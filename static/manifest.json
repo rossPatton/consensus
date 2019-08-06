@@ -1,0 +1,13 @@
+{
+  "display": "standalone",
+  "gcm_sender_id": "482941778795",
+  "icons": [{
+    "src": "apple-touch-icon.png",
+    "type": "image/png",
+    "sizes": "152x152"
+  }],
+  "name": "Consensus: Get Organized",
+  "short_name": "Consensus",
+  "start_url": "/?utm_source=homescreen",
+  "theme_color": "#990000"
+}

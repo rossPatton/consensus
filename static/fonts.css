@@ -1,0 +1,38 @@
+@font-face {
+  font-display: swap;
+  font-family: 'Ivar';
+  src: url('./fonts/IvarDisplay-Regular.woff2') format('woff2'),
+    url('./fonts/IvarDisplay-Regular.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Lab';
+  src: url('./fonts/LabGrotesque-Medium.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/LabGrotesque-Medium.woff2') format('woff2'),
+    url('./fonts/LabGrotesque-Medium.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'LabBlack';
+  src: url('./fonts/LabGrotesque-Black.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/LabGrotesque-Black.woff2') format('woff2'),
+    url('./fonts/LabGrotesque-Black.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Eksell';
+  src: url('./fonts/EksellDisplayWeb-Large.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/EksellDisplayWeb-Large.woff2') format('woff2'),
+    url('./fonts/EksellDisplayWeb-Large.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
