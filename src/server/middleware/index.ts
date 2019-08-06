@@ -17,6 +17,7 @@ export const setupMiddleware = (app: Koa) => {
   bodyParserMiddleware(app);
   compressionMiddleware(app);
   sslMiddleware(app);
+  helmetMiddleware(app);
 
   // any error handlers go here
   errorHandlerMiddleware(app);
@@ -29,5 +30,4 @@ export const setupMiddleware = (app: Koa) => {
   loggerMiddleware(app);
   redirectTrailingSlashMiddleware(app);
   staticFileMiddleware(app);
-  helmetMiddleware(app);
 };

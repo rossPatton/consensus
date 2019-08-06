@@ -47,6 +47,7 @@ app.use(session({
 
 // per request state - good for storing things like nonces, query params, etc
 app.context.state = {};
+
 // make it easy to access redis anywhere
 app.context.redis = store;
 

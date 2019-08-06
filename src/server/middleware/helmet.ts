@@ -25,7 +25,7 @@ export const helmetMiddleware = async (app: Koa) => {
 
   const cspOpts: KoaHelmetContentSecurityPolicyConfiguration = {
     directives: {
-      defaultSrc: directives,
+      defaultSrc: ["'self'"], // directives,
       frameAncestors: ["'none'"],
       objectSrc: ["'none'"],
       sandbox: [
@@ -35,9 +35,8 @@ export const helmetMiddleware = async (app: Koa) => {
       ],
       styleSrc: directives,
       scriptSrc: [
-        ...directives,
-        "'unsafe-inline'",
         'ajax.googleapis.com',
+        // switch to nonce
         `sha256-${__HASH__}`,
       ],
       upgradeInsecureRequests: true,

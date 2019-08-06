@@ -1,12 +1,12 @@
 const path = require('path');
 const crypto = require('crypto');
-const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 const { sha256 } = require('js-sha256');
+const webpack = require('webpack');
 
 const env = require('./webpack.env');
 const common = require('./webpack.common.js');

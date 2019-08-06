@@ -30,9 +30,9 @@ export const SSR = async (ctx: Koa.ParameterizedContext) => {
   htmlStream.on('end', () => {
     ctx.res.write(`</div><div id="portalRoot"></div>
       <script>WebFontConfig={custom:{families:["Ivar","Lab","LabBlack","Eksell"],urls:["/static/fonts.css"]}};window.__PRELOADED_STATE__ = ${serialize(store.getState())}</script>
-      <script type="text/javascript" defer src="/vendor.main.js"></script>
-      <script type="text/javascript" defer src="/main.js"></script>
-      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+      <script defer src="/vendor.main.js"></script>
+      <script defer src="/main.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
       </body></html>`);
     ctx.res.end();
   });

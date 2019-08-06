@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { Decisions, Overview } from '../../_components';
+import { Decisions, Overview } from '../../_pages';
 import { tProps } from './_types';
 import { OrganizationHeader, OrganizationTabs } from './_components';
 

@@ -1,11 +1,11 @@
 const fs = require('fs');
 const path = require('path');
-const webpack = require('webpack');
 const merge = require('webpack-merge');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyPlugin = require('copy-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
+const webpack = require('webpack');
 
 const devServer = require('./webpack.devServer');
 const common = require('./webpack.common.js');
