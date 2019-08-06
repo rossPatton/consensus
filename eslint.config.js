@@ -22,6 +22,13 @@ module.exports = {
     node: true,
     es6: true,
   },
+  globals: {
+    __DEBUG__: true,
+    __DEV__: true,
+    __NODE_ENV__: true,
+    __PROD__: true,
+    __SECRET__: true,
+  },
   extends: [
     'eslint:recommended',
     'plugin:import/errors',
@@ -151,15 +158,11 @@ module.exports = {
     'no-spaced-func': ERROR,
     'no-throw-literal': ERROR,
     'no-trailing-spaces': ERROR,
-    'no-undef': OFF, // let typescript handle it
+    'no-undef': WARN,
     'no-unneeded-ternary': ERROR,
     'no-unused-expressions': ERROR,
     // off, let typescript handle it, since eslint runs after typescript
-    'no-unused-vars': [OFF, {
-      'vars': 'all',
-      'args': 'none',
-      'varsIgnorePattern': 'React',
-    }],
+    'no-unused-vars': OFF,
     'no-useless-call': ERROR,
     'no-useless-computed-key': ERROR,
     'no-useless-rename': ERROR,

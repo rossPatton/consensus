@@ -1,14 +1,16 @@
-// TODO just use dotenv for everything environment related
+// dotenv just defines common sense defaults for us + can be used to store
+// sensitive variables, like DB password or auth tokens, etc
+require('dotenv').config();
 
 // normalize any env vars used during build time here
 const CWD = process.cwd();
 
 const {
-  DEBUG = 'false',
-  DB_POOL_MIN = 1,
-  DB_POOL_MAX = 10,
-  NODE_ENV = 'development',
-  SERVICE_URL = 'https://127.0.0.1',
+  DEBUG,
+  DB_POOL_MIN,
+  DB_POOL_MAX,
+  NODE_ENV,
+  SERVICE_URL,
 } = process.env;
 
 // TODO eventually move to an opts file

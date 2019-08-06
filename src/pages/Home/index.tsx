@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import { getUsers } from '../../redux';
 import { GenericLoader, Helmet } from '../../components';
 import { title, canonical, description, keywords } from './_constants';
-import { tContainerProps, tThunkProps } from './_types';
+import { tContainerProps } from './_types';
 import { HomeComponent } from './HomeComponent';
 
 export class HomeContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
+    if (props.users.length > 0) return;
     props.getUsers();
   }
 
@@ -27,10 +28,10 @@ export class HomeContainer extends PureComponent<tContainerProps> {
           ]}
         />
         <GenericLoader
-          isLoading={this.props.users.isLoading}
+          isLoading={this.props.isLoading}
           render={() => (
             <HomeComponent
-              users={this.props.users.data}
+              users={this.props.users}
             />
           )}
         />
@@ -39,12 +40,13 @@ export class HomeContainer extends PureComponent<tContainerProps> {
   }
 }
 
-const mapStateToProps = (state: { users: tThunkProps }) => ({
-  users: state.users,
+const mapStateToProps = (state: { users: tThunk<tUser[]> }) => ({
+  isLoading: state.users.isLoading,
+  users: state.users.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getUsers: (url: string) => dispatch(getUsers(url)),
+  getUsers: () => dispatch(getUsers()),
 });
 
 export const Home = connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

@@ -1,9 +1,8 @@
 const path = require('path');
 const fs = require('fs');
-const webpack = require('webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ForceCaseSensitivityPlugin = require('case-sensitive-paths-webpack-plugin');
-const WebpackNotifierPlugin = require('webpack-notifier');
+const webpack = require('webpack');
 
 const env = require('./webpack.env');
 
@@ -108,8 +107,6 @@ module.exports = {
     new FriendlyErrorsWebpackPlugin(),
     // protects us from case mismatch import errors
     new ForceCaseSensitivityPlugin(),
-    // handy build notification (ding on failure)
-    new WebpackNotifierPlugin(),
 
     // server only globals should go in webpack.server
     new webpack.DefinePlugin({

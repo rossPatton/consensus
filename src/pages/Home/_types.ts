@@ -8,13 +8,8 @@ export type tComponentProps = {
   users: tUser[],
 };
 
-export type tThunkProps = {
-  data: tUser[],
-  error?: Error,
-  isLoading: boolean,
-};
-
 export type tContainerProps = {
   getUsers: Function,
-  users: tThunkProps,
+  isLoading: boolean,
+  users: tUser[],
 };

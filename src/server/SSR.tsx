@@ -16,9 +16,8 @@ export const SSR = async (ctx: Koa.ParameterizedContext) => {
   ctx.res.write(`
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><title>Consensus - when you need to get organized.</title><link rel="stylesheet" href="/static/styles.css" /></head><body><div id="appRoot">`);
 
-  const store = await initStoreForSSR(ctx);
-
   const initRouterContext = {};
+  const store = await initStoreForSSR(ctx);
   const htmlStream = renderToNodeStream(
     <Provider store={store as any}>
       <StaticRouter context={initRouterContext} location={ctx.request.url}>
@@ -29,7 +28,7 @@ export const SSR = async (ctx: Koa.ParameterizedContext) => {
   htmlStream.pipe(ctx.res, { end: false });
   htmlStream.on('end', () => {
     ctx.res.write(`</div><div id="portalRoot"></div>
-      <script>WebFontConfig={custom:{families:["Ivar","Lab","LabBlack","Eksell"],urls:["/static/fonts.css"]}};window.__PRELOADED_STATE__ = ${serialize(store.getState())}</script>
+      <script nonce="${ctx.state.locals.nonce}">WebFontConfig={custom:{families:["Ivar","Lab","LabBlack","Eksell"],urls:["/static/fonts.css"]}};window.__PRELOADED_STATE__ = ${serialize(store.getState())}</script>
       <script defer src="/vendor.main.js"></script>
       <script defer src="/main.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
