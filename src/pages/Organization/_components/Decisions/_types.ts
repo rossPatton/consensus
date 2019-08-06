@@ -1,5 +1,7 @@
+import { match } from 'react-router';
+
 export type tProps = {
   allDecisions: tDecision[],
   decisionsToRender: tDecision[],
-  match: object,
+  match: match & { params: tOrgRouteParams },
 }

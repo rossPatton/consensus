@@ -24,5 +24,5 @@ const RSVPStatusComponent = memo((props: tProps) => {
   );
 });
 
-const mapStateToProps = (state: any) => ({ session: state.session });
+const mapStateToProps = (state: { session: tSession }) => ({ session: state.session });
 export const RSVPStatus = connect(mapStateToProps)(RSVPStatusComponent);

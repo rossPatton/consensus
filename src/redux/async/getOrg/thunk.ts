@@ -10,7 +10,7 @@ import {
 } from './actions';
 
 
-export const getOrg = memoize({ ttl: 300 }, (params: tOrgRoute) => {
+export const getOrg = memoize({ ttl: 300 }, (params: tOrgRouteParams) => {
   const { country, state, city, org } = params;
 
   return async function <S>(dispatch: Dispatch<S>) {

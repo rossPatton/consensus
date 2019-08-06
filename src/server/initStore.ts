@@ -4,7 +4,7 @@ import { initStore } from '../redux/store';
 
 // in order to sync our server/client sessions, we have to initalize here
 // pull out passport session info, use to populate the `auth` and `session` state
-export const initStoreForSSR = async (ctx: Koa.ParameterizedContext<any>) => {
+export const initStoreForSSR = async (ctx: Koa.ParameterizedContext) => {
   // get authentication status + active session data
   const passport = await ctx.redis.get(ctx.session._sessCtx.externalKey);
 

@@ -12,22 +12,24 @@ export const Paginate = memo((props: tProps) => {
   const pageCount = Math.ceil(items.length / count);
   const pages = Array(pageCount).fill(null);
 
-  console.log('pagination props => ', props);
-
   return (
     <ul className="lsNone fx aiCtr jcCtr fs4 fw600 mT3">
       {pages.map((_, i) => {
         const pageNo = i + 1;
         const isActive = activePage === pageNo;
         const to = params.page
-          ? url.replace(`${params.page}`, pageNo)
+          ? url.replace(`${params.page}`, `${pageNo}`)
           : `${url}/${pageNo}`;
 
         return (
-          <li key={i} className="mL2 mR2">
-            {isActive && pageNo}
+          <li key={i}>
+            {isActive && (
+              <span className="dBl mL1 mR1 pL1 pR1">
+                {pageNo}
+              </span>
+            )}
             {!isActive && (
-              <Link to={to}>
+              <Link className="dBl mL1 mR1 pL1 pR1" to={to}>
                 {pageNo}
               </Link>
             )}

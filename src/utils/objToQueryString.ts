@@ -1,4 +1,5 @@
-export const objToQueryString = (obj: any): string => {
+type tObj = {[key: string]: number | string};
+export const objToQueryString = (obj: tObj): string => {
   if (typeof obj !== 'object') return '';
   if (obj instanceof Array) return '';
 

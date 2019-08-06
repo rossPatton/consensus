@@ -9,7 +9,7 @@ import {
 } from './actions';
 
 type tExpectedQuery = {
-  id: string,
+  id: number,
   limit?: number | 'ALL',
   offset?: number,
 };

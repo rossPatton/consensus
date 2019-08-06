@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 
 import { getDecisionsByOrg, getEvents } from '../../../../redux';
 import { Helmet } from '../../../../components';
+import { tContainerProps, tState } from './_types';
 import { OverviewComponent } from './Component';
 
-export class OverviewContainer extends PureComponent<any> {
-  constructor(props: any) {
+export class OverviewContainer extends PureComponent<tContainerProps> {
+  constructor(props: tContainerProps) {
     super(props);
 
     if (props.events.length > 0) return;
@@ -37,7 +38,7 @@ export class OverviewContainer extends PureComponent<any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: tState) => ({
   decisions: state.decisions.data,
   events: state.events.data,
   isLoading: state.decisions.isLoading
@@ -45,7 +46,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getDecisionsByOrg: (id: number) => dispatch(getDecisionsByOrg(id)),
+  getDecisionsByOrg: (opts: { id: number }) => dispatch(getDecisionsByOrg(opts)),
   getEvents: (id: number) => dispatch(getEvents(id)),
 });
 

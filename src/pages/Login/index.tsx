@@ -86,7 +86,7 @@ export class LoginContainer extends Component<tProps, tState> {
   }
 }
 
-const mapStateToProps = (state: any) => ({ session: state.session });
+const mapStateToProps = (state: { session: tSession }) => ({ session: state.session });
 
 const mapDispatchToProps = (dispatch: Function) => ({
   authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),

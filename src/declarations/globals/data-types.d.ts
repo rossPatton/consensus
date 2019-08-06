@@ -22,10 +22,11 @@ declare type tSimpleMajorityData = {
 }
 
 declare type tDecision = {
+  id: number,
+
   data: any,
   date: string,
   description: string,
-  id: number,
   minutes: string,
   orgId: number,
   rationale: string,
@@ -35,6 +36,7 @@ declare type tDecision = {
 
 declare type tEvent = {
   id: number,
+
   category: string,
   city: string,
   country: string,
@@ -58,7 +60,8 @@ declare type tEvent = {
 };
 
 declare type tOrg = {
-  id: number, // we dont usually expose the id on the client side
+  id: number,
+
   category: string,
   city: string,
   country: string,
@@ -70,20 +73,21 @@ declare type tOrg = {
   username: string,
 };
 
-declare type tOrgRoute = {
-  country: string,
-  state: string,
+declare type tOrgRouteParams = {
   city: string,
+  country: string,
   org: string,
+  page?: string,
+  section?: string,
+  state: string;
 };
 
 declare type tUser = {
   id: number,
-  isAuthenticated: boolean,
   email: string,
   fname: string,
   lname: string,
-  password?: string, // we dont want to include the pw client side
+  password: string,
   username: string,
 };
 
@@ -97,8 +101,10 @@ declare type tAuth = {
   isAuthenticated: boolean,
 };
 
+// tSession is like tUser, but with auth data and everything is optional
+// since a user might not be logged in
 declare type tSession = {
-  id?: number,
+  id?: number | string,
   isAuthenticated?: boolean,
   email?: string,
   fname?: string,

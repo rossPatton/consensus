@@ -2,9 +2,9 @@ import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Decisions, Events } from '../../../../components';
-import { tProps } from './_types';
+import { tComponentProps } from './_types';
 
-export const OverviewComponent = memo((props: tProps) => (
+export const OverviewComponent = memo((props: tComponentProps) => (
   <>
     <div className="contain ffLab pB4 pT3">
       <div className="mB4">
@@ -26,10 +26,5 @@ export const OverviewComponent = memo((props: tProps) => (
         </Link>
       </div>
     </div>
-    <footer className="bgBlue white pT5 pB5">
-      <div className="contain">
-        @copyright etc
-      </div>
-    </footer>
   </>
 ));

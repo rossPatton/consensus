@@ -25,5 +25,10 @@ export const OrganizationShellComponent = memo((props: tProps) => (
         org={props.org}
       />
     )}
+    <footer className="bgBlue white pT5 pB5">
+      <div className="contain">
+        @copyright etc
+      </div>
+    </footer>
   </>
 ));

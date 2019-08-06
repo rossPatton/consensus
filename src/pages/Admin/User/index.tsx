@@ -82,7 +82,8 @@ export class UserAdminContainer extends PureComponent<tContainerProps> {
   }
 }
 
-const mapStateToProps = (state: any) => ({ session: state.session });
+const mapStateToProps = (state: { session: tSession }) =>
+  ({ session: state.session });
 
 const mapDispatchToProps = (dispatch: Function) => ({
   updateUser: (user: tSession) => dispatch(updateUser(user)),

@@ -7,14 +7,14 @@ export type tState = {
 };
 
 export type tContainerProps = {
-  session: tUser,
+  session: tSession,
   setActiveSession: (user: tSession) => tSession,
   // we get id from the active session
   updateUser: (user: tSession) => Promise<{ payload: tSession }>,
 };
 
 export type tComponentProps = tState & {
-  session: tUser,
+  session: tSession,
   save: (ev: React.FormEvent<HTMLFormElement>) => void,
   updateEmail: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   updatePassword: (ev: React.ChangeEvent<HTMLInputElement>) => void,

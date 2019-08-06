@@ -14,5 +14,5 @@ export class PrivateRouteContainer extends PureComponent<tProps> {
   }
 }
 
-const mapStateToProps = (state: any) => ({ session: state.session });
+const mapStateToProps = (state: { session: tSession }) => ({ session: state.session });
 export const PrivateRoute = connect(mapStateToProps)(PrivateRouteContainer);

@@ -16,7 +16,7 @@ export class HeaderContainer extends PureComponent<tProps> {
   }
 }
 
-const mapStateToProps = (state: any) => ({ session: state.session });
+const mapStateToProps = (state: { session: tSession }) => ({ session: state.session });
 
 const mapDispatchToProps = (dispatch: Function) => ({
   logout: () => dispatch(setActiveSession({ isAuthenticated: false })),

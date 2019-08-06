@@ -4,10 +4,10 @@ import { match } from 'react-router';
 export type tProps = {
   isLoading: boolean,
   location: Location,
-  match: match,
+  match: match & { params: tOrgRouteParams },
   org: tOrg,
   usersByOrg: tUsersByOrg,
-};
+}
 
 export type tContainerProps = tProps & {
   getDecisionsByOrg: (id: number) => Promise<tThunk<tDecision[]>>,
