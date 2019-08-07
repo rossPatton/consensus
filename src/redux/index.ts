@@ -1,7 +1,7 @@
 // exports actions here for easier importing
 export { authenticateSession } from './async/session/thunk';
 export { getDecisionsByOrg } from './async/getDecisionsByOrg/thunk';
-export { getEvents } from './async/getEvents/thunk';
+export { getEventsByOrg } from './async/getEventsByOrg/thunk';
 export { getOrg } from './async/getOrg/thunk';
 export { getUsers } from './async/getUsers/thunk';
 export { getUsersByOrg } from './async/getUsersByOrg/thunk';

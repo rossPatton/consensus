@@ -8,7 +8,6 @@ export const OrganizationComponent = memo((props: tProps) => (
   <>
     <OrganizationHeader
       org={props.org}
-      usersByOrg={props.usersByOrg}
     />
     <OrganizationTabs
       location={props.location}

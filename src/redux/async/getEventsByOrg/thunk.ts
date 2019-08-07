@@ -3,18 +3,18 @@ import { Dispatch } from 'redux';
 import { agent } from '../../../utils';
 
 import {
-  getDecisionsByOrgBegin,
-  getDecisionsByOrgSuccess,
-  getDecisionsByOrgFailure,
+  getEventsByOrgBegin,
+  getEventsByOrgSuccess,
+  getEventsByOrgFailure,
 } from './actions';
 
-export const getDecisionsByOrg = memoize({ ttl: 300 }, (queryObj: tIdQuery) => {
+export const getEventsByOrg = memoize({ ttl: 300 }, (queryObj: tIdQuery) => {
   return async function <S>(dispatch: Dispatch<S>) {
-    dispatch(getDecisionsByOrgBegin());
+    dispatch(getEventsByOrgBegin());
 
     const prefix = __DEV__ ?
-      'https://127.0.0.1:3001/api/v1/decisionsByOrg' :
-      '/api/v1/decisionsByOrg';
+      'https://127.0.0.1:3001/api/v1/eventsByOrg' :
+      '/api/v1/eventsByOrg';
 
     try {
       const { id, limit, offset } = queryObj;
@@ -27,9 +27,9 @@ export const getDecisionsByOrg = memoize({ ttl: 300 }, (queryObj: tIdQuery) => {
       // @ts-ignore
       const result = await fetch(qs, { agent });
       const json = await result.json();
-      return dispatch(getDecisionsByOrgSuccess(json));
+      return dispatch(getEventsByOrgSuccess(json));
     } catch (err) {
-      return dispatch(getDecisionsByOrgFailure(err));
+      return dispatch(getEventsByOrgFailure(err));
     }
   };
 });

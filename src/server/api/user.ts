@@ -8,8 +8,9 @@ export const user = new Router();
 // @ts-ignore
 user.get('getUser', '/api/v1/user', async (ctx: Koa.Context) => {
   try {
-    const users = await knex('users').where(ctx.query).first();
-    ctx.body = users;
+    const user: tUser = await knex('users').where(ctx.query).limit(1).first();
+    const { password, ...safeUserForClient } = user;
+    ctx.body = safeUserForClient;
   } catch (err) {
     ctx.throw('400', err);
   }
@@ -26,10 +27,7 @@ user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
     const userQuery = await knex('users').insert(newUser).returning('*');
     const { password, ...safeUserForClient } = userQuery[0];
 
-    ctx.body = {
-      ...safeUserForClient,
-      isAuthenticated: ctx.isAuthenticated(),
-    };
+    ctx.body = safeUserForClient;
   } catch (err) {
     ctx.throw('400', err);
   }
@@ -38,7 +36,7 @@ user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
 // @ts-ignore
 user.patch('patchUser', '/api/v1/user', async (ctx: Koa.Context) => {
   try {
-    const { id, ...theRestOfTheQuery } = ctx.query;
+    const { id, ...theRestOfTheQuery }: tUser = ctx.query;
 
     const query = {
       ...theRestOfTheQuery,

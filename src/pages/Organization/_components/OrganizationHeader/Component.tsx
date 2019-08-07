@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { tProps } from './_types';
+import { tComponentProps } from './_types';
 
-export const OrganizationHeaderComponent = memo((props: tProps) => (
+export const OrganizationHeaderComponent = memo((props: tComponentProps) => (
   <header className="bgBlue pT4 pB4 mT5 white">
     <div className="contain">
       <ul className="lsNone fx fxWrap fs5 fw600 mB2 brdB1 brdMagenta brdW2 pB2 mB2">

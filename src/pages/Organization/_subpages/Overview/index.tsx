@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { getDecisionsByOrg, getEvents } from '../../../../redux';
+import { getDecisionsByOrg, getEventsByOrg } from '../../../../redux';
 import { Helmet } from '../../../../components';
 import { tContainerProps, tState } from './_types';
 import { OverviewComponent } from './Component';
@@ -11,10 +11,10 @@ export class OverviewContainer extends PureComponent<tContainerProps> {
     super(props);
 
     if (props.events.length > 0) return;
-    props.getEvents(props.org.id);
+    props.getEventsByOrg({id: props.org.id});
 
     if (props.decisions.length > 0) return;
-    props.getDecisionsByOrg({ id: props.org.id });
+    props.getDecisionsByOrg({id: props.org.id});
   }
 
   render() {
@@ -41,13 +41,12 @@ export class OverviewContainer extends PureComponent<tContainerProps> {
 const mapStateToProps = (state: tState) => ({
   decisions: state.decisions.data,
   events: state.events.data,
-  isLoading: state.decisions.isLoading
-    || state.events.isLoading,
+  isLoading: state.decisions.isLoading || state.events.isLoading,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getDecisionsByOrg: (opts: { id: number }) => dispatch(getDecisionsByOrg(opts)),
-  getEvents: (id: number) => dispatch(getEvents(id)),
+  getDecisionsByOrg: (query: tIdQuery) => dispatch(getDecisionsByOrg(query)),
+  getEventsByOrg: (query: tIdQuery) => dispatch(getEventsByOrg(query)),
 });
 
 export const Overview = connect(

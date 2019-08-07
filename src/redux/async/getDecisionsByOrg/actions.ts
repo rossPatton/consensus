@@ -1,22 +1,22 @@
 import {
-  GET_DECISIONS_BEGIN,
-  GET_DECISIONS_SUCCESS,
-  GET_DECISIONS_FAILURE,
+  GET_DECISIONS_BY_ORG_BEGIN,
+  GET_DECISIONS_BY_ORG_SUCCESS,
+  GET_DECISIONS_BY_ORG_FAILURE,
   tBeginAction,
   tSuccessAction,
   tFailureAction,
 } from './_types';
 
-export const getDecisionsBegin = (): tBeginAction => ({
-  type: GET_DECISIONS_BEGIN,
+export const getDecisionsByOrgBegin = (): tBeginAction => ({
+  type: GET_DECISIONS_BY_ORG_BEGIN,
 });
 
-export const getDecisionsSuccess = (payload: tThunk<tDecision[]>): tSuccessAction => ({
-  type: GET_DECISIONS_SUCCESS,
+export const getDecisionsByOrgSuccess = (payload: tThunk<tDecision[]>): tSuccessAction => ({
+  type: GET_DECISIONS_BY_ORG_SUCCESS,
   payload,
 });
 
-export const getDecisionsFailure = (payload: Error): tFailureAction => ({
-  type: GET_DECISIONS_FAILURE,
+export const getDecisionsByOrgFailure = (payload: Error): tFailureAction => ({
+  type: GET_DECISIONS_BY_ORG_FAILURE,
   payload,
 });

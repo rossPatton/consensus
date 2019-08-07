@@ -55,7 +55,6 @@ declare type tEvent = {
     attended: boolean,
     isGoing: boolean,
     isInterested: boolean,
-    isNotGoing: boolean,
   }
 };
 
@@ -91,6 +90,25 @@ declare type tUser = {
   username: string,
 };
 
+declare type tRSVP = {
+  attended: boolean,
+  going: boolean,
+  interested: boolean,
+};
+
+declare type tUserEventRelation = tRSVP & {
+  id: number,
+  eventId: number,
+  userId: number,
+};
+
+type tUserOrgRelation = {
+  id: number,
+  orgId: number,
+  role: 'member' | 'admin',
+  userId: number,
+}
+
 // subset of user/org needed for login/authentication
 declare type tLogin = {
   password: string,
@@ -124,4 +142,20 @@ declare type tRoute = {
   path: string,
   private?: boolean,
   redirect?: string,
+};
+
+// typical id-based db query
+type tIdQuery = {
+  id: number,
+  limit?: number,
+  offset?: number,
+};
+
+// once the above values are passed to the server, they become strings
+type tIdQueryServer = {
+  query: {
+    id: string,
+    limit?: string,
+    offset?: string,
+  }
 };

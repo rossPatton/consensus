@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { getOrg, getUsersByOrg } from '../../redux';
-import { Helmet } from '../../components';
+import { getOrg } from '../../redux';
+import { GenericLoader, Helmet } from '../../components';
 import { tContainerProps, tState } from './_types';
 import { OrganizationComponent } from './Component';
 
@@ -18,10 +18,7 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
     // 0 is just the default, not possible in the db
     // basically dont re-fetch every time
     if (props.org.id !== 0) return;
-
-    props.getOrg(props.match.params)
-      .then(async (res: any) => props.getUsersByOrg(res.payload.id))
-      .catch(console.error);
+    props.getOrg(props.match.params);
   }
 
   render() {
@@ -37,8 +34,13 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
             { property: 'og:description', content: '' },
           ]}
         />
-        <OrganizationComponent
-          {...this.props}
+        <GenericLoader
+          isLoading={this.props.isLoading}
+          render={() => (
+            <OrganizationComponent
+              {...this.props}
+            />
+          )}
         />
       </>
     );
@@ -46,14 +48,12 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (state: tState) => ({
-  isLoading: state.org.isLoading || state.usersByOrg.isLoading,
+  isLoading: state.org.isLoading,
   org: state.org.data,
-  usersByOrg: state.usersByOrg.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
   getOrg: (params: object) => dispatch(getOrg(params)),
-  getUsersByOrg: (params: object) => dispatch(getUsersByOrg(params)),
 });
 
 export const Organization = connect(

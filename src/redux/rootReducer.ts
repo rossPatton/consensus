@@ -4,7 +4,7 @@ import { sessionReducer } from './sync/session/reducer';
 
 import { authenticateSessionReducer } from './async/session/reducer';
 import { getDecisionsByOrgReducer } from './async/getDecisionsByOrg/reducer';
-import { getEventsReducer } from './async/getEvents/reducer';
+import { getEventsByOrgReducer } from './async/getEventsByOrg/reducer';
 import { getOrgReducer } from './async/getOrg/reducer';
 import { getUsersByOrgReducer } from './async/getUsersByOrg/reducer';
 import { getUsersReducer } from './async/getUsers/reducer';
@@ -14,7 +14,7 @@ import { updateUserReducer } from './async/updateUser/reducer';
 export const rootReducer = combineReducers({
   auth: authenticateSessionReducer,
   decisions: getDecisionsByOrgReducer,
-  events: getEventsReducer,
+  events: getEventsByOrgReducer,
   org: getOrgReducer,
   registerUser: registerUserReducer,
   session: sessionReducer,

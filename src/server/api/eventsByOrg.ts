@@ -2,73 +2,75 @@ import _ from 'lodash';
 import Koa from 'koa';
 import Router from 'koa-router';
 import { knex } from '../db/connection';
+import { notNull, utcToDateString } from '../../utils';
 
 export const eventsByOrg = new Router();
 
-type tExpectedQuery = {
-  query: {
-    id: string,
-    // technically, these are strings too, but doesn't really matter
-    // since we only use it for the knex query, which doesnt care
-    // but we want to include the orgId in the response, so we parse it
-    limit?: number,
-    offset?: number,
-  }
+const getEvents = async (ctx: Koa.ParameterizedContext) => {
+  const { query }: tIdQueryServer = ctx;
+  const { id, limit, offset } = query;
+
+  const orgId = parseInt(id, 10);
+  const parsedLimit = limit ? parseInt(limit, 10) : 3;
+  const parsedOffset = offset ? parseInt(offset, 10) : 0;
+
+  const events = knex('events')
+    .where({ orgId })
+    .orderBy('date', 'asc');
+
+  if (parsedLimit > 0) events.limit(parsedLimit);
+  if (parsedOffset > 0) events.offset(parsedOffset);
+
+  return events;
 };
 
 // @ts-ignore
-eventsByOrg.get('eventsByOrg', '/api/v1/eventsByOrg',
-  async (ctx: Koa.ParameterizedContext) => {
-    const { query }: tExpectedQuery = ctx;
-    const { id, limit = 3, offset = 0 } = query;
-    const orgId = parseInt(id, 10);
-
-    // use the returned ids to query users table
-    const events = await knex.select('*')
-      .from('events')
-      .where({ orgId })
-      .orderBy('date', 'asc')
-      .limit(limit)
-      .offset(offset);
+eventsByOrg.get('events', '/api/v1/eventsByOrg', async (ctx: Koa.ParameterizedContext) => {
+  try {
+    const events = await getEvents(ctx);
 
     // convert UTC timestamps to human readable dates
-    const eventsWithMappedDates = events.map(event => {
-      const date = new Date(event.date);
-      return {
-        ...event,
-        date: date.toLocaleString('en-US'),
-      };
-    });
+    // easier to just normalize here on the server than do it every time on client
+    const eventsWithMappedDates: tEvent[] = events.map(utcToDateString);
+
+    // default return, if user is logged out, we return this
+    let returnValue = eventsWithMappedDates;
 
     // get authentication status + active session data
     const passport = await ctx.redis.get(ctx.session._sessCtx.externalKey);
+
     // get user/org session. this object is determined by our serialization strategy
-    const passportSession = _.get(passport, 'passport.user', null);
+    const session = _.get(passport, 'passport.user', null);
 
     // if user is logged in, we merge in relevant user data using their session id
-    if (passportSession) {
+    if (session) {
       // use 3rd table to get relation between users and events
-      const userEventRelations = await knex('users_events')
-        .where({ userId: passportSession.id });
+      const userEventRels = await knex('users_events').where({userId: session.id});
 
-      const eventsWithDatesAndUserRSVPData = userEventRelations.map(rel => {
-        const matchingEvent = _.find(eventsWithMappedDates, (ev) => ev.id === rel.eventId);
+      const eventsWithDatesAndUserRSVPData = userEventRels.map(
+        (rel: tUserEventRelation) => {
+          const matchingEvent = _.find(
+            eventsWithMappedDates,
+            ev => ev.id === rel.eventId
+          );
 
-        if (!matchingEvent) return null;
+          if (!matchingEvent) return null;
 
-        return {
-          ...matchingEvent,
-          session: {
-            attended: rel.attended,
-            isGoing: rel.going,
-            isInterested: rel.interested,
-            isNotGoing: rel.notGoing,
-          },
-        };
-      }).filter(ev => !!ev);
+          return {
+            ...matchingEvent,
+            session: {
+              attended: rel.attended,
+              isGoing: rel.going,
+              isInterested: rel.interested,
+            },
+          };
+        }).filter(notNull);
 
-      ctx.body = eventsWithDatesAndUserRSVPData;
-    } else {
-      ctx.body = eventsWithMappedDates;
+      returnValue = eventsWithDatesAndUserRSVPData;
     }
-  });
+
+    ctx.body = returnValue;
+  } catch (err) {
+    ctx.throw('400', err);
+  }
+});

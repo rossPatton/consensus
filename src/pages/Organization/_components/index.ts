@@ -1,3 +1,3 @@
-export { OrganizationHeaderComponent as OrganizationHeader } from './OrganizationHeader/OrganizationHeaderComponent';
+export { OrganizationHeader } from './OrganizationHeader';
 
 export { OrganizationTabsComponent as OrganizationTabs } from './OrganizationTabs/OrganizationTabsComponent';

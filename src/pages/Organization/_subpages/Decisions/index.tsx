@@ -14,7 +14,7 @@ export class DecisionsContainer extends Component<any> {
     const { match: { params: { page = 0 } = {} }, org } = props;
     props.getDecisionsByOrg({
       id: org.id,
-      limit: 'ALL',
+      limit: -1,
       offset: page,
     });
   }

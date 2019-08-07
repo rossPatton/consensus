@@ -2,43 +2,44 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import { knex } from '../db/connection';
 
-type tExpectedQuery = {
-  query: {
-    id: number,
-    limit: number,
-    offset: number,
-  },
-};
-
 export const usersByOrg = new Router();
+
+const getUsers = async (ctx: Koa.ParameterizedContext, mappedIds: number[]) => {
+  const { query }: tIdQueryServer = ctx;
+  const { limit, offset } = query;
+
+  const parsedLimit = limit ? parseInt(limit, 10) : 3;
+  const parsedOffset = offset ? parseInt(offset, 10) : 0;
+
+  const users = knex('users').whereIn('id', mappedIds);
+
+  if (parsedLimit > 0) users.limit(parsedLimit);
+  if (parsedOffset > 0) users.offset(parsedOffset);
+
+  return users;
+};
 
 // @ts-ignore
 usersByOrg.get('usersByOrg', '/api/v1/usersByOrg', async (ctx: Koa.Context) => {
-  const { query }: tExpectedQuery = ctx;
-  const { id: orgId, limit = 3, offset = 0 } = query;
+  try {
+    const { query }: tIdQueryServer = ctx;
+    const { id: orgId } = query;
 
-  type tFusionTable = {
-    id: number,
-    orgId: number,
-    role: 'member' | 'admin',
-    userId: number,
+    // use 3rd table to get relation between users and organization
+    const userIds: tUserOrgRelation[] = await knex('users_orgs').where({ orgId });
+
+    // userIds here are ALL ids, but we limit by default to 10 at a time by default
+    const mappedIds = userIds.map(idSet => idSet.userId);
+
+    // use the returned ids to query users table
+    const users: tUser[] = await getUsers(ctx, mappedIds);
+    const usersByOrg: tUsersByOrg = {
+      userTotal: mappedIds.length,
+      users,
+    };
+
+    ctx.body = usersByOrg;
+  } catch (err) {
+    ctx.throw('400', err);
   }
-
-  // use 3rd table to get relation between users and organization
-  const userIds: tFusionTable[] = await knex('users_orgs').where({ orgId });
-
-  // userIds here are ALL ids, but we limit by default to 10 at a time by default
-  const mappedIds = userIds.map(idSet => idSet.userId);
-
-  // use the returned ids to query users table
-  const users = await knex.select('*')
-    .from('users')
-    .whereIn('id', mappedIds)
-    .limit(limit)
-    .offset(offset);
-
-  ctx.body = {
-    userTotal: mappedIds.length,
-    users,
-  };
 });
