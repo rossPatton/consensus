@@ -1,1 +1,0 @@
-export { OrganizationShell } from './OrganizationShell';

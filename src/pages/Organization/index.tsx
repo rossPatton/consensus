@@ -1,17 +1,17 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { getOrg, getUsersByOrg } from '../../../../redux';
-import { GenericLoader, Helmet } from '../../../../components';
+import { getOrg, getUsersByOrg } from '../../redux';
+import { Helmet } from '../../components';
 import { tContainerProps, tState } from './_types';
-import { OrganizationShellComponent } from './OrganizationShellComponent';
+import { OrganizationComponent } from './Component';
 
 // TODO this is too much nesting - maybe figure out a less verbose structure
 // basically, this
 // 1- gets basic org info needed for header
 // 2- sets up the shared layout for all sub pages
 // 3 - renders correct sub page based on react router match
-export class OrganizationShellContainer extends PureComponent<tContainerProps> {
+export class OrganizationContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
 
@@ -37,13 +37,8 @@ export class OrganizationShellContainer extends PureComponent<tContainerProps> {
             { property: 'og:description', content: '' },
           ]}
         />
-        <GenericLoader
-          isLoading={this.props.isLoading}
-          render={() => (
-            <OrganizationShellComponent
-              {...this.props}
-            />
-          )}
+        <OrganizationComponent
+          {...this.props}
         />
       </>
     );
@@ -61,7 +56,7 @@ const mapDispatchToProps = (dispatch: Function) => ({
   getUsersByOrg: (params: object) => dispatch(getUsersByOrg(params)),
 });
 
-export const OrganizationShell = connect(
+export const Organization = connect(
   mapStateToProps,
   mapDispatchToProps
-)(OrganizationShellContainer);
+)(OrganizationContainer);
