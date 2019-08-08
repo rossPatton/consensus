@@ -36,3 +36,13 @@
   font-weight: 700;
   font-style: normal;
 }
+
+@font-face {
+  font-display: swap;
+  font-family: 'Cooper';
+  src: url('./fonts/cooper.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/cooper.woff2') format('woff2'),
+    url('./fonts/cooper.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}

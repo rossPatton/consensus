@@ -1,3 +1,4 @@
+export { Breadcrumbs } from './Breadcrumbs/Component';
 export { Decisions } from './Decisions';
 export { Events } from './Events';
 export { GenericLoader } from './GenericLoader';

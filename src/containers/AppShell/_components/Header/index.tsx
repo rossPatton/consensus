@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { setActiveSession } from '../../../../redux';
-import { HeaderComponent } from './HeaderComponent';
+import { HeaderComponent } from './Component';
 import { tProps } from './_types';
 
 export class HeaderContainer extends PureComponent<tProps> {

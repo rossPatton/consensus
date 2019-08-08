@@ -5,16 +5,16 @@ import { StaticRouter } from 'react-router-dom';
 import { renderToNodeStream } from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import { AppShell } from '../containers';
+import styles from '../css/styles.styl';
 import { initStoreForSSR } from './initStore';
 
-// import stylus from '../css/styles.styl';
 
 export const SSR = async (ctx: Koa.ParameterizedContext) => {
   // need to be set for server streaming, if not set, then koa will crap out
   ctx.respond = false;
   ctx.type = 'text/html';
   ctx.res.write(`
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><title>Consensus - when you need to get organized.</title><link rel="stylesheet" href="/static/styles.css" /></head><body><div id="appRoot">`);
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><title>Consensus - when you need to get organized.</title><style>${styles}</style></head><body><div id="appRoot">`);
 
   const initRouterContext = {};
   const store = await initStoreForSSR(ctx);

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { Approval, SimpleMajority } from './_components';
 
 export const Decisions = memo(({ decisions }: { decisions: tDecision[] }) => (
-  <ul className="lsNone brdB1 mB2">
+  <ul>
     {decisions.map((decision, i) => (
-      <li key={i} className="brdA1 brdB0 brdL0 p3 pL4 m0 rel">
+      <li key={i} className="brdA1 br8 mB2 p3 pL4 rel ovfHide">
         {decision.type === 'Simple Majority' && (
           <SimpleMajority
             date={decision.date}

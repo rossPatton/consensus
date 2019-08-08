@@ -1,7 +1,5 @@
 export type tComponentProps = {
   org: tOrg,
-  session: tSession,
-  usersByOrg: tUsersByOrg,
 };
 
 export type tContainerProps = tComponentProps & {

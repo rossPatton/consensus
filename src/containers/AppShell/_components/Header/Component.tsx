@@ -4,26 +4,25 @@ import React, { memo } from 'react';
 import { tProps } from './_types';
 
 export const HeaderComponent = memo((props: tProps) => (
-  <header className="bgBlack fix t l r pT3 pB3 z99">
+  <header className="bgWhite bxSh1 fix t l r pT3 pB3 z99">
     <div className="contain fx aiCtr jcCtr rel">
-      <Link className="abs l" to="/us/ny/nyc/tech-workers-coalition">
+      <Link className="abs l" to="/us/ny/nyc/tech-workers-coalition/overview">
         <img alt="" src="/static/images/ham.svg" width="40" />
       </Link>
       <Link to="/">
-        <img alt="" src="/static/images/logo.svg" width="150" />
+        <img alt="" src="/static/images/logo.svg" width="125" />
       </Link>
       {!props.session.isAuthenticated && (
-        <div className="abs r">
+        <div className="abs r fs6">
           <Link
             to="/signup"
             id="a11ySignup"
-            className="br16 p1 pL3 pR3 fs6 bgGreen black">
+            className="brdA1 br16 p1 pL3 pR3 mR2">
             Sign Up
           </Link>
           <Link
             to="/login"
-            id="a11yLogin"
-            className="mL3 fs6 white">
+            id="a11yLogin">
             Login
           </Link>
         </div>

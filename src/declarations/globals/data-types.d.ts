@@ -129,13 +129,16 @@ declare type tAuth = {
 declare type tSession = {
   id?: number | string,
   isAuthenticated?: boolean,
+  createdAt?: string,
   email?: string,
   fname?: string,
+  lastActive?: string,
   lname?: string,
    // we dont want to include the pw client side, generally
   password?: string,
   // simple map of org ids and role types to determine level of access for user
-  roles: tRoleMap[],
+  roles?: tRoleMap[],
+  updatedAt?: string,
   username?: string,
 };
 

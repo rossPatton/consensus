@@ -23,6 +23,7 @@ auth.post('user login', '/auth/user/login', async (ctx: Koa.Context) => {
     const newSession: tSession = {
       ...safeUser,
       isAuthenticated: await ctx.isAuthenticated(),
+      lastActive: await knex.fn.now(),
       roles,
     };
 
