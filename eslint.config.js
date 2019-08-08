@@ -158,10 +158,11 @@ module.exports = {
     'no-spaced-func': ERROR,
     'no-throw-literal': ERROR,
     'no-trailing-spaces': ERROR,
-    'no-undef': WARN,
+    // ts can catch it for us, and causes problems with react-hooks
+    'no-undef': OFF,
     'no-unneeded-ternary': ERROR,
     'no-unused-expressions': ERROR,
-    // off, let typescript handle it, since eslint runs after typescript
+    // conflicts with ts type imports
     'no-unused-vars': OFF,
     'no-useless-call': ERROR,
     'no-useless-computed-key': ERROR,

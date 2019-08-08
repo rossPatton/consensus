@@ -30,12 +30,12 @@ export const OrganizationComponent = memo((props: tProps) => (
         org={props.org}
       />
     )}
-    {props.match.params.section === 'forum' && (
+    {/* {props.match.params.section === 'forum' && (
       <Forum />
     )}
     {props.match.params.section === 'resources' && (
       <Resources />
-    )}
+    )} */}
     <footer className="bgBlue white pT5 pB5">
       <div className="contain">
         @copyright etc
