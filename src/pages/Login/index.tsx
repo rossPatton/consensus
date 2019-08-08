@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { authenticateSession, setActiveSession } from '../../redux';
 import { Helmet } from '../../components';
 import { tProps, tState } from './_types';
-import { LoginComponent } from './Login';
+import { LoginComponent } from './Component';
 
 export class LoginContainer extends Component<tProps, tState> {
   state = {
@@ -16,12 +17,13 @@ export class LoginContainer extends Component<tProps, tState> {
     username: '',
   };
 
-  login = (ev: React.FormEvent<HTMLFormElement>) => {
+  login = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const { username, password } = this.state;
-    this.props.authenticateSession({ username, password })
-      .then(resp => this.props.setActiveSession(resp.payload))
-      .catch(console.error);
+    const { authenticateSession, setActiveSession } = this.props;
+
+    const session = await authenticateSession({username, password});
+    setActiveSession(session.payload);
   }
 
   updateEmail = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,7 +90,7 @@ export class LoginContainer extends Component<tProps, tState> {
 
 const mapStateToProps = (state: { session: tSession }) => ({ session: state.session });
 
-const mapDispatchToProps = (dispatch: Function) => ({
+const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
   setActiveSession: (user: tUser) => dispatch(setActiveSession(user)),
 });

@@ -12,7 +12,7 @@ export const authenticateBegin = (payload: tLogin): tBeginAction => ({
   payload,
 });
 
-export const authenticateSuccess = (payload: tAuth): tSuccessAction => ({
+export const authenticateSuccess = (payload: tSession): tSuccessAction => ({
   type: AUTHENTICATE_SUCCESS,
   payload,
 });

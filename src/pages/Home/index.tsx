@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { getUsers } from '../../redux';
 import { GenericLoader, Helmet } from '../../components';
@@ -45,7 +46,7 @@ const mapStateToProps = (state: { users: tThunk<tUser[]> }) => ({
   users: state.users.data,
 });
 
-const mapDispatchToProps = (dispatch: Function) => ({
+const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getUsers: () => dispatch(getUsers()),
 });
 

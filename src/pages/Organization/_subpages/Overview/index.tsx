@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { getDecisionsByOrg, getEventsByOrg } from '../../../../redux';
 import { Helmet } from '../../../../components';
@@ -31,7 +32,9 @@ export class OverviewContainer extends PureComponent<tContainerProps> {
           ]}
         />
         <OverviewComponent
-          {...this.props}
+          decisions={this.props.decisions.slice(0, 3)}
+          events={this.props.events.slice(0, 3)}
+          org={this.props.org}
         />
       </>
     );
@@ -44,7 +47,7 @@ const mapStateToProps = (state: tState) => ({
   isLoading: state.decisions.isLoading || state.events.isLoading,
 });
 
-const mapDispatchToProps = (dispatch: Function) => ({
+const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getDecisionsByOrg: (query: tIdQuery) => dispatch(getDecisionsByOrg(query)),
   getEventsByOrg: (query: tIdQuery) => dispatch(getEventsByOrg(query)),
 });

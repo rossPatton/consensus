@@ -25,7 +25,10 @@ export const OrganizationComponent = memo((props: tProps) => (
       />
     )}
     {props.match.params.section === 'events' && (
-      <Events />
+      <Events
+        match={props.match}
+        org={props.org}
+      />
     )}
     {props.match.params.section === 'forum' && (
       <Forum />

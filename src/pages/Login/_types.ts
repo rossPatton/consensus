@@ -1,7 +1,7 @@
 export type tProps = {
   session: tSession,
-  authenticateSession: (arg: tLogin) => Promise<{payload: tUser}>,
-  setActiveSession: (user: tUser) => Promise<tUser>,
+  authenticateSession: (arg: tLogin) => { payload: tUser },
+  setActiveSession: (user: tUser) => any,
 };
 
 export type tState = {

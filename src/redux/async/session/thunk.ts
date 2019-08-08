@@ -21,7 +21,7 @@ export const authenticateSession = memoize({ ttl: 300 }, (user: tLogin) => {
       const qs = `?username=${username}&password=${password}`;
 
       // we do it this way so errors can bubble properly to our middleware
-      const result: tUser & tAuth = await fetch(`${prefix}${qs}`, {
+      const result: tSession = await fetch(`${prefix}${qs}`, {
         // @ts-ignore
         agent,
         // we need credentials here so that the session cookie gets set properly

@@ -1,20 +1,20 @@
 import { match } from 'react-router';
 
 export type tComponentProps = {
-  allDecisions: tDecision[],
-  decisionsToRender: tDecision[],
+  allEvents: tEvent[],
+  eventsToRender: tEvent[],
   match: match & { params: tOrgRouteParams },
 }
 
 export type tContainerProps = {
-  decisions: tDecision[],
-  getDecisionsByOrg: (query: tIdQuery) => Promise<tThunk<tDecision[]>>,
+  events: tEvent[],
+  getEventsByOrg: (query: tIdQuery) => Promise<tThunk<tEvent[]>>,
   isLoading: boolean,
   match: match & { params: tOrgRouteParams },
   org: tOrg,
 };
 
 export type tState = {
-  decisions: tThunk<tDecision[]>,
+  events: tThunk<tEvent[]>,
   isLoading: boolean,
 };

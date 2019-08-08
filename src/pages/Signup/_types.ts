@@ -1,3 +1,7 @@
+export type tStore = {
+  session: tSession,
+}
+
 export type tState = {
   email: string,
   fname: string,
@@ -7,9 +11,9 @@ export type tState = {
 };
 
 export type tContainerProps = {
-  authenticateSession: (arg: tLogin) => Promise<{ payload: tSession }>,
+  authenticateSession: (arg: tLogin) => { payload: tUser },
   insertUser: (arg: tState) => Promise<{ payload: tSession }>,
-  setActiveSession: (sess: tSession) => tSession,
+  setActiveSession: (user: tUser) => any,
   session: tSession,
 };
 

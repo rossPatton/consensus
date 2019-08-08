@@ -2,29 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { getDecisionsByOrg } from '../../../../redux';
+import { getEventsByOrg } from '../../../../redux';
 import { GenericLoader, Helmet } from '../../../../components';
 import { tContainerProps, tState } from './_types';
-import { DecisionsComponent } from './Component';
+import { EventsComponent } from './Component';
 
-export class DecisionsContainer extends Component<tContainerProps> {
+export class EventsContainer extends Component<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
 
-    if (props.decisions.length > 3) return;
+    if (props.events.length > 3) return;
 
     const { match: { params: { page = 0 } = {} }, org } = props;
     const offset = page ? parseInt(page, 10) : 0;
 
-    props.getDecisionsByOrg({
+    props.getEventsByOrg({
       id: org.id,
       limit: -1,
       offset,
     });
   }
 
-  getSliceOfDecisions = (decisions: tDecision[]) => {
-    const newArray = [...decisions];
+  getSliceOfEvents = (events: tEvent[]) => {
+    const newArray = [...events];
 
     const { match: { params: { page } } } = this.props;
     const activePage = page ? parseInt(page, 10) : 1;
@@ -52,9 +52,9 @@ export class DecisionsContainer extends Component<tContainerProps> {
         <GenericLoader
           isLoading={this.props.isLoading}
           render={() => (
-            <DecisionsComponent
-              allDecisions={this.props.decisions}
-              decisionsToRender={this.getSliceOfDecisions(this.props.decisions)}
+            <EventsComponent
+              allEvents={this.props.events}
+              eventsToRender={this.getSliceOfEvents(this.props.events)}
               match={this.props.match}
             />
           )}
@@ -65,15 +65,15 @@ export class DecisionsContainer extends Component<tContainerProps> {
 }
 
 const mapStateToProps = (state: tState) => ({
-  decisions: state.decisions.data,
-  isLoading: state.decisions.isLoading,
+  events: state.events.data,
+  isLoading: state.events.isLoading,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  getDecisionsByOrg: (query: tIdQuery) => dispatch(getDecisionsByOrg(query)),
+  getEventsByOrg: (query: tIdQuery) => dispatch(getEventsByOrg(query)),
 });
 
-export const Decisions = connect(
+export const Events = connect(
   mapStateToProps,
   mapDispatchToProps
-)(DecisionsContainer);
+)(EventsContainer);

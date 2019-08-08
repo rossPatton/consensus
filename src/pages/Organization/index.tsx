@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { getOrg } from '../../redux';
 import { GenericLoader, Helmet } from '../../components';
@@ -52,8 +53,8 @@ const mapStateToProps = (state: tState) => ({
   org: state.org.data,
 });
 
-const mapDispatchToProps = (dispatch: Function) => ({
-  getOrg: (params: object) => dispatch(getOrg(params)),
+const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
+  getOrg: (params: tOrgRouteParams) => dispatch(getOrg(params)),
 });
 
 export const Organization = connect(

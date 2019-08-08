@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { authenticateSession, registerUser, setActiveSession } from '../../redux';
 import { Helmet } from '../../components';
-import { tContainerProps, tState } from './_types';
+import { tContainerProps, tState, tStore } from './_types';
 import { SignupComponent } from './Signup';
 
 export class SignupContainer extends PureComponent<tContainerProps, tState> {
@@ -16,16 +17,15 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
     username: '',
   };
 
-  register = (ev: React.FormEvent<HTMLFormElement>) => {
+  register = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
     const { username, password } = this.state;
 
     // add user to db, and log them in on success
-    this.props.insertUser(this.state)
-      .then(() => this.props.authenticateSession({ username, password }))
-      .then(res => this.props.setActiveSession(res.payload))
-      .catch(console.error);
+    await this.props.insertUser(this.state);
+    const session = await this.props.authenticateSession({username, password});
+    this.props.setActiveSession(session.payload);
   }
 
   updateEmail = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,9 +91,9 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (state: any) => ({ session: state.session });
+const mapStateToProps = (state: tStore) => ({ session: state.session });
 
-const mapDispatchToProps = (dispatch: Function) => ({
+const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
   insertUser: (user: tState) => dispatch(registerUser(user)),
   setActiveSession: (user: tSession) => dispatch(setActiveSession(user)),

@@ -12,8 +12,7 @@ export type tProps = {
 export type tContainerProps = tProps & {
   getDecisionsByOrg: (id: number) => Promise<tThunk<tDecision[]>>,
   getEvents: (id: number) => Promise<tThunk<tEvent[]>>,
-  getOrg: (params: object) => Promise<tThunk<tOrg>>,
-  getUsersByOrg: (params: object) => Promise<tThunk<tUsersByOrg>>,
+  getOrg: (params: tOrgRouteParams) => Promise<tThunk<tOrg>>,
 };
 
 export type tState = {

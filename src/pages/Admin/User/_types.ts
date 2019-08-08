@@ -6,11 +6,13 @@ export type tState = {
   username: string,
 };
 
+export type tStore = { session: tSession };
+
 export type tContainerProps = {
   session: tSession,
-  setActiveSession: (user: tSession) => tSession,
+  setActiveSession: (user: tSession) => any,
   // we get id from the active session
-  updateUser: (user: tSession) => Promise<{ payload: tSession }>,
+  updateUser: (user: tSession) => { payload: tUser },
 };
 
 export type tComponentProps = tState & {

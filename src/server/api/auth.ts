@@ -11,13 +11,14 @@ auth.post('user login', '/auth/user/login', async (ctx: Koa.Context) => {
     if (!unsafeUser) ctx.throw(400, 'User not found');
 
     const { password, ...safeUser } = unsafeUser;
-
     ctx.login(safeUser);
     ctx.status = 200;
-    ctx.body = {
+
+    const newSession: tSession = {
       ...safeUser,
       isAuthenticated: ctx.isAuthenticated(),
     };
+    ctx.body = newSession;
   })(ctx);
 });
 

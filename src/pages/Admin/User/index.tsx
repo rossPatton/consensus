@@ -1,13 +1,14 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { Helmet } from '../../../components';
 import { setActiveSession, updateUser } from '../../../redux';
 import { title, canonical, description, keywords } from './_constants';
-import { tContainerProps } from './_types';
+import { tContainerProps, tState, tStore } from './_types';
 import { UserAdminComponent } from './UserAdminComponent';
 
-export class UserAdminContainer extends PureComponent<tContainerProps> {
+export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
   state = {
     email: '',
     password: '',
@@ -16,12 +17,15 @@ export class UserAdminContainer extends PureComponent<tContainerProps> {
     lname: '',
   };
 
-  save = (ev: React.FormEvent<HTMLFormElement>) => {
+  save = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const { id } = this.props.session;
-    this.props.updateUser({ id, ...this.state })
-      .then((res: { payload: tSession }) => this.props.setActiveSession(res.payload))
-      .catch(console.error);
+    try {
+      const { id } = this.props.session;
+      const user = await this.props.updateUser({ id, ...this.state });
+      return this.props.setActiveSession(user.payload);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   updateEmail = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,10 +86,10 @@ export class UserAdminContainer extends PureComponent<tContainerProps> {
   }
 }
 
-const mapStateToProps = (state: { session: tSession }) =>
+const mapStateToProps = (state: tStore) =>
   ({ session: state.session });
 
-const mapDispatchToProps = (dispatch: Function) => ({
+const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   updateUser: (user: tSession) => dispatch(updateUser(user)),
   setActiveSession: (user: tSession) => dispatch(setActiveSession(user)),
 });
