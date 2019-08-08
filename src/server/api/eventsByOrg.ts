@@ -40,10 +40,10 @@ eventsByOrg.get('events', '/api/v1/eventsByOrg', async (ctx: Koa.ParameterizedCo
     const passport = await ctx.redis.get(ctx.session._sessCtx.externalKey);
 
     // get user/org session. this object is determined by our serialization strategy
-    const session = _.get(passport, 'passport.user', null);
+    const session = _.get(passport, 'passport.user', {});
 
     // if user is logged in, we merge in relevant user data using their session id
-    if (session) {
+    if (session.id) {
       // use 3rd table to get relation between users and events
       const userEventRels = await knex('users_events').where({userId: session.id});
 

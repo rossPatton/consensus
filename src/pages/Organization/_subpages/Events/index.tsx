@@ -11,8 +11,6 @@ export class EventsContainer extends Component<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
 
-    if (props.events.length > 3) return;
-
     const { match: { params: { page = 0 } = {} }, org } = props;
     const offset = page ? parseInt(page, 10) : 0;
 
@@ -50,7 +48,7 @@ export class EventsContainer extends Component<tContainerProps> {
           ]}
         />
         <GenericLoader
-          isLoading={this.props.isLoading}
+          isLoading={this.props.events.length === 0 && this.props.isLoading}
           render={() => (
             <EventsComponent
               allEvents={this.props.events}

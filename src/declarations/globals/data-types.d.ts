@@ -102,10 +102,15 @@ declare type tUserEventRelation = tRSVP & {
   userId: number,
 };
 
-type tUserOrgRelation = {
-  id: number,
+declare type tRole = 'member' | 'admin';
+
+declare type tRoleMap = {
   orgId: number,
-  role: 'member' | 'admin',
+  role: tRole,
+}
+
+declare type tUserOrgRelation = tRoleMap & {
+  id: number,
   userId: number,
 }
 
@@ -127,7 +132,10 @@ declare type tSession = {
   email?: string,
   fname?: string,
   lname?: string,
-  password?: string, // we dont want to include the pw client side
+   // we dont want to include the pw client side, generally
+  password?: string,
+  // simple map of org ids and role types to determine level of access for user
+  roles: tRoleMap[],
   username?: string,
 };
 

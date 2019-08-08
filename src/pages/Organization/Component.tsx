@@ -13,7 +13,7 @@ export const OrganizationComponent = memo((props: tProps) => (
       location={props.location}
       match={props.match}
     />
-    {!props.match.params.section && (
+    {props.match.params.section === 'overview' && (
       <Overview
         org={props.org}
       />
@@ -36,10 +36,5 @@ export const OrganizationComponent = memo((props: tProps) => (
     {props.match.params.section === 'resources' && (
       <Resources />
     )} */}
-    <footer className="bgBlue white pT5 pB5">
-      <div className="contain">
-        @copyright etc
-      </div>
-    </footer>
   </>
 ));

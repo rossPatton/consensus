@@ -1,23 +1,32 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 import passport from 'koa-passport';
+import { knex } from '../db/connection';
 
 export const auth = new Router();
 
 // @ts-ignore
 auth.post('user login', '/auth/user/login', async (ctx: Koa.Context) => {
   // @ts-ignore
-  return passport.authenticate('local', (_, unsafeUser: tUser) => {
+  return passport.authenticate('local', async (_, unsafeUser: tUser) => {
     if (!unsafeUser) ctx.throw(400, 'User not found');
 
     const { password, ...safeUser } = unsafeUser;
-    ctx.login(safeUser);
-    ctx.status = 200;
+    await ctx.login(safeUser);
+
+    const userOrgRels = await knex('users_orgs').where({userId: safeUser.id});
+    const roles = userOrgRels.map((userOrgRel: tUserOrgRelation) => ({
+      orgId: userOrgRel.orgId,
+      role: userOrgRel.role,
+    }));
 
     const newSession: tSession = {
       ...safeUser,
-      isAuthenticated: ctx.isAuthenticated(),
+      isAuthenticated: await ctx.isAuthenticated(),
+      roles,
     };
+
+    ctx.status = 200;
     ctx.body = newSession;
   })(ctx);
 });

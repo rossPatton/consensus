@@ -3,33 +3,29 @@ import { Link } from 'react-router-dom';
 
 import { Tab } from './_components/Tab';
 
-export const OrganizationTabs = memo(({ location, match }: any) => {
+export const OrganizationTabs = memo((props: any) => {
+  const { location, match } = props;
+  console.log('tab props => ', props);
   return (
     <nav className="bgGrey1">
       <ul className="contain fx aiCtr jcCtr lsNone taCtr ovfScr">
         <li className="col m0">
-          <Link to="/us/ny/nyc/tech-workers-coalition">Overview</Link>
-          {/* <Tab
+          <Tab
             match={match}
-            subRoute="/"
-            text="Overview"
-          /> */}
+            subRoute="overview"
+          />
         </li>
         <li className="col m0 bgGrey2">
-          <Link to="/us/ny/nyc/tech-workers-coalition/events">Events</Link>
-          {/* <Tab
+          <Tab
             match={match}
             subRoute="events"
-            text="Events"
-          /> */}
+          />
         </li>
         <li className="col m0 bgGrey2">
-          <Link to="/us/ny/nyc/tech-workers-coalition/decisions">Decisions</Link>
-          {/* <Tab
+          <Tab
             match={match}
             subRoute="decisions"
-            text="Decisions"
-          /> */}
+          />
         </li>
       </ul>
     </nav>

@@ -69,6 +69,7 @@ const createEvent = async () => {
 const createUserOrgRelation = async i => ({
   userId: i,
   orgId: 100,
+  role: 'admin',
 });
 
 const createUserEventRelation = async (u, e) => {
@@ -182,11 +183,12 @@ exports.seed = async (knex, Promise) => {
     fakeUsers.push(await createUser());
   }
 
+  // ids are both 100 for the test accounts
   fakeUsers.push(await createTestUser());
   fakeOrgs.push(await createTWC());
 
   let c = 1;
-  for (c; c < 100; c++) {
+  for (c; c <= 100; c++) {
     fakeUserOrgRelations.push(await createUserOrgRelation(c));
   }
 
@@ -198,7 +200,7 @@ exports.seed = async (knex, Promise) => {
 
   // u for user, e for event. loop through both to get a good spread
   let e = 1;
-  for (e; e < 100; e++) {
+  for (e; e <= 100; e++) {
 
     let f = 1;
     for (f; f < 20; f++) {
@@ -207,12 +209,12 @@ exports.seed = async (knex, Promise) => {
   }
 
   let g = 1;
-  for (g; g < 100; g++) {
+  for (g; g <= 100; g++) {
     fakeDecisions.push(await createDecision(g));
   }
 
   let h = 1;
-  for (h; h < 100; h++) {
+  for (h; h <= 100; h++) {
     fakeUserDecisionRelations.push(await createUserDecisionRelation(h));
   }
 

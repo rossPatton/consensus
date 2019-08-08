@@ -1,5 +1,6 @@
 export type tComponentProps = {
   org: tOrg,
+  session: tSession,
   usersByOrg: tUsersByOrg,
 };
 
@@ -10,4 +11,5 @@ export type tContainerProps = tComponentProps & {
 
 export type tState = {
   usersByOrg: tThunk<tUsersByOrg>,
+  session: tSession,
 }

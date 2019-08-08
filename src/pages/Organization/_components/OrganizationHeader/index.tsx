@@ -20,7 +20,9 @@ export class OrganizationHeaderContainer extends PureComponent<tContainerProps> 
   render() {
     return (
       <OrganizationHeaderComponent
-        {...this.props}
+        org={this.props.org}
+        session={this.props.session}
+        usersByOrg={this.props.usersByOrg}
       />
     );
   }
@@ -28,6 +30,7 @@ export class OrganizationHeaderContainer extends PureComponent<tContainerProps> 
 
 const mapStateToProps = (state: tState) => ({
   isLoading: state.usersByOrg.isLoading,
+  session: state.session,
   usersByOrg: state.usersByOrg.data,
 });
 

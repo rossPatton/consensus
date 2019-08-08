@@ -11,6 +11,7 @@ exports.up = async knex => {
     table.string('lname');
     table.string('username').unique().notNullable();
 
+    table.timestamp('lastActive').defaultTo(knex.fn.now());
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.timestamp('updatedAt').defaultTo(knex.fn.now());
   });

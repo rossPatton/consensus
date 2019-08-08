@@ -36,14 +36,17 @@ export const SimpleMajority = memo((props: tProps) => {
           {title}
         </Link>
       </h3>
-      <div className="fs6 fw600 black">
-        <span className="mR2">
+      <div className="fx aiCtr fs6 fw600 black">
+        <span className="fx aiCtr mR2">
+          <span className="bgGreen p1 circ mR1" />
           {yesPercent}% Approved
         </span>
-        <span className="mR2">
+        <span className="fx aiCtr mR2">
+          <span className="bgRed p1 circ mR1" />
           {noPercent}% Rejected
         </span>
-        <span className="mR2">
+        <span className="fx aiCtr mR2">
+          <span className="bgYellow p1 circ mR1" />
           {abstainPercent}% Abstained
         </span>
       </div>

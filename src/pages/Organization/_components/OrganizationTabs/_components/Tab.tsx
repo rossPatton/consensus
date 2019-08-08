@@ -2,22 +2,22 @@ import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
 export const Tab = memo((props: any) => {
-  const { match, text, subRoute = '' } = props;
-  const { country, city, organization } = match.params;
+  const { match, subRoute = '' } = props;
+  const { country, city, state, org, section } = match.params;
 
-  const to = `${country}/${city}/${organization}${subRoute}`;
+  const to = `/${country}/${state}/${city}/${org}/${subRoute}`;
 
-  // if (subRoute === route) {
-  //   return (
-  //     <span className="capitalize dBl bgBlue white p3">
-  //       {text.replace('/', '')}
-  //     </span>
-  //   );
-  // }
+  if (section === subRoute) {
+    return (
+      <span className="cap dBl bgBlue white p3">
+        {subRoute}
+      </span>
+    );
+  }
 
   return (
-    <Link to={subRoute} className="capitalize dBl p3">
-      {text}
+    <Link to={to} className="cap dBl p3">
+      {subRoute}
     </Link>
   );
 });
