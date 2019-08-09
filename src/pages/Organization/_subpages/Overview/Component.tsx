@@ -6,7 +6,7 @@ import { tComponentProps } from './_types';
 
 export const OverviewComponent = memo((props: tComponentProps) => (
   <>
-    <div className="bgYellowLite fs6 fw600 lh1 pT3 pB3 mB4 brdB1">
+    <div className="bgYellowLite fs6 lh1 pT3 pB3 mB4 brdB1">
       <ul className="contain fx fxWrap aiCtr">
         <li className="fx aiCtr cap">
           {props.role && (
@@ -34,6 +34,19 @@ export const OverviewComponent = memo((props: tComponentProps) => (
             {props.usersByOrg.userTotal} members total
           </a>
         </li>
+        <ul className="fx col jcEnd fs6">
+          <li className="mR2 brdA1 p1 br4 bgWhite pL2 pR2 trans1">
+            <Link to="/us/ny/nyc/tech-workers-coalition/createEvent">
+              Create Event
+            </Link>
+          </li>
+          <li className="brdA1 p1 br4 bgWhite pL2 pR2 mR2">
+            Make a Decision
+          </li>
+          <li className="brdA1 p1 br4 bgWhite pL2 pR2">
+            Manage Group
+          </li>
+        </ul>
       </ul>
     </div>
     <div className="contain ffLab pB4">

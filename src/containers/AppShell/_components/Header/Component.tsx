@@ -17,7 +17,7 @@ export const HeaderComponent = memo((props: tProps) => (
           <Link
             to="/signup"
             id="a11ySignup"
-            className="brdA1 br8 p1 pL3 pR3 mR2 fw600">
+            className="brdA1 br4 p1 pL2 pR2 mR2 fw600 trans1 hvrBgGrey1">
             Sign Up
           </Link>
           <Link
@@ -38,7 +38,7 @@ export const HeaderComponent = memo((props: tProps) => (
           <button
             id="a11yLogout"
             onClick={() => fetch('/auth/logout').then(props.logout)}
-            className="bg0 p0 fs6">
+            className="bg0 p0 ba0 fs6">
             Logout
           </button>
         </div>

@@ -20,20 +20,13 @@ export const SimpleMajority = memo((props: tProps) => {
           'bgRed': !isPassed,
         })}
       />
-      <div className="fx aiCtr black fw600 LabBlack fs6 mB2">
-        <time className="mR2 lh1">{date}</time>
-        <div className="bgGrey2 p1 lh1">
-          <Link title="What does this mean?" to="/filler">
-            {type}
-          </Link>
-        </div>
-      </div>
-      <h3 className="mB3 lh1 ttCap">
+      <time className="mR2 lh1 fw600 fs6 mB2">{date}</time>
+      <h3 className="mB2 lh1 ttCap">
         <Link to="/filler">
           {title}
         </Link>
       </h3>
-      <div className="fx aiCtr fs6 fw600 lh1">
+      <div className="fx aiCtr fs6 fw600 lh1 mB2">
         <span className="fx aiCtr mR2">
           <span className="bgBlue p1 circ mR1" />
           {yesPercent}% Approved

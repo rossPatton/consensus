@@ -6,5 +6,4 @@ export { Helmet } from './Helmet';
 export { Paginate } from './Paginate';
 export { PrivateRoute } from './PrivateRoute';
 export { RouteWithSubRoutes } from './RouteWithSubRoutes';
-export { RSVPStatus } from './RSVPStatus';
 export { ScrollToTop } from './ScrollToTop';

@@ -128,7 +128,7 @@ h3
 h4,
 h5,
 h6
-  font-family LabBlack, sans-serif
+  font-family Lab, sans-serif
 
 h1,
 h2,
@@ -155,14 +155,17 @@ a
   outline 0
 
 button
+  background 0
+  border 1px solid #e1e1e1
   border-radius 4px
   box-shadow none
   display inline-block
   font-family Lab, "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif
-  font-size 16px
-  font-weight 500
+  font-size 14px
+  font-weight 600
   line-height 1
   margin 0
+  padding 4px 8px
   text-align center
   vertical-align middle
   white-space nowrap
@@ -175,45 +178,31 @@ img
   height auto
   max-width 100%
 
-button,
-input,
-option,
-select,
-textarea
-  border 0
-  outline 0
-
 input
   border-radius 0
 
 button,
 option,
 select,
-textarea,
-input[type="tel"],
-input[type="text"],
-input[type="email"],
-input[type="search"],
-input[type="submit"]
-  appearance none
-
-input[type="tel"],
-input[type="email"],
-input[type="text"],
-input[type="search"],
 textarea
-  background #fff
-  width 100%
+  appearance none
 
 input,
 select,
 textarea
+  border 1px solid #e1e1e1
   font-family inherit !important
   font-size 16px
   margin 0
+  max-width 760px
+  padding 16px
 
 select
+  border-radius 8px
+  transition background-color 0.15s cubic-bezier(0.33, 0.66, 0.66, 1)
   white-space normal
+  &:hover
+    background-color: #efefef
 
 i
   font-style normal
@@ -306,6 +295,9 @@ i
 
 .fx
   display flex
+
+.fxNoShrink
+  flex-shrink 0
 
 .fxdCol
   flex-direction column
@@ -444,16 +436,13 @@ h4,
 .fs4
   font-size 18px
 h5,
+h6,
 .fs5
   font-size 16px
   line-height 24px
-h6,
-.fs6
+.fs6,
+small
   font-size 14px
-.sm,
-small,
-.fs7
-  font-size 12px
 .fw300
   font-weight 300
 .fw400

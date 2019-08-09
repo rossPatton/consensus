@@ -36,16 +36,15 @@ declare type tDecision = {
 
 declare type tEvent = {
   id: number,
-
   category: string,
   city: string,
   country: string,
   date: string,
   description: string,
-  going: boolean,
-  interested: boolean,
+  endDate: string,
+  goingCount: number,
+  interestedCount: number,
   location: string,
-  notGoing: boolean,
   orgId: number,
   slug: string,
   state: string,

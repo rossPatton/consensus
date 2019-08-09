@@ -58,6 +58,9 @@ const createEvent = async () => {
     category: faker.company.bsNoun(),
     date: faker.date.future(),
     description: faker.lorem.paragraphs(),
+    // endDate === duration, since users can have custom durations this is a timestamp
+    // we convert the 1hr, 2hr etc values to timestamps as well
+    endDate: faker.date.future(),
     goingCount: faker.random.number(),
     interestedCount: faker.random.number(),
     location: faker.address.streetAddress(),

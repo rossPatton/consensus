@@ -5,7 +5,7 @@ import { Approval, SimpleMajority } from './_components';
 export const Decisions = memo(({ decisions }: { decisions: tDecision[] }) => (
   <ul>
     {decisions.map((decision, i) => (
-      <li key={i} className="brdA1 br8 mB2 p3 pL4 rel ovfHide">
+      <li key={i} className="brdA1 br8 mB2 p3 pT2 pL4 rel ovfHide">
         {decision.type === 'Simple Majority' && (
           <SimpleMajority
             date={decision.date}
@@ -22,7 +22,12 @@ export const Decisions = memo(({ decisions }: { decisions: tDecision[] }) => (
             type={decision.type}
           />
         )}
-        <div className="fx aiCtr fs6">
+        <div className="fx aiCtr fs6 fw600">
+          <Link
+            title="What does this mean?"
+            to="/filler">
+            {decision.type} Vote
+          </Link>
           {decision.rationale && (
             <Link className="mR2" to="">Rationale</Link>
           )}

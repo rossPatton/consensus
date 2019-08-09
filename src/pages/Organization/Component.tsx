@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { Decisions, Events, Forum, Overview, Resources } from './_subpages';
+import { Decisions, Events, Forum, Overview, Resources, AdminEvent } from './_subpages';
 import { tProps } from './_types';
 import { OrganizationHeader, OrganizationTabs } from './_components';
 
@@ -27,6 +27,11 @@ export const OrganizationComponent = memo((props: tProps) => (
     {props.match.params.section === 'events' && (
       <Events
         match={props.match}
+        org={props.org}
+      />
+    )}
+    {props.match.params.section === 'createEvent' && (
+      <AdminEvent
         org={props.org}
       />
     )}

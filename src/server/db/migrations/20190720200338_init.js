@@ -54,7 +54,9 @@ exports.up = async knex => {
     table.text('description', 'longtext').notNullable();
     table.text('location').defaultTo('Location To Be Determined');
     table.text('title').notNullable();
+
     table.timestamp('date').notNullable();
+    table.timestamp('endDate').notNullable();
 
     table.integer('goingCount').unsigned().notNullable().defaultTo(0);
     table.integer('interestedCount').unsigned().notNullable().defaultTo(0);
