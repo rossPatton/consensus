@@ -34,7 +34,8 @@ declare type tDecision = {
   type: 'Simple Majority' | 'Approval',
 };
 
-declare type tEvent = {
+// creating an event, event schema in db, not logged in event
+declare type tPublicEvent = {
   id: number,
   category: string,
   city: string,
@@ -44,18 +45,22 @@ declare type tEvent = {
   endDate: string,
   goingCount: number,
   interestedCount: number,
+  isPrivate: boolean,
   location: string,
   orgId: number,
   slug: string,
   state: string,
   title: string,
+};
 
-  session: {
+// if user is logged in, we map in their checkin/rsvp status to each event
+declare type tEvent = tPublicEvent & {
+  session?: {
     attended: boolean,
     isGoing: boolean,
     isInterested: boolean,
   }
-};
+}
 
 declare type tOrg = {
   id: number,

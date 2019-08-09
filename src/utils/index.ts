@@ -4,5 +4,6 @@ export { getRandomNum } from './getRandomNum';
 export { getUserRole } from './getUserRole';
 export { notNull } from './notNull';
 export { notUndefined } from './notUndefined';
+export { padDate } from './padDate';
 export { slugify } from './slugify';
 export { utcToDateString } from './utcToDateString';

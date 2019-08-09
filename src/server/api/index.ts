@@ -2,6 +2,7 @@ import Koa from 'koa';
 
 import { auth } from './auth';
 import { decisionsByOrg } from './decisionsByOrg';
+import { event } from './event';
 import { eventsByOrg } from './eventsByOrg';
 import { org } from './org';
 import { reportUri } from './reportUri';
@@ -13,6 +14,7 @@ export const setupApi = (app: Koa) => {
   // app stuff, queries, etc
   app.use(auth.routes());
   app.use(decisionsByOrg.routes());
+  app.use(event.routes());
   app.use(eventsByOrg.routes());
   app.use(org.routes());
   app.use(reportUri.routes());
@@ -22,6 +24,7 @@ export const setupApi = (app: Koa) => {
 
   app.use(auth.allowedMethods());
   app.use(decisionsByOrg.allowedMethods());
+  app.use(event.allowedMethods());
   app.use(eventsByOrg.allowedMethods());
   app.use(org.allowedMethods());
   app.use(reportUri.allowedMethods());

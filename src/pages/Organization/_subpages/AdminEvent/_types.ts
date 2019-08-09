@@ -1,23 +1,26 @@
 export type tProps = {
+  createEvent: (event: any) => Promise<any>,
   org: tOrg,
   session: tSession,
-  authenticateSession: (arg: tLogin) => { payload: tUser },
-  setActiveSession: (user: tUser) => any,
 };
 
 export type tState = {
-  email: string,
-  fname: string,
-  lname: string,
-  password: string,
-  username: string,
+  category: string,
+  date: string,
+  description: string,
+  endDate: string,
+  isPrivate: boolean,
+  location: string,
+  time: string,
+  title: string,
 };
 
-export type tComponentProps = tState & {
-  login: (ev: React.FormEvent<HTMLFormElement>) => void,
-  updateEmail: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  updatePassword: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  updateUsername: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  updateFname: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  updateLname: (ev: React.ChangeEvent<HTMLInputElement>) => void,
+export type tStateUnion = keyof tState;
+
+export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
+
+export type tComponentProps = tProps & tState & {
+  publishEvent: (ev: React.FormEvent<HTMLFormElement>) => void,
+  updateState: (stateKey: tStateUnion, ev: any) => void,
+  toggleChecked: () => void,
 }

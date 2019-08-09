@@ -6,8 +6,8 @@ import { tProps } from './_types';
 export const Events = memo((props: tProps) => (
   <ul>
     {props.events.map((ev, i) => (
-      <li key={i} className="brdA1 br8 mB2 p3 fx aiCtr">
-        <div className="br8 bgGrey1 mR3 col fxNoShrink">
+      <li key={i} className="brdA1 br8 mB2 p3 fx">
+        <div className="br8 bgGrey1 mR3 col fxNoShrink fxg0">
           <img
             alt=""
             height="175"

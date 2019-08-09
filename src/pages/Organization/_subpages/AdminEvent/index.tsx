@@ -3,62 +3,60 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { authenticateSession, setActiveSession } from '../../../../redux';
+import { padDate } from '../../../../utils';
+import { createEvent } from '../../../../redux';
 import { Helmet } from '../../../../components';
-import { tProps, tState } from './_types';
+import { tProps, tState, tStateUnion } from './_types';
 import { AdminEventComponent } from './Component';
 
 export class AdminEventContainer extends Component<tProps, tState> {
-  state = {
-    email: '',
-    fname: '',
-    lname: '',
-    password: '',
-    username: '',
-  };
+  constructor(props: tProps) {
+    super(props);
 
-  login = async (ev: React.FormEvent<HTMLFormElement>) => {
+    // set default date value to right now
+    const date = new Date(Date.now());
+    const yr = date.getFullYear();
+    const mo = date.getMonth();
+    const day = date.getDate();
+    const dateStr = `${yr}-${padDate(mo + 1)}-${padDate(day)}`;
+
+    this.state = {
+      category: props.org.category,
+      date: dateStr,
+      description: '',
+      endDate: '',
+      isPrivate: false,
+      location: '',
+      time: '19:00',
+      title: '',
+    };
+  }
+
+  publishEvent = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const { username, password } = this.state;
-    const { authenticateSession, setActiveSession } = this.props;
+    const { time, ...restOfEvent } = this.state;
+    const event = {
+      ...restOfEvent,
+      date: new Date(`${this.state.date} ${time}`).toUTCString(),
+      orgId: this.props.org.id,
+    };
 
-    const session = await authenticateSession({username, password});
-    setActiveSession(session.payload);
+    await this.props.createEvent(event);
   }
 
-  updateEmail = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  toggleChecked = () => {
     this.setState({
-      email: ev.currentTarget.value,
+      isPrivate: !this.state.isPrivate,
     });
   }
 
-  updatePassword = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  updateState = (stateKey: tStateUnion, ev: any) => {
     this.setState({
-      password: ev.currentTarget.value,
-    });
-  }
-
-  updateUsername = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      username: ev.currentTarget.value,
-    });
-  }
-
-  updateFname = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      fname: ev.currentTarget.value,
-    });
-  }
-
-  updateLname = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      lname: ev.currentTarget.value,
-    });
+      [stateKey]: ev.currentTarget.value,
+    } as Pick<tState, tStateUnion>);
   }
 
   render() {
-    const { session } = this.props;
-
     return (
       <>
         <Helmet
@@ -74,12 +72,9 @@ export class AdminEventContainer extends Component<tProps, tState> {
         <AdminEventComponent
           {...this.props}
           {...this.state}
-          login={this.login}
-          updateEmail={this.updateEmail}
-          updatePassword={this.updatePassword}
-          updateUsername={this.updateUsername}
-          updateFname={this.updateFname}
-          updateLname={this.updateLname}
+          publishEvent={this.publishEvent}
+          toggleChecked={this.toggleChecked}
+          updateState={this.updateState}
         />
       </>
     );
@@ -89,8 +84,7 @@ export class AdminEventContainer extends Component<tProps, tState> {
 const mapStateToProps = (state: {session: tSession}) => ({session: state.session});
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
-  setActiveSession: (user: tUser) => dispatch(setActiveSession(user)),
+  createEvent: (event: tState) => dispatch(createEvent(event)),
 });
 
 export const AdminEvent = connect(

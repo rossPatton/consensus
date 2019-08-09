@@ -1,4 +1,4 @@
-type tObj = {[key: string]: number | string};
+type tObj = {[key: string]: number | string | boolean};
 export const objToQueryString = (obj: tObj): string => {
   if (typeof obj !== 'object') return '';
   if (obj instanceof Array) return '';

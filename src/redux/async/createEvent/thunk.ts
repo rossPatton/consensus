@@ -3,21 +3,21 @@ import { Dispatch } from 'redux';
 import { agent, objToQueryString } from '../../../utils';
 
 import {
-  registerUserBegin,
-  registerUserSuccess,
-  registerUserFailure,
+  createEventBegin,
+  createEventSuccess,
+  createEventFailure,
 } from './actions';
 
-export const registerUser = memoize({ ttl: 300 }, (user: tUser) => {
+export const createEvent = memoize({ ttl: 300 }, (event: tPublicEvent) => {
   return async function <S>(dispatch: Dispatch<S>) {
-    dispatch(registerUserBegin());
+    dispatch(createEventBegin());
 
     try {
       const prefix = __DEV__ ?
-        'https://127.0.0.1:3001/api/v1/user' :
-        '/api/v1/user';
+        'https://127.0.0.1:3001/api/v1/event' :
+        '/api/v1/event';
 
-      const qs = objToQueryString(user);
+      const qs = objToQueryString(event);
 
       // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, {
@@ -26,9 +26,9 @@ export const registerUser = memoize({ ttl: 300 }, (user: tUser) => {
         method: 'POST',
       });
       const json = await result.json();
-      return dispatch(registerUserSuccess(json));
+      return dispatch(createEventSuccess(json));
     } catch (err) {
-      return dispatch(registerUserFailure(err));
+      return dispatch(createEventFailure(err));
     }
   };
 });
