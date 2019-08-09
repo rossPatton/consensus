@@ -29,11 +29,11 @@ export const Events = memo(({ events }: { events: tEvent[] }) => (
             {event.description}
           </p>
           <div className="fx fw600 fs6 lh1 lsNone black">
-            <span className="br4 brdA1 p1 pL2 pR2 mR2 fx aiCtr curPtr hvrBgGrey1 trans1">
+            <span className="br8 brdA1 p1 pL2 pR2 mR2 fx aiCtr curPtr hvrBgGrey1 trans1">
               <span className="bgBlue circ p1 mR1" />
               {event.going} Going
             </span>
-            <span className="bgr4 brdA1 p1 pL2 pR2 fx aiCtr curPtr hvrBgGrey1 trans1">
+            <span className="br8 brdA1 p1 pL2 pR2 fx aiCtr curPtr hvrBgGrey1 trans1">
               <span className="bgYellow circ p1 mR1" />
               {event.interested} Interested
             </span>

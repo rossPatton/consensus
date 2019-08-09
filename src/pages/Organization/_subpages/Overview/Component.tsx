@@ -9,10 +9,16 @@ export const OverviewComponent = memo((props: tComponentProps) => (
     <div className="bgYellowLite fs6 fw600 lh1 pT3 pB3 mB4 brdB1">
       <ul className="contain fx fxWrap aiCtr">
         <li className="fx aiCtr cap">
-          {props.role && <span className="fs3 mR1">✔</span>}
-          {props.role && props.role}
+          {props.role && (
+            <span className="bgWhite brdA1 br8 p1 pL2 pR2 mR2 fx aiCtr">
+              <span className="fs4 mR1">✔</span>
+              <span className="ttCap">{props.role}</span>
+            </span>
+          )}
           {!props.role && (
-            <Link to="filler" className="bgBlack white br16 p1 pL2 pR2 mR2 noUnderline">
+            <Link
+              to="filler"
+              className="bgWhite brdA1 br8 p1 pL2 pR2 mR2 noUnderline fw600">
               Join This Organization
             </Link>
           )}
