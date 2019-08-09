@@ -12,6 +12,7 @@ export const contentSecurityPolicyMiddleware = async (app: Koa) => {
     directives: {
       defaultSrc: directives,
       frameAncestors: ["'none'"],
+      imgSrc: ["'self'", 'picsum.photos', 'via.placeholder.com'],
       objectSrc: ["'none'"],
       sandbox: [
         'allow-forms',

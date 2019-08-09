@@ -19,10 +19,6 @@ event.get('getEvent', '/api/v1/event', async (ctx: Koa.Context) => {
 event.post('postEvent', '/api/v1/event', async (ctx: Koa.Context) => {
   try {
     const event: tPublicEvent = ctx.query;
-    // const newEvent = { date, time, ...event };
-    console.log('event => ', event);
-    // const utcDate =
-
     const eventQuery = await knex('events').insert(event).returning('*');
     const newEventInsert = eventQuery[0];
     ctx.body = newEventInsert;

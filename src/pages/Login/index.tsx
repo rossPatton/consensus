@@ -23,6 +23,7 @@ export class LoginContainer extends Component<tProps, tState> {
     const { authenticateSession, setActiveSession } = this.props;
 
     const session = await authenticateSession({username, password});
+    console.log('session => ', session);
     setActiveSession(session.payload);
   }
 

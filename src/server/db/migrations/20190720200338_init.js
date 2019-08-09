@@ -59,7 +59,6 @@ exports.up = async knex => {
     table.timestamp('endDate');
 
     table.integer('goingCount').unsigned().notNullable().defaultTo(0);
-    table.integer('interestedCount').unsigned().notNullable().defaultTo(0);
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.timestamp('updatedAt').defaultTo(knex.fn.now());
@@ -71,9 +70,8 @@ exports.up = async knex => {
     table.integer('userId').notNullable().references('users.id');
     table.integer('eventId').notNullable().references('events.id');
 
-    table.boolean('attended').defaultTo(false);
-    table.boolean('going').defaultTo(false);
-    table.boolean('interested').defaultTo(false);
+    table.boolean('didAttend').defaultTo(false);
+    table.boolean('isGoing').defaultTo(false);
   });
 
   await knex.schema.createTable('decision_types', table => {

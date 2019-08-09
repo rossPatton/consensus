@@ -11,24 +11,42 @@ auth.post('user login', '/auth/user/login', async (ctx: Koa.Context) => {
   return passport.authenticate('local', async (_, unsafeUser: tUser) => {
     if (!unsafeUser) ctx.throw(400, 'User not found');
 
-    const { password, ...safeUser } = unsafeUser;
-    await ctx.login(safeUser);
+    try {
+      await ctx.login(unsafeUser);
+      const { password, ...safeUser } = unsafeUser;
 
-    const userOrgRels = await knex('users_orgs').where({userId: safeUser.id});
-    const roles = userOrgRels.map((userOrgRel: tUserOrgRelation) => ({
-      orgId: userOrgRel.orgId,
-      role: userOrgRel.role,
-    }));
+      // @TODO consolidate this session logic
+      const userOrgRels = await knex('users_orgs').where({userId: safeUser.id});
+      const userEventRels = await knex('users_events').where({userId: safeUser.id});
 
-    const newSession: tSession = {
-      ...safeUser,
-      isAuthenticated: await ctx.isAuthenticated(),
-      lastActive: await knex.fn.now(),
-      roles,
-    };
+      const roles = userOrgRels.map((rel: tUserOrgRelation) => ({
+        orgId: rel.orgId,
+        role: rel.role,
+      }));
 
-    ctx.status = 200;
-    ctx.body = newSession;
+      const rsvps = userEventRels.map((rel: tUserEventRelation) => ({
+        eventId: rel.eventId,
+        status: {
+          didAttend: rel.didAttend,
+          isGoing: rel.isGoing,
+        },
+      }));
+
+      const isAuthenticated = ctx.isAuthenticated();
+      // const lastActive = await knex.fn.now();
+      const newSession: tSession = {
+        ...safeUser,
+        isAuthenticated,
+        // lastActive,
+        roles,
+        rsvps,
+      };
+
+      ctx.status = 200;
+      ctx.body = newSession;
+    } catch (err) {
+      ctx.throw('400', err);
+    }
   })(ctx);
 });
 

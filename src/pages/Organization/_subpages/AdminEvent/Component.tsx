@@ -32,6 +32,7 @@ export const AdminEventComponent = memo((props: tComponentProps) => {
           <h3>Tell Us About Your Event</h3>
           <textarea
             rows={5}
+            spellCheck
             className="mB3 row"
             placeholder="Event Description Here"
             value={props.description}

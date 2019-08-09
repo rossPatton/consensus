@@ -44,7 +44,6 @@ declare type tPublicEvent = {
   description: string,
   endDate: string,
   goingCount: number,
-  interestedCount: number,
   isPrivate: boolean,
   location: string,
   orgId: number,
@@ -55,16 +54,11 @@ declare type tPublicEvent = {
 
 // if user is logged in, we map in their checkin/rsvp status to each event
 declare type tEvent = tPublicEvent & {
-  session?: {
-    attended: boolean,
-    isGoing: boolean,
-    isInterested: boolean,
-  }
+  status?: tRSVP,
 }
 
 declare type tOrg = {
   id: number,
-
   category: string,
   city: string,
   country: string,
@@ -95,9 +89,8 @@ declare type tUser = {
 };
 
 declare type tRSVP = {
-  attended: boolean,
-  going: boolean,
-  interested: boolean,
+  didAttend: boolean,
+  isGoing: boolean,
 };
 
 declare type tUserEventRelation = tRSVP & {
@@ -142,6 +135,10 @@ declare type tSession = {
   password?: string,
   // simple map of org ids and role types to determine level of access for user
   roles?: tRoleMap[],
+  rsvps?: {
+    eventId: number,
+    status: tRSVP,
+  }[],
   updatedAt?: string,
   username?: string,
 };

@@ -62,7 +62,7 @@ const createEvent = async () => {
     // we convert the 1hr, 2hr etc values to timestamps as well
     endDate: faker.date.future(),
     goingCount: faker.random.number(),
-    interestedCount: faker.random.number(),
+    isPrivate: faker.random.boolean(),
     location: faker.address.streetAddress(),
     orgId: 100,
     title: faker.company.bs(),
@@ -77,15 +77,12 @@ const createUserOrgRelation = async i => ({
 
 const createUserEventRelation = async (u, e) => {
   // random bool for going
-  const going = faker.random.boolean();
-
-  // additional random boolean + not going, then say interested
-  const interested = faker.random.boolean() && !going;
+  const didAttend = faker.random.boolean();
 
   return {
+    didAttend,
     eventId: e,
-    going,
-    interested,
+    isGoing: !didAttend && faker.random.boolean(),
     userId: u,
   };
 };
@@ -196,19 +193,9 @@ exports.seed = async (knex, Promise) => {
   }
 
   let d = 1;
-  for (d; d < 20; d++) {
+  for (d; d < 50; d++) {
     fakeEvents.push(await createEvent());
     fakeUserEventRelations.push(await createUserEventRelation(100, d));
-  }
-
-  // u for user, e for event. loop through both to get a good spread
-  let e = 1;
-  for (e; e <= 100; e++) {
-
-    let f = 1;
-    for (f; f < 20; f++) {
-      fakeUserEventRelations.push(await createUserEventRelation(e, f));
-    }
   }
 
   let g = 1;
