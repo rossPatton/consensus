@@ -8,7 +8,10 @@ const initialState: tSession = {
 export const sessionReducer = (state = initialState, action: tSessionAction) => {
   switch (action.type) {
   case SET_ACTIVE_SESSION:
-    return action.payload;
+    return {
+      ...state,
+      session: action.payload,
+    };
   default:
     return state;
   }

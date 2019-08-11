@@ -1,9 +1,8 @@
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { getRandomNum } from '../../utils';
-import { tComponentProps } from './_types';
 
-export const EventsComponent = memo((props: tComponentProps) => (
+export const EventsComponent = memo((props: { events: tEvent[] }) => (
   <ul>
     {props.events.map((ev, i) => (
       <li key={i} className="brdA1 br8 mB3 p3 fx">
@@ -41,20 +40,15 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 </a>
               </span>
             )}
-            {ev.goingCount === 0 && (
-              <span className="mR3 fx aiCtr">
-                No attendees yet – be the first to RSVP!
-              </span>
-            )}
             {!ev.status && (
-              <span className="br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1">
+              <span className="br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
                 <span
                   role="img"
                   className="mR1"
                   aria-label="Big Plus Sign Emoji">
                   ➕
                 </span>
-                RSVP to this event
+                RSVP
               </span>
             )}
             {ev.status && (
@@ -62,28 +56,50 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 {ev.status.isGoing && (
                   <span
                     title="Click to cancel your RSVP"
-                    className="br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1">
+                    className="br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
                     <span
                       role="img"
                       className="mR1"
                       aria-label="Thumbs Up Emoji">
                       👍
                     </span>
-                    You&apos;re going to this event!
+                    You&apos;re going!
                   </span>
                 )}
                 {ev.status.didAttend && (
-                  <span>
+                  <span className="mR2">
                     <span
                       role="img"
                       className="mR1"
                       aria-label="Party Popper Emoji">
                       🎉
                     </span>
-                    You went to this event!
+                    You went!
                   </span>
                 )}
               </>
+            )}
+            {ev.isPrivate && (
+              <small className="bgYellowLite br4 p1 pL2 pR2">
+                <span
+                  role="img"
+                  className="mR1"
+                  aria-label="Lock Emoji">
+                  🔒
+                </span>
+                Private Event
+              </small>
+            )}
+            {!ev.isPrivate && (
+              <small className="bgGreenLite br4 p1 pL2 pR2">
+                <span
+                  role="img"
+                  className="mR1"
+                  aria-label="Tada Emoji">
+                  🎉
+                </span>
+                Public Event
+              </small>
             )}
           </div>
         </div>

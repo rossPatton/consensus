@@ -1,9 +1,12 @@
 export { agent } from './agent';
-export { objToQueryString } from './objToQueryString';
+export { getDateNowAsISOStr } from './getDateNowAsISOStr';
 export { getRandomNum } from './getRandomNum';
 export { getUserRole } from './getUserRole';
 export { notNull } from './notNull';
 export { notUndefined } from './notUndefined';
+export { objToQueryString } from './objToQueryString';
 export { padDate } from './padDate';
+export { parseISOLocalString } from './parseISOLocalString';
+export { parseTimeString } from './parseTimeString';
 export { slugify } from './slugify';
 export { utcToDateString } from './utcToDateString';

@@ -34,6 +34,7 @@ declare type tDecision = {
   type: 'Simple Majority' | 'Approval',
 };
 
+// TODO need to rethink how to split up event types
 // creating an event, event schema in db, not logged in event
 declare type tPublicEvent = {
   id: number,
@@ -46,6 +47,7 @@ declare type tPublicEvent = {
   goingCount: number,
   isPrivate: boolean,
   location: string,
+  locationLink: string,
   orgId: number,
   slug: string,
   state: string,
@@ -99,8 +101,7 @@ declare type tUserEventRelation = tRSVP & {
   userId: number,
 };
 
-declare type tRole = 'member' | 'admin';
-
+declare type tRole = 'member' | 'admin' | null;
 declare type tRoleMap = {
   orgId: number,
   role: tRole,

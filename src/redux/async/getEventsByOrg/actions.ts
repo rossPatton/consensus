@@ -11,7 +11,7 @@ export const getEventsByOrgBegin = (): tBeginAction => ({
   type: GET_EVENTS_BY_ORG_BEGIN,
 });
 
-export const getEventsByOrgSuccess = (payload: tThunk<tEvent[]>): tSuccessAction => ({
+export const getEventsByOrgSuccess = (payload: tEvent[]): tSuccessAction => ({
   type: GET_EVENTS_BY_ORG_SUCCESS,
   payload,
 });

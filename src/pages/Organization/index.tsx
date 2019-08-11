@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
+import { getUserRole } from '../../utils';
 import { getOrg } from '../../redux';
 import { GenericLoader, Helmet } from '../../components';
 import { tContainerProps, tState } from './_types';
@@ -23,6 +24,9 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
+    const { org, session } = this.props;
+    const role = getUserRole(session, org);
+
     return (
       <>
         <Helmet
@@ -40,6 +44,7 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
           render={() => (
             <OrganizationComponent
               {...this.props}
+              role={role}
             />
           )}
         />
@@ -51,6 +56,7 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
 const mapStateToProps = (state: tState) => ({
   isLoading: state.org.isLoading,
   org: state.org.data,
+  session: state.session,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

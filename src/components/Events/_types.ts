@@ -1,8 +1,4 @@
-export type tComponentProps = {
-  events: tEvent[],
-};
-
-export type tContainerProps = {
+export type tProps = {
   events: tEvent[],
   session: tSession,
 };

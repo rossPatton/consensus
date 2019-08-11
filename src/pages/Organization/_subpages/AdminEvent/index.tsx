@@ -3,45 +3,50 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { padDate } from '../../../../utils';
+import { getDateNowAsISOStr, parseISOLocalString, parseTimeString } from '../../../../utils';
 import { createEvent } from '../../../../redux';
+import { getEventsByOrgSuccess } from '../../../../redux/async/getEventsByOrg/actions';
 import { Helmet } from '../../../../components';
-import { tProps, tState, tStateUnion } from './_types';
+import { tContainerProps, tState, tStateUnion, tStore } from './_types';
 import { AdminEventComponent } from './Component';
 
-export class AdminEventContainer extends Component<tProps, tState> {
-  constructor(props: tProps) {
-    super(props);
+export class AdminEventContainer extends Component<tContainerProps, tState> {
+  state = {
+    category: this.props.org.category,
+    date: getDateNowAsISOStr(),
+    description: '',
+    duration: '2',
+    isPrivate: false,
+    location: '',
+    locationLink: '',
+    time: '19:00',
+    title: '',
+  };
 
-    // set default date value to right now
-    const date = new Date(Date.now());
-    const yr = date.getFullYear();
-    const mo = date.getMonth();
-    const day = date.getDate();
-    const dateStr = `${yr}-${padDate(mo + 1)}-${padDate(day)}`;
-
-    this.state = {
-      category: props.org.category,
-      date: dateStr,
-      description: '',
-      endDate: '',
-      isPrivate: false,
-      location: '',
-      time: '19:00',
-      title: '',
-    };
-  }
-
-  publishEvent = async (ev: React.FormEvent<HTMLFormElement>) => {
+  publishEvent = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const { time, ...restOfEvent } = this.state;
-    const event = {
+    const { events } = this.props;
+    const { duration, time, ...restOfEvent } = this.state;
+
+    // TODO move date manipulation logic to server
+    const timeArray = parseTimeString(time);
+    const startDate = new Date(this.state.date);
+    startDate.setHours(timeArray[0]);
+    startDate.setMinutes(timeArray[1]);
+
+    const endDate = startDate;
+    endDate.setHours(endDate.getHours() + parseInt(duration, 10));
+
+    const newEv = {
       ...restOfEvent,
-      date: new Date(`${this.state.date} ${time}`).toUTCString(),
+      date: startDate.toISOString(),
+      endDate: endDate.toISOString(),
       orgId: this.props.org.id,
     };
 
-    await this.props.createEvent(event);
+    this.props.createEvent(newEv)
+      .then((newEv: tEvent) => getEventsByOrgSuccess([newEv, ...events]))
+      .catch(console.error);
   }
 
   toggleChecked = () => {
@@ -57,6 +62,9 @@ export class AdminEventContainer extends Component<tProps, tState> {
   }
 
   render() {
+    const { session } = this.props;
+    console.log('this.state => ', this.state);
+
     return (
       <>
         <Helmet
@@ -69,19 +77,25 @@ export class AdminEventContainer extends Component<tProps, tState> {
             { property: 'og:description', content: '' },
           ]}
         />
-        <AdminEventComponent
-          {...this.props}
-          {...this.state}
-          publishEvent={this.publishEvent}
-          toggleChecked={this.toggleChecked}
-          updateState={this.updateState}
-        />
+        {!session.isAuthenticated && <Redirect to="" />}
+        {session.isAuthenticated && (
+          <AdminEventComponent
+            {...this.props}
+            {...this.state}
+            publishEvent={this.publishEvent}
+            toggleChecked={this.toggleChecked}
+            updateState={this.updateState}
+          />
+        )}
       </>
     );
   }
 }
 
-const mapStateToProps = (state: {session: tSession}) => ({session: state.session});
+const mapStateToProps = (state: tStore) => ({
+  events: state.events.data,
+  session: state.session,
+});
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   createEvent: (event: tState) => dispatch(createEvent(event)),

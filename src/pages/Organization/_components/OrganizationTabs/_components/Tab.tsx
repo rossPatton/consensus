@@ -16,7 +16,7 @@ export const Tab = memo((props: any) => {
   }
 
   return (
-    <Link to={to} className={cx}>
+    <Link to={to} className={`${cx} hvrBgGrey3 trans1`}>
       {subRoute}
     </Link>
   );
