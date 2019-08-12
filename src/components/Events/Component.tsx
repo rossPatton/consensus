@@ -1,6 +1,8 @@
+import dayJS from 'dayjs';
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { getRandomNum } from '../../utils';
+import { ExternalLink } from '../../components';
 
 export const EventsComponent = memo((props: { events: tEvent[] }) => (
   <ul>
@@ -16,28 +18,32 @@ export const EventsComponent = memo((props: { events: tEvent[] }) => (
         </div>
         <div className="col">
           <h3 className="mB2 fx aiCtr ttCap">
-            <Link to="">
+            <Link to={`/events/${ev.id}`}>
               {ev.title}
             </Link>
           </h3>
           <div className="fx aiCtr mB2 fs6 fw600 lh1">
-            <time className="mR1" dateTime="2018-07-07T20:00:00">
-              {ev.date}
+            <time className="mR1" dateTime={ev.date}>
+              {dayJS(ev.date).format('MM/DD/YYYY h:mmA')}
             </time>
             <span className="mR1">@</span>
-            <a href="filler" className="mR1">
-              {ev.location}
-            </a>
+            {ev.locationLink && (
+              <ExternalLink
+                noFollow
+                className="mR1"
+                to={ev.locationLink}>
+                {ev.location}
+              </ExternalLink>
+            )}
+            {!ev.locationLink && ev.location}
           </div>
           <p className="mB2 pR5 lineClamp">
             {ev.description}
           </p>
           <div className="fx aiCtr fs6 lh1 lsNone black">
             {ev.goingCount > 0 && (
-              <span className="mR3 fx aiCtr">
-                <a href="filler">
-                  {ev.goingCount} Attendees
-                </a>
+              <span className="mR3">
+                {ev.goingCount} Attendees
               </span>
             )}
             {!ev.status && (

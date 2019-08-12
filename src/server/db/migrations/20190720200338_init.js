@@ -54,6 +54,7 @@ exports.up = async knex => {
     table.string('category').notNullable();
     table.text('description', 'longtext').notNullable();
     table.text('location').defaultTo('Location To Be Determined');
+    table.text('locationLink');
     table.text('title').notNullable();
     table.timestamp('date').notNullable();
     table.timestamp('endDate');

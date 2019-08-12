@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import dayJS from 'dayjs';
 
 import { getDateNowAsISOStr, parseISOLocalString, parseTimeString } from '../../../../utils';
 import { createEvent } from '../../../../redux';
@@ -29,23 +30,24 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     const { duration, time, ...restOfEvent } = this.state;
 
     // TODO move date manipulation logic to server
-    const timeArray = parseTimeString(time);
-    const startDate = new Date(this.state.date);
-    startDate.setHours(timeArray[0]);
-    startDate.setMinutes(timeArray[1]);
-
-    const endDate = startDate;
-    endDate.setHours(endDate.getHours() + parseInt(duration, 10));
+    const timeArr = parseTimeString(time);
+    const date = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
+    const endDate = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
+    endDate.hour(endDate.hour() + parseInt(duration, 10));
 
     const newEv = {
       ...restOfEvent,
-      date: startDate.toISOString(),
+      // every date is stored in the db as an ISO string
+      date: date.toISOString(),
       endDate: endDate.toISOString(),
       orgId: this.props.org.id,
     };
 
     this.props.createEvent(newEv)
-      .then((newEv: tEvent) => getEventsByOrgSuccess([newEv, ...events]))
+      .then((newEv: tAction<'CREATE_EVENT_SUCCESS', tEvent>) => {
+        if (!newEv.payload) return null;
+        return getEventsByOrgSuccess([newEv.payload, ...events]);
+      })
       .catch(console.error);
   }
 
@@ -63,7 +65,6 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
 
   render() {
     const { session } = this.props;
-    console.log('this.state => ', this.state);
 
     return (
       <>

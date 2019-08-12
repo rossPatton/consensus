@@ -64,6 +64,7 @@ const createEvent = async () => {
     goingCount: faker.random.number(),
     isPrivate: faker.random.boolean(),
     location: faker.address.streetAddress(),
+    locationLink: faker.internet.url(),
     orgId: 100,
     title: faker.company.bs(),
   };
