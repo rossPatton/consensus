@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import dayJS from 'dayjs';
 
-import { getDateNowAsISOStr, parseISOLocalString, parseTimeString } from '../../../../utils';
-import { createEvent } from '../../../../redux';
+import { getDateNowAsISOStr, parseTimeString } from '../../../../utils';
+import { createEvent, fileUpload } from '../../../../redux';
 import { getEventsByOrgSuccess } from '../../../../redux/async/getEventsByOrg/actions';
 import { Helmet } from '../../../../components';
 import { tContainerProps, tState, tStateUnion, tStore } from './_types';
@@ -17,6 +17,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     date: getDateNowAsISOStr(),
     description: '',
     duration: '2',
+    featuredImage: '',
     isPrivate: false,
     location: '',
     locationLink: '',
@@ -24,16 +25,45 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     title: '',
   };
 
-  publishEvent = (ev: React.FormEvent<HTMLFormElement>) => {
+  fileUpload = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    if (!ev.currentTarget.files) return;
+
+    const images = Array.from(ev.currentTarget.files);
+    const featuredImage = images[0];
+
+    const img = document.createElement('img');
+    img.file = featuredImage;
+
+    const test = document.getElementById('testImgRender');
+    test.appendChild(img);
+
+    const reader = new FileReader();
+    reader.readAsDataURL(featuredImage);
+    reader.onload = (ev) => {
+      console.log('ev.currentTarget.result => ', ev.currentTarget.result);
+      this.setState({
+        featuredImage,
+        imagePreview: ev.currentTarget.result,
+      });
+    };
+  }
+
+  publishEvent = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const { events } = this.props;
-    const { duration, time, ...restOfEvent } = this.state;
+    const { duration, featuredImage, imagePreview, time, ...restOfEvent } = this.state;
 
     // TODO move date manipulation logic to server
     const timeArr = parseTimeString(time);
     const date = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
     const endDate = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
     endDate.hour(endDate.hour() + parseInt(duration, 10));
+
+    const body = new FormData();
+    const fileInput = document.getElementById('fileUpload');
+    console.log('fileInput.files => ', fileInput.files);
+    body.append('featuredImage', fileInput.files[0]);
+    // body.append('event', fileInput.files[0]);
 
     const newEv = {
       ...restOfEvent,
@@ -43,12 +73,22 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
       orgId: this.props.org.id,
     };
 
-    this.props.createEvent(newEv)
-      .then((newEv: tAction<'CREATE_EVENT_SUCCESS', tEvent>) => {
-        if (!newEv.payload) return null;
-        return getEventsByOrgSuccess([newEv.payload, ...events]);
-      })
-      .catch(console.error);
+    const fileUpload = await fetch('/api/v1/fileUpload', {
+      method: 'post',
+      body,
+    });
+    const fileUploadJson = await fileUpload.json();
+    console.log('fileUploadJson => ', fileUploadJson);
+
+    const newEvent = await this.props.createEvent(newEv);
+    console.log('newEvent => ', newEvent);
+
+    // .then((newEv: tAction<'CREATE_EVENT_SUCCESS', tEvent>) => {
+    //   console.log('newEv => ', newEv.payload);
+    //   if (!newEv.payload) return null;
+    //   return getEventsByOrgSuccess([newEv.payload, ...events]);
+    // })
+    // .catch(console.error);
   }
 
   toggleChecked = () => {
@@ -83,6 +123,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
           <AdminEventComponent
             {...this.props}
             {...this.state}
+            fileUpload={this.fileUpload}
             publishEvent={this.publishEvent}
             toggleChecked={this.toggleChecked}
             updateState={this.updateState}

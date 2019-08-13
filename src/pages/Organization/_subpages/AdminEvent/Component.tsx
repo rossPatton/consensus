@@ -1,10 +1,14 @@
+import _ from 'lodash';
 import React, { memo } from 'react';
 import { getDateNowAsISOStr } from '../../../../utils';
 import { tComponentProps } from './_types';
 
 export const AdminEventComponent = memo((props: tComponentProps) => (
   <>
-    <form onSubmit={props.publishEvent}>
+    <form
+      id="form"
+      encType="multipart/form-data"
+      onSubmit={props.publishEvent}>
       <fieldset style={{maxWidth: '760px'}}>
         <legend className="mB3">
           <h2>Create a new Event</h2>
@@ -26,10 +30,19 @@ export const AdminEventComponent = memo((props: tComponentProps) => (
           onChange={ev => props.updateState('description', ev)}
         />
         <h3>Featured Image</h3>
-        <div
-          className="br8 brdA1 bsDashed brdW3 mB3 p5 fx fxdCol aiCtr jcCtr"
-          style={{maxWidth: '760px'}}>
-          <button className="bgWhite p3 hvrBgGrey1 trans1 mB2">
+        <img alt="" src={props.imagePreview} />
+        <label
+          id="testImgRender"
+          htmlFor="fileUpload"
+          className="rel fx fxdCol aiCtr jcCtr br8 brdA1 bsDashed brdW3 mB3 p5 curPtr">
+          <input
+            type="file"
+            name="featuredImage"
+            id="fileUpload"
+            onChange={props.fileUpload}
+            accept="image/png, image/jpeg, image/gif"
+          />
+          <span className="btn fx aiCtr p3 hvrBgGrey1">
             <span
               role="img"
               className="mR1"
@@ -37,9 +50,9 @@ export const AdminEventComponent = memo((props: tComponentProps) => (
               📷
             </span>
             Upload Your Image
-          </button>
-          <small>At least 300x300</small>
-        </div>
+          </span>
+          <small>We recommend at least 200x200 px</small>
+        </label>
         <h3>Where is your event happening?</h3>
         <div className="fx mB3">
           <input
@@ -51,10 +64,9 @@ export const AdminEventComponent = memo((props: tComponentProps) => (
             onChange={ev => props.updateState('location', ev)}
           />
           <input
-            results={3}
-            spellCheck
+            type="url"
             className="row"
-            placeholder="If you have a link to a map - put here"
+            placeholder="https://example.com"
             value={props.locationLink}
             onChange={ev => props.updateState('locationLink', ev)}
           />

@@ -27,13 +27,7 @@ const getEvents = async (ctx: Koa.ParameterizedContext) => {
 // @ts-ignore
 eventsByOrg.get('events', '/api/v1/eventsByOrg', async (ctx: Koa.ParameterizedContext) => {
   try {
-    const events = await getEvents(ctx);
-
-    // convert UTC timestamps to human readable dates
-    // easier to just normalize here on the server than do it every time on client
-    const eventsWithMappedDates: tEvent[] = events.map(utcToDateString);
-
-    ctx.body = eventsWithMappedDates; // returnValue;
+    ctx.body = await getEvents(ctx);
   } catch (err) {
     ctx.throw('400', err);
   }

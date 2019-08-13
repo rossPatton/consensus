@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { sessionReducer } from './sync/session/reducer';
+// import { sessionReducer } from './sync/session/reducer';
 
 import { authenticateSessionReducer } from './async/session/reducer';
 import { getDecisionsByOrgReducer } from './async/getDecisionsByOrg/reducer';
@@ -12,12 +12,12 @@ import { registerUserReducer } from './async/registerUser/reducer';
 import { updateUserReducer } from './async/updateUser/reducer';
 
 export const rootReducer = combineReducers({
-  auth: authenticateSessionReducer,
+  // auth: authenticateSessionReducer,
   decisions: getDecisionsByOrgReducer,
   events: getEventsByOrgReducer,
   org: getOrgReducer,
   registerUser: registerUserReducer,
-  session: sessionReducer,
+  session: authenticateSessionReducer,
   updateUser: updateUserReducer,
   users: getUsersReducer,
   usersByOrg: getUsersByOrgReducer,

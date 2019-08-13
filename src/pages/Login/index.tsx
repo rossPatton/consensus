@@ -3,6 +3,7 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
+import { authenticateSuccess } from '../../redux/async/session/actions';
 import { authenticateSession, setActiveSession } from '../../redux';
 import { Helmet } from '../../components';
 import { tProps, tState } from './_types';
@@ -23,8 +24,11 @@ export class LoginContainer extends Component<tProps, tState> {
     const { authenticateSession, setActiveSession } = this.props;
 
     const session = await authenticateSession({username, password});
-    console.log('session => ', session);
-    setActiveSession(session.payload);
+    if (session.payload && session.type === 'AUTHENTICATE_USER_SUCCESS') {
+      authenticateSuccess(session.payload);
+    }
+
+    // setActiveSession(session.payload);
   }
 
   updateEmail = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,7 +93,7 @@ export class LoginContainer extends Component<tProps, tState> {
   }
 }
 
-const mapStateToProps = (state: { session: tSession }) => ({ session: state.session });
+const mapStateToProps = (state: {session: tSession}) => ({session: state.session});
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),

@@ -144,17 +144,30 @@ p
   margin 0 0 14px
 
 a,
+.btn,
 button,
 select,
-input[type="checkbox"],
-input[type="submit"]
+[type="checkbox"],
+[type="submit"]
   cursor pointer
+
+// file stuff has a lot of css, but needed to reset file inputs
+[type="file"]
+  border 0
+  clip rect(0, 0, 0, 0)
+  height 1px
+  overflow hidden
+  padding 0
+  position absolute !important
+  white-space nowrap
+  width 1px
 
 a
   color #000
   font-family Lab, "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif
   outline 0
 
+.btn,
 button
   background 0
   border 1px solid #e1e1e1
@@ -179,14 +192,14 @@ img
   height auto
   max-width 100%
 
-input
-  border-radius 0
-
 button,
 option,
 select,
 textarea
   appearance none
+
+input
+  border-radius 0
 
 input,
 select,

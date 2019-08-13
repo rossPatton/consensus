@@ -25,13 +25,7 @@ export const authenticateSessionReducer = (state = initialState, action: tAction
   case AUTHENTICATE_SUCCESS:
     return {
       ...state,
-      isLoading: false,
-      // instead of storing the active session under auth, we use a sync action to
-      // update the session redux state when a user logs in, logs out, updates, etc
-      data: {
-        // @ts-ignore
-        isAuthenticated: action.payload.isAuthenticated,
-      },
+      data: action.payload,
     };
 
   case AUTHENTICATE_FAILURE:

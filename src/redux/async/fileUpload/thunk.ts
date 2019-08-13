@@ -3,22 +3,21 @@ import { Dispatch } from 'redux';
 import { agent, objToQueryString } from '../../../utils';
 
 import {
-  createEventBegin,
-  createEventSuccess,
-  createEventFailure,
+  fileUploadBegin,
+  fileUploadSuccess,
+  fileUploadFailure,
 } from './actions';
 
-export const createEvent = memoize({ ttl: 300 }, (event: tPublicEvent) => {
+export const fileUpload = memoize({ ttl: 300 }, (event: tPublicEvent) => {
   return async function <S>(dispatch: Dispatch<S>) {
-    dispatch(createEventBegin());
+    dispatch(fileUploadBegin());
 
     try {
       const prefix = __DEV__ ?
-        'https://127.0.0.1:3001/api/v1/event' :
-        '/api/v1/event';
+        'https://127.0.0.1:3001/api/v1/fileUpload' :
+        '/api/v1/fileUpload';
 
       const qs = objToQueryString(event);
-      console.log('qs => ', qs);
 
       // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, {
@@ -27,9 +26,9 @@ export const createEvent = memoize({ ttl: 300 }, (event: tPublicEvent) => {
         method: 'POST',
       });
       const json = await result.json();
-      return dispatch(createEventSuccess(json));
+      return dispatch(fileUploadSuccess(json));
     } catch (err) {
-      return dispatch(createEventFailure(err));
+      return dispatch(fileUploadFailure(err));
     }
   };
 });

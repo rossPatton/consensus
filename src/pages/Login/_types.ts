@@ -1,6 +1,6 @@
 export type tProps = {
   session: tSession,
-  authenticateSession: (arg: tLogin) => { payload: tUser },
+  authenticateSession: (arg: tLogin) => tAction<'AUTHENTICATE_USER_SUCCESS', tUser>,
   setActiveSession: (user: tUser) => any,
 };
 
