@@ -3,6 +3,7 @@ export type tState = {
   date: string,
   description: string,
   duration: string,
+  imagePreview: string,
   isPrivate: boolean,
   location: string,
   locationLink: string,

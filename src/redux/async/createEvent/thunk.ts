@@ -18,7 +18,6 @@ export const createEvent = memoize({ ttl: 300 }, (event: tPublicEvent) => {
         '/api/v1/event';
 
       const qs = objToQueryString(event);
-      console.log('qs => ', qs);
 
       // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, {

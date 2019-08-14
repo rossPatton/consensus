@@ -18,6 +18,7 @@ export const fileUpload = memoize({ ttl: 300 }, (event: tPublicEvent) => {
         '/api/v1/fileUpload';
 
       const qs = objToQueryString(event);
+      console.log('qs => ', qs);
 
       // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, {

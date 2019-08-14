@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const merge = require('webpack-merge');
-const DashboardPlugin = require('webpack-dashboard/plugin');
+// const DashboardPlugin = require('webpack-dashboard/plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyPlugin = require('copy-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
@@ -46,7 +46,7 @@ module.exports = merge(common, {
     // new webpack.HotModuleReplacementPlugin(),
 
     // dashboard to keep us updated on bundle rebuilding times, etc. client only
-    new DashboardPlugin({ port: 3002 }),
+    // new DashboardPlugin({ port: 3002 }),
     // better client side error message
     new ErrorOverlayPlugin(),
 

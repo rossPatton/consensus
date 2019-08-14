@@ -1,21 +1,17 @@
 import Koa from 'koa';
-// import multer from 'koa-multer';
 
 import { auth } from './auth';
 import { decisionsByOrg } from './decisionsByOrg';
 import { event } from './event';
 import { eventsByOrg } from './eventsByOrg';
+import { fileUpload } from './fileUpload';
 import { org } from './org';
 import { reportUri } from './reportUri';
 import { user } from './user';
 import { users } from './users';
 import { usersByOrg } from './usersByOrg';
 
-import { fileUpload } from './fileUpload';
-
 export const setupApi = (app: Koa) => {
-  // app.use(multer());
-
   // app stuff, queries, etc
   app.use(auth.routes());
   app.use(decisionsByOrg.routes());

@@ -39,8 +39,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
 
     const reader = new FileReader();
     reader.readAsDataURL(featuredImage);
-    reader.onload = (ev) => {
-      console.log('ev.currentTarget.result => ', ev.currentTarget.result);
+    reader.onload = ev => {
       this.setState({
         featuredImage,
         imagePreview: ev.currentTarget.result,
@@ -50,45 +49,43 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
 
   publishEvent = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const { events } = this.props;
-    const { duration, featuredImage, imagePreview, time, ...restOfEvent } = this.state;
+    try {
+      const { events } = this.props;
+      const {
+        duration,
+        featuredImage,
+        imagePreview,
+        time,
+        ...restOfEvent
+      } = this.state;
 
-    // TODO move date manipulation logic to server
-    const timeArr = parseTimeString(time);
-    const date = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
-    const endDate = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
-    endDate.hour(endDate.hour() + parseInt(duration, 10));
+      // TODO move date manipulation logic to server
+      const timeArr = parseTimeString(time);
+      const date = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
+      const endDate = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
+      endDate.hour(endDate.hour() + parseInt(duration, 10));
 
-    const body = new FormData();
-    const fileInput = document.getElementById('fileUpload');
-    console.log('fileInput.files => ', fileInput.files);
-    body.append('featuredImage', fileInput.files[0]);
-    // body.append('event', fileInput.files[0]);
+      const createEvent = await this.props.createEvent({
+        ...restOfEvent,
+        // every date is stored in the db as an ISO string
+        date: date.toISOString(),
+        endDate: endDate.toISOString(),
+        orgId: this.props.org.id,
+      });
 
-    const newEv = {
-      ...restOfEvent,
-      // every date is stored in the db as an ISO string
-      date: date.toISOString(),
-      endDate: endDate.toISOString(),
-      orgId: this.props.org.id,
-    };
+      const newEvent = createEvent.payload;
+      if (!newEvent) return;
+      await getEventsByOrgSuccess([newEvent.payload, ...events]);
 
-    const fileUpload = await fetch('/api/v1/fileUpload', {
-      method: 'post',
-      body,
-    });
-    const fileUploadJson = await fileUpload.json();
-    console.log('fileUploadJson => ', fileUploadJson);
+      const body = new FormData();
+      const fileInput = document.getElementById('fileUpload');
+      body.append('featuredImage', fileInput.files[0]);
+      body.append('eventId', newEvent.id);
 
-    const newEvent = await this.props.createEvent(newEv);
-    console.log('newEvent => ', newEvent);
-
-    // .then((newEv: tAction<'CREATE_EVENT_SUCCESS', tEvent>) => {
-    //   console.log('newEv => ', newEv.payload);
-    //   if (!newEv.payload) return null;
-    //   return getEventsByOrgSuccess([newEv.payload, ...events]);
-    // })
-    // .catch(console.error);
+      await fetch(`/api/v1/fileUpload?eventId=${newEvent.id}`, {method: 'post', body});
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   toggleChecked = () => {

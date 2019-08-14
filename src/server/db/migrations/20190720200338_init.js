@@ -65,6 +65,22 @@ exports.up = async knex => {
     table.timestamp('updatedAt').defaultTo(knex.fn.now());
   });
 
+  // await knex.schema.createTable('images', table => {
+  //   table.increments().unsigned().primary();
+  //   table.timestamp('createdAt').defaultTo(knex.fn.now());
+  //   table.timestamp('updatedAt').defaultTo(knex.fn.now());
+  // });
+
+  // await knex.schema.createTable('images_events', table => {
+  //   table.increments().unsigned().primary();
+
+  //   table.integer('imgId').notNullable().references('images.id');
+  //   table.integer('eventId').notNullable().references('events.id');
+
+  //   table.timestamp('createdAt').defaultTo(knex.fn.now());
+  //   table.timestamp('updatedAt').defaultTo(knex.fn.now());
+  // });
+
   await knex.schema.createTable('users_events', table => {
     table.increments('id').unsigned().primary();
 
