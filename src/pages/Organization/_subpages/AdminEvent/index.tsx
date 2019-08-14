@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import dayJS from 'dayjs';
 
-import { getDateNowAsISOStr, parseTimeString } from '../../../../utils';
+import { getDateNowAsISOStr, parseTimeString, notNull } from '../../../../utils';
 import { createEvent, fileUpload } from '../../../../redux';
 import { getEventsByOrgSuccess } from '../../../../redux/async/getEventsByOrg/actions';
 import { Helmet } from '../../../../components';
@@ -17,7 +17,8 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     date: getDateNowAsISOStr(),
     description: '',
     duration: '2',
-    featuredImage: '',
+    featuredImage: null,
+    imagePreview: null,
     isPrivate: false,
     location: '',
     locationLink: '',
@@ -25,46 +26,42 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     title: '',
   };
 
+  // create preview image, store featuredImage in state to be uploaded on submit
   fileUpload = (ev: React.ChangeEvent<HTMLInputElement>) => {
     if (!ev.currentTarget.files) return;
 
     const images = Array.from(ev.currentTarget.files);
     const featuredImage = images[0];
 
-    const img = document.createElement('img');
-    img.file = featuredImage;
-
-    const test = document.getElementById('testImgRender');
-    test.appendChild(img);
-
     const reader = new FileReader();
     reader.readAsDataURL(featuredImage);
-    reader.onload = ev => {
+    reader.onload = () => {
       this.setState({
         featuredImage,
-        imagePreview: ev.currentTarget.result,
+        imagePreview: reader.result as string,
       });
     };
   }
 
-  publishEvent = async (ev: React.FormEvent<HTMLFormElement>) => {
+  onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
+    const { events } = this.props;
+    const {
+      duration,
+      featuredImage,
+      imagePreview,
+      time,
+      ...restOfEvent
+    } = this.state;
+
+    // TODO move date manipulation logic to server
+    const timeArr = parseTimeString(time);
+    const date = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
+    const endDate = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
+    endDate.hour(endDate.hour() + parseInt(duration, 10));
+
+    let newEvent = null;
     try {
-      const { events } = this.props;
-      const {
-        duration,
-        featuredImage,
-        imagePreview,
-        time,
-        ...restOfEvent
-      } = this.state;
-
-      // TODO move date manipulation logic to server
-      const timeArr = parseTimeString(time);
-      const date = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
-      const endDate = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
-      endDate.hour(endDate.hour() + parseInt(duration, 10));
-
       const createEvent = await this.props.createEvent({
         ...restOfEvent,
         // every date is stored in the db as an ISO string
@@ -73,19 +70,31 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
         orgId: this.props.org.id,
       });
 
-      const newEvent = createEvent.payload;
-      if (!newEvent) return;
-      await getEventsByOrgSuccess([newEvent.payload, ...events]);
+      newEvent = createEvent.payload;
+    } catch (err) {
+      console.error('failed to save event to db');
+    }
 
-      const body = new FormData();
-      const fileInput = document.getElementById('fileUpload');
-      body.append('featuredImage', fileInput.files[0]);
-      body.append('eventId', newEvent.id);
+    const body = new FormData();
+    const fileInput = document.getElementById('fileUpload') as HTMLInputElement;
+    if (fileInput !== null) {
+      const { files }: { files: FileList | null } = fileInput;
 
+      if (files !== null) {
+        body.append('featuredImage', files[0]);
+        body.append('eventId', newEvent.id);
+      }
+    }
+
+    // upload featuredImage to fileserver, resize, etc
+    try {
       await fetch(`/api/v1/fileUpload?eventId=${newEvent.id}`, {method: 'post', body});
     } catch (err) {
-      console.error(err);
+      console.error('failed to upload featured image');
     }
+
+    // update redux on client side on event upload success
+    getEventsByOrgSuccess([newEvent.payload, ...events]);
   }
 
   toggleChecked = () => {
@@ -121,7 +130,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
             {...this.props}
             {...this.state}
             fileUpload={this.fileUpload}
-            publishEvent={this.publishEvent}
+            onSubmit={this.onSubmit}
             toggleChecked={this.toggleChecked}
             updateState={this.updateState}
           />

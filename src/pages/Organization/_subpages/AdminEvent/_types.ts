@@ -3,7 +3,8 @@ export type tState = {
   date: string,
   description: string,
   duration: string,
-  imagePreview: string,
+  featuredImage: File | null,
+  imagePreview: string | null,
   isPrivate: boolean,
   location: string,
   locationLink: string,
@@ -27,7 +28,8 @@ export type tContainerProps = {
 };
 
 export type tComponentProps = tContainerProps & tState & {
-  publishEvent: (ev: React.FormEvent<HTMLFormElement>) => void,
+  fileUpload: (ev: React.ChangeEvent<HTMLInputElement>) => void,
+  onSubmit: (ev: React.FormEvent<HTMLFormElement>) => void,
   updateState: (stateKey: tStateUnion, ev: any) => void,
   toggleChecked: () => void,
 }

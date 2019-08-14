@@ -8,7 +8,7 @@ export const AdminEventComponent = memo((props: tComponentProps) => (
     <form
       id="form"
       encType="multipart/form-data"
-      onSubmit={props.publishEvent}>
+      onSubmit={props.onSubmit}>
       <fieldset style={{maxWidth: '760px'}}>
         <legend className="mB3">
           <h2>Create a new Event</h2>
@@ -30,9 +30,17 @@ export const AdminEventComponent = memo((props: tComponentProps) => (
           onChange={ev => props.updateState('description', ev)}
         />
         <h3>Featured Image</h3>
-        <img alt="" src={props.imagePreview} />
+        {props.imagePreview && (
+          <div className="bgGrey1 p3 mB3 fx aiCtr" id="imagePreview">
+            <img
+              alt=""
+              height="175"
+              width="175"
+              src={props.imagePreview}
+            />
+          </div>
+        )}
         <label
-          id="testImgRender"
           htmlFor="fileUpload"
           className="rel fx fxdCol aiCtr jcCtr br8 brdA1 bsDashed brdW3 mB3 p5 curPtr">
           <input
