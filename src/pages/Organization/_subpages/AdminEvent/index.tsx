@@ -27,7 +27,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
   };
 
   // create preview image, store featuredImage in state to be uploaded on submit
-  fileUpload = (ev: React.ChangeEvent<HTMLInputElement> | null) => {
+  setImage = (ev: React.ChangeEvent<HTMLInputElement> | null) => {
     if (ev) ev.preventDefault();
 
     if (ev === null) {
@@ -40,7 +40,6 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     if (!ev.currentTarget.files) return;
 
     const images = Array.from(ev.currentTarget.files);
-    console.log('images => ', images);
     const featuredImage = images[0];
 
     const reader = new FileReader();
@@ -64,8 +63,6 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
       ...restOfEvent
     } = this.state;
 
-    console.log('onSubmit state => ', this.state);
-
     // TODO move date manipulation logic to server
     const timeArr = parseTimeString(time);
     const date = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
@@ -82,8 +79,6 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
         orgId: this.props.org.id,
       });
 
-      console.log('createEvent => ', createEvent);
-
       newEvent = createEvent.payload;
     } catch (err) {
       console.error('failed to save event to db');
@@ -93,9 +88,6 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     const fileInput = document.getElementById('fileUpload') as HTMLInputElement;
     if (fileInput !== null) {
       const { files }: { files: FileList | null } = fileInput;
-
-      console.log('files => ', files);
-      console.log('newEvent => ', newEvent);
 
       if (files !== null) {
         body.append('featuredImage', files[0]);
@@ -146,8 +138,8 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
           <AdminEventComponent
             {...this.props}
             {...this.state}
-            fileUpload={this.fileUpload}
             onSubmit={this.onSubmit}
+            setImage={this.setImage}
             toggleChecked={this.toggleChecked}
             updateState={this.updateState}
           />

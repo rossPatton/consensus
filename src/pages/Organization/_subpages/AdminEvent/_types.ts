@@ -28,8 +28,8 @@ export type tContainerProps = {
 };
 
 export type tComponentProps = tContainerProps & tState & {
-  fileUpload: (ev: React.ChangeEvent<HTMLInputElement> | null) => void,
   onSubmit: (ev: React.FormEvent<HTMLFormElement>) => void,
-  updateState: (stateKey: tStateUnion, ev: any) => void,
+  setImage: (ev: React.ChangeEvent<HTMLInputElement> | null) => void,
   toggleChecked: () => void,
+  updateState: (stateKey: tStateUnion, ev: any) => void,
 }

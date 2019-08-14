@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import cx from 'classnames';
 import React, { memo } from 'react';
 import { getDateNowAsISOStr } from '../../../../utils';
 import { tComponentProps } from './_types';
@@ -31,9 +32,21 @@ export const AdminEventComponent = memo((props: tComponentProps) => (
         />
         <h3>Featured Image</h3>
         {props.imagePreview && (
-          <div className="bgGrey1 p3 mB3 fx aiCtr" id="imagePreview">
+          <div className="bgGrey1 p3 mB3 fx fxdCol aiCtr" id="imagePreview">
+            <button
+              onClick={() => props.setImage(null)}
+              className="bgWhite mB2 p2 pL3 pR3">
+              <span
+                role="img"
+                className="mR1"
+                aria-label="X Emoji">
+                ✖️
+              </span>
+              Remove Image
+            </button>
             <img
               alt=""
+              className="row"
               height="175"
               width="175"
               src={props.imagePreview}
@@ -42,12 +55,15 @@ export const AdminEventComponent = memo((props: tComponentProps) => (
         )}
         <label
           htmlFor="fileUpload"
-          className="rel fx fxdCol aiCtr jcCtr br8 brdA1 bsDashed brdW3 mB3 p5 curPtr">
+          className={cx({
+            'rel fx fxdCol aiCtr jcCtr br8 brdA1 bsDashed brdW3 mB3 p5 curPtr': true,
+            'hide': props.imagePreview,
+          })}>
           <input
             type="file"
             name="featuredImage"
             id="fileUpload"
-            onChange={props.fileUpload}
+            onChange={props.setImage}
             accept="image/png, image/jpeg, image/gif"
           />
           <span className="btn fx aiCtr p3 hvrBgGrey1">
@@ -59,7 +75,7 @@ export const AdminEventComponent = memo((props: tComponentProps) => (
             </span>
             Upload Your Image
           </span>
-          <small>We recommend at least 200x200 px</small>
+          <small>We recommend a size of at least 760x428px</small>
         </label>
         <h3>Where is your event happening?</h3>
         <div className="fx mB3">
