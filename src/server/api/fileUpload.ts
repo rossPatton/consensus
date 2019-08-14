@@ -1,6 +1,7 @@
 import { IncomingMessage } from 'http';
 import path from 'path';
 import qs from 'querystring';
+import { Url } from 'url';
 import fs from 'fs-extra';
 import Koa from 'koa';
 import mkdirp from 'mkdirp';
@@ -15,13 +16,14 @@ export const fileUpload = new Router();
 // TODO move to declarations folder if we end up using in more places
 type multerCB = (error: Error | null, destination: string) => void;
 interface tReq extends multer.MulterIncomingMessage {
-  _parsedUrl: string,
+  _parsedUrl: Url,
 }
 
 const storage = multer.diskStorage({
   destination: (req: IncomingMessage, _: multer.File, cb: multerCB) => {
     const { _parsedUrl } = req as tReq;
-    const { eventId } = qs.parse(_parsedUrl);
+    const { query = '' } = _parsedUrl;
+    const { eventId } = qs.parse(query as string);
     const destination = `${CWD}/static/eventImages/${eventId}`;
 
     mkdirp(destination, (err: Error) => {
@@ -41,10 +43,10 @@ fileUpload.post(
   '/api/v1/fileUpload',
   upload.single('featuredImage'),
   async (ctx: Koa.ParameterizedContext<any>) => {
-    const { file }: any = ctx.req;
+    const { file }: { file: multer.File } = ctx.req as multer.MulterIncomingMessage;
     const ext = path.extname(file.originalname);
 
-    const resizer = await sharp().resize(175, 175, { fit: 'contain' });
+    const resizer = await sharp().resize(175, 175, {fit: 'contain'});
     const writeStream = fs.createWriteStream(`${file.destination}/175x175${ext}`);
 
     // take original file, resize it, and then write it via streams
