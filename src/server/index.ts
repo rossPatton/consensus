@@ -1,3 +1,4 @@
+require('dotenv').config();
 require('es6-promise').polyfill();
 import 'core-js/stable';
 import 'isomorphic-fetch';

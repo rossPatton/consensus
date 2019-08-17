@@ -30,7 +30,9 @@ passport.deserializeUser(async (savedUser: tUser, done: tDone) => {
 // userPassword === plaintext input from client
 // double hashed password in the db
 const isValidPw = async (userPassword: string, databasePassword: string) => {
-  const sha = sha256(userPassword);
+  // add a little pepper to the salt - hard coded server key for extra security
+  const { PEPPER } = process.env;
+  const sha = sha256(userPassword + PEPPER);
   return bcrypt.compare(sha, databasePassword);
 };
 
@@ -51,7 +53,6 @@ passport.use(new LocalStrategy(opts, async (username, pw, done) => {
     type: 'password',
   }, false);
 }));
-
 
 // type tDone = (err: Error | null, user: tUser) => Promise<any>;
 // passport.use(new OpenIDStrategy({
