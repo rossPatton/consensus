@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const faker = require('faker');
+const { sha256 } = require('js-sha256');
 
 const slugify = string => {
   if (typeof string !== 'string') return string;
@@ -12,28 +13,40 @@ const slugify = string => {
     .trim();
 };
 
-// TODO dont use sync methods (at least, for the hashes)
-const salt = bcrypt.genSaltSync();
+const salt = bcrypt.genSaltSync(10);
 
-const createUser = async () => ({
-  email: faker.internet.exampleEmail(),
-  fname: faker.name.firstName(),
-  lname: faker.name.lastName(),
-  password: await bcrypt.hash(faker.internet.password(), salt),
-  username: faker.internet.userName(),
-});
+const createUser = async () => {
+  const sha = sha256(faker.internet.password());
+  const password = await bcrypt.hash(sha, salt);
 
-const createTestUser = async () => ({
-  email: 'test@test.com',
-  fname: 'test',
-  lname: 'user',
-  password: await bcrypt.hash('test', salt),
-  username: 'testUser',
-});
+  return {
+    email: faker.internet.exampleEmail(),
+    fname: faker.name.firstName(),
+    lname: faker.name.lastName(),
+    password,
+    username: faker.internet.userName(),
+  };
+};
+
+const createTestUser = async () => {
+  const sha = sha256('test');
+  const password = await bcrypt.hash(sha, salt);
+
+  return {
+    email: 'test@test.com',
+    fname: 'test',
+    lname: 'user',
+    password,
+    username: 'testUser',
+  };
+};
 
 const createOrg = async () => {
   const orgName = faker.company.companyName();
   const slug = slugify(orgName);
+
+  const sha = sha256(faker.internet.password());
+  const password = await bcrypt.hash(sha, salt);
 
   return {
     category: faker.lorem.word(),
@@ -43,7 +56,7 @@ const createOrg = async () => {
     description: faker.lorem.paragraphs(),
     email: faker.internet.exampleEmail(),
     orgName,
-    password: await bcrypt.hash(faker.internet.password(), salt),
+    password,
     slug,
     state: faker.address.state(),
     username: faker.internet.userName(),
@@ -89,19 +102,24 @@ const createUserEventRelation = async (u, e) => {
   };
 };
 
-const createTWC = async () => ({
-  category: 'Tech and Science Activism',
-  city: 'nyc',
-  count: 1789,
-  country: 'us',
-  description: faker.lorem.paragraphs(),
-  email: 'techworkerscoalitionnyc@gmail.com',
-  orgName: 'Tech Workers Coalition NYC',
-  password: await bcrypt.hash(faker.internet.password(), salt),
-  slug: 'tech-workers-coalition',
-  state: 'ny',
-  username: 'twc-ny',
-});
+const createTWC = async () => {
+  const sha = sha256(faker.internet.password());
+  const password = await bcrypt.hash(sha, salt);
+
+  return {
+    category: 'Tech and Science Activism',
+    city: 'nyc',
+    count: 1789,
+    country: 'us',
+    description: faker.lorem.paragraphs(),
+    email: 'techworkerscoalitionnyc@gmail.com',
+    orgName: 'Tech Workers Coalition NYC',
+    password,
+    slug: 'tech-workers-coalition',
+    state: 'ny',
+    username: 'twc-ny',
+  };
+};
 
 const createDecisionTypes = () => ([
   { type: 'Simple Majority' },

@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import { sha256 } from 'js-sha256';
 import passport from 'koa-passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 // import { Strategy as OpenIDStrategy } from 'passport-openid';
@@ -19,16 +20,19 @@ type tDone = (err: Error | null, data: any) => void;
 passport.deserializeUser(async (savedUser: tUser, done: tDone) => {
   try {
     const { id } = savedUser;
-    const user = await knex('users').where({ id }).first();
+    const user = await knex('users').where({id}).first();
     return done(null, user);
   } catch (err) {
     return done(err, null);
   }
 });
 
-
-const isValidPw = async (userPassword: string, databasePassword: string) =>
-  bcrypt.compare(userPassword, databasePassword);
+// userPassword === plaintext input from client
+// double hashed password in the db
+const isValidPw = async (userPassword: string, databasePassword: string) => {
+  const sha = sha256(userPassword);
+  return bcrypt.compare(sha, databasePassword);
+};
 
 passport.use(new LocalStrategy(opts, async (username, pw, done) => {
   let user: any = {};

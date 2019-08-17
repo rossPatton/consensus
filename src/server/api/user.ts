@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import { sha256 } from 'js-sha256';
 import Koa from 'koa';
 import Router from 'koa-router';
 import { knex } from '../db/connection';
@@ -20,8 +21,10 @@ user.get('getUser', '/api/v1/user', async (ctx: Koa.Context) => {
 // @ts-ignore
 user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
   try {
-    const salt = await bcrypt.genSalt();
-    const hash = await bcrypt.hash(ctx.query.password, salt);
+    // bycrypt truncates long inputs - doing it this way ensures no truncation
+    const sha = sha256(ctx.query.password);
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(sha, salt);
 
     const newUser = { ...ctx.query, password: hash };
     const userQuery = await knex('users').insert(newUser).returning('*');

@@ -51,6 +51,7 @@
     "dayjs": "^1.8.15",
     "es6-promise": "^4.2.8",
     "fs-extra": "^8.1.0",
+    "fxa-common-password-list": "0.0.3",
     "history": "^4.9.0",
     "iltorb": "^2.4.3",
     "isomorphic-fetch": "^2.2.1",

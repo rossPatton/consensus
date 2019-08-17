@@ -6,26 +6,41 @@ import { Dispatch } from 'redux';
 import { authenticateSession, registerUser, setActiveSession } from '../../redux';
 import { Helmet } from '../../components';
 import { tContainerProps, tState, tStore } from './_types';
-import { SignupComponent } from './Signup';
+import { SignupComponent } from './Component';
 
 export class SignupContainer extends PureComponent<tContainerProps, tState> {
   state = {
     email: '',
+    error: '',
     fname: '',
     lname: '',
     password: '',
+    showPW: false,
     username: '',
   };
 
   register = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
+    const { error, ...state } = this.state;
     const { username, password } = this.state;
 
+    if (password.length < 12) {
+      return this.setState({
+        error: 'Password must be at least 12 characters',
+      });
+    }
+
     // add user to db, and log them in on success
-    await this.props.insertUser(this.state);
+    await this.props.insertUser(state);
     const session = await this.props.authenticateSession({username, password});
     this.props.setActiveSession(session.payload);
+  }
+
+  togglePWVisibility = () => {
+    this.setState({
+      showPW: !this.state.showPW,
+    });
   }
 
   updateEmail = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,6 +94,7 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
             {...this.props}
             {...this.state}
             register={this.register}
+            togglePWVisibility={this.togglePWVisibility}
             updateEmail={this.updateEmail}
             updatePassword={this.updatePassword}
             updateUsername={this.updateUsername}
@@ -91,7 +107,7 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (state: tStore) => ({ session: state.session });
+const mapStateToProps = (state: tStore) => ({session: state.session});
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
