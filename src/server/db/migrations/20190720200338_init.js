@@ -53,7 +53,7 @@ exports.up = async knex => {
     // name because 90% of the time that's all we need
     // TODO - eventually, events should be searchable by city/state, etc
     table.integer('orgId').notNullable().references('orgs.id');
-    table.integer('orgName').notNullable().references('orgs.orgName');
+    table.string('orgName').notNullable();
 
     table.boolean('isPrivate').defaultTo(false);
     table.string('category').notNullable();

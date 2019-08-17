@@ -17,12 +17,14 @@ export const getEventsByOrg = memoize({ ttl: 300 }, (queryObj: tIdQuery) => {
       '/api/v1/eventsByOrg';
 
     try {
-      const { id, limit, offset } = queryObj;
+      const { exclude, id, limit, offset } = queryObj;
 
       const query = `?id=${id}`;
+      // exclude === an id we don't want to include in the results
+      const excludeStr = exclude ? `&exclude=${exclude}` : '';
       const limitStr = limit ? `&limit=${limit}` : '';
       const offsetStr = offset ? `&offset=${offset}` : '';
-      const qs = `${prefix}${query}${limitStr}${offsetStr}`;
+      const qs = `${prefix}${query}${excludeStr}${limitStr}${offsetStr}`;
 
       // @ts-ignore
       const result = await fetch(qs, { agent });

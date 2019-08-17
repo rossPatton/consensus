@@ -16,7 +16,7 @@ export class EventContainer extends PureComponent<tProps> {
     props.getEventById({id}).then((res: any) => {
       // for rendering the 'more by orgName' sidebar
       // TODO it shouldn't get the current event being looked at
-      return props.getEventsByOrg({id: res.payload.orgId });
+      return props.getEventsByOrg({id: res.payload.orgId, exclude: id});
     }).catch(console.error);
   }
 

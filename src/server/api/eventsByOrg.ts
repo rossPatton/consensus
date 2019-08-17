@@ -8,16 +8,19 @@ export const eventsByOrg = new Router();
 
 const getEvents = async (ctx: Koa.ParameterizedContext) => {
   const { query }: tIdQueryServer = ctx;
-  const { id, limit, offset } = query;
+  const { exclude, id, limit, offset } = query;
 
   const orgId = parseInt(id, 10);
   const parsedLimit = limit ? parseInt(limit, 10) : 3;
   const parsedOffset = offset ? parseInt(offset, 10) : 0;
-  console.log(getDateNowAsISOStr());
 
   // by default, we only return upcoming events
-  const events = knex('events')
-    .where({ orgId })
+  const events = knex('events');
+
+  // if we're excluding events, do it up front
+  if (exclude) events.whereNot({id: exclude});
+
+  events.where({orgId})
     .where('date', '>=', getDateNowAsISOStr())
     .orderBy('date', 'asc');
 

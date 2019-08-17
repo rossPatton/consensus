@@ -49,6 +49,7 @@ declare type tPublicEvent = {
   location: string,
   locationLink: string,
   orgId: number,
+  orgName: string,
   slug: string,
   state: string,
   title: string,
@@ -150,7 +151,7 @@ declare type tUsersByOrg = {
 };
 
 declare type tRoute = {
-  component: any, // @TODO fix any
+  component: React.ReactNode,
   exact?: boolean,
   path: string,
   private?: boolean,
@@ -159,6 +160,8 @@ declare type tRoute = {
 
 // typical id-based db query
 type tIdQuery = {
+  exclude?: number,
+
   id: number,
   limit?: number,
   offset?: number,
@@ -167,6 +170,7 @@ type tIdQuery = {
 // once the above values are passed to the server, they become strings
 type tIdQueryServer = {
   query: {
+    exclude?: string,
     id: string,
     limit?: string,
     offset?: string,

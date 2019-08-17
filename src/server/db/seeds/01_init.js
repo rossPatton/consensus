@@ -66,6 +66,7 @@ const createEvent = async () => {
     location: faker.address.streetAddress(),
     locationLink: faker.internet.url(),
     orgId: 100,
+    orgName: 'Tech Workers Coalition NYC',
     title: faker.company.bs(),
   };
 };
