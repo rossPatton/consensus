@@ -2,7 +2,7 @@ import _ from 'lodash';
 import Koa from 'koa';
 import Router from 'koa-router';
 import { knex } from '../db/connection';
-import { utcToDateString } from '../../utils';
+import { getDateNowAsISOStr } from '../../utils';
 
 export const eventsByOrg = new Router();
 
@@ -13,9 +13,12 @@ const getEvents = async (ctx: Koa.ParameterizedContext) => {
   const orgId = parseInt(id, 10);
   const parsedLimit = limit ? parseInt(limit, 10) : 3;
   const parsedOffset = offset ? parseInt(offset, 10) : 0;
+  console.log(getDateNowAsISOStr());
 
+  // by default, we only return upcoming events
   const events = knex('events')
     .where({ orgId })
+    .where('date', '>=', getDateNowAsISOStr())
     .orderBy('date', 'asc');
 
   if (parsedLimit > 0) events.limit(parsedLimit);

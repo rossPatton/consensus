@@ -1,14 +1,20 @@
 import dayJS from 'dayjs';
+import cx from 'classnames';
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { getRandomNum } from '../../utils';
 import { ExternalLink } from '../../components';
+import { tComponentProps } from './_types';
 
-export const EventsComponent = memo((props: { events: tEvent[] }) => (
+export const EventsComponent = memo((props: tComponentProps) => (
   <ul>
     {props.events.map((ev, i) => (
       <li key={i} className="brdA1 br8 mB3 p3 fx">
-        <div className="br8 bgGrey1 mR3 col fxNoShrink fxg0">
+        <div
+          className={cx({
+            'br8 bgGrey1 mR3 col fxNoShrink fxg0': true,
+            hide: props.tiny,
+          })}>
           <img
             alt=""
             height="175"
@@ -17,14 +23,21 @@ export const EventsComponent = memo((props: { events: tEvent[] }) => (
           />
         </div>
         <div className="col">
-          <h3 className="mB2 fx aiCtr ttCap">
-            <Link to={`/events/${ev.id}`}>
+          <h3
+            className={cx({
+              'mB2 fx aiCtr ttCap': true,
+              fs4: props.tiny,
+            })}>
+            <Link to={`/event/${ev.id}`}>
               {ev.title}
             </Link>
           </h3>
-          <div className="fx aiCtr mB2 fs6 fw600 lh1">
+          <div
+            className={cx({
+              'fx aiCtr mB2 fs6 fw600 lh1': true,
+            })}>
             <time className="mR1" dateTime={ev.date}>
-              {dayJS(ev.date).format('MM/DD/YYYY h:mmA')}
+              {dayJS(ev.date).format('ddd MMM DD, h:mmA')}
             </time>
             <span className="mR1">@</span>
             {ev.locationLink && (
@@ -37,10 +50,19 @@ export const EventsComponent = memo((props: { events: tEvent[] }) => (
             )}
             {!ev.locationLink && ev.location}
           </div>
-          <p className="mB2 pR5 lineClamp">
+          <p
+            className={cx({
+              'mB2 lineClamp': true,
+              'pR5': !props.tiny,
+              'fs5': props.tiny,
+            })}>
             {ev.description}
           </p>
-          <div className="fx aiCtr fs6 lh1 lsNone black">
+          <div
+            className={cx({
+              'fx aiCtr fs6 lh1 lsNone': true,
+              hide: props.tiny,
+            })}>
             {ev.goingCount > 0 && (
               <span className="mR3">
                 {ev.goingCount} Attendees

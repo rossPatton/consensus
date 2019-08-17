@@ -5,9 +5,10 @@ import { knex } from '../db/connection';
 export const event = new Router();
 
 // @ts-ignore
-event.get('getEvent', '/api/v1/event', async (ctx: Koa.Context) => {
+event.get('getEventById', '/api/v1/event', async (ctx: Koa.Context) => {
   try {
-    const event: tEvent = await knex('events').where(ctx.query).limit(1).first();
+    const { id } = ctx.query;
+    const event: tEvent = await knex('events').where({id}).limit(1).first();
     ctx.body = event;
   } catch (err) {
     ctx.throw('400', err);

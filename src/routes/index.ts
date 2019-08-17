@@ -1,5 +1,5 @@
 // top-level pages, usually static
-import { Home, Login, Organization, Signup, UserAdmin } from '../pages';
+import { Event, Home, Login, Organization, Signup, UserAdmin } from '../pages';
 
 // TODO eventually split this file up once it starts getting big
 export const routes = [
@@ -21,6 +21,11 @@ export const routes = [
     path: '/admin',
     private: true,
     redirect: '/login',
+  },
+  {
+    component: Event,
+    exact: true,
+    path: '/event/:id',
   },
   {
     component: Organization,

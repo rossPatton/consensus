@@ -114,6 +114,11 @@ select,
 time
   display block
 
+// only use is as a sidebar - trying to avoid complicated grid logic
+aside
+  max-width 30%
+  min-width 30%
+
 main
   overflow-x hidden
 
@@ -449,6 +454,7 @@ h3,
 h4,
 .fs4
   font-size 18px
+  line-height 24px
 h5,
 h6,
 .fs5
@@ -739,6 +745,9 @@ small
   max-width 33%
 
 @media (max-width: 768px)
+  .fx
+    flex-direction column
+
   .mHide
     display none
 

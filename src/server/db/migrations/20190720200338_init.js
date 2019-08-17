@@ -48,7 +48,12 @@ exports.up = async knex => {
   await knex.schema.createTable('events', table => {
     table.increments().unsigned().primary();
 
+    // all events are tied to an org currently
+    // id so we can look up whatever we need if necessary
+    // name because 90% of the time that's all we need
+    // TODO - eventually, events should be searchable by city/state, etc
     table.integer('orgId').notNullable().references('orgs.id');
+    table.integer('orgName').notNullable().references('orgs.orgName');
 
     table.boolean('isPrivate').defaultTo(false);
     table.string('category').notNullable();
