@@ -8,7 +8,7 @@ export type tProps = {
   org: tOrg,
   usersByOrg: tUsersByOrg,
   role: tRole,
-}
+};
 
 export type tContainerProps = tProps & {
   getDecisionsByOrg: (id: number) => Promise<tThunk<tDecision[]>>,
@@ -17,10 +17,10 @@ export type tContainerProps = tProps & {
   session: tSession,
 };
 
-export type tState = {
+export type tStore = {
   decisions: tThunk<tDecision[]>,
   events: tThunk<tEvent[]>,
   org: tThunk<tOrg>,
-  session: tSession,
+  session: tThunk<tSession>,
   usersByOrg: tThunk<tUsersByOrg>,
-}
+};

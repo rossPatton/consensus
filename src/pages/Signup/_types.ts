@@ -1,5 +1,5 @@
 export type tStore = {
-  session: tSession,
+  session: tThunk<tSession>,
 };
 
 export type tForm = {
@@ -12,6 +12,7 @@ export type tForm = {
 
 export type tState = tForm & {
   error: string,
+  showPW: boolean,
 };
 
 export type tContainerProps = {
@@ -22,6 +23,7 @@ export type tContainerProps = {
 
 export type tComponentProps = tContainerProps & tState & {
   register: (ev: React.FormEvent<HTMLFormElement>) => void,
+  togglePWVisibility: (ev: React.MouseEvent<HTMLButtonElement>) => void,
   updateEmail: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   updatePassword: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   updateUsername: (ev: React.ChangeEvent<HTMLInputElement>) => void,

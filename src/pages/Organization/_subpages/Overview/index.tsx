@@ -4,7 +4,7 @@ import { Dispatch } from 'redux';
 
 import { getDecisionsByOrg, getEventsByOrg, getUsersByOrg } from '../../../../redux';
 import { Helmet } from '../../../../components';
-import { tContainerProps, tState } from './_types';
+import { tContainerProps, tStore } from './_types';
 import { OverviewComponent } from './Component';
 
 export class OverviewContainer extends PureComponent<tContainerProps> {
@@ -41,7 +41,7 @@ export class OverviewContainer extends PureComponent<tContainerProps> {
   }
 }
 
-const mapStateToProps = (state: tState) => ({
+const mapStateToProps = (state: tStore) => ({
   decisions: state.decisions.data,
   events: state.events.data,
   isLoading: state.decisions.isLoading || state.events.isLoading,

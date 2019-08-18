@@ -151,7 +151,7 @@ declare type tUsersByOrg = {
 };
 
 declare type tRoute = {
-  component: React.ReactNode,
+  component: React.ReactComponentElement, //React.ReactNode,
   exact?: boolean,
   path: string,
   private?: boolean,

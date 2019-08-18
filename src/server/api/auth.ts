@@ -6,8 +6,7 @@ import { knex } from '../db/connection';
 export const auth = new Router();
 
 // @ts-ignore
-auth.post('user login', '/auth/user/login', async (ctx: Koa.Context) => {
-  // @ts-ignore
+auth.post('user login', '/auth/login', async (ctx: Koa.Context, next) => {
   return passport.authenticate('local', async (_, unsafeUser: tUser) => {
     if (!unsafeUser) ctx.throw(400, 'User not found');
 
@@ -49,27 +48,21 @@ auth.post('user login', '/auth/user/login', async (ctx: Koa.Context) => {
     } catch (err) {
       ctx.throw('400', err);
     }
-  })(ctx);
+  })(ctx, next);
 });
 
 // logout just clears the session basically, doesnt matter how you logged in
 // @ts-ignore
-auth.get('logout', '/auth/logout', async (ctx: Koa.Context) => {
-  // @ts-ignore
+auth.get('logout', '/auth/logout', async (ctx: Koa.Context, next) => {
   return passport.authenticate('local', () => {
     if (ctx.isAuthenticated()) {
       ctx.logout();
-      ctx.redirect('/');
-      ctx.body = {
-        data: { isAuthenticated: false },
-        error: null,
-        isLoading: false,
-      };
+      ctx.body = {isAuthenticated: false};
     } else {
-      ctx.body = { message: 'You are not logged in' };
+      ctx.body = {error: 'You are not logged in'};
       ctx.throw(401);
     }
-  })(ctx);
+  })(ctx, next);
 });
 
 // app.post('/auth/openid',

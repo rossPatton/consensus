@@ -14,7 +14,7 @@ export type tState = {
 
 export type tStore = {
   events: tThunk<tEvent[]>,
-  session: tSession,
+  session: tThunk<tSession>,
 }
 
 export type tStateUnion = keyof tState;

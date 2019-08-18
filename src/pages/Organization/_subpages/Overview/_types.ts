@@ -11,8 +11,8 @@ export type tContainerProps = tComponentProps & {
   session: tSession,
 };
 
-export type tState = {
+export type tStore = {
   decisions: tThunk<tDecision[]>,
   events: tThunk<tEvent[]>,
-  session: tSession,
+  session: tThunk<tSession>,
 }

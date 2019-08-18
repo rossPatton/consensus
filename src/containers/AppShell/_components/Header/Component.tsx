@@ -37,7 +37,8 @@ export const HeaderComponent = memo((props: tProps) => (
           </Link>
           <button
             id="a11yLogout"
-            onClick={() => fetch('/auth/logout').then(props.logout)}>
+            className="trans1 hvrBgGrey1"
+            onClick={props.logout}>
             Logout
           </button>
         </div>

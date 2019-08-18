@@ -5,7 +5,7 @@ import { Dispatch } from 'redux';
 
 import { authenticateSession, registerUser } from '../../redux';
 import { Helmet } from '../../components';
-import { tContainerProps, tState, tStore } from './_types';
+import { tContainerProps, tForm, tState, tStore } from './_types';
 import { SignupComponent } from './Component';
 
 export class SignupContainer extends PureComponent<tContainerProps, tState> {
@@ -22,7 +22,7 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
   register = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
-    const { error, ...state } = this.state;
+    const { error, showPW, ...state } = this.state;
     const { username, password } = this.state;
 
     if (password.length < 12) {
@@ -110,7 +110,10 @@ const mapStateToProps = (state: tStore) => ({session: state.session.data});
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
-  insertUser: (user: tState) => dispatch(registerUser(user)),
+  insertUser: (user: tForm) => dispatch(registerUser(user)),
 });
 
-export const Signup = connect(mapStateToProps, mapDispatchToProps)(SignupContainer);
+export const Signup = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignupContainer);

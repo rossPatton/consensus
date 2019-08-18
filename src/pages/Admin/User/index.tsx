@@ -86,7 +86,9 @@ export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (state: tThunk<tSession>) => ({session: state.session.data});
+const mapStateToProps = (state: {session: tThunk<tSession>}) => ({
+  session: state.session.data,
+});
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   updateUser: (user: tSession) => dispatch(updateUser(user)),

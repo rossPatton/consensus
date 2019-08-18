@@ -5,7 +5,7 @@ import { Dispatch } from 'redux';
 import { getUserRole } from '../../utils';
 import { getOrg } from '../../redux';
 import { GenericLoader, Helmet } from '../../components';
-import { tContainerProps, tState } from './_types';
+import { tContainerProps, tStore } from './_types';
 import { OrganizationComponent } from './Component';
 
 // TODO this is too much nesting - maybe figure out a less verbose structure
@@ -53,7 +53,7 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
   }
 }
 
-const mapStateToProps = (state: tState) => ({
+const mapStateToProps = (state: tStore) => ({
   isLoading: state.org.isLoading,
   org: state.org.data,
   session: state.session.data,

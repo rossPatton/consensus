@@ -1,8 +1,11 @@
 import {
-  tActionUnion,
   AUTHENTICATE_BEGIN,
   AUTHENTICATE_SUCCESS,
   AUTHENTICATE_FAILURE,
+  LOG_OUT_BEGIN,
+  LOG_OUT_SUCCESS,
+  LOG_OUT_FAILURE,
+  tSessionUnion,
 } from './_types';
 
 const initialState: tThunk<tAuth> = {
@@ -13,8 +16,7 @@ const initialState: tThunk<tAuth> = {
   },
 };
 
-export const authenticateSessionReducer = (state = initialState, action: tActionUnion) => {
-  console.log('authentication reducer => ', action);
+export const authenticateSessionReducer = (state = initialState, action: tSessionUnion) => {
   switch (action.type) {
   case AUTHENTICATE_BEGIN:
     return {
@@ -33,6 +35,27 @@ export const authenticateSessionReducer = (state = initialState, action: tAction
   case AUTHENTICATE_FAILURE:
     return {
       data: { isAuthenticated: false },
+      error: action.payload,
+      isLoading: false,
+    };
+
+  case LOG_OUT_BEGIN:
+    return {
+      ...state,
+      error: null,
+      isLoading: true,
+    };
+
+  case LOG_OUT_SUCCESS:
+    return {
+      ...state,
+      data: action.payload,
+      isLoading: false,
+    };
+
+  case LOG_OUT_FAILURE:
+    return {
+      ...state,
       error: action.payload,
       isLoading: false,
     };

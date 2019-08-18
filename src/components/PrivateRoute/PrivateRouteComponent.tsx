@@ -10,8 +10,6 @@ export const PrivateRouteComponent = (ownProps: tProps) => (
     render={(props: RouteComponentProps<any>) => {
       const { component: Component } = ownProps;
 
-      console.log('ownProps.session => ', ownProps.session);
-
       if (ownProps.session.isAuthenticated) {
         return (
           <Component

@@ -29,7 +29,6 @@ export class LoginContainer extends Component<tProps, tState> {
 
   render() {
     const { session } = this.props;
-    console.log('login session => ', session);
 
     return (
       <>
