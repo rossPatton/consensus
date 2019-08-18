@@ -18,6 +18,7 @@ export const SSR = async (ctx: Koa.ParameterizedContext) => {
 
   const initRouterContext = {};
   const store = await initStoreForSSR(ctx);
+  console.log('store => ', store);
   const htmlStream = renderToNodeStream(
     <Provider store={store as any}>
       <StaticRouter context={initRouterContext} location={ctx.request.url}>

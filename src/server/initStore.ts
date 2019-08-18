@@ -39,11 +39,15 @@ export const initStoreForSSR = async (ctx: Koa.ParameterizedContext) => {
 
   // initialize auth state using our thunk pattern
   const session = {
-    ...passportSession,
-    isAuthenticated,
-    // lastActive,
-    roles,
-    rsvps,
+    error: null,
+    isLoading: false,
+    data: {
+      ...passportSession,
+      isAuthenticated,
+      // lastActive,
+      roles,
+      rsvps,
+    },
   };
 
   // generate the initial state from our Redux store, with our new defaults

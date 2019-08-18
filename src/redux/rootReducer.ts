@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
 
-// import { sessionReducer } from './sync/session/reducer';
-
 import { authenticateSessionReducer } from './async/session/reducer';
 import { getDecisionsByOrgReducer } from './async/getDecisionsByOrg/reducer';
 import { getEventByIdReducer } from './async/getEventById/reducer';

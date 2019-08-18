@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { Helmet } from '../../../components';
-import { setActiveSession, updateUser } from '../../../redux';
+import { updateUser } from '../../../redux';
 import { title, canonical, description, keywords } from './_constants';
-import { tContainerProps, tState, tStore } from './_types';
+import { tContainerProps, tState } from './_types';
 import { UserAdminComponent } from './UserAdminComponent';
 
 export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
@@ -21,8 +21,8 @@ export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
     ev.preventDefault();
     try {
       const { id } = this.props.session;
-      const user = await this.props.updateUser({ id, ...this.state });
-      return this.props.setActiveSession(user.payload);
+      await this.props.updateUser({ id, ...this.state });
+      // return this.props.setActiveSession(user.payload);
     } catch (err) {
       console.error(err);
     }
@@ -86,12 +86,10 @@ export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (state: tStore) =>
-  ({ session: state.session });
+const mapStateToProps = (state: tThunk<tSession>) => ({session: state.session.data});
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   updateUser: (user: tSession) => dispatch(updateUser(user)),
-  setActiveSession: (user: tSession) => dispatch(setActiveSession(user)),
 });
 
 export const UserAdmin = connect(

@@ -151,7 +151,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
 
 const mapStateToProps = (state: tStore) => ({
   events: state.events.data,
-  session: state.session,
+  session: state.session.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

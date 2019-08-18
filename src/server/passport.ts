@@ -39,7 +39,7 @@ const isValidPw = async (userPassword: string, databasePassword: string) => {
 passport.use(new LocalStrategy(opts, async (username, pw, done) => {
   let user: any = {};
   try {
-    user = await knex('users').where({ username }).first();
+    user = await knex('users').where({username}).limit(1).first();
   } catch (err) {
     return done(err, false);
   }

@@ -14,14 +14,14 @@ export const LoginComponent = memo((props: tComponentProps) => (
             className="p3 pR4 brdA1 dBl mB2"
             placeholder="Username here"
             value={props.username}
-            onChange={props.updateUsername}
+            onChange={ev => props.updateState('username', ev)}
           />
           <input
             type="password"
             className="p3 pR4 brdA1 dBl"
             placeholder="Password here"
             value={props.password}
-            onChange={props.updatePassword}
+            onChange={ev => props.updateState('password', ev)}
           />
         </div>
         <button className="p3 hvrBgGrey1 trans1">

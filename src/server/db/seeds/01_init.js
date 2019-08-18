@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bcrypt = require('bcrypt');
 const faker = require('faker');
 const { sha256 } = require('js-sha256');
@@ -13,10 +14,15 @@ const slugify = string => {
     .trim();
 };
 
+// add a little pepper to the salt - hard coded server key for extra security
+const { PEPPER } = process.env;
+
+console.log('PEPPER => ', PEPPER);
+
 const salt = bcrypt.genSaltSync(10);
 
 const createUser = async () => {
-  const sha = sha256(faker.internet.password());
+  const sha = sha256(faker.internet.password() + PEPPER);
   const password = await bcrypt.hash(sha, salt);
 
   return {
@@ -29,7 +35,7 @@ const createUser = async () => {
 };
 
 const createTestUser = async () => {
-  const sha = sha256('test');
+  const sha = sha256('test' + PEPPER);
   const password = await bcrypt.hash(sha, salt);
 
   return {

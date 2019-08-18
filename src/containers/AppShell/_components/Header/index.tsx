@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { setActiveSession } from '../../../../redux';
 import { HeaderComponent } from './Component';
 import { tProps } from './_types';
 
@@ -17,11 +16,12 @@ export class HeaderContainer extends PureComponent<tProps> {
   }
 }
 
-const mapStateToProps = (state: { session: tSession }) =>
-  ({ session: state.session });
+const mapStateToProps = (state: {session: tSession}) => ({
+  session: state.session.data,
+});
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  logout: () => dispatch(setActiveSession({ isAuthenticated: false })),
+  logout: () => () => {},
 });
 
 export const Header = connect(

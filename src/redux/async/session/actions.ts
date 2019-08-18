@@ -12,10 +12,13 @@ export const authenticateBegin = (payload: tLogin): tBeginAction => ({
   payload,
 });
 
-export const authenticateSuccess = (payload: tSession): tSuccessAction => ({
-  type: AUTHENTICATE_SUCCESS,
-  payload,
-});
+export const authenticateSuccess = (payload: tSession): tSuccessAction => {
+  console.log('authentication success => ', payload);
+  return {
+    type: AUTHENTICATE_SUCCESS,
+    payload,
+  };
+};
 
 export const authenticateFailure = (payload: Error): tFailureAction => ({
   type: AUTHENTICATE_FAILURE,

@@ -14,6 +14,7 @@ const initialState: tThunk<tAuth> = {
 };
 
 export const authenticateSessionReducer = (state = initialState, action: tActionUnion) => {
+  console.log('authentication reducer => ', action);
   switch (action.type) {
   case AUTHENTICATE_BEGIN:
     return {
@@ -26,6 +27,7 @@ export const authenticateSessionReducer = (state = initialState, action: tAction
     return {
       ...state,
       data: action.payload,
+      isLoading: false,
     };
 
   case AUTHENTICATE_FAILURE:

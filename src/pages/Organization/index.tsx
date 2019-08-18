@@ -56,7 +56,7 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
 const mapStateToProps = (state: tState) => ({
   isLoading: state.org.isLoading,
   org: state.org.data,
-  session: state.session,
+  session: state.session.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

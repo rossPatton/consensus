@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { authenticateSession, registerUser, setActiveSession } from '../../redux';
+import { authenticateSession, registerUser } from '../../redux';
 import { Helmet } from '../../components';
 import { tContainerProps, tState, tStore } from './_types';
 import { SignupComponent } from './Component';
@@ -33,8 +33,7 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
 
     // add user to db, and log them in on success
     await this.props.insertUser(state);
-    const session = await this.props.authenticateSession({username, password});
-    this.props.setActiveSession(session.payload);
+    return this.props.authenticateSession({username, password});
   }
 
   togglePWVisibility = () => {
@@ -107,12 +106,11 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (state: tStore) => ({session: state.session});
+const mapStateToProps = (state: tStore) => ({session: state.session.data});
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
   insertUser: (user: tState) => dispatch(registerUser(user)),
-  setActiveSession: (user: tSession) => dispatch(setActiveSession(user)),
 });
 
 export const Signup = connect(mapStateToProps, mapDispatchToProps)(SignupContainer);

@@ -17,7 +17,6 @@ export type tState = tForm & {
 export type tContainerProps = {
   authenticateSession: (arg: tLogin) => { payload: tUser },
   insertUser: (arg: tForm) => Promise<{ payload: tSession }>,
-  setActiveSession: (user: tUser) => any,
   session: tSession,
 };
 

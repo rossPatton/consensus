@@ -35,6 +35,7 @@ auth.post('user login', '/auth/user/login', async (ctx: Koa.Context) => {
       const isAuthenticated = ctx.isAuthenticated();
       // const lastActive = await knex.fn.now();
 
+      // newSession === session.data on the client, redux adds loading/error keys
       const newSession: tSession = {
         ...safeUser,
         isAuthenticated,
@@ -59,7 +60,11 @@ auth.get('logout', '/auth/logout', async (ctx: Koa.Context) => {
     if (ctx.isAuthenticated()) {
       ctx.logout();
       ctx.redirect('/');
-      ctx.body = { isAuthenticated: false };
+      ctx.body = {
+        data: { isAuthenticated: false },
+        error: null,
+        isLoading: false,
+      };
     } else {
       ctx.body = { message: 'You are not logged in' };
       ctx.throw(401);

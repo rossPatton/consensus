@@ -45,7 +45,7 @@ const mapStateToProps = (state: tState) => ({
   decisions: state.decisions.data,
   events: state.events.data,
   isLoading: state.decisions.isLoading || state.events.isLoading,
-  session: state.session,
+  session: state.session.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

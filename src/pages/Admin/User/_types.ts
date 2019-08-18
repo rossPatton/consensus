@@ -10,7 +10,6 @@ export type tStore = { session: tSession };
 
 export type tContainerProps = {
   session: tSession,
-  setActiveSession: (user: tSession) => any,
   // we get id from the active session
   updateUser: (user: tSession) => { payload: tUser },
 };
