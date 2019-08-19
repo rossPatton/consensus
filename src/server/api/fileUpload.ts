@@ -47,9 +47,11 @@ fileUpload.post(
     const ext = path.extname(file.originalname);
 
     const resizer = await sharp().resize(175, 175, {fit: 'contain'});
+    // eslint-disable-next-line
     const writeStream = fs.createWriteStream(`${file.destination}/175x175${ext}`);
 
     // take original file, resize it, and then write it via streams
+    // eslint-disable-next-line
     const readStream = fs.createReadStream(file.path)
       .pipe(resizer)
       .pipe(writeStream);

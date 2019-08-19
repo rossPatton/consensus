@@ -14,7 +14,7 @@ passport.serializeUser((unsafeUser: tUser, done: any) => {
   return done(null, user);
 });
 
-type tDone = (err: Error | null, data: any) => void;
+type tDone = (err: Error | null, data: tUser | null) => void;
 passport.deserializeUser(async (savedUser: tUser, done: tDone) => {
   try {
     const { id } = savedUser;

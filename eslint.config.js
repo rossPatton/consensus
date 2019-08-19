@@ -216,6 +216,9 @@ module.exports = {
     'react-hooks/rules-of-hooks': ERROR,
     'react-hooks/exhaustive-deps': WARN,
     'require-atomic-updates': OFF,
+    // these ones are very common and sometimes necessary, so disable
+    'security/detect-object-injection': OFF,
+    'security/detect-non-literal-fs-filename': OFF,
     'semi': ERROR,
     'semi-spacing': [ERROR, {
       'before': false,
