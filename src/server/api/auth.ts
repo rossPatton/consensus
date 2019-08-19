@@ -7,7 +7,8 @@ export const auth = new Router();
 
 // @ts-ignore
 auth.post('user login', '/auth/login', async (ctx: Koa.Context, next) => {
-  return passport.authenticate('local', async (_, unsafeUser: tUser) => {
+  return passport.authenticate('local', async (err: Error | null, unsafeUser: tUser) => {
+    if (err) ctx.throw(400, err);
     if (!unsafeUser) ctx.throw(400, 'User not found');
 
     try {

@@ -35,6 +35,7 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:jsx-a11y/strict',
     'plugin:react/recommended',
+    'plugin:security/recommended',
   ],
   settings: {
     react: {
@@ -55,6 +56,7 @@ module.exports = {
     'promise',
     'react',
     'react-hooks',
+    'security',
   ],
   rules: {
     'array-bracket-spacing': [ERROR, 'never'],

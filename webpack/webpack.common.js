@@ -3,7 +3,6 @@ const fs = require('fs');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ForceCaseSensitivityPlugin = require('case-sensitive-paths-webpack-plugin');
 const webpack = require('webpack');
-
 const env = require('./webpack.env');
 
 const srcPath = (subdir) => path.join(env.CWD, 'src', subdir);
