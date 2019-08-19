@@ -1,90 +1,51 @@
 import React, { memo } from 'react';
+import { PasswordInput } from '../../components';
 import { tComponentProps } from './_types';
 
 export const SignupComponent = memo((props: tComponentProps) => (
-  <div className="contain mT5 pT4 pB5 fx fxdCol aiCtr">
-    <form onSubmit={props.register}>
-      <legend className="mB2">Create an account</legend>
-      <fieldset>
-        <div className="mB3">
-          <input
-            autoComplete="off"
-            className="p3 brdA1 dBl mB2"
-            placeholder="Email"
-            value={props.email}
-            onChange={ev => props.updateState('email', ev)}
-          />
-          <div className="mB4">
-            <div className="fx aiCtr">
-              <input
-                autoComplete="off"
-                className="p3 brdA1 dBl mB2 mR2"
-                placeholder="Password"
-                value={props.password}
-                onChange={ev => props.updateState('password', ev)}
-                type={props.showPW ? 'text' : 'password'}
-              />
-              <button
-                type="button"
-                className="hvrBgGrey1 trans1"
-                onClick={props.togglePWVisibility}>
-                <span
-                  role="img"
-                  className="mR1"
-                  aria-label="Eye Emoji">
-                  👁️
-                </span>
-                Reveal
-              </button>
-            </div>
-            {!props.error && !props.password && (
-              <small>
-                Password must be at least 12 characters long. We recommend using a password manager to generate a randomized password or passphrase
-              </small>
-            )}
-            {!props.error && props.password && (
-              <div>
-                <span
-                  className="br8 dBl bgGreen p1"
-                  style={{
-                    maxWidth: '100%',
-                    width: `${props.password.length * 8}%`,
-                  }}
-                />
-              </div>
-            )}
-            {props.error && (
-              <span className="fs6 fw600 red">
-                {props.error}
-              </span>
-            )}
-          </div>
-          <input
-            autoComplete="off"
-            className="p3 brdA1 dBl mB2"
-            placeholder="Username"
-            value={props.username}
-            onChange={ev => props.updateState('username', ev)}
-          />
-          <input
-            autoComplete="off"
-            className="p3 brdA1 dBl mB2"
-            placeholder="First name"
-            value={props.fname}
-            onChange={ev => props.updateState('fname', ev)}
-          />
-          <input
-            autoComplete="off"
-            className="p3 brdA1 dBl"
-            placeholder="Last name"
-            value={props.lname}
-            onChange={ev => props.updateState('lname', ev)}
-          />
-        </div>
-        <button className="p3 pL4 pR4 hvrBgGrey1 trans1">
-          Sign up
-        </button>
-      </fieldset>
-    </form>
-  </div>
+  <form
+    className="contain p5 bgGrey1 br8"
+    autoComplete="off"
+    onSubmit={props.register}>
+    <legend className="mB3 ffCooper fs2">
+      Create an account
+    </legend>
+    <fieldset>
+      <h2 className="ffLab fs5 mB1 lh1">Email</h2>
+      <input
+        required
+        className="p3 mB3 row"
+        placeholder="example@youraddress.com"
+        value={props.email}
+        onChange={ev => props.updateState('email', ev)}
+      />
+      <h2 className="ffLab fs5 mB1 lh1">Username</h2>
+      <input
+        required
+        className="p3 mB3 row"
+        placeholder="theNameOtherUsersWillSee"
+        value={props.username}
+        onChange={ev => props.updateState('username', ev)}
+      />
+      <div className="mB4">
+        <h2 className="ffLab fs5 mB1 lh1">Password</h2>
+        <PasswordInput
+          required
+          autoComplete="new-password"
+          error={props.error}
+          password={props.password}
+          placeholder="correct_horse_battery_staple_is_a_good_secure_passphrase"
+          showPW={props.showPW}
+          togglePWVisibility={props.togglePWVisibility}
+          updateState={props.updateState}
+        />
+      </div>
+      <button className="bgWhite mB2 p3 pL4 pR4">
+        Sign up
+      </button>
+      <div className="fs6">
+        By signing up, you agree to our Terms and that you have read our Privacy Policy and Content Policy.
+      </div>
+    </fieldset>
+  </form>
 ));
