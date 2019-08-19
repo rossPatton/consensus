@@ -5,7 +5,7 @@ import { Dispatch } from 'redux';
 
 import { authenticateSession, registerUser } from '../../redux';
 import { Helmet } from '../../components';
-import { tContainerProps, tForm, tState, tStore } from './_types';
+import { tContainerProps, tForm, tState, tStateUnion, tStore } from './_types';
 import { SignupComponent } from './Component';
 
 export class SignupContainer extends PureComponent<tContainerProps, tState> {
@@ -42,34 +42,10 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
     });
   }
 
-  updateEmail = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  updateState = (stateKey: tStateUnion, ev: any) => {
     this.setState({
-      email: ev.currentTarget.value,
-    });
-  }
-
-  updatePassword = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      password: ev.currentTarget.value,
-    });
-  }
-
-  updateUsername = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      username: ev.currentTarget.value,
-    });
-  }
-
-  updateFname = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      fname: ev.currentTarget.value,
-    });
-  }
-
-  updateLname = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      lname: ev.currentTarget.value,
-    });
+      [stateKey]: ev.currentTarget.value,
+    } as Pick<tState, tStateUnion>);
   }
 
   render() {
@@ -94,11 +70,7 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
             {...this.state}
             register={this.register}
             togglePWVisibility={this.togglePWVisibility}
-            updateEmail={this.updateEmail}
-            updatePassword={this.updatePassword}
-            updateUsername={this.updateUsername}
-            updateFname={this.updateFname}
-            updateLname={this.updateLname}
+            updateState={this.updateState}
           />
         )}
       </>

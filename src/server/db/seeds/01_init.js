@@ -16,9 +16,6 @@ const slugify = string => {
 
 // add a little pepper to the salt - hard coded server key for extra security
 const { PEPPER } = process.env;
-
-console.log('PEPPER => ', PEPPER);
-
 const salt = bcrypt.genSaltSync(10);
 
 const createUser = async () => {

@@ -15,6 +15,8 @@ export type tState = tForm & {
   showPW: boolean,
 };
 
+export type tStateUnion = keyof tState;
+
 export type tContainerProps = {
   authenticateSession: (arg: tLogin) => { payload: tUser },
   insertUser: (arg: tForm) => Promise<{ payload: tSession }>,
@@ -24,9 +26,5 @@ export type tContainerProps = {
 export type tComponentProps = tContainerProps & tState & {
   register: (ev: React.FormEvent<HTMLFormElement>) => void,
   togglePWVisibility: (ev: React.MouseEvent<HTMLButtonElement>) => void,
-  updateEmail: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  updatePassword: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  updateUsername: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  updateFname: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  updateLname: (ev: React.ChangeEvent<HTMLInputElement>) => void,
+  updateState: (key: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 };

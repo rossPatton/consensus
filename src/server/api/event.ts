@@ -27,35 +27,3 @@ event.post('postEvent', '/api/v1/event', async (ctx: Koa.Context) => {
     ctx.throw('400', err);
   }
 });
-
-// @ts-ignore
-// user.patch('patchUser', '/api/v1/user', async (ctx: Koa.Context) => {
-//   try {
-//     const { id, ...theRestOfTheQuery }: tUser = ctx.query;
-
-//     const query = {
-//       ...theRestOfTheQuery,
-//       updated_at: knex.fn.now(),
-//     };
-
-//     if (query.password) {
-//       const salt = await bcrypt.genSalt();
-//       const hash = await bcrypt.hash(theRestOfTheQuery.password, salt);
-//       query.password = hash;
-//     }
-
-//     const updatedUser = await knex('users')
-//       .where({ id })
-//       .update(query)
-//       .returning('*');
-
-//     const { password, ...safeUserForClient } = updatedUser[0];
-
-//     ctx.body = {
-//       ...safeUserForClient,
-//       isAuthenticated: ctx.isAuthenticated(),
-//     };
-//   } catch (err) {
-//     ctx.throw('400', err);
-//   }
-// });

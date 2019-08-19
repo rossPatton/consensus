@@ -3,15 +3,16 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { Helmet } from '../../../components';
-import { updateUser } from '../../../redux';
+import { authenticateSession, updateUser } from '../../../redux';
 import { title, canonical, description, keywords } from './_constants';
-import { tContainerProps, tState } from './_types';
-import { UserAdminComponent } from './UserAdminComponent';
+import { tContainerProps, tState, tStateUnion } from './_types';
+import { UserAdminComponent } from './Component';
 
 export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
   state = {
     email: '',
     password: '',
+    newPassword: '',
     username: '',
     fname: '',
     lname: '',
@@ -20,42 +21,38 @@ export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
   save = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     try {
-      const { id } = this.props.session;
-      await this.props.updateUser({ id, ...this.state });
-      // return this.props.setActiveSession(user.payload);
+      const {id} = this.props.session;
+      const { newPassword, ...restOfState } = this.state;
+      const query = restOfState;
+      if (newPassword) {
+        query.password = newPassword;
+      }
+      const newUser = await this.props.updateUser({id, ...query});
+      console.log('this.state => ', this.state);
+      console.log('query => ', query);
+      console.log('newUser => ', newUser.payload);
+
+      // combine new state with existing user
+      const user = {
+        ...query,
+        ...newUser.payload,
+      };
+
+      console.log('combined user => ', user);
+
+      return this.props.authenticateSession({
+        username: user.username,
+        password: user.password,
+      });
     } catch (err) {
       console.error(err);
     }
   }
 
-  updateEmail = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  updateState = (stateKey: tStateUnion, ev: any) => {
     this.setState({
-      email: ev.currentTarget.value,
-    });
-  }
-
-  updatePassword = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      password: ev.currentTarget.value,
-    });
-  }
-
-  updateUsername = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      username: ev.currentTarget.value,
-    });
-  }
-
-  updateFname = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      fname: ev.currentTarget.value,
-    });
-  }
-
-  updateLname = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      lname: ev.currentTarget.value,
-    });
+      [stateKey]: ev.currentTarget.value,
+    } as Pick<tState, tStateUnion>);
   }
 
   render() {
@@ -75,11 +72,7 @@ export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
           {...this.state}
           session={this.props.session}
           save={this.save}
-          updateEmail={this.updateEmail}
-          updatePassword={this.updatePassword}
-          updateUsername={this.updateUsername}
-          updateFname={this.updateFname}
-          updateLname={this.updateLname}
+          updateState={this.updateState}
         />
       </>
     );
@@ -91,6 +84,7 @@ const mapStateToProps = (state: {session: tThunk<tSession>}) => ({
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
+  authenticateSession: (user: tSession) => dispatch(authenticateSession(user)),
   updateUser: (user: tSession) => dispatch(updateUser(user)),
 });
 

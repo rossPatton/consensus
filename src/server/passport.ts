@@ -1,8 +1,6 @@
-import bcrypt from 'bcrypt';
-import { sha256 } from 'js-sha256';
 import passport from 'koa-passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-// import { Strategy as OpenIDStrategy } from 'passport-openid';
+import { isValidPw } from './utils';
 import { knex } from './db/connection';
 
 const opts = {};
@@ -27,15 +25,6 @@ passport.deserializeUser(async (savedUser: tUser, done: tDone) => {
   }
 });
 
-// userPassword === plaintext input from client
-// double hashed password in the db
-const isValidPw = async (userPassword: string, databasePassword: string) => {
-  // add a little pepper to the salt - hard coded server key for extra security
-  const { PEPPER } = process.env;
-  const sha = sha256(userPassword + PEPPER);
-  return bcrypt.compare(sha, databasePassword);
-};
-
 passport.use(new LocalStrategy(opts, async (username, pw, done) => {
   let user: any = {};
   try {
@@ -53,13 +42,3 @@ passport.use(new LocalStrategy(opts, async (username, pw, done) => {
     type: 'password',
   }, false);
 }));
-
-// type tDone = (err: Error | null, user: tUser) => Promise<any>;
-// passport.use(new OpenIDStrategy({
-//   returnURL: 'https://127.0.0.1:3001/admin',
-//   realm: 'https://127.0.0.1:3001/',
-// }, (identifier: any, done: tDone) => {
-//   User.findByOpenID({ openId: identifier }, (err: Error | null, user: tUser) => {
-//     return done(err, user);
-//   });
-// }));

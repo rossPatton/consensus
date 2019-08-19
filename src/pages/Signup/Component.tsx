@@ -12,7 +12,7 @@ export const SignupComponent = memo((props: tComponentProps) => (
             className="p3 brdA1 dBl mB2"
             placeholder="Email"
             value={props.email}
-            onChange={props.updateEmail}
+            onChange={ev => props.updateState('email', ev)}
           />
           <div className="mB4">
             <div className="fx aiCtr">
@@ -21,7 +21,7 @@ export const SignupComponent = memo((props: tComponentProps) => (
                 className="p3 brdA1 dBl mB2 mR2"
                 placeholder="Password"
                 value={props.password}
-                onChange={props.updatePassword}
+                onChange={ev => props.updateState('password', ev)}
                 type={props.showPW ? 'text' : 'password'}
               />
               <button
@@ -64,21 +64,21 @@ export const SignupComponent = memo((props: tComponentProps) => (
             className="p3 brdA1 dBl mB2"
             placeholder="Username"
             value={props.username}
-            onChange={props.updateUsername}
+            onChange={ev => props.updateState('username', ev)}
           />
           <input
             autoComplete="off"
             className="p3 brdA1 dBl mB2"
             placeholder="First name"
             value={props.fname}
-            onChange={props.updateFname}
+            onChange={ev => props.updateState('fname', ev)}
           />
           <input
             autoComplete="off"
             className="p3 brdA1 dBl"
             placeholder="Last name"
             value={props.lname}
-            onChange={props.updateLname}
+            onChange={ev => props.updateState('lname', ev)}
           />
         </div>
         <button className="p3 pL4 pR4 hvrBgGrey1 trans1">
