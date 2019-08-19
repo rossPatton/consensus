@@ -32,31 +32,33 @@ user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
 
 // @ts-ignore
 user.patch('patchUser', '/api/v1/user', async (ctx: Koa.Context) => {
-  const { id, password, ...theRestOfTheQuery }: tUser = ctx.query;
-
-  const query = {
-    ...theRestOfTheQuery,
-    updatedAt: knex.fn.now(),
-  };
-
-  console.log('query before hash => ', query);
-
-  if (query.newPassword) {
-    const safePW = await saltAndPepper(query.newPassword);
-    query.password = safePW;
+  let user = null;
+  try {
+    user = await knex('users').limit(1).where({id: ctx.query.id}).first();
+  } catch (err) {
+    ctx.throw('400', err);
   }
 
-  console.log('query after hash => ', query);
+  if (!isValidPw(ctx.query.password, user.password)) {
+    return ctx.throw('400', 'Password is not correct');
+  }
 
+  if (ctx.query.newPassword) {
+    const safePW = await saltAndPepper(ctx.query.newPassword);
+    ctx.query.password = safePW;
+  }
+
+  const {newPassword, ...updateQuery} = ctx.query;
+
+  let updatedUser = null;
   try {
-    const updatedUser = await knex('users')
-      .where({id})
-      .update(query)
+    updatedUser = await knex('users')
+      .limit(1)
+      .where({id: ctx.query.id})
+      .update(updateQuery)
       .returning('*');
 
     const {password, ...safeUserForClient} = updatedUser[0];
-
-    console.log('updatedUser[0] => ', updatedUser[0]);
 
     ctx.body = {
       ...safeUserForClient,

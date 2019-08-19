@@ -43,16 +43,6 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           value={props.email}
         />
         <div className="mB1 fs6 fw600 lh1">
-          Password
-        </div>
-        <input
-          autoComplete="new-password"
-          onChange={ev => props.updateState('newPassword', ev)}
-          className="p2 mR2 mB3 brdA1"
-          placeholder="Your new password"
-          value={props.newPassword}
-        />
-        <div className="mB1 fs6 fw600 lh1">
           Username
         </div>
         <input
@@ -62,10 +52,22 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           value={props.username}
         />
         <div className="mB1 fs6 fw600 lh1">
-          Current password, required
+          Password
+        </div>
+        <input
+          type="password"
+          autoComplete="new-password"
+          onChange={ev => props.updateState('newPassword', ev)}
+          className="p2 mR2 mB3 brdA1"
+          placeholder="Your new password"
+          value={props.newPassword}
+        />
+        <div className="mB1 fs6 fw600 lh1">
+          Current password, required to make any changes
         </div>
         <input
           required
+          type="password"
           className="p2 brdA1 mB2"
           onChange={ev => props.updateState('password', ev)}
           placeholder="Your current password"

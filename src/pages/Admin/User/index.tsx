@@ -22,27 +22,15 @@ export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
     ev.preventDefault();
     try {
       const {id} = this.props.session;
-      const { newPassword, ...restOfState } = this.state;
-      const query = restOfState;
-      if (newPassword) {
-        query.password = newPassword;
-      }
-      const newUser = await this.props.updateUser({id, ...query});
-      console.log('this.state => ', this.state);
-      console.log('query => ', query);
-      console.log('newUser => ', newUser.payload);
+      const newUser = await this.props.updateUser({id, ...this.state});
 
       // combine new state with existing user
-      const user = {
-        ...query,
-        ...newUser.payload,
-      };
+      const user = newUser.payload;
 
-      console.log('combined user => ', user);
-
+      const { newPassword, password } = this.state;
       return this.props.authenticateSession({
         username: user.username,
-        password: user.password,
+        password: newPassword || password,
       });
     } catch (err) {
       console.error(err);

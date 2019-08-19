@@ -12,6 +12,7 @@ export type tStateUnion = keyof tState;
 
 export type tContainerProps = {
   session: tSession,
+  authenticateSession: (login: tLogin) => any,
   // we get id from the active session
   updateUser: (user: tSession) => { type: string, payload: tUser },
 };
