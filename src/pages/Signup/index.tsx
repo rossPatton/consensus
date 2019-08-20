@@ -3,6 +3,7 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
+import { isValidEmail } from '../../utils';
 import { authenticateSession, registerUser } from '../../redux';
 import { Helmet } from '../../components';
 import { tContainerProps, tForm, tState, tStateUnion, tStore } from './_types';
@@ -11,7 +12,7 @@ import { SignupComponent } from './Component';
 export class SignupContainer extends PureComponent<tContainerProps, tState> {
   state = {
     email: '',
-    error: '',
+    errors: [],
     fname: '',
     lname: '',
     password: '',
@@ -19,20 +20,39 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
     username: '',
   };
 
+  checkErrors = (): string[] => {
+    let errors = [] as string[];
+    const {email, password} = this.state;
+
+    console.log('password.length => ', password.length);
+
+    if (password.length < 12) {
+      errors = ['Password must be at least 12 characters'];
+    }
+
+    if (!isValidEmail(email)) {
+      errors = [...errors, 'Email address must be valid'];
+    }
+
+    console.log('errors ? ', errors);
+
+    this.setState({
+      errors,
+    });
+
+    return errors;
+  }
+
   register = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
-    const { error, showPW, ...state } = this.state;
-    const { username, password } = this.state;
-
-    if (password.length < 12) {
-      return this.setState({
-        error: 'Password must be at least 12 characters',
-      });
-    }
+    // errors and showPW are client-side only
+    const { errors, showPW, ...state } = this.state;
 
     // add user to db, and log them in on success
     await this.props.insertUser(state);
+
+    const { username, password } = this.state;
     return this.props.authenticateSession({username, password});
   }
 
@@ -45,7 +65,7 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
   updateState = (stateKey: tStateUnion, ev: any) => {
     this.setState({
       [stateKey]: ev.currentTarget.value,
-    } as Pick<tState, tStateUnion>);
+    } as Pick<tState, tStateUnion>, this.checkErrors);
   }
 
   render() {

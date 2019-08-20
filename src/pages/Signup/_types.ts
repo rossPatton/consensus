@@ -11,7 +11,7 @@ export type tForm = {
 };
 
 export type tState = tForm & {
-  error: string,
+  errors: string[],
   showPW: boolean,
 };
 
