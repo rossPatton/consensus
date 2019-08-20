@@ -9,7 +9,7 @@ exports.up = async knex => {
 
     table.string('fname');
     table.string('lname');
-    table.string('username').unique().notNullable();
+    table.string('username').notNullable();
 
     table.timestamp('lastActive').defaultTo(knex.fn.now());
     table.timestamp('createdAt').defaultTo(knex.fn.now());

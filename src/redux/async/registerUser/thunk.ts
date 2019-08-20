@@ -19,14 +19,17 @@ export const registerUser = memoize({ ttl: 300 }, (user: tUser) => {
 
       const qs = objToQueryString(user);
 
-      // @ts-ignore
+      // we do it this way so errors can bubble properly to our middleware
       const result = await fetch(`${prefix}?${qs}&client=true`, {
         // @ts-ignore
         agent,
         method: 'POST',
+      }).then((response: any) => {
+        if (!response.ok) throw response;
+        return response.json();
       });
-      const json = await result.json();
-      return dispatch(registerUserSuccess(json));
+
+      return dispatch(registerUserSuccess(result));
     } catch (err) {
       return dispatch(registerUserFailure(err));
     }

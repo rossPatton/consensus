@@ -18,7 +18,7 @@ export type tStateUnion = keyof tState;
 
 export type tContainerProps = {
   authenticateSession: (arg: tLogin) => { payload: tUser },
-  insertUser: (arg: tForm) => Promise<{ payload: tSession }>,
+  registerUser: (arg: tForm) => Promise<{ payload: tSession }>,
   session: tSession,
 };
 

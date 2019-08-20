@@ -11,8 +11,6 @@ auth.post('user login', '/auth/login', async (ctx: Koa.Context, next) => {
     if (err) ctx.throw(400, err);
     if (!unsafeUser) ctx.throw(400, 'User not found');
 
-    console.log('ctx.headers => ', ctx.query);
-
     try {
       await ctx.login(unsafeUser);
       const { password, ...safeUser } = unsafeUser;

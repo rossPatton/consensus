@@ -1,7 +1,9 @@
+import _ from 'lodash';
 import Koa from 'koa';
 import Router from 'koa-router';
 import { knex } from '../db/connection';
 import { isValidPw, saltAndPepper } from '../utils';
+import { agent } from '../../utils';
 
 export const user = new Router();
 
@@ -19,21 +21,41 @@ user.get('getUser', '/api/v1/user', async (ctx: Koa.Context) => {
 // user signup form basically
 // @ts-ignore
 user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
-  try {
-    const safePW = await saltAndPepper(ctx.query.password);
-    const newUser = { ...ctx.query, password: safePW };
-    const userQuery = await knex('users').insert(newUser).returning('*');
-    const { password, ...safeUserForClient } = userQuery[0];
+  // TODO this form/ajax stuff should probably just be a middleware
+  const { query } = ctx;
+  const { body } = ctx.request;
+  const isFormSubmit = _.isEmpty(query) && !_.isEmpty(body);
+  const data = isFormSubmit ? body : query;
 
-    if (!ctx.query.client) {
-      ctx.redirect('/admin');
-    } else {
-      ctx.status = 200;
-      ctx.body = safeUserForClient;
-    }
+  const pwInput: string = data.password;
+  let hashedPW = pwInput;
+  try {
+    hashedPW = await saltAndPepper(pwInput);
   } catch (err) {
-    ctx.throw('400', err);
+    ctx.throw(400, err);
   }
+
+  let userResult = [];
+  try {
+    const { email, username } = data;
+    const newUser = { email, username, password: hashedPW };
+    userResult = await knex('users').insert(newUser).returning('*').limit(1);
+  } catch (err) {
+    ctx.throw(400, err);
+  }
+
+  if (userResult.length === 0) {
+    ctx.throw(400, 'Failed to insert user into db');
+  }
+
+  if (!isFormSubmit) {
+    const { password, ...safeUserForClient } = userResult[0];
+    ctx.status = 200;
+    ctx.body = safeUserForClient;
+    return;
+  }
+
+  ctx.redirect('/login');
 });
 
 // @ts-ignore

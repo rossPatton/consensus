@@ -3,7 +3,6 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-// import { authenticateSuccess } from '../../redux/async/session/actions';
 import { authenticateSession } from '../../redux';
 import { Helmet } from '../../components';
 import { tProps, tState, tStateUnion } from './_types';

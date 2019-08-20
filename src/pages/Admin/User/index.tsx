@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import { Dispatch } from 'redux';
 
 import { Helmet } from '../../../components';
@@ -44,6 +45,8 @@ export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
+    const { session } = this.props;
+
     return (
       <>
         <Helmet
@@ -56,12 +59,15 @@ export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
             { property: 'og:description', content: description },
           ]}
         />
-        <UserAdminComponent
-          {...this.state}
-          session={this.props.session}
-          save={this.save}
-          updateState={this.updateState}
-        />
+        {!session.isAuthenticated && <Redirect to="/login" />}
+        {session.isAuthenticated && (
+          <UserAdminComponent
+            {...this.state}
+            session={session}
+            save={this.save}
+            updateState={this.updateState}
+          />
+        )}
       </>
     );
   }

@@ -20,7 +20,7 @@ export const createEvent = memoize({ ttl: 300 }, (event: tPublicEvent) => {
       const qs = objToQueryString(event);
 
       // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {
+      const result = await fetch(`${prefix}?${qs}&client=true`, {
         // @ts-ignore
         agent,
         method: 'POST',

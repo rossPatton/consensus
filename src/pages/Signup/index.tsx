@@ -51,7 +51,7 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
     const { errors, ...state } = this.state;
 
     // add user to db, and log them in on success
-    await this.props.insertUser(state);
+    await this.props.registerUser(state);
 
     const { username, password } = this.state;
     return this.props.authenticateSession({username, password});
@@ -96,7 +96,7 @@ const mapStateToProps = (state: tStore) => ({session: state.session.data});
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
-  insertUser: (user: tForm) => dispatch(registerUser(user)),
+  registerUser: (user: tForm) => dispatch(registerUser(user)),
 });
 
 export const Signup = connect(
