@@ -38,7 +38,7 @@ passport.use(new LocalStrategy(opts, async (username, pw, done) => {
 
   // default case - incorrect password
   return done({
-    message: 'Passwords didnt match',
+    message: 'Passwords dont match',
     type: 'password',
   }, false);
 }));

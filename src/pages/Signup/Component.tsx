@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import faker from 'faker';
 import { PasswordInput } from '../../components';
 import { tComponentProps } from './_types';
 
@@ -7,6 +8,8 @@ export const SignupComponent = memo((props: tComponentProps) => (
     <form
       className="contain p5 pT4 pB4 mB2 bgGrey1 br8"
       autoComplete="off"
+      action="/api/v1/user"
+      method="post"
       onSubmit={props.register}>
       <legend className="mB3 ffCooper fs2">
         Create an account
@@ -45,8 +48,6 @@ export const SignupComponent = memo((props: tComponentProps) => (
             autoComplete="new-password"
             password={props.password}
             placeholder="correct_horse_battery_staple"
-            showPW={props.showPW}
-            togglePWVisibility={props.togglePWVisibility}
             updateState={props.updateState}
           />
         </label>

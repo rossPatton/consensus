@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import commonPasswordList from 'fxa-common-password-list';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -16,15 +17,12 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
     fname: '',
     lname: '',
     password: '',
-    showPW: false,
     username: '',
   };
 
   checkErrors = (): string[] => {
     let errors = [] as string[];
     const {email, password} = this.state;
-
-    console.log('password.length => ', password.length);
 
     if (password.length < 12) {
       errors = ['Password must be at least 12 characters'];
@@ -34,7 +32,10 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
       errors = [...errors, 'Email address must be valid'];
     }
 
-    console.log('errors ? ', errors);
+    if (commonPasswordList.test(password) ||
+      password === 'correct_horse_battery_staple') {
+      errors = [...errors, 'Please choose a more unique password'];
+    }
 
     this.setState({
       errors,
@@ -47,19 +48,13 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
     ev.preventDefault();
 
     // errors and showPW are client-side only
-    const { errors, showPW, ...state } = this.state;
+    const { errors, ...state } = this.state;
 
     // add user to db, and log them in on success
     await this.props.insertUser(state);
 
     const { username, password } = this.state;
     return this.props.authenticateSession({username, password});
-  }
-
-  togglePWVisibility = () => {
-    this.setState({
-      showPW: !this.state.showPW,
-    });
   }
 
   updateState = (stateKey: tStateUnion, ev: any) => {
@@ -89,7 +84,6 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
             {...this.props}
             {...this.state}
             register={this.register}
-            togglePWVisibility={this.togglePWVisibility}
             updateState={this.updateState}
           />
         )}

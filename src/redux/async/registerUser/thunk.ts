@@ -20,7 +20,7 @@ export const registerUser = memoize({ ttl: 300 }, (user: tUser) => {
       const qs = objToQueryString(user);
 
       // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {
+      const result = await fetch(`${prefix}?${qs}&client=true`, {
         // @ts-ignore
         agent,
         method: 'POST',

@@ -21,7 +21,7 @@ export const authenticateSession = memoize({ ttl: 300 }, (user: tLogin) => {
         '/auth/login';
 
       const { username, password } = user;
-      const qs = `?username=${username}&password=${password}`;
+      const qs = `?username=${username}&password=${password}&client=true`;
 
       // we do it this way so errors can bubble properly to our middleware
       const result: tSession = await fetch(`${prefix}${qs}`, {
@@ -53,7 +53,7 @@ export const logOutOfSession = memoize({ ttl: 300 }, () => {
         '/auth/logout';
 
       // we do it this way so errors can bubble properly to our middleware
-      const result: tSession = await fetch(apiEndpoint, {
+      const result: tSession = await fetch(`${apiEndpoint}?client=true`, {
         // @ts-ignore
         agent,
         // we need credentials here so that the session cookie gets set properly

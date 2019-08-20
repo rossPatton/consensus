@@ -10,7 +10,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
   } = props.session;
 
   return (
-    <form className="contain mT5 pT4 mB5" autoComplete="off" onSubmit={props.save}>
+    <form className="contain" autoComplete="off" onSubmit={props.save}>
       <fieldset>
         <legend className="fs2 mB3 ffLab">
           Your profile

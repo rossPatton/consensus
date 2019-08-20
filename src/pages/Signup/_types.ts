@@ -12,7 +12,6 @@ export type tForm = {
 
 export type tState = tForm & {
   errors: string[],
-  showPW: boolean,
 };
 
 export type tStateUnion = keyof tState;
@@ -25,6 +24,5 @@ export type tContainerProps = {
 
 export type tComponentProps = tContainerProps & tState & {
   register: (ev: React.FormEvent<HTMLFormElement>) => void,
-  togglePWVisibility: (ev: React.MouseEvent<HTMLButtonElement>) => void,
   updateState: (key: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 };

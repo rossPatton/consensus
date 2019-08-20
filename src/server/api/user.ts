@@ -24,7 +24,13 @@ user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
     const newUser = { ...ctx.query, password: safePW };
     const userQuery = await knex('users').insert(newUser).returning('*');
     const { password, ...safeUserForClient } = userQuery[0];
-    ctx.body = safeUserForClient;
+
+    if (!ctx.query.client) {
+      ctx.redirect('/admin');
+    } else {
+      ctx.status = 200;
+      ctx.body = safeUserForClient;
+    }
   } catch (err) {
     ctx.throw('400', err);
   }
@@ -60,6 +66,7 @@ user.patch('patchUser', '/api/v1/user', async (ctx: Koa.Context) => {
 
     const {password, ...safeUserForClient} = updatedUser[0];
 
+    ctx.status = 200;
     ctx.body = {
       ...safeUserForClient,
       isAuthenticated: ctx.isAuthenticated(),
