@@ -9,30 +9,36 @@ import { title, canonical, description, keywords } from './_constants';
 import { tContainerProps, tState, tStateUnion } from './_types';
 import { UserAdminComponent } from './Component';
 
-export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
-  state = {
-    email: '',
-    password: '',
-    newPassword: '',
-    username: '',
-    fname: '',
-    lname: '',
-  };
+const initialState = {
+  email: '',
+  password: '',
+  newPassword: '',
+  username: '',
+  fname: '',
+  lname: '',
+};
 
+export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
+  state = initialState;
+
+  // TODO handle errors better, re-arrange try-catches
   save = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     try {
       const {id} = this.props.session;
+      // const { password, ...updateState } = this.state;
       const newUser = await this.props.updateUser({id, ...this.state});
 
       // combine new state with existing user
-      const user = newUser.payload;
-
+      const response = newUser.payload;
       const { newPassword, password } = this.state;
+
+      if (response.status === 500) return;
+
       return this.props.authenticateSession({
-        username: user.username,
+        username: response.username,
         password: newPassword || password,
-      });
+      }).then(() => this.setState(initialState));
     } catch (err) {
       console.error(err);
     }

@@ -5,8 +5,9 @@ import { sha256 } from 'js-sha256';
 const { PEPPER } = process.env;
 
 // userPassword === plaintext input from client
-// double hashed password in the db
+// dbPW= === double hashed password in the db
 export const isValidPw = async (userPw: string, dbPw: string) => {
+  if (!userPw || !dbPw) return false;
   const sha = sha256(userPw + PEPPER);
   return bcrypt.compare(sha, dbPw);
 };

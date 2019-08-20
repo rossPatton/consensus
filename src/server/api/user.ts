@@ -3,7 +3,6 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import { knex } from '../db/connection';
 import { isValidPw, saltAndPepper } from '../utils';
-import { agent } from '../../utils';
 
 export const user = new Router();
 
@@ -60,6 +59,12 @@ user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
 
 // @ts-ignore
 user.patch('patchUser', '/api/v1/user', async (ctx: Koa.Context) => {
+  // TODO this form/ajax stuff should probably just be a middleware
+  const { query } = ctx;
+  const { body } = ctx.request;
+  const isFormSubmit = _.isEmpty(query) && !_.isEmpty(body);
+  const {password: pwInput, ...data} = isFormSubmit ? body : query;
+
   let user = null;
   try {
     user = await knex('users').limit(1).where({id: ctx.query.id}).first();
@@ -67,33 +72,34 @@ user.patch('patchUser', '/api/v1/user', async (ctx: Koa.Context) => {
     ctx.throw('400', err);
   }
 
-  if (!isValidPw(ctx.query.password, user.password)) {
-    return ctx.throw('400', 'Password is not correct');
+  const isValidPW = await isValidPw(pwInput, user.password);
+  if (!isValidPW) return ctx.throw('400', 'Password is not correct');
+
+  if (data.newPassword) {
+    const safePW = await saltAndPepper(data.newPassword);
+    data.password = safePW;
   }
 
-  if (ctx.query.newPassword) {
-    const safePW = await saltAndPepper(ctx.query.newPassword);
-    ctx.query.password = safePW;
-  }
+  // newPassword will cause a constraint error - pull out before updating
+  const {newPassword, ...updateQuery} = data;
 
-  const {newPassword, ...updateQuery} = ctx.query;
-
-  let updatedUser = null;
+  let updatedUser = [];
   try {
     updatedUser = await knex('users')
       .limit(1)
       .where({id: ctx.query.id})
       .update(updateQuery)
       .returning('*');
-
-    const {password, ...safeUserForClient} = updatedUser[0];
-
-    ctx.status = 200;
-    ctx.body = {
-      ...safeUserForClient,
-      isAuthenticated: ctx.isAuthenticated(),
-    };
   } catch (err) {
     ctx.throw('400', err);
   }
+
+  if (isFormSubmit) return;
+
+  const {password, ...safeUserForClient} = updatedUser[0];
+  ctx.body = {
+    ...safeUserForClient,
+    isAuthenticated: ctx.isAuthenticated(),
+  };
+
 });

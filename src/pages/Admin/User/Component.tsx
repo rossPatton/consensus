@@ -12,6 +12,8 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
 
   return (
     <form
+      method="PATCH"
+      action="/api/v1/user"
       autoComplete="off"
       className="contain mT4 p5 pT4 pB4 mB2 br8 brdA1"
       onSubmit={props.save}>
@@ -27,6 +29,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           className="p3 mB3 row"
           placeholder={origFname}
           value={props.fname}
+          name="fname"
         />
         <h2 className="ffLab fs5 mB1 lh1">
           Last Name
@@ -36,6 +39,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           className="p3 mB3 row"
           placeholder={origLname}
           value={props.lname}
+          name="lname"
         />
         <h2 className="ffLab fs5 mB1 lh1">
           Email address
@@ -45,6 +49,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           className="p3 mB3 row"
           placeholder={origEmail}
           value={props.email}
+          name="email"
         />
         <h2 className="ffLab fs5 mB1 lh1">
           Username
@@ -54,26 +59,25 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           className="p3 row mB3"
           placeholder={origUsername}
           value={props.username}
+          name="username"
         />
         <PasswordInput
           newPassword
-          id="pwInput"
+          id="newPwInput"
+          name="newPassword"
           password={props.newPassword}
           placeholder="Your1new2very3secure4password!"
           onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
             return props.updateState('newPassword', ev);
           }}
         />
-        <h2 className="ffLab fs5 mB1 lh1">
-          Current password, required to make any changes
-        </h2>
-        <input
-          required
-          type="password"
-          className="p3 row mB2"
-          onChange={ev => props.updateState('password', ev)}
-          placeholder="Your current password"
-          value={props.password}
+        <PasswordInput
+          id="pwInput"
+          title="Current password, required"
+          password={props.password}
+          onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+            return props.updateState('password', ev);
+          }}
         />
       </fieldset>
       <button

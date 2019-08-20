@@ -10,7 +10,7 @@ export const HeaderComponent = memo((props: tProps) => (
         <img alt="" src="/static/images/ham.svg" width="40" />
       </Link>
       <Link to="/">
-        <img alt="" src="/static/images/logo.svg" width="125" />
+        <img alt="Unison" src="/static/images/logo.svg" width="125" />
       </Link>
       {!props.session.isAuthenticated && (
         <div className="abs r fs6">

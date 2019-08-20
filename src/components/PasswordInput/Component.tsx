@@ -8,12 +8,14 @@ export const PasswordInputComponent = memo((props: any) => {
 
   return (
     <>
-      <label htmlFor="pwInput">
-        <h2 className="ffLab fs5 mB1 lh1">Password</h2>
+      <label htmlFor={props.id}>
+        <h2 className="ffLab fs5 mB1 lh1">
+          {props.title || 'Password'}
+        </h2>
         <div className="fx mB2">
           <input
-            id="pwInput"
-            name="password"
+            id={props.id}
+            name={props.name || 'password'}
             autoComplete={props.newPassword ? 'new-password' : 'on'}
             required={props.required}
             placeholder={props.placeholder}

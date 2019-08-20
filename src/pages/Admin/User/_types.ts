@@ -14,7 +14,7 @@ export type tContainerProps = {
   session: tSession,
   authenticateSession: (login: tLogin) => any,
   // we get id from the active session
-  updateUser: (user: tSession) => { type: string, payload: tUser },
+  updateUser: (user: tSession) => any,
 };
 
 export type tComponentProps = tState & {
