@@ -1,48 +1,42 @@
 import React, { memo } from 'react';
+import { PasswordInput } from '../../components';
 import { tComponentProps } from './_types';
 
 export const LoginComponent = memo((props: tComponentProps) => (
   <form
-    className="contain fx fxdCol aiCtr"
+    method="POST"
+    className="contain mT4 p5 pT4 pB4 mB2 br8 brdA1"
     name="userLoginForm"
     autoComplete="off"
     action="/auth/login"
-    method="POST"
     onSubmit={props.login}>
     <fieldset>
       <legend className="mB3">
-        Login to your account
+        <h1 className="fs2">Login to your account</h1>
       </legend>
-      <div className="mB3">
-        <label htmlFor="usernameInput">
-          <div className="lh1 fs6 fw600 mB1">
-            Username:
-          </div>
-          <input
-            spellCheck
-            id="usernameInput"
-            name="username"
-            className="p3 pR4 brdA1 dBl mB3"
-            value={props.username}
-            onChange={ev => props.updateState('username', ev)}
-          />
-        </label>
-        <label htmlFor="pwInput">
-          <div className="lh1 fs6 fw600 mB1">
-            Password:
-          </div>
-          <input
-            type="password"
-            id="pwInput"
-            name="password"
-            className="p3 pR4 brdA1 dBl"
-            value={props.password}
-            onChange={ev => props.updateState('password', ev)}
-          />
-        </label>
-      </div>
-      <button className="p3 hvrBgGrey1 trans1">
-          Login
+      <label htmlFor="usernameInput">
+        <h2 className="ffLab fs5 mB1 lh1">Username</h2>
+        <input
+          required
+          id="usernameInput"
+          name="username"
+          placeholder="yourUserNameHere"
+          className="p3 row mB3"
+          value={props.username}
+          onChange={ev => props.updateState('username', ev)}
+        />
+      </label>
+      <PasswordInput
+        required
+        id="pwInput"
+        password={props.password}
+        placeholder="your_very_secure_password_here"
+        onChange={(ev: any) => props.updateState('password', ev)}
+      />
+      <button
+        disabled={!props.password || !props.username}
+        className="p3 pL4 pR4 hvrBgGrey1 trans1">
+        Login
       </button>
     </fieldset>
   </form>

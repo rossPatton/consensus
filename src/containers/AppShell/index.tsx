@@ -12,7 +12,7 @@ export const AppShell = (props: any) => (
     <>
       <Header {...props} />
       <Nav />
-      <main className="mT5 mB5 pT4 pB5">
+      <main className="mT5 mB5 pB5">
         <Switch>
           {routes.map((route: tRoute, i) => (
             <RouteWithSubRoutes

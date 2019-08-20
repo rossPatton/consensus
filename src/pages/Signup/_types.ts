@@ -4,14 +4,17 @@ export type tStore = {
 
 export type tForm = {
   email: string,
-  fname: string,
-  lname: string,
   password: string,
   username: string,
 };
 
+export type tErrorObject = {
+  email?: string[],
+  password?: string[],
+};
+
 export type tState = tForm & {
-  errors: string[],
+  errors: tErrorObject,
 };
 
 export type tStateUnion = keyof tState;
@@ -23,6 +26,8 @@ export type tContainerProps = {
 };
 
 export type tComponentProps = tContainerProps & tState & {
+  disabled: boolean,
+  errArr: string[],
   register: (ev: React.FormEvent<HTMLFormElement>) => void,
   updateState: (key: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 };

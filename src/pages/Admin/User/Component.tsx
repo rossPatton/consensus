@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { PasswordInput } from '../../../components';
 import { tComponentProps } from './_types';
 
 export const UserAdminComponent = memo((props: tComponentProps) => {
@@ -10,71 +11,74 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
   } = props.session;
 
   return (
-    <form className="contain" autoComplete="off" onSubmit={props.save}>
+    <form
+      autoComplete="off"
+      className="contain mT4 p5 pT4 pB4 mB2 br8 brdA1"
+      onSubmit={props.save}>
       <fieldset>
-        <legend className="fs2 mB3 ffLab">
-          Your profile
+        <legend>
+          <h1 className="fs2 mB3">Your profile</h1>
         </legend>
-        <div className="mB1 fs6 fw600 lh1">
+        <h2 className="ffLab fs5 mB1 lh1">
           First Name
-        </div>
+        </h2>
         <input
           onChange={ev => props.updateState('fname', ev)}
-          className="p2 mB3 brdA1"
+          className="p3 mB3 row"
           placeholder={origFname}
           value={props.fname}
         />
-        <div className="mB1 fs6 fw600 lh1">
+        <h2 className="ffLab fs5 mB1 lh1">
           Last Name
-        </div>
+        </h2>
         <input
           onChange={ev => props.updateState('lname', ev)}
-          className="p2 mB3 brdA1"
+          className="p3 mB3 row"
           placeholder={origLname}
           value={props.lname}
         />
-        <div className="mB1 fs6 fw600 lh1">
+        <h2 className="ffLab fs5 mB1 lh1">
           Email address
-        </div>
+        </h2>
         <input
           onChange={ev => props.updateState('email', ev)}
-          className="p2 mB3 brdA1"
+          className="p3 mB3 row"
           placeholder={origEmail}
           value={props.email}
         />
-        <div className="mB1 fs6 fw600 lh1">
+        <h2 className="ffLab fs5 mB1 lh1">
           Username
-        </div>
+        </h2>
         <input
           onChange={ev => props.updateState('username', ev)}
-          className="p2 brdA1 mB4"
+          className="p3 row mB3"
           placeholder={origUsername}
           value={props.username}
         />
-        <div className="mB1 fs6 fw600 lh1">
-          Password
-        </div>
-        <input
-          type="password"
-          autoComplete="new-password"
-          onChange={ev => props.updateState('newPassword', ev)}
-          className="p2 mR2 mB3 brdA1"
-          placeholder="Your new password"
-          value={props.newPassword}
+        <PasswordInput
+          newPassword
+          id="pwInput"
+          password={props.newPassword}
+          placeholder="Your1new2very3secure4password!"
+          onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+            return props.updateState('newPassword', ev);
+          }}
         />
-        <div className="mB1 fs6 fw600 lh1">
+        <h2 className="ffLab fs5 mB1 lh1">
           Current password, required to make any changes
-        </div>
+        </h2>
         <input
           required
           type="password"
-          className="p2 brdA1 mB2"
+          className="p3 row mB2"
           onChange={ev => props.updateState('password', ev)}
           placeholder="Your current password"
           value={props.password}
         />
       </fieldset>
-      <button className="p3 pL4 pR4 hvrBgGrey1 trans1">
+      <button
+        disabled={props.password.length === 0}
+        className="p3 pL4 pR4 hvrBgGrey1 trans1">
         Save Changes
       </button>
     </form>

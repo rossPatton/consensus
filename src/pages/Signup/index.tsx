@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import commonPasswordList from 'fxa-common-password-list';
 import { Redirect } from 'react-router';
@@ -13,34 +14,35 @@ import { SignupComponent } from './Component';
 export class SignupContainer extends PureComponent<tContainerProps, tState> {
   state = {
     email: '',
-    errors: [],
-    fname: '',
-    lname: '',
+    errors: {},
     password: '',
     username: '',
   };
 
-  checkErrors = (): string[] => {
-    let errors = [] as string[];
-    const {email, password} = this.state;
+  checkErrors = (): object => {
+    const {email, password: pw} = this.state;
 
-    if (password.length < 12) {
-      errors = ['Password must be at least 12 characters'];
+    let pwArr = [] as string[];
+    if (pw.length > 0 && pw.length < 12) {
+      pwArr = [...pwArr, 'Password must be at least 12 characters'];
     }
 
-    if (!isValidEmail(email)) {
-      errors = [...errors, 'Email address must be valid'];
+    if (commonPasswordList.test(pw) || pw === 'correct_horse_battery_staple') {
+      pwArr = [...pwArr, 'Please choose a less common password'];
     }
 
-    if (commonPasswordList.test(password) ||
-      password === 'correct_horse_battery_staple') {
-      errors = [...errors, 'Please choose a more unique password'];
+
+    let emailArr = [] as string[];
+    if (email.length > 0 && !isValidEmail(email)) {
+      emailArr = ['Email address must be valid'];
     }
 
-    this.setState({
-      errors,
-    });
+    const errors = {
+      email: emailArr,
+      password: pwArr,
+    };
 
+    this.setState({errors});
     return errors;
   }
 
@@ -65,6 +67,12 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     const { session } = this.props;
+    const { email, errors, password, username } = this.state;
+    const errArr = _.flatten(Object.values(errors as string[]));
+    const disabled = !email
+      || !password
+      || !username
+      || errArr.length > 0;
 
     return (
       <>
@@ -83,6 +91,8 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
           <SignupComponent
             {...this.props}
             {...this.state}
+            disabled={disabled}
+            errArr={errArr}
             register={this.register}
             updateState={this.updateState}
           />
