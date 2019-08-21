@@ -28,20 +28,24 @@ export const HeaderComponent = memo((props: tProps) => (
         </div>
       )}
       {props.session.isAuthenticated && (
-        <div className="fx abs r fs6">
-          <Link
-            id="a11yAdmin"
-            to="/admin"
-            className="mR2">
-            Account
-          </Link>
-          <button
-            id="a11yLogout"
-            className="trans1 hvrBgGrey1"
-            onClick={props.logout}>
-            Logout
-          </button>
-        </div>
+        <form
+          action="/auth/logout"
+          className="abs r fs6">
+          <fieldset className="fx">
+            <Link
+              id="a11yAdmin"
+              to="/admin"
+              className="mR2">
+              Account
+            </Link>
+            <button
+              id="a11yLogout"
+              className="trans1 hvrBgGrey1"
+              onClick={props.logout}>
+              Logout
+            </button>
+          </fieldset>
+        </form>
       )}
     </div>
   </header>

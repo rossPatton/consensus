@@ -1,9 +1,10 @@
 export type tProps = {
-  session: tSession,
   authenticateSession: (arg: tLogin) => tAction<'AUTHENTICATE_USER_SUCCESS', tUser>,
+  session: tSession,
 };
 
 export type tState = {
+  isClient: boolean,
   password: string,
   username: string,
 };

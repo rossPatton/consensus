@@ -10,9 +10,17 @@ import { LoginComponent } from './Component';
 
 export class LoginContainer extends Component<tProps, tState> {
   state = {
+    isClient: false,
     password: '',
     username: '',
   };
+
+  componentDidMount() {
+    // we do this so we only disable form submit when js is available
+    this.setState({
+      isClient: true,
+    });
+  }
 
   login = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();

@@ -7,7 +7,7 @@ import { knex } from './db/connection';
 // pull out passport session info, use to populate the `auth` and `session` state
 export const initStoreForSSR = async (ctx: Koa.ParameterizedContext) => {
   // get authentication status + active session data
-  const passport = await ctx.redis.get(ctx.session._sessCtx.externalKey);
+  const passport = ctx.redis.get(ctx.session._sessCtx.externalKey);
 
   // get user/org session. this object is determined by our serialization strategy
   const passportSession = _.get(passport, 'passport.user', {});

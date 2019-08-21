@@ -34,7 +34,7 @@ export const LoginComponent = memo((props: tComponentProps) => (
         onChange={(ev: any) => props.updateState('password', ev)}
       />
       <button
-        disabled={!props.password || !props.username}
+        disabled={props.isClient && (!props.password || !props.username)}
         className="p3 pL4 pR4 hvrBgGrey1 trans1">
         Login
       </button>

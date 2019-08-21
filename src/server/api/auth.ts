@@ -62,7 +62,7 @@ auth.get('logout', '/auth/logout', async (ctx: Koa.Context, next) => {
   return passport.authenticate('local', () => {
     if (ctx.isAuthenticated()) {
       ctx.logout();
-      ctx.body = {isAuthenticated: false};
+      ctx.redirect('/login');
     } else {
       ctx.body = {error: 'You are not logged in'};
       ctx.throw(401);

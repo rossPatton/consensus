@@ -14,6 +14,7 @@ export type tErrorObject = {
 };
 
 export type tState = tForm & {
+  isClient: boolean,
   errors: tErrorObject,
 };
 

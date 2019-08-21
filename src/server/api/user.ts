@@ -57,22 +57,23 @@ user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
   ctx.redirect('/login');
 });
 
+// TODO no-js forms only do GET/POST - figure out how to make patches work w/o js
 // @ts-ignore
 user.patch('patchUser', '/api/v1/user', async (ctx: Koa.Context) => {
   // TODO this form/ajax stuff should probably just be a middleware
   const { query } = ctx;
   const { body } = ctx.request;
   const isFormSubmit = _.isEmpty(query) && !_.isEmpty(body);
-  const {password: pwInput, ...data} = isFormSubmit ? body : query;
+  const data = isFormSubmit ? body : query;
 
   let user = null;
   try {
-    user = await knex('users').limit(1).where({id: ctx.query.id}).first();
+    user = await knex('users').limit(1).where({id: data.id}).first();
   } catch (err) {
     ctx.throw('400', err);
   }
 
-  const isValidPW = await isValidPw(pwInput, user.password);
+  const isValidPW = await isValidPw(data.password, user.password);
   if (!isValidPW) return ctx.throw('400', 'Password is not correct');
 
   if (data.newPassword) {
@@ -87,7 +88,7 @@ user.patch('patchUser', '/api/v1/user', async (ctx: Koa.Context) => {
   try {
     updatedUser = await knex('users')
       .limit(1)
-      .where({id: ctx.query.id})
+      .where({id: data.id})
       .update(updateQuery)
       .returning('*');
   } catch (err) {

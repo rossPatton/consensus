@@ -1,5 +1,6 @@
 export type tState = {
   email: string,
+  isClient: boolean,
   fname: string,
   lname: string,
   newPassword: string,
@@ -11,8 +12,8 @@ export type tStore = { session: tSession };
 export type tStateUnion = keyof tState;
 
 export type tContainerProps = {
-  session: tSession,
   authenticateSession: (login: tLogin) => any,
+  session: tSession,
   // we get id from the active session
   updateUser: (user: tSession) => any,
 };

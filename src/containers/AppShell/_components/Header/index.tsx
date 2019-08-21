@@ -4,13 +4,18 @@ import { Dispatch } from 'redux';
 
 import { logOutOfSession } from '../../../../redux';
 import { HeaderComponent } from './Component';
-import { tProps } from './_types';
+import { tContainerProps } from './_types';
 
-export class HeaderContainer extends PureComponent<tProps> {
+export class HeaderContainer extends PureComponent<tContainerProps> {
+  logout = (ev: React.MouseEvent<HTMLButtonElement>) => {
+    ev.preventDefault();
+    this.props.logOutOfSession();
+  }
+
   render() {
     return (
       <HeaderComponent
-        logout={this.props.logout}
+        logout={this.logout}
         session={this.props.session}
       />
     );
@@ -22,7 +27,7 @@ const mapStateToProps = (state: {session: tThunk<tSession>}) => ({
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  logout: () => dispatch(logOutOfSession()),
+  logOutOfSession: () => dispatch(logOutOfSession()),
 });
 
 export const Header = connect(

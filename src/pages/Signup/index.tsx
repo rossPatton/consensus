@@ -13,11 +13,19 @@ import { SignupComponent } from './Component';
 
 export class SignupContainer extends PureComponent<tContainerProps, tState> {
   state = {
+    isClient: false,
     email: '',
     errors: {},
     password: '',
     username: '',
   };
+
+  componentDidMount() {
+    // we do this so we only disable form submit when js is available
+    this.setState({
+      isClient: true,
+    });
+  }
 
   checkErrors = (): object => {
     const {email, password: pw} = this.state;
@@ -50,7 +58,7 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
     ev.preventDefault();
 
     // errors and showPW are client-side only
-    const { errors, ...state } = this.state;
+    const { errors, isClient, ...state } = this.state;
 
     // add user to db, and log them in on success
     await this.props.registerUser(state);
@@ -67,12 +75,10 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     const { session } = this.props;
-    const { email, errors, password, username } = this.state;
+    const { email, errors, isClient, password, username } = this.state;
     const errArr = _.flatten(Object.values(errors as string[]));
-    const disabled = !email
-      || !password
-      || !username
-      || errArr.length > 0;
+    const disabled = isClient &&
+      (!email || !password || !username || errArr.length > 0);
 
     return (
       <>
