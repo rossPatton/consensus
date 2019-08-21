@@ -1,35 +1,25 @@
 import crypto from 'crypto';
-
-// our encryption key, must be 256 bits (32 characters)
 const { PEPPER } = process.env;
-const IV_LENGTH = 16; // For AES, this is always 16
+const algo = 'AES-256-CTR';
 
-export const encrypt = (txt: string) => {
-  const iv = crypto.randomBytes(IV_LENGTH);
-  const cipher = crypto.createCipheriv(
-    'aes-256-cbc',
-    Buffer.from(PEPPER as string),
-    iv
-  );
+export const encrypt = (input: string) => {
+  const IV = Buffer.from(crypto.randomBytes(16));
+  const cipher = crypto.createCipheriv(algo, PEPPER as string, IV);
+  cipher.setEncoding('base64');
+  cipher.write(input);
+  cipher.end();
 
-  let encrypted = cipher.update(txt);
-  encrypted = Buffer.concat([encrypted, cipher.final()]);
+  const cipherText = cipher.read();
 
-  return iv.toString('hex') + ':' + encrypted.toString('hex');
+  return `${cipherText}!${IV.toString('base64')}`;
 };
 
-export const decrypt = (txt: string) => {
-  const textParts = txt.split(':');
-  const iv = Buffer.from(textParts.shift() as string, 'hex');
-  const encryptedText = Buffer.from(textParts.join(':'), 'hex');
-  const decipher = crypto.createDecipheriv(
-    'aes-256-cbc',
-    Buffer.from(PEPPER as string),
-    iv
-  );
-
-  let decrypted = decipher.update(encryptedText);
-  decrypted = Buffer.concat([decrypted, decipher.final()]);
-
-  return decrypted.toString();
+export const decrypt = (input: string) => {
+  let result;
+  const [cipherText, IV] = input.split('!');
+  const buffIV = Buffer.from(IV, 'base64');
+  const decipher = crypto.createDecipheriv(algo, PEPPER as string, buffIV);
+  result = decipher.update(cipherText, 'base64', 'utf8');
+  result += decipher.final('utf8');
+  return result;
 };

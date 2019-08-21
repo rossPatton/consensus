@@ -6,6 +6,7 @@ exports.up = async knex => {
 
     table.string('email').notNullable();
     table.string('password').notNullable();
+    table.string('saltedHash');
 
     table.string('fname');
     table.string('lname');

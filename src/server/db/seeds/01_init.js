@@ -1,7 +1,36 @@
 require('dotenv').config();
-const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
 const faker = require('faker');
-const { sha256 } = require('js-sha256');
+const { PEPPER } = process.env;
+
+function encrypt(input) {
+  const IV = Buffer.from(crypto.randomBytes(16));
+  const cipher = crypto.createCipheriv('AES-256-CTR', PEPPER, IV);
+  cipher.setEncoding('base64');
+  cipher.write(input);
+  cipher.end();
+
+  const cipherText = cipher.read();
+
+  return `${cipherText}!${IV.toString('base64')}`;
+}
+
+function decrypt(input) {
+  let result;
+  const [cipherText, IV] = input.split('!');
+  const buffIV = Buffer.from(IV, 'base64');
+  const decipher = crypto.createDecipheriv('AES-256-CTR', PEPPER, buffIV);
+  result = decipher.update(cipherText, 'base64', 'utf8');
+  result += decipher.final('utf8');
+  return result;
+}
+
+const sha384 = (input) => {
+  const hasher = crypto.createHash('SHA384');
+  hasher.update(input);
+  return hasher.digest('base64');
+};
 
 const slugify = string => {
   if (typeof string !== 'string') return string;
@@ -14,12 +43,10 @@ const slugify = string => {
     .trim();
 };
 
-// add a little pepper to the salt - hard coded server key for extra security
-const { PEPPER } = process.env;
 const salt = bcrypt.genSaltSync(10);
 
 const createUser = async () => {
-  const sha = sha256(faker.internet.password() + PEPPER);
+  const sha = sha384(faker.internet.password());
   const password = await bcrypt.hash(sha, salt);
 
   return {
@@ -32,14 +59,20 @@ const createUser = async () => {
 };
 
 const createTestUser = async () => {
-  const sha = sha256('test' + PEPPER);
-  const password = await bcrypt.hash(sha, salt);
+  const sha = sha384('test');
+  console.log('sha384 ', sha);
+  console.log('length of sha384 => ', sha.length);
+  const saltedHash = await bcrypt.hash(sha, salt);
+  console.log('salted test hash => ', saltedHash);
+  const password = encrypt(saltedHash);
+  console.log('encryped hash => ', password);
 
   return {
     email: 'test@test.com',
     fname: 'test',
     lname: 'user',
     password,
+    saltedHash,
     username: 'testUser',
   };
 };
@@ -48,7 +81,7 @@ const createOrg = async () => {
   const orgName = faker.company.companyName();
   const slug = slugify(orgName);
 
-  const sha = sha256(faker.internet.password());
+  const sha = sha384(faker.internet.password());
   const password = await bcrypt.hash(sha, salt);
 
   return {
@@ -106,7 +139,7 @@ const createUserEventRelation = async (u, e) => {
 };
 
 const createTWC = async () => {
-  const sha = sha256(faker.internet.password());
+  const sha = sha384(faker.internet.password());
   const password = await bcrypt.hash(sha, salt);
 
   return {

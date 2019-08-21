@@ -2,6 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import passport from 'koa-passport';
 import { knex } from '../db/connection';
+import { decrypt, encrypt } from '../utils';
 
 export const auth = new Router();
 
@@ -33,13 +34,11 @@ auth.post('user login', '/auth/login', async (ctx: Koa.Context, next) => {
       }));
 
       const isAuthenticated = ctx.isAuthenticated();
-      // const lastActive = await knex.fn.now();
 
       // newSession === session.data on the client, redux adds loading/error keys
       const newSession: tSession = {
         ...safeUser,
         isAuthenticated,
-        // lastActive,
         roles,
         rsvps,
       };

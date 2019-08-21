@@ -2,7 +2,7 @@ import _ from 'lodash';
 import Koa from 'koa';
 import Router from 'koa-router';
 import { knex } from '../db/connection';
-import { isValidPw, saltAndPepper } from '../utils';
+import { encrypt, isValidPw, saltedHash } from '../utils';
 
 export const user = new Router();
 
@@ -29,7 +29,7 @@ user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
   const pwInput: string = data.password;
   let hashedPW = pwInput;
   try {
-    hashedPW = await saltAndPepper(pwInput);
+    hashedPW = await saltedHash(pwInput);
   } catch (err) {
     ctx.throw(400, err);
   }
@@ -37,7 +37,7 @@ user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
   let userResult = [];
   try {
     const { email, username } = data;
-    const newUser = { email, username, password: hashedPW };
+    const newUser = { email, username, password: encrypt(hashedPW) };
     userResult = await knex('users').insert(newUser).returning('*').limit(1);
   } catch (err) {
     ctx.throw(400, err);
@@ -77,8 +77,8 @@ user.patch('patchUser', '/api/v1/user', async (ctx: Koa.Context) => {
   if (!isValidPW) return ctx.throw('400', 'Password is not correct');
 
   if (data.newPassword) {
-    const safePW = await saltAndPepper(data.newPassword);
-    data.password = safePW;
+    const safePW = await saltedHash(data.newPassword);
+    data.password = encrypt(safePW);
   }
 
   // newPassword will cause a constraint error - pull out before updating
