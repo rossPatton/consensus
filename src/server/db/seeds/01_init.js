@@ -47,7 +47,8 @@ const salt = bcrypt.genSaltSync(10);
 
 const createUser = async () => {
   const sha = sha384(faker.internet.password());
-  const password = await bcrypt.hash(sha, salt);
+  const saltedHash = await bcrypt.hash(sha, salt);
+  const password = encrypt(saltedHash);
 
   return {
     email: faker.internet.exampleEmail(),
@@ -60,19 +61,14 @@ const createUser = async () => {
 
 const createTestUser = async () => {
   const sha = sha384('test');
-  console.log('sha384 ', sha);
-  console.log('length of sha384 => ', sha.length);
   const saltedHash = await bcrypt.hash(sha, salt);
-  console.log('salted test hash => ', saltedHash);
   const password = encrypt(saltedHash);
-  console.log('encryped hash => ', password);
 
   return {
     email: 'test@test.com',
     fname: 'test',
     lname: 'user',
     password,
-    saltedHash,
     username: 'testUser',
   };
 };
@@ -82,7 +78,8 @@ const createOrg = async () => {
   const slug = slugify(orgName);
 
   const sha = sha384(faker.internet.password());
-  const password = await bcrypt.hash(sha, salt);
+  const saltedHash = await bcrypt.hash(sha, salt);
+  const password = encrypt(saltedHash);
 
   return {
     category: faker.lorem.word(),
@@ -140,7 +137,8 @@ const createUserEventRelation = async (u, e) => {
 
 const createTWC = async () => {
   const sha = sha384(faker.internet.password());
-  const password = await bcrypt.hash(sha, salt);
+  const saltedHash = await bcrypt.hash(sha, salt);
+  const password = encrypt(saltedHash);
 
   return {
     category: 'Tech and Science Activism',
