@@ -13,6 +13,7 @@
     "start": "better-npm-run start",
     "debug": "better-npm-run debug",
     "lint": "npx eslint --ext .jsx,.js,.tsx,.ts --config ./eslint.config.js --fix src/",
+    "migrate": "node -r esm ./node_modules/.bin/knex migrate:latest",
     "pretest": "npm run lint",
     "test": "tsc"
   },
@@ -51,6 +52,7 @@
     "core-js": "^3.1.4",
     "dayjs": "^1.8.15",
     "es6-promise": "^4.2.8",
+    "esm": "^3.2.25",
     "fs-extra": "^8.1.0",
     "fxa-common-password-list": "0.0.3",
     "history": "^4.9.0",
@@ -96,6 +98,7 @@
     "regenerator-runtime": "^0.13.2",
     "serialize-javascript": "^1.7.0",
     "sharp": "^0.23.0",
+    "ts-node": "^8.3.0",
     "uuid": "^3.3.2",
     "whatwg-fetch": "^3.0.0"
   },
@@ -161,6 +164,7 @@
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-module-resolver": "^3.2.0",
+    "babel-preset-node6": "^11.0.0",
     "better-npm-run": "^0.1.1",
     "case-sensitive-paths-webpack-plugin": "^2.2.0",
     "clean-webpack-plugin": "^0.1.19",

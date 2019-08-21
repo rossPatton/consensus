@@ -1,5 +1,23 @@
-exports.up = async knex => {
+import Knex from 'knex';
+
+exports.up = async (knex: Knex) => {
   await knex.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
+
+  // each column in the directory table cooresponds to a directory
+  // ie, the url /us should give a directory of all the states in the us
+  // the url /us/ny should give a directory of all cities in ny
+  // and the url /us/ny/nyc should give a director of all organization in nyc
+  await knex.schema.createTable('directories', table => {
+    table.increments().unsigned().primary();
+
+    // initial launch === US only for now
+    table.string('country').notNullable().defaultTo('United States');
+    table.string('state').notNullable();
+    table.string('city').notNullable();
+
+    table.timestamp('createdAt').defaultTo(knex.fn.now());
+    table.timestamp('updatedAt').defaultTo(knex.fn.now());
+  });
 
   await knex.schema.createTable('users', table => {
     table.increments().unsigned().primary();
@@ -132,7 +150,8 @@ exports.up = async knex => {
   });
 };
 
-exports.down = async knex => {
+exports.down = async (knex: Knex) => {
+  await knex.schema.dropTable('directories');
   await knex.schema.dropTable('decision_types');
   await knex.schema.dropTable('decisions');
   await knex.schema.dropTable('events');

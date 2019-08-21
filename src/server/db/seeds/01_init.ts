@@ -2,6 +2,11 @@ require('dotenv').config();
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const faker = require('faker');
+const utils = require('../../utils');
+const states = require('../../json/usa/states.json');
+const cities = require('../../json/usa/cities.json');
+console.log('utils => ', utils);
+console.log('states => ', states);
 const { PEPPER } = process.env;
 
 function encrypt(input) {
@@ -44,6 +49,14 @@ const slugify = string => {
 };
 
 const salt = bcrypt.genSaltSync(10);
+
+const createDirectory = async (row) => {
+  return {
+    country: row.country,
+    state: row.state,
+    city: row.city,
+  };
+};
 
 const createUser = async () => {
   const sha = sha384(faker.internet.password());

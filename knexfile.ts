@@ -1,4 +1,7 @@
 require('dotenv').config();
+require('ts-node/register');
+// require('@babel/register');
+
 const path = require('path');
 const Knex = require('knex');
 
@@ -7,8 +10,8 @@ const IS_DEV = process.env.NODE_ENV !== 'production';
 const migrations = path.join(CWD, 'src', 'server', 'db', 'migrations');
 const seeds = path.join(CWD, 'src', 'server', 'db', 'seeds');
 
-const poolMin = parseInt(process.env.DB_POOL_MIN, 0) || 1;
-const poolMax = parseInt(process.env.DB_POOL_MAX, 0) || 10;
+const poolMin = parseInt(process.env.DB_POOL_MIN as string, 0) || 1;
+const poolMax = parseInt(process.env.DB_POOL_MAX as string, 0) || 10;
 
 module.exports = {
   development: {

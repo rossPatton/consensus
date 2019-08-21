@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { sha384 } from '.';
 
-// takes a text input (usually a password) and returned an encrypted salted hash
+// takes a text input (usually a password) and returned a salted hash
 export const saltedHash = async (plaintextPW: string) => {
   // bycrypt truncates long inputs -
   // so this first hash just converts our string to a fixed length
