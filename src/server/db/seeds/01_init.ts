@@ -1,43 +1,12 @@
 require('dotenv').config();
-const crypto = require('crypto');
-const bcrypt = require('bcryptjs');
-const faker = require('faker');
-const utils = require('../../utils');
-const states = require('../../json/usa/states.json');
-const cities = require('../../json/usa/cities.json');
-console.log('utils => ', utils);
-console.log('states => ', states);
-const { PEPPER } = process.env;
+import Knex from 'knex';
+import bcrypt from 'bcryptjs';
+import faker from 'faker';
+import { encrypt, sha384 } from '../../utils';
+// import states from '../../json/usa/states.json';
+// import cities from '../../json/usa/cities.json';
 
-function encrypt(input) {
-  const IV = Buffer.from(crypto.randomBytes(16));
-  const cipher = crypto.createCipheriv('AES-256-CTR', PEPPER, IV);
-  cipher.setEncoding('base64');
-  cipher.write(input);
-  cipher.end();
-
-  const cipherText = cipher.read();
-
-  return `${cipherText}!${IV.toString('base64')}`;
-}
-
-function decrypt(input) {
-  let result;
-  const [cipherText, IV] = input.split('!');
-  const buffIV = Buffer.from(IV, 'base64');
-  const decipher = crypto.createDecipheriv('AES-256-CTR', PEPPER, buffIV);
-  result = decipher.update(cipherText, 'base64', 'utf8');
-  result += decipher.final('utf8');
-  return result;
-}
-
-const sha384 = (input) => {
-  const hasher = crypto.createHash('SHA384');
-  hasher.update(input);
-  return hasher.digest('base64');
-};
-
-const slugify = string => {
+export const slugify = (string: string): string => {
   if (typeof string !== 'string') return string;
 
   return string
@@ -48,9 +17,10 @@ const slugify = string => {
     .trim();
 };
 
+// in production, salt would be generated per hash, but this saves time
 const salt = bcrypt.genSaltSync(10);
 
-const createDirectory = async (row) => {
+const createDirectory = async (row: any) => {
   return {
     country: row.country,
     state: row.state,
@@ -130,13 +100,13 @@ const createEvent = async () => {
   };
 };
 
-const createUserOrgRelation = async i => ({
+const createUserOrgRelation = async (i: number) => ({
   userId: i,
   orgId: 100,
   role: 'admin',
 });
 
-const createUserEventRelation = async (u, e) => {
+const createUserEventRelation = async (u: number, e: number) => {
   // random bool for going
   const didAttend = faker.random.boolean();
 
@@ -173,7 +143,7 @@ const createDecisionTypes = () => ([
   { type: 'Approval' },
 ]);
 
-const createDecision = async (i) => {
+const createDecision = async (i: number) => {
   const type = i % 2 === 0 ? 'Simple Majority' : 'Approval';
   const data = type === 'Simple Majority'
     ? {
@@ -225,12 +195,12 @@ const createDecision = async (i) => {
   };
 };
 
-const createUserDecisionRelation = async (i) => ({
+const createUserDecisionRelation = async (i: number) => ({
   decisionId: i,
   userId: 100,
 });
 
-exports.seed = async (knex, Promise) => {
+exports.seed = async (knex: Knex) => {
   const fakeEvents = [];
   const fakeUsers = [];
   const fakeOrgs = [];
