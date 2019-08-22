@@ -3,17 +3,50 @@ import Knex from 'knex';
 exports.up = async (knex: Knex) => {
   await knex.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
 
+  // a region === a state, or a province, or some other way of parsing geographical
+  // information that is smaller than a country but larger than a city
+  await knex.schema.createTable('countries', table => {
+    table.increments().unsigned().primary();
+
+    // United States
+    table.string('name').notNullable();
+    // USA
+    table.string('code').notNullable();
+
+    table.timestamp('createdAt').defaultTo(knex.fn.now());
+    table.timestamp('updatedAt').defaultTo(knex.fn.now());
+  });
+
+  // a region === a state, or a province, or some other way of parsing geographical
+  // information that is smaller than a country but larger than a city
+  await knex.schema.createTable('regions', table => {
+    table.increments().unsigned().primary();
+
+    // if state, name would be New York
+    table.string('name').notNullable();
+    // if state, code would be NY
+    table.string('code').notNullable();
+
+    // in this case, the US since we have no other options atm
+    table.integer('country').notNullable().references('countries.id');
+
+    table.timestamp('createdAt').defaultTo(knex.fn.now());
+    table.timestamp('updatedAt').defaultTo(knex.fn.now());
+  });
+
   // each column in the directory table cooresponds to a directory
   // ie, the url /us should give a directory of all the states in the us
   // the url /us/ny should give a directory of all cities in ny
   // and the url /us/ny/nyc should give a director of all organization in nyc
-  await knex.schema.createTable('directories', table => {
+  await knex.schema.createTable('cities', table => {
     table.increments().unsigned().primary();
 
-    // initial launch === US only for now
-    table.string('country').notNullable().defaultTo('United States');
-    table.string('state').notNullable();
-    table.string('city').notNullable();
+    // New York City
+    // name is not id, since many cities have same name
+    table.string('name').notNullable();
+
+    table.integer('country').notNullable().references('countries.id');
+    table.integer('region').notNullable().references('regions.id');
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.timestamp('updatedAt').defaultTo(knex.fn.now());
@@ -28,6 +61,13 @@ exports.up = async (knex: Knex) => {
     table.string('fname');
     table.string('lname');
     table.string('username').notNullable();
+
+    // optional - allow user to set their primary city
+    // on login, take user to directory for that location
+    table.integer('city').references('cities.id');
+
+    // user's preferred language
+    table.string('language').defaultTo('en');
 
     table.timestamp('lastActive').defaultTo(knex.fn.now());
     table.timestamp('createdAt').defaultTo(knex.fn.now());
@@ -151,7 +191,9 @@ exports.up = async (knex: Knex) => {
 };
 
 exports.down = async (knex: Knex) => {
-  await knex.schema.dropTable('directories');
+  await knex.schema.dropTable('cities');
+  await knex.schema.dropTable('regions');
+  await knex.schema.dropTable('countries');
   await knex.schema.dropTable('decision_types');
   await knex.schema.dropTable('decisions');
   await knex.schema.dropTable('events');

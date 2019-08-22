@@ -3,8 +3,8 @@ import Knex from 'knex';
 import bcrypt from 'bcryptjs';
 import faker from 'faker';
 import { encrypt, sha384 } from '../../utils';
-// import states from '../../json/usa/states.json';
-// import cities from '../../json/usa/cities.json';
+import stateMap from '../../json/usa/stateCodeMap.json';
+import cities from '../../json/usa/cities.json';
 
 export const slugify = (string: string): string => {
   if (typeof string !== 'string') return string;
@@ -19,14 +19,6 @@ export const slugify = (string: string): string => {
 
 // in production, salt would be generated per hash, but this saves time
 const salt = bcrypt.genSaltSync(10);
-
-const createDirectory = async (row: any) => {
-  return {
-    country: row.country,
-    state: row.state,
-    city: row.city,
-  };
-};
 
 const createUser = async () => {
   const sha = sha384(faker.internet.password());
@@ -48,6 +40,7 @@ const createTestUser = async () => {
   const password = encrypt(saltedHash);
 
   return {
+    city: 3658, // New York City
     email: 'test@test.com',
     fname: 'test',
     lname: 'user',
@@ -81,7 +74,6 @@ const createOrg = async () => {
 
 const createEvent = async () => {
   const orgName = faker.company.companyName();
-  const slug = slugify(orgName);
 
   return {
     category: faker.company.bsNoun(),
@@ -244,6 +236,45 @@ exports.seed = async (knex: Knex) => {
   for (h; h <= 100; h++) {
     fakeUserDecisionRelations.push(await createUserDecisionRelation(h));
   }
+
+  const regions = [];
+
+  // in our case, just states for now
+  const createRegion = (key: string, value: any) => ({
+    code: key,
+    country: 1, // United States basically
+    name: value,
+  });
+
+  for (const [key, value] of Object.entries(stateMap)) {
+    regions.push(createRegion(key, value));
+  }
+
+  // only country supported atm
+  const createUSA = async () => ({
+    code: 'USA',
+    name: 'United States',
+  });
+
+  const statesByName = Object.keys(stateMap);
+  const createCity = (row: any) => {
+    // arr index is 0 based, db is 1 based
+    const region = statesByName.findIndex(state => state === row.state) + 1;
+    return {
+      name: row.city,
+      region,
+      country: 1, // United States basically
+    };
+  };
+
+  await knex('countries').del();
+  await knex('countries').insert(await createUSA());
+
+  await knex('regions').del();
+  await knex('regions').insert(regions);
+
+  await knex('cities').del();
+  await knex('cities').insert(cities.map(createCity));
 
   // we delete all rows from our tables to get a clean slate
   // if a previous migration or seed ran and it errored, you might to reset

@@ -20,6 +20,7 @@
     "esModuleInterop": true,
     // we very often have unused params - no point in checking params that aren't used
     "noUnusedParameters": true,
+    "resolveJsonModule": true,
     "sourceMap": false,
     "baseUrl": ".",
   },
