@@ -79,7 +79,7 @@ declare type tOrgRouteParams = {
   org: string,
   page?: string,
   section?: string,
-  state: string;
+  region: string;
 };
 
 declare type tUser = {

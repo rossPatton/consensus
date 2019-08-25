@@ -1,7 +1,7 @@
 import { memoize } from 'redux-memoize';
 import { Dispatch } from 'redux';
 
-import { agent } from '../../../utils';
+import { agent, objToQueryString } from '../../../utils';
 
 import {
   getOrgBegin,
@@ -9,10 +9,7 @@ import {
   getOrgFailure,
 } from './actions';
 
-
 export const getOrg = memoize({ ttl: 300 }, (params: tOrgRouteParams) => {
-  const { country, state, city, org } = params;
-
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getOrgBegin());
 
@@ -21,9 +18,11 @@ export const getOrg = memoize({ ttl: 300 }, (params: tOrgRouteParams) => {
         'https://127.0.0.1:3001/api/v1/org' :
         '/api/v1/org';
 
-      const qs = `${prefix}?country=${country}&state=${state}&city=${city}&slug=${org}`;
+      const {section, page, ...restParams} = params;
+      const qs = objToQueryString(restParams as any);
+
       // @ts-ignore
-      const result = await fetch(qs, { agent });
+      const result = await fetch(`${prefix}?${qs}&client=true`, { agent });
       const json = await result.json();
       return dispatch(getOrgSuccess(json));
     } catch (err) {

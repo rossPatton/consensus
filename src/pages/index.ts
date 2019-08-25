@@ -1,5 +1,6 @@
 // 1 Folder === 1 Route
 // A route can have sub-routes (see Organization)
+export { Directory } from './Directory';
 export { Event } from './Event';
 export { Home } from './Home';
 export { Login } from './Login';

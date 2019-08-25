@@ -10,7 +10,13 @@ export const Breadcrumbs = memo(() => (
     </li>
     <li className="mHide mR1">/</li>
     <li className="mR1">
-      <Link to="/us/ny/nyc">
+      <Link to="/us/ny">
+        New York
+      </Link>
+    </li>
+    <li className="mHide mR1">/</li>
+    <li className="mR1">
+      <Link to="/us/ny/new-york-city">
         New York City
       </Link>
     </li>

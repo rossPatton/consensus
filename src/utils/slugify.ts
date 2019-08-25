@@ -15,3 +15,16 @@ export const slugify = (string: string): string => {
     .toLowerCase()
     .trim();
 };
+
+// takes output of above, and returns human friendly string
+// new-york-city => New York City
+export const deSlugify = (string: string): string => {
+  if (typeof string !== 'string') return string;
+
+  return string
+    .replace(/-+/gm, ' ')
+    .split(' ')
+    .map(word => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
+    .join(' ')
+    .trim();
+};

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
+import { notNull } from '../../utils';
 import { tContainerProps } from './_types';
 import { EventsComponent } from './Component';
 
@@ -13,6 +14,13 @@ import { EventsComponent } from './Component';
 export class EventsContainer extends PureComponent<tContainerProps> {
   mergeEventsWithRSVPs(events: tEvent[], session: tSession) {
     return events.map(ev => {
+      // if private event, and user is not logged in, hide
+      // if private event, user is logged in, but user is not a member, hide
+      if (ev.isPrivate) {
+        if (!session.isAuthenticated) return null;
+        // TODO check for roles here too
+      }
+
       const match = _.find(session.rsvps, rsvp => ev.id === rsvp.eventId);
 
       if (match && (match.status.isGoing || match.status.didAttend)) {
@@ -23,7 +31,7 @@ export class EventsContainer extends PureComponent<tContainerProps> {
       }
 
       return ev;
-    });
+    }).filter(notNull);
   }
 
   render() {

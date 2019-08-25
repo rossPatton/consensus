@@ -9,5 +9,5 @@ export { objToQueryString } from './objToQueryString';
 export { padDate } from './padDate';
 export { parseISOLocalString } from './parseISOLocalString';
 export { parseTimeString } from './parseTimeString';
-export { slugify } from './slugify';
+export { deSlugify, slugify } from './slugify';
 export { utcToDateString } from './utcToDateString';

@@ -78,16 +78,17 @@ exports.up = async (knex: Knex) => {
     table.increments().unsigned().primary();
 
     table.string('category').notNullable();
-    table.string('city').notNullable();
-    table.string('country').notNullable();
-    table.integer('count').unsigned().notNullable().defaultTo(0);
+    table.integer('membershipTotal').unsigned().notNullable().defaultTo(0);
     table.text('description', 'longtext').notNullable();
     table.string('email').notNullable();
     table.string('orgName').notNullable();
     table.string('slug').notNullable();
     table.string('password').notNullable();
-    table.string('state').notNullable();
     table.string('username').notNullable();
+
+    table.integer('city').notNullable().references('cities.id');
+    table.integer('country').notNullable().references('countries.id');
+    table.integer('region').notNullable().references('regions.id');
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.timestamp('updatedAt').defaultTo(knex.fn.now());

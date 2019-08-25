@@ -59,38 +59,34 @@ const createOrg = async () => {
 
   return {
     category: faker.lorem.word(),
-    city: faker.address.city(),
-    count: faker.random.number(),
-    country: faker.address.country(),
+    city: 3658,
+    country: 1,
     description: faker.lorem.paragraphs(),
     email: faker.internet.exampleEmail(),
+    membershipTotal: faker.random.number(),
     orgName,
     password,
+    region: 37,
     slug,
-    state: faker.address.state(),
     username: faker.internet.userName(),
   };
 };
 
-const createEvent = async () => {
-  const orgName = faker.company.companyName();
-
-  return {
-    category: faker.company.bsNoun(),
-    date: faker.date.future(),
-    description: faker.lorem.paragraphs(),
-    // endDate === duration, since users can have custom durations this is a timestamp
-    // we convert the 1hr, 2hr etc values to timestamps as well
-    endDate: faker.date.future(),
-    goingCount: faker.random.number(),
-    isPrivate: faker.random.boolean(),
-    location: faker.address.streetAddress(),
-    locationLink: faker.internet.url(),
-    orgId: 100,
-    orgName: 'Tech Workers Coalition NYC',
-    title: faker.company.bs(),
-  };
-};
+const createEvent = async () => ({
+  category: faker.company.bsNoun(),
+  date: faker.date.future(),
+  description: faker.lorem.paragraphs(),
+  // endDate === duration, since users can have custom durations this is a timestamp
+  // we convert the 1hr, 2hr etc values to timestamps as well
+  endDate: faker.date.future(),
+  goingCount: faker.random.number(),
+  isPrivate: faker.random.boolean(),
+  location: faker.address.streetAddress(),
+  locationLink: faker.internet.url(),
+  orgId: 100,
+  orgName: 'Tech Workers Coalition NYC',
+  title: faker.company.bs(),
+});
 
 const createUserOrgRelation = async (i: number) => ({
   userId: i,
@@ -117,16 +113,16 @@ const createTWC = async () => {
 
   return {
     category: 'Tech and Science Activism',
-    city: 'nyc',
-    count: 1789,
-    country: 'us',
+    city: 3658,
+    country: 1,
     description: faker.lorem.paragraphs(),
     email: 'techworkerscoalitionnyc@gmail.com',
+    membershipTotal: 1789,
     orgName: 'Tech Workers Coalition NYC',
     password,
+    region: 37,
     slug: 'tech-workers-coalition',
-    state: 'ny',
-    username: 'twc-ny',
+    username: 'twcNYC',
   };
 };
 
@@ -241,9 +237,9 @@ exports.seed = async (knex: Knex) => {
 
   // in our case, just states for now
   const createRegion = (key: string, value: any) => ({
-    code: key,
+    code: value,
     country: 1, // United States basically
-    name: value,
+    name: key,
   });
 
   for (const [key, value] of Object.entries(stateMap)) {
@@ -252,7 +248,7 @@ exports.seed = async (knex: Knex) => {
 
   // only country supported atm
   const createUSA = async () => ({
-    code: 'USA',
+    code: 'us',
     name: 'United States',
   });
 
