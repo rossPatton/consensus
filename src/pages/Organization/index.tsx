@@ -21,6 +21,7 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
   render() {
     const { org, session } = this.props;
     const role = getUserRole(session, org);
+    console.log('org props => ', this.props);
 
     return (
       <>

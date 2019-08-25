@@ -1,6 +1,6 @@
 import { memoize } from 'redux-memoize';
 import { Dispatch } from 'redux';
-import { agent } from '../../../utils';
+import { agent, objToQueryString } from '../../../utils';
 
 import {
   getEventsByOrgBegin,
@@ -17,17 +17,12 @@ export const getEventsByOrg = memoize({ ttl: 300 }, (queryObj: tIdQuery) => {
       '/api/v1/eventsByOrg';
 
     try {
-      const { exclude, id, limit, offset } = queryObj;
-
-      const query = `?id=${id}`;
-      // exclude === an id we don't want to include in the results
-      const excludeStr = exclude ? `&exclude=${exclude}` : '';
-      const limitStr = limit ? `&limit=${limit}` : '';
-      const offsetStr = offset ? `&offset=${offset}` : '';
-      const qs = `${prefix}${query}${excludeStr}${limitStr}${offsetStr}`;
+      const qs = objToQueryString(queryObj as any);
+      console.log('queryObj => ', queryObj);
+      console.log('events by org query => ', `${prefix}?${qs}`);
 
       // @ts-ignore
-      const result = await fetch(qs, { agent });
+      const result = await fetch(`${prefix}?${qs}`, {agent});
       const json = await result.json();
       return dispatch(getEventsByOrgSuccess(json));
     } catch (err) {

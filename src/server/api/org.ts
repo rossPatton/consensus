@@ -14,13 +14,19 @@ org.get('org', '/api/v1/org', async (ctx: Koa.Context) => {
     region: regionCode,
   } = ctx.query;
 
-  const country = await knex('countries')
-    .limit(1).where({code: countryCode}).first();
+  console.log('ctx.query => ', ctx.query);
+
+  const country = await knex('countries').limit(1)
+    .where({code: countryCode}).first();
+
+  console.log('country => ', country);
 
   const region = await knex('regions').limit(1).where({
     country: country.id,
-    code: regionCode.toUpperCase(),
+    code: regionCode,
   }).first();
+
+  console.log('region => ', region);
 
   const cityName = deSlugify(citySlug);
   const city = await knex('cities').limit(1).where({
@@ -29,16 +35,28 @@ org.get('org', '/api/v1/org', async (ctx: Koa.Context) => {
     name: cityName,
   }).first();
 
+  console.log('city => ', city);
+  console.dir({
+    country: country.id,
+    city: city.id,
+    region: region.id,
+    slug: orgSlug,
+  });
+
+  const org = await knex('orgs')
+    .limit(1)
+    .where({
+      country: country.id,
+      city: city.id,
+      region: region.id,
+      slug: orgSlug,
+    })
+    .first();
+
+  console.log('org => ', org);
+
   try {
-    ctx.body = await knex('orgs')
-      .limit(1)
-      .where({
-        country: country.id,
-        city: city.id,
-        region: region.id,
-        slug: orgSlug,
-      })
-      .first();
+    ctx.body = org;
   } catch (err) {
     ctx.throw('400', err);
   }

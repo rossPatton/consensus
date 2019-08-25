@@ -1,4 +1,4 @@
-export { Breadcrumbs } from './Breadcrumbs/Component';
+export { Breadcrumbs } from './Breadcrumbs';
 export { Decisions } from './Decisions';
 export { Events } from './Events';
 export { ExternalLink } from './ExternalLink';

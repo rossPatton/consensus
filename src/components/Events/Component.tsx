@@ -4,9 +4,9 @@ import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { getRandomNum } from '../../utils';
 import { ExternalLink } from '../../components';
-import { tComponentProps } from './_types';
+import { tProps } from './_types';
 
-export const EventsComponent = memo((props: tComponentProps) => (
+export const EventsComponent = memo((props: tProps) => (
   <ul>
     {props.events.map((ev, i) => (
       <li key={i} className="brdA1 br8 mB3 p3 fx">
@@ -107,26 +107,30 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 )}
               </>
             )}
-            {ev.isPrivate && (
+            {props.session.isAuthenticated && (
               <small className="bgYellowLite br4 p1 pL2 pR2">
-                <span
-                  role="img"
-                  className="mR1"
-                  aria-label="Lock Emoji">
-                  🔒
-                </span>
-                Private Event
-              </small>
-            )}
-            {!ev.isPrivate && (
-              <small className="bgGreenLite br4 p1 pL2 pR2">
-                <span
-                  role="img"
-                  className="mR1"
-                  aria-label="Tada Emoji">
-                  🎉
-                </span>
-                Public Event
+                {ev.isPrivate && (
+                  <>
+                    <span
+                      role="img"
+                      className="mR1"
+                      aria-label="Lock Emoji">
+                      🔒
+                    </span>
+                    Private Event
+                  </>
+                )}
+                {!ev.isPrivate && (
+                  <>
+                    <span
+                      role="img"
+                      className="mR1"
+                      aria-label="Tada Emoji">
+                      🎉
+                    </span>
+                    Public Event
+                  </>
+                )}
               </small>
             )}
           </div>

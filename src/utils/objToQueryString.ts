@@ -4,7 +4,7 @@ export const objToQueryString = (obj: tObj): string => {
   if (obj instanceof Array) return '';
 
   return Object.keys(obj).map(k => {
-    if (!obj[k]) return '';
+    if (typeof obj[k] === 'undefined') return '';
     return `${k}=${obj[k]}`;
   })
     .filter(s => !!s)

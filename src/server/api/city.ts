@@ -21,7 +21,7 @@ city.get('city', '/api/v1/city', async (ctx: Koa.ParameterizedContext) => {
 
     const region = await knex('regions').limit(1).where({
       country: country.id,
-      code: regionCode.toUpperCase(),
+      code: regionCode,
     }).first();
 
     const cityName = deSlugify(citySlug);

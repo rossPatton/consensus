@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { Link } from 'react-router-dom';
 
-import { getRegion } from '../../../../redux';
+import { getCountry, getRegion } from '../../../../redux';
 import { slugify } from '../../../../utils';
 
 export class RegionContainer extends PureComponent<any> {
   constructor(props: any) {
     super(props);
+    if (!props.country.name) props.getCountry(props.match.params);
     props.getRegion(props.match.params);
   }
 
@@ -40,10 +41,12 @@ export class RegionContainer extends PureComponent<any> {
 
 const mapStateToProps = (state: any) => ({
   isLoading: state.region.isLoading,
+  country: state.country.data,
   region: state.region.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
+  getCountry: (params: any) => dispatch(getCountry(params)),
   getRegion: (params: any) => dispatch(getRegion(params)),
 });
 

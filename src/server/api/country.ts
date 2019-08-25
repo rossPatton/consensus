@@ -12,7 +12,7 @@ country.get('country', '/api/v1/country', async (ctx: Koa.ParameterizedContext) 
     const { country: code } = query;
 
     const country = await knex('countries').limit(1).where({code}).first();
-    const regions = await knex('regions').where({country: country.id});
+    const regions = await knex('regions').where({country: 1});
 
     ctx.body = {
       ...country,

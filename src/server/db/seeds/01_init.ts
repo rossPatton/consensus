@@ -2,20 +2,10 @@ require('dotenv').config();
 import Knex from 'knex';
 import bcrypt from 'bcryptjs';
 import faker from 'faker';
+import { slugify } from '../../../utils/slugify';
 import { encrypt, sha384 } from '../../utils';
 import stateMap from '../../json/usa/stateCodeMap.json';
 import cities from '../../json/usa/cities.json';
-
-export const slugify = (string: string): string => {
-  if (typeof string !== 'string') return string;
-
-  return string
-    .replace(/\s+|\/+/gm, '-') // spaces and / => -
-    .replace(/('|\(|\)|\.)+|#+|'+/gm, '') // '#' and () and ' => ''
-    .replace(/-+/gm, '-') // repeating '-'s
-    .toLowerCase()
-    .trim();
-};
 
 // in production, salt would be generated per hash, but this saves time
 const salt = bcrypt.genSaltSync(10);
@@ -121,7 +111,7 @@ const createTWC = async () => {
     orgName: 'Tech Workers Coalition NYC',
     password,
     region: 37,
-    slug: 'tech-workers-coalition',
+    slug: 'tech-workers-coalition-nyc',
     username: 'twcNYC',
   };
 };
@@ -237,7 +227,7 @@ exports.seed = async (knex: Knex) => {
 
   // in our case, just states for now
   const createRegion = (key: string, value: any) => ({
-    code: value,
+    code: value.toLowerCase(),
     country: 1, // United States basically
     name: key,
   });

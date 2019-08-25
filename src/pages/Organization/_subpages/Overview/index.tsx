@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
@@ -7,15 +7,20 @@ import { Helmet } from '../../../../components';
 import { tContainerProps, tStore } from './_types';
 import { OverviewComponent } from './Component';
 
-export class OverviewContainer extends PureComponent<tContainerProps> {
+export class OverviewContainer extends Component<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
 
+    if (props.org.id === 0) return;
+
+    // only show public events if user is not signed in
+    const isPublic = !props.session.isAuthenticated;
+
     if (props.events.length > 0) return;
-    props.getEventsByOrg({id: props.org.id});
+    props.getEventsByOrg({id: props.org.id, isPublic, limit: -1});
 
     if (props.decisions.length > 0) return;
-    props.getDecisionsByOrg({id: props.org.id});
+    props.getDecisionsByOrg({id: props.org.id, isPublic, limit: -1});
   }
 
   render() {

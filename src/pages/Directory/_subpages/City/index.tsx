@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { Link } from 'react-router-dom';
 
-import { getCity } from '../../../../redux';
+import { getCity, getCountry, getRegion } from '../../../../redux';
 import { slugify } from '../../../../utils';
 
 export class CityContainer extends PureComponent<any> {
   constructor(props: any) {
     super(props);
+    if (!props.country.name) props.getCountry(props.match.params);
+    if (!props.region.name) props.getRegion(props.match.params);
     props.getCity(props.match.params);
   }
 
@@ -41,10 +43,14 @@ export class CityContainer extends PureComponent<any> {
 const mapStateToProps = (state: any) => ({
   isLoading: state.city.isLoading,
   city: state.city.data,
+  country: state.country.data,
+  region: state.region.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getCity: (params: any) => dispatch(getCity(params)),
+  getCountry: (params: any) => dispatch(getCountry(params)),
+  getRegion: (params: any) => dispatch(getRegion(params)),
 });
 
 export const City = connect(

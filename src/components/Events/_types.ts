@@ -1,9 +1,6 @@
-export type tComponentProps = {
+export type tProps = {
   events: tEvent[],
+  session: tSession,
   // render mobile/sidebar version
   tiny?: boolean,
-};
-
-export type tContainerProps = tComponentProps & {
-  session: tSession,
 };

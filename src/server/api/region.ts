@@ -16,7 +16,7 @@ region.get('region', '/api/v1/region', async (ctx: Koa.ParameterizedContext) => 
 
     const region = await knex('regions').limit(1).where({
       country: country.id,
-      code: regionCode.toUpperCase(),
+      code: regionCode,
     }).first();
 
     const cities = await knex('cities').where({

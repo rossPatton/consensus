@@ -19,10 +19,12 @@ export const getOrg = memoize({ ttl: 300 }, (params: tOrgRouteParams) => {
         '/api/v1/org';
 
       const {section, page, ...restParams} = params;
+      console.log('restParams => ', restParams);
       const qs = objToQueryString(restParams as any);
+      console.log('qs => ', qs);
 
       // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}&client=true`, { agent });
+      const result = await fetch(`${prefix}?${qs}`, {agent});
       const json = await result.json();
       return dispatch(getOrgSuccess(json));
     } catch (err) {
