@@ -20,13 +20,9 @@ user.get('getUser', '/api/v1/user', async (ctx: Koa.Context) => {
 // user signup form basically
 // @ts-ignore
 user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
-  // TODO this form/ajax stuff should probably just be a middleware
-  const { query } = ctx;
-  const { body } = ctx.request;
-  const isFormSubmit = _.isEmpty(query) && !_.isEmpty(body);
-  const data: tUser = isFormSubmit ? body : query;
-
+  const {data} = ctx.state.locals;
   const pwInput = data.password;
+
   let hashedPW: string;
   try {
     hashedPW = await saltedHash(pwInput);
@@ -47,7 +43,7 @@ user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
     ctx.throw(400, 'Failed to insert user into db');
   }
 
-  if (!isFormSubmit) {
+  if (!data.isFormSubmit) {
     const { password, ...safeUserForClient } = userResult[0];
     ctx.status = 200;
     ctx.body = safeUserForClient;
@@ -60,11 +56,7 @@ user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
 // TODO no-js forms only do GET/POST - figure out how to make patches work w/o js
 // @ts-ignore
 user.patch('patchUser', '/api/v1/user', async (ctx: Koa.Context) => {
-  // TODO this form/ajax stuff should probably just be a middleware
-  const { query } = ctx;
-  const { body } = ctx.request;
-  const isFormSubmit = _.isEmpty(query) && !_.isEmpty(body);
-  const data = isFormSubmit ? body : query;
+  const {data} = ctx.state.locals;
 
   let user = null;
   try {
@@ -95,7 +87,7 @@ user.patch('patchUser', '/api/v1/user', async (ctx: Koa.Context) => {
     ctx.throw('400', err);
   }
 
-  if (isFormSubmit) return;
+  if (data.isFormSubmit) return;
 
   const {password, ...safeUserForClient} = updatedUser[0];
   ctx.body = {

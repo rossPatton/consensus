@@ -7,7 +7,7 @@ export const event = new Router();
 // @ts-ignore
 event.get('getEventById', '/api/v1/event', async (ctx: Koa.Context) => {
   try {
-    const { id } = ctx.query;
+    const {id} = ctx.query;
     const event: tEvent = await knex('events').where({id}).limit(1).first();
     ctx.body = event;
   } catch (err) {

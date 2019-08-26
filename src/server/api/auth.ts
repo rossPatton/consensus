@@ -51,7 +51,7 @@ auth.post('user login', '/auth/login', async (ctx: Koa.Context, next) => {
       rsvps,
     };
 
-    const isFormSubmit = _.isEmpty(ctx.query) && !_.isEmpty(ctx.request.body);
+    const {isFormSubmit} = ctx.state.locals.data;
     if (isFormSubmit) return ctx.redirect('/admin');
 
     ctx.status = 200;
@@ -63,7 +63,7 @@ auth.post('user login', '/auth/login', async (ctx: Koa.Context, next) => {
 // @ts-ignore
 auth.get('logout', '/auth/logout', async (ctx: Koa.Context, next) => {
   return passport.authenticate('local', () => {
-    const isFormSubmit = _.isEmpty(ctx.query) && !_.isEmpty(ctx.request.body);
+    const {isFormSubmit} = ctx.state.locals.data;
     const isAuthenticated = ctx.isAuthenticated();
 
     if (!isAuthenticated) return ctx.throw(400, 'You are not logged in');

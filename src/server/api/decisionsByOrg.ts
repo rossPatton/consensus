@@ -40,34 +40,3 @@ decisionsByOrg.get('decisions', '/api/v1/decisionsByOrg', async (ctx: Koa.Contex
   }
 });
 
-// get authentication status + active session data
-// const passport = await ctx.redis.get(ctx.session._sessCtx.externalKey);
-// // get user/org session. this object is determined by our serialization strategy
-// const passportSession = _.get(passport, 'passport.user', null);
-
-// // if user is logged in, we merge in relevant user data using their session id
-// if (passportSession) {
-//   // use 3rd table to get relation between users and events
-//   const userEventRelations = await knex('users_events')
-//     .where({ userId: passportSession.id });
-
-//   const eventsWithDatesAndUserRSVPData = userEventRelations.map(rel => {
-//     const matchingEvent = _.find(eventsWithMappedDates, (ev) => ev.id === rel.eventId);
-
-//     if (!matchingEvent) return null;
-
-//     return {
-//       ...matchingEvent,
-//       session: {
-//         attended: rel.attended,
-//         isGoing: rel.going,
-//         isInterested: rel.interested,
-//         isNotGoing: rel.notGoing,
-//       },
-//     };
-//   }).filter(ev => !!ev);
-
-//   ctx.body = eventsWithDatesAndUserRSVPData;
-// } else {
-//   ctx.body = decisionsWithMappedDates;
-// }

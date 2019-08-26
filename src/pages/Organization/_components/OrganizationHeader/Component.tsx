@@ -22,7 +22,9 @@ export const OrganizationHeaderComponent = memo((props: tComponentProps) => {
   return (
     <header className="bgGrey2 pT3 pB3">
       <div className="contain">
-        <Breadcrumbs crumbs={crumbs} />
+        {props.org.name && (
+          <Breadcrumbs crumbs={crumbs} />
+        )}
         <h1>
           {props.org.name}
         </h1>

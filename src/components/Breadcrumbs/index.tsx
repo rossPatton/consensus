@@ -3,12 +3,13 @@ import {Link} from 'react-router-dom';
 import {tProps} from './_types';
 
 export const Breadcrumbs = memo((props: tProps) => {
-  const {crumbs = []} = props;
+  if (!props.crumbs) return null;
+  if (!(props.crumbs instanceof Array)) return null;
 
   return (
     <ul className="fs6 fw600 mB2 lh1 lsNone fx fxWrap brdB1 mB3 pB3">
-      {crumbs.map((crumb: tCrumb, i) => {
-        const isLastItem = i === crumbs.length - 1;
+      {props.crumbs.map((crumb: tCrumb, i) => {
+        const isLastItem = i === props.crumbs.length - 1;
         const renderLink = !isLastItem && crumb.to;
 
         return (

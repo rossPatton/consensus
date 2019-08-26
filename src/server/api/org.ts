@@ -13,7 +13,7 @@ org.get('org', '/api/v1/org', async (ctx: Koa.Context) => {
     country: countryCode,
     org: orgSlug,
     region: regionCode,
-  } = ctx.query;
+  } = ctx.state.locals.data;
 
   let country: tCountry;
   try {
