@@ -23,22 +23,15 @@
       "comment": "This script runs the same thing as dev, but with all loggers and tooling enabled and set to the debug level. This generates far more console output. Alternatively, you can search the codebase for the __DEBUG__ webpack var and toggle loggers one by one.",
       "command": "npm run build && concurrently \"webpack-dev-server --config webpack/\" \"DEBUG=koa* node --max-old-space-size=8192 --inspect ./dist/server.js\"",
       "env": {
-        "DB_POOL_MIN": 5,
-        "DB_POOL_MAX": 10,
         "DEBUG": true,
-        "NODE_ENV": "development",
-        "UV_THREADPOOL_SIZE": 100
+        "NODE_ENV": "development"
       }
     },
     "start": {
       "comment": "This script bundles the initial build then starts up the dev server and localhost concurrently together. TODO get dev server fucking working jesus",
       "command": "npm run build && concurrently \"webpack --watch --config webpack/\" \"nodemon --max-old-space-size=8192 ./dist/server.js\"",
       "env": {
-        "DB_POOL_MIN": 5,
-        "DB_POOL_MAX": 10,
-        "DEBUG": false,
-        "NODE_ENV": "development",
-        "UV_THREADPOOL_SIZE": 100
+        "NODE_ENV": "development"
       }
     }
   },
@@ -46,24 +39,19 @@
     "@koa/cors": "^2.2.3",
     "@loadable/component": "^5.10.2",
     "@types/redis": "^2.8.13",
-    "bcrypt": "^3.0.6",
     "bcryptjs": "^2.4.3",
     "classnames": "^2.2.6",
-    "co-busboy": "^1.4.0",
     "core-js": "^3.1.4",
     "dayjs": "^1.8.15",
     "es6-promise": "^4.2.8",
-    "esm": "^3.2.25",
     "fs-extra": "^8.1.0",
     "fxa-common-password-list": "0.0.3",
     "history": "^4.9.0",
     "iltorb": "^2.4.3",
     "isomorphic-fetch": "^2.2.1",
-    "js-sha256": "^0.9.0",
     "knex": "^0.19.0",
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.1",
-    "koa-compose": "^4.1.0",
     "koa-compress": "^3.0.0",
     "koa-connect": "^2.0.1",
     "koa-ctx-cache-control": "^1.0.1",
@@ -78,7 +66,6 @@
     "koa-session": "^5.12.2",
     "koa-sslify": "^4.0.3",
     "koa-static": "^5.0.0",
-    "koa2-cors": "^2.0.6",
     "lodash": "^4.17.15",
     "loglevel": "^1.6.3",
     "passport": "^0.4.0",
@@ -100,8 +87,7 @@
     "serialize-javascript": "^1.7.0",
     "sharp": "^0.23.0",
     "ts-node": "^8.3.0",
-    "uuid": "^3.3.2",
-    "whatwg-fetch": "^3.0.0"
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
@@ -120,7 +106,6 @@
     "@hot-loader/react-dom": "^16.8.6",
     "@loadable/babel-plugin": "^5.10.0",
     "@loadable/webpack-plugin": "^5.7.1",
-    "@types/bcrypt": "^3.0.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/classnames": "^2.2.9",
     "@types/faker": "^4.1.5",
@@ -184,18 +169,16 @@
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-react-hooks": "^1.6.1",
     "eslint-plugin-security": "^1.4.0",
+    "esm": "^3.2.25",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "faker": "^4.1.0",
     "file-loader": "^1.1.11",
     "friendly-errors-webpack-plugin": "^1.7.0",
-    "install": "^0.13.0",
     "jest": "^24.8.0",
-    "koa-jsonp": "^2.0.2",
     "koa-logger": "^3.2.0",
     "koa-webpack": "^3.0.2",
     "nib": "^1.1.2",
     "nodemon": "^1.19.1",
-    "npm": "^6.10.2",
     "postcss-unique-selectors": "^4.0.1",
     "postcss-warn-cleaner": "^0.1.9",
     "poststylus": "^1.0.0",
@@ -205,7 +188,6 @@
     "style-loader": "^0.20.2",
     "stylus-loader": "^3.0.2",
     "supertest": "^4.0.2",
-    "svgo": "^1.3.0",
     "svgo-loader": "^2.2.1",
     "typescript": "^3.5.3",
     "uglifyjs-webpack-plugin": "^1.2.2",

@@ -55,7 +55,7 @@ export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
     this.setState(initialState);
   }
 
-  updateState = (stateKey: tStateUnion, ev: any) => {
+  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
     this.setState({
       [stateKey]: ev.currentTarget.value,
     } as Pick<tState, tStateUnion>);

@@ -54,7 +54,7 @@ export const SignupComponent = memo((props: tComponentProps) => (
           errors={props.errors}
           password={props.password}
           placeholder="correct_horse_battery_staple"
-          onChange={(ev: any) => props.updateState('password', ev)}
+          onChange={ev => props.updateState('password', ev)}
         />
         <button
           disabled={props.disabled}

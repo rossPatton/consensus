@@ -1,5 +1,6 @@
 import { match } from 'react-router';
 
 export type tProps = {
-  match: match & { params: tLocationParams },
+  match: match & {params: tOrgRouteParams},
+  subRoute: string,
 };

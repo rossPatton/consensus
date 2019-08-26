@@ -81,7 +81,7 @@ exports.up = async (knex: Knex) => {
     table.integer('membershipTotal').unsigned().notNullable().defaultTo(0);
     table.text('description', 'longtext').notNullable();
     table.string('email').notNullable();
-    table.string('orgName').notNullable();
+    table.string('name').notNullable();
     table.string('slug').notNullable();
     table.string('password').notNullable();
     table.string('username').notNullable();

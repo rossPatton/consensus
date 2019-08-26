@@ -8,20 +8,17 @@ import {
   getCountryFailure,
 } from './actions';
 
-export const getCountry = memoize({ttl: 300}, (params: any) => {
+export const getCountry = memoize({ttl: 300}, (params: tLocationParams) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getCountryBegin());
 
-    const prefix = __DEV__ ?
-      'https://127.0.0.1:3001/api/v1/country' :
-      '/api/v1/country';
-
     try {
+      const prefix = `${__URL__}/api/v1/country`;
       const qs = objToQueryString(params);
 
       // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, {agent})
-        .then((response: any) => {
+        .then((response: tFetchResponse) => {
           if (!response.ok) throw response;
           return response.json();
         });

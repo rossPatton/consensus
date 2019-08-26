@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 
-import { PasswordInputComponent } from './Component';
+import {tProps, tState} from './_types';
+import {PasswordInputComponent} from './Component';
 
-export class PasswordInput extends PureComponent<any, any> {
+export class PasswordInput extends PureComponent<tProps, tState> {
   state = {
     showPW: false,
   };

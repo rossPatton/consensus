@@ -1,21 +1,22 @@
 import React, { memo } from 'react';
 import cx from 'classnames';
+import {tComponentProps} from './_types';
 
-export const PasswordInputComponent = memo((props: any) => {
+export const PasswordInputComponent = memo((props: tComponentProps) => {
   const len = props.password.length;
-  const { errors = {} } = props;
+  const {errors = {}, name = 'password'} = props;
   const hasError = errors.password && errors.password.length > 0;
 
   return (
     <>
-      <label htmlFor={props.id}>
+      <label htmlFor={`${props.id}`}>
         <h2 className="ffLab fs5 mB1 lh1">
           {props.title || 'Password'}
         </h2>
         <div className="fx mB2">
           <input
             id={props.id}
-            name={props.name || 'password'}
+            name={name}
             autoComplete={props.newPassword ? 'new-password' : 'on'}
             required={props.required}
             placeholder={props.placeholder}

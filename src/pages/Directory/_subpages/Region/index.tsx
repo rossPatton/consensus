@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { Link } from 'react-router-dom';
 
-import { getCountry, getRegion } from '../../../../redux';
-import { slugify } from '../../../../utils';
+import {getCountry, getRegion} from '../../../../redux';
+import {slugify} from '../../../../utils';
+import {tProps, tStore} from './_types';
 
-export class RegionContainer extends PureComponent<any> {
-  constructor(props: any) {
+export class RegionContainer extends PureComponent<tProps> {
+  constructor(props: tProps) {
     super(props);
     if (!props.country.name) props.getCountry(props.match.params);
     props.getRegion(props.match.params);
@@ -20,8 +21,11 @@ export class RegionContainer extends PureComponent<any> {
         <h1 className="mB3">
           {region.name}
         </h1>
+        <h2 className="mB2 fs3">
+          Cities in {region.name}
+        </h2>
         <ul className="fx fxWrap">
-          {region.cities.map((city: any, i: number) => (
+          {region.cities && region.cities.map((city: tCity, i) => (
             <li
               key={i}
               className="col"
@@ -39,15 +43,15 @@ export class RegionContainer extends PureComponent<any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
-  isLoading: state.region.isLoading,
-  country: state.country.data,
-  region: state.region.data,
+const mapStateToProps = (store: tStore) => ({
+  isLoading: store.region.isLoading,
+  country: store.country.data,
+  region: store.region.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  getCountry: (params: any) => dispatch(getCountry(params)),
-  getRegion: (params: any) => dispatch(getRegion(params)),
+  getCountry: (params: tLocationParams) => dispatch(getCountry(params)),
+  getRegion: (params: tLocationParams) => dispatch(getRegion(params)),
 });
 
 export const Region = connect(

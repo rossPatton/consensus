@@ -141,7 +141,7 @@ export const AdminEventComponent = memo((props: tComponentProps) => (
             checked={props.isPrivate}
           />
           {props.isPrivate && (
-            <span>Yes, only show this event to {props.org.orgName} members.</span>
+            <span>Yes, only show this event to {props.org.name} members.</span>
           )}
           {!props.isPrivate && (
             <span>No, and I understand that anyone can see this event.</span>

@@ -13,10 +13,7 @@ export const updateUser = memoize({ ttl: 300 }, (user: tUser) => {
     dispatch(updateUserBegin());
 
     try {
-      const prefix = __DEV__ ?
-        'https://127.0.0.1:3001/api/v1/user' :
-        '/api/v1/user';
-
+      const prefix = `${__URL__}/api/v1/user`;
       const qs = objToQueryString(user);
 
       // we do it this way so errors can bubble properly to our middleware
@@ -27,7 +24,7 @@ export const updateUser = memoize({ ttl: 300 }, (user: tUser) => {
         credentials: __DEV__ ? 'include' : 'same-origin',
         method: 'PATCH',
       })
-        .then((response: any) => {
+        .then((response: tFetchResponse) => {
           if (!response.ok) throw response;
           return response.json();
         });

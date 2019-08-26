@@ -1,7 +1,8 @@
-import React, { memo } from 'react';
-import { Link } from 'react-router-dom';
+import React, {memo} from 'react';
+import {Link} from 'react-router-dom';
+import {tProps} from './_types';
 
-export const Tab = memo((props: any) => {
+export const Tab = memo((props: tProps) => {
   const { match, subRoute = '' } = props;
   const { country, city, region, org, section } = match.params;
   const to = `/${country}/${region}/${city}/${org}/${subRoute}`;
@@ -16,7 +17,9 @@ export const Tab = memo((props: any) => {
   }
 
   return (
-    <Link to={to} className={`${cx} hvrBgGrey3 trans1`}>
+    <Link
+      to={to}
+      className={`${cx} hvrBgGrey3 trans1`}>
       {subRoute}
     </Link>
   );

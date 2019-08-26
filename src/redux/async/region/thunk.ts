@@ -8,20 +8,17 @@ import {
   getRegionFailure,
 } from './actions';
 
-export const getRegion = memoize({ttl: 300}, (params: any) => {
+export const getRegion = memoize({ttl: 300}, (params: tLocationParams) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getRegionBegin());
 
-    const prefix = __DEV__ ?
-      'https://127.0.0.1:3001/api/v1/region' :
-      '/api/v1/region';
-
     try {
+      const prefix = `${__URL__}/api/v1/region`;
       const qs = objToQueryString(params);
 
       // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, { agent })
-        .then((response: any) => {
+        .then((response: tFetchResponse) => {
           if (!response.ok) throw response;
           return response.json();
         });

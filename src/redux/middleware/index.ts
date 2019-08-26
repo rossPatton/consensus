@@ -9,11 +9,11 @@ const requiredMiddleware = [
   crashReporter,
   logger,
   // ttl here is the default, can override thunk by thunk
-  createMemoizeMiddleware({ ttl: 100 }),
+  createMemoizeMiddleware({ttl: 100}),
 ];
 
 // some middleware we only want to include in development
 // in this case, immutableStateVariant will warn us of mutating state in redux
-export const middleware = process.env.NODE_ENV === 'development' ?
+export const middleware = __DEV__ ?
   [...requiredMiddleware, reduxImmutableStateVariant()] :
   [...requiredMiddleware];

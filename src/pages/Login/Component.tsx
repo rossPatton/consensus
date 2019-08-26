@@ -31,7 +31,7 @@ export const LoginComponent = memo((props: tComponentProps) => (
         id="pwInput"
         password={props.password}
         placeholder="your_very_secure_password_here"
-        onChange={(ev: any) => props.updateState('password', ev)}
+        onChange={ev => props.updateState('password', ev)}
       />
       <button
         disabled={props.isClient && (!props.password || !props.username)}

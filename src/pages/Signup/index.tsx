@@ -67,7 +67,7 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
     return this.props.authenticateSession({username, password});
   }
 
-  updateState = (stateKey: tStateUnion, ev: any) => {
+  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
     this.setState({
       [stateKey]: ev.currentTarget.value,
     } as Pick<tState, tStateUnion>, this.checkErrors);

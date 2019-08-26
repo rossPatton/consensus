@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { tProps } from './_types';
 
 export const Paginate = memo((props: tProps) => {
-  const { match, count = 10, items = [] } = props;
+  const { match, count = 10, total = 10 } = props;
   const { params, url } = match;
 
   const activePage = params.page ? parseInt(params.page, 0) : 1;
 
   // a _.range equivalent. sort of
-  const pageCount = Math.ceil(items.length / count);
+  const pageCount = Math.ceil(total / count);
   const pages = Array(pageCount).fill(null);
 
   return (

@@ -110,7 +110,7 @@ export const EventComponent = memo(({ event, events }: tComponentProps) => (
         {events && events.length > 0 && (
           <>
             <h2 className="fs5 mB3 ffLab lh1">
-            More by {event.orgName}
+            More by {event.name}
             </h2>
             <Events events={events} tiny />
           </>

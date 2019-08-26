@@ -15,18 +15,17 @@ org.get('org', '/api/v1/org', async (ctx: Koa.Context) => {
     region: regionCode,
   } = ctx.query;
 
-  // id is just here to shut typescript up
-  let country = {id: 0};
+  let country: tCountry;
   try {
     country = await knex('countries')
       .limit(1)
       .where({code: countryCode})
       .first();
   } catch (err) {
-    ctx.throw(400, err);
+    return ctx.throw(400, err);
   }
 
-  let region = {id: 0};
+  let region: tRegion;
   try {
     region = await knex('regions')
       .limit(1)
@@ -36,10 +35,10 @@ org.get('org', '/api/v1/org', async (ctx: Koa.Context) => {
       })
       .first();
   } catch (err) {
-    ctx.throw(400, err);
+    return ctx.throw(400, err);
   }
 
-  let city = {id: 0};
+  let city: tCity;
   try {
     const cityName = deSlugify(citySlug);
     city = await knex('cities')
@@ -51,10 +50,10 @@ org.get('org', '/api/v1/org', async (ctx: Koa.Context) => {
       })
       .first();
   } catch (err) {
-    ctx.throw(400, err);
+    return ctx.throw(400, err);
   }
 
-  let org = {};
+  let org: tOrg;
   try {
     org = await knex('orgs')
       .limit(1)
@@ -66,11 +65,7 @@ org.get('org', '/api/v1/org', async (ctx: Koa.Context) => {
       })
       .first();
   } catch (err) {
-    ctx.throw(400, err);
-  }
-
-  if (_.isEmpty(org)) {
-    ctx.throw(500, 'Failed to fetch organization');
+    return ctx.throw(400, err);
   }
 
   ctx.body = org;

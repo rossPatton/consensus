@@ -28,7 +28,7 @@ export class LoginContainer extends Component<tProps, tState> {
     return this.props.authenticateSession({username, password});
   }
 
-  updateState = (stateKey: tStateUnion, ev: any) => {
+  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
     this.setState({
       [stateKey]: ev.currentTarget.value,
     } as Pick<tState, tStateUnion>);

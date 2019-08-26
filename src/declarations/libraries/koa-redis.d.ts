@@ -12,7 +12,7 @@ import { stores } from 'koa-session';
 
 declare module 'koa-redis' {
   export interface RedisOptions extends ClientOpts {
-    client?: any;
+    // client?: any;
     duplicate?: boolean;
   }
 

@@ -7,18 +7,25 @@ export const country = new Router();
 
 // @ts-ignore
 country.get('country', '/api/v1/country', async (ctx: Koa.ParameterizedContext) => {
+  const {query}: tLocationQueryServer = ctx;
+  const {country: code = ''} = query;
+
+  let country: tCountry;
   try {
-    const { query }: any = ctx;
-    const { country: code } = query;
-
-    const country = await knex('countries').limit(1).where({code}).first();
-    const regions = await knex('regions').where({country: 1});
-
-    ctx.body = {
-      ...country,
-      regions,
-    };
+    country = await knex('countries').limit(1).where({code}).first();
   } catch (err) {
-    ctx.throw('400', err);
+    return ctx.throw('400', err);
   }
+
+  let regions: tRegion[];
+  try {
+    regions = await knex('regions').where({country: 1});
+  } catch (err) {
+    return ctx.throw('400', err);
+  }
+
+  ctx.body = {
+    ...country,
+    regions,
+  };
 });

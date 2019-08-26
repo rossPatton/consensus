@@ -6,6 +6,9 @@ export const DecisionsComponent = memo((props: tComponentProps) => (
   <>
     <h2 className="mB2">Decision Archive</h2>
     <Decisions decisions={props.decisionsToRender} />
-    <Paginate match={props.match} items={props.allDecisions} />
+    <Paginate
+      match={props.match}
+      total={props.allDecisions.length}
+    />
   </>
 ));

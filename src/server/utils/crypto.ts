@@ -8,10 +8,7 @@ export const encrypt = (input: string) => {
   cipher.setEncoding('base64');
   cipher.write(input);
   cipher.end();
-
-  const cipherText = cipher.read();
-
-  return `${cipherText}!${IV.toString('base64')}`;
+  return `${cipher.read()}!${IV.toString('base64')}`;
 };
 
 export const decrypt = (input: string) => {

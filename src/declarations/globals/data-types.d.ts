@@ -11,7 +11,7 @@ declare interface tAction<T, P = undefined> {
 }
 
 declare type tApprovalData = {
-  choices: { count: number, label: string }[],
+  choices: {count: number, label: string}[],
   winners: number,
 };
 
@@ -22,11 +22,10 @@ declare type tSimpleMajorityData = {
 }
 
 declare type tDecision = {
-  id: number,
-
   data: any,
   date: string,
   description: string,
+  id: number,
   minutes: string,
   orgId: number,
   rationale: string,
@@ -37,7 +36,6 @@ declare type tDecision = {
 // TODO need to rethink how to split up event types
 // creating an event, event schema in db, not logged in event
 declare type tPublicEvent = {
-  id: number,
   category: string,
   city: string,
   country: string,
@@ -45,11 +43,12 @@ declare type tPublicEvent = {
   description: string,
   endDate: string,
   goingCount: number,
+  id: number,
   isPrivate: boolean,
   location: string,
   locationLink: string,
+  name: string,
   orgId: number,
-  orgName: string,
   slug: string,
   state: string,
   title: string,
@@ -61,25 +60,32 @@ declare type tEvent = tPublicEvent & {
 }
 
 declare type tOrg = {
-  id: number,
   category: string,
   city: string,
   country: string,
   description: string,
   email: string,
-  orgName: string,
+  id: number,
+  membershipTotal: number,
+  name: string,
   slug: string,
   state: string,
   username: string,
 };
 
-declare type tOrgRouteParams = {
-  city: string,
-  country: string,
+type tLocationParams = {
+  city?: string,
+  country?: string,
+  region?: string,
+};
+
+declare type tOrgRouteParams = tLocationParams & {
+  // city: string,
+  // country: string,
   org: string,
   page?: string,
   section?: string,
-  region: string;
+  // region: string;
 };
 
 declare type tUser = {
@@ -159,7 +165,7 @@ declare type tRoute = {
 };
 
 // typical id-based db query
-type tIdQuery = {
+declare type tIdQuery = {
   // exclude an id, or something else
   exclude?: number,
   // id to search by
@@ -171,7 +177,7 @@ type tIdQuery = {
 };
 
 // once the above values are passed to the server, they become strings
-type tIdQueryServer = {
+declare type tIdQueryServer = {
   query: {
     exclude?: string,
     id: string,
@@ -179,4 +185,29 @@ type tIdQueryServer = {
     limit?: string,
     offset?: string,
   }
+};
+
+declare type tLocationQueryServer = {
+  query: tLocationParams,
+};
+
+declare type tCountry = {
+  code: string, // us
+  id: number,
+  name: string, // United States
+  regions?: tRegion[],
+};
+
+declare type tRegion = tCountry & {
+  cities?: tCity[],
+  country: number, // country.id
+};
+
+declare type tCity = tRegion & {
+  orgs?: tOrg[],
+  region, // region.id
+};
+
+declare interface tFetchResponse<T = any> extends Response {
+  json<P = T>(): Promise<P>
 };

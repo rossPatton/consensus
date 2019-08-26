@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import dayJS from 'dayjs';
 
-import { getDateNowAsISOStr, parseTimeString, notNull } from '../../../../utils';
-import { createEvent, fileUpload } from '../../../../redux';
+import { getDateNowAsISOStr, parseTimeString } from '../../../../utils';
+import { createEvent } from '../../../../redux';
 import { getEventsByOrgSuccess } from '../../../../redux/async/getEventsByOrg/actions';
 import { Helmet } from '../../../../components';
-import { tContainerProps, tState, tStateUnion, tStore } from './_types';
+import { tContainerProps, tCreateEvent, tState, tStateUnion, tStore } from './_types';
 import { AdminEventComponent } from './Component';
 
 export class AdminEventContainer extends Component<tContainerProps, tState> {
@@ -69,7 +69,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     const endDate = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
     endDate.hour(endDate.hour() + parseInt(duration, 10));
 
-    let newEvent = null;
+    let newEvent: tEvent;
     try {
       const createEvent = await this.props.createEvent({
         ...restOfEvent,
@@ -81,7 +81,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
 
       newEvent = createEvent.payload;
     } catch (err) {
-      console.error('failed to save event to db');
+      return console.error('failed to save event to db');
     }
 
     const body = new FormData();
@@ -91,7 +91,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
 
       if (files !== null) {
         body.append('featuredImage', files[0]);
-        body.append('eventId', newEvent.id);
+        body.append('eventId', `${newEvent.id}`);
       }
     }
 
@@ -112,14 +112,14 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     });
   }
 
-  updateState = (stateKey: tStateUnion, ev: any) => {
+  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
     this.setState({
       [stateKey]: ev.currentTarget.value,
     } as Pick<tState, tStateUnion>);
   }
 
   render() {
-    const { session } = this.props;
+    const {session} = this.props;
 
     return (
       <>
@@ -149,13 +149,13 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (state: tStore) => ({
-  events: state.events.data,
-  session: state.session.data,
+const mapStateToProps = (store: tStore) => ({
+  events: store.events.data,
+  session: store.session.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  createEvent: (event: tState) => dispatch(createEvent(event)),
+  createEvent: (event: tCreateEvent) => dispatch(createEvent(event)),
 });
 
 export const AdminEvent = connect(

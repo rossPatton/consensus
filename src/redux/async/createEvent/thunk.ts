@@ -13,18 +13,15 @@ export const createEvent = memoize({ ttl: 300 }, (event: tPublicEvent) => {
     dispatch(createEventBegin());
 
     try {
-      const prefix = __DEV__ ?
-        'https://127.0.0.1:3001/api/v1/event' :
-        '/api/v1/event';
-
+      const prefix = `${__URL__}/api/v1/event`;
       const qs = objToQueryString(event);
 
-      const result = await fetch(`${prefix}?${qs}&client=true`, {
+      const result = await fetch(`${prefix}?${qs}`, {
         // @ts-ignore
         agent,
         method: 'POST',
       })
-        .then((response: any) => {
+        .then((response: tFetchResponse) => {
           if (!response.ok) throw response;
           return response.json();
         });

@@ -1,5 +1,5 @@
 import Koa from 'koa';
-import cors from 'koa2-cors';
+import cors from '@koa/cors';
 
 // avoid CORS horrors in dev mode, enable for prod
 export const corsMiddleware = async (app: Koa) => {

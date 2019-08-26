@@ -7,15 +7,15 @@ import { utcToDateString } from '../../utils';
 export const decisionsByOrg = new Router();
 
 const getDecisions = async (ctx: Koa.Context) => {
-  const { query }: tIdQueryServer = ctx;
-  const { id, limit, offset } = query;
+  const {query}: tIdQueryServer = ctx;
+  const {id, limit, offset} = query;
 
   const orgId = parseInt(id, 10);
   const parsedLimit = limit ? parseInt(limit, 10) : 3;
   const parsedOffset = offset ? parseInt(offset, 10) : 0;
 
   const decisions = knex('decisions')
-    .where({ orgId })
+    .where({orgId})
     .orderBy('date', 'desc');
 
   if (parsedLimit > 0) decisions.limit(parsedLimit);

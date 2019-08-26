@@ -13,10 +13,7 @@ export const fileUpload = memoize({ ttl: 300 }, (event: tPublicEvent) => {
     dispatch(fileUploadBegin());
 
     try {
-      const prefix = __DEV__ ?
-        'https://127.0.0.1:3001/api/v1/fileUpload' :
-        '/api/v1/fileUpload';
-
+      const prefix = `${__URL__}/api/v1/fileUpload`;
       const qs = objToQueryString(event);
 
       // @ts-ignore
@@ -25,7 +22,7 @@ export const fileUpload = memoize({ ttl: 300 }, (event: tPublicEvent) => {
         agent,
         method: 'POST',
       })
-        .then((response: any) => {
+        .then((response: tFetchResponse) => {
           if (!response.ok) throw response;
           return response.json();
         });

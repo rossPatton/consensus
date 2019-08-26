@@ -8,10 +8,10 @@ const env = require('./webpack.env');
 const srcPath = (subdir) => path.join(env.CWD, 'src', subdir);
 
 module.exports = {
-  devtool: env.IS_DEV ? 'cheap-module-source-map' : undefined,
+  devtool: env.DEV ? 'cheap-module-source-map' : undefined,
 
   // do it this way so that debug mode works
-  mode: !env.IS_PROD ? 'development' : 'production',
+  mode: !env.PROD ? 'development' : 'production',
   stats: env.stats,
 
   resolve: {
@@ -110,10 +110,10 @@ module.exports = {
     // server only globals should go in webpack.server
     new webpack.DefinePlugin({
       __DEBUG__: !!env.DEBUG,
-      __DEV__: !!env.IS_DEV,
-      __PROD__: !!env.IS_PROD,
+      __DEV__: !!env.DEV,
+      __PROD__: !!env.PROD,
       __NODE_ENV__: JSON.stringify(env.NODE_ENV),
-      __URL__: JSON.stringify(env.SERVICE_URL),
+      __URL__: env.DEV ? JSON.stringify(env.SERVICE_URL) : '',
     }),
 
     // force webpack environment to be whatever we set NODE_ENV to, just to be safe

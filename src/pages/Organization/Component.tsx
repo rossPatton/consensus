@@ -11,7 +11,6 @@ export const OrganizationComponent = memo((props: tProps) => (
       org={props.org}
     />
     <OrganizationTabs
-      location={props.location}
       match={props.match}
     />
     <UserBar

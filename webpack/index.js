@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const loglevel = require('loglevel');
 
 loglevel.setDefaultLevel('info');

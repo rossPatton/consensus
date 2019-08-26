@@ -1,12 +1,10 @@
 require('dotenv').config();
 require('ts-node/register');
-// require('@babel/register');
 
 const path = require('path');
 const Knex = require('knex');
 
 const CWD = process.cwd();
-const IS_DEV = process.env.NODE_ENV !== 'production';
 const migrations = path.join(CWD, 'src', 'server', 'db', 'migrations');
 const seeds = path.join(CWD, 'src', 'server', 'db', 'seeds');
 

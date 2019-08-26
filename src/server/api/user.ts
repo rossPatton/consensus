@@ -24,23 +24,23 @@ user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
   const { query } = ctx;
   const { body } = ctx.request;
   const isFormSubmit = _.isEmpty(query) && !_.isEmpty(body);
-  const data = isFormSubmit ? body : query;
+  const data: tUser = isFormSubmit ? body : query;
 
-  const pwInput: string = data.password;
-  let hashedPW = pwInput;
+  const pwInput = data.password;
+  let hashedPW: string;
   try {
     hashedPW = await saltedHash(pwInput);
   } catch (err) {
-    ctx.throw(400, err);
+    return ctx.throw(400, err);
   }
 
-  let userResult = [];
+  let userResult: tUser[];
   try {
     const { email, username } = data;
     const newUser = { email, username, password: encrypt(hashedPW) };
     userResult = await knex('users').insert(newUser).returning('*').limit(1);
   } catch (err) {
-    ctx.throw(400, err);
+    return ctx.throw(400, err);
   }
 
   if (userResult.length === 0) {

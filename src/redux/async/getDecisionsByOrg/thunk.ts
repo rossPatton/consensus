@@ -12,16 +12,13 @@ export const getDecisionsByOrg = memoize({ ttl: 300 }, (queryObj: tIdQuery) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getDecisionsByOrgBegin());
 
-    const prefix = __DEV__ ?
-      'https://127.0.0.1:3001/api/v1/decisionsByOrg' :
-      '/api/v1/decisionsByOrg';
-
     try {
-      const qs = objToQueryString(queryObj as any);
+      const prefix = `${__URL__}/api/v1/decisionsByOrg`;
+      const qs = objToQueryString(queryObj);
 
       // @ts-ignore
-      const result = await fetch(`${prefix}${qs}`, {agent})
-        .then((response: any) => {
+      const result = await fetch(`${prefix}?${qs}`, {agent})
+        .then((response: tFetchResponse) => {
           if (!response.ok) throw response;
           return response.json();
         });

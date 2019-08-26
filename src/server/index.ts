@@ -9,7 +9,7 @@ import './passport';
 
 import http from 'http';
 import https from 'https';
-import fs from 'fs';
+import fs from 'fs-extra';
 import Koa from 'koa';
 import passport from 'koa-passport';
 import loglevel from 'loglevel';

@@ -13,18 +13,15 @@ export const registerUser = memoize({ ttl: 300 }, (user: tUser) => {
     dispatch(registerUserBegin());
 
     try {
-      const prefix = __DEV__ ?
-        'https://127.0.0.1:3001/api/v1/user' :
-        '/api/v1/user';
-
+      const prefix = `${__URL__}/api/v1/user`;
       const qs = objToQueryString(user);
 
       // we do it this way so errors can bubble properly to our middleware
-      const result = await fetch(`${prefix}?${qs}&client=true`, {
+      const result = await fetch(`${prefix}?${qs}`, {
         // @ts-ignore
         agent,
         method: 'POST',
-      }).then((response: any) => {
+      }).then((response: tFetchResponse) => {
         if (!response.ok) throw response;
         return response.json();
       });

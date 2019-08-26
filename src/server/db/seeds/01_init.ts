@@ -40,8 +40,8 @@ const createTestUser = async () => {
 };
 
 const createOrg = async () => {
-  const orgName = faker.company.companyName();
-  const slug = slugify(orgName);
+  const name = faker.company.companyName();
+  const slug = slugify(name);
 
   const sha = sha384(faker.internet.password());
   const saltedHash = await bcrypt.hash(sha, salt);
@@ -54,7 +54,7 @@ const createOrg = async () => {
     description: faker.lorem.paragraphs(),
     email: faker.internet.exampleEmail(),
     membershipTotal: faker.random.number(),
-    orgName,
+    name,
     password,
     region: 37,
     slug,
@@ -108,7 +108,7 @@ const createTWC = async () => {
     description: faker.lorem.paragraphs(),
     email: 'techworkerscoalitionnyc@gmail.com',
     membershipTotal: 1789,
-    orgName: 'Tech Workers Coalition NYC',
+    name: 'Tech Workers Coalition NYC',
     password,
     region: 37,
     slug: 'tech-workers-coalition-nyc',
@@ -226,7 +226,7 @@ exports.seed = async (knex: Knex) => {
   const regions = [];
 
   // in our case, just states for now
-  const createRegion = (key: string, value: any) => ({
+  const createRegion = (key: string, value: string) => ({
     code: value.toLowerCase(),
     country: 1, // United States basically
     name: key,
@@ -243,7 +243,7 @@ exports.seed = async (knex: Knex) => {
   });
 
   const statesByName = Object.keys(stateMap);
-  const createCity = (row: any) => {
+  const createCity = (row: {city: string, state: string}) => {
     // arr index is 0 based, db is 1 based
     const region = statesByName.findIndex(state => state === row.state) + 1;
     return {

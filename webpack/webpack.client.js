@@ -12,7 +12,6 @@ const common = require('./webpack.common.js');
 const env = require('./webpack.env');
 
 module.exports = merge(common, {
-  // devServer: env.IS_DEV ? devServer : undefined,
   target: 'web',
   entry: [
     // 'webpack-dev-server/client?http://0.0.0.0:8080',
@@ -23,7 +22,7 @@ module.exports = merge(common, {
   output: {
     filename: 'main.js',
     path: path.join(env.CWD, 'dist'),
-    crossOriginLoading: env.IS_DEV ? 'anonymous' : false,
+    crossOriginLoading: env.DEV ? 'anonymous' : false,
   },
 
   optimization: {

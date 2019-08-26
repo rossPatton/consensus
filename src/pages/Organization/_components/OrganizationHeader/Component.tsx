@@ -7,7 +7,7 @@ export const OrganizationHeaderComponent = memo((props: tComponentProps) => (
     <div className="contain">
       <Breadcrumbs />
       <h1>
-        {props.org.orgName}
+        {props.org.name}
       </h1>
     </div>
   </header>

@@ -1,6 +1,6 @@
-import { memoize } from 'redux-memoize';
-import { Dispatch } from 'redux';
-import { agent } from '../../../utils';
+import {memoize} from 'redux-memoize';
+import {Dispatch} from 'redux';
+import {agent, objToQueryString} from '../../../utils';
 
 import {
   getUsersBegin,
@@ -14,13 +14,12 @@ export const getUsers = memoize({ttl: 300},
       dispatch(getUsersBegin());
 
       try {
-        const prefix = __DEV__ ?
-          'https://127.0.0.1:3001/api/v1/users' :
-          '/api/v1/users';
+        const prefix = `${__URL__}/api/v1/users`;
+        const qs = objToQueryString({limit, offset});
 
         // @ts-ignore
-        const result = await fetch(`${prefix}?limit=${limit}&offset=${offset}`, {agent})
-          .then((response: any) => {
+        const result = await fetch(`${prefix}?${qs}`, {agent})
+          .then((response: tFetchResponse) => {
             if (!response.ok) throw response;
             return response.json();
           });

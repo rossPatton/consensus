@@ -13,11 +13,16 @@ export class EventContainer extends PureComponent<tProps> {
     super(props);
     const { id } = props.match.params;
 
-    props.getEventById({id}).then((res: any) => {
-      // for rendering the 'more by orgName' sidebar
+    props.getEventById({id})
+      .then((res: {payload: tEvent}) => {
+      // for rendering the 'more by name' sidebar
       // TODO it shouldn't get the current event being looked at
-      return props.getEventsByOrg({id: res.payload.orgId, exclude: id});
-    }).catch(console.error);
+        return props.getEventsByOrg({
+          id: res.payload.orgId,
+          exclude: id,
+        });
+      })
+      .catch(console.error);
   }
 
   render() {

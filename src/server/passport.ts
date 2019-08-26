@@ -9,16 +9,15 @@ const opts = {};
 // users should be able to change any of their personal info, including usernames
 // their internal id should be the only value that is constant
 
-passport.serializeUser((unsafeUser: tUser, done: any) => {
+passport.serializeUser((unsafeUser: tUser, done) => {
   const { password, ...user } = unsafeUser;
   return done(null, user);
 });
 
-type tDone = (err: Error | null, data: tUser | null) => void;
-passport.deserializeUser(async (savedUser: tUser, done: tDone) => {
+passport.deserializeUser(async (savedUser: tUser, done) => {
   try {
-    const { id } = savedUser;
-    const user = await knex('users').where({id}).first();
+    const {id} = savedUser;
+    const user: tUser = await knex('users').where({id}).first();
     return done(null, user);
   } catch (err) {
     return done(err, null);
@@ -26,9 +25,9 @@ passport.deserializeUser(async (savedUser: tUser, done: tDone) => {
 });
 
 passport.use(new LocalStrategy(opts, async (username, pw, done) => {
-  let user: any = {};
+  let user: tUser;
   try {
-    user = await knex('users').where({username}).limit(1).first();
+    user = await knex('users').limit(1).where({username}).first();
   } catch (err) {
     return done(err, false);
   }
