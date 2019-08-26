@@ -42,13 +42,14 @@ region.get('region', '/api/v1/region', async (ctx: Koa.ParameterizedContext) => 
       .where({
         country: country.id,
         region: region.id,
-      });
+      })
+      .orderBy('name', 'asc');
   } catch (err) {
     return ctx.throw('400', err);
   }
 
   ctx.body = {
     ...region,
-    cities,
+    cities: _.uniqBy(cities, city => city.name),
   };
 });

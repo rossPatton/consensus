@@ -49,14 +49,17 @@ const createOrg = async () => {
 
   return {
     category: faker.lorem.word(),
-    city: 3658,
-    country: 1,
+    city: 'New York City',
+    cityId: 3658,
+    country: 'United States',
+    countryId: 1,
     description: faker.lorem.paragraphs(),
     email: faker.internet.exampleEmail(),
     membershipTotal: faker.random.number(),
     name,
     password,
-    region: 37,
+    region: 'New York',
+    regionId: 37,
     slug,
     username: faker.internet.userName(),
   };
@@ -103,14 +106,17 @@ const createTWC = async () => {
 
   return {
     category: 'Tech and Science Activism',
-    city: 3658,
-    country: 1,
+    city: 'New York City',
+    cityId: 3658,
+    country: 'United States',
+    countryId: 1,
     description: faker.lorem.paragraphs(),
     email: 'techworkerscoalitionnyc@gmail.com',
     membershipTotal: 1789,
     name: 'Tech Workers Coalition NYC',
     password,
-    region: 37,
+    region: 'New York',
+    regionId: 37,
     slug: 'tech-workers-coalition-nyc',
     username: 'twcNYC',
   };

@@ -9,6 +9,7 @@ export const OrganizationComponent = memo((props: tProps) => (
   <>
     <OrganizationHeader
       org={props.org}
+      params={props.match.params}
     />
     <OrganizationTabs
       match={props.match}

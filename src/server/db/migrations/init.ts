@@ -86,9 +86,15 @@ exports.up = async (knex: Knex) => {
     table.string('password').notNullable();
     table.string('username').notNullable();
 
-    table.integer('city').notNullable().references('cities.id');
-    table.integer('country').notNullable().references('countries.id');
-    table.integer('region').notNullable().references('regions.id');
+    // display names for ease of breadcrumbs, 99% of what we need on the client usually
+    table.string('city').notNullable();
+    table.string('country').notNullable();
+    table.string('region').notNullable();
+
+    // ease of lookup later
+    table.integer('cityId').notNullable().references('cities.id');
+    table.integer('countryId').notNullable().references('countries.id');
+    table.integer('regionId').notNullable().references('regions.id');
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.timestamp('updatedAt').defaultTo(knex.fn.now());

@@ -12,14 +12,17 @@ const initialState: tThunk<tOrg> = {
   data: {
     category: '',
     city: '',
+    cityId: 0,
     country: '',
+    countryId: 0,
     description: '',
     id: 0,
     email: '',
     membershipTotal: 0,
     name: '',
     slug: '',
-    state: '',
+    region: '',
+    regionId: 0,
     username: '',
   },
 };

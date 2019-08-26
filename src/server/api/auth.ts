@@ -1,8 +1,8 @@
+import _ from 'lodash';
 import Koa from 'koa';
 import Router from 'koa-router';
 import passport from 'koa-passport';
 import { knex } from '../db/connection';
-import { decrypt, encrypt } from '../utils';
 
 export const auth = new Router();
 
@@ -12,46 +12,50 @@ auth.post('user login', '/auth/login', async (ctx: Koa.Context, next) => {
     if (err) ctx.throw(400, err);
     if (!unsafeUser) ctx.throw(400, 'User not found');
 
+    await ctx.login(unsafeUser);
+    const { password, ...safeUser } = unsafeUser;
+
+    let userOrgRels: tUserOrgRelation[];
     try {
-      await ctx.login(unsafeUser);
-      const { password, ...safeUser } = unsafeUser;
-
       // @TODO consolidate this session logic
-      const userOrgRels = await knex('users_orgs').where({userId: safeUser.id});
-      const userEventRels = await knex('users_events').where({userId: safeUser.id});
-
-      const roles = userOrgRels.map((rel: tUserOrgRelation) => ({
-        orgId: rel.orgId,
-        role: rel.role,
-      }));
-
-      const rsvps = userEventRels.map((rel: tUserEventRelation) => ({
-        eventId: rel.eventId,
-        status: {
-          didAttend: rel.didAttend,
-          isGoing: rel.isGoing,
-        },
-      }));
-
-      const isAuthenticated = ctx.isAuthenticated();
-
-      // newSession === session.data on the client, redux adds loading/error keys
-      const newSession: tSession = {
-        ...safeUser,
-        isAuthenticated,
-        roles,
-        rsvps,
-      };
-
-      if (!ctx.query.client) {
-        ctx.redirect('/admin');
-      } else {
-        ctx.status = 200;
-        ctx.body = newSession;
-      }
+      userOrgRels = await knex('users_orgs').where({userId: safeUser.id});
     } catch (err) {
-      ctx.throw('400', err);
+      return ctx.throw(400, err);
     }
+
+    let userEventRels: tUserEventRelation[];
+    try {
+      userEventRels = await knex('users_events').where({userId: safeUser.id});
+    } catch (err) {
+      return ctx.throw(400, err);
+    }
+
+    const roles = userOrgRels.map((rel: tUserOrgRelation) => ({
+      orgId: rel.orgId,
+      role: rel.role,
+    }));
+
+    const rsvps = userEventRels.map((rel: tUserEventRelation) => ({
+      eventId: rel.eventId,
+      status: {
+        didAttend: rel.didAttend,
+        isGoing: rel.isGoing,
+      },
+    }));
+
+    // newSession === session.data on the client, redux adds loading/error keys
+    const newSession: tSession = {
+      ...safeUser,
+      isAuthenticated: ctx.isAuthenticated(),
+      roles,
+      rsvps,
+    };
+
+    const isFormSubmit = _.isEmpty(ctx.query) && !_.isEmpty(ctx.request.body);
+    if (isFormSubmit) return ctx.redirect('/admin');
+
+    ctx.status = 200;
+    ctx.body = newSession;
   })(ctx, next);
 });
 
@@ -59,13 +63,16 @@ auth.post('user login', '/auth/login', async (ctx: Koa.Context, next) => {
 // @ts-ignore
 auth.get('logout', '/auth/logout', async (ctx: Koa.Context, next) => {
   return passport.authenticate('local', () => {
-    if (ctx.isAuthenticated()) {
-      ctx.logout();
-      ctx.redirect('/login');
-    } else {
-      ctx.body = {error: 'You are not logged in'};
-      ctx.throw(401);
-    }
+    const isFormSubmit = _.isEmpty(ctx.query) && !_.isEmpty(ctx.request.body);
+    const isAuthenticated = ctx.isAuthenticated();
+
+    if (!isAuthenticated) return ctx.throw(400, 'You are not logged in');
+
+    ctx.logout();
+    if (isFormSubmit) return ctx.redirect('/login');
+
+    ctx.status = 200;
+    ctx.body = {isAuthenticated: false};
   })(ctx, next);
 });
 

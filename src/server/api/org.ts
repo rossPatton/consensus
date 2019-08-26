@@ -58,9 +58,9 @@ org.get('org', '/api/v1/org', async (ctx: Koa.Context) => {
     org = await knex('orgs')
       .limit(1)
       .where({
-        country: country.id,
-        city: city.id,
-        region: region.id,
+        countryId: country.id,
+        cityId: city.id,
+        regionId: region.id,
         slug: orgSlug,
       })
       .first();

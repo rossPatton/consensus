@@ -6,11 +6,6 @@ import { getUsersByOrg } from '../../../../redux';
 import { tContainerProps, tState } from './_types';
 import { OrganizationHeaderComponent } from './Component';
 
-// TODO this is too much nesting - maybe figure out a less verbose structure
-// basically, this
-// 1- gets basic org info needed for header
-// 2- sets up the shared layout for all sub pages
-// 3 - renders correct sub page based on react router match
 export class OrganizationHeaderContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
@@ -21,6 +16,7 @@ export class OrganizationHeaderContainer extends PureComponent<tContainerProps> 
     return (
       <OrganizationHeaderComponent
         org={this.props.org}
+        params={this.props.params}
       />
     );
   }

@@ -5,6 +5,7 @@ import { compressionMiddleware } from './compression';
 import { contentSecurityPolicyMiddleware } from './contentSecurityPolicy';
 import { corsMiddleware } from './cors';
 import { errorHandlerMiddleware } from './errorHandler';
+import { faviconMiddleware } from './favicon';
 import { featurePolicyMiddleware } from './featurePolicy';
 import { helmetMiddleware } from './helmet';
 import { loggerMiddleware } from './logger';
@@ -37,6 +38,7 @@ export const setupMiddleware = (app: Koa) => {
   responseTimeHeaderMiddleware(app);
 
   // then the misc stuff
+  faviconMiddleware(app);
   loggerMiddleware(app);
   redirectTrailingSlashMiddleware(app);
   staticFileMiddleware(app);

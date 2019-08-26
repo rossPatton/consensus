@@ -35,7 +35,7 @@ city.get('city', '/api/v1/city', async (ctx: Koa.ParameterizedContext) => {
       })
       .first();
   } catch (err) {
-    return ctx.throw('400', err);
+    return ctx.throw(400, err);
   }
 
   const cityName = deSlugify(citySlug);
@@ -50,24 +50,24 @@ city.get('city', '/api/v1/city', async (ctx: Koa.ParameterizedContext) => {
       })
       .first();
   } catch (err) {
-    return ctx.throw('400', err);
+    return ctx.throw(400, err);
   }
 
   let orgs: tOrg[];
   try {
     orgs = await knex('orgs')
       .where({
-        country: country.id,
-        region: region.id,
-        city: city.id,
+        cityId: city.id,
+        countryId: country.id,
+        regionId: region.id,
       })
-      .orderBy('name', 'asc');
+      .orderBy('name');
   } catch (err) {
-    return ctx.throw('400', err);
+    return ctx.throw(400, err);
   }
 
   ctx.body = {
     ...city,
-    orgs,
+    orgs: _.uniqBy(orgs, org => org.name),
   };
 });

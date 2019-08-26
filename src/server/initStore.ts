@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import _ from 'lodash';
-import { initStore } from '../redux/store';
-import { knex } from './db/connection';
+import {initStore} from '../redux/store';
+import {knex} from './db/connection';
 
 // in order to sync our server/client sessions, we have to initalize here
 // pull out passport session info, use to populate the `auth` and `session` state

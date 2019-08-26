@@ -14,9 +14,14 @@ const getDecisions = async (ctx: Koa.Context) => {
   const parsedLimit = limit ? parseInt(limit, 10) : 3;
   const parsedOffset = offset ? parseInt(offset, 10) : 0;
 
-  const decisions = knex('decisions')
-    .where({orgId})
-    .orderBy('date', 'desc');
+  let decisions;
+  try {
+    decisions = knex('decisions')
+      .where({orgId})
+      .orderBy('date', 'desc');
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
 
   if (parsedLimit > 0) decisions.limit(parsedLimit);
   if (parsedOffset > 0) decisions.offset(parsedOffset);

@@ -12,20 +12,26 @@ country.get('country', '/api/v1/country', async (ctx: Koa.ParameterizedContext) 
 
   let country: tCountry;
   try {
-    country = await knex('countries').limit(1).where({code}).first();
+    country = await knex('countries')
+      .limit(1)
+      .where({code})
+      .orderBy('name', 'asc')
+      .first();
   } catch (err) {
-    return ctx.throw('400', err);
+    return ctx.throw(400, err);
   }
 
   let regions: tRegion[];
   try {
-    regions = await knex('regions').where({country: 1});
+    regions = await knex('regions')
+      .where({country: country.id})
+      .orderBy('name', 'asc');
   } catch (err) {
-    return ctx.throw('400', err);
+    return ctx.throw(400, err);
   }
 
   ctx.body = {
     ...country,
-    regions,
+    regions: _.uniqBy(regions, region => region.name),
   };
 });

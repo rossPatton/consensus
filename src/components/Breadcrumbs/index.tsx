@@ -1,33 +1,32 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { GenericLoader } from '../../components';
-import { BreadcrumbsComponent } from './Component';
-import { tContainerProps, tStore } from './_types';
+import React, {Fragment, memo} from 'react';
+import {Link} from 'react-router-dom';
+import {tProps} from './_types';
 
-export class BreadcrumbsContainer extends PureComponent<tContainerProps> {
-  render() {
-    return (
-      <GenericLoader
-        isLoading={this.props.isLoading}
-        render={() => (
-          <BreadcrumbsComponent
-            country={this.props.country}
-            region={this.props.region}
-            city={this.props.city}
-          />
-        )}
-      />
-    );
-  }
-}
+export const Breadcrumbs = memo((props: tProps) => {
+  const {crumbs = []} = props;
 
-const mapStateToProps = (store: tStore) => ({
-  isLoading: store.country.isLoading
-    && store.region.isLoading
-    && store.city.isLoading,
-  country: store.country.data,
-  region: store.region.data,
-  city: store.city.data,
+  return (
+    <ul className="fs6 fw600 mB2 lh1 lsNone fx fxWrap brdB1 mB3 pB3">
+      {crumbs.map((crumb: tCrumb, i) => {
+        const isLastItem = i === crumbs.length - 1;
+        const renderLink = !isLastItem && crumb.to;
+
+        return (
+          <Fragment key={i}>
+            <li className="mR1">
+              {!renderLink && crumb.display}
+              {renderLink && (
+                <Link to={`/${crumb.to}`}>
+                  {crumb.display}
+                </Link>
+              )}
+            </li>
+            {renderLink && (
+              <li className="mHide mR1">/</li>
+            )}
+          </Fragment>
+        );
+      })}
+    </ul>
+  );
 });
-
-export const Breadcrumbs = connect(mapStateToProps)(BreadcrumbsContainer);

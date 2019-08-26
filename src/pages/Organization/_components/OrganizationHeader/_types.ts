@@ -1,5 +1,6 @@
 export type tComponentProps = {
   org: tOrg,
+  params: tOrgRouteParams,
 };
 
 export type tContainerProps = tComponentProps & {

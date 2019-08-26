@@ -62,18 +62,21 @@ declare type tEvent = tPublicEvent & {
 declare type tOrg = {
   category: string,
   city: string,
+  cityId: number,
   country: string,
+  countryId: number,
   description: string,
   email: string,
   id: number,
   membershipTotal: number,
   name: string,
   slug: string,
-  state: string,
+  region: string,
+  regionId: number,
   username: string,
 };
 
-type tLocationParams = {
+declare type tLocationParams = {
   city?: string,
   country?: string,
   region?: string,
@@ -127,6 +130,11 @@ declare type tLogin = {
 
 declare type tAuth = {
   isAuthenticated: boolean,
+};
+
+declare type tCrumb = {
+  display: string,
+  to: string,
 };
 
 // tSession is like tUser, but with auth data and everything is optional

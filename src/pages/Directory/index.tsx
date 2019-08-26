@@ -1,29 +1,27 @@
-import React, { PureComponent } from 'react';
+import React, {memo} from 'react';
+import {Breadcrumbs} from '../../components';
+import {tProps} from './_types';
+import {Country, Region, City} from './_subpages';
 
-import { Helmet } from '../../components';
-import { tProps } from './_types';
-import { DirectoryComponent } from './Component';
+export const Directory = memo((props: tProps) => {
+  const {match: {params}} = props;
+  const renderCity = !!params.city;
+  const renderRegion = !params.city && !!params.region;
+  const renderCountry = (!renderCity && !renderRegion) && !!params.country;
 
-// TODO potentially move up redux logic to this container
-export class DirectoryContainer extends PureComponent<tProps> {
-  render() {
-    return (
-      <>
-        <Helmet
-          canonical=""
-          title=""
-          meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
-          ]}
-        />
-        <DirectoryComponent {...this.props} />
-      </>
-    );
-  }
-}
-
-export const Directory = DirectoryContainer;
-
+  return (
+    <>
+      <div className="contain pT3 mB4">
+        {renderCountry && (
+          <Country {...props} />
+        )}
+        {renderRegion && (
+          <Region {...props} />
+        )}
+        {renderCity && (
+          <City {...props} />
+        )}
+      </div>
+    </>
+  );
+});

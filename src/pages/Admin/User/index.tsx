@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
-import { Dispatch } from 'redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router';
+import {Dispatch} from 'redux';
 
-import { Helmet } from '../../../components';
-import { authenticateSession, updateUser } from '../../../redux';
-import { title, canonical, description, keywords } from './_constants';
-import { tContainerProps, tState, tStateUnion } from './_types';
-import { UserAdminComponent } from './Component';
+import {Helmet} from '../../../components';
+import {authenticateSession, updateUser} from '../../../redux';
+import {title, canonical, description, keywords} from './_constants';
+import {tContainerProps, tState, tStateUnion} from './_types';
+import {UserAdminComponent} from './Component';
 
 const initialState = {
   isClient: false,
@@ -19,7 +19,7 @@ const initialState = {
   lname: '',
 };
 
-export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
+export class UserAdminContainer extends Component<tContainerProps, tState> {
   state = initialState;
 
   componentDidMount() {
@@ -62,7 +62,7 @@ export class UserAdminContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const { session } = this.props;
+    const {session} = this.props;
 
     return (
       <>

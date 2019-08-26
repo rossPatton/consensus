@@ -1,43 +1,53 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { Link } from 'react-router-dom';
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
+// import {Redirect} from 'react-router-dom';
 
+import {Breadcrumbs, GenericLoader, Helmet} from '../../../../components';
 import {getCountry} from '../../../../redux';
-import {tProps, tStore} from './_types';
+import {tContainerProps, tStore} from './_types';
+import {CountryComponent} from './Component';
 
-export class CountryContainer extends PureComponent<tProps> {
-  constructor(props: tProps) {
+export class CountryContainer extends PureComponent<tContainerProps> {
+  constructor(props: tContainerProps) {
     super(props);
-    if (props.country.name) return;
     props.getCountry(props.match.params);
   }
 
   render() {
-    const {country, match} = this.props;
+    const {country, isLoading, match} = this.props;
 
     return (
       <>
-        <h1 className="mB3">
-          {country.name}
-        </h1>
-        <h2 className="mB2 fs3">
-          Regions in {country.name}
-        </h2>
-        <ul className="fx fxWrap">
-          {country.regions && country.regions.map((region: tRegion) => (
-            <li
-              key={region.name}
-              className="col"
-              style={{width: '32%', maxWidth: '32%'}}>
-              <Link
-                to={`${match.url}/${region.code.toLowerCase()}`}
-                className="dBl p3 brdA1 br8 mB3 mL1 mR1 hvrBgGrey1 trans1">
-                {region.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <Helmet
+          canonical=""
+          title=""
+          meta={[
+            { name: 'description', content: '' },
+            { name: 'keywords', content: '' },
+            { property: 'og:title', content: '' },
+            { property: 'og:description', content: '' },
+          ]}
+        />
+        <GenericLoader
+          isLoading={isLoading}
+          render={() => {
+            const crumbs = [{
+              display: country.name,
+              to: country.code,
+            }];
+
+            return (
+              <>
+                <Breadcrumbs crumbs={crumbs} />
+                <CountryComponent
+                  country={country}
+                  match={match}
+                />
+              </>
+            );
+          }}
+        />
       </>
     );
   }
