@@ -24,9 +24,13 @@ export const fileUpload = memoize({ ttl: 300 }, (event: tPublicEvent) => {
         // @ts-ignore
         agent,
         method: 'POST',
-      });
-      const json = await result.json();
-      return dispatch(fileUploadSuccess(json));
+      })
+        .then((response: any) => {
+          if (!response.ok) throw response;
+          return response.json();
+        });
+
+      return dispatch(fileUploadSuccess(result));
     } catch (err) {
       return dispatch(fileUploadFailure(err));
     }

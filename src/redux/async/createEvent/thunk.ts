@@ -19,14 +19,17 @@ export const createEvent = memoize({ ttl: 300 }, (event: tPublicEvent) => {
 
       const qs = objToQueryString(event);
 
-      // @ts-ignore
       const result = await fetch(`${prefix}?${qs}&client=true`, {
         // @ts-ignore
         agent,
         method: 'POST',
-      });
-      const json = await result.json();
-      return dispatch(createEventSuccess(json));
+      })
+        .then((response: any) => {
+          if (!response.ok) throw response;
+          return response.json();
+        });
+
+      return dispatch(createEventSuccess(result));
     } catch (err) {
       return dispatch(createEventFailure(err));
     }

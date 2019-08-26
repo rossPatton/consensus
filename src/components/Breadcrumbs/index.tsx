@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { BreadcrumbsComponent } from './Component';
+import { tProps } from './_types';
 
-export class BreadcrumbsContainer extends PureComponent<any> {
+export class BreadcrumbsContainer extends PureComponent<tProps> {
   render() {
     return (
       <BreadcrumbsComponent
-        category={this.props.category}
         country={this.props.country}
         region={this.props.region}
         city={this.props.city}

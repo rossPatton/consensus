@@ -4,7 +4,7 @@ import { Events, ExternalLink } from '../../components';
 import { tComponentProps } from './_types';
 
 export const EventComponent = memo(({ event, events }: tComponentProps) => (
-  <div className="contain pT5 mT4 mB5">
+  <div className="contain mT4 mB5">
     <small className="fx fw600 lh1 mB3">
       <time className="mR1" dateTime={event.date}>
         {dayJS(event.date).format('ddd MMM DD, h:mmA')}

@@ -8,7 +8,7 @@ import {
   getUsersFailure,
 } from './actions';
 
-export const getUsers = memoize({ ttl: 300 },
+export const getUsers = memoize({ttl: 300},
   (limit: number = 100, offset: number = 0) => {
     return async function <S>(dispatch: Dispatch<S>) {
       dispatch(getUsersBegin());
@@ -19,9 +19,13 @@ export const getUsers = memoize({ ttl: 300 },
           '/api/v1/users';
 
         // @ts-ignore
-        const result = await fetch(`${prefix}?limit=${limit}&offset=${offset}`, { agent });
-        const json = await result.json();
-        return dispatch(getUsersSuccess(json));
+        const result = await fetch(`${prefix}?limit=${limit}&offset=${offset}`, {agent})
+          .then((response: any) => {
+            if (!response.ok) throw response;
+            return response.json();
+          });
+
+        return dispatch(getUsersSuccess(result));
       } catch (err) {
         return dispatch(getUsersFailure(err));
       }

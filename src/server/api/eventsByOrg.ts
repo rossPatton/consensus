@@ -10,8 +10,6 @@ const getEvents = async (ctx: Koa.ParameterizedContext) => {
   const { query }: tIdQueryServer = ctx;
   const { exclude, id, limit, isPublic, offset } = query;
 
-  console.log('getEvents query => ', query);
-
   const orgId = parseInt(id, 10);
   const parsedLimit = limit ? parseInt(limit, 10) : 3;
   const parsedOffset = offset ? parseInt(offset, 10) : 0;
@@ -31,8 +29,6 @@ const getEvents = async (ctx: Koa.ParameterizedContext) => {
 
   if (parsedLimit > 0) events.limit(parsedLimit);
   if (parsedOffset > 0) events.offset(parsedOffset);
-
-  console.log('events ? ', events);
 
   return events;
 };

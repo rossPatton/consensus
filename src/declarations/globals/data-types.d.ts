@@ -160,9 +160,12 @@ declare type tRoute = {
 
 // typical id-based db query
 type tIdQuery = {
+  // exclude an id, or something else
   exclude?: number,
-
+  // id to search by
   id: number,
+  // filter out private events/decisions/etc if user is not logged in
+  isPublic?: boolean,
   limit?: number,
   offset?: number,
 };
@@ -172,6 +175,7 @@ type tIdQueryServer = {
   query: {
     exclude?: string,
     id: string,
+    isPublic?: boolean,
     limit?: string,
     offset?: string,
   }

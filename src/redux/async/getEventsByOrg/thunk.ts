@@ -18,13 +18,15 @@ export const getEventsByOrg = memoize({ ttl: 300 }, (queryObj: tIdQuery) => {
 
     try {
       const qs = objToQueryString(queryObj as any);
-      console.log('queryObj => ', queryObj);
-      console.log('events by org query => ', `${prefix}?${qs}`);
 
       // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {agent});
-      const json = await result.json();
-      return dispatch(getEventsByOrgSuccess(json));
+      const result = await fetch(`${prefix}?${qs}`, {agent})
+        .then((response: any) => {
+          if (!response.ok) throw response;
+          return response.json();
+        });
+
+      return dispatch(getEventsByOrgSuccess(result));
     } catch (err) {
       return dispatch(getEventsByOrgFailure(err));
     }

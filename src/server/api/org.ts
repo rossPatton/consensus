@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import Koa from 'koa';
 import Router from 'koa-router';
 import { knex } from '../db/connection';
@@ -14,50 +15,63 @@ org.get('org', '/api/v1/org', async (ctx: Koa.Context) => {
     region: regionCode,
   } = ctx.query;
 
-  console.log('ctx.query => ', ctx.query);
-
-  const country = await knex('countries').limit(1)
-    .where({code: countryCode}).first();
-
-  console.log('country => ', country);
-
-  const region = await knex('regions').limit(1).where({
-    country: country.id,
-    code: regionCode,
-  }).first();
-
-  console.log('region => ', region);
-
-  const cityName = deSlugify(citySlug);
-  const city = await knex('cities').limit(1).where({
-    country: country.id,
-    region: region.id,
-    name: cityName,
-  }).first();
-
-  console.log('city => ', city);
-  console.dir({
-    country: country.id,
-    city: city.id,
-    region: region.id,
-    slug: orgSlug,
-  });
-
-  const org = await knex('orgs')
-    .limit(1)
-    .where({
-      country: country.id,
-      city: city.id,
-      region: region.id,
-      slug: orgSlug,
-    })
-    .first();
-
-  console.log('org => ', org);
-
+  // id is just here to shut typescript up
+  let country = {id: 0};
   try {
-    ctx.body = org;
+    country = await knex('countries')
+      .limit(1)
+      .where({code: countryCode})
+      .first();
   } catch (err) {
-    ctx.throw('400', err);
+    ctx.throw(400, err);
   }
+
+  let region = {id: 0};
+  try {
+    region = await knex('regions')
+      .limit(1)
+      .where({
+        country: country.id,
+        code: regionCode,
+      })
+      .first();
+  } catch (err) {
+    ctx.throw(400, err);
+  }
+
+  let city = {id: 0};
+  try {
+    const cityName = deSlugify(citySlug);
+    city = await knex('cities')
+      .limit(1)
+      .where({
+        country: country.id,
+        region: region.id,
+        name: cityName,
+      })
+      .first();
+  } catch (err) {
+    ctx.throw(400, err);
+  }
+
+  let org = {};
+  try {
+    org = await knex('orgs')
+      .limit(1)
+      .where({
+        country: country.id,
+        city: city.id,
+        region: region.id,
+        slug: orgSlug,
+      })
+      .first();
+  } catch (err) {
+    ctx.throw(400, err);
+  }
+
+  if (_.isEmpty(org)) {
+    ctx.throw(500, 'Failed to fetch organization');
+  }
+
+  ctx.body = org;
 });

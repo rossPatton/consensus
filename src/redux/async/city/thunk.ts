@@ -20,7 +20,7 @@ export const getCity = memoize({ttl: 300}, (params: any) => {
       const qs = objToQueryString(params);
 
       // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, { agent })
+      const result = await fetch(`${prefix}?${qs}`, {agent})
         .then((response: any) => {
           if (!response.ok) throw response;
           return response.json();

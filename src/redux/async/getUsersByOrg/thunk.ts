@@ -1,6 +1,6 @@
 import { memoize } from 'redux-memoize';
 import { Dispatch } from 'redux';
-import { agent } from '../../../utils';
+import { agent, objToQueryString } from '../../../utils';
 
 import {
   getUsersByOrgBegin,
@@ -17,17 +17,16 @@ export const getUsersByOrg = memoize({ ttl: 300 }, (queryObj: tIdQuery) => {
     dispatch(getUsersByOrgBegin());
 
     try {
-      const { id, limit, offset } = queryObj;
-
-      const query = `?id=${id}`;
-      const limitStr = limit ? `&limit=${limit}` : '';
-      const offsetStr = offset ? `&offset=${offset}` : '';
-      const qs = `${prefix}${query}${limitStr}${offsetStr}`;
+      const qs = objToQueryString(queryObj as any);
 
       // @ts-ignore
-      const result = await fetch(qs, { agent });
-      const json = await result.json();
-      return dispatch(getUsersByOrgSuccess(json));
+      const result = await fetch(`${prefix}?${qs}`, {agent})
+        .then((response: any) => {
+          if (!response.ok) throw response;
+          return response.json();
+        });
+
+      return dispatch(getUsersByOrgSuccess(result));
     } catch (err) {
       return dispatch(getUsersByOrgFailure(err));
     }

@@ -108,7 +108,12 @@ export const EventsComponent = memo((props: tProps) => (
               </>
             )}
             {props.session.isAuthenticated && (
-              <small className="bgYellowLite br4 p1 pL2 pR2">
+              <small
+                className={cx({
+                  'br4 p1 pL2 pR2': true,
+                  bgYellowLite: ev.isPrivate,
+                  bgGreenLite: !ev.isPrivate,
+                })}>
                 {ev.isPrivate && (
                   <>
                     <span

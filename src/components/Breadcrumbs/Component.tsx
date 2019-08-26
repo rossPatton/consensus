@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
+import { tProps } from './_types';
 
-export const BreadcrumbsComponent = memo((props: any) => (
+export const BreadcrumbsComponent = memo((props: tProps) => (
   <ul className="fs6 fw600 mB2 lh1 lsNone fx fxWrap brdB1 mB3 pB3">
-    {console.log('props => ', props)}
     {props.country && (
       <li className="mR1">
         {!props.region && props.country.name}
