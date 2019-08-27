@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
 
-import { GenericLoader, Helmet } from '../../../../components';
-import { getDecisionsByOrg } from '../../../../redux';
-import { tContainerProps, tState } from './_types';
-import { DecisionsComponent } from './Component';
+import {GenericLoader, Helmet} from '../../../../components';
+import {getDecisionsByOrg} from '../../../../redux';
+import {tContainerProps, tStore} from './_types';
+import {DecisionsComponent} from './Component';
 
 export class DecisionsContainer extends Component<tContainerProps> {
   constructor(props: tContainerProps) {
@@ -64,9 +64,9 @@ export class DecisionsContainer extends Component<tContainerProps> {
   }
 }
 
-const mapStateToProps = (state: tState) => ({
-  decisions: state.decisions.data,
-  isLoading: state.decisions.isLoading,
+const mapStateToProps = (store: tStore) => ({
+  decisions: store.decisions.data,
+  isLoading: store.decisions.isLoading,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

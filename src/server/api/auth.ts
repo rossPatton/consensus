@@ -14,8 +14,8 @@ auth.post('user login', '/auth/login', async (ctx: Koa.Context, next) => {
     if (!unsafeUser) ctx.throw(400, 'User not found');
 
     await ctx.login(unsafeUser);
-    const { password, ...safeUser } = unsafeUser;
 
+    const { password, ...safeUser } = unsafeUser;
     let userOrgRels: tUserOrgRelation[];
     try {
       // @TODO consolidate this session logic

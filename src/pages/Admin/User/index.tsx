@@ -4,6 +4,7 @@ import {Redirect} from 'react-router';
 import {Dispatch} from 'redux';
 
 import {Helmet} from '../../../components';
+import {ErrorBoundary} from '../../../containers';
 import {authenticateSession, updateUser} from '../../../redux';
 import {canonical, description, keywords, title} from './_constants';
 import {tContainerProps, tState, tStateUnion} from './_types';
@@ -65,7 +66,7 @@ export class UserAdminContainer extends Component<tContainerProps, tState> {
     const {session} = this.props;
 
     return (
-      <>
+      <ErrorBoundary>
         <Helmet
           canonical={canonical}
           title={title}
@@ -85,13 +86,13 @@ export class UserAdminContainer extends Component<tContainerProps, tState> {
             updateState={this.updateState}
           />
         )}
-      </>
+      </ErrorBoundary>
     );
   }
 }
 
-const mapStateToProps = (state: {session: tThunk<tSession>}) => ({
-  session: state.session.data,
+const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
+  session: store.session.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

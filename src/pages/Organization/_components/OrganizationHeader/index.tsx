@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
 
-import { getUsersByOrg } from '../../../../redux';
-import { tContainerProps, tState } from './_types';
-import { OrganizationHeaderComponent } from './Component';
+import {getUsersByOrg} from '../../../../redux';
+import {tContainerProps, tStore} from './_types';
+import {OrganizationHeaderComponent} from './Component';
 
 export class OrganizationHeaderContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
@@ -22,9 +22,9 @@ export class OrganizationHeaderContainer extends PureComponent<tContainerProps> 
   }
 }
 
-const mapStateToProps = (state: tState) => ({
-  isLoading: state.usersByOrg.isLoading,
-  usersByOrg: state.usersByOrg.data,
+const mapStateToProps = (store: tStore) => ({
+  isLoading: store.usersByOrg.isLoading,
+  usersByOrg: store.usersByOrg.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

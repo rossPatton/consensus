@@ -14,7 +14,7 @@ export type tContainerProps = {
   org: tOrg,
 };
 
-export type tState = {
+export type tStore = {
   decisions: tThunk<tDecision[]>,
   isLoading: boolean,
 };

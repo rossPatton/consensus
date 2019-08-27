@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
-import { Dispatch } from 'redux';
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
 
-import { GenericLoader, Helmet } from '../../components';
-import { getEventById, getEventsByOrg } from '../../redux';
-import { tProps, tStore } from './_types';
-import { EventComponent } from './Component';
+import {GenericLoader, Helmet} from '../../components';
+import {ErrorBoundary} from '../../containers';
+import {getEventById, getEventsByOrg} from '../../redux';
+import {tProps, tStore} from './_types';
+import {EventComponent} from './Component';
 
 export class EventContainer extends PureComponent<tProps> {
   constructor(props: tProps) {
@@ -27,7 +27,7 @@ export class EventContainer extends PureComponent<tProps> {
 
   render() {
     return (
-      <>
+      <ErrorBoundary>
         <Helmet
           canonical=""
           title=""
@@ -47,7 +47,7 @@ export class EventContainer extends PureComponent<tProps> {
             />
           )}
         />
-      </>
+      </ErrorBoundary>
     );
   }
 }

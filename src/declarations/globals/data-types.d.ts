@@ -48,6 +48,7 @@ declare type tPublicEvent = {
   locationLink: string,
   name: string,
   orgId: number,
+  orgName: string,
   slug: string,
   state: string,
   title: string,

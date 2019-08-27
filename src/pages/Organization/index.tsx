@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
 import {GenericLoader, Helmet} from '../../components';
+import {ErrorBoundary} from '../../containers';
 import {getOrg} from '../../redux';
 import {getUserRole} from '../../utils';
 import {tContainerProps, tStore} from './_types';
@@ -19,11 +20,10 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const { isLoading, location, match, org, session, usersByOrg } = this.props;
-    const role = getUserRole(session, org);
+    const {isLoading, location, match, org, session, usersByOrg} = this.props;
 
     return (
-      <>
+      <ErrorBoundary>
         <Helmet
           canonical=""
           title=""
@@ -36,17 +36,21 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
         />
         <GenericLoader
           isLoading={isLoading}
-          render={() => (
-            <OrganizationComponent
-              location={location}
-              match={match}
-              org={org}
-              usersByOrg={usersByOrg}
-              role={role}
-            />
-          )}
+          render={() => {
+            const role = getUserRole(session, org);
+
+            return (
+              <OrganizationComponent
+                location={location}
+                match={match}
+                org={org}
+                usersByOrg={usersByOrg}
+                role={role}
+              />
+            );
+          }}
         />
-      </>
+      </ErrorBoundary>
     );
   }
 }

@@ -15,6 +15,7 @@ export const OrganizationComponent = memo((props: tProps) => (
       match={props.match}
     />
     <UserBar
+      match={props.match}
       org={props.org}
       role={props.role}
     />

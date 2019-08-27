@@ -1,15 +1,16 @@
 import commonPasswordList from 'fxa-common-password-list';
 import _ from 'lodash';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
-import { Dispatch } from 'redux';
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router';
+import {Dispatch} from 'redux';
 
-import { Helmet } from '../../components';
-import { authenticateSession, registerUser } from '../../redux';
-import { isValidEmail } from '../../utils';
-import { tContainerProps, tForm, tState, tStateUnion, tStore } from './_types';
-import { SignupComponent } from './Component';
+import {Helmet} from '../../components';
+import {ErrorBoundary} from '../../containers';
+import {authenticateSession, registerUser} from '../../redux';
+import {isValidEmail} from '../../utils';
+import {tContainerProps, tForm, tState, tStateUnion, tStore} from './_types';
+import {SignupComponent} from './Component';
 
 export class SignupContainer extends PureComponent<tContainerProps, tState> {
   state = {
@@ -38,7 +39,6 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
     if (commonPasswordList.test(pw) || pw === 'correct_horse_battery_staple') {
       pwArr = [...pwArr, 'Please choose a less common password'];
     }
-
 
     let emailArr = [] as string[];
     if (email.length > 0 && !isValidEmail(email)) {
@@ -81,7 +81,7 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
       (!email || !password || !username || errArr.length > 0);
 
     return (
-      <>
+      <ErrorBoundary>
         <Helmet
           canonical=""
           title=""
@@ -103,12 +103,12 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
             updateState={this.updateState}
           />
         )}
-      </>
+      </ErrorBoundary>
     );
   }
 }
 
-const mapStateToProps = (state: tStore) => ({session: state.session.data});
+const mapStateToProps = (store: tStore) => ({session: store.session.data});
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),

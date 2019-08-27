@@ -18,7 +18,7 @@ passport.serializeUser((unsafeUser: tUser, done) => {
 passport.deserializeUser(async (savedUser: tUser, done) => {
   try {
     const {id} = savedUser;
-    const user: tUser = await knex('users').where({id}).first();
+    const user: tUser = await knex('users').limit(1).where({id}).first();
     return done(null, user);
   } catch (err) {
     return done(err, null);

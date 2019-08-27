@@ -1,10 +1,10 @@
 import dayJS from 'dayjs';
-import React, { memo } from 'react';
+import React, {memo} from 'react';
 
-import { Events, ExternalLink } from '../../components';
-import { tComponentProps } from './_types';
+import {Events, ExternalLink} from '../../components';
+import {tComponentProps} from './_types';
 
-export const EventComponent = memo(({ event, events }: tComponentProps) => (
+export const EventComponent = memo(({event, events}: tComponentProps) => (
   <div className="contain mT4 mB5">
     <small className="fx fw600 lh1 mB3">
       <time className="mR1" dateTime={event.date}>
@@ -111,7 +111,7 @@ export const EventComponent = memo(({ event, events }: tComponentProps) => (
         {events && events.length > 0 && (
           <>
             <h2 className="fs5 mB3 ffLab lh1">
-            More by {event.name}
+            More by {event.orgName}
             </h2>
             <Events events={events} tiny />
           </>

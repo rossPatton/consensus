@@ -1,12 +1,13 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
 
-import { GenericLoader, Helmet } from '../../components';
-import { getUsers } from '../../redux';
-import { canonical, description, keywords, title } from './_constants';
-import { tContainerProps } from './_types';
-import { HomeComponent } from './HomeComponent';
+import {GenericLoader, Helmet} from '../../components';
+import {ErrorBoundary} from '../../containers';
+import {getUsers} from '../../redux';
+import {canonical, description, keywords, title} from './_constants';
+import {tContainerProps} from './_types';
+import {HomeComponent} from './HomeComponent';
 
 export class HomeContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
@@ -17,7 +18,7 @@ export class HomeContainer extends PureComponent<tContainerProps> {
 
   render() {
     return (
-      <>
+      <ErrorBoundary>
         <Helmet
           canonical={canonical}
           title={title}
@@ -36,14 +37,14 @@ export class HomeContainer extends PureComponent<tContainerProps> {
             />
           )}
         />
-      </>
+      </ErrorBoundary>
     );
   }
 }
 
-const mapStateToProps = (state: { users: tThunk<tUser[]> }) => ({
-  isLoading: state.users.isLoading,
-  users: state.users.data,
+const mapStateToProps = (store: { users: tThunk<tUser[]> }) => ({
+  isLoading: store.users.isLoading,
+  users: store.users.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

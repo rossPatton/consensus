@@ -22,8 +22,8 @@ export class HeaderContainer extends PureComponent<tContainerProps> {
   }
 }
 
-const mapStateToProps = (state: {session: tThunk<tSession>}) => ({
-  session: state.session.data,
+const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
+  session: store.session.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

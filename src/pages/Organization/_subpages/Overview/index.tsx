@@ -46,11 +46,11 @@ export class OverviewContainer extends Component<tContainerProps> {
   }
 }
 
-const mapStateToProps = (state: tStore) => ({
-  decisions: state.decisions.data,
-  events: state.events.data,
-  isLoading: state.decisions.isLoading || state.events.isLoading,
-  session: state.session.data,
+const mapStateToProps = (store: tStore) => ({
+  decisions: store.decisions.data,
+  events: store.events.data,
+  isLoading: store.decisions.isLoading || store.events.isLoading,
+  session: store.session.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

@@ -62,9 +62,9 @@ export class EventsContainer extends Component<tContainerProps> {
   }
 }
 
-const mapStateToProps = (state: tState) => ({
-  events: state.events.data,
-  isLoading: state.events.isLoading,
+const mapStateToProps = (store: tState) => ({
+  events: store.events.data,
+  isLoading: store.events.isLoading,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

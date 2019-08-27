@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
-import { Dispatch } from 'redux';
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router';
+import {Dispatch} from 'redux';
 
-import { Helmet } from '../../components';
-import { authenticateSession } from '../../redux';
-import { tProps, tState, tStateUnion } from './_types';
-import { LoginComponent } from './Component';
+import {Helmet} from '../../components';
+import {ErrorBoundary} from '../../containers';
+import {authenticateSession} from '../../redux';
+import {tProps, tState, tStateUnion} from './_types';
+import {LoginComponent} from './Component';
 
-export class LoginContainer extends Component<tProps, tState> {
+export class LoginContainer extends PureComponent<tProps, tState> {
   state = {
     isClient: false,
     password: '',
@@ -38,7 +39,7 @@ export class LoginContainer extends Component<tProps, tState> {
     const { session } = this.props;
 
     return (
-      <>
+      <ErrorBoundary>
         <Helmet
           canonical=""
           title=""
@@ -57,13 +58,13 @@ export class LoginContainer extends Component<tProps, tState> {
             updateState={this.updateState}
           />
         )}
-      </>
+      </ErrorBoundary>
     );
   }
 }
 
-const mapStateToProps = (state: {session: tThunk<tSession>}) => ({
-  session: state.session.data,
+const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
+  session: store.session.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

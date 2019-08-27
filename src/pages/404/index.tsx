@@ -1,17 +1,18 @@
 import React, { memo } from 'react';
 
-import { Helmet } from '../../components';
+import {Helmet} from '../../components';
+import {canonical, description, keywords, title} from './_constants';
 
 export const NoMatch = memo(() => (
   <>
     <Helmet
-      canonical=""
-      title=""
+      canonical={canonical}
+      title={title}
       meta={[
-        { name: 'description', content: '' },
-        { name: 'keywords', content: '' },
-        { property: 'og:title', content: '' },
-        { property: 'og:description', content: '' },
+        { name: 'description', content: description },
+        { name: 'keywords', content: keywords },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: description },
       ]}
     />
     <div className="contain mT4 taCtr">

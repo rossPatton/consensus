@@ -33,7 +33,6 @@ export const UserBarComponent = memo((props: tProps) => (
           )}
         </li>
         <li className="mR2 fx aiCtr">
-          <span className="circ bgBlack p1 dInBl mR1" />
           <a title="Click to see list of online members" href="filler">
             89 members online now
           </a>
@@ -46,7 +45,7 @@ export const UserBarComponent = memo((props: tProps) => (
         {props.role === 'admin' && (
           <ul className="fx col jcEnd fs6">
             <li className="mR2 brdA1 p1 br4 bgWhite pL2 pR2 trans1">
-              <Link to="/us/ny/nyc/tech-workers-coalition/createEvent">
+              <Link to="createEvent">
                 Create Event
               </Link>
             </li>

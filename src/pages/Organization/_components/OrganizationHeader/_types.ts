@@ -8,7 +8,7 @@ export type tContainerProps = tComponentProps & {
   isLoading: boolean,
 };
 
-export type tState = {
+export type tStore = {
   usersByOrg: tThunk<tUsersByOrg>,
   session: tSession,
 }

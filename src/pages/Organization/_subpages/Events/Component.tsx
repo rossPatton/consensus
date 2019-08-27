@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
-import { Events, Paginate } from '../../../../components';
-import { tComponentProps } from './_types';
+import {Events, Paginate} from '../../../../components';
+import {tComponentProps} from './_types';
 
 export const EventsComponent = memo((props: tComponentProps) => (
   <>

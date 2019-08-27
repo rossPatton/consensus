@@ -1,9 +1,9 @@
 import {
   Directory,
+  ErrorPage,
   Event,
   Home,
   Login,
-  // NoMatch,
   Organization,
   Signup,
   UserAdmin,
@@ -47,9 +47,9 @@ export const routes = [
   },
   // NoMatch === our 404 page
   // any match that we can't find, 404, or else we can manually redirect to /404
-  // {
-  //   component: NoMatch,
-  //   path: '*',
-  // },
+  {
+    component: ErrorPage,
+    path: '/500',
+  },
 ];
 

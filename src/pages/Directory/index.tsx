@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 
-import {Breadcrumbs} from '../../components';
+import {ErrorBoundary} from '../../containers';
 import {City, Country, Region} from './_subpages';
 import {tProps} from './_types';
 
@@ -11,7 +11,7 @@ export const Directory = memo((props: tProps) => {
   const renderCountry = (!renderCity && !renderRegion) && !!params.country;
 
   return (
-    <>
+    <ErrorBoundary>
       <div className="contain pT3 mB4">
         {renderCountry && (
           <Country {...props} />
@@ -23,6 +23,6 @@ export const Directory = memo((props: tProps) => {
           <City {...props} />
         )}
       </div>
-    </>
+    </ErrorBoundary>
   );
 });
