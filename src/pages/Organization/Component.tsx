@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 
 import { UserBar } from './_components';
-import { Decisions, Events, Overview, AdminEvent } from './_subpages';
-import { tProps } from './_types';
 import { OrganizationHeader, OrganizationTabs } from './_components';
+import { AdminEvent, Decisions, Events, Overview } from './_subpages';
+import { tProps } from './_types';
 
 export const OrganizationComponent = memo((props: tProps) => (
   <>

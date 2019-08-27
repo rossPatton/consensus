@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
+
 import { tProps } from './_types';
 
 // UserBar currently has 3 states =>

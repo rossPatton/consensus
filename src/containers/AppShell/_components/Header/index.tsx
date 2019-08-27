@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { logOutOfSession } from '../../../../redux';
-import { HeaderComponent } from './Component';
 import { tContainerProps } from './_types';
+import { HeaderComponent } from './Component';
 
 export class HeaderContainer extends PureComponent<tContainerProps> {
   logout = (ev: React.MouseEvent<HTMLButtonElement>) => {

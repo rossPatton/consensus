@@ -1,7 +1,8 @@
-import { createStore, applyMiddleware } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import { rootReducer } from './rootReducer';
+
 import { middleware } from './middleware';
+import { rootReducer } from './rootReducer';
 
 // set up initial store
 export const initStore = (initialState?: object) => {

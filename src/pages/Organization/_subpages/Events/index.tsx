@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { getEventsByOrg } from '../../../../redux';
 import { GenericLoader, Helmet } from '../../../../components';
+import { getEventsByOrg } from '../../../../redux';
 import { tContainerProps, tState } from './_types';
 import { EventsComponent } from './Component';
 

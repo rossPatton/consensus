@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+
 import { tComponentProps } from './_types';
 
 export const HomeComponent = memo((props: tComponentProps) => (

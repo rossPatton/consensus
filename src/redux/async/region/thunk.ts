@@ -1,11 +1,11 @@
-import { memoize } from 'redux-memoize';
 import { Dispatch } from 'redux';
-import { agent, objToQueryString } from '../../../utils';
+import { memoize } from 'redux-memoize';
 
+import { agent, objToQueryString } from '../../../utils';
 import {
   getRegionBegin,
-  getRegionSuccess,
   getRegionFailure,
+  getRegionSuccess,
 } from './actions';
 
 export const getRegion = memoize({ttl: 300}, (params: tLocationParams) => {

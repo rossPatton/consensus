@@ -1,8 +1,9 @@
 import Koa from 'koa';
 import c2k from 'koa-connect';
-import devMiddleware from 'webpack-dev-middleware';
 // import hotMiddleware from 'webpack-hot-middleware';
 import webpack from 'webpack';
+import devMiddleware from 'webpack-dev-middleware';
+
 import webpackConfig from '../../../webpack';
 
 const compiler = webpack(webpackConfig);

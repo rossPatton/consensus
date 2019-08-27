@@ -1,6 +1,6 @@
+import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 
 import { notNull } from '../../utils';
 import { tProps } from './_types';

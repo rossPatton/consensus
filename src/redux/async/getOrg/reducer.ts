@@ -1,10 +1,9 @@
+import { tActionUnion } from './_types';
 import {
   GET_ORG_BEGIN,
-  GET_ORG_SUCCESS,
   GET_ORG_FAILURE,
+  GET_ORG_SUCCESS,
 } from './actions';
-
-import { tActionUnion } from './_types';
 
 const initialState: tThunk<tOrg> = {
   error: null,

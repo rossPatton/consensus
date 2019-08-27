@@ -1,8 +1,8 @@
 import {
-  tActionUnion,
   GET_REGION_BEGIN,
-  GET_REGION_SUCCESS,
   GET_REGION_FAILURE,
+  GET_REGION_SUCCESS,
+  tActionUnion,
 } from './_types';
 
 const initialState: tThunk<any> = {

@@ -1,7 +1,8 @@
 import passport from 'koa-passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { isValidPw } from './utils';
+
 import { knex } from './db/connection';
+import { isValidPw } from './utils';
 
 const opts = {};
 

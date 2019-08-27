@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
-import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import { Dispatch } from 'redux';
 
-import { getEventById, getEventsByOrg } from '../../redux';
 import { GenericLoader, Helmet } from '../../components';
+import { getEventById, getEventsByOrg } from '../../redux';
 import { tProps, tStore } from './_types';
 import { EventComponent } from './Component';
 

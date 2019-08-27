@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
+
 import { Decisions, Events } from '../../../../components';
 import { tComponentProps } from './_types';
 

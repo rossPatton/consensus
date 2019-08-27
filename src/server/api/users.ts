@@ -1,5 +1,6 @@
 import Koa from 'koa';
 import Router from 'koa-router';
+
 import { knex } from '../db/connection';
 
 export const users = new Router();

@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+
 import { tProps } from './types';
 
 export const GenericLoader = memo((props: tProps) => {

@@ -1,6 +1,7 @@
-import _ from 'lodash';
 import Koa from 'koa';
 import Router from 'koa-router';
+import _ from 'lodash';
+
 import { knex } from '../db/connection';
 
 export const region = new Router();

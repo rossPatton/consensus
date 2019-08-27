@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { getUserRole } from '../../utils';
-import { getOrg } from '../../redux';
 import { GenericLoader, Helmet } from '../../components';
+import { getOrg } from '../../redux';
+import { getUserRole } from '../../utils';
 import { tContainerProps, tStore } from './_types';
 import { OrganizationComponent } from './Component';
 

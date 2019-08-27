@@ -1,4 +1,5 @@
 import Koa from 'koa';
+
 import { bodyParserMiddleware } from './bodyParser';
 import { cacheControlMiddleware } from './cacheControl';
 import { compressionMiddleware } from './compression';
@@ -9,13 +10,13 @@ import { faviconMiddleware } from './favicon';
 import { featurePolicyMiddleware } from './featurePolicy';
 import { helmetMiddleware } from './helmet';
 import { loggerMiddleware } from './logger';
+import { nonceMiddleware } from './nonce';
 import { normalizeFormMiddleware } from './normalizeForm';
 import { redirectTrailingSlashMiddleware } from './redirectTrailingSlash';
 import { referrerPolicyMiddleware } from './referrerPolicy';
 import { responseTimeHeaderMiddleware } from './responseTimeHeader';
 import { sslMiddleware } from './ssl';
 import { staticFileMiddleware } from './static';
-import { nonceMiddleware } from './nonce';
 
 // middleware order is important
 export const setupMiddleware = (app: Koa) => {

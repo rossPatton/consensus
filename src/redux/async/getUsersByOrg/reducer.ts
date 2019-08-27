@@ -1,8 +1,8 @@
 import {
-  tActionUnion,
   GET_USERS_BY_ORG_BEGIN,
-  GET_USERS_BY_ORG_SUCCESS,
   GET_USERS_BY_ORG_FAILURE,
+  GET_USERS_BY_ORG_SUCCESS,
+  tActionUnion,
 } from './_types';
 
 const initialState: tThunk<tUsersByOrg> = {

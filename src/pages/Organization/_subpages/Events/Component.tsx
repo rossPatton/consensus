@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+
 import { Events, Paginate } from '../../../../components';
 import { tComponentProps } from './_types';
 

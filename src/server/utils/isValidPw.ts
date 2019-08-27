@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+
 import { decrypt, sha384 } from '.';
 
 // userPassword === plaintext input from client

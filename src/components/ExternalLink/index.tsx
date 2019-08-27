@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+
 import { tProps } from './_types';
 
 export const ExternalLink = memo((props: tProps) => (

@@ -1,8 +1,9 @@
-import _ from 'lodash';
 import Koa from 'koa';
 import Router from 'koa-router';
-import { knex } from '../db/connection';
+import _ from 'lodash';
+
 import { getDateNowAsISOStr } from '../../utils';
+import { knex } from '../db/connection';
 
 export const eventsByOrg = new Router();
 

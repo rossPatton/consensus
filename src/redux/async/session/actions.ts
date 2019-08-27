@@ -1,16 +1,16 @@
 import {
   AUTHENTICATE_BEGIN,
-  AUTHENTICATE_SUCCESS,
   AUTHENTICATE_FAILURE,
+  AUTHENTICATE_SUCCESS,
   LOG_OUT_BEGIN,
-  LOG_OUT_SUCCESS,
   LOG_OUT_FAILURE,
+  LOG_OUT_SUCCESS,
   tBeginAction,
-  tSuccessAction,
   tFailureAction,
   tLogOutBeginAction,
-  tLogOutSuccessAction,
   tLogOutFailureAction,
+  tLogOutSuccessAction,
+  tSuccessAction,
 } from './_types';
 
 export const authenticateBegin = (payload: tLogin): tBeginAction => ({

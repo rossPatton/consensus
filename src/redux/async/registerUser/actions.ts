@@ -1,4 +1,4 @@
-import { tBeginAction, tSuccessAction, tFailureAction } from './_types';
+import { tBeginAction, tFailureAction, tSuccessAction } from './_types';
 
 export const REGISTER_USER_BEGIN = 'REGISTER_USER_BEGIN';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';

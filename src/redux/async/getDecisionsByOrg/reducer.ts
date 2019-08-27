@@ -1,8 +1,8 @@
 import {
-  tActionUnion,
   GET_DECISIONS_BY_ORG_BEGIN,
-  GET_DECISIONS_BY_ORG_SUCCESS,
   GET_DECISIONS_BY_ORG_FAILURE,
+  GET_DECISIONS_BY_ORG_SUCCESS,
+  tActionUnion,
 } from './_types';
 
 const initialState: tThunk<tDecision[]> = {

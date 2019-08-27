@@ -1,7 +1,8 @@
 import React, {memo} from 'react';
+
 import {Breadcrumbs} from '../../components';
+import {City, Country, Region} from './_subpages';
 import {tProps} from './_types';
-import {Country, Region, City} from './_subpages';
 
 export const Directory = memo((props: tProps) => {
   const {match: {params}} = props;

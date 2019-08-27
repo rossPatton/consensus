@@ -1,11 +1,11 @@
-import {memoize} from 'redux-memoize';
 import {Dispatch} from 'redux';
-import {agent, objToQueryString} from '../../../utils';
+import {memoize} from 'redux-memoize';
 
+import {agent, objToQueryString} from '../../../utils';
 import {
   getUsersBegin,
-  getUsersSuccess,
   getUsersFailure,
+  getUsersSuccess,
 } from './actions';
 
 export const getUsers = memoize({ttl: 300},

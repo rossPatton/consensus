@@ -1,10 +1,10 @@
 import {
   GET_EVENTS_BY_ORG_BEGIN,
-  GET_EVENTS_BY_ORG_SUCCESS,
   GET_EVENTS_BY_ORG_FAILURE,
+  GET_EVENTS_BY_ORG_SUCCESS,
   tBeginAction,
-  tSuccessAction,
   tFailureAction,
+  tSuccessAction,
 } from './_types';
 
 export const getEventsByOrgBegin = (): tBeginAction => ({

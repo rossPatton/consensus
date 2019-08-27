@@ -1,11 +1,11 @@
-import { memoize } from 'redux-memoize';
 import { Dispatch } from 'redux';
-import { agent, objToQueryString } from '../../../utils';
+import { memoize } from 'redux-memoize';
 
+import { agent, objToQueryString } from '../../../utils';
 import {
   updateUserBegin,
-  updateUserSuccess,
   updateUserFailure,
+  updateUserSuccess,
 } from './actions';
 
 export const updateUser = memoize({ ttl: 300 }, (user: tUser) => {

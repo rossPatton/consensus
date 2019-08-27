@@ -1,5 +1,6 @@
 import Koa from 'koa';
 import _ from 'lodash';
+
 import {initStore} from '../redux/store';
 import {knex} from './db/connection';
 

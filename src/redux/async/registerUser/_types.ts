@@ -1,7 +1,7 @@
 import {
   REGISTER_USER_BEGIN,
-  REGISTER_USER_SUCCESS,
   REGISTER_USER_FAILURE,
+  REGISTER_USER_SUCCESS,
 } from './actions';
 
 export type tBeginAction = tAction<typeof REGISTER_USER_BEGIN>;

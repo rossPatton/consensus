@@ -1,8 +1,8 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
-// import {Redirect} from 'react-router-dom';
 
+// import {Redirect} from 'react-router-dom';
 import {Breadcrumbs, GenericLoader, Helmet} from '../../../../components';
 import {getCountry} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';

@@ -1,5 +1,6 @@
-import React, { memo } from 'react';
 import cx from 'classnames';
+import React, { memo } from 'react';
+
 import {tComponentProps} from './_types';
 
 export const PasswordInputComponent = memo((props: tComponentProps) => {

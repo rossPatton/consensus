@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { Helmet as ReactHelmetAsync } from 'react-helmet-async';
+
 import { LINK_TAGS, META_TAGS } from './_constants';
 import { tProps } from './_types';
 

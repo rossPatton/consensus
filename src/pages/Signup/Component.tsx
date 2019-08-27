@@ -1,6 +1,7 @@
+import cx from 'classnames';
 import _ from 'lodash';
 import React, { memo } from 'react';
-import cx from 'classnames';
+
 import { PasswordInput } from '../../components';
 import { tComponentProps } from './_types';
 

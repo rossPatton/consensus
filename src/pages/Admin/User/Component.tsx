@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+
 import { PasswordInput } from '../../../components';
 import { tComponentProps } from './_types';
 
@@ -77,7 +78,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           id="newPwInput"
           name="newPassword"
           password={props.newPassword}
-          placeholder="Your1new2very3secure4password!"
+          placeholder="Your new password"
           onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
             return props.updateState('newPassword', ev);
           }}

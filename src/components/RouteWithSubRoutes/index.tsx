@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, RouteComponentProps } from 'react-router-dom';
 
-import { tProps} from './_types';
 import { PrivateRoute } from '..';
+import { tProps} from './_types';
 
 // for nested static routes
 export const RouteWithSubRoutes = (route: tProps) => (

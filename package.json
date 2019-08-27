@@ -8,6 +8,9 @@
   "browserslist": [
     "last 2 versions"
   ],
+  "engines": {
+    "node": ">=12.3.1"
+  },
   "scripts": {
     "build": "webpack --display-error-details --display=minimal --progress --config webpack/index.js",
     "start": "better-npm-run start",
@@ -167,10 +170,13 @@
     "eslint-import-resolver-webpack": "^0.8.4",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-no-secrets": "^0.3.3",
+    "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-react-hooks": "^1.6.1",
     "eslint-plugin-security": "^1.4.0",
+    "eslint-plugin-simple-import-sort": "^4.0.0",
     "esm": "^3.2.25",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "faker": "^4.1.0",

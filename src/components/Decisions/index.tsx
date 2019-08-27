@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
+
 import { Approval, SimpleMajority } from './_components';
 
 export const Decisions = memo(({ decisions }: { decisions: tDecision[] }) => (

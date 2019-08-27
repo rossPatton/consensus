@@ -5,7 +5,7 @@ import {Dispatch} from 'redux';
 
 import {Helmet} from '../../../components';
 import {authenticateSession, updateUser} from '../../../redux';
-import {title, canonical, description, keywords} from './_constants';
+import {canonical, description, keywords, title} from './_constants';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {UserAdminComponent} from './Component';
 

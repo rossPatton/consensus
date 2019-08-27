@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { getUsers } from '../../redux';
 import { GenericLoader, Helmet } from '../../components';
-import { title, canonical, description, keywords } from './_constants';
+import { getUsers } from '../../redux';
+import { canonical, description, keywords, title } from './_constants';
 import { tContainerProps } from './_types';
 import { HomeComponent } from './HomeComponent';
 

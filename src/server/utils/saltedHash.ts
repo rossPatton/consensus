@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+
 import { sha384 } from '.';
 
 // takes a text input (usually a password) and returned a salted hash

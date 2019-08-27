@@ -5,8 +5,8 @@ import { Dispatch } from 'redux';
 import {Breadcrumbs, GenericLoader, Helmet} from '../../../../components';
 import {getCity, getCountry, getRegion} from '../../../../redux';
 import {slugify } from '../../../../utils';
-import {CityComponent} from './Component';
 import {tContainerProps, tStore} from './_types';
+import {CityComponent} from './Component';
 
 export class CityContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {

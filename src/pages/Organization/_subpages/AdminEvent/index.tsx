@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 import dayJS from 'dayjs';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
+import { Dispatch } from 'redux';
 
-import { getDateNowAsISOStr, parseTimeString } from '../../../../utils';
+import { Helmet } from '../../../../components';
 import { createEvent } from '../../../../redux';
 import { getEventsByOrgSuccess } from '../../../../redux/async/getEventsByOrg/actions';
-import { Helmet } from '../../../../components';
+import { getDateNowAsISOStr, parseTimeString } from '../../../../utils';
 import { tContainerProps, tCreateEvent, tState, tStateUnion, tStore } from './_types';
 import { AdminEventComponent } from './Component';
 

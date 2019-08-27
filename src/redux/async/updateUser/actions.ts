@@ -1,4 +1,4 @@
-import { tBeginAction, tSuccessAction, tFailureAction } from './_types';
+import { tBeginAction, tFailureAction, tSuccessAction } from './_types';
 
 export const UPDATE_USER_BEGIN = 'UPDATE_USER_BEGIN';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';

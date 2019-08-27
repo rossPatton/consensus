@@ -1,10 +1,10 @@
+import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Switch } from 'react-router-dom';
-import React from 'react';
-// import { hot } from 'react-hot-loader';
 
-import { routes } from '../../routes';
 import { RouteWithSubRoutes } from '../../components';
+// import { hot } from 'react-hot-loader';
+import { routes } from '../../routes';
 import { Footer, Header, Nav } from './_components';
 
 export const AppShell = (props: any) => (

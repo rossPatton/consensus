@@ -1,6 +1,7 @@
-import thunk from 'redux-thunk';
 import reduxImmutableStateVariant from 'redux-immutable-state-invariant';
 import createMemoizeMiddleware from 'redux-memoize';
+import thunk from 'redux-thunk';
+
 import { crashReporter } from './crashReporter';
 import { logger } from './logger';
 

@@ -1,5 +1,6 @@
 import React, {Fragment, memo} from 'react';
 import {Link} from 'react-router-dom';
+
 import {tProps} from './_types';
 
 export const Breadcrumbs = memo((props: tProps) => {

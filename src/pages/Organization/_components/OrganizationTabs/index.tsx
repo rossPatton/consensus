@@ -1,4 +1,5 @@
 import React, {memo} from 'react';
+
 import {Tab} from './_components';
 import {tProps} from './_types';
 

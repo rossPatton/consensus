@@ -1,10 +1,10 @@
 import {
   GET_EVENT_BY_ID_BEGIN,
-  GET_EVENT_BY_ID_SUCCESS,
   GET_EVENT_BY_ID_FAILURE,
+  GET_EVENT_BY_ID_SUCCESS,
   tBeginAction,
-  tSuccessAction,
   tFailureAction,
+  tSuccessAction,
 } from './_types';
 
 export const getEventByIdBegin = (): tBeginAction => ({

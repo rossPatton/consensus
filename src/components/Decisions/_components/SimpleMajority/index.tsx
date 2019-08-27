@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
+
 import { tProps } from './_types';
 
 export const SimpleMajority = memo((props: tProps) => {

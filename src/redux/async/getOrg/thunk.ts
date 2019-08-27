@@ -1,12 +1,11 @@
-import { memoize } from 'redux-memoize';
 import { Dispatch } from 'redux';
+import { memoize } from 'redux-memoize';
 
 import { agent, objToQueryString } from '../../../utils';
-
 import {
   getOrgBegin,
-  getOrgSuccess,
   getOrgFailure,
+  getOrgSuccess,
 } from './actions';
 
 export const getOrg = memoize({ ttl: 300 }, (params: tOrgRouteParams) => {

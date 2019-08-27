@@ -1,8 +1,8 @@
 import {
-  tActionUnion,
   GET_EVENT_BY_ID_BEGIN,
-  GET_EVENT_BY_ID_SUCCESS,
   GET_EVENT_BY_ID_FAILURE,
+  GET_EVENT_BY_ID_SUCCESS,
+  tActionUnion,
 } from './_types';
 
 const initialState: tThunk<tEvent> = {

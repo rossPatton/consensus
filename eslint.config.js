@@ -36,6 +36,7 @@ module.exports = {
     'plugin:jsx-a11y/strict',
     'plugin:react/recommended',
     'plugin:security/recommended',
+    'plugin:node/recommended',
   ],
   settings: {
     react: {
@@ -53,10 +54,13 @@ module.exports = {
   plugins: [
     'import',
     'jsx-a11y',
+    'node',
+    'no-secrets',
     'promise',
     'react',
     'react-hooks',
     'security',
+    'simple-import-sort',
   ],
   rules: {
     'array-bracket-spacing': [ERROR, 'never'],
@@ -90,16 +94,7 @@ module.exports = {
     // doesnt like aliases, and besides, ts handles it just fine
     'import/no-unresolved': OFF,
     'import/namespace': [OFF, { allowComputed: true }],
-    'import/order': [ERROR, {
-      'groups': [
-        'builtin',
-        'external',
-        'internal',
-        'parent',
-        'sibling',
-        'index',
-      ],
-    }],
+    'import/order': OFF,
     'import/no-named-as-default': ERROR,
     'import/no-named-as-default-member': ERROR,
     'indent': [ERROR, 2],
@@ -116,6 +111,8 @@ module.exports = {
     }],
     'linebreak-style': ERROR,
     'new-parens': ERROR,
+    'node/no-extraneous-require': OFF,
+    'node/no-unsupported-features/es-syntax': OFF,
     'no-alert': ERROR,
     'no-array-constructor': ERROR,
     'no-caller': ERROR,
@@ -154,6 +151,7 @@ module.exports = {
     'no-proto': ERROR,
     'no-restricted-modules': ERROR,
     'no-return-assign': ERROR,
+    'no-secrets/no-secrets': ERROR,
     'no-script-url': ERROR,
     'no-self-compare': ERROR,
     'no-sequences': ERROR,
@@ -225,6 +223,7 @@ module.exports = {
       'after': true,
     }],
     'sort-imports': OFF,
+    'simple-import-sort/sort': ERROR,
     'sort-vars': ERROR,
     'space-before-blocks': ERROR,
     'space-before-function-paren': [OFF, 'never'], // doesnt work with async funcs

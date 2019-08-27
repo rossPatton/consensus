@@ -1,10 +1,10 @@
 import {
   GET_REGION_BEGIN,
-  GET_REGION_SUCCESS,
   GET_REGION_FAILURE,
+  GET_REGION_SUCCESS,
   tBeginAction,
-  tSuccessAction,
   tFailureAction,
+  tSuccessAction,
 } from './_types';
 
 export const getRegionBegin = (): tBeginAction => ({

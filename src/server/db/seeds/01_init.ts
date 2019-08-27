@@ -1,11 +1,12 @@
 require('dotenv').config();
-import Knex from 'knex';
 import bcrypt from 'bcryptjs';
 import faker from 'faker';
+import Knex from 'knex';
+
 import { slugify } from '../../../utils/slugify';
-import { encrypt, sha384 } from '../../utils';
-import stateMap from '../../json/usa/stateCodeMap.json';
 import cities from '../../json/usa/cities.json';
+import stateMap from '../../json/usa/stateCodeMap.json';
+import { encrypt, sha384 } from '../../utils';
 
 // in production, salt would be generated per hash, but this saves time
 const salt = bcrypt.genSaltSync(10);

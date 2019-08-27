@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
+
 import { tProps } from './_types';
 
 const ScrollToTopComponent = (props: tProps) => {

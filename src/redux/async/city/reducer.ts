@@ -1,8 +1,8 @@
 import {
-  tActionUnion,
   GET_CITY_BEGIN,
-  GET_CITY_SUCCESS,
   GET_CITY_FAILURE,
+  GET_CITY_SUCCESS,
+  tActionUnion,
 } from './_types';
 
 const initialState: tThunk<any> = {

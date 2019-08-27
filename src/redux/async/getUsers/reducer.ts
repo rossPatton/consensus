@@ -1,10 +1,9 @@
+import { tActionUnion } from './_types';
 import {
   GET_USERS_BEGIN,
-  GET_USERS_SUCCESS,
   GET_USERS_FAILURE,
+  GET_USERS_SUCCESS,
 } from './actions';
-
-import { tActionUnion } from './_types';
 
 const initialState: tThunk<tUser[]> = {
   error: null,

@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+
 import { Decisions, Paginate } from '../../../../components';
 import { tComponentProps } from './_types';
 

@@ -1,14 +1,14 @@
-import { memoize } from 'redux-memoize';
 import { Dispatch } from 'redux';
-import { agent, objToQueryString } from '../../../utils';
+import { memoize } from 'redux-memoize';
 
+import { agent, objToQueryString } from '../../../utils';
 import {
   authenticateBegin,
-  authenticateSuccess,
   authenticateFailure,
+  authenticateSuccess,
   logOutBegin,
-  logOutSuccess,
   logOutFailure,
+  logOutSuccess,
 } from './actions';
 
 export const authenticateSession = memoize({ ttl: 300 }, (user: tLogin) => {

@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
+
 import { tProps } from './_types';
 
 export const Approval = memo((props: tProps) => (

@@ -1,10 +1,10 @@
 import {
   GET_USERS_BY_ORG_BEGIN,
-  GET_USERS_BY_ORG_SUCCESS,
   GET_USERS_BY_ORG_FAILURE,
+  GET_USERS_BY_ORG_SUCCESS,
   tBeginAction,
-  tSuccessAction,
   tFailureAction,
+  tSuccessAction,
 } from './_types';
 
 export const getUsersByOrgBegin = (): tBeginAction => ({

@@ -1,7 +1,7 @@
 import {
   UPDATE_USER_BEGIN,
-  UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
+  UPDATE_USER_SUCCESS,
 } from './actions';
 
 export type tBeginAction = tAction<typeof UPDATE_USER_BEGIN>;

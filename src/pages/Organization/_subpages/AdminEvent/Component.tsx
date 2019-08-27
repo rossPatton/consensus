@@ -1,6 +1,7 @@
-import _ from 'lodash';
 import cx from 'classnames';
+import _ from 'lodash';
 import React, { memo } from 'react';
+
 import { getDateNowAsISOStr } from '../../../../utils';
 import { tComponentProps } from './_types';
 

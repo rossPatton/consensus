@@ -1,4 +1,4 @@
-import { GET_USERS_BEGIN, GET_USERS_SUCCESS, GET_USERS_FAILURE } from './actions';
+import { GET_USERS_BEGIN, GET_USERS_FAILURE, GET_USERS_SUCCESS } from './actions';
 
 export type tBeginAction = tAction<typeof GET_USERS_BEGIN>;
 export type tSuccessAction = tAction<typeof GET_USERS_SUCCESS, tThunk<tUser[]>>;

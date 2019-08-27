@@ -1,4 +1,4 @@
-import { tBeginAction, tSuccessAction, tFailureAction } from './_types';
+import { tBeginAction, tFailureAction, tSuccessAction } from './_types';
 
 export const GET_ORG_BEGIN = 'GET_ORG_BEGIN';
 export const GET_ORG_SUCCESS = 'GET_ORG_SUCCESS';

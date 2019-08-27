@@ -7,8 +7,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { AppShell } from './containers';
+
 import { ScrollToTop } from './components';
+import { AppShell } from './containers';
 import { initStore } from './redux/store';
 
 // Grab the state from a global variable injected into the server-generated HTML

@@ -1,7 +1,7 @@
 import {
   FILE_UPLOAD_BEGIN,
-  FILE_UPLOAD_SUCCESS,
   FILE_UPLOAD_FAILURE,
+  FILE_UPLOAD_SUCCESS,
   tActionUnion,
 } from './_types';
 

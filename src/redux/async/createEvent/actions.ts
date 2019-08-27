@@ -1,10 +1,10 @@
 import {
   CREATE_EVENT_BEGIN,
-  CREATE_EVENT_SUCCESS,
   CREATE_EVENT_FAILURE,
+  CREATE_EVENT_SUCCESS,
   tBeginAction,
-  tSuccessAction,
   tFailureAction,
+  tSuccessAction,
 } from './_types';
 
 

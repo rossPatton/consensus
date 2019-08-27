@@ -1,11 +1,11 @@
-import { memoize } from 'redux-memoize';
 import { Dispatch } from 'redux';
-import { agent, objToQueryString } from '../../../utils';
+import { memoize } from 'redux-memoize';
 
+import { agent, objToQueryString } from '../../../utils';
 import {
   createEventBegin,
-  createEventSuccess,
   createEventFailure,
+  createEventSuccess,
 } from './actions';
 
 export const createEvent = memoize({ ttl: 300 }, (event: tPublicEvent) => {

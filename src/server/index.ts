@@ -3,21 +3,20 @@ require('es6-promise').polyfill();
 import 'core-js/stable';
 import 'isomorphic-fetch';
 import 'regenerator-runtime/runtime';
-
 // initialize passport
 import './passport';
 
+import fs from 'fs-extra';
 import http from 'http';
 import https from 'https';
-import fs from 'fs-extra';
 import Koa from 'koa';
 import passport from 'koa-passport';
-import loglevel from 'loglevel';
 import redisStore from 'koa-redis';
 import session from 'koa-session';
+import loglevel from 'loglevel';
 
-import { setupMiddleware } from './middleware';
 import { setupApi } from './api';
+import { setupMiddleware } from './middleware';
 import { SSR } from './SSR';
 
 if (__DEBUG__) {

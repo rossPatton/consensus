@@ -1,7 +1,8 @@
-import _ from 'lodash';
 import Koa from 'koa';
-import Router from 'koa-router';
 import passport from 'koa-passport';
+import Router from 'koa-router';
+import _ from 'lodash';
+
 import { knex } from '../db/connection';
 
 export const auth = new Router();

@@ -1,11 +1,11 @@
-import { memoize } from 'redux-memoize';
 import { Dispatch } from 'redux';
-import { agent, objToQueryString } from '../../../utils';
+import { memoize } from 'redux-memoize';
 
+import { agent, objToQueryString } from '../../../utils';
 import {
   getUsersByOrgBegin,
-  getUsersByOrgSuccess,
   getUsersByOrgFailure,
+  getUsersByOrgSuccess,
 } from './actions';
 
 export const getUsersByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {

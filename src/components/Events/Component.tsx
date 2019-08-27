@@ -1,9 +1,10 @@
-import dayJS from 'dayjs';
 import cx from 'classnames';
+import dayJS from 'dayjs';
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { getRandomNum } from '../../utils';
+
 import { ExternalLink } from '../../components';
+import { getRandomNum } from '../../utils';
 import { tProps } from './_types';
 
 export const EventsComponent = memo((props: tProps) => (
