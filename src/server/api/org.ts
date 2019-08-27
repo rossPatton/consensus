@@ -12,8 +12,8 @@ org.get('org', '/api/v1/org', async (ctx: Koa.Context) => {
   const {
     city: citySlug,
     country: countryCode,
-    org: orgSlug,
     region: regionCode,
+    slug: orgSlug,
   } = ctx.state.locals.data;
 
   let country: tCountry;

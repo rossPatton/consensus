@@ -1,4 +1,13 @@
-import { Directory, Event, Home, Login, Organization, Signup, UserAdmin } from '../pages';
+import {
+  Directory,
+  Event,
+  Home,
+  Login,
+  // NoMatch,
+  Organization,
+  Signup,
+  UserAdmin,
+} from '../pages';
 
 // TODO eventually split this file up once it starts getting big
 export const routes = [
@@ -29,11 +38,18 @@ export const routes = [
   {
     component: Directory,
     exact: true,
-    path: '/:country/:region?/:city?',
+    path: '/directory/:country/:region?/:city?',
   },
   {
     component: Organization,
-    path: '/:country/:region/:city/:org/:section/:page?',
+    exact: true,
+    path: '/org/:country/:region/:city/:slug/:section/:page?',
   },
+  // NoMatch === our 404 page
+  // any match that we can't find, 404, or else we can manually redirect to /404
+  // {
+  //   component: NoMatch,
+  //   path: '*',
+  // },
 ];
 

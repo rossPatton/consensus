@@ -34,7 +34,7 @@ export class CountryContainer extends PureComponent<tContainerProps> {
           render={() => {
             const crumbs = [{
               display: country.name,
-              to: country.code,
+              to: `directory/${country.code}`,
             }];
 
             return (
@@ -59,7 +59,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  getCountry: (params: tLocationParams) => dispatch(getCountry(params)),
+  getCountry: (params: tDirectoryParams) => dispatch(getCountry(params)),
 });
 
 export const Country = connect(

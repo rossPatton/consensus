@@ -8,8 +8,8 @@ export type tProps = {
 
 export type tContainerProps = tProps & {
   country: tCountry,
-  getCountry: (params: tLocationParams) => tThunk<tCountry>,
-  getRegion: (params: tLocationParams) => tThunk<tRegion>,
+  getCountry: (params: tDirectoryParams) => tThunk<tCountry>,
+  getRegion: (params: tDirectoryParams) => tThunk<tRegion>,
   isLoading: boolean,
   match: match,
   region: tRegion,

@@ -36,13 +36,13 @@ export class CityContainer extends PureComponent<tContainerProps> {
           render={() => {
             const crumbs = [{
               display: country.name,
-              to: country.code,
+              to: `directory/${country.code}`,
             }, {
               display: region.name,
-              to: `${country.code}/${region.code}`,
+              to: `directory/${country.code}/${region.code}`,
             }, {
               display: city.name,
-              to: `${country.code}/${region.code}/${slugify(city.name)}`,
+              to: `directory/${country.code}/${region.code}/${slugify(city.name)}`,
             }];
 
             return (
@@ -71,9 +71,9 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  getCity: (params: tLocationParams) => dispatch(getCity(params)),
-  getCountry: (params: tLocationParams) => dispatch(getCountry(params)),
-  getRegion: (params: tLocationParams) => dispatch(getRegion(params)),
+  getCity: (params: tDirectoryParams) => dispatch(getCity(params)),
+  getCountry: (params: tDirectoryParams) => dispatch(getCountry(params)),
+  getRegion: (params: tDirectoryParams) => dispatch(getRegion(params)),
 });
 
 export const City = connect(

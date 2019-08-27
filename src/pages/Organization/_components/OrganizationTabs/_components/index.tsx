@@ -5,8 +5,8 @@ import {tProps} from './_types';
 
 export const Tab = memo((props: tProps) => {
   const { match, subRoute = '' } = props;
-  const { country, city, region, org, section } = match.params;
-  const to = `/${country}/${region}/${city}/${org}/${subRoute}`;
+  const { country, city, region, slug, section } = match.params;
+  const to = `/org/${country}/${region}/${city}/${slug}/${subRoute}`;
   const cx = 'ttCap dBl p2 pL3 pR3';
 
   if (section === subRoute) {

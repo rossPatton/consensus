@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
 
-import { GenericLoader, Helmet } from '../../components';
-import { getOrg } from '../../redux';
-import { getUserRole } from '../../utils';
-import { tContainerProps, tStore } from './_types';
-import { OrganizationComponent } from './Component';
+import {GenericLoader, Helmet} from '../../components';
+import {getOrg} from '../../redux';
+import {getUserRole} from '../../utils';
+import {tContainerProps, tStore} from './_types';
+import {OrganizationComponent} from './Component';
 
 export class OrganizationContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
@@ -19,7 +19,7 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const { org, session } = this.props;
+    const { isLoading, location, match, org, session, usersByOrg } = this.props;
     const role = getUserRole(session, org);
 
     return (
@@ -35,10 +35,13 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
           ]}
         />
         <GenericLoader
-          isLoading={this.props.isLoading}
+          isLoading={isLoading}
           render={() => (
             <OrganizationComponent
-              {...this.props}
+              location={location}
+              match={match}
+              org={org}
+              usersByOrg={usersByOrg}
               role={role}
             />
           )}
@@ -48,10 +51,10 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
   }
 }
 
-const mapStateToProps = (state: tStore) => ({
-  isLoading: state.org.isLoading,
-  org: state.org.data,
-  session: state.session.data,
+const mapStateToProps = (store: tStore) => ({
+  isLoading: store.org.isLoading,
+  org: store.org.data,
+  session: store.session.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

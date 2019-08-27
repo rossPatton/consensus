@@ -8,7 +8,7 @@ import {
   getCountrySuccess,
 } from './actions';
 
-export const getCountry = memoize({ttl: 300}, (params: tLocationParams) => {
+export const getCountry = memoize({ttl: 300}, (params: tDirectoryParams) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getCountryBegin());
 

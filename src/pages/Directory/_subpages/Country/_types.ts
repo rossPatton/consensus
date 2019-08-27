@@ -6,7 +6,7 @@ export type tProps = {
 };
 
 export type tContainerProps = tProps & {
-  getCountry: (params: tLocationParams) => tThunk<tCountry>,
+  getCountry: (params: tDirectoryParams) => tThunk<tCountry>,
   isLoading: boolean,
 };
 

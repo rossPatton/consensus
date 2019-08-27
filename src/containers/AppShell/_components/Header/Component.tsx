@@ -6,7 +6,9 @@ import { tProps } from './_types';
 export const HeaderComponent = memo((props: tProps) => (
   <header className="bgWhite bxSh1 fix t l r pT3 pB3 z99">
     <div className="contain fx aiCtr jcCtr rel">
-      <Link className="abs l" to="/us/ny/new-york-city/tech-workers-coalition-nyc/overview">
+      <Link
+        className="abs l"
+        to="/org/us/ny/new-york-city/tech-workers-coalition-nyc/overview">
         <img alt="" src="/static/images/ham.svg" width="40" />
       </Link>
       <Link to="/">

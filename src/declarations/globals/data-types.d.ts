@@ -1,4 +1,3 @@
-// TODO define country/state maps
 declare interface tThunk<D> {
   error?: Error | null,
   data: D,
@@ -76,19 +75,16 @@ declare type tOrg = {
   username: string,
 };
 
-declare type tLocationParams = {
+declare type tDirectoryParams = {
   city?: string,
   country?: string,
   region?: string,
 };
 
-declare type tOrgRouteParams = tLocationParams & {
-  // city: string,
-  // country: string,
-  org: string,
+declare type tOrgRouteParams = tDirectoryParams & {
+  slug: string,
   page?: string,
   section?: string,
-  // region: string;
 };
 
 declare type tUser = {
@@ -196,7 +192,7 @@ declare type tIdQueryServer = {
 };
 
 declare type tLocationQueryServer = {
-  query: tLocationParams,
+  query: tDirectoryParams,
 };
 
 declare type tCountry = {

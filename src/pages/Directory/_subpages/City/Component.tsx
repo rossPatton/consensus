@@ -5,24 +5,26 @@ import {slugify } from '../../../../utils';
 import {tProps} from './_types';
 
 export const CityComponent = memo((props: tProps) => {
-  const {city, match} = props;
+  const {city: cityObj, match} = props;
+  const {city, region, country} = match.params;
+  const urlPrefix = `/org/${country}/${region}/${city}`;
 
   return (
     <>
       <h1 className="mB3">
-        {city.name}
+        {cityObj.name}
       </h1>
       <h2 className="mB2 fs3">
-        Organizations in {city.name}
+        Organizations in {cityObj.name}
       </h2>
-      {!city.orgs || city.orgs.length === 0 && (
+      {!cityObj.orgs || cityObj.orgs.length === 0 && (
         <div>
-          No organizations found for {city.name}
+          No organizations found for {cityObj.name}
         </div>
       )}
-      {city.orgs && (
+      {cityObj.orgs && (
         <ul className="fx fxWrap">
-          {city.orgs.map((org: tOrg, i) => (
+          {cityObj.orgs.map((org: tOrg, i) => (
             <li
               key={i}
               className="col p3 brdA1 br8 mB3 mL1 mR1"
@@ -32,7 +34,7 @@ export const CityComponent = memo((props: tProps) => {
               </div>
               <Link
                 className="dBl lh1 mB3 fs3"
-                to={`${match.url}/${slugify(org.name)}/overview`}>
+                to={`${urlPrefix}/${slugify(org.name)}/overview`}>
                 {org.name}
               </Link>
               <div className="fs6 lh1">

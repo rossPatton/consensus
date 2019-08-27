@@ -1,11 +1,11 @@
 import React from 'react';
-import { HelmetProvider } from 'react-helmet-async';
-import { Switch } from 'react-router-dom';
+import {HelmetProvider} from 'react-helmet-async';
+import {Route, Switch} from 'react-router-dom';
 
-import { RouteWithSubRoutes } from '../../components';
-// import { hot } from 'react-hot-loader';
-import { routes } from '../../routes';
-import { Footer, Header, Nav } from './_components';
+import {RouteWithSubRoutes} from '../../components';
+import {NoMatch} from '../../pages';
+import {routes} from '../../routes';
+import {Footer, Header, Nav} from './_components';
 
 export const AppShell = (props: any) => (
   <HelmetProvider context={{}}>
@@ -21,6 +21,7 @@ export const AppShell = (props: any) => (
               {...route}
             />
           ))}
+          <Route component={() => <NoMatch />} />
         </Switch>
       </main>
       <Footer />

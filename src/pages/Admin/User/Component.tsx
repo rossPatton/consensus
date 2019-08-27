@@ -79,17 +79,14 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           name="newPassword"
           password={props.newPassword}
           placeholder="Your new password"
-          onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-            return props.updateState('newPassword', ev);
-          }}
+          onChange={ev => props.updateState('newPassword', ev)}
         />
         <PasswordInput
           id="pwInput"
           title="Current password, required"
           password={props.password}
-          onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-            return props.updateState('password', ev);
-          }}
+          placeholder="Your current password"
+          onChange={ev => props.updateState('password', ev)}
         />
       </fieldset>
       <button className="p3 pL4 pR4 hvrBgGrey1 trans1">

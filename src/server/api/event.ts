@@ -9,7 +9,7 @@ export const event = new Router();
 event.get('getEventById', '/api/v1/event', async (ctx: Koa.Context) => {
   try {
     const {id} = ctx.query;
-    const event: tEvent = await knex('events').where({id}).limit(1).first();
+    const event: tEvent = await knex('events').limit(1).where({id}).first();
     ctx.body = event;
   } catch (err) {
     ctx.throw('400', err);

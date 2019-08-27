@@ -3,14 +3,14 @@ import { match } from 'react-router-dom';
 export type tProps = {
   city: tCity,
   country: tCountry,
-  match: match,
+  match: match & {params: tDirectoryParams},
   region: tRegion,
 };
 
 export type tContainerProps = tProps & {
-  getCity: (params: tLocationParams) => tThunk<tCity>,
-  getCountry: (params: tLocationParams) => tThunk<tCountry>,
-  getRegion: (params: tLocationParams) => tThunk<tRegion>,
+  getCity: (params: tDirectoryParams) => tThunk<tCity>,
+  getCountry: (params: tDirectoryParams) => tThunk<tCountry>,
+  getRegion: (params: tDirectoryParams) => tThunk<tRegion>,
   isLoading: boolean,
 };
 
