@@ -6,9 +6,10 @@ import { knex } from '../db/connection';
 import { encrypt, isValidPw, saltedHash } from '../utils';
 
 export const user = new Router();
+const route = '/api/v1/user';
 
 // @ts-ignore
-user.get('getUser', '/api/v1/user', async (ctx: Koa.Context) => {
+user.get('getUser', route, async (ctx: Koa.Context) => {
   try {
     const user: tUser = await knex('users').where(ctx.query).limit(1).first();
     const { password, ...safeUserForClient } = user;
@@ -20,7 +21,7 @@ user.get('getUser', '/api/v1/user', async (ctx: Koa.Context) => {
 
 // user signup form basically
 // @ts-ignore
-user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
+user.post('postUser', route, async (ctx: Koa.Context) => {
   const {data} = ctx.state.locals;
   const pwInput = data.password;
 
@@ -56,7 +57,7 @@ user.post('postUser', '/api/v1/user', async (ctx: Koa.Context) => {
 
 // TODO no-js forms only do GET/POST - figure out how to make patches work w/o js
 // @ts-ignore
-user.patch('patchUser', '/api/v1/user', async (ctx: Koa.Context) => {
+user.patch('patchUser', route, async (ctx: Koa.Context) => {
   const {data} = ctx.state.locals;
 
   let user = null;

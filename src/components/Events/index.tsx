@@ -6,20 +6,13 @@ import { notNull } from '../../utils';
 import { tProps } from './_types';
 import { EventsComponent } from './Component';
 
-// TODO this is too much nesting - maybe figure out a less verbose structure
-// basically, this
-// 1- gets basic org info needed for header
-// 2- sets up the shared layout for all sub pages
-// 3 - renders correct sub page based on react router match
 export class EventsContainer extends PureComponent<tProps> {
   mergeEventsWithRSVPs(events: tEvent[], session: tSession) {
     return events.map(ev => {
       // if private event, and user is not logged in, hide
       // if private event, user is logged in, but user is not a member, hide
-      if (ev.isPrivate) {
-        if (!session.isAuthenticated) return null;
-        // TODO check for roles here too
-      }
+      if (ev.isPrivate && !session.isAuthenticated) return null;
+      // TODO check for roles here too
 
       const match = _.find(session.rsvps, rsvp => ev.id === rsvp.eventId);
 

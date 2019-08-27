@@ -39,6 +39,7 @@ export const authenticateSessionReducer = (state = initialState, action: tSessio
       isLoading: false,
     };
 
+  /* eslint-disable */
   case LOG_OUT_BEGIN:
     return {
       ...state,
@@ -52,6 +53,7 @@ export const authenticateSessionReducer = (state = initialState, action: tSessio
       data: action.payload,
       isLoading: false,
     };
+  /* eslint-enable */
 
   case LOG_OUT_FAILURE:
     return {

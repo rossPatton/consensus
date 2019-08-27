@@ -37,6 +37,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:security/recommended',
     'plugin:node/recommended',
+    'plugin:sonarjs/recommended',
   ],
   settings: {
     react: {
@@ -61,6 +62,7 @@ module.exports = {
     'react-hooks',
     'security',
     'simple-import-sort',
+    'sonarjs',
   ],
   rules: {
     'array-bracket-spacing': [ERROR, 'never'],

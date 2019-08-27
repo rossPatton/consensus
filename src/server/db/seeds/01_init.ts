@@ -8,6 +8,8 @@ import cities from '../../json/usa/cities.json';
 import stateMap from '../../json/usa/stateCodeMap.json';
 import { encrypt, sha384 } from '../../utils';
 
+const country = 'United States';
+
 // in production, salt would be generated per hash, but this saves time
 const salt = bcrypt.genSaltSync(10);
 
@@ -52,7 +54,7 @@ const createOrg = async () => {
     category: faker.lorem.word(),
     city: 'New York City',
     cityId: 3658,
-    country: 'United States',
+    country,
     countryId: 1,
     description: faker.lorem.paragraphs(),
     email: faker.internet.exampleEmail(),
@@ -109,7 +111,7 @@ const createTWC = async () => {
     category: 'Tech and Science Activism',
     city: 'New York City',
     cityId: 3658,
-    country: 'United States',
+    country,
     countryId: 1,
     description: faker.lorem.paragraphs(),
     email: 'techworkerscoalitionnyc@gmail.com',
@@ -123,14 +125,16 @@ const createTWC = async () => {
   };
 };
 
+const MAJORITY = 'Simple Majority';
+const APPROVAL = 'Approval';
 const createDecisionTypes = () => ([
-  { type: 'Simple Majority' },
-  { type: 'Approval' },
+  { type: MAJORITY },
+  { type: APPROVAL },
 ]);
 
 const createDecision = async (i: number) => {
-  const type = i % 2 === 0 ? 'Simple Majority' : 'Approval';
-  const data = type === 'Simple Majority'
+  const type = i % 2 === 0 ? MAJORITY : APPROVAL;
+  const data = type === MAJORITY
     ? {
       yes: faker.random.number(),
       no: faker.random.number(),
@@ -246,7 +250,7 @@ exports.seed = async (knex: Knex) => {
   // only country supported atm
   const createUSA = async () => ({
     code: 'us',
-    name: 'United States',
+    name: country,
   });
 
   const statesByName = Object.keys(stateMap);

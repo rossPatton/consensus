@@ -1,6 +1,7 @@
 import Knex from 'knex';
 
 exports.up = async (knex: Knex) => {
+  const countryId = 'countries.id';
   await knex.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
 
   // a region === a state, or a province, or some other way of parsing geographical
@@ -28,7 +29,7 @@ exports.up = async (knex: Knex) => {
     table.string('code').notNullable();
 
     // in this case, the US since we have no other options atm
-    table.integer('country').notNullable().references('countries.id');
+    table.integer('country').notNullable().references(countryId);
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.timestamp('updatedAt').defaultTo(knex.fn.now());
@@ -45,7 +46,7 @@ exports.up = async (knex: Knex) => {
     // name is not id, since many cities have same name
     table.string('name').notNullable();
 
-    table.integer('country').notNullable().references('countries.id');
+    table.integer('country').notNullable().references(countryId);
     table.integer('region').notNullable().references('regions.id');
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());
@@ -93,7 +94,7 @@ exports.up = async (knex: Knex) => {
 
     // ease of lookup later
     table.integer('cityId').notNullable().references('cities.id');
-    table.integer('countryId').notNullable().references('countries.id');
+    table.integer('countryId').notNullable().references(countryId);
     table.integer('regionId').notNullable().references('regions.id');
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());
