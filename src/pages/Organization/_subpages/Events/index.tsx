@@ -11,7 +11,7 @@ export class EventsContainer extends Component<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
 
-    const { match: { params: { page = 0 } = {} }, org } = props;
+    const {match: {params: {page = 0} = {}}, org} = props;
     const offset = page ? parseInt(page, 10) : 0;
 
     props.getEventsByOrg({
@@ -24,7 +24,7 @@ export class EventsContainer extends Component<tContainerProps> {
   getSliceOfEvents = (events: tEvent[]) => {
     const newArray = [...events];
 
-    const { match: { params: { page } } } = this.props;
+    const {match: {params: {page}}} = this.props;
     const activePage = page ? parseInt(page, 10) : 1;
 
     const end = activePage * 10;

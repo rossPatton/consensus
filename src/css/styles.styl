@@ -302,6 +302,14 @@ i
   flex auto
   min-width 0
 
+.third
+  margin-right 1%
+  width 32%
+  &:last-child
+    margin-right 0
+  &:nth-child(3n)
+    margin-right 0
+
 .fxg0
   flex-grow 0
 
@@ -753,6 +761,12 @@ small
   max-width 33%
 
 @media (max-width: 768px)
+  .col
+    margin-left 0
+    margin-right 0
+    min-width 100%
+    width 100%
+
   .fx
     flex-direction column
 

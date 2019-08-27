@@ -1,25 +1,18 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
 
-import { Helmet } from '../../../../components';
-import { getDecisionsByOrg, getEventsByOrg, getUsersByOrg } from '../../../../redux';
-import { tContainerProps, tStore } from './_types';
-import { OverviewComponent } from './Component';
+import {GenericLoader, Helmet} from '../../../../components';
+import {getDecisionsByOrg, getEventsByOrg, getUsersByOrg} from '../../../../redux';
+import {tContainerProps, tStore} from './_types';
+import {OverviewComponent} from './Component';
 
-export class OverviewContainer extends Component<tContainerProps> {
+export class OverviewContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-
-    if (props.org.id === 0) return;
-
     // only show public events if user is not signed in
     const isPublic = !props.session.isAuthenticated;
-
-    if (props.events.length > 0) return;
     props.getEventsByOrg({id: props.org.id, isPublic, limit: -1});
-
-    if (props.decisions.length > 0) return;
     props.getDecisionsByOrg({id: props.org.id, isPublic, limit: -1});
   }
 
@@ -36,10 +29,15 @@ export class OverviewContainer extends Component<tContainerProps> {
             { property: 'og:description', content: '' },
           ]}
         />
-        <OverviewComponent
-          decisions={this.props.decisions.slice(0, 3)}
-          events={this.props.events.slice(0, 3)}
-          org={this.props.org}
+        <GenericLoader
+          isLoading={this.props.isLoading}
+          render={() => (
+            <OverviewComponent
+              decisions={this.props.decisions.slice(0, 3)}
+              events={this.props.events.slice(0, 3)}
+              org={this.props.org}
+            />
+          )}
         />
       </>
     );

@@ -2,7 +2,8 @@ import { match } from 'react-router';
 
 export type tProps = {
   active?: number,
+  className?: string,
   count?: number,
-  match: match & { params: tOrgRouteParams },
+  match: match & {params: any},
   total: number,
 }

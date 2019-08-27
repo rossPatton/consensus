@@ -4,9 +4,14 @@ import { Link } from 'react-router-dom';
 import { tProps } from './_types';
 
 export const Paginate = memo((props: tProps) => {
-  const { match, count = 10, total = 10 } = props;
-  const { params, url } = match;
+  const {
+    className = 'lsNone fx aiCtr jcCtr fs4 fw600',
+    match,
+    count = 10,
+    total = 10,
+  } = props;
 
+  const { params, url } = match;
   const activePage = params.page ? parseInt(params.page, 0) : 1;
 
   // a _.range equivalent. sort of
@@ -14,7 +19,7 @@ export const Paginate = memo((props: tProps) => {
   const pages = Array(pageCount).fill(null);
 
   return (
-    <ul className="lsNone fx aiCtr jcCtr fs4 fw600 mT3">
+    <ul className={className}>
       {pages.map((_, i) => {
         const pageNo = i + 1;
         const isActive = activePage === pageNo;

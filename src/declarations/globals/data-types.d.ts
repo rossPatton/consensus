@@ -79,6 +79,7 @@ declare type tOrg = {
 declare type tDirectoryParams = {
   city?: string,
   country?: string,
+  page?: string,
   region?: string,
 };
 

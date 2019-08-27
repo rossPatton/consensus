@@ -8,7 +8,7 @@ export const CountryComponent = memo((props: tProps) => {
 
   return (
     <>
-      <h1 className="mB3">
+      <h1>
         {country.name}
       </h1>
       <h2 className="mB2 fs3">

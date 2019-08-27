@@ -8,7 +8,7 @@ export const RegionComponent = memo((props: tProps) => {
   const {region, match} = props;
   return (
     <>
-      <h1 className="mB3">
+      <h1>
         {region.name}
       </h1>
       <h2 className="mB2 fs3">

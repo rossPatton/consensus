@@ -1,4 +1,5 @@
 export { agent } from './agent';
+export { fuzz } from './fuzz';
 export { getDateNowAsISOStr } from './getDateNowAsISOStr';
 export { getRandomNum } from './getRandomNum';
 export { getUserRole } from './getUserRole';

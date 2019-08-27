@@ -11,7 +11,8 @@ export const CityComponent = memo((props: tProps) => {
 
   return (
     <>
-      <h1 className="mB3">
+      {console.log('orgsToRender => ', props.orgsToRender)}
+      <h1>
         {cityObj.name}
       </h1>
       <h2 className="mB2 fs3">
@@ -19,16 +20,29 @@ export const CityComponent = memo((props: tProps) => {
       </h2>
       {!cityObj.orgs || cityObj.orgs.length === 0 && (
         <div>
-          No organizations found for {cityObj.name}
+        No organizations found for {cityObj.name}
         </div>
       )}
-      {cityObj.orgs && (
+      <div className="fx aiCtr p3 bgGrey1 br8 mB3">
+        <input
+          spellCheck
+          type="search"
+          className="mR2 lh1 row"
+          onChange={props.onChange}
+          placeholder="Search for an organization by name"
+        />
+        <button
+          type="button"
+          className="bgWhite p3 pL4 pR4 lh1 fs5">
+          Search
+        </button>
+      </div>
+      {props.orgsToRender.length > 0 && (
         <ul className="fx fxWrap">
-          {cityObj.orgs.map((org: tOrg, i) => (
+          {props.orgsToRender.map((org: tOrg, i) => (
             <li
               key={i}
-              className="col p3 brdA1 br8 mB3 mL1 mR1"
-              style={{width: '32%', maxWidth: '32%'}}>
+              className="col third p3 brdA1 br8 mB3">
               <div className="fs6 lh1 mB2">
                 {org.category}
               </div>

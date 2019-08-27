@@ -4,6 +4,7 @@ export type tProps = {
   city: tCity,
   country: tCountry,
   match: match & {params: tDirectoryParams},
+  onChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   region: tRegion,
 };
 

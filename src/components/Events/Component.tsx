@@ -33,10 +33,7 @@ export const EventsComponent = memo((props: tProps) => (
               {ev.title}
             </Link>
           </h3>
-          <div
-            className={cx({
-              'fx aiCtr mB2 fs6 fw600 lh1': true,
-            })}>
+          <div className="fx aiCtr mB2 fs6 fw600 lh1">
             <time className="mR1" dateTime={ev.date}>
               {dayJS(ev.date).format('ddd MMM DD, h:mmA')}
             </time>
