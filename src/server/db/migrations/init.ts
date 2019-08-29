@@ -13,6 +13,8 @@ exports.up = async (knex: Knex) => {
     table.string('name').notNullable();
     // USA
     table.string('code').notNullable();
+    // name for regions in this country (state|province|prefecture|etc)
+    table.string('regionType').notNullable().defaultTo('state');
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.timestamp('updatedAt').defaultTo(knex.fn.now());

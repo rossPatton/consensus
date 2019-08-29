@@ -202,6 +202,7 @@ declare type tCountry = {
   id: number,
   name: string, // United States
   regions?: tRegion[],
+  regionType: 'state'|'province'|'prefecture';
 };
 
 declare type tRegion = tCountry & {
@@ -210,7 +211,7 @@ declare type tRegion = tCountry & {
 };
 
 declare type tCity = tRegion & {
-  orgs?: tOrg[],
+  orgs: tOrg[],
   region, // region.id
 };
 

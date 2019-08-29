@@ -12,6 +12,7 @@ const initialState: tThunk<any> = {
     code: '',
     name: '',
     regions: [],
+    regionType: 'state',
   },
 };
 

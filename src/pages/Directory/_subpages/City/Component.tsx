@@ -11,49 +11,50 @@ export const CityComponent = memo((props: tProps) => {
 
   return (
     <>
-      {console.log('orgsToRender => ', props.orgsToRender)}
       <h1>
         {cityObj.name}
       </h1>
-      <h2 className="mB2 fs3">
-        Organizations in {cityObj.name}
-      </h2>
-      {!cityObj.orgs || cityObj.orgs.length === 0 && (
-        <div>
-        No organizations found for {cityObj.name}
-        </div>
-      )}
-      <div className="fx aiCtr p3 bgGrey1 br8 mB3">
+      <label
+        htmlFor="searchFilter"
+        className="fx aiCtr p3 bgGrey1 br8 mB4">
         <input
           spellCheck
           type="search"
+          id="searchFilter"
           className="mR2 lh1 row"
-          onChange={props.onChange}
+          onChange={props.onSearch}
           placeholder="Search for an organization by name"
         />
-        <button
-          type="button"
-          className="bgWhite p3 pL4 pR4 lh1 fs5">
-          Search
-        </button>
-      </div>
+        <select onBlur={props.onChange} onChange={props.onChange}>
+          <option value="">
+            Filter by Category
+          </option>
+          {props.categories.map((category: string, i) => (
+            <option key={i} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+      </label>
+      <h2 className="mB2 fs3">
+        {props.orgsToRender.length > 0 && `Organizations in ${cityObj.name}`}
+        {props.orgsToRender.length === 0 && 'No organizations found'}
+      </h2>
       {props.orgsToRender.length > 0 && (
         <ul className="fx fxWrap">
           {props.orgsToRender.map((org: tOrg, i) => (
             <li
               key={i}
-              className="col fxg0 third p3 brdA1 br8 mB3 trans2">
-              <div className="fs6 lh1 mB2">
-                {org.category}
-              </div>
+              className="col fxg0 third mB3">
               <Link
-                className="dBl lh1 mB3 fs3"
+                className="dBl fs6 lh1 p3 brdA1 br8 hvrBgGrey1 trans2 noUnderline"
                 to={`${urlPrefix}/${slugify(org.name)}/overview`}>
-                {org.name}
-              </Link>
-              <div className="fs6 lh1">
+                {org.category}
+                <span className="dBl lh1 fs3 mT1 mB3 underline">
+                  {org.name}
+                </span>
                 {org.membershipTotal} members
-              </div>
+              </Link>
             </li>
           ))}
         </ul>

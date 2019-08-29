@@ -1,5 +1,6 @@
 export { agent } from './agent';
 export { fuzz } from './fuzz';
+export { fuzzFilterList } from './fuzzFilterList';
 export { getDateNowAsISOStr } from './getDateNowAsISOStr';
 export { getRandomNum } from './getRandomNum';
 export { getUserRole } from './getUserRole';
@@ -11,4 +12,5 @@ export { padDate } from './padDate';
 export { parseISOLocalString } from './parseISOLocalString';
 export { parseTimeString } from './parseTimeString';
 export { deSlugify, slugify } from './slugify';
+export { lowerCase, upperCase } from './string';
 export { utcToDateString } from './utcToDateString';

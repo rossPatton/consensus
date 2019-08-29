@@ -4,12 +4,13 @@ import { Dispatch } from 'redux';
 
 import {Breadcrumbs, GenericLoader, Helmet} from '../../../../components';
 import {getCity, getCountry, getRegion} from '../../../../redux';
-import {fuzz, slugify} from '../../../../utils';
-import {tContainerProps, tStore} from './_types';
+import {fuzzFilterList, slugify} from '../../../../utils';
+import {tContainerProps, tState, tStore} from './_types';
 import {CityComponent} from './Component';
 
-export class CityContainer extends PureComponent<tContainerProps> {
+export class CityContainer extends PureComponent<tContainerProps, tState> {
   state = {
+    category: '',
     orgsBySearch: [],
   };
 
@@ -20,45 +21,37 @@ export class CityContainer extends PureComponent<tContainerProps> {
     props.getCity(props.match.params);
   }
 
-  onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  // Re-run the filter whenever the list array or filter text changes:
+  filterByCategory = (orgs: tOrg[]) => {
+    if (this.state.category === '') return orgs;
+    return orgs.filter(org => org.category === this.state.category);
+  };
+
+  onChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
     ev.preventDefault();
+    this.setState({
+      category: ev.currentTarget.value,
+    });
+  }
 
-    const search = ev.currentTarget.value;
-    const searchNorm = search.toLowerCase();
-    const {orgs = []} = this.props.city;
-
-    type tMatch = {
-      rendered: string,
-      score: number;
-    };
-
-    const orgsBySearch = orgs
-      .map(org => {
-        const orgNorm = org.name.toLowerCase();
-        const match = fuzz(searchNorm, orgNorm);
-        return {
-          ...org,
-          match,
-        };
-      })
-      .filter(org => !!org.match && org.match.score > 0)
-      .sort((a: any, b: any) => {
-        if (a.match.score > b.match.score) return -1;
-        if (a.match.score < b.match.score) return 1;
-        return 0;
-      });
-
-
-    this.setState({orgsBySearch});
+  onSearch = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    ev.preventDefault();
+    console.log('search => ', ev.currentTarget.value);
+    this.setState({
+      orgsBySearch: fuzzFilterList({
+        input: this.props.city.orgs,
+        search: ev.currentTarget.value,
+      }),
+    });
   }
 
   render() {
-    const {city, country, isLoading, match, region} = this.props;
-    const {orgs = []} = city;
     const {orgsBySearch} = this.state;
-    const orgsToRender = orgsBySearch.length > 0
-      ? orgsBySearch
-      : orgs;
+    const {city, country, isLoading, match, region} = this.props;
+    const categories = city.orgs.map(org => org.category);
+    const orgsToRender = orgsBySearch.length > 0 ? orgsBySearch : city.orgs;
+
+    console.log('orgsToRender => ', orgsToRender);
 
     return (
       <>
@@ -90,11 +83,13 @@ export class CityContainer extends PureComponent<tContainerProps> {
               <>
                 <Breadcrumbs crumbs={crumbs} />
                 <CityComponent
+                  categories={categories}
                   city={city}
                   country={country}
                   match={match}
                   onChange={this.onChange}
-                  orgsToRender={orgsToRender}
+                  onSearch={this.onSearch}
+                  orgsToRender={this.filterByCategory(orgsToRender)}
                   region={region}
                 />
               </>

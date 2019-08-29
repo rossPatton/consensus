@@ -1,10 +1,12 @@
 import { match } from 'react-router-dom';
 
 export type tProps = {
+  categories: string[],
   city: tCity,
   country: tCountry,
   match: match & {params: tDirectoryParams},
-  onChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
+  onChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
+  onSearch: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   orgsToRender: tOrg[],
   region: tRegion,
 };
@@ -17,7 +19,12 @@ export type tContainerProps = {
   getRegion: (params: tDirectoryParams) => tThunk<tRegion>,
   isLoading: boolean,
   match: match & {params: tDirectoryParams},
-region: tRegion,
+  region: tRegion,
+};
+
+export type tState = {
+  category: string,
+  orgsBySearch: tOrg[],
 };
 
 export type tStore = {

@@ -4,44 +4,39 @@ import {Link} from 'react-router-dom';
 import {slugify} from '../../../../utils';
 import {tProps} from './_types';
 
-export const RegionComponent = memo((props: tProps) => {
-  const {region, match} = props;
-  return (
-    <>
-      <h1>
-        {region.name}
-      </h1>
-      <h2 className="mB2 fs3">
-        Cities in {region.name}
-      </h2>
-      <div className="fx aiCtr p3 bgGrey1 br8 mB3">
-        <input
-          spellCheck
-          type="search"
-          className="mR2 lh1 row"
-          onChange={props.onChange}
-          placeholder="Search for an organization by name"
-        />
-        <button
-          type="button"
-          className="bgWhite p3 pL4 pR4 lh1 fs5">
-          Search
-        </button>
-      </div>
-      <ul className="fx fxWrap">
-        {props.citiesToRender.map((city: tCity, i) => (
-          <li
-            key={i}
-            className="col"
-            style={{width: '32%', maxWidth: '32%'}}>
-            <Link
-              to={`${match.url}/${slugify(city.name)}`}
-              className="dBl p3 brdA1 br8 mB3 mL1 mR1 hvrBgGrey1 trans1">
-              {city.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </>
-  );
-});
+export const RegionComponent = memo((props: tProps) => (
+  <>
+    <h1>
+      {props.region.name}
+    </h1>
+    <label
+      htmlFor="searchFilter"
+      className="fx aiCtr p3 bgGrey1 br8 mB4">
+      <input
+        spellCheck
+        type="search"
+        id="searchFilter"
+        className="mR2 lh1 row"
+        onChange={props.onChange}
+        placeholder={`Search for a ${props.country.regionType} by name`}
+      />
+    </label>
+    <h2 className="mB2 fs3">
+      {props.citiesToRender.length > 0 && `Cities in ${props.region.name}`}
+      {props.citiesToRender.length === 0 && 'No cities found'}
+    </h2>
+    <ul className="fx fxWrap">
+      {props.citiesToRender.map((city: tCity, i) => (
+        <li
+          key={i}
+          className="col fxg0 third mB3">
+          <Link
+            to={`${props.match.url}/${slugify(city.name)}`}
+            className="dBl p3 brdA1 br8 hvrBgGrey1 trans1">
+            {city.name}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </>
+));

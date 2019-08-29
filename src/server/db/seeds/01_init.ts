@@ -251,6 +251,7 @@ exports.seed = async (knex: Knex) => {
   const createUSA = async () => ({
     code: 'us',
     name: country,
+    regionType: 'state',
   });
 
   const statesByName = Object.keys(stateMap);
