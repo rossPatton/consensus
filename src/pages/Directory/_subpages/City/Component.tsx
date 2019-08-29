@@ -42,7 +42,7 @@ export const CityComponent = memo((props: tProps) => {
           {props.orgsToRender.map((org: tOrg, i) => (
             <li
               key={i}
-              className="col third p3 brdA1 br8 mB3">
+              className="col fxg0 third p3 brdA1 br8 mB3 trans2">
               <div className="fs6 lh1 mB2">
                 {org.category}
               </div>

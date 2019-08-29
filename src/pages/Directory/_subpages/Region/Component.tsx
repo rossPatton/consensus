@@ -14,8 +14,22 @@ export const RegionComponent = memo((props: tProps) => {
       <h2 className="mB2 fs3">
         Cities in {region.name}
       </h2>
+      <div className="fx aiCtr p3 bgGrey1 br8 mB3">
+        <input
+          spellCheck
+          type="search"
+          className="mR2 lh1 row"
+          onChange={props.onChange}
+          placeholder="Search for an organization by name"
+        />
+        <button
+          type="button"
+          className="bgWhite p3 pL4 pR4 lh1 fs5">
+          Search
+        </button>
+      </div>
       <ul className="fx fxWrap">
-        {region.cities && region.cities.map((city: tCity, i) => (
+        {props.citiesToRender.map((city: tCity, i) => (
           <li
             key={i}
             className="col"

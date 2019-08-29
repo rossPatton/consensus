@@ -1,12 +1,14 @@
 import { match } from 'react-router-dom';
 
 export type tProps = {
+  citiesToRender: tCity[],
   country: tCountry,
   match: match,
+  onChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   region: tRegion,
 };
 
-export type tContainerProps = tProps & {
+export type tContainerProps = {
   country: tCountry,
   getCountry: (params: tDirectoryParams) => tThunk<tCountry>,
   getRegion: (params: tDirectoryParams) => tThunk<tRegion>,

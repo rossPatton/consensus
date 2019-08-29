@@ -24,24 +24,41 @@ export class CityContainer extends PureComponent<tContainerProps> {
     ev.preventDefault();
 
     const search = ev.currentTarget.value;
+    const searchNorm = search.toLowerCase();
     const {orgs = []} = this.props.city;
 
-    const orgsBySearch = orgs.filter(org => {
-      const searchNorm = search.toLowerCase();
-      const orgNorm = org.name.toLowerCase();
-      const match = fuzz(searchNorm, orgNorm);
-      return !!match && (match.score >= 25);
-    });
+    type tMatch = {
+      rendered: string,
+      score: number;
+    };
+
+    const orgsBySearch = orgs
+      .map(org => {
+        const orgNorm = org.name.toLowerCase();
+        const match = fuzz(searchNorm, orgNorm);
+        return {
+          ...org,
+          match,
+        };
+      })
+      .filter(org => !!org.match && org.match.score > 0)
+      .sort((a: any, b: any) => {
+        if (a.match.score > b.match.score) return -1;
+        if (a.match.score < b.match.score) return 1;
+        return 0;
+      });
+
 
     this.setState({orgsBySearch});
   }
 
   render() {
     const {city, country, isLoading, match, region} = this.props;
+    const {orgs = []} = city;
     const {orgsBySearch} = this.state;
     const orgsToRender = orgsBySearch.length > 0
       ? orgsBySearch
-      : city.orgs;
+      : orgs;
 
     return (
       <>
