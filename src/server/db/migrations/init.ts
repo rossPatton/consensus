@@ -159,9 +159,7 @@ exports.up = async (knex: Knex) => {
 
     table.integer('userId').notNullable().references('users.id');
     table.integer('eventId').notNullable().references('events.id');
-
-    table.boolean('didAttend').defaultTo(false);
-    table.boolean('isGoing').defaultTo(false);
+    table.boolean('rsvp').notNullable().defaultTo(false);
   });
 
   await knex.schema.createTable('decision_types', table => {

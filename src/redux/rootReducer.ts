@@ -14,7 +14,6 @@ import { authenticateSessionReducer } from './async/session/reducer';
 import { updateUserReducer } from './async/updateUser/reducer';
 
 export const rootReducer = combineReducers({
-  // auth: authenticateSessionReducer,
   decisions: getDecisionsByOrgReducer,
   city: getCityReducer,
   country: getCountryReducer,

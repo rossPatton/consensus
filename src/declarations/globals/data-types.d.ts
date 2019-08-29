@@ -98,14 +98,10 @@ declare type tUser = {
   username: string,
 };
 
-declare type tRSVP = {
-  didAttend: boolean,
-  isGoing: boolean,
-};
-
-declare type tUserEventRelation = tRSVP & {
+declare type tUserEventRelation = {
   id: number,
   eventId: number,
+  rsvp: boolean,
   userId: number,
 };
 
@@ -151,7 +147,7 @@ declare type tSession = {
   roles?: tRoleMap[],
   rsvps?: {
     eventId: number,
-    status: tRSVP,
+    rsvp: boolean,
   }[],
   updatedAt?: string,
   username?: string,

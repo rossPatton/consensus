@@ -38,19 +38,22 @@ auth.post('user login', '/auth/login', async (ctx: Koa.Context, next) => {
 
     const rsvps = userEventRels.map((rel: tUserEventRelation) => ({
       eventId: rel.eventId,
-      status: {
-        didAttend: rel.didAttend,
-        isGoing: rel.isGoing,
-      },
+      rsvp: rel.rsvp,
     }));
 
     // newSession === session.data on the client, redux adds loading/error keys
     const newSession: tSession = {
       ...safeUser,
       isAuthenticated: ctx.isAuthenticated(),
-      roles,
-      rsvps,
     };
+
+    if (roles && roles.length > 0) {
+      newSession.roles = roles;
+    }
+
+    if (rsvps && rsvps.length > 0) {
+      newSession.rsvps = rsvps;
+    }
 
     const {isFormSubmit} = ctx.state.locals.data;
     if (isFormSubmit) return ctx.redirect('/admin');

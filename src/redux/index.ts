@@ -9,6 +9,7 @@ export { getEventById } from './async/getEventById/thunk';
 export { getEventsByOrg } from './async/getEventsByOrg/thunk';
 export { getOrg } from './async/getOrg/thunk';
 export { getRegion } from './async/region/thunk';
+export { getRsvp, setRsvp } from './async/rsvp/thunk';
 export { getUsers } from './async/getUsers/thunk';
 export { getUsersByOrg } from './async/getUsersByOrg/thunk';
 export { registerUser } from './async/registerUser/thunk';

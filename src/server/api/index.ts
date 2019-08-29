@@ -10,6 +10,7 @@ import { fileUpload } from './fileUpload';
 import { org } from './org';
 import { region } from './region';
 import { reportUri } from './reportUri';
+import { rsvp } from './rsvp';
 import { user } from './user';
 import { users } from './users';
 import { usersByOrg } from './usersByOrg';
@@ -26,6 +27,7 @@ export const setupApi = (app: Koa) => {
   app.use(org.routes());
   app.use(region.routes());
   app.use(reportUri.routes());
+  app.use(rsvp.routes());
   app.use(user.routes());
   app.use(users.routes());
   app.use(usersByOrg.routes());
@@ -40,6 +42,7 @@ export const setupApi = (app: Koa) => {
   app.use(org.allowedMethods());
   app.use(region.allowedMethods());
   app.use(reportUri.allowedMethods());
+  app.use(rsvp.allowedMethods());
   app.use(user.allowedMethods());
   app.use(users.allowedMethods());
   app.use(usersByOrg.allowedMethods());

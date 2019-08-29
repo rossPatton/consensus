@@ -11,7 +11,7 @@ const route = '/api/v1/user';
 // @ts-ignore
 user.get('getUser', route, async (ctx: Koa.Context) => {
   try {
-    const user: tUser = await knex('users').where(ctx.query).limit(1).first();
+    const user: tUser = await knex('users').limit(1).where(ctx.query).first();
     const { password, ...safeUserForClient } = user;
     ctx.body = safeUserForClient;
   } catch (err) {
@@ -36,7 +36,7 @@ user.post('postUser', route, async (ctx: Koa.Context) => {
   try {
     const { email, username } = data;
     const newUser = { email, username, password: encrypt(hashedPW) };
-    userResult = await knex('users').insert(newUser).returning('*').limit(1);
+    userResult = await knex('users').insert(newUser).returning('*');
   } catch (err) {
     return ctx.throw(400, err);
   }

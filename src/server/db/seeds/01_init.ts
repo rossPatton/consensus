@@ -90,17 +90,11 @@ const createUserOrgRelation = async (i: number) => ({
   role: 'admin',
 });
 
-const createUserEventRelation = async (u: number, e: number) => {
-  // random bool for going
-  const didAttend = faker.random.boolean();
-
-  return {
-    didAttend,
-    eventId: e,
-    isGoing: !didAttend && faker.random.boolean(),
-    userId: u,
-  };
-};
+const createUserEventRelation = async (u: number, e: number) => ({
+  eventId: e,
+  rsvp: faker.random.boolean(),
+  userId: u,
+});
 
 const createTWC = async () => {
   const sha = sha384(faker.internet.password());
