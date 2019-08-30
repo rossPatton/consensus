@@ -48,7 +48,7 @@ export class EventsContainer extends Component<tContainerProps> {
           ]}
         />
         <GenericLoader
-          isLoading={this.props.events.length === 0 && this.props.isLoading}
+          isLoading={this.props.isLoading}
           render={() => (
             <EventsComponent
               allEvents={this.props.events}

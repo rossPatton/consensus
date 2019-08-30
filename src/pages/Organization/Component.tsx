@@ -1,11 +1,11 @@
-import React, { memo } from 'react';
+import React from 'react';
 
-import { UserBar } from './_components';
-import { OrganizationHeader, OrganizationTabs } from './_components';
-import { AdminEvent, Decisions, Events, Overview } from './_subpages';
-import { tProps } from './_types';
+import {UserBar} from './_components';
+import {OrganizationHeader, OrganizationTabs} from './_components';
+import {AdminEvent, Decisions, Events, Overview} from './_subpages';
+import {tProps} from './_types';
 
-export const OrganizationComponent = memo((props: tProps) => (
+export const OrganizationComponent = (props: tProps) => (
   <>
     <OrganizationHeader
       org={props.org}
@@ -50,4 +50,4 @@ export const OrganizationComponent = memo((props: tProps) => (
       <Resources />
     )} */}
   </>
-));
+);

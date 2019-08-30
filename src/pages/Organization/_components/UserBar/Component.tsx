@@ -2,7 +2,8 @@ import cx from 'classnames';
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
-import { tProps } from './_types';
+import {JoinForm} from './_components';
+import {tProps} from './_types';
 
 // UserBar currently has 3 states =>
 // 1. Not logged in or non-member state, where it just shows public info
@@ -18,30 +19,24 @@ export const UserBarComponent = memo((props: tProps) => (
       })}>
       <ul className="contain fx fxWrap aiCtr">
         <li className="fx aiCtr cap">
-          {props.role && (
-            <span className="bgWhite brdA1 br8 p1 pL2 pR2 mR2 fx aiCtr">
-              <span className="fs4 mR1">✔</span>
-              <span className="ttCap">{props.role}</span>
-            </span>
-          )}
-          {!props.role && (
-            <Link
-              to="filler"
-              className="bgWhite brdA1 br8 p1 pL2 pR2 mR2 noUnderline fw600">
-              Join This Organization
-            </Link>
-          )}
+          <JoinForm
+            org={props.org}
+            role={props.role}
+            session={props.session}
+          />
         </li>
         <li className="mR2 fx aiCtr">
           <a title="Click to see list of online members" href="filler">
             89 members online now
           </a>
         </li>
-        <li className="mL1 mR2">
-          <a title="CLick to see total member list" href="filler">
-            {props.usersByOrg.userTotal} members total
-          </a>
-        </li>
+        {props.usersByOrg.userTotal && (
+          <li className="mL1 mR2">
+            <a title="CLick to see total member list" href="filler">
+              {props.usersByOrg.userTotal} members total
+            </a>
+          </li>
+        )}
         {props.role === 'admin' && (
           <ul className="fx col jcEnd fs6">
             <li className="mR2 brdA1 p1 br4 bgWhite pL2 pR2 trans1">

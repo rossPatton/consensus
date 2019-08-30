@@ -79,12 +79,21 @@ export class UserAdminContainer extends Component<tContainerProps, tState> {
         />
         {!session.isAuthenticated && <Redirect to="/login" />}
         {session.isAuthenticated && (
-          <UserAdminComponent
-            {...this.state}
-            session={session}
-            save={this.save}
-            updateState={this.updateState}
-          />
+          <div className="contain fx mT4">
+            <aside>
+              <ul role="navigation">
+                <li>Profile</li>
+                <li>Memberships</li>
+                <li>Events</li>
+              </ul>
+            </aside>
+            <UserAdminComponent
+              {...this.state}
+              session={session}
+              save={this.save}
+              updateState={this.updateState}
+            />
+          </div>
         )}
       </ErrorBoundary>
     );

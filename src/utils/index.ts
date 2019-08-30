@@ -3,7 +3,6 @@ export { fuzz } from './fuzz';
 export { fuzzFilterList } from './fuzzFilterList';
 export { getDateNowAsISOStr } from './getDateNowAsISOStr';
 export { getRandomNum } from './getRandomNum';
-export { getUserRole } from './getUserRole';
 export { isValidEmail } from './isValidEmail';
 export { notNull } from './notNull';
 export { notUndefined } from './notUndefined';

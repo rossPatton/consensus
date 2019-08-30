@@ -1,7 +1,7 @@
 import {
-  GET_RSVP_BEGIN,
-  GET_RSVP_FAILURE,
-  GET_RSVP_SUCCESS,
+  GET_RSVPS_BEGIN,
+  GET_RSVPS_FAILURE,
+  GET_RSVPS_SUCCESS,
   SET_RSVP_BEGIN,
   SET_RSVP_FAILURE,
   SET_RSVP_SUCCESS,
@@ -14,16 +14,16 @@ import {
 } from './_types';
 
 export const getRsvpBegin = (): tGetBeginAction => ({
-  type: GET_RSVP_BEGIN,
+  type: GET_RSVPS_BEGIN,
 });
 
 export const getRsvpSuccess = (payload: any): tGetSuccessAction => ({
-  type: GET_RSVP_SUCCESS,
+  type: GET_RSVPS_SUCCESS,
   payload,
 });
 
 export const getRsvpFailure = (payload: Error): tGetFailureAction => ({
-  type: GET_RSVP_FAILURE,
+  type: GET_RSVPS_FAILURE,
   payload,
 });
 

@@ -11,17 +11,15 @@ import {
   setRsvpSuccess,
 } from './actions';
 
-const prefix = `${__URL__}/api/v1/rsvp`;
+const prefix = `${__URL__}/api/v1/rsvps`;
 
-export const getRsvp = memoize({ttl: 300}, (query: any) => {
+export const getRsvps = memoize({ttl: 300}, () => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getRsvpBegin());
 
     try {
-      const qs = objToQueryString(query);
-
       // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {agent})
+      const result = await fetch(prefix, {agent})
         .then((response: tFetchResponse) => {
           if (!response.ok) throw response;
           return response.json();
@@ -34,30 +32,23 @@ export const getRsvp = memoize({ttl: 300}, (query: any) => {
   };
 });
 
-export const setRsvp = memoize({ttl: 300}, (query: any) => {
+export const setRsvp = (query: any) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(setRsvpBegin());
 
     try {
       const qs = objToQueryString(query);
-      console.log('`${prefix}?${qs}` => ', `${prefix}?${qs}`);
 
-      const result = await fetch(`${prefix}?${qs}`, {
-        // @ts-ignore
-        agent,
-        method: 'POST',
-      })
+      // @ts-ignore
+      const result = await fetch(`${prefix}?${qs}`, {agent, method: 'POST'})
         .then((response: tFetchResponse) => {
-          console.log('ok ? ', response.ok);
           if (!response.ok) throw response;
           return response.json();
         });
-
-      console.log('rsvp result => ', result);
 
       return dispatch(setRsvpSuccess(result));
     } catch (err) {
       return dispatch(setRsvpFailure(err));
     }
   };
-});
+};

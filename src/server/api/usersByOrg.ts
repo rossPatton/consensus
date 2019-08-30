@@ -27,7 +27,7 @@ usersByOrg.get('usersByOrg', '/api/v1/usersByOrg', async (ctx: Koa.Context) => {
     const { id: orgId } = query;
 
     // use 3rd table to get relation between users and organization
-    const userIds: tUserOrgRelation[] = await knex('users_orgs').where({ orgId });
+    const userIds: tUserOrgRelation[] = await knex('users_orgs').where({orgId});
 
     // userIds here are ALL ids, but we limit by default to 10 at a time by default
     const mappedIds = userIds.map(idSet => idSet.userId);
@@ -40,6 +40,24 @@ usersByOrg.get('usersByOrg', '/api/v1/usersByOrg', async (ctx: Koa.Context) => {
     };
 
     ctx.body = usersByOrg;
+  } catch (err) {
+    ctx.throw('400', err);
+  }
+});
+
+// @ts-ignore
+usersByOrg.post('usersByOrg', '/api/v1/usersByOrg', async (ctx: Koa.Context) => {
+  try {
+    const userId = ctx.state.user.id;
+    const {data} = ctx.locals.state;
+    const {id: orgId} = data;
+
+    // use 3rd table to get relation between users and organization
+    const userIds: tUserOrgRelation[] = await knex('users_orgs').where({orgId});
+    console.log('userIds => ', userIds);
+    console.log('userId => ', userId);
+
+    ctx.body = {ok: true};
   } catch (err) {
     ctx.throw('400', err);
   }

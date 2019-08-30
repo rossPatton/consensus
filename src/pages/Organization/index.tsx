@@ -1,26 +1,21 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
 import {GenericLoader, Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
-import {getOrg} from '../../redux';
-import {getUserRole} from '../../utils';
+import {getOrg, getRsvps} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {OrganizationComponent} from './Component';
 
-export class OrganizationContainer extends PureComponent<tContainerProps> {
+export class OrganizationContainer extends Component<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-
-    // 0 is just the default, not possible in the db
-    // basically dont re-fetch every time
-    if (props.org.id !== 0) return;
     props.getOrg(props.match.params);
   }
 
   render() {
-    const {isLoading, location, match, org, session, usersByOrg} = this.props;
+    const {isLoading, location, match, org, usersByOrg} = this.props;
 
     return (
       <ErrorBoundary>
@@ -36,19 +31,14 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
         />
         <GenericLoader
           isLoading={isLoading}
-          render={() => {
-            const role = getUserRole(session, org);
-
-            return (
-              <OrganizationComponent
-                location={location}
-                match={match}
-                org={org}
-                usersByOrg={usersByOrg}
-                role={role}
-              />
-            );
-          }}
+          render={() => (
+            <OrganizationComponent
+              location={location}
+              match={match}
+              org={org}
+              usersByOrg={usersByOrg}
+            />
+          )}
         />
       </ErrorBoundary>
     );
@@ -58,7 +48,6 @@ export class OrganizationContainer extends PureComponent<tContainerProps> {
 const mapStateToProps = (store: tStore) => ({
   isLoading: store.org.isLoading,
   org: store.org.data,
-  session: store.session.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

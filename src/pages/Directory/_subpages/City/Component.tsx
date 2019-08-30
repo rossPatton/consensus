@@ -36,10 +36,21 @@ export const CityComponent = memo((props: tProps) => {
           ))}
         </select>
       </label>
-      <h2 className="mB2 fs3">
-        {props.orgsToRender.length > 0 && `Organizations in ${cityObj.name}`}
-        {props.orgsToRender.length === 0 && 'No organizations found'}
-      </h2>
+      <div className="fx aiCtr mB2">
+        <h2 className="fs3">
+          {props.orgsToRender.length > 0 && `Organizations in ${cityObj.name}`}
+          {props.orgsToRender.length === 0 && 'No organizations found'}
+        </h2>
+        <button className="p2 pL3 pR3 hvrBgGrey1 trans1 fx aiCtr lh1">
+          <span
+            role="img"
+            className="mR1"
+            aria-label="Big Plus Sign Emoji">
+            ➕
+          </span>
+          Create a new organization
+        </button>
+      </div>
       {props.orgsToRender.length > 0 && (
         <ul className="fx fxWrap">
           {props.orgsToRender.map((org: tOrg, i) => (

@@ -13,9 +13,9 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
 
   return (
     <form
-      action="/api/v1/user"
       autoComplete="off"
-      className="contain mT4 p5 pT4 pB4 mB2 br8 brdA1"
+      action="/api/v1/user"
+      className="col p5 pT4 pB4 br8 brdA1"
       onSubmit={props.save}>
       <fieldset>
         <legend>

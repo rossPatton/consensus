@@ -1,22 +1,37 @@
 import _ from 'lodash';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
 
-import { setRsvp } from '../../redux';
-import { notNull } from '../../utils';
-import { tContainerProps } from './_types';
-import { EventsComponent } from './Component';
+import {getRsvps, setRsvp} from '../../redux';
+import {notNull} from '../../utils';
+import {tContainerProps} from './_types';
+import {EventsComponent} from './Component';
 
-export class EventsContainer extends PureComponent<tContainerProps> {
-  hidePrivateEvents(events: tEvent[], session: tSession) {
+export class EventsContainer extends Component<tContainerProps> {
+  constructor(props: any) {
+    super(props);
+    props.getRsvps();
+  }
+
+  mapEvents = () => {
+    const {events, role, rsvps, session} = this.props;
+
     return events.map(ev => {
       // if private event, and user is not logged in, hide
       // if private event, user is logged in, but user is not a member, hide
       if (ev.isPrivate && !session.isAuthenticated) return null;
-      // TODO check for roles here too
+      if (role === null) return null;
 
-      return ev;
+      const rsvpObj = _.find(
+        rsvps,
+        rsvp => ev.id === rsvp.eventId && rsvp.userId === session.id,
+      );
+
+      return {
+        ...ev,
+        rsvp: rsvpObj && rsvpObj.rsvp,
+      };
     }).filter(notNull);
   }
 
@@ -26,32 +41,40 @@ export class EventsContainer extends PureComponent<tContainerProps> {
     value: boolean) => {
     ev.preventDefault();
     console.log('setRSVP => ', eventId, value);
-    this.props.setRsvpDispatch({
-      id: eventId,
-      value,
-    });
+    this.props
+      .setRsvp({
+        id: eventId,
+        value,
+      })
+      .then((res) => {
+        console.log('set RSVP response client => ', res);
+        return this.props.getRsvps();
+      })
+      .catch(console.error);
   }
 
   render() {
-    const {events, session} = this.props;
-
     return (
       <EventsComponent
-        events={this.hidePrivateEvents(events, session)}
+        events={this.mapEvents()}
         setRsvp={this.setRsvp}
-        session={session}
+        session={this.props.session}
         tiny={this.props.tiny}
       />
     );
   }
 }
 
-const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
+const mapStateToProps = (store: any) => ({
+  isLoading: store.rsvps.isLoading,
+  role: store.role.data,
+  rsvps: store.rsvps.data,
   session: store.session.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  setRsvpDispatch: (query: any) => dispatch(setRsvp(query)),
+  setRsvp: (query: any) => dispatch(setRsvp(query)),
+  getRsvps: (query: any) => dispatch(getRsvps(query)),
 });
 
 export const Events = connect(

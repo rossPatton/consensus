@@ -86,15 +86,24 @@ exports.up = async (knex: Knex) => {
     table.string('email').notNullable();
     table.string('name').notNullable();
     table.string('slug').notNullable();
+
+    // gate is the best 1 word term i could think of for it
+    // on user signup - do we gatekeep who can join or not?
+    // public === 'anyone can join, no questions asked, no screening'
+    // restricted === 'anyone can join, but we require manual approval'
+    // private === '100% manual approval. only pre-approved members can join'
+    table.string('gate').notNullable().defaultTo('public');
+
+    // orgs are also 'accounts' of their own, can login, etc
     table.string('password').notNullable();
     table.string('username').notNullable();
 
-    // display names for ease of breadcrumbs, 99% of what we need on the client usually
+    // display names for ease of use, 99% of what we need on the client usually
     table.string('city').notNullable();
     table.string('country').notNullable();
     table.string('region').notNullable();
 
-    // ease of lookup later
+    // for ease of lookup later if need be
     table.integer('cityId').notNullable().references('cities.id');
     table.integer('countryId').notNullable().references(countryId);
     table.integer('regionId').notNullable().references('regions.id');

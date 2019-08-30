@@ -9,7 +9,7 @@ export const slugify = (string: string): string => {
   if (typeof string !== 'string') return string;
 
   return string
-    .replace(/\s+|\/+/gm, '-') // spaces and / => -
+    .replace(/\s+|\/+|,+/gm, '-') // spaces and / => -
     .replace(/('|\(|\)|\.)+|#+|'+/gm, '') // '#' and () and ' => ''
     .replace(/-+/gm, '-') // repeating '-'s
     .toLowerCase()
