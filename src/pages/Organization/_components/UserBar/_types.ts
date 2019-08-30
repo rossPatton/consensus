@@ -9,10 +9,12 @@ export type tProps = {
 };
 
 export type tContainerProps = tProps & {
+  isLoading: boolean,
   getUsersByOrg: (query: tIdQuery) => Promise<tThunk<tUsersByOrg>>,
 };
 
 export type tStore = {
+  role: tThunk<tRole>,
   session: tThunk<tSession>,
   usersByOrg: tThunk<tUsersByOrg>,
 };

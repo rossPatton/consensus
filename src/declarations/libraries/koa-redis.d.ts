@@ -11,10 +11,6 @@ import { ClientOpts } from 'redis';
 import { stores } from 'koa-session';
 
 declare module 'koa-redis' {
-  export interface RedisOptions extends ClientOpts {
-    // client?: any;
-    duplicate?: boolean;
-  }
-
+  export interface RedisOptions extends ClientOpts {}
   export function redisStore(options: RedisOptions): stores
 }

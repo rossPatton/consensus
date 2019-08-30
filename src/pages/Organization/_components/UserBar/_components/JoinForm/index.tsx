@@ -1,13 +1,9 @@
 import React from 'react';
 
+import {tProps} from './_types';
 import {JoinFormComponent} from './Component';
 
-export class JoinForm extends React.PureComponent<any> {
-  state = {
-    didSubmit: false,
-    error: {},
-  };
-
+export class JoinForm extends React.PureComponent<tProps> {
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
@@ -24,8 +20,6 @@ export class JoinForm extends React.PureComponent<any> {
   render() {
     const {org, role} = this.props;
 
-    console.log('role => ', role);
-
     if (org.gate === 'public') return null;
 
     if (role) {
@@ -38,7 +32,9 @@ export class JoinForm extends React.PureComponent<any> {
     }
 
     return (
-      <JoinFormComponent onSubmit={this.onSubmit} />
+      <JoinFormComponent
+        onSubmit={this.onSubmit}
+      />
     );
   }
 }

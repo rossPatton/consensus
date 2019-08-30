@@ -1,5 +1,6 @@
 import Koa from 'koa';
 import Router from 'koa-router';
+import _ from 'lodash';
 
 import { knex } from '../db/connection';
 
@@ -9,56 +10,16 @@ const table = 'users_orgs';
 
 // get role for current logged in user by orgId
 role.get(route, async (ctx: Koa.ParameterizedContext) => {
+  const orgId = parseInt(_.get(ctx, 'state.locals.data.id', '0'), 10);
+  const userId = _.get(ctx, 'state.user.id', 0);
+  let body: tRole;
   try {
-    const {id} = ctx.state.locals.data;
-    const orgId = parseInt(id, 10);
-    const userId = ctx.state.user.id;
-    ctx.body = await knex(table).limit(1).where({orgId, userId}).first();
+    body = await knex(table).limit(1).where({orgId, userId}).first();
   } catch (err) {
-    ctx.throw(400, err);
+    return ctx.throw(400, err);
   }
+
+  // sometimes there could be no error but nothing was found
+  if (!body) return ctx.throw(204, 'Nothing found');
+  ctx.body = body;
 });
-
-// role.post(route, async (ctx: Koa.ParameterizedContext) => {
-//   const {id, value} = ctx.state.locals.data;
-//   const eventId = parseInt(id, 10);
-//   const userId = ctx.state.user.id;
-
-//   const newRsvp = {
-//     eventId,
-//     rsvp: value === 'true',
-//     userId,
-//   };
-
-//   let currentRSVPStatus: any;
-//   try {
-//     currentRSVPStatus = await knex(table)
-//       .limit(1)
-//       .where({eventId, userId})
-//       .first();
-//   } catch (err) {
-//     return ctx.throw(400, err);
-//   }
-
-//   // TODO reduce branches or just simplify somehow
-//   // update existing event or insert new users_events relation
-//   if (currentRSVPStatus) {
-//     try {
-//       ctx.body = await knex(table)
-//         .where({id: currentRSVPStatus.id})
-//         .update(newRsvp)
-//         .returning('*');
-//     } catch (err) {
-//       return ctx.throw(400, err);
-//     }
-//   }
-
-//   try {
-//     ctx.body = await knex(table)
-//       .insert(newRsvp)
-//       .returning('*')
-//       .first();
-//   } catch (err) {
-//     ctx.throw(400, err);
-//   }
-// });

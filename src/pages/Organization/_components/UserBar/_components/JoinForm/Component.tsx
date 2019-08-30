@@ -1,6 +1,8 @@
 import React, {memo} from 'react';
 
-export const JoinFormComponent = memo((props: any) => (
+import {tComponentProps} from './_types';
+
+export const JoinFormComponent = memo((props: tComponentProps) => (
   <>
     <form
       method="POST"

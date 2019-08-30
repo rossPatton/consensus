@@ -5,9 +5,9 @@ import _ from 'lodash';
 import { utcToDateString } from '../../utils';
 import { knex } from '../db/connection';
 
-export const decisionsByOrg = new Router();
+export const decisions = new Router();
 
-const getDecisions = async (ctx: Koa.Context) => {
+const getDecisions = async (ctx: Koa.ParameterizedContext) => {
   const {query}: tIdQueryServer = ctx;
   const {id, limit, offset} = query;
 
@@ -26,18 +26,16 @@ const getDecisions = async (ctx: Koa.Context) => {
 
   if (parsedLimit > 0) decisions.limit(parsedLimit);
   if (parsedOffset > 0) decisions.offset(parsedOffset);
-
   return decisions;
 };
 
-// @ts-ignore
-decisionsByOrg.get('decisions', '/api/v1/decisionsByOrg', async (ctx: Koa.Context) => {
+decisions.get('/api/v1/decisions', async (ctx: Koa.ParameterizedContext) => {
   try {
     const decisions = await getDecisions(ctx);
     const decisionsWithMappedDates: tDecision[] = decisions.map(utcToDateString);
     ctx.body = decisionsWithMappedDates;
   } catch (err) {
-    ctx.throw('400', err);
+    ctx.throw(400, err);
   }
 });
 

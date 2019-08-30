@@ -2,7 +2,6 @@ import Koa from 'koa';
 import _ from 'lodash';
 
 import {initStore} from '../redux/store';
-import {knex} from './db/connection';
 
 // in order to sync our server/client sessions, we have to initalize here
 // pull out passport session info, use to populate the `auth` and `session` state
@@ -13,30 +12,8 @@ export const initStoreForSSR = async (ctx: Koa.ParameterizedContext) => {
   // get user/org session. this object is determined by our serialization strategy
   const passportSession = _.get(passport, 'passport.user', {});
 
-  // TODO we have to do this currently in a couple places - consolidate
-  let roles = null;
-  let rsvps = null;
-  if (passportSession.id) {
-    const userOrgRels = await knex('users_orgs').where({userId: passportSession.id});
-    roles = userOrgRels.map((rel: tUserOrgRelation) => ({
-      orgId: rel.orgId,
-      role: rel.role,
-    }));
-
-    const userEventRels = await knex('users_events').where({userId: passportSession.id});
-
-    rsvps = userEventRels.map((rel: tUserEventRelation) => ({
-      eventId: rel.eventId,
-      status: {
-        didAttend: rel.didAttend,
-        isGoing: rel.isGoing,
-      },
-    }));
-  }
-
   // verify authentication
   const isAuthenticated = ctx.isAuthenticated();
-  // const lastActive = knex.fn.now();
 
   // initialize auth state using our thunk pattern
   const session = {
@@ -45,9 +22,6 @@ export const initStoreForSSR = async (ctx: Koa.ParameterizedContext) => {
     data: {
       ...passportSession,
       isAuthenticated,
-      // lastActive,
-      roles,
-      rsvps,
     },
   };
 

@@ -6,7 +6,6 @@ export type tProps = {
   match: match & { params: tOrgRouteParams },
   org: tOrg,
   usersByOrg: tUsersByOrg,
-  role: tRole,
 };
 
 export type tContainerProps = tProps & {

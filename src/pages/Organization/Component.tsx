@@ -17,7 +17,6 @@ export const OrganizationComponent = (props: tProps) => (
     <UserBar
       match={props.match}
       org={props.org}
-      role={props.role}
     />
     <div className="contain mB4">
       {props.match.params.section === 'overview' && (

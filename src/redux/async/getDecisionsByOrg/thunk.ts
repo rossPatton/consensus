@@ -8,12 +8,13 @@ import {
   getDecisionsByOrgSuccess,
 } from './actions';
 
-export const getDecisionsByOrg = memoize({ ttl: 300 }, (queryObj: tIdQuery) => {
+const prefix = `${__URL__}/api/v1/decisions`;
+
+export const getDecisionsByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getDecisionsByOrgBegin());
 
     try {
-      const prefix = `${__URL__}/api/v1/decisionsByOrg`;
       const qs = objToQueryString(queryObj);
 
       // @ts-ignore

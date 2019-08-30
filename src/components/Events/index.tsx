@@ -1,15 +1,15 @@
 import _ from 'lodash';
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
 import {getRsvps, setRsvp} from '../../redux';
 import {notNull} from '../../utils';
-import {tContainerProps} from './_types';
+import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
 
-export class EventsContainer extends Component<tContainerProps> {
-  constructor(props: any) {
+export class EventsContainer extends PureComponent<tContainerProps> {
+  constructor(props: tContainerProps) {
     super(props);
     props.getRsvps();
   }
@@ -18,19 +18,23 @@ export class EventsContainer extends Component<tContainerProps> {
     const {events, role, rsvps, session} = this.props;
 
     return events.map(ev => {
-      // if private event, and user is not logged in, hide
-      // if private event, user is logged in, but user is not a member, hide
-      if (ev.isPrivate && !session.isAuthenticated) return null;
-      if (role === null) return null;
+      if (ev.isPrivate) {
+        // if private event, and user is not logged in, hide
+        if (!session.isAuthenticated) return null;
+        // if private event, user is logged in, but user is not a member, hide
+        if (role === null) return null;
+      }
 
       const rsvpObj = _.find(
         rsvps,
         rsvp => ev.id === rsvp.eventId && rsvp.userId === session.id,
       );
 
+      const rsvp = (rsvpObj && rsvpObj.rsvp) || false;
+
       return {
         ...ev,
-        rsvp: rsvpObj && rsvpObj.rsvp,
+        rsvp,
       };
     }).filter(notNull);
   }
@@ -54,6 +58,7 @@ export class EventsContainer extends Component<tContainerProps> {
   }
 
   render() {
+    console.log('events container props => ', this.props);
     return (
       <EventsComponent
         events={this.mapEvents()}
@@ -65,7 +70,7 @@ export class EventsContainer extends Component<tContainerProps> {
   }
 }
 
-const mapStateToProps = (store: any) => ({
+const mapStateToProps = (store: tStore) => ({
   isLoading: store.rsvps.isLoading,
   role: store.role.data,
   rsvps: store.rsvps.data,
@@ -73,8 +78,8 @@ const mapStateToProps = (store: any) => ({
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  setRsvp: (query: any) => dispatch(setRsvp(query)),
-  getRsvps: (query: any) => dispatch(getRsvps(query)),
+  setRsvp: (query: {id: number, value: boolean}) => dispatch(setRsvp(query)),
+  getRsvps: () => dispatch(getRsvps()),
 });
 
 export const Events = connect(

@@ -2,12 +2,12 @@ declare interface tThunk<D> {
   error?: Error | null,
   data: D,
   isLoading: boolean,
-}
+};
 
 declare interface tAction<T, P = undefined> {
   type: T,
   payload?: P,
-}
+};
 
 declare type tApprovalData = {
   choices: {count: number, label: string}[],
@@ -34,7 +34,7 @@ declare type tDecision = {
 
 // TODO need to rethink how to split up event types
 // creating an event, event schema in db, not logged in event
-declare type tPublicEvent = {
+declare type tEvent = {
   category: string,
   city: string,
   country: string,
@@ -54,10 +54,17 @@ declare type tPublicEvent = {
   title: string,
 };
 
-// if user is logged in, we map in their checkin/rsvp status to each event
-declare type tEvent = tPublicEvent & {
-  status?: tRSVP,
-}
+// if a user is logged in, then we merge in their RSVP status at render time
+declare type tLoggedInEvent = tEvent & {
+  rsvp: boolean,
+};
+
+declare type tRSVP = {
+  eventId: number,
+  id?: number,
+  userId: number,
+  rsvp: boolean,
+};
 
 declare type tOrg = {
   category: string,
@@ -67,6 +74,7 @@ declare type tOrg = {
   countryId: number,
   description: string,
   email: string,
+  gate: 'public' | 'restricted' | 'private',
   id: number,
   membershipTotal: number,
   name: string,

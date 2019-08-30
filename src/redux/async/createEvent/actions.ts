@@ -12,7 +12,7 @@ export const createEventBegin = (): tBeginAction => ({
   type: CREATE_EVENT_BEGIN,
 });
 
-export const createEventSuccess = (payload: tThunk<tPublicEvent>): tSuccessAction => ({
+export const createEventSuccess = (payload: tThunk<tEvent>): tSuccessAction => ({
   type: CREATE_EVENT_SUCCESS,
   payload,
 });

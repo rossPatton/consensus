@@ -1,5 +1,6 @@
 import Koa from 'koa';
 import Router from 'koa-router';
+import _ from 'lodash';
 
 import { knex } from '../db/connection';
 
@@ -9,27 +10,35 @@ const table = 'users_events';
 
 // get all rsvps for the logged in user, by eventId
 rsvps.get(route, async (ctx: Koa.ParameterizedContext) => {
+  const userId = _.get(ctx, 'state.user.id', 0);
+
+  let body: tRSVP[];
   try {
-    const userId = ctx.state.user.id;
-    ctx.body = await knex(table).where({userId});
+    body = await knex(table).where({userId});
   } catch (err) {
-    ctx.throw(400, err);
+    return ctx.throw(400, err);
   }
+
+  if (body instanceof Array && body.length === 0) {
+    return ctx.throw(204);
+  }
+
+  ctx.body = body;
 });
 
 // post new rsvp for the logged in user, by eventId
 rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const {id, value} = ctx.state.locals.data;
+  const {id = 0, value} = _.get(ctx, 'state.locals.data', {});
   const eventId = parseInt(id, 10);
-  const userId = ctx.state.user.id;
+  const userId = _.get(ctx, 'state.user.id', 0);
 
-  const newRsvp = {
+  const newRsvp: tRSVP = {
     eventId,
     rsvp: value === 'true',
     userId,
   };
 
-  let currentRSVPStatus: any;
+  let currentRSVPStatus: tRSVP;
   try {
     currentRSVPStatus = await knex(table)
       .limit(1)

@@ -4,15 +4,11 @@ import {Redirect} from 'react-router-dom';
 import {tState} from './_types';
 
 export class ErrorBoundary extends PureComponent<any, tState> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      hasError: false,
-    };
-  }
+  state = {
+    hasError: false,
+  };
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    console.log('component did catch => ', error);
     this.setState({
       error,
       hasError: true,

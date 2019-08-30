@@ -30,45 +30,6 @@ export const EventComponent = memo(({event, events}: tComponentProps) => (
           {event.goingCount} attendees |
         </span>
       )}
-      {!event.status && (
-        <span className="br8 brdA1 p2 pL3 pR3 curPtr hvrBgGrey1 trans1 mR2">
-          <span
-            role="img"
-            className="mR1"
-            aria-label="Big Plus Sign Emoji">
-            ➕
-          </span>
-          RSVP
-        </span>
-      )}
-      {event.status && (
-        <>
-          {event.status.isGoing && (
-            <span
-              title="Click to cancel your RSVP"
-              className="br8 brdA1 p2 pL3 pR3 curPtr hvrBgGrey1 trans1 mR2">
-              <span
-                role="img"
-                className="mR1"
-                aria-label="Thumbs Up Emoji">
-                👍
-              </span>
-              You&apos;re going!
-            </span>
-          )}
-          {event.status.didAttend && (
-            <span className="mR2">
-              <span
-                role="img"
-                className="mR1"
-                aria-label="Party Popper Emoji">
-                🎉
-              </span>
-              You went!
-            </span>
-          )}
-        </>
-      )}
       {event.isPrivate && (
         <small className="bgYellowLite br4 p2 pL3 pR3">
           <span

@@ -8,14 +8,14 @@ import {
   createEventSuccess,
 } from './actions';
 
-export const createEvent = memoize({ ttl: 300 }, (event: tPublicEvent) => {
+const prefix = `${__URL__}/api/v1/event`;
+
+export const createEvent = memoize({ttl: 300}, (event: tEvent) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(createEventBegin());
 
     try {
-      const prefix = `${__URL__}/api/v1/event`;
       const qs = objToQueryString(event);
-
       const result = await fetch(`${prefix}?${qs}`, {
         // @ts-ignore
         agent,

@@ -4,6 +4,10 @@ export type tProps = {
   active?: number,
   className?: string,
   count?: number,
-  match: match & {params: any},
+  match: match & {
+    params: {
+      page?: string,
+    },
+  },
   total: number,
 }

@@ -102,7 +102,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                       role="img"
                       className="mR1"
                       aria-label="Thumbs Up Emoji">
-                        👍
+                      👍
                     </span>
                     <legend>You&apos;re going!</legend>
                   </button>

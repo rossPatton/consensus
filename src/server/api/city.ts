@@ -7,8 +7,7 @@ import { knex } from '../db/connection';
 
 export const city = new Router();
 
-// @ts-ignore
-city.get('city', '/api/v1/city', async (ctx: Koa.ParameterizedContext) => {
+city.get('/api/v1/city', async (ctx: Koa.ParameterizedContext) => {
   const {query}: tLocationQueryServer = ctx;
   const {
     city: citySlug = '',

@@ -8,15 +8,14 @@ import {
   fileUploadSuccess,
 } from './actions';
 
-export const fileUpload = memoize({ ttl: 300 }, (event: tPublicEvent) => {
+const prefix = `${__URL__}/api/v1/fileUpload`;
+
+export const fileUpload = memoize({ttl: 300}, (event: tEvent) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(fileUploadBegin());
 
     try {
-      const prefix = `${__URL__}/api/v1/fileUpload`;
       const qs = objToQueryString(event);
-
-      // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, {
         // @ts-ignore
         agent,
