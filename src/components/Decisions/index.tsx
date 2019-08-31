@@ -6,7 +6,7 @@ import { Approval, SimpleMajority } from './_components';
 export const Decisions = memo(({ decisions }: { decisions: tDecision[] }) => (
   <ul>
     {decisions.map((decision, i) => (
-      <li key={i} className="brdA1 br8 mB3 p3 pT2 pL4 rel ovfHide fx">
+      <li key={i} className="brdA1 br8 mB2 p3 pT2 pL4 rel ovfHide fx">
         <div className="br8 bgGrey1 mR3 col fxNoShrink fxg0">
           <img
             alt=""

@@ -3,18 +3,19 @@ import { memoize } from 'redux-memoize';
 
 import { agent, objToQueryString } from '../../../utils';
 import {
-  getEventsByOrgBegin,
-  getEventsByOrgFailure,
-  getEventsByOrgSuccess,
+  getEventsBegin,
+  getEventsFailure,
+  getEventsSuccess,
 } from './actions';
 
-export const getEventsByOrg = memoize({ ttl: 300 }, (queryObj: tIdQuery) => {
+const prefix = `${__URL__}/api/v1/events`;
+
+export const getEvents = memoize({ttl: 300}, (query: tIdQuery) => {
   return async function <S>(dispatch: Dispatch<S>) {
-    dispatch(getEventsByOrgBegin());
+    dispatch(getEventsBegin());
 
     try {
-      const prefix = `${__URL__}/api/v1/eventsByOrg`;
-      const qs = objToQueryString(queryObj);
+      const qs = objToQueryString(query);
 
       // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, {agent})
@@ -23,9 +24,9 @@ export const getEventsByOrg = memoize({ ttl: 300 }, (queryObj: tIdQuery) => {
           return response.json();
         });
 
-      return dispatch(getEventsByOrgSuccess(result));
+      return dispatch(getEventsSuccess(result));
     } catch (err) {
-      return dispatch(getEventsByOrgFailure(err));
+      return dispatch(getEventsFailure(err));
     }
   };
 });

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
 import {GenericLoader, Helmet} from '../../../../components';
-import {getDecisionsByOrg, getEventsByOrg, getUsersByOrg} from '../../../../redux';
+import {getDecisionsByOrg, getEvents, getUsersByOrg} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {OverviewComponent} from './Component';
 
@@ -12,7 +12,7 @@ export class OverviewContainer extends PureComponent<tContainerProps> {
     super(props);
     // only show public events if user is not signed in
     const isPublic = !props.session.isAuthenticated;
-    props.getEventsByOrg({id: props.org.id, isPublic, limit: -1});
+    props.getEvents({id: props.org.id, isPublic, limit: -1});
     props.getDecisionsByOrg({id: props.org.id, isPublic, limit: -1});
   }
 
@@ -53,7 +53,7 @@ const mapStateToProps = (store: tStore) => ({
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getDecisionsByOrg: (query: tIdQuery) => dispatch(getDecisionsByOrg(query)),
-  getEventsByOrg: (query: tIdQuery) => dispatch(getEventsByOrg(query)),
+  getEvents: (query: tIdQuery) => dispatch(getEvents(query)),
   getUsersByOrg: (query: tIdQuery) => dispatch(getUsersByOrg(query)),
 });
 

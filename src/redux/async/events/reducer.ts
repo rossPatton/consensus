@@ -1,7 +1,7 @@
 import {
-  GET_EVENTS_BY_ORG_BEGIN,
-  GET_EVENTS_BY_ORG_FAILURE,
-  GET_EVENTS_BY_ORG_SUCCESS,
+  GET_EVENTS_BEGIN,
+  GET_EVENTS_FAILURE,
+  GET_EVENTS_SUCCESS,
   tActionUnion,
 } from './_types';
 
@@ -11,22 +11,22 @@ const initialState: tThunk<tEvent[]> = {
   data: [],
 };
 
-export const getEventsByOrgReducer = (state = initialState, action: tActionUnion) => {
+export const eventsReducer = (state = initialState, action: tActionUnion) => {
   switch (action.type) {
-  case GET_EVENTS_BY_ORG_BEGIN:
+  case GET_EVENTS_BEGIN:
     return {
       ...state,
       isLoading: true,
     };
 
-  case GET_EVENTS_BY_ORG_SUCCESS:
+  case GET_EVENTS_SUCCESS:
     return {
       ...state,
       data: action.payload,
       isLoading: false,
     };
 
-  case GET_EVENTS_BY_ORG_FAILURE:
+  case GET_EVENTS_FAILURE:
     return {
       ...state,
       data: initialState.data,

@@ -6,26 +6,28 @@ import { knex } from '../db/connection';
 
 export const event = new Router();
 
-// event/eventId
+// for fetching a single event at a time
+// redux state object => event
+// route example: event/eventId
 event.get('/api/v1/event', async (ctx: Koa.ParameterizedContext) => {
-  const id: number = _.get(ctx, 'state.locals.data.id', 0);
+  const query = _.get(ctx, 'state.locals.data', {});
 
   let event: tEvent;
   try {
-    event = await knex('events').limit(1).where({id}).first();
-    ctx.body = event;
+    ctx.body = await knex('events').limit(1).where(query).first();
   } catch (err) {
     ctx.throw('400', err);
   }
 });
 
-// event creation form
+// create a new event
+// route example: org admin event creation form
 event.post('/api/v1/event', async (ctx: Koa.ParameterizedContext) => {
-  const event: tEvent = _.get(ctx, 'state.locals.data', {});
+  const insert: tEvent = _.get(ctx, 'state.locals.data', {});
 
   let eventQuery: tEvent[];
   try {
-    eventQuery = await knex('events').insert(event).returning('*');
+    eventQuery = await knex('events').insert(insert).returning('*');
     ctx.body = eventQuery[0];
   } catch (err) {
     ctx.throw(400, err);

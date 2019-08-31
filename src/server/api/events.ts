@@ -5,8 +5,10 @@ import _ from 'lodash';
 import { getDateNowAsISOStr } from '../../utils';
 import { knex } from '../db/connection';
 
-export const eventsByOrg = new Router();
+export const events = new Router();
+const route = '/api/v1/events';
 
+// TODO simplify
 const getEvents = async (ctx: Koa.ParameterizedContext) => {
   const { query }: tIdQueryServer = ctx;
   const { exclude, id, limit, isPublic, offset } = query;
@@ -34,8 +36,8 @@ const getEvents = async (ctx: Koa.ParameterizedContext) => {
   return events;
 };
 
-// @ts-ignore
-eventsByOrg.get('events', '/api/v1/eventsByOrg', async (ctx: Koa.ParameterizedContext) => {
+// get multiple events at a time
+events.get(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     ctx.body = await getEvents(ctx);
   } catch (err) {

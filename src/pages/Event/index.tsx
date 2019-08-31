@@ -4,7 +4,7 @@ import {Dispatch} from 'redux';
 
 import {GenericLoader, Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
-import {getEventById, getEventsByOrg} from '../../redux';
+import {getEventById, getEvents} from '../../redux';
 import {tProps, tStore} from './_types';
 import {EventComponent} from './Component';
 
@@ -16,7 +16,7 @@ export class EventContainer extends PureComponent<tProps> {
     props.getEventById({id})
       .then((res: {payload: tEvent}) => {
         // for rendering the 'more by name' sidebar
-        return props.getEventsByOrg({
+        return props.getEvents({
           id: res.payload.orgId,
           exclude: id,
         });
@@ -59,7 +59,7 @@ const mapStateToProps = (store: tStore) => ({
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getEventById: (query: tIdQuery) => dispatch(getEventById(query)),
-  getEventsByOrg: (query: tIdQuery) => dispatch(getEventsByOrg(query)),
+  getEvents: (query: tIdQuery) => dispatch(getEvents(query)),
 });
 
 export const Event = connect(

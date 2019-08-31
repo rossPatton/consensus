@@ -49,9 +49,7 @@ export class EventsContainer extends PureComponent<tContainerProps> {
         id: eventId,
         value,
       })
-      .then((res) => {
-        return this.props.getRsvps();
-      })
+      .then(() => this.props.getRsvps())
       .catch(console.error);
   }
 

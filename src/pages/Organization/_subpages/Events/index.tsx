@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { GenericLoader, Helmet } from '../../../../components';
-import { getEventsByOrg } from '../../../../redux';
+import { getEvents } from '../../../../redux';
 import { tContainerProps, tState } from './_types';
 import { EventsComponent } from './Component';
 
@@ -14,7 +14,7 @@ export class EventsContainer extends Component<tContainerProps> {
     const {match: {params: {page = 0} = {}}, org} = props;
     const offset = page ? parseInt(page, 10) : 0;
 
-    props.getEventsByOrg({
+    props.getEvents({
       id: org.id,
       limit: -1,
       offset,
@@ -68,7 +68,7 @@ const mapStateToProps = (store: tState) => ({
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  getEventsByOrg: (query: tIdQuery) => dispatch(getEventsByOrg(query)),
+  getEvents: (query: tIdQuery) => dispatch(getEvents(query)),
 });
 
 export const Events = connect(

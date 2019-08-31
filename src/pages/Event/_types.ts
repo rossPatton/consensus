@@ -10,7 +10,7 @@ export type tProps = {
   event: tEvent,
   events: tEvent[],
   getEventById: (query: tIdQuery) => Promise<any>,
-  getEventsByOrg: (query: tIdQuery) => Promise<any>,
+  getEvents: (query: tIdQuery) => Promise<any>,
   isLoading: boolean,
   match: match & { params: { id: number } },
 };

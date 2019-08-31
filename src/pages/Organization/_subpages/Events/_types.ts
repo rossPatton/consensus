@@ -8,7 +8,7 @@ export type tComponentProps = {
 
 export type tContainerProps = {
   events: tEvent[],
-  getEventsByOrg: (query: tIdQuery) => Promise<tThunk<tEvent[]>>,
+  getEvents: (query: tIdQuery) => Promise<tThunk<tEvent[]>>,
   isLoading: boolean,
   match: match & { params: tOrgRouteParams },
   org: tOrg,

@@ -5,7 +5,7 @@ import { city } from './city';
 import { country } from './country';
 import { decisions } from './decisions';
 import { event } from './event';
-import { eventsByOrg } from './eventsByOrg';
+import { events } from './events';
 import { fileUpload } from './fileUpload';
 import { org } from './org';
 import { region } from './region';
@@ -22,7 +22,7 @@ export const setupApi = (app: Koa) => {
   app.use(country.routes());
   app.use(decisions.routes());
   app.use(event.routes());
-  app.use(eventsByOrg.routes());
+  app.use(events.routes());
   app.use(fileUpload.routes());
   app.use(org.routes());
   app.use(region.routes());
@@ -38,7 +38,7 @@ export const setupApi = (app: Koa) => {
   app.use(country.allowedMethods());
   app.use(decisions.allowedMethods());
   app.use(event.allowedMethods());
-  app.use(eventsByOrg.allowedMethods());
+  app.use(events.allowedMethods());
   app.use(fileUpload.allowedMethods());
   app.use(org.allowedMethods());
   app.use(region.allowedMethods());

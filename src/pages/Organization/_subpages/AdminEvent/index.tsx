@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 
 import { Helmet } from '../../../../components';
 import { createEvent } from '../../../../redux';
-import { getEventsByOrgSuccess } from '../../../../redux/async/getEventsByOrg/actions';
+import { getEventsSuccess } from '../../../../redux/async/events/actions';
 import { getDateNowAsISOStr, parseTimeString } from '../../../../utils';
 import { tContainerProps, tCreateEvent, tState, tStateUnion, tStore } from './_types';
 import { AdminEventComponent } from './Component';
@@ -103,7 +103,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     }
 
     // update redux on client side on event upload success
-    getEventsByOrgSuccess([newEvent, ...events]);
+    getEventsSuccess([newEvent, ...events]);
   }
 
   toggleChecked = () => {
