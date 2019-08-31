@@ -60,9 +60,9 @@ export const AdminEventComponent = memo((props: tComponentProps) => (
           'hide': props.imagePreview,
         })}>
         <input
-          type="file"
-          name="featuredImage"
           id="fileUpload"
+          name="eventFeaturedImage"
+          type="file"
           onChange={props.setImage}
           accept="image/png, image/jpeg, image/gif"
         />

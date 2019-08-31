@@ -36,7 +36,6 @@ export class CityContainer extends PureComponent<tContainerProps, tState> {
 
   onSearch = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
-    console.log('search => ', ev.currentTarget.value);
     this.setState({
       orgsBySearch: fuzzFilterList({
         input: this.props.city.orgs,
@@ -50,8 +49,6 @@ export class CityContainer extends PureComponent<tContainerProps, tState> {
     const {city, country, isLoading, match, region} = this.props;
     const categories = city.orgs.map(org => org.category);
     const orgsToRender = orgsBySearch.length > 0 ? orgsBySearch : city.orgs;
-
-    console.log('orgsToRender => ', orgsToRender);
 
     return (
       <>

@@ -20,8 +20,6 @@ export const getRole = memoize({ttl: 300}, (query: any) => {
           return response.json();
         });
 
-      console.log('user role => ', result);
-
       return dispatch(getRoleSuccess(result));
     } catch (err) {
       return dispatch(getRoleFailure(err));

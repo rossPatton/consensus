@@ -10,7 +10,6 @@ import { tComponentProps } from './_types';
 
 export const EventsComponent = memo((props: tComponentProps) => (
   <ul>
-    {console.log('all props for events => ', props)}
     {props.events.map((ev, i) => (
       <li key={i} className="brdA1 br8 mB3 p3 fx">
         <div

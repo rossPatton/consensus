@@ -44,21 +44,18 @@ export class EventsContainer extends PureComponent<tContainerProps> {
     eventId: number,
     value: boolean) => {
     ev.preventDefault();
-    console.log('setRSVP => ', eventId, value);
     this.props
       .setRsvp({
         id: eventId,
         value,
       })
       .then((res) => {
-        console.log('set RSVP response client => ', res);
         return this.props.getRsvps();
       })
       .catch(console.error);
   }
 
   render() {
-    console.log('events container props => ', this.props);
     return (
       <EventsComponent
         events={this.mapEvents()}

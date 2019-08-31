@@ -24,7 +24,7 @@ const storage = multer.diskStorage({
     const { _parsedUrl } = req as tReq;
     const { query = '' } = _parsedUrl;
     const { eventId } = qs.parse(query as string);
-    const destination = `${CWD}/static/eventImages/${eventId}`;
+    const destination = `${CWD}/static/images/eventImages/${eventId}`;
 
     mkdirp(destination, (err: Error) => {
       if (err) throw err;
@@ -41,7 +41,7 @@ const upload = multer({ storage });
 // @ts-ignore
 fileUpload.post(
   '/api/v1/fileUpload',
-  upload.single('featuredImage'),
+  upload.single('eventFeaturedImage'),
   async (ctx: Koa.ParameterizedContext<any>) => {
     const { file }: { file: multer.File } = ctx.req as multer.MulterIncomingMessage;
     const ext = path.extname(file.originalname);

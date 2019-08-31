@@ -54,8 +54,6 @@ usersByOrg.post('usersByOrg', '/api/v1/usersByOrg', async (ctx: Koa.Context) => 
 
     // use 3rd table to get relation between users and organization
     const userIds: tUserOrgRelation[] = await knex('users_orgs').where({orgId});
-    console.log('userIds => ', userIds);
-    console.log('userId => ', userId);
 
     ctx.body = {ok: true};
   } catch (err) {

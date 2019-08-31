@@ -1,7 +1,8 @@
-import React, { memo } from 'react';
+import cx from 'classnames';
+import React, {memo} from 'react';
 
-import { PasswordInput } from '../../../components';
-import { tComponentProps } from './_types';
+import {PasswordInput} from '../../../components';
+import {tComponentProps} from './_types';
 
 export const UserAdminComponent = memo((props: tComponentProps) => {
   const {
@@ -15,13 +16,60 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
     <form
       autoComplete="off"
       action="/api/v1/user"
+      encType="multipart/form-data"
       className="col p5 pT4 pB4 br8 brdA1"
       onSubmit={props.save}>
       <fieldset>
         <legend>
           <h1 className="fs2 mB3">Edit your profile</h1>
         </legend>
-        <input type="hidden" name="methodOverride" value="PATCH" />
+        <h2 className="ffLab fs5 mB1 lh1">
+          Avatar
+        </h2>
+        <div className="fx aiCtr mB3">
+          <div className="bgGrey1 p3 mR3 fx fxdCol aiCtr" id="avatarPreview">
+            <button
+              onClick={() => {}}
+              className="bgWhite mB2 p2 pL3 pR3">
+              <span
+                role="img"
+                className="mR1"
+                aria-label="X Emoji">
+                ✖️
+              </span>
+              Remove
+            </button>
+            <img
+              alt=""
+              className="row"
+              height="200"
+              width="200"
+              src=""
+            />
+            Current Avatar
+          </div>
+          <label
+            htmlFor="fileUpload"
+            className="col rel fx fxdCol aiCtr jcCtr br8 brdA1 bsDashed brdW3 mB3 p5 curPtr">
+            <input
+              type="file"
+              name="userAvatar"
+              id="fileUpload"
+              onChange={() => {}}
+              accept="image/png, image/jpeg, image/gif"
+            />
+            <span className="btn fx aiCtr p3 hvrBgGrey1">
+              <span
+                role="img"
+                className="mR1"
+                aria-label="Camera Emoji">
+                📷
+              </span>
+              Upload Your Avatar
+            </span>
+            <small>We recommend a size of at least 200x200px</small>
+          </label>
+        </div>
         <label htmlFor="fname">
           <h2 className="ffLab fs5 mB1 lh1">
           First Name
