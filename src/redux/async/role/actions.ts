@@ -2,6 +2,7 @@ import {
   GET_ROLE_BEGIN,
   GET_ROLE_FAILURE,
   GET_ROLE_SUCCESS,
+  SET_ROLE,
   tBeginAction,
   tFailureAction,
   tSuccessAction,
@@ -18,5 +19,10 @@ export const getRoleSuccess = (payload: any): tSuccessAction => ({
 
 export const getRoleFailure = (payload: Error): tFailureAction => ({
   type: GET_ROLE_FAILURE,
+  payload,
+});
+
+export const setRole = (payload: any): tSuccessAction => ({
+  type: SET_ROLE,
   payload,
 });

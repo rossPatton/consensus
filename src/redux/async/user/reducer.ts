@@ -1,9 +1,9 @@
 import { tActionUnion } from './_types';
 import {
-  GET_USERS_BEGIN,
-  GET_USERS_FAILURE,
-  GET_USERS_SUCCESS,
-} from './actions';
+  GET_USER_BEGIN,
+  GET_USER_FAILURE,
+  GET_USER_SUCCESS,
+} from './_types';
 
 const initialState: tThunk<tUser[]> = {
   error: null,
@@ -11,22 +11,22 @@ const initialState: tThunk<tUser[]> = {
   data: [],
 };
 
-export const getUsersReducer = (state = initialState, action: tActionUnion) => {
+export const userReducer = (state = initialState, action: tActionUnion) => {
   switch (action.type) {
-  case GET_USERS_BEGIN:
+  case GET_USER_BEGIN:
     return {
       ...state,
       isLoading: true,
     };
 
-  case GET_USERS_SUCCESS:
+  case GET_USER_SUCCESS:
     return {
       ...state,
       data: action.payload,
       isLoading: false,
     };
 
-  case GET_USERS_FAILURE:
+  case GET_USER_FAILURE:
     return {
       ...state,
       data: initialState.data,

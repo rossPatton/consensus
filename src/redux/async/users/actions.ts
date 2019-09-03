@@ -1,8 +1,11 @@
-import { tBeginAction, tFailureAction, tSuccessAction } from './_types';
-
-export const GET_USERS_BEGIN = 'GET_USERS_BEGIN';
-export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
-export const GET_USERS_FAILURE = 'GET_USERS_FAILURE';
+import {
+  GET_USERS_BEGIN,
+  GET_USERS_FAILURE,
+  GET_USERS_SUCCESS,
+  tBeginAction,
+  tFailureAction,
+  tSuccessAction,
+} from './_types';
 
 export const getUsersBegin = (): tBeginAction => ({
   type: GET_USERS_BEGIN,

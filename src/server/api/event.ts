@@ -11,8 +11,6 @@ export const event = new Router();
 // route example: event/eventId
 event.get('/api/v1/event', async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, 'state.locals.data', {});
-
-  let event: tEvent;
   try {
     ctx.body = await knex('events').limit(1).where(query).first();
   } catch (err) {

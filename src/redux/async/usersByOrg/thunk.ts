@@ -6,14 +6,18 @@ import {
   getUsersByOrgBegin,
   getUsersByOrgFailure,
   getUsersByOrgSuccess,
+  postUserByOrgBegin,
+  postUserByOrgFailure,
+  postUserByOrgSuccess,
 } from './actions';
+
+const prefix = `${__URL__}/api/v1/usersByOrg`;
 
 export const getUsersByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getUsersByOrgBegin());
 
     try {
-      const prefix = `${__URL__}/api/v1/usersByOrg`;
       const qs = objToQueryString(queryObj);
 
       // @ts-ignore
@@ -26,6 +30,27 @@ export const getUsersByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {
       return dispatch(getUsersByOrgSuccess(result));
     } catch (err) {
       return dispatch(getUsersByOrgFailure(err));
+    }
+  };
+});
+
+export const postNewUserByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {
+  return async function <S>(dispatch: Dispatch<S>) {
+    dispatch(postUserByOrgBegin());
+
+    try {
+      const qs = objToQueryString(queryObj);
+
+      // @ts-ignore
+      const result = await fetch(`${prefix}?${qs}`, {agent, method: 'POST'})
+        .then((response: tFetchResponse) => {
+          if (!response.ok) throw response;
+          return response.json();
+        });
+
+      return dispatch(postUserByOrgSuccess(result));
+    } catch (err) {
+      return dispatch(postUserByOrgFailure(err));
     }
   };
 });

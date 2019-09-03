@@ -4,6 +4,8 @@ import Router from 'koa-router';
 import { knex } from '../db/connection';
 
 export const usersByOrg = new Router();
+const route = '/api/v1/usersByOrg';
+const table = 'users_orgs';
 
 const getUsers = async (ctx: Koa.ParameterizedContext, mappedIds: number[]) => {
   const { query }: tIdQueryServer = ctx;
@@ -20,14 +22,13 @@ const getUsers = async (ctx: Koa.ParameterizedContext, mappedIds: number[]) => {
   return users;
 };
 
-// @ts-ignore
-usersByOrg.get('usersByOrg', '/api/v1/usersByOrg', async (ctx: Koa.Context) => {
+usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
   try {
-    const { query }: tIdQueryServer = ctx;
-    const { id: orgId } = query;
+    const {query}: tIdQueryServer = ctx;
+    const {id: orgId} = query;
 
     // use 3rd table to get relation between users and organization
-    const userIds: tUserOrgRelation[] = await knex('users_orgs').where({orgId});
+    const userIds: tUserOrgRelation[] = await knex(table).where({orgId});
 
     // userIds here are ALL ids, but we limit by default to 10 at a time by default
     const mappedIds = userIds.map(idSet => idSet.userId);
@@ -41,22 +42,32 @@ usersByOrg.get('usersByOrg', '/api/v1/usersByOrg', async (ctx: Koa.Context) => {
 
     ctx.body = usersByOrg;
   } catch (err) {
-    ctx.throw('400', err);
+    ctx.throw(400, err);
   }
 });
 
-// @ts-ignore
-usersByOrg.post('usersByOrg', '/api/v1/usersByOrg', async (ctx: Koa.Context) => {
+usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
+  const userId = ctx.state.user.id;
+  const {data} = ctx.state.locals;
+  const {id: orgId} = data;
+
   try {
-    const userId = ctx.state.user.id;
-    const {data} = ctx.locals.state;
-    const {id: orgId} = data;
-
-    // use 3rd table to get relation between users and organization
-    const userIds: tUserOrgRelation[] = await knex('users_orgs').where({orgId});
-
-    ctx.body = {ok: true};
+    await knex(table)
+      .insert({orgId, userId, role: 'member'})
+      .returning('*');
   } catch (err) {
-    ctx.throw('400', err);
+    return ctx.throw(400, err);
   }
+
+  let user: tUser;
+  try {
+    user = await knex('users')
+      .limit(1)
+      .where({id: userId})
+      .first();
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
+
+  ctx.body = user;
 });

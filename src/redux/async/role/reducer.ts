@@ -2,6 +2,7 @@ import {
   GET_ROLE_BEGIN,
   GET_ROLE_FAILURE,
   GET_ROLE_SUCCESS,
+  SET_ROLE,
   tActionUnion,
 } from './_types';
 
@@ -31,6 +32,14 @@ export const roleReducer = (state = initialState, action: tActionUnion) => {
     return {
       data: null,
       error: action.payload,
+      isLoading: false,
+    };
+
+  // eslint-disable-next-line
+  case SET_ROLE:
+    return {
+      ...state,
+      data: action.payload.role,
       isLoading: false,
     };
 

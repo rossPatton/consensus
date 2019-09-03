@@ -1,26 +1,23 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {Dispatch} from 'redux';
 
+import {postNewUserByOrg, setRole, setUserByOrg} from '../../../../../../redux';
 import {tProps} from './_types';
 import {JoinFormComponent} from './Component';
 
-export class JoinForm extends React.PureComponent<tProps> {
+class JoinFormContainer extends React.PureComponent<tProps> {
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-
-    const {session} = this.props;
-
-    fetch('/api/v1/usersByOrg', {
-      body: `${session.id}`,
-      method: 'POST',
-    })
-      .then(console.log)
+    this.props.postNewUserByOrg({id: this.props.session.id})
+      .then((res: any) => this.props.setUserByOrg(res.payload))
+      .then(() => this.props.setRole({role: 'member'}))
       .catch(console.error);
   }
 
   render() {
-    const {org, role} = this.props;
-
-    if (org.gate === 'public') return null;
+    const {role, session} = this.props;
 
     if (role) {
       return (
@@ -31,6 +28,16 @@ export class JoinForm extends React.PureComponent<tProps> {
       );
     }
 
+    if (!session.isAuthenticated) {
+      return (
+        <Link
+          to="/signup"
+          className="bgWhite hvrBgGrey1 brdA1 br8 p1 pL2 pR2 mR2 trans1">
+          Join This Organization
+        </Link>
+      );
+    }
+
     return (
       <JoinFormComponent
         onSubmit={this.onSubmit}
@@ -38,3 +45,19 @@ export class JoinForm extends React.PureComponent<tProps> {
     );
   }
 }
+
+const mapStateToProps = (store: any) => ({
+  isLoading: store.usersByOrg.isLoading,
+  usersByOrg: store.usersByOrg.data,
+});
+
+const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
+  postNewUserByOrg: (query: tIdQuery) => dispatch(postNewUserByOrg(query)),
+  setRole: (query: any) => dispatch(setRole(query)),
+  setUserByOrg: (query: any) => dispatch(setUserByOrg(query)),
+});
+
+export const JoinForm = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(JoinFormContainer);

@@ -9,17 +9,22 @@ import _ from 'lodash';
 // the normalized data object (when submitting a form basically)
 export const normalizeFormMiddleware = async (app: Koa) => {
   await app.use((ctx, next) => {
-    const { query } = ctx;
-    const { body } = ctx.request;
+    const {query} = ctx;
+    const {body, method} = ctx.request;
     const isFormSubmit = _.isEmpty(query) && !_.isEmpty(body);
+
+    // we only need the isFormSubmit bool if submitting a form
+    // if we're just hitting the db, no point to adding it
     const data = isFormSubmit ? body : query;
-    const finalData = {...data, isFormSubmit};
+    if (method !== 'GET') {
+      data.isFormSubmit = isFormSubmit;
+    }
 
     if (ctx.state.locals) {
-      ctx.state.locals.data = finalData;
+      ctx.state.locals.data = data;
     } else {
       ctx.state.locals = {
-        data: finalData,
+        data,
       };
     }
 

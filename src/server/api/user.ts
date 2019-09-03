@@ -7,11 +7,11 @@ import { encrypt, isValidPw, saltedHash } from '../utils';
 
 export const user = new Router();
 const route = '/api/v1/user';
+const table = 'users';
 
-// @ts-ignore
-user.get('getUser', route, async (ctx: Koa.Context) => {
+user.get(route, async (ctx: Koa.ParameterizedContext) => {
   try {
-    const user: tUser = await knex('users').limit(1).where(ctx.query).first();
+    const user: tUser = await knex(table).limit(1).where(ctx.query).first();
     const { password, ...safeUserForClient } = user;
     ctx.body = safeUserForClient;
   } catch (err) {
@@ -20,8 +20,7 @@ user.get('getUser', route, async (ctx: Koa.Context) => {
 });
 
 // user signup form basically
-// @ts-ignore
-user.post('postUser', route, async (ctx: Koa.Context) => {
+user.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {data} = ctx.state.locals;
   const pwInput = data.password;
 
@@ -56,19 +55,18 @@ user.post('postUser', route, async (ctx: Koa.Context) => {
 });
 
 // TODO no-js forms only do GET/POST - figure out how to make patches work w/o js
-// @ts-ignore
-user.patch('patchUser', route, async (ctx: Koa.Context) => {
+user.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {data} = ctx.state.locals;
 
   let user = null;
   try {
-    user = await knex('users').limit(1).where({id: data.id}).first();
+    user = await knex(table).limit(1).where({id: data.id}).first();
   } catch (err) {
-    ctx.throw('400', err);
+    return ctx.throw(400, err);
   }
 
   const isValidPW = await isValidPw(data.password, user.password);
-  if (!isValidPW) return ctx.throw('400', 'Password is not correct');
+  if (!isValidPW) return ctx.throw(400, 'Password is not correct');
 
   if (data.newPassword) {
     const safePW = await saltedHash(data.newPassword);
@@ -78,15 +76,15 @@ user.patch('patchUser', route, async (ctx: Koa.Context) => {
   // newPassword will cause a constraint error - pull out before updating
   const {newPassword, ...updateQuery} = data;
 
-  let updatedUser = [];
+  let updatedUser: tUser[];
   try {
-    updatedUser = await knex('users')
+    updatedUser = await knex(table)
       .limit(1)
       .where({id: data.id})
       .update(updateQuery)
       .returning('*');
   } catch (err) {
-    ctx.throw('400', err);
+    return ctx.throw(400, err);
   }
 
   if (data.isFormSubmit) return;
