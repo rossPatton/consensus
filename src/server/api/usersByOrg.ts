@@ -1,5 +1,6 @@
 import Koa from 'koa';
 import Router from 'koa-router';
+import _ from 'lodash';
 
 import { knex } from '../db/connection';
 
@@ -23,10 +24,10 @@ const getUsers = async (ctx: Koa.ParameterizedContext, mappedIds: number[]) => {
 };
 
 usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
-  try {
-    const {query}: tIdQueryServer = ctx;
-    const {id: orgId} = query;
+  const data = _.get(ctx, 'state.locals.data', {});
+  const {id: orgId} = data;
 
+  try {
     // use 3rd table to get relation between users and organization
     const userIds: tUserOrgRelation[] = await knex(table).where({orgId});
 
@@ -47,8 +48,8 @@ usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const userId = ctx.state.user.id;
-  const {data} = ctx.state.locals;
+  const data = _.get(ctx, 'state.locals.data', {});
+  const userId = _.get(ctx, 'state.user.id', 0);
   const {id: orgId} = data;
 
   try {

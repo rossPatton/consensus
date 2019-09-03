@@ -5,7 +5,8 @@ import { getCountryReducer } from './async/country/reducer';
 import { eventsReducer } from './async/events/reducer';
 import { getDecisionsByOrgReducer } from './async/getDecisionsByOrg/reducer';
 import { getEventByIdReducer } from './async/getEventById/reducer';
-import { getOrgReducer } from './async/getOrg/reducer';
+import { orgReducer } from './async/org/reducer';
+import { orgsReducer } from './async/orgs/reducer';
 import { getRegionReducer } from './async/region/reducer';
 import { registerUserReducer } from './async/registerUser/reducer';
 import { roleReducer } from './async/role/reducer';
@@ -22,7 +23,8 @@ export const rootReducer = combineReducers({
   decisions: getDecisionsByOrgReducer,
   event: getEventByIdReducer,
   events: eventsReducer,
-  org: getOrgReducer,
+  org: orgReducer,
+  orgs: orgsReducer,
   region: getRegionReducer,
   registerUser: registerUserReducer,
   role: roleReducer,

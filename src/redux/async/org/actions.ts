@@ -1,8 +1,11 @@
-import { tBeginAction, tFailureAction, tSuccessAction } from './_types';
-
-export const GET_ORG_BEGIN = 'GET_ORG_BEGIN';
-export const GET_ORG_SUCCESS = 'GET_ORG_SUCCESS';
-export const GET_ORG_FAILURE = 'GET_ORG_FAILURE';
+import {
+  GET_ORG_BEGIN,
+  GET_ORG_FAILURE,
+  GET_ORG_SUCCESS,
+  tBeginAction,
+  tFailureAction,
+  tSuccessAction,
+} from './_types';
 
 export const getOrgBegin = (): tBeginAction => ({
   type: GET_ORG_BEGIN,

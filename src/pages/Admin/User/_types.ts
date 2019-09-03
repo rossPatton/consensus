@@ -1,25 +1,6 @@
-export type tState = {
-  email: string,
-  isClient: boolean,
-  fname: string,
-  lname: string,
-  newPassword: string,
-  password: string,
-  username: string,
-};
+import {match} from 'react-router-dom';
 
-export type tStore = { session: tSession };
-export type tStateUnion = keyof tState;
-
-export type tContainerProps = {
-  authenticateSession: (login: tLogin) => any,
+export type tProps = {
+  match: match & {params: {section: 'memberships' | 'profile' | 'events'}},
   session: tSession,
-  // we get id from the active session
-  updateUser: (user: tSession) => any,
-};
-
-export type tComponentProps = tState & {
-  session: tSession,
-  save: (ev: React.FormEvent<HTMLFormElement>) => void,
-  updateState: (key: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 };

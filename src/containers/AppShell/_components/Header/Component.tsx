@@ -36,7 +36,7 @@ export const HeaderComponent = memo((props: tProps) => (
           <fieldset className="fx">
             <Link
               id="a11yAdmin"
-              to="/admin"
+              to="/admin/profile"
               className="mR2">
               Account
             </Link>

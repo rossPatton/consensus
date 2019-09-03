@@ -26,7 +26,7 @@ export const routes = [
   },
   {
     component: UserAdmin,
-    path: '/admin',
+    path: '/admin/:section',
     private: true,
     redirect: '/login',
   },

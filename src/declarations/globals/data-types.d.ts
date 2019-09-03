@@ -147,6 +147,7 @@ declare type tSession = {
   createdAt?: string,
   email?: string,
   fname?: string,
+  hasAvatar?: boolean,
   lastActive?: string,
   lname?: string,
    // we dont want to include the pw client side, generally

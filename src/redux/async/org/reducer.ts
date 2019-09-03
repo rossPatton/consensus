@@ -1,9 +1,9 @@
-import { tActionUnion } from './_types';
 import {
   GET_ORG_BEGIN,
   GET_ORG_FAILURE,
   GET_ORG_SUCCESS,
-} from './actions';
+  tActionUnion,
+} from './_types';
 
 const initialState: tThunk<tOrg> = {
   error: null,
@@ -27,7 +27,7 @@ const initialState: tThunk<tOrg> = {
   },
 };
 
-export const getOrgReducer = (state = initialState, action: tActionUnion) => {
+export const orgReducer = (state = initialState, action: tActionUnion) => {
   switch (action.type) {
   case GET_ORG_BEGIN:
     return {
