@@ -11,14 +11,14 @@ const table = 'users_orgs';
 orgsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
   const userId = _.get(ctx, 'state.user.id', 0);
 
-  let userIds: tUserOrgRelation[];
+  let userOrgRels: tUserOrgRelation[];
   try {
-    userIds = await knex(table).where({userId});
+    userOrgRels = await knex(table).where({userId});
   } catch (err) {
     return ctx.throw(400, err);
   }
 
-  const mappedIds = userIds.map(idSet => idSet.orgId);
+  const mappedIds = userOrgRels.map(idSet => idSet.orgId);
 
   let orgs: tOrg[];
   try {
@@ -27,5 +27,14 @@ orgsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  ctx.body = orgs;
+  const orgsWithUserRole = orgs.map(org => {
+    const userOrgRel = _.find(userOrgRels, rel => rel.orgId === org.id);
+
+    return {
+      ...org,
+      role: userOrgRel ? userOrgRel.role : null,
+    };
+  });
+
+  ctx.body = orgsWithUserRole;
 });

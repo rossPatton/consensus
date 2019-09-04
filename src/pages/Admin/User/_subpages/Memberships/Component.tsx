@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
@@ -14,21 +15,29 @@ export const MembershipsComponent = memo((props: tProps) => {
           <li
             key={i}
             className="brdA1 br8 mB3">
-            <div className="bgBlueLite fx aiCtr fs6 p2 pL3 pR3 brdB1">
-              <div className="col">
-                <span className="mR3">
-                  <span className="mR1">✔</span>
-                  <span className="ttCap">Admin</span>
+            <div
+              className={cx({
+                'fx aiCtr fs6 p2 pL3 pR3 brdB1': true,
+                bgBlueLite: org.role === 'admin',
+                bgYellowLite: org.role === 'member',
+              })}>
+              <div className="fx aiCtr col">
+                <span className="ttCap mR3">
+                  {org.role}
                 </span>
-                <a href="filler" className="mR3">
-                  Create Event
-                </a>
-                <a href="filler" className="mR3">
-                  Make Decision
-                </a>
-                <a href="filler">
-                  Manage Group
-                </a>
+                {org.role === 'admin' && (
+                  <div>
+                    <a href="filler" className="mR3">
+                      Create Event
+                    </a>
+                    <a href="filler" className="mR3">
+                      Make Decision
+                    </a>
+                    <a href="filler">
+                      Manage Group
+                    </a>
+                  </div>
+                )}
               </div>
               <div className="col jcEnd taR">
                 <a href="filler">

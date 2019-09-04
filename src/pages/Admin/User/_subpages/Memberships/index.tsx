@@ -12,10 +12,22 @@ class MembershipsContainer extends PureComponent<tContainerProps> {
     props.getOrgsByUser();
   }
 
+  sortOrgs(orgs: tOrg[]) {
+    return orgs.sort((a, b) => {
+      const aIsAdmin = a.role === 'admin';
+      const bIsAdmin = b.role === 'admin';
+      if (aIsAdmin && !bIsAdmin) return -1;
+      if (bIsAdmin && !aIsAdmin) return 1;
+      return 0;
+    });
+  }
+
   render() {
+    const sortedOrgs = this.sortOrgs(this.props.orgs);
+
     return (
       <MembershipsComponent
-        orgs={this.props.orgs}
+        orgs={sortedOrgs}
       />
     );
   }

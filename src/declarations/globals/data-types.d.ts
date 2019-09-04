@@ -74,6 +74,7 @@ declare type tOrg = {
   id: number,
   membershipTotal: number,
   name: string,
+  role: tRole,
   slug: string,
   region: string,
   regionId: number,
