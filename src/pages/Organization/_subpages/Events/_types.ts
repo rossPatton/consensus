@@ -1,9 +1,7 @@
 import { match } from 'react-router';
 
 export type tComponentProps = {
-  allEvents: tEvent[],
-  eventsToRender: tEvent[],
-  match: match & { params: tOrgRouteParams },
+  events: tEvent[],
 }
 
 export type tContainerProps = {

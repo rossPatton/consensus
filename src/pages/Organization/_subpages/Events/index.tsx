@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { GenericLoader, Helmet } from '../../../../components';
+import { Paginate } from '../../../../containers';
 import { getEvents } from '../../../../redux';
 import { tContainerProps, tState } from './_types';
 import { EventsComponent } from './Component';
@@ -21,19 +22,6 @@ export class EventsContainer extends Component<tContainerProps> {
     });
   }
 
-  getSliceOfEvents = (events: tEvent[]) => {
-    const newArray = [...events];
-
-    const {match: {params: {page}}} = this.props;
-    const activePage = page ? parseInt(page, 10) : 1;
-
-    const end = activePage * 10;
-    const start = end - 10;
-
-    // -1 here because page numbers are 1 indexed, arrays are 0 indexed
-    return newArray.slice(start, end - 1);
-  }
-
   render() {
     return (
       <>
@@ -50,10 +38,14 @@ export class EventsContainer extends Component<tContainerProps> {
         <GenericLoader
           isLoading={this.props.isLoading}
           render={() => (
-            <EventsComponent
-              allEvents={this.props.events}
-              eventsToRender={this.getSliceOfEvents(this.props.events)}
+            <Paginate
+              items={this.props.events}
               match={this.props.match}
+              render={(itemsToRender: tEvent[]) => (
+                <EventsComponent
+                  events={itemsToRender}
+                />
+              )}
             />
           )}
         />

@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 
 import { ExternalLink, RSVP } from '../../components';
 import { getRandomNum } from '../../utils';
-import { tComponentProps } from './_types';
+import { tProps } from './_types';
 
-export const EventsComponent = memo((props: tComponentProps) => (
+export const EventsComponent = memo((props: tProps) => (
   <ul>
     {props.events.map((ev, i) => (
       <li key={i} className="brdA1 br8 mB2 p3 fx">
@@ -68,32 +68,30 @@ export const EventsComponent = memo((props: tComponentProps) => (
               </span>
             )}
             <RSVP event={ev} />
-            {props.session.isAuthenticated && (
-              <small className="bgYellowLite br8 p1 pL2 pR2">
-                {ev.isPrivate && (
-                  <>
-                    <span
-                      role="img"
-                      className="mR1"
-                      aria-label="Lock Emoji">
-                      🔒
-                    </span>
-                    Private Event
-                  </>
-                )}
-                {!ev.isPrivate && (
-                  <>
-                    <span
-                      role="img"
-                      className="mR1"
-                      aria-label="Tada Emoji">
-                      🎉
-                    </span>
-                    Public Event
-                  </>
-                )}
-              </small>
-            )}
+            <small className="bgYellowLite br8 p1 pL2 pR2">
+              {ev.isPrivate && (
+                <>
+                  <span
+                    role="img"
+                    className="mR1"
+                    aria-label="Lock Emoji">
+                    🔒
+                  </span>
+                  Private Event
+                </>
+              )}
+              {!ev.isPrivate && (
+                <>
+                  <span
+                    role="img"
+                    className="mR1"
+                    aria-label="Tada Emoji">
+                    🎉
+                  </span>
+                  Public Event
+                </>
+              )}
+            </small>
           </div>
         </div>
       </li>

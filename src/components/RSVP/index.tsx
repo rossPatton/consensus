@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
 import {setRsvp} from '../../redux';
-import {tProps} from './_types';
+import {tContainerProps, tState} from './_types';
 import {RSVPComponent} from './Component';
 
-class RSVPContainer extends PureComponent<tProps> {
+class RSVPContainer extends PureComponent<tContainerProps, tState> {
   state = {
     rsvp: this.props.event.rsvp,
   };

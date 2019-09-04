@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
 import {GenericLoader, Helmet} from '../../../../components';
+import {Paginate} from '../../../../containers';
 import {getDecisionsByOrg} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {DecisionsComponent} from './Component';
@@ -23,19 +24,6 @@ export class DecisionsContainer extends Component<tContainerProps> {
     });
   }
 
-  getSliceOfDecisions = (decisions: tDecision[]) => {
-    const newArray = [...decisions];
-
-    const { match: { params: { page } } } = this.props;
-    const activePage = page ? parseInt(page, 10) : 1;
-
-    const end = activePage * 10;
-    const start = end - 10;
-
-    // -1 here because page numbers are 1 indexed, arrays are 0 indexed
-    return newArray.slice(start, end - 1);
-  }
-
   render() {
     return (
       <>
@@ -52,10 +40,14 @@ export class DecisionsContainer extends Component<tContainerProps> {
         <GenericLoader
           isLoading={this.props.isLoading}
           render={() => (
-            <DecisionsComponent
-              allDecisions={this.props.decisions}
-              decisionsToRender={this.getSliceOfDecisions(this.props.decisions)}
+            <Paginate
+              items={this.props.decisions}
               match={this.props.match}
+              render={(itemsToRender: tDecision[]) => (
+                <DecisionsComponent
+                  decisions={itemsToRender}
+                />
+              )}
             />
           )}
         />

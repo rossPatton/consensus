@@ -1,9 +1,7 @@
 import { match } from 'react-router';
 
 export type tComponentProps = {
-  allDecisions: tDecision[],
-  decisionsToRender: tDecision[],
-  match: match & { params: tOrgRouteParams },
+  decisions: tDecision[],
 }
 
 export type tContainerProps = {

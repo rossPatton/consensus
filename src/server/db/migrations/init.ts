@@ -58,12 +58,17 @@ exports.up = async (knex: Knex) => {
   await knex.schema.createTable('users', table => {
     table.increments().unsigned().primary();
 
-    table.string('email').notNullable();
+    // login values
+    table.string('username').notNullable();
     table.string('password').notNullable();
 
+    // additional info that could be made public, but is private by default
     table.string('fname');
     table.string('lname');
-    table.string('username').notNullable();
+
+    // account recovery / verification
+    table.string('email');
+    table.string('phone');
 
     // optional - allow user to set their primary city
     // on login, take user to directory for that location

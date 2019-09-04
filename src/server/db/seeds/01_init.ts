@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import faker from 'faker';
 import Knex from 'knex';
 
+import { notNull } from '../../../utils/notNull';
 import { slugify } from '../../../utils/slugify';
 import cities from '../../json/usa/cities.json';
 import stateMap from '../../json/usa/stateCodeMap.json';
@@ -23,6 +24,7 @@ const createUser = async () => {
     fname: faker.name.firstName(),
     lname: faker.name.lastName(),
     password,
+    phone: faker.phone.phoneNumber(),
     username: faker.internet.userName(),
   };
 };
@@ -38,6 +40,7 @@ const createTestUser = async () => {
     fname: 'test',
     lname: 'user',
     password,
+    phone: faker.phone.phoneNumber(),
     username: 'testUser',
   };
 };
@@ -85,11 +88,22 @@ const createEvent = async () => ({
   title: faker.company.bs(),
 });
 
-const createUserOrgRelation = async (i: number) => ({
-  userId: i,
-  orgId: 100,
-  role: 'admin',
-});
+const createUserOrgRelation = async (userId: number, orgId: number) => {
+  const isMember = faker.random.boolean();
+  const isTestAdmin = userId === 100 && orgId === 100;
+
+  let role = isMember ? 'member' : null;
+  if (isTestAdmin) role = 'admin';
+
+  // if no role, dont create entry
+  if (!role) return null;
+
+  return {
+    userId,
+    orgId,
+    role,
+  };
+};
 
 const createUserEventRelation = async (u: number, e: number) => ({
   eventId: e,
@@ -191,7 +205,7 @@ exports.seed = async (knex: Knex) => {
   const fakeOrgs = [];
   const fakeDecisions = [];
 
-  const fakeUserOrgRelations = [];
+  let fakeUserOrgRelations = [];
   const fakeUserEventRelations = [];
   const fakeUserDecisionRelations = [];
 
@@ -209,10 +223,15 @@ exports.seed = async (knex: Knex) => {
   fakeUsers.push(await createTestUser());
   fakeOrgs.push(await createTWC());
 
-  let c = 1;
-  for (c; c <= 100; c++) {
-    fakeUserOrgRelations.push(await createUserOrgRelation(c));
+  let userId = 1;
+  for (userId; userId <= 100; userId++) {
+    let orgId = 1;
+    for (orgId; orgId <= 100; orgId++) {
+      fakeUserOrgRelations.push(await createUserOrgRelation(userId, orgId));
+    }
   }
+
+  fakeUserOrgRelations = fakeUserOrgRelations.filter(notNull);
 
   let d = 1;
   for (d; d < 50; d++) {

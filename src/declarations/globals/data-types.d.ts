@@ -49,14 +49,10 @@ declare type tEvent = {
   name: string,
   orgId: number,
   orgName: string,
+  rsvp: boolean,
   slug: string,
   state: string,
   title: string,
-};
-
-// if a user is logged in, then we merge in their RSVP status at render time
-declare type tLoggedInEvent = tEvent & {
-  rsvp: boolean,
 };
 
 declare type tRSVP = {

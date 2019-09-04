@@ -1,13 +1,13 @@
 import { match } from 'react-router';
 
 export type tProps = {
-  active?: number,
-  className?: string,
-  count?: number,
+  className: string,
+  count: number,
+  items: any[],
   match: match & {
     params: {
       page?: string,
     },
   },
-  total: number,
+  render: (itemsToRender: any[]) => React.ReactNode,
 }
