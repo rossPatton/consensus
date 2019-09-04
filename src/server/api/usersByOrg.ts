@@ -27,23 +27,26 @@ usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
   const data = _.get(ctx, 'state.locals.data', {});
   const {id: orgId} = data;
 
+  let userIds: tUserOrgRelation[];
   try {
-    // use 3rd table to get relation between users and organization
-    const userIds: tUserOrgRelation[] = await knex(table).where({orgId});
+    userIds = await knex(table).where({orgId});
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
 
-    // userIds here are ALL ids, but we limit by default to 10 at a time by default
-    const mappedIds = userIds.map(idSet => idSet.userId);
+  // userIds here are ALL ids, but we limit by default to 10 at a time by default
+  const mappedIds = userIds.map(idSet => idSet.userId);
 
-    // use the returned ids to query users table
+  // use the returned ids to query users table
+  try {
     const users: tUser[] = await getUsers(ctx, mappedIds);
     const usersByOrg: tUsersByOrg = {
       userTotal: mappedIds.length,
       users,
     };
-
     ctx.body = usersByOrg;
   } catch (err) {
-    ctx.throw(400, err);
+    return ctx.throw(400, err);
   }
 });
 

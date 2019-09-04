@@ -4,7 +4,7 @@ import _ from 'lodash';
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ExternalLink } from '../../components';
+import { ExternalLink, RSVP } from '../../components';
 import { getRandomNum } from '../../utils';
 import { tComponentProps } from './_types';
 
@@ -67,47 +67,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 {ev.goingCount} Attendees
               </span>
             )}
-            {!ev.rsvp && (
-              <form
-                method="POST"
-                onSubmit={e => props.setRsvp(e, ev.id, true)}
-                action="/api/v1/rsvps">
-                <fieldset>
-                  <input type="hidden" name="rsvp" value={ev.id} />
-                  <button
-                    className="fx aiCtr br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
-                    <span
-                      role="img"
-                      className="mR1"
-                      aria-label="Big Plus Sign Emoji">
-                      ➕
-                    </span>
-                    <legend>RSVP</legend>
-                  </button>
-                </fieldset>
-              </form>
-            )}
-            {ev.rsvp && (
-              <form
-                method="POST"
-                action="/api/v1/rsvps"
-                onSubmit={e => props.setRsvp(e, ev.id, false)}>
-                <fieldset>
-                  <input type="hidden" name="rsvp" value={ev.id} />
-                  <button
-                    title="Click to cancel your RSVP"
-                    className="fx aiCtr br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
-                    <span
-                      role="img"
-                      className="mR1"
-                      aria-label="Thumbs Up Emoji">
-                      👍
-                    </span>
-                    <legend>You&apos;re going!</legend>
-                  </button>
-                </fieldset>
-              </form>
-            )}
+            <RSVP event={ev} />
             {props.session.isAuthenticated && (
               <small className="bgYellowLite br8 p1 pL2 pR2">
                 {ev.isPrivate && (

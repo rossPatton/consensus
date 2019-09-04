@@ -2,7 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import { getDateNowAsISOStr } from '../../utils';
+import { getDateNowAsISOStr, notNull } from '../../utils';
 import { knex } from '../db/connection';
 
 export const events = new Router();
@@ -10,8 +10,8 @@ const route = '/api/v1/events';
 
 // TODO simplify
 const getEvents = async (ctx: Koa.ParameterizedContext) => {
-  const { query }: tIdQueryServer = ctx;
-  const { exclude, id, limit, isPublic, offset } = query;
+  const data = _.get(ctx, 'state.locals.data', {});
+  const { exclude, id, limit, isPublic, offset } = data;
 
   const orgId = parseInt(id, 10);
   const parsedLimit = limit ? parseInt(limit, 10) : 3;
@@ -38,9 +38,50 @@ const getEvents = async (ctx: Koa.ParameterizedContext) => {
 
 // get multiple events at a time
 events.get(route, async (ctx: Koa.ParameterizedContext) => {
+  const data = _.get(ctx, 'state.locals.data', {});
+  const userId = _.get(ctx, 'state.user.id', 0);
+  const orgId = parseInt(data.id, 10);
+
+  let events: tEvent[];
   try {
-    ctx.body = await getEvents(ctx);
+    events = await getEvents(ctx);
   } catch (err) {
-    ctx.throw('400', err);
+    return ctx.throw(400, err);
   }
+
+  let userOrgRel: tUserOrgRelation;
+  try {
+    userOrgRel = await knex('users_orgs').limit(1).where({orgId}).first();
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
+
+  let userEventsRels: tUserEventRelation[];
+  try {
+    userEventsRels = await knex('users_events').where({userId});
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
+
+  const isAuthenticated = ctx.isAuthenticated();
+  ctx.body = events.map(ev => {
+    if (ev.isPrivate) {
+      // if private event, and user is not logged in, hide
+      if (!isAuthenticated) return null;
+      // if private event, user is logged in, but user is not a member, hide
+      if (userOrgRel.role === null) return null;
+    }
+
+    const rsvpObj = _.find(
+      userEventsRels,
+      rel => rel.eventId === ev.id && rel.userId === userId,
+    );
+
+    const rsvp = (rsvpObj && rsvpObj.rsvp) || false;
+
+    return {
+      ...ev,
+      rsvp,
+    };
+  }).filter(notNull);
 });

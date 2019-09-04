@@ -14,7 +14,7 @@ event.get('/api/v1/event', async (ctx: Koa.ParameterizedContext) => {
   try {
     ctx.body = await knex('events').limit(1).where(query).first();
   } catch (err) {
-    ctx.throw('400', err);
+    ctx.throw(400, err);
   }
 });
 

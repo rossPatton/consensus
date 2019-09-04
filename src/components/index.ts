@@ -8,4 +8,5 @@ export {Paginate} from './Paginate';
 export {PasswordInput} from './PasswordInput';
 export {PrivateRoute} from './PrivateRoute';
 export {RouteWithSubRoutes} from './RouteWithSubRoutes';
+export {RSVP} from './RSVP';
 export {ScrollToTop} from './ScrollToTop';

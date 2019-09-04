@@ -2,7 +2,8 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import { knex } from '../db/connection';
+import {getDateNowAsISOStr} from '../../utils';
+import {knex} from '../db/connection';
 
 export const eventsByUser = new Router();
 const route = '/api/v1/eventsByUser';
@@ -26,10 +27,19 @@ eventsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let events: tEvent[];
   try {
-    events = await knex('events').whereIn('id', mappedIds);
+    events = await knex('events')
+      .whereIn('id', mappedIds)
+      .where('date', '>=', getDateNowAsISOStr())
+      .orderBy('date', 'asc');
   } catch (err) {
     return ctx.throw(400, err);
   }
 
-  ctx.body = events;
+  // client side rendering expects a rsvp boolean on the event object
+  const mappedEvents = events.map(ev => ({
+    ...ev,
+    rsvp: true,
+  }));
+
+  ctx.body = mappedEvents;
 });

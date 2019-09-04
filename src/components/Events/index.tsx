@@ -3,7 +3,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {getRsvps, setRsvp} from '../../redux';
+import {getRsvps} from '../../redux';
 import {notNull} from '../../utils';
 import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
@@ -14,52 +14,14 @@ export class EventsContainer extends PureComponent<tContainerProps> {
     props.getRsvps();
   }
 
-  mapEvents = () => {
-    const {events, role, rsvps, session} = this.props;
-
-    return events.map(ev => {
-      if (ev.isPrivate) {
-        // if private event, and user is not logged in, hide
-        if (!session.isAuthenticated) return null;
-        // if private event, user is logged in, but user is not a member, hide
-        // if (role === null) return null;
-      }
-
-      const rsvpObj = _.find(
-        rsvps,
-        rsvp => ev.id === rsvp.eventId && rsvp.userId === session.id,
-      );
-
-      const rsvp = (rsvpObj && rsvpObj.rsvp) || false;
-
-      return {
-        ...ev,
-        rsvp,
-      };
-    }).filter(notNull);
-  }
-
-  setRsvp = (
-    ev: React.FormEvent<HTMLFormElement>,
-    eventId: number,
-    value: boolean) => {
-    ev.preventDefault();
-    this.props
-      .setRsvp({
-        id: eventId,
-        value,
-      })
-      .then(() => this.props.getRsvps())
-      .catch(console.error);
-  }
-
   render() {
+    const {events, session, tiny} = this.props;
+
     return (
       <EventsComponent
-        events={this.mapEvents()}
-        setRsvp={this.setRsvp}
-        session={this.props.session}
-        tiny={this.props.tiny}
+        events={events}
+        session={session}
+        tiny={tiny}
       />
     );
   }
@@ -73,7 +35,6 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  setRsvp: (query: {id: number, value: boolean}) => dispatch(setRsvp(query)),
   getRsvps: () => dispatch(getRsvps()),
 });
 
