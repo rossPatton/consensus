@@ -42,6 +42,12 @@ export const routes = [
     exact: true,
     path: '/directory/:country/:region?/:city?',
   },
+  // organization page is reachable directly via id or by geographical location
+  {
+    component: Organization,
+    exact: true,
+    path: '/org/:id/:section/:page?',
+  },
   {
     component: Organization,
     exact: true,

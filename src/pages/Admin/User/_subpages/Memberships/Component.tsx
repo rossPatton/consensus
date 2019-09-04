@@ -19,7 +19,7 @@ export const MembershipsComponent = memo((props: tProps) => {
               className={cx({
                 'fx aiCtr fs6 p2 pL3 pR3 brdB1': true,
                 bgBlueLite: org.role === 'admin',
-                bgYellowLite: org.role === 'member',
+                bgGreenLite: org.role === 'member',
               })}>
               <div className="fx aiCtr col">
                 <span className="ttCap mR3">
@@ -47,7 +47,7 @@ export const MembershipsComponent = memo((props: tProps) => {
             </div>
             <div className="p3">
               <h2 className="fs3 lh1 ttCap mB2">
-                <Link to={org.slug}>
+                <Link to={`/org/${org.id}/overview`}>
                   {org.name}
                 </Link>
               </h2>

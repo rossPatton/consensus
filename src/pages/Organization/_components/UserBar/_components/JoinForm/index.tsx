@@ -21,7 +21,7 @@ class JoinFormContainer extends React.PureComponent<tProps> {
 
     if (role) {
       return (
-        <span className="bgWhite brdA1 br8 p1 pL2 pR2 mR2 fx aiCtr">
+        <span className="bgWhite brdA1 br8 lh1 pL2 pR2 mR2 fx aiCtr">
           <span className="fs4 mR1">✔</span>
           <span className="ttCap">{role}</span>
         </span>

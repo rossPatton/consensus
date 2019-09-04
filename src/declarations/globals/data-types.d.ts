@@ -89,6 +89,7 @@ declare type tDirectoryParams = {
 };
 
 declare type tOrgRouteParams = tDirectoryParams & {
+  id?: string,
   slug: string,
   page?: string,
   section?: string,

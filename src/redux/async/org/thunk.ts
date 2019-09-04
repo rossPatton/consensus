@@ -14,8 +14,10 @@ export const getOrg = memoize({ ttl: 300 }, (params: tOrgRouteParams) => {
 
     try {
       const {section, page, ...restParams} = params;
-      const prefix = `${__URL__}/api/v1/org`;
       const qs = objToQueryString(restParams);
+
+      const isByID = !!params.id;
+      const prefix = `${__URL__}/api/v1/org${isByID ? 'ById' : ''}`;
 
       // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, {agent})

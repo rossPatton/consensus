@@ -6,9 +6,9 @@ import { deSlugify } from '../../utils';
 import { knex } from '../db/connection';
 
 export const org = new Router();
+const route = '/api/v1/org';
 
-// @ts-ignore
-org.get('org', '/api/v1/org', async (ctx: Koa.Context) => {
+org.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {
     city: citySlug,
     country: countryCode,
