@@ -12,10 +12,25 @@ class EventsContainer extends PureComponent<tContainerProps> {
     props.getEventsByUser();
   }
 
+  getSliceOfEvents = (events: tEvent[]) => {
+    const newArray = [...events];
+
+    const {match: {params: {page}}} = this.props;
+    const activePage = page ? parseInt(page, 10) : 1;
+
+    const end = activePage * 10;
+    const start = end - 10;
+
+    // -1 here because page numbers are 1 indexed, arrays are 0 indexed
+    return newArray.slice(start, end - 1);
+  }
+
   render() {
     return (
       <EventsComponent
-        events={this.props.events}
+        allEvents={this.props.events}
+        eventsToRender={this.getSliceOfEvents(this.props.events)}
+        match={this.props.match}
       />
     );
   }

@@ -9,13 +9,16 @@ export const UserAdminComponent = memo((props: tProps) => {
   const isProfile = props.match.params.section === 'profile';
   const isMemberships = props.match.params.section === 'memberships';
 
+  // const { section } = props.match.params;
+  // const to = `/admin/${section}/${region}/${city}/${slug}/${subRoute}`;
+
   return (
     <div className="contain fx mT4">
       <aside className="mR5">
         <ul role="navigation">
           <li>
             {!isProfile && (
-              <Link to="profile">
+              <Link to="/admin/profile">
                 Profile
               </Link>
             )}
@@ -23,7 +26,7 @@ export const UserAdminComponent = memo((props: tProps) => {
           </li>
           <li>
             {!isEvents && (
-              <Link to="events">
+              <Link to="/admin/events">
                 Events
               </Link>
             )}
@@ -31,7 +34,7 @@ export const UserAdminComponent = memo((props: tProps) => {
           </li>
           <li>
             {!isMemberships && (
-              <Link to="memberships">
+              <Link to="/admin/memberships">
                 Memberships
               </Link>
             )}
@@ -42,6 +45,7 @@ export const UserAdminComponent = memo((props: tProps) => {
       <div className="col">
         {isEvents && (
           <Events
+            match={props.match}
             session={props.session}
           />
         )}

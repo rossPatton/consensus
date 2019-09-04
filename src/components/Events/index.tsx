@@ -22,7 +22,7 @@ export class EventsContainer extends PureComponent<tContainerProps> {
         // if private event, and user is not logged in, hide
         if (!session.isAuthenticated) return null;
         // if private event, user is logged in, but user is not a member, hide
-        if (role === null) return null;
+        // if (role === null) return null;
       }
 
       const rsvpObj = _.find(

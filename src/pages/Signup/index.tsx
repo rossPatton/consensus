@@ -92,7 +92,7 @@ export class SignupContainer extends PureComponent<tContainerProps, tState> {
             { property: 'og:description', content: '' },
           ]}
         />
-        {session.isAuthenticated && <Redirect to="/admin" />}
+        {session.isAuthenticated && <Redirect to="/admin/profile" />}
         {!session.isAuthenticated && (
           <SignupComponent
             {...this.props}

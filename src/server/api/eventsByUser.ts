@@ -11,17 +11,18 @@ const table = 'users_events';
 eventsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
   const userId = _.get(ctx, 'state.user.id', 0);
 
-  let userIds: tUserEventRelation[];
+  let userEventIds: tUserEventRelation[];
   try {
-    userIds = await knex(table).where({userId});
+    userEventIds = await knex(table).where({userId});
   } catch (err) {
     return ctx.throw(400, err);
   }
 
   // mapped set of events that the user has RSVP'd to
-  const mappedIds = userIds
+  const mappedIds = _.uniq(userEventIds
     .filter(idSet => idSet.rsvp)
-    .map(idSet => idSet.eventId);
+    .map(idSet => idSet.eventId)
+  );
 
   let events: tEvent[];
   try {

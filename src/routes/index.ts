@@ -26,7 +26,9 @@ export const routes = [
   },
   {
     component: UserAdmin,
-    path: '/admin/:section',
+    exact: true,
+    // page is only used by events pagination
+    path: '/admin/:section/:page?',
     private: true,
     redirect: '/login',
   },

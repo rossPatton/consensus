@@ -29,8 +29,8 @@ rsvps.get(route, async (ctx: Koa.ParameterizedContext) => {
 // post new rsvp for the logged in user, by eventId
 rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {id = 0, value} = _.get(ctx, 'state.locals.data', {});
-  const eventId = parseInt(id, 10);
   const userId = _.get(ctx, 'state.user.id', 0);
+  const eventId = parseInt(id, 10);
 
   const newRsvp: tRSVP = {
     eventId,

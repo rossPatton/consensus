@@ -20,7 +20,7 @@ auth.post('/auth/login', async (ctx: Koa.ParameterizedContext, next) =>
     };
 
     const {isFormSubmit} = ctx.state.locals.data;
-    if (isFormSubmit) return ctx.redirect('/admin');
+    if (isFormSubmit) return ctx.redirect('/admin/profile');
 
     ctx.status = 200;
     ctx.body = newSession;
