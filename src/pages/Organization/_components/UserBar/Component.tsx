@@ -13,15 +13,14 @@ export const UserBarComponent = memo((props: tProps) => (
   <>
     <div
       className={cx('fs6 lh1 pT3 pB3 mB4 brdB1', {
-        bgYellowLite: !props.role,
-        bgGreenLite: props.role === 'member',
-        bgBlueLite: props.role === 'admin',
+        bgYellowLite: !props.org.role,
+        bgGreenLite: props.org.role === 'member',
+        bgBlueLite: props.org.role === 'admin',
       })}>
       <ul className="contain fx fxWrap aiCtr">
         <li className="fx aiCtr cap">
           <JoinForm
-            org={props.org}
-            role={props.role}
+            role={props.org.role}
             session={props.session}
           />
         </li>
@@ -37,7 +36,7 @@ export const UserBarComponent = memo((props: tProps) => (
             </a>
           </li>
         )}
-        {props.role === 'admin' && (
+        {props.org.role === 'admin' && (
           <ul className="fx col jcEnd fs6">
             <li className="mR2 brdA1 p1 br4 bgWhite pL2 pR2 trans1">
               <Link to="createEvent">

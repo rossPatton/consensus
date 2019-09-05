@@ -70,6 +70,9 @@ exports.up = async (knex: Knex) => {
     table.string('email');
     table.string('phone');
 
+    // has user been veriied yet, either view email or text
+    table.boolean('isVerified').notNullable().defaultTo(false);
+
     // optional - allow user to set their primary city
     // on login, take user to directory for that location
     table.integer('city').references('cities.id');

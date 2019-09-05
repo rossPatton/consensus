@@ -3,7 +3,7 @@ import { match } from 'react-router';
 export type tProps = {
   className: string,
   count: number,
-  items: any[],
+  items: object[],
   match: match & {
     params: {
       page?: string,

@@ -4,6 +4,10 @@ export type tProps = {
   events: tEvent[],
 };
 
+export type tStore = {
+  events: tThunk<tEvent[]>,
+}
+
 export type tContainerProps = tProps & {
   match: match,
   getEventsByUser: () => void,

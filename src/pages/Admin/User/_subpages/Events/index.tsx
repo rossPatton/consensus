@@ -4,7 +4,7 @@ import {Dispatch} from 'redux';
 
 import {Paginate} from '../../../../../containers';
 import {getEventsByUser} from '../../../../../redux';
-import {tContainerProps} from './_types';
+import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
 
 class EventsContainer extends PureComponent<tContainerProps> {
@@ -28,7 +28,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
   }
 }
 
-const mapStateToProps = (store: any) => ({
+const mapStateToProps = (store: tStore) => ({
   isLoading: store.events.isLoading,
   events: store.events.data,
 });

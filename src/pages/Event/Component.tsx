@@ -1,7 +1,7 @@
 import dayJS from 'dayjs';
 import React, {memo} from 'react';
 
-import {Events, ExternalLink} from '../../components';
+import {Events, ExternalLink, RSVP} from '../../components';
 import {tComponentProps} from './_types';
 
 export const EventComponent = memo(({event, events}: tComponentProps) => (
@@ -30,8 +30,9 @@ export const EventComponent = memo(({event, events}: tComponentProps) => (
           {event.goingCount} attendees |
         </span>
       )}
+      <RSVP event={event} />
       {event.isPrivate && (
-        <small className="bgYellowLite br4 p2 pL3 pR3">
+        <small className="bgYellowLite br4 p1 pL2 pR2 lh1">
           <span
             role="img"
             className="mR1"
@@ -42,7 +43,7 @@ export const EventComponent = memo(({event, events}: tComponentProps) => (
         </small>
       )}
       {!event.isPrivate && (
-        <small className="bgGreenLite br4 p2 pL3 pR3">
+        <small className="bgYellowLite br4 p1 pL2 pR2 lh1">
           <span
             role="img"
             className="mR1"

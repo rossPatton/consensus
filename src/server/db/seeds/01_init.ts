@@ -38,6 +38,7 @@ const createTestUser = async () => {
     city: 3658, // New York City
     email: 'test@test.com',
     fname: 'test',
+    isVerified: true,
     lname: 'user',
     password,
     phone: faker.phone.phoneNumber(),

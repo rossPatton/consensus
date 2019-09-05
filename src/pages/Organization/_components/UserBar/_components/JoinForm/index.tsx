@@ -4,14 +4,21 @@ import {Link} from 'react-router-dom';
 import {Dispatch} from 'redux';
 
 import {postNewUserByOrg, setRole, setUserByOrg} from '../../../../../../redux';
-import {tProps} from './_types';
+import {tProps, tQuery, tStore, tUserAction} from './_types';
 import {JoinFormComponent} from './Component';
 
 class JoinFormContainer extends React.PureComponent<tProps> {
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
+
+    // just satisfy typescript
+    if (!this.props.session.id) return;
+
     this.props.postNewUserByOrg({id: this.props.session.id})
-      .then((res: any) => this.props.setUserByOrg(res.payload))
+      .then((res: tUserAction) => {
+        if (!res.payload) return null;
+        return this.props.setUserByOrg(res.payload);
+      })
       .then(() => this.props.setRole({role: 'member'}))
       .catch(console.error);
   }
@@ -46,15 +53,15 @@ class JoinFormContainer extends React.PureComponent<tProps> {
   }
 }
 
-const mapStateToProps = (store: any) => ({
+const mapStateToProps = (store: tStore) => ({
   isLoading: store.usersByOrg.isLoading,
   usersByOrg: store.usersByOrg.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  postNewUserByOrg: (query: tIdQuery) => dispatch(postNewUserByOrg(query)),
-  setRole: (query: any) => dispatch(setRole(query)),
-  setUserByOrg: (query: any) => dispatch(setUserByOrg(query)),
+  postNewUserByOrg: (query: tQuery) => dispatch(postNewUserByOrg(query)),
+  setRole: (query: {role: tRole}) => dispatch(setRole(query)),
+  setUserByOrg: (query: tUser) => dispatch(setUserByOrg(query)),
 });
 
 export const JoinForm = connect(

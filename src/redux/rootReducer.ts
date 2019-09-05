@@ -9,8 +9,8 @@ import { orgReducer } from './async/org/reducer';
 import { orgsReducer } from './async/orgs/reducer';
 import { getRegionReducer } from './async/region/reducer';
 import { registerUserReducer } from './async/registerUser/reducer';
-import { roleReducer } from './async/role/reducer';
-import { rsvpsReducer } from './async/rsvps/reducer';
+// import { roleReducer } from './async/role/reducer';
+// import { rsvpsReducer } from './async/rsvps/reducer';
 import { authenticateSessionReducer } from './async/session/reducer';
 import { updateUserReducer } from './async/updateUser/reducer';
 import { userReducer } from './async/user/reducer';
@@ -27,8 +27,8 @@ export const rootReducer = combineReducers({
   orgs: orgsReducer,
   region: getRegionReducer,
   registerUser: registerUserReducer,
-  role: roleReducer,
-  rsvps: rsvpsReducer,
+  // role: roleReducer,
+  // rsvps: rsvpsReducer,
   session: authenticateSessionReducer,
   updateUser: updateUserReducer,
   user: userReducer,

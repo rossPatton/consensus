@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
 import {setRsvp} from '../../redux';
-import {tContainerProps, tState} from './_types';
+import {tContainerProps, tSetRsvpOpts, tState } from './_types';
 import {RSVPComponent} from './Component';
 
 class RSVPContainer extends PureComponent<tContainerProps, tState> {
@@ -11,7 +11,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
     rsvp: this.props.event.rsvp,
   };
 
-  setRsvp = async (opts: any) => {
+  setRsvp = async (opts: tSetRsvpOpts) => {
     opts.ev.preventDefault();
 
     try {

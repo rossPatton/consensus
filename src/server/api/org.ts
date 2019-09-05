@@ -9,12 +9,14 @@ export const org = new Router();
 const route = '/api/v1/org';
 
 org.get(route, async (ctx: Koa.ParameterizedContext) => {
+  const userId = _.get(ctx, 'state.user.id', 0);
+
   const {
     city: citySlug,
     country: countryCode,
     region: regionCode,
     slug: orgSlug,
-  } = ctx.state.locals.data;
+  } = _.get(ctx, 'state.locals.data', {});
 
   let country: tCountry;
   try {
@@ -69,5 +71,20 @@ org.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  ctx.body = org;
+  let userOrgRel: tUserOrgRelation;
+  try {
+    userOrgRel = await knex('users_orgs')
+      .limit(1)
+      .where({userId, orgId: org.id})
+      .first();
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
+
+  const orgWithRole = {
+    ...org,
+    role: userOrgRel.role,
+  };
+
+  ctx.body = orgWithRole;
 });

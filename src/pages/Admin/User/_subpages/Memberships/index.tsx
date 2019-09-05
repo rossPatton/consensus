@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
 import {getOrgsByUser} from '../../../../../redux';
-import {tContainerProps} from './_types';
+import {tContainerProps, tStore} from './_types';
 import {MembershipsComponent} from './Component';
 
 class MembershipsContainer extends PureComponent<tContainerProps> {
@@ -33,7 +33,7 @@ class MembershipsContainer extends PureComponent<tContainerProps> {
   }
 }
 
-const mapStateToProps = (store: any) => ({
+const mapStateToProps = (store: tStore) => ({
   isLoading: store.orgs.isLoading,
   orgs: store.orgs.data,
 });

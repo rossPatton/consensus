@@ -11,11 +11,32 @@ export const event = new Router();
 // route example: event/eventId
 event.get('/api/v1/event', async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, 'state.locals.data', {});
+  const userId = _.get(ctx, 'state.user.id', 0);
+
+  let event: tEvent;
   try {
-    ctx.body = await knex('events').limit(1).where(query).first();
+    event = await knex('events')
+      .limit(1)
+      .where(query)
+      .first();
   } catch (err) {
-    ctx.throw(400, err);
+    return ctx.throw(400, err);
   }
+
+  let userEventRel: tUserEventRelation;
+  try {
+    userEventRel = await knex('users_events')
+      .limit(1)
+      .where({userId, eventId: event.id})
+      .first();
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
+
+  ctx.body = {
+    ...event,
+    rsvp: userEventRel.rsvp,
+  };
 });
 
 // create a new event
