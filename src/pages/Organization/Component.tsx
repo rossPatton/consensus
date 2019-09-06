@@ -2,7 +2,7 @@ import React from 'react';
 
 import {UserBar} from './_components';
 import {OrganizationHeader, OrganizationTabs} from './_components';
-import {AdminEvent, Decisions, Events, Overview} from './_subpages';
+import {AdminEvent, AdminManage, Decisions, Events, Overview} from './_subpages';
 import {tProps} from './_types';
 
 export const OrganizationComponent = (props: tProps) => (
@@ -38,6 +38,11 @@ export const OrganizationComponent = (props: tProps) => (
       )}
       {props.match.params.section === 'createEvent' && (
         <AdminEvent
+          org={props.org}
+        />
+      )}
+      {props.match.params.section === 'manageOrganization' && (
+        <AdminManage
           org={props.org}
         />
       )}

@@ -4,6 +4,7 @@ import {Dispatch} from 'redux';
 
 import {Paginate} from '../../../../../containers';
 import {getEventsByUser} from '../../../../../redux';
+import {fuzzFilterList} from '../../../../../utils';
 import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
 
@@ -13,14 +14,38 @@ class EventsContainer extends PureComponent<tContainerProps> {
     props.getEventsByUser();
   }
 
+  state = {
+    events: [],
+  };
+
+  // TODO consolidate search logic somewhere
+  onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    ev.preventDefault();
+
+    const filteredList = fuzzFilterList({
+      input: this.props.events || [],
+      key: 'title',
+      search: ev.currentTarget.value,
+    });
+
+    this.setState({
+      events: filteredList,
+    });
+  }
+
   render() {
+    const eventsToRender = this.state.events.length > 0
+      ? this.state.events
+      : this.props.events;
+
     return (
       <Paginate
-        items={this.props.events}
+        items={eventsToRender}
         match={this.props.match}
         render={(itemsToRender: tEvent[]) => (
           <EventsComponent
             events={itemsToRender}
+            onSearchChange={this.onSearchChange}
           />
         )}
       />

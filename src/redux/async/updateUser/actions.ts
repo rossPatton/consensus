@@ -1,8 +1,11 @@
-import { tBeginAction, tFailureAction, tSuccessAction } from './_types';
-
-export const UPDATE_USER_BEGIN = 'UPDATE_USER_BEGIN';
-export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
-export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
+import {
+  tBeginAction,
+  tFailureAction,
+  tSuccessAction,
+  UPDATE_USER_BEGIN,
+  UPDATE_USER_FAILURE,
+  UPDATE_USER_SUCCESS,
+} from './_types';
 
 export const updateUserBegin = (): tBeginAction => ({
   type: UPDATE_USER_BEGIN,

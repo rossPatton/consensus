@@ -1,9 +1,9 @@
-import { tActionUnion } from './_types';
 import {
+  tActionUnion,
   UPDATE_USER_BEGIN,
   UPDATE_USER_FAILURE,
   UPDATE_USER_SUCCESS,
-} from './actions';
+} from './_types';
 
 const initialState: tThunk<tSession> = {
   error: null,

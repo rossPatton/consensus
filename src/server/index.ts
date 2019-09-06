@@ -62,7 +62,6 @@ setupApi(app);
 
 // render the page
 app.use(async ctx => {
-  ctx.status = 200; // koa defaults to 404
   ctx.body = SSR(ctx);
 });
 

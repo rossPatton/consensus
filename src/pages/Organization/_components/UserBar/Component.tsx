@@ -47,7 +47,9 @@ export const UserBarComponent = memo((props: tProps) => (
               Make a Decision
             </li>
             <li className="brdA1 p1 br4 bgWhite pL2 pR2">
-              Manage Group
+              <Link to="manageOrganization">
+                Manage Group
+              </Link>
             </li>
           </ul>
         )}

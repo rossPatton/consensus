@@ -15,7 +15,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
     opts.ev.preventDefault();
 
     try {
-      await this.props.setRsvp({
+      this.props.setRsvp({
         id: opts.eventId,
         value: opts.value,
       });

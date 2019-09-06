@@ -1,3 +1,4 @@
+import Boom from '@hapi/boom';
 import Koa from 'koa';
 
 import { auth } from './auth';
@@ -41,23 +42,29 @@ export const setupApi = (app: Koa) => {
   app.use(users.routes());
   app.use(usersByOrg.routes());
 
-  app.use(auth.allowedMethods());
-  app.use(city.allowedMethods());
-  app.use(country.allowedMethods());
-  app.use(decisions.allowedMethods());
-  app.use(event.allowedMethods());
-  app.use(events.allowedMethods());
-  app.use(eventsByUser.allowedMethods());
-  app.use(fileUpload.allowedMethods());
-  app.use(org.allowedMethods());
-  app.use(orgById.allowedMethods());
-  app.use(orgsByUser.allowedMethods());
-  app.use(region.allowedMethods());
-  app.use(reportUri.allowedMethods());
-  app.use(role.allowedMethods());
-  app.use(rsvp.allowedMethods());
-  app.use(rsvps.allowedMethods());
-  app.use(user.allowedMethods());
-  app.use(users.allowedMethods());
-  app.use(usersByOrg.allowedMethods());
+  const opts = Object.freeze({
+    methodNotAllowed: () => Boom.methodNotAllowed(),
+    notImplemented: () => Boom.notImplemented(),
+    throw: true,
+  });
+
+  app.use(auth.allowedMethods(opts));
+  app.use(city.allowedMethods(opts));
+  app.use(country.allowedMethods(opts));
+  app.use(decisions.allowedMethods(opts));
+  app.use(event.allowedMethods(opts));
+  app.use(events.allowedMethods(opts));
+  app.use(eventsByUser.allowedMethods(opts));
+  app.use(fileUpload.allowedMethods(opts));
+  app.use(org.allowedMethods(opts));
+  app.use(orgById.allowedMethods(opts));
+  app.use(orgsByUser.allowedMethods(opts));
+  app.use(region.allowedMethods(opts));
+  app.use(reportUri.allowedMethods(opts));
+  app.use(role.allowedMethods(opts));
+  app.use(rsvp.allowedMethods(opts));
+  app.use(rsvps.allowedMethods(opts));
+  app.use(user.allowedMethods(opts));
+  app.use(users.allowedMethods(opts));
+  app.use(usersByOrg.allowedMethods(opts));
 };

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
 import {authenticateSession, updateUser} from '../../../../../redux';
+import {UPDATE_USER_SUCCESS} from '../../../../../redux/async/updateUser/_types';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {ProfileComponent} from './Component';
 
@@ -26,22 +27,23 @@ export class ProfileContainer extends PureComponent<tContainerProps, tState> {
     });
   }
 
-  // TODO handle errors better, re-arrange try-catches
   save = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const {id} = this.props.session;
-    const { newPassword, password } = this.state;
+    const {newPassword, password} = this.state;
 
-    let newUser = {};
+    let newUser: tAction<typeof UPDATE_USER_SUCCESS, tUser>;
     try {
       newUser = await this.props.updateUser({id, ...this.state});
     } catch (err) {
-      console.error(err);
+      return console.error(err);
     }
+
+    // TODO trigger error boundary or something
+    if (!newUser.payload) return;
 
     try {
       await this.props.authenticateSession({
-      // @ts-ignore
         username: newUser.payload.username,
         password: newPassword || password,
       });

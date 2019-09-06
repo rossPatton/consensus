@@ -54,3 +54,24 @@ export const postNewUserByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {
     }
   };
 });
+
+export const deleteUserByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {
+  return async function <S>(dispatch: Dispatch<S>) {
+    dispatch(postUserByOrgBegin());
+
+    try {
+      const qs = objToQueryString(queryObj);
+
+      // @ts-ignore
+      const result = await fetch(`${prefix}?${qs}`, {agent, method: 'DELETE'})
+        .then((response: tFetchResponse) => {
+          if (!response.ok) throw response;
+          return response.json();
+        });
+
+      return dispatch(postUserByOrgSuccess(result));
+    } catch (err) {
+      return dispatch(postUserByOrgFailure(err));
+    }
+  };
+});

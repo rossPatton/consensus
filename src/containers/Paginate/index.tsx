@@ -36,13 +36,14 @@ export class Paginate extends PureComponent<tProps> {
     // a _.range equivalent. sort of
     const pageCount = Math.ceil(items.length / count);
     const pages = Array(pageCount).fill(null);
-
-    const itemsToRender = this.getSliceOfItems(items);
+    const itemsToRender = items.length > count
+      ? this.getSliceOfItems(items)
+      : items;
 
     return (
       <>
         {this.props.render(itemsToRender)}
-        {pages.length > 0 && (
+        {pageCount > 1 && (
           <ul className={className}>
             {pages.map((_, i) => {
               const pageNo = i + 1;

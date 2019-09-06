@@ -6,6 +6,11 @@ type tMatch = {
   score: number;
 };
 
+type tObjWithMatch = {
+  [key: string]: any,
+  match: tMatch,
+};
+
 type tOpts = {
   input?: any[],
   key?: string,
@@ -33,8 +38,8 @@ export const fuzzFilterList = (opts: tOpts) => {
         match,
       };
     })
-    .filter(obj => !!obj.match && obj.match.score > 0)
-    .sort((a: any, b: any) => {
+    .filter((obj: tObjWithMatch) => !!obj.match && obj.match.score > 0)
+    .sort((a: tObjWithMatch, b: tObjWithMatch) => {
       if (a.match.score > b.match.score) return -1;
       if (a.match.score < b.match.score) return 1;
       return 0;

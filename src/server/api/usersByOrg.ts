@@ -75,3 +75,19 @@ usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
 
   ctx.body = user;
 });
+
+usersByOrg.delete(route, async (ctx: Koa.ParameterizedContext) => {
+  const userId = _.get(ctx, 'state.user.id', 0);
+  const orgId = _.get(ctx, 'state.locals.data.id', {});
+
+  try {
+    await knex(table)
+      .limit(1)
+      .where({orgId, userId})
+      .del();
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
+
+  ctx.body = {ok: true};
+});

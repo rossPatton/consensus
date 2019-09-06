@@ -2,14 +2,37 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {getOrgsByUser} from '../../../../../redux';
-import {tContainerProps, tStore} from './_types';
+import {deleteUserByOrg, getOrgsByUser} from '../../../../../redux';
+import {fuzzFilterList} from '../../../../../utils';
+import {tContainerProps, tState, tStore} from './_types';
 import {MembershipsComponent} from './Component';
 
-class MembershipsContainer extends PureComponent<tContainerProps> {
+class MembershipsContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
     props.getOrgsByUser();
+  }
+
+  state = {
+    orgs: [],
+  };
+
+  leaveOrg = (ev: React.MouseEvent<HTMLButtonElement>, id: number) => {
+    ev.preventDefault();
+    this.props.deleteUserByOrg({id});
+  }
+
+  onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    ev.preventDefault();
+
+    const filteredList = fuzzFilterList({
+      input: this.props.orgs || [],
+      search: ev.currentTarget.value,
+    });
+
+    this.setState({
+      orgs: filteredList,
+    });
   }
 
   sortOrgs(orgs: tOrg[]) {
@@ -23,11 +46,15 @@ class MembershipsContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const sortedOrgs = this.sortOrgs(this.props.orgs);
+    const orgsToRender = this.state.orgs.length > 0
+      ? this.state.orgs
+      : this.props.orgs;
 
     return (
       <MembershipsComponent
-        orgs={sortedOrgs}
+        leaveOrg={this.leaveOrg}
+        onSearchChange={this.onSearchChange}
+        orgs={this.sortOrgs(orgsToRender)}
       />
     );
   }
@@ -39,6 +66,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
+  deleteUserByOrg: (query: {id: number}) => dispatch(deleteUserByOrg(query)),
   getOrgsByUser: () => dispatch(getOrgsByUser()),
 });
 
