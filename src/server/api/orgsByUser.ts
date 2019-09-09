@@ -27,14 +27,14 @@ orgsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  const orgsWithUserRole = orgs.map(org => {
+  const orgsWithUserRole = await Promise.all(orgs.map(async org => {
     const userOrgRel = _.find(userOrgRels, rel => rel.orgId === org.id);
 
     return {
       ...org,
       role: userOrgRel ? userOrgRel.role : null,
     };
-  });
+  }));
 
   ctx.body = orgsWithUserRole;
 });

@@ -22,7 +22,6 @@ auth.post('/auth/login', async (ctx: Koa.ParameterizedContext, next) =>
     const {isFormSubmit} = ctx.state.locals.data;
     if (isFormSubmit) return ctx.redirect('/admin/profile');
 
-    ctx.status = 200;
     ctx.body = newSession;
   })(ctx, next));
 
@@ -36,7 +35,6 @@ auth.get('/auth/logout', async (ctx: Koa.ParameterizedContext, next) =>
     ctx.logout();
     if (isFormSubmit) return ctx.redirect('/login');
 
-    ctx.status = 200;
     ctx.body = {isAuthenticated: false};
   })(ctx, next));
 

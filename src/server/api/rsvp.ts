@@ -2,7 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import { knex } from '../db/connection';
+import {knex} from '../db/connection';
 
 export const rsvp = new Router();
 const route = '/api/v1/rsvp';

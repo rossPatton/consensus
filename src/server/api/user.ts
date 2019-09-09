@@ -15,7 +15,7 @@ user.get(route, async (ctx: Koa.ParameterizedContext) => {
     const { password, ...safeUserForClient } = user;
     ctx.body = safeUserForClient;
   } catch (err) {
-    ctx.throw('400', err);
+    ctx.throw(400, err);
   }
 });
 

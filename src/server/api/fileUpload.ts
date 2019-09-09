@@ -46,7 +46,7 @@ fileUpload.post(
     const { file }: { file: multer.File } = ctx.req as multer.MulterIncomingMessage;
     const ext = path.extname(file.originalname);
 
-    const resizer = await sharp().resize(175, 175, {fit: 'contain'});
+    const resizer = sharp().resize(175, 175, {fit: 'contain'});
     // eslint-disable-next-line
     const writeStream = fs.createWriteStream(`${file.destination}/175x175${ext}`);
 
@@ -62,6 +62,6 @@ fileUpload.post(
     });
 
     readStream.on('error', (err: Error) => {
-      ctx.throw('400', err);
+      ctx.throw(400, err);
     });
   });

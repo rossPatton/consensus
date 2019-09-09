@@ -20,10 +20,16 @@ eventsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
   }
 
   // mapped set of events that the user has RSVP'd to
-  const mappedIds = _.uniq(userEventIds
-    .filter(idSet => idSet.rsvp)
-    .map(idSet => idSet.eventId)
-  );
+  let mappedIds: number[];
+  try {
+    mappedIds = await Promise.all(_.uniq(
+      userEventIds
+        .filter(async idSet => idSet.rsvp)
+        .map(async idSet => idSet.eventId)
+    ));
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
 
   let events: tEvent[];
   try {
@@ -36,10 +42,15 @@ eventsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
   }
 
   // client side rendering expects a rsvp boolean on the event object
-  const mappedEvents = events.map(ev => ({
-    ...ev,
-    rsvp: true,
-  }));
+  let mappedEvents: tEvent[];
+  try {
+    mappedEvents = await Promise.all(events.map(async ev => ({
+      ...ev,
+      rsvp: true,
+    })));
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
 
   ctx.body = mappedEvents;
 });
