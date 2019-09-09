@@ -2,20 +2,32 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {Events, Members, Profile} from './_subpages';
-import {tComponentProps} from './_types';
+import {Decisions, Events, Members, Profile} from './_subpages';
+import {tProps} from './_types';
 
-export const AdminManageComponent = memo((props: tComponentProps) => {
-  const { country, city, region, slug, section } = props.match.params;
+export const AdminManageComponent = memo((props: tProps) => {
+  // TODO this should work regardless of how we get to the org page
+  const {country, city, region, slug, section} = props.match.params;
+  const isDecisions = section === 'manageDecisions';
   const isEvents = section === 'manageEvents';
   const isProfile = section === 'manageOrganization';
   const isMembers = section === 'manageMembers';
   const to = `/org/${country}/${region}/${city}/${slug}`;
 
+  console.log('admin manage component section - ', section);
+
   return (
     <div className="fx">
       <aside className="mR5">
         <ul>
+          <li>
+            {isDecisions && 'Decisions'}
+            {!isDecisions && (
+              <Link to={`${to}/manageDecisions`}>
+                Decisions
+              </Link>
+            )}
+          </li>
           <li>
             {isEvents && 'Events'}
             {!isEvents && (
@@ -43,6 +55,11 @@ export const AdminManageComponent = memo((props: tComponentProps) => {
         </ul>
       </aside>
       <div className="col row">
+        {isDecisions && (
+          <Decisions
+            {...props}
+          />
+        )}
         {isEvents && (
           <Events
             {...props}

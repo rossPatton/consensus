@@ -4,26 +4,10 @@ import { Redirect } from 'react-router';
 
 import {Helmet} from '../../../../components';
 import {ErrorBoundary} from '../../../../containers';
-import {tContainerProps, tStateUnion, tStore} from './_types';
+import {tProps, tStore} from './_types';
 import {AdminManageComponent} from './Component';
 
-export class AdminManageContainer extends Component<tContainerProps, tOrg> {
-  state = {
-    ...this.props.org,
-    newPassword: '',
-    password: '',
-  };
-
-  onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
-    ev.preventDefault();
-  }
-
-  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
-    this.setState({
-      [stateKey]: ev.currentTarget.value,
-    } as Pick<tOrg, tStateUnion>);
-  }
-
+export class AdminManageContainer extends Component<tProps> {
   render() {
     const {match, session} = this.props;
 
@@ -42,12 +26,9 @@ export class AdminManageContainer extends Component<tContainerProps, tOrg> {
         {!session.isAuthenticated && <Redirect to="" />}
         {session.isAuthenticated && (
           <AdminManageComponent
-            {...this.state}
-            onSubmit={this.onSubmit}
-            org={this.props.org}
             match={match}
+            org={this.props.org}
             session={session}
-            updateState={this.updateState}
           />
         )}
       </ErrorBoundary>
@@ -59,11 +40,4 @@ const mapStateToProps = (store: tStore) => ({
   session: store.session.data,
 });
 
-// const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-//   updateOrg: (event: any) => dispatch(updateOrg(event)),
-// });
-
-export const AdminManage = connect(
-  mapStateToProps,
-  // mapDispatchToProps
-)(AdminManageContainer);
+export const AdminManage = connect(mapStateToProps)(AdminManageContainer);

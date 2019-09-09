@@ -7,10 +7,12 @@ import { knex } from '../db/connection';
 
 export const events = new Router();
 const route = '/api/v1/events';
+const table = 'events';
+const state = 'state.locals.data';
 
 // TODO simplify
 const getEvents = async (ctx: Koa.ParameterizedContext) => {
-  const data = _.get(ctx, 'state.locals.data', {});
+  const data = _.get(ctx, state, {});
   const { exclude, id, limit, isPublic, offset } = data;
 
   const orgId = parseInt(id, 10);
@@ -18,7 +20,7 @@ const getEvents = async (ctx: Koa.ParameterizedContext) => {
   const parsedOffset = offset ? parseInt(offset, 10) : 0;
 
   // by default, we only return upcoming events
-  const events = knex('events');
+  const events = knex(table);
 
   // if we're excluding events, do it up front
   if (exclude) events.whereNot({id: exclude});
@@ -38,7 +40,7 @@ const getEvents = async (ctx: Koa.ParameterizedContext) => {
 
 // get multiple events at a time
 events.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const data = _.get(ctx, 'state.locals.data', {});
+  const data = _.get(ctx, state, {});
   const userId = _.get(ctx, 'state.user.id', 0);
   const orgId = parseInt(data.id, 10);
 
@@ -84,4 +86,19 @@ events.get(route, async (ctx: Koa.ParameterizedContext) => {
       rsvp,
     };
   }).filter(notNull);
+});
+
+events.delete(route, async (ctx: Koa.ParameterizedContext) => {
+  const {id} = _.get(ctx, state, {});
+
+  try {
+    await knex(table)
+      .limit(1)
+      .where({id})
+      .del();
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
+
+  ctx.body = {ok: true, id};
 });

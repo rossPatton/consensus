@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 
 import { ExternalLink, RSVP } from '../../components';
 import { getRandomNum } from '../../utils';
-import { tProps } from './_types';
+import { tComponentProps } from './_types';
 
-export const EventsComponent = memo((props: tProps) => (
+export const EventsComponent = memo((props: tComponentProps) => (
   <ul>
     {props.events.map((ev, i) => (
       <li
@@ -73,7 +73,7 @@ export const EventsComponent = memo((props: tProps) => (
             <small
               className={cx({
                 'bgYellowLite br8 p1 pL2 pR2': true,
-                mR3: props.isEditable,
+                mR2: props.isEditable,
               })}>
               {ev.isPrivate && (
                 <>
@@ -99,11 +99,29 @@ export const EventsComponent = memo((props: tProps) => (
               )}
             </small>
             {props.isEditable && (
-              <a
-                href="filler"
-                className="bgGreenLite br8 p1 pL2 pR2 fw600">
-                Edit this event
-              </a>
+              <>
+                <button
+                  className="hvrBgGrey1 trans1 fw600 mR2 fx aiCtr">
+                  <span
+                    role="img"
+                    className="mR1"
+                    aria-label="Hand with Pen Emoji">
+                    ✍️
+                  </span>
+                  Edit this event
+                </button>
+                <button
+                  onClick={e => props.deleteEvent(e, ev.id)}
+                  className="hvrBgGrey1 trans1 fw600 fx aiCtr">
+                  <span
+                    role="img"
+                    className="mR1"
+                    aria-label="Big X Emoji">
+                    ✖️
+                  </span>
+                  Delete this event
+                </button>
+              </>
             )}
           </div>
         </div>

@@ -12,7 +12,7 @@ export { getCity } from './async/city/thunk';
 export { getCountry } from './async/country/thunk';
 export { getDecisionsByOrg } from './async/getDecisionsByOrg/thunk';
 export { getEventById } from './async/getEventById/thunk';
-export { getEvents, getEventsByUser } from './async/events/thunk';
+export { deleteEvent, getEvents, getEventsByUser } from './async/events/thunk';
 export { getOrg } from './async/org/thunk';
 export { deleteOrgByUser, getOrgsByUser } from './async/orgs/thunk';
 export { getRegion } from './async/region/thunk';

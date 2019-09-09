@@ -1,19 +1,19 @@
 import { match } from 'react-router';
 
 export type tComponentProps = {
-  events: tEvent[],
+  decisions: tDecision[],
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
 export type tContainerProps = {
-  events: tEvent[],
-  getEvents: (query: tIdQuery) => Promise<tThunk<tEvent[]>>,
+  decisions: tDecision[],
+  getDecisions: (query: tIdQuery) => Promise<tThunk<tDecision[]>>,
   isLoading: boolean,
   match: match & { params: tOrgRouteParams },
   org: tOrg,
 };
 
 export type tState = {
-  events: tThunk<tEvent[]>,
+  decisions: tThunk<tDecision[]>,
   isLoading: boolean,
 };
