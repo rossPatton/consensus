@@ -55,7 +55,7 @@ export const MembershipsComponent = memo((props: tComponentProps) => (
             <div className="col taR">
               <button
                 className="bgWhite"
-                onClick={ev => props.leaveOrg(ev, org.id)}>
+                onClick={ev => props.deleteOrgByUser(ev, org.id)}>
                 Leave this organization
               </button>
             </div>

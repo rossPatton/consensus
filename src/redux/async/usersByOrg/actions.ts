@@ -1,4 +1,7 @@
 import {
+  DELETE_USER_BY_ORG_BEGIN,
+  DELETE_USER_BY_ORG_FAILURE,
+  DELETE_USER_BY_ORG_SUCCESS,
   GET_USERS_BY_ORG_BEGIN,
   GET_USERS_BY_ORG_FAILURE,
   GET_USERS_BY_ORG_SUCCESS,
@@ -10,6 +13,21 @@ import {
   tFailureAction,
   tSuccessAction,
 } from './_types';
+
+export const deleteUserByOrgBegin = (): tBeginAction => ({
+  type: DELETE_USER_BY_ORG_BEGIN,
+});
+
+export const deleteUserByOrgSuccess =
+(payload: tThunk<tUsersByOrg>): tSuccessAction => ({
+  type: DELETE_USER_BY_ORG_SUCCESS,
+  payload,
+});
+
+export const deleteUserByOrgFailure = (payload: Error): tFailureAction => ({
+  type: DELETE_USER_BY_ORG_FAILURE,
+  payload,
+});
 
 export const getUsersByOrgBegin = (): tBeginAction => ({
   type: GET_USERS_BY_ORG_BEGIN,

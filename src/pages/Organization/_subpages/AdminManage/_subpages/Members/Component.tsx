@@ -27,7 +27,7 @@ export const MembersComponent = memo((props: tComponentProps) => {
         {users.map((user: tUser, i) => (
           <li
             key={i}
-            className="brdA1 br8 mB3">
+            className="brdA1 br8 mB3 trans2">
             <div
               className={cx({
                 'fx aiCtr fs6 p2 pL3 pR3 brdB1': true,
@@ -42,7 +42,7 @@ export const MembersComponent = memo((props: tComponentProps) => {
               <div className="col taR">
                 <button
                   className="bgWhite"
-                  onClick={ev => props.leaveOrg(ev, user.id)}>
+                  onClick={ev => props.deleteUserByOrg(ev, user.id)}>
                   Remove this user
                 </button>
               </div>
@@ -74,10 +74,10 @@ export const MembersComponent = memo((props: tComponentProps) => {
                     Current role: {user.role}
                   </option>
                   <option value="member">
-                    Member: has access to org but can&apos;t create new events, decisions, etc
+                    Member
                   </option>
                   <option value="admin">
-                    Admin: can create events, decisions, manage users, etc
+                    Admin
                   </option>
                 </select>
               </div>

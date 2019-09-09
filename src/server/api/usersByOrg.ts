@@ -8,9 +8,10 @@ import {knex} from '../db/connection';
 export const usersByOrg = new Router();
 const route = '/api/v1/usersByOrg';
 const table = 'users_orgs';
+const state = 'state.locals.data';
 
 usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const data = _.get(ctx, 'state.locals.data', {});
+  const data = _.get(ctx, state, {});
   const {id: orgId} = data;
 
   const userOrgRelsStream = knex(table).where({orgId}).stream();
@@ -64,9 +65,14 @@ usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const data = _.get(ctx, 'state.locals.data', {});
+  const data = _.get(ctx, state, {});
   const userId = _.get(ctx, 'state.user.id', 0);
   const {id: orgId} = data;
+
+  if (userId === 0) {
+    ctx.throw(400, 'User needs to be logged in');
+    return ctx.redirect('/signup');
+  }
 
   // insert new user into db
   try {
@@ -92,8 +98,7 @@ usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 usersByOrg.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  const userId = _.get(ctx, 'state.user.id', 0);
-  const orgId = _.get(ctx, 'state.locals.data.id', {});
+  const {orgId, userId} = _.get(ctx, state, {});
 
   try {
     await knex(table)
@@ -104,5 +109,5 @@ usersByOrg.delete(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  ctx.body = {ok: true};
+  ctx.body = {ok: true, orgId, userId};
 });

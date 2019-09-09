@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
 
 import {Paginate} from '../../../../../../containers';
+import {deleteUserByOrg} from '../../../../../../redux';
 import {fuzzFilterList} from '../../../../../../utils';
 import {tProps, tState} from './_types';
 import {MembersComponent} from './Component';
@@ -17,6 +19,11 @@ class MembersContainer extends Component<tProps, tState> {
   state = {
     users: this.props.usersByOrg.users,
   };
+
+  deleteUserByOrg = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {
+    ev.preventDefault();
+    this.props.deleteUserByOrg({userId, orgId: this.props.org.id});
+  }
 
   onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
@@ -43,6 +50,7 @@ class MembersContainer extends Component<tProps, tState> {
         match={this.props.match}
         render={(itemsToRender: tUser[]) => (
           <MembersComponent
+            deleteUserByOrg={this.deleteUserByOrg}
             onSearchChange={this.onSearchChange}
             users={itemsToRender}
             userTotal={this.props.usersByOrg.userTotal}
@@ -57,11 +65,12 @@ const mapStateToProps = (store: any) => ({
   usersByOrg: store.usersByOrg.data,
 });
 
-// const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-//   updateOrg: (event: any) => dispatch(updateOrg(event)),
-// });
+const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
+  deleteUserByOrg: (query: {orgId: number, userId: number}) =>
+    dispatch(deleteUserByOrg(query)),
+});
 
 export const Members = connect(
   mapStateToProps,
-  // mapDispatchToProps
+  mapDispatchToProps
 )(MembersContainer);

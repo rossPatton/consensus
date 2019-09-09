@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
 import {Paginate} from '../../../../../containers';
-import {deleteUserByOrg, getOrgsByUser} from '../../../../../redux';
+import {deleteOrgByUser, getOrgsByUser} from '../../../../../redux';
 import {fuzzFilterList} from '../../../../../utils';
 import {tContainerProps, tState, tStore} from './_types';
 import {MembershipsComponent} from './Component';
@@ -18,9 +18,10 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
     orgs: [],
   };
 
-  leaveOrg = (ev: React.MouseEvent<HTMLButtonElement>, id: number) => {
+  deleteOrgByUser = (ev: React.MouseEvent<HTMLButtonElement>, orgId: number) => {
     ev.preventDefault();
-    this.props.deleteUserByOrg({id});
+    const userId = this.props.session.id as number;
+    this.props.deleteOrgByUser({orgId, userId});
   }
 
   onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +58,7 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
         match={this.props.match}
         render={(itemsToRender: tOrg[]) => (
           <MembershipsComponent
-            leaveOrg={this.leaveOrg}
+            deleteOrgByUser={this.deleteOrgByUser}
             onSearchChange={this.onSearchChange}
             orgs={this.sortOrgs(itemsToRender)}
           />
@@ -73,7 +74,8 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  deleteUserByOrg: (query: {id: number}) => dispatch(deleteUserByOrg(query)),
+  deleteOrgByUser: (query: {orgId: number, userId: number}) =>
+    dispatch(deleteOrgByUser(query)),
   getOrgsByUser: () => dispatch(getOrgsByUser()),
 });
 

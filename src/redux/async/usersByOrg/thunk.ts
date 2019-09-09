@@ -1,8 +1,11 @@
-import { Dispatch } from 'redux';
-import { memoize } from 'redux-memoize';
+import {Dispatch} from 'redux';
+import {memoize} from 'redux-memoize';
 
-import { agent, objToQueryString } from '../../../utils';
+import {agent, objToQueryString} from '../../../utils';
 import {
+  deleteUserByOrgBegin,
+  deleteUserByOrgFailure,
+  deleteUserByOrgSuccess,
   getUsersByOrgBegin,
   getUsersByOrgFailure,
   getUsersByOrgSuccess,
@@ -57,7 +60,7 @@ export const postNewUserByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {
 
 export const deleteUserByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {
   return async function <S>(dispatch: Dispatch<S>) {
-    dispatch(postUserByOrgBegin());
+    dispatch(deleteUserByOrgBegin());
 
     try {
       const qs = objToQueryString(queryObj);
@@ -69,9 +72,9 @@ export const deleteUserByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {
           return response.json();
         });
 
-      return dispatch(postUserByOrgSuccess(result));
+      return dispatch(deleteUserByOrgSuccess(result));
     } catch (err) {
-      return dispatch(postUserByOrgFailure(err));
+      return dispatch(deleteUserByOrgFailure(err));
     }
   };
 });

@@ -38,3 +38,18 @@ orgsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   ctx.body = orgsWithUserRole;
 });
+
+orgsByUser.delete(route, async (ctx: Koa.ParameterizedContext) => {
+  const {orgId, userId} = _.get(ctx, 'state.locals.data', {});
+
+  try {
+    await knex(table)
+      .limit(1)
+      .where({orgId, userId})
+      .del();
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
+
+  ctx.body = {ok: true, orgId, userId};
+});

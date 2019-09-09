@@ -1,4 +1,7 @@
 import {
+  DELETE_USER_BY_ORG_BEGIN,
+  DELETE_USER_BY_ORG_FAILURE,
+  DELETE_USER_BY_ORG_SUCCESS,
   GET_USERS_BY_ORG_BEGIN,
   GET_USERS_BY_ORG_FAILURE,
   GET_USERS_BY_ORG_SUCCESS,
@@ -20,7 +23,7 @@ const initialState: tThunk<tUsersByOrg> = {
 
 export const usersByOrgReducer = (state = initialState, action: tActionUnion) => {
   switch (action.type) {
-  case GET_USERS_BY_ORG_BEGIN || POST_USER_BY_ORG_BEGIN:
+  case DELETE_USER_BY_ORG_BEGIN || GET_USERS_BY_ORG_BEGIN || POST_USER_BY_ORG_BEGIN:
     return {
       ...state,
       isLoading: true,
@@ -33,13 +36,30 @@ export const usersByOrgReducer = (state = initialState, action: tActionUnion) =>
       isLoading: false,
     };
 
-  case GET_USERS_BY_ORG_FAILURE || POST_USER_BY_ORG_FAILURE:
+  case DELETE_USER_BY_ORG_FAILURE || GET_USERS_BY_ORG_FAILURE || POST_USER_BY_ORG_FAILURE:
     return {
       ...state,
       data: initialState.data,
       error: action.payload,
       isLoading: false,
     };
+
+  case DELETE_USER_BY_ORG_SUCCESS: {
+    const removedUser = action.payload as any;
+    const userId = parseInt(removedUser.userId, 10);
+    const copy = [...state.data.users];
+    const indexOfRemovedUser = copy.findIndex(user => userId === user.id);
+    copy.splice(indexOfRemovedUser, 1);
+
+    return {
+      ...state,
+      data: {
+        users: copy,
+        userTotal: state.data.userTotal - 1,
+      },
+      isLoading: false,
+    };
+  }
 
   case SET_USER_BY_ORG:
     return {

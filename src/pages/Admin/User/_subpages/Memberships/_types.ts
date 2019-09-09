@@ -6,12 +6,13 @@ export type tProps = {
 
 export type tComponentProps = tProps & {
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  leaveOrg: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
+  deleteOrgByUser: (ev: React.MouseEvent<HTMLButtonElement>, orgId: number) => void,
 };
 
 export type tContainerProps = tProps & {
   match: match,
-  deleteUserByOrg: (query: {id: number}) => void,
+  // from redux
+  deleteOrgByUser: (query: {orgId: number, userId: number}) => void,
   getOrgsByUser: () => void,
   session: tSession,
 };

@@ -9,11 +9,14 @@ export type tState = {
 }
 
 export type tProps = {
+  deleteUserByOrg: (query: {orgId: number, userId: number}) => void,
   match: match,
+  org: tOrg,
   usersByOrg: tUsersByOrg,
 };
 
 export type tComponentProps = {
+  deleteUserByOrg: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   users: tUser[],
   userTotal: number,
