@@ -31,7 +31,9 @@ exports.up = async (knex: Knex) => {
     table.string('code').notNullable();
 
     // in this case, the US since we have no other options atm
-    table.integer('country').notNullable().references(countryId);
+    table.integer('country').notNullable().references(countryId)
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.timestamp('updatedAt').defaultTo(knex.fn.now());
@@ -48,8 +50,12 @@ exports.up = async (knex: Knex) => {
     // name is not id, since many cities have same name
     table.string('name').notNullable();
 
-    table.integer('country').notNullable().references(countryId);
-    table.integer('region').notNullable().references('regions.id');
+    table.integer('country').notNullable().references(countryId)
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+    table.integer('region').notNullable().references('regions.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.timestamp('updatedAt').defaultTo(knex.fn.now());
@@ -75,7 +81,9 @@ exports.up = async (knex: Knex) => {
 
     // optional - allow user to set their primary city
     // on login, take user to directory for that location
-    table.integer('city').references('cities.id');
+    table.integer('city').references('cities.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
 
     // user's preferred language
     table.string('language').defaultTo('en');
@@ -118,9 +126,15 @@ exports.up = async (knex: Knex) => {
     table.string('region').notNullable();
 
     // for ease of lookup later if need be
-    table.integer('cityId').notNullable().references('cities.id');
-    table.integer('countryId').notNullable().references(countryId);
-    table.integer('regionId').notNullable().references('regions.id');
+    table.integer('cityId').notNullable().references('cities.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+    table.integer('countryId').notNullable().references(countryId)
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+    table.integer('regionId').notNullable().references('regions.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.timestamp('updatedAt').defaultTo(knex.fn.now());
@@ -129,8 +143,12 @@ exports.up = async (knex: Knex) => {
   await knex.schema.createTable('users_orgs', table => {
     table.increments('id').unsigned().primary();
 
-    table.integer('userId').notNullable().references('users.id');
-    table.integer('orgId').notNullable().references('orgs.id');
+    table.integer('userId').notNullable().references('users.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+    table.integer('orgId').notNullable().references('orgs.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
 
     // roles can be of one of type 'member' | 'admin'
     table.string('role').notNullable().defaultTo('member');
@@ -143,7 +161,10 @@ exports.up = async (knex: Knex) => {
     // id so we can look up whatever we need if necessary
     // name because 90% of the time that's all we need
     // TODO - eventually, events should be searchable by city/state, etc
-    table.integer('orgId').notNullable().references('orgs.id');
+    table.integer('orgId').notNullable().references('orgs.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+
     table.string('orgName').notNullable();
 
     table.boolean('isPrivate').defaultTo(false);
@@ -161,27 +182,17 @@ exports.up = async (knex: Knex) => {
     table.timestamp('updatedAt').defaultTo(knex.fn.now());
   });
 
-  // await knex.schema.createTable('images', table => {
-  //   table.increments().unsigned().primary();
-  //   table.timestamp('createdAt').defaultTo(knex.fn.now());
-  //   table.timestamp('updatedAt').defaultTo(knex.fn.now());
-  // });
-
-  // await knex.schema.createTable('images_events', table => {
-  //   table.increments().unsigned().primary();
-
-  //   table.integer('imgId').notNullable().references('images.id');
-  //   table.integer('eventId').notNullable().references('events.id');
-
-  //   table.timestamp('createdAt').defaultTo(knex.fn.now());
-  //   table.timestamp('updatedAt').defaultTo(knex.fn.now());
-  // });
-
   await knex.schema.createTable('users_events', table => {
     table.increments('id').unsigned().primary();
 
-    table.integer('userId').notNullable().references('users.id');
-    table.integer('eventId').notNullable().references('events.id');
+    table.integer('userId').notNullable().references('users.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+
+    table.integer('eventId').notNullable().references('events.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+
     table.boolean('rsvp').notNullable().defaultTo(false);
   });
 
@@ -195,10 +206,14 @@ exports.up = async (knex: Knex) => {
     table.increments().unsigned().primary();
 
     // the org that made the decision / poll
-    table.integer('orgId').notNullable().references('orgs.id');
+    table.integer('orgId').notNullable().references('orgs.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
 
     // the type of voting system the decision used (defaults to simple majority)
-    table.string('type').notNullable().references('decision_types.type');
+    table.string('type').notNullable().references('decision_types.type')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
 
     table.text('description', 'longtext').notNullable();
     table.text('minutes', 'longtext');
@@ -216,8 +231,13 @@ exports.up = async (knex: Knex) => {
 
   await knex.schema.createTable('users_decisions', table => {
     table.increments('id').unsigned().primary();
-    table.integer('userId').notNullable().references('users.id');
-    table.integer('decisionId').notNullable().references('decisions.id');
+    table.integer('userId').notNullable().references('users.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+
+    table.integer('decisionId').notNullable().references('decisions.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
   });
 };
 

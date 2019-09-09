@@ -37,12 +37,19 @@ export const eventsReducer = (state = initialState, action: tActionUnion) => {
       isLoading: false,
     };
 
-  case DELETE_EVENT_SUCCESS:
+  case DELETE_EVENT_SUCCESS: {
+    const removedEvent = action.payload as any;
+    const eventId = parseInt(removedEvent.id, 10);
+    const copy = [...state.data];
+    const indexOfRemovedEvent = copy.findIndex(ev => eventId === ev.id);
+    copy.splice(indexOfRemovedEvent, 1);
+
     return {
       ...state,
-      data: action.payload,
+      data: copy,
       isLoading: false,
     };
+  }
 
   default:
     return state;
