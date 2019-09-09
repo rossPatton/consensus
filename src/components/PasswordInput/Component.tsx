@@ -11,9 +11,9 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
   return (
     <>
       <label htmlFor={`${props.id}`}>
-        <h2 className="ffLab fs5 mB1 lh1">
+        <h3>
           {props.title || 'Password'}
-        </h2>
+        </h3>
         <div className="fx mB2">
           <input
             id={props.id}

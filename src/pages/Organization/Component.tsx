@@ -41,8 +41,11 @@ export const OrganizationComponent = (props: tProps) => (
           org={props.org}
         />
       )}
-      {props.match.params.section === 'manageOrganization' && (
+      {(props.match.params.section === 'manageEvents'
+        || props.match.params.section === 'manageOrganization'
+        || props.match.params.section === 'manageMembers') && (
         <AdminManage
+          match={props.match}
           org={props.org}
         />
       )}

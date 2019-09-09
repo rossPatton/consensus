@@ -11,7 +11,9 @@ import { tProps } from './_types';
 export const EventsComponent = memo((props: tProps) => (
   <ul>
     {props.events.map((ev, i) => (
-      <li key={i} className="brdA1 br8 mB2 p3 fx">
+      <li
+        key={i}
+        className="brdA1 br8 mB2 p3 fx">
         <div
           className={cx({
             'br8 bgGrey1 mR3 col fxNoShrink fxg0': true,
@@ -67,8 +69,12 @@ export const EventsComponent = memo((props: tProps) => (
                 {ev.goingCount} Attendees
               </span>
             )}
-            <RSVP event={ev} />
-            <small className="bgYellowLite br8 p1 pL2 pR2">
+            {!props.isEditable && <RSVP event={ev} />}
+            <small
+              className={cx({
+                'bgYellowLite br8 p1 pL2 pR2': true,
+                mR3: props.isEditable,
+              })}>
               {ev.isPrivate && (
                 <>
                   <span
@@ -92,6 +98,13 @@ export const EventsComponent = memo((props: tProps) => (
                 </>
               )}
             </small>
+            {props.isEditable && (
+              <a
+                href="filler"
+                className="bgGreenLite br8 p1 pL2 pR2 fw600">
+                Edit this event
+              </a>
+            )}
           </div>
         </div>
       </li>

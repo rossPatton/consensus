@@ -9,6 +9,7 @@ export class Events extends PureComponent<tProps> {
     return (
       <EventsComponent
         events={this.props.events}
+        isEditable={this.props.isEditable}
         tiny={this.props.tiny}
       />
     );

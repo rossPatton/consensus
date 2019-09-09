@@ -56,6 +56,7 @@ export const UserAdminComponent = memo((props: tProps) => {
         )}
         {isMemberships && (
           <Memberships
+            match={props.match}
             session={props.session}
           />
         )}

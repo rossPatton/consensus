@@ -77,7 +77,7 @@ export const ProfileComponent = memo((props: tComponentProps) => {
           </div>
           <label htmlFor="fname">
             <h2 className="ffLab fs5 mB1 lh1">
-          First Name
+              First Name
             </h2>
             <input
               id="fname"
@@ -90,7 +90,7 @@ export const ProfileComponent = memo((props: tComponentProps) => {
           </label>
           <label htmlFor="lname">
             <h2 className="ffLab fs5 mB1 lh1">
-            Last Name
+              Last Name
             </h2>
             <input
               id="lname"
@@ -103,7 +103,7 @@ export const ProfileComponent = memo((props: tComponentProps) => {
           </label>
           <label htmlFor="email">
             <h2 className="ffLab fs5 mB1 lh1">
-            Email address
+              Email address
             </h2>
             <input
               onChange={ev => props.updateState('email', ev)}

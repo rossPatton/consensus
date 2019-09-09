@@ -2,17 +2,18 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import { knex } from '../db/connection';
+import {notNull} from '../../utils';
+import {knex} from '../db/connection';
 
 export const usersByOrg = new Router();
 const route = '/api/v1/usersByOrg';
 const table = 'users_orgs';
 
 const getUsers = async (ctx: Koa.ParameterizedContext, mappedIds: number[]) => {
-  const { query }: tIdQueryServer = ctx;
-  const { limit, offset } = query;
+  const {query}: tIdQueryServer = ctx;
+  const {limit, offset} = query;
 
-  const parsedLimit = limit ? parseInt(limit, 10) : 3;
+  const parsedLimit = limit ? parseInt(limit, 10) : 0;
   const parsedOffset = offset ? parseInt(offset, 10) : 0;
 
   const users = knex('users').whereIn('id', mappedIds);
@@ -27,27 +28,41 @@ usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
   const data = _.get(ctx, 'state.locals.data', {});
   const {id: orgId} = data;
 
-  let userIds: tUserOrgRelation[];
+  let userOrgRels: tUserOrgRelation[];
   try {
-    userIds = await knex(table).where({orgId});
+    userOrgRels = await knex(table).where({orgId});
   } catch (err) {
     return ctx.throw(400, err);
   }
 
   // userIds here are ALL ids, but we limit by default to 10 at a time by default
-  const mappedIds = userIds.map(idSet => idSet.userId);
+  const mappedIds = userOrgRels.map(idSet => idSet.userId);
 
   // use the returned ids to query users table
+  let users: tUser[];
   try {
-    const users: tUser[] = await getUsers(ctx, mappedIds);
-    const usersByOrg: tUsersByOrg = {
-      userTotal: mappedIds.length,
-      users,
-    };
-    ctx.body = usersByOrg;
+    users = await getUsers(ctx, mappedIds);
   } catch (err) {
     return ctx.throw(400, err);
   }
+
+  const usersWithRoles = users.map(user => {
+    const idSet = _.find(userOrgRels, userOrgRel => user.id === userOrgRel.userId);
+
+    if (!idSet) return null;
+
+    return {
+      ...user,
+      role: idSet.role,
+    };
+  }).filter(notNull);
+
+  const usersByOrg = {
+    userTotal: mappedIds.length,
+    users: usersWithRoles,
+  };
+
+  ctx.body = usersByOrg;
 });
 
 usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {

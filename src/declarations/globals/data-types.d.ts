@@ -62,6 +62,8 @@ declare type tRSVP = {
   rsvp: boolean,
 };
 
+declare type tGate = 'public' | 'restricted' | 'private';
+
 declare type tOrg = {
   category: string,
   city: string,
@@ -70,7 +72,8 @@ declare type tOrg = {
   countryId: number,
   description: string,
   email: string,
-  gate: 'public' | 'restricted' | 'private',
+  eventPrivacy: tGate,
+  gate: tGate,
   id: number,
   membershipTotal: number,
   name: string,
@@ -102,6 +105,7 @@ declare type tUser = {
   lname: string,
   password: string,
   username: string,
+  role: tRole,
 };
 
 declare type tUserEventRelation = {

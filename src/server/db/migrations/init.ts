@@ -99,8 +99,14 @@ exports.up = async (knex: Knex) => {
     // on user signup - do we gatekeep who can join or not?
     // public === 'anyone can join, no questions asked, no screening'
     // restricted === 'anyone can join, but we require manual approval'
-    // private === '100% manual approval. only pre-approved members can join'
+    // private === 'members must be invited to join'
     table.string('gate').notNullable().defaultTo('public');
+
+    // eventPrivacy is an admin override for event privacy settings
+    // public === 'all events are public'
+    // restricted === 'events default to public, but can be made private'
+    // private === 'all events are private'
+    table.string('eventPrivacy').notNullable().defaultTo('restricted');
 
     // orgs are also 'accounts' of their own, can login, etc
     table.string('password').notNullable();

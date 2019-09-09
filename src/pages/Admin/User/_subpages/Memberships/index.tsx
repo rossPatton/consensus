@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
+import {Paginate} from '../../../../../containers';
 import {deleteUserByOrg, getOrgsByUser} from '../../../../../redux';
 import {fuzzFilterList} from '../../../../../utils';
 import {tContainerProps, tState, tStore} from './_types';
@@ -51,10 +52,16 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
       : this.props.orgs;
 
     return (
-      <MembershipsComponent
-        leaveOrg={this.leaveOrg}
-        onSearchChange={this.onSearchChange}
-        orgs={this.sortOrgs(orgsToRender)}
+      <Paginate
+        items={orgsToRender}
+        match={this.props.match}
+        render={(itemsToRender: tOrg[]) => (
+          <MembershipsComponent
+            leaveOrg={this.leaveOrg}
+            onSearchChange={this.onSearchChange}
+            orgs={this.sortOrgs(itemsToRender)}
+          />
+        )}
       />
     );
   }

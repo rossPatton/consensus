@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 
-import {Helmet} from '../../../../components';
-import {ErrorBoundary} from '../../../../containers';
+import {Helmet} from '../../../../../../components';
 import {tContainerProps, tStateUnion, tStore} from './_types';
-import {AdminManageComponent} from './Component';
+import {ProfileComponent} from './Component';
 
-export class AdminManageContainer extends Component<tContainerProps, tOrg> {
+export class ProfileContainer extends Component<tContainerProps, tOrg> {
   state = {
     ...this.props.org,
     newPassword: '',
@@ -25,10 +24,10 @@ export class AdminManageContainer extends Component<tContainerProps, tOrg> {
   }
 
   render() {
-    const {match, session} = this.props;
+    const {session} = this.props;
 
     return (
-      <ErrorBoundary>
+      <>
         <Helmet
           canonical=""
           title=""
@@ -41,16 +40,16 @@ export class AdminManageContainer extends Component<tContainerProps, tOrg> {
         />
         {!session.isAuthenticated && <Redirect to="" />}
         {session.isAuthenticated && (
-          <AdminManageComponent
+          <ProfileComponent
+            {...this.props}
             {...this.state}
             onSubmit={this.onSubmit}
-            org={this.props.org}
-            match={match}
-            session={session}
+            // setImage={this.setImage}
+            // toggleChecked={this.toggleChecked}
             updateState={this.updateState}
           />
         )}
-      </ErrorBoundary>
+      </>
     );
   }
 }
@@ -63,7 +62,7 @@ const mapStateToProps = (store: tStore) => ({
 //   updateOrg: (event: any) => dispatch(updateOrg(event)),
 // });
 
-export const AdminManage = connect(
+export const Profile = connect(
   mapStateToProps,
   // mapDispatchToProps
-)(AdminManageContainer);
+)(ProfileContainer);

@@ -1,3 +1,5 @@
+import {match} from 'react-router-dom';
+
 export type tProps = {
   orgs: tOrg[],
 };
@@ -8,6 +10,7 @@ export type tComponentProps = tProps & {
 };
 
 export type tContainerProps = tProps & {
+  match: match,
   deleteUserByOrg: (query: {id: number}) => void,
   getOrgsByUser: () => void,
   session: tSession,

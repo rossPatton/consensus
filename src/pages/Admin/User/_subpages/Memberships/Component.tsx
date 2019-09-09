@@ -46,9 +46,9 @@ export const MembershipsComponent = memo((props: tComponentProps) => (
                   <a href="filler" className="mR3">
                     Make Decision
                   </a>
-                  <a href="filler">
+                  <Link to={`/org/${org.id}/manageOrganization`}>
                     Manage Group
-                  </a>
+                  </Link>
                 </div>
               )}
             </div>

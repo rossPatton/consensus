@@ -35,7 +35,7 @@ orgById.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   const orgWithRole = {
     ...org,
-    role: userOrgRel.role,
+    role: userOrgRel ? userOrgRel.role : null,
   };
 
   ctx.body = orgWithRole;
