@@ -182,6 +182,35 @@ exports.up = async (knex: Knex) => {
     table.timestamp('updatedAt').defaultTo(knex.fn.now());
   });
 
+  await knex.schema.createTable('event_drafts', table => {
+    table.increments().unsigned().primary();
+
+    // all events are tied to an org currently
+    // id so we can look up whatever we need if necessary
+    // name because 90% of the time that's all we need
+    // TODO - eventually, events should be searchable by city/state, etc
+    table.integer('orgId').notNullable().references('orgs.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+
+    table.string('orgName').notNullable();
+
+    table.boolean('isPublished').notNullable().defaultTo(false);
+    table.boolean('isPrivate').notNullable().defaultTo(false);
+    table.string('category').notNullable();
+    table.text('description', 'longtext').notNullable();
+    table.text('location').defaultTo('Location To Be Determined');
+    table.text('locationLink');
+    table.text('title').notNullable();
+    table.timestamp('date').notNullable();
+    table.timestamp('endDate');
+
+    table.integer('goingCount').unsigned().notNullable().defaultTo(0);
+
+    table.timestamp('createdAt').defaultTo(knex.fn.now());
+    table.timestamp('updatedAt').defaultTo(knex.fn.now());
+  });
+
   await knex.schema.createTable('users_events', table => {
     table.increments('id').unsigned().primary();
 
