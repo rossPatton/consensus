@@ -65,10 +65,9 @@ export const MembersComponent = memo((props: tComponentProps) => {
                   Role:
                 </h3>
                 <select
-                  value={user.role as string}
                   className="mB3 row ffLab"
-                  // onBlur={ev => props.updateState('role', ev)}
-                  // onChange={ev => props.updateState('role', ev)}
+                  value={user.role as string}
+                  onChange={ev => props.setRole(ev, user.id)}
                 >
                   <option className="ttCap" value={user.role as string}>
                     Current role: {user.role}

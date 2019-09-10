@@ -97,6 +97,25 @@ usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = user;
 });
 
+usersByOrg.patch(route, async (ctx: Koa.ParameterizedContext) => {
+  const {orgId, role, userId} = _.get(ctx, state, {});
+  console.log('patch query => ', orgId, role, userId);
+
+  let updatedUserOrgRel: tUserOrgRelation[];
+  try {
+    updatedUserOrgRel = await knex(table)
+      .limit(1)
+      .where({orgId, userId})
+      .update({role})
+      .returning('*');
+    console.log('updatedUserOrgRel => ', updatedUserOrgRel[0]);
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
+
+  ctx.body = updatedUserOrgRel[0];
+});
+
 usersByOrg.delete(route, async (ctx: Koa.ParameterizedContext) => {
   const {orgId, userId} = _.get(ctx, state, {});
 

@@ -9,6 +9,9 @@ import {
   getUsersByOrgBegin,
   getUsersByOrgFailure,
   getUsersByOrgSuccess,
+  patchUserByOrgBegin,
+  patchUserByOrgFailure,
+  patchUserByOrgSuccess,
   postUserByOrgBegin,
   postUserByOrgFailure,
   postUserByOrgSuccess,
@@ -54,6 +57,27 @@ export const postNewUserByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {
       return dispatch(postUserByOrgSuccess(result));
     } catch (err) {
       return dispatch(postUserByOrgFailure(err));
+    }
+  };
+});
+
+export const patchUserByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {
+  return async function <S>(dispatch: Dispatch<S>) {
+    dispatch(patchUserByOrgBegin());
+
+    try {
+      const qs = objToQueryString(queryObj);
+
+      // @ts-ignore
+      const result = await fetch(`${prefix}?${qs}`, {agent, method: 'PATCH'})
+        .then((response: tFetchResponse) => {
+          if (!response.ok) throw response;
+          return response.json();
+        });
+
+      return dispatch(patchUserByOrgSuccess(result));
+    } catch (err) {
+      return dispatch(patchUserByOrgFailure(err));
     }
   };
 });

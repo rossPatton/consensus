@@ -5,6 +5,9 @@ import {
   GET_USERS_BY_ORG_BEGIN,
   GET_USERS_BY_ORG_FAILURE,
   GET_USERS_BY_ORG_SUCCESS,
+  PATCH_USER_BY_ORG_BEGIN,
+  PATCH_USER_BY_ORG_FAILURE,
+  PATCH_USER_BY_ORG_SUCCESS,
   POST_USER_BY_ORG_BEGIN,
   POST_USER_BY_ORG_FAILURE,
   POST_USER_BY_ORG_SUCCESS,
@@ -44,8 +47,23 @@ export const getUsersByOrgFailure = (payload: Error): tFailureAction => ({
   payload,
 });
 
-export const postUserByOrgBegin = (): tBeginAction => ({
+export const patchUserByOrgBegin = (): tBeginAction => ({
   type: POST_USER_BY_ORG_BEGIN,
+});
+
+export const patchUserByOrgSuccess =
+(payload: tThunk<tUsersByOrg>): tSuccessAction => ({
+  type: PATCH_USER_BY_ORG_SUCCESS,
+  payload,
+});
+
+export const patchUserByOrgFailure = (payload: Error): tFailureAction => ({
+  type: PATCH_USER_BY_ORG_FAILURE,
+  payload,
+});
+
+export const postUserByOrgBegin = (): tBeginAction => ({
+  type: PATCH_USER_BY_ORG_BEGIN,
 });
 
 export const postUserByOrgSuccess =

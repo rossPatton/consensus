@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
 import {Paginate} from '../../../../../../containers';
-import {deleteUserByOrg} from '../../../../../../redux';
+import {deleteUserByOrg, patchUserByOrg} from '../../../../../../redux';
 import {fuzzFilterList} from '../../../../../../utils';
 import {tProps, tState} from './_types';
 import {MembersComponent} from './Component';
@@ -39,6 +39,13 @@ class MembersContainer extends Component<tProps, tState> {
     });
   }
 
+  setRole = (ev: React.ChangeEvent<HTMLSelectElement>, userId: number) => {
+    ev.preventDefault();
+    const role = ev.currentTarget.value;
+    const orgId = this.props.org.id;
+    this.props.updateRole({role, orgId, userId});
+  }
+
   render() {
     const usersToRender = this.state.users.length > 0
       ? this.state.users
@@ -52,6 +59,7 @@ class MembersContainer extends Component<tProps, tState> {
           <MembersComponent
             deleteUserByOrg={this.deleteUserByOrg}
             onSearchChange={this.onSearchChange}
+            setRole={this.setRole}
             users={itemsToRender}
             userTotal={this.props.usersByOrg.userTotal}
           />
@@ -68,6 +76,7 @@ const mapStateToProps = (store: any) => ({
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   deleteUserByOrg: (query: {orgId: number, userId: number}) =>
     dispatch(deleteUserByOrg(query)),
+  updateRole: (query: any) => dispatch(patchUserByOrg(query)),
 });
 
 export const Members = connect(
