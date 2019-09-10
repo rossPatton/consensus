@@ -16,6 +16,7 @@ const initialState: tThunk<tOrg> = {
     countryId: 0,
     description: '',
     email: '',
+    eventPrivacy: 'public',
     gate: 'private',
     id: 0,
     membershipTotal: 0,

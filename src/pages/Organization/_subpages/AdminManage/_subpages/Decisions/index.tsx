@@ -45,8 +45,6 @@ export class DecisionsContainer extends PureComponent<tContainerProps> {
       ? this.state.decisions
       : this.props.decisions;
 
-    console.log('decisions rendering => ', decisionsToRender);
-
     return (
       <Paginate
         items={decisionsToRender}

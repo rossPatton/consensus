@@ -6,6 +6,7 @@ import {tComponentProps} from './_types';
 
 export const MembersComponent = memo((props: tComponentProps) => {
   const {users, userTotal} = props;
+  const roles = ['member', 'facilitator', 'admin'];
 
   return (
     <>
@@ -30,8 +31,9 @@ export const MembersComponent = memo((props: tComponentProps) => {
             className="brdA1 br8 mB3 trans2">
             <div
               className={cx({
-                'fx aiCtr fs6 p2 pL3 pR3 brdB1': true,
+                'fx fs6 p2 pL3 pR3 brdB1': true,
                 bgBlueLite: user.role === 'admin',
+                bgYellowLite: user.role === 'facilitator',
                 bgGreenLite: user.role === 'member',
               })}>
               <div className="fx aiCtr col">
@@ -47,7 +49,7 @@ export const MembersComponent = memo((props: tComponentProps) => {
                 </button>
               </div>
             </div>
-            <div className="p3 fx aiCtr">
+            <div className="p3 fx">
               <h3>
                 <div className="ffLab fs5">Username:</div>
                 {user.username}
@@ -61,23 +63,26 @@ export const MembersComponent = memo((props: tComponentProps) => {
                 {user.lname}
               </h3>
               <div className="row">
-                <h3 className="ffLab fs5">
-                  Role:
+                <h3 className="ffLab fs5 ttCap mB2">
+                  Current role: {user.role}
                 </h3>
                 <select
-                  className="mB3 row ffLab"
+                  className="row ffLab ttCap"
                   value={user.role as string}
                   onChange={ev => props.setRole(ev, user.id)}
                 >
-                  <option className="ttCap" value={user.role as string}>
-                    Current role: {user.role}
+                  <option value={user.role as string}>
+                    Choose a new role
                   </option>
-                  <option value="member">
-                    Member
-                  </option>
-                  <option value="admin">
-                    Admin
-                  </option>
+                  {roles.map(role => (
+                    role === user.role
+                      ? null
+                      : (
+                        <option className="ttCap" value={role}>
+                          {role}
+                        </option>
+                      )
+                  ))}
                 </select>
               </div>
             </div>

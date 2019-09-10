@@ -101,6 +101,7 @@ module.exports = {
     'import/no-named-as-default-member': ERROR,
     'indent': [ERROR, 2],
     'jsx-a11y/no-autofocus': OFF,
+    'jsx-a11y/no-onchange': OFF,
     'jsx-a11y/no-noninteractive-element-interactions': ERROR,
     'jsx-quotes': [ERROR, 'prefer-double'],
     'key-spacing': [ERROR, {

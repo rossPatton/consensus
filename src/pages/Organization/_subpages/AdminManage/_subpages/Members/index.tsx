@@ -41,7 +41,7 @@ class MembersContainer extends Component<tProps, tState> {
 
   setRole = (ev: React.ChangeEvent<HTMLSelectElement>, userId: number) => {
     ev.preventDefault();
-    const role = ev.currentTarget.value;
+    const role = ev.currentTarget.value as tRole;
     const orgId = this.props.org.id;
     this.props.updateRole({role, orgId, userId});
   }

@@ -14,8 +14,6 @@ export const AdminManageComponent = memo((props: tProps) => {
   const isMembers = section === 'manageMembers';
   const to = `/org/${country}/${region}/${city}/${slug}`;
 
-  console.log('admin manage component section - ', section);
-
   return (
     <div className="fx">
       <aside className="mR5">

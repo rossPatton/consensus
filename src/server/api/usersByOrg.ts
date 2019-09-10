@@ -99,7 +99,6 @@ usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
 
 usersByOrg.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {orgId, role, userId} = _.get(ctx, state, {});
-  console.log('patch query => ', orgId, role, userId);
 
   let updatedUserOrgRel: tUserOrgRelation[];
   try {
@@ -108,7 +107,6 @@ usersByOrg.patch(route, async (ctx: Koa.ParameterizedContext) => {
       .where({orgId, userId})
       .update({role})
       .returning('*');
-    console.log('updatedUserOrgRel => ', updatedUserOrgRel[0]);
   } catch (err) {
     return ctx.throw(400, err);
   }

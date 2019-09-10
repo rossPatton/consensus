@@ -57,15 +57,16 @@ export const usersByOrgReducer = (state = initialState, action: tActionUnion) =>
 
   case PATCH_USER_BY_ORG_SUCCESS: {
     const patchedUser = action.payload as any;
-    console.log('patched user ? ', patchedUser);
     const userId = parseInt(patchedUser.userId, 10);
     const copy = [...state.data.users];
     const indexOfPatchedUser = copy.findIndex(user => userId === user.id);
+    const userWithNewRole = {
+      ...copy[indexOfPatchedUser],
+      role: patchedUser.role,
+    };
 
     // replace user in-place with updated relation
-    copy.splice(indexOfPatchedUser, 1, patchedUser);
-
-    console.log('users => ', copy);
+    copy.splice(indexOfPatchedUser, 1, userWithNewRole);
 
     return {
       ...state,
