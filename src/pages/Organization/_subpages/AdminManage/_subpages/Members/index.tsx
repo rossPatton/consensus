@@ -16,13 +16,28 @@ class MembersContainer extends Component<tProps, tState> {
     },
   };
 
-  state = {
+  state: tState = {
+    role: 'n/a',
     users: this.props.usersByOrg.users,
   };
 
   deleteUserByOrg = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {
     ev.preventDefault();
     this.props.deleteUserByOrg({userId, orgId: this.props.org.id});
+  }
+
+  // re-run the filter whenever the list array or filter text changes:
+  // TODO maybe memoize
+  filterByRole = (users: tUser[]) => {
+    if (this.state.role === 'n/a') return users;
+    return users.filter(user => user.role === this.state.role);
+  };
+
+  onFilterChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
+    ev.preventDefault();
+    this.setState({
+      role: ev.currentTarget.value as tRole,
+    });
   }
 
   onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,9 +62,11 @@ class MembersContainer extends Component<tProps, tState> {
   }
 
   render() {
-    const usersToRender = this.state.users.length > 0
-      ? this.state.users
-      : this.props.usersByOrg.users;
+    const usersToRender = this.filterByRole(
+      this.state.users.length > 0
+        ? this.state.users
+        : this.props.usersByOrg.users
+    );
 
     return (
       <Paginate
@@ -58,6 +75,7 @@ class MembersContainer extends Component<tProps, tState> {
         render={(itemsToRender: tUser[]) => (
           <MembersComponent
             deleteUserByOrg={this.deleteUserByOrg}
+            onFilterChange={this.onFilterChange}
             onSearchChange={this.onSearchChange}
             setRole={this.setRole}
             users={itemsToRender}

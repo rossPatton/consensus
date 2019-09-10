@@ -69,7 +69,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 {ev.goingCount} Attendees
               </span>
             )}
-            {!props.isEditable && <RSVP event={ev} />}
+            <RSVP event={ev} />
             <small
               className={cx({
                 'bgYellowLite br8 p1 pL2 pR2': true,

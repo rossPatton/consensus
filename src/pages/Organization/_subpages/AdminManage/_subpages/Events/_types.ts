@@ -1,7 +1,8 @@
-import { match } from 'react-router';
+import {match} from 'react-router';
 
 export type tComponentProps = {
   events: tEvent[],
+  onFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
@@ -14,6 +15,11 @@ export type tContainerProps = {
 };
 
 export type tState = {
+  events: tEvent[]
+  isPublicFilter: boolean | null,
+};
+
+export type tStore = {
   events: tThunk<tEvent[]>,
   isLoading: boolean,
 };

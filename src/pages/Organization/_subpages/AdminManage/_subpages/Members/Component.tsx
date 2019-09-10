@@ -6,7 +6,7 @@ import {tComponentProps} from './_types';
 
 export const MembersComponent = memo((props: tComponentProps) => {
   const {users, userTotal} = props;
-  const roles = ['member', 'facilitator', 'admin'];
+  const roles: tRole[] = ['member', 'facilitator', 'admin'];
 
   return (
     <>
@@ -23,6 +23,16 @@ export const MembersComponent = memo((props: tComponentProps) => {
           onChange={props.onSearchChange}
           placeholder="Search for a member by username"
         />
+        <select onBlur={props.onFilterChange} onChange={props.onFilterChange}>
+          <option value="n/a">
+            Filter by User Role
+          </option>
+          {roles.map((role: tRole, i) => (
+            <option key={i} value={role as string}>
+              {role}
+            </option>
+          ))}
+        </select>
       </label>
       <ul>
         {users.map((user: tUser, i) => (

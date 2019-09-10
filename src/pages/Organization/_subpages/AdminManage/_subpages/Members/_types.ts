@@ -5,6 +5,7 @@ export type tStore = {
 };
 
 export type tState = {
+  role: tRole,
   users: tUser[],
 };
 
@@ -24,6 +25,7 @@ export type tProps = {
 
 export type tComponentProps = {
   deleteUserByOrg: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
+  onFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   setRole: (ev: React.ChangeEvent<HTMLSelectElement>, id: number) => void,
   users: tUser[],

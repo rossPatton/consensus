@@ -14,11 +14,15 @@ class EventsContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
+    const {org} = this.props;
+    // TODO having role be on the org object feels wrong somehow
+    const isEditable = org.role === 'admin' || org.role === 'facilitator';
+
     return (
       <EventsComponent
         deleteEvent={this.deleteEvent}
         events={this.props.events}
-        isEditable={this.props.isEditable}
+        isEditable={isEditable}
         tiny={this.props.tiny}
       />
     );
@@ -26,16 +30,15 @@ class EventsContainer extends PureComponent<tContainerProps> {
 }
 
 // TODO just handle fetching events in this generic component instead of repeating logic
-// const mapStateToProps = (store: any) => ({
-//   decisions: store.decisions.data,
-//   isLoading: store.events.isLoading,
-// });
+const mapStateToProps = (store: any) => ({
+  org: store.org.data,
+});
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   deleteEvent: (query: tIdQuery) => dispatch(deleteEvent(query)),
 });
 
 export const Events = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(EventsContainer);

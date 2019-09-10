@@ -118,7 +118,7 @@ declare type tUserEventRelation = {
 // member => can RSVP to events, partake in decisions
 // facilitator => can create events, decisions
 // admin => can do all the above plus manage the group
-declare type tRole = 'member' | 'facilitator' | 'admin' | null;
+declare type tRole = 'member' | 'facilitator' | 'admin' | 'n/a';
 declare type tRoleMap = {
   orgId: number,
   role: tRole,

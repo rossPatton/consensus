@@ -18,7 +18,7 @@ export const RegionComponent = memo((props: tProps) => (
         id="searchFilter"
         className="mR2 lh1 row"
         onChange={props.onChange}
-        placeholder={`Search for a ${props.country.regionType} by name`}
+        placeholder="Search for a city by name"
       />
     </label>
     <h2 className="mB2 fs3">

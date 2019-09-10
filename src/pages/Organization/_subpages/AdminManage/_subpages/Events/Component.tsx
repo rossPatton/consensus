@@ -17,6 +17,17 @@ export const EventsComponent = memo((props: tComponentProps) => (
         onChange={props.onSearchChange}
         placeholder="Search for an event by title"
       />
+      <select onBlur={props.onFilterChange} onChange={props.onFilterChange}>
+        <option value="n/a">
+          Filter by Event Privacy
+        </option>
+        <option value="true">
+          Private Events
+        </option>
+        <option value="false">
+          Public Events
+        </option>
+      </select>
     </label>
     <Events isEditable events={props.events} />
   </>

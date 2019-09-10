@@ -177,6 +177,9 @@ exports.up = async (knex: Knex) => {
     table.timestamp('endDate');
 
     table.integer('goingCount').unsigned().notNullable().defaultTo(0);
+    table.integer('eventDraftId').notNullable().references('event_drafts.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.timestamp('updatedAt').defaultTo(knex.fn.now());
@@ -206,6 +209,9 @@ exports.up = async (knex: Knex) => {
     table.timestamp('endDate');
 
     table.integer('goingCount').unsigned().notNullable().defaultTo(0);
+    table.integer('eventId').notNullable().references('events.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.timestamp('updatedAt').defaultTo(knex.fn.now());

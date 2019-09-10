@@ -12,14 +12,14 @@ export class Paginate extends PureComponent<tProps> {
   getSliceOfItems = (items: any[]) => {
     const newArray = [...items];
 
-    const {match: {params: {page}}} = this.props;
+    const {count, match: {params: {page}}} = this.props;
     const activePage = page ? parseInt(page, 10) : 1;
 
-    const end = activePage * 10;
-    const start = end - 10;
+    const end = activePage * count;
+    const start = end - count;
 
     // -1 here because page numbers are 1 indexed, arrays are 0 indexed
-    return newArray.slice(start, end - 1);
+    return newArray.slice(start, end);
   }
 
   render() {
