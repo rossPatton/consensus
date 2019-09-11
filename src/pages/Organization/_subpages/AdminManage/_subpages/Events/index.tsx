@@ -5,7 +5,7 @@ import {Dispatch} from 'redux';
 import {Paginate} from '../../../../../../containers';
 import {getEvents} from '../../../../../../redux';
 import {fuzzFilterList} from '../../../../../../utils';
-import {tContainerProps, tState, tStore} from './_types';
+import {tContainerProps, tPrivacyFilter, tPublishedFilter, tState, tStore} from './_types';
 import {EventsComponent} from './Component';
 
 export class EventsContainer extends PureComponent<tContainerProps, tState> {
@@ -22,25 +22,46 @@ export class EventsContainer extends PureComponent<tContainerProps, tState> {
     });
   }
 
-  state: tState = {
+  state = {
     events: this.props.events,
-    isPublicFilter: null,
+    privacyFilter: 'n/a' as tPrivacyFilter,
+    publishedFilter: 'n/a' as tPublishedFilter,
   };
 
-  // re-run the filter whenever the list array or filter text changes:
+  // re-run the filter whenever the list array or filter text changes
+  // also we filter out non-drafts in this particular case, regardless of privacy
   // TODO maybe memoize
-  filterByPrivacy = (events: tEvent[]) => {
-    if (this.state.isPublicFilter === null) return events;
-    return events.filter(event => event.isPrivate === this.state.isPublicFilter);
+  filter = (evs: tEvent[]) => {
+    const evsFilteredByPublishStatus = this.filterByPublished(evs);
+    return this.filterByPrivacy(evsFilteredByPublishStatus);
   };
 
-  onFilterChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
-    ev.preventDefault();
-    const {value} = ev.currentTarget;
-    const isPublicFilter = value === 'n/a' ? null : value === 'true';
+  filterByPrivacy = (evs: tEvent[]) => {
+    const {privacyFilter} = this.state;
+    if (privacyFilter === 'n/a') return evs;
 
+    const isPrivate = privacyFilter === 'private';
+    return evs.filter(ev => ev.isPrivate === isPrivate);
+  };
+
+  filterByPublished = (evs: tEvent[]) => {
+    const {publishedFilter} = this.state;
+    if (publishedFilter === 'n/a') return evs;
+    const isDraft = publishedFilter === 'draft';
+    return evs.filter(ev => ev.isDraft === isDraft);
+  };
+
+  onPrivacyFilterChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
+    ev.preventDefault();
     this.setState({
-      isPublicFilter,
+      privacyFilter: ev.currentTarget.value as tPrivacyFilter,
+    });
+  }
+
+  onPublishedFilterChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
+    ev.preventDefault();
+    this.setState({
+      publishedFilter: ev.currentTarget.value as tPublishedFilter,
     });
   }
 
@@ -59,11 +80,13 @@ export class EventsContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const eventsToRender = this.filterByPrivacy(
+    const eventsToRender = this.filter(
       this.state.events.length > 0
         ? this.state.events
         : this.props.events
     );
+
+    console.log('events to render => ', eventsToRender);
 
     return (
       <Paginate
@@ -71,7 +94,8 @@ export class EventsContainer extends PureComponent<tContainerProps, tState> {
         match={this.props.match}
         render={(itemsToRender: tEvent[]) => (
           <EventsComponent
-            onFilterChange={this.onFilterChange}
+            onPrivacyFilterChange={this.onPrivacyFilterChange}
+            onPublishedFilterChange={this.onPublishedFilterChange}
             onSearchChange={this.onSearchChange}
             events={itemsToRender}
           />

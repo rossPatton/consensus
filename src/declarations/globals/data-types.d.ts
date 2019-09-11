@@ -43,6 +43,7 @@ declare type tEvent = {
   endDate: string,
   goingCount: number,
   id: number,
+  isDraft: boolean,
   isPrivate: boolean,
   location: string,
   locationLink: string,

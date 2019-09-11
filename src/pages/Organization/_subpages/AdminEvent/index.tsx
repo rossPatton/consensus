@@ -19,9 +19,11 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     duration: '2',
     featuredImage: null,
     imagePreview: null,
+    isDraft: false,
     isPrivate: false,
     location: '',
     locationLink: '',
+    orgName: this.props.org.name,
     time: '19:00',
     title: '',
   };
@@ -52,9 +54,19 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     };
   }
 
-  onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
+  saveAsDraft = (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.preventDefault();
-    const { events } = this.props;
+
+    this.setState({
+      isDraft: true,
+    }, () => this.onSubmit(ev, true));
+  }
+
+  onSubmit = async (
+    ev: React.MouseEvent<HTMLButtonElement>,
+    saveAsDraft: boolean = false) => {
+    ev.preventDefault();
+    const {events} = this.props;
     const {
       duration,
       featuredImage,
@@ -73,6 +85,8 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     try {
       const createEvent = await this.props.createEvent({
         ...restOfEvent,
+        // override here since we submit drafts to the DB as well
+        isDraft: saveAsDraft,
         // every date is stored in the db as an ISO string
         date: date.toISOString(),
         endDate: endDate.toISOString(),
@@ -95,15 +109,21 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
       }
     }
 
-    // upload featuredImage to fileserver, resize, etc
-    try {
-      await fetch(`/api/v1/fileUpload?eventId=${newEvent.id}`, {method: 'post', body});
-    } catch (err) {
-      console.error('failed to upload featured image');
+    // upload featuredImage to fileserver, resize, etc if we have one
+    // TODO this should go through redux probably
+    if (featuredImage) {
+      try {
+        await fetch(`/api/v1/fileUpload?eventId=${newEvent.id}`, {method: 'post', body});
+      } catch (err) {
+        console.error('failed to upload featured image');
+      }
     }
 
     // update redux on client side on event upload success
     getEventsSuccess([newEvent, ...events]);
+    this.setState({
+      id: newEvent.id,
+    });
   }
 
   toggleChecked = () => {
@@ -139,6 +159,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
             {...this.props}
             {...this.state}
             onSubmit={this.onSubmit}
+            saveAsDraft={this.saveAsDraft}
             setImage={this.setImage}
             toggleChecked={this.toggleChecked}
             updateState={this.updateState}

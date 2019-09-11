@@ -23,6 +23,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
         deleteEvent={this.deleteEvent}
         events={this.props.events}
         isEditable={isEditable}
+        session={this.props.session}
         tiny={this.props.tiny}
       />
     );
@@ -32,6 +33,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
 // TODO just handle fetching events in this generic component instead of repeating logic
 const mapStateToProps = (store: any) => ({
   org: store.org.data,
+  session: store.session.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

@@ -42,11 +42,12 @@ event.get('/api/v1/event', async (ctx: Koa.ParameterizedContext) => {
 // create a new event
 // route example: org admin event creation form
 event.post('/api/v1/event', async (ctx: Koa.ParameterizedContext) => {
-  const insert: tEvent = _.get(ctx, 'state.locals.data', {});
+  const data = _.get(ctx, 'state.locals.data', {});
+  const {isFormSubmit, ...newEvent} = data;
 
   let eventQuery: tEvent[];
   try {
-    eventQuery = await knex('events').insert(insert).returning('*');
+    eventQuery = await knex('events').insert(newEvent).returning('*');
     ctx.body = eventQuery[0];
   } catch (err) {
     ctx.throw(400, err);

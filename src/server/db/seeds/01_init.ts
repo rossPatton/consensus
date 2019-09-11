@@ -81,6 +81,7 @@ const createEvent = async () => ({
   // we convert the 1hr, 2hr etc values to timestamps as well
   endDate: faker.date.future(),
   goingCount: faker.random.number(),
+  isDraft: faker.random.boolean(),
   isPrivate: faker.random.boolean(),
   location: faker.address.streetAddress(),
   locationLink: faker.internet.url(),
@@ -235,7 +236,7 @@ exports.seed = async (knex: Knex) => {
   fakeUserOrgRelations = fakeUserOrgRelations.filter(notNull);
 
   let d = 1;
-  for (d; d < 50; d++) {
+  for (d; d < 100; d++) {
     fakeEvents.push(await createEvent());
     fakeUserEventRelations.push(await createUserEventRelation(100, d));
   }

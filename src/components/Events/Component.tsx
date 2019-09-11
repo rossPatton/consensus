@@ -10,72 +10,75 @@ import { tComponentProps } from './_types';
 
 export const EventsComponent = memo((props: tComponentProps) => (
   <ul>
-    {props.events.map((ev, i) => (
-      <li
-        key={i}
-        className="brdA1 br8 mB2 p3 fx">
-        <div
-          className={cx({
-            'br8 bgGrey1 mR3 col fxNoShrink fxg0': true,
-            hide: props.tiny,
-          })}>
-          <img
-            alt=""
-            height="175"
-            width="175"
-            src={`https://picsum.photos/id/${getRandomNum(0, 100)}/175/175`}
-          />
-        </div>
-        <div className="col">
-          <h3
-            className={cx({
-              'mB2 fx aiCtr ttCap': true,
-              fs4: props.tiny,
-            })}>
-            <Link to={`/event/${ev.id}`}>
-              {ev.title}
-            </Link>
-          </h3>
-          <div className="fx aiCtr mB2 fs6 fw600 lh1">
-            <time className="mR1" dateTime={ev.date}>
-              {dayJS(ev.date).format('ddd MMM DD, h:mmA')}
-            </time>
-            <span className="mR1">@</span>
-            {ev.locationLink && (
-              <ExternalLink
-                noFollow
-                className="mR1"
-                to={ev.locationLink}>
-                {ev.location}
-              </ExternalLink>
-            )}
-            {!ev.locationLink && ev.location}
-          </div>
-          <p
-            className={cx({
-              'mB2 lineClamp': true,
-              'pR5': !props.tiny,
-              'fs5': props.tiny,
-            })}>
-            {ev.description}
-          </p>
+    {props.events.map((ev, i) => {
+      if (!props.session.isAuthenticated && ev.isDraft) return null;
+
+      return (
+        <li
+          key={i}
+          className="brdA1 br8 mB2 p3 fx">
           <div
             className={cx({
-              'fx aiCtr fs6 lh1 lsNone': true,
+              'br8 bgGrey1 mR3 col fxNoShrink fxg0': true,
               hide: props.tiny,
             })}>
-            {ev.goingCount > 0 && (
-              <span className="mR3">
-                {ev.goingCount} Attendees
-              </span>
-            )}
-            <RSVP event={ev} />
-            <small
+            <img
+              alt=""
+              height="175"
+              width="175"
+              src={`https://picsum.photos/id/${getRandomNum(0, 100)}/175/175`}
+            />
+          </div>
+          <div className="col">
+            <h3
               className={cx({
-                'bgYellowLite br8 p1 pL2 pR2': true,
-                mR2: props.isEditable,
+                'mB2 fx aiCtr ttCap': true,
+                fs4: props.tiny,
               })}>
-              {ev.isPrivate && (
+              <Link to={`/event/${ev.id}`}>
+                {ev.title}
+              </Link>
+            </h3>
+            <div className="fx aiCtr mB2 fs6 fw600 lh1">
+              <time className="mR1" dateTime={ev.date}>
+                {dayJS(ev.date).format('ddd MMM DD, h:mmA')}
+              </time>
+              <span className="mR1">@</span>
+              {ev.locationLink && (
+                <ExternalLink
+                  noFollow
+                  className="mR1"
+                  to={ev.locationLink}>
+                  {ev.location}
+                </ExternalLink>
+              )}
+              {!ev.locationLink && ev.location}
+            </div>
+            <p
+              className={cx({
+                'mB2 lineClamp': true,
+                'pR5': !props.tiny,
+                'fs5': props.tiny,
+              })}>
+              {ev.description}
+            </p>
+            <div
+              className={cx({
+                'fx aiCtr fs6 lh1 lsNone': true,
+                hide: props.tiny,
+              })}>
+              {ev.goingCount > 0 && (
+                <span className="mR3">
+                  {ev.goingCount} Attendees
+                </span>
+              )}
+              <RSVP event={ev} />
+              <small
+                className={cx({
+                  'bgYellowLite br8 p1 pL2 pR2': true,
+                  mR2: props.isEditable,
+                })}>
+                {ev.isPrivate && (
                 <>
                   <span
                     role="img"
@@ -85,8 +88,8 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   </span>
                   Private Event
                 </>
-              )}
-              {!ev.isPrivate && (
+                )}
+                {!ev.isPrivate && (
                 <>
                   <span
                     role="img"
@@ -96,9 +99,9 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   </span>
                   Public Event
                 </>
-              )}
-            </small>
-            {props.isEditable && (
+                )}
+              </small>
+              {props.isEditable && (
               <>
                 <button
                   className="hvrBgGrey1 trans1 fw600 mR2 fx aiCtr">
@@ -122,10 +125,11 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   Delete this event
                 </button>
               </>
-            )}
+              )}
+            </div>
           </div>
-        </div>
-      </li>
-    ))}
+        </li>
+      );
+    })}
   </ul>
 ));

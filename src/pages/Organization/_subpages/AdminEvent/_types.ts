@@ -4,10 +4,13 @@ export type tState = {
   description: string,
   duration: string,
   featuredImage: File | null,
+  id?: number,
   imagePreview: string | null,
+  isDraft: boolean,
   isPrivate: boolean,
   location: string,
   locationLink: string,
+  orgName: string,
   time: string,
   title: string,
 };
@@ -24,6 +27,7 @@ export type tCreateEvent = {
   date: string,
   description: string,
   endDate: string,
+  isDraft: boolean,
   isPrivate: boolean,
   location: string,
   locationLink: string,
@@ -39,7 +43,8 @@ export type tContainerProps = {
 };
 
 export type tComponentProps = tContainerProps & tState & {
-  onSubmit: (ev: React.FormEvent<HTMLFormElement>) => void,
+  onSubmit: (ev: React.MouseEvent<HTMLButtonElement>) => void,
+  saveAsDraft: (ev: React.MouseEvent<HTMLButtonElement>) => void,
   setImage: (ev: React.ChangeEvent<HTMLInputElement> | null) => void,
   toggleChecked: () => void,
   updateState: (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => void,

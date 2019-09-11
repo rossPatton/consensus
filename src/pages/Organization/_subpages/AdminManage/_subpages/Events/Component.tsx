@@ -6,29 +6,51 @@ import {tComponentProps} from './_types';
 export const EventsComponent = memo((props: tComponentProps) => (
   <>
     <h2 className="mB2">Manage Events</h2>
-    <label
-      htmlFor="searchFilter"
-      className="fx aiCtr p3 bgGrey1 br8 mB4">
-      <input
-        spellCheck
-        type="search"
-        id="searchFilter"
-        className="mR2 lh1 row"
-        onChange={props.onSearchChange}
-        placeholder="Search for an event by title"
-      />
-      <select onBlur={props.onFilterChange} onChange={props.onFilterChange}>
-        <option value="n/a">
-          Filter by Event Privacy
-        </option>
-        <option value="true">
-          Private Events
-        </option>
-        <option value="false">
-          Public Events
-        </option>
-      </select>
-    </label>
-    <Events isEditable events={props.events} />
+    <div className="fx aiCtr p3 bgGrey1 br8 mB4">
+      <label className="col row mR3" htmlFor="searchFilter">
+        Search:
+        <input
+          spellCheck
+          type="search"
+          id="searchFilter"
+          className="mR2 lh1 row"
+          onChange={props.onSearchChange}
+          placeholder="Search for an event by title"
+        />
+      </label>
+      <div className="mR3">
+        Filter by privacy
+        <select
+          onBlur={props.onPrivacyFilterChange}
+          onChange={props.onPrivacyFilterChange}>
+          <option value="n/a">
+            Public & Private Events
+          </option>
+          <option value="private">
+            Private Events Only
+          </option>
+          <option value="public">
+            Public Events Only
+          </option>
+        </select>
+      </div>
+      <div>
+        Filter drafts
+        <select
+          onBlur={props.onPublishedFilterChange}
+          onChange={props.onPublishedFilterChange}>
+          <option value="n/a">
+            Published Events & Drafts
+          </option>
+          <option value="published">
+            Published Events Only
+          </option>
+          <option value="draft">
+            Drafts Only
+          </option>
+        </select>
+      </div>
+    </div>
+    <Events events={props.events} />
   </>
 ));

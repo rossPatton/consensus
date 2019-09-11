@@ -1,8 +1,13 @@
-import { applyMiddleware, createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import {applyMiddleware, createStore} from 'redux';
+import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 
-import { middleware } from './middleware';
-import { rootReducer } from './rootReducer';
+import {middleware} from './middleware';
+import {rootReducer} from './rootReducer';
+
+const composeEnhancers = composeWithDevTools({
+  trace: __DEV__,
+  traceLimit: 25,
+});
 
 // set up initial store
 export const initStore = (initialState?: object) => {
@@ -13,7 +18,7 @@ export const initStore = (initialState?: object) => {
       // 2nd param === any initial preloaded state
       initialState,
       // 3rd param === middleware/dev tools extension
-      composeWithDevTools(
+      composeEnhancers(
         applyMiddleware(...middleware),
       )
     );
@@ -23,7 +28,7 @@ export const initStore = (initialState?: object) => {
     // 1st param === all reducers (using combinedReducer)
     rootReducer,
     // 2nd param === middleware/dev tools extension
-    composeWithDevTools(
+    composeEnhancers(
       applyMiddleware(...middleware),
     )
   );

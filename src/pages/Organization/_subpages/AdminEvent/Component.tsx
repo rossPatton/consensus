@@ -1,15 +1,15 @@
 import cx from 'classnames';
 import _ from 'lodash';
-import React, { memo } from 'react';
+import React, {memo} from 'react';
+import {Link} from 'react-router-dom';
 
-import { getDateNowAsISOStr } from '../../../../utils';
-import { tComponentProps } from './_types';
+import {getDateNowAsISOStr} from '../../../../utils';
+import {tComponentProps} from './_types';
 
 export const AdminEventComponent = memo((props: tComponentProps) => (
   <form
     id="form"
-    encType="multipart/form-data"
-    onSubmit={props.onSubmit}>
+    encType="multipart/form-data">
     <fieldset style={{maxWidth: '760px'}}>
       <legend className="mB3">
         <h2>Create a new Event</h2>
@@ -148,15 +148,20 @@ export const AdminEventComponent = memo((props: tComponentProps) => (
         )}
       </div>
       <div className="brdT1 pT4 pB4 mT4 fx aiCtr">
-        <button className="p3 mR2 hvrBgGrey1 trans1">
-          + Publish Event
+        <button onClick={props.onSubmit} className="p3 mR2 hvrBgGrey1 trans1">
+          Publish
         </button>
-        <button className="p3 mR2 hvrBgGrey1 trans1">
-          Preview Event
-        </button>
-        <button className="p3 hvrBgGrey1 trans1">
+        <button onClick={props.saveAsDraft} className="p3 mR2 hvrBgGrey1 trans1">
           Save as Draft
         </button>
+        {/* TODO only show after saving as draft*/}
+        {props.id && (
+          <Link
+            to={`/event/${props.id}?isPreview=true`}
+            className="brdA1 br4 lh1 p3 fs6 hvrBgGrey1 trans1">
+            Preview
+          </Link>
+        )}
       </div>
     </fieldset>
   </form>
