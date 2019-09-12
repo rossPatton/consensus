@@ -87,6 +87,7 @@ const createEvent = async () => ({
   locationLink: faker.internet.url(),
   orgId: 100,
   orgName: 'Tech Workers Coalition NYC',
+  pathToFeaturedImage: faker.image.imageUrl(),
   title: faker.company.bs(),
 });
 

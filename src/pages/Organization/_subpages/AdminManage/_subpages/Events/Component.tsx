@@ -6,7 +6,7 @@ import {tComponentProps} from './_types';
 export const EventsComponent = memo((props: tComponentProps) => (
   <>
     <h2 className="mB2">Manage Events</h2>
-    <div className="fx aiCtr p3 bgGrey1 br8 mB4">
+    <div className="fx aiCtr p3 bgGrey1 br8 mB4 fs6 fw600">
       <label className="col row mR3" htmlFor="searchFilter">
         Search:
         <input

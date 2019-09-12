@@ -1,8 +1,10 @@
+import {Location} from 'history';
+
 export type tState = {
   category: string,
   date: string,
   description: string,
-  duration: string,
+  duration: string | number, // string because that's what the form will give us
   featuredImage: File | null,
   id?: number,
   imagePreview: string | null,
@@ -11,6 +13,7 @@ export type tState = {
   location: string,
   locationLink: string,
   orgName: string,
+  pathToFeaturedImage: string | null,
   time: string,
   title: string,
 };
@@ -38,6 +41,7 @@ export type tCreateEvent = {
 export type tContainerProps = {
   createEvent: (event: tCreateEvent) => Promise<{payload: tEvent}>,
   events: tEvent[],
+  router: Location,
   org: tOrg,
   session: tSession,
 };
@@ -45,7 +49,7 @@ export type tContainerProps = {
 export type tComponentProps = tContainerProps & tState & {
   onSubmit: (ev: React.MouseEvent<HTMLButtonElement>) => void,
   saveAsDraft: (ev: React.MouseEvent<HTMLButtonElement>) => void,
-  setImage: (ev: React.ChangeEvent<HTMLInputElement> | null) => void,
+  setImage: (ev: React.ChangeEvent<HTMLInputElement>, removeImage?: boolean) => void,
   toggleChecked: () => void,
-  updateState: (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => void,
+  updateState: (stateKey: tStateUnion, value: any) => void,
 };

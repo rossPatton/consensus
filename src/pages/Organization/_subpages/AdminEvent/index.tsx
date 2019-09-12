@@ -1,4 +1,5 @@
 import dayJS from 'dayjs';
+import qs from 'querystring';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
@@ -16,7 +17,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     category: this.props.org.category,
     date: getDateNowAsISOStr(),
     description: '',
-    duration: '2',
+    duration: 2,
     featuredImage: null,
     imagePreview: null,
     isDraft: false,
@@ -24,18 +25,44 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     location: '',
     locationLink: '',
     orgName: this.props.org.name,
+    pathToFeaturedImage: null,
     time: '19:00',
     title: '',
   };
 
-  // create preview image, store featuredImage in state to be uploaded on submit
-  setImage = (ev: React.ChangeEvent<HTMLInputElement> | null) => {
-    if (ev) ev.preventDefault();
+  componentDidMount() {
+    const draft = qs.parse(this.props.router.search.split('?')[1]);
+    if (!draft.id) return;
 
-    if (ev === null) {
+    const isPrivate = draft.isPrivate === 'true';
+
+    this.setState({
+      category: draft.category as string,
+      // convert UTC date with tz to local format for html5 date/time
+      date: dayJS(draft.date as string).format('YYYY-MM-DD'),
+      description: draft.description as string,
+      duration: parseInt(draft.duration as string, 10),
+      id: parseInt(draft.id as string, 10),
+      isDraft: true,
+      isPrivate,
+      location: draft.location as string,
+      locationLink: draft.locationLink as string,
+      orgName: this.props.org.name,
+      pathToFeaturedImage: draft.pathToFeaturedImage as string,
+      time: draft.time as string,
+      title: draft.title as string,
+    });
+  }
+
+  // create preview image, store featuredImage in state to be saved to file server
+  setImage = (ev: React.ChangeEvent<HTMLInputElement>, removeImage: boolean = false) => {
+    ev.preventDefault();
+
+    if (removeImage) {
       return this.setState({
         featuredImage: null,
         imagePreview: null,
+        pathToFeaturedImage: null,
       });
     }
 
@@ -75,11 +102,13 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
       ...restOfEvent
     } = this.state;
 
+    const dur = typeof duration === 'string' ? parseInt(duration, 10) : duration;
+
     // TODO move date manipulation logic to server
     const timeArr = parseTimeString(time);
     const date = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
     const endDate = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
-    endDate.hour(endDate.hour() + parseInt(duration, 10));
+    endDate.hour(endDate.hour() + dur);
 
     let newEvent: tEvent;
     try {
@@ -132,9 +161,9 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     });
   }
 
-  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
+  updateState = (stateKey: tStateUnion, value: any) => {
     this.setState({
-      [stateKey]: ev.currentTarget.value,
+      [stateKey]: value,
     } as Pick<tState, tStateUnion>);
   }
 

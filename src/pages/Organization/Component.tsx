@@ -39,6 +39,7 @@ export const OrganizationComponent = (props: tProps) => (
       {props.match.params.section === 'createEvent' && (
         <AdminEvent
           org={props.org}
+          router={props.location}
         />
       )}
       {(props.match.params.section === 'manageDecisions'
