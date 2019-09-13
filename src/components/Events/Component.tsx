@@ -20,6 +20,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
           {props.isEditable && (
             <div
               className={cx({
+                hide: props.tiny,
                 bgBlueLite: !ev.isDraft,
                 bgYellowLite: ev.isDraft,
                 'brdB1 p2 pL3 pR3 fx aiCtr fs6 jcEnd': true,
@@ -61,7 +62,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
             </div>
           )}
           <div className="p3 fx">
-            <div
+            {/* <div
               className={cx({
                 'br8 bgGrey1 mR3 col fxNoShrink fxg0': true,
                 hide: props.tiny,
@@ -73,6 +74,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 src={`https://picsum.photos/id/${getRandomNum(0, 100)}/175/175`}
               />
             </div>
+            */}
             <div className="col">
               <h3
                 className={cx({

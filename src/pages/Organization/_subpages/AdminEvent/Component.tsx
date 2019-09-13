@@ -23,7 +23,7 @@ export const AdminEventComponent = memo((props: tComponentProps) => {
         </legend>
         <h3>Event Title</h3>
         <input
-          className="mB3 row"
+          className="mB4 row"
           placeholder="Your Event Title Here"
           value={props.title}
           onChange={ev => updateState('title', ev.currentTarget.value)}
@@ -32,12 +32,12 @@ export const AdminEventComponent = memo((props: tComponentProps) => {
         <textarea
           rows={8}
           spellCheck
-          className="mB3 row"
+          className="mB4 row"
           placeholder="Event Description Here"
           value={props.description}
           onChange={ev => updateState('description', ev.currentTarget.value)}
         />
-        <h3>Featured Image</h3>
+        {/* <h3>Featured Image</h3>
         {(props.imagePreview || props.pathToFeaturedImage) && (
           <div className="bgGrey1 p3 mB3 fx fxdCol aiCtr" id="imagePreview">
             <button
@@ -85,8 +85,9 @@ export const AdminEventComponent = memo((props: tComponentProps) => {
           </span>
           <small>We recommend a size of at least 760x428px</small>
         </label>
+        */}
         <h3>Where is your event happening?</h3>
-        <div className="fx mB3">
+        <div className="fx mB4">
           <input
             results={3}
             spellCheck
@@ -103,7 +104,7 @@ export const AdminEventComponent = memo((props: tComponentProps) => {
             onChange={ev => updateState('locationLink', ev.currentTarget.value)}
           />
         </div>
-        <div className="fx mB3">
+        <div className="fx mB4">
           <div className="mR3">
             <h3>When is the Event?</h3>
             <input

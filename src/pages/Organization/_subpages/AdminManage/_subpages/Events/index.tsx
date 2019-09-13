@@ -86,8 +86,6 @@ export class EventsContainer extends PureComponent<tContainerProps, tState> {
         : this.props.events
     );
 
-    console.log('events to render => ', eventsToRender);
-
     return (
       <Paginate
         items={eventsToRender}
@@ -97,6 +95,7 @@ export class EventsContainer extends PureComponent<tContainerProps, tState> {
             onPrivacyFilterChange={this.onPrivacyFilterChange}
             onPublishedFilterChange={this.onPublishedFilterChange}
             onSearchChange={this.onSearchChange}
+            org={this.props.org}
             events={itemsToRender}
           />
         )}

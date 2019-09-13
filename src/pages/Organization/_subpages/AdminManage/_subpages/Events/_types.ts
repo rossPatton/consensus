@@ -5,6 +5,7 @@ export type tComponentProps = {
   onPrivacyFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onPublishedFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
+  org: tOrg,
 }
 
 export type tContainerProps = {

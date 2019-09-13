@@ -106,15 +106,15 @@ exports.up = async (knex: Knex) => {
     // gate is the best 1 word term i could think of for it
     // on user signup - do we gatekeep who can join or not?
     // public === 'anyone can join, no questions asked, no screening'
-    // restricted === 'anyone can join, but we require manual approval'
+    // manual === 'anyone can join, but we require manual approval'
     // private === 'members must be invited to join'
-    table.string('gate').notNullable().defaultTo('public');
+    table.string('gate').notNullable().defaultTo('manual');
 
     // eventPrivacy is an admin override for event privacy settings
     // public === 'all events are public'
-    // restricted === 'events default to public, but can be made private'
+    // manual === 'events default to public, but can be made private'
     // private === 'all events are private'
-    table.string('eventPrivacy').notNullable().defaultTo('restricted');
+    table.string('eventPrivacy').notNullable().defaultTo('manual');
 
     // orgs are also 'accounts' of their own, can login, etc
     table.string('password').notNullable();

@@ -63,7 +63,7 @@ declare type tRSVP = {
   rsvp: boolean,
 };
 
-declare type tGate = 'public' | 'restricted' | 'private';
+declare type tGate = 'public' | 'manual' | 'private';
 
 declare type tOrg = {
   category: string,

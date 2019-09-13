@@ -7,7 +7,7 @@ export const ProfileComponent = memo((props: tComponentProps) => {
   const {
     email: origEmail,
     fname: origFname,
-    hasAvatar: origAvatar,
+    // hasAvatar: origAvatar,
     lname: origLname,
     username: origUsername,
   } = props.session;
@@ -24,7 +24,7 @@ export const ProfileComponent = memo((props: tComponentProps) => {
           <h1 className="fs2 mB3">Edit your profile</h1>
         </legend>
         <div className="p4 br8 brdA1 mB3">
-          <h2 className="ffLab fs5 mB1 lh1">
+          {/* <h2 className="ffLab fs5 mB1 lh1">
             Avatar
           </h2>
           <div className="fx aiCtr mB3">
@@ -75,6 +75,7 @@ export const ProfileComponent = memo((props: tComponentProps) => {
               </label>
             )}
           </div>
+            */}
           <label htmlFor="fname">
             <h2 className="ffLab fs5 mB1 lh1">
               First Name

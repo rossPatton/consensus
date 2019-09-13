@@ -18,18 +18,19 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     date: getDateNowAsISOStr(),
     description: '',
     duration: 2,
-    featuredImage: null,
-    imagePreview: null,
+    // featuredImage: null,
+    // imagePreview: null,
     isDraft: false,
     isPrivate: false,
     location: '',
     locationLink: '',
     orgName: this.props.org.name,
-    pathToFeaturedImage: null,
+    // pathToFeaturedImage: null,
     time: '19:00',
     title: '',
   };
 
+  // we use query params to populate the form when editing a draft
   componentDidMount() {
     const draft = qs.parse(this.props.router.search.split('?')[1]);
     if (!draft.id) return;
@@ -48,38 +49,38 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
       location: draft.location as string,
       locationLink: draft.locationLink as string,
       orgName: this.props.org.name,
-      pathToFeaturedImage: draft.pathToFeaturedImage as string,
+      // pathToFeaturedImage: draft.pathToFeaturedImage as string,
       time: draft.time as string,
       title: draft.title as string,
     });
   }
 
   // create preview image, store featuredImage in state to be saved to file server
-  setImage = (ev: React.ChangeEvent<HTMLInputElement>, removeImage: boolean = false) => {
-    ev.preventDefault();
+  // setImage = (ev: React.ChangeEvent<HTMLInputElement>, removeImage: boolean = false) => {
+  //   ev.preventDefault();
 
-    if (removeImage) {
-      return this.setState({
-        featuredImage: null,
-        imagePreview: null,
-        pathToFeaturedImage: null,
-      });
-    }
+  //   if (removeImage) {
+  //     return this.setState({
+  //       featuredImage: null,
+  //       imagePreview: null,
+  //       pathToFeaturedImage: null,
+  //     });
+  //   }
 
-    if (!ev.currentTarget.files) return;
+  //   if (!ev.currentTarget.files) return;
 
-    const images = Array.from(ev.currentTarget.files);
-    const featuredImage = images[0];
+  //   const images = Array.from(ev.currentTarget.files);
+  //   const featuredImage = images[0];
 
-    const reader = new FileReader();
-    reader.readAsDataURL(featuredImage);
-    reader.onload = () => {
-      this.setState({
-        featuredImage,
-        imagePreview: reader.result as string,
-      });
-    };
-  }
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(featuredImage);
+  //   reader.onload = () => {
+  //     this.setState({
+  //       featuredImage,
+  //       imagePreview: reader.result as string,
+  //     });
+  //   };
+  // }
 
   saveAsDraft = (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.preventDefault();
@@ -96,8 +97,8 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     const {events} = this.props;
     const {
       duration,
-      featuredImage,
-      imagePreview,
+      // featuredImage,
+      // imagePreview,
       time,
       ...restOfEvent
     } = this.state;
@@ -114,7 +115,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     try {
       const createEvent = await this.props.createEvent({
         ...restOfEvent,
-        // override here since we submit drafts to the DB as well
+        // we submit drafts to the same table in the DB as well
         isDraft: saveAsDraft,
         // every date is stored in the db as an ISO string
         date: date.toISOString(),
@@ -127,32 +128,32 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
       return console.error('failed to save event to db');
     }
 
-    const body = new FormData();
-    const fileInput = document.getElementById('fileUpload') as HTMLInputElement;
-    if (fileInput !== null) {
-      const { files }: { files: FileList | null } = fileInput;
-
-      if (files !== null) {
-        body.append('featuredImage', files[0]);
-        body.append('eventId', `${newEvent.id}`);
-      }
-    }
-
-    // upload featuredImage to fileserver, resize, etc if we have one
-    // TODO this should go through redux probably
-    if (featuredImage) {
-      try {
-        await fetch(`/api/v1/fileUpload?eventId=${newEvent.id}`, {method: 'post', body});
-      } catch (err) {
-        console.error('failed to upload featured image');
-      }
-    }
-
     // update redux on client side on event upload success
     getEventsSuccess([newEvent, ...events]);
     this.setState({
       id: newEvent.id,
     });
+
+    // const body = new FormData();
+    // const fileInput = document.getElementById('fileUpload') as HTMLInputElement;
+    // if (fileInput !== null) {
+    //   const { files }: { files: FileList | null } = fileInput;
+
+    //   if (files !== null) {
+    //     body.append('featuredImage', files[0]);
+    //     body.append('eventId', `${newEvent.id}`);
+    //   }
+    // }
+
+    // // upload featuredImage to fileserver, resize, etc if we have one
+    // // TODO this should go through redux probably
+    // if (featuredImage) {
+    //   try {
+    //     await fetch(`/api/v1/fileUpload?eventId=${newEvent.id}`, {method: 'post', body});
+    //   } catch (err) {
+    //     console.error('failed to upload featured image');
+    //   }
+    // }
   }
 
   toggleChecked = () => {
@@ -189,7 +190,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
             {...this.state}
             onSubmit={this.onSubmit}
             saveAsDraft={this.saveAsDraft}
-            setImage={this.setImage}
+            // setImage={this.setImage}
             toggleChecked={this.toggleChecked}
             updateState={this.updateState}
           />

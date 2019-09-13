@@ -56,7 +56,7 @@ export const EventComponent = memo(({event, events}: tComponentProps) => (
     </div>
     <div className="fx mB3">
       <div className="col row mR3">
-        <div className="bgGrey1 mB3">
+        {/* <div className="bgGrey1 mB3">
           <img
             alt=""
             className="row"
@@ -65,9 +65,13 @@ export const EventComponent = memo(({event, events}: tComponentProps) => (
             src="https://via.placeholder.com/760x428"
           />
         </div>
-        <p>
-          {event.description}
-        </p>
+      */}
+        {event.description &&
+          event.description.split('\n').map((p: string, i) => (
+            <p key={i} className="fs3">
+              {p}
+            </p>
+          ))}
       </div>
       <aside>
         {events && events.length > 0 && (
