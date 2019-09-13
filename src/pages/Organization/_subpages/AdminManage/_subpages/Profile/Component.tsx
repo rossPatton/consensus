@@ -8,10 +8,10 @@ export const ProfileComponent = memo((props: tComponentProps) => {
 
   return (
     <>
-      <h2 className="mB3">Manage Your Organization</h2>
+      <h2 className="mB4">Manage Your Organization</h2>
       <form
         id="form"
-        className="p4 br8 brdA1 row"
+        className="row"
         onSubmit={props.onSubmit}>
         <fieldset>
           <h3>Organization Name</h3>
@@ -42,11 +42,11 @@ export const ProfileComponent = memo((props: tComponentProps) => {
             className="mB3 row"
             onBlur={ev => props.updateState('gate', ev)}
             onChange={ev => props.updateState('gate', ev)}>
-            <option value="public">
-              Public, no vetting process at all
-            </option>
             <option value="manual">
               Manual, membership must be manually approved
+            </option>
+            <option value="public">
+              Public, no vetting process at all
             </option>
             <option value="private">
               Private, invite only
@@ -56,18 +56,18 @@ export const ProfileComponent = memo((props: tComponentProps) => {
             Event privacy defaults
           </h3>
           <select
-            value={props.gate}
+            value={props.eventPrivacy}
             className="mB3 row"
             onBlur={ev => props.updateState('eventPrivacy', ev)}
             onChange={ev => props.updateState('eventPrivacy', ev)}>
-            <option value="public">
-              Public, all events are public
-            </option>
             <option value="manual">
               Manual, event privacy defaults to public but can be changed per event
             </option>
+            <option value="public">
+              Public, all events are public
+            </option>
             <option value="private">
-              Private, all events are private and cannot be made public
+              Private, all events are private
             </option>
           </select>
           <div className="brdT1 pT4 pB4 mT4 fx aiCtr">

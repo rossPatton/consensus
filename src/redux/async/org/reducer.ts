@@ -2,6 +2,9 @@ import {
   GET_ORG_BEGIN,
   GET_ORG_FAILURE,
   GET_ORG_SUCCESS,
+  PATCH_ORG_BEGIN,
+  PATCH_ORG_FAILURE,
+  PATCH_ORG_SUCCESS,
   tActionUnion,
 } from './_types';
 
@@ -16,8 +19,8 @@ const initialState: tThunk<tOrg> = {
     countryId: 0,
     description: '',
     email: '',
-    eventPrivacy: 'public',
-    gate: 'private',
+    eventPrivacy: 'manual',
+    gate: 'manual',
     id: 0,
     membershipTotal: 0,
     name: '',
@@ -31,7 +34,7 @@ const initialState: tThunk<tOrg> = {
 
 export const orgReducer = (state = initialState, action: tActionUnion) => {
   switch (action.type) {
-  case GET_ORG_BEGIN:
+  case GET_ORG_BEGIN || PATCH_ORG_BEGIN:
     return {
       ...state,
       isLoading: true,
@@ -44,13 +47,23 @@ export const orgReducer = (state = initialState, action: tActionUnion) => {
       isLoading: false,
     };
 
-  case GET_ORG_FAILURE:
+  case GET_ORG_FAILURE || PATCH_ORG_FAILURE:
     return {
       ...state,
-      data: initialState.data,
       error: action.payload,
       isLoading: false,
     };
+
+  // separate case to force state update
+  /* eslint-disable */
+  case PATCH_ORG_SUCCESS: {
+    return {
+      ...state,
+      data: action.payload,
+      isLoading: false,
+    };
+  }
+  /* eslint-enable */
 
   default:
     return state;

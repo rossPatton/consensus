@@ -71,17 +71,20 @@ declare type tOrg = {
   cityId: number,
   country: string,
   countryId: number,
+  createdAt?: string, // we dont send to client
   description: string,
-  email: string,
+  email?: string, // user admin account only
   eventPrivacy: tGate,
   gate: tGate,
   id: number,
   membershipTotal: number,
   name: string,
+  password?: string, // never sent to client
   role: tRole,
   slug: string,
   region: string,
   regionId: number,
+  updatedAt?: string, // we dont send to client
   username: string,
 };
 

@@ -65,8 +65,6 @@ export const usersByOrgReducer = (state = initialState, action: tActionUnion) =>
       role: patchedUser.role,
     };
 
-    console.log('userWithNewRole => ', userWithNewRole);
-
     // replace user in-place with updated relation
     copy.splice(indexOfPatchedUser, 1, userWithNewRole);
 

@@ -7,6 +7,7 @@ export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaEleme
 
 export type tContainerProps = {
   org: tOrg,
+  patchOrg: (query: any) => any,
   session: tSession,
 };
 

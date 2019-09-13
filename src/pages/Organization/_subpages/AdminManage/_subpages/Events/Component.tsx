@@ -18,24 +18,22 @@ export const EventsComponent = memo((props: tComponentProps) => (
           placeholder="Search for an event by title"
         />
       </label>
-      {props.org.eventPrivacy === 'manual' && (
-        <div className="mR3">
+      <div className="mR3">
         Filter by privacy
-          <select
-            onBlur={props.onPrivacyFilterChange}
-            onChange={props.onPrivacyFilterChange}>
-            <option value="n/a">
+        <select
+          onBlur={props.onPrivacyFilterChange}
+          onChange={props.onPrivacyFilterChange}>
+          <option value="n/a">
             Public & Private Events
-            </option>
-            <option value="private">
+          </option>
+          <option value="private">
             Private Events Only
-            </option>
-            <option value="public">
+          </option>
+          <option value="public">
             Public Events Only
-            </option>
-          </select>
-        </div>
-      )}
+          </option>
+        </select>
+      </div>
       <div>
         Filter drafts
         <select

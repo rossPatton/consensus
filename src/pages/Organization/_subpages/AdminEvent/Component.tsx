@@ -135,27 +135,31 @@ export const AdminEventComponent = memo((props: tComponentProps) => {
             </select>
           </div>
         </div>
-        <h3>Is this a private event?</h3>
-        <div
-          tabIndex={0}
-          role="button"
-          className="fx aiCtr curPtr dInBl"
-          onClick={props.toggleChecked}
-          onKeyPress={props.toggleChecked}>
-          <input
-            readOnly
-            type="checkbox"
-            className="mR2"
-            autoComplete="nope"
-            checked={props.isPrivate}
-          />
-          {props.isPrivate && (
-            <span>Yes, only show this event to {props.org.name} members.</span>
-          )}
-          {!props.isPrivate && (
-            <span>No, and I understand that anyone can see this event.</span>
-          )}
-        </div>
+        {props.org.eventPrivacy === 'manual' && (
+          <>
+            <h3>Is this a private event?</h3>
+            <div
+              tabIndex={0}
+              role="button"
+              className="fx aiCtr curPtr dInBl"
+              onClick={props.toggleChecked}
+              onKeyPress={props.toggleChecked}>
+              <input
+                readOnly
+                type="checkbox"
+                className="mR2"
+                autoComplete="nope"
+                checked={props.isPrivate}
+              />
+              {props.isPrivate && (
+                <span>Yes, only show this event to {props.org.name} members.</span>
+              )}
+              {!props.isPrivate && (
+                <span>No, and I understand that anyone can see this event.</span>
+              )}
+            </div>
+          </>
+        )}
         <div className="brdT1 pT4 pB4 mT4 fx aiCtr">
           <button
             onClick={props.onSubmit}

@@ -7,6 +7,7 @@ import { knex } from '../db/connection';
 
 export const org = new Router();
 const route = '/api/v1/org';
+const table = 'orgs';
 
 org.get(route, async (ctx: Koa.ParameterizedContext) => {
   const userId = _.get(ctx, 'state.user.id', 0);
@@ -58,7 +59,7 @@ org.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let org: tOrg;
   try {
-    org = await knex('orgs')
+    org = await knex(table)
       .limit(1)
       .where({
         countryId: country.id,
@@ -81,10 +82,30 @@ org.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
+  const {createdAt, email, password, updatedAt, ...safeOrg} = org;
+
   const orgWithRole = {
-    ...org,
+    ...safeOrg,
     role: userOrgRel ? userOrgRel.role : null,
   };
 
   ctx.body = orgWithRole;
+});
+
+org.patch(route, async (ctx: Koa.ParameterizedContext) => {
+  const {isFormSubmit, ...newOrg} = _.get(ctx, 'state.locals.data', {});
+
+  let updatedOrg: tOrg[];
+  try {
+    updatedOrg = await knex(table)
+      .limit(1)
+      .where({id: newOrg.id})
+      .update(newOrg)
+      .returning('*');
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
+
+  const {createdAt, email, password, updatedAt, ...safeOrg} = updatedOrg[0];
+  ctx.body = safeOrg;
 });
