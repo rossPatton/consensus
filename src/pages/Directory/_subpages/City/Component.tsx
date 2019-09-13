@@ -41,7 +41,9 @@ export const CityComponent = memo((props: tProps) => {
           {props.orgsToRender.length > 0 && `Organizations in ${cityObj.name}`}
           {props.orgsToRender.length === 0 && 'No organizations found'}
         </h2>
-        <button className="p2 pL3 pR3 hvrBgGrey1 trans1 fx aiCtr lh1">
+        <Link
+          to="/createOrg"
+          className="fs6 brdA1 br4 p2 pL3 pR3 hvrBgGrey1 trans1 fx aiCtr lh1 noUnderline">
           <span
             role="img"
             className="mR1"
@@ -49,7 +51,7 @@ export const CityComponent = memo((props: tProps) => {
             ➕
           </span>
           Create a new organization
-        </button>
+        </Link>
       </div>
       {props.orgsToRender.length > 0 && (
         <ul className="fx fxWrap">

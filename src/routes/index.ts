@@ -4,6 +4,7 @@ import {
   Event,
   Home,
   Login,
+  NewOrganizationForm,
   Organization,
   Signup,
   UserAdmin,
@@ -41,6 +42,11 @@ export const routes = [
     component: Directory,
     exact: true,
     path: '/directory/:country/:region?/:city?/:page?',
+  },
+  {
+    component: NewOrganizationForm,
+    exact: true,
+    path: '/createOrg',
   },
   // organization page is reachable directly via id or by geographical location
   {
