@@ -10,10 +10,12 @@ auth.post('/auth/login', async (ctx: Koa.ParameterizedContext, next) =>
     if (err) ctx.throw(400, err);
     if (!unsafeUser) ctx.throw(400, 'User not found');
 
+    console.log('unsafeUser => ', unsafeUser);
+
     await ctx.login(unsafeUser);
 
     // newSession === session.data on the client, redux adds loading/error keys
-    const { password, ...safeUser } = unsafeUser;
+    const {password, ...safeUser} = unsafeUser;
     const newSession: tSession = {
       ...safeUser,
       isAuthenticated: ctx.isAuthenticated(),

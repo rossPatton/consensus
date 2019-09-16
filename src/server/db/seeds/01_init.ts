@@ -3,8 +3,8 @@ import bcrypt from 'bcryptjs';
 import faker from 'faker';
 import Knex from 'knex';
 
-import { notNull } from '../../../utils/notNull';
-import { slugify } from '../../../utils/slugify';
+import {notNull} from '../../../utils/notNull';
+import {slugify} from '../../../utils/slugify';
 import cities from '../../json/usa/cities.json';
 import stateMap from '../../json/usa/stateCodeMap.json';
 import { encrypt, sha384 } from '../../utils';
@@ -14,45 +14,52 @@ const country = 'United States';
 // in production, salt would be generated per hash, but this saves time
 const salt = bcrypt.genSaltSync(10);
 
-const createUser = async () => {
+const createUserAccount = async (i: number) => {
   const sha = sha384(faker.internet.password());
   const saltedHash = await bcrypt.hash(sha, salt);
   const password = encrypt(saltedHash);
 
   return {
-    email: faker.internet.exampleEmail(),
-    fname: faker.name.firstName(),
-    lname: faker.name.lastName(),
+    login: faker.internet.userName(),
     password,
-    phone: faker.phone.phoneNumber(),
-    username: faker.internet.userName(),
+    userId: i,
   };
 };
 
-const createTestUser = async () => {
+const createUser = async () => ({
+  email: faker.internet.exampleEmail(),
+  fname: faker.name.firstName(),
+  isVerified: faker.random.boolean(),
+  lname: faker.name.lastName(),
+  phone: faker.phone.phoneNumber(),
+  username: faker.internet.userName(),
+});
+
+const createTestUser = async () => ({
+  city: 3658, // New York City
+  email: 'test@test.com',
+  fname: 'test',
+  isVerified: true,
+  lname: 'user',
+  phone: faker.phone.phoneNumber(),
+  username: 'testUser',
+});
+
+const createTestUserAccount = async () => {
   const sha = sha384('test');
   const saltedHash = await bcrypt.hash(sha, salt);
   const password = encrypt(saltedHash);
 
   return {
-    city: 3658, // New York City
-    email: 'test@test.com',
-    fname: 'test',
-    isVerified: true,
-    lname: 'user',
+    login: faker.internet.userName(),
     password,
-    phone: faker.phone.phoneNumber(),
-    username: 'testUser',
+    userId: 100,
   };
 };
 
 const createOrg = async () => {
   const name = faker.company.companyName();
   const slug = slugify(name);
-
-  const sha = sha384(faker.internet.password());
-  const saltedHash = await bcrypt.hash(sha, salt);
-  const password = encrypt(saltedHash);
 
   return {
     category: faker.lorem.word(),
@@ -61,11 +68,9 @@ const createOrg = async () => {
     country,
     countryId: 1,
     description: faker.lorem.paragraphs(),
-    email: faker.internet.exampleEmail(),
     gate: 'public',
     membershipTotal: faker.random.number(),
     name,
-    password,
     region: 'New York',
     regionId: 37,
     slug,
@@ -113,28 +118,20 @@ const createUserEventRelation = async (u: number, e: number) => ({
   userId: u,
 });
 
-const createTWC = async () => {
-  const sha = sha384(faker.internet.password());
-  const saltedHash = await bcrypt.hash(sha, salt);
-  const password = encrypt(saltedHash);
-
-  return {
-    category: 'Tech and Science Activism',
-    city: 'New York City',
-    cityId: 3658,
-    country,
-    countryId: 1,
-    description: faker.lorem.paragraphs(),
-    email: 'techworkerscoalitionnyc@gmail.com',
-    gate: 'restricted',
-    membershipTotal: 1789,
-    name: 'Tech Workers Coalition NYC',
-    password,
-    region: 'New York',
-    regionId: 37,
-    slug: 'tech-workers-coalition-nyc',
-  };
-};
+const createTWC = async () => ({
+  category: 'Tech and Science Activism',
+  city: 'New York City',
+  cityId: 3658,
+  country,
+  countryId: 1,
+  description: faker.lorem.paragraphs(),
+  gate: 'restricted',
+  membershipTotal: 1789,
+  name: 'Tech Workers Coalition NYC',
+  region: 'New York',
+  regionId: 37,
+  slug: 'tech-workers-coalition-nyc',
+});
 
 const MAJORITY = 'Simple Majority';
 const APPROVAL = 'Approval';
@@ -201,6 +198,7 @@ const createUserDecisionRelation = async (i: number) => ({
 });
 
 exports.seed = async (knex: Knex) => {
+  const fakeAccounts = [];
   const fakeEvents = [];
   const fakeUsers = [];
   const fakeOrgs = [];
@@ -218,10 +216,12 @@ exports.seed = async (knex: Knex) => {
   let b = 1;
   for (b; b < 100; b++) {
     fakeUsers.push(await createUser());
+    fakeAccounts.push(await createUserAccount(b));
   }
 
   // ids are both 100 for the test accounts
   fakeUsers.push(await createTestUser());
+  fakeAccounts.push(await createTestUserAccount());
   fakeOrgs.push(await createTWC());
 
   let userId = 1;
@@ -298,6 +298,9 @@ exports.seed = async (knex: Knex) => {
 
   await knex('orgs').del();
   await knex('orgs').insert(fakeOrgs);
+
+  await knex('accounts').del();
+  await knex('accounts').insert(fakeAccounts);
 
   await knex('decision_types').del();
   await knex('decision_types').insert(createDecisionTypes());

@@ -5,8 +5,10 @@ export type tProps = {
 
 export type tState = {
   isClient: boolean,
-  password: string,
-  username: string,
+  oEmail: string,
+  oPassword: string,
+  uEmail: string,
+  uPassword: string,
 };
 
 export type tStateUnion = keyof tState;

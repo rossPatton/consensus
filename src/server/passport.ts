@@ -11,7 +11,7 @@ const opts = {};
 // their internal id should be the only value that is constant
 
 passport.serializeUser((unsafeUser: tUser, done) => {
-  const { password, ...user } = unsafeUser;
+  const {password, ...user} = unsafeUser;
   return done(null, user);
 });
 
@@ -25,20 +25,21 @@ passport.deserializeUser(async (savedUser: tUser, done) => {
   }
 });
 
-passport.use(new LocalStrategy(opts, async (username, pw, done) => {
-  let user: tUser;
-  try {
-    user = await knex('users').limit(1).where({username}).first();
-  } catch (err) {
-    return done(err, false);
-  }
+passport.use(new LocalStrategy(opts, async (email, pw, done) => {
+  console.log('arguments for passport => ', email, pw);
+  // let user: tUser;
+  // try {
+  //   user = await knex('users').limit(1).where({email}).first();
+  // } catch (err) {
+  //   return done(err, false);
+  // }
 
-  // if passwords match, return the user
-  if (await isValidPw(pw, user.password)) return done(null, user);
+  // // if passwords match, return the user
+  // if (await isValidPw(pw, user.password)) return done(null, user);
 
-  // default case - incorrect password
-  return done({
-    message: 'Passwords dont match',
-    type: 'password',
-  }, false);
+  // // default error case - incorrect password
+  // return done({
+  //   message: 'Passwords dont match',
+  //   type: 'password',
+  // }, false);
 }));

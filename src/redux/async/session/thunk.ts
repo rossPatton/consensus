@@ -11,7 +11,7 @@ import {
   logOutSuccess,
 } from './actions';
 
-export const authenticateSession = memoize({ ttl: 300 }, (user: tLogin) => {
+export const authenticateSession = memoize({ttl: 300}, (user: tLogin) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(authenticateBegin(user));
 
