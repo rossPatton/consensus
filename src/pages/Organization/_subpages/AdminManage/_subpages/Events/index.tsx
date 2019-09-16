@@ -16,7 +16,7 @@ export class EventsContainer extends PureComponent<tContainerProps, tState> {
     const offset = page ? parseInt(page, 10) : 0;
 
     props.getEvents({
-      id: org.id,
+      id: org.id as number,
       limit: -1,
       offset,
     });

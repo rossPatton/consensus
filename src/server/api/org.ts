@@ -2,12 +2,13 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import { deSlugify } from '../../utils';
-import { knex } from '../db/connection';
+import {deSlugify} from '../../utils';
+import {knex} from '../db/connection';
 
 export const org = new Router();
 const route = '/api/v1/org';
 const table = 'orgs';
+const dataPath = 'state.locals.data';
 
 org.get(route, async (ctx: Koa.ParameterizedContext) => {
   const userId = _.get(ctx, 'state.user.id', 0);
@@ -17,7 +18,7 @@ org.get(route, async (ctx: Koa.ParameterizedContext) => {
     country: countryCode,
     region: regionCode,
     slug: orgSlug,
-  } = _.get(ctx, 'state.locals.data', {});
+  } = _.get(ctx, dataPath, {});
 
   let country: tCountry;
   try {
@@ -93,7 +94,7 @@ org.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 org.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const {isFormSubmit, ...newOrg} = _.get(ctx, 'state.locals.data', {});
+  const {isFormSubmit, ...newOrg} = _.get(ctx, dataPath, {});
 
   let updatedOrg: tOrg[];
   try {
@@ -107,5 +108,23 @@ org.patch(route, async (ctx: Koa.ParameterizedContext) => {
   }
 
   const {createdAt, email, password, updatedAt, ...safeOrg} = updatedOrg[0];
+  ctx.body = safeOrg;
+});
+
+org.post(route, async (ctx: Koa.ParameterizedContext) => {
+  const {isFormSubmit, ...org} = _.get(ctx, dataPath, {});
+
+  console.log('data => ', org);
+
+  let newOrg: tOrg[];
+  try {
+    newOrg = await knex(table).insert(org).returning('*');
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
+
+  console.log('newOrg => ', newOrg);
+
+  const {createdAt, email, password, updatedAt, ...safeOrg} = newOrg[0];
   ctx.body = safeOrg;
 });

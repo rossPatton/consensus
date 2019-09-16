@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import React, {memo} from 'react';
 
-import { tComponentProps } from './_types';
+import {PasswordInput} from '../../components';
+import {tComponentProps} from './_types';
 
 export const NewOrganizationComponent = memo((props: tComponentProps) => {
   const { category: origCategory } = props;
@@ -14,10 +15,35 @@ export const NewOrganizationComponent = memo((props: tComponentProps) => {
         className="row"
         onSubmit={props.onSubmit}>
         <fieldset>
+          <small className="dBl mB2 copyBlack">
+            The email and password will be used to log into your organization&apos;s admin account.
+          </small>
+          <div className="mB5">
+            <h3>Organization Email</h3>
+            <div className="mB3">
+              <input
+                required
+                className="row"
+                onChange={ev => props.updateState('email', ev)}
+                placeholder="Your organization's email here"
+                value={props.email}
+              />
+            </div>
+            <PasswordInput
+              required
+              newPassword
+              id="password"
+              title="Organization Password"
+              onChange={ev => props.updateState('password', ev)}
+              placeholder="Your organization's password here"
+              password={props.password as string}
+            />
+          </div>
           <h3>Organization Name</h3>
-          <div className="mB3">
+          <div className="mB4">
             <input
-              className="mB3 row"
+              required
+              className="row"
               onChange={ev => props.updateState('name', ev)}
               placeholder="Your organization name here"
               value={props.name}
@@ -25,7 +51,7 @@ export const NewOrganizationComponent = memo((props: tComponentProps) => {
           </div>
           <h3>Organization Category</h3>
           <input
-            className="mB3 row"
+            className="mB4 row"
             onChange={ev => props.updateState('category', ev)}
             placeholder="Your organization category here"
             value={props.category}
@@ -34,7 +60,7 @@ export const NewOrganizationComponent = memo((props: tComponentProps) => {
           <textarea
             rows={5}
             spellCheck
-            className="mB3 row fs5"
+            className="mB4 row fs5"
             placeholder="Organization Description Here"
             value={props.description}
             onChange={ev => props.updateState('description', ev)}
@@ -43,12 +69,12 @@ export const NewOrganizationComponent = memo((props: tComponentProps) => {
             Membership Vetting Process
           </h3>
           <select
+            className="mB4 row"
             value={props.gate}
-            className="mB3 row"
             onBlur={ev => props.updateState('gate', ev)}
             onChange={ev => props.updateState('gate', ev)}>
             <option value="manual">
-              Manual, membership must be manually approved
+              Manual, new members must be approved
             </option>
             <option value="public">
               Public, no vetting process at all
@@ -61,12 +87,12 @@ export const NewOrganizationComponent = memo((props: tComponentProps) => {
             Event privacy defaults
           </h3>
           <select
+            className="mB4 row"
             value={props.eventPrivacy}
-            className="mB3 row"
             onBlur={ev => props.updateState('eventPrivacy', ev)}
             onChange={ev => props.updateState('eventPrivacy', ev)}>
             <option value="manual">
-              Manual, event privacy defaults to public but can be changed per event
+              Manual, event privacy can be changed per event
             </option>
             <option value="public">
               Public, all events are public

@@ -117,8 +117,8 @@ exports.up = async (knex: Knex) => {
     table.string('eventPrivacy').notNullable().defaultTo('manual');
 
     // orgs are also 'accounts' of their own, can login, etc
+    // no username, just use the org name to log in
     table.string('password').notNullable();
-    table.string('username').notNullable();
 
     // display names for ease of use, 99% of what we need on the client usually
     table.string('city').notNullable();

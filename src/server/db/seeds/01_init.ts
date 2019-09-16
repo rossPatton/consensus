@@ -69,7 +69,6 @@ const createOrg = async () => {
     region: 'New York',
     regionId: 37,
     slug,
-    username: faker.internet.userName(),
   };
 };
 
@@ -134,7 +133,6 @@ const createTWC = async () => {
     region: 'New York',
     regionId: 37,
     slug: 'tech-workers-coalition-nyc',
-    username: 'twcNYC',
   };
 };
 

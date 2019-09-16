@@ -5,6 +5,9 @@ import {
   PATCH_ORG_BEGIN,
   PATCH_ORG_FAILURE,
   PATCH_ORG_SUCCESS,
+  POST_ORG_BEGIN,
+  POST_ORG_FAILURE,
+  POST_ORG_SUCCESS,
   tActionUnion,
 } from './_types';
 
@@ -28,13 +31,12 @@ const initialState: tThunk<tOrg> = {
     regionId: 0,
     role: 'n/a',
     slug: '',
-    username: '',
   },
 };
 
 export const orgReducer = (state = initialState, action: tActionUnion) => {
   switch (action.type) {
-  case GET_ORG_BEGIN || PATCH_ORG_BEGIN:
+  case GET_ORG_BEGIN || PATCH_ORG_BEGIN || POST_ORG_BEGIN:
     return {
       ...state,
       isLoading: true,
@@ -47,7 +49,7 @@ export const orgReducer = (state = initialState, action: tActionUnion) => {
       isLoading: false,
     };
 
-  case GET_ORG_FAILURE || PATCH_ORG_FAILURE:
+  case GET_ORG_FAILURE || PATCH_ORG_FAILURE || POST_ORG_FAILURE:
     return {
       ...state,
       error: action.payload,
@@ -57,6 +59,17 @@ export const orgReducer = (state = initialState, action: tActionUnion) => {
   // separate case to force state update
   /* eslint-disable */
   case PATCH_ORG_SUCCESS: {
+    return {
+      ...state,
+      data: action.payload,
+      isLoading: false,
+    };
+  }
+  /* eslint-enable */
+
+  // separate case to force state update
+  /* eslint-disable */
+  case POST_ORG_SUCCESS: {
     return {
       ...state,
       data: action.payload,

@@ -30,7 +30,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
     title: '',
   };
 
-  // we use query params to populate the form when editing a draft
+  // we use query params to populate the form when editing an event
   componentDidMount() {
     const draft = qs.parse(this.props.router.search.split('?')[1]);
     if (!draft.id) return;
@@ -120,7 +120,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
         // every date is stored in the db as an ISO string
         date: date.toISOString(),
         endDate: endDate.toISOString(),
-        orgId: this.props.org.id,
+        orgId: this.props.org.id as number,
       });
 
       newEvent = createEvent.payload;

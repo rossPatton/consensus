@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import { IncomingMessage } from 'http';
+import {IncomingMessage} from 'http';
 import Koa from 'koa';
 import multer from 'koa-multer';
 import Router from 'koa-router';
@@ -21,9 +21,9 @@ interface tReq extends multer.MulterIncomingMessage {
 
 const storage = multer.diskStorage({
   destination: (req: IncomingMessage, _: multer.File, cb: multerCB) => {
-    const { _parsedUrl } = req as tReq;
-    const { query = '' } = _parsedUrl;
-    const { eventId } = qs.parse(query as string);
+    const {_parsedUrl} = req as tReq;
+    const {query = ''} = _parsedUrl;
+    const {eventId} = qs.parse(query as string);
     const destination = `${CWD}/static/images/eventImages/${eventId}`;
 
     mkdirp(destination, (err: Error) => {

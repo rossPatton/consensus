@@ -1,13 +1,19 @@
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {slugify } from '../../../../utils';
+import {objToQueryString, slugify} from '../../../../utils';
 import {tProps} from './_types';
 
 export const CityComponent = memo((props: tProps) => {
   const {city: cityObj, match} = props;
   const {city, region, country} = match.params;
   const urlPrefix = `/org/${country}/${region}/${city}`;
+  const newOrgQueryParams = {
+    ...match.params,
+    cityId: cityObj.id,
+    regionId: cityObj.region,
+    countryId: cityObj.country,
+  };
 
   return (
     <>
@@ -42,8 +48,8 @@ export const CityComponent = memo((props: tProps) => {
           {props.orgsToRender.length === 0 && 'No organizations found'}
         </h2>
         <Link
-          to="/createOrg"
-          className="fs6 brdA1 br4 p2 pL3 pR3 hvrBgGrey1 trans1 fx aiCtr lh1 noUnderline">
+          to={`/createOrg?${objToQueryString(newOrgQueryParams)}`}
+          className="noWrap fs6 brdA1 br4 p2 pL3 pR3 hvrBgGrey1 trans1 lh1 noUnderline">
           <span
             role="img"
             className="mR1"

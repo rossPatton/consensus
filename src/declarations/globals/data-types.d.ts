@@ -76,16 +76,16 @@ declare type tOrg = {
   email?: string, // user admin account only
   eventPrivacy: tGate,
   gate: tGate,
-  id: number,
+  id?: number,
   membershipTotal: number,
   name: string,
   password?: string, // never sent to client
-  role: tRole,
+  role?: tRole,
   slug: string,
   region: string,
   regionId: number,
   updatedAt?: string, // we dont send to client
-  username: string,
+  // username: string,
 };
 
 declare type tDirectoryParams = {

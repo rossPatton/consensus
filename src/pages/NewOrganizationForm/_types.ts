@@ -1,3 +1,5 @@
+import {Location} from 'history';
+
 export type tStore = {
   session: tThunk<tSession>,
 };
@@ -6,8 +8,9 @@ export type tStateUnion = keyof tOrg;
 export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export type tContainerProps = {
+  location: Location,
   org: tOrg,
-  patchOrg: (query: any) => any,
+  postOrg: (query: any) => any,
   session: tSession,
 };
 
