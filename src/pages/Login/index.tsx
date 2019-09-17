@@ -12,9 +12,9 @@ import {LoginComponent} from './Component';
 export class LoginContainer extends PureComponent<tProps, tState> {
   state = {
     isClient: false,
-    oEmail: '',
+    oLogin: '',
     oPassword: '',
-    uEmail: '',
+    uLogin: '',
     uPassword: '',
   };
 
@@ -27,14 +27,14 @@ export class LoginContainer extends PureComponent<tProps, tState> {
 
   userLogin = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {uEmail: email, uPassword: password} = this.state;
-    return this.props.authenticateSession({email, password});
+    const {uLogin: login, uPassword: password} = this.state;
+    return this.props.authenticateSession({login, password});
   }
 
   orgLogin = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {oEmail: email, oPassword: password} = this.state;
-    return this.props.authenticateSession({email, password});
+    const {oLogin: login, oPassword: password} = this.state;
+    return this.props.authenticateSession({login, password});
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
@@ -62,7 +62,8 @@ export class LoginContainer extends PureComponent<tProps, tState> {
         {!session.isAuthenticated && (
           <LoginComponent
             {...this.state}
-            login={this.login}
+            userLogin={this.userLogin}
+            orgLogin={this.orgLogin}
             updateState={this.updateState}
           />
         )}

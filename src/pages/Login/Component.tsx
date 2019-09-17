@@ -11,21 +11,21 @@ export const LoginComponent = memo((props: tComponentProps) => (
       name="userLoginForm"
       autoComplete="off"
       action="/auth/login"
-      onSubmit={props.login}>
+      onSubmit={props.orgLogin}>
       <fieldset>
         <legend className="mB3">
           <h1 className="fs2">User Login</h1>
         </legend>
-        <label htmlFor="uEmailInput">
+        <label htmlFor="uLoginInput">
           <h2 className="fs5 mB1 lh1">Email</h2>
           <input
             required
-            name="uEmail"
-            id="uEmailInput"
+            name="uLogin"
+            id="uLoginInput"
             placeholder="your@email.com"
             className="p3 row mB3"
-            value={props.uEmail}
-            onChange={ev => props.updateState('uEmail', ev)}
+            value={props.uLogin}
+            onChange={ev => props.updateState('uLogin', ev)}
           />
         </label>
         <PasswordInput
@@ -36,7 +36,7 @@ export const LoginComponent = memo((props: tComponentProps) => (
           onChange={ev => props.updateState('uPassword', ev)}
         />
         <button
-          disabled={props.isClient && (!props.uPassword || !props.uEmail)}
+          disabled={props.isClient && (!props.uPassword || !props.uLogin)}
           className="p3 pL4 pR4 hvrBgGrey1 trans1">
           Login
         </button>
@@ -48,21 +48,21 @@ export const LoginComponent = memo((props: tComponentProps) => (
       name="userLoginForm"
       autoComplete="off"
       action="/auth/login"
-      onSubmit={props.login}>
+      onSubmit={props.userLogin}>
       <fieldset>
         <legend className="mB3">
           <h1 className="fs2">Org Login</h1>
         </legend>
-        <label htmlFor="oEmailInput">
+        <label htmlFor="oLoginInput">
           <h2 className="ffLab fs5 mB1 lh1">Username</h2>
           <input
             required
-            id="oEmailInput"
-            name="oEmail"
+            id="oLoginInput"
+            name="oLogin"
             placeholder="org@email.com"
             className="p3 row mB3"
-            value={props.oEmail}
-            onChange={ev => props.updateState('oEmail', ev)}
+            value={props.oLogin}
+            onChange={ev => props.updateState('oLogin', ev)}
           />
         </label>
         <PasswordInput
@@ -73,7 +73,7 @@ export const LoginComponent = memo((props: tComponentProps) => (
           onChange={ev => props.updateState('oPassword', ev)}
         />
         <button
-          disabled={props.isClient && (!props.oPassword || !props.oEmail)}
+          disabled={props.isClient && (!props.oPassword || !props.oLogin)}
           className="p3 pL4 pR4 hvrBgGrey1 trans1">
         Login
         </button>

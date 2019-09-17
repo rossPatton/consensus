@@ -135,7 +135,7 @@ declare type tUserOrgRelation = tRoleMap & {
 
 // subset of user/org needed for login/authentication
 declare type tLogin = {
-  email: string,
+  login: string,
   password: string,
 };
 

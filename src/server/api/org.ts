@@ -114,8 +114,6 @@ org.patch(route, async (ctx: Koa.ParameterizedContext) => {
 org.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...org} = _.get(ctx, dataPath, {});
 
-  console.log('data => ', org);
-
   let newOrg: tOrg[];
   try {
     newOrg = await knex(table).insert(org).returning('*');

@@ -3,21 +3,38 @@ import passport from 'koa-passport';
 import Router from 'koa-router';
 import _ from 'lodash';
 
+import {knex} from '../db/connection';
+
 export const auth = new Router();
 
 auth.post('/auth/login', async (ctx: Koa.ParameterizedContext, next) =>
-  passport.authenticate('local', async (err: Error | null, unsafeUser: tUser) => {
+  passport.authenticate('local', async (err: Error | null, account: any) => {
     if (err) ctx.throw(400, err);
-    if (!unsafeUser) ctx.throw(400, 'User not found');
+    if (!account) ctx.throw(400, 'User not found');
 
-    console.log('unsafeUser => ', unsafeUser);
+    console.log('account => ', account);
 
-    await ctx.login(unsafeUser);
+    await ctx.login(account);
+
+    const {orgId, userId} = account;
+    let profile: any;
+    if (orgId) {
+      try {
+        profile = await knex('orgs').limit(1).where({id: orgId}).first();
+      } catch (err) {
+        ctx.throw(400, err);
+      }
+    } else if (userId) {
+      try {
+        profile = await knex('users').limit(1).where({id: userId}).first();
+      } catch (err) {
+        ctx.throw(400, err);
+      }
+    }
 
     // newSession === session.data on the client, redux adds loading/error keys
-    const {password, ...safeUser} = unsafeUser;
     const newSession: tSession = {
-      ...safeUser,
+      ...profile,
       isAuthenticated: ctx.isAuthenticated(),
     };
 

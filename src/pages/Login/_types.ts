@@ -5,15 +5,16 @@ export type tProps = {
 
 export type tState = {
   isClient: boolean,
-  oEmail: string,
+  oLogin: string,
   oPassword: string,
-  uEmail: string,
+  uLogin: string,
   uPassword: string,
 };
 
 export type tStateUnion = keyof tState;
 
 export type tComponentProps = tState & {
-  login: (ev: React.FormEvent<HTMLFormElement>) => void,
+  orgLogin: (ev: React.FormEvent<HTMLFormElement>) => void,
   updateState: (stateKey: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
+  userLogin: (ev: React.FormEvent<HTMLFormElement>) => void,
 }
