@@ -10,6 +10,7 @@ export { objToQueryString } from './objToQueryString';
 export { padDate } from './padDate';
 export { parseISOLocalString } from './parseISOLocalString';
 export { parseTimeString } from './parseTimeString';
+export { range } from './range';
 export { deSlugify, slugify } from './slugify';
 export { lowerCase, upperCase } from './string';
 export { utcToDateString } from './utcToDateString';

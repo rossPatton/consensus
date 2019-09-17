@@ -1,0 +1,47 @@
+require('dotenv').config();
+import bcrypt from 'bcryptjs';
+import faker from 'faker';
+import Knex from 'knex';
+
+import {range} from '../../../utils/range';
+import {encrypt, sha384} from '../../utils';
+
+// in production, salt would be generated per hash, but this saves time
+const salt = bcrypt.genSaltSync(10);
+
+const createUserAccount = async (i: number) => {
+  const sha = sha384(faker.internet.password());
+  const saltedHash = await bcrypt.hash(sha, salt);
+  const password = encrypt(saltedHash);
+
+  return {
+    login: faker.internet.userName(),
+    password,
+    userId: i,
+  };
+};
+
+const createTestUserAccount = async () => {
+  const sha = sha384('test');
+  const saltedHash = await bcrypt.hash(sha, salt);
+  const password = encrypt(saltedHash);
+
+  return {
+    login: faker.internet.userName(),
+    password,
+    userId: 100,
+  };
+};
+
+exports.seed = async (knex: Knex) => {
+  const fakeAccounts = [];
+
+  for await (const i of range(100, true)) {
+    fakeAccounts.push(await createUserAccount(i));
+  }
+
+  fakeAccounts.push(await createTestUserAccount());
+
+  await knex('accounts').del();
+  await knex('accounts').insert(fakeAccounts);
+};

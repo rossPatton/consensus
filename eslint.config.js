@@ -86,7 +86,7 @@ module.exports = {
     }],
     'eol-last': ERROR,
     'eqeqeq': ERROR,
-    'generator-star-spacing': ERROR,
+    'generator-star-spacing': [ERROR, {before: false, after: true}],
     'guard-for-in': ERROR,
     'handle-callback-err': ERROR,
     // unfortunately, this doesnt work very well with bundled types

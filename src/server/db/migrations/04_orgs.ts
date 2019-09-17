@@ -8,7 +8,6 @@ exports.up = async (knex: Knex) => {
     table.integer('membershipTotal').unsigned().notNullable().defaultTo(0);
     table.text('description', 'longtext').notNullable();
     table.string('name').notNullable().unique();
-    table.string('slug').notNullable();
 
     // gate is the best 1 word term i could think of for it
     // on user signup - do we gatekeep who can join or not?
