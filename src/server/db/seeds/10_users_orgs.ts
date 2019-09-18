@@ -25,8 +25,8 @@ const createUserOrgRelation = async (userId: number, orgId: number) => {
 exports.seed = async (knex: Knex) => {
   let fakeUserOrgRelations = [];
 
-  for await (const userId of range(100, true)) {
-    for await (const orgId of range(100, true)) {
+  for await (const userId of range(99, true)) {
+    for await (const orgId of range(99, true)) {
       fakeUserOrgRelations.push(await createUserOrgRelation(userId, orgId));
     }
   }

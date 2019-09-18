@@ -8,7 +8,7 @@ const env = require('./webpack.env');
 const srcPath = (subdir) => path.join(env.CWD, 'src', subdir);
 
 module.exports = {
-  devtool: env.DEV ? 'source-map' : undefined,
+  devtool: env.DEV ? 'inline-source-map' : undefined,
 
   // do it this way so that debug mode works
   mode: !env.PROD ? 'development' : 'production',

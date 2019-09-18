@@ -68,8 +68,6 @@ export const postOrg = memoize({ ttl: 300 }, (params: tOrgRouteParams) => {
       const {section, page, ...restParams} = params;
       const qs = objToQueryString(restParams);
 
-      console.log(`${prefix}?${qs}`);
-
       // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, {agent, method: 'POST'})
         .then((response: tFetchResponse) => {

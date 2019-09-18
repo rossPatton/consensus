@@ -13,9 +13,8 @@ import {
   tSuccessAction,
 } from './_types';
 
-export const authenticateBegin = (payload: tLogin): tBeginAction => ({
+export const authenticateBegin = (): tBeginAction => ({
   type: AUTHENTICATE_BEGIN,
-  payload,
 });
 
 export const authenticateSuccess = (payload: tSession): tSuccessAction => ({

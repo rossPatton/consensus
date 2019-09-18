@@ -10,7 +10,7 @@ const compiler = webpack(webpackConfig);
 const { publicPath } = webpackConfig[0].output;
 
 export const devServerMiddleware = async (app: Koa) => {
-  await app.use(c2k(devMiddleware(compiler, {
+  app.use(c2k(devMiddleware(compiler, {
     logLevel: 'warn',
     publicPath,
   })));

@@ -121,8 +121,6 @@ org.post(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  console.log('newOrg => ', newOrg);
-
   const {createdAt, email, password, updatedAt, ...safeOrg} = newOrg[0];
   ctx.body = safeOrg;
 });

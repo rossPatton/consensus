@@ -25,16 +25,18 @@ export class LoginContainer extends PureComponent<tProps, tState> {
     });
   }
 
+  // TODO work is needed now to make this work without js due to login stuff
+
   userLogin = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {uLogin: login, uPassword: password} = this.state;
-    return this.props.authenticateSession({login, password});
+    const {uLogin: username, uPassword: password} = this.state;
+    return this.props.authenticateSession({username, password});
   }
 
   orgLogin = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {oLogin: login, oPassword: password} = this.state;
-    return this.props.authenticateSession({login, password});
+    const {oLogin: username, oPassword: password} = this.state;
+    return this.props.authenticateSession({username, password});
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {

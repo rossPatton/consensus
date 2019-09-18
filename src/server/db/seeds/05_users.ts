@@ -7,7 +7,6 @@ import {range} from '../../../utils/range';
 const createUser = async () => ({
   email: faker.internet.exampleEmail(),
   fname: faker.name.firstName(),
-  isVerified: faker.random.boolean(),
   lname: faker.name.lastName(),
   phone: faker.phone.phoneNumber(),
   username: faker.internet.userName(),
@@ -17,16 +16,15 @@ const createTestUser = async () => ({
   city: 3658, // New York City
   email: 'test@test.com',
   fname: 'test',
-  isVerified: true,
   lname: 'user',
   phone: faker.phone.phoneNumber(),
-  username: 'testUser',
+  username: 'testUsername',
 });
 
 exports.seed = async (knex: Knex) => {
   const fakeUsers = [];
 
-  for await (const _ of range(100, true)) {
+  for await (const _ of range(99, true)) {
     fakeUsers.push(await createUser());
   }
 

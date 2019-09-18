@@ -8,11 +8,9 @@ import {knex} from '../db/connection';
 export const auth = new Router();
 
 auth.post('/auth/login', async (ctx: Koa.ParameterizedContext, next) =>
-  passport.authenticate('local', async (err: Error | null, account: any) => {
+  passport.authenticate('local', async (err: Error | null, account: tAccount) => {
     if (err) ctx.throw(400, err);
-    if (!account) ctx.throw(400, 'User not found');
-
-    console.log('account => ', account);
+    if (!account) ctx.throw(400, 'Account not found');
 
     await ctx.login(account);
 

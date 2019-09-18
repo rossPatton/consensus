@@ -6,7 +6,7 @@ export const LOG_OUT_BEGIN = 'LOG_OUT_BEGIN';
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
 export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
 
-export type tBeginAction = tAction<typeof AUTHENTICATE_BEGIN, tLogin>;
+export type tBeginAction = tAction<typeof AUTHENTICATE_BEGIN>;
 export type tSuccessAction = tAction<typeof AUTHENTICATE_SUCCESS, tSession>;
 export type tFailureAction = tAction<typeof AUTHENTICATE_FAILURE, Error>;
 export type tActionUnion = tBeginAction | tSuccessAction | tFailureAction;

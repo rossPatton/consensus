@@ -3,7 +3,7 @@ import loglevel from 'loglevel';
 
 // generic error-handler
 export const errorHandlerMiddleware = async (app: Koa) => {
-  await app.use(async (ctx, next) => {
+  app.use(async (ctx, next) => {
     try {
       await next();
     } catch (err) {

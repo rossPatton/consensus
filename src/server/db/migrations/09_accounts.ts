@@ -7,6 +7,8 @@ exports.up = async (knex: Knex) => {
     table.string('login').notNullable().unique();
     table.string('password').notNullable();
 
+    table.boolean('isVerified').defaultTo(false);
+
     // if user type
     table.integer('userId')
       .unique()

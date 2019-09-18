@@ -15,6 +15,7 @@ const createUserAccount = async (i: number) => {
   const password = encrypt(saltedHash);
 
   return {
+    isVerified: faker.random.boolean(),
     login: faker.internet.userName(),
     password,
     userId: i,
@@ -27,7 +28,8 @@ const createTestUserAccount = async () => {
   const password = encrypt(saltedHash);
 
   return {
-    login: faker.internet.userName(),
+    isVerified: true,
+    login: 'testAccount',
     password,
     userId: 100,
   };
@@ -36,7 +38,7 @@ const createTestUserAccount = async () => {
 exports.seed = async (knex: Knex) => {
   const fakeAccounts = [];
 
-  for await (const i of range(100, true)) {
+  for await (const i of range(99, true)) {
     fakeAccounts.push(await createUserAccount(i));
   }
 

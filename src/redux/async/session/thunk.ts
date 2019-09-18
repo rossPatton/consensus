@@ -11,13 +11,13 @@ import {
   logOutSuccess,
 } from './actions';
 
-export const authenticateSession = memoize({ttl: 300}, (user: tLogin) => {
+export const authenticateSession = memoize({ttl: 300}, (account: tLogin) => {
   return async function <S>(dispatch: Dispatch<S>) {
-    dispatch(authenticateBegin(user));
+    dispatch(authenticateBegin());
 
     try {
       const prefix = `${__URL__}/auth/login`;
-      const qs = objToQueryString(user);
+      const qs = objToQueryString(account);
 
       // we do it this way so errors can bubble properly to our middleware
       const result: tSession = await fetch(`${prefix}?${qs}`, {

@@ -133,9 +133,23 @@ declare type tUserOrgRelation = tRoleMap & {
   userId: number,
 }
 
+// accounts are currently of 2 types. users, and organization admins
+// we consolidate that in the accounts table, along with shared rows
+declare type tAccount = {
+  id: number,
+  login: string, // unique login value separate from username or email
+  orgId?: number,
+  password: string, // password goes here, but the referenced profile gets sent to client
+  userId?: number,
+  isVerified: boolean,
+};
+
 // subset of user/org needed for login/authentication
 declare type tLogin = {
-  login: string,
+  // passport is a fucking black box, and near impossible to debug
+  // so we decouple email/username from the login credentials
+  // we have to still call the form field 'username' here, or else passport doesnt work
+  username: string,
   password: string,
 };
 

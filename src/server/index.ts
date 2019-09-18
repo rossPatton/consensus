@@ -62,6 +62,7 @@ setupApi(app);
 
 // render the page
 app.use(async ctx => {
+  // ctx.status = 200;
   ctx.body = SSR(ctx);
 });
 

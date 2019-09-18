@@ -43,7 +43,7 @@ const createTWC = async () => ({
 exports.seed = async (knex: Knex) => {
   const fakeOrgs = [];
 
-  for await (const _ of range(100, true)) {
+  for await (const _ of range(99, true)) {
     fakeOrgs.push(await createOrg());
   }
 

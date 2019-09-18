@@ -6,29 +6,7 @@ import { isValidPw } from './utils';
 
 const opts = {};
 
-// we use user.id instead of the default of username here to serialize/deserialize
-// users should be able to change any of their personal info, including usernames
-// their internal id should be the only value that is constant
-
 passport.serializeUser(async (account: any, done) => {
-  // const {orgId, userId} = account;
-  // // TODO get actual account profile here
-
-  // let profile: any;
-  // if (orgId) {
-  //   try {
-  //     profile = await knex('orgs').limit(1).where({id: orgId}).first();
-  //   } catch (err) {
-  //     return done(err, false);
-  //   }
-  // } else if (userId) {
-  //   try {
-  //     profile = await knex('users').limit(1).where({id: userId}).first();
-  //   } catch (err) {
-  //     return done(err, false);
-  //   }
-  // }
-
   return done(null, account.id);
 });
 
@@ -42,8 +20,7 @@ passport.deserializeUser(async (id: number, done) => {
 });
 
 passport.use(new LocalStrategy(opts, async (login, pw, done) => {
-  console.log('arguments for passport => ', login, pw);
-  let account: any;
+  let account: tAccount;
   try {
     account = await knex('accounts').limit(1).where({login}).first();
   } catch (err) {

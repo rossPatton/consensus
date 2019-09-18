@@ -8,7 +8,7 @@ import _ from 'lodash';
 // in most cases, we still just use ctx.query but in others, we shoudl use
 // the normalized data object (when submitting a form basically)
 export const normalizeFormMiddleware = async (app: Koa) => {
-  await app.use((ctx, next) => {
+  app.use(async (ctx, next) => {
     const {query} = ctx;
     const {body, method} = ctx.request;
     const isFormSubmit = _.isEmpty(query) && !_.isEmpty(body);

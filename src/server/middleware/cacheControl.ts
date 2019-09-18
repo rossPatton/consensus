@@ -6,7 +6,7 @@ export const cacheControlMiddleware = async (app: Koa) => {
   await cacheControl(app);
 
   // set Cache-Control time, dont cache during development
-  await app.use(async (ctx, next) => {
+  app.use(async (ctx, next) => {
     const timeToCache = __PROD__ ? '6 months' : false;
     ctx.cacheControl(timeToCache);
     await next();

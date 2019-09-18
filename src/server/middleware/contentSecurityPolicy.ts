@@ -4,7 +4,7 @@ import koaHelmet, { KoaHelmetContentSecurityPolicyConfiguration } from 'koa-helm
 // only allow assets served from our origin or a trusted cdn
 // required nonces for any inline scripts and SRI for cdns to verify integrity
 export const contentSecurityPolicyMiddleware = async (app: Koa) => {
-  app.use((ctx, next) => {
+  app.use(async (ctx, next) => {
     const directives = __DEV__ ?
       ["'self'", '0.0.0.0:*', '127.0.0.1:*', 'localhost:*'] :
       ["'self'"];

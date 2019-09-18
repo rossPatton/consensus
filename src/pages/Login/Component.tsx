@@ -11,16 +11,16 @@ export const LoginComponent = memo((props: tComponentProps) => (
       name="userLoginForm"
       autoComplete="off"
       action="/auth/login"
-      onSubmit={props.orgLogin}>
+      onSubmit={props.userLogin}>
       <fieldset>
         <legend className="mB3">
-          <h1 className="fs2">User Login</h1>
+          <h2>User Login</h2>
         </legend>
         <label htmlFor="uLoginInput">
-          <h2 className="fs5 mB1 lh1">Email</h2>
+          <h3 className="mB1 lh1">Account Name</h3>
           <input
             required
-            name="uLogin"
+            name="username" // for non-js submit and passportjs
             id="uLoginInput"
             placeholder="your@email.com"
             className="p3 row mB3"
@@ -45,20 +45,20 @@ export const LoginComponent = memo((props: tComponentProps) => (
     <form
       method="POST"
       className="col p4 br8 brdA1 mL2"
-      name="userLoginForm"
+      name="orgLoginForm"
       autoComplete="off"
       action="/auth/login"
-      onSubmit={props.userLogin}>
+      onSubmit={props.orgLogin}>
       <fieldset>
         <legend className="mB3">
-          <h1 className="fs2">Org Login</h1>
+          <h2>Org Login</h2>
         </legend>
         <label htmlFor="oLoginInput">
-          <h2 className="ffLab fs5 mB1 lh1">Username</h2>
+          <h3 className="mB1 lh1">Account Name</h3>
           <input
             required
             id="oLoginInput"
-            name="oLogin"
+            name="username" // for non-js submit and passportjs
             placeholder="org@email.com"
             className="p3 row mB3"
             value={props.oLogin}
@@ -75,7 +75,7 @@ export const LoginComponent = memo((props: tComponentProps) => (
         <button
           disabled={props.isClient && (!props.oPassword || !props.oLogin)}
           className="p3 pL4 pR4 hvrBgGrey1 trans1">
-        Login
+          Login
         </button>
       </fieldset>
     </form>
