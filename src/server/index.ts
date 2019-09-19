@@ -62,7 +62,7 @@ setupApi(app);
 
 // render the page
 app.use(async ctx => {
-  // ctx.status = 200;
+  ctx.status = 200; // TODO koa handles status codes badly, handle better
   ctx.body = SSR(ctx);
 });
 

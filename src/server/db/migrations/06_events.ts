@@ -8,7 +8,9 @@ exports.up = async (knex: Knex) => {
     // id so we can look up whatever we need if necessary
     // name because 90% of the time that's all we need
     // TODO - eventually, events should be searchable by city/state, etc
-    table.integer('orgId').notNullable().references('orgs.id')
+    table.integer('orgId')
+      .notNullable()
+      .references('orgs.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
@@ -31,8 +33,10 @@ exports.up = async (knex: Knex) => {
     // it is not used when rendering events - but still needed
     // default 2 hours event duration, used to calculate endDate along with time
     table.integer('duration').defaultTo(2);
+
     // ref to where img lives on file server. only created if image is uploaded
     table.string('pathToFeaturedImage');
+
     // time of day the event occurs. used to calculate endDate along with duration
     table.string('time').notNullable().defaultTo('19:00');
 

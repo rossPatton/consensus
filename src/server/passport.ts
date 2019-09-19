@@ -19,6 +19,8 @@ passport.deserializeUser(async (id: number, done) => {
   }
 });
 
+// due to stupid passportjs limitations, the login value here has to be set as
+// 'username' in the login form. but it cooresponds to the login value in accounts
 passport.use(new LocalStrategy(opts, async (login, pw, done) => {
   let account: tAccount;
   try {

@@ -7,7 +7,7 @@ exports.up = async (knex: Knex) => {
     table.string('category').notNullable();
     table.integer('membershipTotal').unsigned().notNullable().defaultTo(0);
     table.text('description', 'longtext').notNullable();
-    table.string('name').notNullable().unique();
+    table.string('name').notNullable();
     table.string('slug').notNullable();
 
     // gate is the best 1 word term i could think of for it
@@ -29,15 +29,21 @@ exports.up = async (knex: Knex) => {
     table.string('region').notNullable();
 
     // for ease of lookup later if need be
-    table.integer('cityId').notNullable().references('cities.id')
+    table.integer('cityId')
+      .notNullable()
+      .references('cities.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
-    table.integer('countryId').notNullable().references('countries.id')
+    table.integer('countryId')
+      .notNullable()
+      .references('countries.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
-    table.integer('regionId').notNullable().references('regions.id')
+    table.integer('regionId')
+      .notNullable()
+      .references('regions.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 

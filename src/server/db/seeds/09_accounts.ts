@@ -35,6 +35,19 @@ const createTestUserAccount = async () => {
   };
 };
 
+const createTestOrgAccount = async () => {
+  const sha = sha384('test');
+  const saltedHash = await bcrypt.hash(sha, salt);
+  const password = encrypt(saltedHash);
+
+  return {
+    isVerified: true,
+    login: 'twcNYC',
+    orgId: 100,
+    password,
+  };
+};
+
 exports.seed = async (knex: Knex) => {
   const fakeAccounts = [];
 
@@ -43,6 +56,7 @@ exports.seed = async (knex: Knex) => {
   }
 
   fakeAccounts.push(await createTestUserAccount());
+  fakeAccounts.push(await createTestOrgAccount());
 
   await knex('accounts').del();
   await knex('accounts').insert(fakeAccounts);
