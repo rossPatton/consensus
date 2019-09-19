@@ -5,7 +5,7 @@ import {Dispatch} from 'redux';
 
 import {Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
-import {authenticateSession} from '../../redux';
+import {authenticateSession, getRoles} from '../../redux';
 import {tProps, tState, tStateUnion} from './_types';
 import {LoginComponent} from './Component';
 
@@ -30,7 +30,11 @@ export class LoginContainer extends PureComponent<tProps, tState> {
   userLogin = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const {uLogin: username, uPassword: password} = this.state;
-    return this.props.authenticateSession({username, password});
+    return this.props
+      .authenticateSession({username, password})
+      // @ts-ignore
+      .then(res => this.props.getRoles({id: res.payload.id as number}))
+      .catch(console.error);
   }
 
   orgLogin = async (ev: React.FormEvent<HTMLFormElement>) => {
@@ -80,6 +84,7 @@ const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
+  getRoles: (query: any) => dispatch(getRoles(query)),
 });
 
 export const Login = connect(

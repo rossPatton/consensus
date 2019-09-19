@@ -1,7 +1,7 @@
 import {
-  GET_ROLE_BEGIN,
-  GET_ROLE_FAILURE,
-  GET_ROLE_SUCCESS,
+  GET_ROLES_BEGIN,
+  GET_ROLES_FAILURE,
+  GET_ROLES_SUCCESS,
   SET_ROLE,
   tBeginAction,
   tFailureAction,
@@ -9,16 +9,16 @@ import {
 } from './_types';
 
 export const getRoleBegin = (): tBeginAction => ({
-  type: GET_ROLE_BEGIN,
+  type: GET_ROLES_BEGIN,
 });
 
 export const getRoleSuccess = (payload: any): tSuccessAction => ({
-  type: GET_ROLE_SUCCESS,
+  type: GET_ROLES_SUCCESS,
   payload,
 });
 
 export const getRoleFailure = (payload: Error): tFailureAction => ({
-  type: GET_ROLE_FAILURE,
+  type: GET_ROLES_FAILURE,
   payload,
 });
 

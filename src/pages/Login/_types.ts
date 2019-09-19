@@ -1,5 +1,7 @@
 export type tProps = {
-  authenticateSession: (arg: tLogin) => tAction<'AUTHENTICATE_USER_SUCCESS', tUser>,
+  authenticateSession: (arg: tLogin) => Promise<
+    tAction<'AUTHENTICATE_USER_SUCCESS', tUser>
+  >,
   session: tSession,
 };
 

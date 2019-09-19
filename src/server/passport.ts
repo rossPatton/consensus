@@ -1,19 +1,19 @@
 import passport from 'koa-passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 
-import { knex } from './db/connection';
-import { isValidPw } from './utils';
+import {knex} from './db/connection';
+import {isValidPw} from './utils';
 
 const opts = {};
 
 passport.serializeUser(async (account: any, done) => {
-  return done(null, account.id);
+  return done(null, account);
 });
 
-passport.deserializeUser(async (id: number, done) => {
+passport.deserializeUser(async (account: any, done) => {
   try {
-    const account: any = await knex('accounts').limit(1).where({id}).first();
-    return done(null, account);
+    const row: any = await knex('accounts').limit(1).where({id: account.id}).first();
+    return done(null, row);
   } catch (err) {
     return done(err, null);
   }
@@ -27,6 +27,13 @@ passport.use(new LocalStrategy(opts, async (login, pw, done) => {
     account = await knex('accounts').limit(1).where({login}).first();
   } catch (err) {
     return done(err, false);
+  }
+
+  if (!account) {
+    return done({
+      message: 'No account found that matches your login',
+      type: 'login',
+    }, false);
   }
 
   // if passwords match, return the user

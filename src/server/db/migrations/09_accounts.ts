@@ -6,7 +6,6 @@ exports.up = async (knex: Knex) => {
 
     table.string('login').notNullable().unique();
     table.string('password').notNullable();
-
     table.boolean('isVerified').defaultTo(false);
 
     // if user type
@@ -23,6 +22,8 @@ exports.up = async (knex: Knex) => {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
+    table.timestamp('createdAt').defaultTo(knex.fn.now());
+    table.timestamp('updatedAt').defaultTo(knex.fn.now());
     table.timestamp('lastActive').defaultTo(knex.fn.now());
   });
 };

@@ -34,6 +34,7 @@ auth.post('/auth/login', async (ctx: Koa.ParameterizedContext, next) =>
     const newSession: tSession = {
       ...profile,
       isAuthenticated: ctx.isAuthenticated(),
+      type: orgId ? 'org' : 'user',
     };
 
     const {isFormSubmit} = ctx.state.locals.data;

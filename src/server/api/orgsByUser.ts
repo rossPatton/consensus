@@ -6,14 +6,15 @@ import { knex } from '../db/connection';
 
 export const orgsByUser = new Router();
 const route = '/api/v1/orgsByUser';
-const table = 'users_orgs';
+const table = 'accounts_roles';
 
 orgsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const userId = _.get(ctx, 'state.user.id', 0);
+  // user account id that cooresponds to row in accounts_roles
+  const accountId = _.get(ctx, 'state.user.id', 0);
 
   let userOrgRels: tUserOrgRelation[];
   try {
-    userOrgRels = await knex(table).where({userId});
+    userOrgRels = await knex(table).where({accountId});
   } catch (err) {
     return ctx.throw(400, err);
   }

@@ -1,12 +1,12 @@
 import { Dispatch } from 'redux';
 import { memoize } from 'redux-memoize';
 
-import { agent, objToQueryString } from '../../../utils';
+import {agent, objToQueryString} from '../../../utils';
 import {getRoleBegin, getRoleFailure, getRoleSuccess} from './actions';
 
-const prefix = `${__URL__}/api/v1/role`;
+const prefix = `${__URL__}/api/v1/roles`;
 
-export const getRole = memoize({ttl: 300}, (query: any) => {
+export const getRoles = memoize({ttl: 300}, (query: any) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getRoleBegin());
 

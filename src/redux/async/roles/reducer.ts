@@ -1,7 +1,7 @@
 import {
-  GET_ROLE_BEGIN,
-  GET_ROLE_FAILURE,
-  GET_ROLE_SUCCESS,
+  GET_ROLES_BEGIN,
+  GET_ROLES_FAILURE,
+  GET_ROLES_SUCCESS,
   SET_ROLE,
   tActionUnion,
 } from './_types';
@@ -9,26 +9,26 @@ import {
 const initialState: tThunk<any> = {
   error: null,
   isLoading: false,
-  data: null,
+  data: [],
 };
 
 export const roleReducer = (state = initialState, action: tActionUnion) => {
   switch (action.type) {
-  case GET_ROLE_BEGIN:
+  case GET_ROLES_BEGIN:
     return {
       ...state,
       error: null,
       isLoading: true,
     };
 
-  case GET_ROLE_SUCCESS:
+  case GET_ROLES_SUCCESS:
     return {
       ...state,
-      data: action.payload.role,
+      data: action.payload,
       isLoading: false,
     };
 
-  case GET_ROLE_FAILURE:
+  case GET_ROLES_FAILURE:
     return {
       data: null,
       error: action.payload,

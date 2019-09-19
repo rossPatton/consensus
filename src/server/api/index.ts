@@ -14,7 +14,7 @@ import { orgById } from './orgById';
 import { orgsByUser } from './orgsByUser';
 import { region } from './region';
 import { reportUri } from './reportUri';
-import { role } from './role';
+import { roles } from './roles';
 import { rsvp } from './rsvp';
 import { rsvps } from './rsvps';
 import { user } from './user';
@@ -35,7 +35,7 @@ export const setupApi = (app: Koa) => {
   app.use(orgsByUser.routes());
   app.use(region.routes());
   app.use(reportUri.routes());
-  app.use(role.routes());
+  app.use(roles.routes());
   app.use(rsvp.routes());
   app.use(rsvps.routes());
   app.use(user.routes());
@@ -61,7 +61,7 @@ export const setupApi = (app: Koa) => {
   app.use(orgsByUser.allowedMethods(opts));
   app.use(region.allowedMethods(opts));
   app.use(reportUri.allowedMethods(opts));
-  app.use(role.allowedMethods(opts));
+  app.use(roles.allowedMethods(opts));
   app.use(rsvp.allowedMethods(opts));
   app.use(rsvps.allowedMethods(opts));
   app.use(user.allowedMethods(opts));

@@ -43,24 +43,9 @@ usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  const usersWithRoles = await Promise.all(users.map(async user => {
-    const idSet = _.find(userOrgRels, userOrgRel => user.id === userOrgRel.userId);
-
-    if (!idSet) return null;
-
-    return {
-      ...user,
-      role: idSet.role,
-    };
-  }).filter(notNull));
-
-  if (usersWithRoles instanceof Array && usersWithRoles.length === 0) {
-    return ctx.throw(204);
-  }
-
   ctx.body = {
     userTotal: mappedIds.length,
-    users: usersWithRoles,
+    users: users,
   };
 });
 

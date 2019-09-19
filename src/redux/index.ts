@@ -1,7 +1,7 @@
 // exports actions/thunks here for easier importing
 
 // sync actions here
-export { setRole } from './async/role/actions';
+export { setRole } from './async/roles/actions';
 export { setUserByOrg } from './async/usersByOrg/actions';
 
 // async thunks here
@@ -16,7 +16,7 @@ export { deleteEvent, getEvents, getEventsByUser } from './async/events/thunk';
 export { getOrg, patchOrg, postOrg } from './async/org/thunk';
 export { deleteOrgByUser, getOrgsByUser } from './async/orgs/thunk';
 export { getRegion } from './async/region/thunk';
-export { getRole } from './async/role/thunk';
+export { getRoles } from './async/roles/thunk';
 export { getRsvps, setRsvp } from './async/rsvps/thunk';
 export { getUsers } from './async/users/thunk';
 export { deleteUserByOrg, getUsersByOrg, patchUserByOrg, postNewUserByOrg } from './async/usersByOrg/thunk';

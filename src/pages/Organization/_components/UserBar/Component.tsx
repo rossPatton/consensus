@@ -12,20 +12,20 @@ import {tProps} from './_types';
 export const UserBarComponent = memo((props: tProps) => (
   <div
     className={cx('fs6 lh1 pT3 pB3 mB4 brdB1', {
-      bgYellowLite: !props.org.role,
-      bgGreenLite: props.org.role === 'member',
-      bgBlueLite: props.org.role === 'admin',
+      bgYellowLite: props.role === 'member',
+      bgGreenLite: props.role === 'facilitator',
+      bgBlueLite: props.role === 'admin',
     })}>
     <ul className="contain fx fxWrap aiCtr">
       <li className="fx aiCtr cap">
         <JoinForm
-          role={props.org.role}
+          role={props.role}
           session={props.session}
         />
       </li>
       <li className="mR2 fx aiCtr">
         <a title="Click to see list of online members" href="filler">
-            89 members online now
+          89 members online now
         </a>
       </li>
       {props.usersByOrg.userTotal && (
@@ -35,21 +35,23 @@ export const UserBarComponent = memo((props: tProps) => (
           </a>
         </li>
       )}
-      {props.org.role === 'admin' && (
+      {props.role && props.role !== 'member' && (
         <ul className="fx col jcEnd fs6">
           <li className="mR2 brdA1 p1 br4 bgWhite pL2 pR2 trans1">
             <Link to="createEvent">
-                Create Event
+              Create Event
             </Link>
           </li>
           <li className="brdA1 p1 br4 bgWhite pL2 pR2 mR2">
-              Make a Decision
+            Make a Decision
           </li>
-          <li className="brdA1 p1 br4 bgWhite pL2 pR2">
-            <Link to="manageOrganization">
-                Manage Group
-            </Link>
-          </li>
+          {props.role === 'admin' && (
+            <li className="brdA1 p1 br4 bgWhite pL2 pR2">
+              <Link to="manageOrganization">
+              Manage Group
+              </Link>
+            </li>
+          )}
         </ul>
       )}
     </ul>
