@@ -67,7 +67,7 @@ export class NewOrganizationContainer extends Component<tContainerProps, tState>
             { property: 'og:description', content: '' },
           ]}
         />
-        {!session.isAuthenticated && <Redirect to="" />}
+        {!session.isAuthenticated && <Redirect to="/login" />}
         {session.isAuthenticated && (
           <NewOrganizationComponent
             {...this.props}

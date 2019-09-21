@@ -3,7 +3,7 @@ import passport from 'koa-passport';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {knex} from '../db/connection';
+import {getSession} from '../queries';
 
 export const auth = new Router();
 
@@ -14,33 +14,11 @@ auth.post('/auth/login', async (ctx: Koa.ParameterizedContext, next) =>
 
     await ctx.login(account);
 
-    const {orgId, userId} = account;
-    let profile: any;
-    if (orgId) {
-      try {
-        profile = await knex('orgs').limit(1).where({id: orgId}).first();
-      } catch (err) {
-        ctx.throw(400, err);
-      }
-    } else if (userId) {
-      try {
-        profile = await knex('users').limit(1).where({id: userId}).first();
-      } catch (err) {
-        ctx.throw(400, err);
-      }
-    }
-
-    // newSession === session.data on the client, redux adds loading/error keys
-    const newSession: tSession = {
-      ...profile,
-      isAuthenticated: ctx.isAuthenticated(),
-      type: orgId ? 'org' : 'user',
-    };
-
     const {isFormSubmit} = ctx.state.locals.data;
     if (isFormSubmit) return ctx.redirect('/admin/profile');
 
-    ctx.body = newSession;
+    const session = await getSession(ctx, account);
+    ctx.body = session.data;
   })(ctx, next));
 
 // logout just clears the session basically, doesnt matter how you logged in

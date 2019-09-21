@@ -160,7 +160,6 @@ declare type tCrumb = {
 // tSession is like tUser, but with auth data and everything is optional
 // since a user might not be logged in
 declare type tSession = {
-  id?: number | string,
   isAuthenticated?: boolean,
   createdAt?: string,
   email?: string,
@@ -168,14 +167,13 @@ declare type tSession = {
   hasAvatar?: boolean,
   lastActive?: string,
   lname?: string,
-   // we dont want to include the pw client side, generally
-  password?: string,
   // simple map of org ids and role types to determine level of access for user
   roles?: tRoleMap[],
   rsvps?: {
     eventId: number,
     rsvp: boolean,
   }[],
+  type: 'org' | 'user',
   updatedAt?: string,
   username?: string,
 };

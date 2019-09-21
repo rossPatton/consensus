@@ -2,8 +2,8 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {notNull} from '../../utils';
 import {knex} from '../db/connection';
+import {getUsersByOrgId} from '../queries';
 
 export const usersByOrg = new Router();
 const route = '/api/v1/usersByOrg';
@@ -13,56 +13,7 @@ const state = 'state.locals.data';
 usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
   const data = _.get(ctx, state, {});
   const {id: orgId} = data;
-
-  const userOrgRelsStream = knex(table).where({orgId}).stream();
-  const userOrgRels: tUserOrgRelation[] = [];
-  try {
-    for await (const chunk of userOrgRelsStream) {
-      userOrgRels.push(chunk);
-    }
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
-
-  let mappedIds: number[];
-  try {
-    mappedIds = await Promise.all(userOrgRels.map(async idSet => idSet.userId));
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
-
-  // use the returned ids to query users table
-  const usersStream = knex('users').whereIn('id', mappedIds).stream();
-  const users: tUser[] = [];
-  try {
-    for await (const chunk of usersStream) {
-      users.push(chunk);
-    }
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
-
-  let accountRoles: tUserOrgRelation[];
-  try {
-    accountRoles = await knex('accounts_roles').where({orgId});
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
-
-  // TODO refactor where we add role all over the place
-  const usersWithRole = await Promise.all(users.map(async user => {
-    const roleRel = _.find(accountRoles, rel => rel.userId === user.id);
-
-    return {
-      ...user,
-      role: roleRel ? roleRel.role : null,
-    };
-  }));
-
-  ctx.body = {
-    userTotal: mappedIds.length,
-    users: usersWithRole,
-  };
+  ctx.body = await getUsersByOrgId(ctx, orgId);
 });
 
 usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {

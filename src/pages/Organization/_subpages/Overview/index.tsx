@@ -17,7 +17,6 @@ export class OverviewContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    console.log('all props for overview => ', this.props);
     return (
       <>
         <Helmet

@@ -6,7 +6,6 @@ import { tComponentProps } from './_types';
 
 export const OverviewComponent = memo((props: tComponentProps) => (
   <>
-    {console.log('props => ', props)}
     <div className="mB4">
       <h2 className="mB2">Mission Statement</h2>
       <p>{props.org.description}</p>

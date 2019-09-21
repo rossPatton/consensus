@@ -3,6 +3,7 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import { knex } from '../db/connection';
+import { getUserByQuery } from '../queries';
 import { encrypt, isValidPw, saltedHash } from '../utils';
 
 export const user = new Router();
@@ -10,12 +11,8 @@ const route = '/api/v1/user';
 const table = 'users';
 
 user.get(route, async (ctx: Koa.ParameterizedContext) => {
-  try {
-    const user: tUser = await knex(table).limit(1).where(ctx.query).first();
-    ctx.body = user;
-  } catch (err) {
-    ctx.throw(400, err);
-  }
+  const data = _.get(ctx, 'state.locals.data', {});
+  return getUserByQuery(ctx, data);
 });
 
 // user signup form basically

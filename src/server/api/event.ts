@@ -2,7 +2,8 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import { knex } from '../db/connection';
+import {knex} from '../db/connection';
+import {getEventByQuery} from '../queries';
 
 export const event = new Router();
 
@@ -11,32 +12,8 @@ export const event = new Router();
 // route example: event/eventId
 event.get('/api/v1/event', async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, 'state.locals.data', {});
-  const userId = _.get(ctx, 'state.user.id', 0);
-
-  let event: tEvent;
-  try {
-    event = await knex('events')
-      .limit(1)
-      .where(query)
-      .first();
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
-
-  let userEventRel: tUserEventRelation;
-  try {
-    userEventRel = await knex('users_events')
-      .limit(1)
-      .where({userId, eventId: event.id})
-      .first();
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
-
-  ctx.body = {
-    ...event,
-    rsvp: userEventRel.rsvp,
-  };
+  const event = await getEventByQuery(ctx, query);
+  ctx.body = event;
 });
 
 // create a new event
