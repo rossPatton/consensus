@@ -7,10 +7,10 @@ import {Dispatch} from 'redux';
 import {Helmet} from '../../components';
 import {postOrg} from '../../redux';
 import {slugify} from '../../utils';
-import {tContainerProps, tStateUnion, tStore} from './_types';
+import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 import {NewOrganizationComponent} from './Component';
 
-export class NewOrganizationContainer extends Component<tContainerProps, tOrg> {
+export class NewOrganizationContainer extends Component<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
 
@@ -26,6 +26,7 @@ export class NewOrganizationContainer extends Component<tContainerProps, tOrg> {
       email: '',
       eventPrivacy: 'manual' as tGate,
       gate: 'manual' as tGate,
+      login: '',
       membershipTotal: 0,
       name: '',
       password: '',
@@ -48,7 +49,7 @@ export class NewOrganizationContainer extends Component<tContainerProps, tOrg> {
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
     this.setState({
       [stateKey]: ev.currentTarget.value,
-    } as Pick<tOrg, tStateUnion>);
+    } as Pick<tState, tStateUnion>);
   }
 
   render() {
@@ -72,8 +73,6 @@ export class NewOrganizationContainer extends Component<tContainerProps, tOrg> {
             {...this.props}
             {...this.state}
             onSubmit={this.onSubmit}
-            // setImage={this.setImage}
-            // toggleChecked={this.toggleChecked}
             updateState={this.updateState}
           />
         )}

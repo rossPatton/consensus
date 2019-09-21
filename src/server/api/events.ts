@@ -74,6 +74,8 @@ events.get(route, async (ctx: Koa.ParameterizedContext) => {
       if (userOrgRel.role === null) return null;
     }
 
+    if (ev.isDraft && !isAuthenticated) return null;
+
     const rsvpObj = _.find(
       userEventsRels,
       rel => rel.eventId === ev.id && rel.userId === userId,

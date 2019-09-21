@@ -6,6 +6,7 @@ import { tComponentProps } from './_types';
 
 export const OverviewComponent = memo((props: tComponentProps) => (
   <>
+    {console.log('props => ', props)}
     <div className="mB4">
       <h2 className="mB2">Mission Statement</h2>
       <p>{props.org.description}</p>
@@ -13,7 +14,7 @@ export const OverviewComponent = memo((props: tComponentProps) => (
     {props.events.length > 0 && (
       <div className="mB4">
         <h2 className="mB2">Upcoming Events</h2>
-        <Events events={props.events} />
+        <Events events={props.events} role={props.role} />
         <Link to="/events" className="fs6 fw600 mB3">
           See All Events
         </Link>

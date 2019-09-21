@@ -83,7 +83,7 @@ org.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  const {createdAt, email, password, updatedAt, ...safeOrg} = org;
+  const {createdAt, email, updatedAt, ...safeOrg} = org;
 
   const orgWithRole = {
     ...safeOrg,
@@ -107,7 +107,7 @@ org.patch(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  const {createdAt, email, password, updatedAt, ...safeOrg} = updatedOrg[0];
+  const {createdAt, email, updatedAt, ...safeOrg} = updatedOrg[0];
   ctx.body = safeOrg;
 });
 
@@ -121,6 +121,6 @@ org.post(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  const {createdAt, email, password, updatedAt, ...safeOrg} = newOrg[0];
+  const {createdAt, email, updatedAt, ...safeOrg} = newOrg[0];
   ctx.body = safeOrg;
 });

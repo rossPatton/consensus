@@ -44,6 +44,7 @@ export class EventsContainer extends Component<tContainerProps> {
               render={(itemsToRender: tEvent[]) => (
                 <EventsComponent
                   events={itemsToRender}
+                  role={this.props.role}
                 />
               )}
             />

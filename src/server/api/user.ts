@@ -12,8 +12,7 @@ const table = 'users';
 user.get(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     const user: tUser = await knex(table).limit(1).where(ctx.query).first();
-    const { password, ...safeUserForClient } = user;
-    ctx.body = safeUserForClient;
+    ctx.body = user;
   } catch (err) {
     ctx.throw(400, err);
   }
@@ -45,9 +44,7 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
   }
 
   if (!data.isFormSubmit) {
-    const { password, ...safeUserForClient } = userResult[0];
-    ctx.status = 200;
-    ctx.body = safeUserForClient;
+    ctx.body = userResult[0];
     return;
   }
 
@@ -89,9 +86,8 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
   if (data.isFormSubmit) return;
 
-  const {password, ...safeUserForClient} = updatedUser[0];
   ctx.body = {
-    ...safeUserForClient,
+    ...updatedUser[0],
     isAuthenticated: ctx.isAuthenticated(),
   };
 

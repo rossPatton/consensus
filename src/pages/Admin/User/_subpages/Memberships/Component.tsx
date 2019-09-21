@@ -22,15 +22,16 @@ export const MembershipsComponent = memo((props: tComponentProps) => (
       />
     </label>
     <ul>
-      {props.orgs.map((org: tOrg, i) => (
+      {props.orgs.map((org: tOrg & {role: tRole}, i) => (
         <li
           key={i}
           className="brdA1 br8 mB3">
           <div
             className={cx({
               'fx aiCtr fs6 p2 pL3 pR3 brdB1': true,
+              bgYellowLite: org.role === 'member',
+              bgGreenLite: org.role === 'facilitator',
               bgBlueLite: org.role === 'admin',
-              bgGreenLite: org.role === 'member',
             })}>
             <div className="fx aiCtr col">
               <span className="ttCap mR3">

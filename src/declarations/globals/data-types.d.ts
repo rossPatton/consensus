@@ -76,16 +76,13 @@ declare type tOrg = {
   email?: string, // user admin account only
   eventPrivacy: tGate,
   gate: tGate,
-  id?: number,
+  id: number,
   membershipTotal: number,
   name: string,
-  password?: string, // never sent to client
-  role?: tRole,
   slug: string,
   region: string,
   regionId: number,
   updatedAt?: string, // we dont send to client
-  // username: string,
 };
 
 declare type tDirectoryParams = {
@@ -107,9 +104,7 @@ declare type tUser = {
   email: string,
   fname: string,
   lname: string,
-  password: string,
   username: string,
-  role: tRole,
 };
 
 declare type tUserEventRelation = {
@@ -122,7 +117,7 @@ declare type tUserEventRelation = {
 // member => can RSVP to events, partake in decisions
 // facilitator => can create events, decisions
 // admin => can do all the above plus manage the group
-declare type tRole = 'member' | 'facilitator' | 'admin' | 'n/a';
+declare type tRole = 'member' | 'facilitator' | 'admin';
 declare type tRoleMap = {
   orgId: number,
   role: tRole,

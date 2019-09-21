@@ -30,6 +30,13 @@ export const initStoreForSSR = async (ctx: Koa.ParameterizedContext) => {
     }
   }
 
+  let roleRows: tRoleMap[];
+  try {
+    roleRows = await knex('accounts_roles').where({accountId: accountSession.id});
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
+
   // newSession === session.data on the client, redux adds loading/error keys
   const newSession: tSession = {
     ...profile,
@@ -44,6 +51,12 @@ export const initStoreForSSR = async (ctx: Koa.ParameterizedContext) => {
     data: newSession,
   };
 
+  const roles = {
+    error: null,
+    isLoading: false,
+    data: roleRows,
+  };
+
   // generate the initial state from our Redux store, with our new defaults
-  return initStore({session});
+  return initStore({roles, session});
 };

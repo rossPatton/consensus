@@ -5,7 +5,7 @@ import {Dispatch} from 'redux';
 import {Paginate} from '../../../../../containers';
 import {deleteOrgByUser, getOrgsByUser} from '../../../../../redux';
 import {fuzzFilterList} from '../../../../../utils';
-import {tContainerProps, tState, tStore} from './_types';
+import {tContainerProps, tOrgWithRole, tState, tStore} from './_types';
 import {MembershipsComponent} from './Component';
 
 class MembershipsContainer extends PureComponent<tContainerProps, tState> {
@@ -37,10 +37,10 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
     });
   }
 
-  sortOrgs(orgs: tOrg[]) {
+  sortOrgs(orgs: tOrgWithRole[]) {
     return orgs.sort((a, b) => {
-      const aIsAdmin = a.role === 'admin';
-      const bIsAdmin = b.role === 'admin';
+      const aIsAdmin = a.role === 'facilitator';
+      const bIsAdmin = b.role === 'facilitator';
       if (aIsAdmin && !bIsAdmin) return -1;
       if (bIsAdmin && !aIsAdmin) return 1;
       return 0;
@@ -56,7 +56,7 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
       <Paginate
         items={orgsToRender}
         match={this.props.match}
-        render={(itemsToRender: tOrg[]) => (
+        render={(itemsToRender: tOrgWithRole[]) => (
           <MembershipsComponent
             deleteOrgByUser={this.deleteOrgByUser}
             onSearchChange={this.onSearchChange}

@@ -29,7 +29,6 @@ const initialState: tThunk<tOrg> = {
     name: '',
     region: '',
     regionId: 0,
-    role: 'n/a',
     slug: '',
   },
 };

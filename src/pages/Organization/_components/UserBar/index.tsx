@@ -13,22 +13,17 @@ export class UserBarContainer extends PureComponent<tContainerProps> {
     if (props.org.id !== 0) {
       props.getUsersByOrg({id: props.org.id as number});
     }
-
-    if (props.roles.length === 0 && props.session.id !== 0) {
-      props.getRoles({id: props.session.id});
-    }
   }
 
   render() {
-    const roleMap = this.props.roles.find(roleMap => {
-      return roleMap.orgId === this.props.org.id;
-    }) || {};
+    // if user not logged in, dont prompt membership or display group stats
+    if (!this.props.session.isAuthenticated) return null;
 
     return (
       <UserBarComponent
         org={this.props.org}
         match={this.props.match}
-        role={roleMap.role}
+        role={this.props.role}
         session={this.props.session}
         usersByOrg={this.props.usersByOrg}
       />
@@ -37,13 +32,11 @@ export class UserBarContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  roles: store.roles.data,
-  session: store.session.data,
+  isLoading: store.usersByOrg.isLoading,
   usersByOrg: store.usersByOrg.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  getRoles: (query: tIdQuery) => dispatch(getRoles(query)),
   getUsersByOrg: (query: tIdQuery) => dispatch(getUsersByOrg(query)),
 });
 

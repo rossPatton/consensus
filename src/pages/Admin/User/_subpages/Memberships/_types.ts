@@ -1,7 +1,10 @@
 import {match} from 'react-router-dom';
 
+// TODO happy leftovers from before role de-coupling, eventually remove
+export type tOrgWithRole = tOrg & {role: tRole};
+
 export type tProps = {
-  orgs: tOrg[],
+  orgs: tOrgWithRole[],
 };
 
 export type tComponentProps = tProps & {
@@ -18,9 +21,9 @@ export type tContainerProps = tProps & {
 };
 
 export type tState = {
-  orgs: tOrg[],
+  orgs: tOrgWithRole[],
 };
 
 export type tStore = {
-  orgs: tThunk<tOrg[]>,
+  orgs: tThunk<any[]>,
 };

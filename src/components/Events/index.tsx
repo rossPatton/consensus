@@ -7,6 +7,8 @@ import {deleteEvent} from '../../redux';
 import {tContainerProps} from './_types';
 import {EventsComponent} from './Component';
 
+// TODO completely decouple this container from the other events pages etc
+// this should be where the redux gets connected
 class EventsContainer extends PureComponent<tContainerProps> {
   deleteEvent = (ev: React.MouseEvent, id: number) => {
     ev.preventDefault();
@@ -14,9 +16,8 @@ class EventsContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {org} = this.props;
-    // TODO having role be on the org object feels wrong somehow
-    const isEditable = org.role === 'admin' || org.role === 'facilitator';
+    const {role} = this.props;
+    const isEditable = role === 'admin' || role === 'facilitator';
 
     return (
       <EventsComponent

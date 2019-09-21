@@ -24,7 +24,6 @@ usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  // userIds here are ALL ids, but we limit by default to 10 at a time by default
   let mappedIds: number[];
   try {
     mappedIds = await Promise.all(userOrgRels.map(async idSet => idSet.userId));
@@ -43,9 +42,26 @@ usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
+  let accountRoles: tUserOrgRelation[];
+  try {
+    accountRoles = await knex('accounts_roles').where({orgId});
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
+
+  // TODO refactor where we add role all over the place
+  const usersWithRole = await Promise.all(users.map(async user => {
+    const roleRel = _.find(accountRoles, rel => rel.userId === user.id);
+
+    return {
+      ...user,
+      role: roleRel ? roleRel.role : null,
+    };
+  }));
+
   ctx.body = {
     userTotal: mappedIds.length,
-    users: users,
+    users: usersWithRole,
   };
 });
 

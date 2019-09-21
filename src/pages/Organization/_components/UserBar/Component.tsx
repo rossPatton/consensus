@@ -3,13 +3,13 @@ import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
 import {JoinForm} from './_components';
-import {tProps} from './_types';
+import {tComponentProps} from './_types';
 
 // UserBar currently has 3 states =>
 // 1. Not logged in or non-member state, where it just shows public info
 // 2. Logged-in state, where members have access to some additional features
 // 3. Admin state. Can create new events, or other things not available to members
-export const UserBarComponent = memo((props: tProps) => (
+export const UserBarComponent = memo((props: tComponentProps) => (
   <div
     className={cx('fs6 lh1 pT3 pB3 mB4 brdB1', {
       bgYellowLite: props.role === 'member',

@@ -225,6 +225,7 @@ module.exports = {
       'before': false,
       'after': true,
     }],
+    'sonarjs/cognitive-complexity': [ERROR, 20],
     'sort-imports': OFF,
     'simple-import-sort/sort': ERROR,
     'sort-vars': ERROR,

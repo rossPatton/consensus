@@ -1,11 +1,11 @@
 import { match } from 'react-router';
 
-export type tComponentProps = {
+export type tProps = {
   events: tEvent[],
+  role: tRole,
 }
 
-export type tContainerProps = {
-  events: tEvent[],
+export type tContainerProps = tProps & {
   getEvents: (query: tIdQuery) => Promise<tThunk<tEvent[]>>,
   isLoading: boolean,
   match: match & { params: tOrgRouteParams },

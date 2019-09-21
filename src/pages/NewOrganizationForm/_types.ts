@@ -4,19 +4,35 @@ export type tStore = {
   session: tThunk<tSession>,
 };
 
-export type tStateUnion = keyof tOrg;
+export type tState = {
+  category: string,
+  city: string,
+  cityId: number,
+  country: string,
+  countryId: number,
+  description: string,
+  email: string,
+  eventPrivacy: tGate,
+  gate: tGate,
+  login: string,
+  membershipTotal: number,
+  name: string,
+  password: string,
+  region: string
+  regionId: number,
+  slug: string,
+};
+
+export type tStateUnion = keyof tState;
 export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export type tContainerProps = {
   location: Location,
-  org: tOrg,
   postOrg: (query: any) => any,
   session: tSession,
 };
 
-export type tComponentProps = tOrg & {
+export type tComponentProps = tState & {
   onSubmit: (ev: React.FormEvent<HTMLFormElement>) => void,
-  // setImage: (ev: React.ChangeEvent<HTMLInputElement> | null) => void,
-  // toggleChecked: () => void,
   updateState: (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => void,
 };

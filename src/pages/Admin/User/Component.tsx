@@ -9,9 +9,6 @@ export const UserAdminComponent = memo((props: tProps) => {
   const isProfile = props.match.params.section === 'profile';
   const isMemberships = props.match.params.section === 'memberships';
 
-  // const { section } = props.match.params;
-  // const to = `/admin/${section}/${region}/${city}/${slug}/${subRoute}`;
-
   return (
     <div className="contain fx mT4">
       <aside className="mR5">

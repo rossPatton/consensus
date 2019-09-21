@@ -38,6 +38,7 @@ export class UserAdminContainer extends PureComponent<tProps> {
 }
 
 const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
+  isLoading: store.session.isLoading,
   session: store.session.data,
 });
 
