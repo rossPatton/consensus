@@ -7,5 +7,6 @@ export type tStore = {
 export type tProps = {
   match: match & {params: tOrgRouteParams},
   org: tOrg,
+  role: tRole,
   session: tSession,
 };

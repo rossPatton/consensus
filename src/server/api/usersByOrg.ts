@@ -7,12 +7,11 @@ import {getUsersByOrgId} from '../queries';
 
 export const usersByOrg = new Router();
 const route = '/api/v1/usersByOrg';
-const table = 'users_orgs';
+const table = 'accounts_roles';
 const state = 'state.locals.data';
 
 usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const data = _.get(ctx, state, {});
-  const {id: orgId} = data;
+  const orgId = _.get(ctx, `${state}.id`, 0);
   ctx.body = await getUsersByOrgId(ctx, orgId);
 });
 
@@ -26,10 +25,12 @@ usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.redirect('/signup');
   }
 
+  const accountId = await knex('accounts').limit(1).where({userId}).first();
+
   // insert new user into db
   try {
     await knex(table)
-      .insert({orgId, userId, role: 'member'})
+      .insert({accountId, orgId, userId, role: 'member'})
       .returning('*');
   } catch (err) {
     return ctx.throw(400, err);
@@ -52,9 +53,9 @@ usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
 usersByOrg.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {orgId, role, userId} = _.get(ctx, state, {});
 
-  let updatedUserOrgRel: tUserOrgRelation[];
+  let updatedAccountRoleRel: tAccountRoleRelation[];
   try {
-    updatedUserOrgRel = await knex(table)
+    updatedAccountRoleRel = await knex(table)
       .limit(1)
       .where({orgId, userId})
       .update({role})
@@ -63,7 +64,7 @@ usersByOrg.patch(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  ctx.body = updatedUserOrgRel[0];
+  ctx.body = updatedAccountRoleRel[0];
 });
 
 usersByOrg.delete(route, async (ctx: Koa.ParameterizedContext) => {

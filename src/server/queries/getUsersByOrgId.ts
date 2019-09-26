@@ -1,32 +1,33 @@
 import Koa from 'koa';
 import _ from 'lodash';
 
-import { knex } from '../db/connection';
+import {knex} from '../db/connection';
 
 // TODO add sanitization/validation
+// TODO this query should be simplfied if at all possible
 export const getUsersByOrgId = async (
   ctx: Koa.ParameterizedContext,
-  orgId: any): Promise<tUsersByOrg> => {
-
-  const userOrgRelsStream = knex('users_orgs').where({orgId}).stream();
-  const userOrgRels: tUserOrgRelation[] = [];
+  orgId: number,
+): Promise<tUsersByOrg> => {
+  const rolesStream = knex('accounts_roles').where({orgId}).stream();
+  const roleMaps: tAccountRoleRelation[] = [];
   try {
-    for await (const chunk of userOrgRelsStream) {
-      userOrgRels.push(chunk);
+    for await (const chunk of rolesStream) {
+      roleMaps.push(chunk);
     }
   } catch (err) {
     return ctx.throw(400, err);
   }
 
-  let mappedIds: number[];
+  let userIds: number[];
   try {
-    mappedIds = await Promise.all(userOrgRels.map(async idSet => idSet.userId));
+    userIds = await Promise.all(roleMaps.map(async idSet => idSet.userId));
   } catch (err) {
     return ctx.throw(400, err);
   }
 
   // use the returned ids to query users table
-  const usersStream = knex('users').whereIn('id', mappedIds).stream();
+  const usersStream = knex('users').whereIn('id', userIds).stream();
   const users: tUser[] = [];
   try {
     for await (const chunk of usersStream) {
@@ -36,25 +37,18 @@ export const getUsersByOrgId = async (
     return ctx.throw(400, err);
   }
 
-  let accountRoles: tUserOrgRelation[];
-  try {
-    accountRoles = await knex('accounts_roles').where({orgId});
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
-
   // TODO refactor where we add role all over the place
-  const usersWithRole = await Promise.all(users.map(async user => {
-    const roleRel = _.find(accountRoles, rel => rel.userId === user.id);
+  const usersWithRole = await Promise.all(roleMaps.map(async roleMap => {
+    const userProfile = _.find(users, user => roleMap.userId === user.id) as tUser;
 
     return {
-      ...user,
-      role: roleRel ? roleRel.role : null,
+      ...userProfile,
+      role: roleMap.role,
     };
   }));
 
   return {
-    userTotal: mappedIds.length,
+    userTotal: userIds.length,
     users: usersWithRole,
   };
 };

@@ -28,6 +28,7 @@ export class AdminManageContainer extends Component<tProps> {
           <AdminManageComponent
             match={match}
             org={this.props.org}
+            role={this.props.role}
             session={session}
           />
         )}

@@ -19,7 +19,10 @@ export const AdminEventComponent = memo((props: tComponentProps) => {
       encType="multipart/form-data">
       <fieldset style={{maxWidth: '760px'}}>
         <legend className="mB3">
-          <h2>Create a new Event</h2>
+          <h2>
+            {props.isDraft && 'Edit event'}
+            {!props.isDraft && 'Create a new event'}
+          </h2>
         </legend>
         <h3>Event Title</h3>
         <input

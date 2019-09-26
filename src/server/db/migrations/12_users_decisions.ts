@@ -15,5 +15,5 @@ exports.up = async (knex: Knex) => {
 };
 
 exports.down = async (knex: Knex) => {
-  await knex.schema.dropTable('users_orgs');
+  await knex.schema.dropTable('users_decisions');
 };

@@ -12,7 +12,7 @@ orgsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
   // user account id that cooresponds to row in accounts_roles
   const accountId = _.get(ctx, 'state.user.id', 0);
 
-  let userOrgRels: tUserOrgRelation[];
+  let userOrgRels: tAccountRoleRelation[];
   try {
     userOrgRels = await knex(table).where({accountId});
   } catch (err) {
@@ -41,16 +41,16 @@ orgsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 orgsByUser.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  const {orgId, userId} = _.get(ctx, 'state.locals.data', {});
+  const {accountId, orgId} = _.get(ctx, 'state.locals.data', {});
 
   try {
     await knex(table)
       .limit(1)
-      .where({orgId, userId})
+      .where({accountId, orgId})
       .del();
   } catch (err) {
     return ctx.throw(400, err);
   }
 
-  ctx.body = {ok: true, orgId, userId};
+  ctx.body = {ok: true, accountId, orgId};
 });

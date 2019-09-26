@@ -6,7 +6,7 @@ import {knex} from '../db/connection';
 // ideally only happens once per visit, on login. but if user refreshes, we do again
 export const getProfileByAccount = async (
   ctx: Koa.ParameterizedContext,
-  account: tAccount): Promise<tThunk<tOrg | tUser>> => {
+  account: tAccount): Promise<tOrg | tUser> => {
   const {orgId, userId} = account;
 
   let profile: any;

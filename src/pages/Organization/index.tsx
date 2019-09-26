@@ -4,7 +4,7 @@ import {Dispatch} from 'redux';
 
 import {GenericLoader, Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
-import {getOrg, getRoles} from '../../redux';
+import {getOrg, getRoles, getRsvps} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {OrganizationComponent} from './Component';
 
@@ -13,17 +13,23 @@ export class OrganizationContainer extends Component<tContainerProps> {
     super(props);
     props.getOrg(props.match.params);
 
-    if (props.roles.length === 0 && props.session.isAuthenticated) {
+    if (props.session.isAuthenticated && props.session.type === 'user') {
       props.getRoles({id: props.session.id as number});
+      props.getRsvps({id: props.session.id as number});
     }
   }
 
   render() {
-    const {isLoading, location, match, org, roles, usersByOrg} = this.props;
+    const {isLoading, location, match, org, roles, session, usersByOrg} = this.props;
 
     const roleMap = roles.find(roleMap => {
       return roleMap.orgId === this.props.org.id;
-    }) || {} as tRoleMap;
+    }) as tRoleMap;
+
+    let role = roleMap && roleMap.role;
+    if (session.type === 'org' && session.profileId === org.id) {
+      role = 'admin';
+    }
 
     return (
       <ErrorBoundary>
@@ -44,7 +50,7 @@ export class OrganizationContainer extends Component<tContainerProps> {
               location={location}
               match={match}
               org={org}
-              role={roleMap.role}
+              role={role}
               session={this.props.session}
               usersByOrg={usersByOrg}
             />
@@ -65,6 +71,7 @@ const mapStateToProps = (store: tStore) => ({
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getOrg: (params: tOrgRouteParams) => dispatch(getOrg(params)),
   getRoles: (query: tIdQuery) => dispatch(getRoles(query)),
+  getRsvps: (query: tIdQuery) => dispatch(getRsvps(query)),
 });
 
 export const Organization = connect(

@@ -104,6 +104,7 @@ declare type tUser = {
   email: string,
   fname: string,
   lname: string,
+  role?: tRole,
   username: string,
 };
 
@@ -117,26 +118,34 @@ declare type tUserEventRelation = {
 // member => can RSVP to events, partake in decisions
 // facilitator => can create events, decisions
 // admin => can do all the above plus manage the group
-declare type tRole = 'member' | 'facilitator' | 'admin';
+// n/a => inputs cant have null values, so we use this sometimes
+// null => often happens if we're trying to tie roles to users, and there's no match
+declare type tRole = 'member' | 'facilitator' | 'admin' | 'n/a' | null;
 declare type tRoleMap = {
   orgId: number,
   role: tRole,
 }
 
-declare type tUserOrgRelation = tRoleMap & {
+declare type tAccountRoleRelation = tRoleMap & {
   id: number,
   userId: number,
 }
+
+declare type tUserOrgRelation = {
+  id: number,
+  userId: number,
+  orgId: number,
+};
 
 // accounts are currently of 2 types. users, and organization admins
 // we consolidate that in the accounts table, along with shared rows
 declare type tAccount = {
   id: number,
+  isVerified: boolean,
   login: string, // unique login value separate from username or email
   orgId?: number,
   password: string, // password goes here, but the referenced profile gets sent to client
   userId?: number,
-  isVerified: boolean,
 };
 
 // subset of user/org needed for login/authentication
@@ -159,23 +168,11 @@ declare type tCrumb = {
 
 // tSession is like tUser, but with auth data and everything is optional
 // since a user might not be logged in
-declare type tSession = {
-  isAuthenticated?: boolean,
-  createdAt?: string,
-  email?: string,
-  fname?: string,
-  hasAvatar?: boolean,
+declare type tSession = tOrg & tUser & {
+  isAuthenticated: boolean,
   lastActive?: string,
-  lname?: string,
-  // simple map of org ids and role types to determine level of access for user
-  roles?: tRoleMap[],
-  rsvps?: {
-    eventId: number,
-    rsvp: boolean,
-  }[],
+  profileId: number,
   type: 'org' | 'user',
-  updatedAt?: string,
-  username?: string,
 };
 
 declare type tUsersByOrg = {

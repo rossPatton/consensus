@@ -51,6 +51,6 @@ export const EventsComponent = memo((props: tComponentProps) => (
         </select>
       </div>
     </div>
-    <Events events={props.events} />
+    <Events events={props.events} role={props.role} />
   </>
 ));

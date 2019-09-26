@@ -6,7 +6,7 @@ import {tComponentProps} from './_types';
 
 export const MembersComponent = memo((props: tComponentProps) => {
   const {users, userTotal} = props;
-  const roles: tRole[] = ['member', 'facilitator', 'admin'];
+  const roles: tRole[] = ['member', 'facilitator'];
 
   return (
     <>
@@ -42,9 +42,8 @@ export const MembersComponent = memo((props: tComponentProps) => {
             <div
               className={cx({
                 'fx fs6 p2 pL3 pR3 brdB1': true,
-                bgBlueLite: user.role === 'admin',
-                bgYellowLite: user.role === 'facilitator',
-                bgGreenLite: user.role === 'member',
+                bgYellowLite: user.role === 'member',
+                bgGreenLite: user.role === 'facilitator',
               })}>
               <div className="fx aiCtr col">
                 <span className="ttCap mR3">
@@ -88,7 +87,7 @@ export const MembersComponent = memo((props: tComponentProps) => {
                     role === user.role
                       ? null
                       : (
-                        <option className="ttCap" value={role}>
+                        <option className="ttCap" value={role as string}>
                           {role}
                         </option>
                       )

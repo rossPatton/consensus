@@ -92,11 +92,12 @@ export class EventsContainer extends PureComponent<tContainerProps, tState> {
         match={this.props.match}
         render={(itemsToRender: tEvent[]) => (
           <EventsComponent
+            events={itemsToRender}
             onPrivacyFilterChange={this.onPrivacyFilterChange}
             onPublishedFilterChange={this.onPublishedFilterChange}
             onSearchChange={this.onSearchChange}
             org={this.props.org}
-            events={itemsToRender}
+            role={this.props.role}
           />
         )}
       />

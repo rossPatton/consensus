@@ -21,8 +21,8 @@ export class UserBarContainer extends PureComponent<tContainerProps> {
 
     return (
       <UserBarComponent
-        org={this.props.org}
         match={this.props.match}
+        org={this.props.org}
         role={this.props.role}
         session={this.props.session}
         usersByOrg={this.props.usersByOrg}

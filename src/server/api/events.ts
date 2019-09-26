@@ -51,9 +51,9 @@ events.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  let userOrgRel: tUserOrgRelation;
+  let userOrgRel: tAccountRoleRelation;
   try {
-    userOrgRel = await knex('users_orgs').limit(1).where({orgId}).first();
+    userOrgRel = await knex('accounts_roles').limit(1).where({orgId}).first();
   } catch (err) {
     return ctx.throw(400, err);
   }

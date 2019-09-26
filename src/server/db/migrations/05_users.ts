@@ -23,6 +23,12 @@ exports.up = async (knex: Knex) => {
     // user's preferred language
     table.string('language').defaultTo('en');
 
+    // if set to true, user RSVPS show up in the count but aren't visible in RSVP list
+    table.boolean('privateRSVP').notNullable().defaultTo(true);
+
+    // if set to true, user memberships aren't visible to others in user profile
+    table.boolean('privateMembership').notNullable().defaultTo(true);
+
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.timestamp('updatedAt').defaultTo(knex.fn.now());
   });

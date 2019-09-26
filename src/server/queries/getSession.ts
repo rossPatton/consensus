@@ -11,8 +11,12 @@ export const getSession = async (
   // we have 2 types of accounts, orgs and users
   const profile = await getProfileByAccount(ctx, account);
 
-  // users can different levels of roles within an org. orgs have 1 role - admin
-  const roles = await getRolesByAccountId(ctx, account.id);
+  // for roles, etc, we want id here to be from the account, not the profile
+  const {id, orgId, userId} = account;
+
+  // for rsvps, other stuff, we want to use the profile id
+  // (technically, rsvps are user only, but who knows what things will look later)
+  const profileId = orgId as number || userId as number;
 
   // we return things this way to match redux-thunk on the client
   return {
@@ -20,9 +24,10 @@ export const getSession = async (
     isLoading: false,
     data: {
       ...profile,
+      id,
       isAuthenticated: ctx.isAuthenticated(),
-      roles,
-      type: account.orgId ? 'org' : 'user',
+      profileId,
+      type: orgId ? 'org' : 'user',
     },
   };
 };

@@ -23,11 +23,6 @@ export const UserBarComponent = memo((props: tComponentProps) => (
           session={props.session}
         />
       </li>
-      <li className="mR2 fx aiCtr">
-        <a title="Click to see list of online members" href="filler">
-          89 members online now
-        </a>
-      </li>
       {props.usersByOrg.userTotal && (
         <li className="mL1 mR2">
           <a title="CLick to see total member list" href="filler">

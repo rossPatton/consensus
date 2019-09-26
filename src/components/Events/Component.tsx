@@ -19,8 +19,8 @@ export const EventsComponent = memo((props: tComponentProps) => (
             className={cx({
               'brdB1 p2 pL3 pR3 fx aiCtr fs6 jcEnd': true,
               hide: props.tiny,
-              bgBlueLite: !ev.isDraft,
-              bgYellowLite: ev.isDraft,
+              bgBlueLite: props.role === 'admin',
+              bgGreenLite: props.role === 'facilitator',
             })}>
             <div className="col mR2 fx aiCtr">
               {ev.isDraft && (

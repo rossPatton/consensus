@@ -1,19 +1,22 @@
 import {match} from 'react-router';
 
-export type tComponentProps = {
+export type tProps = {
   events: tEvent[],
+  org: tOrg,
+  role: tRole,
+};
+
+export type tComponentProps = tProps & {
   onPrivacyFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onPublishedFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  org: tOrg,
+
 }
 
-export type tContainerProps = {
-  events: tEvent[],
+export type tContainerProps = tProps & {
   getEvents: (query: tIdQuery) => Promise<tThunk<tEvent[]>>,
   isLoading: boolean,
   match: match & {params: tOrgRouteParams},
-  org: tOrg,
 };
 
 export type tPrivacyFilter = 'n/a' | 'public' | 'private';

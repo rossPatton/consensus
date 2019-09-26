@@ -16,7 +16,8 @@ class MembersContainer extends Component<tProps, tState> {
     },
   };
 
-  state: tState = {
+  state = {
+    role: 'n/a' as tRole,
     users: this.props.usersByOrg.users,
   };
 
@@ -28,7 +29,7 @@ class MembersContainer extends Component<tProps, tState> {
   // re-run the filter whenever the list array or filter text changes:
   // TODO maybe memoize
   filterByRole = (users: tUser[]) => {
-    if (!this.props.role) return users;
+    if (this.state.role === 'n/a') return users;
     return users.filter(user => user.role === this.state.role);
   };
 

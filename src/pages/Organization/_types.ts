@@ -18,6 +18,7 @@ export type tContainerProps = tProps & {
   getEvents: (id: number) => Promise<tThunk<tEvent[]>>,
   getOrg: (params: tOrgRouteParams) => Promise<tThunk<tOrg>>,
   getRoles: (query: {id: number}) => Promise<tThunk<tRoleMap[]>>,
+  getRsvps: (query: {id: number}) => Promise<tThunk<tRSVP[]>>,
   isLoading: boolean,
   roles: tRoleMap[],
   session: tSession,

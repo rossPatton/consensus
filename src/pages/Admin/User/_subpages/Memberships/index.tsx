@@ -20,8 +20,8 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
 
   deleteOrgByUser = (ev: React.MouseEvent<HTMLButtonElement>, orgId: number) => {
     ev.preventDefault();
-    const userId = this.props.session.id as number;
-    this.props.deleteOrgByUser({orgId, userId});
+    const accountId = this.props.session.id as number;
+    this.props.deleteOrgByUser({accountId, orgId});
   }
 
   onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +74,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  deleteOrgByUser: (query: {orgId: number, userId: number}) =>
+  deleteOrgByUser: (query: {accountId: number, orgId: number}) =>
     dispatch(deleteOrgByUser(query)),
   getOrgsByUser: () => dispatch(getOrgsByUser()),
 });
