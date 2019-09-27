@@ -23,12 +23,11 @@ export const routes = [
   },
   {
     component: Signup,
-    path: '/signup',
+    path: '/signup/:type?',
   },
   {
     component: Admin,
     exact: true,
-    // page is only used by events pagination
     path: '/admin/:section/:page?',
     private: true,
     redirect: '/login',

@@ -2,9 +2,9 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import { knex } from '../db/connection';
-import { getUserByQuery } from '../queries';
-import { encrypt, isValidPw, saltedHash } from '../utils';
+import {knex} from '../db/connection';
+import {getUserByQuery} from '../queries';
+import {encrypt, isValidPw, saltedHash} from '../utils';
 
 export const user = new Router();
 const route = '/api/v1/user';
@@ -29,8 +29,8 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
 
   let userResult: tUser[];
   try {
-    const { email, username } = data;
-    const newUser = { email, username, password: encrypt(hashedPW) };
+    const {email, username} = data;
+    const newUser = { email, username };
     userResult = await knex('users').insert(newUser).returning('*');
   } catch (err) {
     return ctx.throw(400, err);
@@ -40,8 +40,22 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
     ctx.throw(400, 'Failed to insert user into db');
   }
 
+  const {login} = data;
+  const password = encrypt(hashedPW);
+  const user = userResult[0];
+
+  // after we update users, we save login specific stuff to the accounts table
+  let userAccount: tAccount[];
+  try {
+    userAccount = await knex('accounts')
+      .insert({login, password, userId: user.id})
+      .returning('*');
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
+
   if (!data.isFormSubmit) {
-    ctx.body = userResult[0];
+    ctx.body = userAccount[0];
     return;
   }
 
