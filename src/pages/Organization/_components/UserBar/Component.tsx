@@ -40,13 +40,6 @@ export const UserBarComponent = memo((props: tComponentProps) => (
           <li className="brdA1 p1 br4 bgWhite pL2 pR2 mR2">
             Make a Decision
           </li>
-          {props.role === 'admin' && (
-            <li className="brdA1 p1 br4 bgWhite pL2 pR2">
-              <Link to="manageOrganization">
-              Manage Group
-              </Link>
-            </li>
-          )}
         </ul>
       )}
     </ul>

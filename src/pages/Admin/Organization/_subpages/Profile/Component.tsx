@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import React, {memo} from 'react';
 
-import { tComponentProps } from './_types';
+import {tComponentProps} from './_types';
 
 export const ProfileComponent = memo((props: tComponentProps) => {
-  const { category: origCategory } = props;
+  const {category: origCategory} = props;
 
   return (
     <>

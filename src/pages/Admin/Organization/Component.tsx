@@ -5,17 +5,16 @@ import {Link} from 'react-router-dom';
 import {Decisions, Events, Members, Profile} from './_subpages';
 import {tProps} from './_types';
 
-export const AdminManageComponent = memo((props: tProps) => {
-  // TODO this should work regardless of how we get to the org page
-  const {country, city, region, slug, section} = props.match.params;
+export const OrgAdminComponent = memo((props: tProps) => {
+  const {section} = props.match.params;
   const isDecisions = section === 'manageDecisions';
   const isEvents = section === 'manageEvents';
   const isProfile = section === 'manageOrganization';
   const isMembers = section === 'manageMembers';
-  const to = `/org/${country}/${region}/${city}/${slug}`;
+  const to = '/admin';
 
   return (
-    <div className="fx">
+    <div className="contain mT4 fx">
       <aside className="mR5">
         <ul>
           <li>

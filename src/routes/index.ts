@@ -1,4 +1,5 @@
 import {
+  Admin,
   Directory,
   ErrorPage,
   Event,
@@ -7,7 +8,6 @@ import {
   NewOrganizationForm,
   Organization,
   Signup,
-  UserAdmin,
 } from '../pages';
 
 // TODO eventually split this file up once it starts getting big
@@ -26,7 +26,7 @@ export const routes = [
     path: '/signup',
   },
   {
-    component: UserAdmin,
+    component: Admin,
     exact: true,
     // page is only used by events pagination
     path: '/admin/:section/:page?',

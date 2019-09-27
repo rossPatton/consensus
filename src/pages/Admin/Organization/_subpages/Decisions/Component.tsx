@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import {Decisions} from '../../../../../../components';
+import {Decisions} from '../../../../../components';
 import {tComponentProps} from './_types';
 
 export const DecisionsComponent = memo((props: tComponentProps) => (

@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import {Events} from '../../../../../../components';
+import {Events} from '../../../../../components';
 import {tComponentProps} from './_types';
 
 export const EventsComponent = memo((props: tComponentProps) => (
@@ -51,6 +51,6 @@ export const EventsComponent = memo((props: tComponentProps) => (
         </select>
       </div>
     </div>
-    <Events events={props.events} role={props.role} />
+    <Events events={props.events} role="admin" />
   </>
 ));

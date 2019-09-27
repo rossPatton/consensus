@@ -52,9 +52,9 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 role="img"
                 className="mR1"
                 aria-label="Big X Emoji">
-                  ✖️
+                ✖️
               </span>
-                Delete this event
+                Delete this {ev.isDraft ? 'draft' : 'event'}
             </button>
           </div>
         )}

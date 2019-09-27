@@ -36,8 +36,11 @@ export const HeaderComponent = memo((props: tProps) => (
           <fieldset className="fx">
             <Link
               id="a11yAdmin"
-              to="/admin/profile"
-              className="mR2">
+              className="mR2"
+              to={props.session.type === 'org'
+                ? '/admin/manageOrganization'
+                : '/admin/profile'
+              }>
               Account
             </Link>
             <button

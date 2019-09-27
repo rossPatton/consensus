@@ -47,17 +47,6 @@ export const CityComponent = memo((props: tProps) => {
           {props.orgsToRender.length > 0 && `Organizations in ${cityObj.name}`}
           {props.orgsToRender.length === 0 && 'No organizations found'}
         </h2>
-        <Link
-          to={`/createOrg?${objToQueryString(newOrgQueryParams)}`}
-          className="noWrap fs6 brdA1 br4 p2 pL3 pR3 hvrBgGrey1 trans1 lh1 noUnderline">
-          <span
-            role="img"
-            className="mR1"
-            aria-label="Big Plus Sign Emoji">
-            ➕
-          </span>
-          Create a new organization
-        </Link>
       </div>
       {props.orgsToRender.length > 0 && (
         <ul className="fx fxWrap">

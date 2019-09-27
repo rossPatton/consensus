@@ -10,14 +10,14 @@ export class UserBarContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
 
-    if (props.org.id !== 0) {
+    if (props.session.isAuthenticated && props.org.id !== 0) {
       props.getUsersByOrg({id: props.org.id as number});
     }
   }
 
   render() {
     // if user not logged in, dont prompt membership or display group stats
-    if (!this.props.session.isAuthenticated) return null;
+    // if (!this.props.session.isAuthenticated) return null;
 
     return (
       <UserBarComponent

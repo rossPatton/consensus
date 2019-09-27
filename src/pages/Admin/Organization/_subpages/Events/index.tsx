@@ -2,9 +2,9 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {Paginate} from '../../../../../../containers';
-import {getEvents} from '../../../../../../redux';
-import {fuzzFilterList} from '../../../../../../utils';
+import {Paginate} from '../../../../../containers';
+import {getEvents} from '../../../../../redux';
+import {fuzzFilterList} from '../../../../../utils';
 import {tContainerProps, tPrivacyFilter, tPublishedFilter, tState, tStore} from './_types';
 import {EventsComponent} from './Component';
 
@@ -12,11 +12,11 @@ export class EventsContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
 
-    const {match: {params: {page = 0} = {}}, org} = props;
+    const {match: {params: {page = 0} = {}}, session} = props;
     const offset = page ? parseInt(page, 10) : 0;
 
     props.getEvents({
-      id: org.id as number,
+      id: session.profileId,
       limit: -1,
       offset,
     });
@@ -96,8 +96,6 @@ export class EventsContainer extends PureComponent<tContainerProps, tState> {
             onPrivacyFilterChange={this.onPrivacyFilterChange}
             onPublishedFilterChange={this.onPublishedFilterChange}
             onSearchChange={this.onSearchChange}
-            org={this.props.org}
-            role={this.props.role}
           />
         )}
       />

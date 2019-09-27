@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import {getDateNowAsISOStr} from '../../../../utils';
 import {tComponentProps} from './_types';
 
-export const AdminEventComponent = memo((props: tComponentProps) => {
+export const CreateOrEditEventComponent = memo((props: tComponentProps) => {
   const {updateState} = props;
   const onChange = (ev: React.ChangeEvent<any>) => updateState(
     'duration',

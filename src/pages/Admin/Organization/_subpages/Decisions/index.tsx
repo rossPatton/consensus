@@ -2,9 +2,9 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {Paginate} from '../../../../../../containers';
-import {getDecisionsByOrg} from '../../../../../../redux';
-import {fuzzFilterList} from '../../../../../../utils';
+import {Paginate} from '../../../../../containers';
+import {getDecisionsByOrg} from '../../../../../redux';
+import {fuzzFilterList} from '../../../../../utils';
 import {tContainerProps} from './_types';
 import {DecisionsComponent} from './Component';
 
@@ -12,11 +12,11 @@ export class DecisionsContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
 
-    const {match: {params: {page = 0} = {}}, org} = props;
+    const {match: {params: {page = 0} = {}}, session} = props;
     const offset = page ? parseInt(page, 10) : 0;
 
     props.getDecisions({
-      id: org.id,
+      id: session.profileId,
       limit: -1,
       offset,
     });

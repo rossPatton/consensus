@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { Dispatch } from 'redux';
 
-import { Helmet } from '../../../../components';
-import { createEvent } from '../../../../redux';
-import { getEventsSuccess } from '../../../../redux/async/events/actions';
-import { getDateNowAsISOStr, parseTimeString } from '../../../../utils';
-import { tContainerProps, tCreateEvent, tState, tStateUnion, tStore } from './_types';
-import { AdminEventComponent } from './Component';
+import {Helmet} from '../../../../components';
+import {createEvent} from '../../../../redux';
+import {getEventsSuccess} from '../../../../redux/async/events/actions';
+import {getDateNowAsISOStr, parseTimeString} from '../../../../utils';
+import {tContainerProps, tCreateEvent, tState, tStateUnion, tStore} from './_types';
+import {CreateOrEditEventComponent } from './Component';
 
-export class AdminEventContainer extends Component<tContainerProps, tState> {
+export class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
   state = {
     category: this.props.org.category,
     date: getDateNowAsISOStr(),
@@ -185,7 +185,7 @@ export class AdminEventContainer extends Component<tContainerProps, tState> {
         />
         {!session.isAuthenticated && <Redirect to="" />}
         {session.isAuthenticated && (
-          <AdminEventComponent
+          <CreateOrEditEventComponent
             {...this.props}
             {...this.state}
             onSubmit={this.onSubmit}
@@ -209,7 +209,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   createEvent: (event: tCreateEvent) => dispatch(createEvent(event)),
 });
 
-export const AdminEvent = connect(
+export const CreateOrEditEvent = connect(
   mapStateToProps,
   mapDispatchToProps
-)(AdminEventContainer);
+)(CreateOrEditEventContainer);

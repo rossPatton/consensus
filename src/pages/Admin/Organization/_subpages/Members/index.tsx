@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {Paginate} from '../../../../../../containers';
-import {deleteUserByOrg, patchUserByOrg} from '../../../../../../redux';
-import {fuzzFilterList} from '../../../../../../utils';
+import {Paginate} from '../../../../../containers';
+import {deleteUserByOrg, getUsersByOrg, patchUserByOrg} from '../../../../../redux';
+import {fuzzFilterList} from '../../../../../utils';
 import {tProps, tState} from './_types';
 import {MembersComponent} from './Component';
 
@@ -16,6 +16,11 @@ class MembersContainer extends Component<tProps, tState> {
     },
   };
 
+  constructor(props: any) {
+    super(props);
+    props.getUsersByOrg({id: props.session.profileId});
+  }
+
   state = {
     role: 'n/a' as tRole,
     users: this.props.usersByOrg.users,
@@ -23,7 +28,7 @@ class MembersContainer extends Component<tProps, tState> {
 
   deleteUserByOrg = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {
     ev.preventDefault();
-    this.props.deleteUserByOrg({userId, orgId: this.props.org.id});
+    this.props.deleteUserByOrg({userId, orgId: this.props.session.profileId});
   }
 
   // re-run the filter whenever the list array or filter text changes:
@@ -57,7 +62,7 @@ class MembersContainer extends Component<tProps, tState> {
   setRole = (ev: React.ChangeEvent<HTMLSelectElement>, userId: number) => {
     ev.preventDefault();
     const role = ev.currentTarget.value as tRole;
-    const orgId = this.props.org.id;
+    const orgId = this.props.session.profileId;
     this.props.updateRole({role, orgId, userId});
   }
 
@@ -94,6 +99,7 @@ const mapStateToProps = (store: any) => ({
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   deleteUserByOrg: (query: {orgId: number, userId: number}) =>
     dispatch(deleteUserByOrg(query)),
+  getUsersByOrg: (query: tIdQuery) => dispatch(getUsersByOrg(query)),
   updateRole: (query: any) => dispatch(patchUserByOrg(query)),
 });
 

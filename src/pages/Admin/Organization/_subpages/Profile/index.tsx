@@ -3,14 +3,14 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 import {Dispatch} from 'redux';
 
-import {Helmet} from '../../../../../../components';
-import {patchOrg} from '../../../../../../redux';
+import {Helmet} from '../../../../../components';
+import {patchOrg} from '../../../../../redux';
 import {tContainerProps, tStateUnion, tStore} from './_types';
 import {ProfileComponent} from './Component';
 
 export class ProfileContainer extends Component<tContainerProps, tOrg> {
   state = {
-    ...this.props.org,
+    ...this.props.session,
   };
 
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
@@ -56,15 +56,11 @@ export class ProfileContainer extends Component<tContainerProps, tOrg> {
   }
 }
 
-const mapStateToProps = (store: tStore) => ({
-  session: store.session.data,
-});
-
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   patchOrg: (org: any) => dispatch(patchOrg(org)),
 });
 
 export const Profile = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(ProfileContainer);

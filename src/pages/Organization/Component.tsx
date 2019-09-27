@@ -3,7 +3,7 @@ import React from 'react';
 
 import {UserBar} from './_components';
 import {OrganizationHeader, OrganizationTabs} from './_components';
-import {AdminEvent, AdminManage, Decisions, Events, Overview} from './_subpages';
+import {CreateOrEditEvent, Decisions, Events, Overview} from './_subpages';
 import {tComponentProps} from './_types';
 
 export const OrganizationComponent = (props: tComponentProps) => (
@@ -47,19 +47,9 @@ export const OrganizationComponent = (props: tComponentProps) => (
         />
       )}
       {props.match.params.section === 'createEvent' && (
-        <AdminEvent
+        <CreateOrEditEvent
           org={props.org}
           router={props.location}
-        />
-      )}
-      {(props.match.params.section === 'manageDecisions'
-        || props.match.params.section === 'manageEvents'
-        || props.match.params.section === 'manageOrganization'
-        || props.match.params.section === 'manageMembers') && (
-        <AdminManage
-          match={props.match}
-          org={props.org}
-          role={props.role}
         />
       )}
     </div>
