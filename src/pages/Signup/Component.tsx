@@ -29,7 +29,7 @@ export const SignupComponent = memo((props: tProps) => (
       <UserSignup />
     )}
     {props.match.params.type === 'newOrg' && (
-      <OrgSignup />
+      <OrgSignup location={props.location} />
     )}
   </div>
 ));

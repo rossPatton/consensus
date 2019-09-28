@@ -16,9 +16,6 @@ export class UserBarContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    // if user not logged in, dont prompt membership or display group stats
-    // if (!this.props.session.isAuthenticated) return null;
-
     return (
       <UserBarComponent
         match={this.props.match}

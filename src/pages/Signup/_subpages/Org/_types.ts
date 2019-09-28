@@ -1,33 +1,33 @@
-export type tStore = {
-  session: tThunk<tSession>,
-};
+import {Location} from 'history';
 
-export type tForm = {
+export type tState = {
+  category: string,
+  city: string,
+  cityId: number,
+  country: string,
+  countryId: number,
+  description: string,
   email: string,
+  eventPrivacy: tGate,
+  gate: tGate,
+  login: string,
+  membershipTotal: number,
+  name: string,
   password: string,
-  username: string,
-};
-
-export type tErrorObject = {
-  email?: string[],
-  password?: string[],
-};
-
-export type tState = tForm & {
-  isClient: boolean,
-  errors: tErrorObject,
+  region: string
+  regionId: number,
+  slug: string,
 };
 
 export type tStateUnion = keyof tState;
+export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export type tContainerProps = {
-  authenticateSession: (arg: tLogin) => { payload: tUser },
-  registerUser: (arg: tForm) => Promise<{ payload: tSession }>,
+  location: Location,
+  postOrg: (query: any) => any,
 };
 
-export type tComponentProps = tContainerProps & tState & {
-  disabled: boolean,
-  errArr: string[],
-  register: (ev: React.FormEvent<HTMLFormElement>) => void,
-  updateState: (key: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
+export type tComponentProps = tState & {
+  onSubmit: (ev: React.FormEvent<HTMLFormElement>) => void,
+  updateState: (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => void,
 };

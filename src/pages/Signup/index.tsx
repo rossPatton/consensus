@@ -27,6 +27,7 @@ export class SignupContainer extends PureComponent<tProps> {
         {session.isAuthenticated && <Redirect to="/admin/profile" />}
         {!session.isAuthenticated && (
           <SignupComponent
+            location={this.props.location}
             match={this.props.match}
             session={session}
           />

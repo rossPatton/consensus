@@ -15,7 +15,7 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
     onSubmit={props.register}>
     <fieldset>
       <legend>
-        <h2 className="fs3 taCtr mB2">New User</h2>
+        <h2 className="mB4">New User</h2>
       </legend>
       <label htmlFor="emailInput">
         <h2 className="ffLab fs5 mB1 lh1">Email</h2>

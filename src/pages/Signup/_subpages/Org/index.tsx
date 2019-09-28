@@ -1,88 +1,61 @@
-import commonPasswordList from 'fxa-common-password-list';
-import _ from 'lodash';
-import React, {PureComponent} from 'react';
+import qs from 'querystring';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {authenticateSession, registerUser} from '../../../../redux';
-import {isValidEmail} from '../../../../utils';
-import {tContainerProps, tForm, tState, tStateUnion} from './_types';
+import {postOrg} from '../../../../redux';
+import {slugify} from '../../../../utils';
+import {tContainerProps, tState, tStateUnion} from './_types';
 import {OrgSignupComponent} from './Component';
 
-export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
-  state = {
-    isClient: false,
-    email: '',
-    errors: {},
-    password: '',
-    username: '',
-  };
+export class OrgSignupContainer extends Component<tContainerProps, tState> {
+  constructor(props: tContainerProps) {
+    super(props);
 
-  componentDidMount() {
-    // we do this so we only disable form submit when js is available
-    this.setState({
-      isClient: true,
-    });
+    const location = qs.parse(props.location.search.split('?')[1]);
+
+    this.state = {
+      category: '',
+      city: location.city as string,
+      cityId: parseInt(location.cityId as string, 10),
+      country: location.country as string,
+      countryId: parseInt(location.countryId as string, 10),
+      description: '',
+      email: '',
+      eventPrivacy: 'manual' as tGate,
+      gate: 'manual' as tGate,
+      login: '',
+      membershipTotal: 0,
+      name: '',
+      password: '',
+      region: location.region as string,
+      regionId: parseInt(location.regionId as string, 10),
+      slug: '',
+    };
   }
 
-  checkErrors = (): object => {
-    const {email, password: pw} = this.state;
-
-    let pwArr = [] as string[];
-    if (pw.length > 0 && pw.length < 12) {
-      pwArr = [...pwArr, 'Password must be at least 12 characters'];
-    }
-
-    if (commonPasswordList.test(pw) || pw === 'correct_horse_battery_staple') {
-      pwArr = [...pwArr, 'Please choose a less common password'];
-    }
-
-    let emailArr = [] as string[];
-    if (email.length > 0 && !isValidEmail(email)) {
-      emailArr = ['Email address must be valid'];
-    }
-
-    const errors = {
-      email: emailArr,
-      password: pwArr,
+  onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+    ev.preventDefault();
+    const newOrg = {
+      ...this.state,
+      slug: slugify(this.state.name),
     };
 
-    this.setState({errors});
-    return errors;
-  }
-
-  register = async (ev: React.FormEvent<HTMLFormElement>) => {
-    ev.preventDefault();
-
-    // errors and showPW are client-side only
-    const { errors, isClient, ...state } = this.state;
-
-    // add user to db, and log them in on success
-    await this.props.registerUser(state);
-
-    const { username, password } = this.state;
-    return this.props.authenticateSession({username, password});
+    this.props.postOrg(newOrg);
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
     this.setState({
       [stateKey]: ev.currentTarget.value,
-    } as Pick<tState, tStateUnion>, this.checkErrors);
+    } as Pick<tState, tStateUnion>);
   }
 
   render() {
-    const { email, errors, isClient, password, username } = this.state;
-    const errArr = _.flatten(Object.values(errors as string[]));
-    const disabled = isClient &&
-      (!email || !password || !username || errArr.length > 0);
-
     return (
       <OrgSignupComponent
         {...this.props}
         {...this.state}
-        disabled={disabled}
-        errArr={errArr}
-        register={this.register}
+        onSubmit={this.onSubmit}
         updateState={this.updateState}
       />
     );
@@ -90,8 +63,7 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
 }
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
-  registerUser: (user: tForm) => dispatch(registerUser(user)),
+  postOrg: (org: any) => dispatch(postOrg(org)),
 });
 
 export const OrgSignup = connect(
