@@ -2,7 +2,6 @@ export type tProps = {
   events: tEvent[],
   // if user is an admin, they can edit events
   isEditable?: boolean,
-  session: tSession,
   role?: tRole,
   // render mobile/sidebar version
   tiny?: boolean,

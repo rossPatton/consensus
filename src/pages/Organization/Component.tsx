@@ -30,6 +30,7 @@ export const OrganizationComponent = (props: tComponentProps) => (
         <Overview
           org={props.org}
           role={props.role}
+          session={props.session}
         />
       )}
       {props.match.params.section === 'decisions' && (
@@ -44,6 +45,7 @@ export const OrganizationComponent = (props: tComponentProps) => (
           match={props.match}
           org={props.org}
           role={props.role}
+          session={props.session}
         />
       )}
       {props.match.params.section === 'createEvent' && (

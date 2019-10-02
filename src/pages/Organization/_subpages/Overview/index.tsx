@@ -49,7 +49,6 @@ const mapStateToProps = (store: tStore) => ({
   decisions: store.decisions.data,
   events: store.events.data,
   isLoading: store.decisions.isLoading || store.events.isLoading,
-  session: store.session.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

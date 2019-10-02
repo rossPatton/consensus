@@ -18,15 +18,15 @@ exports.up = async (knex: Knex) => {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
-    // profile id
+    // user profile id if applicable
     table.integer('userId')
-      .notNullable()
+      .nullable()
       .references('orgs.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
     // relation the account has to the org
-    // 'member' || 'facilitator'
+    // 'admin' || 'member' || 'facilitator'
     table.string('role').notNullable().defaultTo('member');
   });
 };

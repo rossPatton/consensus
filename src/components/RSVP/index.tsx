@@ -32,6 +32,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
     return (
       <RSVPComponent
         id={this.props.event.id}
+        role={this.props.role}
         rsvp={this.state.rsvp}
         setRsvp={this.setRsvp}
       />

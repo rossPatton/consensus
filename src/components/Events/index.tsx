@@ -25,7 +25,6 @@ class EventsContainer extends PureComponent<tContainerProps> {
         events={this.props.events}
         isEditable={isEditable}
         role={role}
-        session={this.props.session}
         tiny={this.props.tiny}
       />
     );

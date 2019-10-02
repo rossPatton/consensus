@@ -2,15 +2,15 @@ import React, { memo } from 'react';
 
 import {tComponentProps} from './_types';
 
-export const RSVPComponent = memo((props: tComponentProps) => {
-  const {id, rsvp} = props;
+export const RSVPComponent = memo(({id, role, rsvp, setRsvp}: tComponentProps) => {
+  if (role === 'admin') return null;
 
   return (
     <>
       {!rsvp && (
         <form
           method="POST"
-          onSubmit={ev => props.setRsvp({ev, eventId: id, value: true})}
+          onSubmit={ev => setRsvp({ev, eventId: id, value: true})}
           action="/api/v1/rsvps">
           <fieldset>
             <button
@@ -30,7 +30,7 @@ export const RSVPComponent = memo((props: tComponentProps) => {
         <form
           method="POST"
           action="/api/v1/rsvps"
-          onSubmit={ev => props.setRsvp({ev, eventId: id, value: false})}>
+          onSubmit={ev => setRsvp({ev, eventId: id, value: false})}>
           <fieldset>
             <input type="hidden" name="rsvp" value={id} />
             <button

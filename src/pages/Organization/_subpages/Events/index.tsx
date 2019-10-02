@@ -13,10 +13,13 @@ export class EventsContainer extends Component<tContainerProps> {
     super(props);
 
     const {match: {params: {page = 0} = {}}, org} = props;
+    // only show public events if user is not signed in
+    const isPublic = !props.session.isAuthenticated;
     const offset = page ? parseInt(page, 10) : 0;
 
     props.getEvents({
       id: org.id,
+      isPublic,
       limit: -1,
       offset,
     });

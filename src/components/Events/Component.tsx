@@ -40,9 +40,9 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   role="img"
                   className="mR1"
                   aria-label="Hand with Pen Emoji">
-                    ✍️
+                  ✍️
                 </span>
-                  Edit this event
+                Edit this event
               </Link>
             </div>
             <button
@@ -54,7 +54,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 aria-label="Big X Emoji">
                 ✖️
               </span>
-                Delete this {ev.isDraft ? 'draft' : 'event'}
+              Delete this {ev.isDraft ? 'draft' : 'event'}
             </button>
           </div>
         )}
@@ -115,7 +115,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   {ev.goingCount} Attendees
                 </span>
               )}
-              <RSVP event={ev} />
+              <RSVP event={ev} role={props.role} />
               <small
                 className={cx({
                   'bgYellowLite br8 p1 pL2 pR2': true,

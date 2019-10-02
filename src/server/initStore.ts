@@ -2,7 +2,6 @@ import Koa from 'koa';
 import _ from 'lodash';
 
 import {initStore} from '../redux/store';
-import {knex} from './db/connection';
 import {getSession} from './queries';
 
 // in order to sync our server/client sessions, we have to initalize here

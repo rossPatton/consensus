@@ -10,11 +10,10 @@ export type tContainerProps = tComponentProps & {
   getDecisionsByOrg: (query: tIdQuery) => Promise<tThunk<tDecision[]>>,
   isLoading: boolean,
   session: tSession,
-  role: tRole,
 };
 
 export type tStore = {
   decisions: tThunk<tDecision[]>,
   events: tThunk<tEvent[]>,
   session: tThunk<tSession>,
-}
+};
