@@ -5,19 +5,29 @@ import Knex from 'knex';
 import {range} from '../../../utils/range';
 
 const createUser = async () => ({
+  bio: faker.lorem.paragraphs(),
   email: faker.internet.exampleEmail(),
   fname: faker.name.firstName(),
   lname: faker.name.lastName(),
   phone: faker.phone.phoneNumber(),
+  privateEmail: faker.random.boolean(),
+  privateMemberships: faker.random.boolean(),
+  privatePhone: faker.random.boolean(),
+  privateRSVP: faker.random.boolean(),
   username: faker.internet.userName(),
 });
 
 const createTestUser = async () => ({
+  bio: faker.lorem.paragraphs(),
   city: 3658, // New York City
   email: 'test@test.com',
   fname: 'test',
   lname: 'user',
   phone: faker.phone.phoneNumber(),
+  privateEmail: faker.random.boolean(),
+  privateMemberships: faker.random.boolean(),
+  privatePhone: faker.random.boolean(),
+  privateRSVP: faker.random.boolean(),
   username: 'testUsername',
 });
 

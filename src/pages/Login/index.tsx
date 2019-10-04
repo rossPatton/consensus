@@ -65,10 +65,7 @@ export class LoginContainer extends PureComponent<tProps, tState> {
           ]}
         />
         {session.isAuthenticated && (
-          <>
-            {session.type === 'user' && <Redirect to="/admin/profile" />}
-            {session.type === 'org' && <Redirect to="/admin/manageOrganization" />}
-          </>
+          <Redirect to="/admin/profile" />
         )}
         {!session.isAuthenticated && (
           <LoginComponent

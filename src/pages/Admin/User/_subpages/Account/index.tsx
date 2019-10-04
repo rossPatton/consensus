@@ -4,23 +4,19 @@ import {Dispatch} from 'redux';
 
 import {authenticateSession, updateUser} from '../../../../../redux';
 import {tContainerProps, tState, tStateUnion} from './_types';
-import {ProfileComponent} from './Component';
+import {AccountComponent} from './Component';
 
 const initialState = {
-  bio: '',
-  email: '',
-  fname: '',
   isClient: false,
-  lname: '',
+  login: '',
   newPassword: '',
   password: '',
-  privateEmail: true,
-  privateMemberships: false,
   privateRSVP: false,
-  username: '',
+  privateMembership: false,
+  privateProfile: false,
 };
 
-export class ProfileContainer extends PureComponent<tContainerProps, tState> {
+export class AccountContainer extends PureComponent<tContainerProps, tState> {
   state = initialState;
 
   componentDidMount() {
@@ -32,7 +28,7 @@ export class ProfileContainer extends PureComponent<tContainerProps, tState> {
 
   save = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {id} = this.props.session;
+    const {id, login} = this.props.session;
     const {newPassword, password} = this.state;
 
     let newUser;
@@ -47,7 +43,7 @@ export class ProfileContainer extends PureComponent<tContainerProps, tState> {
 
     try {
       await this.props.authenticateSession({
-        username: newUser.payload.username,
+        username: login,
         password: newPassword || password,
       });
     } catch (err) {
@@ -58,22 +54,14 @@ export class ProfileContainer extends PureComponent<tContainerProps, tState> {
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
-    let {value} = ev.currentTarget;
-    console.log('og value => ', value);
-    if (stateKey.indexOf('private') !== -1) {
-      value = !this.state[stateKey];
-    }
-
-    console.log('value => ', value);
-
     this.setState({
-      [stateKey]: value,
+      [stateKey]: ev.currentTarget.value,
     } as Pick<tState, tStateUnion>);
   }
 
   render() {
     return (
-      <ProfileComponent
+      <AccountComponent
         {...this.state}
         session={this.props.session}
         save={this.save}
@@ -85,10 +73,10 @@ export class ProfileContainer extends PureComponent<tContainerProps, tState> {
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
-  updateUser: (user: {id: number} & tState) => dispatch(updateUser(user)),
+  updateUser: (account: {id: number} & tState) => dispatch(updateUser(account)),
 });
 
-export const Profile = connect(
+export const Account = connect(
   null,
   mapDispatchToProps
-)(ProfileContainer);
+)(AccountContainer);

@@ -5,10 +5,10 @@ import {Dispatch} from 'redux';
 import {Paginate} from '../../../../../containers';
 import {getEventsByUser} from '../../../../../redux';
 import {fuzzFilterList} from '../../../../../utils';
-import {tContainerProps, tStore} from './_types';
+import {tContainerProps, tState, tStore} from './_types';
 import {EventsComponent} from './Component';
 
-class EventsContainer extends PureComponent<tContainerProps> {
+class EventsContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
     props.getEventsByUser();
@@ -16,6 +16,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
 
   state = {
     events: [],
+    privacyFilter: 'n/a' as tPrivacyFilter,
   };
 
   // TODO consolidate search logic somewhere
@@ -33,10 +34,27 @@ class EventsContainer extends PureComponent<tContainerProps> {
     });
   }
 
+  filter = (evs: tEvent[]) => {
+    const {privacyFilter} = this.state;
+    if (privacyFilter === 'n/a') return evs;
+
+    const isPrivate = privacyFilter === 'private';
+    return evs.filter(ev => ev.isPrivate === isPrivate);
+  };
+
+  onPrivacyFilterChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
+    ev.preventDefault();
+    this.setState({
+      privacyFilter: ev.currentTarget.value as tPrivacyFilter,
+    });
+  }
+
   render() {
-    const eventsToRender = this.state.events.length > 0
-      ? this.state.events
-      : this.props.events;
+    const eventsToRender = this.filter(
+      this.state.events.length > 0
+        ? this.state.events
+        : this.props.events
+    );
 
     return (
       <Paginate
@@ -45,6 +63,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
         render={(itemsToRender: tEvent[]) => (
           <EventsComponent
             events={itemsToRender}
+            onPrivacyFilterChange={this.onPrivacyFilterChange}
             onSearchChange={this.onSearchChange}
           />
         )}

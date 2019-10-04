@@ -1,3 +1,4 @@
+export {Account} from './Account';
 export {Decisions} from './Decisions';
 export {Events} from './Events';
 export {Profile} from './Profile';

@@ -22,10 +22,10 @@
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "sourceMap": false,
-    "baseUrl": ".",
+    "baseUrl": "."
   },
   "include": [
-    "src",
+    "src"
   ],
   "exclude": [
     "node_modules"

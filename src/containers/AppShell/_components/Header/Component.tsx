@@ -37,10 +37,7 @@ export const HeaderComponent = memo((props: tProps) => (
             <Link
               id="a11yAdmin"
               className="mR2"
-              to={props.session.type === 'org'
-                ? '/admin/manageOrganization'
-                : '/admin/profile'
-              }>
+              to="/admin/profile">
               Account
             </Link>
             <button

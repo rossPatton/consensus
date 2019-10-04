@@ -4,7 +4,8 @@ import faker from 'faker';
 import Knex from 'knex';
 
 import {range} from '../../../utils/range';
-import {encrypt, sha384} from '../../utils';
+import {encrypt} from '../../utils/crypto';
+import {sha384} from '../../utils/sha';
 
 // in production, salt would be generated per hash, but this saves time
 const salt = bcrypt.genSaltSync(10);

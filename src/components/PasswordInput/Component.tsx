@@ -14,6 +14,11 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
         <h3 className="ffLab fs5">
           {props.title || 'Password'}
         </h3>
+        {!props.newPassword && (
+          <p className="fs5 copyBlack mB1">
+            Required to make any changes to your account or profile.
+          </p>
+        )}
         <div className="fx mB2">
           <input
             id={props.id}
@@ -66,7 +71,7 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
           <ul className="fs6 lh1 lsDisc mL3 mB4">
             <li className="mB1">Do not use a common password, or one you have used before.</li>
             <li className="mB1">Minimum password length is 12 characters - but even longer is better.</li>
-            <li className="mB1">We strongly recommend adding numbers, capitals, or special characters, but you aren&apos;t required.</li>
+            <li className="mB1">We strongly recommend adding numbers, capitals, or special characters, but they aren&apos;t required.</li>
             <li className="mB1">We encourage the use of a password manager to generate and save strong passwords</li>
           </ul>
         </>

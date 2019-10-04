@@ -5,13 +5,32 @@ exports.up = async (knex: Knex) => {
     table.increments().unsigned().primary();
 
     // additional info that could be made public, but is private by default
+    table.text('bio', 'longtext');
     table.string('fname');
     table.string('lname');
+
     table.string('username').notNullable();
 
     // account recovery / verification
     table.string('email').notNullable().unique();
+    // if set to true, email addresses aren't visible to other users or org
+    table.boolean('privateEmail').notNullable().defaultTo(true);
+
     table.string('phone').unique();
+    // if set to true, user memberships aren't visible to others
+    table.boolean('privatePhone').notNullable().defaultTo(true);
+
+    // optional - allow user to change their country, eventually
+    table.integer('country')
+      .references('countries.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+
+    // optional - allow user to change their country, eventually
+    table.integer('region')
+      .references('regions.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
 
     // optional - allow user to set their primary city
     // on login, take user to directory for that location
@@ -20,6 +39,9 @@ exports.up = async (knex: Knex) => {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
+    // if set to true, user location isn't visible to others
+    table.boolean('privateLocation').notNullable().defaultTo(true);
+
     // user's preferred language
     table.string('language').defaultTo('en');
 
@@ -27,7 +49,7 @@ exports.up = async (knex: Knex) => {
     table.boolean('privateRSVP').notNullable().defaultTo(true);
 
     // if set to true, user memberships aren't visible to others in user profile
-    table.boolean('privateMembership').notNullable().defaultTo(true);
+    table.boolean('privateMemberships').notNullable().defaultTo(true);
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.timestamp('updatedAt').defaultTo(knex.fn.now());

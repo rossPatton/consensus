@@ -100,10 +100,14 @@ declare type tOrgRouteParams = tDirectoryParams & {
 };
 
 declare type tUser = {
+  bio: string,
   id: number,
   email: string,
   fname: string,
   lname: string,
+  privateRSVP: boolean,
+  privateMemberships: boolean,
+  privateProfile: boolean,
   role?: tRole,
   username: string,
 };
@@ -162,12 +166,17 @@ declare type tCrumb = {
   to: string,
 };
 
+declare type tPrivacyFilter = 'n/a' | 'public' | 'private';
+declare type tPublishedFilter = 'n/a' | 'published' | 'draft';
+
 // tSession is like tUser, but with auth data and everything is optional
 // since a user might not be logged in
 declare type tSession = {
   id: number,
   isAuthenticated: boolean,
+  isVerified: boolean,
   lastActive?: string,
+  login: string, // unique login value separate from username or email
   profile: tOrg | tUser,
   profileId: number,
   type: 'org' | 'user',

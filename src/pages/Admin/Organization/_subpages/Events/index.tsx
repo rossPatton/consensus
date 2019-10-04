@@ -5,7 +5,7 @@ import {Dispatch} from 'redux';
 import {Paginate} from '../../../../../containers';
 import {getEvents} from '../../../../../redux';
 import {fuzzFilterList} from '../../../../../utils';
-import {tContainerProps, tPrivacyFilter, tPublishedFilter, tState, tStore} from './_types';
+import {tContainerProps, tState, tStore} from './_types';
 import {EventsComponent} from './Component';
 
 export class EventsContainer extends PureComponent<tContainerProps, tState> {

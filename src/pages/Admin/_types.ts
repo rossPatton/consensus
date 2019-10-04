@@ -7,7 +7,7 @@ export type tStore = {
 export type tAdminSections = match & {
   params: {
     page?: string,
-    section: 'decisions' | 'memberships' | 'profile' | 'events',
+    section: 'account' | 'decisions' | 'memberships' | 'profile' | 'events',
   }
 };
 

@@ -1,17 +1,13 @@
 import {UPDATE_USER_SUCCESS} from '../../../../../redux/async/updateUser/_types';
 
 export type tState = {
-  bio: string,
-  email: string,
   isClient: boolean,
-  fname: string,
-  lname: string,
+  login: string,
   newPassword: string,
   password: string,
-  privateEmail: boolean,
-  privateMemberships: boolean,
   privateRSVP: boolean,
-  username: string,
+  privateMembership: boolean,
+  privateProfile: boolean,
 };
 
 export type tStateUnion = keyof tState;
@@ -20,17 +16,12 @@ export type tContainerProps = {
   authenticateSession: (login: tLogin) => any,
   session: tSession,
   // we get id from the active session
-  updateUser: (user: {id: number} & tState) =>
-    Promise<tAction<typeof UPDATE_USER_SUCCESS, tUser>>,
+  updateUser: (account: {id: number} & tState) =>
+    Promise<tAction<typeof UPDATE_USER_SUCCESS, tAccount>>,
 };
 
 export type tComponentProps = tState & {
   session: tSession,
   save: (ev: React.FormEvent<HTMLFormElement>) => void,
-  updateState: (
-    key: tStateUnion,
-    ev: React.MouseEvent<HTMLDivElement>
-      | React.KeyboardEvent<HTMLDivElement>
-      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void,
+  updateState: (key: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 };

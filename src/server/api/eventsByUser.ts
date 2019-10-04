@@ -10,7 +10,8 @@ const route = '/api/v1/eventsByUser';
 const table = 'users_events';
 
 eventsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const userId = _.get(ctx, 'state.user.id', 0);
+  // state.user === logged in account
+  const userId = _.get(ctx, 'state.user.userId', 0);
 
   let userEventIds: tUserEventRelation[];
   try {

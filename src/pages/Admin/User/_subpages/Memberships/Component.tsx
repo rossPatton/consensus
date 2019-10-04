@@ -31,13 +31,12 @@ export const MembershipsComponent = memo((props: tComponentProps) => (
               'fx aiCtr fs6 p2 pL3 pR3 brdB1': true,
               bgYellowLite: org.role === 'member',
               bgGreenLite: org.role === 'facilitator',
-              bgBlueLite: org.role === 'admin',
             })}>
             <div className="fx aiCtr col">
               <span className="ttCap mR3">
                 {org.role}
               </span>
-              {org.role === 'admin' && (
+              {org.role === 'facilitator' && (
                 <div>
                   <Link
                     className="mR3"
@@ -47,9 +46,6 @@ export const MembershipsComponent = memo((props: tComponentProps) => (
                   <a href="filler" className="mR3">
                     Make Decision
                   </a>
-                  <Link to={`/org/${org.id}/manageOrganization`}>
-                    Manage Group
-                  </Link>
                 </div>
               )}
             </div>

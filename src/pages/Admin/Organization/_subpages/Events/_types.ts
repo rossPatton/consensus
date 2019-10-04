@@ -17,9 +17,6 @@ export type tContainerProps = tProps & {
   session: tSession,
 };
 
-export type tPrivacyFilter = 'n/a' | 'public' | 'private';
-export type tPublishedFilter = 'n/a' | 'published' | 'draft';
-
 export type tState = {
   events: tEvent[]
   privacyFilter: tPrivacyFilter,
