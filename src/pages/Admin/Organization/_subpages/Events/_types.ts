@@ -1,22 +1,20 @@
-import {match} from 'react-router';
+import {tAdminSections} from '../../../_types';
 
 export type tProps = {
   events: tEvent[],
-  org: tOrg,
-  role: tRole,
 };
 
 export type tComponentProps = tProps & {
   onPrivacyFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onPublishedFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-
-}
+};
 
 export type tContainerProps = tProps & {
   getEvents: (query: tIdQuery) => Promise<tThunk<tEvent[]>>,
   isLoading: boolean,
-  match: match & {params: tOrgRouteParams},
+  match: tAdminSections,
+  session: tSession,
 };
 
 export type tPrivacyFilter = 'n/a' | 'public' | 'private';

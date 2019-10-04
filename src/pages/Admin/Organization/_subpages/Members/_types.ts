@@ -1,4 +1,4 @@
-import {match} from 'react-router';
+import {tAdminSections} from '../../../_types';
 
 export type tStore = {
   usersByOrg: tThunk<tUsersByOrg>,
@@ -17,8 +17,8 @@ export type tRoleOpts = {
 
 export type tProps = {
   deleteUserByOrg: (query: {orgId: number, userId: number}) => void,
-  match: match,
-  org: tOrg,
+  match: tAdminSections,
+  session: tSession,
   updateRole: (opts: tRoleOpts) => void,
   usersByOrg: tUsersByOrg,
 };

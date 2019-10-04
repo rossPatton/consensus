@@ -5,12 +5,13 @@ import {Dispatch} from 'redux';
 
 import {Helmet} from '../../../../../components';
 import {patchOrg} from '../../../../../redux';
-import {tContainerProps, tStateUnion, tStore} from './_types';
+import {tContainerProps, tStateUnion} from './_types';
 import {ProfileComponent} from './Component';
 
 export class ProfileContainer extends Component<tContainerProps, tOrg> {
   state = {
-    ...this.props.session,
+    id: this.props.session.id,
+    ...this.props.session.profile as tOrg,
   };
 
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {

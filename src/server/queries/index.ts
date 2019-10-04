@@ -1,4 +1,5 @@
 export {getEventByQuery} from './getEventByQuery';
+export {getEventsByOrgId} from './getEventsByOrgId';
 export {getProfileByAccount} from './getProfileByAccount';
 export {getRolesByAccountId} from './getRolesByAccountId';
 export {getRSVPByEventId} from './getRSVPByEventId';

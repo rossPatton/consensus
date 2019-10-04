@@ -1,3 +1,5 @@
+import {UPDATE_USER_SUCCESS} from '../../../../../redux/async/updateUser/_types';
+
 export type tState = {
   email: string,
   isClient: boolean,
@@ -8,14 +10,13 @@ export type tState = {
   username: string,
 };
 
-export type tStore = { session: tSession };
 export type tStateUnion = keyof tState;
 
 export type tContainerProps = {
   authenticateSession: (login: tLogin) => any,
   session: tSession,
   // we get id from the active session
-  updateUser: (user: tSession) => any,
+  updateUser: (user: tUser) => Promise<tAction<typeof UPDATE_USER_SUCCESS, tUser>>,
 };
 
 export type tComponentProps = tState & {

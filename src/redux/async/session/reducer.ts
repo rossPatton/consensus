@@ -8,12 +8,10 @@ import {
   tSessionUnion,
 } from './_types';
 
-const initialState: tThunk<tAuth> = {
+const initialState: tThunk<tSession> = {
   error: null,
   isLoading: false,
-  data: {
-    isAuthenticated: false,
-  },
+  data: {} as tSession,
 };
 
 export const authenticateSessionReducer = (state = initialState, action: tSessionUnion) => {

@@ -2,7 +2,6 @@ import { match } from 'react-router';
 
 export type tProps = {
   decisions: tDecision[],
-  role: tRole,
 };
 
 export type tContainerProps = tProps & {
@@ -10,6 +9,7 @@ export type tContainerProps = tProps & {
   isLoading: boolean,
   match: match & { params: tOrgRouteParams },
   org: tOrg,
+  role: tRole,
 };
 
 export type tStore = {

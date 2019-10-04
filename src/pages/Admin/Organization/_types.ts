@@ -1,12 +1,6 @@
-import {match} from 'react-router';
-
-export type tStore = {
-  session: tThunk<tSession>,
-};
+import {tAdminSections} from '../_types';
 
 export type tProps = {
-  match: match & {params: tOrgRouteParams},
-  org: tOrg,
-  role: tRole,
+  match: tAdminSections,
   session: tSession,
 };

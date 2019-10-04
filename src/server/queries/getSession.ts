@@ -1,6 +1,6 @@
 import Koa from 'koa';
 
-import {getProfileByAccount, getRolesByAccountId, getRSVPsByUserId} from '.';
+import {getProfileByAccount} from '.';
 
 // use login info to return session for client
 // ideally only happens once per visit, on login. but if user refreshes, we do again
@@ -23,9 +23,9 @@ export const getSession = async (
     error: null,
     isLoading: false,
     data: {
-      ...profile,
       id,
       isAuthenticated: ctx.isAuthenticated(),
+      profile,
       profileId,
       type: orgId ? 'org' : 'user',
     },

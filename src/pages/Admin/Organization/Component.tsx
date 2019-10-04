@@ -7,10 +7,10 @@ import {tProps} from './_types';
 
 export const OrgAdminComponent = memo((props: tProps) => {
   const {section} = props.match.params;
-  const isDecisions = section === 'manageDecisions';
-  const isEvents = section === 'manageEvents';
-  const isProfile = section === 'manageOrganization';
-  const isMembers = section === 'manageMembers';
+  const isDecisions = section === 'decisions';
+  const isEvents = section === 'events';
+  const isProfile = section === 'profile';
+  const isMembers = section === 'memberships';
   const to = '/admin';
 
   return (
@@ -54,22 +54,25 @@ export const OrgAdminComponent = memo((props: tProps) => {
       <div className="col row">
         {isDecisions && (
           <Decisions
-            {...props}
+            match={props.match}
+            session={props.session}
           />
         )}
         {isEvents && (
           <Events
-            {...props}
+            match={props.match}
+            session={props.session}
           />
         )}
         {isProfile && (
           <Profile
-            {...props}
+            session={props.session}
           />
         )}
         {isMembers && (
           <Members
-            {...props}
+            match={props.match}
+            session={props.session}
           />
         )}
       </div>

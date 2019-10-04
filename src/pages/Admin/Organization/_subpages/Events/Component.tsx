@@ -51,6 +51,8 @@ export const EventsComponent = memo((props: tComponentProps) => (
         </select>
       </div>
     </div>
+    {/* eslint-disable */}
     <Events events={props.events} role="admin" />
+    {/* eslint-enable */}
   </>
 ));

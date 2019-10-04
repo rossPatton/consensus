@@ -4,11 +4,11 @@ import {Redirect} from 'react-router';
 
 import {Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
-// import {tProps, tStore} from './_types';
+import {tProps, tStore} from './_types';
 import {OrgAdmin} from './Organization';
 import {UserAdmin} from './User';
 
-export class AdminContainer extends Component<any> {
+export class AdminContainer extends Component<tProps> {
   render() {
     const {match, session} = this.props;
 
@@ -46,7 +46,7 @@ export class AdminContainer extends Component<any> {
   }
 }
 
-const mapStateToProps = (store: any) => ({
+const mapStateToProps = (store: tStore) => ({
   session: store.session.data,
 });
 

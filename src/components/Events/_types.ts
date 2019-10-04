@@ -8,9 +8,7 @@ export type tProps = {
 };
 
 export type tContainerProps = tProps & {
-  // redux
-  deleteEvent: (query: {id: number}) => void,
-  org: tOrg,
+  deleteEvent: (query: tIdQuery) => void,
 };
 
 export type tComponentProps = tProps & {

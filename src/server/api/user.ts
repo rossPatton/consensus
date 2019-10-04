@@ -99,7 +99,5 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
   ctx.body = {
     ...updatedUser[0],
-    isAuthenticated: ctx.isAuthenticated(),
   };
-
 });

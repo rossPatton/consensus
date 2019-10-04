@@ -31,17 +31,11 @@ class EventsContainer extends PureComponent<tContainerProps> {
   }
 }
 
-// TODO just handle fetching events in this generic component instead of repeating logic
-const mapStateToProps = (store: any) => ({
-  org: store.org.data,
-  session: store.session.data,
-});
-
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   deleteEvent: (query: tIdQuery) => dispatch(deleteEvent(query)),
 });
 
 export const Events = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(EventsContainer);

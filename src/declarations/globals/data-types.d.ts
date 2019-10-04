@@ -157,10 +157,6 @@ declare type tLogin = {
   password: string,
 };
 
-declare type tAuth = {
-  isAuthenticated: boolean,
-};
-
 declare type tCrumb = {
   display: string,
   to: string,
@@ -168,9 +164,11 @@ declare type tCrumb = {
 
 // tSession is like tUser, but with auth data and everything is optional
 // since a user might not be logged in
-declare type tSession = tOrg & tUser & {
+declare type tSession = {
+  id: number,
   isAuthenticated: boolean,
   lastActive?: string,
+  profile: tOrg | tUser,
   profileId: number,
   type: 'org' | 'user',
 };

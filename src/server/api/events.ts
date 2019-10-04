@@ -2,60 +2,34 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import { getDateNowAsISOStr, notNull } from '../../utils';
-import { knex } from '../db/connection';
+import {knex} from '../db/connection';
+import {getEventsByOrgId} from '../queries';
+import {filterEvs4Client, zipEvsWithRSVPS} from '../utils'; // server only utils
 
 export const events = new Router();
 const route = '/api/v1/events';
 const table = 'events';
 const state = 'state.locals.data';
 
-// TODO simplify
-const getEvents = async (ctx: Koa.ParameterizedContext) => {
-  const data = _.get(ctx, state, {});
-  const { exclude, id, limit, isPublic: isPublicStr, offset } = data;
-
-  const orgId = parseInt(id, 10);
-  const parsedLimit = limit ? parseInt(limit, 10) : 3;
-  const parsedOffset = offset ? parseInt(offset, 10) : 0;
-
-  // by default, we only return upcoming events
-  const events = knex(table);
-
-  // if we're excluding events, do it up front
-  if (exclude) {
-    events.whereNot({id: exclude});
-  }
-
-  // if user isn't logged in or a member, only show public events
-  const isPublic = isPublicStr === 'true';
-  if (isPublic) events.where({isPrivate: false});
-
-  events.where({orgId})
-    .where('date', '>=', getDateNowAsISOStr())
-    .orderBy('date', 'asc');
-
-  if (parsedLimit > 0) events.limit(parsedLimit);
-  if (parsedOffset > 0) events.offset(parsedOffset);
-
-  return events;
-};
-
 // get multiple events at a time
 events.get(route, async (ctx: Koa.ParameterizedContext) => {
   const data = _.get(ctx, state, {});
   const account = _.get(ctx, 'state.user', 0);
 
+  // get back events by orgId
   let events: tEvent[];
   try {
-    events = await getEvents(ctx);
+    events = await getEventsByOrgId(ctx);
   } catch (err) {
     return ctx.throw(400, err);
   }
 
-  const {id, userId} = account;
   // get account role if logged in
-  let accountRoleRel: tAccountRoleRelation;
+  // if user logged in, then we'll want to get RSVPS
+  // if not logged in, we'll want to hide private events and drafts
+  // if user is logged in but just a member, we want to hide drafts
+  const {id, userId} = account;
+  let accountRoleRel = {} as tAccountRoleRelation;
   if (id) {
     try {
       accountRoleRel = await knex('accounts_roles')
@@ -70,49 +44,11 @@ events.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   const isAuthenticated = ctx.isAuthenticated();
   const role = _.get(accountRoleRel, 'role', null);
+  const filteredEvents: tEvent[] = await filterEvs4Client(events, isAuthenticated, role);
 
-  const filteredEvents = events.map(ev => {
-    if (ev.isPrivate || ev.isDraft) {
-      // if private event or draft, and user is not logged in, hide
-      if (!isAuthenticated) return null;
-      // if private event or draft, user is logged in, but user is not a member, hide
-      if (role === null) return null;
-      // only facilitators and the org admin should see drafts
-      if (ev.isDraft && role === 'member') return null;
-    }
-
-    return ev;
-  }).filter(notNull);
-
-  // if org admin account, no need to fetch rsvps
-  if (!userId) {
-    ctx.body = filteredEvents;
-  } else {
-
-    // if user account, fetch rsvps
-    let userEventsRels: tUserEventRelation[];
-    try {
-      userEventsRels = await knex('users_events').where({userId});
-    } catch (err) {
-      return ctx.throw(400, err);
-    }
-
-    const eventsWithRSVPS = filteredEvents.map(ev => {
-      const rsvpObj = _.find(
-        userEventsRels,
-        rel => rel.eventId === ev.id && rel.userId === userId,
-      );
-
-      const rsvp = (rsvpObj && rsvpObj.rsvp) || false;
-
-      return {
-        ...ev,
-        rsvp,
-      };
-    });
-
-    ctx.body = eventsWithRSVPS;
-  }
+  // if org admin account, this just returns the events we've already fetched
+  const eventsWithRSVPS = await zipEvsWithRSVPS(ctx, filteredEvents);
+  ctx.body = eventsWithRSVPS;
 });
 
 events.delete(route, async (ctx: Koa.ParameterizedContext) => {

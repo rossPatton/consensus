@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 
 import {Helmet} from '../../../components';
@@ -36,10 +35,4 @@ export class UserAdminContainer extends PureComponent<tProps> {
     );
   }
 }
-
-const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
-  isLoading: store.session.isLoading,
-  session: store.session.data,
-});
-
-export const UserAdmin = connect(mapStateToProps)(UserAdminContainer);
+export const UserAdmin = UserAdminContainer;

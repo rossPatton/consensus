@@ -1,6 +1,6 @@
-import {match} from 'react-router-dom';
+import {tAdminSections} from '../_types';
 
 export type tProps = {
-  match: match & {params: {section: 'memberships' | 'profile' | 'events'}},
+  match: tAdminSections,
   session: tSession,
 };

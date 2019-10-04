@@ -10,7 +10,7 @@ export const ProfileComponent = memo((props: tComponentProps) => {
     // hasAvatar: origAvatar,
     lname: origLname,
     username: origUsername,
-  } = props.session;
+  } = props.session.profile as tUser;
 
   return (
     <form

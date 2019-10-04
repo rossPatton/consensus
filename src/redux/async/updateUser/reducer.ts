@@ -5,10 +5,10 @@ import {
   UPDATE_USER_SUCCESS,
 } from './_types';
 
-const initialState: tThunk<tSession> = {
+const initialState: tThunk<tUser> = {
   error: null,
   isLoading: false,
-  data: {},
+  data: {} as tUser,
 };
 
 export const updateUserReducer = (state = initialState, action: tActionUnion) => {
