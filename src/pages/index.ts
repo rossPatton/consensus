@@ -9,3 +9,4 @@ export { Login } from './Login';
 export { NoMatch } from './404';
 export { Organization } from './Organization';
 export { Signup } from './Signup';
+export { User } from './User';

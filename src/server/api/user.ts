@@ -12,7 +12,7 @@ const table = 'users';
 
 user.get(route, async (ctx: Koa.ParameterizedContext) => {
   const data = _.get(ctx, 'state.locals.data', {});
-  return getUserByQuery(ctx, data);
+  ctx.body = await getUserByQuery(ctx, data);
 });
 
 // user signup form basically

@@ -19,6 +19,7 @@ export { deleteOrgByUser, getOrgsByUser } from './async/orgs/thunk';
 export { getRegion } from './async/region/thunk';
 export { getRoles } from './async/roles/thunk';
 export { getRsvps, setRsvp } from './async/rsvps/thunk';
+export { getUserById } from './async/user/thunk';
 export { getUsers } from './async/users/thunk';
 export { deleteUserByOrg, getUsersByOrg, patchUserByOrg, postNewUserByOrg } from './async/usersByOrg/thunk';
 export { registerUser } from './async/registerUser/thunk';

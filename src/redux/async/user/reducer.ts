@@ -5,10 +5,10 @@ import {
   GET_USER_SUCCESS,
 } from './_types';
 
-const initialState: tThunk<tUser[]> = {
+const initialState: tThunk<tUser> = {
   error: null,
   isLoading: false,
-  data: [],
+  data: {} as tUser,
 };
 
 export const userReducer = (state = initialState, action: tActionUnion) => {

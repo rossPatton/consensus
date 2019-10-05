@@ -7,6 +7,7 @@ import {
   Login,
   Organization,
   Signup,
+  User,
 } from '../pages';
 
 // TODO eventually split this file up once it starts getting big
@@ -51,6 +52,11 @@ export const routes = [
     component: Organization,
     exact: true,
     path: '/org/:country/:region/:city/:slug/:section/:page?',
+  },
+  {
+    component: User,
+    exact: true,
+    path: '/user/:id',
   },
   // NoMatch === our 404 page
   // any match that we can't find, 404, or else we can manually redirect to /404
