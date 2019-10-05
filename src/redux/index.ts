@@ -1,10 +1,11 @@
 // exports actions/thunks here for easier importing
 
-// sync actions here
+// actions here
 export { setRole } from './async/roles/actions';
 export { setUserByOrg } from './async/usersByOrg/actions';
 
-// async thunks here
+// thunks here
+export { patchAccount } from './async/account/thunk';
 export { authenticateSession, logOutOfSession } from './async/session/thunk';
 export { createEvent } from './async/createEvent/thunk';
 export { fileUpload } from './async/fileUpload/thunk';

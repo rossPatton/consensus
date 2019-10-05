@@ -25,7 +25,7 @@ export class LoginContainer extends PureComponent<tProps, tState> {
     });
   }
 
-  // TODO work is needed now to make this work without js due to login stuff
+  // TODO is it safe to login on the client like this?
 
   userLogin = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();

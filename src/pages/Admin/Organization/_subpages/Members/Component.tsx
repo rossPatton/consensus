@@ -24,7 +24,7 @@ export const MembersComponent = memo((props: tComponentProps) => {
           placeholder="Search for a member by username"
         />
         <select onBlur={props.onFilterChange} onChange={props.onFilterChange}>
-          <option value="n/a">
+          <option key="n/a" value="n/a">
             Filter by User Role
           </option>
           {roles.map((role: tRole, i) => (
@@ -80,14 +80,17 @@ export const MembersComponent = memo((props: tComponentProps) => {
                   value={user.role as string}
                   onChange={ev => props.setRole(ev, user.id)}
                 >
-                  <option value={user.role as string}>
+                  <option key="default" value={user.role as string}>
                     Choose a new role
                   </option>
                   {roles.map(role => (
                     role === user.role
                       ? null
                       : (
-                        <option className="ttCap" value={role as string}>
+                        <option
+                          className="ttCap"
+                          key={role as string}
+                          value={role as string}>
                           {role}
                         </option>
                       )

@@ -1,14 +1,9 @@
 import {fuzz} from './fuzz';
 import {lowerCase} from './string';
 
-type tMatch = {
-  rendered: string,
-  score: number;
-};
-
-type tObjWithMatch = {
+type tObjWithScore = {
   [key: string]: any,
-  match: tMatch,
+  score: number,
 };
 
 type tOpts = {
@@ -32,16 +27,16 @@ export const fuzzFilterList = (opts: tOpts) => {
   return input
     .map(obj => {
       const orgNorm = lowerCase(obj[key]);
-      const match = fuzz(searchNorm, orgNorm);
+      const score = fuzz(searchNorm, orgNorm);
       return {
         ...obj,
-        match,
+        score,
       };
     })
-    .filter((obj: tObjWithMatch) => !!obj.match && obj.match.score > 0)
-    .sort((a: tObjWithMatch, b: tObjWithMatch) => {
-      if (a.match.score > b.match.score) return -1;
-      if (a.match.score < b.match.score) return 1;
+    .filter((obj: tObjWithScore) => obj.score > 0)
+    .sort((a: tObjWithScore, b: tObjWithScore) => {
+      if (a.score > b.score) return -1;
+      if (a.score < b.score) return 1;
       return 0;
     });
 };

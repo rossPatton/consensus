@@ -17,11 +17,16 @@ export type tRoleOpts = {
 
 export type tProps = {
   deleteUserByOrg: (query: {orgId: number, userId: number}) => void,
+};
+
+export type tContainerProps = tProps & {
+  getUsersByOrg: (query: tIdQuery) => any,
+  isLoading: boolean,
   match: tAdminSections,
   session: tSession,
   updateRole: (opts: tRoleOpts) => void,
   usersByOrg: tUsersByOrg,
-};
+}
 
 export type tComponentProps = {
   deleteUserByOrg: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,

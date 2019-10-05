@@ -51,7 +51,9 @@ export const AccountComponent = memo((props: tComponentProps) => {
           />
         </div>
       </fieldset>
-      <button className="p3 pL4 pR4 hvrBgGrey1 trans1">
+      <button
+        disabled={!props.password}
+        className="p3 pL4 pR4 hvrBgGrey1 trans1">
         Save Changes
       </button>
     </form>

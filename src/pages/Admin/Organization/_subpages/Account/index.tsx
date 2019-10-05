@@ -2,45 +2,36 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {authenticateSession, updateUser} from '../../../../../redux';
+import {authenticateSession, patchAccount} from '../../../../../redux';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {AccountComponent} from './Component';
 
-const initialState = {
-  isClient: false,
-  login: '',
-  newPassword: '',
-  password: '',
-  privateRSVP: false,
-  privateMembership: false,
-  privateProfile: false,
-};
-
 export class AccountContainer extends PureComponent<tContainerProps, tState> {
-  state = initialState;
+  constructor(props: tContainerProps) {
+    super(props);
 
-  componentDidMount() {
-    // we do this so we only disable form submit when js is available
-    this.setState({
-      isClient: true,
-    });
+    this.state = {
+      login: props.session.login,
+      newPassword: '',
+      password: '',
+    };
   }
 
   save = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {id, login} = this.props.session;
-    const {newPassword, password} = this.state;
+    const {id} = this.props.session;
 
-    let newUser;
+    let newAccount;
     try {
-      newUser = await this.props.updateUser({id, ...this.state});
+      newAccount = await this.props.patchAccount({id, ...this.state});
     } catch (err) {
       return console.error(err);
     }
 
     // TODO trigger error boundary or something
-    if (!newUser.payload) return;
+    if (!newAccount.payload) return;
 
+    const {login, newPassword, password} = this.state;
     try {
       await this.props.authenticateSession({
         username: login,
@@ -50,7 +41,7 @@ export class AccountContainer extends PureComponent<tContainerProps, tState> {
       console.error(err);
     }
 
-    this.setState(initialState);
+    this.setState({password: ''});
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
@@ -73,7 +64,7 @@ export class AccountContainer extends PureComponent<tContainerProps, tState> {
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
-  updateUser: (account: {id: number} & tState) => dispatch(updateUser(account)),
+  patchAccount: (account: {id: number} & tState) => dispatch(patchAccount(account)),
 });
 
 export const Account = connect(

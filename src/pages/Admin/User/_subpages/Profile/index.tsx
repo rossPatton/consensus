@@ -70,6 +70,8 @@ export class ProfileContainer extends PureComponent<tContainerProps, tState> {
     } catch (err) {
       console.error(err);
     }
+
+    this.setState({password: ''});
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {

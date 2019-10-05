@@ -1,6 +1,7 @@
 import Boom from '@hapi/boom';
 import Koa from 'koa';
 
+import { account } from './account';
 import { auth } from './auth';
 import { city } from './city';
 import { country } from './country';
@@ -22,6 +23,7 @@ import { users } from './users';
 import { usersByOrg } from './usersByOrg';
 
 export const setupApi = (app: Koa) => {
+  app.use(account.routes());
   app.use(auth.routes());
   app.use(city.routes());
   app.use(country.routes());
@@ -48,6 +50,7 @@ export const setupApi = (app: Koa) => {
     throw: true,
   });
 
+  app.use(account.allowedMethods(opts));
   app.use(auth.allowedMethods(opts));
   app.use(city.allowedMethods(opts));
   app.use(country.allowedMethods(opts));

@@ -1,27 +1,22 @@
-import {UPDATE_USER_SUCCESS} from '../../../../../redux/async/updateUser/_types';
+import {PATCH_ACCOUNT_SUCCESS} from '../../../../../redux/async/account/_types';
 
 export type tState = {
-  isClient: boolean,
   login: string,
   newPassword: string,
   password: string,
-  privateRSVP: boolean,
-  privateMembership: boolean,
-  privateProfile: boolean,
 };
 
 export type tStateUnion = keyof tState;
 
 export type tContainerProps = {
   authenticateSession: (login: tLogin) => any,
+  patchAccount: (account: {id: number} & tState) =>
+    Promise<tAction<typeof PATCH_ACCOUNT_SUCCESS, tAccount>>,
   session: tSession,
-  // we get id from the active session
-  updateUser: (account: {id: number} & tState) =>
-    Promise<tAction<typeof UPDATE_USER_SUCCESS, tAccount>>,
 };
 
 export type tComponentProps = tState & {
-  session: tSession,
   save: (ev: React.FormEvent<HTMLFormElement>) => void,
+  session: tSession,
   updateState: (key: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 };

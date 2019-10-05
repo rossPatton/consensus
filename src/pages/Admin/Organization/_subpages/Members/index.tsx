@@ -5,26 +5,24 @@ import {Dispatch} from 'redux';
 import {Paginate} from '../../../../../containers';
 import {deleteUserByOrg, getUsersByOrg, patchUserByOrg} from '../../../../../redux';
 import {fuzzFilterList} from '../../../../../utils';
-import {tProps, tState} from './_types';
+import {tContainerProps, tState, tStore} from './_types';
 import {MembersComponent} from './Component';
 
-class MembersContainer extends Component<tProps, tState> {
-  static defaultProps = {
-    usersByOrg: {
-      users: [],
-      userTotal: 0,
-    },
-  };
-
-  constructor(props: any) {
-    super(props);
-    props.getUsersByOrg({id: this.props.session.profile.id});
-  }
-
+class MembersContainer extends Component<tContainerProps, tState> {
   state = {
     role: 'n/a' as tRole,
     users: this.props.usersByOrg.users,
   };
+
+  componentDidMount() {
+    this.props.getUsersByOrg({id: this.props.session.profile.id})
+      .then((res: any) => {
+        return this.setState({
+          users: res.payload.users,
+        });
+      })
+      .catch(console.error);
+  }
 
   deleteUserByOrg = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {
     ev.preventDefault();
@@ -48,10 +46,18 @@ class MembersContainer extends Component<tProps, tState> {
   onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
 
+    const search = ev.currentTarget.value;
+
+    if (!search) {
+      return this.setState({
+        users: this.props.usersByOrg.users,
+      });
+    }
+
     const filteredList = fuzzFilterList({
-      input: this.props.usersByOrg.users || [],
+      input: this.props.usersByOrg.users,
       key: 'username',
-      search: ev.currentTarget.value,
+      search,
     });
 
     this.setState({
@@ -67,11 +73,7 @@ class MembersContainer extends Component<tProps, tState> {
   }
 
   render() {
-    const usersToRender = this.filterByRole(
-      this.state.users.length > 0
-        ? this.state.users
-        : this.props.usersByOrg.users
-    );
+    const usersToRender = this.filterByRole(this.state.users);
 
     return (
       <Paginate
@@ -92,7 +94,8 @@ class MembersContainer extends Component<tProps, tState> {
   }
 }
 
-const mapStateToProps = (store: any) => ({
+const mapStateToProps = (store: tStore) => ({
+  isLoading: store.usersByOrg.isLoading,
   usersByOrg: store.usersByOrg.data,
 });
 

@@ -32,10 +32,6 @@ export const fuzz = function(search: string = '', string: string = '') {
   }
 
   // return rendered string if we have a match for every char
-  if (patternIdx === pattern.length) {
-    return {
-      rendered: result.join(''),
-      score: totalScore,
-    };
-  }
+  if (patternIdx === pattern.length) return totalScore;
+  return 0;
 };

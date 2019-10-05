@@ -15,7 +15,7 @@ export const AccountComponent = memo((props: tComponentProps) => {
       onSubmit={props.save}>
       <fieldset>
         <legend>
-          <h1 className="fs2 mB3">Manage Your Account</h1>
+          <h1 className="fs2 mB3">Manage your account</h1>
         </legend>
         <div className="p4 br8 brdA1 mB3">
           <label htmlFor="login">
@@ -51,7 +51,9 @@ export const AccountComponent = memo((props: tComponentProps) => {
           />
         </div>
       </fieldset>
-      <button className="p3 pL4 pR4 hvrBgGrey1 trans1">
+      <button
+        disabled={!props.password}
+        className="p3 pL4 pR4 hvrBgGrey1 trans1">
         Save Changes
       </button>
     </form>
