@@ -14,10 +14,6 @@ export const getSession = async (
   // for roles, etc, we want id here to be from the account, not the profile
   const {id, isVerified, login, orgId, userId} = account;
 
-  // for rsvps, other stuff, we want to use the profile id
-  // (technically, rsvps are user only, but who knows what things will look later)
-  const profileId = orgId as number || userId as number;
-
   // we return things this way to match redux-thunk on the client
   return {
     error: null,
@@ -28,7 +24,6 @@ export const getSession = async (
       isVerified, // has the account been verified yet
       login, // unique login for account
       profile, // user or org profile
-      profileId, // id for the above, if needed
       type: orgId ? 'org' : 'user', // account type
     },
   };

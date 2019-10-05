@@ -14,7 +14,7 @@ export const UserAdminComponent = memo((props: tProps) => {
     <div className="contain fx mT4">
       <aside className="mR5">
         <ul role="navigation">
-          <li>
+          <li className="p1">
             {!isAccount && (
               <Link to="/admin/account">
                 Account
@@ -22,7 +22,7 @@ export const UserAdminComponent = memo((props: tProps) => {
             )}
             {isAccount && 'Account'}
           </li>
-          <li>
+          <li className="p1">
             {!isProfile && (
               <Link to="/admin/profile">
                 Profile
@@ -30,7 +30,7 @@ export const UserAdminComponent = memo((props: tProps) => {
             )}
             {isProfile && 'Profile'}
           </li>
-          <li>
+          <li className="p1">
             {!isEvents && (
               <Link to="/admin/events">
                 Events
@@ -38,7 +38,7 @@ export const UserAdminComponent = memo((props: tProps) => {
             )}
             {isEvents && 'Events'}
           </li>
-          <li>
+          <li className="p1">
             {!isMemberships && (
               <Link to="/admin/memberships">
                 Memberships

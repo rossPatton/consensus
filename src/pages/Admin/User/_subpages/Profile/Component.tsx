@@ -3,187 +3,184 @@ import React, {memo} from 'react';
 import {PasswordInput} from '../../../../../components';
 import {tComponentProps} from './_types';
 
-export const ProfileComponent = memo((props: tComponentProps) => {
-  const {
-    bio: origBio,
-    email: origEmail,
-    fname: origFname,
-    lname: origLname,
-    username: origUsername,
-  } = props.session.profile as tUser;
-
-  return (
-    <form
-      action="/api/v1/user"
-      autoComplete="off"
-      className="col"
-      encType="multipart/form-data"
-      onSubmit={props.save}>
-      <fieldset>
-        <legend>
-          <h1 className="fs2 mB3">Edit your profile</h1>
-        </legend>
-        <div className="p4 br8 brdA1 mB3">
-          <div className="fx aiCtr mB3">
-            <label className="col row mR3" htmlFor="fname">
-              <h2 className="ffLab fs5 mB1 lh1">
-                First Name
-              </h2>
-              <input
-                id="fname"
-                onChange={ev => props.updateState('fname', ev)}
-                className="p3 row"
-                placeholder={origFname}
-                value={props.fname}
-                name="fname"
-              />
-            </label>
-            <label className="col row" htmlFor="lname">
-              <h2 className="ffLab fs5 mB1 lh1">
-                Last Name
-              </h2>
-              <input
-                id="lname"
-                onChange={ev => props.updateState('lname', ev)}
-                className="p3 row"
-                placeholder={origLname}
-                value={props.lname}
-                name="lname"
-              />
-            </label>
-          </div>
-          <label htmlFor="bio">
+export const ProfileComponent = memo((props: tComponentProps) => (
+  <form
+    action="/api/v1/user"
+    autoComplete="off"
+    className="col"
+    encType="multipart/form-data"
+    onSubmit={props.save}>
+    <fieldset>
+      <legend>
+        <h1 className="fs2 mB3">Edit your profile</h1>
+      </legend>
+      <div className="p4 br8 brdA1 mB3">
+        <div className="fx aiCtr mB3">
+          <label className="col row mR3" htmlFor="fname">
             <h2 className="ffLab fs5 mB1 lh1">
-              Bio
+              First Name
             </h2>
-            <p className="fs5 copyBlack mB1">
-              Some space to describe yourself, what you do, what you&apos;re interested in, etc.
-            </p>
-            <textarea
-              id="bio"
-              rows={6}
-              onChange={ev => props.updateState('bio', ev)}
-              className="p3 row mB3"
-              placeholder={origBio}
-              value={props.bio}
-              name="bio"
+            <input
+              id="fname"
+              onChange={ev => props.updateState('fname', ev)}
+              className="p3 row"
+              placeholder={props.fname}
+              defaultValue={props.fname}
+              value={props.fname}
+              name="fname"
             />
           </label>
-          <label htmlFor="email">
+          <label className="col row" htmlFor="lname">
             <h2 className="ffLab fs5 mB1 lh1">
-              Email address
+              Last Name
             </h2>
-            <p className="fs5 copyBlack mB1">
-              Used for account verification, event reminders, etc.
-            </p>
             <input
-              onChange={ev => props.updateState('email', ev)}
-              className="p3 row mB1"
-              placeholder={origEmail}
-              value={props.email}
-              name="email"
+              id="lname"
+              onChange={ev => props.updateState('lname', ev)}
+              className="p3 row"
+              placeholder={props.lname}
+              defaultValue={props.lname}
+              value={props.lname}
+              name="lname"
             />
           </label>
-          <div
-            tabIndex={0}
-            role="button"
-            className="fx aiCtr curPtr mB3 fs6"
-            onClick={ev => props.updateState('privateEmail', ev)}
-            onKeyPress={ev => props.updateState('privateEmail', ev)}>
-            <input
-              readOnly
-              type="checkbox"
-              className="mR2"
-              autoComplete="nope"
-              checked={props.privateEmail}
-            />
-            {props.privateEmail && (
-              <span>Private</span>
-            )}
-            {!props.privateEmail && (
-              <span>Public</span>
-            )}
-          </div>
-          <label htmlFor="username">
-            <h2 className="ffLab fs5 mB1 lh1">
-              Username
-            </h2>
-            <p className="fs5 copyBlack mB1">
-              This will be your publicly visible name.
-            </p>
-            <input
-              id="username"
-              onChange={ev => props.updateState('username', ev)}
-              className="p3 row mB3"
-              placeholder={origUsername}
-              value={props.username}
-              name="username"
-            />
-          </label>
-          <PasswordInput
-            id="pwInput"
-            title="Current password"
-            password={props.password}
-            placeholder="Your current password"
-            onChange={ev => props.updateState('password', ev)}
-          />
-          <h2 className="ffLab fs5 mT3 mB1 lh1">
-            Other privacy settings
-          </h2>
-          <div
-            tabIndex={0}
-            role="button"
-            className="fx aiCtr curPtr fs6"
-            onClick={ev => props.updateState('privateRSVP', ev)}
-            onKeyPress={ev => props.updateState('privateRSVP', ev)}>
-            <input
-              readOnly
-              type="checkbox"
-              className="mR2"
-              autoComplete="nope"
-              checked={props.privateRSVP}
-            />
-            {props.privateRSVP && (
-              <span>Keep my event RSVPs private.</span>
-            )}
-            {!props.privateRSVP && (
-              <span>
-                Show my RSVPs publicly (user account will be linked in RSVP list)
-              </span>
-            )}
-          </div>
-          <div
-            tabIndex={0}
-            role="button"
-            className="fx aiCtr curPtr mB3 fs6"
-            onClick={ev => props.updateState('privateMemberships', ev)}
-            onKeyPress={ev => props.updateState('privateMemberships', ev)}>
-            <input
-              readOnly
-              type="checkbox"
-              className="mR2"
-              autoComplete="nope"
-              checked={props.privateMemberships}
-            />
-            {props.privateMemberships && (
-              <span>
-                Keep my organization memberships private.
-              </span>
-            )}
-            {!props.privateMemberships && (
-              <span>
-                Link to organization I am a member of on my profile
-              </span>
-            )}
-          </div>
         </div>
-      </fieldset>
-      <button className="p3 pL4 pR4 hvrBgGrey1 trans1">
-        Save Changes
-      </button>
-    </form>
-  );
-});
+        <label htmlFor="bio">
+          <h2 className="ffLab fs5 mB1 lh1">
+            Bio
+          </h2>
+          <p className="fs5 copyBlack mB1">
+            Some space to describe yourself, what you do, what you&apos;re interested in, etc.
+          </p>
+          <textarea
+            id="bio"
+            rows={6}
+            onChange={ev => props.updateState('bio', ev)}
+            className="p3 row mB3"
+            placeholder={props.bio}
+            defaultValue={props.bio}
+            value={props.bio}
+            name="bio"
+          />
+        </label>
+        <label htmlFor="email">
+          <h2 className="ffLab fs5 mB1 lh1">
+            Email address
+          </h2>
+          <p className="fs5 copyBlack mB1">
+            Used for account verification, event reminders, etc.
+          </p>
+          <input
+            onChange={ev => props.updateState('email', ev)}
+            className="p3 row mB1"
+            placeholder="Update your email here"
+            defaultValue={props.email}
+            value={props.email}
+            name="email"
+          />
+        </label>
+        <div
+          tabIndex={0}
+          role="button"
+          className="fx aiCtr curPtr mB3 fs6"
+          onClick={ev => props.updateState('privateEmail', ev)}
+          onKeyPress={ev => props.updateState('privateEmail', ev)}>
+          <input
+            readOnly
+            type="checkbox"
+            className="mR2"
+            autoComplete="nope"
+            checked={props.privateEmail}
+          />
+          {props.privateEmail && (
+            <span>Private</span>
+          )}
+          {!props.privateEmail && (
+            <span>Public</span>
+          )}
+        </div>
+        <label htmlFor="username">
+          <h2 className="ffLab fs5 mB1 lh1">
+            Username
+          </h2>
+          <p className="fs5 copyBlack mB1">
+            This will be your publicly visible name.
+          </p>
+          <input
+            id="username"
+            onChange={ev => props.updateState('username', ev)}
+            className="p3 row mB3"
+            placeholder="Update your username here"
+            defaultValue={props.username}
+            value={props.username}
+            name="username"
+          />
+        </label>
+        <PasswordInput
+          id="pwInput"
+          title="Current password"
+          password={props.password}
+          placeholder="Your current password"
+          onChange={ev => props.updateState('password', ev)}
+        />
+        <h2 className="ffLab fs5 mT3 mB1 lh1">
+          Other privacy settings
+        </h2>
+        <div
+          tabIndex={0}
+          role="button"
+          className="fx aiCtr curPtr fs6"
+          onClick={ev => props.updateState('privateRSVP', ev)}
+          onKeyPress={ev => props.updateState('privateRSVP', ev)}>
+          <input
+            readOnly
+            type="checkbox"
+            className="mR2"
+            autoComplete="nope"
+            checked={props.privateRSVP}
+          />
+          {props.privateRSVP && (
+            <span>Keep my event RSVPs private.</span>
+          )}
+          {!props.privateRSVP && (
+            <span>
+              Show my RSVPs publicly (user account will be linked in RSVP list)
+            </span>
+          )}
+        </div>
+        <div
+          tabIndex={0}
+          role="button"
+          className="fx aiCtr curPtr mB3 fs6"
+          onClick={ev => props.updateState('privateMemberships', ev)}
+          onKeyPress={ev => props.updateState('privateMemberships', ev)}>
+          <input
+            readOnly
+            type="checkbox"
+            className="mR2"
+            autoComplete="nope"
+            checked={props.privateMemberships}
+          />
+          {props.privateMemberships && (
+            <span>
+              Keep my organization memberships private.
+            </span>
+          )}
+          {!props.privateMemberships && (
+            <span>
+              Link to organization I am a member of on my profile
+            </span>
+          )}
+        </div>
+      </div>
+    </fieldset>
+    <button
+      disabled={!props.password}
+      className="p3 pL4 pR4 hvrBgGrey1 trans1">
+      Save Changes
+    </button>
+  </form>
+));
 
 /* <h2 className="ffLab fs5 mB1 lh1">
             Avatar

@@ -18,7 +18,7 @@ class MembersContainer extends Component<tProps, tState> {
 
   constructor(props: any) {
     super(props);
-    props.getUsersByOrg({id: props.session.profileId});
+    props.getUsersByOrg({id: this.props.session.profile.id});
   }
 
   state = {
@@ -28,7 +28,7 @@ class MembersContainer extends Component<tProps, tState> {
 
   deleteUserByOrg = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {
     ev.preventDefault();
-    this.props.deleteUserByOrg({userId, orgId: this.props.session.profileId});
+    this.props.deleteUserByOrg({userId, orgId: this.props.session.profile.id});
   }
 
   // re-run the filter whenever the list array or filter text changes:
@@ -62,7 +62,7 @@ class MembersContainer extends Component<tProps, tState> {
   setRole = (ev: React.ChangeEvent<HTMLSelectElement>, userId: number) => {
     ev.preventDefault();
     const role = ev.currentTarget.value as tRole;
-    const orgId = this.props.session.profileId;
+    const orgId = this.props.session.profile.id;
     this.props.updateRole({role, orgId, userId});
   }
 

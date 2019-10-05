@@ -17,7 +17,7 @@ export const OrgAdminComponent = memo((props: tProps) => {
     <div className="contain mT4 fx">
       <aside className="mR5">
         <ul>
-          <li>
+          <li className="p1">
             {!isAccount && (
               <Link to="/admin/account">
                 Account
@@ -25,7 +25,7 @@ export const OrgAdminComponent = memo((props: tProps) => {
             )}
             {isAccount && 'Account'}
           </li>
-          <li>
+          <li className="p1">
             {isDecisions && 'Decisions'}
             {!isDecisions && (
               <Link to="/admin/decisions">
@@ -33,7 +33,7 @@ export const OrgAdminComponent = memo((props: tProps) => {
               </Link>
             )}
           </li>
-          <li>
+          <li className="p1">
             {isEvents && 'Events'}
             {!isEvents && (
               <Link to="/admin/events">
@@ -41,7 +41,7 @@ export const OrgAdminComponent = memo((props: tProps) => {
               </Link>
             )}
           </li>
-          <li>
+          <li className="p1">
             {isProfile && 'Profile'}
             {!isProfile && (
               <Link to="/admin/profile">
@@ -49,7 +49,7 @@ export const OrgAdminComponent = memo((props: tProps) => {
               </Link>
             )}
           </li>
-          <li>
+          <li className="p1">
             {isMembers && 'Members'}
             {!isMembers && (
               <Link to="/admin/memberships">

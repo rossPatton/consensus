@@ -12,9 +12,10 @@ auth.post('/auth/login', async (ctx: Koa.ParameterizedContext, next) =>
     if (err) ctx.throw(400, err);
     if (!account) ctx.throw(400, 'Account not found');
 
+    const data = _.get(ctx, 'state.locals.data', {});
     await ctx.login(account);
 
-    const {isFormSubmit} = ctx.state.locals.data;
+    const {isFormSubmit} = data;
     if (isFormSubmit) return ctx.redirect('/admin/profile');
 
     const session = await getSession(ctx, account);

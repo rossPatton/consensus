@@ -64,16 +64,10 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
 
 // TODO no-js forms only do GET/POST - figure out how to make patches work w/o js
 user.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const {data} = ctx.state.locals;
+  const data = _.get(ctx, 'state.locals.data', {});
+  const account = _.get(ctx, 'state.user', {});
 
-  let user = null;
-  try {
-    user = await knex(table).limit(1).where({id: data.id}).first();
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
-
-  const isValidPW = await isValidPw(data.password, user.password);
+  const isValidPW = await isValidPw(data.password, account.password);
   if (!isValidPW) return ctx.throw(400, 'Password is not correct');
 
   if (data.newPassword) {
@@ -81,8 +75,8 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
     data.password = encrypt(safePW);
   }
 
-  // newPassword will cause a constraint error - pull out before updating
-  const {newPassword, ...updateQuery} = data;
+  // password stuff will cause a constraint error - pull out before updating
+  const {isFormSubmit, newPassword, password, ...updateQuery} = data;
 
   let updatedUser: tUser[];
   try {
@@ -95,9 +89,8 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  if (data.isFormSubmit) return;
+  if (isFormSubmit) return;
 
-  ctx.body = {
-    ...updatedUser[0],
-  };
+  const body = updatedUser[0];
+  ctx.body = body;
 });

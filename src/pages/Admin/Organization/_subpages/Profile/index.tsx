@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 import {Dispatch} from 'redux';
@@ -8,9 +8,8 @@ import {patchOrg} from '../../../../../redux';
 import {tContainerProps, tStateUnion} from './_types';
 import {ProfileComponent} from './Component';
 
-export class ProfileContainer extends Component<tContainerProps, tOrg> {
+export class ProfileContainer extends PureComponent<tContainerProps, tOrg> {
   state = {
-    id: this.props.session.id,
     ...this.props.session.profile as tOrg,
   };
 

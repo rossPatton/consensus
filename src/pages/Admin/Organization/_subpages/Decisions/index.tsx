@@ -16,7 +16,7 @@ export class DecisionsContainer extends PureComponent<tContainerProps> {
     const offset = page ? parseInt(page, 10) : 0;
 
     props.getDecisions({
-      id: session.profileId,
+      id: session.profile.id,
       limit: -1,
       offset,
     });

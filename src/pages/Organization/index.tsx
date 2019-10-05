@@ -27,7 +27,7 @@ export class OrganizationContainer extends Component<tContainerProps> {
     }) as tRoleMap;
 
     let role = roleMap && roleMap.role;
-    if (session.type === 'org' && session.profileId === org.id) {
+    if (session.type === 'org' && session.profile.id === org.id) {
       role = 'admin';
     }
 

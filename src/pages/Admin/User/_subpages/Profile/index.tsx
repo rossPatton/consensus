@@ -10,7 +10,6 @@ const initialState = {
   bio: '',
   email: '',
   fname: '',
-  isClient: false,
   lname: '',
   newPassword: '',
   password: '',
@@ -21,23 +20,41 @@ const initialState = {
 };
 
 export class ProfileContainer extends PureComponent<tContainerProps, tState> {
-  state = initialState;
+  constructor(props: tContainerProps) {
+    super(props);
 
-  componentDidMount() {
-    // we do this so we only disable form submit when js is available
-    this.setState({
-      isClient: true,
-    });
+    const user = props.session.profile as tUser;
+
+    this.state = {
+      ...initialState,
+      bio: user.bio,
+      email: user.email,
+      fname: user.fname,
+      lname: user.lname,
+      newPassword: '',
+      password: '',
+      privateEmail: user.privateEmail,
+      privateMemberships: user.privateMemberships,
+      privateRSVP: user.privateRSVP,
+      username: user.username,
+    };
   }
+
+  // componentDidMount() {
+  //   // we do this so we only disable form submit when js is available
+  //   this.setState({
+  //     isClient: true,
+  //   });
+  // }
 
   save = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {id} = this.props.session;
+    const {login, profile} = this.props.session;
     const {newPassword, password} = this.state;
 
     let newUser;
     try {
-      newUser = await this.props.updateUser({id, ...this.state});
+      newUser = await this.props.updateUser({id: profile.id, ...this.state});
     } catch (err) {
       return console.error(err);
     }
@@ -47,24 +64,19 @@ export class ProfileContainer extends PureComponent<tContainerProps, tState> {
 
     try {
       await this.props.authenticateSession({
-        username: newUser.payload.username,
+        username: login,
         password: newPassword || password,
       });
     } catch (err) {
       console.error(err);
     }
-
-    this.setState(initialState);
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
     let {value} = ev.currentTarget;
-    console.log('og value => ', value);
     if (stateKey.indexOf('private') !== -1) {
       value = !this.state[stateKey];
     }
-
-    console.log('value => ', value);
 
     this.setState({
       [stateKey]: value,

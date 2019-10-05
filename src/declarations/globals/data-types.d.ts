@@ -105,6 +105,7 @@ declare type tUser = {
   email: string,
   fname: string,
   lname: string,
+  privateEmail: boolean,
   privateRSVP: boolean,
   privateMemberships: boolean,
   privateProfile: boolean,
@@ -178,7 +179,6 @@ declare type tSession = {
   lastActive?: string,
   login: string, // unique login value separate from username or email
   profile: tOrg | tUser,
-  profileId: number,
   type: 'org' | 'user',
 };
 
