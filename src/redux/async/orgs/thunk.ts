@@ -11,15 +11,35 @@ import {
   getOrgsByUserSuccess,
 } from './actions';
 
-const prefix = `${__URL__}/api/v1/orgsByUser`;
-
-export const getOrgsByUser = memoize({ttl: 300}, () => {
+export const getOrgsBySession = memoize({ttl: 300}, () => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getOrgsByUserBegin());
 
     try {
       // @ts-ignore
-      const result = await fetch(prefix, {agent})
+      const result = await fetch(`${__URL__}/api/v1/orgsBySession`, {agent})
+        .then((response: tFetchResponse) => {
+          if (!response.ok) throw response;
+          return response.json();
+        });
+
+      return dispatch(getOrgsByUserSuccess(result));
+    } catch (err) {
+      return dispatch(getOrgsByUserFailure(err));
+    }
+  };
+});
+
+export const getOrgsByUser = memoize({ttl: 300}, (query: tIdQuery) => {
+  return async function <S>(dispatch: Dispatch<S>) {
+    dispatch(getOrgsByUserBegin());
+
+    try {
+      const qs = objToQueryString(query);
+      const prefix = `${__URL__}/api/v1/orgsByUser`;
+
+      // @ts-ignore
+      const result = await fetch(`${prefix}?${qs}`, {agent})
         .then((response: tFetchResponse) => {
           if (!response.ok) throw response;
           return response.json();
@@ -38,6 +58,7 @@ export const deleteOrgByUser = memoize({ttl: 300}, (queryObj: tIdQuery) => {
 
     try {
       const qs = objToQueryString(queryObj);
+      const prefix = `${__URL__}/api/v1/orgsByUser`;
 
       // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, {agent, method: 'DELETE'})

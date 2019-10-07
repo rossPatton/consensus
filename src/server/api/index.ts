@@ -12,6 +12,7 @@ import { eventsByUser } from './eventsByUser';
 import { fileUpload } from './fileUpload';
 import { org } from './org';
 import { orgById } from './orgById';
+import { orgsBySession } from './orgsBySession';
 import { orgsByUser } from './orgsByUser';
 import { region } from './region';
 import { reportUri } from './reportUri';
@@ -34,6 +35,7 @@ export const setupApi = (app: Koa) => {
   app.use(fileUpload.routes());
   app.use(org.routes());
   app.use(orgById.routes());
+  app.use(orgsBySession.routes());
   app.use(orgsByUser.routes());
   app.use(region.routes());
   app.use(reportUri.routes());
@@ -61,6 +63,7 @@ export const setupApi = (app: Koa) => {
   app.use(fileUpload.allowedMethods(opts));
   app.use(org.allowedMethods(opts));
   app.use(orgById.allowedMethods(opts));
+  app.use(orgsBySession.allowedMethods(opts));
   app.use(orgsByUser.allowedMethods(opts));
   app.use(region.allowedMethods(opts));
   app.use(reportUri.allowedMethods(opts));

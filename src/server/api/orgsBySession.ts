@@ -2,19 +2,19 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import { knex } from '../db/connection';
+import {knex} from '../db/connection';
 
-export const orgsByUser = new Router();
-const route = '/api/v1/orgsByUser';
+export const orgsBySession = new Router();
+const route = '/api/v1/orgsBySession';
 const table = 'accounts_roles';
-const state = 'state.locals.data';
 
-orgsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = _.get(ctx, state, {});
+orgsBySession.get(route, async (ctx: Koa.ParameterizedContext) => {
+  // user account id that cooresponds to row in accounts_roles
+  const accountId = _.get(ctx, 'state.user.id', 0);
 
   let userOrgRels: tAccountRoleRelation[];
   try {
-    userOrgRels = await knex(table).where(query);
+    userOrgRels = await knex(table).where({accountId});
   } catch (err) {
     return ctx.throw(400, err);
   }
@@ -40,8 +40,8 @@ orgsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = orgsWithUserRole;
 });
 
-orgsByUser.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  const {accountId, orgId} = _.get(ctx, state, {});
+orgsBySession.delete(route, async (ctx: Koa.ParameterizedContext) => {
+  const {accountId, orgId} = _.get(ctx, 'state.locals.data', {});
 
   try {
     await knex(table)

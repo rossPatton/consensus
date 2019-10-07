@@ -4,15 +4,17 @@ import {Dispatch} from 'redux';
 
 import {GenericLoader, Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
-import {getUserById} from '../../redux';
-import {tProps, tStore} from './_types';
+import {getOrgsByUser, getUserById} from '../../redux';
+import { tOrgWithRole } from '../Admin/User/_subpages/Memberships/_types';
+import {tContainerProps, tStore} from './_types';
 import {UserComponent} from './Component';
 
-export class UserContainer extends PureComponent<tProps> {
-  constructor(props: tProps) {
+export class UserContainer extends PureComponent<tContainerProps> {
+  constructor(props: tContainerProps) {
     super(props);
     const {id} = props.match.params;
     props.getUserById({id});
+    props.getOrgsByUser({id});
   }
 
   render() {
@@ -32,6 +34,7 @@ export class UserContainer extends PureComponent<tProps> {
           isLoading={this.props.isLoading}
           render={() => (
             <UserComponent
+              orgs={this.props.orgs}
               user={this.props.user}
             />
           )}
@@ -42,12 +45,14 @@ export class UserContainer extends PureComponent<tProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.user.isLoading,
+  isLoading: store.user.isLoading && store.orgs.isLoading,
+  orgs: store.orgs.data as tOrgWithRole[],
   user: store.user.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getUserById: (query: tIdQuery) => dispatch(getUserById(query)),
+  getOrgsByUser: (query: tIdQuery) => dispatch(getOrgsByUser(query)),
 });
 
 export const User = connect(

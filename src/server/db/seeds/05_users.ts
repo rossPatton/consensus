@@ -12,7 +12,6 @@ const createUser = async () => ({
   phone: faker.phone.phoneNumber(),
   privateEmail: faker.random.boolean(),
   privateMemberships: faker.random.boolean(),
-  privatePhone: faker.random.boolean(),
   privateRSVP: faker.random.boolean(),
   username: faker.internet.userName(),
 });
@@ -26,7 +25,6 @@ const createTestUser = async () => ({
   phone: faker.phone.phoneNumber(),
   privateEmail: faker.random.boolean(),
   privateMemberships: faker.random.boolean(),
-  privatePhone: faker.random.boolean(),
   privateRSVP: faker.random.boolean(),
   username: 'testUsername',
 });

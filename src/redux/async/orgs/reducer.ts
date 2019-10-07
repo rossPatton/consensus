@@ -2,6 +2,9 @@ import {
   DELETE_ORG_BY_USER_BEGIN,
   DELETE_ORG_BY_USER_FAILURE,
   DELETE_ORG_BY_USER_SUCCESS,
+  GET_ORGS_BY_SESSION_BEGIN,
+  GET_ORGS_BY_SESSION_FAILURE,
+  GET_ORGS_BY_SESSION_SUCCESS,
   GET_ORGS_BY_USER_BEGIN,
   GET_ORGS_BY_USER_FAILURE,
   GET_ORGS_BY_USER_SUCCESS,
@@ -16,20 +19,25 @@ const initialState: tThunk<tOrg[]> = {
 
 export const orgsReducer = (state = initialState, action: tActionUnion) => {
   switch (action.type) {
-  case DELETE_ORG_BY_USER_BEGIN || GET_ORGS_BY_USER_BEGIN:
+  case DELETE_ORG_BY_USER_BEGIN
+    || GET_ORGS_BY_USER_BEGIN
+    || GET_ORGS_BY_SESSION_BEGIN:
     return {
       ...state,
       isLoading: true,
     };
 
-  case GET_ORGS_BY_USER_SUCCESS:
+  case GET_ORGS_BY_USER_SUCCESS || GET_ORGS_BY_SESSION_SUCCESS: {
     return {
       ...state,
       data: action.payload,
       isLoading: false,
     };
+  }
 
-  case DELETE_ORG_BY_USER_FAILURE || GET_ORGS_BY_USER_FAILURE:
+  case DELETE_ORG_BY_USER_FAILURE
+    || GET_ORGS_BY_USER_FAILURE
+    || GET_ORGS_BY_SESSION_FAILURE:
     return {
       ...state,
       error: action.payload,

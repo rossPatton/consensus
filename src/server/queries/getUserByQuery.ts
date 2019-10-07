@@ -14,7 +14,5 @@ export const getUserByQuery = async (
     return ctx.throw(400, err);
   }
 
-  console.log('user => ', user);
-
   return user;
 };

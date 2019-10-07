@@ -16,7 +16,7 @@ export type tContainerProps = tProps & {
   match: match,
   // from redux
   deleteOrgByUser: (query: {accountId: number, orgId: number}) => void,
-  getOrgsByUser: () => void,
+  getOrgsBySession: () => void,
   session: tSession,
 };
 

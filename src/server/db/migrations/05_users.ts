@@ -17,8 +17,6 @@ exports.up = async (knex: Knex) => {
     table.boolean('privateEmail').notNullable().defaultTo(true);
 
     table.string('phone').unique();
-    // if set to true, user memberships aren't visible to others
-    table.boolean('privatePhone').notNullable().defaultTo(true);
 
     // optional - allow user to change their country, eventually
     table.integer('country')

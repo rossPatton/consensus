@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
 import {Paginate} from '../../../../../containers';
-import {deleteOrgByUser, getOrgsByUser} from '../../../../../redux';
+import {deleteOrgByUser, getOrgsBySession} from '../../../../../redux';
 import {fuzzFilterList} from '../../../../../utils';
 import {tContainerProps, tOrgWithRole, tState, tStore} from './_types';
 import {MembershipsComponent} from './Component';
@@ -11,7 +11,7 @@ import {MembershipsComponent} from './Component';
 class MembershipsContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
-    props.getOrgsByUser();
+    props.getOrgsBySession();
   }
 
   state = {
@@ -76,7 +76,7 @@ const mapStateToProps = (store: tStore) => ({
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   deleteOrgByUser: (query: {accountId: number, orgId: number}) =>
     dispatch(deleteOrgByUser(query)),
-  getOrgsByUser: () => dispatch(getOrgsByUser()),
+  getOrgsBySession: () => dispatch(getOrgsBySession()),
 });
 
 export const Memberships = connect(

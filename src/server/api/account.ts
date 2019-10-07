@@ -24,7 +24,6 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
   // password stuff will cause a constraint error - pull out before updating
   const {isFormSubmit, newPassword, password, ...updateQuery} = data;
-  console.log('data => ', data);
 
   let updatedAccount: tUser[];
   try {
@@ -38,8 +37,6 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
   }
 
   if (isFormSubmit) return;
-
-  console.log('updatedAccount => ', updatedAccount);
 
   const body = updatedAccount[0];
   ctx.body = body;
