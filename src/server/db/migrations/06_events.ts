@@ -27,7 +27,8 @@ exports.up = async (knex: Knex) => {
     table.timestamp('date').notNullable();
     table.timestamp('endDate');
 
-    table.integer('goingCount').unsigned().notNullable().defaultTo(0);
+    table.integer('publicRSVPS').unsigned().notNullable().defaultTo(0);
+    table.integer('privateRSVPS').unsigned().notNullable().defaultTo(0);
 
     // stuff below here is to maintain parity with the event creation form/drafts
     // it is not used when rendering events - but still needed

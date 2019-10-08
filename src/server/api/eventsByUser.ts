@@ -13,7 +13,7 @@ eventsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
   // state.user === logged in account
   const userId = _.get(ctx, 'state.user.userId', 0);
 
-  let userEventIds: tUserEventRelation[];
+  let userEventIds: tRSVP[];
   try {
     userEventIds = await knex(table).where({userId});
   } catch (err) {
@@ -25,7 +25,7 @@ eventsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     mappedIds = await Promise.all(_.uniq(
       userEventIds
-        .filter(async idSet => idSet.rsvp)
+        .filter(async idSet => idSet.publicRSVP || idSet.privateRSVP)
         .map(async idSet => idSet.eventId)
     ));
   } catch (err) {

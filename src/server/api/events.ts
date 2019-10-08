@@ -41,12 +41,17 @@ events.get(route, async (ctx: Koa.ParameterizedContext) => {
     }
   }
 
-  let userEventRels = {} as tUserEventRelation[];
+  let userEventRels = {} as tRSVP[];
   const mappedEventIds: number[] = events.map(ev => ev.id);
   try {
     userEventRels = await knex('users_events')
       .whereIn('eventId', mappedEventIds)
-      .where('rsvp', true);
+      .where({
+        publicRSVP: true,
+      })
+      .orWhere({
+        privateRSVP: true,
+      });
   } catch (err) {
     return ctx.throw(400, err);
   }
@@ -57,13 +62,12 @@ events.get(route, async (ctx: Koa.ParameterizedContext) => {
   const eventsWithAttendees = await Promise.all(
     filteredEvents.map(ev => {
       const attendees = [...userEventRels].filter(
-        rel => rel.eventId === ev.id && rel.rsvp,
+        rel => rel.eventId === ev.id && (rel.privateRSVP || rel.publicRSVP),
       );
 
       return {
         ...ev,
-        attendees,
-        goingCount: attendees.length,
+        attendees: attendees.length,
       };
     })
   );

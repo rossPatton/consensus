@@ -17,7 +17,10 @@ export const zipEvsWithRSVPS = async (ctx: Koa.ParameterizedContext, events: tEv
       rel => rel.eventId === ev.id && rel.userId === account.userId,
     );
 
-    const rsvp = (rsvpObj && rsvpObj.rsvp) || false;
+    let rsvp = false;
+    if (rsvpObj && (rsvpObj.publicRSVP || rsvpObj.privateRSVP)) {
+      rsvp = true;
+    }
 
     return {
       ...ev,

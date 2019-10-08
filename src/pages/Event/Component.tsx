@@ -1,7 +1,8 @@
 import dayJS from 'dayjs';
+import pluralize from 'pluralize';
 import React, {memo} from 'react';
 
-import {Events, ExternalLink, RSVP} from '../../components';
+import {EventPrivacy, Events, ExternalLink, RSVP} from '../../components';
 import {tComponentProps} from './_types';
 
 export const EventComponent = memo(({event, events}: tComponentProps) => (
@@ -25,34 +26,13 @@ export const EventComponent = memo(({event, events}: tComponentProps) => (
       {event.title}
     </h1>
     <div className="fx aiCtr fs6 fw600 lh1 mB3">
-      {event.goingCount > 0 && (
+      {event.attendees > 0 && (
         <span className="mR2">
-          {event.goingCount} attendees |
+          {event.attendees} {pluralize('attendees', event.attendees)} |
         </span>
       )}
       <RSVP event={event} />
-      {event.isPrivate && (
-        <small className="bgYellowLite br4 p1 pL2 pR2 lh1">
-          <span
-            role="img"
-            className="mR1"
-            aria-label="Lock Emoji">
-            🔒
-          </span>
-          Private Event
-        </small>
-      )}
-      {!event.isPrivate && (
-        <small className="bgYellowLite br4 p1 pL2 pR2 lh1">
-          <span
-            role="img"
-            className="mR1"
-            aria-label="Tada Emoji">
-            🎉
-          </span>
-          Public Event
-        </small>
-      )}
+      <EventPrivacy isPrivate={event.isPrivate} />
     </div>
     <div className="fx mB3">
       <div className="col row mR3">

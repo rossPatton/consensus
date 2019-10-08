@@ -12,7 +12,7 @@ const initialState: tThunk<any> = {
   data: [],
 };
 
-export const roleReducer = (state = initialState, action: tActionUnion) => {
+export const rolesReducer = (state = initialState, action: tActionUnion) => {
   switch (action.type) {
   case GET_ROLES_BEGIN:
     return {

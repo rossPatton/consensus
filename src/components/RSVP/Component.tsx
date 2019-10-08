@@ -2,7 +2,8 @@ import React, { memo } from 'react';
 
 import {tComponentProps} from './_types';
 
-export const RSVPComponent = memo(({id, role, rsvp, setRsvp}: tComponentProps) => {
+export const RSVPComponent = memo((props: tComponentProps) => {
+  const {id, privateRSVP, role, rsvp, setRsvp} = props;
   if (!role || role === 'admin') return null;
 
   return (
@@ -20,7 +21,7 @@ export const RSVPComponent = memo(({id, role, rsvp, setRsvp}: tComponentProps) =
                 aria-label="Big Plus Sign Emoji">
                 ➕
               </span>
-              <legend>RSVP</legend>
+              <legend>RSVP {privateRSVP ? 'Privately' : 'Publicly'}</legend>
             </button>
           </fieldset>
         </form>

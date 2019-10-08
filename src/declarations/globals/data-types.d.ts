@@ -35,13 +35,13 @@ declare type tDecision = {
 // TODO need to rethink how to split up event types
 // creating an event, event schema in db, not logged in event
 declare type tEvent = {
+  attendees: number,
   category: string,
   city: string,
   country: string,
   date: string,
   description: string,
   endDate: string,
-  goingCount: number,
   id: number,
   isDraft: boolean,
   isPrivate: boolean,
@@ -54,13 +54,6 @@ declare type tEvent = {
   slug: string,
   state: string,
   title: string,
-};
-
-declare type tRSVP = {
-  eventId: number,
-  id?: number,
-  userId: number,
-  rsvp: boolean,
 };
 
 declare type tGate = 'public' | 'manual' | 'private';
@@ -113,10 +106,12 @@ declare type tUser = {
   username: string,
 };
 
-declare type tUserEventRelation = {
-  id: number,
+declare type tRSVP = {
   eventId: number,
-  rsvp: boolean,
+  id?: number,
+  // only one can be true at a time
+  privateRSVP: boolean,
+  publicRSVP: boolean,
   userId: number,
 };
 

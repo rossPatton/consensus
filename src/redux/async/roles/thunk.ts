@@ -2,13 +2,13 @@ import { Dispatch } from 'redux';
 import { memoize } from 'redux-memoize';
 
 import {agent, objToQueryString} from '../../../utils';
-import {getRoleBegin, getRoleFailure, getRoleSuccess} from './actions';
+import {getRolesBegin, getRolesFailure, getRolesSuccess} from './actions';
 
 const prefix = `${__URL__}/api/v1/roles`;
 
 export const getRoles = memoize({ttl: 300}, (query: any) => {
   return async function <S>(dispatch: Dispatch<S>) {
-    dispatch(getRoleBegin());
+    dispatch(getRolesBegin());
 
     try {
       const qs = objToQueryString(query);
@@ -20,9 +20,9 @@ export const getRoles = memoize({ttl: 300}, (query: any) => {
           return response.json();
         });
 
-      return dispatch(getRoleSuccess(result));
+      return dispatch(getRolesSuccess(result));
     } catch (err) {
-      return dispatch(getRoleFailure(err));
+      return dispatch(getRolesFailure(err));
     }
   };
 });

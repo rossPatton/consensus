@@ -10,13 +10,16 @@ const table = 'users_events';
 
 // post new rsvp for the logged in user, by eventId
 rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const {id = 0, value} = _.get(ctx, 'state.locals.data', {});
+  const {id = 0, type = 'private', value} = _.get(ctx, 'state.locals.data', {});
   const userId = _.get(ctx, 'state.user.userId', 0);
   const eventId = parseInt(id, 10);
+  const publicRSVP = type !== 'private';
+  const privateRSVP = type === 'private';
 
   const newRsvp: tRSVP = {
     eventId,
-    rsvp: value === 'true',
+    publicRSVP,
+    privateRSVP,
     userId,
   };
 

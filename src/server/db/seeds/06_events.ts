@@ -11,7 +11,8 @@ const createEvent = async () => ({
   // endDate === duration, since users can have custom durations this is a timestamp
   // we convert the 1hr, 2hr etc values to timestamps as well
   endDate: faker.date.future(),
-  goingCount: faker.random.number(),
+  publicRSVPS: faker.random.number(),
+  privateRSVPS: faker.random.number(),
   isDraft: faker.random.boolean(),
   isPrivate: faker.random.boolean(),
   location: faker.address.streetAddress(),

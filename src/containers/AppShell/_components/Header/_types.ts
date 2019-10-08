@@ -8,5 +8,7 @@ export type tComponentProps = tProps & {
 };
 
 export type tContainerProps = tProps & {
-  logOutOfSession: () => void,
+  // wipe role relations on logout
+  getRolesSuccess: (emptyRoles: []) => any,
+  logOutOfSession: () => any,
 };

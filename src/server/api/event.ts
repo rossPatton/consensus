@@ -7,6 +7,9 @@ import {getEventByQuery} from '../queries';
 
 export const event = new Router();
 
+// TODO you need to create parity between events/event here
+// ie, zip the rsvp and attendees info here
+
 // for fetching a single event at a time
 // redux state object => event
 // route example: event/eventId

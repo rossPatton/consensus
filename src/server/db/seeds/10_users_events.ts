@@ -4,11 +4,16 @@ import Knex from 'knex';
 
 import {range} from '../../../utils/range';
 
-const createUserEventRelation = async (u: number, e: number) => ({
-  eventId: e,
-  rsvp: faker.random.boolean(),
-  userId: u,
-});
+const createUserEventRelation = async (u: number, e: number) => {
+  const publicRSVP = faker.random.boolean();
+
+  return {
+    eventId: e,
+    publicRSVP,
+    privateRSVP: !publicRSVP,
+    userId: u,
+  };
+};
 
 exports.seed = async (knex: Knex) => {
   const fakeUserEventRelations = [];

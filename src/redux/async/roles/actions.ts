@@ -8,21 +8,21 @@ import {
   tSuccessAction,
 } from './_types';
 
-export const getRoleBegin = (): tBeginAction => ({
+export const getRolesBegin = (): tBeginAction => ({
   type: GET_ROLES_BEGIN,
 });
 
-export const getRoleSuccess = (payload: any): tSuccessAction => ({
+export const getRolesSuccess = (payload: tRoleMap[]): tSuccessAction => ({
   type: GET_ROLES_SUCCESS,
   payload,
 });
 
-export const getRoleFailure = (payload: Error): tFailureAction => ({
+export const getRolesFailure = (payload: Error): tFailureAction => ({
   type: GET_ROLES_FAILURE,
   payload,
 });
 
-export const setRole = (payload: any): tSuccessAction => ({
+export const setRole = (payload: {role: tRole}): tSuccessAction => ({
   type: SET_ROLE,
   payload,
 });

@@ -47,8 +47,8 @@ export const authenticateSessionReducer = (state = initialState, action: tSessio
 
   case LOG_OUT_SUCCESS:
     return {
-      ...state,
       data: action.payload,
+      error: null,
       isLoading: false,
     };
   /* eslint-enable */

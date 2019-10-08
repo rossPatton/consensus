@@ -1,6 +1,7 @@
 export {Breadcrumbs} from './Breadcrumbs';
 export {Decisions} from './Decisions';
 export {Events} from './Events';
+export {EventPrivacy} from './EventPrivacy';
 export {ExternalLink} from './ExternalLink';
 export {GenericLoader} from './GenericLoader';
 export {Helmet} from './Helmet';

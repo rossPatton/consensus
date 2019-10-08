@@ -1,10 +1,11 @@
 import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
+import pluralize from 'pluralize';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {ExternalLink, RSVP} from '../../components';
+import {EventPrivacy, ExternalLink, RSVP} from '../../components';
 import {objToQueryString} from '../../utils';
 import {tComponentProps} from './_types';
 
@@ -110,45 +111,11 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 'fx aiCtr fs6 lh1 lsNone': true,
                 hide: props.tiny,
               })}>
-              <small
-                className={cx({
-                  'bgYellowLite br8 p1 pL2 pR2 mR2': true,
-                  mR2: props.isEditable,
-                })}>
-                {ev.isPrivate && (
-                  <>
-                    <span
-                      role="img"
-                      className="mR1"
-                      aria-label="Lock Emoji">
-                      🔒
-                    </span>
-                    Private Event
-                  </>
-                )}
-                {!ev.isPrivate && (
-                  <>
-                    <span
-                      role="img"
-                      className="mR1"
-                      aria-label="Tada Emoji">
-                      🎉
-                    </span>
-                    Public Event
-                  </>
-                )}
-              </small>
+              <EventPrivacy isPrivate={ev.isPrivate} />
               <RSVP event={ev} role={props.role} />
-              {ev.goingCount > 0 && (
-                <Link to="filler" className="mR3">
-                  {ev.goingCount} public attendees
-                </Link>
-              )}
-              {ev.goingCount > 0 && (
-                <span to="filler">
-                  {ev.goingCount} private attendees
-                </span>
-              )}
+              <Link to="filler" className="mR3">
+                {ev.attendees} {pluralize('attendees', ev.attendees)}
+              </Link>
             </div>
           </div>
         </div>
