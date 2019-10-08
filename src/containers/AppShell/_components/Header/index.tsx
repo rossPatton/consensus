@@ -17,6 +17,7 @@ export class HeaderContainer extends PureComponent<tContainerProps> {
       <HeaderComponent
         logout={this.logout}
         session={this.props.session}
+        toggleNav={this.props.toggleNav}
       />
     );
   }

@@ -81,7 +81,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
       </h2>
       <label htmlFor="stateInput" className="mB3">
         <p className="fs5 copyBlack mB1">
-          All organizations on Consensus are currently local, city-based organizations. Both State and City is required here. International, National, and State/Region based organizations are in the works.
+          All organizations on Consensus are currently local, city-based organizations. Both State and City is required here. International, National, and Region based organizations are in the works.
         </p>
         <input
           required
@@ -98,7 +98,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
       </h2>
       <label htmlFor="cityInput" className="mB3">
         <p className="fs5 copyBlack mB1">
-          All organizations on Consensus are currently local, city-based organizations. Both State and City is required here. International, National, and State/Region based organizations are in the works.
+          All organizations on Consensus are currently local, city-based organizations. Both State and City is required here. International, National, and Region based organizations are in the works.
         </p>
         <input
           required

@@ -1,18 +1,22 @@
-import React, { memo } from 'react';
-import { Link } from 'react-router-dom';
+import React, {memo} from 'react';
+import {Link} from 'react-router-dom';
 
-import { tProps } from './_types';
+import {tComponentProps} from './_types';
 
-export const HeaderComponent = memo((props: tProps) => (
+export const HeaderComponent = memo((props: tComponentProps) => (
   <header className="bgWhite bxSh1 fix t l r pT3 pB3 z99">
-    <div className="contain fx aiCtr jcCtr rel">
-      <Link
-        className="abs l"
-        to="/org/us/ny/new-york-city/tech-workers-coalition-nyc/overview">
+    <div className="contain fx aiCtr rel">
+      {/* <button
+        className="bg0 brd0 abs l"
+        onClick={props.toggleNav}>
         <img alt="" src="/static/images/ham.svg" width="40" />
-      </Link>
+      </button>*/}
       <Link to="/">
-        <img alt="Unison" src="/static/images/logo.svg" width="125" />
+        <img
+          alt="Unison"
+          src="/static/images/logo.svg"
+          width="125"
+        />
       </Link>
       {!props.session.isAuthenticated && (
         <div className="abs r fs6">

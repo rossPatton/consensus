@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import {tComponentProps} from './_types';
 
 export const RSVPComponent = memo(({id, role, rsvp, setRsvp}: tComponentProps) => {
-  if (role === 'admin') return null;
+  if (!role || role === 'admin') return null;
 
   return (
     <>
@@ -13,8 +13,7 @@ export const RSVPComponent = memo(({id, role, rsvp, setRsvp}: tComponentProps) =
           onSubmit={ev => setRsvp({ev, eventId: id, value: true})}
           action="/api/v1/rsvps">
           <fieldset>
-            <button
-              className="fx aiCtr br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
+            <button className="fx aiCtr br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
               <span
                 role="img"
                 className="mR1"

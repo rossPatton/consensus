@@ -1,20 +1,15 @@
+import cx from 'classnames';
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
 export const Nav = memo(() => (
-  <nav className="pT5 hide">
-    <ul>
-      <li>
-        <Link to="/us/ny/nyc/tech-workers-coalition">TWC</Link>
+  <nav className="mT5 brdB1">
+    <ul className="contain fx brdL1">
+      <li className="col p2 pL3 pR3 brdR1">
+        <Link to="/directory/us">Directory</Link>
       </li>
-      <li>
-        <Link to="/">home</Link>
-      </li>
-      <li>
-        <Link to="/config">config</Link>
-      </li>
-      <li>
-        <Link to="/status">status</Link>
+      <li className="col p2 pL3 pR3 brdR1">
+        <Link to="/categories">Categories</Link>
       </li>
     </ul>
   </nav>

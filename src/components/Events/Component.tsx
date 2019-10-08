@@ -110,15 +110,9 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 'fx aiCtr fs6 lh1 lsNone': true,
                 hide: props.tiny,
               })}>
-              {ev.goingCount > 0 && (
-                <span className="mR3">
-                  {ev.goingCount} Attendees
-                </span>
-              )}
-              <RSVP event={ev} role={props.role} />
               <small
                 className={cx({
-                  'bgYellowLite br8 p1 pL2 pR2': true,
+                  'bgYellowLite br8 p1 pL2 pR2 mR2': true,
                   mR2: props.isEditable,
                 })}>
                 {ev.isPrivate && (
@@ -144,6 +138,17 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   </>
                 )}
               </small>
+              <RSVP event={ev} role={props.role} />
+              {ev.goingCount > 0 && (
+                <Link to="filler" className="mR3">
+                  {ev.goingCount} public attendees
+                </Link>
+              )}
+              {ev.goingCount > 0 && (
+                <span to="filler">
+                  {ev.goingCount} private attendees
+                </span>
+              )}
             </div>
           </div>
         </div>

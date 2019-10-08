@@ -11,7 +11,7 @@ export const CountryComponent = memo((props: tProps) => (
     </h1>
     <h2 className="mB2 fs3">
       <span className="ttCap">
-        {pluralize(props.country.regionType)}
+        {pluralize(props.country.regionType)}, Regions and Territories
       </span> in {props.country.name}
     </h2>
     <ul className="fx fxWrap">
