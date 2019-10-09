@@ -1,6 +1,7 @@
 import dayJS from 'dayjs';
 import pluralize from 'pluralize';
 import React, {memo} from 'react';
+import {Link} from 'react-router-dom';
 
 import {EventPrivacy, Events, ExternalLink, RSVP} from '../../components';
 import {tComponentProps} from './_types';
@@ -26,13 +27,13 @@ export const EventComponent = memo(({event, events}: tComponentProps) => (
       {event.title}
     </h1>
     <div className="fx aiCtr fs6 fw600 lh1 mB3">
-      {event.attendees > 0 && (
-        <span className="mR2">
-          {event.attendees} {pluralize('attendees', event.attendees)} |
-        </span>
-      )}
       <RSVP event={event} />
       <EventPrivacy isPrivate={event.isPrivate} />
+      {event.attendees > 0 && (
+        <span className="mR3">
+          {event.attendees} {pluralize('attendees', event.attendees)}
+        </span>
+      )}
     </div>
     <div className="fx mB3">
       <div className="col row mR3">
@@ -57,7 +58,7 @@ export const EventComponent = memo(({event, events}: tComponentProps) => (
         {events && events.length > 0 && (
           <>
             <h2 className="fs5 mB3 ffLab lh1">
-            More by {event.orgName}
+            More by <Link to={`/org/${event.orgId}/overview`}>{event.orgName}</Link>
             </h2>
             <Events events={events} tiny />
           </>

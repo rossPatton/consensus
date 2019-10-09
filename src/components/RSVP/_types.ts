@@ -8,10 +8,13 @@ export type tState = {
   rsvp: boolean,
 };
 
-export type tContainerProps = {
-  event: tEvent,
+export type tProps = {
   role?: tRole,
   session: tSession,
+};
+
+export type tContainerProps = tProps &{
+  event: tEvent,
   // redux thunk
   setRsvp: (query: {
     id: number,
@@ -20,10 +23,8 @@ export type tContainerProps = {
   }) => void,
 };
 
-export type tComponentProps = {
+export type tComponentProps = tProps & {
   id: number,
-  privateRSVP: boolean,
-  role?: tRole,
   rsvp: boolean,
   // class method passed down to component that calls the redux thunk
   setRsvp: (opts: tSetRsvpOpts) => void,

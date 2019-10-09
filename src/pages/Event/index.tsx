@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
@@ -8,7 +8,7 @@ import {getEventById, getEvents} from '../../redux';
 import {tProps, tStore} from './_types';
 import {EventComponent} from './Component';
 
-export class EventContainer extends PureComponent<tProps> {
+export class EventContainer extends Component<tProps> {
   constructor(props: tProps) {
     super(props);
     const {id} = props.match.params;

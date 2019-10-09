@@ -34,15 +34,11 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const {profile = {}} = this.props.session;
-    const {privateRSVP = true} = profile as tUser;
-
     return (
       <RSVPComponent
         id={this.props.event.id}
-        privateRSVP={privateRSVP}
-        role={this.props.role}
         rsvp={this.state.rsvp}
+        session={this.props.session}
         setRsvp={this.setRsvp}
       />
     );

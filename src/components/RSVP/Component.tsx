@@ -3,8 +3,11 @@ import React, { memo } from 'react';
 import {tComponentProps} from './_types';
 
 export const RSVPComponent = memo((props: tComponentProps) => {
-  const {id, privateRSVP, role, rsvp, setRsvp} = props;
-  if (!role || role === 'admin') return null;
+  const {id, rsvp, session, setRsvp} = props;
+  if (session.type === 'org') return null;
+
+  const {profile = {}} = session;
+  const {privateRSVP = true} = profile as tUser;
 
   return (
     <>

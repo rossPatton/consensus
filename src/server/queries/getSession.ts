@@ -12,7 +12,7 @@ export const getSession = async (
   const profile = await getProfileByAccount(ctx, account);
 
   // for roles, etc, we want id here to be from the account, not the profile
-  const {id, isVerified, login, orgId, userId} = account;
+  const {id, isVerified, login, orgId} = account;
 
   // we return things this way to match redux-thunk on the client
   return {
