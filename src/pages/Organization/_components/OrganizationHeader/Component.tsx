@@ -1,23 +1,28 @@
-import React, { memo } from 'react';
+import React, {memo} from 'react';
 
-import { Breadcrumbs } from '../../../../components';
-import { tComponentProps } from './_types';
+import {Breadcrumbs} from '../../../../components';
+import regionMap from '../../../../json/usa/stateCodeMap.json';
+import {lowerCase, slugify} from '../../../../utils';
+import {tComponentProps} from './_types';
 
 export const OrganizationHeaderComponent = memo((props: tComponentProps) => {
-  const {country, city, slug, region} = props.params;
+  const {city: cityName, slug} = props.org;
+  // @ts-ignore
+  const region: string = lowerCase(regionMap[props.org.region]);
+  const citySlug = slugify(cityName);
 
   const crumbs: tCrumb[] = [{
     display: props.org.country,
-    to: `directory/${country}`,
+    to: 'directory/us', // rn, only country supported
   }, {
     display: props.org.region,
-    to: `directory/${country}/${region}`,
+    to: `directory/us/${region}`,
   }, {
     display: props.org.city,
-    to: `directory/${country}/${region}/${city}`,
+    to: `directory/us/${region}/${citySlug}`,
   }, {
     display: props.org.name,
-    to: `org/${country}/${region}/${city}/${slug}`,
+    to: `org/us/${region}/${citySlug}/${slug}`,
   }];
 
   return (
