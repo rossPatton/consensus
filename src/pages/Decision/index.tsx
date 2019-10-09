@@ -6,9 +6,9 @@ import {GenericLoader, Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
 import {getEventById, getEvents} from '../../redux';
 import {tProps, tStore} from './_types';
-import {EventComponent} from './Component';
+import {DecisionComponent} from './Component';
 
-export class EventContainer extends Component<tProps> {
+export class DecisionContainer extends Component<tProps> {
   constructor(props: tProps) {
     super(props);
     const {id} = props.match.params;
@@ -64,7 +64,7 @@ export class EventContainer extends Component<tProps> {
         <GenericLoader
           isLoading={this.props.isLoading}
           render={() => (
-            <EventComponent
+            <DecisionComponent
               event={this.props.event}
               events={this.props.events}
             />
@@ -86,7 +86,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getEvents: (query: tIdQuery) => dispatch(getEvents(query)),
 });
 
-export const Event = connect(
+export const Decision = connect(
   mapStateToProps,
   mapDispatchToProps
-)(EventContainer);
+)(DecisionContainer);

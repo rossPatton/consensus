@@ -2,10 +2,9 @@ import cx from 'classnames';
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
-import { tProps } from './_types';
-
-export const SimpleMajority = memo((props: tProps) => {
-  const { date, data, title, type } = props;
+export const SimpleMajority = memo((props: tDecision) => {
+  const {date, description, title} = props;
+  const data = props.data as tSimpleMajorityData;
   const count = data.yes + data.no + data.abstain;
   const yesPercent = Math.round((data.yes / count) * 100);
   const noPercent = Math.round((data.no / count) * 100);
@@ -27,6 +26,9 @@ export const SimpleMajority = memo((props: tProps) => {
           {title}
         </Link>
       </h3>
+      <p className="mB2 lineClamp">
+        {description}
+      </p>
       <div className="fx aiCtr fs6 fw600 lh1 mB2">
         <span className="fx aiCtr mR2">
           <span className="bgBlue p1 circ mR1" />

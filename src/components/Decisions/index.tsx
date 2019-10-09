@@ -18,18 +18,12 @@ export const Decisions = memo(({ decisions }: { decisions: tDecision[] }) => (
         <div className="col">
           {decision.type === 'Simple Majority' && (
             <SimpleMajority
-              date={decision.date}
-              data={decision.data}
-              title={decision.title}
-              type={decision.type}
+              {...decision}
             />
           )}
           {decision.type === 'Approval' && (
             <Approval
-              date={decision.date}
-              data={decision.data}
-              title={decision.title}
-              type={decision.type}
+              {...decision}
             />
           )}
           <div className="fx aiCtr fs6 fw600">

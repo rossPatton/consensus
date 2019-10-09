@@ -1,5 +1,6 @@
 import {
   Admin,
+  Decision,
   Directory,
   ErrorPage,
   Event,
@@ -36,6 +37,11 @@ export const routes = [
     component: Event,
     exact: true,
     path: '/event/:id',
+  },
+  {
+    component: Decision,
+    exact: true,
+    path: '/decision/:id',
   },
   {
     component: Directory,
