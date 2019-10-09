@@ -5,6 +5,7 @@ import { account } from './account';
 import { auth } from './auth';
 import { city } from './city';
 import { country } from './country';
+import { decision } from './decision';
 import { decisions } from './decisions';
 import { event } from './event';
 import { events } from './events';
@@ -28,6 +29,7 @@ export const setupApi = (app: Koa) => {
   app.use(auth.routes());
   app.use(city.routes());
   app.use(country.routes());
+  app.use(decision.routes());
   app.use(decisions.routes());
   app.use(event.routes());
   app.use(events.routes());
@@ -56,6 +58,7 @@ export const setupApi = (app: Koa) => {
   app.use(auth.allowedMethods(opts));
   app.use(city.allowedMethods(opts));
   app.use(country.allowedMethods(opts));
+  app.use(decision.allowedMethods(opts));
   app.use(decisions.allowedMethods(opts));
   app.use(event.allowedMethods(opts));
   app.use(events.allowedMethods(opts));

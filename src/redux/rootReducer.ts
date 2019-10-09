@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import { getCityReducer } from './async/city/reducer';
 import { getCountryReducer } from './async/country/reducer';
+import { getDecisionReducer } from './async/decision/reducer';
 import { eventsReducer } from './async/events/reducer';
 import { getDecisionsByOrgReducer } from './async/getDecisionsByOrg/reducer';
 import { getEventByIdReducer } from './async/getEventById/reducer';
@@ -20,6 +21,7 @@ import { usersByOrgReducer } from './async/usersByOrg/reducer';
 export const rootReducer = combineReducers({
   city: getCityReducer,
   country: getCountryReducer,
+  decision: getDecisionReducer,
   decisions: getDecisionsByOrgReducer,
   event: getEventByIdReducer,
   events: eventsReducer,

@@ -1,22 +1,22 @@
 import { match } from 'react-router';
 
 export type tStore = {
-  event: tThunk<tEvent>,
-  events: tThunk<tEvent[]>,
+  decision: tThunk<tDecision>,
+  decisions: tThunk<tDecision[]>,
   isLoading: boolean,
-}
+};
 
 export type tProps = {
-  event: tEvent,
-  events: tEvent[],
-  getEventById: (query: tIdQuery) => Promise<any>,
-  getEvents: (query: tIdQuery) => Promise<any>,
+  decision: tDecision,
+  decisions: tDecision[],
+  getDecision: (query: tIdQuery) => Promise<{payload: tDecision}>,
+  getDecisionsByOrg: (query: tIdQuery) => Promise<{payload: tDecision[]}>,
   isLoading: boolean,
   match: match & { params: { id: number } },
 };
 
 export type tComponentProps = {
-  event: tEvent,
-  events: tEvent[],
+  decision: tDecision,
+  decisions: tDecision[],
 };
 

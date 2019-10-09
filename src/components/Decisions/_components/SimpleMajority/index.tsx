@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
 export const SimpleMajority = memo((props: tDecision) => {
-  const {date, description, title} = props;
+  const {date, description, id, title} = props;
   const data = props.data as tSimpleMajorityData;
   const count = data.yes + data.no + data.abstain;
   const yesPercent = Math.round((data.yes / count) * 100);
@@ -22,7 +22,7 @@ export const SimpleMajority = memo((props: tDecision) => {
       />
       <time className="mR2 lh1 fw600 fs6 mB2">{date}</time>
       <h3 className="mB2 lh1 ttCap">
-        <Link to="/filler">
+        <Link to={`/decision/${id}`}>
           {title}
         </Link>
       </h3>

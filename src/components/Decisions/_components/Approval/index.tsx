@@ -2,7 +2,7 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 export const Approval = memo((props: tDecision) => {
-  const {date, description, title} = props;
+  const {date, description, id, title} = props;
   const data = props.data as tApprovalData;
 
   return (
@@ -12,7 +12,7 @@ export const Approval = memo((props: tDecision) => {
         {date}
       </time>
       <h3 className="mB2 lh1 ttCap">
-        <Link to="/filler">
+        <Link to={`/decision/${id}`}>
           {title}
         </Link>
       </h3>

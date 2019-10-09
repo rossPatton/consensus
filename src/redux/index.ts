@@ -10,6 +10,7 @@ export { authenticateSession, logOutOfSession } from './async/session/thunk';
 export { createEvent } from './async/createEvent/thunk';
 export { fileUpload } from './async/fileUpload/thunk';
 export { getCity } from './async/city/thunk';
+export { getDecision } from './async/decision/thunk';
 export { getCountry } from './async/country/thunk';
 export { getDecisionsByOrg } from './async/getDecisionsByOrg/thunk';
 export { getEventById } from './async/getEventById/thunk';

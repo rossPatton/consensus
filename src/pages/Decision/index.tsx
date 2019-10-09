@@ -4,7 +4,7 @@ import {Dispatch} from 'redux';
 
 import {GenericLoader, Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
-import {getEventById, getEvents} from '../../redux';
+import {getDecision, getDecisionsByOrg} from '../../redux';
 import {tProps, tStore} from './_types';
 import {DecisionComponent} from './Component';
 
@@ -12,11 +12,10 @@ export class DecisionContainer extends Component<tProps> {
   constructor(props: tProps) {
     super(props);
     const {id} = props.match.params;
-
-    props.getEventById({id})
-      .then((res: {payload: tEvent}) => {
-        // for rendering the 'more by name' sidebar
-        return props.getEvents({
+    props.getDecision({id})
+      .then((res: {payload: tDecision}) => {
+      // for rendering the 'more by name' sidebar
+        return props.getDecisionsByOrg({
           id: res.payload.orgId,
           exclude: id,
         });
@@ -28,10 +27,10 @@ export class DecisionContainer extends Component<tProps> {
     const routeChanged = nextProps.match.url !== this.props.match.url;
     if (routeChanged) {
       const {id} = this.props.match.params;
-      this.props.getEventById({id})
-        .then((res: {payload: tEvent}) => {
-        // for rendering the 'more by name' sidebar
-          return this.props.getEvents({
+      this.props.getDecision({id})
+        .then((res: {payload: tDecision}) => {
+          // for rendering the 'more by name' sidebar
+          return this.props.getDecisionsByOrg({
             id: res.payload.orgId,
             exclude: id,
           });
@@ -43,8 +42,8 @@ export class DecisionContainer extends Component<tProps> {
   shouldComponentUpdate(nextProps: tProps) {
     const loadingFinished = nextProps.isLoading !== this.props.isLoading;
     const routeChanged = nextProps.match.url !== this.props.match.url;
-    const eventsLoaded = nextProps.events.length !== this.props.events.length;
-    return loadingFinished || routeChanged || eventsLoaded;
+    const decisionsLoaded = nextProps.decisions.length !== this.props.decisions.length;
+    return loadingFinished || routeChanged || decisionsLoaded;
   }
 
   render() {
@@ -65,8 +64,8 @@ export class DecisionContainer extends Component<tProps> {
           isLoading={this.props.isLoading}
           render={() => (
             <DecisionComponent
-              event={this.props.event}
-              events={this.props.events}
+              decision={this.props.decision}
+              decisions={this.props.decisions}
             />
           )}
         />
@@ -76,14 +75,14 @@ export class DecisionContainer extends Component<tProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.event.isLoading,
-  event: store.event.data,
-  events: store.events.data,
+  isLoading: store.decision.isLoading,
+  decision: store.decision.data,
+  decisions: store.decisions.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  getEventById: (query: tIdQuery) => dispatch(getEventById(query)),
-  getEvents: (query: tIdQuery) => dispatch(getEvents(query)),
+  getDecision: (query: tIdQuery) => dispatch(getDecision(query)),
+  getDecisionsByOrg: (query: tIdQuery) => dispatch(getDecisionsByOrg(query)),
 });
 
 export const Decision = connect(
