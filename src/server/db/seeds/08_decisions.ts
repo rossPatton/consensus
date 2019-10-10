@@ -3,18 +3,37 @@ import faker from 'faker';
 import Knex from 'knex';
 
 import {range} from '../../../utils/range';
+const SIMPLE_MAJORITY = 'Simple Majority';
+const APPROVAL = 'Approval';
 
 const createDecision = async (i: number) => {
-  const type = i % 2 === 0 ? 'Simple Majority' : 'Approval';
-  const data = type === 'Simple Majority'
+  const type = i % 2 === 0 ? SIMPLE_MAJORITY : APPROVAL;
+  const isClosed = faker.random.boolean();
+
+  const choices = type === SIMPLE_MAJORITY
+    ? {choices: ['yes', 'no', 'abstain']}
+    : {
+      choices: [
+        'Person A',
+        'Person B',
+        'Person C',
+        'Person D',
+        'Person E',
+        'Person F',
+        'Person G',
+      ]};
+
+  const data = type === SIMPLE_MAJORITY
     ? {
-      yes: faker.random.number(),
-      no: faker.random.number(),
-      abstain: faker.random.number(),
+      results: {
+        yes: faker.random.number(),
+        no: faker.random.number(),
+        abstain: faker.random.number(),
+      },
     }
     : {
       winners: 5,
-      choices: [
+      results: [
         {
           count: faker.random.number(),
           label: 'person A',
@@ -47,10 +66,14 @@ const createDecision = async (i: number) => {
     };
 
   return {
+    choices,
     data,
-    date: faker.date.past(),
+    date: faker.date.future(),
     description: faker.lorem.paragraphs(),
+    endDate: faker.date.future(),
+    isClosed,
     orgId: 100,
+    orgName: 'Tech Workers Coalition NYC',
     title: faker.company.bs(),
     type,
   };

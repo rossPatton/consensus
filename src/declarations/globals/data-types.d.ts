@@ -9,25 +9,29 @@ declare interface tAction<T, P = undefined> {
   payload?: P,
 };
 
-declare type tApprovalData = {
-  choices: {count: number, label: string}[],
+declare type tApprovalResults = {
+  results: {count: number, label: string}[],
   winners: number,
 };
 
-declare type tSimpleMajorityData = {
-  abstain: number,
-  no: number,
-  yes: number,
-}
+declare type tSimpleMajorityResults = {
+  results: {
+    abstain: number,
+    no: number,
+    yes: number,
+  },
+};
 
 declare type tDecision = {
-  data: any,
+  choices: any, // voting options
   date: string,
+  data: any, // voting results
   description: string,
+  endDate: string,
   id: number,
-  minutes: string,
+  isClosed: boolean,
   orgId: number,
-  rationale: string,
+  orgName: string,
   title: string,
   type: 'Simple Majority' | 'Approval',
 };

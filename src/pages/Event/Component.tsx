@@ -54,7 +54,7 @@ export const EventComponent = memo(({event, events}: tComponentProps) => (
             </p>
           ))}
       </div>
-      <aside>
+      <aside className="col row mT2">
         {events && events.length > 0 && (
           <>
             <h2 className="fs5 mB3 ffLab lh1">
