@@ -48,7 +48,6 @@ export class EventContainer extends Component<tProps> {
   }
 
   render() {
-    console.log('event page container props => ', this.props);
     return (
       <ErrorBoundary>
         <Helmet

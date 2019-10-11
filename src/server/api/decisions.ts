@@ -2,14 +2,15 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import { utcToDateString } from '../../utils';
-import { knex } from '../db/connection';
+import {utcToDateString} from '../../utils';
+import {knex} from '../db/connection';
 
 export const decisions = new Router();
+type tQuery = {id: string, isClosed: boolean, limit: string, offset: string};
 
 const getDecisions = async (ctx: Koa.ParameterizedContext) => {
-  const {query}: tIdQueryServer = ctx;
-  const {id, limit, offset} = query;
+  const {query} = ctx;
+  const {id, isClosed, limit, offset} = query as tQuery;
 
   const orgId = parseInt(id, 10);
   const parsedLimit = limit ? parseInt(limit, 10) : 3;
@@ -18,7 +19,7 @@ const getDecisions = async (ctx: Koa.ParameterizedContext) => {
   let decisions;
   try {
     decisions = knex('decisions')
-      .where({orgId})
+      .where({isClosed, orgId})
       .orderBy('date', 'desc');
   } catch (err) {
     return ctx.throw(400, err);

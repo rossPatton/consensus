@@ -34,6 +34,10 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
+    const {role, session} = this.props;
+    if (!role) return null;
+    if (session.type === 'org') return null;
+
     return (
       <RSVPComponent
         id={this.props.event.id}

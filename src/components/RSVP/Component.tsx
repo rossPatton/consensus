@@ -4,8 +4,6 @@ import {tComponentProps} from './_types';
 
 export const RSVPComponent = memo((props: tComponentProps) => {
   const {id, rsvp, session, setRsvp} = props;
-  if (session.type === 'org') return null;
-
   const {profile = {}} = session;
   const {privateRSVP = true} = profile as tUser;
 

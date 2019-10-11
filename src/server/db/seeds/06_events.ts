@@ -6,7 +6,7 @@ import {range} from '../../../utils/range';
 
 const createEvent = async () => ({
   category: faker.company.bsNoun(),
-  date: faker.date.future(),
+  date: faker.random.boolean() ? faker.date.future() : faker.date.past(),
   description: faker.lorem.paragraphs(),
   // endDate === duration, since users can have custom durations this is a timestamp
   // we convert the 1hr, 2hr etc values to timestamps as well
@@ -26,7 +26,7 @@ const createEvent = async () => ({
 exports.seed = async (knex: Knex) => {
   const fakeEvents = [];
 
-  for await (const _ of range(100, true)) {
+  for await (const _ of range(150, true)) {
     fakeEvents.push(await createEvent());
   }
 

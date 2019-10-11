@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -11,19 +12,19 @@ export const OverviewComponent = memo((props: tComponentProps) => (
       <p>{props.org.description}</p>
     </div>
     {props.events.length > 0 && (
-      <div className="mB4">
+      <div className={cx({mB5: props.decisions.length > 0})}>
         <h2 className="mB2">Upcoming Events</h2>
         <Events events={props.events} role={props.role} />
-        <Link to="/events" className="fs6 fw600 mB3">
+        <Link to="events" className="lh1 fs6 fw600">
           See All Events
         </Link>
       </div>
     )}
-    {props.events.length > 0 && (
+    {props.role && props.decisions.length > 0 && (
       <>
-        <h2 className="mB2">Public Decisions</h2>
+        <h2 className="mB2">Active Decisions</h2>
         <Decisions decisions={props.decisions.slice(0, 3)} />
-        <Link to="/decisions" className="fs6 fw600">
+        <Link to="decisions" className="lh1 fs6 fw600">
           See All Decisions
         </Link>
       </>

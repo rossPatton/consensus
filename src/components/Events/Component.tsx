@@ -14,26 +14,18 @@ export const EventsComponent = memo((props: tComponentProps) => (
     {props.events.map((ev, i) => (
       <li
         key={i}
-        className="brdA1 br8 mB2">
+        className={cx({
+          'brdA1 br8 mB3': true,
+          // if event already occurred, fade it out
+          o5: dayJS(ev.date).isBefore(dayJS()),
+        })}>
         {props.isEditable && (
           <div
             className={cx({
               'brdB1 p2 pL3 pR3 fx aiCtr fs6 jcEnd': true,
               hide: props.tiny,
-              bgBlueLite: props.role === 'admin',
-              bgGreenLite: props.role === 'facilitator',
             })}>
             <div className="col mR2 fx aiCtr">
-              {ev.isDraft && (
-                <span className="mR3">
-                  This event is a draft.
-                </span>
-              )}
-              {!ev.isDraft && (
-                <span className="mR3">
-                  This event is published.
-                </span>
-              )}
               <Link
                 to={`createEvent?${objToQueryString(ev)}`}
                 className="bgWhite p1 pL2 pR2 hvrBgGrey1 trans1 fw600 br4 lh1 noUnderline brdA1">
@@ -43,7 +35,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   aria-label="Hand with Pen Emoji">
                   ✍️
                 </span>
-                Edit this event
+                Edit this {ev.isDraft ? 'draft' : 'event'}
               </Link>
             </div>
             <button
@@ -87,14 +79,18 @@ export const EventsComponent = memo((props: tComponentProps) => (
               <time className="mR1" dateTime={ev.date}>
                 {dayJS(ev.date).format('ddd MMM DD, h:mmA')}
               </time>
-              <span className="mR1">@</span>
-              {ev.locationLink && (
-                <ExternalLink
-                  noFollow
-                  className="mR1"
-                  to={ev.locationLink}>
-                  {ev.location}
-                </ExternalLink>
+              {!props.tiny && (
+                <>
+                  <span className="mR1">@</span>
+                  {ev.locationLink && (
+                    <ExternalLink
+                      noFollow
+                      className="mR1"
+                      to={ev.locationLink}>
+                      {ev.location}
+                    </ExternalLink>
+                  )}
+                </>
               )}
               {!ev.locationLink && ev.location}
             </div>

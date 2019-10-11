@@ -18,24 +18,14 @@ export const OrganizationTabs = memo((props: tProps) => (
           subRoute="events"
         />
       </li>
-      <li className="brdR1">
-        <Tab
-          match={props.match}
-          subRoute="decisions"
-        />
-      </li>
-      <li className="brdR1">
-        <Tab
-          match={props.match}
-          subRoute="forum"
-        />
-      </li>
-      <li className="brdR1">
-        <Tab
-          match={props.match}
-          subRoute="resources"
-        />
-      </li>
+      {props.role && (
+        <li className="brdR1">
+          <Tab
+            match={props.match}
+            subRoute="decisions"
+          />
+        </li>
+      )}
     </ul>
   </nav>
 ));

@@ -7,7 +7,8 @@ export type tComponentProps = {
 
 export type tContainerProps = tComponentProps & {
   getEvents: (query: tIdQuery) => Promise<tThunk<tEvent[]>>,
-  getDecisionsByOrg: (query: tIdQuery) => Promise<tThunk<tDecision[]>>,
+  getDecisionsByOrg:
+    (query: tIdQuery & {isClosed: boolean}) => Promise<tThunk<tDecision[]>>,
   isLoading: boolean,
   session: tSession,
 };

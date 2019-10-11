@@ -9,7 +9,12 @@ import {tProps} from './_types';
 export const Decisions = memo((props: tProps) => (
   <ul>
     {props.decisions.map((decision, i) => (
-      <li key={i} className="brdA1 br8 mB2 p3 pT2 pL4 rel ovfHide">
+      <li
+        key={i}
+        className={cx({
+          'brdA1 br8 mB3 p3 pT2 rel ovfHide': true,
+          pL4: decision.isClosed,
+        })}>
         {decision.isClosed && decision.type === 'Simple Majority' && (
           <SimpleMajorityResult
             data={decision.data}

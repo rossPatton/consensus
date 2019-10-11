@@ -11,32 +11,29 @@ import {DecisionComponent} from './Component';
 export class DecisionContainer extends Component<tProps> {
   constructor(props: tProps) {
     super(props);
-    const {id} = props.match.params;
-    props.getDecision({id})
-      .then((res: {payload: tDecision}) => {
-      // for rendering the 'more by name' sidebar
-        return props.getDecisionsByOrg({
-          id: res.payload.orgId,
-          exclude: id,
-        });
-      })
-      .catch(console.error);
+    this.getDecision();
   }
 
   componentDidUpdate(nextProps: tProps) {
     const routeChanged = nextProps.match.url !== this.props.match.url;
-    if (routeChanged) {
-      const {id} = this.props.match.params;
-      this.props.getDecision({id})
-        .then((res: {payload: tDecision}) => {
-          // for rendering the 'more by name' sidebar
-          return this.props.getDecisionsByOrg({
-            id: res.payload.orgId,
-            exclude: id,
-          });
-        })
-        .catch(console.error);
-    }
+    if (!routeChanged) return;
+    this.getDecision();
+  }
+
+  getDecision = () => {
+    const {id} = this.props.match.params;
+    this.props.getDecision({id})
+      .then((res: {payload: tDecision}) => {
+        // for rendering the 'more by name' sidebar
+        return this.props.getDecisionsByOrg({
+          id: res.payload.orgId,
+          exclude: id,
+          isClosed: false,
+          limit: 3,
+          offset: 0,
+        });
+      })
+      .catch(console.error);
   }
 
   shouldComponentUpdate(nextProps: tProps) {
@@ -47,7 +44,6 @@ export class DecisionContainer extends Component<tProps> {
   }
 
   render() {
-    console.log('event page container props => ', this.props);
     return (
       <ErrorBoundary>
         <Helmet

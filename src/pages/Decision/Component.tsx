@@ -30,8 +30,9 @@ export const DecisionComponent = memo(({decision, decisions}: tComponentProps) =
       </Link>
     </div>
     <div className="fx mB3">
-      <div className="col row mR3">
+      <div className="col row mR4">
         <div className="mB4">
+          <h2 className="fs3 ffLab mB1">Decision Rationale</h2>
           {decision.description &&
             decision.description.split('\n').map((p: string, i) => (
               <p key={i} className="fs3">
@@ -41,6 +42,7 @@ export const DecisionComponent = memo(({decision, decisions}: tComponentProps) =
         </div>
         {decision.isClosed && (
           <>
+            <h3 className="ffLab mB1">Results</h3>
             {decision.type === 'Approval' && (
               <ApprovalResults data={decision.data} />
             )}

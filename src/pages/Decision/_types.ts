@@ -10,7 +10,8 @@ export type tProps = {
   decision: tDecision,
   decisions: tDecision[],
   getDecision: (query: tIdQuery) => Promise<{payload: tDecision}>,
-  getDecisionsByOrg: (query: tIdQuery) => Promise<{payload: tDecision[]}>,
+  getDecisionsByOrg:
+    (query: tIdQuery & {isClosed: boolean}) => Promise<{payload: tDecision[]}>,
   isLoading: boolean,
   match: match & { params: { id: number } },
 };

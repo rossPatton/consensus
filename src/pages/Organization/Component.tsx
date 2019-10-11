@@ -14,6 +14,7 @@ export const OrganizationComponent = (props: tComponentProps) => (
     />
     <OrganizationTabs
       match={props.match}
+      role={props.role}
     />
     <UserBar
       match={props.match}
@@ -23,7 +24,7 @@ export const OrganizationComponent = (props: tComponentProps) => (
     />
     <div
       className={cx({
-        'contain mB4': true,
+        contain: true,
         mT4: !props.session.isAuthenticated,
       })}>
       {props.match.params.section === 'overview' && (
@@ -35,6 +36,7 @@ export const OrganizationComponent = (props: tComponentProps) => (
       )}
       {props.match.params.section === 'decisions' && (
         <Decisions
+          location={props.location}
           match={props.match}
           org={props.org}
           role={props.role}
@@ -42,6 +44,7 @@ export const OrganizationComponent = (props: tComponentProps) => (
       )}
       {props.match.params.section === 'events' && (
         <Events
+          location={props.location}
           match={props.match}
           org={props.org}
           role={props.role}
