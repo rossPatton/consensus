@@ -6,14 +6,14 @@ import {tProps} from './_types';
 
 export const UserComponent = memo(({orgs, user}: tProps) => (
   <div className="contain mT4 mB5">
-    {(user.fname || user.username) && (
+    {(user.name || user.username) && (
       <h1 className="mB3 fs2 ttCap">
-        {/* if user put in fname/lname, use those, otherwise use username*/}
-        Profile for {user.fname} {user.fname && user.lname}
-        {!user.fname && user.username}
+        {/* if user entered a name, use those, otherwise use username*/}
+        Profile for {user.name}
+        {!user.name && user.username}
       </h1>
     )}
-    {user.fname && (
+    {user.name && (
       <>
         <h3>Username:</h3>
         <p>{user.username}</p>

@@ -6,10 +6,8 @@ exports.up = async (knex: Knex) => {
 
     // additional info that could be made public, but is private by default
     table.text('bio', 'longtext');
-    table.string('fname');
-    table.string('lname');
-
-    table.string('username').notNullable();
+    table.string('name'); // real name
+    table.string('username').notNullable(); // public name
 
     // account recovery / verification
     table.string('email').notNullable().unique();

@@ -45,10 +45,8 @@ export const MembersComponent = memo((props: tComponentProps) => {
                 bgYellowLite: user.role === 'member',
                 bgGreenLite: user.role === 'facilitator',
               })}>
-              <div className="fx aiCtr col">
-                <span className="ttCap mR3">
-                  {user.role}
-                </span>
+              <div className="col ttCap mR3">
+                {user.role}
               </div>
               <div className="col taR">
                 <button
@@ -63,14 +61,12 @@ export const MembersComponent = memo((props: tComponentProps) => {
                 <div className="ffLab fs5">Username:</div>
                 {user.username}
               </h3>
-              <h3>
-                <div className="ffLab fs5">First name:</div>
-                {user.fname}
-              </h3>
-              <h3>
-                <div className="ffLab fs5">Last name:</div>
-                {user.lname}
-              </h3>
+              {user.name && (
+                <h3>
+                  <div className="ffLab fs5">Name:</div>
+                  {user.name}
+                </h3>
+              )}
               <div className="row">
                 <h3 className="ffLab fs5 ttCap mB2">
                   Current role: {user.role}

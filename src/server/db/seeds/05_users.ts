@@ -7,8 +7,7 @@ import {range} from '../../../utils/range';
 const createUser = async () => ({
   bio: faker.lorem.paragraphs(),
   email: faker.internet.exampleEmail(),
-  fname: faker.name.firstName(),
-  lname: faker.name.lastName(),
+  name: `${faker.name.firstName()} ${faker.name.lastName()}`,
   phone: faker.phone.phoneNumber(),
   privateEmail: faker.random.boolean(),
   privateMemberships: faker.random.boolean(),
@@ -20,8 +19,7 @@ const createTestUser = async () => ({
   bio: faker.lorem.paragraphs(),
   city: 3658, // New York City
   email: 'test@test.com',
-  fname: 'test',
-  lname: 'user',
+  name: 'Test User',
   phone: faker.phone.phoneNumber(),
   privateEmail: faker.random.boolean(),
   privateMemberships: faker.random.boolean(),

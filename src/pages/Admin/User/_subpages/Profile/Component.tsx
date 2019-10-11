@@ -16,32 +16,18 @@ export const ProfileComponent = memo((props: tComponentProps) => (
       </legend>
       <div className="p4 br8 brdA1 mB3">
         <div className="fx aiCtr mB3">
-          <label className="col row mR3" htmlFor="fname">
+          <label className="col row mR3" htmlFor="name">
             <h2 className="ffLab fs5 mB1 lh1">
-              First Name
+              Name
             </h2>
             <input
-              id="fname"
-              onChange={ev => props.updateState('fname', ev)}
+              id="name"
               className="p3 row"
-              placeholder={props.fname}
-              defaultValue={props.fname}
-              value={props.fname}
-              name="fname"
-            />
-          </label>
-          <label className="col row" htmlFor="lname">
-            <h2 className="ffLab fs5 mB1 lh1">
-              Last Name
-            </h2>
-            <input
-              id="lname"
-              onChange={ev => props.updateState('lname', ev)}
-              className="p3 row"
-              placeholder={props.lname}
-              defaultValue={props.lname}
-              value={props.lname}
-              name="lname"
+              onChange={ev => props.updateState('name', ev)}
+              placeholder={props.name}
+              defaultValue={props.name}
+              value={props.name}
+              name="name"
             />
           </label>
         </div>

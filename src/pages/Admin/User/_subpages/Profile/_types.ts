@@ -3,8 +3,7 @@ import {UPDATE_USER_SUCCESS} from '../../../../../redux/async/updateUser/_types'
 export type tState = {
   bio: string,
   email: string,
-  fname: string,
-  lname: string,
+  name: string,
   newPassword: string,
   password: string,
   privateEmail: boolean,
