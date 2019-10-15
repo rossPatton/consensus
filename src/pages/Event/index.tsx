@@ -8,7 +8,7 @@ import {getEventById, getEvents} from '../../redux';
 import {tProps, tStore} from './_types';
 import {EventComponent} from './Component';
 
-export class EventContainer extends Component<tProps> {
+class EventContainer extends Component<tProps> {
   constructor(props: tProps) {
     super(props);
     const {id} = props.match.params;
@@ -85,7 +85,5 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getEvents: (query: tIdQuery) => dispatch(getEvents(query)),
 });
 
-export const Event = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EventContainer);
+const Event = connect(mapStateToProps, mapDispatchToProps)(EventContainer);
+export default Event;

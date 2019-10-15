@@ -8,7 +8,7 @@ import {getDecision, getDecisionsByOrg} from '../../redux';
 import {tProps, tStore} from './_types';
 import {DecisionComponent} from './Component';
 
-export class DecisionContainer extends Component<tProps> {
+class DecisionContainer extends Component<tProps> {
   constructor(props: tProps) {
     super(props);
     this.getDecision();
@@ -18,6 +18,13 @@ export class DecisionContainer extends Component<tProps> {
     const routeChanged = nextProps.match.url !== this.props.match.url;
     if (!routeChanged) return;
     this.getDecision();
+  }
+
+  shouldComponentUpdate(nextProps: tProps) {
+    const loadingFinished = nextProps.isLoading !== this.props.isLoading;
+    const routeChanged = nextProps.match.url !== this.props.match.url;
+    const decisionsLoaded = nextProps.decisions.length !== this.props.decisions.length;
+    return loadingFinished || routeChanged || decisionsLoaded;
   }
 
   getDecision = () => {
@@ -34,13 +41,6 @@ export class DecisionContainer extends Component<tProps> {
         });
       })
       .catch(console.error);
-  }
-
-  shouldComponentUpdate(nextProps: tProps) {
-    const loadingFinished = nextProps.isLoading !== this.props.isLoading;
-    const routeChanged = nextProps.match.url !== this.props.match.url;
-    const decisionsLoaded = nextProps.decisions.length !== this.props.decisions.length;
-    return loadingFinished || routeChanged || decisionsLoaded;
   }
 
   render() {
@@ -81,7 +81,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getDecisionsByOrg: (query: tIdQuery) => dispatch(getDecisionsByOrg(query)),
 });
 
-export const Decision = connect(
+const Decision = connect(
   mapStateToProps,
   mapDispatchToProps
 )(DecisionContainer);
+
+export default Decision;

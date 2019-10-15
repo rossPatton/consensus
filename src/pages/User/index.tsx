@@ -9,7 +9,7 @@ import { tOrgWithRole } from '../Admin/User/_subpages/Memberships/_types';
 import {tContainerProps, tStore} from './_types';
 import {UserComponent} from './Component';
 
-export class UserContainer extends PureComponent<tContainerProps> {
+class UserContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     const {id} = props.match.params;
@@ -55,7 +55,5 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getOrgsByUser: (query: tIdQuery) => dispatch(getOrgsByUser(query)),
 });
 
-export const User = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UserContainer);
+const User = connect(mapStateToProps, mapDispatchToProps)(UserContainer);
+export default User;

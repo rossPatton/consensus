@@ -18,6 +18,7 @@ export const SSR = async (ctx: Koa.ParameterizedContext) => {
 
   const initRouterContext = {};
   const store = await initStoreForSSR(ctx);
+  console.log('initial redux store => ', store.getState());
 
   ctx.status = 200;
   const htmlStream = renderToNodeStream(

@@ -8,9 +8,10 @@ import {getOrg, getRoles, getRsvps} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {OrganizationComponent} from './Component';
 
-export class OrganizationContainer extends Component<tContainerProps> {
+class OrganizationContainer extends Component<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
+    console.log('all props for constructor => ', props);
     props.getOrg(props.match.params);
 
     if (props.session.isAuthenticated && props.session.type === 'user') {
@@ -30,6 +31,8 @@ export class OrganizationContainer extends Component<tContainerProps> {
     if (session.type === 'org' && session.profile.id === org.id) {
       role = 'admin';
     }
+
+    console.log('role => ', role);
 
     return (
       <ErrorBoundary>
@@ -74,7 +77,10 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getRsvps: (query: tIdQuery) => dispatch(getRsvps(query)),
 });
 
-export const Organization = connect(
+const Organization = connect(
   mapStateToProps,
   mapDispatchToProps
 )(OrganizationContainer);
+
+// page level components need to be default exports for code-splitting /shrug
+export default Organization;

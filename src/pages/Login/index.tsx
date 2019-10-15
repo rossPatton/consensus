@@ -9,7 +9,7 @@ import {authenticateSession, getRoles} from '../../redux';
 import {tProps, tState, tStateUnion} from './_types';
 import {LoginComponent} from './Component';
 
-export class LoginContainer extends PureComponent<tProps, tState> {
+class LoginContainer extends PureComponent<tProps, tState> {
   state = {
     isClient: false,
     oLogin: '',
@@ -89,7 +89,5 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getRoles: (query: any) => dispatch(getRoles(query)),
 });
 
-export const Login = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginContainer);
+const Login = connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+export default Login;

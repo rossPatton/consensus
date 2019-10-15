@@ -5,7 +5,7 @@ import {ErrorBoundary} from '../../containers';
 import {canonical, description, keywords, title} from './_constants';
 import {HomeComponent} from './Component';
 
-export const Home = memo(() => (
+const Home = memo(() => (
   <ErrorBoundary>
     <Helmet
       canonical={canonical}
@@ -20,4 +20,6 @@ export const Home = memo(() => (
     <HomeComponent />
   </ErrorBoundary>
 ));
+
+export default Home;
 

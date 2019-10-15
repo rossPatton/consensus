@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {PureComponent} from 'react';
+import React, {memo} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 
@@ -8,34 +8,29 @@ import {ErrorBoundary} from '../../containers';
 import {tProps, tStore} from './_types';
 import {SignupComponent} from './Component';
 
-export class SignupContainer extends PureComponent<tProps> {
-  render() {
-    const {session} = this.props;
-
-    return (
-      <ErrorBoundary>
-        <Helmet
-          canonical=""
-          title=""
-          meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
-          ]}
-        />
-        {session.isAuthenticated && <Redirect to="/admin/profile" />}
-        {!session.isAuthenticated && (
-          <SignupComponent
-            location={this.props.location}
-            match={this.props.match}
-            session={session}
-          />
-        )}
-      </ErrorBoundary>
-    );
-  }
-}
+const SignupContainer = memo((props: tProps) => (
+  <ErrorBoundary>
+    <Helmet
+      canonical=""
+      title=""
+      meta={[
+        { name: 'description', content: '' },
+        { name: 'keywords', content: '' },
+        { property: 'og:title', content: '' },
+        { property: 'og:description', content: '' },
+      ]}
+    />
+    {props.session.isAuthenticated && <Redirect to="/admin/profile" />}
+    {!props.session.isAuthenticated && (
+      <SignupComponent
+        location={props.location}
+        match={props.match}
+        session={props.session}
+      />
+    )}
+  </ErrorBoundary>
+));
 
 const mapStateToProps = (store: tStore) => ({session: store.session.data});
-export const Signup = connect(mapStateToProps)(SignupContainer);
+const Signup = connect(mapStateToProps)(SignupContainer);
+export default Signup;
