@@ -22,6 +22,8 @@ declare type tSimpleMajorityResults = {
   },
 };
 
+declare type tDecisionType = 'n/a' | 'Simple Majority' | 'Approval';
+
 declare type tDecision = {
   choices: any, // voting options
   date: string,

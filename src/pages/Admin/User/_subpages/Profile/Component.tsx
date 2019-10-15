@@ -25,7 +25,6 @@ export const ProfileComponent = memo((props: tComponentProps) => (
               className="p3 row"
               onChange={ev => props.updateState('name', ev)}
               placeholder={props.name}
-              defaultValue={props.name}
               value={props.name}
               name="name"
             />
@@ -44,7 +43,6 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             onChange={ev => props.updateState('bio', ev)}
             className="p3 row mB3"
             placeholder={props.bio}
-            defaultValue={props.bio}
             value={props.bio}
             name="bio"
           />
@@ -60,7 +58,6 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             onChange={ev => props.updateState('email', ev)}
             className="p3 row mB1"
             placeholder="Update your email here"
-            defaultValue={props.email}
             value={props.email}
             name="email"
           />
@@ -97,7 +94,6 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             onChange={ev => props.updateState('username', ev)}
             className="p3 row mB3"
             placeholder="Update your username here"
-            defaultValue={props.username}
             value={props.username}
             name="username"
           />

@@ -7,10 +7,10 @@ import {GenericLoader, Helmet} from '../../../../components';
 import {Paginate} from '../../../../containers';
 import {getEvents} from '../../../../redux';
 import {fuzzFilterList} from '../../../../utils';
-import {tContainerProps, tState} from './_types';
+import {tContainerProps, tState, tStore} from './_types';
 import {EventsComponent} from './Component';
 
-export class EventsContainer extends Component<tContainerProps> {
+export class EventsContainer extends Component<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
     this.getEvents();
@@ -22,9 +22,6 @@ export class EventsContainer extends Component<tContainerProps> {
   };
 
   componentDidUpdate() {
-    // const routeChanged = nextProps.location.search !== this.props.location.search;
-    // const routeChanged = nextProps.location.search !== this.props.location.search;
-    // if (!routeChanged) return;
     this.getEvents();
   }
 
@@ -124,7 +121,7 @@ export class EventsContainer extends Component<tContainerProps> {
   }
 }
 
-const mapStateToProps = (store: tState) => ({
+const mapStateToProps = (store: tStore) => ({
   events: store.events.data,
   isLoading: store.events.isLoading,
 });

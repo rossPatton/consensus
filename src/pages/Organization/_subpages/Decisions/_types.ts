@@ -6,7 +6,14 @@ export type tProps = {
   isClosed?: boolean,
 };
 
+export type tState = {
+  decisions: tDecision[],
+  typeFilter: tDecisionType,
+};
+
 export type tComponentProps = tProps & {
+  onTypeFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
+  onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   pathname: string,
 };
 

@@ -38,7 +38,6 @@ export const ProfileComponent = memo((props: tComponentProps) => {
               spellCheck
               className="mB3 row fs5"
               placeholder="Organization Description Here"
-              defaultValue={props.description}
               value={props.description}
               onChange={ev => props.updateState('description', ev)}
             />

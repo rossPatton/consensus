@@ -7,18 +7,22 @@ import {Dispatch} from 'redux';
 import {GenericLoader, Helmet} from '../../../../components';
 import {Paginate} from '../../../../containers';
 import {getDecisionsByOrg} from '../../../../redux';
-import {tContainerProps, tStore} from './_types';
+import {fuzzFilterList} from '../../../../utils';
+import {tContainerProps, tState, tStore} from './_types';
 import {DecisionsComponent} from './Component';
 
-export class DecisionsContainer extends Component<tContainerProps> {
+export class DecisionsContainer extends Component<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
     this.getDecisions();
   }
 
-  componentDidUpdate(nextProps: tContainerProps) {
-    const routeChanged = nextProps.location.search !== this.props.location.search;
-    if (!routeChanged) return;
+  state = {
+    decisions: [],
+    typeFilter: 'n/a' as tDecisionType,
+  };
+
+  componentDidUpdate() {
     this.getDecisions();
   }
 
@@ -37,17 +41,49 @@ export class DecisionsContainer extends Component<tContainerProps> {
     });
   }
 
-  shouldComponentUpdate(nextProps: tContainerProps) {
-    const loadingFinished = nextProps.isLoading !== this.props.isLoading;
-    const routeChanged = nextProps.location.search !== this.props.location.search;
-    const decisionsLoaded = nextProps.decisions.length !== this.props.decisions.length;
-    return loadingFinished || routeChanged || decisionsLoaded;
+  onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    ev.preventDefault();
+
+    const filteredList = fuzzFilterList({
+      input: this.props.decisions || [],
+      key: 'title',
+      search: ev.currentTarget.value,
+    });
+
+    this.setState({
+      decisions: filteredList,
+    });
+  }
+
+  filter = (ds: tDecision[]) => {
+    const {typeFilter} = this.state;
+    if (typeFilter === 'n/a') return ds;
+
+    // only 2 types atm, easy comparison
+    const isApproval = typeFilter === 'Approval';
+    return ds.filter(d => {
+      if (isApproval) return d.type === 'Approval';
+      return d.type !== 'Approval';
+    });
+  };
+
+  onTypeFilterChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
+    ev.preventDefault();
+    this.setState({
+      typeFilter: ev.currentTarget.value as tDecisionType,
+    });
   }
 
   render() {
     const {location} = this.props;
     const query = qs.parse(location.search.replace('?', ''));
     const isClosed = query.isClosed === 'true';
+
+    const decisionsToRender = this.filter(
+      this.state.decisions.length > 0
+        ? this.state.decisions
+        : this.props.decisions
+    );
 
     return (
       <>
@@ -66,13 +102,15 @@ export class DecisionsContainer extends Component<tContainerProps> {
           isLoading={this.props.isLoading}
           render={() => (
             <Paginate
-              items={this.props.decisions}
+              items={decisionsToRender}
               match={this.props.match}
               render={(itemsToRender: tDecision[]) => (
                 <DecisionsComponent
                   decisions={itemsToRender}
                   isClosed={isClosed}
                   pathname={location.pathname}
+                  onTypeFilterChange={this.onTypeFilterChange}
+                  onSearchChange={this.onSearchChange}
                 />
               )}
             />
