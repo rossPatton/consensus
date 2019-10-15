@@ -1,9 +1,9 @@
 import React, {PureComponent} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 import {tProps} from './_types';
 
-export class Paginate extends PureComponent<tProps> {
+class PaginateContainer extends PureComponent<tProps> {
   static defaultProps = {
     className: 'lsNone fx aiCtr jcCtr fs4 fw600',
     count: 10,
@@ -27,10 +27,11 @@ export class Paginate extends PureComponent<tProps> {
       className,
       count,
       items,
+      location: {pathname, search},
       match,
     } = this.props;
 
-    const {params, url} = match;
+    const {params} = match;
     const activePage = params.page ? parseInt(params.page, 0) : 1;
 
     // a _.range equivalent. sort of
@@ -49,8 +50,8 @@ export class Paginate extends PureComponent<tProps> {
               const pageNo = i + 1;
               const isActive = activePage === pageNo;
               const to = params.page
-                ? url.replace(`${params.page}`, `${pageNo}`)
-                : `${url}/${pageNo}`;
+                ? pathname.replace(/\/\d$/gm, `/${pageNo}`)
+                : `${pathname}/${pageNo}`;
 
               return (
                 <li key={i}>
@@ -60,7 +61,9 @@ export class Paginate extends PureComponent<tProps> {
                     </span>
                   )}
                   {!isActive && (
-                    <Link className="dBl mL1 mR1 pL1 pR1" to={to}>
+                    <Link
+                      to={`${to}${search}`}
+                      className="dBl mL1 mR1 pL1 pR1" >
                       {pageNo}
                     </Link>
                   )}
@@ -73,3 +76,6 @@ export class Paginate extends PureComponent<tProps> {
     );
   }
 }
+
+// @ts-ignore
+export const Paginate = withRouter(PaginateContainer);

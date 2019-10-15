@@ -36,13 +36,13 @@ export const EventsComponent = memo((props: tComponentProps) => (
             onBlur={props.onPrivacyFilterChange}
             onChange={props.onPrivacyFilterChange}>
             <option value="n/a">
-            All Events
+              All Events
             </option>
             <option value="private">
-            Private Events
+              Private Events
             </option>
             <option value="public">
-            Public Events
+              Public Events
             </option>
           </select>
         </div>

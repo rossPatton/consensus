@@ -47,13 +47,6 @@ export class EventsContainer extends Component<tContainerProps> {
     });
   }
 
-  // shouldComponentUpdate(nextProps: tContainerProps) {
-  //   const loadingFinished = nextProps.isLoading !== this.props.isLoading;
-  //   const routeChanged = nextProps.location.search !== this.props.location.search;
-  //   const eventsLoaded = nextProps.events.length !== this.props.events.length;
-  //   return loadingFinished || routeChanged || eventsLoaded;
-  // }
-
   // TODO consolidate search logic somewhere
   onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
