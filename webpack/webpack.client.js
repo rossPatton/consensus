@@ -22,6 +22,7 @@ module.exports = merge(common, {
   output: {
     filename: 'main.js',
     path: path.join(env.CWD, 'dist'),
+    publicPath: '/', // serve chunks from root path
     crossOriginLoading: env.DEV ? 'anonymous' : false,
   },
 

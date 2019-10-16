@@ -2,60 +2,69 @@ import loadable from '@loadable/component';
 import React from 'react';
 
 // fallbacks for now, until SSR is setup
-const Admin = loadable(() => import('../pages/Admin'), {
+const Admin = loadable(() =>
+  import(/* webpackChunkName: "Admin" */'../pages/Admin'), {
   fallback: (
     <>Loading...</>
   ),
 });
 
-const Decision = loadable(() => import('../pages/Decision'), {
+const Decision = loadable(() =>
+  import(/* webpackChunkName: "Decision" */'../pages/Decision'), {
   fallback: (
     <>Loading...</>
   ),
 });
 
-const Directory = loadable(() => import('../pages/Directory'), {
+const Directory = loadable(() =>
+  import(/* webpackChunkName: "Directory" */'../pages/Directory'), {
   fallback: (
     <>Loading...</>
   ),
 });
 
-const ErrorPage = loadable(() => import('../pages/500'), {
+const ErrorPage = loadable(() =>
+  import(/* webpackChunkName: "ErrorPage" */'../pages/500'), {
   fallback: (
     <>Loading...</>
   ),
 });
 
-const Event = loadable(() => import('../pages/Event'), {
+const Event = loadable(() =>
+  import(/* webpackChunkName: "Event" */'../pages/Event'), {
   fallback: (
     <>Loading...</>
   ),
 });
 
-const Home = loadable(() => import('../pages/Home'), {
+const Home = loadable(() =>
+  import(/* webpackChunkName: "Home" */'../pages/Home'), {
   fallback: (
     <>Loading...</>
   ),
 });
 
-const Login = loadable(() => import('../pages/Login'), {
+const Login = loadable(() =>
+  import(/* webpackChunkName: "Login" */'../pages/Login'), {
   fallback: (
     <>Loading...</>
   ),
 });
 
 const Organization = loadable(() =>
-  import(/* webpackChunkName: "Organization" */ '../pages/Organization'), {
+  import(/* webpackChunkName: "Organization" */'../pages/Organization'), {
   fallback: <div>Loading...</div>,
 });
 
-const Signup = loadable(() => import('../pages/Signup'), {
+const Signup = loadable(() =>
+  import(/* webpackChunkName: "Signup" */'../pages/Signup'), {
   fallback: (
     <>Loading...</>
   ),
 });
 
-const User = loadable(() => import('../pages/User'), {
+const User = loadable(() =>
+  import(/* webpackChunkName: "User" */'../pages/User'), {
   fallback: (
     <>Loading...</>
   ),
