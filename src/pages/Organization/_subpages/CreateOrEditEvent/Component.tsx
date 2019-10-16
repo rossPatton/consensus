@@ -1,9 +1,8 @@
-import cx from 'classnames';
+import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {getDateNowAsISOStr} from '../../../../utils';
 import {tComponentProps} from './_types';
 
 export const CreateOrEditEventComponent = memo((props: tComponentProps) => {
@@ -112,7 +111,7 @@ export const CreateOrEditEventComponent = memo((props: tComponentProps) => {
             <h3>When is the Event?</h3>
             <input
               type="date"
-              min={getDateNowAsISOStr()}
+              min={dayJS().toISOString()}
               className="mR2"
               value={props.date}
               placeholder="Event Date Here"

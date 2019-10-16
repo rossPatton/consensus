@@ -11,7 +11,6 @@ import {OrganizationComponent} from './Component';
 class OrganizationContainer extends Component<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    console.log('all props for constructor => ', props);
     props.getOrg(props.match.params);
 
     if (props.session.isAuthenticated && props.session.type === 'user') {
@@ -31,8 +30,6 @@ class OrganizationContainer extends Component<tContainerProps> {
     if (session.type === 'org' && session.profile.id === org.id) {
       role = 'admin';
     }
-
-    console.log('role => ', role);
 
     return (
       <ErrorBoundary>

@@ -1,7 +1,7 @@
+import dayJS from 'dayjs';
 import Koa from 'koa';
 import _ from 'lodash';
 
-import {getDateNowAsISOStr} from '../../utils';
 import {knex} from '../db/connection';
 
 // use login info to return session for client
@@ -31,7 +31,7 @@ export const getEventsByOrgId = async (ctx: Koa.ParameterizedContext) => {
   if (isPublic) events.where({isPrivate: false});
 
   const showPast = showPastStr === 'true';
-  const now = getDateNowAsISOStr();
+  const now = dayJS().toISOString();
   // return old events
   if (showPast) events.where('date', '<', now);
   // return upcoming events

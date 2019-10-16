@@ -12,7 +12,12 @@ export class OverviewContainer extends PureComponent<tContainerProps> {
     super(props);
     // only show public events if user is not signed in
     const isLoggedIn = props.session.isAuthenticated;
-    props.getEvents({id: props.org.id, isPublic: !isLoggedIn, limit: -1});
+    props.getEvents({
+      id: props.org.id,
+      showPast: false,
+      isPublic: !isLoggedIn,
+      limit: -1,
+    });
 
     // dont show decisions at all if not logged in
     if (isLoggedIn) {

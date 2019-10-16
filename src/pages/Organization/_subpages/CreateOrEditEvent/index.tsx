@@ -8,14 +8,14 @@ import { Dispatch } from 'redux';
 import {Helmet} from '../../../../components';
 import {createEvent} from '../../../../redux';
 import {getEventsSuccess} from '../../../../redux/async/events/actions';
-import {getDateNowAsISOStr, parseTimeString} from '../../../../utils';
+import {parseTimeString} from '../../../../utils';
 import {tContainerProps, tCreateEvent, tState, tStateUnion, tStore} from './_types';
 import {CreateOrEditEventComponent } from './Component';
 
 export class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
   state = {
     category: this.props.org.category,
-    date: getDateNowAsISOStr(),
+    date: dayJS().toISOString(),
     description: '',
     duration: 2,
     // featuredImage: null,

@@ -5,10 +5,10 @@ export type tComponentProps = {
   role: tRole,
 };
 
+type tQuery = tIdQuery & {isClosed?: boolean, showPast?: boolean};
 export type tContainerProps = tComponentProps & {
-  getEvents: (query: tIdQuery) => Promise<tThunk<tEvent[]>>,
-  getDecisionsByOrg:
-    (query: tIdQuery & {isClosed: boolean}) => Promise<tThunk<tDecision[]>>,
+  getEvents: (query: tQuery) => Promise<tThunk<tEvent[]>>,
+  getDecisionsByOrg: (query: tQuery) => Promise<tThunk<tDecision[]>>,
   isLoading: boolean,
   session: tSession,
 };

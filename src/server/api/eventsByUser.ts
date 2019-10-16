@@ -1,8 +1,8 @@
+import dayJS from 'dayjs';
 import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {getDateNowAsISOStr} from '../../utils';
 import {knex} from '../db/connection';
 
 export const eventsByUser = new Router();
@@ -36,7 +36,7 @@ eventsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     events = await knex('events')
       .whereIn('id', mappedIds)
-      .where('date', '>=', getDateNowAsISOStr())
+      .where('date', '>=', dayJS().toISOString())
       .orderBy('date', 'asc');
   } catch (err) {
     return ctx.throw(400, err);
