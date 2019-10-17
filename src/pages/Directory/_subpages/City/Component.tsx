@@ -8,12 +8,6 @@ export const CityComponent = memo((props: tProps) => {
   const {city: cityObj, match} = props;
   const {city, region, country} = match.params;
   const urlPrefix = `/org/${country}/${region}/${city}`;
-  const newOrgQueryParams = {
-    ...match.params,
-    cityId: cityObj.id,
-    regionId: cityObj.region,
-    countryId: cityObj.country,
-  };
 
   return (
     <>
@@ -55,8 +49,8 @@ export const CityComponent = memo((props: tProps) => {
               key={i}
               className="col fxg0 third mB3">
               <Link
-                className="dBl fs6 lh1 p3 brdA1 br8 hvrBgGrey1 trans2 noUnderline"
-                to={`${urlPrefix}/${slugify(org.name)}/overview`}>
+                to={`/org/${org.id}/overview`}
+                className="dBl fs6 lh1 p3 brdA1 br8 hvrBgGrey1 trans2 noUnderline">
                 {org.category}
                 <span className="dBl lh1 fs3 mT1 mB3 underline">
                   {org.name}

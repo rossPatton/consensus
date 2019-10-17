@@ -9,8 +9,6 @@ import {EventPrivacy, ExternalLink, RSVP} from '../../components';
 import {objToQueryString} from '../../utils';
 import {tComponentProps} from './_types';
 
-console.log('day => ', dayJS().toISOString());
-
 export const EventsComponent = memo((props: tComponentProps) => (
   <ul>
     {props.events.map((ev, i) => {

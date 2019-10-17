@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import {Helmet} from '../../components';
 import {canonical, description, keywords, title} from './_constants';
 
-export const NoMatch = memo(() => (
+const NoMatch = memo(() => (
   <>
     <Helmet
       canonical={canonical}
@@ -21,3 +21,5 @@ export const NoMatch = memo(() => (
     </div>
   </>
 ));
+
+export default NoMatch;

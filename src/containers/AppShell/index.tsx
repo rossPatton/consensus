@@ -3,7 +3,7 @@ import {HelmetProvider} from 'react-helmet-async';
 import {Route, Switch} from 'react-router-dom';
 
 import {RouteWithSubRoutes} from '../../components';
-import {NoMatch} from '../../pages';
+import NoMatch from '../../pages/404';
 import {routes} from '../../routes';
 import {Footer, Header, Nav} from './_components';
 
