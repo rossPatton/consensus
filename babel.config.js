@@ -23,6 +23,7 @@ module.exports = {
     '@babel/proposal-object-rest-spread',
     '@babel/proposal-class-properties',
     '@babel/syntax-dynamic-import',
+    '@loadable/babel-plugin',
     // ['babel-plugin-module-resolver', {
     //   'cwd': 'babel.config.js',
     //   'root': ['src/'],

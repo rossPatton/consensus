@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ForceCaseSensitivityPlugin = require('case-sensitive-paths-webpack-plugin');
 const webpack = require('webpack');
@@ -95,6 +96,9 @@ module.exports = {
   },
 
   plugins: [
+    // needed for server side loadable to work
+    new LoadablePlugin(),
+
     // does what the name implies
     new webpack.optimize.AggressiveMergingPlugin(),
 
@@ -104,6 +108,7 @@ module.exports = {
     // fun plugins here
     // better error reporting
     new FriendlyErrorsWebpackPlugin(),
+
     // protects us from case mismatch import errors
     new ForceCaseSensitivityPlugin(),
 

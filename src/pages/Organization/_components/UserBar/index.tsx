@@ -2,16 +2,15 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {getRoles, getUsersByOrg} from '../../../../redux';
+import {getUsersByOrg} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {UserBarComponent} from './Component';
 
 export class UserBarContainer extends PureComponent<tContainerProps> {
-  constructor(props: tContainerProps) {
-    super(props);
-
-    if (props.session.isAuthenticated && props.org.id !== 0) {
-      props.getUsersByOrg({id: props.org.id as number});
+  componentDidMount() {
+    const {org, session} = this.props;
+    if (session.isAuthenticated && org.id !== 0) {
+      this.props.getUsersByOrg({id: org.id as number});
     }
   }
 

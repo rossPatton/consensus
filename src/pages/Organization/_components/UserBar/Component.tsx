@@ -23,7 +23,7 @@ export const UserBarComponent = memo((props: tComponentProps) => (
           session={props.session}
         />
       </li>
-      {props.usersByOrg.userTotal && (
+      {props.usersByOrg.userTotal > 0 && (
         <li className="mL1 mR2">
           <a title="CLick to see total member list" href="filler">
             {props.usersByOrg.userTotal} members total
