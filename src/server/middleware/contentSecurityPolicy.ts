@@ -8,52 +8,24 @@ let prevUrl: string | undefined;
 // required nonces for any inline scripts and SRI for cdns to verify integrity
 export const contentSecurityPolicyMiddleware = async (app: Koa) => {
   app.use(async (ctx, next) => {
-    // const {nonce} = app.context.state;
-    // if (!ctx.state.locals) ctx.state.locals = {};
-
-    // let {nonce} = ctx.state.locals;
-    // // only update nonce on server render - not on every single request
-    // if (ctx.req.url !== prevUrl) {
-    //   console.log('should only be called once');
-    //   nonce = uuidv4();
-    //   ctx.state.locals.nonce = nonce;
-    //   prevUrl = ctx.req.url;
-    // }
-
-    const directives = ["'self'", `'nonce-${app.context.state.nonce}'`];
-    // if (__DEV__) {
-    //   directives = [...directives, '0.0.0.0:*', '127.0.0.1:*', 'localhost:*'];
-    // }
-
-    console.log('csp app.context => ', app.context.state.nonce);
-    console.log('directives => ', directives);
-    // console.log('locals.nonce => ', ctx.state.locals.nonce);
-
     const cspOpts: KoaHelmetContentSecurityPolicyConfiguration = {
+      // most directive we define via the meta tag
+      // for some reason, doing it all via the middleware here causes some issues with FF
+      // splitting it up - by doing most of it via meta tag in server/SSR.tsx and
+      // the rest of it here, seems to be the solution that works cross-browser
+      // also - on FF, if you use react/redux dev tools, it will trigger a CSP error
       directives: {
-        baseUri: ["'none'"],
-        blockAllMixedContent: true,
-        defaultSrc: ["'self'"],
-        formAction: ["'self'"],
         frameAncestors: ["'none'"],
-        objectSrc: ["'none'"],
-        // TODO cant use inline css in svgs either, at least in ff
-        styleSrc: directives,
-        scriptSrc: [
-          ...directives,
-          'ajax.googleapis.com',
+        reportUri: '/report-violation',
+        sandbox: [
+          'allow-forms',
+          'allow-same-origin',
+          'allow-scripts',
         ],
       },
-      reportOnly: __DEV__,
+      // if something breaks, set this to true to make it easier to investigate
+      reportOnly: false,
     };
-
-    if (__DEBUG__ || __PROD__) {
-      cspOpts.reportOnly = true;
-      cspOpts.directives = {
-        ...cspOpts.directives,
-        reportUri: '/report-violation',
-      };
-    }
 
     return koaHelmet.contentSecurityPolicy(cspOpts)(ctx, next);
   });

@@ -1,12 +1,8 @@
 import loadable from '@loadable/component';
-import React from 'react';
 
 const NoMatchComponent = loadable(() =>
-  import(/* webpackChunkName: "NoMatch" */'../pages/404'), {
-  fallback: (
-    <>Loading...</>
-  ),
-});
+  import(/* webpackChunkName: "NoMatch" */'../pages/404')
+);
 
 export const NoMatch = {
   component: NoMatchComponent,

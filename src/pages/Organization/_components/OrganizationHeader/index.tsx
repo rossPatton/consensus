@@ -6,7 +6,7 @@ import {getUsersByOrg} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {OrganizationHeaderComponent} from './Component';
 
-export class OrganizationHeaderContainer extends PureComponent<tContainerProps> {
+class OrganizationHeaderContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     props.getUsersByOrg({id: props.org.id});
@@ -31,7 +31,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getUsersByOrg: (query: tIdQuery) => dispatch(getUsersByOrg(query)),
 });
 
-export const OrganizationHeader = connect(
+const OrganizationHeader = connect(
   mapStateToProps,
   mapDispatchToProps
 )(OrganizationHeaderContainer);
+
+export default OrganizationHeader;

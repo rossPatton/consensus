@@ -1,12 +1,8 @@
 import loadable from '@loadable/component';
-import React from 'react';
 
 const DecisionComponent = loadable(() =>
-  import(/* webpackChunkName: "Decision" */'../pages/Decision'), {
-  fallback: (
-    <>Loading...</>
-  ),
-});
+  import(/* webpackChunkName: "Decision" */'../pages/Decision')
+);
 
 export const Decision = {
   component: DecisionComponent,

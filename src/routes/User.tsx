@@ -1,12 +1,8 @@
 import loadable from '@loadable/component';
-import React from 'react';
 
 const UserComponent = loadable(() =>
-  import(/* webpackChunkName: "User" */'../pages/User'), {
-  fallback: (
-    <>Loading...</>
-  ),
-});
+  import(/* webpackChunkName: "User" */'../pages/User')
+);
 
 export const User = {
   component: UserComponent,

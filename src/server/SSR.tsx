@@ -1,5 +1,6 @@
 import { ChunkExtractor } from '@loadable/server';
 import Koa from 'koa';
+import _ from 'lodash';
 import path from 'path';
 import React from 'react';
 import { renderToNodeStream } from 'react-dom/server';
@@ -15,15 +16,14 @@ import { initStoreForSSR } from './initStore';
 const statsFile = path.resolve('./dist/loadable-stats.json');
 
 export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
+  const nonce = _.get(app, 'context.state.nonce', '');
   // need to be set for server streaming, if not set, then koa will crap out
   ctx.respond = false;
   ctx.type = 'text/html';
-  ctx.res.write(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><title>Consensus - when you need to get organized.</title><style nonce="${app.context.state.nonce}">${styles}</style></head><body><div id="appRoot">`);
+  ctx.res.write(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="base-uri 'none'; default-src 'self'; block-all-mixed-content; form-action 'self'; img-src 'self'; object-src 'none'; script-src 'self' ajax.googleapis.com 'nonce-${nonce}'; style-src 'self' 'nonce-${nonce}'"><title>Consensus - when you need to get organized.</title><style type="text/css" nonce="${nonce}">${styles}</style></head><body><div id="appRoot">`);
 
   const initRouterContext = {};
   const store = await initStoreForSSR(ctx);
-
-  console.log('app.context.state => ', app.context.state);
 
   ctx.status = 200;
   const extractor = new ChunkExtractor({ statsFile });
@@ -35,16 +35,14 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
     </Provider>
   );
 
-  // const scriptTags = extractor.getScriptTags();
-  // console.log('scriptTags => ', scriptTags);
   const htmlStream = renderToNodeStream(jsx);
   htmlStream.pipe(ctx.res, {end: false});
   htmlStream.on('end', () => {
     // eslint-disable-next-line
-    const fontConfig = `WebFontConfig={custom:{families:["Ivar","Lab","LabBlack","Eksell"],urls:["/static/fonts.css"]}};window.__PRELOADED_STATE__ = ${serialize(store.getState())}`;
+    const fontConfig = `WebFontConfig={custom:{families:["Lab"],urls:["/static/fonts.css"]}};window.__PRELOADED_STATE__ = ${serialize(store.getState())}`;
 
     ctx.res.write(`</div><div id="portalRoot"></div>
-      <script nonce="${app.context.state.nonce}">${fontConfig}</script>
+      <script type="text/javascript" nonce="${nonce}">${fontConfig}</script>
       <script defer src="/vendor.bundle.js"></script>
       <script defer src="/main.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>

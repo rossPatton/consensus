@@ -186,7 +186,6 @@
     "eslint-import-resolver-webpack": "^0.8.4",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-no-secrets": "^0.3.3",
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.1.0",

@@ -1,12 +1,8 @@
 import loadable from '@loadable/component';
-import React from 'react';
 
 const ErrorPageComponent = loadable(() =>
-  import(/* webpackChunkName: "ErrorPage" */'../pages/500'), {
-  fallback: (
-    <>Loading...</>
-  ),
-});
+  import(/* webpackChunkName: "ErrorPage" */'../pages/500')
+);
 
 export const ErrorPage = {
   component: ErrorPageComponent,

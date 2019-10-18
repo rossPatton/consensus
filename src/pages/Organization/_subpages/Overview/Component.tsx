@@ -9,7 +9,11 @@ export const OverviewComponent = memo((props: tComponentProps) => (
   <>
     <div className="mB4">
       <h2 className="mB2">Mission Statement</h2>
-      <p>{props.org.description}</p>
+      {props.org.description.split('\n').map((p, i) => (
+        <p key={i}>
+          {p}
+        </p>
+      ))}
     </div>
     {props.events.length > 0 && (
       <div className={cx({mB5: props.decisions.length > 0})}>

@@ -1,8 +1,7 @@
 import cx from 'classnames';
 import React from 'react';
 
-import {UserBar} from './_components';
-import {OrganizationHeader, OrganizationTabs} from './_components';
+import {OrganizationHeader, OrganizationTabs, UserBar} from './_components';
 import {CreateOrEditEvent, Decisions, Events, Overview} from './_subpages';
 import {tComponentProps} from './_types';
 

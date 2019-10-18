@@ -7,7 +7,7 @@ import {getDecisionsByOrg, getEvents, getUsersByOrg} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {OverviewComponent} from './Component';
 
-export class OverviewContainer extends PureComponent<tContainerProps> {
+class OverviewContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     // only show public events if user is not signed in
@@ -70,7 +70,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getUsersByOrg: (query: tIdQuery) => dispatch(getUsersByOrg(query)),
 });
 
-export const Overview = connect(
+const Overview = connect(
   mapStateToProps,
   mapDispatchToProps
 )(OverviewContainer);
+
+export default Overview;

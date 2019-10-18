@@ -10,7 +10,6 @@ import { faviconMiddleware } from './favicon';
 import { featurePolicyMiddleware } from './featurePolicy';
 import { helmetMiddleware } from './helmet';
 import { loggerMiddleware } from './logger';
-import { nonceMiddleware } from './nonce';
 import { normalizeFormMiddleware } from './normalizeForm';
 import { redirectTrailingSlashMiddleware } from './redirectTrailingSlash';
 import { referrerPolicyMiddleware } from './referrerPolicy';
@@ -20,13 +19,11 @@ import { staticFileMiddleware } from './static';
 
 // middleware order is important
 export const setupMiddleware = (app: Koa) => {
-  console.log('middleware => ', app.context.state);
   bodyParserMiddleware(app);
   compressionMiddleware(app);
 
   // security stuff
   corsMiddleware(app);
-  // nonceMiddleware(app);
   sslMiddleware(app);
   helmetMiddleware(app);
   referrerPolicyMiddleware(app);

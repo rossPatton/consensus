@@ -1,12 +1,8 @@
 import loadable from '@loadable/component';
-import React from 'react';
 
 const DirectoryComponent = loadable(() =>
-  import(/* webpackChunkName: "Directory" */'../pages/Directory'), {
-  fallback: (
-    <>Loading...</>
-  ),
-});
+  import(/* webpackChunkName: "Directory" */'../pages/Directory')
+);
 
 export const Directory = {
   component: DirectoryComponent,

@@ -50,14 +50,15 @@ app.use(session({
 app.context.redis = store;
 app.context.state = {nonce: uuidv4()};
 
+// session login MUST go before middleware/api
+app.use(passport.initialize());
+app.use(passport.session());
+
 // setup all middleware in correct order
 setupMiddleware(app);
 
 // setup api
 setupApi(app);
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 // render the page
 app.use(async ctx => {

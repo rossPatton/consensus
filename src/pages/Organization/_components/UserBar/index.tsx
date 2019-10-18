@@ -6,7 +6,7 @@ import {getUsersByOrg} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {UserBarComponent} from './Component';
 
-export class UserBarContainer extends PureComponent<tContainerProps> {
+class UserBarContainer extends PureComponent<tContainerProps> {
   componentDidMount() {
     const {org, session} = this.props;
     if (session.isAuthenticated && org.id !== 0) {
@@ -36,7 +36,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getUsersByOrg: (query: tIdQuery) => dispatch(getUsersByOrg(query)),
 });
 
-export const UserBar = connect(
+const UserBar = connect(
   mapStateToProps,
   mapDispatchToProps
 )(UserBarContainer);
+
+export default UserBar;

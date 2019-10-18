@@ -12,7 +12,7 @@ import {parseTimeString} from '../../../../utils';
 import {tContainerProps, tCreateEvent, tState, tStateUnion, tStore} from './_types';
 import {CreateOrEditEventComponent } from './Component';
 
-export class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
+class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
   state = {
     category: this.props.org.category,
     date: dayJS().toISOString(),
@@ -209,7 +209,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   createEvent: (event: tCreateEvent) => dispatch(createEvent(event)),
 });
 
-export const CreateOrEditEvent = connect(
+const CreateOrEditEvent = connect(
   mapStateToProps,
   mapDispatchToProps
 )(CreateOrEditEventContainer);
+
+export default CreateOrEditEvent;

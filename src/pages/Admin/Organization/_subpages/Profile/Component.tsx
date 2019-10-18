@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, {memo} from 'react';
+import {Link} from 'react-router-dom';
 
 import {tComponentProps} from './_types';
 
@@ -19,7 +20,7 @@ export const ProfileComponent = memo((props: tComponentProps) => {
               Organization Name
             </h2>
             <div className="mB3 copyBlack">
-              {props.name}
+              <Link to={`/org/${props.id}/overview`}>{props.name}</Link>
             </div>
             <h2 className="ffLab fs5 mB1 lh1">
               Organization Category

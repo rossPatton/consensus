@@ -1,10 +1,8 @@
 import loadable from '@loadable/component';
-import React from 'react';
 
 const OrganizationComponent = loadable(() =>
-  import(/* webpackChunkName: "Organization" */'../pages/Organization') /* {
-  fallback: <div>Loading...</div>,
-}*/);
+  import(/* webpackChunkName: "Organization" */'../pages/Organization')
+);
 
 export const Organization = {
   component: OrganizationComponent,

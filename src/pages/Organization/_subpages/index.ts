@@ -1,6 +1,17 @@
-export {CreateOrEditEvent} from './CreateOrEditEvent';
-export {Decisions} from './Decisions';
-export {Events} from './Events';
-export {Forum} from './Forum/Forum';
-export {Overview} from './Overview';
-export {Resources} from './Resources/Resources';
+import loadable from '@loadable/component';
+
+export const CreateOrEditEvent = loadable(() =>
+  import(/* webpackChunkName: "CreateOrEditEvent" */'./CreateOrEditEvent')
+);
+
+export const Decisions = loadable(() =>
+  import(/* webpackChunkName: "Org Decisions" */'./Decisions')
+);
+
+export const Events = loadable(() =>
+  import(/* webpackChunkName: "Org Events" */'./Events')
+);
+
+export const Overview = loadable(() =>
+  import(/* webpackChunkName: "Org Overview" */'./Overview')
+);

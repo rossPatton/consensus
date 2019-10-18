@@ -1,12 +1,8 @@
 import loadable from '@loadable/component';
-import React from 'react';
 
 const EventComponent = loadable(() =>
-  import(/* webpackChunkName: "Event" */'../pages/Event'), {
-  fallback: (
-    <>Loading...</>
-  ),
-});
+  import(/* webpackChunkName: "Event" */'../pages/Event')
+);
 
 export const Event = {
   component: EventComponent,

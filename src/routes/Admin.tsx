@@ -1,12 +1,8 @@
 import loadable from '@loadable/component';
-import React from 'react';
 
 const AdminComponent = loadable(() =>
-  import(/* webpackChunkName: "Admin" */'../pages/Admin'), {
-  fallback: (
-    <>Loading...</>
-  ),
-});
+  import(/* webpackChunkName: "Admin" */'../pages/Admin')
+);
 
 export const Admin = {
   component: AdminComponent,
