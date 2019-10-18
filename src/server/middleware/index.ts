@@ -20,12 +20,13 @@ import { staticFileMiddleware } from './static';
 
 // middleware order is important
 export const setupMiddleware = (app: Koa) => {
+  console.log('middleware => ', app.context.state);
   bodyParserMiddleware(app);
   compressionMiddleware(app);
 
   // security stuff
   corsMiddleware(app);
-  nonceMiddleware(app);
+  // nonceMiddleware(app);
   sslMiddleware(app);
   helmetMiddleware(app);
   referrerPolicyMiddleware(app);

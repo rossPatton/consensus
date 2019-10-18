@@ -1,37 +1,50 @@
 import Koa from 'koa';
 import koaHelmet, { KoaHelmetContentSecurityPolicyConfiguration } from 'koa-helmet';
+import uuidv4 from 'uuid/v4';
+
+let prevUrl: string | undefined;
 
 // only allow assets served from our origin or a trusted cdn
 // required nonces for any inline scripts and SRI for cdns to verify integrity
 export const contentSecurityPolicyMiddleware = async (app: Koa) => {
   app.use(async (ctx, next) => {
-    const directives = __DEV__ ?
-      ["'self'", '0.0.0.0:*', '127.0.0.1:*', 'localhost:*'] :
-      ["'self'"];
+    // const {nonce} = app.context.state;
+    // if (!ctx.state.locals) ctx.state.locals = {};
+
+    // let {nonce} = ctx.state.locals;
+    // // only update nonce on server render - not on every single request
+    // if (ctx.req.url !== prevUrl) {
+    //   console.log('should only be called once');
+    //   nonce = uuidv4();
+    //   ctx.state.locals.nonce = nonce;
+    //   prevUrl = ctx.req.url;
+    // }
+
+    const directives = ["'self'", `'nonce-${app.context.state.nonce}'`];
+    // if (__DEV__) {
+    //   directives = [...directives, '0.0.0.0:*', '127.0.0.1:*', 'localhost:*'];
+    // }
+
+    console.log('csp app.context => ', app.context.state.nonce);
+    console.log('directives => ', directives);
+    // console.log('locals.nonce => ', ctx.state.locals.nonce);
 
     const cspOpts: KoaHelmetContentSecurityPolicyConfiguration = {
       directives: {
-        defaultSrc: directives,
+        baseUri: ["'none'"],
+        blockAllMixedContent: true,
+        defaultSrc: ["'self'"],
+        formAction: ["'self'"],
         frameAncestors: ["'none'"],
-        imgSrc: ["'self'", 'picsum.photos', 'via.placeholder.com'],
         objectSrc: ["'none'"],
-        sandbox: [
-          'allow-forms',
-          'allow-same-origin',
-          'allow-scripts',
-        ],
         // TODO cant use inline css in svgs either, at least in ff
-        // unsafe inline just here for now until i can redo the svgs
-        styleSrc: [...directives, "'unsafe-inline'"],
+        styleSrc: directives,
         scriptSrc: [
           ...directives,
-          "'unsafe-inline'",
           'ajax.googleapis.com',
-          `'nonce-${ctx.state.locals.nonce}'`,
         ],
-        upgradeInsecureRequests: true,
       },
-      reportOnly: true,
+      reportOnly: __DEV__,
     };
 
     if (__DEBUG__ || __PROD__) {

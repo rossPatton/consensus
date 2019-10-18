@@ -20,6 +20,7 @@ module.exports = merge(common, {
   ],
 
   output: {
+    chunkFilename: '[name].bundle.js',
     filename: 'main.js',
     path: path.join(env.CWD, 'dist'),
     publicPath: '/', // serve chunks from root path

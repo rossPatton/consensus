@@ -1,16 +1,21 @@
-import { useEffect } from 'react';
+import React, {PureComponent} from 'react';
 import { withRouter } from 'react-router-dom';
 
-import { tProps } from './_types';
+import {tProps} from './_types';
 
-const ScrollToTopComponent = (props: tProps) => {
-  const { children, location: { pathname } } = props;
+class ScrollToTopComponent extends PureComponent<tProps> {
+  componentDidUpdate(prevProps: tProps) {
+    if (
+      this.props.location.pathname !== prevProps.location.pathname
+    ) {
+      window.scrollTo(0, 0);
+    }
+  }
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+  render() {
+    return this.props.children || null;
+  }
+}
 
-  return children || null;
-};
-
+// @ts-ignore
 export const ScrollToTop = withRouter(ScrollToTopComponent);

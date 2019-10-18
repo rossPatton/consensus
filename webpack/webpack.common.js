@@ -1,10 +1,13 @@
 const path = require('path');
 const fs = require('fs');
 const LoadablePlugin = require('@loadable/webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ForceCaseSensitivityPlugin = require('case-sensitive-paths-webpack-plugin');
 const webpack = require('webpack');
 const env = require('./webpack.env');
+
+console.log('webpack env => ', env);
 
 const srcPath = (subdir) => path.join(env.CWD, 'src', subdir);
 
@@ -16,11 +19,11 @@ module.exports = {
   stats: env.stats,
 
   resolve: {
-    alias: {
-      // 'react-dom': '@hot-loader/react-dom',
-      '@components': srcPath('components'),
-      '@containers': srcPath('containers'),
-    },
+    // alias: {
+    //   // 'react-dom': '@hot-loader/react-dom',
+    //   '@components': srcPath('components'),
+    //   '@containers': srcPath('containers'),
+    // },
     modules: ['./node_modules', './src'],
     extensions: ['.js', '.ts', '.tsx', '.json', '.css', '.styl'],
   },
@@ -92,7 +95,7 @@ module.exports = {
   },
 
   optimization: {
-    minimize: env.IS_PROD,
+    minimizer: [new UglifyJsPlugin()],
   },
 
   plugins: [

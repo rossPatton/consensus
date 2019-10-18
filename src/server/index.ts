@@ -14,6 +14,7 @@ import passport from 'koa-passport';
 import redisStore from 'koa-redis';
 import session from 'koa-session';
 import loglevel from 'loglevel';
+import uuidv4 from 'uuid/v4';
 
 import { setupApi } from './api';
 import { setupMiddleware } from './middleware';
@@ -45,14 +46,9 @@ app.use(session({
   store,
 }, app));
 
-// per request state - good for storing things like nonces, query params, etc
-app.context.state = { nonce: '' };
-
 // make it easy to access redis anywhere
 app.context.redis = store;
-
-app.use(passport.initialize());
-app.use(passport.session());
+app.context.state = {nonce: uuidv4()};
 
 // setup all middleware in correct order
 setupMiddleware(app);
@@ -60,10 +56,12 @@ setupMiddleware(app);
 // setup api
 setupApi(app);
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 // render the page
 app.use(async ctx => {
-  ctx.status = 200; // TODO koa handles status codes badly, handle better
-  ctx.body = SSR(ctx);
+  ctx.body = SSR(app, ctx);
 });
 
 const HOST = '127.0.0.1';

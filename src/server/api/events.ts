@@ -56,7 +56,7 @@ events.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  const isAuthenticated = ctx.isAuthenticated();
+  const isAuthenticated = ctx.isAuthenticated && ctx.isAuthenticated();
   const role = _.get(accountRoleRel, 'role', null);
   const filteredEvents: tEvent[] = await filterEvs4Client(events, isAuthenticated, role);
   const eventsWithAttendees = await Promise.all(
