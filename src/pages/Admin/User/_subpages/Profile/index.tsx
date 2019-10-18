@@ -18,7 +18,7 @@ const initialState = {
   username: '',
 };
 
-export class ProfileContainer extends PureComponent<tContainerProps, tState> {
+class ProfileContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
 
@@ -100,7 +100,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   updateUser: (user: {id: number} & tState) => dispatch(updateUser(user)),
 });
 
-export const Profile = connect(
+const Profile = connect(
   null,
   mapDispatchToProps
 )(ProfileContainer);
+
+export default Profile;

@@ -8,7 +8,7 @@ import {patchOrg} from '../../../../../redux';
 import {tContainerProps, tStateUnion} from './_types';
 import {ProfileComponent} from './Component';
 
-export class ProfileContainer extends PureComponent<tContainerProps, tOrg> {
+class ProfileContainer extends PureComponent<tContainerProps, tOrg> {
   state = {
     ...this.props.session.profile as tOrg,
   };
@@ -60,7 +60,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   patchOrg: (org: any) => dispatch(patchOrg(org)),
 });
 
-export const Profile = connect(
+const Profile = connect(
   null,
   mapDispatchToProps
 )(ProfileContainer);
+
+export default Profile;

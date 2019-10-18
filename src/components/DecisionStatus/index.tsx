@@ -3,7 +3,7 @@ import React, {memo} from 'react';
 import {SimpleMajorityResult} from './_components';
 import {tProps} from './_types';
 
-export const DecisionStatus = memo((props: tProps) => (
+const DecisionStatus = memo((props: tProps) => (
   <>
     {props.decision.isClosed &&
       props.decision.type === 'Simple Majority' && (
@@ -33,3 +33,5 @@ export const DecisionStatus = memo((props: tProps) => (
     )}
   </>
 ));
+
+export default DecisionStatus;

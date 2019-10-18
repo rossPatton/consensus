@@ -7,7 +7,7 @@ import { tProps } from './_types';
 // helmet renders what was passed in last.for SSR, we only want to call helmet once
 // using this component, we basically merge route specific meta with default meta
 // so all default meta gets included + route specific meta like title, etc
-export const Helmet = memo((props: tProps) => {
+const Helmet = memo((props: tProps) => {
   const { link = [], meta = [], canonical = '' } = props;
   const canonicalUrl = `https://www.consensus.com${canonical}`;
   const linkCanonical: tLinkProps = { rel: 'canonical', href: canonicalUrl };
@@ -24,3 +24,5 @@ export const Helmet = memo((props: tProps) => {
     />
   );
 });
+
+export default Helmet;

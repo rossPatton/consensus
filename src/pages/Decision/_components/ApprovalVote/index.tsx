@@ -2,7 +2,7 @@ import React, {memo} from 'react';
 
 import {tProps} from './_types';
 
-export const ApprovalVote = memo((props: tProps) => (
+const ApprovalVote = memo((props: tProps) => (
   <form>
     <fieldset>
       <legend className="mB2 fs4">
@@ -33,3 +33,5 @@ export const ApprovalVote = memo((props: tProps) => (
     </fieldset>
   </form>
 ));
+
+export default ApprovalVote;

@@ -35,7 +35,5 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   deleteEvent: (query: tIdQuery) => dispatch(deleteEvent(query)),
 });
 
-export const Events = connect(
-  null,
-  mapDispatchToProps
-)(EventsContainer);
+const Events = connect(null, mapDispatchToProps)(EventsContainer);
+export default Events;

@@ -18,4 +18,5 @@ class ScrollToTopComponent extends PureComponent<tProps> {
 }
 
 // @ts-ignore
-export const ScrollToTop = withRouter(ScrollToTopComponent);
+const ScrollToTop = withRouter(ScrollToTopComponent);
+export default ScrollToTop;

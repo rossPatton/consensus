@@ -9,7 +9,7 @@ import {fuzzFilterList, slugify} from '../../../../utils';
 import {tContainerProps, tState, tStore} from './_types';
 import {CityComponent} from './Component';
 
-export class CityContainer extends PureComponent<tContainerProps, tState> {
+class CityContainer extends PureComponent<tContainerProps, tState> {
   state = {
     category: '',
     orgsBySearch: [],
@@ -119,7 +119,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getRegion: (params: tDirectoryParams) => dispatch(getRegion(params)),
 });
 
-export const City = connect(
+const City = connect(
   mapStateToProps,
   mapDispatchToProps
 )(CityContainer);
+
+export default City;

@@ -6,7 +6,7 @@ import {DecisionStatus} from '../../components';
 import {SimpleMajorityResult} from './_components';
 import {tProps} from './_types';
 
-export const Decisions = memo((props: tProps) => (
+const Decisions = memo((props: tProps) => (
   <ul>
     {props.decisions.map((decision, i) => (
       <li
@@ -48,3 +48,5 @@ export const Decisions = memo((props: tProps) => (
     ))}
   </ul>
 ));
+
+export default Decisions;

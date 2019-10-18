@@ -79,7 +79,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getOrgsBySession: () => dispatch(getOrgsBySession()),
 });
 
-export const Memberships = connect(
+const Memberships = connect(
   mapStateToProps,
   mapDispatchToProps
 )(MembershipsContainer);
+
+export default Memberships;

@@ -2,7 +2,7 @@ import React, {memo} from 'react';
 
 import {tProps} from './_types';
 
-export const ApprovalResults = memo((props: tProps) => (
+const ApprovalResults = memo((props: tProps) => (
   <ul className="fw600 lh1">
     {props.data.results.map((result, i) => (
       <li key={i} className="fx aiCtr mB3 ttCap">
@@ -13,3 +13,5 @@ export const ApprovalResults = memo((props: tProps) => (
     ))}
   </ul>
 ));
+
+export default ApprovalResults;

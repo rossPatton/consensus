@@ -2,7 +2,7 @@ import React, {memo} from 'react';
 
 import {tProps} from './_types';
 
-export const SimpleMajorityResults = memo((props: tProps) => {
+const SimpleMajorityResults = memo((props: tProps) => {
   const {results} = props.data;
   const count = results.yes + results.no + results.abstain;
   const yesPercent = Math.round((results.yes / count) * 100);
@@ -26,3 +26,5 @@ export const SimpleMajorityResults = memo((props: tProps) => {
     </ul>
   );
 });
+
+export default SimpleMajorityResults;

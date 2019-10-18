@@ -1,13 +1,53 @@
-export {Breadcrumbs} from './Breadcrumbs';
-export {Decisions} from './Decisions';
-export {DecisionStatus} from './DecisionStatus';
-export {Events} from './Events';
-export {EventPrivacy} from './EventPrivacy';
-export {ExternalLink} from './ExternalLink';
-export {GenericLoader} from './GenericLoader';
-export {Helmet} from './Helmet';
-export {PasswordInput} from './PasswordInput';
-export {PrivateRoute} from './PrivateRoute';
-export {RouteWithSubRoutes} from './RouteWithSubRoutes';
-export {RSVP} from './RSVP';
-export {ScrollToTop} from './ScrollToTop';
+import loadable from '@loadable/component';
+
+export const Breadcrumbs = loadable(() =>
+  import(/* webpackChunkName: "Breadcrumbs" */'./Breadcrumbs')
+);
+
+export const Decisions = loadable(() =>
+  import(/* webpackChunkName: "Decisions" */'./Decisions')
+);
+
+export const DecisionStatus = loadable(() =>
+  import(/* webpackChunkName: "DecisionStatus" */'./DecisionStatus')
+);
+
+export const Events = loadable(() =>
+  import(/* webpackChunkName: "Events" */'./Events')
+);
+
+export const EventPrivacy = loadable(() =>
+  import(/* webpackChunkName: "EventPrivacy" */'./EventPrivacy')
+);
+
+export const ExternalLink = loadable(() =>
+  import(/* webpackChunkName: "ExternalLink" */'./ExternalLink')
+);
+
+export const GenericLoader = loadable(() =>
+  import(/* webpackChunkName: "GenericLoader" */'./GenericLoader')
+);
+
+export const Helmet = loadable(() =>
+  import(/* webpackChunkName: "Helmet" */'./Helmet')
+);
+
+export const PasswordInput = loadable(() =>
+  import(/* webpackChunkName: "PasswordInput" */'./PasswordInput')
+);
+
+export const PrivateRoute = loadable(() =>
+  import(/* webpackChunkName: "PrivateRoute" */'./PrivateRoute')
+);
+
+export const RouteWithSubRoutes = loadable(() =>
+  import(/* webpackChunkName: "RouteWithSubRoutes" */'./RouteWithSubRoutes')
+);
+
+export const RSVP = loadable(() =>
+  import(/* webpackChunkName: "RSVP" */'./RSVP')
+);
+
+export const ScrollToTop = loadable(() =>
+  import(/* webpackChunkName: "ScrollToTop" */'./ScrollToTop')
+);

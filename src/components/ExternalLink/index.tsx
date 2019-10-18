@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import { tProps } from './_types';
 
-export const ExternalLink = memo((props: tProps) => (
+const ExternalLink = memo((props: tProps) => (
   <a
     href={props.to}
     className={props.className}
@@ -10,3 +10,5 @@ export const ExternalLink = memo((props: tProps) => (
     {props.children}
   </a>
 ));
+
+export default ExternalLink;

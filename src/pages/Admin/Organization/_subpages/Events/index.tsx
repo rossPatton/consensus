@@ -8,7 +8,7 @@ import {fuzzFilterList} from '../../../../../utils';
 import {tContainerProps, tState, tStore} from './_types';
 import {EventsComponent} from './Component';
 
-export class EventsContainer extends PureComponent<tContainerProps, tState> {
+class EventsContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
 
@@ -112,7 +112,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getEvents: (query: tIdQuery) => dispatch(getEvents(query)),
 });
 
-export const Events = connect(
+const Events = connect(
   mapStateToProps,
   mapDispatchToProps
 )(EventsContainer);
+
+export default Events;

@@ -81,7 +81,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getEventsByUser: () => dispatch(getEventsByUser()),
 });
 
-export const Events = connect(
+const Events = connect(
   mapStateToProps,
   mapDispatchToProps
 )(EventsContainer);
+
+export default Events;

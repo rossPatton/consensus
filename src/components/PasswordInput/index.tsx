@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import {tProps, tState} from './_types';
 import {PasswordInputComponent} from './Component';
 
-export class PasswordInput extends PureComponent<tProps, tState> {
+class PasswordInput extends PureComponent<tProps, tState> {
   state = {
     showPW: false,
   };
@@ -24,3 +24,5 @@ export class PasswordInput extends PureComponent<tProps, tState> {
     );
   }
 }
+
+export default PasswordInput;

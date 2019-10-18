@@ -5,7 +5,7 @@ import {PrivateRoute} from '..';
 import {tProps} from './_types';
 
 // for nested static routes
-export const RouteWithSubRoutes = (route: tProps) => (
+const RouteWithSubRoutes = (route: tProps) => (
   <Route
     path={route.path}
     render={(props: RouteComponentProps<any>) => {
@@ -31,3 +31,5 @@ export const RouteWithSubRoutes = (route: tProps) => (
     }}
   />
 );
+
+export default RouteWithSubRoutes;

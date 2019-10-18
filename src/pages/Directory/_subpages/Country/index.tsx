@@ -7,7 +7,7 @@ import {getCountry} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {CountryComponent} from './Component';
 
-export class CountryContainer extends PureComponent<tContainerProps> {
+class CountryContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     props.getCountry(props.match.params);
@@ -61,7 +61,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getCountry: (params: tDirectoryParams) => dispatch(getCountry(params)),
 });
 
-export const Country = connect(
+const Country = connect(
   mapStateToProps,
   mapDispatchToProps
 )(CountryContainer);
+
+export default Country;

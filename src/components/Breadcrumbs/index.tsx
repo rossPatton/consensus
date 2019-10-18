@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 import {tProps} from './_types';
 
-export const Breadcrumbs = memo((props: tProps) => {
+const Breadcrumbs = memo((props: tProps) => {
   if (!props.crumbs) return null;
   if (!(props.crumbs instanceof Array)) return null;
 
@@ -32,3 +32,5 @@ export const Breadcrumbs = memo((props: tProps) => {
     </ul>
   );
 });
+
+export default Breadcrumbs;

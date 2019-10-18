@@ -8,7 +8,7 @@ import {fuzzFilterList} from '../../../../utils';
 import {tContainerProps, tStore} from './_types';
 import {RegionComponent} from './Component';
 
-export class RegionContainer extends PureComponent<tContainerProps> {
+class RegionContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     props.getCountry(props.match.params);
@@ -93,7 +93,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getRegion: (params: tDirectoryParams) => dispatch(getRegion(params)),
 });
 
-export const Region = connect(
+const Region = connect(
   mapStateToProps,
   mapDispatchToProps
 )(RegionContainer);
+
+export default Region;

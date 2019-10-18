@@ -20,7 +20,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   // need to be set for server streaming, if not set, then koa will crap out
   ctx.respond = false;
   ctx.type = 'text/html';
-  ctx.res.write(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="base-uri 'none'; default-src 'self'; block-all-mixed-content; form-action 'self'; img-src 'self'; object-src 'none'; script-src 'self' ajax.googleapis.com 'nonce-${nonce}'; style-src 'self' 'nonce-${nonce}'"><title>Consensus - when you need to get organized.</title><style type="text/css" nonce="${nonce}">${styles}</style></head><body><div id="appRoot">`);
+  ctx.res.write(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="base-uri 'none'; connect-src 'self'; default-src 'none'; block-all-mixed-content; font-src 'self'; form-action 'self'; img-src 'self'; object-src 'none'; script-src 'self' ajax.googleapis.com 'nonce-${nonce}'; style-src 'self' 'nonce-${nonce}'"><title>Consensus - when you need to get organized.</title><style type="text/css" nonce="${nonce}">${styles}</style></head><body><div id="appRoot">`);
 
   const initRouterContext = {};
   const store = await initStoreForSSR(ctx);
@@ -45,7 +45,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
       <script type="text/javascript" nonce="${nonce}">${fontConfig}</script>
       <script defer src="/vendor.bundle.js"></script>
       <script defer src="/main.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" integrity="sha384-pvXSwSU09c+q9mPyY++ygUHWIYRoaxgnJ/JC5wcOzMb/NVVu+IDniiB9qWp3ZNWM" crossorigin="anonymous"></script>
       </body></html>`);
     ctx.res.end();
   });

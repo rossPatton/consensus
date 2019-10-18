@@ -8,7 +8,7 @@ import {fuzzFilterList} from '../../../../../utils';
 import {tContainerProps} from './_types';
 import {DecisionsComponent} from './Component';
 
-export class DecisionsContainer extends PureComponent<tContainerProps> {
+class DecisionsContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
 
@@ -69,7 +69,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getDecisions: (query: tIdQuery) => dispatch(getDecisionsByOrg(query)),
 });
 
-export const Decisions = connect(
+const Decisions = connect(
   mapStateToProps,
   mapDispatchToProps
 )(DecisionsContainer);
+
+export default Decisions;

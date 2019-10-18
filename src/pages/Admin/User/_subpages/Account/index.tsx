@@ -6,7 +6,7 @@ import {authenticateSession, patchAccount} from '../../../../../redux';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {AccountComponent} from './Component';
 
-export class AccountContainer extends PureComponent<tContainerProps, tState> {
+class AccountContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
 
@@ -67,7 +67,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   patchAccount: (account: {id: number} & tState) => dispatch(patchAccount(account)),
 });
 
-export const Account = connect(
+const Account = connect(
   null,
   mapDispatchToProps
 )(AccountContainer);
+
+export default Account;

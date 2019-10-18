@@ -106,7 +106,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   updateRole: (query: any) => dispatch(patchUserByOrg(query)),
 });
 
-export const Members = connect(
+const Members = connect(
   mapStateToProps,
   mapDispatchToProps
 )(MembersContainer);
+
+export default Members;

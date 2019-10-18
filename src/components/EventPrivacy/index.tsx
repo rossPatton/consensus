@@ -23,4 +23,5 @@ const mapStateToProps = (store: tStore) => ({
   session: store.session.data,
 });
 
-export const EventPrivacy = connect(mapStateToProps)(EventPrivacyContainer);
+const EventPrivacy = connect(mapStateToProps)(EventPrivacyContainer);
+export default EventPrivacy;

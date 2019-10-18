@@ -57,7 +57,9 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   setRsvp: (query: {id: number, value: boolean}) => dispatch(setRsvp(query)),
 });
 
-export const RSVP = connect(
+const RSVP = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(RSVPContainer);
+
+export default RSVP;
