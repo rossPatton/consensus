@@ -20,12 +20,12 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   // need to be set for server streaming, if not set, then koa will crap out
   ctx.respond = false;
   ctx.type = 'text/html';
-  ctx.res.write(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="base-uri 'none'; connect-src 'self'; default-src 'none'; block-all-mixed-content; font-src 'self'; form-action 'self'; img-src 'self'; object-src 'none'; script-src 'self' ajax.googleapis.com 'nonce-${nonce}'; style-src 'self' 'nonce-${nonce}'"><title>Consensus - when you need to get organized.</title><style type="text/css" nonce="${nonce}">${styles}</style></head><body><div id="appRoot">`);
+  const local = __DEV__ ? "'self' 127.0.0.1:*" : "'self'";
+  ctx.res.write(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="base-uri 'none'; connect-src ${local}; default-src 'none'; block-all-mixed-content; font-src ${local}; form-action ${local}; img-src ${local}; manifest-src ${local}; object-src 'none'; script-src ${local} ajax.googleapis.com 'nonce-${nonce}'; style-src ${local} 'nonce-${nonce}'"><title>Consensus - when you need to get organized.</title><style type="text/css" nonce="${nonce}">${styles}</style></head><body><div id="appRoot">`);
 
   const initRouterContext = {};
   const store = await initStoreForSSR(ctx);
 
-  ctx.status = 200;
   const extractor = new ChunkExtractor({ statsFile });
   const jsx = extractor.collectChunks(
     <Provider store={store as any}>
