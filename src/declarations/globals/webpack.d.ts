@@ -8,6 +8,7 @@ declare module '*.svg' {
   export default content;
 }
 
+declare let __DB_PW__: string;
 declare let __DB__: 'development' | 'production';
 declare let __CLIENT__: boolean;
 declare let __DEBUG__: boolean;

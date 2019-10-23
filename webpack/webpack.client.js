@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const merge = require('webpack-merge');
 // const DashboardPlugin = require('webpack-dashboard/plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyPlugin = require('copy-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const webpack = require('webpack');
@@ -43,7 +43,7 @@ module.exports = merge(common, {
   },
 
   plugins: [
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     // new webpack.HotModuleReplacementPlugin(),
 
     // dashboard to keep us updated on bundle rebuilding times, etc. client only
