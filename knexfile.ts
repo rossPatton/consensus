@@ -41,7 +41,7 @@ module.exports = {
       host: '127.0.0.1',
       user: 'postgres',
       password: '',
-      database: 'consensus_prod',
+      database: 'consensus_dev',
     },
     migrations: {
       directory: migrations,

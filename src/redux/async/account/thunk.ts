@@ -14,7 +14,7 @@ export const patchAccount = memoize({ ttl: 300 }, (account: tAccount) => {
     dispatch(patchAccountBegin());
 
     try {
-      const prefix = `${__URL__}/api/v1/account`;
+      const prefix = '/api/v1/account';
       const qs = objToQueryString(account);
 
       // we do it this way so errors can bubble properly to our middleware

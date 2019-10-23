@@ -13,7 +13,7 @@ export const getCountry = memoize({ttl: 300}, (params: tDirectoryParams) => {
     dispatch(getCountryBegin());
 
     try {
-      const prefix = `${__URL__}/api/v1/country`;
+      const prefix = '/api/v1/country';
       const qs = objToQueryString(params);
 
       // @ts-ignore

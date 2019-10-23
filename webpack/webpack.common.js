@@ -115,11 +115,11 @@ module.exports = {
 
     // server only globals should go in webpack.server
     new webpack.DefinePlugin({
+      __DB__: JSON.stringify(env.DB),
       __DEBUG__: !!env.DEBUG,
       __DEV__: !!env.DEV,
       __PROD__: !!env.PROD,
       __NODE_ENV__: JSON.stringify(env.NODE_ENV),
-      __URL__: env.DEV ? JSON.stringify(env.SERVICE_URL) : '',
     }),
 
     // force webpack environment to be whatever we set NODE_ENV to, just to be safe

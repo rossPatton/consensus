@@ -8,7 +8,7 @@ import {
   createEventSuccess,
 } from './actions';
 
-const prefix = `${__URL__}/api/v1/event`;
+const prefix = '/api/v1/event';
 
 export const createEvent = memoize({ttl: 300}, (event: tEvent) => {
   return async function <S>(dispatch: Dispatch<S>) {

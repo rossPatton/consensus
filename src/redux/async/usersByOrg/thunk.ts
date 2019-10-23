@@ -17,7 +17,7 @@ import {
   postUserByOrgSuccess,
 } from './actions';
 
-const prefix = `${__URL__}/api/v1/usersByOrg`;
+const prefix = '/api/v1/usersByOrg';
 
 export const getUsersByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {
   return async function <S>(dispatch: Dispatch<S>) {

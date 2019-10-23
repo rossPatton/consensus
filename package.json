@@ -18,6 +18,7 @@
     "debug": "better-npm-run debug",
     "lint": "npx eslint --ext .jsx,.js,.tsx,.ts --config ./eslint.config.js --fix src/",
     "migrate": "node -r esm ./node_modules/.bin/knex migrate:latest",
+    "localProd": "better-npm-run localProd",
     "prod": "better-npm-run prod",
     "seed": "node -r esm ./node_modules/.bin/knex seed:run",
     "pretest": "npm run lint",
@@ -36,13 +37,23 @@
       "comment": "This script bundles the initial build then starts up the dev server and localhost concurrently together. TODO get dev server fucking working jesus",
       "command": "npm run build && concurrently \"webpack --watch --config webpack/\" \"nodemon --max-old-space-size=8192 ./dist/server.js\"",
       "env": {
+        "DB": "development",
         "NODE_ENV": "development"
       }
     },
-    "prod": {
-      "comment": "This script bundles the initial build then starts up the prod server.",
+    "localProd": {
+      "comment": "Run prod locally, uses the dev DB for now (change when site is live)",
       "command": "npm run build && concurrently \"webpack --config webpack/\" \"nodemon --max-old-space-size=8192 ./dist/server.js\"",
       "env": {
+        "DB": "development",
+        "NODE_ENV": "production"
+      }
+    },
+    "prod": {
+      "comment": "Runs prod, uses the prod DB (delete above once site is live and has data)",
+      "command": "npm run build && concurrently \"webpack --config webpack/\" \"nodemon --max-old-space-size=8192 ./dist/server.js\"",
+      "env": {
+        "DB": "production",
         "NODE_ENV": "production"
       }
     }

@@ -13,8 +13,11 @@ export const getEventById = memoize({ ttl: 300 }, (queryObj: tIdQuery) => {
     dispatch(getEventByIdBegin());
 
     try {
-      const prefix = `${__URL__}/api/v1/event`;
+      const prefix = '/api/v1/event';
       const qs = objToQueryString(queryObj);
+
+      // console.log('prefix => ', prefix);
+      console.log('qs => ', qs);
 
       // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, {agent})

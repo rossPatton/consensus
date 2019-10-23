@@ -16,7 +16,7 @@ export const getEvents = memoize({ttl: 300}, (query: tIdQuery) => {
     dispatch(getEventsBegin());
 
     try {
-      const prefix = `${__URL__}/api/v1/events`;
+      const prefix = '/api/v1/events';
       const qs = objToQueryString(query);
 
       // @ts-ignore
@@ -38,7 +38,7 @@ export const getEventsByUser = memoize({ttl: 300}, (query: tIdQuery) => {
     dispatch(getEventsBegin());
 
     try {
-      const prefix = `${__URL__}/api/v1/eventsByUser`;
+      const prefix = '/api/v1/eventsByUser';
       const qs = objToQueryString(query);
 
       // @ts-ignore
@@ -60,7 +60,7 @@ export const deleteEvent = memoize({ttl: 300}, (query: tIdQuery) => {
     dispatch(deleteEventBegin());
 
     try {
-      const prefix = `${__URL__}/api/v1/events`;
+      const prefix = '/api/v1/events';
       const qs = objToQueryString(query);
 
       // @ts-ignore

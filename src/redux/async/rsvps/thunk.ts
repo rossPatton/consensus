@@ -16,7 +16,7 @@ export const getRsvps = memoize({ttl: 300}, () => {
     dispatch(getRsvpBegin());
 
     try {
-      const prefix = `${__URL__}/api/v1/rsvps`;
+      const prefix = '/api/v1/rsvps';
 
       // @ts-ignore
       const result = await fetch(prefix, {agent})
@@ -37,7 +37,7 @@ export const setRsvp = (query: any) => {
     dispatch(setRsvpBegin());
 
     try {
-      const prefix = `${__URL__}/api/v1/rsvp`;
+      const prefix = '/api/v1/rsvp';
       const qs = objToQueryString(query);
 
       // @ts-ignore

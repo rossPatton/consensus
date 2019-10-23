@@ -13,7 +13,7 @@ export const updateUser = memoize({ ttl: 300 }, (user: tUser) => {
     dispatch(updateUserBegin());
 
     try {
-      const prefix = `${__URL__}/api/v1/user`;
+      const prefix = '/api/v1/user';
       const qs = objToQueryString(user);
 
       // we do it this way so errors can bubble properly to our middleware

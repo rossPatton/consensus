@@ -6,11 +6,11 @@ require('dotenv').config();
 const CWD = process.cwd();
 
 const {
+  DB,
   DEBUG,
   DB_POOL_MIN,
   DB_POOL_MAX,
   NODE_ENV,
-  SERVICE_URL,
 } = process.env;
 
 // TODO eventually move to an opts file
@@ -28,12 +28,14 @@ const stats = {
 
 module.exports = {
   CWD,
+  // development or production, decouple from NODE_ENV so we can run any env against any db
+  // also will be useful if we setup a test or staging env
+  DB,
   DB_POOL_MIN,
   DB_POOL_MAX,
   DEBUG: DEBUG === 'true',
   DEV: NODE_ENV === 'development',
   PROD: NODE_ENV === 'production',
   NODE_ENV,
-  SERVICE_URL,
   stats,
 };

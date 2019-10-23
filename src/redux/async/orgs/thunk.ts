@@ -17,7 +17,7 @@ export const getOrgsBySession = memoize({ttl: 300}, () => {
 
     try {
       // @ts-ignore
-      const result = await fetch(`${__URL__}/api/v1/orgsBySession`, {agent})
+      const result = await fetch('/api/v1/orgsBySession', {agent})
         .then((response: tFetchResponse) => {
           if (!response.ok) throw response;
           return response.json();
@@ -36,7 +36,7 @@ export const getOrgsByUser = memoize({ttl: 300}, (query: tIdQuery) => {
 
     try {
       const qs = objToQueryString(query);
-      const prefix = `${__URL__}/api/v1/orgsByUser`;
+      const prefix = '/api/v1/orgsByUser';
 
       // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, {agent})
@@ -58,7 +58,7 @@ export const deleteOrgByUser = memoize({ttl: 300}, (queryObj: tIdQuery) => {
 
     try {
       const qs = objToQueryString(queryObj);
-      const prefix = `${__URL__}/api/v1/orgsByUser`;
+      const prefix = '/api/v1/orgsByUser';
 
       // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, {agent, method: 'DELETE'})

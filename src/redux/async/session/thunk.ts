@@ -16,7 +16,7 @@ export const authenticateSession = memoize({ttl: 300}, (account: tLogin) => {
     dispatch(authenticateBegin());
 
     try {
-      const prefix = `${__URL__}/auth/login`;
+      const prefix = '/auth/login';
       const qs = objToQueryString(account);
 
       // we do it this way so errors can bubble properly to our middleware
@@ -45,7 +45,7 @@ export const logOutOfSession = memoize({ttl: 300}, () => {
 
     try {
       // we do it this way so errors can bubble properly to our middleware
-      const result: tSession = await fetch(`${__URL__}/auth/logout`, {
+      const result: tSession = await fetch('/auth/logout', {
         // @ts-ignore
         agent,
         // we need credentials here so that the session cookie gets set properly

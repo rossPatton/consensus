@@ -8,7 +8,7 @@ import {
   getDecisionsByOrgSuccess,
 } from './actions';
 
-const prefix = `${__URL__}/api/v1/decision`;
+const prefix = '/api/v1/decision';
 
 export const getDecision = memoize({ttl: 300}, (queryObj: tIdQuery) => {
   return async function <S>(dispatch: Dispatch<S>) {

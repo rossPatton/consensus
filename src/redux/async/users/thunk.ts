@@ -8,7 +8,7 @@ import {
   getUsersSuccess,
 } from './actions';
 
-const prefix = `${__URL__}/api/v1/users`;
+const prefix = '/api/v1/users';
 
 export const getUsers = memoize({ttl: 300},
   (limit: number = 100, offset: number = 0) => {

@@ -8,7 +8,7 @@ import {
   fileUploadSuccess,
 } from './actions';
 
-const prefix = `${__URL__}/api/v1/fileUpload`;
+const prefix = '/api/v1/fileUpload';
 
 export const fileUpload = memoize({ttl: 300}, (event: tEvent) => {
   return async function <S>(dispatch: Dispatch<S>) {

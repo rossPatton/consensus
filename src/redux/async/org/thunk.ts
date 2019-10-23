@@ -11,7 +11,7 @@ import {
   patchOrgSuccess,
 } from './actions';
 
-const prefix = `${__URL__}/api/v1/org`;
+const prefix = '/api/v1/org';
 
 export const getOrg = memoize({ ttl: 300 }, (params: tOrgRouteParams) => {
   return async function <S>(dispatch: Dispatch<S>) {

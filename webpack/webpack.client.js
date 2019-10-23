@@ -43,7 +43,7 @@ module.exports = merge(common, {
   },
 
   plugins: [
-    // new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
     // new webpack.HotModuleReplacementPlugin(),
 
     // dashboard to keep us updated on bundle rebuilding times, etc. client only
