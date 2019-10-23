@@ -14,7 +14,7 @@
   "files": [],
   "scripts": {
     "build": "webpack --display-error-details --display=minimal --progress --config webpack/index.js",
-    "start": "better-npm-run start",
+    "start": "sudo better-npm-run start",
     "debug": "better-npm-run debug",
     "lint": "npx eslint --ext .jsx,.js,.tsx,.ts --config ./eslint.config.js --fix src/",
     "migrate": "node -r esm ./node_modules/.bin/knex migrate:latest",

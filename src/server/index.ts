@@ -66,17 +66,6 @@ app.use(async ctx => {
   ctx.body = SSR(app, ctx);
 });
 
-const HOST = '127.0.0.1';
-const HTTP_PORT = 3000;
-const HTTPS_PORT = 3001;
-
-// init http server
-const httpServer = http.createServer(app.callback());
-httpServer.listen(HTTP_PORT, HOST, () => {
-  loglevel.info(`HTTP server listening on port ${HTTP_PORT}`);
-});
-
-// init https server, use localhost certs in dev, real certs in prod
 let key = './static/certs/localhost.key';
 let cert = './static/certs/localhost.cert';
 if (__PROD__) {
@@ -89,6 +78,6 @@ const httpsServer = https.createServer({
   cert: fs.readFileSync(cert),
 }, app.callback());
 
-httpsServer.listen(HTTPS_PORT, HOST, () => {
-  loglevel.info(`HTTPS server listening on port ${HTTPS_PORT}`);
+httpsServer.listen(443, '127.0.0.1', () => {
+  loglevel.info('HTTPS server listening on port 443');
 });
