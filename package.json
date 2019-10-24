@@ -2,14 +2,14 @@
   "name": "consensus",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/client.tsx",
   "author": "ross",
   "license": "ISC",
   "browserslist": [
     "last 2 versions"
   ],
   "engines": {
-    "node": ">=12.3.1"
+    "node": ">=12.3.0"
   },
   "files": [],
   "scripts": {
