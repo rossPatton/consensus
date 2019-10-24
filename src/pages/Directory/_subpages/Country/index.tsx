@@ -4,17 +4,40 @@ import {Dispatch} from 'redux';
 
 import {Breadcrumbs, GenericLoader, Helmet} from '../../../../components';
 import {getCountry} from '../../../../redux';
-import {tContainerProps, tStore} from './_types';
+import {fuzzFilterList} from '../../../../utils';
+import {tContainerProps, tState, tStore} from './_types';
 import {CountryComponent} from './Component';
 
-class CountryContainer extends PureComponent<tContainerProps> {
+class CountryContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
     props.getCountry(props.match.params);
   }
 
+  state = {
+    regionsBySearch: [],
+  };
+
+  onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    ev.preventDefault();
+
+    const {regions = []} = this.props.country;
+
+    this.setState({
+      regionsBySearch: fuzzFilterList({
+        input: regions,
+        search: ev.currentTarget.value,
+      }),
+    });
+  }
+
   render() {
     const {country, isLoading, match} = this.props;
+    const {regions = []} = country;
+    const {regionsBySearch} = this.state;
+    const regionsToRender = regionsBySearch.length > 0
+      ? regionsBySearch
+      : regions;
 
     return (
       <>
@@ -42,6 +65,8 @@ class CountryContainer extends PureComponent<tContainerProps> {
                 <CountryComponent
                   country={country}
                   match={match}
+                  onChange={this.onChange}
+                  regionsToRender={regionsToRender}
                 />
               </>
             );
