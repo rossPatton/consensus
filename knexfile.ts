@@ -8,6 +8,7 @@ const CWD = process.cwd();
 const migrations = path.join(CWD, 'src', 'server', 'db', 'migrations');
 const seeds = path.join(CWD, 'src', 'server', 'db', 'seeds');
 
+const DB_HOST = process.env.DB_HOST as string || '127.0.0.1';
 const DB_PW = process.env.DB_PW as string || '';
 const DB_DEV_PW = process.env.DB_DEV_PW as string || '';
 const DB_PROD_PW = process.env.DB_PROD_PW as string || '';
@@ -21,7 +22,7 @@ module.exports = {
     debug: false,
     version: '11',
     connection: {
-      host: '127.0.0.1',
+      host: DB_HOST,
       user: 'consensusdev',
       password: DB_DEV_PW,
       database: 'consensus_dev',
@@ -42,7 +43,7 @@ module.exports = {
     debug: false,
     version: '11',
     connection: {
-      host: '127.0.0.1',
+      host: DB_HOST,
       user: 'consensusprod',
       password: DB_PROD_PW,
       // eventually this should be consensus_prod
@@ -65,7 +66,7 @@ module.exports = {
     debug: true,
     version: '11',
     connection: {
-      host: '127.0.0.1',
+      host: DB_HOST,
       user: 'consensustest',
       password: DB_TEST_PW,
       database: 'consensus_test',

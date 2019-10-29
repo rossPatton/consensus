@@ -119,7 +119,7 @@ module.exports = {
     'no-array-constructor': ERROR,
     'no-caller': ERROR,
     'no-confusing-arrow': ERROR,
-    'no-console': OFF,
+    'no-console': WARN,
     'no-continue': ERROR,
     'no-else-return': ERROR,
     'no-eq-null': ERROR,

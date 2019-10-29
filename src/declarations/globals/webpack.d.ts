@@ -16,5 +16,6 @@ declare let __HASH__: string;
 declare let __DEV__: boolean;
 declare let __PROD__: boolean;
 declare let __NODE_ENV__: 'development' | 'production';
+declare let __REDIS__: 'host.internal.docker' | '127.0.0.1';
 declare let __SECRET__: string;
 declare let __SERVER__: boolean;

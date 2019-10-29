@@ -1,3 +1,4 @@
+import loglevel from 'loglevel';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
@@ -21,7 +22,7 @@ class MembersContainer extends Component<tContainerProps, tState> {
           users: res.payload.users,
         });
       })
-      .catch(console.error);
+      .catch(loglevel.error);
   }
 
   deleteUserByOrg = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {

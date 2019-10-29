@@ -1,3 +1,4 @@
+import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
@@ -34,7 +35,7 @@ class LoginContainer extends PureComponent<tProps, tState> {
       .authenticateSession({username, password})
       // @ts-ignore
       .then(res => this.props.getRoles({id: res.payload.id as number}))
-      .catch(console.error);
+      .catch(loglevel.error);
   }
 
   orgLogin = async (ev: React.FormEvent<HTMLFormElement>) => {

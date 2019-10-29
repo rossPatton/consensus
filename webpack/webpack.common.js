@@ -1,19 +1,20 @@
 const path = require('path');
 const fs = require('fs');
 const LoadablePlugin = require('@loadable/webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ForceCaseSensitivityPlugin = require('case-sensitive-paths-webpack-plugin');
 const webpack = require('webpack');
 const env = require('./webpack.env');
 
 const srcPath = (subdir) => path.join(env.CWD, 'src', subdir);
+const devPlugins = env.DEV ? [new FriendlyErrorsWebpackPlugin()] : [];
 
 module.exports = {
   devtool: env.DEV ? 'inline-source-map' : undefined,
 
   // do it this way so that debug mode works
-  mode: !env.PROD ? 'development' : 'production',
+  mode: env.DEV ? 'development' : 'production',
   stats: env.stats,
 
   resolve: {
@@ -93,7 +94,8 @@ module.exports = {
   },
 
   optimization: {
-    minimizer: [new UglifyJsPlugin()],
+    minimize: !!env.PROD,
+    minimizer: [new TerserPlugin()],
   },
 
   plugins: [
@@ -108,7 +110,7 @@ module.exports = {
 
     // fun plugins here
     // better error reporting
-    new FriendlyErrorsWebpackPlugin(),
+    ...devPlugins,
 
     // protects us from case mismatch import errors
     new ForceCaseSensitivityPlugin(),

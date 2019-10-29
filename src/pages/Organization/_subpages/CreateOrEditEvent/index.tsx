@@ -1,4 +1,5 @@
 import dayJS from 'dayjs';
+import loglevel from 'loglevel';
 import qs from 'querystring';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -125,7 +126,7 @@ class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
 
       newEvent = createEvent.payload;
     } catch (err) {
-      return console.error('failed to save event to db');
+      return loglevel.error('failed to save event to db');
     }
 
     // update redux on client side on event upload success
@@ -151,7 +152,7 @@ class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
     //   try {
     //     await fetch(`/api/v1/fileUpload?eventId=${newEvent.id}`, {method: 'post', body});
     //   } catch (err) {
-    //     console.error('failed to upload featured image');
+    //     loglevel.error('failed to upload featured image');
     //   }
     // }
   }

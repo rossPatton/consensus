@@ -11,6 +11,7 @@ const {
   DB_POOL_MIN,
   DB_POOL_MAX,
   NODE_ENV,
+  REDIS,
 } = process.env;
 
 // TODO eventually move to an opts file
@@ -37,5 +38,6 @@ module.exports = {
   DEV: NODE_ENV === 'development',
   PROD: NODE_ENV === 'production',
   NODE_ENV,
+  REDIS,
   stats,
 };

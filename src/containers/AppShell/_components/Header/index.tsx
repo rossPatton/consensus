@@ -1,3 +1,4 @@
+import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
@@ -12,7 +13,7 @@ export class HeaderContainer extends PureComponent<tContainerProps> {
     ev.preventDefault();
     this.props.logOutOfSession()
       .then(() => this.props.getRolesSuccess([]))
-      .catch(console.error);
+      .catch(loglevel.error);
   }
 
   render() {

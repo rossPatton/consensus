@@ -11,6 +11,8 @@ const devServer = require('./webpack.devServer');
 const common = require('./webpack.common.js');
 const env = require('./webpack.env');
 
+const devPlugins = env.DEV ? [new ErrorOverlayPlugin()] : [];
+
 module.exports = merge(common, {
   target: 'web',
   entry: [
@@ -48,8 +50,9 @@ module.exports = merge(common, {
 
     // dashboard to keep us updated on bundle rebuilding times, etc. client only
     // new DashboardPlugin({ port: 3002 }),
-    // better client side error message
-    new ErrorOverlayPlugin(),
+
+    // better client side error message for development
+    ...devPlugins,
 
     // copy static content over to dist dir. stuff like favicons, certs, images, etc
     new CopyPlugin([{

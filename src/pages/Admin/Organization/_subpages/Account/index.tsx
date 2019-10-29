@@ -1,3 +1,4 @@
+import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
@@ -25,7 +26,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
     try {
       newAccount = await this.props.patchAccount({id, ...this.state});
     } catch (err) {
-      return console.error(err);
+      return loglevel.error(err);
     }
 
     // TODO trigger error boundary or something
@@ -38,7 +39,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
         password: newPassword || password,
       });
     } catch (err) {
-      console.error(err);
+      loglevel.error(err);
     }
 
     this.setState({password: ''});

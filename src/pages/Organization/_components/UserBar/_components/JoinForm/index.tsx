@@ -1,3 +1,4 @@
+import loglevel from 'loglevel';
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
@@ -20,7 +21,7 @@ class JoinFormContainer extends React.PureComponent<tProps> {
         return this.props.setUserByOrg(res.payload);
       })
       .then(() => this.props.setRole({role: 'member'}))
-      .catch(console.error);
+      .catch(loglevel.error);
   }
 
   render() {

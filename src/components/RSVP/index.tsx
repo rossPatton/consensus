@@ -1,3 +1,4 @@
+import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
@@ -25,7 +26,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
         value: opts.value,
       });
     } catch (err) {
-      return console.error(err);
+      return loglevel.error(err);
     }
 
     this.setState({

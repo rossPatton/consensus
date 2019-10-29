@@ -1,3 +1,4 @@
+import loglevel from 'loglevel';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
@@ -40,7 +41,7 @@ class DecisionContainer extends Component<tProps> {
           offset: 0,
         });
       })
-      .catch(console.error);
+      .catch(loglevel.error);
   }
 
   render() {
