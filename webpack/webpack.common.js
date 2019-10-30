@@ -15,7 +15,7 @@ module.exports = {
 
   // do it this way so that debug mode works
   mode: env.DEV ? 'development' : 'production',
-  stats: env.stats,
+  stats: env.DEV ? env.stats : 'errors-only',
 
   resolve: {
     // alias: {

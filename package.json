@@ -26,41 +26,36 @@
   },
   "betterScripts": {
     "debug": {
-      "comment": "This script runs the same thing as dev, but with all loggers and tooling enabled and set to the debug level. This generates far more console output. Alternatively, you can search the codebase for the __DEBUG__ webpack var and toggle loggers one by one.",
-      "command": "npm run build && concurrently \"webpack-dev-server --config webpack/\" \"DEBUG=koa* node --max-old-space-size=8192 --inspect ./dist/server.js\"",
+      "comment": "This script runs the same thing as dev, but with all loggers and tooling enabled and set to the debug level. This generates far more console output. If you want to run this with vscode integration, i've found the easiest way is to run outside of docker and pick the nodejs process to attach to. Alternatively, you can search the codebase for the __DEBUG__ webpack var and toggle loggers one by one.",
+      "command": "npm run build && concurrently \"webpack --watch --config webpack/\" \"DEBUG=koa* nodemon --inspect ./dist/server.js\"",
       "env": {
         "DEBUG": true,
-        "NODE_ENV": "development",
-        "REDIS": "127.0.0.1"
+        "DB": "development",
+        "NODE_ENV": "development"
       }
     },
     "start": {
       "comment": "This script bundles the initial build then starts up the dev server and localhost concurrently together. TODO get dev server fucking working jesus",
-      "command": "npm run build && concurrently \"webpack --watch --config webpack/\" \"nodemon --max-old-space-size=8192 ./dist/server.js\"",
+      "command": "npm run build && concurrently \"webpack --watch --config webpack/\" \"npx pm2-dev startOrReload pm2.config.js --no-daemon\"",
       "env": {
         "DB": "development",
-        "NODE_ENV": "development",
-        "REDIS": "127.0.0.1"
+        "NODE_ENV": "development"
       }
     },
     "localProd": {
       "comment": "Run prod locally, uses the dev DB for now (change when site is live)",
-      "command": "npm run build && nodemon --max-old-space-size=8192 ./dist/server.js",
+      "command": "npm run build && npx pm2 startOrReload pm2.config.js --no-daemon",
       "env": {
         "DB": "development",
-        "DB_HOST": "host.docker.internal",
-        "NODE_ENV": "production",
-        "REDIS": "redis-server"
+        "NODE_ENV": "production"
       }
     },
     "prod": {
       "comment": "Runs prod, uses the prod DB (delete above once site is live and has data)",
-      "command": "npm run build && nodemon --max-old-space-size=8192 ./dist/server.js",
+      "command": "npm run build && npx pm2 startOrReload pm2.config.js --no-daemon",
       "env": {
         "DB": "production",
-        "DB_HOST": "host.docker.internal",
-        "NODE_ENV": "production",
-        "REDIS": "redis-server"
+        "NODE_ENV": "production"
       }
     }
   },
@@ -108,6 +103,7 @@
     "pg": "^7.11.0",
     "pg-query-stream": "^2.0.0",
     "pluralize": "^8.0.0",
+    "pm2": "^4.1.2",
     "querystring": "^0.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

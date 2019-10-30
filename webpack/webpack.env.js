@@ -38,6 +38,5 @@ module.exports = {
   DEV: NODE_ENV === 'development',
   PROD: NODE_ENV === 'production',
   NODE_ENV,
-  REDIS,
   stats,
 };

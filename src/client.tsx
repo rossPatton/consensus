@@ -1,3 +1,5 @@
+// this is the main entrypoint for the app
+
 require('es6-promise').polyfill();
 import 'core-js/stable';
 import 'isomorphic-fetch';

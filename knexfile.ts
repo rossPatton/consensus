@@ -3,6 +3,8 @@ require('ts-node/register');
 
 const path = require('path');
 const Knex = require('knex');
+// const pg = require('pg');
+// pg.defaults.ssl = true; // necessary stupid hack to force knex to use ssl
 
 const CWD = process.cwd();
 const migrations = path.join(CWD, 'src', 'server', 'db', 'migrations');
@@ -26,6 +28,7 @@ module.exports = {
       user: 'consensusdev',
       password: DB_DEV_PW,
       database: 'consensus_dev',
+      // ssl: true,
     },
     migrations: {
       directory: migrations,
@@ -48,6 +51,7 @@ module.exports = {
       password: DB_PROD_PW,
       // eventually this should be consensus_prod
       database: 'consensus_dev',
+      // ssl: true,
     },
     migrations: {
       directory: migrations,
@@ -70,6 +74,7 @@ module.exports = {
       user: 'consensustest',
       password: DB_TEST_PW,
       database: 'consensus_test',
+      // ssl: true,
     },
     migrations: {
       directory: migrations,

@@ -2,7 +2,7 @@
 FROM node:12.3.0-alpine
 
 # allow access to node_modules and app dir
-RUN mkdir -p /app/node_modules && chown -R node:node /app
+# RUN mkdir -p /app/node_modules && chown -R node:node /app
 
 # create home dir, where the app will be run
 WORKDIR /app
@@ -11,7 +11,7 @@ WORKDIR /app
 COPY . $WORKDIR
 
 # install our dependencies, for now we want to install ALL deps, including dev ones
-RUN npm install
+RUN npm ci
 
 # make sure we're not running root
 USER node
@@ -20,10 +20,7 @@ USER node
 COPY --chown=node:node . .
 
 # expose ports to outside world
-EXPOSE 3000 3001
-
-# make sure we're running in production mode, just in case
-ENV NODE_ENV production
+EXPOSE 3001 9229
 
 # make sure we're using the production DB, just in case
 # TODO change to production once we actually have some real data there
@@ -35,4 +32,4 @@ ENV DB development
 # // ideally behind nginx and a load balancer, etc
 
 # run the damn thing
-CMD [ "npm", "run", "localProd" ]
+CMD ["sh", "./scripts/start.sh"]

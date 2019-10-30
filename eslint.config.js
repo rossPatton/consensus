@@ -5,7 +5,6 @@ const ERROR = 2;
 const CWD = process.cwd();
 
 module.exports = {
-  // "parser": "babel-eslint",
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2017,

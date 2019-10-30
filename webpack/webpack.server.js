@@ -25,7 +25,6 @@ module.exports = merge(common, {
       __CLIENT__: false,
       __DB_POOL_MIN__: env.DB_POOL_MIN,
       __DB_POOL_MAX__: env.DB_POOL_MAX,
-      __REDIS__: JSON.stringify(env.REDIS),
       __SECRET__: JSON.stringify(secret),
       __SERVER__: true,
     }),

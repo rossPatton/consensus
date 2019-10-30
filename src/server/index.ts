@@ -7,7 +7,6 @@ import 'regenerator-runtime/runtime';
 import './passport';
 
 import fs from 'fs-extra';
-import http from 'http';
 import https from 'https';
 import Koa from 'koa';
 import passport from 'koa-passport';
@@ -20,23 +19,13 @@ import { setupApi } from './api';
 import { setupMiddleware } from './middleware';
 import { SSR } from './SSR';
 
-if (__DEBUG__) {
-  loglevel.setDefaultLevel('trace');
-} else if (__DEV__) {
-  loglevel.setDefaultLevel('debug');
-} else if (__PROD__) {
-  loglevel.setDefaultLevel('error');
-} else {
-  loglevel.setDefaultLevel('info');
-}
-
 const app = new Koa();
 
 // "secret" key for sessions, generated at build time
 app.keys = [__SECRET__];
 
 const store = redisStore({
-  host: __REDIS__,
+  host: 'redis',
   port: 6379,
 });
 
@@ -66,11 +55,6 @@ app.use(async ctx => {
   ctx.body = SSR(app, ctx);
 });
 
-// to run localhost via Docker, you must update your docker config locally
-const HOST = __DEV__ ? '127.0.0.1' : '0.0.0.0';
-const HTTP_PORT = 3000;
-const HTTPS_PORT = 3001;
-
 // init https server, use localhost certs in dev, real certs in prod
 let key = './static/certs/localhost.key';
 let cert = './static/certs/localhost.cert';
@@ -84,15 +68,16 @@ const opts = {
   cert: fs.readFileSync(cert),
 };
 
-// init http server
-const httpServer = http.createServer(app.callback());
+// 0.0.0.0 is necessary for docker to work locally
 const httpsServer = https.createServer(opts, app.callback());
+httpsServer.listen(3001, '0.0.0.0', () => loglevel.info('https app running on port 3001'));
 
-httpServer.listen(HTTP_PORT, HOST, () => {
-  // eslint-disable-next-line
-  console.log(`HTTP server listening on port ${HTTP_PORT}`);
-});
-httpsServer.listen(HTTPS_PORT, HOST, () => {
-  // eslint-disable-next-line
-  console.log(`HTTPS server listening on port ${HTTPS_PORT}`);
-});
+if (__DEBUG__) {
+  loglevel.setDefaultLevel('trace');
+} else if (__DEV__) {
+  loglevel.setDefaultLevel('debug');
+} else if (__PROD__) {
+  loglevel.setDefaultLevel('error');
+} else {
+  loglevel.setDefaultLevel('info');
+}

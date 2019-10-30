@@ -1,5 +1,8 @@
 dist
+dumps
 node_modules
+volumes
+*.vscode
 *.log
 *.rdb
 .env
