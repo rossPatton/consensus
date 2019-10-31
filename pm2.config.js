@@ -1,7 +1,5 @@
 const { NODE_ENV } = process.env;
 
-console.log('NODE_ENV => ', NODE_ENV);
-
 module.exports = {
   apps: [{
     name: 'consensus',

@@ -1,8 +1,16 @@
-node_modules
-npm-debug.log
-Dockerfile
-.dockerignore
+# folders
 __tests__
-# .env
+node_modules
+dumps
 .git
+
+# filetypes
+*.log
+*.md
+
+#individual files
 .gitignore
+.dockerignore
+Dockerfile
+docker-compose.yml
+# .env

@@ -66,14 +66,5 @@ module.exports = merge(common, {
       __CLIENT__: true,
       __SERVER__: false,
     }),
-
-    // gen client stats json, in case we want or need that at some point
-    function(compiler) {
-      this.plugin('done', function(stats) {
-        fs.writeFileSync(
-          path.resolve(env.CWD, 'dist', 'stats.generated.json'),
-          JSON.stringify(stats.toJson()));
-      });
-    },
   ],
 });

@@ -10,6 +10,8 @@ const env = require('./webpack.env');
 const srcPath = (subdir) => path.join(env.CWD, 'src', subdir);
 const devPlugins = env.DEV ? [new FriendlyErrorsWebpackPlugin()] : [];
 
+process.traceDeprecation = env.DEV;
+
 module.exports = {
   devtool: env.DEV ? 'inline-source-map' : undefined,
 
@@ -108,10 +110,6 @@ module.exports = {
     // keeps hashes consistent between compilations
     new webpack.optimize.OccurrenceOrderPlugin(),
 
-    // fun plugins here
-    // better error reporting
-    ...devPlugins,
-
     // protects us from case mismatch import errors
     new ForceCaseSensitivityPlugin(),
 
@@ -126,5 +124,9 @@ module.exports = {
 
     // force webpack environment to be whatever we set NODE_ENV to, just to be safe
     new webpack.EnvironmentPlugin('NODE_ENV'),
+
+    // fun plugins here
+    // better error reporting
+    ...devPlugins,
   ],
 };

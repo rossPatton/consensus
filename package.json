@@ -13,7 +13,7 @@
   },
   "files": [],
   "scripts": {
-    "build": "npx webpack --display-error-details --display=minimal --progress --config webpack/index.js",
+    "build": "npx webpack --display=errors-only --config webpack/index.js",
     "start": "npx better-npm-run start",
     "debug": "npx better-npm-run debug",
     "lint": "npx eslint --ext .jsx,.js,.tsx,.ts --config ./eslint.config.js --fix src/",
@@ -27,7 +27,7 @@
   "betterScripts": {
     "debug": {
       "comment": "This script runs the same thing as dev, but with all loggers and tooling enabled and set to the debug level. This generates far more console output. If you want to run this with vscode integration, i've found the easiest way is to run outside of docker and pick the nodejs process to attach to. Alternatively, you can search the codebase for the __DEBUG__ webpack var and toggle loggers one by one.",
-      "command": "npm run build && concurrently \"webpack --watch --config webpack/\" \"DEBUG=koa* nodemon --inspect ./dist/server.js\"",
+      "command": "concurrently \"webpack -d --watch --config webpack/\" \"DEBUG=koa* nodemon --inspect ./dist/server.js\"",
       "env": {
         "DEBUG": true,
         "DB": "development",
@@ -36,7 +36,7 @@
     },
     "start": {
       "comment": "This script bundles the initial build then starts up the dev server and localhost concurrently together. TODO get dev server fucking working jesus",
-      "command": "npm run build && concurrently \"webpack --watch --config webpack/\" \"npx pm2-dev startOrReload pm2.config.js --no-daemon\"",
+      "command": "concurrently \"webpack --watch --config webpack/\" \"npx pm2-dev pm2.config.js --no-daemon\"",
       "env": {
         "DB": "development",
         "NODE_ENV": "development"
@@ -44,7 +44,7 @@
     },
     "localProd": {
       "comment": "Run prod locally, uses the dev DB for now (change when site is live)",
-      "command": "npm run build && npx pm2 startOrReload pm2.config.js --no-daemon",
+      "command": "npx pm2 startOrReload pm2.config.js --no-daemon",
       "env": {
         "DB": "development",
         "NODE_ENV": "production"
@@ -52,7 +52,7 @@
     },
     "prod": {
       "comment": "Runs prod, uses the prod DB (delete above once site is live and has data)",
-      "command": "npm run build && npx pm2 startOrReload pm2.config.js --no-daemon",
+      "command": "npx pm2 startOrReload pm2.config.js --no-daemon",
       "env": {
         "DB": "production",
         "NODE_ENV": "production"

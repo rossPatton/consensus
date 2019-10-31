@@ -1,8 +1,7 @@
 #!/bin/sh
 set -e
 
-# echo never | tee /sys/kernel/mm/transparent_hugepage/enabled
-# echo never | tee /sys/kernel/mm/transparent_hugepage/defrag
+npm run build
 
 if [ $NODE_ENV = "production" ] ; then
   npm run localProd
