@@ -20,8 +20,14 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   // need to be set for server streaming, if not set, then koa will crap out
   ctx.respond = false;
   ctx.type = 'text/html';
-  const local = __DEV__ ? "'self' 127.0.0.1:*" : "'self'";
-  ctx.res.write(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="base-uri 'none'; connect-src ${local}; default-src 'none'; block-all-mixed-content; font-src ${local}; form-action ${local}; img-src ${local}; manifest-src ${local}; object-src 'none'; script-src ${local} ajax.googleapis.com 'nonce-${nonce}'; style-src ${local} 'nonce-${nonce}'"><title>Consensus - when you need to get organized.</title><style type="text/css" nonce="${nonce}">${styles}</style></head><body><div id="appRoot">`);
+
+  // set stricter whitelist for prod
+  const local = __DEV__ ? "'self' 127.0.0.1:* 0.0.0.0:*" : "'self'";
+  // webpack debug mode seems to use eval(?) so disable the CSP in debug mode
+  // i think this is mostly fine, considering the CSP runs for every other case
+  const CSP = !__DEBUG__ ? `<meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="base-uri 'none'; connect-src ${local}; default-src 'none'; block-all-mixed-content; font-src ${local}; form-action ${local}; img-src ${local}; manifest-src ${local}; object-src 'none'; script-src ${local} ajax.googleapis.com 'nonce-${nonce}'; style-src ${local} 'nonce-${nonce}'">` : '';
+
+  ctx.res.write(`<!DOCTYPE html><html lang="en"><head>${CSP}<title>Consensus - when you need to get organized.</title><style type="text/css" nonce="${nonce}">${styles}</style></head><body><div id="appRoot">`);
 
   const initRouterContext = {};
   const store = await initStoreForSSR(ctx);

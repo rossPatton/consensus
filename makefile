@@ -1,11 +1,29 @@
-# build app. uses env vars defined in .env
+# install dependencies. npm install, basically
+# useful for local development to decouple build/run steps
 install:
-	docker-compose -f docker-compose.build.yml run --rm install
+	docker-compose -f docker-compose.install.yml run --rm install
 
-# runs dev app. uses env vars defined in .env
+# runs debug mode locally
+debug:
+	docker-compose -f docker-compose.debug.yml up --remove-orphans
+
+# runs development mode locally
 dev:
-	docker-compose up
+	docker-compose -f docker-compose.yml up --remove-orphans
 
-# runs dev app. uses env vars defined in .env
+# runs production mode locally
 prod:
-	docker-compose -f docker-compose.prod.yml up --rm --build
+	docker-compose -f docker-compose.prod.yml up --remove-orphans
+
+# build site for prod, and prepares an image for deployment
+build:
+	docker-compose -f docker-compose.prod.yml build --no-cache --parallel
+
+# stops all active containers (as defined by docker-compose)
+reset:
+	docker-compose down
+
+# just runs whatever container is currently ready to go
+# if nothing is already built, just runs dev mode locally (default docker-compose file)
+start:
+	docker-compose up --remove-orphans

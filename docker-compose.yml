@@ -8,6 +8,10 @@ services:
       - db
     env_file:
       - .env
+    environment:
+      - DB=development
+      - DEBUG=false
+      - NODE_ENV=development
     image: node:12.3.0-alpine
     ports:
       - "3001:3001"

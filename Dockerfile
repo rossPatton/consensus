@@ -1,6 +1,9 @@
 # get node distro - should be consistent across environments
 FROM node:12.3.0-alpine
 
+# increase max # of threads available to our nodejs process
+ENV UV_THREADPOOL_SIZE=64
+
 # copy package.json etc FIRST. any changes here invalidate cache for rest of file
 # see https://docs.semaphoreci.com/article/81-docker-layer-caching
 COPY package.json package-lock.json app/
@@ -16,7 +19,7 @@ RUN npm ci --arch=x64 --platform=linux
 # copy everything not in .dockerignore to /app
 COPY . $WORKDIR
 
-# Alpine Linux is a very bare-bones distro and curl is very useful when debugging
+# Alpine Linux is a bare-bones distro, but curl is very useful when debugging so add it
 RUN apk add curl --no-cache
 
 # make sure we're not running root
@@ -29,4 +32,4 @@ COPY --chown=node:node . .
 EXPOSE 3001 9229
 
 # run the damn thing
-CMD ["sh", "./scripts/start.sh"]
+CMD ["npm", "run", "prod"]

@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv-safe').config();
 import faker from 'faker';
 import Knex from 'knex';
 

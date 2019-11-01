@@ -13,51 +13,12 @@
   },
   "files": [],
   "scripts": {
-    "build": "npx webpack --display=errors-only --config webpack/index.js",
-    "start": "docker-compose -f docker-compose.dev.yml up",
-    "debug": "npx better-npm-run debug",
     "lint": "npx eslint --ext .jsx,.js,.tsx,.ts --config ./eslint.config.js --fix src/",
     "migrate": "node -r esm ./node_modules/.bin/knex migrate:latest",
-    "localProd": "npx better-npm-run localProd",
-    "prod": "npx better-npm-run prod",
     "seed": "node -r esm ./node_modules/.bin/knex seed:run",
     "pretest": "npm run lint",
+    "prod": "webpack --config webpack/ && npx pm2 startOrReload pm2.config.js --no-daemon",
     "test": "tsc"
-  },
-  "betterScripts": {
-    "debug": {
-      "comment": "This script runs the same thing as dev, but with all loggers and tooling enabled and set to the debug level. This generates far more console output. If you want to run this with vscode integration, i've found the easiest way is to run outside of docker and pick the nodejs process to attach to. Alternatively, you can search the codebase for the __DEBUG__ webpack var and toggle loggers one by one.",
-      "command": "concurrently \"webpack -d --watch --config webpack/\" \"DEBUG=koa* nodemon --inspect ./dist/server.js\"",
-      "env": {
-        "DEBUG": true,
-        "DB": "development",
-        "NODE_ENV": "development"
-      }
-    },
-    "start": {
-      "comment": "This script bundles the initial build then starts up the dev server and localhost concurrently together. TODO get dev server fucking working jesus",
-      "command": "concurrently \"webpack --watch --config webpack/\" \"npx pm2-dev pm2.config.js --no-daemon\"",
-      "env": {
-        "DB": "development",
-        "NODE_ENV": "development"
-      }
-    },
-    "localProd": {
-      "comment": "Run prod locally, uses the dev DB for now (change when site is live)",
-      "command": "npx pm2 startOrReload pm2.config.js --no-daemon",
-      "env": {
-        "DB": "development",
-        "NODE_ENV": "production"
-      }
-    },
-    "prod": {
-      "comment": "Runs prod, uses the prod DB (delete above once site is live and has data)",
-      "command": "npx pm2 startOrReload pm2.config.js --no-daemon",
-      "env": {
-        "DB": "production",
-        "NODE_ENV": "production"
-      }
-    }
   },
   "dependencies": {
     "@hapi/boom": "^7.4.3",
@@ -70,7 +31,7 @@
     "classnames": "^2.2.6",
     "core-js": "^3.1.4",
     "dayjs": "^1.8.15",
-    "dotenv": "^8.2.0",
+    "dotenv-safe": "^8.1.0",
     "es6-promise": "^4.2.8",
     "fs-extra": "^8.1.0",
     "fxa-common-password-list": "0.0.3",
@@ -188,7 +149,6 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-module-resolver": "^3.2.0",
     "babel-preset-node6": "^11.0.0",
-    "better-npm-run": "^0.1.1",
     "case-sensitive-paths-webpack-plugin": "^2.2.0",
     "clean-webpack-plugin": "^0.1.19",
     "concurrently": "^4.1.1",

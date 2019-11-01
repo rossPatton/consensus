@@ -23,8 +23,6 @@ module.exports = merge(common, {
     // server only global variables
     new webpack.DefinePlugin({
       __CLIENT__: false,
-      __DB_POOL_MIN__: env.DB_POOL_MIN,
-      __DB_POOL_MAX__: env.DB_POOL_MAX,
       __SECRET__: JSON.stringify(secret),
       __SERVER__: true,
     }),

@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv-safe').config();
 import bcrypt from 'bcryptjs';
 import faker from 'faker';
 import Knex from 'knex';

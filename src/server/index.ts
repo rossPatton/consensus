@@ -1,9 +1,8 @@
-require('dotenv').config();
+require('dotenv-safe').config();
 require('es6-promise').polyfill();
 import 'core-js/stable';
 import 'isomorphic-fetch';
 import 'regenerator-runtime/runtime';
-// initialize passport
 import './passport';
 
 import fs from 'fs-extra';

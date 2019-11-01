@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv-safe').config();
 import Knex from 'knex';
 
 import stateMap from '../../../json/usa/stateCodeMap.json';

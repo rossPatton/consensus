@@ -9,6 +9,10 @@ services:
     working_dir: /app/
     env_file:
       - .env
+    # change these to production when doing a prod build
+    environment:
+      - DB=production
+      - NODE_ENV=production
 
   install:
     extends:
