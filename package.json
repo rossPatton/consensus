@@ -14,7 +14,7 @@
   "files": [],
   "scripts": {
     "build": "npx webpack --display=errors-only --config webpack/index.js",
-    "start": "npx better-npm-run start",
+    "start": "docker-compose -f docker-compose.dev.yml up",
     "debug": "npx better-npm-run debug",
     "lint": "npx eslint --ext .jsx,.js,.tsx,.ts --config ./eslint.config.js --fix src/",
     "migrate": "node -r esm ./node_modules/.bin/knex migrate:latest",

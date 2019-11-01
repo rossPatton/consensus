@@ -1,0 +1,25 @@
+# used by both prod and dev. set env vars in .env to control build
+version: '2'
+services:
+  base:
+    image: node:12.3.0-alpine
+    volumes:
+      - .:/app/
+      - nodemodules:/app/node_modules
+    working_dir: /app/
+    env_file:
+      - .env
+
+  install:
+    extends:
+      service: base
+    command: npm i --arch=x64 --platform=linux
+
+  build:
+    extends:
+      service: base
+    command: npm run build
+
+volumes:
+  nodemodules:
+    external: true

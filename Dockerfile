@@ -10,7 +10,7 @@ WORKDIR /app
 
 # install our dependencies, for now we want to install ALL deps, including dev ones
 # put before COPY, any changes in the cwd will invalidate the cache for this layer
-RUN npm ci
+RUN npm ci --arch=x64 --platform=linux
 
 # below this point we don't need to worry about the cache
 # copy everything not in .dockerignore to /app
