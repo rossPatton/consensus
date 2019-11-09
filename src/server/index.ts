@@ -54,12 +54,12 @@ app.use(async ctx => {
   ctx.body = SSR(app, ctx);
 });
 
-// init https server, use localhost certs in dev, real certs in prod
-let key = './static/certs/localhost.key';
-let cert = './static/certs/localhost.cert';
+const CWD = process.cwd();
+let key = `${CWD}/nginx/certs/consensus.local.key`;
+let cert = `${CWD}/nginx/certs/consensus.local.crt`;
 if (__PROD__) {
-  key = './static/certs/localhost.key';
-  cert = './static/certs/localhost.cert';
+  key = `${CWD}/nginx/certs/consensus.local.key`;
+  cert = `${CWD}/nginx/certs/consensus.local.crt`;
 }
 
 const opts = {

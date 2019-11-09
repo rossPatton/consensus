@@ -6,12 +6,18 @@ services:
     command: "npx concurrently \"webpack --watch --config webpack/\" \"npx pm2-dev pm2.config.js --no-daemon\""
     depends_on:
       - db
+      - redis
     env_file:
       - .env
     environment:
       - DB=development
       - DEBUG=false
       - NODE_ENV=development
+      - VIRTUAL_HOST=consensus.local
+      - VIRTUAL_PORT=3001
+    expose:
+      - 3001
+      - 9229
     image: node:12.3.0-alpine
     ports:
       - "3001:3001"
@@ -33,9 +39,16 @@ services:
     container_name: redis
     image: redis:alpine
     sysctls:
-      # fixes warning when using the barebones alpine image
+      # fixes warning when using redis with the barebones alpine image
       net.core.somaxconn: '511'
 
+# connect our localhost to the nginx reverse proxy
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
+# ties our local directory and db to the running docker container
 volumes:
   db_data:
     external: true
