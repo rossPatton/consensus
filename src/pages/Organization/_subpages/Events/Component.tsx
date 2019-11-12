@@ -30,9 +30,10 @@ export const EventsComponent = memo((props: tComponentProps) => (
         />
       </label>
       {props.role && (
-        <div className="mR3">
+        <div>
           Filter by privacy
           <select
+            value={props.filterType}
             onBlur={props.onPrivacyFilterChange}
             onChange={props.onPrivacyFilterChange}>
             <option value="n/a">

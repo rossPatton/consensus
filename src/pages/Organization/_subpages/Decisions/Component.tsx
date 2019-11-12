@@ -30,18 +30,19 @@ export const DecisionsComponent = memo((props: tComponentProps) => (
           placeholder="Search for a decision by title"
         />
       </label>
-      <div className="mR3">
+      <div>
         Filter by type
         <select
+          value={props.filterType}
           onBlur={props.onTypeFilterChange}
           onChange={props.onTypeFilterChange}>
           <option value="n/a">
             All Decisions
           </option>
-          <option value="private">
-            Simple Poll
+          <option value="Simple Majority">
+            Simple Majority
           </option>
-          <option value="public">
+          <option value="Approval">
             Approval
           </option>
         </select>

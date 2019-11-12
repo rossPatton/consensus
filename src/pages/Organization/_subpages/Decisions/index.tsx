@@ -1,5 +1,5 @@
 import qs from 'querystring';
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {Dispatch} from 'redux';
@@ -11,7 +11,7 @@ import {fuzzFilterList} from '../../../../utils';
 import {tContainerProps, tState, tStore} from './_types';
 import {DecisionsComponent} from './Component';
 
-class DecisionsContainer extends Component<tContainerProps, tState> {
+class DecisionsContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
     this.getDecisions();
@@ -38,6 +38,7 @@ class DecisionsContainer extends Component<tContainerProps, tState> {
       isClosed,
       limit: -1,
       offset,
+      type: this.state.typeFilter,
     });
   }
 
@@ -82,7 +83,7 @@ class DecisionsContainer extends Component<tContainerProps, tState> {
     const decisionsToRender = this.filter(
       this.state.decisions.length > 0
         ? this.state.decisions
-        : this.props.decisions
+        : this.props.decisions,
     );
 
     return (
@@ -107,6 +108,7 @@ class DecisionsContainer extends Component<tContainerProps, tState> {
               render={(itemsToRender: tDecision[]) => (
                 <DecisionsComponent
                   decisions={itemsToRender}
+                  filterType={this.state.typeFilter}
                   isClosed={isClosed}
                   pathname={location.pathname}
                   onTypeFilterChange={this.onTypeFilterChange}
@@ -132,7 +134,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const Decisions = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(DecisionsContainer);
 
 export default Decisions;

@@ -12,6 +12,7 @@ export type tState = {
 };
 
 export type tComponentProps = tProps & {
+  filterType: tPrivacyFilter,
   onPrivacyFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   pathname: string,

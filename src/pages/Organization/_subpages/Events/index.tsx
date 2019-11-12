@@ -1,5 +1,5 @@
 import qs from 'querystring';
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
@@ -10,7 +10,7 @@ import {fuzzFilterList} from '../../../../utils';
 import {tContainerProps, tState, tStore} from './_types';
 import {EventsComponent} from './Component';
 
-class EventsContainer extends Component<tContainerProps, tState> {
+class EventsContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
     this.getEvents();
@@ -33,7 +33,6 @@ class EventsContainer extends Component<tContainerProps, tState> {
     const offset = page ? parseInt(page, 10) : 0;
     const showPast = query.showPast === 'true';
 
-    // get active decisions only
     this.props.getEvents({
       id: org.id,
       isDraft: false,
@@ -82,7 +81,7 @@ class EventsContainer extends Component<tContainerProps, tState> {
     const eventsToRender = this.filter(
       this.state.events.length > 0
         ? this.state.events
-        : this.props.events
+        : this.props.events,
     );
 
     return (
@@ -106,6 +105,7 @@ class EventsContainer extends Component<tContainerProps, tState> {
               render={(itemsToRender: tEvent[]) => (
                 <EventsComponent
                   events={itemsToRender}
+                  filterType={this.state.privacyFilter}
                   pathname={location.pathname}
                   role={this.props.role}
                   showPast={showPast}
@@ -132,7 +132,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const Events = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(EventsContainer);
 
 export default Events;

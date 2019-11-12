@@ -12,6 +12,7 @@ export type tState = {
 };
 
 export type tComponentProps = tProps & {
+  filterType: tDecisionType,
   onTypeFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   pathname: string,
@@ -19,7 +20,7 @@ export type tComponentProps = tProps & {
 
 export type tContainerProps = tProps & {
   getDecisionsByOrg:
-    (query: tIdQuery & {isClosed: boolean}) => Promise<tThunk<tDecision[]>>,
+    (query: tIdQuery & {isClosed: boolean, type: tDecisionType}) => Promise<tThunk<tDecision[]>>,
   isLoading: boolean,
   location: Location,
   match: match & { params: tOrgRouteParams },
