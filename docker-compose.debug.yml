@@ -11,9 +11,12 @@ services:
     environment:
       - DB=development
       - DEBUG=false
+      - ENABLE_IPV6=true
+      - NETWORK_ACCESS=internal
       - NODE_ENV=development
       - VIRTUAL_HOST=consensus.local
       - VIRTUAL_PORT=3001
+      - VIRTUAL_PROTO=https
     image: node:12.3.0-alpine
     working_dir: /app
     volumes:

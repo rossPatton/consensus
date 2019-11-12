@@ -23,6 +23,12 @@ build:
 reset:
 	docker-compose down
 
-# just an alias that runs dev mode locally
+# if installing on new machine, you need to create the shared networks and volumes first
+setup:
+	docker network create nginx-proxy \
+		docker volume create db_data \
+		docker volume create node_modules
+
+# just an alias for make dev
 start:
 	docker-compose up --remove-orphans

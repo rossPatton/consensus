@@ -8,6 +8,7 @@ services:
       - "443:443"
     volumes:
       - ./certs:/etc/nginx/certs
+      - ./consensus.conf:/etc/nginx/conf.d/consensus.conf:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
     restart: unless-stopped
 
