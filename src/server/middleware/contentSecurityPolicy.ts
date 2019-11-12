@@ -1,8 +1,5 @@
 import Koa from 'koa';
 import koaHelmet, { KoaHelmetContentSecurityPolicyConfiguration } from 'koa-helmet';
-import uuidv4 from 'uuid/v4';
-
-let prevUrl: string | undefined;
 
 // only allow assets served from our origin or a trusted cdn
 // required nonces for any inline scripts and SRI for cdns to verify integrity

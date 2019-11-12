@@ -16,21 +16,21 @@ const initialState: tThunk<any> = {
 
 export const rsvpsReducer = (state = initialState, action: tSessionUnion) => {
   switch (action.type) {
-  case GET_RSVPS_BEGIN:
+  case GET_RSVPS_BEGIN || SET_RSVP_BEGIN:
     return {
       ...state,
       error: null,
       isLoading: true,
     };
 
-  case GET_RSVPS_SUCCESS:
+  case GET_RSVPS_SUCCESS || SET_RSVP_SUCCESS:
     return {
       ...state,
       data: action.payload,
       isLoading: false,
     };
 
-  case GET_RSVPS_FAILURE:
+  case GET_RSVPS_FAILURE || SET_RSVP_FAILURE:
     return {
       ...state,
       error: action.payload,

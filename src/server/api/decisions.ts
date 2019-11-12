@@ -10,7 +10,7 @@ type tQuery = {id: string, isClosed: boolean, limit: string, offset: string};
 
 const getDecisions = async (ctx: Koa.ParameterizedContext) => {
   const {query} = ctx;
-  const {id, isClosed, limit, offset, type} = query as tQuery;
+  const {id, isClosed, limit, offset, type} = query as tQuery & {type: tDecisionType};
 
   const orgId = parseInt(id, 10);
   const parsedLimit = limit ? parseInt(limit, 10) : 3;

@@ -1,4 +1,3 @@
-import cx from 'classnames';
 import React, {memo} from 'react';
 
 import {tProps} from './_types';
