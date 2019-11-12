@@ -6,7 +6,7 @@ module.exports = {
     script: './dist/server.js',
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
-    args: '--max-old-space-size=8192',
+    args: ['--max-old-space-size=8192', '--inspect=0.0.0.0'],
     // enables cluster mode basically, up to max number of available cores
     instances: 'max',
     exec_mode: 'cluster',

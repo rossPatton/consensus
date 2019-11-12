@@ -19,13 +19,14 @@ services:
       - 3001
       - 9229
     image: node:12.3.0-alpine
-    ports:
-      - "3001:3001"
-      - "9229:9229"
+    # ports:
+    #   - "3001:3001"
+    #   - "9229:9229"
     working_dir: /app
     volumes:
-      - nodemodules:/app/node_modules
       - .:/app
+      - node_modules:/app/node_modules
+
 
   db:
     container_name: db
@@ -52,5 +53,5 @@ networks:
 volumes:
   db_data:
     external: true
-  nodemodules:
+  node_modules:
     external: true

@@ -23,7 +23,6 @@ build:
 reset:
 	docker-compose down
 
-# just runs whatever container is currently ready to go
-# if nothing is already built, just runs dev mode locally (default docker-compose file)
+# just an alias that runs dev mode locally
 start:
 	docker-compose up --remove-orphans

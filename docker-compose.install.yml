@@ -5,14 +5,14 @@ services:
     image: node:12.3.0-alpine
     volumes:
       - .:/app/
-      - nodemodules:/app/node_modules
+      - node_modules:/app/node_modules
     working_dir: /app/
     env_file:
       - .env
     # change these to production when doing a prod build
     environment:
-      - DB=production
-      - NODE_ENV=production
+      - DB=development
+      - NODE_ENV=development
 
   install:
     extends:
@@ -25,5 +25,5 @@ services:
     command: npm run build
 
 volumes:
-  nodemodules:
+  node_modules:
     external: true
