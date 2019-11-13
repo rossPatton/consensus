@@ -3,10 +3,9 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {GenericLoader, Helmet} from '../../../../components';
-import {Paginate} from '../../../../containers';
+import {Helmet} from '../../../../components';
+import {Paginate, Search} from '../../../../containers';
 import {getEvents} from '../../../../redux';
-import {fuzzFilterList} from '../../../../utils';
 import {tContainerProps, tState, tStore} from './_types';
 import {EventsComponent} from './Component';
 
@@ -17,7 +16,7 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
   }
 
   state = {
-    events: [],
+    events: [] as tEvent[],
     privacyFilter: 'n/a' as tPrivacyFilter,
   };
 
@@ -25,7 +24,7 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
     this.getEvents();
   }
 
-  getEvents = () => {
+  private getEvents = () => {
     const {location, match: {params: {page = 0} = {}}, org} = this.props;
     const query = qs.parse(location.search.replace('?', ''));
     // only show public events if user is not signed in
@@ -40,21 +39,6 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
       showPast,
       limit: -1,
       offset,
-    });
-  }
-
-  // TODO consolidate search logic somewhere
-  onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    ev.preventDefault();
-
-    const filteredList = fuzzFilterList({
-      input: this.props.events || [],
-      key: 'title',
-      search: ev.currentTarget.value,
-    });
-
-    this.setState({
-      events: filteredList,
     });
   }
 
@@ -96,12 +80,12 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
             { property: 'og:description', content: '' },
           ]}
         />
-        <GenericLoader
-          isLoading={this.props.isLoading}
-          render={() => (
+        <Search
+          items={eventsToRender}
+          render={(searchProps: any) => (
             <Paginate
-              items={eventsToRender}
-              match={this.props.match}
+              items={searchProps.items}
+              page={this.props.match.params.page}
               render={(itemsToRender: tEvent[]) => (
                 <EventsComponent
                   events={itemsToRender}
@@ -110,7 +94,7 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
                   role={this.props.role}
                   showPast={showPast}
                   onPrivacyFilterChange={this.onPrivacyFilterChange}
-                  onSearchChange={this.onSearchChange}
+                  onSearchChange={searchProps.onSearchChange}
                 />
               )}
             />

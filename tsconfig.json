@@ -21,6 +21,7 @@
     "skipLibCheck": true,
     "sourceMap": false,
     "strict": true,
+    "strictNullChecks": false,
     "target": "esnext",
   },
   "include": [

@@ -23,7 +23,7 @@ export type tContainerProps = tProps & {
     (query: tIdQuery & {isClosed: boolean, type: tDecisionType}) => Promise<tThunk<tDecision[]>>,
   isLoading: boolean,
   location: Location,
-  match: match & { params: tOrgRouteParams },
+  match: match & {params: tOrgRouteParams},
   org: tOrg,
   role: tRole,
 };

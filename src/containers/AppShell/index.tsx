@@ -7,7 +7,7 @@ import NoMatch from '../../pages/404';
 import {routes} from '../../routes';
 import {Footer, Header, Nav} from './_components';
 
-export class AppShell extends Component<any, {showNav: boolean}> {
+export default class AppShell extends Component<any, {showNav: boolean}> {
   state = {
     showNav: false,
   };
@@ -21,27 +21,27 @@ export class AppShell extends Component<any, {showNav: boolean}> {
   render() {
     return (
       <HelmetProvider context={{}}>
-      <>
-        <Header
-          {...this.props}
-          toggleNav={this.toggleNav}
-        />
-        {this.state.showNav && <Nav />}
-        <main className="mT5 mB5 pB5">
-          <Switch>
-            {routes.map((route: tRoute, i) => (
-              <RouteWithSubRoutes
-                key={i}
-                {...this.props}
-                {...this.state}
-                {...route}
-              />
-            ))}
-            <Route component={() => <NoMatch />} />
-          </Switch>
-        </main>
-        <Footer />
-      </>
+        <>
+          <Header
+            {...this.props}
+            toggleNav={this.toggleNav}
+          />
+          {this.state.showNav && <Nav />}
+          <main className="mT5 mB5 pB5">
+            <Switch>
+              {routes.map((route: tRoute, i) => (
+                <RouteWithSubRoutes
+                  key={i}
+                  {...this.props}
+                  {...this.state}
+                  {...route}
+                />
+              ))}
+              <Route component={() => <NoMatch />} />
+            </Switch>
+          </main>
+          <Footer />
+        </>
       </HelmetProvider>
     );
   }

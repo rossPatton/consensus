@@ -103,7 +103,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const Profile = connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ProfileContainer);
 
 export default Profile;

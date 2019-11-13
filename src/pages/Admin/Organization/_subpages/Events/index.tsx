@@ -83,13 +83,13 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
     const eventsToRender = this.filter(
       this.state.events.length > 0
         ? this.state.events
-        : this.props.events
+        : this.props.events,
     );
 
     return (
       <Paginate
         items={eventsToRender}
-        match={this.props.match}
+        page={this.props.match.params.page}
         render={(itemsToRender: tEvent[]) => (
           <EventsComponent
             events={itemsToRender}
@@ -114,7 +114,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const Events = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(EventsContainer);
 
 export default Events;

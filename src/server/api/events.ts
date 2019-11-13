@@ -69,7 +69,7 @@ events.get(route, async (ctx: Koa.ParameterizedContext) => {
         ...ev,
         attendees: attendees.length,
       };
-    })
+    }),
   );
 
   // if org admin account, this just returns the events we've already fetched

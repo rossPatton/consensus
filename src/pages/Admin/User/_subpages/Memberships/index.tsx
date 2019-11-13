@@ -15,7 +15,7 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
   }
 
   state = {
-    orgs: [],
+    orgs: [] as tOrgWithRole[],
   };
 
   deleteOrgByUser = (ev: React.MouseEvent<HTMLButtonElement>, orgId: number) => {
@@ -55,7 +55,7 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
     return (
       <Paginate
         items={orgsToRender}
-        match={this.props.match}
+        page={this.props.match.params.page}
         render={(itemsToRender: tOrgWithRole[]) => (
           <MembershipsComponent
             deleteOrgByUser={this.deleteOrgByUser}
@@ -81,7 +81,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const Memberships = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(MembershipsContainer);
 
 export default Memberships;

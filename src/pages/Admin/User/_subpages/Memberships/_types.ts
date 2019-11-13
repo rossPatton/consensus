@@ -13,7 +13,7 @@ export type tComponentProps = tProps & {
 };
 
 export type tContainerProps = tProps & {
-  match: match,
+  match: match & {params: {page?: string}},
   // from redux
   deleteOrgByUser: (query: {accountId: number, orgId: number}) => void,
   getOrgsBySession: () => void,

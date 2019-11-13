@@ -48,7 +48,7 @@ class DecisionsContainer extends PureComponent<tContainerProps> {
     return (
       <Paginate
         items={decisionsToRender}
-        match={this.props.match}
+        page={this.props.match.params.page}
         render={(itemsToRender: tDecision[]) => (
           <DecisionsComponent
             decisions={itemsToRender}
@@ -71,7 +71,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const Decisions = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(DecisionsContainer);
 
 export default Decisions;

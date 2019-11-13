@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom';
 
 import {tState} from './_types';
 
-export class ErrorBoundary extends PureComponent<any, tState> {
+export default class ErrorBoundary extends PureComponent<any, tState> {
   state = {
     hasError: false,
   };

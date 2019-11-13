@@ -4,10 +4,9 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {Dispatch} from 'redux';
 
-import {GenericLoader, Helmet} from '../../../../components';
-import {Paginate} from '../../../../containers';
+import {Helmet} from '../../../../components';
+import {Paginate, Search} from '../../../../containers';
 import {getDecisionsByOrg} from '../../../../redux';
-import {fuzzFilterList} from '../../../../utils';
 import {tContainerProps, tState, tStore} from './_types';
 import {DecisionsComponent} from './Component';
 
@@ -18,7 +17,7 @@ class DecisionsContainer extends PureComponent<tContainerProps, tState> {
   }
 
   state = {
-    decisions: [],
+    decisions: [] as tDecision[],
     typeFilter: 'n/a' as tDecisionType,
   };
 
@@ -26,7 +25,7 @@ class DecisionsContainer extends PureComponent<tContainerProps, tState> {
     this.getDecisions();
   }
 
-  getDecisions = () => {
+  private getDecisions = () => {
     const {location, match: { params: { page = 0 } = {} }, org} = this.props;
     const query = qs.parse(location.search.replace('?', ''));
     const isClosed = query.isClosed === 'true';
@@ -39,20 +38,6 @@ class DecisionsContainer extends PureComponent<tContainerProps, tState> {
       limit: -1,
       offset,
       type: this.state.typeFilter,
-    });
-  }
-
-  onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    ev.preventDefault();
-
-    const filteredList = fuzzFilterList({
-      input: this.props.decisions || [],
-      key: 'title',
-      search: ev.currentTarget.value,
-    });
-
-    this.setState({
-      decisions: filteredList,
     });
   }
 
@@ -99,12 +84,12 @@ class DecisionsContainer extends PureComponent<tContainerProps, tState> {
             { property: 'og:description', content: '' },
           ]}
         />
-        <GenericLoader
-          isLoading={this.props.isLoading}
-          render={() => (
+        <Search
+          items={decisionsToRender}
+          render={(searchProps: any) => (
             <Paginate
-              items={decisionsToRender}
-              match={this.props.match}
+              items={searchProps.items}
+              page={this.props.match.params.page}
               render={(itemsToRender: tDecision[]) => (
                 <DecisionsComponent
                   decisions={itemsToRender}
@@ -112,7 +97,7 @@ class DecisionsContainer extends PureComponent<tContainerProps, tState> {
                   isClosed={isClosed}
                   pathname={location.pathname}
                   onTypeFilterChange={this.onTypeFilterChange}
-                  onSearchChange={this.onSearchChange}
+                  onSearchChange={searchProps.onSearchChange}
                 />
               )}
             />

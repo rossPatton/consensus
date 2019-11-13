@@ -1,17 +1,17 @@
 import {Location} from 'history';
 import {match} from 'react-router';
 
-export type tProps = {
+export interface tProps {
   location: Location,
-  match: match & { params: tOrgRouteParams },
+  match: match & {params: tOrgRouteParams},
   org: tOrg,
   session: tSession,
   usersByOrg: tUsersByOrg,
-};
+}
 
-export type tComponentProps = tProps & {
+export interface tComponentProps extends tProps {
   role: tRole,
-};
+}
 
 export type tContainerProps = tProps & {
   getDecisionsByOrg: (id: number) => Promise<tThunk<tDecision[]>>,

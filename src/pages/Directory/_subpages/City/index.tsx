@@ -12,7 +12,7 @@ import {CityComponent} from './Component';
 class CityContainer extends PureComponent<tContainerProps, tState> {
   state = {
     category: '',
-    orgsBySearch: [],
+    orgsBySearch: [] as tOrg[],
   };
 
   constructor(props: tContainerProps) {
@@ -83,7 +83,7 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
                 <Paginate
                   count={9}
                   items={this.filterByCategory(orgsToRender)}
-                  match={this.props.match}
+                  page={this.props.match.params.page}
                   render={(itemsToRender: tOrg[]) => (
                     <CityComponent
                       categories={categories}
@@ -121,7 +121,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const City = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(CityContainer);
 
 export default City;

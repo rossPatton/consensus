@@ -7,14 +7,13 @@ class PaginateContainer extends PureComponent<tProps> {
   static defaultProps = {
     className: 'lsNone fx aiCtr jcCtr fs4 fw600',
     count: 10,
+    page: '1',
   };
 
   getSliceOfItems = (items: any[]) => {
     const newArray = [...items];
-
-    const {count, match: {params: {page}}} = this.props;
+    const {count, page} = this.props;
     const activePage = page ? parseInt(page, 10) : 1;
-
     const end = activePage * count;
     const start = end - count;
 
@@ -32,7 +31,7 @@ class PaginateContainer extends PureComponent<tProps> {
     } = this.props;
 
     const {params} = match;
-    const activePage = params.page ? parseInt(params.page, 0) : 1;
+    const activePage = params.page ? parseInt(params.page, 10) : 1;
 
     // a _.range equivalent. sort of
     const pageCount = Math.ceil(items.length / count);
@@ -77,5 +76,5 @@ class PaginateContainer extends PureComponent<tProps> {
   }
 }
 
-// @ts-ignore
-export const Paginate = withRouter(PaginateContainer);
+const Paginate = withRouter(PaginateContainer);
+export default Paginate;

@@ -79,7 +79,7 @@ class MembersContainer extends Component<tContainerProps, tState> {
     return (
       <Paginate
         items={usersToRender}
-        match={this.props.match}
+        page={this.props.match.params.page}
         render={(itemsToRender: tUser[]) => (
           <MembersComponent
             deleteUserByOrg={this.deleteUserByOrg}
@@ -109,7 +109,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const Members = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(MembersContainer);
 
 export default Members;

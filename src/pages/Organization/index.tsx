@@ -50,7 +50,7 @@ class OrganizationContainer extends Component<tContainerProps> {
               location={location}
               match={match}
               org={org}
-              role={role}
+              role={role as tRole} // unsure why this errors but should be ok?
               session={this.props.session}
               usersByOrg={usersByOrg}
             />
@@ -76,7 +76,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const Organization = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(OrganizationContainer);
 
 // page level components need to be default exports for code-splitting /shrug

@@ -16,7 +16,7 @@ class RegionContainer extends PureComponent<tContainerProps> {
   }
 
   state = {
-    citiesBySearch: [],
+    citiesBySearch: [] as tCity[],
   };
 
   onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,7 +95,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const Region = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(RegionContainer);
 
 export default Region;

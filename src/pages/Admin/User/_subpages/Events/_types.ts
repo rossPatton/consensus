@@ -19,7 +19,7 @@ export type tComponentProps = tProps & {
 };
 
 export type tContainerProps = tProps & {
-  match: match,
+  match: match & {params: {page?: string}},
   getEventsByUser: () => void,
   session: tSession,
 };
