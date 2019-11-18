@@ -2,9 +2,8 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {Paginate} from '../../../../../containers';
+import {Paginate, Search} from '../../../../../containers';
 import {deleteOrgByUser, getOrgsBySession} from '../../../../../redux';
-import {fuzzFilterList} from '../../../../../utils';
 import {tContainerProps, tOrgWithRole, tState, tStore} from './_types';
 import {MembershipsComponent} from './Component';
 
@@ -24,19 +23,6 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
     this.props.deleteOrgByUser({accountId, orgId});
   }
 
-  onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    ev.preventDefault();
-
-    const filteredList = fuzzFilterList({
-      input: this.props.orgs || [],
-      search: ev.currentTarget.value,
-    });
-
-    this.setState({
-      orgs: filteredList,
-    });
-  }
-
   sortOrgs(orgs: tOrgWithRole[]) {
     return orgs.sort((a, b) => {
       const aIsAdmin = a.role === 'facilitator';
@@ -53,14 +39,20 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
       : this.props.orgs;
 
     return (
-      <Paginate
+      <Search
+        key="name"
         items={orgsToRender}
-        page={this.props.match.params.page}
-        render={(itemsToRender: tOrgWithRole[]) => (
-          <MembershipsComponent
-            deleteOrgByUser={this.deleteOrgByUser}
-            onSearchChange={this.onSearchChange}
-            orgs={this.sortOrgs(itemsToRender)}
+        render={(searchProps: any) => (
+          <Paginate
+            items={searchProps.items}
+            page={this.props.match.params.page}
+            render={(itemsToRender: tOrgWithRole[]) => (
+              <MembershipsComponent
+                deleteOrgByUser={this.deleteOrgByUser}
+                onSearchChange={searchProps.onSearchChange}
+                orgs={this.sortOrgs(itemsToRender)}
+              />
+            )}
           />
         )}
       />

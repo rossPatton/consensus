@@ -33,9 +33,9 @@ export const DecisionsComponent = memo((props: tComponentProps) => (
       <div>
         Filter by type
         <select
-          value={props.filterType}
-          onBlur={props.onTypeFilterChange}
-          onChange={props.onTypeFilterChange}>
+          value={props.decisionFilter}
+          onBlur={props.onDecisionTypeChange}
+          onChange={props.onDecisionTypeChange}>
           <option value="n/a">
             All Decisions
           </option>
@@ -48,6 +48,6 @@ export const DecisionsComponent = memo((props: tComponentProps) => (
         </select>
       </div>
     </div>
-    <Decisions decisions={props.decisions} />
+    <Decisions decisions={props.items} match={props.match} />
   </>
 ));

@@ -1,3 +1,5 @@
+import {match} from 'react-router';
+
 export type tProps = {
   events: tEvent[],
   // if user is an admin, they can edit events
@@ -9,6 +11,7 @@ export type tProps = {
 
 export type tContainerProps = tProps & {
   deleteEvent: (query: tIdQuery) => void,
+  match: match & {params: any},
 };
 
 export type tComponentProps = tProps & {

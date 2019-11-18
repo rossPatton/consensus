@@ -1,25 +1,20 @@
 import qs from 'querystring';
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {Dispatch} from 'redux';
 
 import {Helmet} from '../../../../components';
-import {Paginate, Search} from '../../../../containers';
+import {DecisionTypeFilter, Search} from '../../../../containers';
 import {getDecisionsByOrg} from '../../../../redux';
-import {tContainerProps, tState, tStore} from './_types';
+import {tContainerProps, tStore} from './_types';
 import {DecisionsComponent} from './Component';
 
-class DecisionsContainer extends PureComponent<tContainerProps, tState> {
+class DecisionsContainer extends Component<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     this.getDecisions();
   }
-
-  state = {
-    decisions: [] as tDecision[],
-    typeFilter: 'n/a' as tDecisionType,
-  };
 
   componentDidUpdate() {
     this.getDecisions();
@@ -37,39 +32,12 @@ class DecisionsContainer extends PureComponent<tContainerProps, tState> {
       isClosed,
       limit: -1,
       offset,
-      type: this.state.typeFilter,
-    });
-  }
-
-  filter = (ds: tDecision[]) => {
-    const {typeFilter} = this.state;
-    if (typeFilter === 'n/a') return ds;
-
-    // only 2 types atm, easy comparison
-    const isApproval = typeFilter === 'Approval';
-    return ds.filter(d => {
-      if (isApproval) return d.type === 'Approval';
-      return d.type !== 'Approval';
-    });
-  };
-
-  onTypeFilterChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
-    ev.preventDefault();
-    this.setState({
-      typeFilter: ev.currentTarget.value as tDecisionType,
     });
   }
 
   render() {
     const {location} = this.props;
     const query = qs.parse(location.search.replace('?', ''));
-    const isClosed = query.isClosed === 'true';
-
-    const decisionsToRender = this.filter(
-      this.state.decisions.length > 0
-        ? this.state.decisions
-        : this.props.decisions,
-    );
 
     return (
       <>
@@ -84,20 +52,19 @@ class DecisionsContainer extends PureComponent<tContainerProps, tState> {
             { property: 'og:description', content: '' },
           ]}
         />
-        <Search
-          items={decisionsToRender}
-          render={(searchProps: any) => (
-            <Paginate
-              items={searchProps.items}
-              page={this.props.match.params.page}
-              render={(itemsToRender: tDecision[]) => (
+        <DecisionTypeFilter
+          items={this.props.decisions}
+          render={(decisionTypeProps: any) => (
+            <Search
+              items={decisionTypeProps.items}
+              render={(searchProps: any) => (
                 <DecisionsComponent
-                  decisions={itemsToRender}
-                  filterType={this.state.typeFilter}
-                  isClosed={isClosed}
+                  {...decisionTypeProps}
+                  {...searchProps}
+                  isClosed={query.isClosed === 'true'}
+                  match={this.props.match}
                   pathname={location.pathname}
-                  onTypeFilterChange={this.onTypeFilterChange}
-                  onSearchChange={searchProps.onSearchChange}
+                  role={this.props.role}
                 />
               )}
             />

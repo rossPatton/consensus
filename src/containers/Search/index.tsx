@@ -6,19 +6,28 @@ import {tProps, tState} from './_types';
 export default class Search extends PureComponent<tProps, tState> {
   static defaultProps = {
     items: [] as any[],
+    key: 'title',
   };
 
-  state = {
+  public state = {
     items: this.props.items,
   };
 
-  onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  public onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
+
+    const search = ev.currentTarget.value;
+
+    if (!search) {
+      return this.setState({
+        items: this.props.items,
+      });
+    }
 
     const filteredList = fuzzFilterList({
       input: this.props.items || [],
-      key: 'title',
-      search: ev.currentTarget.value,
+      key: this.props.searchKey,
+      search,
     });
 
     this.setState({

@@ -83,17 +83,17 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   {dayJS(ev.date).format('ddd MMM DD, h:mmA')}
                 </time>
                 {!props.tiny && (
-                <>
-                  <span className="mR1">@</span>
-                  {ev.locationLink && (
-                    <ExternalLink
-                      noFollow
-                      className="mR1"
-                      to={ev.locationLink}>
-                      {ev.location}
-                    </ExternalLink>
-                  )}
-                </>
+                  <>
+                    <span className="mR1">@</span>
+                    {ev.locationLink && (
+                      <ExternalLink
+                        noFollow
+                        className="mR1"
+                        to={ev.locationLink}>
+                        {ev.location}
+                      </ExternalLink>
+                    )}
+                  </>
                 )}
                 {!ev.locationLink && ev.location}
               </div>
@@ -114,9 +114,12 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 })}>
                 <EventPrivacy isPrivate={ev.isPrivate} />
                 <RSVP event={ev} role={props.role} />
-                <Link to="filler" className="mR3">
-                  {ev.attendees} {pluralize('attendees', ev.attendees)}
-                </Link>
+                {ev.attendees === 0 && 'Be the first to RSVP to this event'}
+                {ev.attendees > 0 && (
+                  <Link to="filler" className="mR3">
+                    {ev.attendees} {pluralize('attendees', ev.attendees)}
+                  </Link>
+                )}
               </div>
             </div>
           </div>

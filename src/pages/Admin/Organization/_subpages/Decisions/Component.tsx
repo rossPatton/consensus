@@ -18,6 +18,6 @@ export const DecisionsComponent = memo((props: tComponentProps) => (
         placeholder="Search for a decision by title"
       />
     </label>
-    <Decisions decisions={props.decisions} />
+    <Decisions decisions={props.decisions} match={props.match} />
   </>
 ));

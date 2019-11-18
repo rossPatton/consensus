@@ -19,5 +19,6 @@ export type tProps = {
 export type tComponentProps = {
   decision: tDecision,
   decisions: tDecision[],
+  match: match & { params: { id: number } },
 };
 

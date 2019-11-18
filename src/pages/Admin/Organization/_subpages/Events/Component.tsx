@@ -24,13 +24,13 @@ export const EventsComponent = memo((props: tComponentProps) => (
           onBlur={props.onPrivacyFilterChange}
           onChange={props.onPrivacyFilterChange}>
           <option value="n/a">
-            Public & Private Events
+            All Events
           </option>
           <option value="private">
-            Private Events Only
+            Private Events
           </option>
           <option value="public">
-            Public Events Only
+            Public Events
           </option>
         </select>
       </div>
@@ -52,7 +52,6 @@ export const EventsComponent = memo((props: tComponentProps) => (
       </div>
     </div>
     {/* eslint-disable */}
-    <Events events={props.events} role="admin" />
-    {/* eslint-enable */}
+    <Events events={props.events} match={props.match} role="admin" />
   </>
 ));

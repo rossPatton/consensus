@@ -2,9 +2,8 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {Paginate} from '../../../../../containers';
+import {Search} from '../../../../../containers';
 import {getDecisionsByOrg} from '../../../../../redux';
-import {fuzzFilterList} from '../../../../../utils';
 import {tContainerProps} from './_types';
 import {DecisionsComponent} from './Component';
 
@@ -22,37 +21,15 @@ class DecisionsContainer extends PureComponent<tContainerProps> {
     });
   }
 
-  state = {
-    decisions: this.props.decisions,
-  };
-
-  onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    ev.preventDefault();
-
-    const filteredList = fuzzFilterList({
-      input: this.props.decisions || [],
-      key: 'title',
-      search: ev.currentTarget.value,
-    });
-
-    this.setState({
-      decisions: filteredList,
-    });
-  }
-
   render() {
-    const decisionsToRender = this.state.decisions.length > 0
-      ? this.state.decisions
-      : this.props.decisions;
-
     return (
-      <Paginate
-        items={decisionsToRender}
-        page={this.props.match.params.page}
-        render={(itemsToRender: tDecision[]) => (
+      <Search
+        items={this.props.decisions}
+        render={(searchProps: any) => (
           <DecisionsComponent
-            decisions={itemsToRender}
-            onSearchChange={this.onSearchChange}
+            {...searchProps}
+            decisions={searchProps.items}
+            match={this.props.match}
           />
         )}
       />

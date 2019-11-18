@@ -1,28 +1,19 @@
-import loglevel from 'loglevel';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {Paginate} from '../../../../../containers';
+import {Paginate, Search} from '../../../../../containers';
 import {deleteUserByOrg, getUsersByOrg, patchUserByOrg} from '../../../../../redux';
-import {fuzzFilterList} from '../../../../../utils';
 import {tContainerProps, tState, tStore} from './_types';
 import {MembersComponent} from './Component';
 
 class MembersContainer extends Component<tContainerProps, tState> {
   state = {
     role: 'n/a' as tRole,
-    users: this.props.usersByOrg.users,
   };
 
   componentDidMount() {
-    this.props.getUsersByOrg({id: this.props.session.profile.id})
-      .then((res: any) => {
-        return this.setState({
-          users: res.payload.users,
-        });
-      })
-      .catch(loglevel.error);
+    this.props.getUsersByOrg({id: this.props.session.profile.id});
   }
 
   deleteUserByOrg = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {
@@ -44,28 +35,6 @@ class MembersContainer extends Component<tContainerProps, tState> {
     });
   }
 
-  onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    ev.preventDefault();
-
-    const search = ev.currentTarget.value;
-
-    if (!search) {
-      return this.setState({
-        users: this.props.usersByOrg.users,
-      });
-    }
-
-    const filteredList = fuzzFilterList({
-      input: this.props.usersByOrg.users,
-      key: 'username',
-      search,
-    });
-
-    this.setState({
-      users: filteredList,
-    });
-  }
-
   setRole = (ev: React.ChangeEvent<HTMLSelectElement>, userId: number) => {
     ev.preventDefault();
     const role = ev.currentTarget.value as tRole;
@@ -74,20 +43,26 @@ class MembersContainer extends Component<tContainerProps, tState> {
   }
 
   render() {
-    const usersToRender = this.filterByRole(this.state.users);
+    const usersToRender = this.filterByRole(this.props.usersByOrg.users);
 
     return (
-      <Paginate
+      <Search
+        searchKey="username"
         items={usersToRender}
-        page={this.props.match.params.page}
-        render={(itemsToRender: tUser[]) => (
-          <MembersComponent
-            deleteUserByOrg={this.deleteUserByOrg}
-            onFilterChange={this.onFilterChange}
-            onSearchChange={this.onSearchChange}
-            setRole={this.setRole}
-            users={itemsToRender}
-            userTotal={this.props.usersByOrg.userTotal}
+        render={(searchProps: any) => (
+          <Paginate
+            items={searchProps.items}
+            page={this.props.match.params.page}
+            render={(itemsToRender: tUser[]) => (
+              <MembersComponent
+                deleteUserByOrg={this.deleteUserByOrg}
+                onFilterChange={this.onFilterChange}
+                onSearchChange={searchProps.onSearchChange}
+                setRole={this.setRole}
+                users={itemsToRender}
+                userTotal={this.props.usersByOrg.userTotal}
+              />
+            )}
           />
         )}
       />

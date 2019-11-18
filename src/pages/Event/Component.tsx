@@ -4,9 +4,9 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {EventPrivacy, Events, ExternalLink, RSVP} from '../../components';
-import {tComponentProps} from './_types';
+import {tProps} from './_types';
 
-export const EventComponent = memo(({event, events}: tComponentProps) => (
+export const EventComponent = memo(({event, events, match}: tProps) => (
   <div className="contain mT4 mB5">
     <small className="fx fw600 lh1 mB3">
       <time className="mR1" dateTime={event.date}>
@@ -60,7 +60,11 @@ export const EventComponent = memo(({event, events}: tComponentProps) => (
             <h2 className="fs5 mB3 ffLab lh1">
             More by <Link to={`/org/${event.orgId}/overview`}>{event.orgName}</Link>
             </h2>
-            <Events events={events} tiny />
+            <Events
+              tiny
+              events={events}
+              match={match}
+            />
           </>
         )}
       </aside>

@@ -37,6 +37,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
     </div>
     <Events
       events={props.events}
+      match={props.match}
     />
   </>
 ));

@@ -63,6 +63,7 @@ class DecisionContainer extends Component<tProps> {
             <DecisionComponent
               decision={this.props.decision}
               decisions={this.props.decisions}
+              match={this.props.match}
             />
           )}
         />

@@ -4,21 +4,16 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
 import {Helmet} from '../../../../components';
-import {Paginate, Search} from '../../../../containers';
+import {PrivacyFilter, Search} from '../../../../containers';
 import {getEvents} from '../../../../redux';
-import {tContainerProps, tState, tStore} from './_types';
+import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
 
-class EventsContainer extends PureComponent<tContainerProps, tState> {
+class EventsContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     this.getEvents();
   }
-
-  state = {
-    events: [] as tEvent[],
-    privacyFilter: 'n/a' as tPrivacyFilter,
-  };
 
   componentDidUpdate() {
     this.getEvents();
@@ -42,31 +37,9 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
     });
   }
 
-  filter = (evs: tEvent[]) => {
-    const {privacyFilter} = this.state;
-    if (privacyFilter === 'n/a') return evs;
-
-    const isPrivate = privacyFilter === 'private';
-    return evs.filter(ev => ev.isPrivate === isPrivate);
-  };
-
-  onPrivacyFilterChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
-    ev.preventDefault();
-    this.setState({
-      privacyFilter: ev.currentTarget.value as tPrivacyFilter,
-    });
-  }
-
   render() {
     const {location} = this.props;
     const query = qs.parse(location.search.replace('?', ''));
-    const showPast = query.showPast === 'true';
-
-    const eventsToRender = this.filter(
-      this.state.events.length > 0
-        ? this.state.events
-        : this.props.events,
-    );
 
     return (
       <>
@@ -80,21 +53,20 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
             { property: 'og:description', content: '' },
           ]}
         />
-        <Search
-          items={eventsToRender}
-          render={(searchProps: any) => (
-            <Paginate
-              items={searchProps.items}
-              page={this.props.match.params.page}
-              render={(itemsToRender: tEvent[]) => (
+        <PrivacyFilter
+          items={this.props.events}
+          render={(privacyProps: any) => (
+            <Search
+              items={privacyProps.items}
+              render={(searchProps: any) => (
                 <EventsComponent
-                  events={itemsToRender}
-                  filterType={this.state.privacyFilter}
+                  {...privacyProps}
+                  {...searchProps}
+                  events={searchProps.items}
+                  match={this.props.match}
                   pathname={location.pathname}
                   role={this.props.role}
-                  showPast={showPast}
-                  onPrivacyFilterChange={this.onPrivacyFilterChange}
-                  onSearchChange={searchProps.onSearchChange}
+                  showPast={query.showPast === 'true'}
                 />
               )}
             />

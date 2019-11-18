@@ -2,6 +2,7 @@ import {tAdminSections} from '../../../_types';
 
 export type tProps = {
   events: tEvent[],
+  match: tAdminSections,
 };
 
 export type tComponentProps = tProps & {
@@ -13,13 +14,10 @@ export type tComponentProps = tProps & {
 export type tContainerProps = tProps & {
   getEvents: (query: tIdQuery) => Promise<tThunk<tEvent[]>>,
   isLoading: boolean,
-  match: tAdminSections,
   session: tSession,
 };
 
 export type tState = {
-  events: tEvent[]
-  privacyFilter: tPrivacyFilter,
   publishedFilter: tPublishedFilter,
 };
 

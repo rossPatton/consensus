@@ -33,7 +33,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
         <div>
           Filter by privacy
           <select
-            value={props.filterType}
+            value={props.privacyFilter}
             onBlur={props.onPrivacyFilterChange}
             onChange={props.onPrivacyFilterChange}>
             <option value="n/a">
@@ -49,6 +49,10 @@ export const EventsComponent = memo((props: tComponentProps) => (
         </div>
       )}
     </div>
-    <Events events={props.events} role={props.role} />
+    <Events
+      events={props.events}
+      match={props.match}
+      role={props.role}
+    />
   </>
 ));

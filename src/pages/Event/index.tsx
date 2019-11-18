@@ -6,11 +6,11 @@ import {Dispatch} from 'redux';
 import {GenericLoader, Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
 import {getEventById, getEvents} from '../../redux';
-import {tProps, tStore} from './_types';
+import {tContainerProps, tStore} from './_types';
 import {EventComponent} from './Component';
 
-class EventContainer extends Component<tProps> {
-  constructor(props: tProps) {
+class EventContainer extends Component<tContainerProps> {
+  constructor(props: tContainerProps) {
     super(props);
     const {id} = props.match.params;
 
@@ -25,7 +25,7 @@ class EventContainer extends Component<tProps> {
       .catch(loglevel.error);
   }
 
-  componentDidUpdate(nextProps: tProps) {
+  componentDidUpdate(nextProps: tContainerProps) {
     const routeChanged = nextProps.match.url !== this.props.match.url;
     if (routeChanged) {
       const {id} = this.props.match.params;
@@ -41,7 +41,7 @@ class EventContainer extends Component<tProps> {
     }
   }
 
-  shouldComponentUpdate(nextProps: tProps) {
+  shouldComponentUpdate(nextProps: tContainerProps) {
     const loadingFinished = nextProps.isLoading !== this.props.isLoading;
     const routeChanged = nextProps.match.url !== this.props.match.url;
     const eventsLoaded = nextProps.events.length !== this.props.events.length;
@@ -67,6 +67,7 @@ class EventContainer extends Component<tProps> {
             <EventComponent
               event={this.props.event}
               events={this.props.events}
+              match={this.props.match}
             />
           )}
         />

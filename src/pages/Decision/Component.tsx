@@ -11,7 +11,7 @@ import {
 } from './_components';
 import {tComponentProps} from './_types';
 
-export const DecisionComponent = memo(({decision, decisions}: tComponentProps) => (
+export const DecisionComponent = memo(({decision, decisions, match}: tComponentProps) => (
   <div className="contain mT4 mB5">
     <small className="fx fw600 lh1 mB3">
       <time className="mR1" dateTime={decision.date}>
@@ -68,7 +68,11 @@ export const DecisionComponent = memo(({decision, decisions}: tComponentProps) =
             <h2 className="fs5 mB3 ffLab lh1">
               More by <Link to={`/org/${decision.orgId}/overview`}>{decision.orgName}</Link>
             </h2>
-            <Decisions decisions={decisions} tiny />
+            <Decisions
+              tiny
+              decisions={decisions}
+              match={match}
+            />
           </>
         )}
       </aside>

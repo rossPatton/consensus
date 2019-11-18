@@ -1,6 +1,9 @@
+import {match} from 'react-router';
+
 export type tComponentProps = {
   decisions: tDecision[],
   events: tEvent[],
+  match: match & {params: tOrgRouteParams},
   org: tOrg, // inherited
   role: tRole,
 };

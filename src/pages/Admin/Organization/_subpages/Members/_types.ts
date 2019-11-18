@@ -6,7 +6,6 @@ export type tStore = {
 
 export type tState = {
   role: tRole,
-  users: tUser[],
 };
 
 export type tRoleOpts = {

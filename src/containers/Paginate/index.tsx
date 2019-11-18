@@ -25,7 +25,7 @@ class PaginateContainer extends PureComponent<tProps> {
     const {
       className,
       count,
-      items,
+      items = [],
       location: {pathname, search},
       match,
     } = this.props;

@@ -6,5 +6,6 @@ export interface tState {
 }
 
 export interface tProps extends tState {
+  searchKey?: string,
   render: (props: tRenderProps) => React.ReactNode,
 }

@@ -1,7 +1,10 @@
 import {match} from 'react-router-dom';
 
+import {tAdminSections} from '../../../_types';
+
 export type tProps = {
   events: tEvent[],
+  match: tAdminSections,
 };
 
 export type tState = {

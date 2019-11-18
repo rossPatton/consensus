@@ -7,6 +7,8 @@ import {getDecisionsByOrg, getEvents, getUsersByOrg} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {OverviewComponent} from './Component';
 
+// TODO use context for match cause passing it around everywhere is annoying
+
 class OverviewContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
@@ -48,6 +50,7 @@ class OverviewContainer extends PureComponent<tContainerProps> {
             <OverviewComponent
               decisions={this.props.decisions.slice(0, 3)}
               events={this.props.events.slice(0, 3)}
+              match={this.props.match}
               org={this.props.org}
               role={this.props.role}
             />

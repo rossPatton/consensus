@@ -9,14 +9,12 @@ export type tStore = {
 export type tProps = {
   event: tEvent,
   events: tEvent[],
-  getEventById: (query: tIdQuery) => Promise<any>,
-  getEvents: (query: tIdQuery) => Promise<any>,
-  isLoading: boolean,
   match: match & { params: { id: number } },
 };
 
-export type tComponentProps = {
-  event: tEvent,
-  events: tEvent[],
-};
+export interface tContainerProps extends tProps {
+  getEventById: (query: tIdQuery) => Promise<any>,
+  getEvents: (query: tIdQuery) => Promise<any>,
+  isLoading: boolean,
+}
 

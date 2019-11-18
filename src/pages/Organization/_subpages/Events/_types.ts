@@ -1,35 +1,30 @@
 import {Location} from 'history';
 import {match} from 'react-router';
 
-export type tProps = {
+interface tBaseProps {
   events: tEvent[],
+  match: match & {params: tOrgRouteParams},
   role: tRole,
-};
+}
 
-export type tState = {
-  events: tEvent[],
-  privacyFilter: tPrivacyFilter,
-};
-
-export type tComponentProps = tProps & {
-  filterType: tPrivacyFilter,
+export interface tComponentProps extends tBaseProps {
   onPrivacyFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   pathname: string,
+  privacyFilter: tPrivacyFilter,
   showPast: boolean,
-};
+}
 
 type tIdQueryExtend = tIdQuery & {isDraft: boolean, showPast: boolean};
-export type tContainerProps = tProps & {
+export interface tContainerProps extends tBaseProps {
   getEvents: (query: tIdQueryExtend) => Promise<tThunk<tEvent[]>>,
   isLoading: boolean,
   location: Location,
-  match: match & {params: tOrgRouteParams},
   org: tOrg,
   session: tSession,
-};
+}
 
-export type tStore = {
+export interface tStore {
   events: tThunk<tEvent[]>,
   isLoading: boolean,
-};
+}
