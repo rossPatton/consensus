@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {RoleFilter, Search} from '../../../../../containers';
-import {deleteUserByOrg, getUsersByOrg, patchUserByOrg} from '../../../../../redux';
-import {tContainerProps, tState, tStore} from './_types';
+import {RoleFilter, Search} from '../../../../containers';
+import {deleteUserByOrg, getUsersByOrg, patchUserByOrg} from '../../../../redux';
+import {/* tContainerProps, tState,*/ tStore} from './_types';
 import {MembersComponent} from './Component';
 
-class MembersContainer extends Component<tContainerProps, tState> {
+class MembersContainer extends Component<any, any> {
   state = {
     role: 'n/a' as tRole,
   };

@@ -1,8 +1,11 @@
 import {tAdminSections} from '../../../_types';
 
 export type tComponentProps = {
+  decisionFilter: tDecisionType,
   decisions: tDecision[],
+  items: tDecision[],
   match: tAdminSections,
+  onDecisionTypeChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
 }
 

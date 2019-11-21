@@ -20,18 +20,17 @@ class EventsContainer extends PureComponent<tContainerProps> {
   }
 
   private getEvents = () => {
-    const {location, match: {params: {page = 0} = {}}, org} = this.props;
-    const query = qs.parse(location.search.replace('?', ''));
+    const {match: {params: {page = 0} = {}}, org} = this.props;
+    // const query = qs.parse(location.search.replace('?', ''));
     // only show public events if user is not signed in
     const isPublic = !this.props.session.isAuthenticated;
     const offset = page ? parseInt(page, 10) : 0;
-    const showPast = query.showPast === 'true';
+    // const showPast = query.showPast === 'true';
 
     this.props.getEvents({
       id: org.id,
       isDraft: false,
       isPublic,
-      showPast,
       limit: -1,
       offset,
     });

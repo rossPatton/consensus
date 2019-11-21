@@ -51,3 +51,7 @@ export const RSVP = loadable(() =>
 export const ScrollToTop = loadable(() =>
   import(/* webpackChunkName: "ScrollToTop" */'./ScrollToTop')
 );
+
+export const Users = loadable(() =>
+  import(/* webpackChunkName: "Users" */'./Users')
+);

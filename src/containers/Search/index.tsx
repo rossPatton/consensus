@@ -1,16 +1,16 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 
 import {fuzzFilterList} from '../../utils';
 import {tProps, tState} from './_types';
 
-export default class Search extends PureComponent<tProps, tState> {
+export default class Search extends Component<tProps, tState> {
   static defaultProps = {
     items: [] as any[],
-    key: 'title',
+    searchKey: 'title',
   };
 
   public state = {
-    items: this.props.items,
+    items: [] as any[],
   };
 
   public onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {

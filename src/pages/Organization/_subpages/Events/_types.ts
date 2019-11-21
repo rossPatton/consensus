@@ -15,7 +15,7 @@ export interface tComponentProps extends tBaseProps {
   showPast: boolean,
 }
 
-type tIdQueryExtend = tIdQuery & {isDraft: boolean, showPast: boolean};
+type tIdQueryExtend = tIdQuery & {isDraft: boolean};
 export interface tContainerProps extends tBaseProps {
   getEvents: (query: tIdQueryExtend) => Promise<tThunk<tEvent[]>>,
   isLoading: boolean,

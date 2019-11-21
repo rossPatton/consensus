@@ -21,15 +21,14 @@ class DecisionsContainer extends Component<tContainerProps> {
   }
 
   private getDecisions = () => {
-    const {location, match: { params: { page = 0 } = {} }, org} = this.props;
-    const query = qs.parse(location.search.replace('?', ''));
-    const isClosed = query.isClosed === 'true';
+    const {match: { params: { page = 0 } = {} }, org} = this.props;
+    // const query = qs.parse(location.search.replace('?', ''));
+    // const isClosed = query.isClosed === 'true';
     const offset = page ? parseInt(page, 10) : 0;
 
     // get active decisions only
     this.props.getDecisionsByOrg({
       id: org.id,
-      isClosed,
       limit: -1,
       offset,
     });

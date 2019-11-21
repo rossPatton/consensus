@@ -1,20 +1,27 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {Search} from '../../../../../containers';
+import {DecisionTypeFilter, Search} from '../../../../../containers';
 import {getDecisionsByOrg} from '../../../../../redux';
 import {tContainerProps} from './_types';
 import {DecisionsComponent} from './Component';
 
-class DecisionsContainer extends PureComponent<tContainerProps> {
+class DecisionsContainer extends Component<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
+    this.getDecisions();
+  }
 
-    const {match: {params: {page = 0} = {}}, session} = props;
+  componentDidMount() {
+    this.getDecisions();
+  }
+
+  private getDecisions() {
+    const {match: {params: {page = 0} = {}}, session} = this.props;
     const offset = page ? parseInt(page, 10) : 0;
 
-    props.getDecisions({
+    this.props.getDecisions({
       id: session.profile.id,
       limit: -1,
       offset,
@@ -26,10 +33,16 @@ class DecisionsContainer extends PureComponent<tContainerProps> {
       <Search
         items={this.props.decisions}
         render={(searchProps: any) => (
-          <DecisionsComponent
-            {...searchProps}
-            decisions={searchProps.items}
-            match={this.props.match}
+          <DecisionTypeFilter
+            items={searchProps.items}
+            render={(decisionTypeProps: any) => (
+              <DecisionsComponent
+                {...decisionTypeProps}
+                {...searchProps}
+                decisions={decisionTypeProps.items}
+                match={this.props.match}
+              />
+            )}
           />
         )}
       />

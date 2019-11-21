@@ -15,9 +15,8 @@ export type tComponentProps = tProps & {
   pathname: string,
 };
 
-type tIdQueryExtend = tIdQuery & {isClosed: boolean};
 export type tContainerProps = tProps & {
-  getDecisionsByOrg: (query: tIdQueryExtend) => Promise<tThunk<tDecision[]>>,
+  getDecisionsByOrg: (query: tIdQuery) => Promise<tThunk<tDecision[]>>,
   isLoading: boolean,
   location: Location,
   org: tOrg,

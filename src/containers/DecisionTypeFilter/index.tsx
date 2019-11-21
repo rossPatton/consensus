@@ -1,9 +1,9 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 
 import {tProps, tState} from './_types';
 
 // for use with events
-export default class DecisionTypeFilter extends PureComponent<tProps, tState> {
+export default class DecisionTypeFilter extends Component<tProps, tState> {
   public state = {
     decisionFilter: 'n/a' as tDecisionType,
   };

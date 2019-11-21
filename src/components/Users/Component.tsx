@@ -1,0 +1,77 @@
+import cx from 'classnames';
+import _ from 'lodash';
+import React, {memo} from 'react';
+
+// import {Link} from 'react-router-dom';
+import {tComponentProps} from './_types';
+
+export const UsersComponent = memo((props: tComponentProps) => {
+  const {users} = props;
+  const roles: tRole[] = ['member', 'facilitator'];
+
+  return (
+    <ul>
+      {users.map((user: tUser, i) => (
+        <li
+          key={i}
+          className="brdA1 br8 mB3 trans2">
+          <div
+            className={cx({
+              'fx fs6 p2 pL3 pR3 brdB1': true,
+              bgYellowLite: user.role === 'member',
+              bgGreenLite: user.role === 'facilitator',
+            })}>
+            <div className="col ttCap mR3">
+              {user.role}
+            </div>
+            <div className="col taR">
+              <button
+                className="bgWhite"
+                onClick={ev => props.deleteUserByOrg(ev, user.id)}>
+                  Remove this user
+              </button>
+            </div>
+          </div>
+          <div className="p3 fx">
+            <h3>
+              <div className="ffLab fs5">Username:</div>
+              {user.username}
+            </h3>
+            {user.name && (
+              <h3>
+                <div className="ffLab fs5">Name:</div>
+                {user.name}
+              </h3>
+            )}
+            <div className="row">
+              <h3 className="ffLab fs5 ttCap mB2">
+                Current role: {user.role}
+              </h3>
+              <select
+                className="row ffLab ttCap"
+                value={user.role as string}
+                onChange={ev => props.setUserRole(ev, user.id)}
+              >
+                <option key="default" value={user.role as string}>
+                  Choose a new role
+                </option>
+                {roles.map(role => (
+                  role === user.role
+                    ? null
+                    : (
+                      <option
+                        className="ttCap"
+                        key={role as string}
+                        value={role as string}>
+                        {role}
+                      </option>
+                    )
+                ))}
+              </select>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+});

@@ -26,7 +26,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
               })}>
               <div className="col mR2 fx aiCtr">
                 <Link
-                  to={`createEvent?${objToQueryString(ev)}`}
+                  to={`/org/${ev.orgId}/createEvent?${objToQueryString(ev)}`}
                   className="bgWhite p1 pL2 pR2 hvrBgGrey1 trans1 fw600 br4 lh1 noUnderline brdA1">
                   <span
                     role="img"

@@ -1,3 +1,4 @@
+import loglevel from 'loglevel';
 import React, {ErrorInfo, PureComponent} from 'react';
 import {Redirect} from 'react-router-dom';
 
@@ -14,6 +15,7 @@ export default class ErrorBoundary extends PureComponent<any, tState> {
       hasError: true,
       info,
     });
+    loglevel.error(this.state);
     // TODO log to separate service, but only show user 500 page
   }
 

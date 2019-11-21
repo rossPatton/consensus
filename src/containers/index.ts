@@ -24,6 +24,9 @@ export const PrivacyFilter = loadable(() =>
   import(/* webpackChunkName: "PrivacyFilter" */'./PrivacyFilter'),
 );
 
+export const RoleFilter = loadable(() =>
+  import(/* webpackChunkName: "RoleFilter" */'./RoleFilter'),
+);
 
 export const Search = loadable(() =>
   import(/* webpackChunkName: "Search" */'./Search'),
