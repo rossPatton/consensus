@@ -7,16 +7,14 @@ import {Dispatch} from 'redux';
 import {Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
 import {authenticateSession, getRoles} from '../../redux';
-import {tProps, tState, tStateUnion} from './_types';
+import {tContainerProps, tState, tStateUnion} from './_types';
 import {LoginComponent} from './Component';
 
-class LoginContainer extends PureComponent<tProps, tState> {
+class LoginContainer extends PureComponent<tContainerProps, tState> {
   state = {
     isClient: false,
-    oLogin: '',
-    oPassword: '',
-    uLogin: '',
-    uPassword: '',
+    password: '',
+    username: '', // actually login in the DB, but passportjs expects 'username'
   };
 
   componentDidMount() {
@@ -26,22 +24,17 @@ class LoginContainer extends PureComponent<tProps, tState> {
     });
   }
 
-  // TODO is it safe to login on the client like this?
-
-  userLogin = async (ev: React.FormEvent<HTMLFormElement>) => {
+  login = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {uLogin: username, uPassword: password} = this.state;
+    const {username, password} = this.state;
     return this.props
       .authenticateSession({username, password})
       // @ts-ignore
-      .then(res => this.props.getRoles({id: res.payload.id as number}))
+      .then(res => {
+        if (res.payload.orgId) return null;
+        return this.props.getRoles({id: res.payload.id as number});
+      })
       .catch(loglevel.error);
-  }
-
-  orgLogin = async (ev: React.FormEvent<HTMLFormElement>) => {
-    ev.preventDefault();
-    const {oLogin: username, oPassword: password} = this.state;
-    return this.props.authenticateSession({username, password});
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
@@ -71,8 +64,7 @@ class LoginContainer extends PureComponent<tProps, tState> {
         {!session.isAuthenticated && (
           <LoginComponent
             {...this.state}
-            userLogin={this.userLogin}
-            orgLogin={this.orgLogin}
+            login={this.login}
             updateState={this.updateState}
           />
         )}
@@ -87,7 +79,7 @@ const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
-  getRoles: (query: any) => dispatch(getRoles(query)),
+  getRoles: (query: tIdQuery) => dispatch(getRoles(query)),
 });
 
 const Login = connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

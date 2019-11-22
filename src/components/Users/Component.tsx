@@ -1,48 +1,44 @@
 import cx from 'classnames';
 import _ from 'lodash';
 import React, {memo} from 'react';
+import {Link} from 'react-router-dom';
 
-// import {Link} from 'react-router-dom';
 import {tComponentProps} from './_types';
+const roles: tRole[] = ['member', 'facilitator'];
 
-export const UsersComponent = memo((props: tComponentProps) => {
-  const {users} = props;
-  const roles: tRole[] = ['member', 'facilitator'];
-
-  return (
-    <ul>
-      {users.map((user: tUser, i) => (
-        <li
-          key={i}
-          className="brdA1 br8 mB3 trans2">
-          <div
-            className={cx({
-              'fx fs6 p2 pL3 pR3 brdB1': true,
-              bgYellowLite: user.role === 'member',
-              bgGreenLite: user.role === 'facilitator',
-            })}>
-            <div className="col ttCap mR3">
-              {user.role}
-            </div>
+export const UsersComponent = memo((props: tComponentProps) => (
+  <ul>
+    {props.users.map((user: tUser, i) => (
+      <li
+        key={i}
+        className="brdA1 br8 mB3 trans2">
+        <div
+          className={cx({
+            'fx fs6 p2 pL3 pR3 brdB1': true,
+            bgYellowLite: user.role === 'member',
+            bgGreenLite: user.role === 'facilitator',
+          })}>
+          <div className="col ttCap mR3">
+            {user.role}
+          </div>
+          {props.sessionRole === 'admin' && (
             <div className="col taR">
               <button
                 className="bgWhite"
                 onClick={ev => props.deleteUserByOrg(ev, user.id)}>
-                  Remove this user
+                Remove this user
               </button>
             </div>
-          </div>
-          <div className="p3 fx">
-            <h3>
-              <div className="ffLab fs5">Username:</div>
+          )}
+        </div>
+        <div className="p3 fx">
+          <h3>
+            <div className="ffLab fs5">Username:</div>
+            <Link to={`/user/${user.id}`}>
               {user.username}
-            </h3>
-            {user.name && (
-              <h3>
-                <div className="ffLab fs5">Name:</div>
-                {user.name}
-              </h3>
-            )}
+            </Link>
+          </h3>
+          {props.sessionRole === 'admin' && (
             <div className="row">
               <h3 className="ffLab fs5 ttCap mB2">
                 Current role: {user.role}
@@ -69,9 +65,9 @@ export const UsersComponent = memo((props: tComponentProps) => {
                 ))}
               </select>
             </div>
-          </div>
-        </li>
-      ))}
-    </ul>
-  );
-});
+          )}
+        </div>
+      </li>
+    ))}
+  </ul>
+));

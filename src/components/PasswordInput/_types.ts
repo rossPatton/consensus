@@ -4,6 +4,7 @@ export type tProps = {
     password?: string[],
   },
   id: string,
+  hideRequiredMessage?: boolean,
   name?: string,
   newPassword?: boolean,
   onChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
@@ -13,10 +14,10 @@ export type tProps = {
   title?: string,
 };
 
-export type tComponentProps = tProps & {
+export interface tComponentProps extends tProps {
   showPW: boolean,
   togglePWVisibility: () => void,
-};
+}
 
 export type tState = {
   showPW: boolean,

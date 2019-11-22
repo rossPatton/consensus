@@ -23,27 +23,31 @@ export const UserBarComponent = memo((props: tComponentProps) => (
           session={props.session}
         />
       </li>
-      {props.usersByOrg.userTotal > 0 && (
-        <li className="mL1 mR2">
-          <Link
-            to="members"
-            title="CLick to see total member list">
-            {props.usersByOrg.userTotal} members total
-          </Link>
-        </li>
-      )}
-      {props.role && props.role !== 'member' && (
-        <ul className="fx col jcEnd fs6">
-          <li className="mR2 brdA1 p1 br4 bgWhite pL2 pR2 trans1">
-            <Link to="createEvent">
-              Create Event
+      {props.role
+        && props.usersByOrg.userTotal > 0
+        && (
+          <li className="mL1 mR2">
+            <Link
+              to="members"
+              title="Click to browse member list">
+              {props.usersByOrg.userTotal} members
             </Link>
           </li>
-          <li className="brdA1 p1 br4 bgWhite pL2 pR2 mR2">
-            Make a Decision
-          </li>
-        </ul>
-      )}
+        )}
+      {props.role
+        && props.role !== 'member'
+        && (
+          <ul className="fx col jcEnd fs6">
+            <li className="mR2 brdA1 p1 br4 bgWhite pL2 pR2 trans1">
+              <Link to="createEvent">
+              Create Event
+              </Link>
+            </li>
+            <li className="brdA1 p1 br4 bgWhite pL2 pR2 mR2">
+              Make a Decision
+            </li>
+          </ul>
+        )}
     </ul>
   </div>
 ));

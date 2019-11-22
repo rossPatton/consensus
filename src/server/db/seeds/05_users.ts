@@ -8,6 +8,7 @@ const createUser = async () => ({
   bio: faker.lorem.paragraphs(),
   email: faker.internet.exampleEmail(),
   name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+  privateName: faker.random.boolean(),
   phone: faker.phone.phoneNumber(),
   privateEmail: faker.random.boolean(),
   privateMemberships: faker.random.boolean(),
@@ -20,6 +21,7 @@ const createTestUser = async () => ({
   city: 3658, // New York City
   email: 'test@test.com',
   name: 'Test User',
+  privateName: false,
   phone: faker.phone.phoneNumber(),
   privateEmail: faker.random.boolean(),
   privateMemberships: faker.random.boolean(),

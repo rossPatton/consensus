@@ -1,4 +1,4 @@
-import {tAdminSections} from '../../../_types';
+// import {tAdminSections} from '../../../_types';
 
 export type tStore = {
   usersByOrg: tThunk<tUsersByOrg>,
@@ -15,7 +15,9 @@ export type tRoleOpts = {
 };
 
 export type tProps = {
-  match: tAdminSections,
+  match: any,
+  role: tRole,
+  org: tOrg,
 };
 
 export interface tContainerProps extends tProps {

@@ -7,6 +7,9 @@ exports.up = async (knex: Knex) => {
     // additional info that could be made public, but is private by default
     table.text('bio', 'longtext');
     table.string('name'); // real name
+    // if set to true, then name isn't visible to other users or org
+    table.boolean('privateName').notNullable().defaultTo(true);
+
     table.string('username').notNullable(); // public name
 
     // account recovery / verification

@@ -9,8 +9,8 @@ import {UsersComponent} from './Component';
 // this should be where the redux gets connected, etc
 class Users extends Component<tContainerProps> {
   render() {
-    const {match, /* role*/ users} = this.props;
-    // const isEditable = role === 'admin' || role === 'facilitator';
+    const {match, sessionRole, users} = this.props;
+    const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
 
     return (
       <Paginate
@@ -19,11 +19,10 @@ class Users extends Component<tContainerProps> {
         render={(usersToRender: tUser[]) => (
           <UsersComponent
             deleteUserByOrg={this.props.deleteUserByOrg}
+            isEditable={isEditable}
+            sessionRole={sessionRole}
             setUserRole={this.props.setUserRole}
             users={usersToRender}
-            isEditable
-            // role={role}
-            // tiny={this.props.tiny}
           />
         )}
       />

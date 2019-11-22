@@ -12,8 +12,8 @@ export type tState = {
 };
 
 export type tRoleOpts = {
-  role: tRole,
   orgId: number,
+  role: tRole,
   userId: number,
 };
 
@@ -21,12 +21,11 @@ type tProps = {
   deleteUserByOrg?: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
   setUserRole?: (ev: React.ChangeEvent<HTMLSelectElement>, id: number) => void,
   users: tUser[],
+  sessionRole: tRole, // to distinguish from user roles, and to shut up eslint
 }
 
 export interface tContainerProps extends tProps {
   match: tMatch,
-  // role: tRole,
-  // session: tSession,
 }
 
 export interface tComponentProps extends tProps {

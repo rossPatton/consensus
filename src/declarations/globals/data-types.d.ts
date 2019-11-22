@@ -100,13 +100,14 @@ declare type tOrgRouteParams = tDirectoryParams & {
 
 declare type tUser = {
   bio: string,
-  id: number,
   email: string,
+  id: number,
   name: string,
   privateEmail: boolean,
-  privateRSVP: boolean,
   privateMemberships: boolean,
+  privateName: boolean,
   privateProfile: boolean,
+  privateRSVP: boolean,
   role?: tRole,
   username: string,
 };

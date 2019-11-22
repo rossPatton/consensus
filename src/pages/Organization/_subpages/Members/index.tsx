@@ -42,6 +42,8 @@ class MembersContainer extends Component<any, any> {
                 {...searchProps}
                 deleteUserByOrg={this.deleteUserByOrg}
                 match={this.props.match}
+                org={this.props.org}
+                role={this.props.role}
                 setUserRole={this.setUserRole}
                 users={searchProps.items}
                 userTotal={this.props.usersByOrg.userTotal}

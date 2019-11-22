@@ -23,15 +23,8 @@ export default class RoleFilter extends PureComponent<tProps, tState> {
   }
 
   render() {
-    const items = this.filter(this.props.items);
-    console.dir('role filter render => ', {
-      items,
-      onRoleFilterChange: this.onChange,
-      roleFilter: this.state.roleFilter,
-    });
-
     return this.props.render({
-      items,
+      items: this.filter(this.props.items),
       onRoleFilterChange: this.onChange,
       roleFilter: this.state.roleFilter,
     });

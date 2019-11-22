@@ -14,7 +14,7 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
         <h3 className="ffLab fs5">
           {props.title || 'Password'}
         </h3>
-        {!props.newPassword && (
+        {(!props.newPassword && !props.hideRequiredMessage) && (
           <p className="fs5 copyBlack mB1">
             Required to make any changes to your account or profile.
           </p>
