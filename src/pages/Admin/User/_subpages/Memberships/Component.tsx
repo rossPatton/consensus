@@ -43,9 +43,11 @@ export const MembershipsComponent = memo((props: tComponentProps) => (
                     to={`/org/${org.id}/createEvent`}>
                     Create Event
                   </Link>
-                  <a href="filler" className="mR3">
+                  <Link
+                    className="mR3"
+                    to={`/org/${org.id}/makeDecision`}>
                     Make Decision
-                  </a>
+                  </Link>
                 </div>
               )}
             </div>

@@ -22,7 +22,7 @@ declare type tSimpleMajorityResults = {
   },
 };
 
-declare type tDecisionType = 'n/a' | 'Simple Majority' | 'Approval';
+declare type tDecisionType = 'n/a' | 'Simple Poll' | 'Simple Majority' | 'Approval';
 
 declare type tDecision = {
   choices: any, // voting options

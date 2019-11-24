@@ -2,7 +2,14 @@ import cx from 'classnames';
 import React from 'react';
 
 import {OrganizationHeader, OrganizationTabs, UserBar} from './_components';
-import {CreateOrEditEvent, Decisions, Events, Members, Overview} from './_subpages';
+import {
+  CreateOrEditEvent,
+  Decisions,
+  Events,
+  MakeDecision,
+  Members,
+  Overview,
+} from './_subpages';
 import {tComponentProps} from './_types';
 
 export const OrganizationComponent = (props: tComponentProps) => (
@@ -53,6 +60,12 @@ export const OrganizationComponent = (props: tComponentProps) => (
       )}
       {props.match.params.section === 'createEvent' && (
         <CreateOrEditEvent
+          org={props.org}
+          router={props.location}
+        />
+      )}
+      {props.match.params.section === 'makeDecision' && (
+        <MakeDecision
           org={props.org}
           router={props.location}
         />
