@@ -9,7 +9,7 @@ const SimpleMajorityVote = memo((props: tProps) => (
         Choices:
       </legend>
       <ul className="fs6 fw600 lh1">
-        {props.choices.map((choice, i) => (
+        {props.options.map((option, i) => (
           <li
             key={i}
             className="mB3 ttCap">
@@ -20,7 +20,7 @@ const SimpleMajorityVote = memo((props: tProps) => (
                 autoComplete="nope"
                 checked={false}
               />
-              {choice}
+              {option}
             </button>
           </li>
         ))}

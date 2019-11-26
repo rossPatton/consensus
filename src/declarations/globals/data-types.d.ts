@@ -25,7 +25,9 @@ declare type tSimpleMajorityResults = {
 declare type tDecisionType = 'n/a' | 'Simple Poll' | 'Simple Majority' | 'Approval';
 
 declare type tDecision = {
-  choices: any, // voting options
+  options: { // db needs objects, not arrays
+    list: string[],
+  },
   date: string,
   data: any, // voting results
   description: string,
@@ -35,7 +37,7 @@ declare type tDecision = {
   orgId: number,
   orgName: string,
   title: string,
-  type: 'Simple Majority' | 'Approval',
+  type: tDecisionType,
 };
 
 // TODO need to rethink how to split up event types

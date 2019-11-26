@@ -8,15 +8,14 @@ import { Redirect } from 'react-router';
 import { Dispatch } from 'redux';
 
 import {Helmet} from '../../../../components';
-import {createDecision} from '../../../../redux';
-import {getEventsSuccess} from '../../../../redux/async/events/actions';
+import {postDecision} from '../../../../redux';
+// import {postDecisionSuccess} from '../../../../redux/async/decision/actions';
 // import {parseTimeString} from '../../../../utils';
 import {tContainerProps, tCreateDecision, tState, tStateUnion, tStore} from './_types';
 import {CreateOrEditEventComponent } from './Component';
 
 class MakeDecisionContainer extends Component<tContainerProps, tState> {
   state = {
-    date: dayJS().toISOString(),
     deadline: dayJS().toISOString(),
     description: '',
     isDraft: false,
@@ -34,16 +33,15 @@ class MakeDecisionContainer extends Component<tContainerProps, tState> {
     if (!draft.id) return;
 
     const isPrivate = draft.isPrivate === 'true';
+    // const options = (draft.options as string).split(',');
 
     this.setState({
-      // convert UTC date with tz to local format for html5 date/time
-      date: dayJS(draft.date as string).format('YYYY-MM-DD'),
       deadline: dayJS(draft.deadline as string).format('YYYY-MM-DD'),
       description: draft.description as string,
       id: parseInt(draft.id as string, 10),
       isDraft: true,
       isPrivate,
-      // options: draft.options,
+      options: [],
       orgName: this.props.org.name,
       title: draft.title as string,
       type: draft.type as tDecisionType,
@@ -62,23 +60,32 @@ class MakeDecisionContainer extends Component<tContainerProps, tState> {
     ev: React.MouseEvent<HTMLButtonElement>,
     saveAsDraft: boolean = false) => {
     ev.preventDefault();
-    const {decisions} = this.props;
+    // const {decisions} = this.props;
+    const {newOption, ...restOfState} = this.state;
+
+    let {options} = this.state;
+    if (restOfState.type === 'Simple Poll') {
+      options = ['Yes', 'No', 'Abstain'];
+    }
 
     let newDecision: tDecision;
     try {
-      const createDecision = await this.props.createDecision({
-        ...this.state,
+      const postDecision = await this.props.postDecision({
+        ...restOfState,
         isDraft: saveAsDraft,
+        options,
         orgId: this.props.org.id as number,
       });
 
-      newDecision = createDecision.payload;
+      console.log('postDecision => ', postDecision);
+
+      newDecision = postDecision.payload;
     } catch (err) {
-      return loglevel.error('failed to save event to db');
+      return loglevel.error('failed to save decision to db', err);
     }
 
     // update redux on client side on event upload success
-    getEventsSuccess([newDecision, ...decisions]);
+    // postDecisionSuccess([newDecision, ...decisions]);
     this.setState({
       id: newDecision.id,
     });
@@ -150,7 +157,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  createDecision: (decision: tCreateDecision) => dispatch(createDecision(decision)),
+  postDecision: (decision: tCreateDecision) => dispatch(postDecision(decision)),
 });
 
 const MakeDecision = connect(

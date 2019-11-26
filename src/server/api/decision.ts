@@ -34,3 +34,26 @@ decision.get(route, async (ctx: Koa.ParameterizedContext) => {
   }
 });
 
+decision.post(route, async (ctx: Koa.ParameterizedContext) => {
+  const data = _.get(ctx, 'state.locals.data', {});
+  const {isFormSubmit, isPrivate, ...newDecision} = data;
+
+  // should be a comma delimited string, but you never know
+  // db expects an object. arrays are a bit difficult with pg so we do it this way
+  if (typeof newDecision.options === 'string') {
+    newDecision.options = {
+      list: newDecision.options.split(','),
+    };
+  }
+
+  console.log('decision post => ', newDecision);
+
+  let decisionQuery: tDecision[];
+  try {
+    decisionQuery = await knex('decisions').insert(newDecision).returning('*');
+    ctx.body = decisionQuery[0];
+  } catch (err) {
+    ctx.throw(400, err);
+  }
+});
+

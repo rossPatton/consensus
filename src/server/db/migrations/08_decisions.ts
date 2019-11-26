@@ -21,14 +21,16 @@ exports.up = async (knex: Knex) => {
     table.text('description', 'longtext').notNullable();
     table.text('title').notNullable();
 
-    table.timestamp('date').notNullable();
-    table.timestamp('endDate');
+    // when the vote will end
+    table.timestamp('deadline').notNullable();
 
     // data is different for every poll, but the shape of the data
     // is determined by the poll type
-    table.jsonb('choices').notNullable();
-    table.jsonb('data').notNullable();
+    table.jsonb('options').notNullable();
+    // @ts-ignore
+    table.jsonb('data').notNullable().defaultTo({});
 
+    table.boolean('isDraft').notNullable().defaultTo(true);
     table.boolean('isClosed').notNullable().defaultTo(false);
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());

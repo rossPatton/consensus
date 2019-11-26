@@ -3,6 +3,7 @@ import Knex from 'knex';
 
 const createDecisionTypes = () => ([
   { type: 'Simple Majority' },
+  { type: 'Simple Poll' },
   { type: 'Approval' },
 ]);
 

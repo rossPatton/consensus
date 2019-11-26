@@ -1,4 +1,4 @@
 export type tProps = {
-  choices: string[],
+  options: string[],
   tiny?: boolean,
 };

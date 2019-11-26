@@ -1,7 +1,6 @@
 import {Location} from 'history';
 
 export type tState = {
-  date: string,
   deadline: string,
   description: string,
   id?: number,
@@ -21,22 +20,23 @@ export type tStore = {
 
 export type tStateUnion = keyof tState;
 export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
+
 export type tCreateDecision = {
   deadline: string,
   description: string,
   isDraft: boolean,
   isPrivate: boolean,
-  options: string[],
+  options: any[],
   orgId: number,
   title: string,
   type: tDecisionType,
 };
 
 export type tContainerProps = {
-  createDecision: (event: tCreateDecision) => Promise<{payload: tDecision}>,
   decisions: tDecision[],
-  router: Location,
   org: tOrg,
+  postDecision: (decision: tCreateDecision) => Promise<{payload: tDecision}>,
+  router: Location,
   session: tSession,
 };
 

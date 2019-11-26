@@ -126,7 +126,7 @@ class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
 
       newEvent = createEvent.payload;
     } catch (err) {
-      return loglevel.error('failed to save event to db');
+      return loglevel.error('failed to save event to db', err);
     }
 
     // update redux on client side on event upload success

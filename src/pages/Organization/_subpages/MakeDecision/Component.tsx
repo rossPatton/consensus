@@ -39,9 +39,9 @@ export const CreateOrEditEventComponent = memo((props: tComponentProps) => {
           type="date"
           className="mB4 row"
           min={dayJS().toISOString()}
-          value={props.date}
+          value={props.deadline}
           placeholder="Date to finalize the results"
-          onChange={ev => updateState('date', ev.currentTarget.value)}
+          onChange={ev => updateState('deadline', ev.currentTarget.value)}
         />
         <h3>What voting system do you want to use?</h3>
         <select

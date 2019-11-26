@@ -9,7 +9,7 @@ const ApprovalVote = memo((props: tProps) => (
         Choices:
       </legend>
       <ul className="fs6 fw600 lh1">
-        {props.choices.map((choice, i) => (
+        {props.options.map((choice, i) => (
           <li
             key={i}
             className="mB3 ttCap">
