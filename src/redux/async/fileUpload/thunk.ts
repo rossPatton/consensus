@@ -8,7 +8,8 @@ import {
   fileUploadSuccess,
 } from './actions';
 
-const prefix = '/api/v1/fileUpload';
+const endpoint = '/api/v1/fileUpload';
+const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
 
 export const fileUpload = memoize({ttl: 300}, (event: tEvent) => {
   return async function <S>(dispatch: Dispatch<S>) {

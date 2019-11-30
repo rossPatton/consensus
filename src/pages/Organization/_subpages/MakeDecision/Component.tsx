@@ -35,6 +35,7 @@ export const CreateOrEditEventComponent = memo((props: tComponentProps) => {
           onChange={ev => updateState('description', ev.currentTarget.value)}
         />
         <h3>Is there a deadline?</h3>
+        <p>If yes, the vote will end at that date/time. If no, the vote must be ended manually.</p>
         <input
           type="date"
           className="mB4 row"

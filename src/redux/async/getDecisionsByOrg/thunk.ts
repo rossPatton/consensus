@@ -8,6 +8,9 @@ import {
   getDecisionsByOrgSuccess,
 } from './actions';
 
+const endpoint = '/api/v1/decisions';
+const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+
 export const getDecisionsByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getDecisionsByOrgBegin());
@@ -16,7 +19,7 @@ export const getDecisionsByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {
       const qs = objToQueryString(queryObj);
 
       // @ts-ignore
-      const result = await fetch(`/api/v1/decisions?${qs}`, {agent})
+      const result = await fetch(`${prefix}?${qs}`, {agent})
         .then((response: tFetchResponse) => {
           if (!response.ok) throw response;
           return response.json();

@@ -11,13 +11,19 @@ import {
   getOrgsByUserSuccess,
 } from './actions';
 
+const endpoint = '/api/v1/orgsByUser';
+const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+
 export const getOrgsBySession = memoize({ttl: 300}, () => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getOrgsByUserBegin());
 
     try {
+      const endpoint = '/api/v1/orgsBySession';
+      const url = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+
       // @ts-ignore
-      const result = await fetch('/api/v1/orgsBySession', {agent})
+      const result = await fetch(url, {agent})
         .then((response: tFetchResponse) => {
           if (!response.ok) throw response;
           return response.json();
@@ -36,7 +42,6 @@ export const getOrgsByUser = memoize({ttl: 300}, (query: tIdQuery) => {
 
     try {
       const qs = objToQueryString(query);
-      const prefix = '/api/v1/orgsByUser';
 
       // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, {agent})
@@ -58,7 +63,6 @@ export const deleteOrgByUser = memoize({ttl: 300}, (queryObj: tIdQuery) => {
 
     try {
       const qs = objToQueryString(queryObj);
-      const prefix = '/api/v1/orgsByUser';
 
       // @ts-ignore
       const result = await fetch(`${prefix}?${qs}`, {agent, method: 'DELETE'})

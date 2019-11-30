@@ -8,7 +8,8 @@ import {
   getUserByIdSuccess,
 } from './actions';
 
-const prefix = '/api/v1/user';
+const endpoint = '/api/v1/user';
+const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
 
 // TODO this is really just getting the current session - and why even have limit etc here
 export const getUserById = memoize({ttl: 300}, (query: tIdQuery) => {

@@ -11,12 +11,14 @@ import {
   getEventsSuccess,
 } from './actions';
 
+const endpoint = '/api/v1/events';
+const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+
 export const getEvents = memoize({ttl: 300}, (query: tIdQuery) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getEventsBegin());
 
     try {
-      const prefix = '/api/v1/events';
       const qs = objToQueryString(query);
 
       // @ts-ignore
@@ -38,7 +40,8 @@ export const getEventsByUser = memoize({ttl: 300}, (query: tIdQuery) => {
     dispatch(getEventsBegin());
 
     try {
-      const prefix = '/api/v1/eventsByUser';
+      const endpoint = '/api/v1/eventsByUser';
+      const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
       const qs = objToQueryString(query);
 
       // @ts-ignore
@@ -60,7 +63,6 @@ export const deleteEvent = memoize({ttl: 300}, (query: tIdQuery) => {
     dispatch(deleteEventBegin());
 
     try {
-      const prefix = '/api/v1/events';
       const qs = objToQueryString(query);
 
       // @ts-ignore

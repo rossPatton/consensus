@@ -1,4 +1,3 @@
-import dayJS from 'dayjs';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
@@ -13,11 +12,6 @@ import {tComponentProps} from './_types';
 
 export const DecisionComponent = memo(({decision, decisions, match}: tComponentProps) => (
   <div className="contain mT4 mB5">
-    <small className="fx fw600 lh1 mB3">
-      <time className="mR1" dateTime={decision.date}>
-        {dayJS(decision.date).format('ddd MMM DD, h:mmA')}
-      </time>
-    </small>
     <h1 className="mB3 pB3 brdB1 ttCap">
       {decision.title}
     </h1>
@@ -46,9 +40,11 @@ export const DecisionComponent = memo(({decision, decisions, match}: tComponentP
             {decision.type === 'Approval' && (
               <ApprovalResults data={decision.data} />
             )}
-            {decision.type === 'Simple Majority' && (
-              <SimpleMajorityResults data={decision.data} />
-            )}
+            {decision.type === 'Simple Majority'
+              || decision.type === 'Simple Poll'
+              && (
+                <SimpleMajorityResults data={decision.data} />
+              )}
           </>
         )}
         {!decision.isClosed && (
@@ -56,9 +52,10 @@ export const DecisionComponent = memo(({decision, decisions, match}: tComponentP
           {decision.type === 'Approval' && (
             <ApprovalVote options={decision.options.list} />
           )}
-          {decision.type === 'Simple Majority' && (
-            <SimpleMajorityVote options={decision.options.list} />
-          )}
+          {decision.type === 'Simple Majority'
+            || decision.type === 'Simple Poll' && (
+              <SimpleMajorityVote options={decision.options.list} />
+            )}
           </>
         )}
       </div>

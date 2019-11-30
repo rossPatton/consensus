@@ -1,4 +1,5 @@
 import cx from 'classnames';
+import dayJS from 'dayjs';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
@@ -25,7 +26,10 @@ const Decisions = memo((props: tProps) => (
                 data={decision.data}
               />
             )}
-            <time className="mR2 lh1 fw600 fs6 mB2">{decision.date}</time>
+            <time className="mR2 lh1 fw600 fs6 mB2">
+              {decision.isClosed ? 'Voting ended: ' : 'Vote ends: '}
+              {dayJS(decision.deadline).format('ddd MMM DD, h:mmA')}
+            </time>
             <h3
               className={cx({
                 'mB2 lh1 ttCap': true,

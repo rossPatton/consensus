@@ -10,16 +10,16 @@ import {
   tSuccessAction,
 } from './_types';
 
-export const getDecisionsByOrgBegin = (): tBeginAction => ({
+export const getDecisionBegin = (): tBeginAction => ({
   type: GET_DECISION_BEGIN,
 });
 
-export const getDecisionsByOrgSuccess = (payload: tThunk<tDecision>): tSuccessAction => ({
+export const getDecisionSuccess = (payload: tThunk<tDecision>): tSuccessAction => ({
   type: GET_DECISION_SUCCESS,
   payload,
 });
 
-export const getDecisionsByOrgFailure = (payload: Error): tFailureAction => ({
+export const getDecisionFailure = (payload: Error): tFailureAction => ({
   type: GET_DECISION_FAILURE,
   payload,
 });

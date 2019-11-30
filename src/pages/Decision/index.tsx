@@ -3,35 +3,35 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {GenericLoader, Helmet} from '../../components';
+import {/* GenericLoader*/ Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
 import {getDecision, getDecisionsByOrg} from '../../redux';
-import {tProps, tStore} from './_types';
+import {tContainerProps, tStore} from './_types';
 import {DecisionComponent} from './Component';
 
-class DecisionContainer extends Component<tProps> {
-  constructor(props: tProps) {
+class DecisionContainer extends Component<tContainerProps> {
+  constructor(props: tContainerProps) {
     super(props);
     this.getDecision();
   }
 
-  componentDidUpdate(nextProps: tProps) {
+  componentDidUpdate(nextProps: tContainerProps) {
     const routeChanged = nextProps.match.url !== this.props.match.url;
     if (!routeChanged) return;
     this.getDecision();
   }
 
-  shouldComponentUpdate(nextProps: tProps) {
-    const loadingFinished = nextProps.isLoading !== this.props.isLoading;
+  shouldComponentUpdate(nextProps: tContainerProps) {
+    const loadingFinished = nextProps.isDecisionLoading !== this.props.isDecisionLoading;
+    const sidebarFinished = nextProps.areDecisionsLoading !== this.props.areDecisionsLoading;
     const routeChanged = nextProps.match.url !== this.props.match.url;
-    const decisionsLoaded = nextProps.decisions.length !== this.props.decisions.length;
-    return loadingFinished || routeChanged || decisionsLoaded;
+    return loadingFinished || routeChanged || sidebarFinished;
   }
 
   getDecision = () => {
     const {id} = this.props.match.params;
     this.props.getDecision({id})
-      .then((res: {payload: tDecision}) => {
+      .then((res: any) => {
         // for rendering the 'more by name' sidebar
         return this.props.getDecisionsByOrg({
           id: res.payload.orgId,
@@ -57,15 +57,10 @@ class DecisionContainer extends Component<tProps> {
             { property: 'og:description', content: '' },
           ]}
         />
-        <GenericLoader
-          isLoading={this.props.isLoading}
-          render={() => (
-            <DecisionComponent
-              decision={this.props.decision}
-              decisions={this.props.decisions}
-              match={this.props.match}
-            />
-          )}
+        <DecisionComponent
+          decision={this.props.decision}
+          decisions={this.props.decisions}
+          match={this.props.match}
         />
       </ErrorBoundary>
     );
@@ -73,7 +68,8 @@ class DecisionContainer extends Component<tProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.decision.isLoading,
+  isDecisionLoading: store.decision.isLoading,
+  areDecisionsLoading: store.decisions.isLoading,
   decision: store.decision.data,
   decisions: store.decisions.data,
 });

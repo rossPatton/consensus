@@ -11,13 +11,14 @@ import {
   setRsvpSuccess,
 } from './actions';
 
+const endpoint = '/api/v1/rsvps';
+const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+
 export const getRsvps = memoize({ttl: 300}, () => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getRsvpBegin());
 
     try {
-      const prefix = '/api/v1/rsvps';
-
       // @ts-ignore
       const result = await fetch(prefix, {agent})
         .then((response: tFetchResponse) => {
@@ -37,7 +38,8 @@ export const setRsvp = (query: any) => {
     dispatch(setRsvpBegin());
 
     try {
-      const prefix = '/api/v1/rsvp';
+      const endpoint = '/api/v1/rsvp';
+      const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
       const qs = objToQueryString(query);
 
       // @ts-ignore

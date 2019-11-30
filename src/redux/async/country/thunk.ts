@@ -8,12 +8,14 @@ import {
   getCountrySuccess,
 } from './actions';
 
+const endpoint = '/api/v1/country';
+const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+
 export const getCountry = memoize({ttl: 300}, (params: tDirectoryParams) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getCountryBegin());
 
     try {
-      const prefix = '/api/v1/country';
       const qs = objToQueryString(params);
 
       // @ts-ignore

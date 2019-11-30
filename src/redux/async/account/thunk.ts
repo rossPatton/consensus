@@ -8,13 +8,15 @@ import {
   patchAccountSuccess,
 } from './actions';
 
+const endpoint = '/api/v1/account';
+const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+
 // TODO a lot of this thunk logic gets repeated a lot... should consolidate
 export const patchAccount = memoize({ ttl: 300 }, (account: tAccount) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(patchAccountBegin());
 
     try {
-      const prefix = '/api/v1/account';
       const qs = objToQueryString(account);
 
       // we do it this way so errors can bubble properly to our middleware

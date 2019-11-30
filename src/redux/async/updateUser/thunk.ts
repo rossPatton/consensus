@@ -8,12 +8,14 @@ import {
   updateUserSuccess,
 } from './actions';
 
+const endpoint = '/api/v1/user';
+const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+
 export const updateUser = memoize({ ttl: 300 }, (user: tUser) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(updateUserBegin());
 
     try {
-      const prefix = '/api/v1/user';
       const qs = objToQueryString(user);
 
       // we do it this way so errors can bubble properly to our middleware

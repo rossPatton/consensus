@@ -20,7 +20,7 @@ const getDecisions = async (ctx: Koa.ParameterizedContext) => {
   try {
     decisions = knex('decisions')
       .where({orgId})
-      .orderBy('date', 'desc');
+      .orderBy('deadline', 'desc');
   } catch (err) {
     return ctx.throw(400, err);
   }

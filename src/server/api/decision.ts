@@ -27,7 +27,6 @@ const getDecision = async (ctx: Koa.ParameterizedContext) => {
 decision.get(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     const decision = await getDecision(ctx);
-    // const decisionWithMappedDates: tDecision[] = decisions.map(utcToDateString);
     ctx.body = decision;
   } catch (err) {
     ctx.throw(400, err);
@@ -45,8 +44,6 @@ decision.post(route, async (ctx: Koa.ParameterizedContext) => {
       list: newDecision.options.split(','),
     };
   }
-
-  console.log('decision post => ', newDecision);
 
   let decisionQuery: tDecision[];
   try {

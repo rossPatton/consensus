@@ -20,8 +20,6 @@ export const objToQueryString = (obj: tObj): string => {
         value = objToQueryString(value);
       }
 
-      console.log('value => ', value);
-
       return `${k}=${value}`;
     })
     .filter(s => !!s)

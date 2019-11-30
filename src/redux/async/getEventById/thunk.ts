@@ -8,12 +8,14 @@ import {
   getEventByIdSuccess,
 } from './actions';
 
+const endpoint = '/api/v1/event';
+const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+
 export const getEventById = memoize({ ttl: 300 }, (queryObj: tIdQuery) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(getEventByIdBegin());
 
     try {
-      const prefix = '/api/v1/event';
       const qs = objToQueryString(queryObj);
 
       // @ts-ignore

@@ -28,10 +28,9 @@ declare type tDecision = {
   options: { // db needs objects, not arrays
     list: string[],
   },
-  date: string,
+  deadline: string,
   data: any, // voting results
   description: string,
-  endDate: string,
   id: number,
   isClosed: boolean,
   orgId: number,

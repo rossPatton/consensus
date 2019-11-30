@@ -77,8 +77,6 @@ class MakeDecisionContainer extends Component<tContainerProps, tState> {
         orgId: this.props.org.id as number,
       });
 
-      console.log('postDecision => ', postDecision);
-
       newDecision = postDecision.payload;
     } catch (err) {
       return loglevel.error('failed to save decision to db', err);
