@@ -43,7 +43,6 @@ export const OrganizationComponent = (props: tComponentProps) => (
       )}
       {props.match.params.section === 'decisions' && (
         <Decisions
-          location={props.location}
           match={props.match}
           org={props.org}
           role={props.role}

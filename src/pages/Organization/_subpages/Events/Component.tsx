@@ -1,5 +1,4 @@
 import React, {memo} from 'react';
-import {Link} from 'react-router-dom';
 
 import {Events} from '../../../../components';
 import {tComponentProps} from './_types';
@@ -10,16 +9,16 @@ export const EventsComponent = memo((props: tComponentProps) => (
       <h2 className="col row">
         {props.showPast ? 'Past' : 'Upcoming'} {!props.role ? 'Public' : ''} Events
       </h2>
-      <Link
-        className="col row fs6 taR"
-        to={`${props.pathname}?showPast=${!props.showPast}`}>
+      <button
+        onClick={props.togglePast}
+        className="ba0 col row fs6 taR">
         {props.showPast && 'See upcoming events'}
         {!props.showPast && 'See past events'}
-      </Link>
+      </button>
     </div>
     <div className="fx aiCtr p3 bgGrey1 br8 mB4 fs6 fw600">
       <label className="col row mR3" htmlFor="searchFilter">
-        <div>Search:</div>
+        <div>Search</div>
         <input
           spellCheck
           type="search"

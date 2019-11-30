@@ -1,4 +1,3 @@
-import qs from 'querystring';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
@@ -6,26 +5,34 @@ import {Dispatch} from 'redux';
 import {Helmet} from '../../../../components';
 import {PrivacyFilter, Search} from '../../../../containers';
 import {getEvents} from '../../../../redux';
-import {tContainerProps, tStore} from './_types';
+import {tContainerProps, tState, tStore} from './_types';
 import {EventsComponent} from './Component';
 
-class EventsContainer extends PureComponent<tContainerProps> {
+class EventsContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
     this.getEvents();
   }
 
+  state = {
+    showPast: false,
+  };
+
   componentDidUpdate() {
     this.getEvents();
   }
 
+  public togglePast = () =>
+    this.setState({
+      showPast: !this.state.showPast,
+    });
+
   private getEvents = () => {
+    const {showPast} = this.state;
     const {match: {params: {page = 0} = {}}, org} = this.props;
-    // const query = qs.parse(location.search.replace('?', ''));
-    // only show public events if user is not signed in
+    // if user is not signed in, only show public events
     const isPublic = !this.props.session.isAuthenticated;
     const offset = page ? parseInt(page, 10) : 0;
-    // const showPast = query.showPast === 'true';
 
     this.props.getEvents({
       id: org.id,
@@ -33,13 +40,11 @@ class EventsContainer extends PureComponent<tContainerProps> {
       isPublic,
       limit: -1,
       offset,
+      showPast,
     });
   }
 
   render() {
-    const {location} = this.props;
-    const query = qs.parse(location.search.replace('?', ''));
-
     return (
       <>
         <Helmet
@@ -63,9 +68,9 @@ class EventsContainer extends PureComponent<tContainerProps> {
                   {...searchProps}
                   events={searchProps.items}
                   match={this.props.match}
-                  pathname={location.pathname}
                   role={this.props.role}
-                  showPast={query.showPast === 'true'}
+                  showPast={this.state.showPast}
+                  togglePast={this.togglePast}
                 />
               )}
             />

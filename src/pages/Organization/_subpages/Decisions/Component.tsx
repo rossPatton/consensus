@@ -1,5 +1,4 @@
 import React, {memo} from 'react';
-import {Link} from 'react-router-dom';
 
 import {Decisions} from '../../../../components';
 import {tComponentProps} from './_types';
@@ -11,16 +10,16 @@ export const DecisionsComponent = memo((props: tComponentProps) => (
         {props.isClosed && 'Decision Archive'}
         {!props.isClosed && 'Active Decisions'}
       </h2>
-      <Link
-        className="col row fs6 taR"
-        to={`${props.pathname}?isClosed=${!props.isClosed}`}>
+      <button
+        onClick={props.toggleClosed}
+        className="ba0 col row fs6 taR">
         {props.isClosed && 'See active decisions'}
         {!props.isClosed && 'See past decisions'}
-      </Link>
+      </button>
     </div>
     <div className="fx aiCtr p3 bgGrey1 br8 mB4 fs6 fw600">
       <label className="col row mR3" htmlFor="searchFilter">
-        <div>Search:</div>
+        <div>Search</div>
         <input
           spellCheck
           type="search"

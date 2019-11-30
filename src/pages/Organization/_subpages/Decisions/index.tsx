@@ -1,4 +1,3 @@
-import qs from 'querystring';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
@@ -7,37 +6,43 @@ import {Dispatch} from 'redux';
 import {Helmet} from '../../../../components';
 import {DecisionTypeFilter, Search} from '../../../../containers';
 import {getDecisionsByOrg} from '../../../../redux';
-import {tContainerProps, tStore} from './_types';
+import {tContainerProps, tState, tStore} from './_types';
 import {DecisionsComponent} from './Component';
 
-class DecisionsContainer extends Component<tContainerProps> {
+class DecisionsContainer extends Component<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
     this.getDecisions();
+  }
+
+  state = {
+    isClosed: false,
   }
 
   componentDidUpdate() {
     this.getDecisions();
   }
 
+  public toggleClosed = () =>
+    this.setState({
+      isClosed: !this.state.isClosed,
+    })
+
   private getDecisions = () => {
+    const {isClosed} = this.state;
     const {match: { params: { page = 0 } = {} }, org} = this.props;
-    // const query = qs.parse(location.search.replace('?', ''));
-    // const isClosed = query.isClosed === 'true';
     const offset = page ? parseInt(page, 10) : 0;
 
     // get active decisions only
     this.props.getDecisionsByOrg({
       id: org.id,
+      isClosed,
       limit: -1,
       offset,
     });
   }
 
   render() {
-    const {location} = this.props;
-    const query = qs.parse(location.search.replace('?', ''));
-
     return (
       <>
         {!this.props.role && <Redirect to="/login" />}
@@ -60,10 +65,10 @@ class DecisionsContainer extends Component<tContainerProps> {
                 <DecisionsComponent
                   {...decisionTypeProps}
                   {...searchProps}
-                  isClosed={query.isClosed === 'true'}
+                  isClosed={this.state.isClosed}
                   match={this.props.match}
-                  pathname={location.pathname}
                   role={this.props.role}
+                  toggleClosed={this.toggleClosed}
                 />
               )}
             />

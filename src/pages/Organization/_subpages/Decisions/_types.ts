@@ -1,27 +1,30 @@
-import {Location} from 'history';
 import {match} from 'react-router';
 
-export type tProps = {
-  decisions: tDecision[],
-  isClosed?: boolean,
-  match: match & {params: tOrgRouteParams},
-};
+export interface tState {
+  isClosed: boolean,
+}
 
-export type tComponentProps = tProps & {
+export interface tProps {
+  decisions: tDecision[],
+  match: match & {params: tOrgRouteParams},
+}
+
+export interface tComponentProps extends tProps {
   decisionFilter: tDecisionType,
+  isClosed: boolean,
   items: tDecision[],
   onDecisionTypeChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  pathname: string,
-};
+  toggleClosed: (ev: React.MouseEvent<HTMLButtonElement>) => void,
+}
 
-export type tContainerProps = tProps & {
-  getDecisionsByOrg: (query: tIdQuery) => Promise<tThunk<tDecision[]>>,
+type tIdQueryExtend = tIdQuery & {isClosed: boolean};
+export interface tContainerProps extends tProps {
+  getDecisionsByOrg: (query: tIdQueryExtend) => Promise<tThunk<tDecision[]>>,
   isLoading: boolean,
-  location: Location,
   org: tOrg,
   role: tRole,
-};
+}
 
 export type tStore = {
   decisions: tThunk<tDecision[]>,
