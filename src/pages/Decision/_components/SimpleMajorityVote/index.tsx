@@ -1,37 +1,33 @@
-import React, {memo} from 'react';
+import React, {PureComponent} from 'react';
 
-import {tProps} from './_types';
+import {tProps, tState, tStateUnion} from './_types';
+import {SimpleMajorityVoteComponent} from './Component';
 
-const SimpleMajorityVote = memo((props: tProps) => (
-  <form>
-    <fieldset>
-      <legend className="mB2 fs4">
-        Choices:
-      </legend>
-      <ul className="fs6 fw600 lh1">
-        {props.options.map((option, i) => (
-          <li
-            key={i}
-            className="mB3 ttCap">
-            <button className="row p3 taL hvrBgGrey1 trans1">
-              <input
-                type="checkbox"
-                className="mR2"
-                autoComplete="nope"
-                checked={false}
-              />
-              {option}
-            </button>
-          </li>
-        ))}
-        <li>
-          <button className="p3 taL hvrBgGrey1 trans1">
-            Submit your vote
-          </button>
-        </li>
-      </ul>
-    </fieldset>
-  </form>
-));
+class SimpleMajorityVote extends PureComponent<tProps, tState> {
+  state = {
+    selectedOption: 'n/a' as tStateUnion,
+  };
+
+  // TODO move up maybe?
+  selectOption = (ev: any) => {
+    ev.preventDefault();
+    this.setState({
+      selectedOption: ev.currentTarget.value,
+    });
+  }
+
+  render() {
+    return (
+      <SimpleMajorityVoteComponent
+        options={this.props.options}
+        selectOption={this.selectOption}
+        selectedOption={this.state.selectedOption}
+        submitVote={this.props.submitVote}
+        tiny={this.props.tiny}
+        userVoted={this.props.userVoted}
+      />
+    );
+  }
+}
 
 export default SimpleMajorityVote;

@@ -10,7 +10,7 @@ import {
 } from './_components';
 import {tComponentProps} from './_types';
 
-export const DecisionComponent = memo(({decision, decisions, match}: tComponentProps) => (
+export const DecisionComponent = memo(({decision, decisions, ...props}: tComponentProps) => (
   <div className="contain mT4 mB5">
     <h1 className="mB3 pB3 brdB1 ttCap">
       {decision.title}
@@ -49,13 +49,17 @@ export const DecisionComponent = memo(({decision, decisions, match}: tComponentP
         )}
         {!decision.isClosed && (
           <>
-          {decision.type === 'Approval' && (
-            <ApprovalVote options={decision.options.list} />
-          )}
-          {decision.type === 'Simple Majority'
-            || decision.type === 'Simple Poll' && (
-              <SimpleMajorityVote options={decision.options.list} />
+            {decision.type === 'Approval' && (
+              <ApprovalVote options={decision.options.list} />
             )}
+            {decision.type === 'Simple Majority'
+              || decision.type === 'Simple Poll' && (
+                <SimpleMajorityVote
+                  options={decision.options.list}
+                  submitVote={props.submitVote}
+                  userVoted={props.userVoted}
+                />
+              )}
           </>
         )}
       </div>
@@ -68,7 +72,7 @@ export const DecisionComponent = memo(({decision, decisions, match}: tComponentP
             <Decisions
               tiny
               decisions={decisions}
-              match={match}
+              match={props.match}
             />
           </>
         )}

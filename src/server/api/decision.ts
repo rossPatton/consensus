@@ -2,7 +2,6 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-// import {utcToDateString} from '../../utils';
 import {knex} from '../db/connection';
 
 export const decision = new Router();
@@ -26,8 +25,7 @@ const getDecision = async (ctx: Koa.ParameterizedContext) => {
 
 decision.get(route, async (ctx: Koa.ParameterizedContext) => {
   try {
-    const decision = await getDecision(ctx);
-    ctx.body = decision;
+    ctx.body = await getDecision(ctx);
   } catch (err) {
     ctx.throw(400, err);
   }

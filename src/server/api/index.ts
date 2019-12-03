@@ -21,6 +21,7 @@ import { roles } from './roles';
 import { rsvp } from './rsvp';
 import { rsvps } from './rsvps';
 import { user } from './user';
+import { userDecisions } from './userDecisions';
 import { users } from './users';
 import { usersByOrg } from './usersByOrg';
 
@@ -47,6 +48,7 @@ export const setupApi = (app: Koa) => {
   app.use(user.routes());
   app.use(users.routes());
   app.use(usersByOrg.routes());
+  app.use(userDecisions.routes());
 
   const opts = Object.freeze({
     methodNotAllowed: () => Boom.methodNotAllowed(),
@@ -76,4 +78,5 @@ export const setupApi = (app: Koa) => {
   app.use(user.allowedMethods(opts));
   app.use(users.allowedMethods(opts));
   app.use(usersByOrg.allowedMethods(opts));
+  app.use(userDecisions.allowedMethods(opts));
 };

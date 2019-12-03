@@ -1,12 +1,11 @@
 import dayJS from 'dayjs';
-import Koa from 'koa';
 import _ from 'lodash';
 
 import {knex} from '../db/connection';
 
 // use login info to return session for client
 // ideally only happens once per visit, on login. but if user refreshes, we do again
-export const getEventsByOrgId = async (ctx: Koa.ParameterizedContext) => {
+export const getEventsByOrgId = async (data: any) => {
   const {
     exclude,
     id: orgId,
@@ -15,7 +14,7 @@ export const getEventsByOrgId = async (ctx: Koa.ParameterizedContext) => {
     limit,
     offset,
     showPast: showPastStr,
-  } = _.get(ctx, 'state.locals.data', {});
+  } = data;
 
   const parsedLimit = limit ? parseInt(limit, 10) : 3;
   const parsedOffset = offset ? parseInt(offset, 10) : 0;

@@ -11,6 +11,9 @@ exports.up = async (knex: Knex) => {
     table.integer('decisionId').notNullable().references('decisions.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
+
+    // @ts-ignore
+    table.jsonb('data').notNullable().defaultTo({});
   });
 };
 

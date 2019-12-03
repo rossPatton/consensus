@@ -19,7 +19,7 @@ events.get(route, async (ctx: Koa.ParameterizedContext) => {
   // get back events by orgId
   let events: tEvent[];
   try {
-    events = await getEventsByOrgId(ctx);
+    events = await getEventsByOrgId(data);
   } catch (err) {
     return ctx.throw(400, err);
   }
