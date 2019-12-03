@@ -1,37 +1,36 @@
-import React, {memo} from 'react';
+import React, {PureComponent} from 'react';
 
-import {tProps} from './_types';
+import {tProps, tState} from './_types';
+import {ApprovalVoteComponent} from './Component';
 
-const ApprovalVote = memo((props: tProps) => (
-  <form>
-    <fieldset>
-      <legend className="mB2 fs4">
-        Choices:
-      </legend>
-      <ul className="fs6 fw600 lh1">
-        {props.options.map((choice, i) => (
-          <li
-            key={i}
-            className="mB3 ttCap">
-            <button className="row p3 taL hvrBgGrey1 trans1">
-              <input
-                type="checkbox"
-                className="mR2"
-                autoComplete="nope"
-                checked={false}
-              />
-              {choice}
-            </button>
-          </li>
-        ))}
-        <li>
-          <button className="p3 taL hvrBgGrey1 trans1">
-            Submit your vote
-          </button>
-        </li>
-      </ul>
-    </fieldset>
-  </form>
-));
+class ApprovalVote extends PureComponent<tProps, tState> {
+  state = {
+    selectedOptions: [] as string[],
+  };
+
+  // TODO move up maybe?
+  selectOption = (ev: any) => {
+    ev.preventDefault();
+    this.setState({
+      selectedOptions: [
+        ...this.state.selectedOptions,
+        ev.currentTarget.value,
+      ],
+    });
+  }
+
+  render() {
+    return (
+      <ApprovalVoteComponent
+        options={this.props.options}
+        selectOption={this.selectOption}
+        selectedOptions={this.state.selectedOptions}
+        submitVote={this.props.submitVote}
+        tiny={this.props.tiny}
+        userVoted={this.props.userVoted}
+      />
+    );
+  }
+}
 
 export default ApprovalVote;

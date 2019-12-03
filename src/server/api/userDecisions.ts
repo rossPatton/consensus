@@ -10,7 +10,14 @@ const table = 'users_decisions';
 
 // for voting, basically
 userDecisions.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const {data: vote, decisionId, userId} = _.get(ctx, 'state.locals.data', {});
+  const {data, decisionId, userId} = _.get(ctx, 'state.locals.data', {});
+
+  // should be a comma delimited string, but you never know
+  // db expects an object. arrays are a bit difficult with pg so we do it this way
+  let vote = data;
+  if (typeof vote === 'string' && vote.includes(',')) {
+    vote = vote.split(',');
+  }
 
   let decisionQuery: tDecision[];
   try {

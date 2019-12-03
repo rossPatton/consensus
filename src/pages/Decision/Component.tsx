@@ -50,7 +50,11 @@ export const DecisionComponent = memo(({decision, decisions, ...props}: tCompone
         {!decision.isClosed && (
           <>
             {decision.type === 'Approval' && (
-              <ApprovalVote options={decision.options.list} />
+              <ApprovalVote
+                options={decision.options.list}
+                submitVote={props.submitVote}
+                userVoted={props.userVoted}
+              />
             )}
             {decision.type === 'Simple Majority'
               || decision.type === 'Simple Poll' && (
