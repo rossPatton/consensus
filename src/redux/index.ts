@@ -29,5 +29,5 @@ export { getUserById } from './async/user/thunk';
 export { getUsers } from './async/users/thunk';
 export { deleteUserByOrg, getUsersByOrg, patchUserByOrg, postNewUserByOrg } from './async/usersByOrg/thunk';
 export { registerUser } from './async/registerUser/thunk';
-export { submitVote } from './async/submitVote/thunk';
+export { getVotes, submitVote } from './async/userDecisions/thunk';
 export { updateUser } from './async/updateUser/thunk';

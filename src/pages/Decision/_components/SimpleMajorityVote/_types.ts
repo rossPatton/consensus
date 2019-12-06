@@ -5,10 +5,12 @@ export type tProps = {
   userVoted: boolean,
 };
 
-export type tStateUnion = 'Yes' | 'No' | 'Abstain' | 'n/a';
-
 export type tState = {
-  selectedOption: tStateUnion,
+  selectedOption: string,
+};
+
+export type tContainerProps = tProps & {
+  vote: string,
 };
 
 export type tComponentProps = tProps & tState & {

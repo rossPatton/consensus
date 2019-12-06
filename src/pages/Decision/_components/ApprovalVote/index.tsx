@@ -1,12 +1,19 @@
 import React, {PureComponent} from 'react';
 
-import {tProps, tState} from './_types';
+import {tContainerProps, tState} from './_types';
 import {ApprovalVoteComponent} from './Component';
 
-class ApprovalVote extends PureComponent<tProps, tState> {
+class ApprovalVote extends PureComponent<tContainerProps, tState> {
   state = {
     selectedOptions: [] as string[],
   };
+
+  constructor(props: tContainerProps) {
+    super(props);
+    this.state = {
+      selectedOptions: props.votes,
+    };
+  }
 
   // TODO move up maybe?
   selectOption = (ev: any) => {

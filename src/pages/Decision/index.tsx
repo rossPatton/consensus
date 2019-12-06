@@ -6,7 +6,7 @@ import {Dispatch} from 'redux';
 
 import {GenericLoader, Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
-import {getDecision, getDecisionsByOrg, getRoles, submitVote} from '../../redux';
+import {getDecision, getDecisionsByOrg, getRoles, getVotes, submitVote} from '../../redux';
 import {tContainerProps, tState, tStore} from './_types';
 import {DecisionComponent} from './Component';
 
@@ -17,46 +17,51 @@ class DecisionContainer extends Component<tContainerProps, tState> {
 
   constructor(props: tContainerProps) {
     super(props);
-    this.getDecision();
-
-    // TODO check if user has voted in this particular poll
-    if (props.session.isAuthenticated && props.session.type === 'user') {
-      props.getRoles({id: props.session.profile.id as number});
-    }
+    this.getData();
   }
 
   componentDidUpdate(nextProps: tContainerProps) {
     const routeChanged = nextProps.match.url !== this.props.match.url;
     if (!routeChanged) return;
-    this.getDecision();
+    this.getData();
   }
 
-  shouldComponentUpdate(nextProps: tContainerProps, nextState: tState) {
-    const loadingFinished = nextProps.isDecisionLoading !== this.props.isDecisionLoading;
-    const rolesFinished = nextProps.areRolesLoading !== this.props.areRolesLoading;
-    const sidebarFinished = nextProps.areDecisionsLoading !== this.props.areDecisionsLoading;
-    const routeChanged = nextProps.match.url !== this.props.match.url;
-    const userVoted = nextState.userVoted !== this.state.userVoted;
-    return loadingFinished || routeChanged || rolesFinished || sidebarFinished || userVoted;
-  }
-
-  getDecision = () => {
+  getData = async () => {
     const {id} = this.props.match.params;
-    this.props.getDecision({id})
-      .then((res: any) => {
-        // for rendering the 'more by name' sidebar
-        return this.props.getDecisionsByOrg({
-          id: res.payload.orgId,
-          exclude: id,
-          isClosed: false,
-          limit: 3,
-          offset: 0,
+    return this.props.getDecision({id})
+      .then(this.getSideBarDecisions)
+      .then(this.getRolesAndVotes);
+  }
+
+  getSideBarDecisions = async () => {
+    const {decision, getDecisionsByOrg} = this.props;
+    return getDecisionsByOrg({
+      id: decision.orgId,
+      exclude: decision.id,
+      isClosed: false,
+      limit: 3,
+      offset: 0,
+    });
+  }
+
+  getRolesAndVotes = async () => {
+    const {getRoles, getVotes, match, session} = this.props;
+    if (!session.isAuthenticated) return;
+    if (session.isAuthenticated && session.type !== 'user') return;
+
+    const {id: decisionId} = match.params;
+    const userId = session.profile.id as number;
+
+    return getRoles({id: userId})
+      .then(() => getVotes({decisionId, userId}))
+      .then(res => {
+        return this.setState({
+          userVoted: res.payload.length > 0,
         });
       })
       .catch(loglevel.error);
   }
 
-  // TODO you are getting voting working
   submitVote = (data: any) => {
     this.props.submitVote({
       data,
@@ -74,6 +79,7 @@ class DecisionContainer extends Component<tContainerProps, tState> {
   render() {
     const {decision, roles, session} = this.props;
 
+    // TODO consolidate this logic somewhere, maybe utils
     const roleMap = roles.find(roleMap => {
       return roleMap.orgId === decision.orgId;
     }) as tRoleMap;
@@ -83,9 +89,12 @@ class DecisionContainer extends Component<tContainerProps, tState> {
       role = 'admin';
     }
 
+    const {areRolesLoading, areVotesLoading, isDecisionLoading} = this.props;
+    const isLoading = areRolesLoading || areVotesLoading || isDecisionLoading;
+
     return (
       <GenericLoader
-        isLoading={this.props.areRolesLoading}
+        isLoading={isLoading}
         render={() => (
           <ErrorBoundary>
             {!role && <Redirect to="/login" />}
@@ -105,6 +114,7 @@ class DecisionContainer extends Component<tContainerProps, tState> {
               match={this.props.match}
               submitVote={this.submitVote}
               userVoted={this.state.userVoted}
+              votes={this.props.votes}
             />
           </ErrorBoundary>
         )}
@@ -114,19 +124,21 @@ class DecisionContainer extends Component<tContainerProps, tState> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  areDecisionsLoading: store.decisions.isLoading,
   areRolesLoading: store.roles.isLoading,
+  areVotesLoading: store.votes.isLoading,
   decision: store.decision.data,
   decisions: store.decisions.data,
   isDecisionLoading: store.decision.isLoading,
   roles: store.roles.data,
   session: store.session.data,
+  votes: store.votes.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
   getDecision: (query: tIdQuery) => dispatch(getDecision(query)),
   getDecisionsByOrg: (query: tIdQuery) => dispatch(getDecisionsByOrg(query)),
   getRoles: (query: tIdQuery) => dispatch(getRoles(query)),
+  getVotes: (query: any) => dispatch(getVotes(query)),
   submitVote: (query: tIdQuery) => dispatch(submitVote(query)),
 });
 

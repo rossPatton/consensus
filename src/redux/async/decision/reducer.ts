@@ -22,11 +22,21 @@ export const getDecisionReducer = (state = initialState, action: tActionUnion) =
       isLoading: true,
     };
 
-  case GET_DECISION_SUCCESS || POST_DECISION_SUCCESS:
+  case GET_DECISION_SUCCESS:
     return {
       ...state,
+      isLoading: false,
       data: action.payload,
     };
+
+  /* eslint-disable */
+  case POST_DECISION_SUCCESS:
+    return {
+      ...state,
+      isLoading: false,
+      data: action.payload,
+    };
+  /* eslint-enable */
 
   case GET_DECISION_FAILURE || POST_DECISION_FAILURE:
     return {

@@ -1,11 +1,11 @@
 import React, {PureComponent} from 'react';
 
-import {tProps, tState, tStateUnion} from './_types';
+import {tContainerProps, tState} from './_types';
 import {SimpleMajorityVoteComponent} from './Component';
 
-class SimpleMajorityVote extends PureComponent<tProps, tState> {
+class SimpleMajorityVote extends PureComponent<tContainerProps, tState> {
   state = {
-    selectedOption: 'n/a' as tStateUnion,
+    selectedOption: this.props.vote || 'n/a',
   };
 
   // TODO move up maybe?

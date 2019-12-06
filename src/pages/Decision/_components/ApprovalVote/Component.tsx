@@ -6,7 +6,7 @@ export const ApprovalVoteComponent = memo((props: tComponentProps) => (
   <form>
     <fieldset>
       <legend className="mB2 fs4">
-        Choices:
+        {props.userVoted ? 'You voted for: ' : 'Choices:'}
       </legend>
       <ul className="fs6 fw600 lh1">
         {props.options.map((choice, i) => (
@@ -14,7 +14,7 @@ export const ApprovalVoteComponent = memo((props: tComponentProps) => (
             key={i}
             className="mB3 ttCap">
             <button
-              type="button"
+              disabled={props.userVoted && !props.selectedOptions.includes(choice)}
               value={choice}
               onClick={props.selectOption}
               className="row p3 taL hvrBgGrey1 trans1">

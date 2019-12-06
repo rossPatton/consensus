@@ -6,13 +6,13 @@ import {tComponentProps} from './_types';
 export const DecisionsComponent = memo((props: tComponentProps) => (
   <>
     <div className="fx aiCtr mB2">
-      <h2 className="col row">
+      <h2 className="col">
         {props.isClosed && 'Decision Archive'}
         {!props.isClosed && 'Active Decisions'}
       </h2>
       <button
         onClick={props.toggleClosed}
-        className="ba0 col row fs6 taR">
+        className="trans1 hvrBgGrey1">
         {props.isClosed && 'See active decisions'}
         {!props.isClosed && 'See past decisions'}
       </button>

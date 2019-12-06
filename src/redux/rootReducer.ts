@@ -15,6 +15,7 @@ import { rsvpsReducer } from './async/rsvps/reducer';
 import { authenticateSessionReducer } from './async/session/reducer';
 import { updateUserReducer } from './async/updateUser/reducer';
 import { userReducer } from './async/user/reducer';
+import { userDecisionsReducer } from './async/userDecisions/reducer';
 import { usersReducer } from './async/users/reducer';
 import { usersByOrgReducer } from './async/usersByOrg/reducer';
 
@@ -36,4 +37,5 @@ export const rootReducer = combineReducers({
   user: userReducer,
   users: usersReducer,
   usersByOrg: usersByOrgReducer,
+  votes: userDecisionsReducer,
 });

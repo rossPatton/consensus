@@ -6,12 +6,12 @@ import {tComponentProps} from './_types';
 export const EventsComponent = memo((props: tComponentProps) => (
   <>
     <div className="fx aiCtr mB2">
-      <h2 className="col row">
+      <h2 className="col">
         {props.showPast ? 'Past' : 'Upcoming'} {!props.role ? 'Public' : ''} Events
       </h2>
       <button
         onClick={props.togglePast}
-        className="ba0 col row fs6 taR">
+        className="trans1 hvrBgGrey1">
         {props.showPast && 'See upcoming events'}
         {!props.showPast && 'See past events'}
       </button>

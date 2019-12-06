@@ -14,6 +14,7 @@ export const SimpleMajorityVoteComponent = memo((props: tComponentProps) => (
             key={i}
             className="mB3 ttCap">
             <button
+              disabled={props.userVoted && props.selectedOption !== option}
               value={option}
               onClick={props.selectOption}
               className="row p3 taL hvrBgGrey1 trans1">

@@ -1,8 +1,8 @@
 import { match } from 'react-router';
 
 type tBase = {
-  areDecisionsLoading?: boolean,
   areRolesLoading?: boolean,
+  areVotesLoading?: boolean,
   isDecisionLoading?: boolean,
 }
 
@@ -15,9 +15,14 @@ export interface tStore extends tBase {
   decisions: tThunk<tDecision[]>,
   roles: tThunk<tRoleMap[]>,
   session: tThunk<tSession>,
+  votes: tThunk<any>,
 }
 
-export interface tComponentProps extends tBase {
+export type tProps = tBase & {
+  votes: string[],
+}
+
+export interface tComponentProps extends tProps {
   decision: tDecision,
   decisions: tDecision[],
   match: match & { params: { id: number } },
@@ -30,6 +35,7 @@ export interface tContainerProps extends tComponentProps {
   getDecisionsByOrg:
     (query: tIdQuery & {isClosed: boolean}) => Promise<{payload: tDecision[]}>,
   getRoles: (query: tIdQuery) => Promise<any>,
+  getVotes: (query: any) => Promise<any>,
   roles: tRoleMap[],
   session: tSession,
   submitVote: (ev: any) => Promise<any>,
