@@ -15,6 +15,7 @@ import loglevel from 'loglevel';
 import uuidv4 from 'uuid/v4';
 
 import { setupApi } from './api';
+import { closeDecisions } from './cron';
 import { setupMiddleware } from './middleware';
 import { SSR } from './SSR';
 
@@ -69,7 +70,9 @@ const opts = {
 
 // 0.0.0.0 is necessary for docker to work locally
 const httpsServer = https.createServer(opts, app.callback());
-httpsServer.listen(3001, '0.0.0.0', () => loglevel.info('https app running on port 3001'));
+httpsServer.listen(3001, '0.0.0.0' /* needs to be 0.0.0.0 for docker */, () => {
+  loglevel.info('https app running on port 3001');
+});
 
 if (__DEBUG__) {
   loglevel.setDefaultLevel('trace');
@@ -80,3 +83,6 @@ if (__DEBUG__) {
 } else {
   loglevel.setDefaultLevel('info');
 }
+
+// init cronjobs
+// closeDecisions();

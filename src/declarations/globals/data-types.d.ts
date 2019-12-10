@@ -22,7 +22,11 @@ declare type tSimpleMajorityResults = {
   },
 };
 
-declare type tDecisionType = 'n/a' | 'Simple Poll' | 'Simple Majority' | 'Approval';
+declare type tDecisionType = 'n/a'
+  | 'Consensus'
+  | 'Simple Poll'
+  | 'Simple Majority'
+  | 'Approval';
 
 declare type tDecision = {
   options: { // db needs objects, not arrays

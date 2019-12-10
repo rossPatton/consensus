@@ -5,6 +5,7 @@ const createDecisionTypes = () => ([
   { type: 'Simple Majority' },
   { type: 'Simple Poll' },
   { type: 'Approval' },
+  { type: 'Consensus' },
 ]);
 
 exports.seed = async (knex: Knex) => {
