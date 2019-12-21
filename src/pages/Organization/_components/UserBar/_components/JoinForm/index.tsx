@@ -67,5 +67,5 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 export const JoinForm = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(JoinFormContainer);

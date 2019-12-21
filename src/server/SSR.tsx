@@ -38,7 +38,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
       <StaticRouter context={initRouterContext} location={ctx.request.url}>
         <AppShell />
       </StaticRouter>
-    </Provider>
+    </Provider>,
   );
 
   const htmlStream = renderToNodeStream(jsx);

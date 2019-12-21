@@ -11,8 +11,10 @@ class SimpleMajorityVote extends PureComponent<tContainerProps, tState> {
   // TODO move up maybe?
   selectOption = (ev: any) => {
     ev.preventDefault();
+    const selectedOption = ev.currentTarget.value.toLowerCase();
+
     this.setState({
-      selectedOption: ev.currentTarget.value,
+      selectedOption,
     });
   }
 

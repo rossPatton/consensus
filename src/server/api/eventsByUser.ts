@@ -26,7 +26,7 @@ eventsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
     mappedIds = await Promise.all(_.uniq(
       userEventIds
         .filter(async idSet => idSet.publicRSVP || idSet.privateRSVP)
-        .map(async idSet => idSet.eventId)
+        .map(async idSet => idSet.eventId),
     ));
   } catch (err) {
     return ctx.throw(400, err);

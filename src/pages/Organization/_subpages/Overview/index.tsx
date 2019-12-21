@@ -75,7 +75,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const Overview = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(OverviewContainer);
 
 export default Overview;

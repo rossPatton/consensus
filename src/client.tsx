@@ -32,5 +32,5 @@ ReactDOM.hydrate(
       </ScrollToTop>
     </BrowserRouter>
   </Provider>,
-  document.getElementById('appRoot')
+  document.getElementById('appRoot'),
 );

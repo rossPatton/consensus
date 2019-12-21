@@ -33,7 +33,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const OrganizationHeader = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(OrganizationHeaderContainer);
 
 export default OrganizationHeader;

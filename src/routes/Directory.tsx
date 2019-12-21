@@ -1,7 +1,7 @@
 import loadable from '@loadable/component';
 
 const DirectoryComponent = loadable(() =>
-  import(/* webpackChunkName: "Directory" */'../pages/Directory')
+  import(/* webpackChunkName: "Directory" */'../pages/Directory'),
 );
 
 export const Directory = {

@@ -15,9 +15,9 @@ export const ApprovalVoteComponent = memo((props: tComponentProps) => (
             className="mB3 ttCap">
             <button
               disabled={props.userVoted && !props.selectedOptions.includes(choice)}
-              value={choice}
               onClick={props.selectOption}
-              className="row p3 taL hvrBgGrey1 trans1">
+              className="row p3 taL hvrBgGrey1 trans1"
+              value={choice}>
               <input
                 autoComplete="nope"
                 checked={props.selectedOptions.includes(choice)}

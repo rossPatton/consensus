@@ -68,5 +68,5 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 export const OrgSignup = connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(OrgSignupContainer);

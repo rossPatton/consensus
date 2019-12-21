@@ -1,57 +1,57 @@
 import loadable from '@loadable/component';
 
 export const Breadcrumbs = loadable(() =>
-  import(/* webpackChunkName: "Breadcrumbs" */'./Breadcrumbs')
+  import(/* webpackChunkName: "Breadcrumbs" */'./Breadcrumbs'),
 );
 
 export const Decisions = loadable(() =>
-  import(/* webpackChunkName: "Decisions" */'./Decisions')
+  import(/* webpackChunkName: "Decisions" */'./Decisions'),
 );
 
 export const DecisionStatus = loadable(() =>
-  import(/* webpackChunkName: "DecisionStatus" */'./DecisionStatus')
+  import(/* webpackChunkName: "DecisionStatus" */'./DecisionStatus'),
 );
 
 export const Events = loadable(() =>
-  import(/* webpackChunkName: "Events" */'./Events')
+  import(/* webpackChunkName: "Events" */'./Events'),
 );
 
 export const EventPrivacy = loadable(() =>
-  import(/* webpackChunkName: "EventPrivacy" */'./EventPrivacy')
+  import(/* webpackChunkName: "EventPrivacy" */'./EventPrivacy'),
 );
 
 export const ExternalLink = loadable(() =>
-  import(/* webpackChunkName: "ExternalLink" */'./ExternalLink')
+  import(/* webpackChunkName: "ExternalLink" */'./ExternalLink'),
 );
 
 export const GenericLoader = loadable(() =>
-  import(/* webpackChunkName: "GenericLoader" */'./GenericLoader')
+  import(/* webpackChunkName: "GenericLoader" */'./GenericLoader'),
 );
 
 export const Helmet = loadable(() =>
-  import(/* webpackChunkName: "Helmet" */'./Helmet')
+  import(/* webpackChunkName: "Helmet" */'./Helmet'),
 );
 
 export const PasswordInput = loadable(() =>
-  import(/* webpackChunkName: "PasswordInput" */'./PasswordInput')
+  import(/* webpackChunkName: "PasswordInput" */'./PasswordInput'),
 );
 
 export const PrivateRoute = loadable(() =>
-  import(/* webpackChunkName: "PrivateRoute" */'./PrivateRoute')
+  import(/* webpackChunkName: "PrivateRoute" */'./PrivateRoute'),
 );
 
 export const RouteWithSubRoutes = loadable(() =>
-  import(/* webpackChunkName: "RouteWithSubRoutes" */'./RouteWithSubRoutes')
+  import(/* webpackChunkName: "RouteWithSubRoutes" */'./RouteWithSubRoutes'),
 );
 
 export const RSVP = loadable(() =>
-  import(/* webpackChunkName: "RSVP" */'./RSVP')
+  import(/* webpackChunkName: "RSVP" */'./RSVP'),
 );
 
 export const ScrollToTop = loadable(() =>
-  import(/* webpackChunkName: "ScrollToTop" */'./ScrollToTop')
+  import(/* webpackChunkName: "ScrollToTop" */'./ScrollToTop'),
 );
 
 export const Users = loadable(() =>
-  import(/* webpackChunkName: "Users" */'./Users')
+  import(/* webpackChunkName: "Users" */'./Users'),
 );

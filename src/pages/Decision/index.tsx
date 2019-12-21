@@ -68,7 +68,8 @@ class DecisionContainer extends Component<tContainerProps, tState> {
       decisionId: this.props.decision.id,
       userId: this.props.session.profile.id,
     })
-      .then(() => {
+      .then((res) => {
+        loglevel.info('vote => ', res);
         return this.setState({
           userVoted: true,
         });
@@ -93,32 +94,34 @@ class DecisionContainer extends Component<tContainerProps, tState> {
     const isLoading = areRolesLoading || areVotesLoading || isDecisionLoading;
 
     return (
-      <GenericLoader
-        isLoading={isLoading}
-        render={() => (
-          <ErrorBoundary>
-            {!role && <Redirect to="/login" />}
-            <Helmet
-              canonical=""
-              title=""
-              meta={[
-                { name: 'description', content: '' },
-                { name: 'keywords', content: '' },
-                { property: 'og:title', content: '' },
-                { property: 'og:description', content: '' },
-              ]}
-            />
-            <DecisionComponent
-              decision={this.props.decision}
-              decisions={this.props.decisions}
-              match={this.props.match}
-              submitVote={this.submitVote}
-              userVoted={this.state.userVoted}
-              votes={this.props.votes}
-            />
-          </ErrorBoundary>
-        )}
-      />
+      <ErrorBoundary>
+        <GenericLoader
+          isLoading={isLoading}
+          render={() => (
+            <>
+              {!role && <Redirect to="/login" />}
+              <Helmet
+                canonical=""
+                title=""
+                meta={[
+                  { name: 'description', content: '' },
+                  { name: 'keywords', content: '' },
+                  { property: 'og:title', content: '' },
+                  { property: 'og:description', content: '' },
+                ]}
+              />
+              <DecisionComponent
+                decision={this.props.decision}
+                decisions={this.props.decisions}
+                match={this.props.match}
+                submitVote={this.submitVote}
+                userVoted={this.state.userVoted}
+                votes={this.props.votes}
+              />
+            </>
+          )}
+        />
+      </ErrorBoundary>
     );
   }
 }
@@ -144,7 +147,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const Decision = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(DecisionContainer);
 
 export default Decision;

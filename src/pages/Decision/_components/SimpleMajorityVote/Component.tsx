@@ -31,6 +31,7 @@ export const SimpleMajorityVoteComponent = memo((props: tComponentProps) => (
         ))}
         <li>
           <button
+            type="button"
             disabled={props.userVoted}
             className="p3 taL hvrBgGrey1 trans1"
             onClick={ev => {

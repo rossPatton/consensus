@@ -1,1 +1,1 @@
-export { closeDecisions } from './decisions/closeDecisions';
+export { closeOpenDecisions } from './decisions/closeOpenDecisions';

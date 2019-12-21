@@ -1,7 +1,7 @@
 import loadable from '@loadable/component';
 
 const HomeComponent = loadable(() =>
-  import(/* webpackChunkName: "Home" */'../pages/Home')
+  import(/* webpackChunkName: "Home" */'../pages/Home'),
 );
 
 export const Home = {

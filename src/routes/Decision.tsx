@@ -1,7 +1,7 @@
 import loadable from '@loadable/component';
 
 const DecisionComponent = loadable(() =>
-  import(/* webpackChunkName: "Decision" */'../pages/Decision')
+  import(/* webpackChunkName: "Decision" */'../pages/Decision'),
 );
 
 export const Decision = {

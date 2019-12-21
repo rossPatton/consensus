@@ -70,7 +70,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const Account = connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AccountContainer);
 
 export default Account;

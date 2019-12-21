@@ -8,3 +8,4 @@ export {getSession} from './getSession';
 export {getUserByQuery} from './getUserByQuery';
 export {getUsersByQuery} from './getUsersByQuery';
 export {getUsersByOrgId} from './getUsersByOrgId';
+export {updateDecisionsTable} from './updateDecisionsTable';

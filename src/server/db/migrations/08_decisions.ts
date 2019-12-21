@@ -28,7 +28,10 @@ exports.up = async (knex: Knex) => {
     // is determined by the poll type
     table.jsonb('options').notNullable();
     // @ts-ignore
-    table.jsonb('data').notNullable().defaultTo({});
+    table.jsonb('results').notNullable().defaultTo({});
+    table.jsonb('finalWinners').defaultTo(null);
+
+    table.integer('potentialWinners').unsigned().notNullable().defaultTo(1);
 
     table.boolean('isDraft').notNullable().defaultTo(true);
     table.boolean('isClosed').notNullable().defaultTo(false);

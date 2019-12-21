@@ -1,5 +1,5 @@
 require('dotenv-safe').config();
-import dayJS from 'dayjs';
+// import dayJS from 'dayjs';
 import faker from 'faker';
 import Knex from 'knex';
 
@@ -13,7 +13,7 @@ const APPROVAL = 'Approval';
 const types = [CONSENSUS, SIMPLE_POLL, SIMPLE_MAJORITY, APPROVAL];
 
 const createDecision = async () => {
-  const type = types[getRandomNum(0, 2)];
+  const type = types[getRandomNum(0, 3)];
 
   let list = ['Yes', 'No', 'Abstain'];
   if (type === APPROVAL) {
@@ -43,98 +43,75 @@ const createDecision = async () => {
     ];
   }
 
-  let data: any = {
-    results: {
-      yes: faker.random.number(),
-      no: faker.random.number(),
-      abstain: faker.random.number(),
-    },
+  let winners = ['Yes'];
+  if (type === APPROVAL) {
+    winners = [
+      'Person A',
+      'Person C',
+      'Person D',
+      'Person E',
+      'Person F',
+    ];
+  } else if (type === SIMPLE_MAJORITY) {
+    winners = [
+      /* eslint-disable-next-line */
+      'Candidate A',
+    ];
+  } else if (type === CONSENSUS) {
+    winners = [
+      'Disagree',
+    ];
+  }
+
+  let results: any = {
+    Yes: faker.random.number(),
+    No: faker.random.number(),
+    Abstain: faker.random.number(),
   };
 
   if (type === APPROVAL) {
-    data = {
-      winners: 5,
-      // @ts-ignore
-      results: [
-        {
-          count: faker.random.number(),
-          label: 'person A',
-        },
-        {
-          count: faker.random.number(),
-          label: 'person B',
-        },
-        {
-          count: faker.random.number(),
-          label: 'person C',
-        },
-        {
-          count: faker.random.number(),
-          label: 'person D',
-        },
-        {
-          count: faker.random.number(),
-          label: 'person E',
-        },
-        {
-          count: faker.random.number(),
-          label: 'person F',
-        },
-        {
-          count: faker.random.number(),
-          label: 'person G',
-        },
-      ],
+    results = {
+      'Person A': faker.random.number(),
+      'Person C': faker.random.number(),
+      'Person D': faker.random.number(),
+      'Person E': faker.random.number(),
+      'Person F': faker.random.number(),
+      'Person G': faker.random.number(),
     };
   } else if (type === SIMPLE_MAJORITY) {
-    data = {
-      winner: 'Candidate A',
-      // @ts-ignore
-      results: [
-        {
-          count: 100,
-          label: 'Candidate A',
-        },
-        {
-          count: 73,
-          label: 'Candidate B',
-        },
-        {
-          count: 47,
-          label: 'Candidate C',
-        },
-        {
-          count: 12,
-          label: 'Candidate D',
-        },
-      ],
+    results = {
+      'Candidate A': 100,
+      'Candidate B': 73,
+      'Candidate C': 47,
+      'Candidate D': 12,
     };
   } else if (type === CONSENSUS) {
     const decisionBlocked = faker.random.boolean();
-    const blocked = decisionBlocked ? faker.random.number() : 0;
-    data = {
+    const Block = decisionBlocked ? faker.random.number() : 0;
+    results = {
       decisionBlocked,
-      results: {
-        agree: faker.random.number(),
-        disagree: faker.random.number(),
-        abstain: faker.random.number(),
-        blocked,
-      },
+      Agree: faker.random.number(),
+      Disagree: faker.random.number(),
+      Abstain: faker.random.number(),
+      Block,
     };
   }
 
-  const deadline = faker.random.boolean() ? faker.date.past() : faker.date.future();
-  const isClosed = dayJS(deadline).isBefore(dayJS());
+  const deadline = faker.date.past();
+  // faker.random.boolean() ? faker.date.past() : faker.date.future();
+  const isClosed = false; // dayJS(deadline).isBefore(dayJS());
 
   return {
-    data,
     deadline,
     description: faker.lorem.paragraphs(),
     isClosed,
     isDraft: !isClosed && faker.random.boolean(),
+    finalWinners: {winners},
     options: {list},
     orgId: 100,
     orgName: 'Tech Workers Coalition NYC',
+    potentialWinners: winners.length,
+    results,
     title: faker.company.bs(),
     type,
   };

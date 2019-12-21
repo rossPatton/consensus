@@ -1,7 +1,7 @@
 import loadable from '@loadable/component';
 
 const AdminComponent = loadable(() =>
-  import(/* webpackChunkName: "Admin" */'../pages/Admin')
+  import(/* webpackChunkName: "Admin" */'../pages/Admin'),
 );
 
 export const Admin = {

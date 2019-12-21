@@ -35,12 +35,12 @@ export const getVotes = memoize({ ttl: 300 }, (user: tUser) => {
   };
 });
 
-export const submitVote = memoize({ ttl: 300 }, (user: tUser) => {
+export const submitVote = memoize({ ttl: 300 }, (vote: any) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(submitVoteBegin());
 
     try {
-      const qs = objToQueryString(user);
+      const qs = objToQueryString(vote);
 
       // we do it this way so errors can bubble properly to our middleware
       const result = await fetch(`${prefix}?${qs}`, {

@@ -22,7 +22,7 @@ const query = async () => {
   return decisions;
 };
 
-export const closeDecisions = () => {
+export const calculateWinners = () => {
   /* eslint-disable */
   new CronJob('1 * * * * *', query, null, true, 'America/Los_Angeles');
 };

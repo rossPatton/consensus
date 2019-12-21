@@ -38,7 +38,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const UserBar = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(UserBarContainer);
 
 export default UserBar;

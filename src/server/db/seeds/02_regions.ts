@@ -13,8 +13,8 @@ const createRegion = async (key: string, value: string) => ({
 exports.seed = async (knex: Knex) => {
   const regions = await Promise.all(
     Object.entries(stateMap).map(
-      ([k, v]) => createRegion(k, v)
-    )
+      ([k, v]) => createRegion(k, v),
+    ),
   );
 
   await knex('regions').del();

@@ -15,7 +15,7 @@ import loglevel from 'loglevel';
 import uuidv4 from 'uuid/v4';
 
 import { setupApi } from './api';
-import { closeDecisions } from './cron';
+// import { closeOpenDecisions } from './cron';
 import { setupMiddleware } from './middleware';
 import { SSR } from './SSR';
 
@@ -84,5 +84,5 @@ if (__DEBUG__) {
   loglevel.setDefaultLevel('info');
 }
 
-// init cronjobs
-// closeDecisions();
+// run cronjobs
+// closeOpenDecisions();

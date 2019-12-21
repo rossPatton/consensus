@@ -21,7 +21,6 @@ usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {id: orgId} = data;
 
   if (userId === 0) {
-    ctx.throw(400, 'User needs to be logged in');
     return ctx.redirect('/signup');
   }
 

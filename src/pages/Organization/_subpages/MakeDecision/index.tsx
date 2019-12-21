@@ -160,7 +160,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const MakeDecision = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(MakeDecisionContainer);
 
 export default MakeDecision;

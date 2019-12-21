@@ -9,7 +9,7 @@ export const CreateOrEditEventComponent = memo((props: tComponentProps) => {
   const {updateState} = props;
   const onChange = (ev: React.ChangeEvent<any>) => updateState(
     'duration',
-    parseInt(ev.currentTarget.value, 10)
+    parseInt(ev.currentTarget.value, 10),
   );
 
   return (

@@ -1,4 +1,4 @@
-import dayJS from 'dayjs';
+// import dayJS from 'dayjs';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
@@ -17,8 +17,9 @@ const APPROVAL = 'Approval';
 
 export const DecisionComponent = memo((allProps: tComponentProps) => {
   const {decision, decisions, ...props} = allProps;
-  const now = dayJS();
-  const afterDeadline = now.isAfter(decision.deadline);
+  // const now = dayJS();
+  // const afterDeadline = now.isAfter(decision.deadline);
+  // const beforeDeadline = now.isBefore(decision.deadline);
 
   return (
     <div className="contain mT4 mB5">
@@ -44,7 +45,7 @@ export const DecisionComponent = memo((allProps: tComponentProps) => {
                 </p>
               ))}
           </div>
-          {(decision.isClosed || afterDeadline) && (
+          {decision.isClosed && (
             <>
               <h3 className="ffLab mB1">Results</h3>
               {decision.type === 'Approval' && (

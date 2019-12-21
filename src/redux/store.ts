@@ -20,7 +20,7 @@ export const initStore = (initialState?: object) => {
       // 3rd param === middleware/dev tools extension
       composeEnhancers(
         applyMiddleware(...middleware),
-      )
+      ),
     );
   }
 
@@ -30,6 +30,6 @@ export const initStore = (initialState?: object) => {
     // 2nd param === middleware/dev tools extension
     composeEnhancers(
       applyMiddleware(...middleware),
-    )
+    ),
   );
 };

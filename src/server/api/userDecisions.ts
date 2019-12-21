@@ -3,10 +3,12 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import {knex} from '../db/connection';
+import {updateDecisionsTable} from '../queries';
 
 export const userDecisions = new Router();
 const route = '/api/v1/userDecisions';
 const table = 'users_decisions';
+const path = 'state.locals.data';
 
 const getDecisions = async ({decisionId, orgId, userId}: any) => {
   const votes = knex(table).where({userId});
@@ -16,7 +18,7 @@ const getDecisions = async ({decisionId, orgId, userId}: any) => {
 };
 
 userDecisions.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = _.get(ctx, 'state.locals.data', {});
+  const query = _.get(ctx, path, {});
 
   try {
     const votes = await getDecisions(query);
@@ -27,21 +29,24 @@ userDecisions.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 userDecisions.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const {data, decisionId, userId} = _.get(ctx, 'state.locals.data', {});
+  const {data, decisionId, userId} = _.get(ctx, path, {});
 
   // should be a comma delimited string, but you never know
   // db expects an object. arrays are a bit difficult with pg so we do it this way
   // we accept both arrays of votes and single votes, but normalize to array
   const vote = data.includes(',') ? data.split(',') : [data];
-  let decisionQuery: tDecision[];
+  let userDecisionQuery: tDecision[];
   try {
-    decisionQuery = await knex(table)
+    userDecisionQuery = await knex(table)
       .where({decisionId, userId})
       .update({data: { vote }})
       .returning('*');
-
-    ctx.body = _.get(decisionQuery[0], 'data.vote', []);
   } catch (err) {
     ctx.throw(400, err);
   }
+
+  await updateDecisionsTable(ctx, userDecisionQuery[0]);
+
+  const result = _.get(userDecisionQuery[0], 'data.vote', []);
+  ctx.body = result;
 });

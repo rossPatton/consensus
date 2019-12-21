@@ -35,8 +35,13 @@ export const userDecisionsReducer = (state = initialState, action: tActionUnion)
     };
   /* eslint-enable */
 
-  case SUBMIT_VOTE_FAILURE || GET_VOTES_FAILURE:
-    return initialState;
+  case SUBMIT_VOTE_FAILURE || GET_VOTES_FAILURE: {
+    return {
+      ...initialState,
+      error: action.payload,
+      isLoading: false,
+    };
+  }
 
   default:
     return initialState;

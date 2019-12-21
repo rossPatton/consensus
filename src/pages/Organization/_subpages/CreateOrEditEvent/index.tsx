@@ -212,7 +212,7 @@ const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
 
 const CreateOrEditEvent = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(CreateOrEditEventContainer);
 
 export default CreateOrEditEvent;
