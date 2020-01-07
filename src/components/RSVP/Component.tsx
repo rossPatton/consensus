@@ -12,8 +12,8 @@ export const RSVPComponent = memo((props: tComponentProps) => {
       {!rsvp && (
         <form
           method="POST"
-          onSubmit={ev => setRsvp({ev, eventId: id, value: true})}
-          action="/api/v1/rsvps">
+          action="/api/v1/rsvps"
+          onSubmit={ev => setRsvp({ev, eventId: id, value: true})}>
           <fieldset>
             <button className="fx aiCtr br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
               <span

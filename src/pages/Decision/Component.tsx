@@ -3,6 +3,7 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {Decisions, DecisionStatus} from '../../components';
+import {APPROVAL, CONSENSUS, MAJORITY, POLL} from '../../constants';
 import {
   ApprovalResults,
   ApprovalVote,
@@ -10,10 +11,6 @@ import {
   SimpleMajorityVote,
 } from './_components';
 import {tComponentProps} from './_types';
-
-const MAJORITY = 'Simple Majority';
-const POLL = 'Simple Poll';
-const APPROVAL = 'Approval';
 
 export const DecisionComponent = memo((allProps: tComponentProps) => {
   const {decision, decisions, ...props} = allProps;
@@ -67,7 +64,9 @@ export const DecisionComponent = memo((allProps: tComponentProps) => {
                   votes={props.votes}
                 />
               )}
-              {(decision.type === MAJORITY || decision.type === POLL)
+              {(decision.type === MAJORITY
+                || decision.type === POLL
+                || decision.type === CONSENSUS)
                 && (
                   <SimpleMajorityVote
                     options={decision.options.list}

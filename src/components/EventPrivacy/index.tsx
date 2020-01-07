@@ -9,7 +9,8 @@ import {EventPrivacyComponent} from './Component';
 // this should be where the redux gets connected
 class EventPrivacyContainer extends PureComponent<tContainerProps> {
   render() {
-    if (!this.props.session || !this.props.session.id) return null;
+    const notLoggedIn = !this.props.session || !this.props.session.id;
+    if (notLoggedIn && this.props.isPrivate) return null;
 
     return (
       <EventPrivacyComponent

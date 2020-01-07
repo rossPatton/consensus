@@ -12,11 +12,17 @@ export default class DecisionTypeFilter extends Component<tProps, tState> {
     const {decisionFilter} = this.state;
     if (decisionFilter === 'n/a') return ds;
 
-    // only 2 types atm, easy comparison
     const isApproval = decisionFilter === 'Approval';
+    const isConsensus = decisionFilter === 'Consensus';
+    const isSimpleMajority = decisionFilter === 'Simple Majority';
+    const isSimplePoll = decisionFilter === 'Simple Poll';
+
     return ds.filter(d => {
       if (isApproval) return d.type === 'Approval';
-      return d.type !== 'Approval';
+      if (isConsensus) return d.type === 'Consensus';
+      if (isSimpleMajority) return d.type === 'Simple Majority';
+      if (isSimplePoll) return d.type === 'Simple Poll';
+      return false;
     });
   };
 

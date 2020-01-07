@@ -8,6 +8,11 @@ import {tComponentProps} from './_types';
 export const CreateOrEditEventComponent = memo((props: tComponentProps) => {
   const {updateState} = props;
   const isSimplePoll = props.type === 'Simple Poll';
+  const isConsensus = props.type === 'Consensus';
+
+  // simple polls and consensus have pre-determined options
+  // other decisions allow the user to input their own options
+  const hasCustomChoices = !isSimplePoll && !isConsensus;
 
   return (
     <form action="/api/v1/decisions" id="form" method="POST">
@@ -59,8 +64,11 @@ export const CreateOrEditEventComponent = memo((props: tComponentProps) => {
           <option value="Approval">
             Approval Vote
           </option>
+          <option value="Consensus">
+            Consensus Vote
+          </option>
         </select>
-        {!isSimplePoll && (
+        {hasCustomChoices && (
           <>
             <h3>What are the voting options?</h3>
             <div className="fx mB4">
@@ -72,15 +80,18 @@ export const CreateOrEditEventComponent = memo((props: tComponentProps) => {
               />
               <button
                 type="button"
-                onClick={() => updateState('options', props.newOption)}
-                className="p3 mR2 hvrBgGrey1 trans1">
+                className="p3 mR2 hvrBgGrey1 trans1"
+                onClick={() => {
+                  updateState('options', props.newOption);
+                  updateState('newOption', '');
+                }}>
                 Add
               </button>
             </div>
           </>
         )}
         <div className="mB4">
-          {!isSimplePoll
+          {hasCustomChoices
             && props.options.length > 0
             && (
               <>
@@ -101,23 +112,64 @@ export const CreateOrEditEventComponent = memo((props: tComponentProps) => {
                 </ul>
               </>
             )}
-          {isSimplePoll && (
-            <>
-              <h3>Simple poll options</h3>
-              <ul className="fs5 copyBlack">
-                <li className="brdA1 br4 fx mB2 p2">
-                  Yes
-                </li>
-                <li className="brdA1 br4 fx mB2 p2">
-                  No
-                </li>
-                <li className="brdA1 br4 fx mB2 p2">
-                  Abstain
-                </li>
-              </ul>
-            </>
-          )}
+          {!hasCustomChoices
+            && isSimplePoll
+            && (
+              <>
+                <h3>Simple poll options</h3>
+                <ul className="fs5 copyBlack">
+                  <li className="brdA1 br4 fx mB2 p2">
+                    Yes
+                  </li>
+                  <li className="brdA1 br4 fx mB2 p2">
+                    No
+                  </li>
+                  <li className="brdA1 br4 fx mB2 p2">
+                    Abstain
+                  </li>
+                </ul>
+              </>
+            )}
+          {!hasCustomChoices
+            && isConsensus
+            && (
+              <>
+                <h3>Consensus options</h3>
+                <ul className="fs5 copyBlack">
+                  <li className="brdA1 br4 fx mB2 p2">
+                    Agree
+                  </li>
+                  <li className="brdA1 br4 fx mB2 p2">
+                    Disagree
+                  </li>
+                  <li className="brdA1 br4 fx mB2 p2">
+                    Abstain
+                  </li>
+                  <li className="brdA1 br4 fx mB2 p2">
+                    Block
+                  </li>
+                </ul>
+              </>
+            )}
         </div>
+        {hasCustomChoices
+          && props.type === 'Approval'
+          && props.options.length > 2
+          && (
+            <div className="mB4">
+              <h3>How many potential winners?</h3>
+              <select className="fs5 copyBlack">
+                {_.range(1, props.options.length).map((i: number) => (
+                  <option
+                    key={i}
+                    value={i}
+                    className="brdA1 br4 fx mB2 p2">
+                    {i}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
         <div className="brdT1 pT4 pB4 mT4 fx aiCtr">
           <button
             onClick={props.onSubmit}
@@ -130,7 +182,6 @@ export const CreateOrEditEventComponent = memo((props: tComponentProps) => {
             className="p3 mR2 hvrBgGrey1 trans1">
             Save as Draft
           </button>
-          {/* TODO only show after saving as draft*/}
           {props.id && (
             <Link
               to={`/decision/${props.id}?isPreview=true`}

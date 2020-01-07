@@ -1,6 +1,14 @@
+import {History} from 'history';
+
 export type tSetRsvpOpts = {
   ev: React.FormEvent<HTMLFormElement>,
   eventId: number,
+  value: boolean,
+};
+
+export type tRSVPQuery = {
+  id: number,
+  type: 'public' | 'private',
   value: boolean,
 };
 
@@ -13,14 +21,11 @@ export type tProps = {
   session: tSession,
 };
 
-export type tContainerProps = tProps &{
+export type tContainerProps = tProps & {
   event: tEvent,
+  history: History,
   // redux thunk
-  setRsvp: (query: {
-    id: number,
-    type: 'public' | 'private',
-    value: boolean,
-  }) => void,
+  setRsvp: (query: tRSVPQuery) => void,
 };
 
 export type tComponentProps = tProps & {

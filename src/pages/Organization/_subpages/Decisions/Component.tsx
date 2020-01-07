@@ -1,6 +1,7 @@
 import React, {memo} from 'react';
 
 import {Decisions} from '../../../../components';
+import {decisionTypes} from '../../../../constants';
 import {tComponentProps} from './_types';
 
 export const DecisionsComponent = memo((props: tComponentProps) => (
@@ -38,12 +39,11 @@ export const DecisionsComponent = memo((props: tComponentProps) => (
           <option value="n/a">
             All Decisions
           </option>
-          <option value="Simple Majority">
-            Simple Majority
-          </option>
-          <option value="Approval">
-            Approval
-          </option>
+          {decisionTypes.map(type => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
         </select>
       </div>
     </div>

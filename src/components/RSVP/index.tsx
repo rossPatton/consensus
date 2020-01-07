@@ -1,23 +1,29 @@
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import {Dispatch} from 'redux';
 
 import {setRsvp} from '../../redux';
-import {tContainerProps, tSetRsvpOpts, tState, tStore} from './_types';
+import {tContainerProps, tRSVPQuery, tSetRsvpOpts, tState, tStore} from './_types';
 import {RSVPComponent} from './Component';
 
 class RSVPContainer extends PureComponent<tContainerProps, tState> {
+  static defaultProps = {
+    event: {} as tEvent,
+  };
+
   state = {
-    // on the server, this is split between public and private
-    // on the client, the user just needs to see if they've rsvp'd or not
     rsvp: this.props.event.rsvp,
   };
 
   setRsvp = async (opts: tSetRsvpOpts) => {
     opts.ev.preventDefault();
-    const {profile = {}} = this.props.session;
+    const {history, session} = this.props;
+    const {profile = {}} = session;
     const {privateRSVP = true} = profile as tUser;
+
+    if (!session.isAuthenticated) return history.push('/login');
 
     try {
       this.props.setRsvp({
@@ -35,8 +41,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const {role, session} = this.props;
-    if (!role) return null;
+    const {session} = this.props;
     if (session.type === 'org') return null;
 
     return (
@@ -55,7 +60,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  setRsvp: (query: {id: number, value: boolean}) => dispatch(setRsvp(query)),
+  setRsvp: (query: tRSVPQuery) => dispatch(setRsvp(query)),
 });
 
 const RSVP = connect(
@@ -63,4 +68,4 @@ const RSVP = connect(
   mapDispatchToProps,
 )(RSVPContainer);
 
-export default RSVP;
+export default withRouter(RSVP);
