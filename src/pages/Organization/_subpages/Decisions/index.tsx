@@ -16,7 +16,7 @@ class DecisionsContainer extends Component<tContainerProps, tState> {
   }
 
   state = {
-    isClosed: false,
+    showClosed: false,
   }
 
   componentDidUpdate() {
@@ -25,18 +25,18 @@ class DecisionsContainer extends Component<tContainerProps, tState> {
 
   public toggleClosed = () =>
     this.setState({
-      isClosed: !this.state.isClosed,
+      showClosed: !this.state.showClosed,
     })
 
   private getDecisions = () => {
-    const {isClosed} = this.state;
+    const {showClosed} = this.state;
     const {match: { params: { page = 0 } = {} }, org} = this.props;
     const offset = page ? parseInt(page, 10) : 0;
 
     // get active decisions only
     this.props.getDecisionsByOrg({
       id: org.id,
-      isClosed,
+      isClosed: showClosed,
       limit: -1,
       offset,
     });
@@ -65,7 +65,7 @@ class DecisionsContainer extends Component<tContainerProps, tState> {
                 <DecisionsComponent
                   {...decisionTypeProps}
                   {...searchProps}
-                  isClosed={this.state.isClosed}
+                  showClosed={this.state.showClosed}
                   match={this.props.match}
                   role={this.props.role}
                   toggleClosed={this.toggleClosed}

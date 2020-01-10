@@ -6,6 +6,7 @@ export {getRSVPByEventId} from './getRSVPByEventId';
 export {getRSVPsByUserId} from './getRSVPsByUserId';
 export {getSession} from './getSession';
 export {getUserByQuery} from './getUserByQuery';
-export {getUsersByQuery} from './getUsersByQuery';
+export {getUsersByIds} from './getUsersByIds';
 export {getUsersByOrgId} from './getUsersByOrgId';
+export {getUsersByQuery} from './getUsersByQuery';
 export {updateDecisionsTable} from './updateDecisionsTable';

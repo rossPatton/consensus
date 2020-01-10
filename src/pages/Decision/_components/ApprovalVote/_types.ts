@@ -1,5 +1,5 @@
 export type tProps = {
-  options: string[],
+  options: tCustomVoteResults,
   submitVote: (vote: any) => void,
   tiny?: boolean,
   userVoted: boolean,

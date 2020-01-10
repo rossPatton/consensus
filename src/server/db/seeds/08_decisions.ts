@@ -1,5 +1,5 @@
 require('dotenv-safe').config();
-// import dayJS from 'dayjs';
+import dayJS from 'dayjs';
 import faker from 'faker';
 import Knex from 'knex';
 
@@ -15,62 +15,13 @@ const types = [CONSENSUS, SIMPLE_POLL, SIMPLE_MAJORITY, APPROVAL];
 const createDecision = async () => {
   const type = types[getRandomNum(0, 3)];
 
-  let list = ['Yes', 'No', 'Abstain'];
-  if (type === APPROVAL) {
-    list = [
-      'Person A',
-      'Person B',
-      'Person C',
-      'Person D',
-      'Person E',
-      'Person F',
-      'Person G',
-    ];
-  } else if (type === SIMPLE_MAJORITY) {
-    list = [
-      /* eslint-disable-next-line */
-      'Candidate A',
-      'Candidate B',
-      'Candidate C',
-      'Candidate D',
-    ];
-  } else if (type === CONSENSUS) {
-    list = [
-      'Agree',
-      'Disagree',
-      'Abstain',
-      'Block',
-    ];
-  }
-
-  let winners = ['Yes'];
-  if (type === APPROVAL) {
-    winners = [
-      'Person A',
-      'Person C',
-      'Person D',
-      'Person E',
-      'Person F',
-    ];
-  } else if (type === SIMPLE_MAJORITY) {
-    winners = [
-      /* eslint-disable-next-line */
-      'Candidate A',
-    ];
-  } else if (type === CONSENSUS) {
-    winners = [
-      'Disagree',
-    ];
-  }
-
-  let results: any = {
+  let options: any = {
     Yes: faker.random.number(),
     No: faker.random.number(),
     Abstain: faker.random.number(),
   };
-
   if (type === APPROVAL) {
-    results = {
+    options = {
       'Person A': faker.random.number(),
       'Person C': faker.random.number(),
       'Person D': faker.random.number(),
@@ -79,7 +30,7 @@ const createDecision = async () => {
       'Person G': faker.random.number(),
     };
   } else if (type === SIMPLE_MAJORITY) {
-    results = {
+    options = {
       'Candidate A': 100,
       'Candidate B': 73,
       'Candidate C': 47,
@@ -88,7 +39,7 @@ const createDecision = async () => {
   } else if (type === CONSENSUS) {
     const decisionBlocked = faker.random.boolean();
     const Block = decisionBlocked ? faker.random.number() : 0;
-    results = {
+    options = {
       decisionBlocked,
       Agree: faker.random.number(),
       Disagree: faker.random.number(),
@@ -97,21 +48,22 @@ const createDecision = async () => {
     };
   }
 
-  const deadline = faker.date.past();
-  // faker.random.boolean() ? faker.date.past() : faker.date.future();
-  const isClosed = false; // dayJS(deadline).isBefore(dayJS());
+  const deadline = faker.random.boolean() ? faker.date.past() : faker.date.future();
+  const isClosed = dayJS(deadline).isBefore(dayJS());
+  let potentialWinners = 1;
+  if (type === APPROVAL) {
+    potentialWinners = getRandomNum(1, 3);
+  }
 
   return {
+    data: {options},
     deadline,
     description: faker.lorem.paragraphs(),
     isClosed,
-    isDraft: !isClosed && faker.random.boolean(),
-    finalWinners: {winners},
-    options: {list},
+    isDraft: false,
     orgId: 100,
     orgName: 'Tech Workers Coalition NYC',
-    potentialWinners: winners.length,
-    results,
+    potentialWinners,
     title: faker.company.bs(),
     type,
   };

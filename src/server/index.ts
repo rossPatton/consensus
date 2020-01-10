@@ -15,7 +15,7 @@ import loglevel from 'loglevel';
 import uuidv4 from 'uuid/v4';
 
 import { setupApi } from './api';
-// import { closeOpenDecisions } from './cron';
+import { closeOpenDecisions } from './cron';
 import { setupMiddleware } from './middleware';
 import { SSR } from './SSR';
 
@@ -85,4 +85,4 @@ if (__DEBUG__) {
 }
 
 // run cronjobs
-// closeOpenDecisions();
+closeOpenDecisions();

@@ -9,7 +9,7 @@ export const SimpleMajorityVoteComponent = memo((props: tComponentProps) => (
         Choices:
       </legend>
       <ul className="fs6 fw600 lh1">
-        {props.options.map((option, i) => (
+        {Object.keys(props.options).map((option, i) => (
           <li
             key={i}
             className="mB3 ttCap">

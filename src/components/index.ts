@@ -48,6 +48,10 @@ export const RSVP = loadable(() =>
   import(/* webpackChunkName: "RSVP" */'./RSVP'),
 );
 
+export const RSVPS = loadable(() =>
+  import(/* webpackChunkName: "RSVPS" */'./RSVPS'),
+);
+
 export const ScrollToTop = loadable(() =>
   import(/* webpackChunkName: "ScrollToTop" */'./ScrollToTop'),
 );

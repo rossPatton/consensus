@@ -9,7 +9,6 @@ exports.up = async (knex: Knex) => {
     table.string('name'); // real name
     // if set to true, then name isn't visible to other users or org
     table.boolean('privateName').notNullable().defaultTo(true);
-
     table.string('username').notNullable(); // public name
 
     // account recovery / verification

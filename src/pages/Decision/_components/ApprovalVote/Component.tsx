@@ -9,7 +9,7 @@ export const ApprovalVoteComponent = memo((props: tComponentProps) => (
         {props.userVoted ? 'You voted for: ' : 'Choices:'}
       </legend>
       <ul className="fs6 fw600 lh1">
-        {props.options.map((choice, i) => (
+        {Object.keys(props.options).map((choice, i) => (
           <li
             key={i}
             className="mB3 ttCap">

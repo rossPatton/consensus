@@ -1,4 +1,4 @@
 export type tProps = {
-  data: tSimpleMajorityResults,
+  data: tCustomVoteResults,
   tiny?: boolean,
 };

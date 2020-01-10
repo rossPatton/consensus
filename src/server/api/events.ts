@@ -61,13 +61,17 @@ events.get(route, async (ctx: Koa.ParameterizedContext) => {
   const filteredEvents: tEvent[] = await filterEvs4Client(events, isAuthenticated, role);
   const eventsWithAttendees = await Promise.all(
     filteredEvents.map(ev => {
-      const attendees = [...userEventRels].filter(
-        rel => rel.eventId === ev.id && (rel.privateRSVP || rel.publicRSVP),
-      );
+      const publicRSVPS = [...userEventRels].filter(
+        rel => rel.eventId === ev.id && rel.publicRSVP,
+      ).length;
+      const privateRSVPS = [...userEventRels].filter(
+        rel => rel.eventId === ev.id && rel.privateRSVP,
+      ).length;
 
       return {
         ...ev,
-        attendees: attendees.length,
+        publicRSVPS,
+        privateRSVPS,
       };
     }),
   );

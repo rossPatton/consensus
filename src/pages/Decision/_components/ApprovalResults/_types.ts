@@ -1,4 +1,4 @@
 export type tProps = {
-  data: tApprovalResults,
+  data: tCustomVoteResults,
   tiny?: boolean,
 };

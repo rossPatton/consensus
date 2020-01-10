@@ -1,11 +1,10 @@
 import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
-import pluralize from 'pluralize';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {EventPrivacy, ExternalLink, RSVP} from '../../components';
+import {EventPrivacy, ExternalLink, RSVP, RSVPS} from '../../components';
 import {objToQueryString} from '../../utils';
 import {tComponentProps} from './_types';
 
@@ -114,12 +113,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 })}>
                 <EventPrivacy isPrivate={ev.isPrivate} />
                 <RSVP event={ev} role={props.role} />
-                {ev.attendees === 0 && 'Be the first to RSVP to this event'}
-                {ev.attendees > 0 && (
-                  <Link to="filler" className="mR3">
-                    {ev.attendees} {pluralize('attendees', ev.attendees)}
-                  </Link>
-                )}
+                <RSVPS event={ev} />
               </div>
             </div>
           </div>

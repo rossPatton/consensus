@@ -46,11 +46,15 @@ export const DecisionComponent = memo((allProps: tComponentProps) => {
             <>
               <h3 className="ffLab mB1">Results</h3>
               {decision.type === 'Approval' && (
-                <ApprovalResults data={decision.data} />
+                <ApprovalResults
+                  data={decision.data.options as tCustomVoteResults}
+                />
               )}
               {(decision.type === MAJORITY || decision.type === POLL)
                 && (
-                  <SimpleMajorityResults data={decision.data} />
+                  <SimpleMajorityResults
+                    data={decision.data.options as tCustomVoteResults}
+                  />
                 )}
             </>
           )}
@@ -58,7 +62,7 @@ export const DecisionComponent = memo((allProps: tComponentProps) => {
             <>
               {decision.type === APPROVAL && (
                 <ApprovalVote
-                  options={decision.options.list}
+                  options={decision.data.options as tCustomVoteResults}
                   submitVote={props.submitVote}
                   userVoted={props.userVoted}
                   votes={props.votes}
@@ -69,7 +73,7 @@ export const DecisionComponent = memo((allProps: tComponentProps) => {
                 || decision.type === CONSENSUS)
                 && (
                   <SimpleMajorityVote
-                    options={decision.options.list}
+                    options={decision.data.options as tCustomVoteResults}
                     submitVote={props.submitVote}
                     userVoted={props.userVoted}
                     vote={props.votes[0]}

@@ -3,11 +3,11 @@ import React, {memo} from 'react';
 import {tProps} from './_types';
 
 const SimpleMajorityResults = memo((props: tProps) => {
-  const {results} = props.data;
-  const count = results.yes + results.no + results.abstain;
-  const yesPercent = Math.round((results.yes / count) * 100);
-  const noPercent = Math.round((results.no / count) * 100);
-  const abstainPercent = Math.round((results.abstain / count) * 100);
+  const {data} = props;
+  const count = data.Yes + data.No + data.Abstain;
+  const yesPercent = Math.round((data.Yes / count) * 100);
+  const noPercent = Math.round((data.No / count) * 100);
+  const abstainPercent = Math.round((data.Abstain / count) * 100);
 
   return (
     <ul className="fx aiCtr fw600 lh1 mB3 copyBlack">

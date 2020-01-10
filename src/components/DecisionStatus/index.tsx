@@ -1,13 +1,16 @@
 import React, {memo} from 'react';
 
+import {POLL} from '../../constants';
 import {SimpleMajorityResult} from './_components';
 import {tProps} from './_types';
 
 const DecisionStatus = memo((props: tProps) => (
   <>
     {props.decision.isClosed &&
-      props.decision.type === 'Simple Majority' && (
-      <SimpleMajorityResult data={props.decision.data} />
+      props.decision.type === POLL && (
+      <SimpleMajorityResult
+        data={props.decision.data.options as tCustomVoteResults}
+      />
     )}
     {!props.decision.isClosed && (
       <small className="bgGreenLite br8 p1 pL2 pR2 mR2">

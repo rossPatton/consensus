@@ -1,6 +1,7 @@
 import loglevel from 'loglevel';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router';
 import {Dispatch} from 'redux';
 
 import {GenericLoader, Helmet} from '../../components';
@@ -49,6 +50,9 @@ class EventContainer extends Component<tContainerProps> {
   }
 
   render() {
+    const {event, session} = this.props;
+    const rsvps = event.publicRSVPS + event.privateRSVPS;
+
     return (
       <ErrorBoundary>
         <Helmet
@@ -61,13 +65,19 @@ class EventContainer extends Component<tContainerProps> {
             { property: 'og:description', content: '' },
           ]}
         />
+        {event.isPrivate
+          && !session.isAuthenticated
+          && (
+            <Redirect to="/login" />
+          )}
         <GenericLoader
-          isLoading={this.props.isLoading}
+          isLoading={this.props.isLoading && session.isAuthenticated}
           render={() => (
             <EventComponent
-              event={this.props.event}
+              event={event}
               events={this.props.events}
               match={this.props.match}
+              rsvps={rsvps}
             />
           )}
         />
@@ -80,6 +90,7 @@ const mapStateToProps = (store: tStore) => ({
   isLoading: store.event.isLoading,
   event: store.event.data,
   events: store.events.data,
+  session: store.session.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({

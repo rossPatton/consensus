@@ -24,13 +24,10 @@ exports.up = async (knex: Knex) => {
     // when the vote will end
     table.timestamp('deadline').notNullable();
 
-    // data is different for every poll, but the shape of the data
-    // is determined by the poll type
-    table.jsonb('options').notNullable();
+    // data is different for every poll, the shape of the
+    // options object is determined by the poll type
     // @ts-ignore
-    table.jsonb('results').notNullable().defaultTo({});
-    table.jsonb('finalWinners').defaultTo(null);
-
+    table.jsonb('data').notNullable().defaultTo({options: {}});
     table.integer('potentialWinners').unsigned().notNullable().defaultTo(1);
 
     table.boolean('isDraft').notNullable().defaultTo(true);

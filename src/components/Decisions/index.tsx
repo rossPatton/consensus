@@ -4,6 +4,7 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {DecisionStatus} from '../../components';
+import {POLL} from '../../constants';
 import {Paginate} from '../../containers';
 import {SimpleMajorityResult} from './_components';
 import {tProps} from './_types';
@@ -21,9 +22,9 @@ const Decisions = memo((props: tProps) => (
               'brdA1 br8 mB3 p3 pT2 rel ovfHide': true,
               pL4: decision.isClosed,
             })}>
-            {decision.isClosed && decision.type === 'Simple Majority' && (
+            {decision.isClosed && decision.type === POLL && (
               <SimpleMajorityResult
-                data={decision.data}
+                data={decision.data.options as tCustomVoteResults}
               />
             )}
             <time className="mR2 lh1 fw600 fs6 mB2">

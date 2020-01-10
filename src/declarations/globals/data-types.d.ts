@@ -9,17 +9,22 @@ declare interface tAction<T, P = undefined> {
   payload?: P,
 };
 
-declare type tApprovalResults = {
-  results: {count: number, label: string}[],
-  winners: number,
+declare type tCustomVoteResults = {
+  [key: string]: number,
 };
 
-declare type tSimpleMajorityResults = {
-  results: {
-    abstain: number,
-    no: number,
-    yes: number,
-  },
+declare type tSimplePollResults = {
+  Abstain: number,
+  No: number,
+  Yes: number,
+};
+
+declare type tConsensusResults = {
+  Abstain: number,
+  Agree: number,
+  Disagree: number,
+  Block: number,
+  decisionBlocked: boolean,
 };
 
 declare type tDecisionType = 'n/a'
@@ -29,11 +34,12 @@ declare type tDecisionType = 'n/a'
   | 'Approval';
 
 declare type tDecision = {
-  options: { // db needs objects, not arrays
-    list: string[],
-  },
   deadline: string,
-  data: any, // voting results
+  data: {
+    options: tCustomVoteResults
+      | tSimplePollResults
+      | tConsensusResults, // voting options object with votes
+  },
   description: string,
   id: number,
   isClosed: boolean,
@@ -46,7 +52,7 @@ declare type tDecision = {
 // TODO need to rethink how to split up event types
 // creating an event, event schema in db, not logged in event
 declare type tEvent = {
-  attendees: number,
+  attendees?: tUser[],
   category: string,
   city: string,
   country: string,
@@ -61,6 +67,8 @@ declare type tEvent = {
   name: string,
   orgId: number,
   orgName: string,
+  publicRSVPS: number,
+  privateRSVPS: number,
   rsvp: boolean,
   slug: string,
   state: string,

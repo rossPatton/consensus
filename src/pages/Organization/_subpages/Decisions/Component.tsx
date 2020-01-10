@@ -8,14 +8,14 @@ export const DecisionsComponent = memo((props: tComponentProps) => (
   <>
     <div className="fx aiCtr mB2">
       <h2 className="col">
-        {props.isClosed && 'Decision Archive'}
-        {!props.isClosed && 'Active Decisions'}
+        {props.showClosed && 'Decision Archive'}
+        {!props.showClosed && 'Active Decisions'}
       </h2>
       <button
         onClick={props.toggleClosed}
         className="trans1 hvrBgGrey1">
-        {props.isClosed && 'See active decisions'}
-        {!props.isClosed && 'See past decisions'}
+        {props.showClosed && 'See active decisions'}
+        {!props.showClosed && 'See past decisions'}
       </button>
     </div>
     <div className="fx aiCtr p3 bgGrey1 br8 mB4 fs6 fw600">
