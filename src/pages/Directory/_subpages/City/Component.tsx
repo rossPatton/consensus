@@ -49,7 +49,6 @@ export const CityComponent = memo((props: tProps) => (
               <span className="dBl lh1 fs3 mT1 mB3 underline">
                 {org.name}
               </span>
-              {org.membershipTotal} members
             </Link>
           </li>
         ))}

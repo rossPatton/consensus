@@ -17,10 +17,10 @@ export const OverviewComponent = memo((props: tComponentProps) => (
     </div>
     {props.events.length > 0 && (
       <div className={cx({mB5: props.decisions.length > 0})}>
-        <h2 className="mB2">Upcoming Events</h2>
+        <h2 className="mB2">Upcoming Meetings</h2>
         <Events events={props.events} match={props.match} role={props.role} />
         <Link to="events" className="lh1 fs6 fw600">
-          See All Events
+          See All Meetings
         </Link>
       </div>
     )}

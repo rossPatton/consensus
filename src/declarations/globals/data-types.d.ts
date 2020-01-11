@@ -89,7 +89,6 @@ declare type tOrg = {
   eventPrivacy: tGate,
   gate: tGate,
   id: number,
-  membershipTotal: number,
   name: string,
   slug: string,
   region: string,

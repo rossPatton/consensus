@@ -25,7 +25,6 @@ const initialState: tThunk<tOrg> = {
     eventPrivacy: 'manual',
     gate: 'manual',
     id: 0,
-    membershipTotal: 0,
     name: '',
     region: '',
     regionId: 0,

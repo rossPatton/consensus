@@ -11,7 +11,6 @@ export type tState = {
   eventPrivacy: tGate,
   gate: tGate,
   login: string,
-  membershipTotal: number,
   name: string,
   password: string,
   region: string

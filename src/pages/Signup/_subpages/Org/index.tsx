@@ -25,7 +25,6 @@ export class OrgSignupContainer extends Component<tContainerProps, tState> {
       eventPrivacy: 'manual' as tGate,
       gate: 'manual' as tGate,
       login: '',
-      membershipTotal: 0,
       name: '',
       password: '',
       region: location.region as string,

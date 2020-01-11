@@ -19,7 +19,7 @@ export const Tab = memo((props: tProps) => {
   if ((!role && !isPublicSection) || section === subRoute) {
     return (
       <span className={`${cx} bgGrey2`}>
-        {subRoute}
+        {subRoute === 'events' ? 'meetings' : subRoute}
       </span>
     );
   }
@@ -28,7 +28,7 @@ export const Tab = memo((props: tProps) => {
     <Link
       to={to}
       className={`${cx} hvrBgGrey3 trans1`}>
-      {subRoute}
+      {subRoute === 'events' ? 'meetings' : subRoute}
     </Link>
   );
 });

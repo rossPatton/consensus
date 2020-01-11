@@ -7,13 +7,13 @@ export const EventsComponent = memo((props: tComponentProps) => (
   <>
     <div className="fx aiCtr mB2">
       <h2 className="col">
-        {props.showPast ? 'Past' : 'Upcoming'} {!props.role ? 'Public' : ''} Events
+        {props.showPast ? 'Past' : 'Upcoming'} {!props.role ? 'Public' : ''} Meetings
       </h2>
       <button
         onClick={props.togglePast}
         className="trans1 hvrBgGrey1">
-        {props.showPast && 'See upcoming events'}
-        {!props.showPast && 'See past events'}
+        {props.showPast && 'See upcoming meetings'}
+        {!props.showPast && 'See past meetings'}
       </button>
     </div>
     <div className="fx aiCtr p3 bgGrey1 br8 mB4 fs6 fw600">
@@ -25,7 +25,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
           id="searchFilter"
           className="mR2 lh1 row"
           onChange={props.onSearchChange}
-          placeholder="Search for an event by title"
+          placeholder="Search for a meeting by title"
         />
       </label>
       {props.role && (
@@ -36,13 +36,13 @@ export const EventsComponent = memo((props: tComponentProps) => (
             onBlur={props.onPrivacyFilterChange}
             onChange={props.onPrivacyFilterChange}>
             <option value="n/a">
-              All Events
+              All Meetings
             </option>
             <option value="private">
-              Private Events
+              Private Meetings
             </option>
             <option value="public">
-              Public Events
+              Public Meetings
             </option>
           </select>
         </div>

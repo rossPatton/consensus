@@ -54,7 +54,7 @@ export const EventComponent = memo(({event, events, match}: tProps) => (
         {event.attendees && event.attendees.length > 0 && (
           <>
             <div className="fs3 fw600 mB3">
-              Who&lsquo;s going?
+              Public Attendees
             </div>
             <ul className="fx">
               {event.attendees.map((user, i) => (
