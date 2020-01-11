@@ -31,17 +31,26 @@ class OrganizationContainer extends Component<tContainerProps> {
       role = 'admin';
     }
 
+    // TODO make real
+    let meta = [
+      { name: 'description', content: '' },
+      { name: 'keywords', content: '' },
+      { property: 'og:title', content: '' },
+      { property: 'og:description', content: '' },
+    ];
+    if (org.gate === 'invite') {
+      meta = [...meta, {
+        name: 'robots',
+        content: 'noindex',
+      }];
+    }
+
     return (
       <ErrorBoundary>
         <Helmet
-          canonical=""
-          title=""
-          meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
-          ]}
+          canonical={`org/${org.id}/overview`}
+          title={`Consensus: ${org.name}`}
+          meta={meta}
         />
         <GenericLoader
           isLoading={isLoading}

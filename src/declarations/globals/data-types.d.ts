@@ -75,7 +75,7 @@ declare type tEvent = {
   title: string,
 };
 
-declare type tGate = 'public' | 'manual' | 'private';
+declare type tGate = 'public' | 'manual' | 'invite';
 
 declare type tOrg = {
   category: string,
