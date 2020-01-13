@@ -8,7 +8,7 @@ export type tSetRsvpOpts = {
 
 export type tRSVPQuery = {
   id: number,
-  type: 'public' | 'private',
+  type?: 'public' | 'private',
   value: boolean,
 };
 
@@ -16,24 +16,24 @@ export type tState = {
   rsvp: boolean,
 };
 
-export type tProps = {
+export interface tProps {
   role?: tRole,
   session: tSession,
-};
+}
 
-export type tContainerProps = tProps & {
+export interface tContainerProps extends tProps {
   event: tEvent,
   history: History,
   // redux thunk
   setRsvp: (query: tRSVPQuery) => void,
-};
+}
 
-export type tComponentProps = tProps & {
+export interface tComponentProps extends tProps {
   id: number,
   rsvp: boolean,
   // class method passed down to component that calls the redux thunk
   setRsvp: (opts: tSetRsvpOpts) => void,
-};
+}
 
 export type tStore = {
   session: tThunk<tSession>,

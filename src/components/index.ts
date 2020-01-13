@@ -52,6 +52,10 @@ export const RSVPS = loadable(() =>
   import(/* webpackChunkName: "RSVPS" */'./RSVPS'),
 );
 
+export const Search = loadable(() =>
+  import(/* webpackChunkName: "Search" */'./Search'),
+);
+
 export const ScrollToTop = loadable(() =>
   import(/* webpackChunkName: "ScrollToTop" */'./ScrollToTop'),
 );

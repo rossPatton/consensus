@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {DecisionTypeFilter, Search} from '../../../../../containers';
+import {DecisionTypeFilter, SearchFilter} from '../../../../../containers';
 import {getDecisionsByOrg} from '../../../../../redux';
 import {tContainerProps} from './_types';
 import {DecisionsComponent} from './Component';
@@ -30,7 +30,7 @@ class DecisionsContainer extends Component<tContainerProps> {
 
   render() {
     return (
-      <Search
+      <SearchFilter
         items={this.props.decisions}
         render={(searchProps: any) => (
           <DecisionTypeFilter

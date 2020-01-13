@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {PrivacyFilter, PublishedFilter, Search} from '../../../../../containers';
+import {PrivacyFilter, PublishedFilter, SearchFilter} from '../../../../../containers';
 import {getEvents} from '../../../../../redux';
 import {tContainerProps, tState, tStore} from './_types';
 import {EventsComponent} from './Component';
@@ -29,7 +29,7 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
           <PrivacyFilter
             items={publishedProps.items}
             render={(privacyProps: any) => (
-              <Search
+              <SearchFilter
                 items={privacyProps.items}
                 render={(searchProps: any) => (
                   <EventsComponent

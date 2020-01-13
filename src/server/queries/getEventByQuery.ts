@@ -38,23 +38,16 @@ export const getEventByQuery = async (
     }
   }
 
-  console.log('rsvps => ', rsvps);
-
   // get count of both public and private rsvps (we combine these on the client, sometimes)
   const publicRSVPS = [...rsvps].filter(rel => rel.publicRSVP);
   const privateRSVPS = [...rsvps].filter(rel => rel.privateRSVP);
 
-  console.log('public then private counts => ', publicRSVPS.length, privateRSVPS.length);
-
   // if on an actual event page, we render a list of public attendees below the description
   const unsafeUsers = await getUsersByIds(ctx, publicRSVPS.map(rsvp => rsvp.userId));
-  console.log('unsafeUsers => ', unsafeUsers);
 
   // "unsafe" because we want to check their privacy settings before we return anything
   // if this value is set, it should never be a problem. but lets double check anyway
   const attendees = unsafeUsers.filter(user => !user.privateRSVP);
-
-  console.log('attendees => ', attendees);
 
   return {
     ...event,

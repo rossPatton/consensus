@@ -4,7 +4,7 @@ import {Redirect} from 'react-router-dom';
 import {Dispatch} from 'redux';
 
 import {Helmet} from '../../../../components';
-import {DecisionTypeFilter, Search} from '../../../../containers';
+import {DecisionTypeFilter, SearchFilter} from '../../../../containers';
 import {getDecisionsByOrg} from '../../../../redux';
 import {tContainerProps, tState, tStore} from './_types';
 import {DecisionsComponent} from './Component';
@@ -59,7 +59,7 @@ class DecisionsContainer extends Component<tContainerProps, tState> {
         <DecisionTypeFilter
           items={this.props.decisions}
           render={(decisionTypeProps: any) => (
-            <Search
+            <SearchFilter
               items={decisionTypeProps.items}
               render={(searchProps: any) => (
                 <DecisionsComponent

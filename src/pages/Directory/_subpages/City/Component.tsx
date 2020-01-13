@@ -21,7 +21,7 @@ export const CityComponent = memo((props: tProps) => (
       />
       <select onBlur={props.onChange} onChange={props.onChange}>
         <option value="">
-            Filter by Category
+          Filter by Category
         </option>
         {props.categories.map((category: string, i) => (
           <option key={i} value={category}>

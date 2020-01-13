@@ -28,6 +28,6 @@ export const RoleFilter = loadable(() =>
   import(/* webpackChunkName: "RoleFilter" */'./RoleFilter'),
 );
 
-export const Search = loadable(() =>
-  import(/* webpackChunkName: "Search" */'./Search'),
+export const SearchFilter = loadable(() =>
+  import(/* webpackChunkName: "SearchFilter" */'./SearchFilter'),
 );

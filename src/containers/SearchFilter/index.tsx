@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {fuzzFilterList} from '../../utils';
 import {tProps, tState} from './_types';
 
-export default class Search extends Component<tProps, tState> {
+export default class SearchFilter extends Component<tProps, tState> {
   static defaultProps = {
     items: [] as any[],
     searchKey: 'title',

@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {Paginate, Search} from '../../../../../containers';
+import {Paginate, SearchFilter} from '../../../../../containers';
 import {deleteOrgByUser, getOrgsBySession} from '../../../../../redux';
 import {tContainerProps, tOrgWithRole, tState, tStore} from './_types';
 import {MembershipsComponent} from './Component';
@@ -39,7 +39,7 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
       : this.props.orgs;
 
     return (
-      <Search
+      <SearchFilter
         key="name"
         items={orgsToRender}
         render={(searchProps: any) => (

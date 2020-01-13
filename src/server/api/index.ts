@@ -20,6 +20,7 @@ import { reportUri } from './reportUri';
 import { roles } from './roles';
 import { rsvp } from './rsvp';
 import { rsvps } from './rsvps';
+import { search } from './search';
 import { user } from './user';
 import { userDecisions } from './userDecisions';
 import { users } from './users';
@@ -45,6 +46,7 @@ export const setupApi = (app: Koa) => {
   app.use(roles.routes());
   app.use(rsvp.routes());
   app.use(rsvps.routes());
+  app.use(search.routes());
   app.use(user.routes());
   app.use(users.routes());
   app.use(usersByOrg.routes());
@@ -75,6 +77,7 @@ export const setupApi = (app: Koa) => {
   app.use(roles.allowedMethods(opts));
   app.use(rsvp.allowedMethods(opts));
   app.use(rsvps.allowedMethods(opts));
+  app.use(search.allowedMethods(opts));
   app.use(user.allowedMethods(opts));
   app.use(users.allowedMethods(opts));
   app.use(usersByOrg.allowedMethods(opts));

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {RoleFilter, Search} from '../../../../containers';
+import {RoleFilter, SearchFilter} from '../../../../containers';
 import {deleteUserByOrg, getUsersByOrg, patchUserByOrg} from '../../../../redux';
 import {/* tContainerProps, tState,*/ tStore} from './_types';
 import {MembersComponent} from './Component';
@@ -33,7 +33,7 @@ class MembersContainer extends Component<any, any> {
       <RoleFilter
         items={this.props.usersByOrg.users}
         render={(roleProps: any) => (
-          <Search
+          <SearchFilter
             searchKey="username"
             items={roleProps.items}
             render={(searchProps: any) => (

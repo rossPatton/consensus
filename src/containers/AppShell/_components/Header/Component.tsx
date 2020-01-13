@@ -1,6 +1,7 @@
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
+import {Search} from '../../../../components';
 import {tComponentProps} from './_types';
 
 export const HeaderComponent = memo((props: tComponentProps) => (
@@ -13,46 +14,47 @@ export const HeaderComponent = memo((props: tComponentProps) => (
       </button>*/}
       <Link to="/">
         <img
-          alt="Unison"
+          alt="Consensus"
           src="/static/images/logo.svg"
           width="125"
         />
       </Link>
-      {!props.session.isAuthenticated && (
-        <div className="abs r fs6">
-          <Link
-            to="/signup"
-            id="a11ySignup"
-            className="brdA1 br4 p1 pL2 pR2 mR2 fw600 trans1 hvrBgGrey1">
-            Sign Up
-          </Link>
-          <Link
-            to="/login"
-            id="a11yLogin">
-            Login
-          </Link>
-        </div>
-      )}
-      {props.session.isAuthenticated && (
-        <form
-          action="/auth/logout"
-          className="abs r fs6">
-          <fieldset className="fx">
+      <div className="fx aiCtr abs r fs6">
+        <Search />
+        {!props.session.isAuthenticated && (
+          <>
             <Link
-              id="a11yAdmin"
-              className="mR2"
-              to="/admin/profile">
-              Account
+              to="/signup"
+              id="a11ySignup"
+              className="brdA1 br4 p1 pL2 pR2 mR2 fw600 trans1 hvrBgGrey1">
+              Sign Up
             </Link>
-            <button
-              id="a11yLogout"
-              className="trans1 hvrBgGrey1"
-              onClick={props.logout}>
-              Logout
-            </button>
-          </fieldset>
-        </form>
-      )}
+            <Link
+              to="/login"
+              id="a11yLogin">
+              Login
+            </Link>
+          </>
+        )}
+        {props.session.isAuthenticated && (
+          <form action="/auth/logout">
+            <fieldset className="fx">
+              <Link
+                id="a11yAdmin"
+                className="mR2"
+                to="/admin/profile">
+                Account
+              </Link>
+              <button
+                id="a11yLogout"
+                className="trans1 hvrBgGrey1"
+                onClick={props.logout}>
+                Logout
+              </button>
+            </fieldset>
+          </form>
+        )}
+      </div>
     </div>
   </header>
 ));

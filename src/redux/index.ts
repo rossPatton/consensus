@@ -25,6 +25,7 @@ export { deleteOrgByUser, getOrgsBySession, getOrgsByUser } from './async/orgs/t
 export { getRegion } from './async/region/thunk';
 export { getRoles } from './async/roles/thunk';
 export { getRsvps, setRsvp } from './async/rsvps/thunk';
+export { getOrgsBySearch } from './async/search/thunk';
 export { getUserById } from './async/user/thunk';
 export { getUsers } from './async/users/thunk';
 export { deleteUserByOrg, getUsersByOrg, patchUserByOrg, postNewUserByOrg } from './async/usersByOrg/thunk';
