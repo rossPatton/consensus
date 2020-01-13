@@ -7,16 +7,18 @@ import {Dispatch} from 'redux';
 import {GenericLoader, Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
 import {getOrgsBySearch} from '../../redux';
-import {tProps} from './_types';
+import {tProps, tStore} from './_types';
 
-class SearchContainer extends React.PureComponent<tProps> {
+class SearchContainer extends React.Component<tProps> {
   constructor(props: tProps) {
     super(props);
-    const queryObj = qs.parse(this.props.location.search.split('?')[1]);
+    const queryObj = qs.parse(props.location.search.split('?')[1]);
     props.getSearchResults(queryObj);
   }
 
   render() {
+    const {isLoading, search} = this.props;
+
     // TODO make real
     const meta = [
       { name: 'description', content: 'Search page' },
@@ -24,6 +26,8 @@ class SearchContainer extends React.PureComponent<tProps> {
       { property: 'og:title', content: 'Consensus: Search' },
       { property: 'og:description', content: 'lorem ipsum' },
     ];
+
+    const renderNoResults = !isLoading && search.length === 0;
 
     return (
       <ErrorBoundary>
@@ -34,13 +38,13 @@ class SearchContainer extends React.PureComponent<tProps> {
         />
         <div className="mT4 contain">
           <h1 className="mB2 fs2">
-            Your Search Results
+            {renderNoResults ? 'No results!' : 'Your Search Results'}
           </h1>
           <GenericLoader
-            isLoading={this.props.isLoading}
+            isLoading={isLoading}
             render={() => (
               <ul className="fx fxWrap">
-                {this.props.search.map((org: tOrg, i) => (
+                {search.map((org: tOrg, i) => (
                   <li
                     key={i}
                     className="col fxg0 third mB3">
@@ -66,13 +70,13 @@ class SearchContainer extends React.PureComponent<tProps> {
   }
 }
 
-const mapStateToProps = (store: any) => ({
+const mapStateToProps = (store: tStore) => ({
   isLoading: store.search.isLoading,
   search: store.search.data,
 });
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  getSearchResults: (search: string) => dispatch(getOrgsBySearch(search)),
+  getSearchResults: (search: qs.ParsedUrlQuery) => dispatch(getOrgsBySearch(search)),
 });
 
 const Search = connect(

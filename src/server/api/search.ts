@@ -12,19 +12,28 @@ const table = 'orgs';
 search.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, 'state.locals.data', {});
 
-  let orgsLike: tOrg[];
+  if (!query.value) {
+    ctx.status = 204;
+    ctx.body = [];
+  }
+
+  let orgsLike: {rows: tOrg[]};
   try {
-    orgsLike = await knex(table)
-      // TODO implement fuzzy matching
-      .where('name', 'ilike', `%${query.value}%`)
-      .limit(100);
+    // get all columns, for rows in orgs whose name is similar to search term
+    // then sort desc by that similarity/sml (closest first)
+    orgsLike = await knex.raw(`
+      SELECT *, similarity(name, '${query.value}') AS sml
+      FROM ${table}
+      WHERE name % '${query.value}'
+      ORDER BY sml DESC;
+    `);
   } catch (err) {
     return ctx.throw(400, err);
   }
 
-  if (orgsLike instanceof Array && orgsLike.length === 0) {
+  if (orgsLike.rows instanceof Array && orgsLike.rows.length === 0) {
     ctx.status = 204;
   }
 
-  ctx.body = orgsLike;
+  ctx.body = orgsLike.rows;
 });
