@@ -2,12 +2,15 @@ import {
   DELETE_ORG_BY_USER_BEGIN,
   DELETE_ORG_BY_USER_FAILURE,
   DELETE_ORG_BY_USER_SUCCESS,
+  GET_ORGS_BEGIN,
   GET_ORGS_BY_SESSION_BEGIN,
   GET_ORGS_BY_SESSION_FAILURE,
   GET_ORGS_BY_SESSION_SUCCESS,
   GET_ORGS_BY_USER_BEGIN,
   GET_ORGS_BY_USER_FAILURE,
   GET_ORGS_BY_USER_SUCCESS,
+  GET_ORGS_FAILURE,
+  GET_ORGS_SUCCESS,
   tActionUnion,
 } from './_types';
 
@@ -18,10 +21,18 @@ const initialState: tThunk<tOrg[]> = {
 };
 
 export const orgsReducer = (state = initialState, action: tActionUnion) => {
+  /* eslint-disable */
+
   switch (action.type) {
   case DELETE_ORG_BY_USER_BEGIN
     || GET_ORGS_BY_USER_BEGIN
     || GET_ORGS_BY_SESSION_BEGIN:
+    return {
+      ...state,
+      isLoading: true,
+    };
+
+  case GET_ORGS_BEGIN:
     return {
       ...state,
       isLoading: true,
@@ -35,9 +46,24 @@ export const orgsReducer = (state = initialState, action: tActionUnion) => {
     };
   }
 
-  case DELETE_ORG_BY_USER_FAILURE
-    || GET_ORGS_BY_USER_FAILURE
-    || GET_ORGS_BY_SESSION_FAILURE:
+  case GET_ORGS_SUCCESS: {
+    return {
+      ...state,
+      data: action.payload,
+      isLoading: false,
+    };
+  }
+
+  case GET_ORGS_FAILURE:
+    return {
+      ...state,
+      error: action.payload,
+      isLoading: false,
+    };
+
+    case DELETE_ORG_BY_USER_FAILURE
+      || GET_ORGS_BY_USER_FAILURE
+      || GET_ORGS_BY_SESSION_FAILURE:
     return {
       ...state,
       error: action.payload,
@@ -61,4 +87,6 @@ export const orgsReducer = (state = initialState, action: tActionUnion) => {
   default:
     return state;
   }
+
+  /* eslint-enable */
 };

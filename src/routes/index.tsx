@@ -1,4 +1,5 @@
 import {Admin} from './Admin';
+import {Categories} from './Categories';
 import {Decision} from './Decision';
 import {Directory} from './Directory';
 import {ErrorPage} from './ErrorPage';
@@ -14,6 +15,7 @@ import {User} from './User';
 // TODO eventually split this file up once it starts getting big
 export const routes = [
   Admin,
+  Categories,
   Decision,
   Directory,
   ErrorPage,

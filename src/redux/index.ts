@@ -21,7 +21,12 @@ export { getDecisionsByOrg } from './async/getDecisionsByOrg/thunk';
 export { getEventById } from './async/getEventById/thunk';
 export { deleteEvent, getEvents, getEventsByUser } from './async/events/thunk';
 export { getOrg, patchOrg, postOrg } from './async/org/thunk';
-export { deleteOrgByUser, getOrgsBySession, getOrgsByUser } from './async/orgs/thunk';
+export {
+  getOrgs,
+  deleteOrgByUser,
+  getOrgsBySession,
+  getOrgsByUser,
+} from './async/orgs/thunk';
 export { getRegion } from './async/region/thunk';
 export { getRoles } from './async/roles/thunk';
 export { getRsvps, setRsvp } from './async/rsvps/thunk';

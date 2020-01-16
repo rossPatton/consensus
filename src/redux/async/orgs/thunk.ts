@@ -6,13 +6,36 @@ import {
   deleteOrgByUserBegin,
   deleteOrgByUserFailure,
   deleteOrgByUserSuccess,
+  getOrgsBegin,
   getOrgsByUserBegin,
   getOrgsByUserFailure,
   getOrgsByUserSuccess,
+  getOrgsFailure,
+  getOrgsSuccess,
 } from './actions';
 
-const endpoint = '/api/v1/orgsByUser';
-const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+export const getOrgs = memoize({ttl: 300}, (query: any) => {
+  return async function <S>(dispatch: Dispatch<S>) {
+    dispatch(getOrgsBegin());
+
+    try {
+      const endpoint = '/api/v1/orgs';
+      const qs = objToQueryString(query);
+      const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+
+      // @ts-ignore
+      const result = await fetch(`${prefix}?${qs}`, {agent})
+        .then((response: tFetchResponse) => {
+          if (!response.ok) throw response;
+          return response.json();
+        });
+
+      return dispatch(getOrgsSuccess(result));
+    } catch (err) {
+      return dispatch(getOrgsFailure(err));
+    }
+  };
+});
 
 export const getOrgsBySession = memoize({ttl: 300}, () => {
   return async function <S>(dispatch: Dispatch<S>) {
@@ -35,6 +58,9 @@ export const getOrgsBySession = memoize({ttl: 300}, () => {
     }
   };
 });
+
+const endpoint = '/api/v1/orgsByUser';
+const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
 
 export const getOrgsByUser = memoize({ttl: 300}, (query: tIdQuery) => {
   return async function <S>(dispatch: Dispatch<S>) {

@@ -4,9 +4,6 @@ exports.up = async (knex: Knex) => {
   await knex.schema.createTable('orgs', table => {
     table.increments().unsigned().primary();
 
-    // activist group, non-profit, union, etc
-    table.string('category').notNullable();
-
     // user-input about what the group does
     table.text('description', 'longtext').notNullable();
 
@@ -51,6 +48,14 @@ exports.up = async (knex: Knex) => {
     table.integer('regionId')
       .notNullable()
       .references('regions.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+
+    // activist group, non-profit, union, cooperative, etc
+    table.string('category')
+      .notNullable()
+      .defaultTo('Political Organization')
+      .references('categories.type')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 

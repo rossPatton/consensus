@@ -2,15 +2,18 @@ require('dotenv-safe').config();
 import faker from 'faker';
 import Knex from 'knex';
 
+import {categories} from '../../../constants';
+import {getRandomNum} from '../../../utils/getRandomNum';
 import {range} from '../../../utils/range';
 import {slugify} from '../../../utils/slugify';
 
 const createOrg = async () => {
   const name = faker.company.companyName();
   const slug = slugify(name);
+  const category = categories[getRandomNum(0, 4)];
 
   return {
-    category: faker.lorem.word(),
+    category,
     city: 'New York City',
     cityId: 3658,
     country: 'United States',
@@ -25,7 +28,7 @@ const createOrg = async () => {
 };
 
 const createTWC = async () => ({
-  category: 'Tech and Science Activism',
+  category: 'Political Organization',
   city: 'New York City',
   cityId: 3658,
   country: 'United States',
