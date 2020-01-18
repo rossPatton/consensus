@@ -20,7 +20,7 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
         render={(privacyProps: any) => (
           <SearchFilter
             items={privacyProps.items}
-            render={(searchProps: any) => (
+            render={(searchProps: tSearchFilterProps) => (
               <EventsComponent
                 {...privacyProps}
                 {...searchProps}

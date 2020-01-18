@@ -23,12 +23,13 @@ export const rsvpsReducer = (state = initialState, action: tSessionUnion) => {
       isLoading: true,
     };
 
-  case GET_RSVPS_SUCCESS || SET_RSVP_SUCCESS:
+  case GET_RSVPS_SUCCESS || SET_RSVP_SUCCESS: {
     return {
       ...state,
       data: action.payload,
       isLoading: false,
     };
+  }
 
   case GET_RSVPS_FAILURE || SET_RSVP_FAILURE:
     return {

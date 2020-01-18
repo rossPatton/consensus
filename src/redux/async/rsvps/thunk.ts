@@ -33,7 +33,7 @@ export const getRsvps = memoize({ttl: 300}, () => {
   };
 });
 
-export const setRsvp = (query: any) => {
+export const setRsvp = (query: tRSVPQuery) => {
   return async function <S>(dispatch: Dispatch<S>) {
     dispatch(setRsvpBegin());
 

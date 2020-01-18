@@ -4,11 +4,11 @@ import {tProps, tState} from './_types';
 
 // for use with events
 export default class DecisionTypeFilter extends Component<tProps, tState> {
-  public state = {
+  state = {
     decisionFilter: 'n/a' as tDecisionType,
   };
 
-  public filter = (ds: tDecision[]) => {
+  filter = (ds: tDecision[]) => {
     const {decisionFilter} = this.state;
     if (decisionFilter === 'n/a') return ds;
 
@@ -26,7 +26,7 @@ export default class DecisionTypeFilter extends Component<tProps, tState> {
     });
   };
 
-  public onChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
+  onChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
     ev.preventDefault();
     this.setState({
       decisionFilter: ev.currentTarget.value as tDecisionType,

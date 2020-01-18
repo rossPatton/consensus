@@ -40,9 +40,9 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
 
     return (
       <SearchFilter
-        key="name"
+        searchKey="name"
         items={orgsToRender}
-        render={(searchProps: any) => (
+        render={(searchProps: tSearchFilterProps) => (
           <Paginate
             items={searchProps.items}
             page={this.props.match.params.page}

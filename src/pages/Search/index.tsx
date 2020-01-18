@@ -1,10 +1,9 @@
 import qs from 'querystring';
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import {Dispatch} from 'redux';
 
-import {GenericLoader, Helmet} from '../../components';
+import {GenericLoader, Helmet, Orgs} from '../../components';
 import {ErrorBoundary} from '../../containers';
 import {getOrgsBySearch} from '../../redux';
 import {tProps, tStore} from './_types';
@@ -43,25 +42,10 @@ class SearchContainer extends React.Component<tProps> {
           <GenericLoader
             isLoading={isLoading}
             render={() => (
-              <ul className="fx fxWrap">
-                {search.map((org: tOrg, i) => (
-                  <li
-                    key={i}
-                    className="col fxg0 third mB3">
-                    <Link
-                      to={`/org/${org.id}/overview`}
-                      className="dBl fs6 lh1 p3 brdA1 br8 hvrBgGrey1 trans2 noUnderline">
-                      {org.category}
-                      <h2 className="dBl lh1 fs3 mT1 mB3 underline">
-                        {org.name}
-                      </h2>
-                      <div>
-                        Based in {org.city}
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <Orgs
+                match={this.props.match}
+                orgs={search}
+              />
             )}
           />
         </div>

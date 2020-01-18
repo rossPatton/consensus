@@ -2,19 +2,20 @@ import {match} from 'react-router';
 
 export type tProps = {
   events: tEvent[],
-  // if user is an admin, they can edit events
-  isEditable?: boolean,
   role?: tRole,
   // render mobile/sidebar version
   tiny?: boolean,
 };
 
-export type tContainerProps = tProps & {
-  deleteEvent: (query: tIdQuery) => void,
-  match: match & {params: any},
-};
+export interface tContainerProps extends tProps {
+  deleteEvent: (query: tIdQuery) => Promise<tThunk<any>>,
+  match: match & {params: tPaginateParams},
+}
 
-export type tComponentProps = tProps & {
+export interface tComponentProps extends tProps {
   deleteEvent: (ev: React.MouseEvent, id: number) => void,
-};
+  // if user is an admin, they can edit events
+  isEditable?: boolean,
+}
+
 

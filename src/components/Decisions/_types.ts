@@ -2,6 +2,6 @@ import {match} from 'react-router';
 
 export type tProps = {
   decisions: tDecision[],
-  match: match & {params: any},
+  match: match & {params: {page?: string}},
   tiny?: boolean,
 };

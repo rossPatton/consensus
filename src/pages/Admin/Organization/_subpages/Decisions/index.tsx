@@ -32,10 +32,10 @@ class DecisionsContainer extends Component<tContainerProps> {
     return (
       <SearchFilter
         items={this.props.decisions}
-        render={(searchProps: any) => (
+        render={(searchProps: tSearchFilterProps) => (
           <DecisionTypeFilter
             items={searchProps.items}
-            render={(decisionTypeProps: any) => (
+            render={(decisionTypeProps: tDecisionFilterProps) => (
               <DecisionsComponent
                 {...decisionTypeProps}
                 {...searchProps}

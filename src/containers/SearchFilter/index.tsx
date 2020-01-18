@@ -9,11 +9,11 @@ export default class SearchFilter extends Component<tProps, tState> {
     searchKey: 'title',
   };
 
-  public state = {
+  state = {
     items: [] as any[],
   };
 
-  public onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
 
     const search = ev.currentTarget.value;

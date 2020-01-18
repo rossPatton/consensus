@@ -7,5 +7,5 @@ const CategoriesComponent = loadable(() =>
 export const Categories = {
   component: CategoriesComponent,
   exact: true,
-  path: '/categories/:category?',
+  path: '/categories/:category?/:page?',
 };

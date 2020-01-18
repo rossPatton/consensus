@@ -13,9 +13,10 @@ export type tGetActionUnion = tGetBeginAction
   | tGetSuccessAction
   | tGetFailureAction;
 
-export type tSetBeginAction = tAction<typeof SET_RSVP_BEGIN, tLogin>;
-export type tSetSuccessAction = tAction<typeof SET_RSVP_SUCCESS, tSession>;
+export type tSetBeginAction = tAction<typeof SET_RSVP_BEGIN>;
+export type tSetSuccessAction = tAction<typeof SET_RSVP_SUCCESS, any>;
 export type tSetFailureAction = tAction<typeof SET_RSVP_FAILURE, Error>;
+
 export type tSetActionUnion = tSetBeginAction
   | tSetSuccessAction
   | tSetFailureAction;

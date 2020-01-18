@@ -5,10 +5,8 @@ import {tProps} from './_types';
 
 export const Tab = memo((props: tProps) => {
   const { match, role, subRoute = '' } = props;
-  const { country, city, id, region, slug, section } = match.params;
-  const to = id
-    ? `/org/${id}/${subRoute}`
-    : `/org/${country}/${region}/${city}/${slug}/${subRoute}`;
+  const { id, section } = match.params;
+  const to = `/org/${id}/${subRoute}`;
 
   const isPublicSection = subRoute !== 'decisions';
 

@@ -58,16 +58,17 @@ class DecisionsContainer extends Component<tContainerProps, tState> {
         />
         <DecisionTypeFilter
           items={this.props.decisions}
-          render={(decisionTypeProps: any) => (
+          render={(decisionTypeProps: tDecisionFilterProps) => (
             <SearchFilter
               items={decisionTypeProps.items}
-              render={(searchProps: any) => (
+              render={(searchProps: tSearchFilterProps) => (
                 <DecisionsComponent
-                  {...decisionTypeProps}
-                  {...searchProps}
-                  showClosed={this.state.showClosed}
+                  decisions={searchProps.items}
+                  decisionFilter={decisionTypeProps.decisionFilter}
                   match={this.props.match}
-                  role={this.props.role}
+                  onDecisionTypeChange={decisionTypeProps.onDecisionTypeChange}
+                  onSearchChange={searchProps.onSearchChange}
+                  showClosed={this.state.showClosed}
                   toggleClosed={this.toggleClosed}
                 />
               )}

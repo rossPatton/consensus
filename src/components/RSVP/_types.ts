@@ -6,12 +6,6 @@ export type tSetRsvpOpts = {
   value: boolean,
 };
 
-export type tRSVPQuery = {
-  id: number,
-  type?: 'public' | 'private',
-  value: boolean,
-};
-
 export type tState = {
   rsvp: boolean,
 };
@@ -25,7 +19,7 @@ export interface tContainerProps extends tProps {
   event: tEvent,
   history: History,
   // redux thunk
-  setRsvp: (query: tRSVPQuery) => void,
+  setRsvp: (query: tRSVPQuery) => Promise<tThunk<tRSVP>>,
 }
 
 export interface tComponentProps extends tProps {

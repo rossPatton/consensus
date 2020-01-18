@@ -1,4 +1,4 @@
-import {match} from 'react-router';
+import { match } from 'react-router';
 
 export interface tState {
   showClosed: boolean,
@@ -11,7 +11,7 @@ export interface tProps {
 
 export interface tComponentProps extends tProps {
   decisionFilter: tDecisionType,
-  items: tDecision[],
+  decisions: tDecision[],
   onDecisionTypeChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   showClosed: boolean,

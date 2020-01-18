@@ -1,0 +1,25 @@
+// TODO need to rethink how to split up event types
+// creating an event, event schema in db, not logged in event
+declare interface tEvent {
+  attendees?: tUser[],
+  category: string,
+  city: string,
+  country: string,
+  date: string,
+  description: string,
+  endDate: string,
+  id: number,
+  isDraft: boolean,
+  isPrivate: boolean,
+  location: string,
+  locationLink: string,
+  name: string,
+  orgId: number,
+  orgName: string,
+  publicRSVPS: number,
+  privateRSVPS: number,
+  rsvp: boolean,
+  slug: string,
+  state: string,
+  title: string,
+}

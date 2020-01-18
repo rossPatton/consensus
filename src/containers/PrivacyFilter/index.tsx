@@ -8,7 +8,7 @@ export default class PrivacyFilter extends PureComponent<tProps, tState> {
     privacyFilter: 'n/a' as tPrivacyFilter,
   };
 
-  public filter = (evs: tEvent[]) => {
+  filter = (evs: tEvent[]) => {
     const {privacyFilter} = this.state;
     if (privacyFilter === 'n/a') return evs;
 
@@ -16,7 +16,7 @@ export default class PrivacyFilter extends PureComponent<tProps, tState> {
     return evs.filter(ev => ev.isPrivate === isPrivate);
   };
 
-  public onChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
+  onChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
     ev.preventDefault();
     this.setState({
       privacyFilter: ev.currentTarget.value as tPrivacyFilter,

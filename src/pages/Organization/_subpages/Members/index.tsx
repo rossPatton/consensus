@@ -32,11 +32,11 @@ class MembersContainer extends Component<any, any> {
     return (
       <RoleFilter
         items={this.props.usersByOrg.users}
-        render={(roleProps: any) => (
+        render={(roleProps: tRoleFilterProps) => (
           <SearchFilter
             searchKey="username"
             items={roleProps.items}
-            render={(searchProps: any) => (
+            render={(searchProps: tSearchFilterProps) => (
               <MembersComponent
                 {...roleProps}
                 {...searchProps}

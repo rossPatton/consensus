@@ -24,7 +24,7 @@ export const OverviewComponent = memo((props: tComponentProps) => (
         </Link>
       </div>
     )}
-    {props.role && props.decisions.length > 0 && (
+    {/* props.role && props.decisions.length > 0 && (
       <>
         <h2 className="mB2">Active Decisions</h2>
         <Decisions decisions={props.decisions.slice(0, 3)} match={props.match} />
@@ -32,6 +32,6 @@ export const OverviewComponent = memo((props: tComponentProps) => (
           See All Decisions
         </Link>
       </>
-    )}
+    )*/}
   </>
 ));

@@ -22,12 +22,12 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
     this.getEvents();
   }
 
-  public togglePast = () =>
+  togglePast = () =>
     this.setState({
       showPast: !this.state.showPast,
     });
 
-  private getEvents = () => {
+  getEvents = () => {
     const {showPast} = this.state;
     const {match: {params: {page = 0} = {}}, org} = this.props;
     // if user is not signed in, only show public events
@@ -62,7 +62,7 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
           render={(privacyProps: any) => (
             <SearchFilter
               items={privacyProps.items}
-              render={(searchProps: any) => (
+              render={(searchProps: tSearchFilterProps) => (
                 <EventsComponent
                   {...privacyProps}
                   {...searchProps}

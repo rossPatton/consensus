@@ -1,6 +1,6 @@
 export interface tProps {
   items: tUser[],
-  render: Function,
+  render: (props: tRoleFilterProps) => React.ReactNode,
 }
 
 export interface tState {

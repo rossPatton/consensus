@@ -1,7 +1,8 @@
-import React, {memo} from 'react';
-import {Link} from 'react-router-dom';
+import React, { memo } from 'react';
 
-import {tProps} from './_types';
+import { Orgs } from '../../../../components';
+import { categories } from '../../../../constants';
+import { tProps } from './_types';
 
 export const CityComponent = memo((props: tProps) => (
   <>
@@ -23,9 +24,9 @@ export const CityComponent = memo((props: tProps) => (
         <option value="">
           Filter by Category
         </option>
-        {props.categories.map((category: string, i) => (
-          <option key={i} value={category}>
-            {category}
+        {categories.map(({display}) => (
+          <option key={display} value={display}>
+            {display}
           </option>
         ))}
       </select>
@@ -36,23 +37,9 @@ export const CityComponent = memo((props: tProps) => (
         {props.orgsToRender.length === 0 && 'No organizations found'}
       </h2>
     </div>
-    {props.orgsToRender.length > 0 && (
-      <ul className="fx fxWrap">
-        {props.orgsToRender.map((org: tOrg, i) => (
-          <li
-            key={i}
-            className="col fxg0 third mB3">
-            <Link
-              to={`/org/${org.id}/overview`}
-              className="dBl fs6 lh1 p3 brdA1 br8 hvrBgGrey1 trans2 noUnderline">
-              {org.category}
-              <span className="dBl lh1 fs3 mT1 mB3 underline">
-                {org.name}
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    )}
+    <Orgs
+      match={props.match}
+      orgs={props.orgsToRender}
+    />
   </>
 ));

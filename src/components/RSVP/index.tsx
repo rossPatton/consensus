@@ -5,7 +5,7 @@ import {withRouter} from 'react-router';
 import {Dispatch} from 'redux';
 
 import {setRsvp} from '../../redux';
-import {tContainerProps, tRSVPQuery, tSetRsvpOpts, tState, tStore} from './_types';
+import {tContainerProps, tSetRsvpOpts, tState, tStore} from './_types';
 import {RSVPComponent} from './Component';
 
 class RSVPContainer extends PureComponent<tContainerProps, tState> {

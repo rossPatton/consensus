@@ -32,6 +32,10 @@ export const Helmet = loadable(() =>
   import(/* webpackChunkName: "Helmet" */'./Helmet'),
 );
 
+export const Orgs = loadable(() =>
+  import(/* webpackChunkName: "Orgs" */'./Orgs'),
+);
+
 export const PasswordInput = loadable(() =>
   import(/* webpackChunkName: "PasswordInput" */'./PasswordInput'),
 );

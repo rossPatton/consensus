@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
@@ -11,7 +11,7 @@ import {EventsComponent} from './Component';
 // TODO completely decouple this container from the other events pages etc
 // this should be where the redux gets connected
 // (probably - rn we have events rendering all over the place)
-class EventsContainer extends Component<tContainerProps> {
+class EventsContainer extends PureComponent<tContainerProps> {
   deleteEvent = (ev: React.MouseEvent, id: number) => {
     ev.preventDefault();
     this.props.deleteEvent({id});

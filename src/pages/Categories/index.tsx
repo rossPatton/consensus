@@ -3,9 +3,9 @@ import React from 'react';
 import {categoryMap} from '../../constants';
 import {ErrorBoundary} from '../../containers';
 import {Category, CategoryList} from './_subpages';
-// import {tProps} from './_types';
+import {tProps} from './_types';
 
-const Categories = (props: any) => {
+const Categories = (props: tProps) => {
   const {match: {params}} = props;
   const renderCategory = !!params.category;
 
@@ -19,7 +19,7 @@ const Categories = (props: any) => {
         </h1>
         {!renderCategory && <CategoryList />}
         {renderCategory && (
-          <Category category={params.category} />
+          <Category match={props.match} />
         )}
       </div>
     </ErrorBoundary>

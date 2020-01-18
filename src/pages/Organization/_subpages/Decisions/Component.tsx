@@ -47,6 +47,9 @@ export const DecisionsComponent = memo((props: tComponentProps) => (
         </select>
       </div>
     </div>
-    <Decisions decisions={props.items} match={props.match} />
+    <Decisions
+      decisions={props.decisions}
+      match={props.match}
+    />
   </>
 ));

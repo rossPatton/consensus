@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Dispatch } from 'redux';
 
-import {Breadcrumbs, GenericLoader, Helmet} from '../../../../components';
-import {categoryMap} from '../../../../constants';
-import {getOrgs} from '../../../../redux';
-// import {fuzzFilterList} from '../../../../utils';
-import {tContainerProps, tStore} from './_types';
+import { Breadcrumbs, GenericLoader, Helmet, Orgs } from '../../../../components';
+import { categoryMap } from '../../../../constants';
+import { Paginate, SearchFilter } from '../../../../containers';
+import { getOrgs } from '../../../../redux';
+import { tContainerProps, tStore } from './_types';
 
 class CategoryContainer extends Component<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    props.getOrgs({category: categoryMap[props.category]});
+    const { match: {params} } = props;
+    props.getOrgs({
+      category: categoryMap[params.category],
+    });
   }
 
   render() {
-    const {category, isLoading, orgs} = this.props;
+    const {match: {params}, isLoading, orgs} = this.props;
 
     return (
       <>
@@ -37,32 +39,42 @@ class CategoryContainer extends Component<tContainerProps> {
               display: 'All Categories',
               to: 'categories',
             }, {
-              display: categoryMap[category],
-              to: `categories/${category}`,
+              display: categoryMap[params.category],
+              to: `categories/${params.category}`,
             }];
 
             return (
               <>
                 <Breadcrumbs crumbs={crumbs} />
-                <ul className="fx fxWrap">
-                  {orgs.map((org: tOrg, i) => (
-                    <li
-                      key={i}
-                      className="col fxg0 third mB3">
-                      <Link
-                        to={`/org/${org.id}/overview`}
-                        className="dBl fs6 lh1 p3 brdA1 br8 hvrBgGrey1 trans2 noUnderline">
-                        {org.category}
-                        <h2 className="dBl lh1 fs3 mT1 mB3 underline">
-                          {org.name}
-                        </h2>
-                        <div>
-                          Based in {org.city}
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                <SearchFilter
+                  items={orgs}
+                  searchKey="name"
+                  render={(searchProps: tSearchFilterProps) => (
+                    <Paginate
+                      count={9}
+                      items={searchProps.items}
+                      page={params.page}
+                      render={(orgsToRender: tOrg[]) => (
+                        <>
+                          <div className="fx aiCtr p3 bgGrey1 br8 mB4 fs6 fw600">
+                            <label className="col row mR3" htmlFor="searchFilter">
+                              <div>Search</div>
+                              <input
+                                spellCheck
+                                type="search"
+                                id="searchFilter"
+                                className="mR2 lh1 row"
+                                onChange={searchProps.onSearchChange}
+                                placeholder="Search for a meeting by title"
+                              />
+                            </label>
+                          </div>
+                          <Orgs match={this.props.match} orgs={orgsToRender} />
+                        </>
+                      )}
+                    />
+                  )}
+                />
               </>
             );
           }}

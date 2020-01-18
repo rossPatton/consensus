@@ -18,13 +18,13 @@ const OrganizationTabs = memo((props: tProps) => (
           subRoute="events"
         />
       </li>
-      <li className="brdR1">
+      {/* <li className="brdR1">
         <Tab
           match={props.match}
           role={props.role}
           subRoute="decisions"
         />
-      </li>
+      </li>*/}
     </ul>
   </nav>
 ));
