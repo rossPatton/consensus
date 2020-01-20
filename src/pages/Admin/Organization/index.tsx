@@ -1,15 +1,23 @@
-import React, { Component } from 'react';
+import React, {PureComponent} from 'react';
+import {Redirect} from 'react-router';
 
 import {tProps} from './_types';
 import {OrgAdminComponent} from './Component';
 
-export class OrgAdmin extends Component<tProps> {
+export class OrgAdmin extends PureComponent<tProps> {
   render() {
+    const {match, session} = this.props;
+
     return (
-      <OrgAdminComponent
-        match={this.props.match}
-        session={this.props.session}
-      />
+      <>
+        {!session.isAuthenticated && <Redirect to="/login" />}
+        {session.isAuthenticated && (
+          <OrgAdminComponent
+            match={match}
+            session={session}
+          />
+        )}
+      </>
     );
   }
 }

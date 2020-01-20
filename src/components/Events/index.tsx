@@ -14,7 +14,7 @@ import {EventsComponent} from './Component';
 class EventsContainer extends PureComponent<tContainerProps> {
   deleteEvent = (ev: React.MouseEvent, id: number) => {
     ev.preventDefault();
-    this.props.deleteEvent({id});
+    this.props.deleteEventDispatch({id});
   }
 
   render() {
@@ -40,7 +40,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
 }
 
 const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  deleteEvent: (query: tIdQuery) => dispatch(deleteEvent(query)),
+  deleteEventDispatch: (query: tIdQuery) => dispatch(deleteEvent(query)),
 });
 
 const Events = connect(null, mapDispatchToProps)(EventsContainer);

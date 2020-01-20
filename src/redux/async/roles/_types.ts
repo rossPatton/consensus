@@ -7,7 +7,8 @@ export const SET_ROLE = 'SET_ROLE';
 export type tBeginAction = tAction<typeof GET_ROLES_BEGIN>;
 
 export type tSuccessAction = tAction<
-  typeof GET_ROLES_SUCCESS | typeof SET_ROLE,
+  typeof GET_ROLES_SUCCESS
+  | typeof SET_ROLE,
   any
 >;
 

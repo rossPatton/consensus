@@ -2,13 +2,12 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {Account, Decisions, Events, Members, Profile} from './_subpages';
+import {Account, Events, Members, Profile} from './_subpages';
 import {tProps} from './_types';
 
 export const OrgAdminComponent = memo((props: tProps) => {
   const {section} = props.match.params;
   const isAccount = section === 'account';
-  const isDecisions = section === 'decisions';
   const isEvents = section === 'events';
   const isProfile = section === 'profile';
   const isMembers = section === 'memberships';
@@ -25,14 +24,14 @@ export const OrgAdminComponent = memo((props: tProps) => {
             )}
             {isAccount && 'Account'}
           </li>
-          <li className="p1">
+          {/* <li className="p1">
             {isDecisions && 'Decisions'}
             {!isDecisions && (
               <Link to="/admin/decisions">
                 Decisions
               </Link>
             )}
-          </li>
+            </li>*/}
           <li className="p1">
             {isEvents && 'Events'}
             {!isEvents && (
@@ -65,12 +64,12 @@ export const OrgAdminComponent = memo((props: tProps) => {
             session={props.session}
           />
         )}
-        {isDecisions && (
+        {/* isDecisions && (
           <Decisions
             match={props.match}
             session={props.session}
           />
-        )}
+        )*/}
         {isEvents && (
           <Events
             match={props.match}

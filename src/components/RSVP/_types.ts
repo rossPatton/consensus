@@ -1,28 +1,29 @@
 import {History} from 'history';
+import {RouteComponentProps} from 'react-router';
 
 export type tSetRsvpOpts = {
   ev: React.FormEvent<HTMLFormElement>,
   eventId: number,
   value: boolean,
-};
+}
 
 export type tState = {
   rsvp: boolean,
 };
 
-export interface tProps {
+type tProps = {
   role?: tRole,
   session: tSession,
 }
 
-export interface tContainerProps extends tProps {
+export type tContainerProps = RouteComponentProps<any> & tProps & {
   event: tEvent,
   history: History,
   // redux thunk
-  setRsvp: (query: tRSVPQuery) => Promise<tThunk<tRSVP>>,
+  setRsvpDispatch: (query: tRSVPQuery) => Promise<tThunk<tRSVP>>,
 }
 
-export interface tComponentProps extends tProps {
+export type tComponentProps = tProps & {
   id: number,
   rsvp: boolean,
   // class method passed down to component that calls the redux thunk

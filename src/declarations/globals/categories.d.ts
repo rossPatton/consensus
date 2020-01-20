@@ -11,10 +11,10 @@ declare type tCategory = 'Community Center'
   | 'Union';
 
 declare type tCategoryMap = {
-  [key: string]: tCategory,
+  readonly [key: string]: tCategory,
 };
 
 declare type tCategories = {
-  display: tCategory,
-  slug: tCategorySlug,
+  readonly display: tCategory,
+  readonly slug: tCategorySlug,
 }[];

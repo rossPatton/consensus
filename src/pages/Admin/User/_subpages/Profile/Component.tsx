@@ -8,27 +8,45 @@ export const ProfileComponent = memo((props: tComponentProps) => (
     action="/api/v1/user"
     autoComplete="off"
     className="col"
-    encType="multipart/form-data"
+    // encType="multipart/form-data"
     onSubmit={props.save}>
     <fieldset>
       <legend>
         <h1 className="fs2 mB3">Edit your profile</h1>
       </legend>
       <div className="p4 br8 brdA1 mB3">
-        <div className="fx aiCtr mB3">
-          <label className="col row mR3" htmlFor="name">
-            <h2 className="ffLab fs5 mB1 lh1">
+        <label className="col row mR3" htmlFor="name">
+          <h2 className="ffLab fs5 mB1 lh1">
               Name
-            </h2>
-            <input
-              id="name"
-              className="p3 row"
-              onChange={ev => props.updateState('name', ev)}
-              placeholder={props.name}
-              value={props.name}
-              name="name"
-            />
-          </label>
+          </h2>
+          <input
+            id="name"
+            className="p3 row"
+            onChange={ev => props.updateState('name', ev)}
+            placeholder={props.name}
+            value={props.name}
+            name="name"
+          />
+        </label>
+        <div
+          tabIndex={0}
+          role="button"
+          className="fx aiCtr curPtr mB3 fs6"
+          onClick={ev => props.updateState('privateName', ev)}
+          onKeyPress={ev => props.updateState('privateName', ev)}>
+          <input
+            readOnly
+            type="checkbox"
+            className="mR2"
+            autoComplete="nope"
+            checked={props.privateName}
+          />
+          {props.privateName && (
+            <span>Private</span>
+          )}
+          {!props.privateName && (
+            <span>Public</span>
+          )}
         </div>
         <label htmlFor="bio">
           <h2 className="ffLab fs5 mB1 lh1">

@@ -1,4 +1,3 @@
-
 declare type tUser = {
   bio: string,
   email: string,

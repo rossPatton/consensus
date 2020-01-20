@@ -1,14 +1,17 @@
-import { tBeginAction, tFailureAction, tSuccessAction } from './_types';
-
-export const REGISTER_USER_BEGIN = 'REGISTER_USER_BEGIN';
-export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
-export const REGISTER_USER_FAILURE = 'REGISTER_USER_FAILURE';
+import {
+  REGISTER_USER_BEGIN,
+  REGISTER_USER_FAILURE,
+  REGISTER_USER_SUCCESS,
+  tBeginAction,
+  tFailureAction,
+  tSuccessAction,
+} from './_types';
 
 export const registerUserBegin = (): tBeginAction => ({
   type: REGISTER_USER_BEGIN,
 });
 
-export const registerUserSuccess = (payload: tThunk<tUser | null>): tSuccessAction => ({
+export const registerUserSuccess = (payload: tUser | null): tSuccessAction => ({
   type: REGISTER_USER_SUCCESS,
   payload,
 });

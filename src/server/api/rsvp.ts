@@ -39,7 +39,7 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
   // update existing event or insert new users_events relation
   if (currentRSVPStatus) {
     try {
-      const update = await knex(table)
+      const update: tRSVP[] = await knex(table)
         .where({id: currentRSVPStatus.id})
         .update(newRsvp)
         .returning('*');
@@ -49,7 +49,7 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
     }
   } else {
     try {
-      const insert = await knex(table)
+      const insert: tRSVP[] = await knex(table)
         .insert(newRsvp)
         .returning('*');
       ctx.body = insert[0];

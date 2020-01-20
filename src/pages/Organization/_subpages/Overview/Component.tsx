@@ -2,7 +2,7 @@ import cx from 'classnames';
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Decisions, Events } from '../../../../components';
+import { Events } from '../../../../components';
 import { tComponentProps } from './_types';
 
 export const OverviewComponent = memo((props: tComponentProps) => (

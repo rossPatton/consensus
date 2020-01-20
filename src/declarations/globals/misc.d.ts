@@ -30,17 +30,17 @@ declare type tRole = 'member' | 'facilitator' | 'admin' | 'n/a' | null;
 declare type tPrivacyFilter = 'n/a' | 'public' | 'private';
 declare type tPublishedFilter = 'n/a' | 'published' | 'draft';
 
-declare interface tRoleMap {
+declare type tRoleMap = {
   orgId: number,
   role: tRole,
 }
 
-declare interface tAccountRoleRelation extends tRoleMap {
+declare type tAccountRoleRelation = tRoleMap & {
   id: number,
   userId: number,
 }
 
-declare interface tUserOrgRelation {
+declare type tUserOrgRelation = {
   id: number,
   userId: number,
   orgId: number,

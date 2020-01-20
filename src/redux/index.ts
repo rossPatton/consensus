@@ -1,10 +1,3 @@
-// exports actions/thunks here for easier importing
-// import loadable from '@loadable/component';
-
-// export const setRole = loadable(() =>
-//   import(/* webpackChunkName: "Admin" */'../pages/Admin')
-// );
-
 // actions here
 export { setRole } from './async/roles/actions';
 export { setUserByOrg } from './async/usersByOrg/actions';
@@ -29,7 +22,7 @@ export {
 } from './async/orgs/thunk';
 export { getRegion } from './async/region/thunk';
 export { getRoles } from './async/roles/thunk';
-export { getRsvps, setRsvp } from './async/rsvps/thunk';
+export { getRsvps, setRsvp } from './async/rsvps';
 export { getOrgsBySearch } from './async/search/thunk';
 export { getUserById } from './async/user/thunk';
 export { getUsers } from './async/users/thunk';

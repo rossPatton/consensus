@@ -9,7 +9,7 @@ export interface tProps {
   usersByOrg: tUsersByOrg,
 }
 
-export interface tComponentProps extends tProps {
+export type tComponentProps = tProps & {
   role: tRole,
 }
 
@@ -17,8 +17,8 @@ export type tContainerProps = tProps & {
   getDecisionsByOrg: (id: number) => Promise<tThunk<tDecision[]>>,
   getEvents: (id: number) => Promise<tThunk<tEvent[]>>,
   getOrg: (params: tOrgRouteParams) => Promise<tThunk<tOrg>>,
-  getRoles: (query: {id: number}) => Promise<tThunk<tRoleMap[]>>,
-  getRsvps: (query: {id: number}) => Promise<tThunk<tRSVP[]>>,
+  getRoles: (query: tIdQuery) => Promise<tThunk<tRoleMap[]>>,
+  getRsvps: (query: tIdQuery) => Promise<tThunk<tRSVP[]>>,
   isLoading: boolean,
   roles: tRoleMap[],
   session: tSession,

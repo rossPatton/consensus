@@ -23,7 +23,7 @@ class DecisionsContainer extends Component<tContainerProps, tState> {
     this.getDecisions();
   }
 
-  public toggleClosed = () =>
+  toggleClosed = () =>
     this.setState({
       showClosed: !this.state.showClosed,
     })

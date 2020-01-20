@@ -15,6 +15,7 @@ const initialState = {
   password: '',
   privateEmail: true,
   privateMemberships: false,
+  privateName: false,
   privateRSVP: false,
   username: '',
 };
@@ -34,6 +35,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       password: '',
       privateEmail: user.privateEmail,
       privateMemberships: user.privateMemberships,
+      privateName: user.privateName,
       privateRSVP: user.privateRSVP,
       username: user.username,
     };

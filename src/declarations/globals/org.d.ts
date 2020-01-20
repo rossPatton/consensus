@@ -1,20 +1,20 @@
 declare type tGate = 'public' | 'manual' | 'invite';
 
-declare interface tOrg {
-  category: string,
-  city: string,
-  cityId: number,
-  country: string,
-  countryId: number,
-  createdAt?: string, // we dont send to client
-  description: string,
-  email?: string, // user admin account only
-  eventPrivacy: tGate,
-  gate: tGate,
-  id: number,
-  name: string,
-  slug: string,
-  region: string,
-  regionId: number,
-  updatedAt?: string, // we dont send to client
+declare type tOrg = {
+  readonly category: string,
+  readonly city: string,
+  readonly cityId: number,
+  readonly country: string,
+  readonly countryId: number,
+  readonly createdAt?: string, // we dont send to client
+  readonly description: string,
+  readonly email?: string, // user admin account only
+  readonly eventPrivacy: tGate,
+  readonly gate: tGate,
+  readonly id: number,
+  readonly name: string,
+  readonly slug: string,
+  readonly region: string,
+  readonly regionId: number,
+  readonly updatedAt?: string, // we dont send to client
 }

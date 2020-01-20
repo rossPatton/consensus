@@ -1,4 +1,4 @@
-declare interface tRSVP {
+declare type tRSVP = {
   eventId: number,
   id?: number,
   // only one can be true at a time
@@ -7,8 +7,8 @@ declare interface tRSVP {
   userId: number,
 }
 
-declare interface tRSVPQuery {
+declare type tRSVPQuery = {
   id: number,
-  type: 'public' | 'private',
+  rsvpType: 'public' | 'private',
   value: boolean,
 }

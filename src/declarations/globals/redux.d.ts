@@ -1,10 +1,10 @@
-declare interface tThunk<D> {
-  error?: Error | null,
-  data: D,
-  isLoading?: boolean,
+declare type tThunk<D> = {
+  readonly error?: Error | null,
+  readonly data: D,
+  readonly isLoading?: boolean,
 };
 
-declare interface tAction<T, P = undefined> {
-  type: T,
-  payload?: P,
+declare type tAction<T, P = undefined> = {
+  readonly type: T,
+  readonly payload?: P,
 };
