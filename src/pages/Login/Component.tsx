@@ -19,6 +19,7 @@ export const LoginComponent = memo((props: tComponentProps) => (
         <h3 className="ffLab fs5 mB1">Login</h3>
         <input
           required
+          autoComplete="login"
           name="username" // for non-js submit and passportjs
           id="loginInput"
           placeholder="yourSecretLogin"

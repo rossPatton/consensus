@@ -5,6 +5,7 @@ type tObj = {[key: string]: any};
 export const objToQueryString = (obj: tObj): string => {
   if (typeof obj !== 'object') return '';
   if (obj instanceof Array) return '';
+  if (Object.keys(obj).length === 0) return '';
 
   const qs = Object.keys(obj)
     .map(k => {

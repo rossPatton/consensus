@@ -1,9 +1,8 @@
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 
-import {authenticateSession, updateUser} from '../../../../../redux';
+import {login, updateUser} from '../../../../../redux';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {ProfileComponent} from './Component';
 
@@ -64,7 +63,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     if (!newUser.payload) return;
 
     try {
-      await this.props.authenticateSession({
+      await this.props.login({
         username: login,
         password: newPassword || password,
       });
@@ -98,8 +97,8 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  login: (query: tLogin) => dispatch(login(query)),
   updateUser: (user: {id: number} & tState) => dispatch(updateUser(user)),
 });
 

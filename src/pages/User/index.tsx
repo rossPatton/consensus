@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 
 import {GenericLoader, Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
@@ -50,9 +49,9 @@ const mapStateToProps = (store: tStore) => ({
   user: store.user.data,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  getUserById: (query: tIdQuery) => dispatch(getUserById(query)),
-  getOrgsByUser: (query: tIdQuery) => dispatch(getOrgsByUser(query)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  getUserById: (query: tIdQueryC) => dispatch(getUserById(query)),
+  getOrgsByUser: (query: tIdQueryC) => dispatch(getOrgsByUser(query)),
 });
 
 const User = connect(mapStateToProps, mapDispatchToProps)(UserContainer);

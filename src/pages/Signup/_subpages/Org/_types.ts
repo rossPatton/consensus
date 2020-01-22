@@ -1,14 +1,14 @@
-import {Location} from 'history';
+import { Location } from 'history';
 
 export type tState = {
-  category: string,
+  category: tCategory,
   city: string,
   cityId: number,
   country: string,
   countryId: number,
   description: string,
   email: string,
-  eventPrivacy: tGate,
+  eventPrivacy: tEventPrivacy,
   gate: tGate,
   login: string,
   name: string,

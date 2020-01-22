@@ -22,7 +22,7 @@ export type tComponentProps = tProps & {
 };
 
 export type tContainerProps = tProps & {
-  match: match & {params: {page?: string}},
-  getEventsByUser: () => void,
+  match: match & {params: tPaginateParams},
+  getEventsByUser: () => tThunkReturn<tEvent[]>,
   session: tSession,
 };

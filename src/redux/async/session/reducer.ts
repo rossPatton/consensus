@@ -1,12 +1,14 @@
+import {tActionUnion} from './_types';
 import {
-  AUTHENTICATE_BEGIN,
-  AUTHENTICATE_FAILURE,
-  AUTHENTICATE_SUCCESS,
-  LOG_OUT_BEGIN,
-  LOG_OUT_FAILURE,
-  LOG_OUT_SUCCESS,
-  tSessionUnion,
-} from './_types';
+  LOGIN_BEGIN,
+  LOGIN_FAILURE,
+  LOGIN_SUCCESS,
+} from './login/_types';
+import {
+  LOGOUT_BEGIN,
+  LOGOUT_FAILURE,
+  LOGOUT_SUCCESS,
+} from './logout/_types';
 
 const initialState: tThunk<tSession> = {
   error: null,
@@ -14,23 +16,23 @@ const initialState: tThunk<tSession> = {
   data: {} as tSession,
 };
 
-export const authenticateSessionReducer = (state = initialState, action: tSessionUnion) => {
+export const sessionReducer = (state = initialState, action: tActionUnion) => {
   switch (action.type) {
-  case AUTHENTICATE_BEGIN:
+  case LOGIN_BEGIN:
     return {
       ...state,
       error: null,
       isLoading: true,
     };
 
-  case AUTHENTICATE_SUCCESS:
+  case LOGIN_SUCCESS:
     return {
       ...state,
       data: action.payload,
       isLoading: false,
     };
 
-  case AUTHENTICATE_FAILURE:
+  case LOGIN_FAILURE:
     return {
       data: { isAuthenticated: false },
       error: action.payload,
@@ -38,22 +40,20 @@ export const authenticateSessionReducer = (state = initialState, action: tSessio
     };
 
   /* eslint-disable */
-  case LOG_OUT_BEGIN:
+  case LOGOUT_BEGIN:
     return {
       ...state,
-      error: null,
       isLoading: true,
     };
 
-  case LOG_OUT_SUCCESS:
+  case LOGOUT_SUCCESS:
     return {
+      ...state,
       data: action.payload,
-      error: null,
-      isLoading: false,
     };
   /* eslint-enable */
 
-  case LOG_OUT_FAILURE:
+  case LOGOUT_FAILURE:
     return {
       ...state,
       error: action.payload,

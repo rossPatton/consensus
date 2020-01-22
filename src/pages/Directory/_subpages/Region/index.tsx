@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 
 import {Breadcrumbs, GenericLoader, Helmet} from '../../../../components';
 import {getCountry, getRegion} from '../../../../redux';
@@ -88,7 +87,7 @@ const mapStateToProps = (store: tStore) => ({
   region: store.region.data,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
+const mapDispatchToProps = (dispatch: Function) => ({
   getCountry: (params: tDirectoryParams) => dispatch(getCountry(params)),
   getRegion: (params: tDirectoryParams) => dispatch(getRegion(params)),
 });

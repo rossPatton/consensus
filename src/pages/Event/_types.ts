@@ -15,8 +15,8 @@ export type tProps = {
 };
 
 export interface tContainerProps extends tProps {
-  getEventById: (query: tIdQuery) => Promise<any>,
-  getEvents: (query: tIdQuery) => Promise<any>,
+  getEventById: (query: tIdQueryC) => Promise<any>,
+  getEvents: (query: tIdQueryC) => Promise<any>,
   isLoading: boolean,
   session: tSession,
 }

@@ -1,7 +1,6 @@
-import { Dispatch } from 'redux';
-import { memoize } from 'redux-memoize';
 
-import { agent, objToQueryString } from '../../../utils';
+
+import { api } from '../../../utils';
 import {
   getEventByIdBegin,
   getEventByIdFailure,
@@ -9,25 +8,17 @@ import {
 } from './actions';
 
 const endpoint = '/api/v1/event';
-const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+const path = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
 
-export const getEventById = memoize({ ttl: 300 }, (queryObj: tIdQuery) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const getEventById = (query: tIdQueryC) => {
+  return async function (dispatch: Function) {
     dispatch(getEventByIdBegin());
 
     try {
-      const qs = objToQueryString(queryObj);
-
-      // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {agent})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
+      const result = await api({query, path});
       return dispatch(getEventByIdSuccess(result));
     } catch (err) {
       return dispatch(getEventByIdFailure(err));
     }
   };
-});
+};

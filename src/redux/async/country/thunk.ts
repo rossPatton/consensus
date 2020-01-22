@@ -1,7 +1,6 @@
-import { Dispatch } from 'redux';
-import { memoize } from 'redux-memoize';
 
-import { agent, objToQueryString } from '../../../utils';
+
+import {api} from '../../../utils';
 import {
   getCountryBegin,
   getCountryFailure,
@@ -9,25 +8,17 @@ import {
 } from './actions';
 
 const endpoint = '/api/v1/country';
-const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+const path = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
 
-export const getCountry = memoize({ttl: 300}, (params: tDirectoryParams) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const getCountry = (query: tDirectoryParams) => {
+  return async function (dispatch: Function) {
     dispatch(getCountryBegin());
 
     try {
-      const qs = objToQueryString(params);
-
-      // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {agent})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
+      const result = await api({query, path});
       return dispatch(getCountrySuccess(result));
     } catch (err) {
       return dispatch(getCountryFailure(err));
     }
   };
-});
+};

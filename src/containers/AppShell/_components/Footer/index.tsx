@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import {Link} from 'react-router-dom';
 
-export const Footer = memo(() => (
+const Footer = memo(() => (
   <footer>
     <div className="bgGrey1 brdT1 pT4">
       <ul className="contain pB3 mB3 brdB1">
@@ -52,3 +52,5 @@ export const Footer = memo(() => (
     </div>
   </footer>
 ));
+
+export default Footer;

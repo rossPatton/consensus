@@ -1,14 +1,11 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 
 import {GenericLoader, Helmet} from '../../../../components';
-import {getDecisionsByOrg, getEvents, getUsersByOrg} from '../../../../redux';
+import {getEvents} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {OverviewComponent} from './Component';
-
 // TODO use context for match cause passing it around everywhere is annoying
-
 class OverviewContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
@@ -20,15 +17,6 @@ class OverviewContainer extends PureComponent<tContainerProps> {
       isPublic: !isLoggedIn,
       limit: -1,
     });
-
-    // dont show decisions at all if not logged in
-    if (isLoggedIn) {
-      props.getDecisionsByOrg({
-        id: props.org.id,
-        isClosed: false,
-        limit: -1,
-      });
-    }
   }
 
   render() {
@@ -48,7 +36,6 @@ class OverviewContainer extends PureComponent<tContainerProps> {
           isLoading={this.props.isLoading}
           render={() => (
             <OverviewComponent
-              decisions={this.props.decisions.slice(0, 3)}
               events={this.props.events.slice(0, 3)}
               match={this.props.match}
               org={this.props.org}
@@ -62,15 +49,12 @@ class OverviewContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  decisions: store.decisions.data,
   events: store.events.data,
-  isLoading: store.decisions.isLoading || store.events.isLoading,
+  isLoading: store.events.isLoading,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  getDecisionsByOrg: (query: tIdQuery) => dispatch(getDecisionsByOrg(query)),
-  getEvents: (query: tIdQuery) => dispatch(getEvents(query)),
-  getUsersByOrg: (query: tIdQuery) => dispatch(getUsersByOrg(query)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  getEvents: (query: tIdQueryC) => dispatch(getEvents(query)),
 });
 
 const Overview = connect(

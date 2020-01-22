@@ -25,31 +25,18 @@ export type tStore = {
 
 export type tStateUnion = keyof tState;
 export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
-export type tCreateEvent = {
-  category: string,
-  date: string,
-  description: string,
-  endDate: string,
-  isDraft: boolean,
-  isPrivate: boolean,
-  location: string,
-  locationLink: string,
-  orgId: number,
-  title: string,
-};
 
 export type tContainerProps = {
-  createEvent: (event: tCreateEvent) => Promise<{payload: tEvent}>,
   events: tEvent[],
-  router: Location,
   org: tOrg,
+  postEvent: (query: tPostEventQuery) => tThunkReturn<tEvent>,
+  router: Location,
   session: tSession,
 };
 
 export type tComponentProps = tContainerProps & tState & {
   onSubmit: (ev: React.MouseEvent<HTMLButtonElement>) => void,
   saveAsDraft: (ev: React.MouseEvent<HTMLButtonElement>) => void,
-  // setImage: (ev: React.ChangeEvent<HTMLInputElement>, removeImage?: boolean) => void,
   toggleChecked: () => void,
   updateState: (stateKey: tStateUnion, value: any) => void,
 };

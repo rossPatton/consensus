@@ -20,7 +20,7 @@ export type tContainerProps = RouteComponentProps<any> & tProps & {
   event: tEvent,
   history: History,
   // redux thunk
-  setRsvpDispatch: (query: tRSVPQuery) => Promise<tThunk<tRSVP>>,
+  setRsvpDispatch: (query: tRSVPQuery) => tThunkReturn<tRSVP>,
 }
 
 export type tComponentProps = tProps & {

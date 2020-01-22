@@ -2,7 +2,6 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {deSlugify} from '../../utils';
 import {knex} from '../db/connection';
 
 export const org = new Router();
@@ -12,62 +11,13 @@ const dataPath = 'state.locals.data';
 
 org.get(route, async (ctx: Koa.ParameterizedContext) => {
   const userId = _.get(ctx, 'state.user.id', 0);
-
-  const {
-    city: citySlug,
-    country: countryCode,
-    region: regionCode,
-    slug: orgSlug,
-  } = _.get(ctx, dataPath, {});
-
-  let country: tCountry;
-  try {
-    country = await knex('countries')
-      .limit(1)
-      .where({code: countryCode})
-      .first();
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
-
-  let region: tRegion;
-  try {
-    region = await knex('regions')
-      .limit(1)
-      .where({
-        country: country.id,
-        code: regionCode,
-      })
-      .first();
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
-
-  let city: tCity;
-  try {
-    const cityName = deSlugify(citySlug);
-    city = await knex('cities')
-      .limit(1)
-      .where({
-        country: country.id,
-        region: region.id,
-        name: cityName,
-      })
-      .first();
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
+  const orgId = _.get(ctx, 'state.locals.data.id', 0);
 
   let org: tOrg;
   try {
     org = await knex(table)
       .limit(1)
-      .where({
-        countryId: country.id,
-        cityId: city.id,
-        regionId: region.id,
-        slug: orgSlug,
-      })
+      .where({id: orgId})
       .first();
   } catch (err) {
     return ctx.throw(400, err);
@@ -83,10 +33,8 @@ org.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  const {createdAt, email, updatedAt, ...safeOrg} = org;
-
   const orgWithRole = {
-    ...safeOrg,
+    ...org,
     role: userOrgRel ? userOrgRel.role : null,
   };
 

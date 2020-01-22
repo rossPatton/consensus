@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 
 import { Breadcrumbs, GenericLoader, Helmet, Orgs } from '../../../../components';
 import { categoryMap } from '../../../../constants';
@@ -89,8 +88,8 @@ const mapStateToProps = (store: tStore) => ({
   orgs: store.orgs.data,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  getOrgs: (params: any) => dispatch(getOrgs(params)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  getOrgs: (query: {category: tCategory}) => dispatch(getOrgs(query)),
 });
 
 const Category = connect(

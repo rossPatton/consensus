@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 
 import {Breadcrumbs, GenericLoader, Helmet} from '../../../../components';
 import {Paginate} from '../../../../containers';
@@ -11,7 +10,7 @@ import {CityComponent} from './Component';
 
 class CityContainer extends PureComponent<tContainerProps, tState> {
   state = {
-    category: '',
+    category: '' as tCategory,
     orgsBySearch: [] as tOrg[],
   };
 
@@ -31,7 +30,7 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
   onChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
     ev.preventDefault();
     this.setState({
-      category: ev.currentTarget.value,
+      category: ev.currentTarget.value as tCategory,
     });
   }
 
@@ -113,7 +112,7 @@ const mapStateToProps = (store: tStore) => ({
   region: store.region.data,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
+const mapDispatchToProps = (dispatch: Function) => ({
   getCity: (params: tDirectoryParams) => dispatch(getCity(params)),
   getCountry: (params: tDirectoryParams) => dispatch(getCountry(params)),
   getRegion: (params: tDirectoryParams) => dispatch(getRegion(params)),

@@ -1,4 +1,5 @@
-// import {tAdminSections} from '../../../_types';
+import H from 'history';
+import {match} from 'react-router';
 
 export type tStore = {
   usersByOrg: tThunk<tUsersByOrg>,
@@ -8,28 +9,23 @@ export type tState = {
   role: tRole,
 };
 
-export type tRoleOpts = {
-  role: tRole,
-  orgId: number,
-  userId: number,
-};
-
-export type tProps = {
-  match: any,
-  role: tRole,
+export type tBaseProps = {
+  match: match & {params: tOrgRouteParams},
   org: tOrg,
-};
+  role: tRole,
+}
 
-export interface tContainerProps extends tProps {
-  deleteUserByOrg: (query: {orgId: number, userId: number}) => void,
-  getUsersByOrg: (query: tIdQuery) => any,
+export type tContainerProps = tBaseProps & {
+  deleteUserByOrg: (query: tDeleteUserOrgQuery) => void,
+  getUsersByOrg: (query: tIdQueryC) => any,
   isLoading: boolean,
+  patchUserByOrg: (opts: tPatchUserRoleQuery) => void,
+  router: H.Location,
   session: tSession,
-  updateRole: (opts: tRoleOpts) => void,
   usersByOrg: tUsersByOrg,
 }
 
-export interface tComponentProps extends tProps {
+export type tComponentProps = tBaseProps & {
   deleteUserByOrg: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
   onRoleFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,

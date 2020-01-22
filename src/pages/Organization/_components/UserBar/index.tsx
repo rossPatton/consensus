@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 
 import {getUsersByOrg} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
@@ -32,8 +31,8 @@ const mapStateToProps = (store: tStore) => ({
   usersByOrg: store.usersByOrg.data,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  getUsersByOrg: (query: tIdQuery) => dispatch(getUsersByOrg(query)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  getUsersByOrg: (query: tIdQueryC) => dispatch(getUsersByOrg(query)),
 });
 
 const UserBar = connect(

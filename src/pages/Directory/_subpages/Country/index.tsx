@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 
 import {Breadcrumbs, GenericLoader, Helmet} from '../../../../components';
 import {getCountry} from '../../../../redux';
@@ -82,7 +81,7 @@ const mapStateToProps = (store: tStore) => ({
   isLoading: store.country.isLoading,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
+const mapDispatchToProps = (dispatch: Function) => ({
   getCountry: (params: tDirectoryParams) => dispatch(getCountry(params)),
 });
 

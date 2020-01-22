@@ -11,7 +11,7 @@ export const getUserByIdBegin = (): tBeginAction => ({
   type: GET_USER_BY_ID_BEGIN,
 });
 
-export const getUserByIdSuccess = (payload: tThunk<tUser>): tSuccessAction => ({
+export const getUserByIdSuccess = (payload: tUser): tSuccessAction => ({
   type: GET_USER_BY_ID_SUCCESS,
   payload,
 });

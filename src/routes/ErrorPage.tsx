@@ -1,6 +1,6 @@
 import loadable from '@loadable/component';
 
-const ErrorPageComponent = loadable(() =>
+export const ErrorPageComponent = loadable(() =>
   import(/* webpackChunkName: "ErrorPage" */'../pages/500'),
 );
 

@@ -1,7 +1,5 @@
 export type tProps = {
-  authenticateSession: (arg: tLogin) => Promise<
-    tAction<'AUTHENTICATE_USER_SUCCESS', tAccount>
-  >,
+  login: (query: tLogin) => tThunkReturn<tAccount>,
   session: tSession,
 };
 
@@ -14,7 +12,7 @@ export type tState = {
 export type tStateUnion = keyof tState;
 
 export interface tContainerProps extends tProps {
-  getRoles: (query: tIdQuery) => any,
+  getRoles: () => tThunkReturn<tRole[]>,
 }
 
 export interface tComponentProps extends tState {

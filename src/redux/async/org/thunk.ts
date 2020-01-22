@@ -1,7 +1,6 @@
-import { Dispatch } from 'redux';
-import { memoize } from 'redux-memoize';
 
-import {agent, objToQueryString} from '../../../utils';
+
+import { api } from '../../../utils';
 import {
   getOrgBegin,
   getOrgFailure,
@@ -12,73 +11,43 @@ import {
 } from './actions';
 
 const endpoint = '/api/v1/org';
-const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+const path = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
 
-export const getOrg = memoize({ ttl: 300 }, (params: tOrgRouteParams) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const getOrg = (query: tOrgRouteParams) => {
+  return async function (dispatch: Function) {
     dispatch(getOrgBegin());
 
     try {
-      const {section, page, ...restParams} = params;
-      const qs = objToQueryString(restParams);
-
-      const isByID = !!params.id;
-      const prefixWId = `${prefix}${isByID ? 'ById' : ''}`;
-
-      // @ts-ignore
-      const result = await fetch(`${prefixWId}?${qs}`, {agent})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
+      const result = await api({query, path});
       return dispatch(getOrgSuccess(result));
     } catch (err) {
       return dispatch(getOrgFailure(err));
     }
   };
-});
+};
 
-export const patchOrg = memoize({ ttl: 300 }, (params: tOrgRouteParams) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const patchOrg = (query: tPatchOrgQuery) => {
+  return async function (dispatch: Function) {
     dispatch(patchOrgBegin());
 
     try {
-      const {section, page, ...restParams} = params;
-      const qs = objToQueryString(restParams);
-
-      // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {agent, method: 'PATCH'})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
+      const result = await api({method: 'PATCH', query, path});
       return dispatch(patchOrgSuccess(result));
     } catch (err) {
       return dispatch(patchOrgFailure(err));
     }
   };
-});
+};
 
-export const postOrg = memoize({ ttl: 300 }, (params: tOrgRouteParams) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const postOrg = (query: tOrgRouteParams) => {
+  return async function (dispatch: Function) {
     dispatch(patchOrgBegin());
 
     try {
-      const {section, page, ...restParams} = params;
-      const qs = objToQueryString(restParams);
-
-      // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {agent, method: 'POST'})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
+      const result = await api({method: 'POST', query, path});
       return dispatch(patchOrgSuccess(result));
     } catch (err) {
       return dispatch(patchOrgFailure(err));
     }
   };
-});
+};

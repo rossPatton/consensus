@@ -1,7 +1,8 @@
 declare type tGate = 'public' | 'manual' | 'invite';
+declare type tEventPrivacy = 'public' | 'private' | 'manual';
 
 declare type tOrg = {
-  readonly category: string,
+  readonly category: tCategory,
   readonly city: string,
   readonly cityId: number,
   readonly country: string,
@@ -9,7 +10,7 @@ declare type tOrg = {
   readonly createdAt?: string, // we dont send to client
   readonly description: string,
   readonly email?: string, // user admin account only
-  readonly eventPrivacy: tGate,
+  readonly eventPrivacy: tEventPrivacy,
   readonly gate: tGate,
   readonly id: number,
   readonly name: string,

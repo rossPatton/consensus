@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 
 import {RoleFilter, SearchFilter} from '../../../../../containers';
-import {deleteUserByOrg, getUsersByOrg, patchUserByOrg} from '../../../../../redux';
+import {deleteUserFromOrg, getUsersByOrg, patchUserByOrg} from '../../../../../redux';
 import {tContainerProps, tState, tStore} from './_types';
 import {MembersComponent} from './Component';
 
@@ -18,14 +17,17 @@ class MembersContainer extends Component<tContainerProps, tState> {
 
   deleteUserByOrg = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {
     ev.preventDefault();
-    this.props.deleteUserByOrg({userId, orgId: this.props.session.profile.id});
+    this.props.deleteUserByOrg({
+      userId,
+      orgId: this.props.session.profile.id,
+    });
   }
 
   setUserRole = (ev: React.ChangeEvent<HTMLSelectElement>, userId: number) => {
     ev.preventDefault();
     const role = ev.currentTarget.value as tRole;
     const orgId = this.props.session.profile.id;
-    this.props.updateRole({role, orgId, userId});
+    this.props.patchUserByOrg({role, orgId, userId});
   }
 
   render() {
@@ -59,11 +61,10 @@ const mapStateToProps = (store: tStore) => ({
   usersByOrg: store.usersByOrg.data,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  deleteUserByOrg: (query: {orgId: number, userId: number}) =>
-    dispatch(deleteUserByOrg(query)),
-  getUsersByOrg: (query: tIdQuery) => dispatch(getUsersByOrg(query)),
-  updateRole: (query: any) => dispatch(patchUserByOrg(query)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  deleteUserByOrg: (query: tDeleteUserOrgQuery) => dispatch(deleteUserFromOrg(query)),
+  getUsersByOrg: (query: tIdQueryC) => dispatch(getUsersByOrg(query)),
+  patchUserByOrg: (query: tPatchUserRoleQuery) => dispatch(patchUserByOrg(query)),
 });
 
 const Members = connect(mapStateToProps, mapDispatchToProps)(MembersContainer);

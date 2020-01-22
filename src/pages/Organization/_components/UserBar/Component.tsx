@@ -19,6 +19,7 @@ export const UserBarComponent = memo((props: tComponentProps) => (
     <ul className="contain fx fxWrap aiCtr">
       <li className="fx aiCtr cap">
         <JoinForm
+          orgId={props.org.id}
           role={props.role}
           session={props.session}
         />
@@ -40,14 +41,14 @@ export const UserBarComponent = memo((props: tComponentProps) => (
           <ul className="fx col jcEnd fs6">
             <li className="mR2 brdA1 p1 br4 bgWhite pL2 pR2 trans1">
               <Link to="createEvent">
-                Create Event
+                Plan Meeting
               </Link>
             </li>
-            <li className="brdA1 p1 br4 bgWhite pL2 pR2 mR2">
+            {/* <li className="brdA1 p1 br4 bgWhite pL2 pR2 mR2">
               <Link to="makeDecision">
                 Make a Decision
               </Link>
-            </li>
+        </li>*/}
           </ul>
         )}
     </ul>

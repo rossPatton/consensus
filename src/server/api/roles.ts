@@ -9,7 +9,7 @@ const route = '/api/v1/roles';
 
 // get all roles for current logged in session
 roles.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const accountId = _.get(ctx, 'state.locals.data.id', 0);
+  const accountId = _.get(ctx, 'state.user.id', 0);
   const roles = await getRolesByAccountId(ctx, accountId);
 
   // sometimes there could be no error but nothing was found

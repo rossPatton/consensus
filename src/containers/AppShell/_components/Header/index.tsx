@@ -1,17 +1,16 @@
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 
-import {logOutOfSession} from '../../../../redux';
-import {getRolesSuccess} from '../../../../redux/async/roles/actions';
+import {logout} from '../../../../redux';
+import {getRolesSuccess} from '../../../../redux/async/roles/getRoles/actions';
 import {tContainerProps} from './_types';
 import {HeaderComponent} from './Component';
 
-export class HeaderContainer extends PureComponent<tContainerProps> {
+class HeaderContainer extends PureComponent<tContainerProps> {
   logout = (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.preventDefault();
-    this.props.logOutOfSession()
+    this.props.logout()
       .then(() => this.props.getRolesSuccess([]))
       .catch(loglevel.error);
   }
@@ -21,7 +20,6 @@ export class HeaderContainer extends PureComponent<tContainerProps> {
       <HeaderComponent
         logout={this.logout}
         session={this.props.session}
-        toggleNav={this.props.toggleNav}
       />
     );
   }
@@ -31,12 +29,14 @@ const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
   session: store.session.data,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
+const mapDispatchToProps = (dispatch: Function) => ({
   getRolesSuccess: (emptyRoles: []) => dispatch(getRolesSuccess(emptyRoles)),
-  logOutOfSession: () => dispatch(logOutOfSession()),
+  logout: () => dispatch(logout()),
 });
 
-export const Header = connect(
+const Header = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(HeaderContainer);
+
+export default Header;

@@ -4,7 +4,7 @@ export type tComponentProps = {
 };
 
 export type tContainerProps = tComponentProps & {
-  getUsersByOrg: (query: tIdQuery) => Promise<tThunk<tUsersByOrg>>,
+  getUsersByOrg: (query: tIdQueryC) => Promise<tThunk<tUsersByOrg>>,
   isLoading: boolean,
 };
 

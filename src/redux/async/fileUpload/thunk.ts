@@ -1,7 +1,6 @@
-import { Dispatch } from 'redux';
-import { memoize } from 'redux-memoize';
 
-import { agent, objToQueryString } from '../../../utils';
+
+import { api } from '../../../utils';
 import {
   fileUploadBegin,
   fileUploadFailure,
@@ -9,27 +8,17 @@ import {
 } from './actions';
 
 const endpoint = '/api/v1/fileUpload';
-const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+const path = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
 
-export const fileUpload = memoize({ttl: 300}, (event: tEvent) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const fileUpload = (query: tEvent) => {
+  return async function (dispatch: Function) {
     dispatch(fileUploadBegin());
 
     try {
-      const qs = objToQueryString(event);
-      const result = await fetch(`${prefix}?${qs}`, {
-        // @ts-ignore
-        agent,
-        method: 'POST',
-      })
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
+      const result = await api({method: 'POST', query, path});
       return dispatch(fileUploadSuccess(result));
     } catch (err) {
       return dispatch(fileUploadFailure(err));
     }
   };
-});
+};

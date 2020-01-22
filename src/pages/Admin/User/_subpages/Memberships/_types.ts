@@ -9,13 +9,13 @@ export type tProps = {
 
 export type tComponentProps = tProps & {
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  deleteOrgByUser: (ev: React.MouseEvent<HTMLButtonElement>, orgId: number) => void,
+  leaveOrg: (ev: React.MouseEvent<HTMLButtonElement>, orgId: number) => void,
 };
 
 export type tContainerProps = tProps & {
-  match: match & {params: {page?: string}},
+  match: match & {params: tPaginateParams},
   // from redux
-  deleteOrgByUser: (query: {accountId: number, orgId: number}) => void,
+  leaveOrg: (query: {orgId: number}) => void,
   getOrgsBySession: () => void,
   session: tSession,
 };

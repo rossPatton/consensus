@@ -11,7 +11,7 @@ export const getOrgsBySearchBegin = (): tBeginAction => ({
   type: GET_ORGS_BY_SEARCH_BEGIN,
 });
 
-export const getOrgsBySearchSuccess = (payload: tThunk<tOrg[]>): tSuccessAction => ({
+export const getOrgsBySearchSuccess = (payload: tOrg[]): tSuccessAction => ({
   type: GET_ORGS_BY_SEARCH_SUCCESS,
   payload,
 });

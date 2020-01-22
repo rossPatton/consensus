@@ -4,13 +4,13 @@ export const Breadcrumbs = loadable(() =>
   import(/* webpackChunkName: "Breadcrumbs" */'./Breadcrumbs'),
 );
 
-export const Decisions = loadable(() =>
-  import(/* webpackChunkName: "Decisions" */'./Decisions'),
-);
+// export const Decisions = loadable(() =>
+//   import(/* webpackChunkName: "Decisions" */'./Decisions'),
+// );
 
-export const DecisionStatus = loadable(() =>
-  import(/* webpackChunkName: "DecisionStatus" */'./DecisionStatus'),
-);
+// export const DecisionStatus = loadable(() =>
+//   import(/* webpackChunkName: "DecisionStatus" */'./DecisionStatus'),
+// );
 
 export const Events = loadable(() =>
   import(/* webpackChunkName: "Events" */'./Events'),

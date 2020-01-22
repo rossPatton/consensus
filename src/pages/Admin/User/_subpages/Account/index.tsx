@@ -1,9 +1,8 @@
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 
-import {authenticateSession, patchAccount} from '../../../../../redux';
+import {login, patchAccount} from '../../../../../redux';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {AccountComponent} from './Component';
 
@@ -12,6 +11,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
     super(props);
 
     this.state = {
+      isVerified: props.session.isVerified,
       login: props.session.login,
       newPassword: '',
       password: '',
@@ -34,7 +34,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
 
     const {login, newPassword, password} = this.state;
     try {
-      await this.props.authenticateSession({
+      await this.props.login({
         username: login,
         password: newPassword || password,
       });
@@ -63,9 +63,9 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
-  patchAccount: (account: {id: number} & tState) => dispatch(patchAccount(account)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  login: (query: tLogin) => dispatch(login(query)),
+  patchAccount: (query: {id: number} & tState) => dispatch(patchAccount(query)),
 });
 
 const Account = connect(

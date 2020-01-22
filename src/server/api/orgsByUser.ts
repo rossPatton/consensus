@@ -41,7 +41,8 @@ orgsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 orgsByUser.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  const {accountId, orgId} = _.get(ctx, state, {});
+  const accountId = _.get(ctx, 'state.user.id', 0);
+  const {orgId} = _.get(ctx, state, {});
 
   try {
     await knex(table)

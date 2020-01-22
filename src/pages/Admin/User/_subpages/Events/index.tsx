@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 
 import {PrivacyFilter, SearchFilter} from '../../../../../containers';
 import {getEventsByUser} from '../../../../../redux';
@@ -40,7 +39,7 @@ const mapStateToProps = (store: tStore) => ({
   events: store.events.data,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
+const mapDispatchToProps = (dispatch: Function) => ({
   getEventsByUser: () => dispatch(getEventsByUser()),
 });
 

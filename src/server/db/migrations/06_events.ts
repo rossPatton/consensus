@@ -19,7 +19,6 @@ exports.up = async (knex: Knex) => {
     table.boolean('isPrivate').defaultTo(false);
     table.boolean('isDraft').notNullable().defaultTo(true);
 
-    table.string('category').notNullable();
     table.text('description', 'longtext').notNullable();
     table.text('location').defaultTo('Location To Be Determined');
     table.text('locationLink');

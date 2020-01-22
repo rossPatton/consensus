@@ -1,4 +1,4 @@
-import { Dispatch } from 'redux';
+
 import { memoize } from 'redux-memoize';
 
 import { agent, objToQueryString } from '../../../utils';
@@ -12,7 +12,7 @@ const endpoint = '/api/v1/user';
 const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
 
 export const updateUser = memoize({ ttl: 300 }, (user: tUser) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+  return async function (dispatch: Function) {
     dispatch(updateUserBegin());
 
     try {

@@ -9,7 +9,7 @@ export type tProps = {
 };
 
 export type tContainerProps = tProps & {
-  getUsersByOrg: (query: tIdQuery) => Promise<tThunk<tUsersByOrg>>,
+  getUsersByOrg: (query: tIdQueryC) => Promise<tThunk<tUsersByOrg>>,
   isLoading: boolean,
 };
 

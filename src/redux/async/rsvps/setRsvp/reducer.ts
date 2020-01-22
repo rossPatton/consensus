@@ -11,7 +11,7 @@ const initialState: tThunk<tRSVP> = {
   data: {} as tRSVP,
 };
 
-export const rsvpsReducer = (state = initialState, action: tSetRSVPUnion) => {
+export const setRSVPReducer = (state = initialState, action: tSetRSVPUnion) => {
   switch (action.type) {
   case SET_RSVP_BEGIN:
     return {

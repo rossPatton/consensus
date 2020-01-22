@@ -8,22 +8,16 @@ export type tState = {
   role: tRole,
 };
 
-export type tRoleOpts = {
-  role: tRole,
-  orgId: number,
-  userId: number,
-};
-
 export type tProps = {
   match: tAdminSections,
 };
 
 export interface tContainerProps extends tProps {
-  deleteUserByOrg: (query: {orgId: number, userId: number}) => void,
-  getUsersByOrg: (query: tIdQuery) => any,
+  deleteUserByOrg: (query: tDeleteUserOrgQuery) => tThunkReturn<tUsersByOrg>,
+  getUsersByOrg: (query: tIdQueryC) => tThunkReturn<tUsersByOrg>,
   isLoading: boolean,
+  patchUserByOrg: (opts: tPatchUserRoleQuery) => tThunkReturn<tAccountRoleRelation>,
   session: tSession,
-  updateRole: (opts: tRoleOpts) => void,
   usersByOrg: tUsersByOrg,
 }
 

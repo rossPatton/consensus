@@ -2,14 +2,7 @@ import cx from 'classnames';
 import React from 'react';
 
 import {OrganizationHeader, OrganizationTabs, UserBar} from './_components';
-import {
-  CreateOrEditEvent,
-  Decisions,
-  Events,
-  MakeDecision,
-  Members,
-  Overview,
-} from './_subpages';
+import {CreateOrEditEvent, Events, Members, Overview} from './_subpages';
 import {tComponentProps} from './_types';
 
 export const OrganizationComponent = (props: tComponentProps) => (
@@ -41,13 +34,6 @@ export const OrganizationComponent = (props: tComponentProps) => (
           session={props.session}
         />
       )}
-      {props.match.params.section === 'decisions' && (
-        <Decisions
-          match={props.match}
-          org={props.org}
-          role={props.role}
-        />
-      )}
       {props.match.params.section === 'events' && (
         <Events
           location={props.location}
@@ -63,12 +49,6 @@ export const OrganizationComponent = (props: tComponentProps) => (
           router={props.location}
         />
       )}
-      {props.match.params.section === 'makeDecision' && (
-        <MakeDecision
-          org={props.org}
-          router={props.location}
-        />
-      )}
       {props.match.params.section === 'members' && (
         <Members
           match={props.match}
@@ -79,11 +59,5 @@ export const OrganizationComponent = (props: tComponentProps) => (
         />
       )}
     </div>
-    {/* {props.match.params.section === 'forum' && (
-      <Forum />
-    )}
-    {props.match.params.section === 'resources' && (
-      <Resources />
-    )} */}
   </>
 );

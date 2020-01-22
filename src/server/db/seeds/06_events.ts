@@ -5,7 +5,6 @@ import Knex from 'knex';
 import {range} from '../../../utils/range';
 
 const createEvent = async () => ({
-  category: faker.company.bsNoun(),
   date: faker.random.boolean() ? faker.date.future() : faker.date.past(),
   description: faker.lorem.paragraphs(),
   // endDate === duration, since users can have custom durations this is a timestamp

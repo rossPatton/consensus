@@ -8,7 +8,8 @@ declare type tCategory = 'Community Center'
   | 'Cooperative'
   | 'Political Organization'
   | 'Religious'
-  | 'Union';
+  | 'Union'
+  | ''; // entering a category isn't required, just heavily encouraged
 
 declare type tCategoryMap = {
   readonly [key: string]: tCategory,

@@ -13,13 +13,13 @@ const table = 'events';
 
 // get multiple events at a time
 events.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const data = _.get(ctx, state, {});
+  const query = _.get(ctx, state, {});
   const account = _.get(ctx, 'state.user', {});
 
   // get back events by orgId
   let events: tEvent[];
   try {
-    events = await getEventsByOrgId(data);
+    events = await getEventsByOrgId(query);
   } catch (err) {
     return ctx.throw(400, err);
   }
@@ -34,7 +34,7 @@ events.get(route, async (ctx: Koa.ParameterizedContext) => {
       accountRoleRel = await knex('accounts_roles')
         .limit(1)
       // data.id === orgId of the org being viewed on the client
-        .where({accountId, orgId: parseInt(data.id, 10)})
+        .where({accountId, orgId: query.id})
         .first();
     } catch (err) {
       return ctx.throw(400, err);

@@ -2,11 +2,10 @@ import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
-import {Dispatch} from 'redux';
 
 import {Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
-import {authenticateSession, getRoles} from '../../redux';
+import {getRoles, login} from '../../redux';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {LoginComponent} from './Component';
 
@@ -28,11 +27,11 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
     ev.preventDefault();
     const {username, password} = this.state;
     return this.props
-      .authenticateSession({username, password})
+      .login({username, password})
       // @ts-ignore
       .then(res => {
         if (res.payload.orgId) return null;
-        return this.props.getRoles({id: res.payload.id as number});
+        return this.props.getRoles();
       })
       .catch(loglevel.error);
   }
@@ -77,9 +76,9 @@ const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
   session: store.session.data,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
-  getRoles: (query: tIdQuery) => dispatch(getRoles(query)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  login: (query: tLogin) => dispatch(login(query)),
+  getRoles: () => dispatch(getRoles()),
 });
 
 const Login = connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

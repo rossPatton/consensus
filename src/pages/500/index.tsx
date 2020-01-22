@@ -17,7 +17,7 @@ const ErrorPage = memo(() => (
     />
     <div className="contain mT4 taCtr">
       <h1 className="mB2">500</h1>
-      <h2>If you&apos;re seeing this, something went really, really wrong</h2>
+      <h2>If you&apos;re seeing this, something went wrong</h2>
     </div>
   </>
 ));

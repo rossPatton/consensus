@@ -4,10 +4,6 @@ export const Account = loadable(() =>
   import(/* webpackChunkName: "OrgAdmin Account" */'./Account'),
 );
 
-export const Decisions = loadable(() =>
-  import(/* webpackChunkName: "OrgAdmin Devisions" */'./Decisions'),
-);
-
 export const Events = loadable(() =>
   import(/* webpackChunkName: "OrgAdmin Events" */'./Events'),
 );

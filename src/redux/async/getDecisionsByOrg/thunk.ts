@@ -1,7 +1,6 @@
-import { Dispatch } from 'redux';
-import { memoize } from 'redux-memoize';
 
-import { agent, objToQueryString } from '../../../utils';
+
+import { api } from '../../../utils';
 import {
   getDecisionsByOrgBegin,
   getDecisionsByOrgFailure,
@@ -9,25 +8,17 @@ import {
 } from './actions';
 
 const endpoint = '/api/v1/decisions';
-const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+const path = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
 
-export const getDecisionsByOrg = memoize({ttl: 300}, (queryObj: tIdQuery) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const getDecisionsByOrg = (query: tIdQueryC) => {
+  return async function (dispatch: Function) {
     dispatch(getDecisionsByOrgBegin());
 
     try {
-      const qs = objToQueryString(queryObj);
-
-      // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {agent})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
+      const result = await api({query, path});
       return dispatch(getDecisionsByOrgSuccess(result));
     } catch (err) {
       return dispatch(getDecisionsByOrgFailure(err));
     }
   };
-});
+};

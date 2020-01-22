@@ -19,9 +19,8 @@ export interface tComponentProps extends tBaseProps {
   togglePast: (ev: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
-type tIdQueryExtend = tIdQuery & {isDraft: boolean, showPast: boolean};
 export interface tContainerProps extends tBaseProps {
-  getEvents: (query: tIdQueryExtend) => Promise<tThunk<tEvent[]>>,
+  getEvents: (query: tEventQueryC) => tThunkReturn<tEvent[]>,
   isLoading: boolean,
   location: Location,
   org: tOrg,

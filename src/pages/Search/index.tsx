@@ -1,7 +1,6 @@
 import qs from 'querystring';
 import React from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 
 import {GenericLoader, Helmet, Orgs} from '../../components';
 import {ErrorBoundary} from '../../containers';
@@ -59,7 +58,7 @@ const mapStateToProps = (store: tStore) => ({
   search: store.search.data,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
+const mapDispatchToProps = (dispatch: Function) => ({
   getSearchResults: (search: qs.ParsedUrlQuery) => dispatch(getOrgsBySearch(search)),
 });
 

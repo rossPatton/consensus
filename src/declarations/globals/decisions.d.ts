@@ -37,3 +37,9 @@ declare type tDecision = {
   readonly title: string,
   readonly type: tDecisionType,
 }
+
+declare type tVote = {
+  data: any,
+  decisionId: number,
+  orgId: number,
+}

@@ -1,7 +1,6 @@
-import {Dispatch} from 'redux';
-import {memoize} from 'redux-memoize';
 
-import {agent, objToQueryString} from '../../../utils';
+
+import { api } from '../../../utils';
 import {
   deleteOrgByUserBegin,
   deleteOrgByUserFailure,
@@ -14,92 +13,61 @@ import {
   getOrgsSuccess,
 } from './actions';
 
-export const getOrgs = memoize({ttl: 300}, (query: any) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const getOrgs = (query: any) => {
+  return async function (dispatch: Function) {
     dispatch(getOrgsBegin());
 
     try {
       const endpoint = '/api/v1/orgs';
-      const qs = objToQueryString(query);
-      const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
-
-      // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {agent})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
+      const path = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+      const result = await api({query, path});
       return dispatch(getOrgsSuccess(result));
     } catch (err) {
       return dispatch(getOrgsFailure(err));
     }
   };
-});
+};
 
-export const getOrgsBySession = memoize({ttl: 300}, () => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const getOrgsBySession = () => {
+  return async function (dispatch: Function) {
     dispatch(getOrgsByUserBegin());
 
     try {
       const endpoint = '/api/v1/orgsBySession';
-      const url = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
-
-      // @ts-ignore
-      const result = await fetch(url, {agent})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
+      const path = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+      const result = await api({path});
       return dispatch(getOrgsByUserSuccess(result));
     } catch (err) {
       return dispatch(getOrgsByUserFailure(err));
     }
   };
-});
+};
 
 const endpoint = '/api/v1/orgsByUser';
-const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+const path = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
 
-export const getOrgsByUser = memoize({ttl: 300}, (query: tIdQuery) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const getOrgsByUser = (query: tIdQueryC) => {
+  return async function (dispatch: Function) {
     dispatch(getOrgsByUserBegin());
 
     try {
-      const qs = objToQueryString(query);
-
-      // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {agent})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
+      const result = await api({query, path});
       return dispatch(getOrgsByUserSuccess(result));
     } catch (err) {
       return dispatch(getOrgsByUserFailure(err));
     }
   };
-});
+};
 
-export const deleteOrgByUser = memoize({ttl: 300}, (queryObj: tIdQuery) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const leaveOrg = (query: {orgId: number}) => {
+  return async function (dispatch: Function) {
     dispatch(deleteOrgByUserBegin());
 
     try {
-      const qs = objToQueryString(queryObj);
-
-      // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {agent, method: 'DELETE'})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
+      const result = await api({method: 'DELETE', query, path});
       return dispatch(deleteOrgByUserSuccess(result));
     } catch (err) {
       return dispatch(deleteOrgByUserFailure(err));
     }
   };
-});
+};

@@ -7,7 +7,7 @@ import {knex} from '../db/connection';
 // TODO this query should be simplfied if at all possible
 export const getUsersByOrgId = async (
   ctx: Koa.ParameterizedContext,
-  orgId: number,
+  orgId: string,
 ): Promise<tUsersByOrg> => {
   const rolesStream = knex('accounts_roles').where({orgId}).stream();
   const roleMaps: tAccountRoleRelation[] = [];

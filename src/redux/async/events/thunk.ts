@@ -1,7 +1,6 @@
-import {Dispatch} from 'redux';
-import {memoize} from 'redux-memoize';
 
-import {agent, objToQueryString} from '../../../utils';
+
+import { api } from '../../../utils';
 import {
   deleteEventBegin,
   deleteEventFailure,
@@ -11,70 +10,47 @@ import {
   getEventsSuccess,
 } from './actions';
 
-const endpoint = '/api/v1/events';
-const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
-
-export const getEvents = memoize({ttl: 300}, (query: tIdQuery) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const getEvents = (query: tIdQueryC) => {
+  return async function (dispatch: Function) {
     dispatch(getEventsBegin());
 
     try {
-      const qs = objToQueryString(query);
-
-      // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {agent})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
+      const endpoint = '/api/v1/events';
+      const path = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+      const result = await api({query, path});
       return dispatch(getEventsSuccess(result));
     } catch (err) {
       return dispatch(getEventsFailure(err));
     }
   };
-});
+};
 
-export const getEventsByUser = memoize({ttl: 300}, (query: tIdQuery) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const getEventsByUser = () => {
+  return async function (dispatch: Function) {
     dispatch(getEventsBegin());
 
     try {
       const endpoint = '/api/v1/eventsByUser';
-      const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
-      const qs = objToQueryString(query);
-
-      // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {agent})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
+      const path = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+      const result = await api({path});
       return dispatch(getEventsSuccess(result));
     } catch (err) {
       return dispatch(getEventsFailure(err));
     }
   };
-});
+};
 
-export const deleteEvent = memoize({ttl: 300}, (query: tIdQuery) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const deleteEvent = (query: tIdQueryC) => {
+  return async function (dispatch: Function) {
     dispatch(deleteEventBegin());
 
     try {
-      const qs = objToQueryString(query);
-
-      // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {agent, method: 'DELETE'})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
+      const endpoint = '/api/v1/events';
+      const path = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+      const result = await api({method: 'DELETE', query, path});
       return dispatch(deleteEventSuccess(result));
     } catch (err) {
       return dispatch(deleteEventFailure(err));
     }
   };
-});
+};

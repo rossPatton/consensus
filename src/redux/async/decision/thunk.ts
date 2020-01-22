@@ -1,7 +1,5 @@
-import { Dispatch } from 'redux';
-import { memoize } from 'redux-memoize';
 
-import { agent, objToQueryString } from '../../../utils';
+import { api } from '../../../utils';
 import {
   getDecisionBegin,
   getDecisionFailure,
@@ -12,46 +10,30 @@ import {
 } from './actions';
 
 const endpoint = '/api/v1/decision';
-const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+const path = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
 
-export const getDecision = memoize({ttl: 300}, (queryObj: tIdQuery) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const getDecision = (query: tIdQueryC) => {
+  return async function (dispatch: Function) {
     dispatch(getDecisionBegin());
 
     try {
-      const qs = objToQueryString(queryObj);
-
-      // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {agent})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
+      const result = await api({query, path});
       return dispatch(getDecisionSuccess(result));
     } catch (err) {
       return dispatch(getDecisionFailure(err));
     }
   };
-});
+};
 
-export const postDecision = memoize({ttl: 300}, (queryObj: tIdQuery) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+export const postDecision = (query: tIdQueryC) => {
+  return async function (dispatch: Function) {
     dispatch(postDecisionBegin());
 
     try {
-      const qs = objToQueryString(queryObj);
-
-      // @ts-ignore
-      const result = await fetch(`${prefix}?${qs}`, {agent, method: 'POST'})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
-
+      const result = await api({method: 'POST', query, path});
       return dispatch(postDecisionSuccess(result));
     } catch (err) {
       return dispatch(postDecisionFailure(err));
     }
   };
-});
+};

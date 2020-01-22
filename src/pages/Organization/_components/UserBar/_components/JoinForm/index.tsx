@@ -2,26 +2,24 @@ import loglevel from 'loglevel';
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {Dispatch} from 'redux';
 
-import {postNewUserByOrg, setRole, setUserByOrg} from '../../../../../../redux';
-import {tProps, tQuery, tStore, tUserAction} from './_types';
+import {postUserToOrg, setRole, setUserByOrg} from '../../../../../../redux';
+import {tProps, tStore} from './_types';
 import {JoinFormComponent} from './Component';
 
 class JoinFormContainer extends React.PureComponent<tProps> {
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
-    // just satisfy typescript
-    if (!this.props.session.id) return;
-
-    this.props.postNewUserByOrg({id: this.props.session.id})
-      .then((res: tUserAction) => {
-        if (!res.payload) return null;
-        return this.props.setUserByOrg(res.payload);
-      })
-      .then(() => this.props.setRole({role: 'member'}))
+    this.props.postNewUserByOrg({id: this.props.orgId})
+      .then(() => window.location.reload())
       .catch(loglevel.error);
+    // .then((res) => {
+    //   if (!res.payload) return null;
+    //   return this.props.setUserByOrg(res.payload);
+    // })
+    // .then(() => this.props.setRole({role: 'member'}))
+
   }
 
   render() {
@@ -59,8 +57,8 @@ const mapStateToProps = (store: tStore) => ({
   usersByOrg: store.usersByOrg.data,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  postNewUserByOrg: (query: tQuery) => dispatch(postNewUserByOrg(query)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  postNewUserByOrg: (query: tIdQueryC) => dispatch(postUserToOrg(query)),
   setRole: (query: {role: tRole}) => dispatch(setRole(query)),
   setUserByOrg: (query: tUser) => dispatch(setUserByOrg(query)),
 });

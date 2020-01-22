@@ -1,6 +1,5 @@
-import {PATCH_ACCOUNT_SUCCESS} from '../../../../../redux/async/account/_types';
-
 export type tState = {
+  isVerified: boolean,
   login: string,
   newPassword: string,
   password: string,
@@ -9,9 +8,8 @@ export type tState = {
 export type tStateUnion = keyof tState;
 
 export type tContainerProps = {
-  authenticateSession: (login: tLogin) => any,
-  patchAccount: (account: {id: number} & tState) =>
-    Promise<tAction<typeof PATCH_ACCOUNT_SUCCESS, tAccount>>,
+  login: (login: tLogin) => tThunkReturn<tSession>,
+  patchAccount: (account: {id: number} & tState) => tThunkReturn<tAccount>,
   session: tSession,
 };
 

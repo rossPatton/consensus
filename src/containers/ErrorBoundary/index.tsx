@@ -1,7 +1,7 @@
 import loglevel from 'loglevel';
 import React, {ErrorInfo, PureComponent} from 'react';
-import {Redirect} from 'react-router-dom';
 
+import {ErrorPageComponent} from '../../routes/ErrorPage';
 import {tState} from './_types';
 
 export default class ErrorBoundary extends PureComponent<any, tState> {
@@ -20,7 +20,12 @@ export default class ErrorBoundary extends PureComponent<any, tState> {
   }
 
   render() {
-    if (this.state.hasError) return <Redirect to="/500" />;
+    if (this.state.hasError) {
+      return (
+        <ErrorPageComponent />
+      );
+    }
+
     return this.props.children;
   }
 }

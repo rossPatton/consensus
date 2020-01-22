@@ -14,6 +14,7 @@ export const initStore = (initialState?: object) => {
   if (initialState) {
     return createStore(
       // 1st param === all reducers (using combinedReducer)
+      // @ts-ignore
       rootReducer,
       // 2nd param === any initial preloaded state
       initialState,

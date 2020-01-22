@@ -1,7 +1,7 @@
 import { match } from 'react-router';
 
 export interface tContainerProps {
-  getOrgs: (params: {category: tCategory}) => tThunk<tOrg[]>,
+  getOrgs: (query: {category: tCategory}) => tThunkReturn<tOrg[]>,
   isLoading: boolean,
   match: match & { params: tCategoryParams },
   orgs: tOrg[],

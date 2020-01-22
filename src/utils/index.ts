@@ -1,4 +1,5 @@
 export { agent } from './agent';
+export { api } from './api';
 export { fuzz } from './fuzz';
 export { fuzzFilterList } from './fuzzFilterList';
 export { getRandomNum } from './getRandomNum';

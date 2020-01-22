@@ -1,33 +1,33 @@
-import React, {PureComponent} from 'react';
+// import React, {PureComponent} from 'react';
 
-import {tContainerProps, tState} from './_types';
-import {SimpleMajorityVoteComponent} from './Component';
+// import {tContainerProps, tState} from './_types';
+// import {SimpleMajorityVoteComponent} from './Component';
 
-class SimpleMajorityVote extends PureComponent<tContainerProps, tState> {
-  state = {
-    selectedOption: this.props.vote || 'n/a',
-  };
+// class SimpleMajorityVote extends PureComponent<tContainerProps, tState> {
+//   state = {
+//     selectedOption: this.props.vote || 'n/a',
+//   };
 
-  // TODO move up maybe?
-  selectOption = (ev: any) => {
-    ev.preventDefault();
-    this.setState({
-      selectedOption: ev.currentTarget.value,
-    });
-  }
+//   // TODO move up maybe?
+//   selectOption = (ev: any) => {
+//     ev.preventDefault();
+//     this.setState({
+//       selectedOption: ev.currentTarget.value,
+//     });
+//   }
 
-  render() {
-    return (
-      <SimpleMajorityVoteComponent
-        options={this.props.options}
-        selectOption={this.selectOption}
-        selectedOption={this.state.selectedOption}
-        submitVote={this.props.submitVote}
-        tiny={this.props.tiny}
-        userVoted={this.props.userVoted}
-      />
-    );
-  }
-}
+//   render() {
+//     return (
+//       <SimpleMajorityVoteComponent
+//         options={this.props.options}
+//         selectOption={this.selectOption}
+//         selectedOption={this.state.selectedOption}
+//         submitVote={this.props.submitVote}
+//         tiny={this.props.tiny}
+//         userVoted={this.props.userVoted}
+//       />
+//     );
+//   }
+// }
 
-export default SimpleMajorityVote;
+// export default SimpleMajorityVote;

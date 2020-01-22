@@ -10,26 +10,34 @@ const route = '/api/v1/usersByOrg';
 const table = 'accounts_roles';
 const state = 'state.locals.data';
 
+// api for interacting with the accounts_roles table
+// not for signing up new users, but for getting users that are members of an org
+// or joining an org, or updating member roles within an org
+
 usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const orgId = _.get(ctx, `${state}.id`, 0);
+  const query: tIdQueryS = _.get(ctx, state, 0);
+  const {id: orgId} = query;
   ctx.body = await getUsersByOrgId(ctx, orgId);
 });
 
 usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const data = _.get(ctx, state, {});
-  const userId = _.get(ctx, 'state.user.id', 0);
-  const {id: orgId} = data;
+  const query: tIdQueryS = _.get(ctx, state, {});
+  const session = _.get(ctx, 'state.user', {});
+  const {id: orgId} = query;
+  const {id: userId} = session;
 
-  if (userId === 0) {
-    return ctx.redirect('/signup');
-  }
+  // 0 means the user isn't logged in basically
+  if (userId === 0) return ctx.redirect('/signup');
 
-  const accountId = await knex('accounts').limit(1).where({userId}).first();
+  const account: tAccount = await knex('accounts')
+    .limit(1)
+    .where({userId})
+    .first();
 
   // insert new user into db
   try {
     await knex(table)
-      .insert({accountId, orgId, userId, role: 'member'})
+      .insert({accountId: account.id, orgId, userId, role: 'member'})
       .returning('*');
   } catch (err) {
     return ctx.throw(400, err);
@@ -50,7 +58,8 @@ usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 usersByOrg.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const {orgId, role, userId} = _.get(ctx, state, {});
+  const query: tPatchUserRoleQuery = _.get(ctx, state, {});
+  const {orgId, role, userId} = query;
 
   let updatedAccountRoleRel: tAccountRoleRelation[];
   try {
@@ -67,7 +76,8 @@ usersByOrg.patch(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 usersByOrg.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  const {orgId, userId} = _.get(ctx, state, {});
+  const query: tDeleteUserOrgQuery = _.get(ctx, state, {});
+  const {orgId, userId} = query;
 
   try {
     await knex(table)

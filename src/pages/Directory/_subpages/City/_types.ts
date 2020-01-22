@@ -23,7 +23,7 @@ export type tContainerProps = {
 };
 
 export type tState = {
-  category: string,
+  category: tCategory,
   orgsBySearch: tOrg[],
 };
 

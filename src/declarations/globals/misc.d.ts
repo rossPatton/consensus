@@ -40,35 +40,6 @@ declare type tAccountRoleRelation = tRoleMap & {
   userId: number,
 }
 
-declare type tUserOrgRelation = {
-  id: number,
-  userId: number,
-  orgId: number,
-}
-
-// typical id-based db query
-declare interface tIdQuery {
-  // exclude an id, or something else
-  exclude?: number,
-  // id to search by
-  id: number,
-  // filter out private events/decisions/etc if user is not logged in
-  isPublic?: boolean,
-  limit?: number,
-  offset?: number,
-}
-
-// once the above values are passed to the server, they become strings
-declare interface tIdQueryServer {
-  query: {
-    exclude?: string,
-    id: string,
-    isPublic?: boolean,
-    limit?: string,
-    offset?: string,
-  }
-}
-
 declare interface tLocationQueryServer {
   query: tDirectoryParams,
 }

@@ -69,7 +69,7 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
             </div>
           </div>
           <ul className="fs6 lh1 lsDisc mL3 mB4">
-            <li className="mB1">Passwords must be at least 12 characters long, and can&apos;t be things like &quot;password&quot;, &quot;123456&quot; or &quot;abcdef&quot;.</li>
+            <li className="mB1">Passwords must be at least 12 characters long, and can&apos;t be too common like &quot;password&quot;.</li>
             <li className="mB1">We strongly recommend adding numbers, capitals, or special characters, but they aren&apos;t required.</li>
             <li className="mB1">Use a password manager to generate and save strong passwords!</li>
           </ul>

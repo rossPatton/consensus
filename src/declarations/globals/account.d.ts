@@ -18,11 +18,15 @@ declare type tLogin = {
   readonly password: string,
 };
 
+// when logging out we return this value
+declare type tLogoutReturn = {
+  readonly isAuthenticated: boolean,
+};
+
 // tSession is like tUser, but with auth data and everything is optional
 // since a user might not be logged in
-declare type tSession = {
+declare type tSession = tLogoutReturn & {
   readonly id: number,
-  readonly isAuthenticated: boolean,
   readonly isVerified: boolean,
   readonly lastActive?: string,
   readonly login: string, // unique login value separate from username or email

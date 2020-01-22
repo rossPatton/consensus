@@ -2,7 +2,6 @@ import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-import {Dispatch} from 'redux';
 
 import {setRsvp} from '../../redux/async/rsvps';
 import {tContainerProps, tSetRsvpOpts, tState, tStore} from './_types';
@@ -24,12 +23,6 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
     const {privateRSVP = true} = profile as tUser;
 
     if (!session.isAuthenticated) return history.push('/login');
-
-    // declare interface tRSVPQuery {
-    //   id: number,
-    //   type: 'public' | 'private',
-    //   value: boolean,
-    // }
 
     try {
       this.props.setRsvpDispatch({
@@ -65,7 +58,7 @@ const mapStateToProps = (store: tStore) => ({
   session: store.session.data,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
+const mapDispatchToProps = (dispatch: Function) => ({
   setRsvpDispatch: (query: tRSVPQuery) => dispatch(setRsvp(query)),
 });
 

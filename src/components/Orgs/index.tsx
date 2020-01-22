@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 // import {connect} from 'react-redux';
-// import {Dispatch} from 'redux';
+//
 import {Paginate} from '../../containers';
 import {tContainerProps} from './_types';
 import {OrgsComponent} from './Component';
@@ -24,8 +24,8 @@ class OrgsContainer extends Component<tContainerProps> {
   }
 }
 
-// const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-//   deleteEvent: (query: tIdQuery) => dispatch(deleteEvent(query)),
+// const mapDispatchToProps = (dispatch: Function) => ({
+//   deleteEvent: (query: tIdQueryC) => dispatch(deleteEvent(query)),
 // });
 
 // const Events = connect(null, mapDispatchToProps)(OrgsContainer);

@@ -5,25 +5,25 @@ import {knex} from '../db/connection';
 
 // use login info to return session for client
 // ideally only happens once per visit, on login. but if user refreshes, we do again
-export const getEventsByOrgId = async (data: any) => {
+export const getEventsByOrgId = async (query: tEventQueryS) => {
   const {
-    exclude,
+    exclude: excludeId,
     id: orgId,
     isDraft: isDraftStr,
     isPublic: isPublicStr,
-    limit,
-    offset,
+    limit: limitStr,
+    offset: offsetStr,
     showPast: showPastStr,
-  } = data;
+  } = query;
 
-  const parsedLimit = limit ? parseInt(limit, 10) : 3;
-  const parsedOffset = offset ? parseInt(offset, 10) : 0;
+  const parsedLimit = limitStr ? parseInt(limitStr, 10) : 3;
+  const parsedOffset = offsetStr ? parseInt(offsetStr, 10) : 0;
 
   // by default, we only return upcoming events
   const events = knex('events');
 
   // if we're excluding events, do it up front
-  if (exclude) events.whereNot({id: exclude});
+  if (excludeId) events.whereNot({id: excludeId});
 
   // if user isn't logged in or a member, only show public events
   const isPublic = isPublicStr === 'true';

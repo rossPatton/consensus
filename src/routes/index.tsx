@@ -1,6 +1,5 @@
 import {Admin} from './Admin';
 import {Categories} from './Categories';
-import {Decision} from './Decision';
 import {Directory} from './Directory';
 import {ErrorPage} from './ErrorPage';
 import {Event} from './Event';
@@ -16,7 +15,6 @@ import {User} from './User';
 export const routes = [
   Admin,
   Categories,
-  Decision,
   Directory,
   ErrorPage,
   Event,

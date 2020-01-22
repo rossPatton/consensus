@@ -4,13 +4,12 @@ import qs from 'querystring';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import { Dispatch } from 'redux';
 
 import {Helmet} from '../../../../components';
-import {createEvent} from '../../../../redux';
+import {postEvent} from '../../../../redux';
 import {getEventsSuccess} from '../../../../redux/async/events/actions';
 import {parseTimeString} from '../../../../utils';
-import {tContainerProps, tCreateEvent, tState, tStateUnion, tStore} from './_types';
+import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 import {CreateOrEditEventComponent } from './Component';
 
 class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
@@ -114,7 +113,7 @@ class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
 
     let newEvent: tEvent;
     try {
-      const createEvent = await this.props.createEvent({
+      const createEvent = await this.props.postEvent({
         ...restOfEvent,
         // we submit drafts to the same table in the DB as well
         isDraft: saveAsDraft,
@@ -206,8 +205,8 @@ const mapStateToProps = (store: tStore) => ({
   session: store.session.data,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  createEvent: (event: tCreateEvent) => dispatch(createEvent(event)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  postEvent: (query: tPostEventQuery) => dispatch(postEvent(query)),
 });
 
 const CreateOrEditEvent = connect(

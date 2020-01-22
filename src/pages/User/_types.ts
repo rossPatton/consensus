@@ -14,8 +14,8 @@ export type tProps = {
 };
 
 export type tContainerProps = tProps & {
-  getOrgsByUser: (query: tIdQuery) => Promise<any>,
-  getUserById: (query: tIdQuery) => Promise<any>,
+  getOrgsByUser: (query: tIdQueryC) => Promise<any>,
+  getUserById: (query: tIdQueryC) => Promise<any>,
   isLoading: boolean,
   match: match & { params: { id: number } },
 };

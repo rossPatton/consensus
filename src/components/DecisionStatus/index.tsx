@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 
-import {POLL} from '../../constants';
+import {POLL} from '../../constants/decisions';
 import {SimpleMajorityResult} from './_components';
 import {tProps} from './_types';
 

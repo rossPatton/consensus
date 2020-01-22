@@ -1,6 +1,5 @@
 export type tProps = {
   session: tSession,
-  toggleNav: () => void,
 };
 
 export type tComponentProps = tProps & {
@@ -8,7 +7,7 @@ export type tComponentProps = tProps & {
 };
 
 export type tContainerProps = tProps & {
-  // wipe role relations on logout
+  // wipes role relations on logout
   getRolesSuccess: (emptyRoles: []) => any,
-  logOutOfSession: () => any,
+  logout: () => tThunkReturn,
 };

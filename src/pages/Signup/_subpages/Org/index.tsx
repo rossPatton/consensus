@@ -1,7 +1,6 @@
 import qs from 'querystring';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 
 import {postOrg} from '../../../../redux';
 import {slugify} from '../../../../utils';
@@ -15,14 +14,14 @@ export class OrgSignupContainer extends Component<tContainerProps, tState> {
     const location = qs.parse(props.location.search.split('?')[1]);
 
     this.state = {
-      category: '',
+      category: 'Political Organization',
       city: location.city as string,
       cityId: parseInt(location.cityId as string, 10),
       country: location.country as string,
       countryId: parseInt(location.countryId as string, 10),
       description: '',
       email: '',
-      eventPrivacy: 'manual' as tGate,
+      eventPrivacy: 'manual' as tEventPrivacy,
       gate: 'manual' as tGate,
       login: '',
       name: '',
@@ -61,7 +60,7 @@ export class OrgSignupContainer extends Component<tContainerProps, tState> {
   }
 }
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
+const mapDispatchToProps = (dispatch: Function) => ({
   postOrg: (org: any) => dispatch(postOrg(org)),
 });
 

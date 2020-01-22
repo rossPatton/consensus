@@ -7,11 +7,6 @@ import {tComponentProps} from './_types';
 export const HeaderComponent = memo((props: tComponentProps) => (
   <header className="bgWhite bxSh1 fix t l r pT3 pB3 z99">
     <div className="contain fx aiCtr rel">
-      {/* <button
-        className="bg0 brd0 abs l"
-        onClick={props.toggleNav}>
-        <img alt="" src="/static/images/ham.svg" width="40" />
-      </button>*/}
       <Link to="/">
         <img
           alt="Consensus"
@@ -38,7 +33,7 @@ export const HeaderComponent = memo((props: tComponentProps) => (
         )}
         {props.session.isAuthenticated && (
           <form action="/auth/logout">
-            <fieldset className="fx">
+            <fieldset>
               <Link
                 id="a11yAdmin"
                 className="mR2"

@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 
 import {PrivacyFilter, PublishedFilter, SearchFilter} from '../../../../../containers';
 import {getEvents} from '../../../../../redux';
@@ -54,8 +53,8 @@ const mapStateToProps = (store: tStore) => ({
   isLoading: store.events.isLoading,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  getEvents: (query: tIdQuery) => dispatch(getEvents(query)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  getEvents: (query: tIdQueryC) => dispatch(getEvents(query)),
 });
 
 const Events = connect(

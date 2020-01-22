@@ -11,13 +11,13 @@ export type tComponentProps = {
 
 export type tContainerProps = {
   decisions: tDecision[],
-  getDecisions: (query: tIdQuery) => Promise<tThunk<tDecision[]>>,
+  getDecisions: (query: tIdQueryC) => tThunkReturn<tDecision[]>,
   isLoading: boolean,
   match: tAdminSections,
   session: tSession,
 };
 
-export type tState = {
+export type tStore = {
   decisions: tThunk<tDecision[]>,
   isLoading: boolean,
 };

@@ -1,3 +1,10 @@
+declare type tUserSignupForm = {
+  email: string,
+  login: string,
+  password: string,
+  username: string,
+};
+
 declare type tUser = {
   bio: string,
   email: string,

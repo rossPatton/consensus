@@ -41,20 +41,15 @@ export const MembershipsComponent = memo((props: tComponentProps) => (
                   <Link
                     className="mR3"
                     to={`/org/${org.id}/createEvent`}>
-                    Create Event
+                    Plan Meeting
                   </Link>
-                  {/* <Link
-                    className="mR3"
-                    to={`/org/${org.id}/makeDecision`}>
-                    Make Decision
-                  </Link>*/}
                 </div>
               )}
             </div>
             <div className="col taR">
               <button
                 className="bgWhite"
-                onClick={ev => props.deleteOrgByUser(ev, org.id)}>
+                onClick={ev => props.leaveOrg(ev, org.id)}>
                 Leave this organization
               </button>
             </div>

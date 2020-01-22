@@ -2,7 +2,6 @@
 // creating an event, event schema in db, not logged in event
 declare type tEvent = {
   readonly attendees?: tUser[],
-  readonly category: string,
   readonly city: string,
   readonly country: string,
   readonly date: string,

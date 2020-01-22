@@ -1,4 +1,4 @@
-export type tProps = {
-  data: tCustomVoteResults,
-  tiny?: boolean,
-};
+// export type tProps = {
+//   data: tCustomVoteResults,
+//   tiny?: boolean,
+// };

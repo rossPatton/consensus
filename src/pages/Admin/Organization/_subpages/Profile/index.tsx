@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
-import {Dispatch} from 'redux';
 
 import {Helmet} from '../../../../../components';
 import {patchOrg} from '../../../../../redux';
@@ -56,8 +55,8 @@ class ProfileContainer extends PureComponent<tContainerProps, tOrg> {
   }
 }
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  patchOrg: (org: any) => dispatch(patchOrg(org)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  patchOrg: (query: tPatchOrgQuery) => dispatch(patchOrg(query)),
 });
 
 const Profile = connect(

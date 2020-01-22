@@ -2,7 +2,6 @@ import loglevel from 'loglevel';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
-import {Dispatch} from 'redux';
 
 import {GenericLoader, Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
@@ -93,9 +92,9 @@ const mapStateToProps = (store: tStore) => ({
   session: store.session.data,
 });
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  getEventById: (query: tIdQuery) => dispatch(getEventById(query)),
-  getEvents: (query: tIdQuery) => dispatch(getEvents(query)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  getEventById: (query: tIdQueryC) => dispatch(getEventById(query)),
+  getEvents: (query: tIdQueryC) => dispatch(getEvents(query)),
 });
 
 const Event = connect(mapStateToProps, mapDispatchToProps)(EventContainer);

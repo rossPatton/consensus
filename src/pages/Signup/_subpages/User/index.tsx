@@ -2,11 +2,10 @@ import commonPasswordList from 'fxa-common-password-list';
 import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 
-import {authenticateSession, registerUser} from '../../../../redux';
+import {login, registerUser} from '../../../../redux';
 import {isValidEmail} from '../../../../utils';
-import {tContainerProps, tForm, tState, tStateUnion} from './_types';
+import {tContainerProps, tState, tStateUnion} from './_types';
 import {UserSignupComponent} from './Component';
 
 export class UserSignupContainer extends PureComponent<tContainerProps, tState> {
@@ -62,6 +61,7 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
     await this.props.registerUser(state);
 
     const {login, password} = this.state;
+
     // has to be called username here, or passport will fail with no err
     return this.props.authenticateSession({username: login, password});
   }
@@ -91,9 +91,9 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
   }
 }
 
-const mapDispatchToProps = <S extends {}>(dispatch: Dispatch<S>) => ({
-  authenticateSession: (login: tLogin) => dispatch(authenticateSession(login)),
-  registerUser: (user: tForm) => dispatch(registerUser(user)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  authenticateSession: (query: tLogin) => dispatch(login(query)),
+  registerUser: (user: tUserSignupForm) => dispatch(registerUser(user)),
 });
 
 export const UserSignup = connect(

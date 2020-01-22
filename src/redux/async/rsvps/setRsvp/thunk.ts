@@ -1,6 +1,6 @@
-import { Dispatch } from 'redux';
 
-import { agent, objToQueryString } from '../../../../utils';
+
+import { api } from '../../../../utils';
 import {
   setRsvpBegin,
   setRsvpFailure,
@@ -8,22 +8,14 @@ import {
 } from './actions';
 
 const endpoint = '/api/v1/rsvp';
-const prefix = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
+const path = __CLIENT__ ? endpoint : `${__URL__}${endpoint}`;
 
 export const setRsvp = (query: tRSVPQuery) => {
-  return async function <S>(dispatch: Dispatch<S>) {
+  return async function (dispatch: Function) {
     dispatch(setRsvpBegin());
 
     try {
-      const qs = objToQueryString(query);
-
-      // @ts-ignore
-      const result: tRSVP = await fetch(`${prefix}?${qs}`, {agent, method: 'POST'})
-        .then((response: tFetchResponse) => {
-          if (!response.ok) throw response;
-          return response.json();
-        });
-
+      const result = await api({method: 'POST', query, path});
       return dispatch(setRsvpSuccess(result));
     } catch (err) {
       return dispatch(setRsvpFailure(err));

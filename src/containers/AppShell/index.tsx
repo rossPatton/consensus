@@ -5,28 +5,14 @@ import {Route, Switch} from 'react-router-dom';
 import {RouteWithSubRoutes} from '../../components';
 import NoMatch from '../../pages/404';
 import {routes} from '../../routes';
-import {Footer, Header, Nav} from './_components';
+import {Footer, Header} from './_components';
 
-export default class AppShell extends Component<any, {showNav: boolean}> {
-  state = {
-    showNav: false,
-  };
-
-  toggleNav = () => {
-    this.setState({
-      showNav: !this.state.showNav,
-    });
-  }
-
+export default class AppShell extends Component<any> {
   render() {
     return (
       <HelmetProvider context={{}}>
         <>
-          <Header
-            {...this.props}
-            toggleNav={this.toggleNav}
-          />
-          {this.state.showNav && <Nav />}
+          <Header />
           <main className="mT5 mB5 pB5">
             <Switch>
               {routes.map((route: tRoute, i) => (

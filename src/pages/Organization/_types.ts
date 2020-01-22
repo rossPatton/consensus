@@ -14,18 +14,16 @@ export type tComponentProps = tProps & {
 }
 
 export type tContainerProps = tProps & {
-  getDecisionsByOrg: (id: number) => Promise<tThunk<tDecision[]>>,
-  getEvents: (id: number) => Promise<tThunk<tEvent[]>>,
-  getOrg: (params: tOrgRouteParams) => Promise<tThunk<tOrg>>,
-  getRoles: (query: tIdQuery) => Promise<tThunk<tRoleMap[]>>,
-  getRsvps: (query: tIdQuery) => Promise<tThunk<tRSVP[]>>,
+  getEvents: (id: number) => tThunkReturn<tEvent[]>,
+  getOrg: (params: tOrgRouteParams) => tThunkReturn<tOrg>,
+  getRoles: () => tThunkReturn<tRoleMap[]>,
+  getRsvps: () => tThunkReturn<tRSVP[]>,
   isLoading: boolean,
   roles: tRoleMap[],
   session: tSession,
 };
 
 export type tStore = {
-  decisions: tThunk<tDecision[]>,
   events: tThunk<tEvent[]>,
   org: tThunk<tOrg>,
   roles: tThunk<tRoleMap[]>,

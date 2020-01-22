@@ -1,6 +1,3 @@
-import {AUTHENTICATE_SUCCESS} from '../../../../../redux/async/session/_types';
-import {UPDATE_USER_SUCCESS} from '../../../../../redux/async/updateUser/_types';
-
 export type tState = {
   bio: string,
   email: string,
@@ -17,12 +14,10 @@ export type tState = {
 export type tStateUnion = keyof tState;
 
 export interface tContainerProps {
-  authenticateSession: (login: tLogin) =>
-    Promise<tAction<typeof AUTHENTICATE_SUCCESS, tLogin>>,
+  login: (login: tLogin) => tThunkReturn<tSession>,
   session: tSession,
   // we get id from the active session
-  updateUser: (user: {id: number} & tState) =>
-    Promise<tAction<typeof UPDATE_USER_SUCCESS, tUser>>,
+  updateUser: (user: tState & {id: number}) => tThunkReturn<tUser>,
 }
 
 export interface tComponentProps extends tState {

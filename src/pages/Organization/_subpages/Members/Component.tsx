@@ -2,9 +2,8 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 
 import {Users} from '../../../../components';
+import {roles} from '../../../../constants';
 import {tComponentProps} from './_types';
-
-const roles: tRole[] = ['member', 'facilitator'];
 
 export const MembersComponent = memo((props: tComponentProps) => (
   <>
