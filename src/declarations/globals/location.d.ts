@@ -1,22 +1,22 @@
-declare interface tPaginateParams {
+declare type tPaginateParams = {
   readonly page?: string,
 }
 
-declare interface tCategoryParams extends tPaginateParams {
+declare type tCategoryParams = tPaginateParams & {
   readonly category: tCategorySlug,
 }
 
-declare interface tDirectoryParams extends tPaginateParams {
+declare type tDirectoryParams = tPaginateParams & {
   readonly city?: string,
   readonly country?: string,
   readonly region?: string,
 }
 
-declare interface tEventParams {
+declare type tEventParams = {
   readonly id: number,
 }
 
-declare interface tOrgRouteParams extends tPaginateParams {
+declare type tOrgRouteParams = tPaginateParams & {
   readonly id: string,
   readonly section?: string,
   readonly slug: string,
@@ -35,6 +35,6 @@ declare type tRoute = {
   readonly redirect?: string,
 };
 
-declare interface tSearchParams extends tPaginateParams {
+declare type tSearchParams = tPaginateParams & {
   readonly value: string,
 }

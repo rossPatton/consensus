@@ -16,7 +16,7 @@
 //     this.getDecisions();
 //   }
 
-//   private getDecisions() {
+//   getDecisions() {
 //     const {match: {params: {page = 0} = {}}, session} = this.props;
 //     const offset = page ? parseInt(page, 10) : 0;
 
@@ -49,7 +49,7 @@
 //   }
 // }
 
-// const mapStateToProps = (store: any) => ({
+// const mapStateToProps = (store: tStore) => ({
 //   decisions: store.decisions.data,
 //   isLoading: store.events.isLoading,
 // });

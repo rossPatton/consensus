@@ -2,7 +2,14 @@ require('dotenv-safe').config();
 import faker from 'faker';
 import Knex from 'knex';
 
-import {categories} from '../../../constants';
+export const categories = [
+  'Religious',
+  'Community Center',
+  'Cooperative',
+  'Union',
+  'Political Organization',
+];
+
 import {getRandomNum} from '../../../utils/getRandomNum';
 import {range} from '../../../utils/range';
 import {slugify} from '../../../utils/slugify';
@@ -10,7 +17,7 @@ import {slugify} from '../../../utils/slugify';
 const createOrg = async () => {
   const name = faker.company.companyName();
   const slug = slugify(name);
-  const category = categories[getRandomNum(0, 4)];
+  const category = categories[getRandomNum(0, categories.length - 1)];
 
   return {
     category,

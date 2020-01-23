@@ -17,7 +17,9 @@ export const api = async (opts: tApiOpts) => {
 
   return fetch(endpoint, fetchOpts)
     .then((response: tFetchResponse) => {
+      console.log('response => ', response);
       if (!response.ok) throw response;
       return response.json();
-    });
+    })
+    .catch(console.error);
 };

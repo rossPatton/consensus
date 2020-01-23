@@ -18,12 +18,14 @@ exports.up = async (knex: Knex) => {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
-    // user profile id if applicable
+    // user id of current session
     table.integer('userId')
-      .nullable()
-      .references('orgs.id')
+      .references('users.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
+
+    // create unique composite key. a user can only have 1 role per org
+    table.unique(['orgId', 'accountId', 'userId']);
 
     // relation the account has to the org
     // 'admin' || 'member' || 'facilitator'

@@ -31,6 +31,7 @@ export const setupApi = (app: Koa) => {
   app.use(event.routes());
   app.use(events.routes());
   app.use(eventsByUser.routes());
+  app.use(org.middleware());
   app.use(org.routes());
   app.use(orgs.routes());
   app.use(orgsBySession.routes());

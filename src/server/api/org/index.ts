@@ -2,44 +2,41 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {knex} from '../db/connection';
+import {knex} from '../../db/connection';
+import {schema} from './_schema';
 
 export const org = new Router();
+const dataPath = 'state.locals.data';
 const route = '/api/v1/org';
 const table = 'orgs';
-const dataPath = 'state.locals.data';
 
 org.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const userId = _.get(ctx, 'state.user.id', 0);
-  const orgId = _.get(ctx, 'state.locals.data.id', 0);
+  const query: tOrgRouteParams = _.get(ctx, 'state.locals.data', {});
+  const isValidated = await schema.validateAsync({ whatever: 'abc', testValue: null });
+  console.log('isValidated => ', isValidated);
+  const isActuallyValidated = await schema.validateAsync({ testValue: '12345' });
+  console.log('isActuallyValidated => ', isActuallyValidated);
+
+  try {
+    await schema.validateAsync({ whatever: 'abc', testValue: null });
+  } catch (err) {
+    const message = Error(_.get(err, 'details[0].message', 'Bad Request'));
+    return ctx.throw(400, message);
+  }
 
   let org: tOrg;
   try {
     org = await knex(table)
       .limit(1)
-      .where({id: orgId})
+      .where({id: query.id})
       .first();
   } catch (err) {
     return ctx.throw(400, err);
   }
 
-  let userOrgRel: tAccountRoleRelation;
-  try {
-    userOrgRel = await knex('accounts_roles')
-      .limit(1)
-      .where({userId, orgId: org.id})
-      .first();
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
-
-  const orgWithRole = {
-    ...org,
-    role: userOrgRel ? userOrgRel.role : null,
-  };
-
-  ctx.body = orgWithRole;
+  ctx.body = org;
 });
+
 
 org.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...newOrg} = _.get(ctx, dataPath, {});
@@ -58,6 +55,7 @@ org.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {createdAt, email, updatedAt, ...safeOrg} = updatedOrg[0];
   ctx.body = safeOrg;
 });
+
 
 org.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...org} = _.get(ctx, dataPath, {});

@@ -8,6 +8,7 @@ declare type tIdQueryC = {
   isPublic?: boolean,
   limit?: number,
   offset?: number,
+
 }
 
 // typical generic id-based db query

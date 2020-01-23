@@ -19,7 +19,6 @@ class JoinFormContainer extends React.PureComponent<tProps> {
     //   return this.props.setUserByOrg(res.payload);
     // })
     // .then(() => this.props.setRole({role: 'member'}))
-
   }
 
   render() {

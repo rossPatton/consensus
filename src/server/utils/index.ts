@@ -1,4 +1,3 @@
-// export {batchUpdate} from './batchUpdate';
 export {encrypt, decrypt} from './crypto';
 export {filterEvs4Client} from './filterEvs4Client';
 export {isValidPw} from './isValidPw';

@@ -47,12 +47,14 @@ export const orgReducer = (state = initialState, action: tActionUnion) => {
       isLoading: false,
     };
 
-  case GET_ORG_FAILURE || PATCH_ORG_FAILURE || POST_ORG_FAILURE:
+  case GET_ORG_FAILURE || PATCH_ORG_FAILURE || POST_ORG_FAILURE: {
+    console.log('get org failure should be called');
     return {
       ...state,
       error: action.payload,
       isLoading: false,
     };
+  }
 
   // separate case to force state update
   /* eslint-disable */

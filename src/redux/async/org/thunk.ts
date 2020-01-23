@@ -17,11 +17,15 @@ export const getOrg = (query: tOrgRouteParams) => {
   return async function (dispatch: Function) {
     dispatch(getOrgBegin());
 
+    console.log('getOrg query => ', query);
+
     try {
       const result = await api({query, path});
+      console.log('result in thunk => ', result);
       return dispatch(getOrgSuccess(result));
     } catch (err) {
-      return dispatch(getOrgFailure(err));
+      console.log('getOrgFailure => ', err);
+      return dispatch(getOrgFailure(err as Error));
     }
   };
 };

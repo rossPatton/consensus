@@ -10,7 +10,11 @@ import {OrganizationComponent} from './Component';
 class OrganizationContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    props.getOrg(props.match.params);
+    props.getOrg(props.match.params)
+      .then(res => {
+        return console.log('get org response => ', res);
+      })
+      .catch(err => console.log(err));
 
     if (props.session.isAuthenticated && props.session.type === 'user') {
       props.getRoles();
@@ -75,6 +79,7 @@ const mapStateToProps = (store: tStore) => ({
   roles: store.roles.data,
   session: store.session.data,
 });
+
 
 const mapDispatchToProps = (dispatch: Function) => ({
   getOrg: (query: tOrgRouteParams) => dispatch(getOrg(query)),
