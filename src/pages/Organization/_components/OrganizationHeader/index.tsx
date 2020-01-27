@@ -1,14 +1,14 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {getUsersByOrg} from '../../../../redux';
+import {getUsersByOrgId} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {OrganizationHeaderComponent} from './Component';
 
 class OrganizationHeaderContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    props.getUsersByOrg({id: props.org.id});
+    props.getUsersByOrgIdDispatch({orgId: props.org.id});
   }
 
   render() {
@@ -27,7 +27,8 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getUsersByOrg: (query: tIdQueryC) => dispatch(getUsersByOrg(query)),
+  getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
+    dispatch(getUsersByOrgId(query)),
 });
 
 const OrganizationHeader = connect(

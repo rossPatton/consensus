@@ -19,3 +19,7 @@ declare type tCategories = {
   readonly display: tCategory,
   readonly slug: tCategorySlug,
 }[];
+
+declare type tCategoryParams = tPaginateParams & {
+  readonly category: tCategorySlug,
+}

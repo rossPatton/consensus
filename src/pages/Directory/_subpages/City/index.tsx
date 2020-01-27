@@ -1,9 +1,11 @@
+import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import {Breadcrumbs, GenericLoader, Helmet} from '../../../../components';
+import {ErrorBoundary} from '../../../../containers';
 import {Paginate} from '../../../../containers';
-import {getCity, getCountry, getRegion} from '../../../../redux';
+import {getCity, getRegion} from '../../../../redux';
 import {fuzzFilterList, slugify} from '../../../../utils';
 import {tContainerProps, tState, tStore} from './_types';
 import {CityComponent} from './Component';
@@ -16,9 +18,9 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
 
   constructor(props: tContainerProps) {
     super(props);
-    props.getCountry(props.match.params);
-    props.getRegion(props.match.params);
-    props.getCity(props.match.params);
+    const {match: {params}} = props;
+    props.getRegion({country: params.country, region: params.region});
+    props.getCity(params);
   }
 
   // Re-run the filter whenever the list array or filter text changes:
@@ -38,20 +40,15 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
     ev.preventDefault();
     this.setState({
       orgsBySearch: fuzzFilterList({
-        input: this.props.city.orgs,
+        input: this.props.city.data.orgs,
         search: ev.currentTarget.value,
       }),
     });
   }
 
   render() {
-    const {orgsBySearch} = this.state;
-    const {city, country, isLoading, match, region} = this.props;
-    const categories = city.orgs.map(org => org.category);
-    const orgsToRender = orgsBySearch.length > 0 ? orgsBySearch : city.orgs;
-
     return (
-      <>
+      <ErrorBoundary status={_.get(this.props.city, 'error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -63,36 +60,45 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
           ]}
         />
         <GenericLoader
-          isLoading={isLoading}
+          isLoading={this.props.isCityLoading}
           render={() => {
-            const crumbs = [{
-              display: country.name,
-              to: `directory/${country.code}`,
-            }, {
-              display: region.name,
-              to: `directory/${country.code}/${region.code}`,
-            }, {
-              display: city.name,
-              to: `directory/${country.code}/${region.code}/${slugify(city.name)}`,
-            }];
+            const {orgsBySearch} = this.state;
+            const orgsToRender = orgsBySearch.length > 0
+              ? orgsBySearch
+              : this.props.city.data.orgs;
 
             return (
               <>
-                <Breadcrumbs crumbs={crumbs} />
+                <GenericLoader
+                  isLoading={this.props.isRegionLoading}
+                  render={() => {
+                    const {city, region} = this.props;
+
+                    const crumbs = [{
+                      display: 'United States',
+                      to: 'directory/us',
+                    }, {
+                      display: region.name,
+                      to: `directory/us/${region.code}`,
+                    }, {
+                      display: city.data.name,
+                      to: `directory/us/${region.code}/${slugify(city.data.name)}`,
+                    }];
+
+                    return <Breadcrumbs crumbs={crumbs} />;
+                  }}
+                />
                 <Paginate
                   count={9}
                   items={this.filterByCategory(orgsToRender)}
                   page={this.props.match.params.page}
                   render={(itemsToRender: tOrg[]) => (
                     <CityComponent
-                      categories={categories}
-                      city={city}
-                      country={country}
-                      match={match}
+                      city={this.props.city.data}
+                      match={this.props.match}
                       onChange={this.onChange}
                       onSearch={this.onSearch}
                       orgsToRender={itemsToRender}
-                      region={region}
                     />
                   )}
                 />
@@ -100,21 +106,20 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
             );
           }}
         />
-      </>
+      </ErrorBoundary>
     );
   }
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.city.isLoading,
-  city: store.city.data,
-  country: store.country.data,
+  isCityLoading: store.city.isLoading,
+  isRegionLoading: store.region.isLoading,
+  city: store.city,
   region: store.region.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
   getCity: (params: tDirectoryParams) => dispatch(getCity(params)),
-  getCountry: (params: tDirectoryParams) => dispatch(getCountry(params)),
   getRegion: (params: tDirectoryParams) => dispatch(getRegion(params)),
 });
 

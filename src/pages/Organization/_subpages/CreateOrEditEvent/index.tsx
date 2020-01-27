@@ -7,7 +7,6 @@ import { Redirect } from 'react-router';
 
 import {Helmet} from '../../../../components';
 import {postEvent} from '../../../../redux';
-import {getEventsSuccess} from '../../../../redux/async/events/actions';
 import {parseTimeString} from '../../../../utils';
 import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 import {CreateOrEditEventComponent } from './Component';
@@ -94,7 +93,7 @@ class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
     ev: React.MouseEvent<HTMLButtonElement>,
     saveAsDraft: boolean = false) => {
     ev.preventDefault();
-    const {events} = this.props;
+    // const {events} = this.props;
     const {
       duration,
       // featuredImage,
@@ -129,7 +128,7 @@ class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
     }
 
     // update redux on client side on event upload success
-    getEventsSuccess([newEvent, ...events]);
+    // getEventsSuccess([newEvent, ...events]);
     this.setState({
       id: newEvent.id,
     });

@@ -6,7 +6,7 @@ import {canonical, description, keywords, title} from './_constants';
 import {HomeComponent} from './Component';
 
 const Home = memo(() => (
-  <ErrorBoundary>
+  <ErrorBoundary status={200}>
     <Helmet
       canonical={canonical}
       title={title}

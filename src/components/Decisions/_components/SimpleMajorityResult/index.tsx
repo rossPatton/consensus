@@ -1,22 +1,22 @@
-import cx from 'classnames';
-import React, {memo} from 'react';
+// import cx from 'classnames';
+// import React, {memo} from 'react';
 
-import {tProps} from './_types';
+// import {tProps} from './_types';
 
-export const SimpleMajorityResult = memo((props: tProps) => {
-  const {data} = props;
-  const count = data.Yes + data.No + data.Abstain;
-  const yesPercent = Math.round((data.Yes / count) * 100);
-  const noPercent = Math.round((data.No / count) * 100);
-  const isPassed = yesPercent > noPercent;
+// export const SimpleMajorityResult = memo((props: tProps) => {
+//   const {data} = props;
+//   const count = data.Yes + data.No + data.Abstain;
+//   const yesPercent = Math.round((data.Yes / count) * 100);
+//   const noPercent = Math.round((data.No / count) * 100);
+//   const isPassed = yesPercent > noPercent;
 
-  return (
-    <span
-      className={cx({
-        'p1 abs t l b': true,
-        'bgBlue': isPassed,
-        'bgRed': !isPassed,
-      })}
-    />
-  );
-});
+//   return (
+//     <span
+//       className={cx({
+//         'p1 abs t l b': true,
+//         'bgBlue': isPassed,
+//         'bgRed': !isPassed,
+//       })}
+//     />
+//   );
+// });

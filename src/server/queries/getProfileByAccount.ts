@@ -9,7 +9,7 @@ export const getProfileByAccount = async (
   account: tAccount): Promise<tOrg | tUser> => {
   const {orgId, userId} = account;
 
-  let profile: any;
+  let profile: tOrg | tUser;
   if (orgId) {
     try {
       profile = await knex('orgs').limit(1).where({id: orgId}).first();

@@ -31,10 +31,10 @@
 // }
 
 // export interface tContainerProps extends tComponentProps {
-//   getDecision: (query: tIdQueryC) => Promise<{payload: tDecision}>,
+//   getDecision: (query: tIdQuery) => Promise<{payload: tDecision}>,
 //   getDecisionsByOrg:
-//     (query: tIdQueryC & {isClosed: boolean}) => Promise<{payload: tDecision[]}>,
-//   getRoles: (query: tIdQueryC) => Promise<any>,
+//     (query: tIdQuery & {isClosed: boolean}) => Promise<{payload: tDecision[]}>,
+//   getRoles: (query: tIdQuery) => Promise<any>,
 //   getVotes: (query: any) => Promise<any>,
 //   roles: tRoleMap[],
 //   session: tSession,

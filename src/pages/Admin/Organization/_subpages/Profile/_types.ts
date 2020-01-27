@@ -2,7 +2,7 @@ export type tStateUnion = keyof tOrg;
 export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export type tContainerProps = {
-  patchOrg: (query: tPatchOrgQuery) => any,
+  patchOrg: (query: tOrgQuery) => tThunkPayload<tOrg>,
   session: tSession,
 };
 

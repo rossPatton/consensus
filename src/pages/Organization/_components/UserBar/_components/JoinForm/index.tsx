@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import {postUserToOrg, setRole, setUserByOrg} from '../../../../../../redux';
+import {postRoleSuccess, postUserByOrgId} from '../../../../../../redux';
 import {tProps, tStore} from './_types';
 import {JoinFormComponent} from './Component';
 
@@ -11,14 +11,11 @@ class JoinFormContainer extends React.PureComponent<tProps> {
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
-    this.props.postNewUserByOrg({id: this.props.orgId})
-      .then(() => window.location.reload())
+    const {dispatch, orgId} = this.props;
+
+    this.props.postNewUserByOrgIdDispatch({orgId})
+      .then(() => dispatch(postRoleSuccess({orgId, role: 'member'})))
       .catch(loglevel.error);
-    // .then((res) => {
-    //   if (!res.payload) return null;
-    //   return this.props.setUserByOrg(res.payload);
-    // })
-    // .then(() => this.props.setRole({role: 'member'}))
   }
 
   render() {
@@ -57,9 +54,9 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  postNewUserByOrg: (query: tIdQueryC) => dispatch(postUserToOrg(query)),
-  setRole: (query: {role: tRole}) => dispatch(setRole(query)),
-  setUserByOrg: (query: tUser) => dispatch(setUserByOrg(query)),
+  dispatch,
+  postNewUserByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
+    dispatch(postUserByOrgId(query)),
 });
 
 export const JoinForm = connect(

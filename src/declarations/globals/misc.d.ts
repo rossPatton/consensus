@@ -4,11 +4,11 @@ declare interface tFetchResponse<T = any> extends Response {
   json<P = T>(): Promise<P>
 };
 
-declare type tDecisionFilterProps = {
-  decisionFilter: tDecisionType,
-  items: tDecision[],
-  onDecisionTypeChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
-}
+// declare type tDecisionFilterProps = {
+//   decisionFilter: tDecisionType,
+//   items: tDecision[],
+//   onDecisionTypeChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
+// }
 
 declare type tRoleFilterProps = {
   items: tUser[],
@@ -18,7 +18,8 @@ declare type tRoleFilterProps = {
 
 declare type tSearchFilterChange = (ev: React.ChangeEvent<HTMLInputElement>) => void;
 declare type tSearchFilterProps = {
-  items: any[], onSearchChange: tOnSearchChange
+  items: any[],
+  onSearchChange: tOnSearchChange
 };
 
 // member => can RSVP to events, partake in decisions
@@ -40,6 +41,8 @@ declare type tAccountRoleRelation = tRoleMap & {
   userId: number,
 }
 
-declare interface tLocationQueryServer {
-  query: tDirectoryParams,
-}
+declare type tPrivacyFilterProps = {
+  items: any[],
+  privacyFilter: tPrivacyFilter,
+  onPrivacyFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
+};

@@ -2,7 +2,7 @@ import H from 'history';
 import {match} from 'react-router';
 
 export type tStore = {
-  usersByOrg: tThunk<tUsersByOrg>,
+  usersByOrg: tThunk<tUser[]>,
 };
 
 export type tState = {
@@ -16,17 +16,20 @@ export type tBaseProps = {
 }
 
 export type tContainerProps = tBaseProps & {
-  deleteUserByOrg: (query: tDeleteUserOrgQuery) => void,
-  getUsersByOrg: (query: tIdQueryC) => any,
+  deleteUserByOrgIdDispatch: (query: tDeleteUserByOrgIdQuery) =>
+    tThunkPayload<{ok: true}>,
+  getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
+    tThunkPayload<tUser[]>,
   isLoading: boolean,
-  patchUserByOrg: (opts: tPatchUserRoleQuery) => void,
+  patchUserByOrgIdDispatch: (opts: tPatchUserRoleQuery) =>
+    tThunkPayload<tUser>,
   router: H.Location,
   session: tSession,
-  usersByOrg: tUsersByOrg,
+  usersByOrg: tUser[],
 }
 
 export type tComponentProps = tBaseProps & {
-  deleteUserByOrg: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
+  removeUser: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
   onRoleFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   setUserRole: (ev: React.ChangeEvent<HTMLSelectElement>, id: number) => void,

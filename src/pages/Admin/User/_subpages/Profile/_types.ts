@@ -14,10 +14,10 @@ export type tState = {
 export type tStateUnion = keyof tState;
 
 export interface tContainerProps {
-  login: (login: tLogin) => tThunkReturn<tSession>,
+  login: (login: tLoginQuery) => tThunkPayload<tSession>,
   session: tSession,
   // we get id from the active session
-  updateUser: (user: tState & {id: number}) => tThunkReturn<tUser>,
+  patchUser: (user: tState & {id: number}) => tThunkPayload<tUser>,
 }
 
 export interface tComponentProps extends tState {

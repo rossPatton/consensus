@@ -1,36 +1,34 @@
-// actions here. sync state changes that happen instantly
-// since basically all interactions involve the DB, these are usually just
-// to force the UI or redux store to update immediately after an async action
-export { setRole } from './sync/roles/setRole/actions';
-export { setUserByOrg } from './sync/usersByOrg/setUserByOrg/actions';
+// account or login related thunks
+export { patchAccount } from './account';
+export { login, logout } from './auth';
 
-// thunks, or async actions that interact with the DB in some way
-export { patchAccount } from './async/account/thunk';
-export { postEvent } from './async/event/thunk';
-export { fileUpload } from './async/fileUpload/thunk';
-export { getCity } from './async/city/thunk';
-export { getCountry } from './async/country/thunk';
-export { getEventById } from './async/getEventById/thunk';
-export { deleteEvent, getEvents, getEventsByUser } from './async/events/thunk';
-export { getOrg, patchOrg, postOrg } from './async/org/thunk';
+// directory related thunks
+export { getCity } from './city';
+export { getCountry } from './country';
+export { getRegion } from './region';
+
+// event(s) related thunks
+export { getEvent, deleteEvent, patchEvent, postEvent } from './event';
+export { getEventsByOrgId } from './eventsOrgId';
+export { getEventsByUserId } from './eventsByUserId';
+
+// org/group related actions/thunks
+export { getOrg, patchOrg, postOrg } from './org';
+export { getOrgs } from './orgs';
+export { deleteOrgByUserId, getOrgsByUserId } from './orgsByUserId';
+
+// user related actions/thunks
+export { deleteUser, getUser, patchUser, postUser } from './user';
 export {
-  getOrgs,
-  leaveOrg,
-  getOrgsBySession,
-  getOrgsByUser,
-} from './async/orgs/thunk';
-export { getRegion } from './async/region/thunk';
-export { getRoles } from './async/roles/getRoles/thunk';
-export { getRsvps, setRsvp } from './async/rsvps';
-export { getOrgsBySearch } from './async/search/thunk';
-export { login, logout } from './async/session';
-export { getUserById } from './async/user/thunk';
-export {
-  postUserToOrg,
-  deleteUserFromOrg,
-  getUsersByOrg,
-  patchUserByOrg,
-} from './async/usersByOrg';
-export { registerUser } from './async/registerUser/thunk';
-export { getVotes, submitVote } from './async/userDecisions/thunk';
-export { updateUser } from './async/updateUser/thunk';
+  deleteUserByOrgId,
+  getUsersByOrgId,
+  patchUserByOrgId,
+  postUserByOrgId,
+} from './usersByOrgId';
+
+// misc thunks
+export { getRoles, postRoleFailure, postRoleSuccess } from './roles';
+export { getRsvp, postRsvp } from './rsvp';
+export { getRsvps } from './rsvps';
+export { getOrgsBySearch } from './orgsBySearch';
+

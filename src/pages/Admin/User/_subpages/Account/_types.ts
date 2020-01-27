@@ -8,8 +8,8 @@ export type tState = {
 export type tStateUnion = keyof tState;
 
 export type tContainerProps = {
-  login: (login: tLogin) => tThunkReturn<tSession>,
-  patchAccount: (account: {id: number} & tState) => tThunkReturn<tAccount>,
+  login: (login: tLoginQuery) => tThunkPayload<tSession>,
+  patchAccount: (account: {id: number} & tState) => tThunkPayload<tAccount>,
   session: tSession,
 };
 

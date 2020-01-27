@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import {tComponentProps} from './_types';
 
 export const RSVPComponent = memo((props: tComponentProps) => {
-  const {id, rsvp, session, setRsvp} = props;
+  const {id, rsvp, session, postRsvp} = props;
   const {profile = {}} = session;
   const {privateRSVP = true} = profile as tUser;
 
@@ -13,7 +13,7 @@ export const RSVPComponent = memo((props: tComponentProps) => {
         <form
           method="POST"
           action="/api/v1/rsvps"
-          onSubmit={ev => setRsvp({ev, eventId: id, value: true})}>
+          onSubmit={ev => postRsvp({ev, eventId: id, value: true})}>
           <fieldset>
             <button className="fx aiCtr br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
               <span
@@ -31,7 +31,7 @@ export const RSVPComponent = memo((props: tComponentProps) => {
         <form
           method="POST"
           action="/api/v1/rsvps"
-          onSubmit={ev => setRsvp({ev, eventId: id, value: false})}>
+          onSubmit={ev => postRsvp({ev, eventId: id, value: false})}>
           <fieldset>
             <input type="hidden" name="rsvp" value={id} />
             <button

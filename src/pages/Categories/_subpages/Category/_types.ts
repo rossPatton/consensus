@@ -1,10 +1,10 @@
 import { match } from 'react-router';
 
-export interface tContainerProps {
-  getOrgs: (query: {category: tCategory}) => tThunkReturn<tOrg[]>,
+export type tContainerProps = {
+  getOrgs: (query: {category: tCategory}) => tThunkPayload<tOrg[]>,
   isLoading: boolean,
   match: match & { params: tCategoryParams },
-  orgs: tOrg[],
+  orgs: tThunk<tOrg[]>,
 }
 
 export type tStore = {

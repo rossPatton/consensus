@@ -223,6 +223,7 @@ module.exports = {
       'after': true,
     }],
     'sonarjs/no-small-switch': OFF,
+    'sonarjs/no-duplicated-branches': OFF,
     'sonarjs/cognitive-complexity': [ERROR, 20],
     'sort-imports': OFF,
     'simple-import-sort/sort': ERROR,

@@ -1,35 +1,37 @@
 import { combineReducers } from 'redux';
 
-import { getCityReducer } from './async/city/reducer';
-import { getCountryReducer } from './async/country/reducer';
-import { eventsReducer } from './async/events/reducer';
-import { getEventByIdReducer } from './async/getEventById/reducer';
-import { orgReducer } from './async/org/reducer';
-import { orgsReducer } from './async/orgs/reducer';
-import { getRegionReducer } from './async/region/reducer';
-import { registerUserReducer } from './async/registerUser/reducer';
-import { rolesReducer } from './async/roles/getRoles/reducer';
-import { rsvpsReducer } from './async/rsvps/getRsvps/reducer';
-import { searchReducer } from './async/search/reducer';
-import { sessionReducer } from './async/session/reducer';
-import { updateUserReducer } from './async/updateUser/reducer';
-import { userReducer } from './async/user/reducer';
-import { usersByOrgReducer } from './async/usersByOrg/reducer';
+import { authReducer } from './auth/reducer';
+import { cityReducer } from './city/reducer';
+import { countryReducer } from './country/reducer';
+import { eventReducer } from './event/reducer';
+import { eventsByUserIdReducer } from './eventsByUserId/reducer';
+import { eventsByOrgIdReducer } from './eventsOrgId/reducer';
+import { orgReducer } from './org/reducer';
+import { orgsReducer } from './orgs/reducer';
+import { searchReducer } from './orgsBySearch/reducer';
+import { orgsByUserIdReducer } from './orgsByUserId/reducer';
+import { regionReducer } from './region/reducer';
+import { rolesReducer } from './roles/reducer';
+import { rsvpReducer } from './rsvp/reducer';
+import { rsvpsReducer } from './rsvps/reducer';
+import { userReducer } from './user/reducer';
+import { usersByOrgReducer } from './usersByOrgId/reducer';
 
 export const rootReducer = combineReducers({
-  city: getCityReducer,
-  country: getCountryReducer,
-  event: getEventByIdReducer,
-  events: eventsReducer,
+  city: cityReducer,
+  country: countryReducer,
+  event: eventReducer,
+  eventsByOrgId: eventsByOrgIdReducer,
+  eventsByUserId: eventsByUserIdReducer,
   org: orgReducer,
   orgs: orgsReducer,
-  region: getRegionReducer,
-  registerUser: registerUserReducer,
+  orgsByUserId: orgsByUserIdReducer,
+  region: regionReducer,
   roles: rolesReducer,
+  rsvp: rsvpReducer,
   rsvps: rsvpsReducer,
   search: searchReducer,
-  session: sessionReducer,
-  updateUser: updateUserReducer,
+  session: authReducer,
   user: userReducer,
   usersByOrg: usersByOrgReducer,
 });

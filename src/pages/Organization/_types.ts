@@ -4,21 +4,20 @@ import {match} from 'react-router';
 export interface tProps {
   location: Location,
   match: match & {params: tOrgRouteParams},
-  org: tOrg,
   session: tSession,
-  usersByOrg: tUsersByOrg,
 }
 
 export type tComponentProps = tProps & {
+  org: tOrg,
   role: tRole,
 }
 
 export type tContainerProps = tProps & {
-  getEvents: (id: number) => tThunkReturn<tEvent[]>,
-  getOrg: (params: tOrgRouteParams) => tThunkReturn<tOrg>,
-  getRoles: () => tThunkReturn<tRoleMap[]>,
-  getRsvps: () => tThunkReturn<tRSVP[]>,
+  getOrg: (params: tGetOrgQuery) => tThunkPayload<tOrg>,
+  getRoles: () => tThunkPayload<tRoleMap[]>,
+  getRsvps: () => tThunkPayload<tRSVP[]>,
   isLoading: boolean,
+  org: tThunk<tOrg>,
   roles: tRoleMap[],
   session: tSession,
 };
@@ -28,5 +27,4 @@ export type tStore = {
   org: tThunk<tOrg>,
   roles: tThunk<tRoleMap[]>,
   session: tThunk<tSession>,
-  usersByOrg: tThunk<tUsersByOrg>,
 };

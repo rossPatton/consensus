@@ -20,7 +20,7 @@ export interface tComponentProps extends tBaseProps {
 }
 
 export interface tContainerProps extends tBaseProps {
-  getEvents: (query: tEventQueryC) => tThunkReturn<tEvent[]>,
+  getEvents: (query: tGetEventQuery) => tThunkPayload<tEvent[]>,
   isLoading: boolean,
   location: Location,
   org: tOrg,
@@ -28,6 +28,6 @@ export interface tContainerProps extends tBaseProps {
 }
 
 export interface tStore {
-  events: tThunk<tEvent[]>,
+  eventsByOrgId: tThunk<tEvent[]>,
   isLoading: boolean,
 }

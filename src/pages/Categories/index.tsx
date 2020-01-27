@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {categoryMap} from '../../constants';
-import {ErrorBoundary} from '../../containers';
 import {Category, CategoryList} from './_subpages';
 import {tProps} from './_types';
 
@@ -10,7 +9,7 @@ const Categories = (props: tProps) => {
   const renderCategory = !!params.category;
 
   return (
-    <ErrorBoundary>
+    <>
       <div className="contain mT4">
         <h1 className="fs2 mB3">
           {renderCategory
@@ -22,7 +21,7 @@ const Categories = (props: tProps) => {
           <Category match={props.match} />
         )}
       </div>
-    </ErrorBoundary>
+    </>
   );
 };
 

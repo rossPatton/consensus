@@ -1,5 +1,5 @@
 import { match } from 'react-router';
 
-export interface tProps {
+export type tProps = {
   match: match & { params: tCategoryParams },
 }

@@ -3,7 +3,7 @@ import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {login, registerUser} from '../../../../redux';
+import {login, postUser} from '../../../../redux';
 import {isValidEmail} from '../../../../utils';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {UserSignupComponent} from './Component';
@@ -58,7 +58,7 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
     const { errors, isClient, ...state } = this.state;
 
     // add user to db, and log them in on success
-    await this.props.registerUser(state);
+    await this.props.postUser(state);
 
     const {login, password} = this.state;
 
@@ -92,8 +92,8 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
 }
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  authenticateSession: (query: tLogin) => dispatch(login(query)),
-  registerUser: (user: tUserSignupForm) => dispatch(registerUser(user)),
+  authenticateSession: (query: tLoginQuery) => dispatch(login(query)),
+  postUser: (user: tUserSignupForm) => dispatch(postUser(user)),
 });
 
 export const UserSignup = connect(

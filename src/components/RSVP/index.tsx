@@ -3,7 +3,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 
-import {setRsvp} from '../../redux/async/rsvps';
+import {postRsvp} from '../../redux';
 import {tContainerProps, tSetRsvpOpts, tState, tStore} from './_types';
 import {RSVPComponent} from './Component';
 
@@ -16,7 +16,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
     rsvp: this.props.event.rsvp,
   };
 
-  setRsvp = async (opts: tSetRsvpOpts) => {
+  postRsvp = async (opts: tSetRsvpOpts) => {
     opts.ev.preventDefault();
     const {history, session} = this.props;
     const {profile = {}} = session;
@@ -25,7 +25,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
     if (!session.isAuthenticated) return history.push('/login');
 
     try {
-      this.props.setRsvpDispatch({
+      this.props.postRsvpDispatch({
         id: opts.eventId,
         rsvpType: privateRSVP ? 'private' : 'public',
         value: opts.value,
@@ -48,7 +48,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
         id={this.props.event.id}
         rsvp={this.state.rsvp}
         session={this.props.session}
-        setRsvp={this.setRsvp}
+        postRsvp={this.postRsvp}
       />
     );
   }
@@ -59,7 +59,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  setRsvpDispatch: (query: tRSVPQuery) => dispatch(setRsvp(query)),
+  postRsvpDispatch: (query: tRSVPQuery) => dispatch(postRsvp(query)),
 });
 
 const RSVP = connect(

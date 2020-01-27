@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {PrivacyFilter, PublishedFilter, SearchFilter} from '../../../../../containers';
-import {getEvents} from '../../../../../redux';
+import {getEventsByOrgId} from '../../../../../redux';
 import {tContainerProps, tState, tStore} from './_types';
 import {EventsComponent} from './Component';
 
@@ -14,7 +14,7 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
     const offset = page ? parseInt(page, 10) : 0;
 
     props.getEvents({
-      id: session.profile.id,
+      orgId: session.profile.id,
       limit: -1,
       offset,
     });
@@ -54,7 +54,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getEvents: (query: tIdQueryC) => dispatch(getEvents(query)),
+  getEvents: (query: tGetEventQuery) => dispatch(getEventsByOrgId(query)),
 });
 
 const Events = connect(

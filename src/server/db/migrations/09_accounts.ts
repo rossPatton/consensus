@@ -24,7 +24,7 @@ exports.up = async (knex: Knex) => {
 
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.timestamp('updatedAt').defaultTo(knex.fn.now());
-    table.timestamp('lastActive').defaultTo(knex.fn.now());
+    // table.timestamp('lastActive').defaultTo(knex.fn.now());
   });
 };
 

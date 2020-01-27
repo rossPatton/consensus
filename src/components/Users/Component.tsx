@@ -25,7 +25,7 @@ export const UsersComponent = memo((props: tComponentProps) => (
             <div className="col taR">
               <button
                 className="bgWhite"
-                onClick={ev => props.deleteUserByOrg(ev, user.id)}>
+                onClick={ev => props.removeUser(ev, user.id)}>
                 Remove this user
               </button>
             </div>

@@ -7,7 +7,5 @@ export type tComponentProps = tProps & {
 };
 
 export type tContainerProps = tProps & {
-  // wipes role relations on logout
-  getRolesSuccess: (emptyRoles: []) => any,
-  logout: () => tThunkReturn,
+  logout: () => tThunkPayload,
 };

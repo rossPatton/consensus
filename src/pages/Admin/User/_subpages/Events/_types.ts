@@ -3,17 +3,12 @@ import {match} from 'react-router-dom';
 import {tAdminSections} from '../../../_types';
 
 export type tProps = {
-  events: tEvent[],
+  eventsByUserId: tEvent[],
   match: tAdminSections,
 };
 
-export type tState = {
-  events: tEvent[],
-  privacyFilter: tPrivacyFilter,
-};
-
 export type tStore = {
-  events: tThunk<tEvent[]>,
+  eventsByUserId: tThunk<tEvent[]>,
 };
 
 export type tComponentProps = tProps & {
@@ -23,6 +18,6 @@ export type tComponentProps = tProps & {
 
 export type tContainerProps = tProps & {
   match: match & {params: tPaginateParams},
-  getEventsByUser: () => tThunkReturn<tEvent[]>,
+  getEventsByUserId: (query: {userId: number}) => tThunkPayload<tEvent[]>,
   session: tSession,
 };

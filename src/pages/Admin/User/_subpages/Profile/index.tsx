@@ -2,7 +2,7 @@ import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {login, updateUser} from '../../../../../redux';
+import {login, patchUser} from '../../../../../redux';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {ProfileComponent} from './Component';
 
@@ -54,7 +54,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
 
     let newUser;
     try {
-      newUser = await this.props.updateUser({id: profile.id, ...this.state});
+      newUser = await this.props.patchUser({id: profile.id, ...this.state});
     } catch (err) {
       return loglevel.error(err);
     }
@@ -98,8 +98,8 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
 }
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  login: (query: tLogin) => dispatch(login(query)),
-  updateUser: (user: {id: number} & tState) => dispatch(updateUser(user)),
+  login: (query: tLoginQuery) => dispatch(login(query)),
+  patchUser: (user: Partial<tUser>) => dispatch(patchUser(user)),
 });
 
 const Profile = connect(

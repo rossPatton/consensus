@@ -1,8 +1,10 @@
+import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import {Breadcrumbs, GenericLoader, Helmet} from '../../../../components';
-import {getCountry, getRegion} from '../../../../redux';
+import {ErrorBoundary} from '../../../../containers';
+import {getRegion} from '../../../../redux';
 import {fuzzFilterList} from '../../../../utils';
 import {tContainerProps, tStore} from './_types';
 import {RegionComponent} from './Component';
@@ -10,7 +12,6 @@ import {RegionComponent} from './Component';
 class RegionContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    props.getCountry(props.match.params);
     props.getRegion(props.match.params);
   }
 
@@ -21,7 +22,7 @@ class RegionContainer extends PureComponent<tContainerProps> {
   onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
 
-    const {cities = []} = this.props.region;
+    const {cities = []} = this.props.region.data;
 
     this.setState({
       citiesBySearch: fuzzFilterList({
@@ -32,15 +33,10 @@ class RegionContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {country, isLoading, match, region} = this.props;
-    const {cities = []} = region;
-    const {citiesBySearch} = this.state;
-    const citiesToRender = citiesBySearch.length > 0
-      ? citiesBySearch
-      : cities;
+    const {isLoading, match, region} = this.props;
 
     return (
-      <>
+      <ErrorBoundary status={_.get(region, 'error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -55,40 +51,43 @@ class RegionContainer extends PureComponent<tContainerProps> {
           isLoading={isLoading}
           render={() => {
             const crumbs = [{
-              display: country.name,
-              to: `directory/${country.code}`,
+              display: 'United States',
+              to: 'directory/us',
             }, {
-              display: region.name,
-              to: `directory/${country.code}/${region.code}`,
+              display: region.data.name,
+              to: `directory/us/${region.data.code}`,
             }];
+
+            const {cities = []} = region.data;
+            const {citiesBySearch} = this.state;
+            const citiesToRender = citiesBySearch.length > 0
+              ? citiesBySearch
+              : cities;
 
             return (
               <>
                 <Breadcrumbs crumbs={crumbs} />
                 <RegionComponent
-                  country={country}
+                  citiesToRender={citiesToRender}
                   match={match}
                   onChange={this.onChange}
-                  region={region}
-                  citiesToRender={citiesToRender}
+                  region={region.data}
                 />
               </>
             );
           }}
         />
-      </>
+      </ErrorBoundary>
     );
   }
 }
 
 const mapStateToProps = (store: tStore) => ({
   isLoading: store.region.isLoading,
-  country: store.country.data,
-  region: store.region.data,
+  region: store.region,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getCountry: (params: tDirectoryParams) => dispatch(getCountry(params)),
   getRegion: (params: tDirectoryParams) => dispatch(getRegion(params)),
 });
 

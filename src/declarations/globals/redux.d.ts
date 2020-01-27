@@ -1,6 +1,6 @@
 declare type tThunk<D> = {
-  readonly error?: Error | null,
   readonly data: D,
+  readonly error: tResponseError | null,
   readonly isLoading?: boolean,
 };
 
@@ -9,12 +9,12 @@ declare type tAction<T, P = undefined> = {
   readonly payload?: P,
 };
 
-declare type tActionReturn<P = any> = {
+declare type tActionPayload<P = any> = {
   readonly type: string,
   readonly payload?: P,
 };
 
-declare type tThunkReturn<P = any> = Promise<{
+declare type tThunkPayload<P = any> = Promise<{
   readonly type: string,
   readonly payload?: P,
 }>;

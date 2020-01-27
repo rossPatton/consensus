@@ -1,27 +1,33 @@
+import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {GenericLoader, Helmet} from '../../../../components';
-import {getEvents} from '../../../../redux';
+import {ErrorBoundary} from '../../../../containers';
+import {getEventsByOrgId} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {OverviewComponent} from './Component';
+
 // TODO use context for match cause passing it around everywhere is annoying
 class OverviewContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     // only show public events if user is not signed in
     const isLoggedIn = props.session.isAuthenticated;
-    props.getEvents({
-      id: props.org.id,
-      showPast: false,
-      isPublic: !isLoggedIn,
-      limit: -1,
-    });
+
+    if (props.org.id !== 0) {
+      props.getEvents({
+        orgId: props.org.id,
+        showPast: false,
+        isPublic: !isLoggedIn,
+        limit: 100,
+      });
+    }
   }
 
   render() {
     return (
-      <>
+      <ErrorBoundary status={_.get(this.props.events, 'error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -43,18 +49,18 @@ class OverviewContainer extends PureComponent<tContainerProps> {
             />
           )}
         />
-      </>
+      </ErrorBoundary>
     );
   }
 }
 
 const mapStateToProps = (store: tStore) => ({
-  events: store.events.data,
-  isLoading: store.events.isLoading,
+  events: store.eventsByOrgId.data,
+  isLoading: store.eventsByOrgId.isLoading,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getEvents: (query: tIdQueryC) => dispatch(getEvents(query)),
+  getEvents: (query: tGetEventQuery) => dispatch(getEventsByOrgId(query)),
 });
 
 const Overview = connect(

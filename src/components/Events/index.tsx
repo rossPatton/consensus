@@ -38,7 +38,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
 }
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  deleteEventDispatch: (query: tIdQueryC) => dispatch(deleteEvent(query)),
+  deleteEventDispatch: (query: tIdQuery) => dispatch(deleteEvent(query)),
 });
 
 const Events = connect(null, mapDispatchToProps)(EventsContainer);

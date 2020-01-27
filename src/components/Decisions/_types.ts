@@ -1,7 +1,7 @@
-import {match} from 'react-router';
+// import {match} from 'react-router';
 
-export type tProps = {
-  decisions: tDecision[],
-  match: match & {params: {page?: string}},
-  tiny?: boolean,
-};
+// export type tProps = {
+//   decisions: tDecision[],
+//   match: match & {params: {page?: string}},
+//   tiny?: boolean,
+// };

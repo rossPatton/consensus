@@ -18,7 +18,7 @@ export type tRoleOpts = {
 };
 
 type tProps = {
-  deleteUserByOrg?: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
+  removeUser?: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
   setUserRole?: (ev: React.ChangeEvent<HTMLSelectElement>, id: number) => void,
   users: tUser[],
   sessionRole: tRole, // to distinguish from user roles, and to shut up eslint

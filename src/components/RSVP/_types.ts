@@ -20,14 +20,14 @@ export type tContainerProps = RouteComponentProps<any> & tProps & {
   event: tEvent,
   history: History,
   // redux thunk
-  setRsvpDispatch: (query: tRSVPQuery) => tThunkReturn<tRSVP>,
+  postRsvpDispatch: (query: tRSVPQuery) => tThunkPayload<tRSVP>,
 }
 
 export type tComponentProps = tProps & {
   id: number,
   rsvp: boolean,
   // class method passed down to component that calls the redux thunk
-  setRsvp: (opts: tSetRsvpOpts) => void,
+  postRsvp: (opts: tSetRsvpOpts) => void,
 }
 
 export type tStore = {

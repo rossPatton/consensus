@@ -1,7 +1,7 @@
 import {tAdminSections} from '../../../_types';
 
 export type tStore = {
-  usersByOrg: tThunk<tUsersByOrg>,
+  usersByOrg: tThunk<tUser[]>,
 };
 
 export type tState = {
@@ -13,16 +13,19 @@ export type tProps = {
 };
 
 export interface tContainerProps extends tProps {
-  deleteUserByOrg: (query: tDeleteUserOrgQuery) => tThunkReturn<tUsersByOrg>,
-  getUsersByOrg: (query: tIdQueryC) => tThunkReturn<tUsersByOrg>,
+  deleteUserByOrgIdDispatch: (query: tDeleteUserByOrgIdQuery) =>
+    tThunkPayload<tUser[]>,
+  getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
+    tThunkPayload<tUser[]>,
   isLoading: boolean,
-  patchUserByOrg: (opts: tPatchUserRoleQuery) => tThunkReturn<tAccountRoleRelation>,
+  patchUserByOrgIdDispatch: (opts: tPatchUserRoleQuery) =>
+    tThunkPayload<tAccountRoleRelation>,
   session: tSession,
-  usersByOrg: tUsersByOrg,
+  usersByOrg: tUser[],
 }
 
 export interface tComponentProps extends tProps {
-  deleteUserByOrg: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
+  removeUser: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
   onRoleFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   setUserRole: (ev: React.ChangeEvent<HTMLSelectElement>, id: number) => void,

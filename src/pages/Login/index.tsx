@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
@@ -6,7 +7,8 @@ import {Redirect} from 'react-router';
 import {Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
 import {getRoles, login} from '../../redux';
-import {tContainerProps, tState, tStateUnion} from './_types';
+import {canonical, description, keywords, title} from './_constants';
+import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 import {LoginComponent} from './Component';
 
 class LoginContainer extends PureComponent<tContainerProps, tState> {
@@ -28,7 +30,6 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
     const {username, password} = this.state;
     return this.props
       .login({username, password})
-      // @ts-ignore
       .then(res => {
         if (res.payload.orgId) return null;
         return this.props.getRoles();
@@ -46,21 +47,21 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
     const {session} = this.props;
 
     return (
-      <ErrorBoundary>
+      <ErrorBoundary status={_.get(session, 'error.status', 200)}>
         <Helmet
-          canonical=""
-          title=""
+          canonical={canonical}
+          title={title}
           meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
+            { name: 'description', content: description },
+            { name: 'keywords', content: keywords },
+            { property: 'og:title', content: title },
+            { property: 'og:description', content: description },
           ]}
         />
-        {session.isAuthenticated && (
+        {session.data.isAuthenticated && (
           <Redirect to="/admin/profile" />
         )}
-        {!session.isAuthenticated && (
+        {!session.data.isAuthenticated && (
           <LoginComponent
             {...this.state}
             login={this.login}
@@ -72,12 +73,12 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
-  session: store.session.data,
+const mapStateToProps = (store: tStore) => ({
+  session: store.session,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  login: (query: tLogin) => dispatch(login(query)),
+  login: (query: tLoginQuery) => dispatch(login(query)),
   getRoles: () => dispatch(getRoles()),
 });
 

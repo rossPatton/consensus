@@ -1,27 +1,5 @@
 import { match } from 'react-router-dom';
 
-export type tProps = {
-  categories: string[],
-  city: tCity,
-  country: tCountry,
-  match: match & {params: tDirectoryParams},
-  onChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
-  onSearch: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  orgsToRender: tOrg[],
-  region: tRegion,
-};
-
-export type tContainerProps = {
-  city: tCity,
-  country: tCountry,
-  getCity: (params: tDirectoryParams) => tThunk<tCity>,
-  getCountry: (params: tDirectoryParams) => tThunk<tCountry>,
-  getRegion: (params: tDirectoryParams) => tThunk<tRegion>,
-  isLoading: boolean,
-  match: match & {params: tDirectoryParams},
-  region: tRegion,
-};
-
 export type tState = {
   category: tCategory,
   orgsBySearch: tOrg[],
@@ -29,6 +7,25 @@ export type tState = {
 
 export type tStore = {
   city: tThunk<tCity>,
-  country: tThunk<tCountry>,
   region: tThunk<tRegion>,
+};
+
+export type tProps = {
+  match: match & {params: tDirectoryParams},
+};
+
+export type tComponentProps = tProps & {
+  city: tCity,
+  onChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
+  onSearch: (ev: React.ChangeEvent<HTMLInputElement>) => void,
+  orgsToRender: tOrg[],
+};
+
+export type tContainerProps = tProps & {
+  city: tThunk<tCity>,
+  getCity: (params: tDirectoryParams) => tThunk<tCity>,
+  getRegion: (params: tDirectoryParams) => tThunk<tRegion>,
+  isCityLoading: boolean,
+  isRegionLoading: boolean,
+  region: tRegion,
 };

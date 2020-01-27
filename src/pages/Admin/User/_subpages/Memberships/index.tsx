@@ -1,15 +1,19 @@
+import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Paginate, SearchFilter} from '../../../../../containers';
-import {getOrgsBySession, leaveOrg} from '../../../../../redux';
+import {deleteOrgByUserId, getOrgsByUserId} from '../../../../../redux';
 import {tContainerProps, tOrgWithRole, tState, tStore} from './_types';
 import {MembershipsComponent} from './Component';
 
 class MembershipsContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
-    props.getOrgsBySession();
+    const userId = _.get(props.session, 'profile.id', null);
+    if (userId) {
+      props.getOrgsByUserIdDispatch({userId});
+    }
   }
 
   state = {
@@ -18,7 +22,8 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
 
   leaveOrg = (ev: React.MouseEvent<HTMLButtonElement>, orgId: number) => {
     ev.preventDefault();
-    this.props.leaveOrg({orgId});
+    const {deleteOrgByUserIdDispatch} = this.props;
+    deleteOrgByUserIdDispatch({orgId});
   }
 
   sortOrgs(orgs: tOrgWithRole[]) {
@@ -59,13 +64,15 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.orgs.isLoading,
-  orgs: store.orgs.data,
+  isLoading: store.orgsByUserId.isLoading,
+  orgs: store.orgsByUserId.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  leaveOrg: (query: {orgId: number}) => dispatch(leaveOrg(query)),
-  getOrgsBySession: () => dispatch(getOrgsBySession()),
+  deleteOrgByUserIdDispatch: (query: tDeleteUserByOrgIdQuery) =>
+    dispatch(deleteOrgByUserId(query)),
+  getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) =>
+    dispatch(getOrgsByUserId(query)),
 });
 
 const Memberships = connect(

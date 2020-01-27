@@ -1,0 +1,1 @@
+export {getEventsByQuery} from './getEventsByQuery';

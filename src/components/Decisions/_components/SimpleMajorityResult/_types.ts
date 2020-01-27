@@ -1,3 +1,3 @@
-export type tProps = {
-  data: tCustomVoteResults,
-};
+// export type tProps = {
+//   data: tCustomVoteResults,
+// };

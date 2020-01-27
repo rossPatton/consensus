@@ -5,11 +5,11 @@ export type tProps = {
   org: tOrg,
   role: tRole,
   session: tSession,
-  usersByOrg: tUsersByOrg,
+  usersByOrg: tUser[],
 };
 
 export type tContainerProps = tProps & {
-  getUsersByOrg: (query: tIdQueryC) => Promise<tThunk<tUsersByOrg>>,
+  getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) => tThunkPayload<tUser[]>,
   isLoading: boolean,
 };
 
@@ -18,5 +18,5 @@ export type tComponentProps = tProps & {
 };
 
 export type tStore = {
-  usersByOrg: tThunk<tUsersByOrg>,
+  usersByOrg: tThunk<tUser[]>,
 };

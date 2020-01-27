@@ -12,7 +12,7 @@ export type tComponentProps = tProps & {
 };
 
 export type tContainerProps = tProps & {
-  getEvents: (query: tIdQueryC) => tThunkReturn<tEvent[]>,
+  getEvents: (query: tGetEventQuery) => tThunkPayload<tEvent[]>,
   isLoading: boolean,
   session: tSession,
 };

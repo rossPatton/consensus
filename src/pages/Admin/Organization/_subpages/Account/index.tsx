@@ -22,7 +22,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
     ev.preventDefault();
     const {id} = this.props.session;
 
-    let newAccount: tActionReturn<tAccount>;
+    let newAccount: tActionPayload<tAccount>;
     try {
       newAccount = await this.props.patchAccount({id, ...this.state});
     } catch (err) {
@@ -64,7 +64,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
 }
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  login: (query: tLogin) => dispatch(login(query)),
+  login: (query: tLoginQuery) => dispatch(login(query)),
   patchAccount: (query: tAccount) => dispatch(patchAccount(query)),
 });
 

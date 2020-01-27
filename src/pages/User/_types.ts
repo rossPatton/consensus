@@ -1,23 +1,24 @@
 import { match } from 'react-router';
 
 export type tStore = {
-  orgs: tThunk<tOrg[]>,
+  orgsByUserId: tThunk<tOrg[]>,
   user: tThunk<tUser>,
-  isLoading: boolean,
 };
 
-type tOrgWRole = tOrg & {role: tRole};
-
 export type tProps = {
-  orgs: tOrgWRole[],
+  match: match & { params: {id: string} },
   user: tUser,
 };
 
+export type tComponentProps = tProps & {
+  orgs: tOrg[],
+}
+
 export type tContainerProps = tProps & {
-  getOrgsByUser: (query: tIdQueryC) => Promise<any>,
-  getUserById: (query: tIdQueryC) => Promise<any>,
+  getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) => tThunkPayload<tOrg[]>,
+  getUserByIdDispatch: (query: tIdQuery) => tThunkPayload<tUser>,
   isLoading: boolean,
-  match: match & { params: { id: number } },
+  orgsByUserId: tOrg[],
 };
 
 

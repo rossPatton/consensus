@@ -1,7 +1,9 @@
+import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Breadcrumbs, GenericLoader, Helmet} from '../../../../components';
+import {ErrorBoundary} from '../../../../containers';
 import {getCountry} from '../../../../redux';
 import {fuzzFilterList} from '../../../../utils';
 import {tContainerProps, tState, tStore} from './_types';
@@ -20,7 +22,7 @@ class CountryContainer extends PureComponent<tContainerProps, tState> {
   onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
 
-    const {regions = []} = this.props.country;
+    const {regions = []} = this.props.country.data;
 
     this.setState({
       regionsBySearch: fuzzFilterList({
@@ -32,14 +34,9 @@ class CountryContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     const {country, isLoading, match} = this.props;
-    const {regions = []} = country;
-    const {regionsBySearch} = this.state;
-    const regionsToRender = regionsBySearch.length > 0
-      ? regionsBySearch
-      : regions;
 
     return (
-      <>
+      <ErrorBoundary status={_.get(country, 'error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -54,15 +51,21 @@ class CountryContainer extends PureComponent<tContainerProps, tState> {
           isLoading={isLoading}
           render={() => {
             const crumbs = [{
-              display: country.name,
-              to: `directory/${country.code}`,
+              display: 'United States',
+              to: 'directory/us',
             }];
+
+            const {regions = []} = country.data;
+            const {regionsBySearch} = this.state;
+            const regionsToRender = regionsBySearch.length > 0
+              ? regionsBySearch
+              : regions;
 
             return (
               <>
                 <Breadcrumbs crumbs={crumbs} />
                 <CountryComponent
-                  country={country}
+                  country={country.data}
                   match={match}
                   onChange={this.onChange}
                   regionsToRender={regionsToRender}
@@ -71,13 +74,13 @@ class CountryContainer extends PureComponent<tContainerProps, tState> {
             );
           }}
         />
-      </>
+      </ErrorBoundary>
     );
   }
 }
 
 const mapStateToProps = (store: tStore) => ({
-  country: store.country.data,
+  country: store.country,
   isLoading: store.country.isLoading,
 });
 

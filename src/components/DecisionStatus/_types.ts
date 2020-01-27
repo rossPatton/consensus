@@ -1,3 +1,3 @@
-export type tProps = {
-  decision: tDecision,
-};
+// export type tProps = {
+//   decision: tDecision,
+// };

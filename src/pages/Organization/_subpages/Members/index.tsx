@@ -1,8 +1,13 @@
+import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {RoleFilter, SearchFilter} from '../../../../containers';
-import {deleteUserFromOrg, getUsersByOrg, patchUserByOrg} from '../../../../redux';
+import {ErrorBoundary, RoleFilter, SearchFilter} from '../../../../containers';
+import {
+  deleteUserByOrgId,
+  getUsersByOrgId,
+  patchUserByOrgId,
+} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {MembersComponent} from './Component';
 
@@ -12,45 +17,55 @@ class MembersContainer extends Component<tContainerProps, {role: tRole}> {
   };
 
   componentDidMount() {
-    this.props.getUsersByOrg({id: this.props.session.profile.id});
+    this.props.getUsersByOrgIdDispatch({
+      orgId: this.props.session.profile.id,
+    });
   }
 
-  deleteUserByOrg = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {
+  removeUser = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {
     ev.preventDefault();
-    this.props.deleteUserByOrg({userId, orgId: this.props.session.profile.id});
+    const {deleteUserByOrgIdDispatch, session} = this.props;
+    deleteUserByOrgIdDispatch({
+      userId,
+      orgId: session.profile.id,
+    });
   }
 
   setUserRole = (ev: React.ChangeEvent<HTMLSelectElement>, userId: number) => {
     ev.preventDefault();
     const role = ev.currentTarget.value as tRole;
     const orgId = this.props.session.profile.id;
-    this.props.patchUserByOrg({role, orgId, userId});
+    this.props.patchUserByOrgIdDispatch({role, orgId, userId});
   }
 
   render() {
+    const {usersByOrg} = this.props;
+
     return (
-      <RoleFilter
-        items={this.props.usersByOrg.users}
-        render={(roleProps: tRoleFilterProps) => (
-          <SearchFilter
-            searchKey="username"
-            items={roleProps.items}
-            render={(searchProps: tSearchFilterProps) => (
-              <MembersComponent
-                {...roleProps}
-                {...searchProps}
-                deleteUserByOrg={this.deleteUserByOrg}
-                match={this.props.match}
-                org={this.props.org}
-                role={this.props.role}
-                setUserRole={this.setUserRole}
-                users={searchProps.items}
-                userTotal={this.props.usersByOrg.userTotal}
-              />
-            )}
-          />
-        )}
-      />
+      <ErrorBoundary status={_.get(usersByOrg, 'session.error.status', 200)}>
+        <RoleFilter
+          items={usersByOrg}
+          render={(roleProps: tRoleFilterProps) => (
+            <SearchFilter
+              searchKey="username"
+              items={roleProps.items}
+              render={(searchProps: tSearchFilterProps) => (
+                <MembersComponent
+                  {...roleProps}
+                  {...searchProps}
+                  match={this.props.match}
+                  org={this.props.org}
+                  removeUser={this.removeUser}
+                  role={this.props.role}
+                  setUserRole={this.setUserRole}
+                  users={searchProps.items}
+                  userTotal={usersByOrg.length}
+                />
+              )}
+            />
+          )}
+        />
+      </ErrorBoundary>
     );
   }
 }
@@ -61,9 +76,12 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  deleteUserByOrg: (query: tDeleteUserOrgQuery) => dispatch(deleteUserFromOrg(query)),
-  getUsersByOrg: (query: tIdQueryC) => dispatch(getUsersByOrg(query)),
-  patchUserByOrg: (query: any) => dispatch(patchUserByOrg(query)),
+  deleteUserByOrgIdDispatch: (query: tDeleteUserByOrgIdQuery) =>
+    dispatch(deleteUserByOrgId(query)),
+  getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
+    dispatch(getUsersByOrgId(query)),
+  patchUserByOrgIdDispatch: (query: tPatchUserRoleQuery) =>
+    dispatch(patchUserByOrgId(query)),
 });
 
 const Members = connect(mapStateToProps, mapDispatchToProps)(MembersContainer);

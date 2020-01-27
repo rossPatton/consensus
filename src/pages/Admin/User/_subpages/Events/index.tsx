@@ -1,21 +1,25 @@
+import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {PrivacyFilter, SearchFilter} from '../../../../../containers';
-import {getEventsByUser} from '../../../../../redux';
-import {tContainerProps, tState, tStore} from './_types';
+import {getEventsByUserId} from '../../../../../redux';
+import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
 
-class EventsContainer extends PureComponent<tContainerProps, tState> {
+class EventsContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    props.getEventsByUser();
+    const userId = _.get(props.session, 'profile.id', null);
+    if (userId) {
+      props.getEventsByUserId({userId});
+    }
   }
 
   render() {
     return (
       <PrivacyFilter
-        items={this.props.events}
+        items={this.props.eventsByUserId}
         render={(privacyProps: any) => (
           <SearchFilter
             items={privacyProps.items}
@@ -23,7 +27,7 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
               <EventsComponent
                 {...privacyProps}
                 {...searchProps}
-                events={searchProps.items}
+                eventsByUserId={searchProps.items}
                 match={this.props.match}
               />
             )}
@@ -35,12 +39,12 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.events.isLoading,
-  events: store.events.data,
+  isLoading: store.eventsByUserId.isLoading,
+  eventsByUserId: store.eventsByUserId.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getEventsByUser: () => dispatch(getEventsByUser()),
+  getEventsByUserId: (query: {userId: number}) => dispatch(getEventsByUserId(query)),
 });
 
 const Events = connect(

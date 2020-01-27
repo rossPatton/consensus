@@ -2,9 +2,9 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {slugify} from '../../../../utils';
-import {tProps} from './_types';
+import {tComponentProps} from './_types';
 
-export const RegionComponent = memo((props: tProps) => (
+export const RegionComponent = memo((props: tComponentProps) => (
   <>
     <h1>
       {props.region.name}

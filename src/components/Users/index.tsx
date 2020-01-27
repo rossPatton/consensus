@@ -18,7 +18,7 @@ class Users extends Component<tContainerProps> {
         page={match.params.page}
         render={(usersToRender: tUser[]) => (
           <UsersComponent
-            deleteUserByOrg={this.props.deleteUserByOrg}
+            removeUser={this.props.removeUser}
             isEditable={isEditable}
             sessionRole={sessionRole}
             setUserRole={this.props.setUserRole}

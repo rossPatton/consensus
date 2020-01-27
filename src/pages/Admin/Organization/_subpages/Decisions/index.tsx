@@ -55,7 +55,7 @@
 // });
 
 // const mapDispatchToProps = (dispatch: Function) => ({
-//   getDecisions: (query: tIdQueryC) => dispatch(getDecisionsByOrg(query)),
+//   getDecisions: (query: tIdQuery) => dispatch(getDecisionsByOrg(query)),
 // });
 
 // const Decisions = connect(

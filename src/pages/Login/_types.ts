@@ -1,6 +1,5 @@
 export type tProps = {
-  login: (query: tLogin) => tThunkReturn<tAccount>,
-  session: tSession,
+  login: (query: tLoginQuery) => tThunkPayload<tAccount>,
 };
 
 export type tState = {
@@ -11,11 +10,15 @@ export type tState = {
 
 export type tStateUnion = keyof tState;
 
-export interface tContainerProps extends tProps {
-  getRoles: () => tThunkReturn<tRole[]>,
+export type tStore = {
+  session: tThunk<tSession>,
+};
+
+export type tContainerProps = tStore & tProps & {
+  getRoles: () => tThunkPayload<tRole[]>,
 }
 
-export interface tComponentProps extends tState {
+export type tComponentProps = tState & {
   login: (ev: React.FormEvent<HTMLFormElement>) => void,
   updateState: (stateKey: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 }

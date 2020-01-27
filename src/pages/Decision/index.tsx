@@ -138,11 +138,11 @@
 // });
 
 // const mapDispatchToProps = (dispatch: Function) => ({
-//   getDecision: (query: tIdQueryC) => dispatch(getDecision(query)),
-//   getDecisionsByOrg: (query: tIdQueryC) => dispatch(getDecisionsByOrg(query)),
-//   getRoles: (query: tIdQueryC) => dispatch(getRoles(query)),
+//   getDecision: (query: tIdQuery) => dispatch(getDecision(query)),
+//   getDecisionsByOrg: (query: tIdQuery) => dispatch(getDecisionsByOrg(query)),
+//   getRoles: (query: tIdQuery) => dispatch(getRoles(query)),
 //   getVotes: (query: any) => dispatch(getVotes(query)),
-//   submitVote: (query: tIdQueryC) => dispatch(submitVote(query)),
+//   submitVote: (query: tIdQuery) => dispatch(submitVote(query)),
 // });
 
 // const Decision = connect(

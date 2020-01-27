@@ -2,9 +2,9 @@ import React, { memo } from 'react';
 
 import { Orgs } from '../../../../components';
 import { categories } from '../../../../constants';
-import { tProps } from './_types';
+import { tComponentProps } from './_types';
 
-export const CityComponent = memo((props: tProps) => (
+export const CityComponent = memo((props: tComponentProps) => (
   <>
     <h1>
       {props.city.name}

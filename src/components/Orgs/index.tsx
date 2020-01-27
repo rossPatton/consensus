@@ -8,11 +8,14 @@ import {OrgsComponent} from './Component';
 
 class OrgsContainer extends Component<tContainerProps> {
   render() {
-    const {match} = this.props;
+    const {orgs, match} = this.props;
+    if (!orgs || orgs instanceof Array && orgs.length === 0) {
+      return null;
+    }
 
     return (
       <Paginate
-        items={this.props.orgs}
+        items={orgs}
         page={match.params.page}
         render={(orgs: tOrg[]) => (
           <OrgsComponent
@@ -25,7 +28,7 @@ class OrgsContainer extends Component<tContainerProps> {
 }
 
 // const mapDispatchToProps = (dispatch: Function) => ({
-//   deleteEvent: (query: tIdQueryC) => dispatch(deleteEvent(query)),
+//   deleteEvent: (query: tIdQuery) => dispatch(deleteEvent(query)),
 // });
 
 // const Events = connect(null, mapDispatchToProps)(OrgsContainer);

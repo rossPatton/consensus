@@ -8,7 +8,7 @@ interface tProps {
 }
 
 export interface tContainerProps extends tProps {
-  deleteEventDispatch: (query: tIdQueryC) => tThunkReturn,
+  deleteEventDispatch: (query: tIdQuery) => tThunkPayload,
   match: match & {params: tPaginateParams},
 }
 

@@ -33,7 +33,7 @@ export const MembersComponent = memo((props: tComponentProps) => (
       </select>
     </label>
     <Users
-      deleteUserByOrg={props.deleteUserByOrg}
+      removeUser={props.removeUser}
       match={props.match}
       users={props.users}
       sessionRole={props.role}

@@ -64,7 +64,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
 }
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  login: (query: tLogin) => dispatch(login(query)),
+  login: (query: tLoginQuery) => dispatch(login(query)),
   patchAccount: (query: {id: number} & tState) => dispatch(patchAccount(query)),
 });
 

@@ -25,13 +25,13 @@ export const UserBarComponent = memo((props: tComponentProps) => (
         />
       </li>
       {props.role
-        && props.usersByOrg.userTotal > 0
+        && props.usersByOrg.length > 0
         && (
           <li className="mL1 mR2">
             <Link
               to="members"
               title="Click to browse member list">
-              {props.usersByOrg.userTotal} members
+              {props.usersByOrg.length} members
             </Link>
           </li>
         )}

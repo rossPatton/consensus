@@ -15,7 +15,6 @@ import loglevel from 'loglevel';
 import uuidv4 from 'uuid/v4';
 
 import { setupApi } from './api';
-import { closeOpenDecisions } from './cron';
 import { setupMiddleware } from './middleware';
 import { SSR } from './SSR';
 
@@ -74,6 +73,10 @@ httpsServer.listen(3001, '0.0.0.0' /* needs to be 0.0.0.0 for docker */, () => {
   loglevel.info('https app running on port 3001');
 });
 
+httpsServer.on('uncaughtException', err => {
+  loglevel.error(err.stack);
+});
+
 if (__DEBUG__) {
   loglevel.setDefaultLevel('trace');
 } else if (__DEV__) {
@@ -85,4 +88,4 @@ if (__DEBUG__) {
 }
 
 // run cronjobs
-closeOpenDecisions();
+// closeOpenDecisions();

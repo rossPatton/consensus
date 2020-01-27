@@ -7,23 +7,22 @@ export type tProps = {
   orgs: tOrgWithRole[],
 };
 
-export type tComponentProps = tProps & {
-  onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  leaveOrg: (ev: React.MouseEvent<HTMLButtonElement>, orgId: number) => void,
-};
-
-export type tContainerProps = tProps & {
-  match: match & {params: tPaginateParams},
-  // from redux
-  leaveOrg: (query: {orgId: number}) => void,
-  getOrgsBySession: () => void,
-  session: tSession,
-};
-
 export type tState = {
   orgs: tOrgWithRole[],
 };
 
+export type tComponentProps = tProps & {
+  leaveOrg: (ev: React.MouseEvent<HTMLButtonElement>, orgId: number) => void,
+  onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
+};
+
+export type tContainerProps = tProps & {
+  deleteOrgByUserIdDispatch: (query: tDeleteUserByOrgIdQuery) => void,
+  getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) => void,
+  match: match & {params: tPaginateParams},
+  session: tSession,
+};
+
 export type tStore = {
-  orgs: tThunk<any[]>,
+  orgsByUserId: tThunk<any[]>,
 };

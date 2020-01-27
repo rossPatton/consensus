@@ -56,12 +56,8 @@ class ProfileContainer extends PureComponent<tContainerProps, tOrg> {
 }
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  patchOrg: (query: tPatchOrgQuery) => dispatch(patchOrg(query)),
+  patchOrg: (query: tOrgQuery) => dispatch(patchOrg(query)),
 });
 
-const Profile = connect(
-  null,
-  mapDispatchToProps,
-)(ProfileContainer);
-
+const Profile = connect(null, mapDispatchToProps)(ProfileContainer);
 export default Profile;

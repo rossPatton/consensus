@@ -4,6 +4,6 @@ export type tProps = {
   orgs: tOrg[],
 }
 
-export interface tContainerProps extends tProps {
+export type tContainerProps = tProps & {
   match: match & {params: tPaginateParams},
 }

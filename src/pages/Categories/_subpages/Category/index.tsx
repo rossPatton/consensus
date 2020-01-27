@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import _ from 'lodash';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { Breadcrumbs, GenericLoader, Helmet, Orgs } from '../../../../components';
 import { categoryMap } from '../../../../constants';
-import { Paginate, SearchFilter } from '../../../../containers';
+import { ErrorBoundary, Paginate, SearchFilter } from '../../../../containers';
 import { getOrgs } from '../../../../redux';
 import { tContainerProps, tStore } from './_types';
 
-class CategoryContainer extends Component<tContainerProps> {
+class CategoryContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     const { match: {params} } = props;
@@ -20,7 +21,7 @@ class CategoryContainer extends Component<tContainerProps> {
     const {match: {params}, isLoading, orgs} = this.props;
 
     return (
-      <>
+      <ErrorBoundary status={_.get(orgs, 'error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -46,7 +47,7 @@ class CategoryContainer extends Component<tContainerProps> {
               <>
                 <Breadcrumbs crumbs={crumbs} />
                 <SearchFilter
-                  items={orgs}
+                  items={orgs.data}
                   searchKey="name"
                   render={(searchProps: tSearchFilterProps) => (
                     <Paginate
@@ -78,14 +79,14 @@ class CategoryContainer extends Component<tContainerProps> {
             );
           }}
         />
-      </>
+      </ErrorBoundary>
     );
   }
 }
 
 const mapStateToProps = (store: tStore) => ({
   isLoading: store.orgs.isLoading,
-  orgs: store.orgs.data,
+  orgs: store.orgs,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

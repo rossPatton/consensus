@@ -1,24 +1,26 @@
+import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {GenericLoader, Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
-import {getOrgsByUser, getUserById} from '../../redux';
-import { tOrgWithRole } from '../Admin/User/_subpages/Memberships/_types';
+import {getOrgsByUserId, getUser} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {UserComponent} from './Component';
 
 class UserContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    const {id} = props.match.params;
-    props.getUserById({id});
-    props.getOrgsByUser({id});
+    const {id: userId} = props.match.params;
+    props.getUserByIdDispatch({id: userId});
+    props.getOrgsByUserIdDispatch({userId});
   }
 
   render() {
+    const {user} = this.props;
+
     return (
-      <ErrorBoundary>
+      <ErrorBoundary status={_.get(user, 'error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -33,7 +35,8 @@ class UserContainer extends PureComponent<tContainerProps> {
           isLoading={this.props.isLoading}
           render={() => (
             <UserComponent
-              orgs={this.props.orgs}
+              match={this.props.match}
+              orgs={this.props.orgsByUserId}
               user={this.props.user}
             />
           )}
@@ -44,14 +47,16 @@ class UserContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.user.isLoading && store.orgs.isLoading,
-  orgs: store.orgs.data as tOrgWithRole[],
+  isLoading: store.user.isLoading,
+  orgsByUserId: store.orgsByUserId.data,
   user: store.user.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getUserById: (query: tIdQueryC) => dispatch(getUserById(query)),
-  getOrgsByUser: (query: tIdQueryC) => dispatch(getOrgsByUser(query)),
+  getUserByIdDispatch: (query: tIdQuery) =>
+    dispatch(getUser(query)),
+  getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) =>
+    dispatch(getOrgsByUserId(query)),
 });
 
 const User = connect(mapStateToProps, mapDispatchToProps)(UserContainer);

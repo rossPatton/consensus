@@ -1,8 +1,8 @@
-export interface tProps {
-  items: tDecision[],
-  render: Function,
-}
+// export interface tProps {
+//   items: tDecision[],
+//   render: Function,
+// }
 
-export interface tState {
-  decisionFilter: tDecisionType,
-}
+// export interface tState {
+//   decisionFilter: tDecisionType,
+// }

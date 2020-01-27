@@ -2,21 +2,24 @@ import { match } from 'react-router';
 
 export type tStore = {
   event: tThunk<tEvent>,
-  events: tThunk<tEvent[]>,
+  eventsByOrgId: tThunk<tEvent[]>,
   isLoading: boolean,
   session: tThunk<tSession>
 }
 
 export type tProps = {
-  event: tEvent,
-  events: tEvent[],
-  match: match & { params: { id: number } },
-  rsvps: number,
+  eventsByOrgId: tEvent[],
+  match: match & { params: tEventParams },
 };
 
-export interface tContainerProps extends tProps {
-  getEventById: (query: tIdQueryC) => Promise<any>,
-  getEvents: (query: tIdQueryC) => Promise<any>,
+export type tComponentProps = tProps & {
+  event: tEvent,
+};
+
+export type tContainerProps = tProps & {
+  getEventDispatch: (query: tGetEventQuery) => tThunkPayload<tEvent>,
+  getEventsByOrgIdDispatch: (query: tGetEventQuery) => tThunkPayload<tEvent[]>,
+  event: tThunk<tEvent>,
   isLoading: boolean,
   session: tSession,
 }

@@ -1,15 +1,16 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {getUsersByOrg} from '../../../../redux';
+import {getUsersByOrgId} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {UserBarComponent} from './Component';
 
 class UserBarContainer extends PureComponent<tContainerProps> {
   componentDidMount() {
+    if (!__CLIENT__) return;
     const {org, session} = this.props;
     if (session.isAuthenticated && org.id !== 0) {
-      this.props.getUsersByOrg({id: org.id as number});
+      this.props.getUsersByOrgIdDispatch({orgId: org.id});
     }
   }
 
@@ -32,7 +33,8 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getUsersByOrg: (query: tIdQueryC) => dispatch(getUsersByOrg(query)),
+  getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
+    dispatch(getUsersByOrgId(query)),
 });
 
 const UserBar = connect(

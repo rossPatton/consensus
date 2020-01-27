@@ -2,19 +2,12 @@ export type tStore = {
   session: tThunk<tSession>,
 };
 
-export type tForm = {
-  email: string,
-  login: string,
-  password: string,
-  username: string,
-};
-
 export type tErrorObject = {
   email?: string[],
   password?: string[],
 };
 
-export type tState = tForm & {
+export type tState = tUserSignupForm & {
   isClient: boolean,
   errors: tErrorObject,
 };
@@ -22,8 +15,8 @@ export type tState = tForm & {
 export type tStateUnion = keyof tState;
 
 export type tContainerProps = {
-  authenticateSession: (query: tLogin) => tThunkReturn<tSession>,
-  registerUser: (arg: tForm) => tThunkReturn<tSession>,
+  authenticateSession: (query: tLoginQuery) => tThunkPayload<tSession>,
+  postUser: (arg: tUserSignupForm) => tThunkPayload<tSession>,
 };
 
 export type tComponentProps = tContainerProps & tState & {

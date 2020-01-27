@@ -1,1 +1,1 @@
-export {SimpleMajorityResult} from './SimpleMajorityResult';
+// export {SimpleMajorityResult} from './SimpleMajorityResult';

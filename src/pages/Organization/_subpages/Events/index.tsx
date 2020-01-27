@@ -1,9 +1,10 @@
+import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet} from '../../../../components';
-import {PrivacyFilter, SearchFilter} from '../../../../containers';
-import {getEvents} from '../../../../redux';
+import {ErrorBoundary, PrivacyFilter, SearchFilter} from '../../../../containers';
+import {getEventsByOrgId} from '../../../../redux';
 import {tContainerProps, tState, tStore} from './_types';
 import {EventsComponent} from './Component';
 
@@ -16,10 +17,6 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
   state = {
     showPast: false,
   };
-
-  componentDidUpdate() {
-    this.getEvents();
-  }
 
   togglePast = () =>
     this.setState({
@@ -34,18 +31,19 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
     const offset = page ? parseInt(page, 10) : 0;
 
     this.props.getEvents({
-      id: org.id,
+      orgId: org.id,
       isDraft: false,
       isPublic,
-      limit: -1,
       offset,
       showPast,
     });
   }
 
   render() {
+    const {events} = this.props;
+
     return (
-      <>
+      <ErrorBoundary status={_.get(events, 'error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -57,8 +55,8 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
           ]}
         />
         <PrivacyFilter
-          items={this.props.events}
-          render={(privacyProps: any) => (
+          items={events}
+          render={(privacyProps: tPrivacyFilterProps) => (
             <SearchFilter
               items={privacyProps.items}
               render={(searchProps: tSearchFilterProps) => (
@@ -75,18 +73,18 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
             />
           )}
         />
-      </>
+      </ErrorBoundary>
     );
   }
 }
 
 const mapStateToProps = (store: tStore) => ({
-  events: store.events.data,
-  isLoading: store.events.isLoading,
+  events: store.eventsByOrgId.data,
+  isLoading: store.eventsByOrgId.isLoading,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getEvents: (query: tIdQueryC) => dispatch(getEvents(query)),
+  getEvents: (query: tGetEventQuery) => dispatch(getEventsByOrgId(query)),
 });
 
 const Events = connect(

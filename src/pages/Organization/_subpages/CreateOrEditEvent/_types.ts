@@ -29,7 +29,7 @@ export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaEleme
 export type tContainerProps = {
   events: tEvent[],
   org: tOrg,
-  postEvent: (query: tPostEventQuery) => tThunkReturn<tEvent>,
+  postEvent: (query: tPostEventQuery) => tThunkPayload<tEvent>,
   router: Location,
   session: tSession,
 };

@@ -7,9 +7,7 @@ declare type tOrg = {
   readonly cityId: number,
   readonly country: string,
   readonly countryId: number,
-  readonly createdAt?: string, // we dont send to client
   readonly description: string,
-  readonly email?: string, // user admin account only
   readonly eventPrivacy: tEventPrivacy,
   readonly gate: tGate,
   readonly id: number,
@@ -17,5 +15,16 @@ declare type tOrg = {
   readonly slug: string,
   readonly region: string,
   readonly regionId: number,
-  readonly updatedAt?: string, // we dont send to client
+};
+
+// if posting/patching most values are up for grabs
+declare type tOrgQuery = Partial<tOrg>;
+
+// if getting, add db delimiters
+declare type tGetOrgQuery = Partial<tOrg> & tBaseQuery;
+
+declare type tOrgRouteParams = tPaginateParams & {
+  readonly id: string,
+  readonly section?: string,
+  readonly slug: string,
 }

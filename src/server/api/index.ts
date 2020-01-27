@@ -10,7 +10,6 @@ import { events } from './events';
 import { eventsByUser } from './eventsByUser';
 import { org } from './org';
 import { orgs } from './orgs';
-import { orgsBySession } from './orgsBySession';
 import { orgsByUser } from './orgsByUser';
 import { region } from './region';
 import { reportUri } from './reportUri';
@@ -19,8 +18,6 @@ import { rsvp } from './rsvp';
 import { rsvps } from './rsvps';
 import { search } from './search';
 import { user } from './user';
-import { userDecisions } from './userDecisions';
-import { users } from './users';
 import { usersByOrg } from './usersByOrg';
 
 export const setupApi = (app: Koa) => {
@@ -34,7 +31,6 @@ export const setupApi = (app: Koa) => {
   app.use(org.middleware());
   app.use(org.routes());
   app.use(orgs.routes());
-  app.use(orgsBySession.routes());
   app.use(orgsByUser.routes());
   app.use(region.routes());
   app.use(reportUri.routes());
@@ -43,9 +39,7 @@ export const setupApi = (app: Koa) => {
   app.use(rsvps.routes());
   app.use(search.routes());
   app.use(user.routes());
-  app.use(users.routes());
   app.use(usersByOrg.routes());
-  app.use(userDecisions.routes());
 
   const opts = Object.freeze({
     methodNotAllowed: () => Boom.methodNotAllowed(),
@@ -62,7 +56,6 @@ export const setupApi = (app: Koa) => {
   app.use(eventsByUser.allowedMethods(opts));
   app.use(org.allowedMethods(opts));
   app.use(orgs.allowedMethods(opts));
-  app.use(orgsBySession.allowedMethods(opts));
   app.use(orgsByUser.allowedMethods(opts));
   app.use(region.allowedMethods(opts));
   app.use(reportUri.allowedMethods(opts));
@@ -71,7 +64,5 @@ export const setupApi = (app: Koa) => {
   app.use(rsvps.allowedMethods(opts));
   app.use(search.allowedMethods(opts));
   app.use(user.allowedMethods(opts));
-  app.use(users.allowedMethods(opts));
   app.use(usersByOrg.allowedMethods(opts));
-  app.use(userDecisions.allowedMethods(opts));
 };

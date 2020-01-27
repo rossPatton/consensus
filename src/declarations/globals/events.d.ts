@@ -2,8 +2,6 @@
 // creating an event, event schema in db, not logged in event
 declare type tEvent = {
   readonly attendees?: tUser[],
-  readonly city: string,
-  readonly country: string,
   readonly date: string,
   readonly description: string,
   readonly endDate: string,
@@ -19,6 +17,19 @@ declare type tEvent = {
   readonly privateRSVPS: number,
   readonly rsvp: boolean,
   readonly slug: string,
-  readonly state: string,
   readonly title: string,
+}
+
+// when posting or patching, we can potentially change just about everything
+declare type tPostEventQuery = Partial<tEvent>;
+
+// the params available to get by are more restrictive than posting
+declare type tGetEventQuery = Partial<tEvent> & tBaseQuery & {
+  isDraft?: boolean,
+  isPublic?: boolean,
+  showPast?: boolean,
+};
+
+declare type tEventParams = {
+  readonly id: number,
 }

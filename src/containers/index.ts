@@ -4,10 +4,6 @@ export const AppShell = loadable(() =>
   import(/* webpackChunkName: "AppShell" */'./AppShell'),
 );
 
-export const DecisionTypeFilter = loadable(() =>
-  import(/* webpackChunkName: "DecisionTypeFilter" */'./DecisionTypeFilter'),
-);
-
 export const ErrorBoundary = loadable(() =>
   import(/* webpackChunkName: "ErrorBoundary" */'./ErrorBoundary'),
 );

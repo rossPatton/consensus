@@ -4,8 +4,7 @@ import loglevel from 'loglevel';
 
 export const reportUri = new Router();
 
-// @ts-ignore
-reportUri.post('reportUri', '/report-violation', async (ctx: Koa.Context) => {
+reportUri.post('/report-violation', async (ctx: Koa.ParameterizedContext) => {
   if (ctx.request.body) {
     loglevel.error('CSP Violation: ', ctx.request.body);
   } else {

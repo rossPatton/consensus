@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import qs from 'querystring';
 import React from 'react';
 import {connect} from 'react-redux';
@@ -10,7 +11,8 @@ import {tProps, tStore} from './_types';
 class SearchContainer extends React.Component<tProps> {
   constructor(props: tProps) {
     super(props);
-    const queryObj = qs.parse(props.location.search.split('?')[1]);
+    const search = _.get(props, 'location.search', '');
+    const queryObj = qs.parse(search.split('?')[1]);
     props.getSearchResults(queryObj);
   }
 
@@ -28,7 +30,7 @@ class SearchContainer extends React.Component<tProps> {
     const renderNoResults = !isLoading && search.length === 0;
 
     return (
-      <ErrorBoundary>
+      <ErrorBoundary status={_.get(search, 'error.status', 200)}>
         <Helmet
           canonical="search"
           title="Consensus: Search"

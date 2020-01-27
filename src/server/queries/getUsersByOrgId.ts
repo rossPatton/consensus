@@ -7,8 +7,8 @@ import {knex} from '../db/connection';
 // TODO this query should be simplfied if at all possible
 export const getUsersByOrgId = async (
   ctx: Koa.ParameterizedContext,
-  orgId: string,
-): Promise<tUsersByOrg> => {
+  orgId: number,
+): Promise<tUser[]> => {
   const rolesStream = knex('accounts_roles').where({orgId}).stream();
   const roleMaps: tAccountRoleRelation[] = [];
   try {
@@ -38,7 +38,7 @@ export const getUsersByOrgId = async (
   }
 
   // TODO refactor where we add role all over the place
-  const usersWithRole = await Promise.all(roleMaps.map(async roleMap => {
+  return await Promise.all(roleMaps.map(async roleMap => {
     const userProfile = _.find(users, user => roleMap.userId === user.id) as tUser;
 
     return {
@@ -46,9 +46,4 @@ export const getUsersByOrgId = async (
       role: roleMap.role,
     };
   }));
-
-  return {
-    userTotal: userIds.length,
-    users: usersWithRole,
-  };
 };

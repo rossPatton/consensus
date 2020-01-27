@@ -1,10 +1,10 @@
 export type tProps = {
+  dispatch: Function,
   orgId: number,
-  postNewUserByOrg: (query: tIdQueryC) => tThunkReturn<tUser>,
+  postNewUserByOrgIdDispatch: (query: tPostUserByOrgIdQuery) =>
+    tThunkPayload<tUser>,
   role: tRole,
   session: tSession,
-  setRole: (query: {role: tRole}) => tThunkReturn<tRole>,
-  setUserByOrg: (query: tUser) => tUser,
 };
 
 export type tComponentProps = {
@@ -12,5 +12,6 @@ export type tComponentProps = {
 };
 
 export type tStore = {
+  dispatch: Function,
   usersByOrg: tThunk<tUser[]>,
 }

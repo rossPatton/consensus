@@ -36,7 +36,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
       </div>
     </div>
     <Events
-      events={props.events}
+      events={props.eventsByUserId}
       match={props.match}
     />
   </>

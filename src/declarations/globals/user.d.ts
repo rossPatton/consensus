@@ -19,7 +19,5 @@ declare type tUser = {
   username: string,
 };
 
-declare type tUsersByOrg = {
-  userTotal: number,
-  users: tUser[],
-};
+// getting/posting/deleting users by org membership
+declare type tGetUserQuery = Partial<tUser> & tBaseQuery;

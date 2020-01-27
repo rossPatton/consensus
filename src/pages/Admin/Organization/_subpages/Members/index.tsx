@@ -2,7 +2,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import {RoleFilter, SearchFilter} from '../../../../../containers';
-import {deleteUserFromOrg, getUsersByOrg, patchUserByOrg} from '../../../../../redux';
+import {
+  deleteUserByOrgId,
+  getUsersByOrgId,
+  patchUserByOrgId,
+} from '../../../../../redux';
 import {tContainerProps, tState, tStore} from './_types';
 import {MembersComponent} from './Component';
 
@@ -11,13 +15,17 @@ class MembersContainer extends Component<tContainerProps, tState> {
     role: 'n/a' as tRole,
   };
 
-  componentDidMount() {
-    this.props.getUsersByOrg({id: this.props.session.profile.id});
+  constructor (props: tContainerProps) {
+    super(props);
+    const {id: orgId} = props.session.profile;
+    props.getUsersByOrgIdDispatch({
+      orgId,
+    });
   }
 
-  deleteUserByOrg = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {
+  removeUser = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {
     ev.preventDefault();
-    this.props.deleteUserByOrg({
+    this.props.deleteUserByOrgIdDispatch({
       userId,
       orgId: this.props.session.profile.id,
     });
@@ -27,13 +35,13 @@ class MembersContainer extends Component<tContainerProps, tState> {
     ev.preventDefault();
     const role = ev.currentTarget.value as tRole;
     const orgId = this.props.session.profile.id;
-    this.props.patchUserByOrg({role, orgId, userId});
+    this.props.patchUserByOrgIdDispatch({role, orgId, userId});
   }
 
   render() {
     return (
       <RoleFilter
-        items={this.props.usersByOrg.users}
+        items={this.props.usersByOrg}
         render={(roleProps: tRoleFilterProps) => (
           <SearchFilter
             searchKey="username"
@@ -42,11 +50,11 @@ class MembersContainer extends Component<tContainerProps, tState> {
               <MembersComponent
                 {...roleProps}
                 {...searchProps}
-                deleteUserByOrg={this.deleteUserByOrg}
+                removeUser={this.removeUser}
                 match={this.props.match}
                 setUserRole={this.setUserRole}
                 users={searchProps.items}
-                userTotal={this.props.usersByOrg.userTotal}
+                userTotal={this.props.usersByOrg.length}
               />
             )}
           />
@@ -62,9 +70,12 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  deleteUserByOrg: (query: tDeleteUserOrgQuery) => dispatch(deleteUserFromOrg(query)),
-  getUsersByOrg: (query: tIdQueryC) => dispatch(getUsersByOrg(query)),
-  patchUserByOrg: (query: tPatchUserRoleQuery) => dispatch(patchUserByOrg(query)),
+  deleteUserByOrgIdDispatch: (query: tDeleteUserByOrgIdQuery) =>
+    dispatch(deleteUserByOrgId(query)),
+  getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
+    dispatch(getUsersByOrgId(query)),
+  patchUserByOrgIdDispatch: (query: tPatchUserRoleQuery) =>
+    dispatch(patchUserByOrgId(query)),
 });
 
 const Members = connect(mapStateToProps, mapDispatchToProps)(MembersContainer);

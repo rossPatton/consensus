@@ -9,7 +9,7 @@ import {tProps, tStore} from './_types';
 import {SignupComponent} from './Component';
 
 const SignupContainer = memo((props: tProps) => (
-  <ErrorBoundary>
+  <ErrorBoundary status={_.get(props, 'session.error.status', 200)}>
     <Helmet
       canonical=""
       title=""

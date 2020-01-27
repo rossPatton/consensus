@@ -19,7 +19,7 @@
 // }
 
 // export interface tContainerProps extends tProps {
-//   getDecisionsByOrg: (query: tEventQueryC) => tThunkReturn<tDecision[]>,
+//   getDecisionsByOrg: (query: tEventQueryC) => tThunkPayload<tDecision[]>,
 //   isLoading: boolean,
 //   org: tOrg,
 //   role: tRole,
