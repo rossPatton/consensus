@@ -7,7 +7,7 @@ export const orgKeys = [
   'countryId',
   'description',
   'eventPrivacy',
-  'gate',
+  'vetting',
   'id',
   'name',
   'slug',

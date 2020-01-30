@@ -1,19 +1,21 @@
 import React, { memo } from 'react';
 
+import {RSVPCount} from '..';
 import {tComponentProps} from './_types';
 
 export const RSVPComponent = memo((props: tComponentProps) => {
-  const {id, rsvp, session, postRsvp} = props;
+  const {event, hasRSVPed, session, setRsvp} = props;
+  const {id: eventId} = event;
   const {profile = {}} = session;
-  const {privateRSVP = true} = profile as tUser;
+  const {privateRSVP: userRSVPsPrivately = true} = profile as tUser;
 
   return (
     <>
-      {!rsvp && (
+      {!hasRSVPed && (
         <form
           method="POST"
           action="/api/v1/rsvps"
-          onSubmit={ev => postRsvp({ev, eventId: id, value: true})}>
+          onSubmit={ev => setRsvp({ev, eventId, value: true})}>
           <fieldset>
             <button className="fx aiCtr br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
               <span
@@ -22,18 +24,18 @@ export const RSVPComponent = memo((props: tComponentProps) => {
                 aria-label="Big Plus Sign Emoji">
                 ➕
               </span>
-              <legend>RSVP {privateRSVP ? 'Privately' : 'Publicly'}</legend>
+              <legend>RSVP {userRSVPsPrivately ? 'Privately' : 'Publicly'}</legend>
             </button>
           </fieldset>
         </form>
       )}
-      {rsvp && (
+      {hasRSVPed && (
         <form
           method="POST"
           action="/api/v1/rsvps"
-          onSubmit={ev => postRsvp({ev, eventId: id, value: false})}>
+          onSubmit={ev => setRsvp({ev, eventId, value: false})}>
           <fieldset>
-            <input type="hidden" name="rsvp" value={id} />
+            <input type="hidden" name="rsvp" value={eventId} />
             <button
               title="Click to cancel your RSVP"
               className="fx aiCtr br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
@@ -48,6 +50,11 @@ export const RSVPComponent = memo((props: tComponentProps) => {
           </fieldset>
         </form>
       )}
+      <RSVPCount
+        event={event}
+        initialRSVP={props.initialRSVP}
+        rsvp={props.rsvp}
+      />
     </>
   );
 });

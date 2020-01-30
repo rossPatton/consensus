@@ -1,7 +1,10 @@
 import _ from 'lodash';
+import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
+import {GenericLoader, Helmet} from '../../../../../components';
+import {ErrorBoundary} from '../../../../../containers';
 import {Paginate, SearchFilter} from '../../../../../containers';
 import {deleteOrgByUserId, getOrgsByUserId} from '../../../../../redux';
 import {tContainerProps, tOrgWithRole, tState, tStore} from './_types';
@@ -10,9 +13,11 @@ import {MembershipsComponent} from './Component';
 class MembershipsContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
-    const userId = _.get(props.session, 'profile.id', null);
+
+    const userId = _.get(props, 'sessionThunk.data.profile.id', null);
     if (userId) {
-      props.getOrgsByUserIdDispatch({userId});
+      props.getOrgsByUserIdDispatch({userId})
+        .catch(loglevel.error);
     }
   }
 
@@ -22,8 +27,10 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
 
   leaveOrg = (ev: React.MouseEvent<HTMLButtonElement>, orgId: number) => {
     ev.preventDefault();
-    const {deleteOrgByUserIdDispatch} = this.props;
-    deleteOrgByUserIdDispatch({orgId});
+    if (orgId) {
+      this.props.deleteOrgByUserIdDispatch({orgId})
+        .catch(loglevel.error);
+    }
   }
 
   sortOrgs(orgs: tOrgWithRole[]) {
@@ -37,40 +44,63 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const orgsToRender = this.state.orgs.length > 0
-      ? this.state.orgs
-      : this.props.orgs;
+    const {orgsByUserIdThunk} = this.props;
 
     return (
-      <SearchFilter
-        searchKey="name"
-        items={orgsToRender}
-        render={(searchProps: tSearchFilterProps) => (
-          <Paginate
-            items={searchProps.items}
-            page={this.props.match.params.page}
-            render={(itemsToRender: tOrgWithRole[]) => (
-              <MembershipsComponent
-                leaveOrg={this.leaveOrg}
-                onSearchChange={searchProps.onSearchChange}
-                orgs={this.sortOrgs(itemsToRender)}
+      <ErrorBoundary status={_.get(orgsByUserIdThunk, 'error.status', 200)}>
+        <Helmet
+          canonical=""
+          title=""
+          meta={[
+            { name: 'description', content: '' },
+            { name: 'keywords', content: '' },
+            { property: 'og:title', content: '' },
+            { property: 'og:description', content: '' },
+          ]}
+        />
+        <GenericLoader
+          isLoading={orgsByUserIdThunk.isLoading}
+          render={() => {
+            const orgsToRender = this.state.orgs.length > 0
+              ? this.state.orgs
+              : orgsByUserIdThunk.data;
+
+            return (
+              <SearchFilter
+                searchKey="name"
+                items={orgsToRender}
+                render={(searchProps: tSearchFilterProps) => (
+                  <Paginate
+                    items={searchProps.items}
+                    page={this.props.match.params.page}
+                    render={(itemsToRender: tOrgWithRole[]) => (
+                      <MembershipsComponent
+                        leaveOrg={this.leaveOrg}
+                        onSearchChange={searchProps.onSearchChange}
+                        // just use Orgs component, put sort there
+                        orgs={this.sortOrgs(itemsToRender)}
+                      />
+                    )}
+                  />
+                )}
               />
-            )}
-          />
-        )}
-      />
+            );
+          }}
+        />
+      </ErrorBoundary>
     );
   }
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.orgsByUserId.isLoading,
-  orgs: store.orgsByUserId.data,
+  orgsByUserIdThunk: store.orgsByUserId,
+  sessionThunk: store.session,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
   deleteOrgByUserIdDispatch: (query: tDeleteUserByOrgIdQuery) =>
     dispatch(deleteOrgByUserId(query)),
+
   getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) =>
     dispatch(getOrgsByUserId(query)),
 });

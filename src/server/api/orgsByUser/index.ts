@@ -3,6 +3,7 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import {knex} from '../../db/connection';
+import {validateSchema} from '../../utils';
 import {orgKeys} from './_constants';
 import {deleteSchema, getSchema} from './_schema';
 
@@ -10,19 +11,12 @@ export const orgsByUser = new Router();
 const route = '/api/v1/orgsByUser';
 const table = 'accounts_roles';
 const dataPath = 'state.locals.data';
-const errorPath = 'details[0].message';
-const errorMsg = 'Bad Request';
 
 orgsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, dataPath, {});
+  await validateSchema(ctx, getSchema, query);
 
-  try {
-    await getSchema.validateAsync(query);
-  } catch (err) {
-    const message = _.get(err, 'details[0].message', 'Bad Request');
-    return ctx.throw(400, message);
-  }
-
+  // TODO the below can be simplified
   let userOrgRels: tAccountRoleRelation[] = [];
   try {
     userOrgRels = await knex(table).where(query);
@@ -59,12 +53,7 @@ orgsByUser.delete(route, async (ctx: Koa.ParameterizedContext) => {
   const userId = _.get(ctx, 'state.user.id', 0);
   const query = {orgId, userId};
 
-  try {
-    await deleteSchema.validateAsync<tDeleteUserByOrgIdQuery>(query);
-  } catch (err) {
-    const message = _.get(err, errorPath, errorMsg);
-    return ctx.throw(400, message);
-  }
+  await validateSchema<tDeleteUserByOrgIdQuery>(ctx, deleteSchema, query);
 
   try {
     await knex(table)

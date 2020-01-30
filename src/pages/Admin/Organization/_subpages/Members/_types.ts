@@ -1,30 +1,26 @@
 import {tAdminSections} from '../../../_types';
 
 export type tStore = {
+  session: tThunk<tSession>,
   usersByOrg: tThunk<tUser[]>,
-};
-
-export type tState = {
-  role: tRole,
 };
 
 export type tProps = {
   match: tAdminSections,
 };
 
-export interface tContainerProps extends tProps {
+export type tContainerProps = tProps & {
   deleteUserByOrgIdDispatch: (query: tDeleteUserByOrgIdQuery) =>
     tThunkPayload<tUser[]>,
   getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
     tThunkPayload<tUser[]>,
-  isLoading: boolean,
   patchUserByOrgIdDispatch: (opts: tPatchUserRoleQuery) =>
     tThunkPayload<tAccountRoleRelation>,
-  session: tSession,
-  usersByOrg: tUser[],
+  sessionThunk: tThunk<tSession>,
+  usersThunk: tThunk<tUser[]>,
 }
 
-export interface tComponentProps extends tProps {
+export type tComponentProps = tProps & {
   removeUser: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
   onRoleFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,

@@ -12,11 +12,15 @@ exports.up = async (knex: Knex) => {
     // name is not id, since many cities have same name
     table.string('name').notNullable();
 
-    table.integer('country').notNullable().references('countries.id')
+    table.integer('country')
+      .notNullable()
+      .references('countries.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
-    table.integer('region').notNullable().references('regions.id')
+    table.integer('region')
+      .notNullable()
+      .references('regions.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 

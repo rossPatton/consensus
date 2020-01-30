@@ -61,36 +61,23 @@ export const usersByOrgReducer = (
       data: state.data.filter(user => user.id !== userId),
       isLoading: false,
     };
-
-    // const removedUser = action.payload as tUser;
-    // const userId = removedUser.id;
-    // const copy = [...state.data];
-    // const indexOfRemovedUser = copy.findIndex(user => userId === user.id);
-    // copy.splice(indexOfRemovedUser, 1);
-
-    // return {
-    //   ...state,
-    //   data: copy,
-    //   isLoading: false,
-    // };
   }
 
   case PATCH_SUCCESS: {
-    const patchedUser = action.payload as any;
-    const userId = parseInt(patchedUser.userId, 10);
-    const copy = [...state.data];
-    const indexOfPatchedUser = copy.findIndex(user => userId === user.id);
-    const userWithNewRole = {
-      ...copy[indexOfPatchedUser],
-      role: patchedUser.role,
-    };
-
-    // replace user in-place with updated relation
-    copy.splice(indexOfPatchedUser, 1, userWithNewRole);
+    const {userId} = action.payload as tAccountRoleRelation;
 
     return {
       ...state,
-      data: copy,
+      data: [...state.data].map(user => {
+        if (user.id === userId) {
+          return {
+            ...user,
+            role: action.payload.role,
+          };
+        }
+
+        return user;
+      }),
       isLoading: false,
     };
   }

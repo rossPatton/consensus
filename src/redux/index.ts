@@ -8,8 +8,8 @@ export { getCountry } from './country';
 export { getRegion } from './region';
 
 // event(s) related thunks
-export { getEvent, deleteEvent, patchEvent, postEvent } from './event';
-export { getEventsByOrgId } from './eventsOrgId';
+export { getEvent, patchEvent, postEvent } from './event';
+export { deleteEvent, getEventsByOrgId } from './eventsByOrgId';
 export { getEventsByUserId } from './eventsByUserId';
 
 // org/group related actions/thunks
@@ -28,7 +28,6 @@ export {
 
 // misc thunks
 export { getRoles, postRoleFailure, postRoleSuccess } from './roles';
-export { getRsvp, postRsvp } from './rsvp';
-export { getRsvps } from './rsvps';
+export { getRsvps, patchRsvps, postRsvps } from './rsvps';
 export { getOrgsBySearch } from './orgsBySearch';
 

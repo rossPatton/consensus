@@ -1,6 +1,6 @@
 import Koa from 'koa';
 
-import {getProfileByAccount} from '.';
+import {getProfileByAccountId} from '.';
 
 // use login info to return session for client
 // ideally only happens once per visit, on login. but if user refreshes, we do again
@@ -8,8 +8,9 @@ export const getSession = async (
   ctx: Koa.ParameterizedContext,
   account: tAccount,
 ): Promise<tThunk<tSession>> => {
-  // we have 2 types of accounts, orgs and users, use account info to fetch the right one
-  const profile = await getProfileByAccount(ctx, account);
+  // we have 2 types of accounts,
+  // orgs and users, use account info to fetch the right one
+  const profile = await getProfileByAccountId(ctx, account);
 
   // for roles, etc, we want id here to be from the account, not the profile
   const {id, isVerified, login, orgId} = account;

@@ -1,6 +1,6 @@
 export interface tProps {
   items: tEvent[],
-  render: Function,
+  render: (renderProps: tPrivacyFilterProps) => React.ReactNode,
 }
 
 export interface tState {

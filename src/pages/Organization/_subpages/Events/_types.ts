@@ -1,33 +1,33 @@
 import {Location} from 'history';
 import {match} from 'react-router';
 
-export interface tState {
+export type tState = {
   showPast: boolean,
 }
 
-interface tBaseProps {
+type tBaseProps = {
   events: tEvent[],
   match: match & {params: tOrgRouteParams},
   role: tRole,
 }
 
-export interface tComponentProps extends tBaseProps {
+export type tComponentProps = tBaseProps & {
   onPrivacyFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   privacyFilter: tPrivacyFilter,
   showPast: boolean,
   togglePast: (ev: React.MouseEvent<HTMLButtonElement>) => void,
-}
+};
 
-export interface tContainerProps extends tBaseProps {
-  getEvents: (query: tGetEventQuery) => tThunkPayload<tEvent[]>,
+export type tContainerProps = tBaseProps & {
+  getEventsDispatch: (query: tGetEventQuery) => tThunkPayload<tEvent[]>,
   isLoading: boolean,
   location: Location,
   org: tOrg,
   session: tSession,
-}
+};
 
-export interface tStore {
+export type tStore = {
   eventsByOrgId: tThunk<tEvent[]>,
   isLoading: boolean,
 }

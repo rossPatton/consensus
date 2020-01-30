@@ -10,7 +10,7 @@ export const failure = (payload: Error): tFailureAction => ({
   payload,
 });
 
-export const success = (payload: tUser[]): tSuccessAction => ({
+export const success = (payload: tAccountRoleRelation): tSuccessAction => ({
   type: PATCH_SUCCESS,
   payload,
 });

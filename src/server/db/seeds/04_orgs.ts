@@ -2,22 +2,26 @@ require('dotenv-safe').config();
 import faker from 'faker';
 import Knex from 'knex';
 
-export const categories = [
-  'Religious',
-  'Community Center',
-  'Cooperative',
-  'Union',
-  'Political Organization',
-];
-
 import {getRandomNum} from '../../../utils/getRandomNum';
 import {range} from '../../../utils/range';
 import {slugify} from '../../../utils/slugify';
 
+const categories = [
+  { type: 'Religious', slug: 'religion' },
+  { type: 'Community Center', slug: 'community-center' },
+  { type: 'Cooperative', slug: 'cooperative' },
+  { type: 'Union', slug: 'union' },
+  { type: 'Political Organization', slug: 'political-organization' },
+  // { type: 'Caucus' },
+  // { type: 'Working Group' },
+];
+const categoryTypes = categories.map((c: any) => c.display);
+
 const createOrg = async () => {
   const name = faker.company.companyName();
   const slug = slugify(name);
-  const category = categories[getRandomNum(0, categories.length - 1)];
+  const category = categoryTypes[getRandomNum(0, categoryTypes.length - 1)];
+  const vetting = ['public', 'manual', 'private'];
 
   return {
     category,
@@ -26,11 +30,11 @@ const createOrg = async () => {
     country: 'United States',
     countryId: 1,
     description: faker.lorem.paragraphs(),
-    gate: 'public',
     name,
     region: 'New York',
     regionId: 37,
     slug,
+    vetting: vetting[getRandomNum(0, vetting.length - 1)],
   };
 };
 
@@ -41,11 +45,11 @@ const createTWC = async () => ({
   country: 'United States',
   countryId: 1,
   description: faker.lorem.paragraphs(),
-  gate: 'invite',
   name: 'Tech Workers Coalition NYC',
   region: 'New York',
   regionId: 37,
   slug: 'tech-workers-coalition-nyc',
+  vetting: 'private',
 });
 
 exports.seed = async (knex: Knex) => {

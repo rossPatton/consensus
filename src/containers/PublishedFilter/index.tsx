@@ -8,7 +8,7 @@ export default class PublishedFilter extends PureComponent<tProps, tState> {
     publishedFilter: 'n/a' as tPublishedFilter,
   };
 
-  filter = (items: any[]) => {
+  filter = (items: tEvent[]) => {
     const {publishedFilter} = this.state;
     if (publishedFilter === 'n/a') return items;
     const isDraft = publishedFilter === 'draft';

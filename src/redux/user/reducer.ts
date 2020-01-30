@@ -26,19 +26,26 @@ export const userReducer = (state = initialState, action: tUserActionUnion) => {
   switch (action.type) {
   case DELETE_FAILURE:
     return failureReturn;
+
   case GET_FAILURE:
     return failureReturn;
+
   case PATCH_FAILURE:
     return failureReturn;
+
   case POST_FAILURE:
     return failureReturn;
 
   case DELETE_SUCCESS:
     return successReturn;
+
   case GET_SUCCESS:
     return successReturn;
-  case PATCH_SUCCESS:
+
+  case PATCH_SUCCESS: {
     return successReturn;
+  }
+
   case POST_SUCCESS:
     return successReturn;
 

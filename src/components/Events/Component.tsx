@@ -4,7 +4,7 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {EventPrivacy, ExternalLink, RSVP, RSVPS} from '../../components';
+import {EventPrivacy, ExternalLink, RSVP} from '../../components';
 import {objToQueryString} from '../../utils';
 import {tComponentProps} from './_types';
 
@@ -12,6 +12,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
   <ul>
     {props.events.map((ev, i) => {
       const isPastEvent = dayJS(ev.date).isBefore(dayJS());
+      const rsvp = _.find(props.rsvps, rsvp => ev.id === rsvp.eventId);
 
       return (
         <li
@@ -50,19 +51,6 @@ export const EventsComponent = memo((props: tComponentProps) => (
             </div>
           )}
           <div className="p3 fx">
-            {/* <div
-              className={cx({
-                'br8 bgGrey1 mR3 col fxNoShrink fxg0': true,
-                hide: props.tiny,
-              })}>
-              <img
-                alt=""
-                height="175"
-                width="175"
-                src={`https://picsum.photos/id/${getRandomNum(0, 100)}/175/175`}
-              />
-            </div>
-            */}
             <div className="col">
               <h3
                 className={cx({
@@ -112,8 +100,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   o5: isPastEvent,
                 })}>
                 <EventPrivacy isPrivate={ev.isPrivate} />
-                <RSVP event={ev} role={props.role} />
-                <RSVPS event={ev} />
+                <RSVP event={ev} role={props.role} rsvp={rsvp} />
               </div>
             </div>
           </div>

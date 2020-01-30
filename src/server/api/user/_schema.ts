@@ -14,18 +14,24 @@ export const postSchema = Joi.object().keys({
 });
 
 export const patchSchema = Joi.object().keys({
-  bio: Joi.string().alphanum(),
-  city: Joi.string().alphanum(),
-  country: Joi.string().alphanum(),
+  bio: Joi.string(),
+  city: Joi.string(),
+  country: Joi.string(),
   email: Joi.string().email(),
+  id: Joi.number().integer().required(),
   language: Joi.string().alphanum().max(2),
   name: Joi.string(),
+  password: Joi.string().required(),
   phone: Joi.string(),
   privateEmail: Joi.bool(),
   privateLocation: Joi.bool(),
   privateMemberships: Joi.bool(),
   privateName: Joi.bool(),
+  privatePhone: Joi.bool(),
   privateRSVP: Joi.bool(),
-  region: Joi.string().alphanum(),
+  region: Joi.string(),
   username: Joi.string(),
+
+  createdAt: Joi.date().timestamp(),
+  updatedAt: Joi.date().timestamp(),
 });

@@ -3,7 +3,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 
-import {postRsvp} from '../../redux';
+import {patchRsvps, postRsvps} from '../../redux';
 import {tContainerProps, tSetRsvpOpts, tState, tStore} from './_types';
 import {RSVPComponent} from './Component';
 
@@ -12,31 +12,56 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
     event: {} as tEvent,
   };
 
-  state = {
-    rsvp: this.props.event.rsvp,
-  };
+  constructor(props: tContainerProps) {
+    super(props);
 
-  postRsvp = async (opts: tSetRsvpOpts) => {
+    const {rsvp} = props;
+    const method = typeof rsvp === 'undefined' ? 'POST' : 'PATCH';
+    // only purpose for this state, is to update the UI right away
+    const hasRSVPed = !!rsvp && (rsvp.publicRSVP || rsvp.privateRSVP);
+
+    this.state = {
+      hasRSVPed,
+      initialRSVP: hasRSVPed,
+      method,
+      rsvp,
+    };
+  }
+
+  // post or patch, depending on RSVP status
+  setRsvp = async (opts: tSetRsvpOpts) => {
     opts.ev.preventDefault();
-    const {history, session} = this.props;
+    const {method} = this.state;
+    const {history, patchRsvpDispatch, postRsvpDispatch, session} = this.props;
     const {profile = {}} = session;
-    const {privateRSVP = true} = profile as tUser;
+    const {privateRSVP: userRSVPsPrivately = true} = profile as tUser;
 
-    if (!session.isAuthenticated) return history.push('/login');
+    if (!session.isAuthenticated) {
+      return history.push('/login');
+    }
+
+    const dispatch = method === 'PATCH' ? patchRsvpDispatch : postRsvpDispatch;
+    const hasRSVPed = !this.state.hasRSVPed;
+    this.setState({
+      hasRSVPed,
+      method: hasRSVPed ? 'PATCH' : 'POST',
+    });
 
     try {
-      this.props.postRsvpDispatch({
-        id: opts.eventId,
-        rsvpType: privateRSVP ? 'private' : 'public',
+      dispatch({
+        eventId: opts.eventId,
+        rsvpType: userRSVPsPrivately ? 'private' : 'public',
         value: opts.value,
-      });
+      })
+        .then(res => {
+          return this.setState({
+            rsvp: res.payload,
+          });
+        })
+        .catch(loglevel.error);
     } catch (err) {
       return loglevel.error(err);
     }
-
-    this.setState({
-      rsvp: opts.value,
-    });
   }
 
   render() {
@@ -45,10 +70,12 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
 
     return (
       <RSVPComponent
-        id={this.props.event.id}
+        event={this.props.event}
+        hasRSVPed={this.state.hasRSVPed}
+        initialRSVP={this.state.initialRSVP}
         rsvp={this.state.rsvp}
         session={this.props.session}
-        postRsvp={this.postRsvp}
+        setRsvp={this.setRsvp}
       />
     );
   }
@@ -59,12 +86,9 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  postRsvpDispatch: (query: tRSVPQuery) => dispatch(postRsvp(query)),
+  patchRsvpDispatch: (query: tRSVPQuery) => dispatch(patchRsvps(query)),
+  postRsvpDispatch: (query: tRSVPQuery) => dispatch(postRsvps(query)),
 });
 
-const RSVP = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(RSVPContainer);
-
+const RSVP = connect(mapStateToProps, mapDispatchToProps)(RSVPContainer);
 export default withRouter(RSVP);

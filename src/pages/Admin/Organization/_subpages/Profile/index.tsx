@@ -1,21 +1,33 @@
+import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router';
 
-import {Helmet} from '../../../../../components';
+import {GenericLoader, Helmet} from '../../../../../components';
+import {ErrorBoundary} from '../../../../../containers';
 import {patchOrg} from '../../../../../redux';
-import {tContainerProps, tStateUnion} from './_types';
+import {tContainerProps, tStateUnion, tStore} from './_types';
 import {ProfileComponent} from './Component';
 
 class ProfileContainer extends PureComponent<tContainerProps, tOrg> {
-  state = {
-    ...this.props.session.profile as tOrg,
-  };
+  constructor(props: tContainerProps) {
+    super(props);
+    const org: tOrg = _.get(this.props, 'sessionThunk.data.profile', {});
+    this.state = {
+      ...org,
+    };
+  }
 
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {category, description, eventPrivacy, gate, id} = this.state;
-    this.props.patchOrg({category, description, eventPrivacy, gate, id});
+    const {category, description, eventPrivacy, vetting, id} = this.state;
+
+    this.props.patchOrgDispatch({
+      category,
+      description,
+      eventPrivacy,
+      vetting,
+      id,
+    });
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
@@ -25,10 +37,10 @@ class ProfileContainer extends PureComponent<tContainerProps, tOrg> {
   }
 
   render() {
-    const {session} = this.props;
+    const {sessionThunk} = this.props;
 
     return (
-      <>
+      <ErrorBoundary status={_.get(sessionThunk, 'error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -39,25 +51,28 @@ class ProfileContainer extends PureComponent<tContainerProps, tOrg> {
             { property: 'og:description', content: '' },
           ]}
         />
-        {!session.isAuthenticated && <Redirect to="" />}
-        {session.isAuthenticated && (
-          <ProfileComponent
-            {...this.props}
-            {...this.state}
-            onSubmit={this.onSubmit}
-            // setImage={this.setImage}
-            // toggleChecked={this.toggleChecked}
-            updateState={this.updateState}
-          />
-        )}
-      </>
+        <GenericLoader
+          isLoading={sessionThunk.isLoading}
+          render={() => (
+            <ProfileComponent
+              {...this.state}
+              onSubmit={this.onSubmit}
+              updateState={this.updateState}
+            />
+          )}
+        />
+      </ErrorBoundary>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch: Function) => ({
-  patchOrg: (query: tOrgQuery) => dispatch(patchOrg(query)),
+const mapStateToProps = (store: tStore) => ({
+  sessionThunk: store.session,
 });
 
-const Profile = connect(null, mapDispatchToProps)(ProfileContainer);
+const mapDispatchToProps = (dispatch: Function) => ({
+  patchOrgDispatch: (query: tOrgQuery) => dispatch(patchOrg(query)),
+});
+
+const Profile = connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
 export default Profile;

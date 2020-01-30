@@ -1,6 +1,10 @@
 import Joi from '@hapi/joi';
 
-export const getSchema = Joi.object().keys({
+const baseSchema = Joi.object().keys({
+  isFormSubmit: Joi.bool(),
+});
+
+export const getSchema = baseSchema.keys({
   orgId: Joi.number().integer(),
 });
 

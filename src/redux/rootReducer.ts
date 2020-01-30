@@ -4,15 +4,14 @@ import { authReducer } from './auth/reducer';
 import { cityReducer } from './city/reducer';
 import { countryReducer } from './country/reducer';
 import { eventReducer } from './event/reducer';
+import { eventsByOrgIdReducer } from './eventsByOrgId/reducer';
 import { eventsByUserIdReducer } from './eventsByUserId/reducer';
-import { eventsByOrgIdReducer } from './eventsOrgId/reducer';
 import { orgReducer } from './org/reducer';
 import { orgsReducer } from './orgs/reducer';
 import { searchReducer } from './orgsBySearch/reducer';
 import { orgsByUserIdReducer } from './orgsByUserId/reducer';
 import { regionReducer } from './region/reducer';
 import { rolesReducer } from './roles/reducer';
-import { rsvpReducer } from './rsvp/reducer';
 import { rsvpsReducer } from './rsvps/reducer';
 import { userReducer } from './user/reducer';
 import { usersByOrgReducer } from './usersByOrgId/reducer';
@@ -28,7 +27,6 @@ export const rootReducer = combineReducers({
   orgsByUserId: orgsByUserIdReducer,
   region: regionReducer,
   roles: rolesReducer,
-  rsvp: rsvpReducer,
   rsvps: rsvpsReducer,
   search: searchReducer,
   session: authReducer,

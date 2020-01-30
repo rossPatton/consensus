@@ -4,43 +4,33 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import {knex} from '../../db/connection';
+import {getRSVPsByUserId} from '../../queries';
+import {validateSchema, zipEventsWithAttendees} from '../../utils';
 import {schema} from './_schema';
+import {tEventsByUserServerQuery} from './_types';
 
-const dataPath = 'state.locals.data';
 export const eventsByUser = new Router();
+const dataPath = 'state.locals.data';
 const route = '/api/v1/eventsByUser';
-const table = 'users_events';
 
 eventsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = _.get(ctx, dataPath, 0);
+  const query: tEventsByUserServerQuery = _.get(ctx, dataPath, {});
+  await validateSchema(ctx, schema, query);
 
-  try {
-    await schema.validateAsync<tGetEventQuery>(query);
-  } catch (err) {
-    const message = _.get(err, 'details[0].message', 'Bad Request');
-    return ctx.throw(400, message);
-  }
-
-  let userEventIds: tRSVP[];
-  try {
-    userEventIds = await knex(table).where({userId: query.userId});
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
+  const userRSVPs = await getRSVPsByUserId(ctx, query.userId);
 
   // mapped set of events that the user has RSVP'd to
-  let mappedIds: number[];
+  let mappedIds: number[] = [];
   try {
     mappedIds = await Promise.all(_.uniq(
-      userEventIds
-        .filter(async idSet => idSet.publicRSVP || idSet.privateRSVP)
-        .map(async idSet => idSet.eventId),
+      userRSVPs.map(async idSet => idSet.eventId),
     ));
   } catch (err) {
     return ctx.throw(400, err);
   }
 
-  let events: tEvent[];
+  // now only return future events where the user rsvped
+  let events: tEvent[] = [];
   try {
     events = await knex('events')
       .whereIn('id', mappedIds)
@@ -50,16 +40,5 @@ eventsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  // client side rendering expects a rsvp boolean on the event object
-  let mappedEvents: tEvent[];
-  try {
-    mappedEvents = await Promise.all(events.map(async ev => ({
-      ...ev,
-      rsvp: true,
-    })));
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
-
-  ctx.body = mappedEvents;
+  ctx.body = await zipEventsWithAttendees(events, userRSVPs);
 });

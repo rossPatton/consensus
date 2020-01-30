@@ -13,7 +13,9 @@ exports.up = async (knex: Knex) => {
     table.string('code').notNullable();
 
     // in this case, the US since we have no other options atm
-    table.integer('country').notNullable().references('countries.id')
+    table.integer('country')
+      .notNullable()
+      .references('countries.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 

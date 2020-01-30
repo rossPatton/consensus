@@ -1,18 +1,23 @@
+import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
+import {GenericLoader, Helmet} from '../../../../../components';
+import {ErrorBoundary} from '../../../../../containers';
 import {login, patchAccount} from '../../../../../redux';
-import {tContainerProps, tState, tStateUnion} from './_types';
+import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 import {AccountComponent} from './Component';
 
 class AccountContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
 
+    const session = _.get(props, 'sessionThunk.data', {});
+
     this.state = {
-      isVerified: props.session.isVerified,
-      login: props.session.login,
+      isVerified: session.isVerified,
+      login: session.login,
       newPassword: '',
       password: '',
     };
@@ -20,11 +25,16 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
 
   save = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {id} = this.props.session;
+    const accountId = _.get(this.props, 'sessionThunk.data.id', null);
+
+    if (!accountId) return;
 
     let newAccount: tActionPayload<tAccount>;
     try {
-      newAccount = await this.props.patchAccount({id, ...this.state});
+      newAccount = await this.props.patchAccountDispatch({
+        ...this.state,
+        id: accountId,
+      });
     } catch (err) {
       return loglevel.error(err);
     }
@@ -32,9 +42,10 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
     // TODO trigger error boundary or something
     if (!newAccount.payload) return;
 
+    // update session by 'logging in' again, with the new account info
     const {login, newPassword, password} = this.state;
     try {
-      await this.props.login({
+      await this.props.loginDispatch({
         username: login,
         password: newPassword || password,
       });
@@ -52,24 +63,47 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
+    const {sessionThunk} = this.props;
+
     return (
-      <AccountComponent
-        {...this.state}
-        session={this.props.session}
-        save={this.save}
-        updateState={this.updateState}
-      />
+      <ErrorBoundary status={_.get(sessionThunk, 'error.status', 200)}>
+        <Helmet
+          canonical=""
+          title=""
+          meta={[
+            { name: 'description', content: '' },
+            { name: 'keywords', content: '' },
+            { property: 'og:title', content: '' },
+            { property: 'og:description', content: '' },
+          ]}
+        />
+        <GenericLoader
+          isLoading={sessionThunk.isLoading}
+          render={() => (
+            <AccountComponent
+              {...this.state}
+              session={sessionThunk.data}
+              save={this.save}
+              updateState={this.updateState}
+            />
+          )}
+        />
+      </ErrorBoundary>
     );
   }
 }
 
+const mapStateToProps = (store: tStore) => ({
+  sessionThunk: store.session,
+});
+
 const mapDispatchToProps = (dispatch: Function) => ({
-  login: (query: tLoginQuery) => dispatch(login(query)),
-  patchAccount: (query: tAccount) => dispatch(patchAccount(query)),
+  loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
+  patchAccountDispatch: (query: tAccount) => dispatch(patchAccount(query)),
 });
 
 const Account = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(AccountContainer);
 

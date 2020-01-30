@@ -4,55 +4,41 @@ import _ from 'lodash';
 
 import {knex} from '../../db/connection';
 import {getSession} from '../../queries';
+import {filterUserInfoFromClient, validateSchema} from '../../utils';
+import {getUsersByOrgId} from './_queries';
 import {deleteSchema, getSchema, patchSchema, postSchema} from './_schema';
-import {getUsersByOrgId} from './queries';
+import {tUserByOrgQuery} from './_types';
 
 export const usersByOrg = new Router();
 const route = '/api/v1/usersByOrg';
 const table = 'accounts_roles';
-const state = 'state.locals.data';
-const errorPath = 'details[0].message';
-const errorMsg = 'Bad Request';
+const dataPath = 'state.locals.data';
 
 // api for interacting with the accounts_roles table
 // not for signing up new users, but for getting users that are members of an org
 // or joining an org, or updating member roles within an org
 
 usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tUsersByOrgIdQuery = _.get(ctx, state, {});
+  const query: tUsersByOrgIdQuery = _.get(ctx, dataPath, {});
 
-  try {
-    await getSchema.validateAsync<tUsersByOrgIdQuery>(query);
-  } catch (err) {
-    const message = _.get(err, errorPath, errorMsg);
-    return ctx.throw(400, message);
-  }
+  await validateSchema<tUsersByOrgIdQuery>(ctx, getSchema, query);
 
-  ctx.body = await getUsersByOrgId(ctx, query);
+  const users = await getUsersByOrgId(ctx, query);
+  const cleanUsers = await filterUserInfoFromClient(users);
+  ctx.body = cleanUsers;
 });
 
 
 // joining an org. uses session data since we don't want people to be able to
 // add others to an org, only the logged-in user should be able to do that
 usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const {orgId}: tUsersByOrgIdQuery = _.get(ctx, state, {});
-  // state.user === account entry. password requires the key user
+  const {orgId}: tUserByOrgQuery = _.get(ctx, dataPath, {});
   const {userId} = _.get(ctx, 'state.user', {});
 
-  try {
-    await postSchema.validateAsync<tUsersByOrgIdQuery>({
-      orgId,
-      userId,
-    });
-  } catch (err) {
-    const message = _.get(err, errorPath, errorMsg);
-    return ctx.throw(400, message);
-  }
+  await validateSchema<tUserByOrgQuery>(ctx, postSchema, {orgId, userId});
 
   // 0 means the user isn't logged in basically
-  if (!userId || userId === 0) {
-    return ctx.redirect('/signup');
-  }
+  if (userId === 0) return ctx.redirect('/signup');
 
   const {id: accountId}: tAccount = await knex('accounts')
     .limit(1)
@@ -74,55 +60,42 @@ usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = _.get(session, 'data.profile', {});
 });
 
+
 usersByOrg.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tPatchUserRoleQuery = _.get(ctx, state, {});
+  const query: tPatchUserRoleQuery = _.get(ctx, dataPath, {});
   const {orgId, role, userId} = query;
 
-  try {
-    await patchSchema.validateAsync<tPatchUserRoleQuery>({
-      orgId,
-      role,
-      userId,
-    });
-  } catch (err) {
-    const message = _.get(err, errorPath, errorMsg);
-    return ctx.throw(400, message);
-  }
+  await validateSchema<tPatchUserRoleQuery>(ctx, patchSchema, {orgId, role, userId});
 
-  let updatedAccountRoleRel = {} as tAccountRoleRelation;
+  let updatedAccountRoleRel: tAccountRoleRelation[] = [];
   try {
     updatedAccountRoleRel = await knex(table)
       .limit(1)
       .where({orgId, userId})
       .update({role})
-      .returning(['orgId', 'role', 'userId'])
-      .first();
+      .returning(['orgId', 'role', 'userId']);
   } catch (err) {
     return ctx.throw(400, err);
   }
 
-  ctx.body = updatedAccountRoleRel;
+  ctx.body = updatedAccountRoleRel[0];
 });
 
-usersByOrg.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  const {isFormSubmit, ...query} = _.get(ctx, state, {});
 
-  try {
-    await deleteSchema.validateAsync<tDeleteUserByOrgIdQuery>(query);
-  } catch (err) {
-    const message = _.get(err, errorPath, errorMsg);
-    return ctx.throw(400, message);
-  }
+usersByOrg.delete(route, async (ctx: Koa.ParameterizedContext) => {
+  const query: tUserByOrgQuery = _.get(ctx, dataPath, {});
+
+  await validateSchema<tUserByOrgQuery>(ctx, deleteSchema, query);
 
   try {
     await knex(table)
       .limit(1)
-      .where(query)
+      .where({orgId: query.orgId, userId: query.userId})
       .first()
       .del();
   } catch (err) {
     return ctx.throw(400, err);
   }
 
-  ctx.body = {ok: true, userId: parseInt(query.userId, 10)};
+  ctx.body = {userId: parseInt(query.userId, 10)};
 });

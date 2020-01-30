@@ -3,7 +3,7 @@ import { PATCH_FAILURE, PATCH_SUCCESS } from './patch/_types';
 
 const initialState: tThunk<tSession> = {
   error: null,
-  isLoading: false,
+  isLoading: true,
   data: {} as tSession,
 };
 

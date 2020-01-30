@@ -1,4 +1,5 @@
 import React, {memo} from 'react';
+import {Link} from 'react-router-dom';
 
 import {PasswordInput} from '../../../../../components';
 import {tComponentProps} from './_types';
@@ -12,12 +13,17 @@ export const ProfileComponent = memo((props: tComponentProps) => (
     onSubmit={props.save}>
     <fieldset>
       <legend>
-        <h1 className="fs2 mB3">Edit your profile</h1>
+        <h1 className="fs2 mB1">Edit your profile</h1>
       </legend>
+      <Link
+        className="dBl mB3"
+        to={`/user/${props.session.profile.id}`}>
+        See your public profile here
+      </Link>
       <div className="p4 br8 brdA1 mB3">
         <label className="col row mR3" htmlFor="name">
           <h2 className="ffLab fs5 mB1 lh1">
-              Name
+            Name
           </h2>
           <input
             id="name"

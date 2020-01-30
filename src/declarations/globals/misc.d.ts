@@ -4,11 +4,11 @@ declare interface tFetchResponse<T = any> extends Response {
   json<P = T>(): Promise<P>
 };
 
-// declare type tDecisionFilterProps = {
-//   decisionFilter: tDecisionType,
-//   items: tDecision[],
-//   onDecisionTypeChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
-// }
+declare type tPublishedFilterProps = {
+  items: tEvent[],
+  onPublishedFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
+  publishedFilter: tPublishedFilter,
+}
 
 declare type tRoleFilterProps = {
   items: tUser[],

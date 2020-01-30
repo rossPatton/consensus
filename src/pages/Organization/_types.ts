@@ -13,9 +13,9 @@ export type tComponentProps = tProps & {
 }
 
 export type tContainerProps = tProps & {
-  getOrg: (params: tGetOrgQuery) => tThunkPayload<tOrg>,
-  getRoles: () => tThunkPayload<tRoleMap[]>,
-  getRsvps: () => tThunkPayload<tRSVP[]>,
+  getOrgDispatch: (params: tGetOrgQuery) => tThunkPayload<tOrg>,
+  getRolesDispatch: () => tThunkPayload<tRoleMap[]>,
+  getRsvpsDispatch: () => tThunkPayload<tRSVP[]>,
   isLoading: boolean,
   org: tThunk<tOrg>,
   roles: tRoleMap[],

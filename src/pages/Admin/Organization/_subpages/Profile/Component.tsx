@@ -47,17 +47,17 @@ export const ProfileComponent = memo((props: tComponentProps) => {
             </h2>
             <select
               className="row"
-              value={props.gate}
-              onBlur={ev => props.updateState('gate', ev)}
-              onChange={ev => props.updateState('gate', ev)}>
+              value={props.vetting}
+              onBlur={ev => props.updateState('vetting', ev)}
+              onChange={ev => props.updateState('vetting', ev)}>
               <option value="manual">
-                Manual, new members must be approved
+                Manual. Anyone can join, but members must be approved by a facilitator or admin.
               </option>
               <option value="public">
-                Public, no vetting process at all
+                Public. Anyone can join, with no vetting process at all.
               </option>
               <option value="private">
-                Private, direct invite only
+                Private. Invite only. Org no longer appears in search results.
               </option>
             </select>
             <small className="dBl mB3 copyBlack">

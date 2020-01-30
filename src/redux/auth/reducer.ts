@@ -4,7 +4,7 @@ import { LOGOUT_FAILURE, LOGOUT_SUCCESS } from './logout/_types';
 
 const initialState: tThunk<tSession> = {
   error: null,
-  isLoading: false,
+  isLoading: true,
   data: { isAuthenticated: false } as tSession,
 };
 

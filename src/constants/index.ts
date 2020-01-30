@@ -1,4 +1,4 @@
-export const categories: tCategories = [
+export const categories: tCategoryObj[] = [
   {display: 'Religious', slug: 'religious'},
   {display: 'Community Center', slug: 'community-center'},
   {display: 'Cooperative', slug: 'cooperative' },

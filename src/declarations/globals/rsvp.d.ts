@@ -8,7 +8,7 @@ declare type tRSVP = {
 }
 
 declare type tRSVPQuery = {
-  id: number,
+  eventId: number,
   rsvpType: 'public' | 'private',
   value: boolean,
 }

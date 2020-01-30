@@ -1,9 +1,12 @@
+import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
+import {GenericLoader, Helmet} from '../../../../../components';
+import {ErrorBoundary} from '../../../../../containers';
 import {login, patchAccount} from '../../../../../redux';
-import {tContainerProps, tState, tStateUnion} from './_types';
+import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 import {AccountComponent} from './Component';
 
 class AccountContainer extends PureComponent<tContainerProps, tState> {
@@ -11,8 +14,8 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
     super(props);
 
     this.state = {
-      isVerified: props.session.isVerified,
-      login: props.session.login,
+      isVerified: _.get(props, 'sessionThunk.data.isVerified', false),
+      login: _.get(props, 'sessionThunk.data.login', ''),
       newPassword: '',
       password: '',
     };
@@ -20,21 +23,18 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
 
   save = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {id} = this.props.session;
+    const {loginDispatch, patchAccountDispatch, sessionThunk} = this.props;
 
-    let newAccount;
     try {
-      newAccount = await this.props.patchAccount({id, ...this.state});
+      const id = _.get(sessionThunk, 'data.id', null);
+      await patchAccountDispatch({...this.state, id});
     } catch (err) {
       return loglevel.error(err);
     }
 
-    // TODO trigger error boundary or something
-    if (!newAccount.payload) return;
-
-    const {login, newPassword, password} = this.state;
     try {
-      await this.props.login({
+      const {login, newPassword, password} = this.state;
+      await loginDispatch({
         username: login,
         password: newPassword || password,
       });
@@ -52,24 +52,49 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
+    const {sessionThunk} = this.props;
+
     return (
-      <AccountComponent
-        {...this.state}
-        session={this.props.session}
-        save={this.save}
-        updateState={this.updateState}
-      />
+      <ErrorBoundary status={_.get(sessionThunk, 'error.status', 200)}>
+        <Helmet
+          canonical=""
+          title=""
+          meta={[
+            { name: 'description', content: '' },
+            { name: 'keywords', content: '' },
+            { property: 'og:title', content: '' },
+            { property: 'og:description', content: '' },
+          ]}
+        />
+        <GenericLoader
+          isLoading={sessionThunk.isLoading}
+          render={() => (
+            <AccountComponent
+              {...this.state}
+              session={sessionThunk.data}
+              save={this.save}
+              updateState={this.updateState}
+            />
+          )}
+        />
+      </ErrorBoundary>
     );
   }
 }
 
+const mapStateToProps = (store: tStore) => ({
+  sessionThunk: store.session,
+});
+
 const mapDispatchToProps = (dispatch: Function) => ({
-  login: (query: tLoginQuery) => dispatch(login(query)),
-  patchAccount: (query: {id: number} & tState) => dispatch(patchAccount(query)),
+  loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
+
+  patchAccountDispatch: (query: {id: number} & tState) =>
+    dispatch(patchAccount(query)),
 });
 
 const Account = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(AccountContainer);
 

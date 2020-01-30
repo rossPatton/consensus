@@ -1,16 +1,18 @@
+import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
+import {GenericLoader, Helmet} from '../../../../../components';
+import {ErrorBoundary} from '../../../../../containers';
 import {login, patchUser} from '../../../../../redux';
-import {tContainerProps, tState, tStateUnion} from './_types';
+import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 import {ProfileComponent} from './Component';
 
 const initialState = {
   bio: '',
   email: '',
   name: '',
-  newPassword: '',
   password: '',
   privateEmail: true,
   privateMemberships: false,
@@ -23,49 +25,53 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
 
-    const user = props.session.profile as tUser;
+    const {createdAt, updatedAt, ...user}: tUser =
+      _.get(props, 'sessionThunk.data.profile', null);
 
-    this.state = {
-      ...initialState,
-      bio: user.bio,
-      email: user.email,
-      name: user.name,
-      newPassword: '',
-      password: '',
-      privateEmail: user.privateEmail,
-      privateMemberships: user.privateMemberships,
-      privateName: user.privateName,
-      privateRSVP: user.privateRSVP,
-      username: user.username,
-    };
+    if (user) {
+      this.state = {
+        ...initialState,
+        ...user,
+      };
+    } else {
+      this.state = initialState;
+    }
+
+    // this.state = {
+    //   ...initialState,
+    //   bio: user.bio,
+    //   email: user.email,
+    //   name: user.name,
+    //   password: '',
+    //   privateEmail: user.privateEmail,
+    //   privateMemberships: user.privateMemberships,
+    //   privateName: user.privateName,
+    //   privateRSVP: user.privateRSVP,
+    //   username: user.username,
+    // };
   }
-
-  // componentDidMount() {
-  //   // we do this so we only disable form submit when js is available
-  //   this.setState({
-  //     isClient: true,
-  //   });
-  // }
 
   save = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {login, profile} = this.props.session;
-    const {newPassword, password} = this.state;
+    const {loginDispatch, patchUserDispatch, sessionThunk} = this.props;
+    const {login, profile} = sessionThunk.data;
 
-    let newUser;
-    try {
-      newUser = await this.props.patchUser({id: profile.id, ...this.state});
-    } catch (err) {
-      return loglevel.error(err);
+    if (profile.id) {
+      try {
+        await patchUserDispatch({
+          ...this.state,
+          id: profile.id,
+        });
+      } catch (err) {
+        return loglevel.error(err);
+      }
     }
 
-    // TODO trigger error boundary or something
-    if (!newUser.payload) return;
-
+    // update current session to reflect new settings
     try {
-      await this.props.login({
+      await loginDispatch({
         username: login,
-        password: newPassword || password,
+        password: this.state.password,
       });
     } catch (err) {
       loglevel.error(err);
@@ -86,24 +92,47 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
+    const {sessionThunk} = this.props;
+
     return (
-      <ProfileComponent
-        {...this.state}
-        session={this.props.session}
-        save={this.save}
-        updateState={this.updateState}
-      />
+      <ErrorBoundary status={_.get(sessionThunk, 'error.status', 200)}>
+        <Helmet
+          canonical=""
+          title=""
+          meta={[
+            { name: 'description', content: '' },
+            { name: 'keywords', content: '' },
+            { property: 'og:title', content: '' },
+            { property: 'og:description', content: '' },
+          ]}
+        />
+        <GenericLoader
+          isLoading={sessionThunk.isLoading}
+          render={() => (
+            <ProfileComponent
+              {...this.state}
+              session={sessionThunk.data}
+              save={this.save}
+              updateState={this.updateState}
+            />
+          )}
+        />
+      </ErrorBoundary>
     );
   }
 }
 
+const mapStateToProps = (store: tStore) => ({
+  sessionThunk: store.session,
+});
+
 const mapDispatchToProps = (dispatch: Function) => ({
-  login: (query: tLoginQuery) => dispatch(login(query)),
-  patchUser: (user: Partial<tUser>) => dispatch(patchUser(user)),
+  loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
+  patchUserDispatch: (user: Partial<tUser>) => dispatch(patchUser(user)),
 });
 
 const Profile = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(ProfileContainer);
 

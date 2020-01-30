@@ -50,25 +50,19 @@ export const UserAdminComponent = memo((props: tProps) => {
       </aside>
       <div className="col">
         {isAccount && (
-          <Account
-            session={props.session}
-          />
+          <Account />
         )}
         {isEvents && (
           <Events
             match={props.match}
-            session={props.session}
           />
         )}
         {isProfile && (
-          <Profile
-            session={props.session}
-          />
+          <Profile />
         )}
         {isMemberships && (
           <Memberships
             match={props.match}
-            session={props.session}
           />
         )}
       </div>

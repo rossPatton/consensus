@@ -29,7 +29,9 @@ exports.up = async (knex: Knex) => {
 
     // relation the account has to the org
     // 'admin' || 'member' || 'facilitator'
-    table.string('role').notNullable().defaultTo('member');
+    table.enum('role', ['admin', 'member', 'facilitator'])
+      .notNullable()
+      .defaultTo('member');
   });
 };
 

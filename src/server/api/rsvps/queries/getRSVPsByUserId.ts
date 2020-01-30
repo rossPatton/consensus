@@ -8,7 +8,7 @@ export const getRSVPsByUserId = async (
   ctx: Koa.ParameterizedContext,
   userId: number = 0): Promise<tRSVP[]> => {
 
-  let rsvps: tRSVP[];
+  let rsvps: tRSVP[] = [];
   try {
     rsvps = await knex('users_events').where({userId});
   } catch (err) {

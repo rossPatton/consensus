@@ -8,7 +8,7 @@ export type tComponentProps = {
 };
 
 export type tContainerProps = tComponentProps & {
-  getEvents: (query: tGetEventQuery) => tThunkPayload<tEvent[]>,
+  getEventsDispatch: (query: tGetEventQuery) => tThunkPayload<tEvent[]>,
   isLoading: boolean,
   session: tSession,
 };

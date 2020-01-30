@@ -8,26 +8,30 @@ export type tSetRsvpOpts = {
 }
 
 export type tState = {
-  rsvp: boolean,
+  hasRSVPed: boolean,
+  initialRSVP: boolean,
+  method: 'PATCH' | 'POST',
+  rsvp?: tRSVP,
 };
 
 type tProps = {
+  event: tEvent,
   role?: tRole,
   session: tSession,
 }
 
 export type tContainerProps = RouteComponentProps<any> & tProps & {
-  event: tEvent,
   history: History,
-  // redux thunk
+  patchRsvpDispatch: (query: tRSVPQuery) => tThunkPayload<tRSVP>,
   postRsvpDispatch: (query: tRSVPQuery) => tThunkPayload<tRSVP>,
+  rsvp?: tRSVP,
 }
 
 export type tComponentProps = tProps & {
-  id: number,
-  rsvp: boolean,
-  // class method passed down to component that calls the redux thunk
-  postRsvp: (opts: tSetRsvpOpts) => void,
+  hasRSVPed: boolean,
+  initialRSVP: boolean,
+  rsvp?: tRSVP,
+  setRsvp: (opts: tSetRsvpOpts) => void,
 }
 
 export type tStore = {

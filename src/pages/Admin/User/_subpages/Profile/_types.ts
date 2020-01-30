@@ -2,7 +2,6 @@ export type tState = {
   bio: string,
   email: string,
   name: string,
-  newPassword: string,
   password: string,
   privateEmail: boolean,
   privateMemberships: boolean,
@@ -13,16 +12,19 @@ export type tState = {
 
 export type tStateUnion = keyof tState;
 
-export interface tContainerProps {
-  login: (login: tLoginQuery) => tThunkPayload<tSession>,
-  session: tSession,
-  // we get id from the active session
-  patchUser: (user: tState & {id: number}) => tThunkPayload<tUser>,
+export type tStore = {
+  session: tThunk<tSession>
+};
+
+export type tContainerProps = {
+  loginDispatch: (login: tLoginQuery) => tThunkPayload<tSession>,
+  patchUserDispatch: (user: tPatchUserQuery) => tThunkPayload<tUser>,
+  sessionThunk: tThunk<tSession>,
 }
 
-export interface tComponentProps extends tState {
-  session: tSession,
+export type tComponentProps = tState & {
   save: (ev: React.FormEvent<HTMLFormElement>) => void,
+  session: tSession,
   updateState: (
     key: tStateUnion,
     ev: React.MouseEvent<HTMLDivElement>

@@ -3,7 +3,14 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import {knex} from '../../db/connection';
-import {encrypt, isValidPw, saltedHash} from '../../utils';
+import {
+  encrypt,
+  filterUserInfoFromClient,
+  isValidPw,
+  saltedHash,
+  validateSchema,
+} from '../../utils';
+import {userKeys} from './_constants';
 import {getSchema, patchSchema, postSchema} from './_schema';
 import {tUserPatchServerQuery, tUserPostServerQuery} from './_types';
 
@@ -11,35 +18,24 @@ export const user = new Router();
 const route = '/api/v1/user';
 const dataPath = 'state.locals.data';
 const table = 'users';
-const errorPath = 'details[0].message';
-const errorMsg = 'Bad Request';
 
 user.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, dataPath, {});
+  await validateSchema<tIdQuery>(ctx, getSchema, query);
 
-  try {
-    await getSchema.validateAsync<{id: number}>(query);
-  } catch (err) {
-    const message = _.get(err, errorPath, errorMsg);
-    return ctx.throw(400, message);
-  }
-
-  ctx.body = await knex('users')
+  const user: tUser = await knex('users')
     .limit(1)
     .where({id: query.id})
     .first();
+
+  const cleanedUser = await filterUserInfoFromClient([user]);
+  ctx.body = cleanedUser[0];
 });
 
 // user signup form basically
 user.post(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tUserPostServerQuery = _.get(ctx, dataPath, {});
-
-  try {
-    await postSchema.validateAsync<tUserPostServerQuery>(query);
-  } catch (err) {
-    const message = _.get(err, errorPath, errorMsg);
-    return ctx.throw(400, message);
-  }
+  await validateSchema<tUserPostServerQuery>(ctx, postSchema, query);
 
   const pwInput = query.password;
   let hashedPW: string = '';
@@ -88,26 +84,18 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
 
 // TODO no-js forms only do GET/POST - figure out how to make patches work w/o js
 user.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tUserPatchServerQuery = _.get(ctx, dataPath, {});
+  const {isFormSubmit, ...query}: tUserPatchServerQuery = _.get(ctx, dataPath, {});
   const account = _.get(ctx, 'state.user', {});
 
-  try {
-    await patchSchema.validateAsync<tUserPatchServerQuery>(query);
-  } catch (err) {
-    const message = _.get(err, errorPath, errorMsg);
-    return ctx.throw(400, message);
-  }
+  await validateSchema<tUserPatchServerQuery>(ctx, patchSchema, query);
 
   const isValidPW = await isValidPw(query.password, account.password);
-  if (!isValidPW) return ctx.throw(400, 'Password is not correct');
-
-  if (query.newPassword) {
-    const safePW = await saltedHash(query.newPassword);
-    query.password = encrypt(safePW);
+  if (!isValidPW) {
+    return ctx.throw(400, 'Password is not correct');
   }
 
   // password stuff will cause a constraint error - pull out before updating
-  const {isFormSubmit, newPassword, password, ...updateQuery} = query;
+  const {password, ...updateQuery} = query;
 
   let updatedUser: tUser[] = [];
   try {
@@ -115,7 +103,7 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
       .limit(1)
       .where({id: query.id})
       .update(updateQuery)
-      .returning('*');
+      .returning(userKeys);
   } catch (err) {
     return ctx.throw(400, err);
   }

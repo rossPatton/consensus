@@ -16,6 +16,8 @@ exports.up = async (knex: Knex) => {
 
     table.string('orgName').notNullable();
 
+    // if private, the event is not visible to non group members
+    // if public, the event is visible to anyone
     table.boolean('isPrivate').defaultTo(false);
     table.boolean('isDraft').notNullable().defaultTo(true);
 

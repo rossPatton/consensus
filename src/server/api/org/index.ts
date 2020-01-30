@@ -3,6 +3,7 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import {knex} from '../../db/connection';
+import {validateSchema} from '../../utils';
 import {orgKeys} from './_constants';
 import {schema} from './_schema';
 
@@ -13,13 +14,7 @@ const table = 'orgs';
 
 org.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tGetOrgQuery = _.get(ctx, dataPath, {});
-
-  try {
-    await schema.validateAsync<tGetOrgQuery>(query);
-  } catch (err) {
-    const message = _.get(err, 'details[0].message', 'Bad Request');
-    return ctx.throw(400, message);
-  }
+  await validateSchema<tGetOrgQuery>(ctx, schema, query);
 
   let org = {} as tOrg;
   try {
@@ -34,7 +29,6 @@ org.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   ctx.body = org;
 });
-
 
 org.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...newOrg} = _.get(ctx, dataPath, {});
@@ -52,7 +46,6 @@ org.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
   ctx.body = updatedOrg;
 });
-
 
 org.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...org} = _.get(ctx, dataPath, {});

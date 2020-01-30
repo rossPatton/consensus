@@ -145,17 +145,17 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
       <h2 className="ffLab fs5 mB1 lh1">
         Membership Vetting Process
       </h2>
-      <label htmlFor="gateSelect" className="mB3">
+      <label htmlFor="vettingSelect" className="mB3">
         <p className="fs5 copyBlack mB1">
           Is anyone free to join your org, or do you want to be able to vet membership?
         </p>
         <select
-          name="gate"
-          id="gateSelect"
+          name="vetting"
+          id="vettingSelect"
           className="row"
-          value={props.gate}
-          onBlur={ev => props.updateState('gate', ev)}
-          onChange={ev => props.updateState('gate', ev)}>
+          value={props.vetting}
+          onBlur={ev => props.updateState('vetting', ev)}
+          onChange={ev => props.updateState('vetting', ev)}>
           <option value="manual">
             Manual, new members must be approved
           </option>
@@ -163,7 +163,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
             Public, no vetting process at all
           </option>
           <option value="private">
-            Private, invite only
+            Private, private only
           </option>
         </select>
       </label>

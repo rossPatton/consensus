@@ -15,10 +15,10 @@ declare type tCategoryMap = {
   readonly [key: string]: tCategory,
 };
 
-declare type tCategories = {
+declare type tCategoryObj = {
   readonly display: tCategory,
   readonly slug: tCategorySlug,
-}[];
+};
 
 declare type tCategoryParams = tPaginateParams & {
   readonly category: tCategorySlug,

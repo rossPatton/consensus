@@ -16,7 +16,7 @@ class OverviewContainer extends PureComponent<tContainerProps> {
     const isLoggedIn = props.session.isAuthenticated;
 
     if (props.org.id !== 0) {
-      props.getEvents({
+      props.getEventsDispatch({
         orgId: props.org.id,
         showPast: false,
         isPublic: !isLoggedIn,
@@ -27,7 +27,7 @@ class OverviewContainer extends PureComponent<tContainerProps> {
 
   render() {
     return (
-      <ErrorBoundary status={_.get(this.props.events, 'error.status', 200)}>
+      <ErrorBoundary status={_.get(this.props, 'events.error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -60,7 +60,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getEvents: (query: tGetEventQuery) => dispatch(getEventsByOrgId(query)),
+  getEventsDispatch: (query: tGetEventQuery) => dispatch(getEventsByOrgId(query)),
 });
 
 const Overview = connect(

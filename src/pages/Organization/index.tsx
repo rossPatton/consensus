@@ -13,11 +13,14 @@ import {OrganizationComponent} from './Component';
 class OrganizationContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
+    // TODO double check re-routes and security
+    // we're not redirecting after updating profile on client to private
+    // also only make roles/rsvps fetch if authenticated
     const {id} = props.match.params;
-    props.getOrg({id: parseInt(id, 10)})
+    props.getOrgDispatch({id: parseInt(id, 10)})
       .then(() => {
-        props.getRoles();
-        return props.getRsvps();
+        props.getRolesDispatch();
+        return props.getRsvpsDispatch();
       })
       .catch(loglevel.error);
   }
@@ -39,7 +42,7 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
               { property: 'og:title', content: '' },
               { property: 'og:description', content: '' },
             ];
-            if (org.gate === 'invite') {
+            if (org.vetting === 'private') {
               meta = [...meta, {
                 name: 'robots',
                 content: 'noindex',
@@ -55,7 +58,7 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
               role = 'admin';
             }
 
-            const isHidden = org.gate === 'invite' && !role;
+            const isHidden = org.vetting === 'private' && !role;
 
             return isHidden
               ? (
@@ -92,9 +95,9 @@ const mapStateToProps = (store: tStore) => ({
 
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getOrg: (query: tGetOrgQuery) => dispatch(getOrg(query)),
-  getRoles: () => dispatch(getRoles()),
-  getRsvps: () => dispatch(getRsvps()),
+  getOrgDispatch: (query: tGetOrgQuery) => dispatch(getOrg(query)),
+  getRolesDispatch: () => dispatch(getRoles()),
+  getRsvpsDispatch: () => dispatch(getRsvps()),
 });
 
 const Organization = connect(

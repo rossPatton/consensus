@@ -13,5 +13,5 @@ export type tAdminSections = match & {
 
 export type tProps = {
   match: tAdminSections,
-  session: tSession,
+  sessionThunk: tThunk<tSession>,
 };

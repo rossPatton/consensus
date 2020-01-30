@@ -6,7 +6,7 @@ import {Redirect} from 'react-router';
 
 import {GenericLoader, Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
-import {getEvent, getEventsByOrgId} from '../../redux';
+import {getEvent, getEventsByOrgId, getRsvps} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {EventComponent} from './Component';
 
@@ -16,10 +16,13 @@ class EventContainer extends PureComponent<tContainerProps> {
     const {match: {params}} = props;
     props.getEventDispatch({id: params.id})
       .then((res: tActionPayload<tEvent>) => {
-        return this.props.getEventsByOrgIdDispatch({
+        this.props.getRsvpsDispatch();
+        this.props.getEventsByOrgIdDispatch({
           exclude: params.id,
           orgId: res.payload.orgId,
         });
+
+        return res;
       })
       .catch(loglevel.error);
   }
@@ -83,6 +86,7 @@ class EventContainer extends PureComponent<tContainerProps> {
                     event={event.data}
                     eventsByOrgId={this.props.eventsByOrgId}
                     match={this.props.match}
+                    rsvps={this.props.rsvps}
                   />
                 )}
             </>
@@ -94,17 +98,19 @@ class EventContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.event.isLoading,
+  isLoading: store.event.isLoading || store.rsvps.isLoading,
   event: store.event,
   eventsByOrgId: store.eventsByOrgId.data,
+  rsvps: store.rsvps.data,
   session: store.session.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getEventDispatch: (query: tGetEventQuery) =>
+  getEventDispatch: (query: tIdQuery) =>
     dispatch(getEvent(query)),
   getEventsByOrgIdDispatch: (query: tGetEventQuery) =>
     dispatch(getEventsByOrgId(query)),
+  getRsvpsDispatch: () => dispatch(getRsvps()),
 });
 
 const Event = connect(mapStateToProps, mapDispatchToProps)(EventContainer);

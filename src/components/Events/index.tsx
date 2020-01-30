@@ -3,13 +3,18 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Paginate} from '../../containers';
-import {deleteEvent} from '../../redux';
-import {tContainerProps} from './_types';
+import {deleteEvent, getRsvps} from '../../redux';
+import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
-// TODO completely decouple this container from the other events pages etc
-// this should be where the redux gets connected
-// (probably - rn we have events rendering all over the place)
+
 class EventsContainer extends PureComponent<tContainerProps> {
+  constructor(props: tContainerProps) {
+    super(props);
+    if (props.session.isAuthenticated && props.session.type === 'user') {
+      this.props.getRsvpsDispatch();
+    }
+  }
+
   deleteEvent = (ev: React.MouseEvent, id: number) => {
     ev.preventDefault();
     this.props.deleteEventDispatch({id});
@@ -29,6 +34,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
             events={events}
             isEditable={isEditable}
             role={role}
+            rsvps={this.props.rsvps}
             tiny={this.props.tiny}
           />
         )}
@@ -37,9 +43,15 @@ class EventsContainer extends PureComponent<tContainerProps> {
   }
 }
 
+const mapStateToProps = (store: tStore) => ({
+  rsvps: store.rsvps.data,
+  session: store.session.data,
+});
+
 const mapDispatchToProps = (dispatch: Function) => ({
+  getRsvpsDispatch: () => dispatch(getRsvps()),
   deleteEventDispatch: (query: tIdQuery) => dispatch(deleteEvent(query)),
 });
 
-const Events = connect(null, mapDispatchToProps)(EventsContainer);
+const Events = connect(mapStateToProps, mapDispatchToProps)(EventsContainer);
 export default Events;

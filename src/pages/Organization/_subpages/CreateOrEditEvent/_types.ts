@@ -19,7 +19,7 @@ export type tState = {
 };
 
 export type tStore = {
-  events: tThunk<tEvent[]>,
+  eventsByOrgId: tThunk<tEvent[]>,
   session: tThunk<tSession>,
 };
 

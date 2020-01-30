@@ -10,5 +10,4 @@ export const schema = Joi.object({
 
   createdAt: Joi.date().timestamp(),
   updatedAt: Joi.date().timestamp(),
-  lastActive: Joi.date().timestamp(),
 });

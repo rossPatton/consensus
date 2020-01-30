@@ -1,60 +1,91 @@
+import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {PrivacyFilter, PublishedFilter, SearchFilter} from '../../../../../containers';
+import {GenericLoader, Helmet} from '../../../../../components';
+import {
+  ErrorBoundary,
+  PrivacyFilter,
+  PublishedFilter,
+  SearchFilter,
+} from '../../../../../containers';
 import {getEventsByOrgId} from '../../../../../redux';
-import {tContainerProps, tState, tStore} from './_types';
+import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
 
-class EventsContainer extends PureComponent<tContainerProps, tState> {
+class EventsContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
 
-    const {match: {params: {page = 0} = {}}, session} = props;
-    const offset = page ? parseInt(page, 10) : 0;
+    const orgId = _.get(props, 'sessionThunk.data.profile.id', null);
 
-    props.getEvents({
-      orgId: session.profile.id,
-      limit: -1,
-      offset,
-    });
+    if (orgId) {
+      const {match: {params: {page = 0} = {}}} = props;
+      const offset = page ? parseInt(page, 10) : 0;
+
+      props.getEventsByOrgIdDispatch({
+        orgId,
+        limit: -1,
+        offset,
+      });
+    }
   }
 
   render() {
+    const {eventsByOrgIdThunk} = this.props;
+
     return (
-      <PublishedFilter
-        items={this.props.events}
-        render={(publishedProps: any) => (
-          <PrivacyFilter
-            items={publishedProps.items}
-            render={(privacyProps: any) => (
-              <SearchFilter
-                items={privacyProps.items}
-                render={(searchProps: tSearchFilterProps) => (
-                  <EventsComponent
-                    {...publishedProps}
-                    {...privacyProps}
-                    {...searchProps}
-                    events={searchProps.items}
-                    match={this.props.match}
-                  />
-                )}
-              />
-            )}
-          />
-        )}
-      />
+      <ErrorBoundary status={_.get(eventsByOrgIdThunk, 'error.status', 200)}>
+        <Helmet
+          canonical=""
+          title=""
+          meta={[
+            { name: 'description', content: '' },
+            { name: 'keywords', content: '' },
+            { property: 'og:title', content: '' },
+            { property: 'og:description', content: '' },
+          ]}
+        />
+        <GenericLoader
+          isLoading={eventsByOrgIdThunk.isLoading}
+          render={() => (
+            <PublishedFilter
+              items={eventsByOrgIdThunk.data}
+              render={publishedProps => (
+                <PrivacyFilter
+                  items={publishedProps.items}
+                  render={privacyProps => (
+                    <SearchFilter
+                      items={privacyProps.items}
+                      render={searchProps => (
+                        <EventsComponent
+                          {...publishedProps}
+                          {...privacyProps}
+                          {...searchProps}
+                          events={searchProps.items}
+                          match={this.props.match}
+                        />
+                      )}
+                    />
+                  )}
+                />
+              )}
+            />
+          )}
+        />
+      </ErrorBoundary>
     );
   }
 }
 
 const mapStateToProps = (store: tStore) => ({
-  events: store.events.data,
-  isLoading: store.events.isLoading,
+  eventsByOrgIdThunk: store.eventsByOrgId,
+  sessionThunk: store.session,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getEvents: (query: tGetEventQuery) => dispatch(getEventsByOrgId(query)),
+  getEventsByOrgIdDispatch: (query: tGetEventQuery) =>
+    dispatch(getEventsByOrgId(query)),
 });
 
 const Events = connect(

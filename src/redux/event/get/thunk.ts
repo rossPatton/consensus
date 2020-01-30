@@ -2,7 +2,7 @@ import {path} from '../_constants';
 import { api } from '../../../utils';
 import {begin, failure, success} from './actions';
 
-export const getEvent = (query: tGetEventQuery) => {
+export const getEvent = (query: tIdQuery) => {
   return async function (dispatch: Function): Promise<tEvent> {
     dispatch(begin());
 

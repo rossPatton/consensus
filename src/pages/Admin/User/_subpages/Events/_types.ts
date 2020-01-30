@@ -1,23 +1,22 @@
-import {match} from 'react-router-dom';
-
 import {tAdminSections} from '../../../_types';
 
 export type tProps = {
-  eventsByUserId: tEvent[],
   match: tAdminSections,
 };
 
 export type tStore = {
   eventsByUserId: tThunk<tEvent[]>,
+  session: tThunk<tSession>,
 };
 
 export type tComponentProps = tProps & {
+  events: tEvent[],
   onPrivacyFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
 };
 
 export type tContainerProps = tProps & {
-  match: match & {params: tPaginateParams},
-  getEventsByUserId: (query: {userId: number}) => tThunkPayload<tEvent[]>,
-  session: tSession,
+  eventsByUserIdThunk: tThunk<tEvent[]>,
+  getEventsByUserIdDispatch: (query: {userId: number}) => tThunkPayload<tEvent[]>,
+  sessionThunk: tThunk<tSession>,
 };

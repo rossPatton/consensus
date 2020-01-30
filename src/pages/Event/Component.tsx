@@ -1,13 +1,15 @@
 import cx from 'classnames';
 import dayJS from 'dayjs';
+import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {EventPrivacy, Events, ExternalLink, RSVP, RSVPS} from '../../components';
+import {EventPrivacy, Events, ExternalLink, RSVP} from '../../components';
 import {tComponentProps} from './_types';
 
 export const EventComponent = memo((props: tComponentProps) => {
-  const {event, eventsByOrgId, match} = props;
+  const {event, eventsByOrgId, match, rsvps} = props;
+  const rsvp = _.find(rsvps, rsvp => event.id === rsvp.eventId);
 
   return (
     <div className="contain mT4 mB5">
@@ -30,9 +32,8 @@ export const EventComponent = memo((props: tComponentProps) => {
         {event.title}
       </h1>
       <div className="fx aiCtr fs6 fw600 lh1 mB3">
-        <RSVP event={event} />
+        <RSVP event={event} rsvp={rsvp} />
         <EventPrivacy isPrivate={event.isPrivate} />
-        <RSVPS event={event} />
       </div>
       <div className="fx mB3">
         <div className="col row mR4">

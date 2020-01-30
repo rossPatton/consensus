@@ -71,9 +71,9 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
         countryId: country.id,
         regionId: region.id,
       })
-      // exclude invite-only orgs
+      // exclude private-only orgs
       .whereNot({
-        gate: 'invite',
+        vetting: 'private',
       })
       .orderBy('name');
   } catch (err) {

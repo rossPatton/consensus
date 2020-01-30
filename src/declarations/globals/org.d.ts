@@ -1,5 +1,4 @@
-declare type tGate = 'public' | 'manual' | 'invite';
-declare type tEventPrivacy = 'public' | 'private' | 'manual';
+declare type tPrivacyEnum = 'public' | 'manual' | 'private';
 
 declare type tOrg = {
   readonly category: tCategory,
@@ -7,14 +6,16 @@ declare type tOrg = {
   readonly cityId: number,
   readonly country: string,
   readonly countryId: number,
+  readonly createdAt?: Date,
   readonly description: string,
-  readonly eventPrivacy: tEventPrivacy,
-  readonly gate: tGate,
+  readonly eventPrivacy: tPrivacyEnum,
   readonly id: number,
   readonly name: string,
-  readonly slug: string,
   readonly region: string,
   readonly regionId: number,
+  readonly slug: string,
+  readonly updatedAt?: Date,
+  readonly vetting: tPrivacyEnum,
 };
 
 // if posting/patching most values are up for grabs

@@ -21,7 +21,7 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
   togglePast = () =>
     this.setState({
       showPast: !this.state.showPast,
-    });
+    }, this.getEvents);
 
   getEvents = () => {
     const {showPast} = this.state;
@@ -30,10 +30,11 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
     const isPublic = !this.props.session.isAuthenticated;
     const offset = page ? parseInt(page, 10) : 0;
 
-    this.props.getEvents({
+    this.props.getEventsDispatch({
       orgId: org.id,
       isDraft: false,
       isPublic,
+      limit: -1,
       offset,
       showPast,
     });
@@ -84,7 +85,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getEvents: (query: tGetEventQuery) => dispatch(getEventsByOrgId(query)),
+  getEventsDispatch: (query: tGetEventQuery) => dispatch(getEventsByOrgId(query)),
 });
 
 const Events = connect(

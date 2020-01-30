@@ -44,8 +44,8 @@ export const RSVP = loadable(() =>
   import(/* webpackChunkName: "RSVP" */'./RSVP'),
 );
 
-export const RSVPS = loadable(() =>
-  import(/* webpackChunkName: "RSVPS" */'./RSVPS'),
+export const RSVPCount = loadable(() =>
+  import(/* webpackChunkName: "RSVPCount" */'./RSVPCount'),
 );
 
 export const Search = loadable(() =>

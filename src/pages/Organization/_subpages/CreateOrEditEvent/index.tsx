@@ -200,7 +200,7 @@ class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  events: store.events.data,
+  events: store.eventsByOrgId.data,
   session: store.session.data,
 });
 

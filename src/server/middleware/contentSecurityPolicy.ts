@@ -20,7 +20,7 @@ export const contentSecurityPolicyMiddleware = async (app: Koa) => {
           'allow-scripts',
         ],
       },
-      // if something breaks, set this to true to make it easier to investigate
+      // if something breaks, set this to true to make it easier to investivetting
       reportOnly: false,
     };
 

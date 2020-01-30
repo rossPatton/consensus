@@ -10,5 +10,4 @@ export type tUserPostServerQuery = {
 export type tUserPatchServerQuery = Partial<tUser> & {
   isFormSubmit?: boolean,
   password: string,
-  newPassword?: string,
 };
