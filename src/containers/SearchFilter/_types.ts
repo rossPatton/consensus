@@ -1,8 +1,9 @@
-export interface tState {
-  items: any[],
-}
+export type tState = {
+  search: string,
+};
 
-export interface tProps extends tState {
+export type tProps = {
+  items: object[],
   searchKey?: string,
   render: (props: tSearchFilterProps) => React.ReactNode,
-}
+};

@@ -1,9 +1,9 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 
 import {tProps, tState} from './_types';
 
 // for use with events
-export default class RoleFilter extends PureComponent<tProps, tState> {
+export default class RoleFilter extends Component<tProps, tState> {
   state = {
     roleFilter: 'n/a' as tRole,
   };

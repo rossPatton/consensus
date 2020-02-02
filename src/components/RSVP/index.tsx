@@ -1,5 +1,5 @@
 import loglevel from 'loglevel';
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 
@@ -7,7 +7,7 @@ import {patchRsvps, postRsvps} from '../../redux';
 import {tContainerProps, tSetRsvpOpts, tState, tStore} from './_types';
 import {RSVPComponent} from './Component';
 
-class RSVPContainer extends PureComponent<tContainerProps, tState> {
+class RSVPContainer extends Component<tContainerProps, tState> {
   static defaultProps = {
     event: {} as tEvent,
   };

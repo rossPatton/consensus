@@ -1,4 +1,4 @@
-import {tActionUnion} from './_types';
+import { tActionUnion } from './_types';
 import { GET_FAILURE, GET_SUCCESS } from './get/_types';
 
 const initialState: tThunk<tEvent[]> = {

@@ -1,9 +1,9 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 
 import {tProps, tState} from './_types';
 
 // for use with events
-export default class PrivacyFilter extends PureComponent<tProps, tState> {
+export default class PrivacyFilter extends Component<tProps, tState> {
   state = {
     privacyFilter: 'n/a' as tPrivacyFilter,
   };
@@ -24,9 +24,8 @@ export default class PrivacyFilter extends PureComponent<tProps, tState> {
   }
 
   render() {
-    const items = this.filter(this.props.items);
     return this.props.render({
-      items,
+      items: this.filter(this.props.items),
       onPrivacyFilterChange: this.onChange,
       privacyFilter: this.state.privacyFilter,
     });

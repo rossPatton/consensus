@@ -15,7 +15,6 @@ export type tStore = {
 
 export type tContainerProps = tProps & {
   deleteEventDispatch: (query: tIdQuery) => tThunkPayload,
-  getRsvpsDispatch: () => tThunkPayload<tRSVP[]>,
   match: match & {params: tPaginateParams},
   session: tSession,
 };

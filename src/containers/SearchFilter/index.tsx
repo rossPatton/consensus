@@ -5,43 +5,34 @@ import {tProps, tState} from './_types';
 
 export default class SearchFilter extends Component<tProps, tState> {
   static defaultProps = {
-    items: [] as any[],
     searchKey: 'title',
   };
 
   state = {
-    items: [] as any[],
+    search: '',
   };
 
   onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
-
     const search = ev.currentTarget.value;
+    this.setState({search});
+  }
 
-    if (!search) {
-      return this.setState({
-        items: this.props.items,
-      });
-    }
+  filterItems = () => {
+    const {search} = this.state;
 
-    const filteredList = fuzzFilterList({
+    if (!search) return this.props.items;
+
+    return fuzzFilterList({
       input: this.props.items || [],
       key: this.props.searchKey,
       search,
     });
-
-    this.setState({
-      items: filteredList,
-    });
   }
 
   render() {
-    const items = this.state.items.length > 0
-      ? this.state.items
-      : this.props.items;
-
     return this.props.render({
-      items,
+      items: this.filterItems(),
       onSearchChange: this.onChange,
     });
   }

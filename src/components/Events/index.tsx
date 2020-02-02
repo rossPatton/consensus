@@ -3,18 +3,11 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Paginate} from '../../containers';
-import {deleteEvent, getRsvps} from '../../redux';
+import {deleteEvent} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
 
 class EventsContainer extends PureComponent<tContainerProps> {
-  constructor(props: tContainerProps) {
-    super(props);
-    if (props.session.isAuthenticated && props.session.type === 'user') {
-      this.props.getRsvpsDispatch();
-    }
-  }
-
   deleteEvent = (ev: React.MouseEvent, id: number) => {
     ev.preventDefault();
     this.props.deleteEventDispatch({id});
@@ -49,7 +42,6 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getRsvpsDispatch: () => dispatch(getRsvps()),
   deleteEventDispatch: (query: tIdQuery) => dispatch(deleteEvent(query)),
 });
 
