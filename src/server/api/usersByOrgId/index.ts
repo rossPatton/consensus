@@ -9,8 +9,8 @@ import {getUsersByOrgId} from './_queries';
 import {deleteSchema, getSchema, patchSchema, postSchema} from './_schema';
 import {tUserByOrgQuery} from './_types';
 
-export const usersByOrg = new Router();
-const route = '/api/v1/usersByOrg';
+export const usersByOrgId = new Router();
+const route = '/api/v1/usersByOrgId';
 const table = 'accounts_roles';
 const dataPath = 'state.locals.data';
 
@@ -18,7 +18,7 @@ const dataPath = 'state.locals.data';
 // not for signing up new users, but for getting users that are members of an org
 // or joining an org, or updating member roles within an org
 
-usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
+usersByOrgId.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tUsersByOrgIdQuery = _.get(ctx, dataPath, {});
 
   await validateSchema<tUsersByOrgIdQuery>(ctx, getSchema, query);
@@ -31,7 +31,7 @@ usersByOrg.get(route, async (ctx: Koa.ParameterizedContext) => {
 
 // joining an org. uses session data since we don't want people to be able to
 // add others to an org, only the logged-in user should be able to do that
-usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
+usersByOrgId.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {orgId}: tUserByOrgQuery = _.get(ctx, dataPath, {});
   const {userId} = _.get(ctx, 'state.user', {});
 
@@ -61,7 +61,7 @@ usersByOrg.post(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 
-usersByOrg.patch(route, async (ctx: Koa.ParameterizedContext) => {
+usersByOrgId.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tPatchUserRoleQuery = _.get(ctx, dataPath, {});
   const {orgId, role, userId} = query;
 
@@ -81,8 +81,7 @@ usersByOrg.patch(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = updatedAccountRoleRel[0];
 });
 
-
-usersByOrg.delete(route, async (ctx: Koa.ParameterizedContext) => {
+usersByOrgId.delete(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tUserByOrgQuery = _.get(ctx, dataPath, {});
 
   await validateSchema<tUserByOrgQuery>(ctx, deleteSchema, query);

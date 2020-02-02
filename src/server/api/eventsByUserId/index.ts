@@ -9,11 +9,11 @@ import {validateSchema, zipEventsWithAttendees} from '../../utils';
 import {schema} from './_schema';
 import {tEventsByUserServerQuery} from './_types';
 
-export const eventsByUser = new Router();
+export const eventsByUserId = new Router();
 const dataPath = 'state.locals.data';
-const route = '/api/v1/eventsByUser';
+const route = '/api/v1/eventsByUserId';
 
-eventsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
+eventsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tEventsByUserServerQuery = _.get(ctx, dataPath, {});
   await validateSchema(ctx, schema, query);
 
