@@ -27,7 +27,6 @@ class EventsContainer extends PureComponent<tContainerProps> {
             events={events}
             isEditable={isEditable}
             role={role}
-            rsvps={this.props.rsvps}
             tiny={this.props.tiny}
           />
         )}
@@ -37,7 +36,6 @@ class EventsContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  rsvps: store.rsvps.data,
   session: store.session.data,
 });
 

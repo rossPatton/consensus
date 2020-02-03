@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import loglevel from 'loglevel';
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 
@@ -10,9 +10,10 @@ import {getEvent, getEventsByOrgId, getRsvps} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {EventComponent} from './Component';
 
-class EventContainer extends Component<tContainerProps> {
+class EventContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
+    this.props.getRsvpsDispatch();
     this.dispatch();
   }
 
@@ -27,8 +28,6 @@ class EventContainer extends Component<tContainerProps> {
 
     this.props.getEventDispatch({id})
       .then((res: tActionPayload<tEvent>) => {
-        this.props.getRsvpsDispatch();
-
         return this.props.getEventsByOrgIdDispatch({
           exclude: id,
           orgId: res.payload.orgId,

@@ -32,7 +32,7 @@ export const EventComponent = memo((props: tComponentProps) => {
         {event.title}
       </h1>
       <div className="fx aiCtr fs6 fw600 lh1 mB3">
-        <RSVP event={event} rsvp={rsvp} />
+        <RSVP event={event} />
         <EventPrivacy isPrivate={event.isPrivate} />
       </div>
       <div className="fx mB3">

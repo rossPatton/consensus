@@ -3,13 +3,11 @@ import {match} from 'react-router';
 type tProps = {
   events: tEvent[],
   role?: tRole,
-  rsvps: tRSVP[],
   // render mobile/sidebar version
   tiny?: boolean,
 };
 
 export type tStore = {
-  rsvps: tThunk<tRSVP[]>,
   session: tThunk<tSession>,
 };
 

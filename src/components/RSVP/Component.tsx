@@ -1,9 +1,10 @@
-import React, { memo } from 'react';
+import _ from 'lodash';
+import React from 'react';
 
 import {RSVPCount} from '..';
 import {tComponentProps} from './_types';
 
-export const RSVPComponent = memo((props: tComponentProps) => {
+export const RSVPComponent = (props: tComponentProps) => {
   const {event, hasRSVPed, session, setRsvp} = props;
   const {id: eventId} = event;
   const {profile = {}} = session;
@@ -57,4 +58,4 @@ export const RSVPComponent = memo((props: tComponentProps) => {
       />
     </>
   );
-});
+};

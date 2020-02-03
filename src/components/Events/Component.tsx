@@ -10,13 +10,12 @@ import {tComponentProps} from './_types';
 
 export const EventsComponent = memo((props: tComponentProps) => (
   <ul>
-    {props.events.map((ev, i) => {
+    {props.events.map(ev => {
       const isPastEvent = dayJS(ev.date).isBefore(dayJS());
-      const rsvp = _.find(props.rsvps, rsvp => ev.id === rsvp.eventId);
 
       return (
         <li
-          key={i}
+          key={ev.id}
           className="brdA1 br8 mB3">
           {!isPastEvent && props.isEditable && (
             <div
@@ -100,7 +99,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   o5: isPastEvent,
                 })}>
                 <EventPrivacy isPrivate={ev.isPrivate} />
-                <RSVP event={ev} role={props.role} rsvp={rsvp} />
+                <RSVP event={ev} />
               </div>
             </div>
           </div>
