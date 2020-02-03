@@ -16,6 +16,8 @@ export const api = async (opts: tApiOpts) => {
     endpoint = `${path}?${qs}`;
   }
 
+  if (opts.init) opts.dispatch(opts.init());
+
   let status = 200;
   return fetch(endpoint, fetchOpts)
     .then((resp: tFetchResponse) => {

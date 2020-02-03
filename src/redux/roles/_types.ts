@@ -1,5 +1,6 @@
 import {
   tFailureAction as tGetFailureAction,
+  tInitAction as tGetInitAction,
   tSuccessAction as tGetSuccessAction,
 } from './get/_types';
 import {
@@ -7,7 +8,8 @@ import {
   tSuccessAction as tPostSuccessAction,
 } from './post/_types';
 
-export type tRolesActionUnion = tGetFailureAction
+export type tRolesActionUnion = tGetInitAction
+  | tGetFailureAction
   | tGetSuccessAction
   | tPostFailureAction
   | tPostSuccessAction;

@@ -13,12 +13,13 @@ export type tComponentProps = tProps & {
 }
 
 export type tContainerProps = tProps & {
-  getOrgDispatch: (params: tGetOrgQuery) => tThunkPayload<tOrg>,
+  getOrgDispatch: (query: tIdQuery) => tThunkPayload<tOrg>,
   getRolesDispatch: () => tThunkPayload<tRoleMap[]>,
   getRsvpsDispatch: () => tThunkPayload<tRSVP[]>,
   isLoading: boolean,
   org: tThunk<tOrg>,
-  roles: tRoleMap[],
+  rolesThunk: tThunk<tRoleMap[]>,
+  rsvpsThunk: tThunk<tRSVP[]>,
   session: tSession,
 };
 
@@ -26,5 +27,6 @@ export type tStore = {
   events: tThunk<tEvent[]>,
   org: tThunk<tOrg>,
   roles: tThunk<tRoleMap[]>,
+  rsvps: tThunk<tRSVP[]>,
   session: tThunk<tSession>,
 };

@@ -1,7 +1,3 @@
-export type tProps = {
-  login: (query: tLoginQuery) => tThunkPayload<tAccount>,
-};
-
 export type tState = {
   isClient: boolean,
   password: string,
@@ -14,8 +10,8 @@ export type tStore = {
   session: tThunk<tSession>,
 };
 
-export type tContainerProps = tStore & tProps & {
-  getRoles: () => tThunkPayload<tRole[]>,
+export type tContainerProps = tStore & {
+  loginDispatch: (query: tLoginQuery) => tThunkPayload<tAccount>,
 }
 
 export type tComponentProps = tState & {

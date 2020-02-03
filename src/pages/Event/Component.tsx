@@ -8,8 +8,7 @@ import {EventPrivacy, Events, ExternalLink, RSVP} from '../../components';
 import {tComponentProps} from './_types';
 
 export const EventComponent = memo((props: tComponentProps) => {
-  const {event, eventsByOrgId, match, rsvps} = props;
-  const rsvp = _.find(rsvps, rsvp => event.id === rsvp.eventId);
+  const {event, eventsByOrgId, match} = props;
 
   return (
     <div className="contain mT4 mB5">

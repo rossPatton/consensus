@@ -1,9 +1,10 @@
 import { tRolesActionUnion } from './_types';
-import { GET_FAILURE, GET_SUCCESS } from './get/_types';
+import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 import { POST_FAILURE, POST_SUCCESS } from './post/_types';
 
 const initialState: tThunk<tRoleMap[]> = {
   error: null,
+  fetched: false,
   isLoading: true,
   data: [],
 };
@@ -19,9 +20,16 @@ export const rolesReducer = (state = initialState, action: tRolesActionUnion) =>
     ...state,
     data: action.payload,
     isLoading: false,
+    fetched: true,
   };
 
   switch (action.type) {
+  case GET_INIT:
+    return {
+      ...state,
+      isLoading: true,
+    };
+
   case GET_FAILURE:
     return failureReturn;
 

@@ -1,5 +1,5 @@
 import { tActionUnion } from './_types';
-import { GET_FAILURE, GET_SUCCESS } from './get/_types';
+import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 import { PATCH_FAILURE, PATCH_SUCCESS } from './patch/_types';
 import { POST_FAILURE, POST_SUCCESS } from './post/_types';
 
@@ -23,6 +23,12 @@ export const eventReducer = (state = initialState, action: tActionUnion) => {
   };
 
   switch (action.type) {
+  case GET_INIT:
+    return {
+      ...state,
+      isLoading: true,
+    };
+
   case GET_FAILURE:
     return failureReturn;
 

@@ -9,8 +9,9 @@ import {UserAdminComponent} from './Component';
 class UserAdminContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    props.getRolesDispatch();
-    props.getRsvpsDispatch();
+    if (!props.session.isAuthenticated) return;
+    if (!props.rolesThunk.fetched) props.getRolesDispatch();
+    if (!props.rsvpsThunk.fetched) props.getRsvpsDispatch();
   }
 
   render() {
@@ -29,6 +30,9 @@ class UserAdminContainer extends PureComponent<tContainerProps> {
 
 const mapStateToProps = (store: tStore) => ({
   isLoading: store.roles.isLoading || store.rsvps.isLoading,
+  rolesThunk: store.roles,
+  rsvpsThunk: store.rsvps,
+  session: store.session.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

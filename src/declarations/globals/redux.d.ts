@@ -1,7 +1,8 @@
 declare type tThunk<D> = {
-  readonly data: D,
-  readonly error: tResponseError | null,
-  readonly isLoading?: boolean,
+  readonly data: D, // response from server, or initial state
+  readonly fetched?: boolean, // has fetched this endpoint at any point
+  readonly error: tResponseError | null, // fetch failed for some reason
+  readonly isLoading?: boolean, // fetch is currently in progress
 };
 
 declare type tAction<T, P = undefined> = {

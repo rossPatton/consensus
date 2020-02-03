@@ -11,13 +11,14 @@ declare type tIdQuery = tBaseQuery & {
 }
 
 declare type tApiOpts = {
-  dispatch: Function,
-  credentials?: boolean,
-  failure: Function,
-  method?: 'DELETE' | 'GET' | 'PATCH' | 'POST',
-  path: string,
-  success: (json: any) => any,
-  query?: any,
+  readonly dispatch: Function,
+  readonly credentials?: boolean,
+  readonly failure: Function,
+  readonly init?: Function,
+  readonly method?: 'DELETE' | 'GET' | 'PATCH' | 'POST',
+  readonly path: string,
+  readonly success: (json: any) => any,
+  readonly query?: any,
 }
 
 declare type tResponseError = {

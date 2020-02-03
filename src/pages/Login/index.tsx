@@ -6,7 +6,7 @@ import {Redirect} from 'react-router';
 
 import {Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
-import {getRoles, login} from '../../redux';
+import {login} from '../../redux';
 import {canonical, description, keywords, title} from './_constants';
 import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 import {LoginComponent} from './Component';
@@ -29,11 +29,7 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
     ev.preventDefault();
     const {username, password} = this.state;
     return this.props
-      .login({username, password})
-      .then(res => {
-        if (res.payload.orgId) return null;
-        return this.props.getRoles();
-      })
+      .loginDispatch({username, password})
       .catch(loglevel.error);
   }
 
@@ -78,8 +74,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  login: (query: tLoginQuery) => dispatch(login(query)),
-  getRoles: () => dispatch(getRoles()),
+  loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
 });
 
 const Login = connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
@@ -13,20 +12,17 @@ import {OrganizationComponent} from './Component';
 class OrganizationContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    // TODO double check re-routes and security
-    // we're not redirecting after updating profile on client to private
-    // also only make roles/rsvps fetch if authenticated
     const {id} = props.match.params;
-    props.getOrgDispatch({id: parseInt(id, 10)})
-      .then(() => {
-        props.getRolesDispatch();
-        return props.getRsvpsDispatch();
-      })
-      .catch(loglevel.error);
+
+    props.getOrgDispatch({id});
+
+    if (!props.session.isAuthenticated) return;
+    if (!props.rolesThunk.fetched) props.getRolesDispatch();
+    if (!props.rsvpsThunk.fetched) props.getRsvpsDispatch();
   }
 
   render() {
-    const {isLoading, location, match, roles, session} = this.props;
+    const {isLoading, location, match, rolesThunk, session} = this.props;
 
     return (
       <ErrorBoundary status={_.get(this.props.org, 'error.status', 200)}>
@@ -49,7 +45,7 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
               }];
             }
 
-            const roleMap = roles.find(roleMap => {
+            const roleMap = rolesThunk.data.find(roleMap => {
               return roleMap.orgId === org.id;
             }) as tRoleMap;
 
@@ -87,15 +83,18 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.org.isLoading || store.roles.isLoading || store.session.isLoading,
+  isLoading: store.org.isLoading
+    || store.roles.isLoading
+    || store.session.isLoading,
   org: store.org,
-  roles: store.roles.data,
+  rolesThunk: store.roles,
+  rsvpsThunk: store.rsvps,
   session: store.session.data,
 });
 
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getOrgDispatch: (query: tGetOrgQuery) => dispatch(getOrg(query)),
+  getOrgDispatch: (query: tIdQuery) => dispatch(getOrg(query)),
   getRolesDispatch: () => dispatch(getRoles()),
   getRsvpsDispatch: () => dispatch(getRsvps()),
 });

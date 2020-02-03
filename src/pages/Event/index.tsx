@@ -13,8 +13,9 @@ import {EventComponent} from './Component';
 class EventContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    this.props.getRsvpsDispatch();
     this.dispatch();
+    if (!props.session.isAuthenticated) return;
+    if (!props.rsvpsThunk.fetched) props.getRsvpsDispatch();
   }
 
   componentDidUpdate(nextProps: tContainerProps) {
@@ -64,7 +65,6 @@ class EventContainer extends PureComponent<tContainerProps> {
                     event={event.data}
                     eventsByOrgId={eventsByOrgId}
                     match={this.props.match}
-                    rsvps={this.props.rsvps}
                   />
                 )}
             </>
@@ -79,7 +79,7 @@ const mapStateToProps = (store: tStore) => ({
   event: store.event,
   eventsByOrgId: store.eventsByOrgId.data,
   isLoading: store.event.isLoading,
-  rsvps: store.rsvps.data,
+  rsvpsThunk: store.rsvps,
   session: store.session.data,
 });
 

@@ -11,7 +11,6 @@ export type tStore = {
 export type tProps = {
   eventsByOrgId: tEvent[],
   match: match & { params: tEventParams },
-  rsvps: tRSVP[],
 };
 
 export type tComponentProps = tProps & {
@@ -24,6 +23,7 @@ export type tContainerProps = tProps & {
   getEventsByOrgIdDispatch: (query: tGetEventQuery) => tThunkPayload<tEvent[]>,
   getRsvpsDispatch: () => tThunkPayload<tRSVP[]>,
   isLoading: boolean,
+  rsvpsThunk: tThunk<tRSVP[]>,
   session: tSession,
 }
 
