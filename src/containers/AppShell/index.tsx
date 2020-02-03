@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {HelmetProvider} from 'react-helmet-async';
-import {Route, Switch} from 'react-router-dom';
+import {Switch} from 'react-router-dom';
 
 import {RouteWithSubRoutes} from '../../components';
-import NoMatch from '../../pages/404';
 import {routes} from '../../routes';
 import {Footer, Header} from './_components';
 
@@ -23,7 +22,6 @@ export default class AppShell extends Component<any> {
                   {...route}
                 />
               ))}
-              <Route component={() => <NoMatch />} />
             </Switch>
           </main>
           <Footer />

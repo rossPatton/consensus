@@ -7,7 +7,7 @@ import {tComponentProps} from './_types';
 
 export const MembersComponent = memo((props: tComponentProps) => (
   <>
-    <h2>Members List</h2>
+    <h2>{props.section === 'pending' && 'Pending'} Members List</h2>
     <label
       htmlFor="searchFilter"
       className="fx aiCtr p3 bgGrey1 br8 mB4">
@@ -19,18 +19,20 @@ export const MembersComponent = memo((props: tComponentProps) => (
         onChange={props.onSearchChange}
         placeholder="Search for a member by username"
       />
-      <select
-        onBlur={props.onRoleFilterChange}
-        onChange={props.onRoleFilterChange}>
-        <option key="n/a" value="n/a">
-          Filter by User Role
-        </option>
-        {roles.map((role: tRole, i) => (
-          <option key={i} value={role as string}>
-            {role}
+      {props.section === 'members' && (
+        <select
+          onBlur={props.onRoleFilterChange}
+          onChange={props.onRoleFilterChange}>
+          <option key="n/a" value="n/a">
+            Filter by User Role
           </option>
-        ))}
-      </select>
+          {roles.map(role => (
+            <option key={role} value={role}>
+              {role}
+            </option>
+          ))}
+        </select>
+      )}
     </label>
     <Users
       removeUser={props.removeUser}

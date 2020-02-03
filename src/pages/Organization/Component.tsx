@@ -58,6 +58,15 @@ export const OrganizationComponent = (props: tComponentProps) => (
           session={props.session}
         />
       )}
+      {props.match.params.section === 'pending' && (
+        <Members
+          match={props.match}
+          org={props.org}
+          role={props.role}
+          router={props.location}
+          session={props.session}
+        />
+      )}
     </div>
   </>
 );

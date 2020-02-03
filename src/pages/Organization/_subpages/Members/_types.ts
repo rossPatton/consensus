@@ -18,8 +18,6 @@ export type tBaseProps = {
 export type tContainerProps = tBaseProps & {
   deleteUserByOrgIdDispatch: (query: tDeleteUserByOrgIdQuery) =>
     tThunkPayload<{ok: true}>,
-  getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
-    tThunkPayload<tUser[]>,
   isLoading: boolean,
   patchUserByOrgIdDispatch: (opts: tPatchUserRoleQuery) =>
     tThunkPayload<tUser>,
@@ -32,6 +30,7 @@ export type tComponentProps = tBaseProps & {
   removeUser: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
   onRoleFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
+  section: string,
   setUserRole: (ev: React.ChangeEvent<HTMLSelectElement>, id: number) => void,
   users: tUser[],
   userTotal: number,

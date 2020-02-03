@@ -41,7 +41,7 @@ export const UserBarComponent = memo((props: tComponentProps) => (
         && (
           <li className="mL1 mR2">
             <Link
-              to="members"
+              to="pending"
               title="Click to browse pending member list">
               {props.pending.length} awaiting approval
             </Link>

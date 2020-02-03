@@ -7,5 +7,5 @@ export type tComponentProps = tProps & {
 };
 
 export type tContainerProps = tProps & {
-  logout: () => tThunkPayload,
+  logoutDispatch: () => tThunkPayload,
 };

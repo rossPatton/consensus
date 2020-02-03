@@ -12,24 +12,25 @@ import {OrganizationComponent} from './Component';
 class OrganizationContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    const {id} = props.match.params;
+    const id = _.get(props, 'match.params.id', null);
 
-    props.getOrgDispatch({id});
+    if (id) props.getOrgDispatch({id});
 
     if (!props.session.isAuthenticated) return;
+    if (props.session.type === 'org') return;
     if (!props.rolesThunk.fetched) props.getRolesDispatch();
     if (!props.rsvpsThunk.fetched) props.getRsvpsDispatch();
   }
 
   render() {
-    const {isLoading, location, match, rolesThunk, session} = this.props;
+    const {isLoading, location, match, orgThunk, rolesThunk, session} = this.props;
 
     return (
-      <ErrorBoundary status={_.get(this.props.org, 'error.status', 200)}>
+      <ErrorBoundary status={_.get(orgThunk, 'error.status', 200)}>
         <GenericLoader
           isLoading={isLoading}
           render={() => {
-            const {org: {data: org}} = this.props;
+            const {orgThunk: {data: org}} = this.props;
 
             // TODO make real
             let meta = [
@@ -84,7 +85,7 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
 
 const mapStateToProps = (store: tStore) => ({
   isLoading: store.org.isLoading,
-  org: store.org,
+  orgThunk: store.org,
   rolesThunk: store.roles,
   rsvpsThunk: store.rsvps,
   session: store.session.data,

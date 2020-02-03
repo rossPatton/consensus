@@ -9,7 +9,7 @@ import {HeaderComponent} from './Component';
 class HeaderContainer extends PureComponent<tContainerProps> {
   logout = (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.preventDefault();
-    this.props.logout()
+    this.props.logoutDispatch()
       .then(() => window.location.reload())
       .catch(loglevel.error);
   }
@@ -29,7 +29,7 @@ const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  logout: () => dispatch(logout()),
+  logoutDispatch: () => dispatch(logout()),
 });
 
 const Header = connect(

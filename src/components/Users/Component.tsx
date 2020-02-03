@@ -26,7 +26,9 @@ export const UsersComponent = memo((props: tComponentProps) => (
               <button
                 className="bgWhite"
                 onClick={ev => props.removeUser(ev, user.id)}>
-                Remove this user
+                {user.role === 'pending'
+                  ? 'Reject this user'
+                  : 'Remove this user'}
               </button>
             </div>
           )}

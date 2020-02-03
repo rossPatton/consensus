@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '../../../../components';
+import {GenericLoader, Helmet} from '../../../../components';
 import {ErrorBoundary, PrivacyFilter, SearchFilter} from '../../../../containers';
 import {getEventsByOrgId} from '../../../../redux';
 import {tContainerProps, tState, tStore} from './_types';
@@ -55,20 +55,25 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
             { property: 'og:description', content: '' },
           ]}
         />
-        <PrivacyFilter
-          items={events}
-          render={(privacyProps: tPrivacyFilterProps) => (
-            <SearchFilter
-              items={privacyProps.items}
-              render={(searchProps: tSearchFilterProps) => (
-                <EventsComponent
-                  {...privacyProps}
-                  {...searchProps}
-                  events={searchProps.items}
-                  match={this.props.match}
-                  role={this.props.role}
-                  showPast={this.state.showPast}
-                  togglePast={this.togglePast}
+        <GenericLoader
+          isLoading={this.props.isLoading}
+          render={() => (
+            <PrivacyFilter
+              items={events}
+              render={(privacyProps: tPrivacyFilterProps) => (
+                <SearchFilter
+                  items={privacyProps.items}
+                  render={(searchProps: tSearchFilterProps) => (
+                    <EventsComponent
+                      {...privacyProps}
+                      {...searchProps}
+                      events={searchProps.items}
+                      match={this.props.match}
+                      role={this.props.role}
+                      showPast={this.state.showPast}
+                      togglePast={this.togglePast}
+                    />
+                  )}
                 />
               )}
             />

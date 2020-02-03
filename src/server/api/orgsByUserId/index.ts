@@ -7,12 +7,12 @@ import {validateSchema} from '../../utils';
 import {orgKeys} from './_constants';
 import {deleteSchema, getSchema} from './_schema';
 
-export const orgsByUser = new Router();
-const route = '/api/v1/orgsByUser';
+export const orgsByUserId = new Router();
+const route = '/api/v1/orgsByUserId';
 const table = 'accounts_roles';
 const dataPath = 'state.locals.data';
 
-orgsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
+orgsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, dataPath, {});
   await validateSchema(ctx, getSchema, query);
 
@@ -48,7 +48,7 @@ orgsByUser.get(route, async (ctx: Koa.ParameterizedContext) => {
 // we use accountId here because only a user can choose to leave an org
 // orgs can remove users, via the usersByOrg api, but in both cases
 // we check against the session instead of allowing the client to pass in any id
-orgsByUser.delete(route, async (ctx: Koa.ParameterizedContext) => {
+orgsByUserId.delete(route, async (ctx: Koa.ParameterizedContext) => {
   const {orgId} = _.get(ctx, dataPath, {});
   const userId = _.get(ctx, 'state.user.id', 0);
   const query = {orgId, userId};

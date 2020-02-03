@@ -2,12 +2,9 @@ import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+import {GenericLoader, Helmet} from '../../../../components';
 import {ErrorBoundary, RoleFilter, SearchFilter} from '../../../../containers';
-import {
-  deleteUserByOrgId,
-  getUsersByOrgId,
-  patchUserByOrgId,
-} from '../../../../redux';
+import {deleteUserByOrgId, patchUserByOrgId} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {MembersComponent} from './Component';
 
@@ -15,12 +12,6 @@ class MembersContainer extends Component<tContainerProps, {role: tRole}> {
   state = {
     role: 'n/a' as tRole,
   };
-
-  componentDidMount() {
-    this.props.getUsersByOrgIdDispatch({
-      orgId: this.props.session.profile.id,
-    });
-  }
 
   removeUser = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {
     ev.preventDefault();
@@ -39,27 +30,48 @@ class MembersContainer extends Component<tContainerProps, {role: tRole}> {
   }
 
   render() {
-    const {usersByOrg} = this.props;
+    const {match: {params}, usersByOrg} = this.props;
+    const {section} = params;
+
+    const members = section === 'members'
+      ? usersByOrg.filter(u => u.role !== 'pending')
+      : usersByOrg.filter(u => u.role === 'pending');
 
     return (
-      <ErrorBoundary status={_.get(usersByOrg, 'session.error.status', 200)}>
-        <RoleFilter
-          items={usersByOrg}
-          render={(roleProps: tRoleFilterProps) => (
-            <SearchFilter
-              searchKey="username"
-              items={roleProps.items}
-              render={(searchProps: tSearchFilterProps) => (
-                <MembersComponent
-                  {...roleProps}
-                  {...searchProps}
-                  match={this.props.match}
-                  org={this.props.org}
-                  removeUser={this.removeUser}
-                  role={this.props.role}
-                  setUserRole={this.setUserRole}
-                  users={searchProps.items}
-                  userTotal={usersByOrg.length}
+      <ErrorBoundary status={_.get(usersByOrg, 'error.status', 200)}>
+        <Helmet
+          canonical=""
+          title=""
+          meta={[
+            { name: 'description', content: '' },
+            { name: 'keywords', content: '' },
+            { property: 'og:title', content: '' },
+            { property: 'og:description', content: '' },
+          ]}
+        />
+        <GenericLoader
+          isLoading={this.props.isLoading}
+          render={() => (
+            <RoleFilter
+              items={members}
+              render={roleProps => (
+                <SearchFilter
+                  searchKey="username"
+                  items={roleProps.items}
+                  render={searchProps => (
+                    <MembersComponent
+                      {...roleProps}
+                      {...searchProps}
+                      match={this.props.match}
+                      org={this.props.org}
+                      removeUser={this.removeUser}
+                      role={this.props.role}
+                      section={section}
+                      setUserRole={this.setUserRole}
+                      users={searchProps.items}
+                      userTotal={usersByOrg.length}
+                    />
+                  )}
                 />
               )}
             />
@@ -78,8 +90,8 @@ const mapStateToProps = (store: tStore) => ({
 const mapDispatchToProps = (dispatch: Function) => ({
   deleteUserByOrgIdDispatch: (query: tDeleteUserByOrgIdQuery) =>
     dispatch(deleteUserByOrgId(query)),
-  getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
-    dispatch(getUsersByOrgId(query)),
+  // getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
+  //   dispatch(getUsersByOrgId(query)),
   patchUserByOrgIdDispatch: (query: tPatchUserRoleQuery) =>
     dispatch(patchUserByOrgId(query)),
 });
