@@ -28,8 +28,8 @@ exports.up = async (knex: Knex) => {
     table.unique(['orgId', 'accountId', 'userId']);
 
     // relation the account has to the org
-    // 'admin' || 'member' || 'facilitator'
-    table.enum('role', ['admin', 'member', 'facilitator'])
+    // 'admin' || 'member' || pending || 'facilitator'
+    table.enum('role', ['admin', 'member', 'pending', 'facilitator'])
       .notNullable()
       .defaultTo('member');
   });

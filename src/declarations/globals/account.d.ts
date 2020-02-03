@@ -40,3 +40,21 @@ declare type tSession = isAuthenticated & {
   readonly profile: tOrg | tUser,
   readonly type: 'org' | 'user',
 }
+
+// pending => user wants to join the group, but isn't approved yet
+// member => can RSVP to events, partake in decisions
+// facilitator => can create events, decisions
+// admin => can do all the above plus manage the group
+// n/a => inputs cant have null values, so we use this sometimes
+// null => often happens if we're trying to tie roles to users, and there's no match
+declare type tRole = 'pending' | 'member' | 'facilitator' | 'admin' | 'n/a' | null;
+
+declare type tRoleMap = {
+  orgId: number,
+  role: tRole,
+};
+
+declare type tAccountRoleRelation = tRoleMap & {
+  id: number,
+  userId: number,
+};

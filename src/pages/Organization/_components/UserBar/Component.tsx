@@ -25,13 +25,25 @@ export const UserBarComponent = memo((props: tComponentProps) => (
         />
       </li>
       {props.role
-        && props.usersByOrg.length > 0
+        && props.role !== 'pending'
+        && props.members.length > 0
         && (
           <li className="mL1 mR2">
             <Link
               to="members"
               title="Click to browse member list">
-              {props.usersByOrg.length} members
+              {props.members.length} members
+            </Link>
+          </li>
+        )}
+      {props.role === 'admin'
+        && props.pending.length > 0
+        && (
+          <li className="mL1 mR2">
+            <Link
+              to="members"
+              title="Click to browse pending member list">
+              {props.pending.length} awaiting approval
             </Link>
           </li>
         )}

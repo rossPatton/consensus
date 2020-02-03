@@ -1,11 +1,12 @@
 require('dotenv-safe').config();
-import faker from 'faker';
 import Knex from 'knex';
 
+import {getRandomNum} from '../../../utils/getRandomNum';
 import {range} from '../../../utils/range';
+const roles = ['member', 'pending', 'facilitator'];
 
 const createRelation = async (accountId: number, orgId: number) => {
-  let role = faker.random.boolean() ? 'member' : 'facilitator';
+  let role = roles[getRandomNum(0, roles.length - 1)];
   if (accountId === 101) { // test org admin
     role = 'admin';
   } else if (accountId === 100) { // test user facilitator

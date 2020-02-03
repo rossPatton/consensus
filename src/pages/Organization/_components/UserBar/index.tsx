@@ -7,21 +7,26 @@ import {UserBarComponent} from './Component';
 
 class UserBarContainer extends PureComponent<tContainerProps> {
   componentDidMount() {
-    if (!__CLIENT__) return;
-    const {org, session} = this.props;
-    if (session.isAuthenticated && org.id !== 0) {
+    const {org, role} = this.props;
+    if (role && (role !== 'n/a' && role !== 'pending')) {
       this.props.getUsersByOrgIdDispatch({orgId: org.id});
     }
   }
 
   render() {
+    const {usersByOrg} = this.props;
+
+    const members = usersByOrg.filter(u => u.role !== 'pending');
+    const pending = usersByOrg.filter(u => u.role === 'pending');
+
     return (
       <UserBarComponent
         match={this.props.match}
+        members={members}
         org={this.props.org}
+        pending={pending}
         role={this.props.role}
         session={this.props.session}
-        usersByOrg={this.props.usersByOrg}
       />
     );
   }

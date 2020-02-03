@@ -1,3 +1,7 @@
+declare interface tFetchResponse<T = any> extends Response {
+  json<P = T>(): Promise<P>
+};
+
 // typical generic id-based db query, client side
 declare type tBaseQuery = {
   // exclude an id, or something else

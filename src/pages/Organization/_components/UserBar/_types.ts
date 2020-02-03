@@ -5,15 +5,17 @@ export type tProps = {
   org: tOrg,
   role: tRole,
   session: tSession,
-  usersByOrg: tUser[],
 };
 
 export type tContainerProps = tProps & {
   getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) => tThunkPayload<tUser[]>,
   isLoading: boolean,
+  usersByOrg: tUser[],
 };
 
 export type tComponentProps = tProps & {
+  members: tUser[],
+  pending: tUser[],
   role: tRole,
 };
 

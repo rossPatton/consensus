@@ -83,9 +83,7 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.org.isLoading
-    || store.roles.isLoading
-    || store.session.isLoading,
+  isLoading: store.org.isLoading,
   org: store.org,
   rolesThunk: store.roles,
   rsvpsThunk: store.rsvps,
