@@ -15,7 +15,7 @@ auth.post('/auth/login', async (ctx: Koa.ParameterizedContext, next) =>
     if (!account) ctx.throw(400, 'Account not found');
 
     try {
-      await schema.validateAsync<tAccountQuery>(account);
+      await schema.validateAsync(account);
     } catch (err) {
       const message = _.get(err, 'details[0].message', 'Bad Request');
       return ctx.throw(400, message);

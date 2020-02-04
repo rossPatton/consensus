@@ -13,7 +13,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tDirectoryParams = _.get(ctx, 'state.locals.data', {});
 
   try {
-    await schema.validateAsync<tDirectoryParams>(query);
+    await schema.validateAsync(query);
   } catch (err) {
     const message = _.get(err, 'details[0].message', 'Bad Request');
     return ctx.throw(400, message);

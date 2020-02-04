@@ -8,6 +8,7 @@ import { country } from './country';
 import { event } from './event';
 import { events } from './events';
 import { eventsByUserId } from './eventsByUserId';
+import { geo } from './geo';
 import { org } from './org';
 import { orgs } from './orgs';
 import { orgsByUserId } from './orgsByUserId';
@@ -28,6 +29,7 @@ export const setupApi = (app: Koa) => {
   app.use(event.routes());
   app.use(events.routes());
   app.use(eventsByUserId.routes());
+  app.use(geo.routes());
   app.use(org.middleware());
   app.use(org.routes());
   app.use(orgs.routes());
@@ -54,6 +56,7 @@ export const setupApi = (app: Koa) => {
   app.use(event.allowedMethods(opts));
   app.use(events.allowedMethods(opts));
   app.use(eventsByUserId.allowedMethods(opts));
+  app.use(geo.allowedMethods(opts));
   app.use(org.allowedMethods(opts));
   app.use(orgs.allowedMethods(opts));
   app.use(orgsByUserId.allowedMethods(opts));

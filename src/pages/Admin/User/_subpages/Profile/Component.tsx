@@ -34,26 +34,6 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             name="name"
           />
         </label>
-        <div
-          tabIndex={0}
-          role="button"
-          className="fx aiCtr curPtr mB3 fs6"
-          onClick={ev => props.updateState('privateName', ev)}
-          onKeyPress={ev => props.updateState('privateName', ev)}>
-          <input
-            readOnly
-            type="checkbox"
-            className="mR2"
-            autoComplete="nope"
-            checked={props.privateName}
-          />
-          {props.privateName && (
-            <span>Private</span>
-          )}
-          {!props.privateName && (
-            <span>Public</span>
-          )}
-        </div>
         <label htmlFor="bio">
           <h2 className="ffLab fs5 mB1 lh1">
             Bio
@@ -111,7 +91,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             Username
           </h2>
           <p className="fs5 copyBlack mB1">
-            This will be your publicly visible name.
+            This is your alias. Can&apos;t be blank.
           </p>
           <input
             id="username"
@@ -146,12 +126,12 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             checked={props.privateRSVP}
           />
           {props.privateRSVP && (
-            <span>Keep my event RSVPs private.</span>
+            <>Keep my event RSVPs private.</>
           )}
           {!props.privateRSVP && (
-            <span>
+            <>
               Show my RSVPs publicly (user account will be linked in RSVP list)
-            </span>
+            </>
           )}
         </div>
         <div
@@ -174,7 +154,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
           )}
           {!props.privateMemberships && (
             <span>
-              Link to organization I am a member of on my profile
+              Link to organizations I&apos;ve joined on my profile
             </span>
           )}
         </div>

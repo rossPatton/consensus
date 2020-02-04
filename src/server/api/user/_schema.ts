@@ -32,6 +32,6 @@ export const patchSchema = Joi.object().keys({
   region: Joi.string(),
   username: Joi.string(),
 
-  createdAt: Joi.date().timestamp(),
-  updatedAt: Joi.date().timestamp(),
+  created_at: Joi.date().timestamp(),
+  updated_at: Joi.date().timestamp(),
 });

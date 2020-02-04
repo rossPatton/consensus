@@ -19,7 +19,7 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const loggedInAccount: tAccount = _.get(ctx, 'state.user', {});
 
   try {
-    await schema.validateAsync<tAccountQuery>(query);
+    await schema.validateAsync(query);
   } catch (err) {
     const message = _.get(err, 'details[0].message', 'Bad Request');
     return ctx.throw(400, message);

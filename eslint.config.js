@@ -68,7 +68,10 @@ module.exports = {
     'block-scoped-var': ERROR,
     'brace-style': [ERROR, '1tbs'],
     'callback-return': OFF,
-    'camelcase': [ERROR, {'properties': 'never'}],
+    'camelcase': [ERROR, {
+      'allow': ['created_at', 'updated_at'],
+      'properties': 'never',
+    }],
     'comma-dangle': [ERROR, 'always-multiline'],
     'comma-spacing': [ERROR, {
       'before': false,

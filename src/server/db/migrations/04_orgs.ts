@@ -13,6 +13,7 @@ const categories = [
 exports.up = async (knex: Knex) => {
   await knex.schema.createTable('orgs', table => {
     table.increments().unsigned().primary();
+    table.timestamps(true, true);
 
     // user-input about what the group does
     table.text('description', 'longtext').notNullable();
@@ -72,9 +73,6 @@ exports.up = async (knex: Knex) => {
       .references('categories.type')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
-
-    table.timestamp('createdAt').defaultTo(knex.fn.now());
-    table.timestamp('updatedAt').defaultTo(knex.fn.now());
   });
 };
 

@@ -23,9 +23,6 @@ exports.up = async (knex: Knex) => {
       .references('regions.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
-
-    table.timestamp('createdAt').defaultTo(knex.fn.now());
-    table.timestamp('updatedAt').defaultTo(knex.fn.now());
   });
 };
 

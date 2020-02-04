@@ -3,6 +3,7 @@ import Knex from 'knex';
 exports.up = async (knex: Knex) => {
   await knex.schema.createTable('events', table => {
     table.increments().unsigned().primary();
+    table.timestamps(true, true);
 
     // all events are tied to an org currently
     // id so we can look up whatever we need if necessary
@@ -38,9 +39,6 @@ exports.up = async (knex: Knex) => {
 
     // time of day the event occurs. used to calculate endDate along with duration
     table.string('time').notNullable().defaultTo('19:00');
-
-    table.timestamp('createdAt').defaultTo(knex.fn.now());
-    table.timestamp('updatedAt').defaultTo(knex.fn.now());
   });
 };
 

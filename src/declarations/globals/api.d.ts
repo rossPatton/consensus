@@ -2,6 +2,10 @@ declare interface tFetchResponse<T = any> extends Response {
   json<P = T>(): Promise<P>
 };
 
+declare type Mutable = {
+  -readonly [K in keyof Immutable]: Immutable[K]
+};
+
 // typical generic id-based db query, client side
 declare type tBaseQuery = {
   // exclude an id, or something else

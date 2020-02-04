@@ -13,7 +13,7 @@ roles.get(route, async (ctx: Koa.ParameterizedContext) => {
   const accountId: number = _.get(ctx, 'state.user.id', 0);
 
   try {
-    await schema.validateAsync<{accountId: number}>({accountId});
+    await schema.validateAsync({accountId});
   } catch (err) {
     const message = _.get(err, 'details[0].message', 'Bad Request');
     return ctx.throw(400, message);

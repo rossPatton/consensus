@@ -18,7 +18,7 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, dataPath, {});
 
   try {
-    await postSchema.validateAsync<{accountId: number}>({query});
+    await postSchema.validateAsync({query});
   } catch (err) {
     const message = _.get(err, 'details[0].message', 'Bad Request');
     return ctx.throw(400, message);

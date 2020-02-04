@@ -6,7 +6,7 @@ declare type tOrg = {
   readonly cityId: number,
   readonly country: string,
   readonly countryId: number,
-  readonly createdAt?: Date,
+  readonly created_at?: Date,
   readonly description: string,
   readonly eventPrivacy: tPrivacyEnum,
   readonly id: number,
@@ -14,7 +14,7 @@ declare type tOrg = {
   readonly region: string,
   readonly regionId: number,
   readonly slug: string,
-  readonly updatedAt?: Date,
+  readonly updated_at?: Date,
   readonly vetting: tPrivacyEnum,
 };
 

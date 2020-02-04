@@ -21,7 +21,7 @@ rsvps.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {userId = 0} = _.get(ctx, sessionPath, {});
 
   try {
-    await getSchema.validateAsync<{userId: number}>({userId});
+    await getSchema.validateAsync({userId});
   } catch (err) {
     const message = _.get(err, errorPath, errorMsg);
     return ctx.throw(400, message);
@@ -37,7 +37,7 @@ rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...query} = data;
 
   try {
-    await postSchema.validateAsync<tPostRSVPServerQuery>(query);
+    await postSchema.validateAsync(query);
   } catch (err) {
     const message = _.get(err, errorPath, errorMsg);
     return ctx.throw(400, message);
@@ -78,7 +78,7 @@ rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...query} = data;
 
   try {
-    await postSchema.validateAsync<tPostRSVPServerQuery>(query);
+    await postSchema.validateAsync(query);
   } catch (err) {
     const message = _.get(err, errorPath, errorMsg);
     return ctx.throw(400, message);

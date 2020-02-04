@@ -3,6 +3,7 @@ import Knex from 'knex';
 exports.up = async (knex: Knex) => {
   await knex.schema.createTable('decisions', table => {
     table.increments().unsigned().primary();
+    table.timestamps(true, true);
 
     // the org that made the decision / poll
     table.integer('orgId').notNullable().references('orgs.id')
@@ -32,9 +33,6 @@ exports.up = async (knex: Knex) => {
 
     table.boolean('isDraft').notNullable().defaultTo(true);
     table.boolean('isClosed').notNullable().defaultTo(false);
-
-    table.timestamp('createdAt').defaultTo(knex.fn.now());
-    table.timestamp('updatedAt').defaultTo(knex.fn.now());
   });
 };
 

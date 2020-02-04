@@ -32,13 +32,18 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|ts|tsx)$/,
         exclude: /node_modules/,
         loaders: ['babel-loader'],
+        test: /\.(js|ts|tsx)$/,
       },
       {
-        test: /\.(png|jpg|gif|woff|woff2|eot|ttf)$/,
         loaders: ['file-loader'],
+        test: /\.(png|jpg|gif|woff|woff2|eot|ttf)$/,
+      },
+      {
+        exclude: /node_modules/,
+        test: /\.mmdb$/,
+        use: 'ignore-loader',
       },
       {
         test: /\.(svg)$/,

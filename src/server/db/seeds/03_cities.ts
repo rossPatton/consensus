@@ -1,23 +1,21 @@
 require('dotenv-safe').config();
 import Knex from 'knex';
 
-import citiesMap from '../../../json/usa/cities.json';
-import stateMap from '../../../json/usa/stateCodeMap.json';
+// import postcodes from '../../../json/usa/zips.json';
 
-const statesByName = Object.keys(stateMap);
-const createCity = async (row: {city: string, state: string}) => {
-  // arr index is 0 based, db is 1 based
-  const region = statesByName.findIndex(state => state === row.state) + 1;
-  return {
-    name: row.city,
-    region,
-    country: 1, // United States basically
-  };
-};
+// const createCode = async (row: {city: string, state: string}) => {
+// arr index is 0 based, db is 1 based
+// const region = statesByName.findIndex(state => state === row.state) + 1;
+// return {
+//   name: row.city,
+//   region,
+//   country: 1, // United States basically
+// };
+// };
 
 exports.seed = async (knex: Knex) => {
-  const cities = await Promise.all(citiesMap.map(createCity));
+  // const codes = await Promise.all(postcodes.map(createCity));
 
-  await knex('cities').del();
-  await knex('cities').insert(cities);
+  await knex('postcodes').del();
+  await knex('postcodes').insert([]);
 };

@@ -22,9 +22,6 @@ exports.up = async (knex: Knex) => {
       .enum('slug', categories.map(c => c.slug))
       .notNullable()
       .defaultTo('political-organization');
-
-    table.timestamp('createdAt').defaultTo(knex.fn.now());
-    table.timestamp('updatedAt').defaultTo(knex.fn.now());
   });
 };
 

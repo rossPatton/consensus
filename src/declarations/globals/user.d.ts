@@ -6,10 +6,9 @@ declare type tUserSignupForm = {
 };
 
 declare type tUser = {
-  readonly createdAt?: Date,
+  readonly created_at?: Date,
   readonly bio: string,
   readonly city?: string,
-  readonly country?: string,
   readonly email: string,
   readonly id: number,
   readonly name: string,
@@ -21,9 +20,8 @@ declare type tUser = {
   readonly privatePhone: boolean,
   readonly privateProfile: boolean,
   readonly privateRSVP: boolean,
-  readonly region?: string,
   readonly role?: tRole,
-  readonly updatedAt?: Date,
+  readonly updated_at?: Date,
   readonly username: string,
 };
 

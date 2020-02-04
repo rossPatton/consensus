@@ -2,7 +2,6 @@
 export const userKeys = [
   'bio',
   'city',
-  'country',
   'email',
   'id',
   'language',
@@ -11,8 +10,6 @@ export const userKeys = [
   'privateEmail',
   'privateLocation',
   'privateMemberships',
-  'privateName',
   'privateRSVP',
-  'region',
   'username',
 ];

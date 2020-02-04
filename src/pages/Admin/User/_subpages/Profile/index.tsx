@@ -25,7 +25,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
 
-    const {createdAt, updatedAt, ...user}: tUser =
+    const {created_at, updated_at, ...user}: tUser =
       _.get(props, 'sessionThunk.data.profile', null);
 
     if (user) {

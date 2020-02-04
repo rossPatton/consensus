@@ -7,27 +7,19 @@ import _ from 'lodash';
 export const filterUserInfoFromClient = async (users: tUser[]) => {
   return await Promise.all(
     users.map(async user => {
-      const userToReturn = user;
+      const userToReturn: Mutable = user;
 
       if (userToReturn.privateEmail) {
-        // @ts-ignore
         userToReturn.email = '';
       } else if (userToReturn.privateName) {
-        // @ts-ignore
         userToReturn.name = '';
       } else if (userToReturn.privateLocation) {
-        // @ts-ignore
         userToReturn.city = '';
-        // @ts-ignore
-        userToReturn.country = '';
-        // @ts-ignore
-        userToReturn.region = '';
       } else if (userToReturn.privatePhone) {
-        // @ts-ignore
         userToReturn.phone = '';
       }
 
-      return userToReturn;
+      return userToReturn as tUser;
     }),
   );
 };

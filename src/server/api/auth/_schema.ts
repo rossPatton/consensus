@@ -8,6 +8,6 @@ export const schema = Joi.object({
   orgId: Joi.number().integer().allow(null),
   userId: Joi.number().integer().allow(null),
 
-  createdAt: Joi.date().timestamp(),
-  updatedAt: Joi.date().timestamp(),
+  created_at: Joi.date().timestamp(),
+  updated_at: Joi.date().timestamp(),
 });
