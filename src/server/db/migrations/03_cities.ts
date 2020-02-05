@@ -16,7 +16,8 @@ exports.up = async (knex: Knex) => {
       .notNullable()
       .references('countries.id')
       .onUpdate('CASCADE')
-      .onDelete('CASCADE');
+      .onDelete('CASCADE')
+      .defaultTo(1);
 
     table.integer('region')
       .notNullable()

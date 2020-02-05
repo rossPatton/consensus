@@ -6,6 +6,7 @@ exports.up = async (knex: Knex) => {
 
     table.string('code').notNullable();
 
+    // cities, especially large ones, can have many postal codes
     table.integer('city')
       .notNullable()
       .references('cities.id')
