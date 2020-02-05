@@ -11,7 +11,8 @@ const createCodes = async (row: any, i: number) =>
   }));
 
 exports.seed = async (knex: Knex) => {
-  const codes = await Promise.all(postcodes.map(createCodes));
+  const codesWithNulls = await Promise.all(postcodes.map(createCodes));
+  const codes = codesWithNulls.filter(c => !!c);
 
   // split processed cities file into chunks
   // postgres can't handle inserting everything at once unfortunately

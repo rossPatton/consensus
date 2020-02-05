@@ -18,7 +18,8 @@ const createCity = async (row: {city: string, state: string}) => {
 };
 
 exports.seed = async (knex: Knex) => {
-  const cities = await Promise.all(citiesMap.map(createCity));
+  const citiesWithNulls = await Promise.all(citiesMap.map(createCity));
+  const cities = citiesWithNulls.filter(c => !!c);
 
   // split processed cities file into chunks
   // postgres can't handle inserting everything at once unfortunately
