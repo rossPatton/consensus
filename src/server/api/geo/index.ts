@@ -24,10 +24,15 @@ geo.get('/api/v1/geo', async (ctx: Koa.ParameterizedContext) => {
 
   const cityLookup = lookup.get(ip as string);
   const city: string = _.get(cityLookup, 'city.names.en', '');
-  const zip: string = _.get(cityLookup, 'postal.code', '');
+  const postcode: string = _.get(cityLookup, 'postal.code', '');
+
+  if (!city && !postcode) {
+    ctx.status = 204;
+    ctx.body = {city: null, postcode: null};
+  }
 
   ctx.body = {
     city,
-    zip,
+    postcode: parseInt(postcode, 10),
   };
 });

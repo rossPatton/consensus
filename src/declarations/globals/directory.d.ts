@@ -13,6 +13,7 @@ declare type tRegion = tCountry & {
 
 declare type tCity = tRegion & {
   readonly orgs: tOrg[],
+  readonly postcodes: number[],
   readonly region: number, // region.id
 }
 

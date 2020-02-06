@@ -15,8 +15,9 @@ const initialState = {
   name: '',
   password: '',
   privateEmail: true,
+  privateLocation: true,
   privateMemberships: false,
-  privateName: false,
+  privatePhone: true,
   privateRSVP: false,
   username: '',
 };
@@ -36,19 +37,6 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     } else {
       this.state = initialState;
     }
-
-    // this.state = {
-    //   ...initialState,
-    //   bio: user.bio,
-    //   email: user.email,
-    //   name: user.name,
-    //   password: '',
-    //   privateEmail: user.privateEmail,
-    //   privateMemberships: user.privateMemberships,
-    //   privateName: user.privateName,
-    //   privateRSVP: user.privateRSVP,
-    //   username: user.username,
-    // };
   }
 
   save = async (ev: React.FormEvent<HTMLFormElement>) => {

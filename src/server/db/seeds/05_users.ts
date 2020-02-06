@@ -17,10 +17,11 @@ const createUser = async () => ({
 
 const createTestUser = async () => ({
   bio: faker.lorem.paragraphs(),
-  city: 3658, // New York City
+  city: 16624, // New York City
   email: 'test@test.com',
   name: 'Test User',
   phone: faker.phone.phoneNumber(),
+  postcode: 10002,
   privateEmail: faker.random.boolean(),
   privateMemberships: faker.random.boolean(),
   privateRSVP: false,

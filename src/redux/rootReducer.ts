@@ -6,6 +6,7 @@ import { countryReducer } from './country/reducer';
 import { eventReducer } from './event/reducer';
 import { eventsByOrgIdReducer } from './eventsByOrgId/reducer';
 import { eventsByUserIdReducer } from './eventsByUserId/reducer';
+import { geoReducer } from './geo/reducer';
 import { orgReducer } from './org/reducer';
 import { orgsReducer } from './orgs/reducer';
 import { searchReducer } from './orgsBySearch/reducer';
@@ -22,6 +23,7 @@ export const rootReducer = combineReducers({
   event: eventReducer,
   eventsByOrgId: eventsByOrgIdReducer,
   eventsByUserId: eventsByUserIdReducer,
+  geo: geoReducer,
   org: orgReducer,
   orgs: orgsReducer,
   orgsByUserId: orgsByUserIdReducer,

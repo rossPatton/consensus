@@ -25,7 +25,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
     region: regionCode = '',
   } = query;
 
-  let country: tCountry;
+  let country = {} as tCountry;
   try {
     country = await knex('countries')
       .limit(1)
@@ -35,7 +35,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw('400', err);
   }
 
-  let region: tRegion;
+  let region = {} as tRegion;
   try {
     region = await knex('regions')
       .limit(1)
@@ -49,7 +49,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
   }
 
   const cityName = deSlugify(citySlug);
-  let city: tCity;
+  let city = {} as tCity;
   try {
     city = await knex('cities')
       .limit(1)
@@ -63,7 +63,16 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  let orgs: tOrg[];
+  let postcodes = [] as {code: string}[];
+  if (city.id) {
+    try {
+      postcodes = await knex('postcodes').where({city: city.id}).select('code');
+    } catch (err) {
+      return ctx.throw(400, err);
+    }
+  }
+
+  let orgs = [] as tOrg[];
   try {
     orgs = await knex('orgs')
       .where({
@@ -71,7 +80,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
         countryId: country.id,
         regionId: region.id,
       })
-      // exclude private-only orgs
+      // exclude invite-only orgs from results
       .whereNot({
         vetting: 'private',
       })
@@ -83,5 +92,6 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = {
     ...city,
     orgs: _.uniqBy(orgs, org => org.name),
+    postcodes: postcodes.map(p => parseInt(p.code, 10)),
   };
 });

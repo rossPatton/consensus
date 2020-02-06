@@ -11,8 +11,6 @@ export const filterUserInfoFromClient = async (users: tUser[]) => {
 
       if (userToReturn.privateEmail) {
         userToReturn.email = '';
-      } else if (userToReturn.privateName) {
-        userToReturn.name = '';
       } else if (userToReturn.privateLocation) {
         userToReturn.city = '';
       } else if (userToReturn.privatePhone) {

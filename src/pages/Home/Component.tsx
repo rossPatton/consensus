@@ -1,7 +1,9 @@
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-export const HomeComponent = memo(() => (
+import {tProps} from './_types';
+
+export const HomeComponent = memo((props: tProps) => (
   <>
     <header className="bxSh1 brdB1 pT5 pB5">
       <div className="contain">
@@ -15,7 +17,9 @@ export const HomeComponent = memo(() => (
           <Link
             to="/directory/us"
             className="btn bgGreenLite fs4 p3 pL4 pR4 mR3">
-            Join a group near you
+            Join a group {props.isLoading
+              ? 'near you'
+              : `in ${props.geo.city} ${props.geo.postcode}`}
           </Link>
           <Link
             to="/signup/newOrg"

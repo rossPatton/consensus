@@ -25,8 +25,8 @@ const createOrg = async () => {
 
   return {
     category,
-    city: 'New York City',
-    cityId: 3658,
+    city: 'New York',
+    cityId: 16624,
     country: 'United States',
     countryId: 1,
     description: faker.lorem.paragraphs(),
@@ -40,8 +40,8 @@ const createOrg = async () => {
 
 const createTWC = async () => ({
   category: 'Political Organization',
-  city: 'New York City',
-  cityId: 3658,
+  city: 'New York',
+  cityId: 16624,
   country: 'United States',
   countryId: 1,
   description: faker.lorem.paragraphs(),

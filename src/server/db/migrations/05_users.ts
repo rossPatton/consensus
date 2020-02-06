@@ -13,7 +13,7 @@ exports.up = async (knex: Knex) => {
     table.string('name');
 
     // default name for displaying
-    table.string('username').notNullable();
+    table.string('username').notNullable().defaultTo('');
 
     // account recovery / verification, event reminders, etc
     table.string('email').notNullable().unique();
@@ -29,6 +29,13 @@ exports.up = async (knex: Knex) => {
     // should be a city search, that renders all cities by region
     table.integer('city')
       .references('cities.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+
+    // optional - allow user to set their primary city
+    // should be a city search, that renders all cities by region
+    table.integer('postcode')
+      .references('postcodes.code')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 

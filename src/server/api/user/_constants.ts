@@ -11,7 +11,7 @@ export const userKeys = [
   'privateEmail',
   'privateLocation',
   'privateMemberships',
-  'privateName',
+  'privatePhone',
   'privateRSVP',
   'region',
   'updated_at',

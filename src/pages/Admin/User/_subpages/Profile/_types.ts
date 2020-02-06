@@ -1,11 +1,14 @@
 export type tState = {
   bio: string,
+  city?: number,
   email: string,
   name: string,
   password: string,
+  postcode?: number,
   privateEmail: boolean,
+  privateLocation: boolean,
   privateMemberships: boolean,
-  privateName: boolean,
+  privatePhone: boolean,
   privateRSVP: boolean,
   username: string,
 };

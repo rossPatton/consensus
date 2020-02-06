@@ -1,11 +1,13 @@
 import React, {memo} from 'react';
+import {connect} from 'react-redux';
 
 import {Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
 import {canonical, description, keywords, title} from './_constants';
+import {tProps, tStore} from './_types';
 import {HomeComponent} from './Component';
 
-const Home = memo(() => (
+const Home = memo((props: tProps) => (
   <ErrorBoundary status={200}>
     <Helmet
       canonical={canonical}
@@ -17,9 +19,17 @@ const Home = memo(() => (
         { property: 'og:description', content: description },
       ]}
     />
-    <HomeComponent />
+    <HomeComponent
+      geo={props.geo}
+      isLoading={props.isLoading}
+    />
   </ErrorBoundary>
 ));
 
-export default Home;
+const mapStateToProps = (store: tStore) => ({
+  isLoading: store.geo.isLoading,
+  geo: store.geo.data,
+});
+
+export default connect(mapStateToProps)(Home);
 

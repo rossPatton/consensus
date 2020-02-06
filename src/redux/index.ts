@@ -27,7 +27,8 @@ export {
 } from './usersByOrgId';
 
 // misc thunks
+export { getGeo } from './geo';
+export { getOrgsBySearch } from './orgsBySearch';
 export { getRoles, postRoleFailure, postRoleSuccess } from './roles';
 export { getRsvps, patchRsvps, postRsvps } from './rsvps';
-export { getOrgsBySearch } from './orgsBySearch';
 
