@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, {Component} from 'react';
 import {HelmetProvider} from 'react-helmet-async';
 import {connect} from 'react-redux';
@@ -12,8 +13,8 @@ import {tProps, tStore} from './_types';
 class AppShellContainer extends Component<tProps> {
   constructor(props: tProps) {
     super(props);
-    const {session, session: {profile}} = props;
-    const {city, postcode} = profile as tUser;
+    const {session} = props;
+    const {city, postcode} = _.get(session, 'profile', {}) as tUser;
     const loggedIn = session.isAuthenticated;
     const isUser = session.type === 'user';
     const hasLocation = city || postcode;
