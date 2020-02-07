@@ -12,7 +12,7 @@ import {
 } from '../../utils';
 import {userKeys} from './_constants';
 import {getSchema, patchSchema, postSchema} from './_schema';
-import {tUserPatchServerQuery, tUserPostServerQuery} from './_types';
+import {tUserPostServerQuery} from './_types';
 
 export const user = new Router();
 const route = '/api/v1/user';
@@ -20,11 +20,14 @@ const dataPath = 'state.locals.data';
 const table = 'users';
 
 user.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = _.get(ctx, dataPath, {});
+  const query: tIdQuery = _.get(ctx, dataPath, {});
   await validateSchema<tIdQuery>(ctx, getSchema, query);
 
+  // TODO certain things like phone numbers should only be returned to the client
+  // if the user is viewing their admin dashboard
   const user: tUser = await knex('users')
     .limit(1)
+    .select(userKeys)
     .where({id: query.id})
     .first();
 
@@ -50,7 +53,7 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
     const {email, username} = query;
     userResult = await knex('users')
       .insert({email, username})
-      .returning('*');
+      .returning(userKeys);
   } catch (err) {
     return ctx.throw(400, err);
   }
@@ -75,7 +78,8 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
   }
 
   if (!query.isFormSubmit) {
-    ctx.body = userAccount[0];
+    const body: tAccount = userAccount[0];
+    ctx.body = body;
     return;
   }
 
@@ -84,10 +88,10 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
 
 // TODO no-js forms only do GET/POST - figure out how to make patches work w/o js
 user.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const {isFormSubmit, ...query}: tUserPatchServerQuery = _.get(ctx, dataPath, {});
+  const {isFormSubmit, ...query}: tUserQuery = _.get(ctx, dataPath, {});
   const account = _.get(ctx, 'state.user', {});
 
-  await validateSchema<tUserPatchServerQuery>(ctx, patchSchema, query);
+  await validateSchema<tUserQuery>(ctx, patchSchema, query);
 
   const isValidPW = await isValidPw(query.password, account.password);
   if (!isValidPW) {

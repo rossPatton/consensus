@@ -22,20 +22,15 @@ exports.up = async (knex: Knex) => {
 
     // contact info (useful if in leadership), ideally eventually useful for 2 factor
     table.string('phone').unique();
-    // hide phone number by default, exception is for leadership roles
-    table.boolean('privatePhone').notNullable().defaultTo(true);
 
     // optional - allow user to set their primary city
     // should be a city search, that renders all cities by region
-    table.integer('city')
+    // rendered to client
+    table.string('city').defaultTo('');
+
+    // supplementary, just included for easier lookup behind the scenes
+    table.integer('cityId')
       .references('cities.id')
-      .onUpdate('CASCADE')
-      .onDelete('CASCADE');
-
-    // optional - allow user to set their primary city
-    // should be a city search, that renders all cities by region
-    table.integer('postcode')
-      .references('postcodes.code')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
@@ -44,7 +39,7 @@ exports.up = async (knex: Knex) => {
     table.boolean('privateLocation').notNullable().defaultTo(true);
 
     // user's preferred language
-    table.string('language').defaultTo('en');
+    table.string('language').notNullable().defaultTo('en');
 
     // if set to true, user RSVPS show up in the count but aren't visible in RSVP list
     // user will also be hidden from the attendees list on the event page

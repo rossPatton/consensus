@@ -17,7 +17,6 @@ const initialState = {
   privateEmail: true,
   privateLocation: true,
   privateMemberships: false,
-  privatePhone: true,
   privateRSVP: false,
   username: '',
 };

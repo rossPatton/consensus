@@ -16,7 +16,7 @@ export const postSchema = Joi.object().keys({
 export const patchSchema = Joi.object().keys({
   bio: Joi.string(),
   city: Joi.string(),
-  country: Joi.string(),
+  cityId: Joi.number().integer(),
   email: Joi.string().email(),
   id: Joi.number().integer().required(),
   language: Joi.string().alphanum().max(2),
@@ -26,9 +26,7 @@ export const patchSchema = Joi.object().keys({
   privateEmail: Joi.bool(),
   privateLocation: Joi.bool(),
   privateMemberships: Joi.bool(),
-  privatePhone: Joi.bool(),
   privateRSVP: Joi.bool(),
-  region: Joi.string(),
   username: Joi.string(),
 
   created_at: Joi.date().timestamp(),

@@ -11,15 +11,15 @@ declare type tCategory = 'Community Center'
   | 'Union'
   | ''; // entering a category isn't required, just heavily encouraged
 
-declare type tCategoryMap = {
-  readonly [key: string]: tCategory,
-};
+declare type tCategoryMap = Readonly<{
+   [key: string]: tCategory,
+}>;
 
-declare type tCategoryObj = {
-  readonly display: tCategory,
-  readonly slug: tCategorySlug,
-};
+declare type tCategoryObj = Readonly<{
+   display: tCategory,
+   slug: tCategorySlug,
+}>;
 
-declare type tCategoryParams = tPaginateParams & {
-  readonly category: tCategorySlug,
-}
+declare type tCategoryParams = tPaginateParams & Readonly<{
+   category: tCategorySlug,
+}>;

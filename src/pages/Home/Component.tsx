@@ -1,9 +1,9 @@
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {tProps} from './_types';
+import {tComponentProps} from './_types';
 
-export const HomeComponent = memo((props: tProps) => (
+export const HomeComponent = memo((props: tComponentProps) => (
   <>
     <header className="bxSh1 brdB1 pT5 pB5">
       <div className="contain">

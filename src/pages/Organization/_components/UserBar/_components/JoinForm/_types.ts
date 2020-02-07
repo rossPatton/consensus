@@ -1,7 +1,7 @@
 export type tProps = {
   dispatch: Function,
   orgId: number,
-  postNewUserByOrgIdDispatch: (query: tPostUserByOrgIdQuery) =>
+  postNewUserByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
     tThunkPayload<tUser>,
   role: tRole,
   session: tSession,

@@ -10,8 +10,3 @@ export type tEventsServerQuery = {
   orgId: string
   showPast: 'true' | 'false',
 };
-
-export type tDeleteEventServerQuery = {
-  id: string,
-  isFormSubmit: boolean,
-};

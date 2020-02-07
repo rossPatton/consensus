@@ -1,16 +1,5 @@
-export type tState = {
-  bio: string,
-  city?: number,
-  email: string,
-  name: string,
+export type tState = Partial<tUser> & {
   password: string,
-  postcode?: number,
-  privateEmail: boolean,
-  privateLocation: boolean,
-  privateMemberships: boolean,
-  privatePhone: boolean,
-  privateRSVP: boolean,
-  username: string,
 };
 
 export type tStateUnion = keyof tState;
@@ -21,7 +10,7 @@ export type tStore = {
 
 export type tContainerProps = {
   loginDispatch: (login: tLoginQuery) => tThunkPayload<tSession>,
-  patchUserDispatch: (user: tPatchUserQuery) => tThunkPayload<tUser>,
+  patchUserDispatch: (user: tUserQuery) => tThunkPayload<tUser>,
   sessionThunk: tThunk<tSession>,
 }
 

@@ -1,6 +1,5 @@
-export type tPostRSVPServerQuery = {
+export type tPostRSVPServerQuery = tFormSubmit & {
   eventId: string,
-  isFormSubmit?: boolean,
   rsvpType: 'public' | 'private',
   value: 'true' | 'false',
 };

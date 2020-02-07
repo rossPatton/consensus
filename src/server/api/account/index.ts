@@ -1,6 +1,7 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
+import {Mutable} from 'utility-types';
 
 import {knex} from '../../db/connection';
 import {encrypt, isValidPw, saltedHash} from '../../utils';
@@ -13,9 +14,7 @@ const table = 'accounts';
 // TODO no-js forms only do GET/POST - figure out how to make patches work w/o js
 // this is basically just for updating your user/org info
 account.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tAccountQuery & {isFormSubmit: boolean} =
-    _.get(ctx, 'state.locals.data', {});
-
+  const query: Mutable<tAccountQuery> = _.get(ctx, 'state.locals.data', {});
   const loggedInAccount: tAccount = _.get(ctx, 'state.user', {});
 
   try {
@@ -36,7 +35,7 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
   // password stuff will cause a constraint error - pull out before updating
   const {isFormSubmit, newPassword, password, ...updateQuery} = query;
 
-  let updatedAccount: tUser[];
+  let updatedAccount: tAccount[];
   try {
     updatedAccount = await knex(table)
       .limit(1)
@@ -52,8 +51,9 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
   if (!updatedAccount
       || (updatedAccount instanceof Array && updatedAccount.length === 0)) {
     ctx.status = 204;
+    ctx.body = {};
   }
 
-  const body = updatedAccount[0];
+  const body: tAccount = updatedAccount[0];
   ctx.body = body;
 });

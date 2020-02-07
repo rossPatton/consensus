@@ -1,22 +1,22 @@
 declare type tPrivacyEnum = 'public' | 'manual' | 'private';
 
-declare type tOrg = {
-  readonly category: tCategory,
-  readonly city: string,
-  readonly cityId: number,
-  readonly country: string,
-  readonly countryId: number,
-  readonly created_at?: Date,
-  readonly description: string,
-  readonly eventPrivacy: tPrivacyEnum,
-  readonly id: number,
-  readonly name: string,
-  readonly region: string,
-  readonly regionId: number,
-  readonly slug: string,
-  readonly updated_at?: Date,
-  readonly vetting: tPrivacyEnum,
-};
+declare type tOrg = Readonly<{
+   category: tCategory,
+   city: string,
+   cityId: number,
+   country: string,
+   countryId: number,
+   created_at?: Date,
+   description: string,
+   eventPrivacy: tPrivacyEnum,
+   id: number,
+   name: string,
+   region: string,
+   regionId: number,
+   slug: string,
+   updated_at?: Date,
+   vetting: tPrivacyEnum,
+}>;
 
 // if posting/patching most values are up for grabs
 declare type tOrgQuery = Partial<tOrg>;
@@ -24,8 +24,8 @@ declare type tOrgQuery = Partial<tOrg>;
 // if getting, add db delimiters
 declare type tGetOrgQuery = Partial<tOrg> & tBaseQuery;
 
-declare type tOrgRouteParams = tPaginateParams & {
-  readonly id: string,
-  readonly section?: string,
-  readonly slug: string,
-}
+declare type tOrgRouteParams = tPaginateParams & Readonly<{
+   id: string,
+   section?: string,
+   slug: string,
+}>;

@@ -1,19 +1,19 @@
 // declare interface tCustomVoteResults {
-//   readonly [key: string]: number,
+//    [key: string]: number,
 // }
 
 // declare type tSimplePollResults = {
-//   readonly Abstain: number,
-//   readonly No: number,
-//   readonly Yes: number,
+//    Abstain: number,
+//    No: number,
+//    Yes: number,
 // };
 
 // declare type tConsensusResults = {
-//   readonly Abstain: number,
-//   readonly Agree: number,
-//   readonly Disagree: number,
-//   readonly Block: number,
-//   readonly decisionBlocked: boolean,
+//    Abstain: number,
+//    Agree: number,
+//    Disagree: number,
+//    Block: number,
+//    decisionBlocked: boolean,
 // };
 
 // declare type tDecisionType = 'n/a'
@@ -23,19 +23,19 @@
 //   | 'Approval';
 
 // declare type tDecision = {
-//   readonly deadline: string,
-//   readonly data: {
+//    deadline: string,
+//    data: {
 //     options: tCustomVoteResults
 //       | tSimplePollResults
 //       | tConsensusResults, // voting options object with votes
 //   },
-//   readonly description: string,
-//   readonly id: number,
-//   readonly isClosed: boolean,
-//   readonly orgId: number,
-//   readonly orgName: string,
-//   readonly title: string,
-//   readonly type: tDecisionType,
+//    description: string,
+//    id: number,
+//    isClosed: boolean,
+//    orgId: number,
+//    orgName: string,
+//    title: string,
+//    type: tDecisionType,
 // }
 
 // declare type tVote = {

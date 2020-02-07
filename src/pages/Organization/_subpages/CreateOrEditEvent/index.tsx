@@ -205,7 +205,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  postEvent: (query: tPostEventQuery) => dispatch(postEvent(query)),
+  postEvent: (query: tUpsertEventQuery) => dispatch(postEvent(query)),
 });
 
 const CreateOrEditEvent = connect(

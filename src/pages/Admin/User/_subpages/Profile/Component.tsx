@@ -21,7 +21,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
         See your public profile here
       </Link>
       <div className="p4 br8 brdA1 mB3">
-        <label className="col row mR3" htmlFor="name">
+        <label className="col row mB3" htmlFor="name">
           <h2 className="ffLab fs5 mB1 lh1">
             Name
           </h2>
@@ -79,19 +79,61 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             autoComplete="nope"
             checked={props.privateEmail}
           />
-          {props.privateEmail && (
-            <span>Private</span>
-          )}
-          {!props.privateEmail && (
-            <span>Public</span>
-          )}
+          {props.privateEmail && 'Your email is kept private'}
+          {!props.privateEmail && 'Your email is displayed on your profile.'}
+        </div>
+        <label className="dBl mB3" htmlFor="phone">
+          <h2 className="ffLab fs5 mB1 lh1">
+            Phone number
+          </h2>
+          <p className="fs5 copyBlack mB1">
+            Used as an additional level of account verification. Always private, never shared with anyone.
+          </p>
+          <input
+            onChange={ev => props.updateState('phone', ev)}
+            className="p3 row"
+            placeholder="Example: 555-555-5555"
+            value={props.phone}
+            name="phone"
+          />
+        </label>
+        <label htmlFor="city">
+          <h2 className="ffLab fs5 mB1 lh1">
+            City
+          </h2>
+          <p className="fs5 copyBlack mB1">
+            Used to show you more personalized search results
+          </p>
+          <input
+            onChange={ev => props.updateState('city', ev)}
+            className="p3 row mB1"
+            placeholder="Example: Brooklyn"
+            value={props.city}
+            name="city"
+          />
+        </label>
+        <div
+          tabIndex={0}
+          role="button"
+          className="fx aiCtr curPtr mB3 fs6"
+          onClick={ev => props.updateState('privateLocation', ev)}
+          onKeyPress={ev => props.updateState('privateLocation', ev)}>
+          <input
+            readOnly
+            type="checkbox"
+            className="mR2"
+            autoComplete="nope"
+            checked={props.privateLocation}
+          />
+          {props.privateLocation && 'Your city is kept private.'}
+          {!props.privateLocation && 'Your city is displayed on your profile.'}
         </div>
         <label htmlFor="username">
           <h2 className="ffLab fs5 mB1 lh1">
             Username
           </h2>
           <p className="fs5 copyBlack mB1">
-            This is your alias. Can&apos;t be blank.
+            This is your alias. Must be unique, can&apos;t be blank. You must fill this out in order to join groups or RSVP to events. You may change it at any time.
           </p>
           <input
             id="username"
@@ -102,13 +144,6 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             name="username"
           />
         </label>
-        <PasswordInput
-          id="pwInput"
-          title="Current password"
-          password={props.password}
-          placeholder="Your current password"
-          onChange={ev => props.updateState('password', ev)}
-        />
         <h2 className="ffLab fs5 mT3 mB1 lh1">
           Other privacy settings
         </h2>
@@ -126,18 +161,16 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             checked={props.privateRSVP}
           />
           {props.privateRSVP && (
-            <>Keep my event RSVPs private.</>
+            'Only you can see your RSVPS.'
           )}
           {!props.privateRSVP && (
-            <>
-              Show my RSVPs publicly (user account will be linked in RSVP list)
-            </>
+            'RSVPs will be shown publicly on events you have RSVPd to.'
           )}
         </div>
         <div
           tabIndex={0}
           role="button"
-          className="fx aiCtr curPtr mB3 fs6"
+          className="fx aiCtr curPtr mB4 fs6"
           onClick={ev => props.updateState('privateMemberships', ev)}
           onKeyPress={ev => props.updateState('privateMemberships', ev)}>
           <input
@@ -148,16 +181,19 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             checked={props.privateMemberships}
           />
           {props.privateMemberships && (
-            <span>
-              Keep my organization memberships private.
-            </span>
+            'Memberships are kept private.'
           )}
           {!props.privateMemberships && (
-            <span>
-              Link to organizations I&apos;ve joined on my profile
-            </span>
+            'Memberships will be displayed on your profile.'
           )}
         </div>
+        <PasswordInput
+          id="pwInput"
+          title="Current password"
+          password={props.password}
+          placeholder="Your current password"
+          onChange={ev => props.updateState('password', ev)}
+        />
       </div>
     </fieldset>
     <button

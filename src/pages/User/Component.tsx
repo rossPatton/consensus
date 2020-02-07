@@ -19,14 +19,6 @@ export const UserComponent = memo(({match, orgs, user}: tComponentProps) => (
           <p>{user.email}</p>
         </>
       )}
-    {user.phone
-      && !user.privatePhone
-      && (
-        <>
-          <h3>Phone number:</h3>
-          <p>{user.phone}</p>
-        </>
-      )}
     {user.bio && (
       <div className="row">
         <h3>Bio:</h3>
@@ -36,9 +28,10 @@ export const UserComponent = memo(({match, orgs, user}: tComponentProps) => (
       </div>
     )}
     {!user.privateMemberships
+      && orgs.length > 0
       && (
         <div className="row">
-          <h3>Organization Memberships:</h3>
+          <h3>Memberships:</h3>
           <Orgs match={match} orgs={orgs} />
         </div>
       )}

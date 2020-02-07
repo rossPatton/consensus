@@ -4,7 +4,7 @@ exports.up = async (knex: Knex) => {
   await knex.schema.createTable('postcodes', table => {
     table.increments().unsigned().primary();
 
-    table.string('code').notNullable();
+    table.integer('code').notNullable();
 
     // cities, especially large ones, can have many postal codes
     table.integer('city')
@@ -12,6 +12,9 @@ exports.up = async (knex: Knex) => {
       .references('cities.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
+
+    // create unique composite key. some cities share zipcodes
+    table.unique(['code', 'city']);
   });
 };
 

@@ -8,7 +8,7 @@ exports.up = async (knex: Knex) => {
   await knex.schema.createTable('cities', table => {
     table.increments().unsigned().primary();
 
-    // New York City
+    // New York
     // name is not id, since many cities have same name
     table.string('name').notNullable();
 

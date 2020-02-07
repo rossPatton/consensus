@@ -7,7 +7,7 @@ import {getAccountRoleRelByOrgId, getRSVPsByUserId} from '../../queries';
 import {validateSchema, zipEventsWithAttendees} from '../../utils';
 import {getEventsByQuery} from './_queries';
 import {deleteSchema, getSchema} from './_schema';
-import {tDeleteEventServerQuery, tEventsServerQuery} from './_types';
+import {tEventsServerQuery} from './_types';
 import {filterEvents} from './_utils';
 
 export const events = new Router();
@@ -37,8 +37,8 @@ events.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 events.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tDeleteEventServerQuery = _.get(ctx, dataPath, {});
-  await validateSchema<tDeleteEventServerQuery>(ctx, deleteSchema, query);
+  const query: tIdQuery = _.get(ctx, dataPath, {});
+  await validateSchema<tIdQuery>(ctx, deleteSchema, query);
 
   try {
     await knex(table).limit(1).where({id: query.id}).del();
@@ -47,7 +47,7 @@ events.delete(route, async (ctx: Koa.ParameterizedContext) => {
   }
 
   // we use the id on the client to filter out the now deleted event
-  ctx.body = {id: parseInt(query.id, 10)};
+  ctx.body = {id: parseInt(query.id as string, 10)};
 });
 
 // create a new event

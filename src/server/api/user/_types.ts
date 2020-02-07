@@ -1,13 +1,7 @@
 // everything gets turned into strings
-export type tUserPostServerQuery = {
+export type tUserPostServerQuery = tFormSubmit & {
   email: string,
-  isFormSubmit?: boolean,
   login: string,
   username: string,
-  password: string,
-};
-
-export type tUserPatchServerQuery = Partial<tUser> & {
-  isFormSubmit?: boolean,
   password: string,
 };
