@@ -27,7 +27,7 @@ class SearchContainer extends React.PureComponent<any, any> {
         <fieldset>
           <div className="fx aiCtr rel">
             <input
-              className="p2 br4"
+              className="p3 br4"
               value={this.state.value}
               onChange={this.onChange}
               placeholder="Eg, TWC, DSA"

@@ -70,7 +70,7 @@ export const EventComponent = memo((props: tComponentProps) => {
           {eventsByOrgId && eventsByOrgId.length > 0 && (
             <>
               <h2 className="fs5 mB3 ffLab lh1">
-                More by <Link to={`/org/${event.orgId}/overview`}>
+                More by <Link to={`/org/${event.orgId}`}>
                   {event.orgName}
                 </Link>
               </h2>

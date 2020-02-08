@@ -3,48 +3,22 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {GenericLoader, Helmet} from '../../../../components';
-import {ErrorBoundary, PrivacyFilter, SearchFilter} from '../../../../containers';
-import {getEventsByOrgId} from '../../../../redux';
-import {tContainerProps, tState, tStore} from './_types';
+import {ErrorBoundary} from '../../../../containers';
+import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
 
-class EventsContainer extends PureComponent<tContainerProps, tState> {
-  constructor(props: tContainerProps) {
-    super(props);
-    this.getEvents();
-  }
-
-  state = {
-    showPast: false,
-  };
-
-  togglePast = () =>
-    this.setState({
-      showPast: !this.state.showPast,
-    }, this.getEvents);
-
-  getEvents = () => {
-    const {showPast} = this.state;
-    const {match: {params: {page = 0} = {}}, org} = this.props;
-    // if user is not signed in, only show public events
-    const isPublic = !this.props.session.isAuthenticated;
-    const offset = page ? parseInt(page, 10) : 0;
-
-    this.props.getEventsDispatch({
-      orgId: org.id,
-      isDraft: false,
-      isPublic,
-      limit: -1,
-      offset,
-      showPast,
-    });
-  }
-
+// TODO use context for match cause passing it around everywhere is annoying
+class EventsContainer extends PureComponent<tContainerProps> {
   render() {
-    const {events} = this.props;
+    const {events, match} = this.props;
+    const type = _.get(match, 'params.section', 'events');
+    const eventsToRender = type === 'events'
+      ? events.filter(ev => !ev.isDraft)
+      : events.filter(ev => ev.isDraft);
+
 
     return (
-      <ErrorBoundary status={_.get(events, 'error.status', 200)}>
+      <ErrorBoundary status={_.get(this.props, 'events.error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -58,24 +32,12 @@ class EventsContainer extends PureComponent<tContainerProps, tState> {
         <GenericLoader
           isLoading={this.props.isLoading}
           render={() => (
-            <PrivacyFilter
-              items={events}
-              render={(privacyProps: tPrivacyFilterProps) => (
-                <SearchFilter
-                  items={privacyProps.items}
-                  render={(searchProps: tSearchFilterProps) => (
-                    <EventsComponent
-                      {...privacyProps}
-                      {...searchProps}
-                      events={searchProps.items}
-                      match={this.props.match}
-                      role={this.props.role}
-                      showPast={this.state.showPast}
-                      togglePast={this.togglePast}
-                    />
-                  )}
-                />
-              )}
+            <EventsComponent
+              events={eventsToRender}
+              match={this.props.match}
+              org={this.props.org}
+              role={this.props.role}
+              type={this.props.type}
             />
           )}
         />
@@ -89,13 +51,5 @@ const mapStateToProps = (store: tStore) => ({
   isLoading: store.eventsByOrgId.isLoading,
 });
 
-const mapDispatchToProps = (dispatch: Function) => ({
-  getEventsDispatch: (query: tGetEventQuery) => dispatch(getEventsByOrgId(query)),
-});
-
-const Events = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(EventsContainer);
-
+const Events = connect(mapStateToProps)(EventsContainer);
 export default Events;

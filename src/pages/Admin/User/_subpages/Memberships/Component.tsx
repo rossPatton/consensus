@@ -56,7 +56,7 @@ export const MembershipsComponent = memo((props: tComponentProps) => (
           </div>
           <div className="p3">
             <h2 className="fs3 lh1 ttCap mB2">
-              <Link to={`/org/${org.id}/overview`}>
+              <Link to={`/org/${org.id}`}>
                 {org.name}
               </Link>
             </h2>

@@ -20,7 +20,7 @@ export const ProfileComponent = memo((props: tComponentProps) => {
               Organization Name
             </h2>
             <div className="mB3 copyBlack">
-              <Link to={`/org/${props.id}/overview`}>{props.name}</Link>
+              <Link to={`/org/${props.id}`}>{props.name}</Link>
             </div>
             <h2 className="ffLab fs5 mB1 lh1">
               Organization Category

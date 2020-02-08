@@ -1,7 +1,7 @@
 import loadable from '@loadable/component';
 
-export const OrganizationHeader = loadable(() =>
-  import(/* webpackChunkName: "OrganizationHeader" */'./OrganizationHeader'),
+export const OrganizationInfo = loadable(() =>
+  import(/* webpackChunkName: "OrganizationInfo" */'./OrganizationInfo'),
 );
 
 export const OrganizationTabs = loadable(() =>

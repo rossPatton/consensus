@@ -86,7 +86,7 @@
 //           {decisions && decisions.length > 0 && (
 //             <>
 //               <h2 className="fs5 mB3 ffLab lh1">
-//                 More by <Link to={`/org/${decision.orgId}/overview`}>{decision.orgName}</Link>
+//                 More by <Link to={`/org/${decision.orgId}`}>{decision.orgName}</Link>
 //               </h2>
 //               <Decisions
 //                 tiny

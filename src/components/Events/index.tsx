@@ -19,6 +19,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
 
     return (
       <Paginate
+        count={4}
         items={events}
         page={match.params.page}
         render={(events: tEvent[]) => (

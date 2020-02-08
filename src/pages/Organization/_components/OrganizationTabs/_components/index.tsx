@@ -1,19 +1,36 @@
+import cx from 'classnames';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {tProps} from './_types';
 
+const routeDisplayMap = {
+  drafts: 'Event Drafts',
+  // events: 'Upcoming Meetings',
+  pending: 'Pending Members',
+};
+
 export const Tab = memo((props: tProps) => {
-  const { match, subRoute = '' } = props;
+  const { match, subRoute } = props;
   const { id, section } = match.params;
-  const to = `/org/${id}/${subRoute}`;
-  const cx = 'ttCap dBl p2 pL3 pR3';
+  const route = `/${subRoute}`;
+  const to = `/org/${id}${subRoute ? route : ''}`;
+  // @ts-ignore
+  const text = routeDisplayMap[subRoute] || 'Upcoming Meetings';
+  const isEvents = subRoute === '' && typeof section === 'undefined';
+  const isActive = isEvents || section === subRoute;
+  const className = cx({
+    'fs3 ttCap dBl p2 pR3': true,
+    'pL3': subRoute !== '',
+    'underline black': isActive,
+    'noUnderline grey3': !isActive,
+  });
 
   // dont render link if you're on the section page itself
-  if (section === subRoute) {
+  if (isEvents || section === subRoute) {
     return (
-      <span className={`${cx} bgGrey2`}>
-        {subRoute === 'events' ? 'meetings' : subRoute}
+      <span className={className}>
+        {text}
       </span>
     );
   }
@@ -21,8 +38,8 @@ export const Tab = memo((props: tProps) => {
   return (
     <Link
       to={to}
-      className={`${cx} hvrBgGrey3 trans1`}>
-      {subRoute === 'events' ? 'meetings' : subRoute}
+      className={className}>
+      {text}
     </Link>
   );
 });

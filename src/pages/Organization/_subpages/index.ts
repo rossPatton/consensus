@@ -11,7 +11,3 @@ export const Events = loadable(() =>
 export const Members = loadable(() =>
   import(/* webpackChunkName: "Org Members" */'./Members'),
 );
-
-export const Overview = loadable(() =>
-  import(/* webpackChunkName: "Org Overview" */'./Overview'),
-);

@@ -7,7 +7,6 @@ import {tComponentProps} from './_types';
 
 export const MembersComponent = memo((props: tComponentProps) => (
   <>
-    <h2>{props.section === 'pending' && 'Pending'} Members List</h2>
     <label
       htmlFor="searchFilter"
       className="fx aiCtr p3 bgGrey1 br8 mB4">
@@ -17,7 +16,7 @@ export const MembersComponent = memo((props: tComponentProps) => (
         id="searchFilter"
         className="mR2 lh1 row"
         onChange={props.onSearchChange}
-        placeholder="Search for a member by username"
+        placeholder="Search for someone by username"
       />
       {props.section === 'members' && (
         <select

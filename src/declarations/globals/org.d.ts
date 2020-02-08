@@ -26,6 +26,6 @@ declare type tGetOrgQuery = Partial<tOrg> & tBaseQuery;
 
 declare type tOrgRouteParams = tPaginateParams & Readonly<{
    id: string,
-   section?: string,
+   section?: 'createEvent' | 'drafts' | 'members' | 'pending',
    slug: string,
 }>;

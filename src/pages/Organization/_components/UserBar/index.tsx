@@ -15,7 +15,6 @@ class UserBarContainer extends PureComponent<tContainerProps> {
 
   render() {
     const {usersByOrg} = this.props;
-
     const members = usersByOrg.filter(u => u.role !== 'pending');
     const pending = usersByOrg.filter(u => u.role === 'pending');
 

@@ -3,19 +3,24 @@ import {connect} from 'react-redux';
 
 import {getUsersByOrgId} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
-import {OrganizationHeaderComponent} from './Component';
+import {OrganizationInfoComponent} from './Component';
 
-class OrganizationHeaderContainer extends PureComponent<tContainerProps> {
+class OrganizationInfoContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     props.getUsersByOrgIdDispatch({orgId: props.org.id});
   }
 
   render() {
+    const {usersByOrg} = this.props;
+    const members = usersByOrg.filter(u => u.role !== 'pending');
+
     return (
-      <OrganizationHeaderComponent
+      <OrganizationInfoComponent
         org={this.props.org}
+        members={members}
         params={this.props.params}
+        role={this.props.role}
       />
     );
   }
@@ -31,9 +36,9 @@ const mapDispatchToProps = (dispatch: Function) => ({
     dispatch(getUsersByOrgId(query)),
 });
 
-const OrganizationHeader = connect(
+const OrganizationInfo = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(OrganizationHeaderContainer);
+)(OrganizationInfoContainer);
 
-export default OrganizationHeader;
+export default OrganizationInfo;

@@ -21,17 +21,18 @@ export const UsersComponent = memo((props: tComponentProps) => (
           <div className="col ttCap mR3">
             {user.role}
           </div>
-          {props.sessionRole === 'admin' && (
-            <div className="col taR">
-              <button
-                className="bgWhite"
-                onClick={ev => props.removeUser(ev, user.id)}>
-                {user.role === 'pending'
-                  ? 'Reject this user'
-                  : 'Remove this user'}
-              </button>
-            </div>
-          )}
+          {(props.sessionRole === 'admin' || props.sessionRole === 'facilitator')
+            && (
+              <div className="col taR">
+                <button
+                  className="bgWhite"
+                  onClick={ev => props.removeUser(ev, user.id)}>
+                  {user.role === 'pending'
+                    ? 'Reject this user'
+                    : 'Remove this user'}
+                </button>
+              </div>
+            )}
         </div>
         <div className="p3 fx">
           <h3>
@@ -40,34 +41,35 @@ export const UsersComponent = memo((props: tComponentProps) => (
               {user.username}
             </Link>
           </h3>
-          {props.sessionRole === 'admin' && (
-            <div className="row">
-              <h3 className="ffLab fs5 ttCap mB2">
-                Current role: {user.role}
-              </h3>
-              <select
-                className="row ffLab ttCap"
-                value={user.role as string}
-                onChange={ev => props.setUserRole(ev, user.id)}
-              >
-                <option key="default" value={user.role as string}>
-                  Choose a new role
-                </option>
-                {roles.map(role => (
-                  role === user.role
-                    ? null
-                    : (
-                      <option
-                        className="ttCap"
-                        key={role as string}
-                        value={role as string}>
-                        {role}
-                      </option>
-                    )
-                ))}
-              </select>
-            </div>
-          )}
+          {(props.sessionRole === 'admin' || props.sessionRole === 'facilitator')
+            && (
+              <div className="row">
+                <h3 className="ffLab fs5 ttCap mB2">
+                  Current role: {user.role}
+                </h3>
+                <select
+                  className="row ffLab ttCap"
+                  value={user.role as string}
+                  onChange={ev => props.setUserRole(ev, user.id)}
+                >
+                  <option key="default" value={user.role as string}>
+                    Choose a new role
+                  </option>
+                  {roles.map(role => (
+                    role === user.role
+                      ? null
+                      : (
+                        <option
+                          className="ttCap"
+                          key={role as string}
+                          value={role as string}>
+                          {role}
+                        </option>
+                      )
+                  ))}
+                </select>
+              </div>
+            )}
         </div>
       </li>
     ))}

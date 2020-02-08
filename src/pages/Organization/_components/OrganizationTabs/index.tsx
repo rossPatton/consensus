@@ -4,20 +4,30 @@ import {Tab} from './_components';
 import {tProps} from './_types';
 
 const OrganizationTabs = memo((props: tProps) => (
-  <nav className="bxSh1 fs5 fw600 bgGrey1">
-    <ul className="contain fx aiCtr taCtr ovfScr brdL1">
-      <li className="brdR1">
+  <nav className="fs5">
+    <ul className="fx aiCtr ovfScr">
+      <li>
         <Tab
           match={props.match}
-          subRoute="overview"
+          subRoute=""
         />
       </li>
-      <li className="brdR1">
-        <Tab
-          match={props.match}
-          subRoute="events"
-        />
-      </li>
+      {(props.role === 'admin' || props.role === 'facilitator')
+        && (<li>
+          <Tab
+            match={props.match}
+            subRoute="pending"
+          />
+        </li>
+        )}
+      {(props.role === 'admin' || props.role === 'facilitator')
+        && (<li>
+          <Tab
+            match={props.match}
+            subRoute="drafts"
+          />
+        </li>
+        )}
       {/* <li className="brdR1">
         <Tab
           match={props.match}

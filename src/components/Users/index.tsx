@@ -14,6 +14,7 @@ class Users extends Component<tContainerProps> {
 
     return (
       <Paginate
+        count={4}
         items={users}
         page={match.params.page}
         render={(usersToRender: tUser[]) => (

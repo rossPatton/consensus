@@ -5,7 +5,7 @@ import {Redirect} from 'react-router';
 
 import {GenericLoader, Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
-import {getOrg, getRoles, getRsvps} from '../../redux';
+import {getEventsByOrgId, getOrg, getRoles, getRsvps} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {OrganizationComponent} from './Component';
 
@@ -15,6 +15,13 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
     const id = _.get(props, 'match.params.id', null);
 
     if (id) props.getOrgDispatch({id});
+    if (id) {
+      props.getEventsDispatch({
+        orgId: id,
+        showPast: false,
+        limit: -1,
+      });
+    }
 
     if (!props.session.isAuthenticated) return;
     if (props.session.type === 'org') return;
@@ -24,6 +31,7 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
 
   render() {
     const {isLoading, location, match, orgThunk, rolesThunk, session} = this.props;
+    console.log('org props => ', this.props);
 
     return (
       <ErrorBoundary status={_.get(orgThunk, 'error.status', 200)}>
@@ -63,7 +71,7 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
               ) : (
                 <>
                   <Helmet
-                    canonical={`org/${org.id}/overview`}
+                    canonical={`org/${org.id}`}
                     title={`Consensus: ${org.name}`}
                     meta={meta}
                   />
@@ -93,6 +101,7 @@ const mapStateToProps = (store: tStore) => ({
 
 
 const mapDispatchToProps = (dispatch: Function) => ({
+  getEventsDispatch: (query: tGetEventQuery) => dispatch(getEventsByOrgId(query)),
   getOrgDispatch: (query: tIdQuery) => dispatch(getOrg(query)),
   getRolesDispatch: () => dispatch(getRoles()),
   getRsvpsDispatch: () => dispatch(getRsvps()),
