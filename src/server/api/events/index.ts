@@ -23,14 +23,20 @@ events.get(route, async (ctx: Koa.ParameterizedContext) => {
   // all events by generic query
   const events = await getEventsByQuery(ctx, query);
 
+  console.log('all generic events => ', events);
+
   // user role for this particular org
   const {role, userId} = await getAccountRoleRelByOrgId(ctx, query.orgId);
+
+  console.log('user role => ', role);
 
   // all user rsvps
   const userRSVPs = await getRSVPsByUserId(ctx, userId);
 
   // zip rsvps up with events, split by public vs private rsvps
   const eventsWithRSVPCount = await zipEventsWithAttendees(events, userRSVPs);
+
+  console.log('events with rsvp counts => ', eventsWithRSVPCount);
 
   // return zipped events, filtered based on user login status, role, etc
   ctx.body = await filterEvents(ctx, eventsWithRSVPCount, role);

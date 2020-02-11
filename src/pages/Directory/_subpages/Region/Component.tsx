@@ -6,16 +6,16 @@ import {tComponentProps} from './_types';
 
 export const RegionComponent = memo((props: tComponentProps) => (
   <>
-    <h1>
+    <h1 className="mB2">
       {props.region.name}
     </h1>
     <label
       htmlFor="searchFilter"
-      className="fx aiCtr p3 bgGrey1 br8 mB4">
+      className="fx aiCtr p3 bgWhite br8 mB4">
       <input
         spellCheck
         type="search"
-        id="searchFilter"
+        name="searchFilter"
         className="mR2 lh1 row"
         onChange={props.onChange}
         placeholder="Search for a city by name"
@@ -32,7 +32,7 @@ export const RegionComponent = memo((props: tComponentProps) => (
           className="col fxg0 third mB3">
           <Link
             to={`${props.match.url}/${slugify(city.name)}`}
-            className="dBl p3 brdA1 br8 hvrBgGrey1 trans1">
+            className="dBl p3 br8 bgWhite">
             {city.name}
           </Link>
         </li>

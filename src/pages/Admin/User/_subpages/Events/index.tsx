@@ -48,7 +48,6 @@ class EventsContainer extends PureComponent<tContainerProps> {
                       {...privacyProps}
                       {...searchProps}
                       events={searchProps.items}
-                      match={this.props.match}
                     />
                   )}
                 />

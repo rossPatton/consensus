@@ -6,16 +6,16 @@ import { tComponentProps } from './_types';
 
 export const CityComponent = memo((props: tComponentProps) => (
   <>
-    <h1>
+    <h1 className="mB2">
       {props.city.name}
     </h1>
     <label
       htmlFor="searchFilter"
-      className="fx aiCtr p3 bgGrey1 br8 mB4">
+      className="fx aiCtr p3 bgWhite br8 mB4">
       <input
         spellCheck
         type="search"
-        id="searchFilter"
+        name="searchFilter"
         className="mR2 lh1 row"
         onChange={props.onSearch}
         placeholder="Search for an organization by name"

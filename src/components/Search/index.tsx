@@ -17,6 +17,8 @@ class SearchContainer extends React.PureComponent<any, any> {
   }
 
   render() {
+    const {value} = this.state;
+
     return (
       <form
         className="mR2"
@@ -25,18 +27,16 @@ class SearchContainer extends React.PureComponent<any, any> {
         onSubmit={this.onSubmit}
         action="/api/v1/search">
         <fieldset>
-          <div className="fx aiCtr rel">
+          <label htmlFor="headerSearch">
             <input
-              className="p3 br4"
-              value={this.state.value}
+              className="p2 pL3 pR3 br4"
+              name="headerSearch"
               onChange={this.onChange}
               placeholder="Eg, TWC, DSA"
               type="search"
+              value={value}
             />
-            <button className="fw600 abs r mR2 p1 bgBlue white">
-              <legend>Search</legend>
-            </button>
-          </div>
+          </label>
         </fieldset>
       </form>
     );

@@ -1,22 +1,27 @@
 import {Location} from 'history';
 
-export type tState = {
-  category: string,
-  date: string,
-  description: string,
-  duration: string | number, // string because that's what the form will give us
-  // featuredImage: File | null,
-  id?: number,
-  // imagePreview: string | null,
-  isDraft: boolean,
-  isPrivate: boolean,
-  location: string,
-  locationLink: string,
-  orgName: string,
-  // pathToFeaturedImage: string | null,
+export type tState = Partial<tEvent> & {
+  duration: string | number,
   time: string,
-  title: string,
 };
+
+// {
+//   category: string,
+//   date: string,
+//   description: string,
+//   duration: string | number, // string because that's what the form will give us
+//   // featuredImage: File | null,
+//   id?: number,
+//   // imagePreview: string | null,
+//   isDraft: boolean,
+//   isPrivate: boolean,
+//   location: string,
+//   locationLink: string,
+//   orgName: string,
+//   // pathToFeaturedImage: string | null,
+//   time: string,
+//   title: string,
+// };
 
 export type tStore = {
   eventsByOrgId: tThunk<tEvent[]>,

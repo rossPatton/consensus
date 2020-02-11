@@ -1,6 +1,4 @@
-import {match} from 'react-router-dom';
-
-// TODO happy leftovers from before role de-coupling, eventually remove
+// TODO leftovers from before role de-coupling, eventually remove
 export type tOrgWithRole = tOrg & {role: tRole};
 
 export type tState = {
@@ -16,7 +14,6 @@ export type tComponentProps = {
 export type tContainerProps = {
   deleteOrgByUserIdDispatch: (query: tDeleteUserByOrgIdQuery) => tThunkPayload<tOrg>,
   getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) => tThunkPayload<tOrg[]>,
-  match: match & {params: tPaginateParams},
   orgsByUserIdThunk: tThunk<tOrgWithRole[]>,
   sessionThunk: tThunk<tSession>,
 };

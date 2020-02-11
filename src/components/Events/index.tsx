@@ -14,17 +14,23 @@ class EventsContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {events, sessionRole} = this.props;
+    const {events, sessionRole, type} = this.props;
     const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
+
+    if (events.length === 0) {
+      return (
+        <h2>No {type === 'events' ? 'upcoming events!' : 'drafts'}</h2>
+      );
+    }
 
     return (
       <Paginate
         count={4}
         items={events}
-        render={(events: tEvent[]) => (
+        render={(eventsToRender: tEvent[]) => (
           <EventsComponent
             deleteEvent={this.deleteEvent}
-            events={events}
+            events={eventsToRender}
             isEditable={isEditable}
             sessionRole={sessionRole}
             tiny={this.props.tiny}

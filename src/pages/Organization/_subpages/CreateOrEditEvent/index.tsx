@@ -30,18 +30,21 @@ class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
   };
 
   // we use query params to populate the form when editing an event
-  componentDidMount() {
-    const draft = qs.parse(this.props.router.search.split('?')[1]);
+  constructor(props: tContainerProps) {
+    super(props);
+    const {router: {search}} = props;
+    const draft = qs.parse(search);
     if (!draft.id) return;
 
     const isPrivate = draft.isPrivate === 'true';
 
-    this.setState({
-      category: draft.category as string,
+    this.state = {
+      category: draft.category as tCategory,
       // convert UTC date with tz to local format for html5 date/time
       date: dayJS(draft.date as string).format('YYYY-MM-DD'),
       description: draft.description as string,
       duration: parseInt(draft.duration as string, 10),
+      // @ts-ignore
       id: parseInt(draft.id as string, 10),
       isDraft: true,
       isPrivate,
@@ -51,7 +54,7 @@ class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
       // pathToFeaturedImage: draft.pathToFeaturedImage as string,
       time: draft.time as string,
       title: draft.title as string,
-    });
+    };
   }
 
   // create preview image, store featuredImage in state to be saved to file server

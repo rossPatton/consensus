@@ -1,11 +1,11 @@
 import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
+import qs from 'query-string';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {ExternalLink, RSVP} from '../../components';
-// import {objToQueryString} from '../../utils';
 import {tComponentProps} from './_types';
 
 export const EventsComponent = memo((props: tComponentProps) => (
@@ -16,7 +16,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
       return (
         <li
           key={ev.id}
-          className="bgWhite fx mB3">
+          className="bgWhite br8 fx aiCtr p3 mB2">
           {/* {!isPastEvent && props.isEditable && (
             <div
               className={cx({
@@ -79,7 +79,11 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 'mB2 fx aiCtr ttCap': true,
                 fs4: props.tiny,
               })}>
-              <Link className="noUnderline" to={`/event/${ev.id}`}>
+              <Link
+                className="noUnderline"
+                to={ev.isDraft
+                  ? `/org/${ev.orgId}/createEvent?${qs.stringify(ev)}`
+                  : `/event/${ev.id}`}>
                 {ev.title}
               </Link>
             </h3>
@@ -98,7 +102,8 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 hide: props.tiny,
                 o5: isPastEvent,
               })}>
-              <RSVP event={ev} />
+              {!ev.isDraft && <RSVP event={ev} />}
+              {ev.isDraft && 'This event is not published yet.'}
             </div>
           </div>
         </li>

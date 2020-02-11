@@ -16,44 +16,42 @@ export const OrganizationComponent = (props: tComponentProps) => (
         match={props.match}
         role={props.role}
       />
-      <div className="p3">
-        {typeof props.match.params.section === 'undefined' && (
-          <Events
-            match={props.match}
-            org={props.org}
-            role={props.role}
-            session={props.session}
-            type="events"
-          />
-        )}
-        {props.match.params.section === 'drafts' && (
-          <Events
-            match={props.match}
-            org={props.org}
-            role={props.role}
-            session={props.session}
-            type="drafts"
-          />
-        )}
-        {props.match.params.section === 'members' && (
-          <Members
-            match={props.match}
-            org={props.org}
-            role={props.role}
-            router={props.location}
-            session={props.session}
-          />
-        )}
-        {props.match.params.section === 'pending' && (
-          <Members
-            match={props.match}
-            org={props.org}
-            role={props.role}
-            router={props.location}
-            session={props.session}
-          />
-        )}
-      </div>
+      {typeof props.match.params.section === 'undefined' && (
+        <Events
+          match={props.match}
+          org={props.org}
+          role={props.role}
+          session={props.session}
+          type="events"
+        />
+      )}
+      {props.match.params.section === 'drafts' && (
+        <Events
+          match={props.match}
+          org={props.org}
+          role={props.role}
+          session={props.session}
+          type="drafts"
+        />
+      )}
+      {props.match.params.section === 'members' && (
+        <Members
+          match={props.match}
+          org={props.org}
+          role={props.role}
+          router={props.location}
+          session={props.session}
+        />
+      )}
+      {props.match.params.section === 'pending' && (
+        <Members
+          match={props.match}
+          org={props.org}
+          role={props.role}
+          router={props.location}
+          session={props.session}
+        />
+      )}
     </div>
     {props.match.params.section === 'createEvent' && (
       <CreateOrEditEvent

@@ -14,9 +14,9 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
     super(props);
     const id = _.get(props, 'match.params.id', null);
 
-    if (id) props.getOrgDispatch({id});
+    if (id) props.getOrgByIdDispatch({id});
     if (id) {
-      props.getEventsDispatch({
+      props.getEventsByOrgIdDispatch({
         orgId: id,
         showPast: false,
         limit: -1,
@@ -100,8 +100,9 @@ const mapStateToProps = (store: tStore) => ({
 
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getEventsDispatch: (query: tGetEventQuery) => dispatch(getEventsByOrgId(query)),
-  getOrgDispatch: (query: tIdQuery) => dispatch(getOrg(query)),
+  getEventsByOrgIdDispatch:
+    (query: tGetEventQuery) => dispatch(getEventsByOrgId(query)),
+  getOrgByIdDispatch: (query: tIdQuery) => dispatch(getOrg(query)),
   getRolesDispatch: () => dispatch(getRoles()),
   getRsvpsDispatch: () => dispatch(getRsvps()),
 });

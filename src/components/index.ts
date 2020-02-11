@@ -16,6 +16,10 @@ export const ExternalLink = loadable(() =>
   import(/* webpackChunkName: "ExternalLink" */'./ExternalLink'),
 );
 
+export const FilterPanel = loadable(() =>
+  import(/* webpackChunkName: "FilterPanel" */'./FilterPanel'),
+);
+
 export const Helmet = loadable(() =>
   import(/* webpackChunkName: "Helmet" */'./Helmet'),
 );

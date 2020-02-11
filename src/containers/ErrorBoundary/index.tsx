@@ -27,12 +27,19 @@ export default class ErrorBoundary extends PureComponent<tProps, tState> {
 
   render() {
     const {error, status} = this.state;
+    const {isSubPage} = this.props;
 
-    if (error) {
+    if (error && isSubPage) {
+      return (
+        <>Something went wrong loading this section. Try refreshing?</>
+      );
+    }
+
+    if (error && status === 500) {
       return (
         <ErrorPageComponent />
       );
-    } else if (status === 400) {
+    } else if (error && status === 400) {
       return (
         <ErrorPageComponent />
       );

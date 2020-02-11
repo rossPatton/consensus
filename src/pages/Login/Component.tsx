@@ -6,7 +6,7 @@ import { tComponentProps } from './_types';
 export const LoginComponent = memo((props: tComponentProps) => (
   <form
     method="POST"
-    className="contain mT4 p4 br8 brdA1"
+    className="contain mT4 p4 br8 bgWhite"
     name="userLoginForm"
     autoComplete="off"
     action="/auth/login"
@@ -23,7 +23,7 @@ export const LoginComponent = memo((props: tComponentProps) => (
           name="username" // for non-js submit and passportjs
           id="loginInput"
           placeholder="yourSecretLogin"
-          className="p3 row mB3"
+          className="bgGrey1 p3 row mB3"
           value={props.username}
           onChange={ev => props.updateState('username', ev)}
         />

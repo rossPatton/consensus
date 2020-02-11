@@ -5,6 +5,7 @@ export type tStatusUnion = 200 | 204 | 400 | 404 | 500;
 
 export type tProps = {
   error?: any,
+  isSubPage?: boolean,
   status: tStatusUnion,
 }
 

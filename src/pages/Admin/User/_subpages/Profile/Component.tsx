@@ -20,7 +20,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
         to={`/user/${props.session.profile.id}`}>
         See your public profile here
       </Link>
-      <div className="p4 br8 brdA1 mB3">
+      <div className="p4 br8 bgWhite mB3">
         <label className="col row mB3" htmlFor="name">
           <h2 className="ffLab fs5 mB1 lh1">
             Name
@@ -79,8 +79,10 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             autoComplete="nope"
             checked={props.privateEmail}
           />
-          {props.privateEmail && 'Your email is kept private'}
-          {!props.privateEmail && 'Your email is displayed on your profile.'}
+          <span>
+            {props.privateEmail && 'Your email is kept private'}
+            {!props.privateEmail && 'Your email is displayed on your profile.'}
+          </span>
         </div>
         <label className="dBl mB3" htmlFor="phone">
           <h2 className="ffLab fs5 mB1 lh1">
@@ -125,8 +127,10 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             autoComplete="nope"
             checked={props.privateLocation}
           />
-          {props.privateLocation && 'Your city is kept private.'}
-          {!props.privateLocation && 'Your city is displayed on your profile.'}
+          <span>
+            {props.privateLocation && 'Your city is kept private.'}
+            {!props.privateLocation && 'Your city is displayed on your profile.'}
+          </span>
         </div>
         <label htmlFor="username">
           <h2 className="ffLab fs5 mB1 lh1">
@@ -160,17 +164,19 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             autoComplete="nope"
             checked={props.privateRSVP}
           />
-          {props.privateRSVP && (
-            'Only you can see your RSVPS.'
-          )}
-          {!props.privateRSVP && (
-            'RSVPs will be shown publicly on events you have RSVPd to.'
-          )}
+          <span>
+            {props.privateRSVP && (
+              'Only you can see your RSVPS.'
+            )}
+            {!props.privateRSVP && (
+              'RSVPs will be shown publicly on events you have RSVPd to.'
+            )}
+          </span>
         </div>
         <div
           tabIndex={0}
           role="button"
-          className="fx aiCtr curPtr mB4 fs6"
+          className="fx aiCtr curPtr fs6"
           onClick={ev => props.updateState('privateMemberships', ev)}
           onKeyPress={ev => props.updateState('privateMemberships', ev)}>
           <input
@@ -180,21 +186,23 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             autoComplete="nope"
             checked={props.privateMemberships}
           />
-          {props.privateMemberships && (
-            'Memberships are kept private.'
-          )}
-          {!props.privateMemberships && (
-            'Memberships will be displayed on your profile.'
-          )}
+          <span>
+            {props.privateMemberships && (
+              'Memberships are kept private.'
+            )}
+            {!props.privateMemberships && (
+              'Memberships will be displayed on your profile.'
+            )}
+          </span>
         </div>
-        <PasswordInput
-          id="pwInput"
-          title="Current password"
-          password={props.password}
-          placeholder="Your current password"
-          onChange={ev => props.updateState('password', ev)}
-        />
       </div>
+      <PasswordInput
+        id="pwInput"
+        title="Current password"
+        password={props.password}
+        placeholder="Your current password"
+        onChange={ev => props.updateState('password', ev)}
+      />
     </fieldset>
     <button
       disabled={!props.password}

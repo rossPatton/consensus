@@ -6,12 +6,12 @@ import {tComponentProps} from './_types';
 
 export const CountryComponent = memo((props: tComponentProps) => (
   <>
-    <h1>
+    <h1 className="mB2">
       {props.country.name}
     </h1>
     <label
       htmlFor="searchFilter"
-      className="fx aiCtr p3 bgGrey1 br8 mB4">
+      className="fx aiCtr p3 bgWhite br8 mB4">
       <input
         spellCheck
         type="search"
@@ -34,7 +34,7 @@ export const CountryComponent = memo((props: tComponentProps) => (
           style={{width: '32%', maxWidth: '32%'}}>
           <Link
             to={`${props.match.url}/${region.code}`}
-            className="dBl p3 brdA1 br8 mB3 mL1 mR1 hvrBgGrey1 trans1">
+            className="dBl p3 bgWhite br8 mB3 mL1 mR1">
             {region.name}
           </Link>
         </li>

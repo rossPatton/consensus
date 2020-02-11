@@ -3,11 +3,15 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet} from '../../../../components';
-import {ErrorBoundary, GenericLoader} from '../../../../containers';
+import {
+  ErrorBoundary,
+  GenericLoader,
+  PrivacyFilter,
+  SearchFilter,
+} from '../../../../containers';
 import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
 
-// TODO use context for match cause passing it around everywhere is annoying
 class EventsContainer extends PureComponent<tContainerProps> {
   render() {
     const {events, match} = this.props;
@@ -16,9 +20,10 @@ class EventsContainer extends PureComponent<tContainerProps> {
       ? events.filter(ev => !ev.isDraft)
       : events.filter(ev => ev.isDraft);
 
-
     return (
-      <ErrorBoundary status={_.get(this.props, 'events.error.status', 200)}>
+      <ErrorBoundary
+        isSubPage
+        status={_.get(this.props, 'events.error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -32,12 +37,22 @@ class EventsContainer extends PureComponent<tContainerProps> {
         <GenericLoader
           isLoading={this.props.isLoading}
           render={() => (
-            <EventsComponent
-              events={eventsToRender}
-              match={this.props.match}
-              org={this.props.org}
-              role={this.props.role}
-              type={this.props.type}
+            <PrivacyFilter
+              items={eventsToRender}
+              render={privacyProps => (
+                <SearchFilter
+                  items={privacyProps.items}
+                  render={searchProps => (
+                    <EventsComponent
+                      {...searchProps}
+                      events={searchProps.items}
+                      org={this.props.org}
+                      role={this.props.role}
+                      type={this.props.type}
+                    />
+                  )}
+                />
+              )}
             />
           )}
         />

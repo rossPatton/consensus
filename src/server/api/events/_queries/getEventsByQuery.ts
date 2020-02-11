@@ -13,7 +13,6 @@ export const getEventsByQuery = async (
 ): Promise<tEvent[]> => {
   const {
     exclude: excludeId,
-    isDraft: isDraftStr,
     isPublic: isPublicStr,
     limit: limitStr,
     offset: offsetStr,
@@ -37,13 +36,14 @@ export const getEventsByQuery = async (
 
     const showPast = showPastStr === 'true';
     const now = dayJS().toISOString();
+
     // return old events
     if (showPast) events.where('date', '<', now);
+
     // return upcoming events
     if (!showPast) events.where('date', '>=', now);
 
-    const isDraft = isDraftStr === 'true';
-    events.where({isDraft, orgId}).orderBy('date', 'asc');
+    events.where({orgId}).orderBy('date', 'asc');
 
     if (parsedLimit > 0) events.limit(parsedLimit);
     if (parsedOffset > 0) events.offset(parsedOffset);

@@ -1,7 +1,7 @@
-import cx from 'classnames';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
+import {FilterPanel} from '../../../../../components';
 import {tComponentProps} from './_types';
 
 export const MembershipsComponent = memo((props: tComponentProps) => (
@@ -9,29 +9,18 @@ export const MembershipsComponent = memo((props: tComponentProps) => (
     <h1 className="fs2 mB3">
       Organizations you have joined
     </h1>
-    <label
-      htmlFor="searchFilter"
-      className="fx aiCtr p3 bgGrey1 br8 mB4">
-      <input
-        spellCheck
-        type="search"
-        id="searchFilter"
-        className="mR2 lh1 row"
-        onChange={props.onSearchChange}
-        placeholder="Search for an organization by name"
+    {props.orgs.length > 1 && (
+      <FilterPanel
+        onSearchChange={props.onSearchChange}
+        placeholder="Search for your memberships by org name"
       />
-    </label>
+    )}
     <ul>
       {props.orgs.map((org: tOrg & {role: tRole}, i) => (
         <li
           key={i}
-          className="brdA1 br8 mB3">
-          <div
-            className={cx({
-              'fx aiCtr fs6 p2 pL3 pR3 brdB1': true,
-              bgYellowLite: org.role === 'member',
-              bgGreenLite: org.role === 'facilitator',
-            })}>
+          className="bgWhite br8 mB3">
+          <div className="fx aiCtr fs6 p2 pL3 pR3 brdB1">
             <div className="fx aiCtr col">
               <span className="ttCap mR3">
                 {org.role}
