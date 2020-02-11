@@ -3,7 +3,7 @@ import React, {memo} from 'react';
 import {Orgs} from '../../components';
 import {tComponentProps} from './_types';
 
-export const UserComponent = memo(({match, orgs, user}: tComponentProps) => (
+export const UserComponent = memo(({orgs, user}: tComponentProps) => (
   <div className="contain mT4 mB5">
     <h1 className="mB3 fs2 ttCap">
       {/* if user entered a real name, use that, otherwise use id */}
@@ -32,7 +32,7 @@ export const UserComponent = memo(({match, orgs, user}: tComponentProps) => (
       && (
         <div className="row">
           <h3>Memberships:</h3>
-          <Orgs match={match} orgs={orgs} />
+          <Orgs orgs={orgs} />
         </div>
       )}
   </div>

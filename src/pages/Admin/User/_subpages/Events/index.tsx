@@ -3,8 +3,8 @@ import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {GenericLoader, Helmet} from '../../../../../components';
-import {ErrorBoundary} from '../../../../../containers';
+import {Helmet} from '../../../../../components';
+import {ErrorBoundary, GenericLoader} from '../../../../../containers';
 import {PrivacyFilter, SearchFilter} from '../../../../../containers';
 import {getEventsByUserId} from '../../../../../redux';
 import {tContainerProps, tStore} from './_types';

@@ -16,10 +16,6 @@ export const ExternalLink = loadable(() =>
   import(/* webpackChunkName: "ExternalLink" */'./ExternalLink'),
 );
 
-export const GenericLoader = loadable(() =>
-  import(/* webpackChunkName: "GenericLoader" */'./GenericLoader'),
-);
-
 export const Helmet = loadable(() =>
   import(/* webpackChunkName: "Helmet" */'./Helmet'),
 );

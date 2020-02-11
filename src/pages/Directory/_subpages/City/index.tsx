@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import {Breadcrumbs, GenericLoader, Helmet} from '../../../../components';
-import {ErrorBoundary} from '../../../../containers';
+import {Breadcrumbs, Helmet} from '../../../../components';
+import {ErrorBoundary, GenericLoader} from '../../../../containers';
 import {Paginate} from '../../../../containers';
 import {getCity, getRegion} from '../../../../redux';
 import {fuzzFilterList, slugify} from '../../../../utils';
@@ -91,7 +91,6 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
                 <Paginate
                   count={9}
                   items={this.filterByCategory(orgsToRender)}
-                  page={this.props.match.params.page}
                   render={(itemsToRender: tOrg[]) => (
                     <CityComponent
                       city={this.props.city.data}

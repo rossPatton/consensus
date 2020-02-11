@@ -3,8 +3,8 @@ import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {GenericLoader, Helmet} from '../../../../../components';
-import {ErrorBoundary} from '../../../../../containers';
+import {Helmet} from '../../../../../components';
+import {ErrorBoundary, GenericLoader} from '../../../../../containers';
 import {Paginate, SearchFilter} from '../../../../../containers';
 import {deleteOrgByUserId, getOrgsByUserId} from '../../../../../redux';
 import {tContainerProps, tOrgWithRole, tState, tStore} from './_types';
@@ -72,7 +72,6 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
                 render={(searchProps: tSearchFilterProps) => (
                   <Paginate
                     items={searchProps.items}
-                    page={this.props.match.params.page}
                     render={(itemsToRender: tOrgWithRole[]) => (
                       <MembershipsComponent
                         leaveOrg={this.leaveOrg}

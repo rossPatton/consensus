@@ -8,7 +8,7 @@ import {EventPrivacy, Events, ExternalLink, RSVP} from '../../components';
 import {tComponentProps} from './_types';
 
 export const EventComponent = memo((props: tComponentProps) => {
-  const {event, eventsByOrgId, match} = props;
+  const {event, eventsByOrgId} = props;
 
   return (
     <div className="contain mT4 mB5">
@@ -77,7 +77,6 @@ export const EventComponent = memo((props: tComponentProps) => {
               <Events
                 tiny
                 events={eventsByOrgId}
-                match={match}
               />
             </>
           )}

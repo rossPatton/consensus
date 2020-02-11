@@ -2,9 +2,10 @@ import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {GenericLoader, Helmet} from '../../../../../components';
+import {Helmet} from '../../../../../components';
 import {
   ErrorBoundary,
+  GenericLoader,
   PrivacyFilter,
   PublishedFilter,
   SearchFilter,

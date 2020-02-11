@@ -16,7 +16,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
       return (
         <li
           key={ev.id}
-          className="fx mB3">
+          className="bgWhite fx mB3">
           {/* {!isPastEvent && props.isEditable && (
             <div
               className={cx({

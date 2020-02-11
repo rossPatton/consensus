@@ -3,8 +3,8 @@ import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {GenericLoader, Helmet} from '../../../../../components';
-import {ErrorBoundary} from '../../../../../containers';
+import {Helmet} from '../../../../../components';
+import {ErrorBoundary, GenericLoader} from '../../../../../containers';
 import {login, patchAccount} from '../../../../../redux';
 import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 import {AccountComponent} from './Component';

@@ -1,22 +1,19 @@
 import _ from 'lodash';
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 
 import {Paginate} from '../../containers';
-import {tContainerProps} from './_types';
+import {tProps} from './_types';
 import {UsersComponent} from './Component';
 
-// TODO completely decouple this container
-// this should be where the redux gets connected, etc
-class Users extends Component<tContainerProps> {
+class Users extends PureComponent<tProps> {
   render() {
-    const {match, sessionRole, users} = this.props;
+    const {sessionRole, users} = this.props;
     const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
 
     return (
       <Paginate
         count={4}
         items={users}
-        page={match.params.page}
         render={(usersToRender: tUser[]) => (
           <UsersComponent
             removeUser={this.props.removeUser}

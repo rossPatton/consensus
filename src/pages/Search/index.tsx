@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import qs from 'querystring';
+import qs from 'query-string';
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {GenericLoader, Helmet, Orgs} from '../../components';
-import {ErrorBoundary} from '../../containers';
+import {Helmet, Orgs} from '../../components';
+import {ErrorBoundary, GenericLoader} from '../../containers';
 import {getOrgsBySearch} from '../../redux';
 import {tProps, tStore} from './_types';
 
@@ -12,7 +12,7 @@ class SearchContainer extends React.Component<tProps> {
   constructor(props: tProps) {
     super(props);
     const search = _.get(props, 'location.search', '');
-    const queryObj = qs.parse(search.split('?')[1]);
+    const queryObj = qs.parse(search);
     props.getSearchResults(queryObj);
   }
 
@@ -43,10 +43,7 @@ class SearchContainer extends React.Component<tProps> {
           <GenericLoader
             isLoading={isLoading}
             render={() => (
-              <Orgs
-                match={this.props.match}
-                orgs={search}
-              />
+              <Orgs orgs={search} />
             )}
           />
         </div>
@@ -61,7 +58,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getSearchResults: (search: qs.ParsedUrlQuery) => dispatch(getOrgsBySearch(search)),
+  getSearchResults: (search: qs.ParsedQuery) => dispatch(getOrgsBySearch(search)),
 });
 
 const Search = connect(

@@ -3,8 +3,8 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 
-import {GenericLoader, Helmet} from '../../components';
-import {ErrorBoundary} from '../../containers';
+import {Helmet} from '../../components';
+import {ErrorBoundary, GenericLoader} from '../../containers';
 import {getEventsByOrgId, getOrg, getRoles, getRsvps} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {OrganizationComponent} from './Component';
@@ -31,7 +31,6 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
 
   render() {
     const {isLoading, location, match, orgThunk, rolesThunk, session} = this.props;
-    console.log('org props => ', this.props);
 
     return (
       <ErrorBoundary status={_.get(orgThunk, 'error.status', 200)}>

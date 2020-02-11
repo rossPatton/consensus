@@ -6,6 +6,5 @@ export interface tProps extends RouteComponentProps<any> {
   count?: number,
   items: object[],
   location: H.Location,
-  page: string,
   render: (itemsToRender: any[]) => React.ReactNode,
 }

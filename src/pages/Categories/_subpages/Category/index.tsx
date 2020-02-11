@@ -2,9 +2,14 @@ import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { Breadcrumbs, GenericLoader, Helmet, Orgs } from '../../../../components';
+import { Breadcrumbs, Helmet, Orgs } from '../../../../components';
 import { categoryMap } from '../../../../constants';
-import { ErrorBoundary, Paginate, SearchFilter } from '../../../../containers';
+import {
+  ErrorBoundary,
+  GenericLoader,
+  Paginate,
+  SearchFilter,
+} from '../../../../containers';
 import { getOrgs } from '../../../../redux';
 import { tContainerProps, tStore } from './_types';
 
@@ -53,7 +58,6 @@ class CategoryContainer extends PureComponent<tContainerProps> {
                     <Paginate
                       count={9}
                       items={searchProps.items}
-                      page={params.page}
                       render={(orgsToRender: tOrg[]) => (
                         <>
                           <div className="fx aiCtr p3 bgGrey1 br8 mB4 fs6 fw600">
@@ -69,7 +73,7 @@ class CategoryContainer extends PureComponent<tContainerProps> {
                               />
                             </label>
                           </div>
-                          <Orgs match={this.props.match} orgs={orgsToRender} />
+                          <Orgs orgs={orgsToRender} />
                         </>
                       )}
                     />

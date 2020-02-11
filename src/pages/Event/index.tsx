@@ -4,8 +4,8 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 
-import {GenericLoader, Helmet} from '../../components';
-import {ErrorBoundary} from '../../containers';
+import {Helmet} from '../../components';
+import {ErrorBoundary, GenericLoader} from '../../containers';
 import {getEvent, getEventsByOrgId, getRsvps} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {EventComponent} from './Component';

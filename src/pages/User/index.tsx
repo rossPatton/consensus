@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {GenericLoader, Helmet} from '../../components';
-import {ErrorBoundary} from '../../containers';
+import {Helmet} from '../../components';
+import {ErrorBoundary, GenericLoader} from '../../containers';
 import {getOrgsByUserId, getUser} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {UserComponent} from './Component';

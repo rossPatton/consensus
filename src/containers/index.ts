@@ -8,6 +8,10 @@ export const ErrorBoundary = loadable(() =>
   import(/* webpackChunkName: "ErrorBoundary" */'./ErrorBoundary'),
 );
 
+export const GenericLoader = loadable(() =>
+  import(/* webpackChunkName: "GenericLoader" */'./GenericLoader'),
+);
+
 export const Paginate = loadable(() =>
   import(/* webpackChunkName: "Paginate" */'./Paginate'),
 );

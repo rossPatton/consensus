@@ -3,12 +3,12 @@ import React, {Component} from 'react';
 // import {connect} from 'react-redux';
 //
 import {Paginate} from '../../containers';
-import {tContainerProps} from './_types';
+import {tProps} from './_types';
 import {OrgsComponent} from './Component';
 
-class OrgsContainer extends Component<tContainerProps> {
+class OrgsContainer extends Component<tProps> {
   render() {
-    const {orgs, match} = this.props;
+    const {orgs} = this.props;
     if (!orgs || orgs instanceof Array && orgs.length === 0) {
       return null;
     }
@@ -16,7 +16,6 @@ class OrgsContainer extends Component<tContainerProps> {
     return (
       <Paginate
         items={orgs}
-        page={match.params.page}
         render={(orgs: tOrg[]) => (
           <OrgsComponent
             orgs={orgs}

@@ -4,8 +4,8 @@
 // import {Redirect} from 'react-router-dom';
 //
 
-// import {GenericLoader, Helmet} from '../../components';
-// import {ErrorBoundary} from '../../containers';
+// import {Helmet} from '../../components';
+// import {ErrorBoundary, GenericLoader} from '../../containers';
 // import {getDecision, getDecisionsByOrg, getRoles, getVotes, submitVote} from '../../redux';
 // import {tContainerProps, tState, tStore} from './_types';
 // import {DecisionComponent} from './Component';

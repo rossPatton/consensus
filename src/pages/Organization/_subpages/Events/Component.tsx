@@ -12,8 +12,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
       <>
         <Events
           events={props.events}
-          match={props.match}
-          role={props.role}
+          sessionRole={props.role}
         />
       </>
     )}

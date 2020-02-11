@@ -12,7 +12,6 @@
 // const Decisions = memo((props: tProps) => (
 //   <Paginate
 //     items={props.decisions}
-//     page={props.match.params.page}
 //     render={(decisions: tDecision[]) => (
 //       <ul>
 //         {decisions.map((decision, i) => (

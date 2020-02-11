@@ -1,8 +1,7 @@
-import {match} from 'react-router';
-
 type tProps = {
   events: tEvent[],
-  role?: tRole,
+  // just because eslint complains about using role with non-ARIA strings
+  sessionRole?: tRole,
   // render mobile/sidebar version
   tiny?: boolean,
 };
@@ -13,7 +12,6 @@ export type tStore = {
 
 export type tContainerProps = tProps & {
   deleteEventDispatch: (query: tIdQuery) => tThunkPayload,
-  match: match & {params: tPaginateParams},
   session: tSession,
 };
 

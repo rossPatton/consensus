@@ -35,7 +35,6 @@ export const MembersComponent = memo((props: tComponentProps) => (
     </label>
     <Users
       removeUser={props.removeUser}
-      match={props.match}
       users={props.users}
       sessionRole={props.role}
       setUserRole={props.setUserRole}

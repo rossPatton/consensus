@@ -7,5 +7,5 @@ const DirectoryComponent = loadable(() =>
 export const Directory = {
   component: DirectoryComponent,
   exact: true,
-  path: '/directory/:country/:region?/:city?/:page?',
+  path: '/directory/:country/:region?/:city?',
 };

@@ -7,7 +7,7 @@ const AdminComponent = loadable(() =>
 export const Admin = {
   component: AdminComponent,
   exact: true,
-  path: '/admin/:section/:page?',
+  path: '/admin/:section',
   private: true,
   redirect: '/login',
 };

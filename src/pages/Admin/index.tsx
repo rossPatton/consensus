@@ -3,8 +3,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 
-import {GenericLoader, Helmet} from '../../components';
-import {ErrorBoundary} from '../../containers';
+import {Helmet} from '../../components';
+import {ErrorBoundary, GenericLoader} from '../../containers';
 import {tProps, tStore} from './_types';
 import {OrgAdmin} from './Organization';
 import {UserAdmin} from './User';

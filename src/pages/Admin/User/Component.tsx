@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
@@ -5,10 +6,11 @@ import {Account, Events, Memberships, Profile} from './_subpages';
 import {tProps} from './_types';
 
 export const UserAdminComponent = memo((props: tProps) => {
-  const isAccount = props.match.params.section === 'account';
-  const isEvents = props.match.params.section === 'events';
-  const isProfile = props.match.params.section === 'profile';
-  const isMemberships = props.match.params.section === 'memberships';
+  const section: string = _.get(props, 'match.params.section', '');
+  const isAccount = section === 'account';
+  const isEvents = section === 'events';
+  const isProfile = section === 'profile';
+  const isMemberships = section === 'memberships';
 
   return (
     <div className="contain fx mT4">

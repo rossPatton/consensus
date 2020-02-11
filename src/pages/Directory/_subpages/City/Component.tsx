@@ -37,9 +37,6 @@ export const CityComponent = memo((props: tComponentProps) => (
         {props.orgsToRender.length === 0 && 'No organizations found'}
       </h2>
     </div>
-    <Orgs
-      match={props.match}
-      orgs={props.orgsToRender}
-    />
+    <Orgs orgs={props.orgsToRender} />
   </>
 ));

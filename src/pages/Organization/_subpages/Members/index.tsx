@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {GenericLoader, Helmet} from '../../../../components';
-import {ErrorBoundary, RoleFilter, SearchFilter} from '../../../../containers';
+import {Helmet} from '../../../../components';
+import {ErrorBoundary, GenericLoader, RoleFilter, SearchFilter} from '../../../../containers';
 import {deleteUserByOrgId, patchUserByOrgId} from '../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {MembersComponent} from './Component';

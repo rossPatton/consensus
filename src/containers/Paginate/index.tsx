@@ -1,3 +1,4 @@
+import qs from 'query-string';
 import React, {PureComponent} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 
@@ -10,10 +11,12 @@ class PaginateContainer extends PureComponent<tProps> {
     page: '1',
   };
 
-  getSliceOfItems = (items: any[]) => {
+  getSliceOfItems = (items: object[]) => {
+    const {count, location: {search}} = this.props;
+    const query = qs.parse(search);
+    const activePage = query.page ? parseInt(query.page as string, 10) : 1;
+
     const newArray = [...items];
-    const {count, page} = this.props;
-    const activePage = page ? parseInt(page, 10) : 1;
     const end = activePage * count;
     const start = end - count;
 
@@ -27,11 +30,10 @@ class PaginateContainer extends PureComponent<tProps> {
       count,
       items = [],
       location: {pathname, search},
-      match,
     } = this.props;
 
-    const {params} = match;
-    const activePage = params.page ? parseInt(params.page, 10) : 1;
+    const query = qs.parse(search);
+    const activePage = query.page ? parseInt(query.page as string, 10) : 1;
 
     // a _.range equivalent. sort of
     const pageCount = Math.ceil(items.length / count);
@@ -47,22 +49,25 @@ class PaginateContainer extends PureComponent<tProps> {
           <ul className={className}>
             {pages.map((_, i) => {
               const pageNo = i + 1;
+              const queryCopy = {
+                ...query,
+                page: pageNo,
+              };
+
               const isActive = activePage === pageNo;
-              const to = params.page
-                ? pathname.replace(/\/\d$/gm, `/${pageNo}`)
-                : `${pathname}/${pageNo}`;
+              const to = `${pathname}?${qs.stringify(queryCopy)}`;
 
               return (
                 <li key={i}>
                   {isActive && (
-                    <span className="dBl mL1 mR1 pL1 pR1">
+                    <span className="dBl mL2 mR2 pL1 pR1">
                       {pageNo}
                     </span>
                   )}
                   {!isActive && (
                     <Link
-                      to={`${to}${search}`}
-                      className="dBl mL1 mR1 pL1 pR1" >
+                      to={to}
+                      className="dBl mL2 mR2 pL1 pR1" >
                       {pageNo}
                     </Link>
                   )}

@@ -1,6 +1,6 @@
 import dayJS from 'dayjs';
 import loglevel from 'loglevel';
-import qs from 'querystring';
+import qs from 'query-string';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';

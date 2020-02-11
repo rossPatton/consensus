@@ -11,7 +11,7 @@ export const UsersComponent = memo((props: tComponentProps) => (
     {props.users.map((user: tUser, i) => (
       <li
         key={i}
-        className="brdA1 br8 mB3 trans2">
+        className="bgWhite br8 mB3">
         <div
           className={cx({
             'fx fs6 p2 pL3 pR3 brdB1': true,

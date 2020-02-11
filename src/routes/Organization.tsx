@@ -7,5 +7,5 @@ const OrganizationComponent = loadable(() =>
 export const Organization = {
   component: OrganizationComponent,
   exact: true,
-  path: '/org/:id/:section?/:page?',
+  path: '/org/:id/:section?',
 };

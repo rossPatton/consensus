@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {GenericLoader} from '../../../components';
+import {GenericLoader} from '../../../containers';
 import {getRoles, getRsvps} from '../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {UserAdminComponent} from './Component';
