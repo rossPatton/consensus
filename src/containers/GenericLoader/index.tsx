@@ -2,9 +2,26 @@ import React, { memo } from 'react';
 
 import { tProps } from './_types';
 
-// TODO potentially remove that we are using dynamic imports + loadable
 const GenericLoader = memo((props: tProps) => {
-  if (props.isLoading) return <></>;
+  const {isLoading = true, showLoader = true} = props;
+
+  if (isLoading) {
+    if (showLoader) {
+      return (
+        <div className="p5 row fx jcCtr">
+          <div className="loading">
+            <div />
+            <div />
+            <div />
+            <div />
+          </div>
+        </div>
+      );
+    }
+
+    return null;
+  }
+
   return props.render();
 });
 

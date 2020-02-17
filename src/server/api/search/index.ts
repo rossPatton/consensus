@@ -40,5 +40,5 @@ search.get(route, async (ctx: Koa.ParameterizedContext) => {
     ctx.status = 204;
   }
 
-  ctx.body = orgsLike.rows.filter(org => org.vetting !== 'private');
+  ctx.body = orgsLike.rows.filter(org => org.type !== 'invite');
 });

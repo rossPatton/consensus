@@ -31,6 +31,7 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
 
   render() {
     const {isLoading, location, match, orgThunk, rolesThunk, session} = this.props;
+    console.log('orgThunk => ', orgThunk);
 
     return (
       <ErrorBoundary status={_.get(orgThunk, 'error.status', 200)}>
@@ -46,7 +47,7 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
               { property: 'og:title', content: '' },
               { property: 'og:description', content: '' },
             ];
-            if (org.vetting === 'private') {
+            if (org.type === 'invite') {
               meta = [...meta, {
                 name: 'robots',
                 content: 'noindex',
@@ -62,7 +63,7 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
               role = 'admin';
             }
 
-            const isHidden = org.vetting === 'private' && !role;
+            const isHidden = org.type === 'invite' && !role;
 
             return isHidden
               ? (

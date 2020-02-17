@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 
-import { Orgs } from '../../../../components';
-import { categories } from '../../../../constants';
+import { FilterPanel, Orgs } from '../../../../components';
 import { tComponentProps } from './_types';
 
 export const CityComponent = memo((props: tComponentProps) => (
@@ -9,32 +8,15 @@ export const CityComponent = memo((props: tComponentProps) => (
     <h1 className="mB2">
       {props.city.name}
     </h1>
-    <label
-      htmlFor="searchFilter"
-      className="fx aiCtr p3 bgWhite br8 mB4">
-      <input
-        spellCheck
-        type="search"
-        name="searchFilter"
-        className="mR2 lh1 row"
-        onChange={props.onSearch}
-        placeholder="Search for an organization by name"
-      />
-      <select onBlur={props.onChange} onChange={props.onChange}>
-        <option value="">
-          Filter by Category
-        </option>
-        {categories.map(({display}) => (
-          <option key={display} value={display}>
-            {display}
-          </option>
-        ))}
-      </select>
-    </label>
+    <FilterPanel
+      className="fx aiCtr p3 bgWhite br8 mB4 fs6 fw600"
+      onCategoryChange={props.onChange}
+      onSearchChange={props.onSearch}
+    />
     <div className="fx aiCtr mB2">
       <h2 className="fs3">
-        {props.orgsToRender.length > 0 && `Organizations in ${props.city.name}`}
-        {props.orgsToRender.length === 0 && 'No organizations found'}
+        {props.orgsToRender.length > 0 && `Groups in ${props.city.name}`}
+        {props.orgsToRender.length === 0 && `No groups found in ${props.city.name}`}
       </h2>
     </div>
     <Orgs orgs={props.orgsToRender} />

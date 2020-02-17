@@ -1,13 +1,13 @@
 import loadable from '@loadable/component';
 
-export const CreateOrEditEvent = loadable(() =>
-  import(/* webpackChunkName: "CreateOrEditEvent" */'./CreateOrEditEvent'),
+export const PlanMeeting = loadable(() =>
+  import(/* webpackChunkName: "Plan Meeting" */'./PlanMeeting'),
 );
 
-export const Events = loadable(() =>
-  import(/* webpackChunkName: "Org Events" */'./Events'),
+export const Meetings = loadable(() =>
+  import(/* webpackChunkName: "Group Meetings" */'./Meetings'),
 );
 
 export const Members = loadable(() =>
-  import(/* webpackChunkName: "Org Members" */'./Members'),
+  import(/* webpackChunkName: "Group Members" */'./Members'),
 );

@@ -6,7 +6,7 @@ import {Redirect} from 'react-router';
 
 import {Helmet} from '../../components';
 import {ErrorBoundary, GenericLoader} from '../../containers';
-import {getEvent, getEventsByOrgId, getRsvps} from '../../redux';
+import {getEvent, getEventsByOrgId, getOrg, getRoles, getRsvps} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {EventComponent} from './Component';
 
@@ -16,6 +16,7 @@ class EventContainer extends PureComponent<tContainerProps> {
     this.dispatch();
     if (!props.session.isAuthenticated) return;
     if (!props.rsvpsThunk.fetched) props.getRsvpsDispatch();
+    if (!props.rolesThunk.fetched) props.getRolesDispatch();
   }
 
   componentDidUpdate(nextProps: tContainerProps) {
@@ -29,8 +30,11 @@ class EventContainer extends PureComponent<tContainerProps> {
 
     this.props.getEventDispatch({id})
       .then((res: tActionPayload<tEvent>) => {
+        this.props.getOrgByIdDispatch({id: res.payload.orgId});
+
         return this.props.getEventsByOrgIdDispatch({
           exclude: id,
+          limit: 4,
           orgId: res.payload.orgId,
         });
       })
@@ -38,10 +42,19 @@ class EventContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const { event, eventsByOrgId, session } = this.props;
+    const {eventThunk, eventsByOrgId, orgThunk, rolesThunk, session} = this.props;
+    const eventStatus = _.get(eventThunk, 'error.status', null);
+    const orgStatus = _.get(orgThunk, 'error.status', null);
+    const status: tStatusUnion = eventStatus || orgStatus;
+    const isLoading = eventThunk.isLoading
+      || orgThunk.isLoading
+      || rolesThunk.isLoading;
+    console.log('status => ', status);
+    console.log('isLoading => ', isLoading);
+    console.log('all props for event page => ', this.props);
 
     return (
-      <ErrorBoundary status={_.get(event, 'error.status', 200)}>
+      <ErrorBoundary status={status || 200}>
         <Helmet
           canonical=""
           title=""
@@ -53,22 +66,28 @@ class EventContainer extends PureComponent<tContainerProps> {
           ]}
         />
         <GenericLoader
-          isLoading={this.props.isLoading}
-          render={() => (
-            <>
-              {event.data.isPrivate
-                && !session.isAuthenticated
-                ? (
-                  <Redirect to="/login" />
-                ) : (
-                  <EventComponent
-                    event={event.data}
-                    eventsByOrgId={eventsByOrgId}
-                    match={this.props.match}
-                  />
-                )}
-            </>
-          )}
+          isLoading={isLoading}
+          render={() => {
+            const privateGroup = orgThunk.data.type !== 'public';
+            const userIsLoggedIn = session.isAuthenticated;
+            const userIsAMemberOfGroup = _.find(rolesThunk.data, roleMap => {
+              return roleMap.orgId === orgThunk.data.id;
+            });
+
+            console.log('userIsAMemberOfGroup => ', userIsAMemberOfGroup);
+
+            if (privateGroup && (!userIsLoggedIn || !userIsAMemberOfGroup)) {
+              return <Redirect to="/login" />;
+            }
+
+            return (
+              <EventComponent
+                event={eventThunk.data}
+                eventsByOrgId={eventsByOrgId}
+                org={orgThunk.data}
+              />
+            );
+          }}
         />
       </ErrorBoundary>
     );
@@ -76,9 +95,10 @@ class EventContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  event: store.event,
+  eventThunk: store.event,
   eventsByOrgId: store.eventsByOrgId.data,
-  isLoading: store.event.isLoading,
+  orgThunk: store.org,
+  rolesThunk: store.roles,
   rsvpsThunk: store.rsvps,
   session: store.session.data,
 });
@@ -88,6 +108,8 @@ const mapDispatchToProps = (dispatch: Function) => ({
     dispatch(getEvent(query)),
   getEventsByOrgIdDispatch: (query: tGetEventQuery) =>
     dispatch(getEventsByOrgId(query)),
+  getOrgByIdDispatch: (query: tIdQuery) => dispatch(getOrg(query)),
+  getRolesDispatch: () => dispatch(getRoles()),
   getRsvpsDispatch: () => dispatch(getRsvps()),
 });
 

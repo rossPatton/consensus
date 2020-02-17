@@ -2,8 +2,8 @@ type tProps = {
   events: tEvent[],
   // just because eslint complains about using role with non-ARIA strings
   sessionRole?: tRole,
-  // render mobile/sidebar version
-  tiny?: boolean,
+  // render alternative version
+  horizontal?: boolean,
 };
 
 export type tStore = {

@@ -19,13 +19,12 @@ class ProfileContainer extends PureComponent<tContainerProps, tOrg> {
 
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {category, description, eventPrivacy, vetting, id} = this.state;
+    const {category, description, type, id} = this.state;
 
     this.props.patchOrgDispatch({
       category,
       description,
-      eventPrivacy,
-      vetting,
+      type,
       id,
     });
   }

@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 
-import {roles} from '../../constants';
+import {categories, roles} from '../../constants';
 import {tProps} from './_types';
 
 // the component half of the search filter container
@@ -17,19 +17,30 @@ const FilterPanel = memo((props: tProps) => (
         placeholder={props.placeholder || 'Filter the results below'}
       />
     </label>
-    {props.onPrivacyFilterChange && (
+    {props.filterOptions && (
       <select
-        onBlur={props.onPrivacyFilterChange}
-        onChange={props.onPrivacyFilterChange}>
-        <option value="n/a">
-          All Events
+        onBlur={props.onFilterOptionChange}
+        onChange={props.onFilterOptionChange}>
+        <option key="n/a" value="n/a">
+          Change search filter type
         </option>
-        <option value="private">
-          Private Events
+        {props.filterOptions.map(opt => (
+          <option key={opt.key} value={opt.key}>
+            {opt.display}
+          </option>
+        ))}
+      </select>
+    )}
+    {props.onCategoryChange && (
+      <select onBlur={props.onCategoryChange} onChange={props.onCategoryChange}>
+        <option value="">
+        Filter by Category
         </option>
-        <option value="public">
-          Public Events
-        </option>
+        {categories.map(({display}) => (
+          <option key={display} value={display}>
+            {display}
+          </option>
+        ))}
       </select>
     )}
     {props.onRoleFilterChange && (
@@ -37,7 +48,7 @@ const FilterPanel = memo((props: tProps) => (
         onBlur={props.onRoleFilterChange}
         onChange={props.onRoleFilterChange}>
         <option key="n/a" value="n/a">
-            Filter by User Role
+          Filter by User Role
         </option>
         {roles.map(role => (
           <option key={role} value={role}>

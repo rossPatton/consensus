@@ -8,10 +8,6 @@ export const Events = loadable(() =>
   import(/* webpackChunkName: "Events" */'./Events'),
 );
 
-export const EventPrivacy = loadable(() =>
-  import(/* webpackChunkName: "EventPrivacy" */'./EventPrivacy'),
-);
-
 export const ExternalLink = loadable(() =>
   import(/* webpackChunkName: "ExternalLink" */'./ExternalLink'),
 );

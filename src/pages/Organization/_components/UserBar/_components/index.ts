@@ -1,1 +1,0 @@
-export { JoinForm } from './JoinForm';

@@ -1,4 +1,4 @@
-declare type tPrivacyEnum = 'public' | 'manual' | 'private';
+declare type tPrivacyEnum = 'public' | 'private' | 'invite';
 
 declare type tOrg = Readonly<{
    category: tCategory,
@@ -8,14 +8,13 @@ declare type tOrg = Readonly<{
    countryId: number,
    created_at?: Date,
    description: string,
-   eventPrivacy: tPrivacyEnum,
    id: number,
    name: string,
    region: string,
    regionId: number,
-   slug: string,
+   handle: string,
    updated_at?: Date,
-   vetting: tPrivacyEnum,
+   type: tPrivacyEnum,
 }>;
 
 // if posting/patching most values are up for grabs
@@ -26,6 +25,6 @@ declare type tGetOrgQuery = Partial<tOrg> & tBaseQuery;
 
 declare type tOrgRouteParams = tPaginateParams & Readonly<{
    id: string,
-   section?: 'createEvent' | 'drafts' | 'members' | 'pending',
+   section?: 'planMeeting' | 'drafts' | 'members' | 'pending',
    slug: string,
 }>;

@@ -10,12 +10,19 @@ export default class SearchFilter extends Component<tProps, tState> {
 
   state = {
     search: '',
+    searchKey: this.props.searchKey,
   };
 
-  onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
     const search = ev.currentTarget.value;
     this.setState({search});
+  }
+
+  onFilterOptionChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
+    ev.preventDefault();
+    const searchKey = ev.currentTarget.value;
+    this.setState({searchKey});
   }
 
   filterItems = () => {
@@ -33,7 +40,8 @@ export default class SearchFilter extends Component<tProps, tState> {
   render() {
     return this.props.render({
       items: this.filterItems(),
-      onSearchChange: this.onChange,
+      onFilterOptionChange: this.onFilterOptionChange,
+      onSearchChange: this.onSearchChange,
     });
   }
 }

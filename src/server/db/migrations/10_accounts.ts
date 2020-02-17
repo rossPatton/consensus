@@ -3,7 +3,6 @@ import Knex from 'knex';
 exports.up = async (knex: Knex) => {
   await knex.schema.createTable('accounts', table => {
     table.increments('id').unsigned().primary();
-    table.timestamps(true, true);
 
     table.string('login').notNullable().unique();
     table.string('password').notNullable();
@@ -22,6 +21,8 @@ exports.up = async (knex: Knex) => {
       .references('orgs.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
+
+    table.timestamps(true, true);
   });
 };
 

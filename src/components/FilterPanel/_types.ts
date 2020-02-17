@@ -1,6 +1,8 @@
 export type tProps = {
   className?: string,
-  onPrivacyFilterChange?: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
+  filterOptions?: {key: string, display: string}[],
+  onCategoryChange?: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
+  onFilterOptionChange?: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onRoleFilterChange?: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
   placeholder?: string,

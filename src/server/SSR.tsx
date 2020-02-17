@@ -6,7 +6,6 @@ import React from 'react';
 import { renderToNodeStream } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
-import serialize from 'serialize-javascript';
 
 import { AppShell } from '../containers';
 import styles from '../css/styles.styl';
@@ -41,11 +40,13 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
     </Provider>,
   );
 
+  console.log('default store state => ', store.getState());
+
   const htmlStream = renderToNodeStream(jsx);
   htmlStream.pipe(ctx.res, {end: false});
   htmlStream.on('end', () => {
     // eslint-disable-next-line
-    const fontConfig = `WebFontConfig={custom:{families:["Lab"],urls:["/static/fonts.css"]}};window.__PRELOADED_STATE__ = ${serialize(store.getState())}`;
+    const fontConfig = `WebFontConfig={custom:{families:["Lab"],urls:["/static/fonts.css"]}};window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())}`;
 
     ctx.res.write(`</div><div id="portalRoot"></div>
       <script type="text/javascript" nonce="${nonce}">${fontConfig}</script>

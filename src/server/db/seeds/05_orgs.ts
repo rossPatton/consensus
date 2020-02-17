@@ -19,9 +19,9 @@ const categoryTypes = categories.map((c: any) => c.display);
 
 const createOrg = async () => {
   const name = faker.company.companyName();
-  const slug = slugify(name);
+  const handle = slugify(name);
   const category = categoryTypes[getRandomNum(0, categoryTypes.length - 1)];
-  const vetting = ['public', 'manual', 'private'];
+  const type = ['public', 'private', 'invite'];
 
   return {
     category,
@@ -30,11 +30,11 @@ const createOrg = async () => {
     country: 'United States',
     countryId: 1,
     description: faker.lorem.paragraphs(),
+    handle,
     name,
     region: 'New York',
     regionId: 37,
-    slug,
-    vetting: vetting[getRandomNum(0, vetting.length - 1)],
+    type: type[getRandomNum(0, type.length - 1)],
   };
 };
 
@@ -45,11 +45,11 @@ const createTWC = async () => ({
   country: 'United States',
   countryId: 1,
   description: faker.lorem.paragraphs(),
+  handle: 'tech-workers-coalition-nyc',
   name: 'Tech Workers Coalition NYC',
   region: 'New York',
   regionId: 37,
-  slug: 'tech-workers-coalition-nyc',
-  vetting: 'private',
+  type: 'public',
 });
 
 exports.seed = async (knex: Knex) => {

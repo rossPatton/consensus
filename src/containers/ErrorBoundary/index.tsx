@@ -2,7 +2,7 @@ import loglevel from 'loglevel';
 import React, {ErrorInfo, PureComponent} from 'react';
 
 import {ErrorPageComponent} from '../../routes/ErrorPage';
-import {tInfoUnion, tProps, tState, tStatusUnion} from './_types';
+import {tProps, tState} from './_types';
 
 export default class ErrorBoundary extends PureComponent<tProps, tState> {
   static defaultProps = {
@@ -20,8 +20,10 @@ export default class ErrorBoundary extends PureComponent<tProps, tState> {
     this.setState({
       error,
       info,
+    }, () => {
+      console.log(error, info);
+      loglevel.error(this.state);
     });
-    loglevel.error(this.state);
     // TODO log to separate service, but only show user 500 page
   }
 
@@ -35,14 +37,16 @@ export default class ErrorBoundary extends PureComponent<tProps, tState> {
       );
     }
 
-    if (error && status === 500) {
-      return (
-        <ErrorPageComponent />
-      );
-    } else if (error && status === 400) {
-      return (
-        <ErrorPageComponent />
-      );
+    if (error) {
+      if (status === 500) {
+        return (
+          <ErrorPageComponent />
+        );
+      } else if (status === 400) {
+        return (
+          <ErrorPageComponent />
+        );
+      }
     }
 
     return this.props.children;

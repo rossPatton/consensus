@@ -26,7 +26,7 @@ const RSVPCount = memo((props: tProps) => {
 
   return (
     <span className="mR3">
-      {rsvpCount} {pluralize('rsvps', rsvpCount)}
+      {rsvpCount} {pluralize('attendees', rsvpCount)}
     </span>
   );
 });

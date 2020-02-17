@@ -87,7 +87,7 @@ class MembersContainer extends Component<tContainerProps> {
 
 const mapStateToProps = (store: tStore) => ({
   sessionThunk: store.session,
-  usersThunk: store.usersByOrg,
+  usersThunk: store.usersByOrgId,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

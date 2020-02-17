@@ -12,7 +12,7 @@ export const OrgsComponent = memo((props: tProps) => (
         className="col fxg0 third mB3">
         <Link
           to={`/org/${org.id}`}
-          className="bgWhite dBl fs6 lh1 p3 br8 noUnderline">
+          className="fs6 lh1 noUnderline">
           {org.category}
           <h2 className="dBl lh1 fs3 mT1 mB3 underline">
             {org.name}

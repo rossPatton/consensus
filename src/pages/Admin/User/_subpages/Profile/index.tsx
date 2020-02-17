@@ -68,6 +68,8 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
+    if (!stateKey) return;
+
     let {value} = ev.currentTarget;
     if (stateKey.indexOf('private') !== -1) {
       value = !this.state[stateKey];

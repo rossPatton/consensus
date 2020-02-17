@@ -8,14 +8,13 @@ export type tState = {
   countryId: number,
   description: string,
   email: string,
-  eventPrivacy: tPrivacyEnum,
-  vetting: tPrivacyEnum,
+  handle: string,
   login: string,
   name: string,
   password: string,
   region: string
   regionId: number,
-  slug: string,
+  type: tPrivacyEnum,
 };
 
 export type tStateUnion = keyof tState;

@@ -15,7 +15,7 @@ import { regionReducer } from './region/reducer';
 import { rolesReducer } from './roles/reducer';
 import { rsvpsReducer } from './rsvps/reducer';
 import { userReducer } from './user/reducer';
-import { usersByOrgReducer } from './usersByOrgId/reducer';
+import { usersByOrgIdReducer } from './usersByOrgId/reducer';
 
 export const rootReducer = combineReducers({
   city: cityReducer,
@@ -33,5 +33,5 @@ export const rootReducer = combineReducers({
   search: searchReducer,
   session: authReducer,
   user: userReducer,
-  usersByOrg: usersByOrgReducer,
+  usersByOrgId: usersByOrgIdReducer,
 });

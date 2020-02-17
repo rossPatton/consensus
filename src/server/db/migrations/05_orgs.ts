@@ -13,7 +13,6 @@ const categories = [
 exports.up = async (knex: Knex) => {
   await knex.schema.createTable('orgs', table => {
     table.increments().unsigned().primary();
-    table.timestamps(true, true);
 
     // user-input about what the group does
     table.text('description', 'longtext').notNullable();
@@ -22,25 +21,15 @@ exports.up = async (knex: Knex) => {
     table.string('name').notNullable();
 
     // slugified version of the name, for urls
-    table.string('slug').notNullable();
+    table.string('handle').notNullable();
 
-    // vetting is the best 1 word term i could think of for it
-    // on user signup - do we vettingkeep who can join or not?
-    // public === anyone can join, no questions asked, no screening
-    // manual === anyone can join, but we require manual approval
-    // private === members must be invited to join, org is hidden from search
-    // TODO we should also make sure to hide these orgs from google as well
-    table.enum('vetting', ['public', 'manual', 'private'])
+    // group type determines the level of privacy and vetting for your group
+    // public === anyone can join, no questions asked, no screening, everything public
+    // private === anyone can join, but we require manual approval. everything private
+    // invite === invite only. private + org is hidden from google and internal search
+    table.enum('type', ['public', 'private', 'invite'])
       .notNullable()
-      .defaultTo('manual');
-
-    // eventPrivacy is an admin override for event privacy settings
-    // public === all events are public'
-    // manual === events default to public, but can be made private case-by-case
-    // private === all events are private, only viewable by org members
-    table.enum('eventPrivacy', ['public', 'manual', 'private'])
-      .notNullable()
-      .defaultTo('manual');
+      .defaultTo('public');
 
     // display names for ease of use, 99% of what we need on the client usually
     table.string('city').notNullable();
@@ -73,6 +62,8 @@ exports.up = async (knex: Knex) => {
       .references('categories.type')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
+
+    table.timestamps(true, true);
   });
 };
 

@@ -16,22 +16,15 @@ export const HeaderComponent = memo((props: tComponentProps) => (
       </Link>
       <div className="fx aiCtr abs r fs6">
         <Search />
-        {!props.session.isAuthenticated && (
-          <>
-            <Link
-              to="/signup"
-              id="a11ySignup"
-              className="brdA1 br4 p1 pL2 pR2 mR2 fw600 trans1 hvrBgGrey1">
-              Sign Up
-            </Link>
-            <Link
-              to="/login"
-              id="a11yLogin">
-              Login
-            </Link>
-          </>
+        {!props.isAuthenticated && (
+          <Link
+            to="/signup"
+            id="a11ySignup"
+            className="brdA1 br4 p1 pL2 pR2 mR2 fw600 trans1 hvrBgGrey1">
+            Sign Up
+          </Link>
         )}
-        {props.session.isAuthenticated && (
+        {props.isAuthenticated && (
           <form action="/auth/logout">
             <fieldset>
               <Link

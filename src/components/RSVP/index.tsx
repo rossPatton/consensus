@@ -61,9 +61,6 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const {session} = this.props;
-    if (session.type === 'org') return null;
-
     return (
       <GenericLoader
         isLoading={this.props.isLoading}

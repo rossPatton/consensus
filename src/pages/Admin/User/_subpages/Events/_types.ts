@@ -3,8 +3,9 @@ export type tStore = {
   session: tThunk<tSession>,
 };
 
-export type tComponentProps = tPrivacyFilterProps & tSearchFilterProps & {
+export type tComponentProps = {
   events: tEvent[],
+  onSearchChange: tSelectChange,
 };
 
 export type tContainerProps = {

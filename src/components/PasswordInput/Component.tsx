@@ -30,7 +30,7 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
             onChange={props.onChange}
             type={props.showPW ? 'text' : 'password'}
             className={cx({
-              'bgGrey1 p3 row mR2': true,
+              'p3 row mR2': true,
               brdRed: hasError,
             })}
           />

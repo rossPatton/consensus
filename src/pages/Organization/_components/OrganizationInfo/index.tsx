@@ -12,8 +12,8 @@ class OrganizationInfoContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {usersByOrg} = this.props;
-    const members = usersByOrg.filter(u => u.role !== 'pending');
+    const {usersByOrgId} = this.props;
+    const members = usersByOrgId.filter(u => u.role !== 'pending');
 
     return (
       <OrganizationInfoComponent
@@ -27,8 +27,8 @@ class OrganizationInfoContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.usersByOrg.isLoading,
-  usersByOrg: store.usersByOrg.data,
+  isLoading: store.usersByOrgId.isLoading,
+  usersByOrgId: store.usersByOrgId.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

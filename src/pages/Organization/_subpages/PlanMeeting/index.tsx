@@ -9,9 +9,9 @@ import {Helmet} from '../../../../components';
 import {postEvent} from '../../../../redux';
 import {parseTimeString} from '../../../../utils';
 import {tContainerProps, tState, tStateUnion, tStore} from './_types';
-import {CreateOrEditEventComponent } from './Component';
+import {PlanMeetingComponent} from './Component';
 
-class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
+class PlanMeetingContainer extends Component<tContainerProps, tState> {
   state = {
     category: this.props.org.category,
     date: dayJS().toISOString(),
@@ -115,7 +115,7 @@ class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
 
     let newEvent: tEvent;
     try {
-      const createEvent = await this.props.postEvent({
+      const planMeeting = await this.props.postEvent({
         ...restOfEvent,
         // we submit drafts to the same table in the DB as well
         isDraft: saveAsDraft,
@@ -125,7 +125,7 @@ class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
         orgId: this.props.org.id as number,
       });
 
-      newEvent = createEvent.payload;
+      newEvent = planMeeting.payload;
     } catch (err) {
       return loglevel.error('failed to save event to db', err);
     }
@@ -187,7 +187,7 @@ class CreateOrEditEventContainer extends Component<tContainerProps, tState> {
         />
         {!session.isAuthenticated && <Redirect to="" />}
         {session.isAuthenticated && (
-          <CreateOrEditEventComponent
+          <PlanMeetingComponent
             {...this.props}
             {...this.state}
             onSubmit={this.onSubmit}
@@ -211,9 +211,9 @@ const mapDispatchToProps = (dispatch: Function) => ({
   postEvent: (query: tUpsertEventQuery) => dispatch(postEvent(query)),
 });
 
-const CreateOrEditEvent = connect(
+const PlanMeeting = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(CreateOrEditEventContainer);
+)(PlanMeetingContainer);
 
-export default CreateOrEditEvent;
+export default PlanMeeting;

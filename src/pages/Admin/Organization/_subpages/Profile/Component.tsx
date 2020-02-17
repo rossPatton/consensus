@@ -43,27 +43,36 @@ export const ProfileComponent = memo((props: tComponentProps) => {
               onChange={ev => props.updateState('description', ev)}
             />
             <h2 className="ffLab fs5 mB1 lh1">
-              Membership Vetting Process
+              Group Type
             </h2>
             <select
               className="row"
-              value={props.vetting}
-              onBlur={ev => props.updateState('vetting', ev)}
-              onChange={ev => props.updateState('vetting', ev)}>
-              <option value="manual">
-                Manual. Anyone can join, but members must be approved by a facilitator or admin.
-              </option>
+              value={props.type}
+              onBlur={ev => props.updateState('type', ev)}
+              onChange={ev => props.updateState('type', ev)}>
               <option value="public">
-                Public. Anyone can join, with no vetting process at all.
+                Public
               </option>
               <option value="private">
-                Private. Invite only. Org no longer appears in search results.
+                Private
+              </option>
+              <option value="invite">
+                Invite only
               </option>
             </select>
             <small className="dBl mB3 copyBlack">
               This option only affects future membership approvals
             </small>
-            <h2 className="ffLab fs5 mB1 lh1">
+            <div>
+              {/* @TODO maybe have a mixed option here? */}
+              {props.type === 'public' &&
+                'Public. Anyone can join, with no vetting process at all. Meetings are public, visible to anyone.'}
+              {props.type === 'private' &&
+                'Private. Anyone can join, but members must be approved by a facilitator or admin first. Meetings are visible only to members.'}
+              {props.type === 'invite' &&
+                'Invite only. Members must be invited by the group owner or facilitator. Meetings are visible only to members. Group does not show in internal search results, and is hidden from search engines.'}
+            </div>
+            {/* <h2 className="ffLab fs5 mB1 lh1">
               Event privacy defaults
             </h2>
             <select
@@ -83,7 +92,7 @@ export const ProfileComponent = memo((props: tComponentProps) => {
             </select>
             <small className="dBl copyBlack">
               This option only affects future events
-            </small>
+  </small>*/}
           </div>
           <button className="p3 pL4 pR4 hvrBgGrey1 trans1">
             Save Changes

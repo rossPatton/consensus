@@ -20,6 +20,7 @@ const dataPath = 'state.locals.data';
 
 usersByOrgId.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tUsersByOrgIdQuery = _.get(ctx, dataPath, {});
+  console.log('usersByOrgId query => ', query);
 
   await validateSchema<tUsersByOrgIdQuery>(ctx, getSchema, query);
 

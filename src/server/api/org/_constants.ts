@@ -6,11 +6,10 @@ export const orgKeys = [
   'country',
   'countryId',
   'description',
-  'eventPrivacy',
-  'vetting',
+  'handle',
   'id',
   'name',
-  'slug',
   'region',
   'regionId',
+  'type',
 ];

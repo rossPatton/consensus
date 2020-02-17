@@ -3,7 +3,6 @@ import Knex from 'knex';
 exports.up = async (knex: Knex) => {
   await knex.schema.createTable('users', table => {
     table.increments().unsigned().primary();
-    table.timestamps(true, true);
 
     // additional optional info the user can choose to provide
     table.text('bio', 'longtext');
@@ -47,6 +46,8 @@ exports.up = async (knex: Knex) => {
 
     // if set to true, user memberships aren't visible to others in user profile
     table.boolean('privateMemberships').notNullable().defaultTo(true);
+
+    table.timestamps(true, true);
   });
 };
 

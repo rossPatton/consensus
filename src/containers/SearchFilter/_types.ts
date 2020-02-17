@@ -1,5 +1,6 @@
 export type tState = {
   search: string,
+  searchKey: string,
 };
 
 export type tProps = {

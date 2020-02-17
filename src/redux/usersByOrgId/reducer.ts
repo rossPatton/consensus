@@ -11,7 +11,7 @@ const initialState: tThunk<tUser[]> = {
   data: [],
 };
 
-export const usersByOrgReducer = (
+export const usersByOrgIdReducer = (
   state = initialState,
   action: tUsersByOrgActionUnion,
 ) => {

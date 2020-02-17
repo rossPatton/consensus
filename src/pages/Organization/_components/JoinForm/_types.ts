@@ -1,6 +1,6 @@
 export type tProps = {
   dispatch: Function,
-  orgId: number,
+  org: tOrg,
   postNewUserByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
     tThunkPayload<tUser>,
   role: tRole,
@@ -9,9 +9,12 @@ export type tProps = {
 
 export type tComponentProps = {
   onSubmit: (ev: React.FormEvent<HTMLFormElement>) => void,
+  org: tOrg,
 };
 
 export type tStore = {
   dispatch: Function,
-  usersByOrg: tThunk<tUser[]>,
+  org: tThunk<tOrg>,
+  session: tThunk<tSession>,
+  usersByOrgId: tThunk<tUser[]>,
 }

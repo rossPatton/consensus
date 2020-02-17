@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import {Helmet} from '../../../../../components';
 import {ErrorBoundary, GenericLoader} from '../../../../../containers';
-import {PrivacyFilter, SearchFilter} from '../../../../../containers';
+import {SearchFilter} from '../../../../../containers';
 import {getEventsByUserId} from '../../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
@@ -38,18 +38,12 @@ class EventsContainer extends PureComponent<tContainerProps> {
         <GenericLoader
           isLoading={eventsByUserIdThunk.isLoading}
           render={() => (
-            <PrivacyFilter
+            <SearchFilter
               items={eventsByUserIdThunk.data}
-              render={privacyProps => (
-                <SearchFilter
-                  items={privacyProps.items}
-                  render={searchProps => (
-                    <EventsComponent
-                      {...privacyProps}
-                      {...searchProps}
-                      events={searchProps.items}
-                    />
-                  )}
+              render={searchProps => (
+                <EventsComponent
+                  events={searchProps.items as tEvent[]}
+                  onSearchChange={searchProps.onSearchChange}
                 />
               )}
             />

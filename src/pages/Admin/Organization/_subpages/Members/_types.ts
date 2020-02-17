@@ -2,7 +2,7 @@ import {tAdminSections} from '../../../_types';
 
 export type tStore = {
   session: tThunk<tSession>,
-  usersByOrg: tThunk<tUser[]>,
+  usersByOrgId: tThunk<tUser[]>,
 };
 
 export type tProps = {

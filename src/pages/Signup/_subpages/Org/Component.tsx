@@ -145,29 +145,35 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
       <h2 className="ffLab fs5 mB1 lh1">
         Membership Vetting Process
       </h2>
-      <label htmlFor="vettingSelect" className="mB3">
+      <label htmlFor="groupTypeSelect" className="mB3">
         <p className="fs5 copyBlack mB1">
-          Is anyone free to join your org, or do you want to be able to vet membership?
+          Is anyone free to join your group, or do you want to be able to vet membership?
         </p>
         <select
-          name="vetting"
-          id="vettingSelect"
+          name="type"
+          id="groupTypeSelect"
           className="row"
-          value={props.vetting}
-          onBlur={ev => props.updateState('vetting', ev)}
-          onChange={ev => props.updateState('vetting', ev)}>
-          <option value="manual">
-            Manual, new members must be approved
-          </option>
+          value={props.type}
+          onBlur={ev => props.updateState('type', ev)}
+          onChange={ev => props.updateState('type', ev)}>
           <option value="public">
-            Public, no vetting process at all
+            Public
           </option>
           <option value="private">
-            Private, private only
+            Private
+          </option>
+          <option value="invite">
+            Invite only
           </option>
         </select>
       </label>
-      <h2 className="ffLab fs5 mB1 lh1">
+      <div>
+        {/* @TODO maybe have a mixed option here? */}
+        {props.type === 'public' && 'Public. Anyone can join, with no vetting process at all. Meetings are public, visible to anyone.'}
+        {props.type === 'private' && 'Private. Anyone can join, but members must be approved by a facilitator or admin first. Meetings are visible only to members.'}
+        {props.type === 'invite' && 'Invite only. Members must be invited by the group owner or facilitator. Meetings are visible only to members. Group does not show in internal search results, and is hidden from search engines.'}
+      </div>
+      {/* <h2 className="ffLab fs5 mB1 lh1">
         Event privacy defaults
       </h2>
       <label htmlFor="eventPrivacySelect" className="mB3">
@@ -191,7 +197,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
             Private, all events are private
           </option>
         </select>
-      </label>
+</label>*/}
       <div className="brdT1 pT4 pB4 mT4 fx aiCtr">
         <button className="p3 pL4 pR4 hvrBgGrey1 trans1">
           Save

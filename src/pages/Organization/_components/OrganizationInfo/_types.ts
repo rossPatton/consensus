@@ -11,9 +11,9 @@ export type tComponentProps = tProps & {
 export type tContainerProps = tProps & {
   getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) => tThunkPayload<tUser[]>,
   isLoading: boolean,
-  usersByOrg: tUser[],
+  usersByOrgId: tUser[],
 };
 
 export type tStore = {
-  usersByOrg: tThunk<tUser[]>,
+  usersByOrgId: tThunk<tUser[]>,
 };

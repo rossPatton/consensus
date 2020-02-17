@@ -1,26 +1,32 @@
 declare type tPrivacyFilter = 'n/a' | 'public' | 'private';
 declare type tPublishedFilter = 'n/a' | 'published' | 'draft';
 
+declare type tInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => void;
+declare type tSelectChange = (ev: React.ChangeEvent<HTMLInputElement>) => void;
+
 declare type tPublishedFilterProps = Readonly<{
   items: tEvent[],
-  onPublishedFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
+  onPublishedFilterChange: tSelectChange,
   publishedFilter: tPublishedFilter,
 }>;
 
 declare type tRoleFilterProps = Readonly<{
   items: tUser[],
-  onRoleFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
+  onRoleFilterChange: tSelectChange,
   roleFilter: tRole,
 }>;
 
-declare type tSearchFilterChange = (ev: React.ChangeEvent<HTMLInputElement>) => void;
 declare type tSearchFilterProps = Readonly<{
-  items: any[],
-  onSearchChange: tOnSearchChange,
+  items: object[],
+  onSearchChange: tSelectChange,
 }>;
 
 declare type tPrivacyFilterProps = Readonly<{
-  items: any[],
+  items: object[],
   privacyFilter: tPrivacyFilter,
-  onPrivacyFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
+  onPrivacyFilterChange: tSelectChange,
 }>;
+
+// maybe make a new file for misc types like this?
+declare type tInfoUnion = ErrorInfo | string | null
+declare type tStatusUnion = 200 | 204 | 400 | 404 | 500;

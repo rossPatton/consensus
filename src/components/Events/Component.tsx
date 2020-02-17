@@ -9,23 +9,29 @@ import {ExternalLink, RSVP} from '../../components';
 import {tComponentProps} from './_types';
 
 export const EventsComponent = memo((props: tComponentProps) => (
-  <ul>
-    {props.events.map(ev => {
+  <ul
+    className={cx({
+      'fx aiCtr jcBetween fxdRow': props.horizontal,
+    })}>
+    {props.events.map((ev, i) => {
       const isPastEvent = dayJS(ev.date).isBefore(dayJS());
 
       return (
         <li
           key={ev.id}
-          className="bgWhite br8 fx aiCtr p3 mB2">
+          className={cx({
+            'fx aiCtr mB3': !props.horizontal,
+            'mR2': props.horizontal && i !== props.events.length - 1,
+          })}>
           {/* {!isPastEvent && props.isEditable && (
             <div
               className={cx({
                 'brdB1 p2 pL3 pR3 fx aiCtr fs6 jcEnd': true,
-                hide: props.tiny,
+                hide: props.horizontal,
               })}>
               <div className="col mR2 fx aiCtr">
                 <Link
-                  to={`/org/${ev.orgId}/createEvent?${objToQueryString(ev)}`}
+                  to={`/org/${ev.orgId}/planMeeting?${objToQueryString(ev)}`}
                   className="bgWhite p1 pL2 pR2 hvrBgGrey1 trans1 fw600 br4 lh1 noUnderline brdA1">
                   <span
                     role="img"
@@ -49,17 +55,23 @@ export const EventsComponent = memo((props: tComponentProps) => (
               </button>
             </div>
           )} */}
-          <div className="bgGrey2 square mR3" />
-          <div className="col">
+          <div
+            className={cx({
+              'brdA1 br8 square': true,
+              'mB2 bgWhite': props.horizontal,
+              'mR3 bgGrey2': !props.horizontal,
+            })}
+          />
+          <div>
             <div
               className={cx({
-                'fx aiCtr mB2 fs6 fw600 lh1': true,
+                'fx aiCtr mB1 fs7 fw600 lh1': true,
                 o5: isPastEvent,
               })}>
               <time className="mR1" dateTime={ev.date}>
                 {dayJS(ev.date).format('MMM DD | h:mmA')}
               </time>
-              {!props.tiny && (
+              {!props.horizontal && (
                 <>
                   <span className="mR1">@</span>
                   {ev.locationLink && (
@@ -76,13 +88,13 @@ export const EventsComponent = memo((props: tComponentProps) => (
             </div>
             <h3
               className={cx({
-                'mB2 fx aiCtr ttCap': true,
-                fs4: props.tiny,
+                'fx aiCtr ttCap': true,
+                fs4: props.horizontal,
               })}>
               <Link
                 className="noUnderline"
                 to={ev.isDraft
-                  ? `/org/${ev.orgId}/createEvent?${qs.stringify(ev)}`
+                  ? `/org/${ev.orgId}/planMeeting?${qs.stringify(ev)}`
                   : `/event/${ev.id}`}>
                 {ev.title}
               </Link>
@@ -90,20 +102,21 @@ export const EventsComponent = memo((props: tComponentProps) => (
             {/* <p
                 className={cx({
                   'mB2 lineClamp': true,
-                  'pR5': !props.tiny,
-                  'fs5': props.tiny,
+                  'pR5': !props.horizontal,
+                  'fs5': props.horizontal,
                   o5: isPastEvent,
                 })}>
                 {ev.description}
               </p> */}
             <div
               className={cx({
-                'fx aiCtr fs6 lh1 lsNone': true,
-                hide: props.tiny,
+                'fx aiCtr fs6 lh1': true,
+                'mB1': props.sessionRole !== 'admin',
+                hide: props.horizontal,
                 o5: isPastEvent,
               })}>
               {!ev.isDraft && <RSVP event={ev} />}
-              {ev.isDraft && 'This event is not published yet.'}
+              {ev.isDraft && 'This event is not published yet. Click to edit.'}
             </div>
           </div>
         </li>

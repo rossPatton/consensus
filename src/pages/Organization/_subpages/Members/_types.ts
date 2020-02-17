@@ -2,7 +2,7 @@ import H from 'history';
 import {match} from 'react-router';
 
 export type tStore = {
-  usersByOrg: tThunk<tUser[]>,
+  usersByOrgId: tThunk<tUser[]>,
 };
 
 export type tState = {
@@ -23,7 +23,7 @@ export type tContainerProps = tBaseProps & {
     tThunkPayload<tUser>,
   router: H.Location,
   session: tSession,
-  usersByOrg: tUser[],
+  usersByOrgId: tUser[],
 }
 
 export type tComponentProps = tBaseProps & {

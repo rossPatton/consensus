@@ -12,44 +12,48 @@ export const RSVPComponent = (props: tComponentProps) => {
 
   return (
     <>
-      {!hasRSVPed && (
-        <form
-          method="POST"
-          action="/api/v1/rsvps"
-          onSubmit={ev => setRsvp({ev, eventId, value: true})}>
-          <fieldset>
-            <button className="fx aiCtr br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
-              <span
-                role="img"
-                className="mR1"
-                aria-label="Big Plus Sign Emoji">
-                ➕
-              </span>
-              <legend>RSVP {userRSVPsPrivately ? 'Privately' : 'Publicly'}</legend>
-            </button>
-          </fieldset>
-        </form>
-      )}
-      {hasRSVPed && (
-        <form
-          method="POST"
-          action="/api/v1/rsvps"
-          onSubmit={ev => setRsvp({ev, eventId, value: false})}>
-          <fieldset>
-            <input type="hidden" name="rsvp" value={eventId} />
-            <button
-              title="Click to cancel your RSVP"
-              className="fx aiCtr br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
-              <span
-                role="img"
-                className="mR1"
-                aria-label="Thumbs Up Emoji">
-                👍
-              </span>
-              <legend>You&apos;re going!</legend>
-            </button>
-          </fieldset>
-        </form>
+      {session.type !== 'org' && (
+        <>
+          {!hasRSVPed && (
+            <form
+              method="POST"
+              action="/api/v1/rsvps"
+              onSubmit={ev => setRsvp({ev, eventId, value: true})}>
+              <fieldset>
+                <button className="fx aiCtr br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
+                  <span
+                    role="img"
+                    className="mR1"
+                    aria-label="Big Plus Sign Emoji">
+                    ➕
+                  </span>
+                  <legend>RSVP {userRSVPsPrivately ? 'Privately' : 'Publicly'}</legend>
+                </button>
+              </fieldset>
+            </form>
+          )}
+          {hasRSVPed && (
+            <form
+              method="POST"
+              action="/api/v1/rsvps"
+              onSubmit={ev => setRsvp({ev, eventId, value: false})}>
+              <fieldset>
+                <input type="hidden" name="rsvp" value={eventId} />
+                <button
+                  title="Click to cancel your RSVP"
+                  className="fx aiCtr br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
+                  <span
+                    role="img"
+                    className="mR1"
+                    aria-label="Thumbs Up Emoji">
+                    👍
+                  </span>
+                  <legend>You&apos;re going!</legend>
+                </button>
+              </fieldset>
+            </form>
+          )}
+        </>
       )}
       <RSVPCount
         event={event}

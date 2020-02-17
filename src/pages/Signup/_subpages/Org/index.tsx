@@ -21,14 +21,13 @@ export class OrgSignupContainer extends Component<tContainerProps, tState> {
       countryId: parseInt(location.countryId as string, 10),
       description: '',
       email: '',
-      eventPrivacy: 'manual' as tPrivacyEnum,
-      vetting: 'manual' as tPrivacyEnum,
+      handle: '',
       login: '',
       name: '',
       password: '',
       region: location.region as string,
       regionId: parseInt(location.regionId as string, 10),
-      slug: '',
+      type: 'public' as tPrivacyEnum,
     };
   }
 

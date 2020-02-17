@@ -3,5 +3,5 @@ import { match } from 'react-router';
 export type tProps = {
   match: match & {params: tOrgRouteParams},
   role?: tRole,
-  subRoute: '' | 'drafts' | 'pending',
+  subRoute: '' | 'planMeeting' | 'drafts' | 'events' | 'pending',
 };

@@ -30,15 +30,15 @@ class MembersContainer extends Component<tContainerProps, {role: tRole}> {
   }
 
   render() {
-    const {match: {params}, usersByOrg} = this.props;
+    const {match: {params}, usersByOrgId} = this.props;
     const {section} = params;
 
     const members = section === 'members'
-      ? usersByOrg.filter(u => u.role !== 'pending')
-      : usersByOrg.filter(u => u.role === 'pending');
+      ? usersByOrgId.filter(u => u.role !== 'pending')
+      : usersByOrgId.filter(u => u.role === 'pending');
 
     return (
-      <ErrorBoundary status={_.get(usersByOrg, 'error.status', 200)}>
+      <ErrorBoundary status={_.get(usersByOrgId, 'error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -69,7 +69,7 @@ class MembersContainer extends Component<tContainerProps, {role: tRole}> {
                       section={section}
                       setUserRole={this.setUserRole}
                       users={searchProps.items}
-                      userTotal={usersByOrg.length}
+                      userTotal={usersByOrgId.length}
                     />
                   )}
                 />
@@ -83,8 +83,8 @@ class MembersContainer extends Component<tContainerProps, {role: tRole}> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.usersByOrg.isLoading,
-  usersByOrg: store.usersByOrg.data,
+  isLoading: store.usersByOrgId.isLoading,
+  usersByOrgId: store.usersByOrgId.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

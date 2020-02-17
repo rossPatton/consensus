@@ -35,6 +35,7 @@ eventsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
     events = await knex('events')
       .whereIn('id', mappedIds)
       .where('date', '>=', dayJS().toISOString())
+      .where({isDraft: false})
       .orderBy('date', 'asc');
   } catch (err) {
     return ctx.throw(400, err);

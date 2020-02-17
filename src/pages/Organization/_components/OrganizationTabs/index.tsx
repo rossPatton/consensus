@@ -3,40 +3,49 @@ import React, {memo} from 'react';
 import {Tab} from './_components';
 import {tProps} from './_types';
 
-const OrganizationTabs = memo((props: tProps) => (
-  <nav className="fs5">
-    <ul className="fx aiCtr ovfScr">
-      <li>
-        <Tab
-          match={props.match}
-          subRoute=""
-        />
-      </li>
-      {(props.role === 'admin' || props.role === 'facilitator')
-        && (<li>
+const OrganizationTabs = memo((props: tProps) => {
+  const isMod = props.role === 'admin' || props.role === 'facilitator';
+  if (!isMod) return null;
+
+  return (
+    <nav className="fs5">
+      <ul className="fx aiCtr ovfScr">
+        <li>
           <Tab
             match={props.match}
-            subRoute="pending"
+            subRoute=""
           />
         </li>
-        )}
-      {(props.role === 'admin' || props.role === 'facilitator')
-        && (<li>
-          <Tab
-            match={props.match}
-            subRoute="drafts"
-          />
-        </li>
-        )}
-      {/* <li className="brdR1">
-        <Tab
-          match={props.match}
-          role={props.role}
-          subRoute="decisions"
-        />
-      </li>*/}
-    </ul>
-  </nav>
-));
+        {isMod
+          && (
+            <li>
+              <Tab
+                match={props.match}
+                subRoute="pending"
+              />
+            </li>
+          )}
+        {isMod
+          && (
+            <li>
+              <Tab
+                match={props.match}
+                subRoute="drafts"
+              />
+            </li>
+          )}
+        {isMod
+          && (
+            <li>
+              <Tab
+                match={props.match}
+                subRoute="planMeeting"
+              />
+            </li>
+          )}
+      </ul>
+    </nav>
+  );
+});
 
 export default OrganizationTabs;

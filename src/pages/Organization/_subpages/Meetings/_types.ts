@@ -1,15 +1,17 @@
 import {match} from 'react-router';
 
 type tProps = {
-  events: tEvent[],
   org: tOrg, // inherited
   role: tRole,
   type: 'drafts' | 'events',
 };
 
-export type tComponentProps = tSearchFilterProps & tProps;
+export type tComponentProps = tSearchFilterProps & tProps & {
+  events: tEvent[],
+};
 
 export type tContainerProps = tProps & {
+  eventsByOrgIdThunk: tThunk<tEvent[]>,
   isLoading: boolean,
   match: match & {params: tOrgRouteParams},
   session: tSession,

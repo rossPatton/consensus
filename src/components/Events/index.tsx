@@ -31,9 +31,9 @@ class EventsContainer extends PureComponent<tContainerProps> {
           <EventsComponent
             deleteEvent={this.deleteEvent}
             events={eventsToRender}
+            horizontal={this.props.horizontal}
             isEditable={isEditable}
             sessionRole={sessionRole}
-            tiny={this.props.tiny}
           />
         )}
       />

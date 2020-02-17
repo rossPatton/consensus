@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {OrganizationInfo, OrganizationTabs} from './_components';
-import {CreateOrEditEvent, Events, Members} from './_subpages';
+import {Meetings, Members, PlanMeeting} from './_subpages';
 import {tComponentProps} from './_types';
 
 export const OrganizationComponent = (props: tComponentProps) => (
@@ -17,7 +17,7 @@ export const OrganizationComponent = (props: tComponentProps) => (
         role={props.role}
       />
       {typeof props.match.params.section === 'undefined' && (
-        <Events
+        <Meetings
           match={props.match}
           org={props.org}
           role={props.role}
@@ -26,7 +26,7 @@ export const OrganizationComponent = (props: tComponentProps) => (
         />
       )}
       {props.match.params.section === 'drafts' && (
-        <Events
+        <Meetings
           match={props.match}
           org={props.org}
           role={props.role}
@@ -52,12 +52,12 @@ export const OrganizationComponent = (props: tComponentProps) => (
           session={props.session}
         />
       )}
+      {props.match.params.section === 'planMeeting' && (
+        <PlanMeeting
+          org={props.org}
+          router={props.location}
+        />
+      )}
     </div>
-    {props.match.params.section === 'createEvent' && (
-      <CreateOrEditEvent
-        org={props.org}
-        router={props.location}
-      />
-    )}
   </div>
 );
