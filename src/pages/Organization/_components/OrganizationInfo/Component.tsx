@@ -12,53 +12,53 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
   const showJoinButton = org.type === 'public' || org.type === 'private';
 
   return (
-    <div className="bgWhite br8 p3 mR3 c3 col growNone rel">
-      <div className="fx aiCtr jcBetween mB3">
-        <span className="mR3 white bgBlack p2 lh1 br8 fs7">
+    <div className="bgWhite br8 mR3 c3 col growNone ovfHide">
+      <div className="bgGrey4 lh1 fx aiCtr jcBetween p3">
+        <small className="fs6 fw600 white">
           {org.type === 'public' && 'Public Group'}
           {org.type === 'private' && 'Private Group'}
           {org.type === 'invite' && 'Invite-Only Group'}
-        </span>
-        {showJoinButton && (
-          <JoinForm role={role} />
-        )}
+        </small>
+        {showJoinButton && <JoinForm role={role} />}
       </div>
-      <div className="mB3">
-        <div className="fx aiCtr">
-          <div>
-            <div className="circ p3 mR2 bgGrey2" />
+      <div className="p3">
+        <div className="mB3">
+          <div className="fx aiCtr">
+            <div>
+              <div className="circ p3 mR2 bgGrey2" />
+            </div>
+            <div>
+              <small className="ttUpper fs7">
+                {props.org.category}
+              </small>
+              <h1 className="fs3 lh1">
+                {props.org.name}
+              </h1>
+            </div>
           </div>
-          <div>
-            <small className="ttUpper fs7">
-              {props.org.category}
-            </small>
-            <h1 className="fs3 lh1">
-              {props.org.name}
-            </h1>
-          </div>
+          {props.role
+            && props.role !== 'pending'
+            && props.members.length > 0
+            && (
+              <Link
+                to="members"
+                className="noUnderline copyBlack"
+                title="Click to browse member list">
+                {props.members.length} members
+              </Link>
+            )}
         </div>
-        {props.role
-          && props.role !== 'pending'
-          && props.members.length > 0
-          && (
-            <Link
-              to="members"
-              className="noUnderline copyBlack"
-              title="Click to browse member list">
-              {props.members.length} members
-            </Link>
-          )}
-      </div>
-      {/* <small className="fw600">
+        {/* <small className="fw600">
           Based in <Link to={`/directory/us/${region}/${citySlug}`}>
             {props.org.city}
           </Link>
         </small> */}
-      <p className="fs6">
-        {props.org.description.split('\n')[0]}
-      </p>
-      <div>
+        <p className="fs6">
+          {props.org.description.split('\n')[0]}
+        </p>
+        <div>
         social media links down here
+        </div>
       </div>
     </div>
   );

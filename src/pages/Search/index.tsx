@@ -37,13 +37,13 @@ class SearchContainer extends React.Component<tProps> {
           meta={meta}
         />
         <div className="mT4 contain">
-          <h1 className="mB2 fs2">
+          <h1 className="mB4 fs2">
             {renderNoResults ? 'No results!' : 'Your Search Results'}
           </h1>
           <GenericLoader
             isLoading={isLoading}
             render={() => (
-              <Orgs orgs={search} />
+              <Orgs showLocation orgs={search} />
             )}
           />
         </div>

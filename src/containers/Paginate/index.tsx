@@ -1,10 +1,10 @@
 import qs from 'query-string';
-import React from 'react';
+import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 
 import {tProps, tState} from './_types';
 
-class PaginateContainer extends React.PureComponent<tProps, tState> {
+class PaginateContainer extends Component<tProps, tState> {
   static defaultProps = {
     className: 'lsNone fx aiCtr jcCtr fs4 fw600',
     count: 10,
@@ -22,15 +22,6 @@ class PaginateContainer extends React.PureComponent<tProps, tState> {
       page: parseInt((query.page as string), 10) || props.page,
     };
   }
-
-  // shouldComponentUpdate(_: tProps, nextState: tState) {
-  //   const {page} = this.state;
-  //   console.log('current page => ', page);
-  //   const {page: nextPage} = nextState;
-  //   console.log('next page => ', nextPage);
-  //   if (page === nextPage) return false;
-  //   return true;
-  // }
 
   getSliceOfItems = (items: object[]) => {
     const {count} = this.props;
@@ -59,6 +50,7 @@ class PaginateContainer extends React.PureComponent<tProps, tState> {
       location: {pathname, search},
     } = this.props;
 
+    console.log('count => ', count);
     const query = qs.parse(search);
 
     // a _.range equivalent. sort of

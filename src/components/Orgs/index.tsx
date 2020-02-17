@@ -1,34 +1,27 @@
-import React, {Component} from 'react';
+import React, {memo} from 'react';
 
-// import {connect} from 'react-redux';
-//
 import {Paginate} from '../../containers';
 import {tProps} from './_types';
 import {OrgsComponent} from './Component';
 
-class OrgsContainer extends Component<tProps> {
-  render() {
-    const {orgs} = this.props;
-    if (!orgs || orgs instanceof Array && orgs.length === 0) {
-      return null;
-    }
-
-    return (
-      <Paginate
-        items={orgs}
-        render={(orgs: tOrg[]) => (
-          <OrgsComponent
-            orgs={orgs}
-          />
-        )}
-      />
-    );
+const OrgsContainer = memo((props: tProps) => {
+  const {orgs, showLocation} = props;
+  if (!orgs || orgs instanceof Array && orgs.length === 0) {
+    return null;
   }
-}
 
-// const mapDispatchToProps = (dispatch: Function) => ({
-//   deleteEvent: (query: tIdQuery) => dispatch(deleteEvent(query)),
-// });
+  return (
+    <Paginate
+      items={orgs}
+      count={props.count}
+      render={(orgsToRender: tOrg[]) => (
+        <OrgsComponent
+          orgs={orgsToRender}
+          showLocation={showLocation}
+        />
+      )}
+    />
+  );
+});
 
-// const Events = connect(null, mapDispatchToProps)(OrgsContainer);
 export default OrgsContainer;

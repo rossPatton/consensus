@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { Breadcrumbs, Helmet, Orgs } from '../../../../components';
+import { Breadcrumbs, FilterPanel, Helmet, Orgs } from '../../../../components';
 import { categoryMap } from '../../../../constants';
 import {
   ErrorBoundary,
@@ -60,19 +60,10 @@ class CategoryContainer extends PureComponent<tContainerProps> {
                       items={searchProps.items}
                       render={(orgsToRender: tOrg[]) => (
                         <>
-                          <div className="fx aiCtr p3 bgGrey1 br8 mB4 fs6 fw600">
-                            <label className="col row mR3" htmlFor="searchFilter">
-                              <div>Search</div>
-                              <input
-                                spellCheck
-                                type="search"
-                                id="searchFilter"
-                                className="mR2 lh1 row"
-                                onChange={searchProps.onSearchChange}
-                                placeholder="Search for a meeting by title"
-                              />
-                            </label>
-                          </div>
+                          <FilterPanel
+                            onSearchChange={searchProps.onSearchChange}
+                            placeholder="Search for a meeting by title"
+                          />
                           <Orgs orgs={orgsToRender} />
                         </>
                       )}

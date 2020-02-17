@@ -1,4 +1,3 @@
-import cx from 'classnames';
 import loglevel from 'loglevel';
 import React from 'react';
 import {connect} from 'react-redux';
@@ -24,12 +23,7 @@ class JoinFormContainer extends React.PureComponent<tProps> {
     if (role) {
       return (
         <span
-          className={cx({
-            'br8 lh1 p2 fx aiCtr fs7': true,
-            'bgBlue white': role === 'admin',
-            'bgGreenLite': role === 'facilitator',
-            'bgYellowLite': role === 'member',
-          })}>
+          className="bgWhite fs6 br4 lh1 p1 pL2 pR2">
           <span className="mR1">✔</span>
           <span className="ttCap">{role}</span>
         </span>
@@ -40,7 +34,7 @@ class JoinFormContainer extends React.PureComponent<tProps> {
       return (
         <Link
           to="/signup"
-          className="bgGrey1 brdA1 br8 fs7 hvrBgGrey3 br8 p2 trans1 lh1">
+          className="bgWhite fs6 br4 lh1 p1 pL2 pR2">
           Join this Group
         </Link>
       );
@@ -53,9 +47,9 @@ class JoinFormContainer extends React.PureComponent<tProps> {
         action="/api/v1/usersByOrg">
         <fieldset>
           <legend>
-            <button className="bgGrey1 br8 fs7 hvrBgGrey3 br8 p2 trans1">
-              {org.type === 'public' && 'Join this Group'}
-              {org.type === 'private' && 'Apply for Membership'}
+            <button className="bgWhite fs6 br4 lh1 p1 pL2 pR2">
+              {org.type === 'public' && 'Join'}
+              {org.type === 'private' && 'Request'}
             </button>
           </legend>
         </fieldset>

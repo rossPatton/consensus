@@ -6,20 +6,20 @@ import {tProps} from './_types';
 
 export const OrgsComponent = memo((props: tProps) => (
   <ul className="fx fxWrap">
-    {props.orgs.map((org: tOrg, i) => (
+    {props.orgs.map((org, i) => (
       <li
         key={i}
-        className="col fxg0 third mB3">
+        className="col fxg0 fourth mB5 pR3">
         <Link
           to={`/org/${org.id}`}
           className="fs6 lh1 noUnderline">
-          {org.category}
-          <h2 className="dBl lh1 fs3 mT1 mB3 underline">
+          <div className="mB1">
+            {org.category}
+          </div>
+          <h2 className="dBl lh1 fs3 underline">
             {org.name}
           </h2>
-          <div>
-            Based in {org.city}
-          </div>
+          {props.showLocation && `Based in ${org.city}`}
         </Link>
       </li>
     ))}

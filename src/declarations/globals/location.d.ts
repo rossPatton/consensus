@@ -23,5 +23,7 @@ declare type tSearchParams = tPaginateParams & Readonly<{
 // if the user is not logged in, or if they haven't provided a location themselves
 declare type tGeo = Readonly<{
   city: string,
+  handle: string,
+  state: string,
   postcode: number,
 }>;

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import {Breadcrumbs, Helmet} from '../../../../components';
 import {ErrorBoundary, GenericLoader} from '../../../../containers';
-import {Paginate} from '../../../../containers';
 import {getCity, getRegion} from '../../../../redux';
 import {fuzzFilterList, slugify} from '../../../../utils';
 import {tContainerProps, tState, tStore} from './_types';
@@ -88,18 +87,12 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
                     return <Breadcrumbs crumbs={crumbs} />;
                   }}
                 />
-                <Paginate
-                  count={9}
-                  items={this.filterByCategory(orgsToRender)}
-                  render={(itemsToRender: tOrg[]) => (
-                    <CityComponent
-                      city={this.props.city.data}
-                      match={this.props.match}
-                      onChange={this.onChange}
-                      onSearch={this.onSearch}
-                      orgsToRender={itemsToRender}
-                    />
-                  )}
+                <CityComponent
+                  city={this.props.city.data}
+                  match={this.props.match}
+                  onChange={this.onChange}
+                  onSearch={this.onSearch}
+                  orgsToRender={this.filterByCategory(orgsToRender)}
                 />
               </>
             );
