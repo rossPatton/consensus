@@ -32,7 +32,7 @@ export default class SearchFilter extends Component<tProps, tState> {
 
     return fuzzFilterList({
       input: this.props.items || [],
-      key: this.props.searchKey,
+      key: this.state.searchKey,
       search,
     });
   }

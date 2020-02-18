@@ -2,7 +2,7 @@ declare type tPrivacyFilter = 'n/a' | 'public' | 'private';
 declare type tPublishedFilter = 'n/a' | 'published' | 'draft';
 
 declare type tInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => void;
-declare type tSelectChange = (ev: React.ChangeEvent<HTMLInputElement>) => void;
+declare type tSelectChange = (ev: React.ChangeEvent<HTMLSelectElement>) => void;
 
 declare type tPublishedFilterProps = Readonly<{
   items: tEvent[],
@@ -18,7 +18,8 @@ declare type tRoleFilterProps = Readonly<{
 
 declare type tSearchFilterProps = Readonly<{
   items: object[],
-  onSearchChange: tSelectChange,
+  onFilterOptionChange: tSelectChange,
+  onSearchChange: tInputChange,
 }>;
 
 declare type tPrivacyFilterProps = Readonly<{

@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import { tProps } from './_types';
 
-const GenericLoader = memo((props: tProps) => {
+const GenericLoader = (props: tProps) => {
   const {isLoading = true, showLoader = true} = props;
 
   if (isLoading) {
@@ -23,6 +23,6 @@ const GenericLoader = memo((props: tProps) => {
   }
 
   return props.render();
-});
+};
 
 export default GenericLoader;

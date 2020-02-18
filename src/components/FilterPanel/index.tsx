@@ -34,7 +34,7 @@ const FilterPanel = memo((props: tProps) => (
     {props.onCategoryChange && (
       <select onBlur={props.onCategoryChange} onChange={props.onCategoryChange}>
         <option value="">
-        Filter by Category
+          Filter by Category
         </option>
         {categories.map(({display}) => (
           <option key={display} value={display}>

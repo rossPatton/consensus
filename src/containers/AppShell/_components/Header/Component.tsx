@@ -16,7 +16,7 @@ export const HeaderComponent = memo((props: tComponentProps) => (
       </Link>
       <div className="fx aiCtr abs r fs6">
         <Search />
-        {!props.isAuthenticated && (
+        {!props.session.isAuthenticated && (
           <Link
             to="/signup"
             id="a11ySignup"
@@ -24,24 +24,25 @@ export const HeaderComponent = memo((props: tComponentProps) => (
             Sign Up
           </Link>
         )}
-        {props.isAuthenticated && (
-          <form action="/auth/logout">
-            <fieldset>
-              <Link
-                id="a11yAdmin"
-                className="mR2"
-                to="/admin/profile">
-                Account
-              </Link>
-              <button
-                id="a11yLogout"
-                className="trans1 hvrBgGrey1"
-                onClick={props.logout}>
-                Logout
-              </button>
-            </fieldset>
-          </form>
-        )}
+        {props.session.isAuthenticated
+          && (
+            <form action="/auth/logout">
+              <fieldset>
+                <Link
+                  id="a11yAdmin"
+                  className="mR2"
+                  to="/admin/events">
+                  Account
+                </Link>
+                <button
+                  id="a11yLogout"
+                  className="trans1 hvrBgGrey1"
+                  onClick={props.logout}>
+                  Logout
+                </button>
+              </fieldset>
+            </form>
+          )}
       </div>
     </div>
   </header>

@@ -7,7 +7,7 @@ export const UserComponent = memo(({orgs, user}: tComponentProps) => (
   <div className="contain mT4 mB5">
     <h1 className="mB3 fs2 ttCap">
       {/* if user entered a real name, use that, otherwise use id */}
-      Profile for {user.name ? user.name : `user ${user.id}`}
+      {user.name ? user.name : `user ${user.id}`}
     </h1>
     <h3>Username</h3>
     <p>{user.username}</p>

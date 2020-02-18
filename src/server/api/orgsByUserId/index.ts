@@ -16,7 +16,6 @@ orgsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, dataPath, {});
   await validateSchema(ctx, getSchema, query);
 
-  // TODO the below can be simplified
   let userOrgRels: tAccountRoleRelation[] = [];
   try {
     userOrgRels = await knex(table).where(query);
@@ -33,16 +32,7 @@ orgsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  const orgsWithUserRole = await Promise.all(orgs.map(async org => {
-    const userOrgRel = _.find(userOrgRels, rel => rel.orgId === org.id);
-
-    return {
-      ...org,
-      role: userOrgRel ? userOrgRel.role : null,
-    };
-  }));
-
-  ctx.body = orgsWithUserRole;
+  ctx.body = orgs;
 });
 
 // we use accountId here because only a user can choose to leave an org

@@ -108,16 +108,28 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 })}>
                 {ev.description}
               </p> */}
-            <div
-              className={cx({
-                'fx aiCtr fs6 lh1': true,
-                'mB1': props.sessionRole !== 'admin',
-                hide: props.horizontal,
-                o5: isPastEvent,
-              })}>
-              {!ev.isDraft && <RSVP event={ev} />}
-              {ev.isDraft && 'This event is not published yet. Click to edit.'}
-            </div>
+            {!props.isDashboard && (
+              <div
+                className={cx({
+                  'fx aiCtr fs6 lh1': true,
+                  'mB1': props.sessionRole !== 'admin',
+                  hide: props.horizontal,
+                  o5: isPastEvent,
+                })}>
+                {!ev.isDraft && <RSVP event={ev} />}
+                {ev.isDraft && 'This event is not published yet. Click to edit.'}
+              </div>
+            )}
+            {props.isDashboard && (
+              <div
+                className={cx({
+                  'fw600 fs6 lh1': true,
+                  hide: props.horizontal,
+                  o5: isPastEvent,
+                })}>
+                {ev.orgName}
+              </div>
+            )}
           </div>
         </li>
       );

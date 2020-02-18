@@ -33,11 +33,11 @@ declare type isAuthenticated = Readonly<{
 
 // tSession is like tUser, but with auth data and everything is optional
 // since a user might not be logged in
-declare type tSession = isAuthenticated & Readonly<{
+declare type tSession<T = tUser> = isAuthenticated & Readonly<{
   id: number,
   isVerified: boolean, // has user been confirmed by email
   login: string, // unique login value separate from username or email
-  profile: tOrg | tUser,
+  profile: T,
   type: 'org' | 'user',
 }>;
 

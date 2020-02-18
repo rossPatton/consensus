@@ -7,40 +7,16 @@ import {Helmet} from '../../../../../components';
 import {ErrorBoundary, GenericLoader} from '../../../../../containers';
 import {Paginate, SearchFilter} from '../../../../../containers';
 import {deleteOrgByUserId, getOrgsByUserId} from '../../../../../redux';
-import {tContainerProps, tOrgWithRole, tState, tStore} from './_types';
+import {tContainerProps, tStore} from './_types';
 import {MembershipsComponent} from './Component';
 
-class MembershipsContainer extends PureComponent<tContainerProps, tState> {
-  constructor(props: tContainerProps) {
-    super(props);
-
-    const userId = _.get(props, 'sessionThunk.data.profile.id', null);
-    if (userId) {
-      props.getOrgsByUserIdDispatch({userId})
-        .catch(loglevel.error);
-    }
-  }
-
-  state = {
-    orgs: [] as tOrgWithRole[],
-  };
-
+class MembershipsContainer extends PureComponent<tContainerProps> {
   leaveOrg = (ev: React.MouseEvent<HTMLButtonElement>, orgId: number) => {
     ev.preventDefault();
     if (orgId) {
       this.props.deleteOrgByUserIdDispatch({orgId})
         .catch(loglevel.error);
     }
-  }
-
-  sortOrgs(orgs: tOrgWithRole[]) {
-    return orgs.sort((a, b) => {
-      const aIsAdmin = a.role === 'facilitator';
-      const bIsAdmin = b.role === 'facilitator';
-      if (aIsAdmin && !bIsAdmin) return -1;
-      if (bIsAdmin && !aIsAdmin) return 1;
-      return 0;
-    });
   }
 
   render() {
@@ -60,31 +36,25 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
         />
         <GenericLoader
           isLoading={orgsByUserIdThunk.isLoading}
-          render={() => {
-            const orgsToRender = this.state.orgs.length > 0
-              ? this.state.orgs
-              : orgsByUserIdThunk.data;
-
-            return (
-              <SearchFilter
-                searchKey="name"
-                items={orgsToRender}
-                render={(searchProps: tSearchFilterProps) => (
-                  <Paginate
-                    items={searchProps.items}
-                    render={(itemsToRender: tOrgWithRole[]) => (
-                      <MembershipsComponent
-                        leaveOrg={this.leaveOrg}
-                        onSearchChange={searchProps.onSearchChange}
-                        // just use Orgs component, put sort there
-                        orgs={this.sortOrgs(itemsToRender)}
-                      />
-                    )}
-                  />
-                )}
-              />
-            );
-          }}
+          render={() => (
+            <SearchFilter
+              searchKey="name"
+              items={orgsByUserIdThunk.data}
+              render={(searchProps: tSearchFilterProps) => (
+                <Paginate
+                  items={searchProps.items}
+                  render={(itemsToRender: tOrg[]) => (
+                    <MembershipsComponent
+                      leaveOrg={this.leaveOrg}
+                      onSearchChange={searchProps.onSearchChange}
+                      orgs={itemsToRender}
+                      roles={this.props.roles}
+                    />
+                  )}
+                />
+              )}
+            />
+          )}
         />
       </ErrorBoundary>
     );
@@ -93,6 +63,7 @@ class MembershipsContainer extends PureComponent<tContainerProps, tState> {
 
 const mapStateToProps = (store: tStore) => ({
   orgsByUserIdThunk: store.orgsByUserId,
+  roles: store.roles.data,
   sessionThunk: store.session,
 });
 

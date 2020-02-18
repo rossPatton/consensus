@@ -43,6 +43,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
               render={searchProps => (
                 <EventsComponent
                   events={searchProps.items as tEvent[]}
+                  onFilterOptionChange={searchProps.onFilterOptionChange}
                   onSearchChange={searchProps.onSearchChange}
                 />
               )}

@@ -1,5 +1,6 @@
 type tProps = {
   events: tEvent[],
+  isDashboard?: boolean,
   // just because eslint complains about using role with non-ARIA strings
   sessionRole?: tRole,
   // render alternative version

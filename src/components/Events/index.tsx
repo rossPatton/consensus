@@ -14,12 +14,14 @@ class EventsContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {events, sessionRole, type} = this.props;
+    const {events, isDashboard, sessionRole, type = 'events'} = this.props;
     const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
 
     if (events.length === 0) {
       return (
-        <h2>No {type === 'events' ? 'upcoming events!' : 'drafts'}</h2>
+        <h2 className="fs4 p4 taCtr">
+          No {type === 'events' ? 'upcoming meetings!' : 'drafts'}
+        </h2>
       );
     }
 
@@ -32,6 +34,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
             deleteEvent={this.deleteEvent}
             events={eventsToRender}
             horizontal={this.props.horizontal}
+            isDashboard={isDashboard}
             isEditable={isEditable}
             sessionRole={sessionRole}
           />

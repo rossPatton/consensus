@@ -16,12 +16,10 @@ class HeaderContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {isAuthenticated = false} = _.get(this.props, 'session', {} as tSession);
-
     return (
       <HeaderComponent
-        isAuthenticated={isAuthenticated}
         logout={this.logout}
+        session={this.props.session}
       />
     );
   }

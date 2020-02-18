@@ -5,6 +5,11 @@ import { tComponentProps } from './_types';
 
 export const EventsComponent = memo((props: tComponentProps) => (
   <>
+    {props.events.length === 0 && (
+      <h2 className="fs3 p4">
+        This group has no upcoming meetings.
+      </h2>
+    )}
     {props.events.length > 0 && (
       <>
         <FilterPanel

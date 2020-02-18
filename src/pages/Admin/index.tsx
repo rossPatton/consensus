@@ -6,7 +6,7 @@ import {Redirect} from 'react-router';
 import {Helmet} from '../../components';
 import {ErrorBoundary, GenericLoader} from '../../containers';
 import {tProps, tStore} from './_types';
-import {OrgAdmin} from './Organization';
+import {GroupAdmin} from './Organization';
 import {UserAdmin} from './User';
 
 const AdminContainer = (props: tProps) => {
@@ -32,12 +32,12 @@ const AdminContainer = (props: tProps) => {
           if (!isAuthenticated) return <Redirect to="" />;
 
           const {type} = sessionThunk.data;
-          const isOrgAdmin = type === 'org';
+          const isGroupAdmin = type === 'org';
           const isUserAdmin = type === 'user';
 
           return (
             <>
-              {isOrgAdmin && <OrgAdmin match={match} />}
+              {isGroupAdmin && <GroupAdmin match={match} />}
               {isUserAdmin && <UserAdmin match={match} />}
             </>
           );

@@ -12,7 +12,7 @@ export const EventComponent = memo((props: tComponentProps) => {
 
   return (
     <div className="contain mT4">
-      <Link to={`org/${org.id}`} className="fw600 lh1 mB4">
+      <Link to={`org/${org.id}`} className="dBl noUnderline fw600 lh1 mB4">
         {org.name}
       </Link>
       <div className="fx mB5">

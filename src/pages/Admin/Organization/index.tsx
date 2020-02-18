@@ -1,11 +1,12 @@
 import _ from 'lodash';
 import React, {memo} from 'react';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import {Account, Events, Members, Profile} from './_subpages';
 import {tProps} from './_types';
 
-export const OrgAdmin = memo((props: tProps) => {
+const GroupAdminContainer = memo((props: tProps) => {
   const {section} = props.match.params;
   const isAccount = section === 'account';
   const isEvents = section === 'events';
@@ -14,7 +15,8 @@ export const OrgAdmin = memo((props: tProps) => {
 
   return (
     <div className="contain mT4 fx">
-      <aside className="mR5">
+      <aside className="bgWhite br8 p3 mR5">
+        <h1>{props.session.profile.name}</h1>
         <ul>
           <li className="p1">
             {!isAccount && (
@@ -67,3 +69,17 @@ export const OrgAdmin = memo((props: tProps) => {
     </div>
   );
 });
+
+const mapStateToProps = (store: any) => ({
+  session: store.session.data,
+});
+
+// const mapDispatchToProps = (dispatch: Function) => ({
+//   getRolesDispatch: () => dispatch(getRoles()),
+//   getRsvpsDispatch: () => dispatch(getRsvps()),
+// });
+
+export const GroupAdmin = connect(
+  mapStateToProps,
+  null,
+)(GroupAdminContainer);

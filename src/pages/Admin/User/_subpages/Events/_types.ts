@@ -5,7 +5,8 @@ export type tStore = {
 
 export type tComponentProps = {
   events: tEvent[],
-  onSearchChange: tSelectChange,
+  onFilterOptionChange: tSelectChange,
+  onSearchChange: tInputChange,
 };
 
 export type tContainerProps = {

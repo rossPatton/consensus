@@ -1,19 +1,34 @@
 import React, {memo} from 'react';
+import {Link} from 'react-router-dom';
 
 import {Events, FilterPanel} from '../../../../../components';
 import {tComponentProps} from './_types';
 
 export const EventsComponent = memo((props: tComponentProps) => (
   <>
-    <h1 className="fs2 mB3">Your Event RSVPs</h1>
+    <ul className="fx aiCtr mB3" role="navigation">
+      <li>
+        <h1 className="fs3 mR3">
+          <Link to="">
+            All RSVPs
+          </Link>
+        </h1>
+      </li>
+      <li>
+        <h2 className="grey3 fs3">
+          All Group Meetings
+        </h2>
+      </li>
+    </ul>
     <FilterPanel
+      className="fx aiCtr mB4 fs6 fw600"
+      onFilterOptionChange={props.onFilterOptionChange}
+      onSearchChange={props.onSearchChange}
       filterOptions={[
         {key: 'title', display: 'Event Title'},
         {key: 'orgName', display: 'Organization Name'},
       ]}
-      onSearchChange={props.onSearchChange}
-      placeholder="Search for your event RSVPS by event title"
     />
-    <Events events={props.events} type="events" />
+    <Events events={props.events} isDashboard />
   </>
 ));

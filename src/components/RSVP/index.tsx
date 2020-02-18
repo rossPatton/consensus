@@ -4,7 +4,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 
-import {GenericLoader} from '../../containers';
+// import {GenericLoader} from '../../containers';
 import {patchRsvps, postRsvps} from '../../redux';
 import {tContainerProps, tSetRsvpOpts, tState, tStore} from './_types';
 import {RSVPComponent} from './Component';
@@ -62,18 +62,13 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     return (
-      <GenericLoader
-        isLoading={this.props.isLoading}
-        render={() => (
-          <RSVPComponent
-            event={this.props.event}
-            hasRSVPed={this.state.hasRSVPed}
-            initialRSVP={this.state.initialRSVP}
-            rsvp={this.state.rsvp}
-            session={this.props.session}
-            setRsvp={this.setRsvp}
-          />
-        )}
+      <RSVPComponent
+        event={this.props.event}
+        hasRSVPed={this.state.hasRSVPed}
+        initialRSVP={this.state.initialRSVP}
+        rsvp={this.state.rsvp}
+        session={this.props.session}
+        setRsvp={this.setRsvp}
       />
     );
   }

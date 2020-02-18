@@ -15,9 +15,9 @@ export const AccountComponent = memo((props: tComponentProps) => {
       onSubmit={props.save}>
       <fieldset>
         <legend>
-          <h1 className="fs2 mB3">Manage your account</h1>
+          <h1 className="fs3 mB3">Manage your account</h1>
         </legend>
-        <div className="p4 br8 bgWhite mB3">
+        <div className="mB4">
           <label htmlFor="login">
             <h2 className="ffLab fs5 mB1 lh1">
               Login
