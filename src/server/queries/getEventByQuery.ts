@@ -4,10 +4,9 @@ import _ from 'lodash';
 import {knex} from '../db/connection';
 import {getUsersByIds} from './getUsersByIds';
 
-// TODO add sanitization/validation
 export const getEventByQuery = async (
   ctx: Koa.ParameterizedContext,
-  query: any,
+  query: tGetEventQuery,
 ): Promise<tEvent> => {
   let event: tEvent;
   try {
@@ -45,7 +44,7 @@ export const getEventByQuery = async (
   // if on an actual event page, we render a list of public attendees below the description
   const unsafeUsers = await getUsersByIds(ctx, publicRSVPS.map(rsvp => rsvp.userId));
 
-  // "unsafe" because we want to check their privacy settings before we return anything
+  // "unsafe" because we want to check user privacy settings first
   // if this value is set, it should never be a problem. but lets double check anyway
   const attendees = unsafeUsers.filter(user => !user.privateRSVP);
 

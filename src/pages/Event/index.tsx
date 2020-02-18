@@ -30,13 +30,19 @@ class EventContainer extends PureComponent<tContainerProps> {
 
     this.props.getEventDispatch({id})
       .then((res: tActionPayload<tEvent>) => {
-        this.props.getOrgByIdDispatch({id: res.payload.orgId});
+        // if private group, might 204 here
+        if (res.payload.orgId) {
+          this.props.getOrgByIdDispatch({id: res.payload.orgId});
 
-        return this.props.getEventsByOrgIdDispatch({
-          exclude: id,
-          limit: 4,
-          orgId: res.payload.orgId,
-        });
+          return this.props.getEventsByOrgIdDispatch({
+            exclude: id,
+            isDraft: false,
+            limit: 4,
+            orgId: res.payload.orgId,
+          });
+        }
+
+        return null;
       })
       .catch(loglevel.error);
   }
@@ -46,12 +52,6 @@ class EventContainer extends PureComponent<tContainerProps> {
     const eventStatus = _.get(eventThunk, 'error.status', null);
     const orgStatus = _.get(orgThunk, 'error.status', null);
     const status: tStatusUnion = eventStatus || orgStatus;
-    const isLoading = eventThunk.isLoading
-      || orgThunk.isLoading
-      || rolesThunk.isLoading;
-    console.log('status => ', status);
-    console.log('isLoading => ', isLoading);
-    console.log('all props for event page => ', this.props);
 
     return (
       <ErrorBoundary status={status || 200}>
@@ -66,7 +66,7 @@ class EventContainer extends PureComponent<tContainerProps> {
           ]}
         />
         <GenericLoader
-          isLoading={isLoading}
+          isLoading={orgThunk.isLoading || rolesThunk.isLoading}
           render={() => {
             const privateGroup = orgThunk.data.type !== 'public';
             const userIsLoggedIn = session.isAuthenticated;
@@ -74,17 +74,20 @@ class EventContainer extends PureComponent<tContainerProps> {
               return roleMap.orgId === orgThunk.data.id;
             });
 
-            console.log('userIsAMemberOfGroup => ', userIsAMemberOfGroup);
-
             if (privateGroup && (!userIsLoggedIn || !userIsAMemberOfGroup)) {
               return <Redirect to="/login" />;
             }
 
             return (
-              <EventComponent
-                event={eventThunk.data}
-                eventsByOrgId={eventsByOrgId}
-                org={orgThunk.data}
+              <GenericLoader
+                isLoading={eventThunk.isLoading}
+                render={() => (
+                  <EventComponent
+                    event={eventThunk.data}
+                    eventsByOrgId={eventsByOrgId}
+                    org={orgThunk.data}
+                  />
+                )}
               />
             );
           }}

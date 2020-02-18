@@ -1,65 +1,44 @@
 import _ from 'lodash';
-import loglevel from 'loglevel';
-import React, {PureComponent} from 'react';
+import React, {memo} from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet} from '../../../../../components';
 import {ErrorBoundary, GenericLoader} from '../../../../../containers';
-import {Paginate, SearchFilter} from '../../../../../containers';
-import {deleteOrgByUserId, getOrgsByUserId} from '../../../../../redux';
+import {SearchFilter} from '../../../../../containers';
+import {getOrgsByUserId} from '../../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {MembershipsComponent} from './Component';
 
-class MembershipsContainer extends PureComponent<tContainerProps> {
-  leaveOrg = (ev: React.MouseEvent<HTMLButtonElement>, orgId: number) => {
-    ev.preventDefault();
-    if (orgId) {
-      this.props.deleteOrgByUserIdDispatch({orgId})
-        .catch(loglevel.error);
-    }
-  }
-
-  render() {
-    const {orgsByUserIdThunk} = this.props;
-
-    return (
-      <ErrorBoundary status={_.get(orgsByUserIdThunk, 'error.status', 200)}>
-        <Helmet
-          canonical=""
-          title=""
-          meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
-          ]}
-        />
-        <GenericLoader
-          isLoading={orgsByUserIdThunk.isLoading}
-          render={() => (
-            <SearchFilter
-              searchKey="name"
-              items={orgsByUserIdThunk.data}
-              render={(searchProps: tSearchFilterProps) => (
-                <Paginate
-                  items={searchProps.items}
-                  render={(itemsToRender: tOrg[]) => (
-                    <MembershipsComponent
-                      leaveOrg={this.leaveOrg}
-                      onSearchChange={searchProps.onSearchChange}
-                      orgs={itemsToRender}
-                      roles={this.props.roles}
-                    />
-                  )}
-                />
-              )}
+const MembershipsContainer = memo((props: tContainerProps) => (
+  <ErrorBoundary status={_.get(props, 'orgsByUserIdThunk.error.status', 200)}>
+    <Helmet
+      canonical=""
+      title=""
+      meta={[
+        { name: 'description', content: '' },
+        { name: 'keywords', content: '' },
+        { property: 'og:title', content: '' },
+        { property: 'og:description', content: '' },
+      ]}
+    />
+    <GenericLoader
+      isLoading={props.orgsByUserIdThunk.isLoading}
+      render={() => (
+        <SearchFilter
+          searchKey="name"
+          items={props.orgsByUserIdThunk.data}
+          render={searchProps => (
+            <MembershipsComponent
+              onSearchChange={searchProps.onSearchChange}
+              orgs={searchProps.items}
+              roles={props.roles}
             />
           )}
         />
-      </ErrorBoundary>
-    );
-  }
-}
+      )}
+    />
+  </ErrorBoundary>
+));
 
 const mapStateToProps = (store: tStore) => ({
   orgsByUserIdThunk: store.orgsByUserId,
@@ -68,9 +47,6 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  deleteOrgByUserIdDispatch: (query: tDeleteUserByOrgIdQuery) =>
-    dispatch(deleteOrgByUserId(query)),
-
   getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) =>
     dispatch(getOrgsByUserId(query)),
 });

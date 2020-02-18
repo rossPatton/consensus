@@ -2,7 +2,7 @@ import Koa from 'koa';
 import _ from 'lodash';
 
 import {knex} from '../../../db/connection';
-import {getUsersByIds} from '../../../queries/getUsersByIds';
+import {getAccountRoleRelByOrgId, getOrgById, getUsersByIds} from '../../../queries';
 
 export const getEventById = async (
   ctx: Koa.ParameterizedContext,
@@ -12,10 +12,24 @@ export const getEventById = async (
   try {
     event = await knex('events')
       .limit(1)
-      .where({id: query.id})
+      .where(query)
       .first();
   } catch (err) {
     return ctx.throw(400, err);
+  }
+
+  if (!event) {
+    ctx.status = 204;
+    return {} as tEvent;
+  }
+
+  // user role for this particular org
+  const {role} = await getAccountRoleRelByOrgId(ctx, event.orgId);
+  const org = await getOrgById(ctx, event.orgId);
+
+  if (!role && org.type !== 'public') {
+    ctx.status = 204;
+    return {} as tEvent;
   }
 
   let rsvps = {} as tRSVP[];
@@ -28,24 +42,15 @@ export const getEventById = async (
     return ctx.throw(400, err);
   }
 
-  // const account = _.get(ctx, 'state.user', {});
-  // let rsvp = false;
-  // if (account.userId) {
-  //   const rel = _.find(rsvps, (rel: tRSVP) => rel.userId === account.userId);
-  //   if (rel) {
-  //     rsvp = rel.publicRSVP || rel.privateRSVP;
-  //   }
-  // }
-
-  // get count of both public and private rsvps (we combine these on the client, sometimes)
+  // get count for both public and private rsvps
   const publicRSVPS = [...rsvps].filter(rel => rel.publicRSVP);
   const privateRSVPS = [...rsvps].filter(rel => rel.privateRSVP);
 
-  // if on an actual event page, we render a list of public attendees below the description
+  // get all event attendees first
   const unsafeUsers = await getUsersByIds(ctx, publicRSVPS.map(rsvp => rsvp.userId));
 
-  // "unsafe" because we want to check their privacy settings before we return
-  // if this value is set, it should never be a problem. but lets double check anyway
+  // then filter out all the ones that are private
+  // if users are okay with sharing RSVPs, we render a list of event attendees
   const attendees = unsafeUsers.filter(user => !user.privateRSVP);
 
   return {

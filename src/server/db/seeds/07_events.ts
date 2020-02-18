@@ -15,7 +15,7 @@ const createMeeting = async (orgId: number) => ({
   location: faker.address.streetAddress(),
   locationLink: faker.internet.url(),
   orgId,
-  orgName: orgId === 100 ? 'Tech Workers Coalition NYC' : '',
+  orgName: orgId === 100 ? 'Tech Workers Coalition (NYC)' : 'Group name',
   pathToFeaturedImage: faker.image.imageUrl(),
   title: faker.company.bs(),
 });
@@ -31,7 +31,7 @@ const createDraft = async () => ({
   location: faker.address.streetAddress(),
   locationLink: faker.internet.url(),
   orgId: 100,
-  orgName: 'Tech Workers Coalition NYC',
+  orgName: 'Tech Workers Coalition (NYC)',
   pathToFeaturedImage: faker.image.imageUrl(),
   title: faker.company.bs(),
 });

@@ -31,7 +31,6 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
 
   render() {
     const {isLoading, location, match, orgThunk, rolesThunk, session} = this.props;
-    console.log('orgThunk => ', orgThunk);
 
     return (
       <ErrorBoundary status={_.get(orgThunk, 'error.status', 200)}>

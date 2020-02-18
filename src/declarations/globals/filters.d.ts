@@ -1,6 +1,4 @@
-declare type tPrivacyFilter = 'n/a' | 'public' | 'private';
 declare type tPublishedFilter = 'n/a' | 'published' | 'draft';
-
 declare type tInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => void;
 declare type tSelectChange = (ev: React.ChangeEvent<HTMLSelectElement>) => void;
 
@@ -17,15 +15,9 @@ declare type tRoleFilterProps = Readonly<{
 }>;
 
 declare type tSearchFilterProps = Readonly<{
-  items: object[],
+  items: any[],
   onFilterOptionChange: tSelectChange,
   onSearchChange: tInputChange,
-}>;
-
-declare type tPrivacyFilterProps = Readonly<{
-  items: object[],
-  privacyFilter: tPrivacyFilter,
-  onPrivacyFilterChange: tSelectChange,
 }>;
 
 // maybe make a new file for misc types like this?

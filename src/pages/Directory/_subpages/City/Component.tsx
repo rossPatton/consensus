@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import {Link} from 'react-router-dom';
 
 import { FilterPanel, Orgs } from '../../../../components';
 import { tComponentProps } from './_types';

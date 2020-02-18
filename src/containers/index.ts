@@ -20,10 +20,6 @@ export const PublishedFilter = loadable(() =>
   import(/* webpackChunkName: "PublishedFilter" */'./PublishedFilter'),
 );
 
-export const PrivacyFilter = loadable(() =>
-  import(/* webpackChunkName: "PrivacyFilter" */'./PrivacyFilter'),
-);
-
 export const RoleFilter = loadable(() =>
   import(/* webpackChunkName: "RoleFilter" */'./RoleFilter'),
 );

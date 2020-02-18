@@ -40,8 +40,6 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
     </Provider>,
   );
 
-  console.log('default store state => ', store.getState());
-
   const htmlStream = renderToNodeStream(jsx);
   htmlStream.pipe(ctx.res, {end: false});
   htmlStream.on('end', () => {

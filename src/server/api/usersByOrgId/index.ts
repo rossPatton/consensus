@@ -20,8 +20,6 @@ const dataPath = 'state.locals.data';
 
 usersByOrgId.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tUsersByOrgIdQuery = _.get(ctx, dataPath, {});
-  console.log('usersByOrgId query => ', query);
-
   await validateSchema<tUsersByOrgIdQuery>(ctx, getSchema, query);
 
   const users = await getUsersByOrgId(ctx, query);
@@ -35,7 +33,6 @@ usersByOrgId.get(route, async (ctx: Koa.ParameterizedContext) => {
 usersByOrgId.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {orgId}: tUserByOrgQuery = _.get(ctx, dataPath, {});
   const {userId} = _.get(ctx, 'state.user', {});
-
   await validateSchema<tUserByOrgQuery>(ctx, postSchema, {orgId, userId});
 
   // 0 means the user isn't logged in basically

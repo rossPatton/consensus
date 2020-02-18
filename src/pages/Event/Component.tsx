@@ -1,4 +1,3 @@
-import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {memo} from 'react';
@@ -12,7 +11,7 @@ export const EventComponent = memo((props: tComponentProps) => {
 
   return (
     <div className="contain mT4">
-      <Link to={`org/${org.id}`} className="dBl noUnderline fw600 lh1 mB4">
+      <Link to={`/org/${org.id}`} className="dBl noUnderline fw600 lh1 mB4">
         {org.name}
       </Link>
       <div className="fx mB5">

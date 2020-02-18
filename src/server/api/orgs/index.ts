@@ -3,6 +3,7 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import {knex} from '../../db/connection';
+import {validateSchema} from '../../utils';
 import {orgKeys} from './_constants';
 import {schema} from './_schema';
 
@@ -12,14 +13,7 @@ const route = '/api/v1/orgs';
 
 orgs.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, dataPath, {});
-  console.log('query => ', query);
-
-  try {
-    await schema.validateAsync(query);
-  } catch (err) {
-    const message = _.get(err, 'details[0].message', 'Bad Request');
-    return ctx.throw(400, message);
-  }
+  await validateSchema(ctx, schema, query);
 
   let orgs: tOrg[] = [];
   try {

@@ -4,10 +4,7 @@ exports.up = async (knex: Knex) => {
   await knex.schema.createTable('events', table => {
     table.increments().unsigned().primary();
 
-    // all events are tied to an org currently
-    // id so we can look up whatever we need if necessary
-    // name because 90% of the time that's all we need
-    // TODO - eventually, events should be searchable by city/state, etc
+    // columns below are added automatically based on group and group type
     table.integer('orgId')
       .notNullable()
       .references('orgs.id')
@@ -20,19 +17,24 @@ exports.up = async (knex: Knex) => {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
-    table.string('orgName').notNullable();
+    table.string('orgName')
+      .notNullable()
+      .references('orgs.name')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
 
-    // if private, the event is not visible to non group members
-    // if public, the event is visible to anyone
-    // table.boolean('isPrivate').defaultTo(false);
-    table.boolean('isDraft').notNullable().defaultTo(true);
-
+    // columns below are manually added by user when creating an event/meeting
     table.text('description', 'longtext').notNullable();
     table.text('location').defaultTo('Location To Be Determined');
     table.text('locationLink');
     table.text('title').notNullable();
     table.timestamp('date').notNullable();
     table.timestamp('endDate');
+
+    // if private, the event is not visible to non group members
+    // if public, the event is visible to anyone
+    // table.boolean('isPrivate').defaultTo(false);
+    table.boolean('isDraft').notNullable().defaultTo(true);
 
     // stuff below here is to maintain parity with the event creation form/drafts
     // it is not used when rendering events - but still needed

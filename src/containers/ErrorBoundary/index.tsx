@@ -20,10 +20,7 @@ export default class ErrorBoundary extends PureComponent<tProps, tState> {
     this.setState({
       error,
       info,
-    }, () => {
-      console.log(error, info);
-      loglevel.error(this.state);
-    });
+    }, () => loglevel.error(error, info));
     // TODO log to separate service, but only show user 500 page
   }
 

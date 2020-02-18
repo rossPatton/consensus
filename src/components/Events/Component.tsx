@@ -11,7 +11,8 @@ import {tComponentProps} from './_types';
 export const EventsComponent = memo((props: tComponentProps) => (
   <ul
     className={cx({
-      'fx aiCtr jcBetween fxdRow': props.horizontal,
+      'fx fxdRow': props.horizontal,
+      'jcBetween': props.horizontal && props.events.length === 4,
     })}>
     {props.events.map((ev, i) => {
       const isPastEvent = dayJS(ev.date).isBefore(dayJS());
@@ -21,7 +22,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
           key={ev.id}
           className={cx({
             'fx aiCtr mB3': !props.horizontal,
-            'mR2': props.horizontal && i !== props.events.length - 1,
+            'mR4': props.horizontal && i !== props.events.length - 1,
           })}>
           {/* {!isPastEvent && props.isEditable && (
             <div

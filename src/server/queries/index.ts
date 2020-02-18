@@ -1,5 +1,6 @@
 export {getAccountRoleRelByOrgId} from './getAccountRoleRelByOrgId';
 export {getEventByQuery} from './getEventByQuery';
+export {getOrgById} from './getOrgById';
 export {getProfileByAccountId} from './getProfileByAccountId';
 export {getRSVPByEventId} from './getRSVPByEventId';
 export {getRSVPsByUserId} from './getRSVPsByUserId';

@@ -6,7 +6,6 @@ export type tProps = {
 
 export type tComponentProps = tProps & {
   events: tEvent[],
-  onPrivacyFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onPublishedFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
 };

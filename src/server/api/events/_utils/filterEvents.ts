@@ -15,16 +15,19 @@ export const filterEvents = async (
 ): Promise<tEvent[]> => {
   const isAuthenticated = ctx.isAuthenticated();
 
-  return events.map(ev => {
-    if (ev.isPrivate || ev.isDraft) {
-      // if private event or draft, and user is not logged in, hide
-      if (!isAuthenticated) return null;
-      // if private event or draft, user is logged in, but user is not a member, hide
-      if (role === null) return null;
-      // only facilitators and the org admin should see drafts
-      if (ev.isDraft && role === 'member') return null;
-    }
+  return Promise.all(
+    events.map(ev => {
+      if (ev.isDraft) {
+        // if draft, and user is not logged in, hide
+        if (!isAuthenticated) return null;
+        // user is logged in, but user is not a member, hide
+        if (role === null) return null;
+        // only facilitators and the org admin should see drafts
+        if (ev.isDraft && role === 'member') return null;
+      }
 
-    return ev;
-  }).filter(notNull);
+      return ev;
+    })
+      .filter(notNull),
+  );
 };

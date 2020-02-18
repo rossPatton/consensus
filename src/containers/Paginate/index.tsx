@@ -50,7 +50,6 @@ class PaginateContainer extends Component<tProps, tState> {
       location: {pathname, search},
     } = this.props;
 
-    console.log('count => ', count);
     const query = qs.parse(search);
 
     // a _.range equivalent. sort of

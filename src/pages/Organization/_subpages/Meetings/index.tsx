@@ -3,18 +3,13 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet} from '../../../../components';
-import {
-  ErrorBoundary,
-  GenericLoader,
-  PrivacyFilter,
-  SearchFilter,
-} from '../../../../containers';
+import {ErrorBoundary, GenericLoader, SearchFilter} from '../../../../containers';
 import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
 
 class MeetingsContainer extends PureComponent<tContainerProps> {
   render() {
-    const {eventsByOrgIdThunk, match} = this.props;
+    const {eventsByOrgIdThunk, match, org, role, session} = this.props;
 
     return (
       <ErrorBoundary
@@ -39,21 +34,25 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
               ? events.filter(ev => !ev.isDraft)
               : events.filter(ev => ev.isDraft);
 
+            // on server, we don't return anything if user isn't a member of the group
+            // but we still render something to show the user they need to join
+            const privateGroup = org.type !== 'public';
+            const userIsLoggedIn = session.isAuthenticated;
+            const userIsAMemberOfGroup = !!role;
+            const hideMeetings = privateGroup
+              && (!userIsLoggedIn || !userIsAMemberOfGroup);
+
             return (
-              <PrivacyFilter
+              <SearchFilter
                 items={eventsToRender}
-                render={privacyProps => (
-                  <SearchFilter
-                    items={privacyProps.items}
-                    render={searchProps => (
-                      <EventsComponent
-                        {...searchProps}
-                        events={searchProps.items}
-                        org={this.props.org}
-                        role={this.props.role}
-                        type={this.props.type}
-                      />
-                    )}
+                render={searchProps => (
+                  <EventsComponent
+                    {...searchProps}
+                    events={searchProps.items}
+                    hideMeetings={hideMeetings}
+                    org={org}
+                    role={role}
+                    type={type}
                   />
                 )}
               />

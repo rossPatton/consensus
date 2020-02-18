@@ -6,7 +6,6 @@ import {Helmet} from '../../../../../components';
 import {
   ErrorBoundary,
   GenericLoader,
-  PrivacyFilter,
   PublishedFilter,
   SearchFilter,
 } from '../../../../../containers';
@@ -53,20 +52,14 @@ class EventsContainer extends PureComponent<tContainerProps> {
             <PublishedFilter
               items={eventsByOrgIdThunk.data}
               render={publishedProps => (
-                <PrivacyFilter
+                <SearchFilter
                   items={publishedProps.items}
-                  render={privacyProps => (
-                    <SearchFilter
-                      items={privacyProps.items}
-                      render={searchProps => (
-                        <EventsComponent
-                          {...publishedProps}
-                          {...privacyProps}
-                          {...searchProps}
-                          events={searchProps.items}
-                          match={this.props.match}
-                        />
-                      )}
+                  render={searchProps => (
+                    <EventsComponent
+                      {...publishedProps}
+                      {...searchProps}
+                      events={searchProps.items}
+                      match={this.props.match}
                     />
                   )}
                 />

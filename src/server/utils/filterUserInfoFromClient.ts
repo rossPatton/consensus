@@ -7,7 +7,7 @@ import {Mutable} from 'utility-types';
 // on the client we will render things conditionally based on whats available
 // certain things like passwords, phone numbers, always, are always stripped out
 export const filterUserInfoFromClient = async (users: tUser[]) => {
-  return await Promise.all(
+  return Promise.all(
     users.map(async user => {
       const userToReturn: Mutable<tUser> = user;
 

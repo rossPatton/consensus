@@ -22,7 +22,6 @@ export const OrganizationComponent = (props: tComponentProps) => (
           org={props.org}
           role={props.role}
           session={props.session}
-          type="events"
         />
       )}
       {props.match.params.section === 'drafts' && (
@@ -31,7 +30,6 @@ export const OrganizationComponent = (props: tComponentProps) => (
           org={props.org}
           role={props.role}
           session={props.session}
-          type="drafts"
         />
       )}
       {props.match.params.section === 'members' && (

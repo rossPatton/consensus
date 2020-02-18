@@ -32,7 +32,6 @@ class HomeContainer extends Component<tContainerProps> {
   }
 
   render() {
-    console.log('all props for home => ', this.props);
     return (
       <ErrorBoundary status={200}>
         <Helmet

@@ -13,7 +13,7 @@ export const getEventsByQuery = async (
 ): Promise<tEvent[]> => {
   const {
     exclude: excludeId,
-    isPublic: isPublicStr,
+    isDraft: isDraftStr,
     limit: limitStr,
     offset: offsetStr,
     orgId,
@@ -21,18 +21,11 @@ export const getEventsByQuery = async (
   } = query;
 
   try {
-    const parsedLimit = limitStr ? parseInt(limitStr, 10) : 3;
-    const parsedOffset = offsetStr ? parseInt(offsetStr, 10) : 0;
-
     // by default, we only return upcoming events
     const events = knex('events');
 
     // if we're excluding events, do it up front
     if (excludeId) events.whereNot({id: excludeId});
-
-    // if user isn't logged in or a member, only show public events
-    const isPublic = isPublicStr === 'true';
-    if (isPublic) events.where({isPrivate: false});
 
     const showPast = showPastStr === 'true';
     const now = dayJS().toISOString();
@@ -43,10 +36,18 @@ export const getEventsByQuery = async (
     // return upcoming events
     if (!showPast) events.where('date', '>=', now);
 
+    // we fetch everything by default if you're a group member,
+    // then filter on the client
+    const dontFetchDrafts = isDraftStr === 'false';
+    if (dontFetchDrafts) events.where('isDraft', false);
+
     events.where({orgId}).orderBy('date', 'asc');
 
+    const parsedLimit = limitStr ? parseInt(limitStr, 10) : 3;
+    const parsedOffset = offsetStr ? parseInt(offsetStr, 10) : 0;
     if (parsedLimit > 0) events.limit(parsedLimit);
     if (parsedOffset > 0) events.offset(parsedOffset);
+
     return events;
   } catch (err) {
     return ctx.throw(400, err);

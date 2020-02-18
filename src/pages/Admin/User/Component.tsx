@@ -75,15 +75,13 @@ export const UserAdminComponent = memo((props: tProps) => {
                   </Link>
                 </li>
               ))}
-              {orgsByUserIdThunk.data.length > 3 && (
-                <li>
-                  <Link
-                    to="/admin/memberships"
-                    className="pL2 fs6 fs600">
-                    See All Groups
-                  </Link>
-                </li>
-              )}
+              <li>
+                <Link
+                  to="/admin/memberships"
+                  className="pL2 fs6 fs600">
+                  Manage Groups
+                </Link>
+              </li>
             </ul>
           )}
       </aside>

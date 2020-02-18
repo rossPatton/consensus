@@ -20,7 +20,7 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     // featuredImage: null,
     // imagePreview: null,
     isDraft: false,
-    isPrivate: false,
+    isPrivate: this.props.org.type !== 'public',
     location: '',
     locationLink: '',
     orgName: this.props.org.name,
@@ -158,12 +158,6 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     // }
   }
 
-  toggleChecked = () => {
-    this.setState({
-      isPrivate: !this.state.isPrivate,
-    });
-  }
-
   updateState = (stateKey: tStateUnion, value: any) => {
     this.setState({
       [stateKey]: value,
@@ -193,7 +187,6 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
             onSubmit={this.onSubmit}
             saveAsDraft={this.saveAsDraft}
             // setImage={this.setImage}
-            toggleChecked={this.toggleChecked}
             updateState={this.updateState}
           />
         )}
