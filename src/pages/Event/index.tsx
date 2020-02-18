@@ -66,13 +66,14 @@ class EventContainer extends PureComponent<tContainerProps> {
           ]}
         />
         <GenericLoader
-          isLoading={orgThunk.isLoading || rolesThunk.isLoading}
+          isLoading={orgThunk.isLoading}
           render={() => {
             const privateGroup = orgThunk.data.type !== 'public';
             const userIsLoggedIn = session.isAuthenticated;
-            const userIsAMemberOfGroup = _.find(rolesThunk.data, roleMap => {
-              return roleMap.orgId === orgThunk.data.id;
-            });
+            const userIsAMemberOfGroup = rolesThunk.fetched
+              && _.find(rolesThunk.data, roleMap => {
+                return roleMap.orgId === orgThunk.data.id;
+              });
 
             if (privateGroup && (!userIsLoggedIn || !userIsAMemberOfGroup)) {
               return <Redirect to="/login" />;

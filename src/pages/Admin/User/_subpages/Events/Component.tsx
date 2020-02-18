@@ -29,6 +29,9 @@ export const EventsComponent = memo((props: tComponentProps) => (
         {key: 'orgName', display: 'Organization Name'},
       ]}
     />
-    <Events events={props.events} isDashboard />
+    <Events
+      events={props.events}
+      showOrgName
+    />
   </>
 ));

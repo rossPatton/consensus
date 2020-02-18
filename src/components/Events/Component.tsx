@@ -5,13 +5,14 @@ import qs from 'query-string';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {ExternalLink, RSVP} from '../../components';
+import {ExternalLink, PlaceholderImage, RSVP} from '../../components';
+import {objToQueryString} from '../../utils';
 import {tComponentProps} from './_types';
 
 export const EventsComponent = memo((props: tComponentProps) => (
   <ul
     className={cx({
-      'fx fxdRow': props.horizontal,
+      'fx fxdRow taL': props.horizontal,
       'jcBetween': props.horizontal && props.events.length === 4,
     })}>
     {props.events.map((ev, i) => {
@@ -22,9 +23,10 @@ export const EventsComponent = memo((props: tComponentProps) => (
           key={ev.id}
           className={cx({
             'fx aiCtr mB3': !props.horizontal,
+            'col row': props.horizontal,
             'mR4': props.horizontal && i !== props.events.length - 1,
           })}>
-          {/* {!isPastEvent && props.isEditable && (
+          {!isPastEvent && props.isEditable && (
             <div
               className={cx({
                 'brdB1 p2 pL3 pR3 fx aiCtr fs6 jcEnd': true,
@@ -55,14 +57,17 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 Delete this {ev.isDraft ? 'draft' : 'event'}
               </button>
             </div>
-          )} */}
+          )}
           <div
             className={cx({
-              'brdA1 br8 square': true,
               'mB2 bgWhite': props.horizontal,
               'mR3 bgGrey2': !props.horizontal,
-            })}
-          />
+            })}>
+            <PlaceholderImage
+              height={100}
+              width={200}
+            />
+          </div>
           <div>
             <div
               className={cx({
@@ -100,20 +105,10 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 {ev.title}
               </Link>
             </h3>
-            {/* <p
-                className={cx({
-                  'mB2 lineClamp': true,
-                  'pR5': !props.horizontal,
-                  'fs5': props.horizontal,
-                  o5: isPastEvent,
-                })}>
-                {ev.description}
-              </p> */}
-            {!props.isDashboard && (
+            {props.showRSVPs && (
               <div
                 className={cx({
                   'fx aiCtr fs6 lh1': true,
-                  'mB1': props.sessionRole !== 'admin',
                   hide: props.horizontal,
                   o5: isPastEvent,
                 })}>
@@ -121,7 +116,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 {ev.isDraft && 'This event is not published yet. Click to edit.'}
               </div>
             )}
-            {props.isDashboard && (
+            {props.showOrgName && (
               <div
                 className={cx({
                   'fw600 fs6 lh1': true,

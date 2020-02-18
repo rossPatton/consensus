@@ -1,8 +1,9 @@
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {Events} from '../../components';
+import {Events, PlaceholderImage} from '../../components';
 import {categories} from '../../constants';
+import {GenericLoader} from '../../containers';
 import {tProps} from './_types';
 
 export const HomeComponent = memo((props: tProps) => (
@@ -23,28 +24,36 @@ export const HomeComponent = memo((props: tProps) => (
           ? 'near you'
           : `in ${props.geo.city}`}
       </Link>
+      <GenericLoader
+        showLoader={false}
+        isLoading={props.eventsByLocation.isLoading}
+        render={() => (
+          <div className="p4">
+            <h2 className="fs4 mB3">Upcoming Meetings in {props.geo.city}</h2>
+            <Events
+              horizontal
+              showOrgName
+              events={props.eventsByLocation.data.slice(0, 4)}
+            />
+          </div>
+        )}
+      />
       <div className="p4">
-        <h2 className="fs4 mB2">Browse By Category</h2>
+        <h2 className="fs4 mB2">Or Browse by Category</h2>
         <ul className="fx jcCtr">
           {categories.map((cat, i) => (
             <li
               key={i}
-              className="fs6 fw600 lh1 mL2 mR2"
-              style={{
-                maxWidth: '150px',
-                minWidth: '150px',
-              }}>
+              className="fs6 fw600 lh1 mL2 mR2">
               <Link to={`/categories/${cat.slug}`}>
-                <div className="square br8 bgGrey3 mB2" />
+                <div className="mB2">
+                  <PlaceholderImage height={100} width={200} />
+                </div>
                 {cat.display}
               </Link>
             </li>
           ))}
         </ul>
-      </div>
-      <div className="p4">
-        <h2 className="fs4 mB3">Upcoming Meetings</h2>
-        <Events horizontal events={props.eventsByLocation} />
       </div>
     </div>
   </header>

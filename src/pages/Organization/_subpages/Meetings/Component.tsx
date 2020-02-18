@@ -27,6 +27,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
           placeholder="Search for events by title"
         />
         <Events
+          showRSVPs
           events={props.events}
           sessionRole={props.role}
           type={props.type}

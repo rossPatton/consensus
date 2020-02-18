@@ -54,7 +54,7 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
             <div className="col bgYellowLite brdA1 br8 p1">
               <span
                 className={cx({
-                  'br8 dBl trans1': true,
+                  'br8 dBl trans1 containRow': true,
                   p1: len > 0,
                   bgRedLite: len < 12,
                   bgYellow: len >= 12 && len < 24,
@@ -62,7 +62,6 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
                   bgGreen: len >= 32,
                 })}
                 style={{
-                  maxWidth: '100%',
                   width: len > 0 ? `${len * 3.125}%` : '0%',
                 }}
               />

@@ -8,7 +8,6 @@ export const getSchema = baseSchema.keys({
   date: Joi.date().timestamp(),
   exclude: Joi.number().integer(),
   isDraft: Joi.string().alphanum(),
-  isPublic: Joi.string().alphanum(),
   limit: Joi.number().integer(),
   offset: Joi.number().integer(),
   orgId: Joi.number().integer(),

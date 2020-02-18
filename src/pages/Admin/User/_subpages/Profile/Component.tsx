@@ -98,7 +98,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             City
           </h2>
           <p className="fs5 copyBlack mB1">
-            Used to show you more personalized search results
+            Share your location with others (if you want!)
           </p>
           <input
             onChange={ev => props.updateState('city', ev)}
@@ -148,7 +148,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
         <div
           tabIndex={0}
           role="button"
-          className="fx aiCtr curPtr fs6"
+          className="fx aiCtr curPtr fs6 p1"
           onClick={ev => props.updateState('privateRSVP', ev)}
           onKeyPress={ev => props.updateState('privateRSVP', ev)}>
           <input
@@ -170,7 +170,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
         <div
           tabIndex={0}
           role="button"
-          className="fx aiCtr curPtr fs6"
+          className="fx aiCtr curPtr fs6 p1"
           onClick={ev => props.updateState('privateMemberships', ev)}
           onKeyPress={ev => props.updateState('privateMemberships', ev)}>
           <input

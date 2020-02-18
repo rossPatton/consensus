@@ -15,13 +15,9 @@ export const EventComponent = memo((props: tComponentProps) => {
         {org.name}
       </Link>
       <div className="fx mB5">
-        <div
-          className="bgWhite mR3 br8 brdA1"
-          style={{
-            height: '200px',
-            minWidth: '400px',
-          }}
-        />
+        <div className="bgWhite mR3 br8 brdA1">
+          <img alt="" src="https://picsum.photos/400/200" />
+        </div>
         <div className="row rel">
           <time className="fw600 lh1 mB3" dateTime={event.date}>
             {dayJS(event.date).format('ddd MMM DD, h:mmA')}

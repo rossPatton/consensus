@@ -7,7 +7,7 @@ export const contentSecurityPolicyMiddleware = async (app: Koa) => {
   app.use(async (ctx, next) => {
     const cspOpts: KoaHelmetContentSecurityPolicyConfiguration = {
       // most directive we define via the meta tag
-      // for some reason, doing it all via the middleware here causes some issues with FF
+      // doing it all via the middleware here causes some issues with FF
       // splitting it up - by doing most of it via meta tag in server/SSR.tsx and
       // the rest of it here, seems to be the solution that works cross-browser
       // also - on FF, if you use react/redux dev tools, it will trigger a CSP error

@@ -1,10 +1,11 @@
 type tProps = {
   events: tEvent[],
-  isDashboard?: boolean,
-  // just because eslint complains about using role with non-ARIA strings
-  sessionRole?: tRole,
   // render alternative version
   horizontal?: boolean,
+  // just because eslint complains about using role with non-ARIA strings
+  sessionRole?: tRole,
+  showOrgName?: boolean,
+  showRSVPs?: boolean,
 };
 
 export type tStore = {

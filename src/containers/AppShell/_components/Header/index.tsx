@@ -4,12 +4,17 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {logout} from '../../../../redux';
+import {logoutSuccess} from '../../../../redux/auth/logout/actions';
 import {tContainerProps} from './_types';
 import {HeaderComponent} from './Component';
 
 class HeaderContainer extends PureComponent<tContainerProps> {
   logout = (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.preventDefault();
+
+    // trigger logout immediately on client side while server works
+    logoutSuccess({isAuthenticated: false});
+
     this.props.logoutDispatch()
       .then(() => window.location.reload())
       .catch(loglevel.error);

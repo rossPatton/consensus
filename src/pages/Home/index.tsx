@@ -14,15 +14,10 @@ class HomeContainer extends Component<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
 
-    const {session} = props;
-    const {city} = _.get(session, 'profile', {}) as tUser;
-    const loggedIn = session.isAuthenticated;
-    const isUser = session.type === 'user';
-
-    if (loggedIn && isUser && city) return;
+    const loggedIn = props.session.isAuthenticated;
+    const isUser = props.session.type === 'user';
     if (loggedIn && !isUser) return;
 
-    // only get geo data for users, and only if we don't already have it
     props.getGeoDispatch()
       .then(res => {
         const query = {...res.payload};
@@ -45,7 +40,7 @@ class HomeContainer extends Component<tContainerProps> {
           ]}
         />
         <HomeComponent
-          eventsByLocation={this.props.eventsByLocation.slice(0, 4)}
+          eventsByLocation={this.props.eventsByLocation}
           geo={this.props.geo}
           isLoading={this.props.isLoading}
         />
@@ -55,7 +50,7 @@ class HomeContainer extends Component<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  eventsByLocation: store.eventsByLocation.data,
+  eventsByLocation: store.eventsByLocation,
   isLoading: store.geo.isLoading,
   geo: store.geo.data,
   session: store.session.data,

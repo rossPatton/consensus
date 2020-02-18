@@ -28,6 +28,10 @@ export const PasswordInput = loadable(() =>
   import(/* webpackChunkName: "PasswordInput" */'./PasswordInput'),
 );
 
+export const PlaceholderImage = loadable(() =>
+  import(/* webpackChunkName: "PlaceholderImage" */'./PlaceholderImage'),
+);
+
 export const PrivateRoute = loadable(() =>
   import(/* webpackChunkName: "PrivateRoute" */'./PrivateRoute'),
 );

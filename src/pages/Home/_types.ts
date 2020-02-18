@@ -5,7 +5,7 @@ export type tStore = {
 };
 
 export type tProps = {
-  eventsByLocation: tEvent[],
+  eventsByLocation: tThunk<tEvent[]>,
   geo: tGeo,
   isLoading: boolean,
 }
