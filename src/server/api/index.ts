@@ -7,6 +7,7 @@ import { city } from './city';
 import { country } from './country';
 import { event } from './event';
 import { events } from './events';
+import { eventsByLocation } from './eventsByLocation';
 import { eventsByUserId } from './eventsByUserId';
 import { geo } from './geo';
 import { org } from './org';
@@ -28,6 +29,7 @@ export const setupApi = (app: Koa) => {
   app.use(country.routes());
   app.use(event.routes());
   app.use(events.routes());
+  app.use(eventsByLocation.routes());
   app.use(eventsByUserId.routes());
   app.use(geo.routes());
   app.use(org.middleware());
@@ -55,6 +57,7 @@ export const setupApi = (app: Koa) => {
   app.use(country.allowedMethods(opts));
   app.use(event.allowedMethods(opts));
   app.use(events.allowedMethods(opts));
+  app.use(eventsByLocation.allowedMethods(opts));
   app.use(eventsByUserId.allowedMethods(opts));
   app.use(geo.allowedMethods(opts));
   app.use(org.allowedMethods(opts));

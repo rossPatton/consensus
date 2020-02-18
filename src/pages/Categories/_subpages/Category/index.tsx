@@ -54,15 +54,16 @@ class CategoryContainer extends PureComponent<tContainerProps> {
                 <SearchFilter
                   items={orgs.data}
                   searchKey="name"
-                  render={(searchProps: tSearchFilterProps) => (
+                  render={searchProps => (
                     <Paginate
                       count={9}
                       items={searchProps.items}
                       render={(orgsToRender: tOrg[]) => (
                         <>
                           <FilterPanel
+                            className="fx aiCtr p3 bgWhite br8 mB4 fs6 fw600"
                             onSearchChange={searchProps.onSearchChange}
-                            placeholder="Search for a meeting by title"
+                            placeholder="Search for a group by name"
                           />
                           <Orgs orgs={orgsToRender} />
                         </>

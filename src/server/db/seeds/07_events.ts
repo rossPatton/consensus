@@ -5,6 +5,7 @@ import Knex from 'knex';
 import {range} from '../../../utils/range';
 
 const createMeeting = async (orgId: number) => ({
+  cityId: 16624,
   date: faker.random.boolean() ? faker.date.future() : faker.date.past(),
   description: faker.lorem.paragraphs(),
   // endDate === duration, since users can have custom durations this is a timestamp
@@ -20,6 +21,7 @@ const createMeeting = async (orgId: number) => ({
 });
 
 const createDraft = async () => ({
+  cityId: 16624,
   date: faker.date.future(),
   description: faker.lorem.paragraphs(),
   // endDate === duration, since users can have custom durations this is a timestamp

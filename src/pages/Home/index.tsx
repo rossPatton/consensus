@@ -1,10 +1,11 @@
 import _ from 'lodash';
+import loglevel from 'loglevel';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet} from '../../components';
 import {ErrorBoundary} from '../../containers';
-import {getGeo} from '../../redux';
+import {getEventsByLocation, getGeo} from '../../redux';
 import {canonical, description, keywords, title} from './_constants';
 import {tContainerProps, tStore} from './_types';
 import {HomeComponent} from './Component';
@@ -12,6 +13,7 @@ import {HomeComponent} from './Component';
 class HomeContainer extends Component<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
+
     const {session} = props;
     const {city} = _.get(session, 'profile', {}) as tUser;
     const loggedIn = session.isAuthenticated;
@@ -21,10 +23,16 @@ class HomeContainer extends Component<tContainerProps> {
     if (loggedIn && !isUser) return;
 
     // only get geo data for users, and only if we don't already have it
-    props.getGeoDispatch();
+    props.getGeoDispatch()
+      .then(res => {
+        const query = {...res.payload};
+        return props.getEventsByLocationDispatch(query);
+      })
+      .catch(loglevel.error);
   }
 
   render() {
+    console.log('all props for home => ', this.props);
     return (
       <ErrorBoundary status={200}>
         <Helmet
@@ -38,6 +46,7 @@ class HomeContainer extends Component<tContainerProps> {
           ]}
         />
         <HomeComponent
+          eventsByLocation={this.props.eventsByLocation.slice(0, 4)}
           geo={this.props.geo}
           isLoading={this.props.isLoading}
         />
@@ -47,12 +56,14 @@ class HomeContainer extends Component<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
+  eventsByLocation: store.eventsByLocation.data,
   isLoading: store.geo.isLoading,
   geo: store.geo.data,
   session: store.session.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
+  getEventsByLocationDispatch: (query: any) => dispatch(getEventsByLocation(query)),
   getGeoDispatch: () => dispatch(getGeo()),
 });
 

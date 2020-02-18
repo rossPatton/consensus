@@ -9,6 +9,7 @@ export { getRegion } from './region';
 
 // event(s) related thunks
 export { getEvent, patchEvent, postEvent } from './event';
+export { getEventsByLocation } from './eventsByLocation';
 export { deleteEvent, getEventsByOrgId } from './eventsByOrgId';
 export { getEventsByUserId } from './eventsByUserId';
 

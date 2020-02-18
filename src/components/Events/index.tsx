@@ -14,7 +14,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {events, isDashboard, sessionRole, type = 'events'} = this.props;
+    const {events = [], isDashboard, sessionRole, type = 'events'} = this.props;
     const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
 
     if (events.length === 0) {

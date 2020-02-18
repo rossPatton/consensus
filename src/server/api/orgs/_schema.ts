@@ -1,7 +1,7 @@
 import Joi from '@hapi/joi';
 
 export const schema = Joi.object({
-  category: Joi.string().alphanum(),
+  category: Joi.string(),
   city: Joi.string().alphanum(),
   cityId: Joi.number().integer(),
   country: Joi.string().alphanum(),

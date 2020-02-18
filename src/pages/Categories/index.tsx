@@ -9,19 +9,17 @@ const Categories = (props: tProps) => {
   const renderCategory = !!params.category;
 
   return (
-    <>
-      <div className="contain mT4">
-        <h1 className="fs2 mB3">
-          {renderCategory
-            ? `Organizations by category: ${categoryMap[params.category]}`
-            : 'Categories'}
-        </h1>
-        {!renderCategory && <CategoryList />}
-        {renderCategory && (
-          <Category match={props.match} />
-        )}
-      </div>
-    </>
+    <div className="contain mT4">
+      <h1 className="fs2 mB3">
+        {renderCategory
+          ? categoryMap[params.category]
+          : 'Categories'}
+      </h1>
+      {!renderCategory && <CategoryList />}
+      {renderCategory && (
+        <Category match={props.match} />
+      )}
+    </div>
   );
 };
 

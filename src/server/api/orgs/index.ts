@@ -7,12 +7,12 @@ import {orgKeys} from './_constants';
 import {schema} from './_schema';
 
 export const orgs = new Router();
-const route = '/api/v1/orgs';
-const table = 'orgs';
 const dataPath = 'state.locals.data';
+const route = '/api/v1/orgs';
 
 orgs.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, dataPath, {});
+  console.log('query => ', query);
 
   try {
     await schema.validateAsync(query);
@@ -23,7 +23,7 @@ orgs.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let orgs: tOrg[] = [];
   try {
-    orgs = await knex(table).where(query).select(orgKeys);
+    orgs = await knex('orgs').where(query).select(orgKeys);
   } catch (err) {
     return ctx.throw(400, err);
   }

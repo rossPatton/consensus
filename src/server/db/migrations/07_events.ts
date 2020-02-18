@@ -14,6 +14,12 @@ exports.up = async (knex: Knex) => {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
+    table.integer('cityId')
+      .notNullable()
+      .references('cities.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+
     table.string('orgName').notNullable();
 
     // if private, the event is not visible to non group members

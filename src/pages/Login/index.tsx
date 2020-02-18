@@ -55,7 +55,7 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
           ]}
         />
         {session.data.isAuthenticated && (
-          <Redirect to="/admin/profile" />
+          <Redirect to="/admin/events" />
         )}
         {!session.data.isAuthenticated && (
           <LoginComponent

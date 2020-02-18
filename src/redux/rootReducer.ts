@@ -4,6 +4,7 @@ import { authReducer } from './auth/reducer';
 import { cityReducer } from './city/reducer';
 import { countryReducer } from './country/reducer';
 import { eventReducer } from './event/reducer';
+import { eventsByLocationReducer } from './eventsByLocation/reducer';
 import { eventsByOrgIdReducer } from './eventsByOrgId/reducer';
 import { eventsByUserIdReducer } from './eventsByUserId/reducer';
 import { geoReducer } from './geo/reducer';
@@ -21,6 +22,7 @@ export const rootReducer = combineReducers({
   city: cityReducer,
   country: countryReducer,
   event: eventReducer,
+  eventsByLocation: eventsByLocationReducer,
   eventsByOrgId: eventsByOrgIdReducer,
   eventsByUserId: eventsByUserIdReducer,
   geo: geoReducer,
