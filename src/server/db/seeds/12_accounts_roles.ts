@@ -31,7 +31,7 @@ exports.seed = async (knex: Knex) => {
   }
 
   // create test user facilitator account
-  fakeRelations.push(await createRelation(100, 100));
+  fakeRelations.push(await createRelation(100, 82));
 
   // create test org admin account
   fakeRelations.push(await createRelation(101, 100));

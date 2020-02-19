@@ -3,6 +3,7 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
+import {PlaceholderImage} from '../../components';
 import {tComponentProps} from './_types';
 
 export const OrgsComponent = memo((props: tComponentProps) => (
@@ -34,8 +35,8 @@ export const OrgsComponent = memo((props: tComponentProps) => (
               'fx aiCtr fs6 lh1 noUnderline': true,
               'p3 hvrBgGrey1 trans1 br8': props.asList,
             })}>
-            <div className="mR3">
-              <div className="bgGrey3 circ p3" />
+            <div className="circ mR3 ovfHide">
+              <PlaceholderImage height={60} width={60} />
             </div>
             <div>
               <div className="fs7 fw600 mB2">
@@ -43,19 +44,28 @@ export const OrgsComponent = memo((props: tComponentProps) => (
                   {org.type}
                 </span>
               </div>
-              <h2 className="dBl lh1 fs3 underline">
+              <h2 className="dBl lh1 fs3 underline mB2">
                 {org.name}
               </h2>
-              <div className="fx aiCtr fs7 fw600 ttCap mT2">
-                <span className="mR2">
+              <div className="fs7 fw600">
+                <span
+                  className={cx({
+                    'mB1': !props.asList,
+                    'mR2': props.asList,
+                  })}>
                   {org.category}
                 </span>
-                <span className="mR2">Based in {org.city}</span>
                 {props.showLocation && (
-                  <span className="mR2">Based in {org.city}</span>
+                  <span
+                    className={cx({
+                      'mB1': !props.asList,
+                      'mR2': props.asList,
+                    })}>
+                    Based in {org.city}
+                  </span>
                 )}
                 {role && (
-                  <span>
+                  <span className="ttCap">
                     {role}
                   </span>
                 )}

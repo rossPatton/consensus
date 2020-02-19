@@ -7,7 +7,8 @@ const baseSchema = Joi.object().keys({
 export const getSchema = baseSchema.keys({
   date: Joi.date().timestamp(),
   exclude: Joi.number().integer(),
-  isDraft: Joi.string().alphanum(),
+  isDraft: Joi.bool(),
+  isPrivate: Joi.bool(),
   limit: Joi.number().integer(),
   offset: Joi.number().integer(),
   orgId: Joi.number().integer(),

@@ -4,7 +4,7 @@ export type tEventsServerQuery = {
   exclude: string,
   id: string,
   isDraft: 'true' | 'false',
-  isPublic: 'true' | 'false',
+  isPrivate: 'true' | 'false',
   limit: string
   offset: string
   orgId: string

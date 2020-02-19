@@ -18,10 +18,10 @@ exports.up = async (knex: Knex) => {
     table.text('description', 'longtext').notNullable();
 
     // name of the group
-    table.string('name').notNullable();
+    table.string('name').notNullable().unique();
 
     // slugified version of the name, for urls
-    table.string('handle').notNullable();
+    table.string('handle').notNullable().unique();
 
     // group type determines the level of privacy and vetting for your group
     // public === anyone can join, no questions asked, no screening, everything public

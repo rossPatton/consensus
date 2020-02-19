@@ -32,7 +32,7 @@ eventsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
     events = await knex('events')
       .where({cityId: cityRel.city})
       .where('date', '>=', dayJS().toISOString())
-      .where({isDraft: false})
+      .where({isDraft: false, isPrivate: false})
       .orderBy('date', 'asc')
       .limit(100);
   } catch (err) {

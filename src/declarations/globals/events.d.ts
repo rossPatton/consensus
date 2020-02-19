@@ -26,7 +26,7 @@ declare type tUpsertEventQuery = Partial<tEvent>;
 // the params available to get are more expansive than posting/patching
 declare type tGetEventQuery = Partial<tEvent> & tBaseQuery & Readonly<{
   isDraft?: boolean,
-  isPublic?: boolean,
+  isPrivate?: boolean,
   showPast?: boolean,
 }>;
 

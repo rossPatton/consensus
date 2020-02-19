@@ -23,6 +23,11 @@ exports.up = async (knex: Knex) => {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
+    // if private, the event is not visible to non group members
+    // if public, the event is visible to anyone
+    // value is based on group type
+    table.boolean('isPrivate').defaultTo(false);
+
     // columns below are manually added by user when creating an event/meeting
     table.text('description', 'longtext').notNullable();
     table.text('location').defaultTo('Location To Be Determined');
@@ -31,9 +36,7 @@ exports.up = async (knex: Knex) => {
     table.timestamp('date').notNullable();
     table.timestamp('endDate');
 
-    // if private, the event is not visible to non group members
-    // if public, the event is visible to anyone
-    // table.boolean('isPrivate').defaultTo(false);
+    // if user saves event as draft instead of publishing right away
     table.boolean('isDraft').notNullable().defaultTo(true);
 
     // stuff below here is to maintain parity with the event creation form/drafts

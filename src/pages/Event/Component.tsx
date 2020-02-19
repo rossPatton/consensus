@@ -3,7 +3,7 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {Events, ExternalLink, RSVP} from '../../components';
+import {Events, ExternalLink, PlaceholderImage, RSVP} from '../../components';
 import {tComponentProps} from './_types';
 
 export const EventComponent = memo((props: tComponentProps) => {
@@ -15,8 +15,8 @@ export const EventComponent = memo((props: tComponentProps) => {
         {org.name}
       </Link>
       <div className="fx mB5">
-        <div className="bgWhite mR3 br8 brdA1">
-          <img alt="" src="https://picsum.photos/400/200" />
+        <div className="mR3">
+          <PlaceholderImage height={420} width={640} />
         </div>
         <div className="row rel">
           <time className="fw600 lh1 mB3" dateTime={event.date}>
