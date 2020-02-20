@@ -8,7 +8,6 @@ export const userKeys = [
   'name',
   'phone',
   'privateEmail',
-  'privateLocation',
   'privateMemberships',
   'privateRSVP',
   'username',

@@ -47,27 +47,31 @@ export const OrgsComponent = memo((props: tComponentProps) => (
               <h2 className="dBl lh1 fs3 underline mB2">
                 {org.name}
               </h2>
-              <div className="fs7 fw600">
+              <div
+                className={cx({
+                  'fs7 fw600': true,
+                  'fx aiCtr': props.asList,
+                })}>
                 <span
                   className={cx({
-                    'mB1': !props.asList,
                     'mR2': props.asList,
+                    'mB1': !props.asList,
                   })}>
                   {org.category}
                 </span>
                 {props.showLocation && (
-                  <span
+                  <div
                     className={cx({
+                      'mR2': true,
                       'mB1': !props.asList,
-                      'mR2': props.asList,
                     })}>
                     Based in {org.city}
-                  </span>
+                  </div>
                 )}
                 {role && (
-                  <span className="ttCap">
+                  <div className="ttCap">
                     {role}
-                  </span>
+                  </div>
                 )}
               </div>
             </div>

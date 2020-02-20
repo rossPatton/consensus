@@ -15,7 +15,6 @@ const initialState = {
   name: '',
   password: '',
   privateEmail: true,
-  privateLocation: true,
   privateMemberships: false,
   privateRSVP: false,
   username: '',

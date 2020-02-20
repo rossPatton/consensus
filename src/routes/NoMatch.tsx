@@ -6,5 +6,5 @@ const NoMatchComponent = loadable(() =>
 
 export const NoMatch = {
   component: NoMatchComponent,
-  path: '/404',
+  path: '*',
 };

@@ -15,7 +15,6 @@ declare type tUser = Readonly<{
   name: string,
   phone: string,
   privateEmail: boolean,
-  privateLocation: boolean,
   privateMemberships: boolean,
   privateRSVP: boolean,
   role?: tRole,

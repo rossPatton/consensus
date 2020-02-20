@@ -14,8 +14,6 @@ exports.up = async (knex: Knex) => {
     // default name for displaying
     table.string('username').notNullable().defaultTo('');
 
-    // account recovery / verification, event reminders, etc
-    table.string('email').notNullable().unique();
     // if set to true, email addresses aren't visible to other users or org
     table.boolean('privateEmail').notNullable().defaultTo(true);
 
@@ -23,19 +21,10 @@ exports.up = async (knex: Knex) => {
     table.string('phone').unique();
 
     // optional - allow user to set their primary city
-    // should be a city search, that renders all cities by region
-    // rendered to client
+    // @TODO eventually build form such that when a user selects a city,
+    // the cooresponding region and zip is shown, so we can use that for geolocation
+    // instead of geolocating every time
     table.string('city').defaultTo('');
-
-    // supplementary, just included for easier lookup behind the scenes
-    table.integer('cityId')
-      .references('cities.id')
-      .onUpdate('CASCADE')
-      .onDelete('CASCADE');
-
-    // if set to true, user location info above isn't visible
-    // this is only relevant if someone visits a user's profile
-    table.boolean('privateLocation').notNullable().defaultTo(true);
 
     // user's preferred language
     table.string('language').notNullable().defaultTo('en');

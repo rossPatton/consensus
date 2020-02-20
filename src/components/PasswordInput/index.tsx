@@ -8,11 +8,10 @@ class PasswordInput extends PureComponent<tProps, tState> {
     showPW: false,
   };
 
-  togglePWVisibility = () => {
+  togglePWVisibility = () =>
     this.setState({
       showPW: !this.state.showPW,
     });
-  }
 
   render() {
     return (

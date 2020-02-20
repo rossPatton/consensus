@@ -13,6 +13,7 @@ import { geo } from './geo';
 import { org } from './org';
 import { orgs } from './orgs';
 import { orgsByUserId } from './orgsByUserId';
+import { passwordResetViaEmail } from './passwordReset';
 import { region } from './region';
 import { reportUri } from './reportUri';
 import { roles } from './roles';
@@ -36,6 +37,7 @@ export const setupApi = (app: Koa) => {
   app.use(org.routes());
   app.use(orgs.routes());
   app.use(orgsByUserId.routes());
+  app.use(passwordResetViaEmail.routes());
   app.use(region.routes());
   app.use(reportUri.routes());
   app.use(roles.routes());
@@ -63,6 +65,7 @@ export const setupApi = (app: Koa) => {
   app.use(org.allowedMethods(opts));
   app.use(orgs.allowedMethods(opts));
   app.use(orgsByUserId.allowedMethods(opts));
+  app.use(passwordResetViaEmail.allowedMethods(opts));
   app.use(region.allowedMethods(opts));
   app.use(reportUri.allowedMethods(opts));
   app.use(roles.allowedMethods(opts));

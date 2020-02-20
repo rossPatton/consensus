@@ -24,7 +24,6 @@ export const patchSchema = Joi.object().keys({
   password: Joi.string().required(),
   phone: Joi.string(),
   privateEmail: Joi.bool(),
-  privateLocation: Joi.bool(),
   privateMemberships: Joi.bool(),
   privateRSVP: Joi.bool(),
   username: Joi.string(),

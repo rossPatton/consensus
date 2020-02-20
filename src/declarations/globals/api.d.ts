@@ -21,13 +21,13 @@ declare type tIdQuery = tBaseQuery & {
 };
 
 declare type tApiOpts = Readonly<{
-  dispatch: Function,
+  dispatch?: Function,
   credentials?: boolean,
-  failure: Function,
+  failure?: Function,
   init?: Function,
   method?: 'DELETE' | 'GET' | 'PATCH' | 'POST',
   path: string,
-  success: (json: any) => any,
+  success?: (json: any) => any,
   query?: any,
 }>;
 

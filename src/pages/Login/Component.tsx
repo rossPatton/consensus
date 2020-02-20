@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import {Link} from 'react-router-dom';
 
 import { PasswordInput } from '../../components';
 import { tComponentProps } from './_types';
@@ -9,7 +10,7 @@ export const LoginComponent = memo((props: tComponentProps) => (
     className="contain mT4"
     name="userLoginForm"
     autoComplete="off"
-    action="/auth/login"
+    action="/auth/v1/login"
     onSubmit={props.login}>
     <fieldset>
       <legend>
@@ -38,9 +39,12 @@ export const LoginComponent = memo((props: tComponentProps) => (
       />
       <button
         disabled={props.isClient && (!props.password || !props.username)}
-        className="p3 pL4 pR4">
+        className="p3 pL4 pR4 mR2">
         Login
       </button>
+      <Link to="/password-reset" className="btn p3 pL4 pR4">
+        Forget your password?
+      </Link>
     </fieldset>
   </form>
 ));

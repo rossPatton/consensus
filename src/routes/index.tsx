@@ -7,11 +7,11 @@ import {Home} from './Home';
 import {Login} from './Login';
 import {NoMatch} from './NoMatch';
 import {Organization} from './Organization';
+import {PasswordReset} from './PasswordReset';
 import {Search} from './Search';
 import {Signup} from './Signup';
 import {User} from './User';
 
-// TODO eventually split this file up once it starts getting big
 export const routes = [
   Admin,
   Categories,
@@ -21,6 +21,7 @@ export const routes = [
   Home,
   Login,
   Organization,
+  PasswordReset,
   Search,
   Signup,
   User,

@@ -23,8 +23,6 @@ user.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tIdQuery = _.get(ctx, dataPath, {});
   await validateSchema<tIdQuery>(ctx, getSchema, query);
 
-  // TODO certain things like phone numbers should only be returned to the client
-  // if the user is viewing their admin dashboard
   const user: tUser = await knex('users')
     .limit(1)
     .select(userKeys)

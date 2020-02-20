@@ -5,9 +5,12 @@ declare type tAccountBase = tFormSubmit & Readonly<{
   isVerified: boolean,
   login: string, // unique login value separate from username or email
   orgId?: number,
+  passwordResetToken?: string,
+  passwordResetExpires?: string,
   userId?: number,
 }>;
 
+// password is never sent to the client
 declare type tAccount = tAccountBase & Readonly<{
   password: string,
 }>;
@@ -21,7 +24,7 @@ declare type tAccountQuery = Partial<tAccountBase> & Readonly<{
 declare type tLoginQuery = Readonly<{
   // passportjs is a black box, and near impossible to debug
   // so we decouple email/username from the login credentials
-  // we still call the login 'username' here, or else passport doesnt work
+  // but we call the login 'username' here, or else passport doesnt work
   username: string,
   password: string,
 }>;

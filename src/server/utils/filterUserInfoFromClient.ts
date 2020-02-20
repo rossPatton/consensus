@@ -11,10 +11,10 @@ export const filterUserInfoFromClient = async (users: tUser[]) => {
     users.map(async user => {
       const userToReturn: Mutable<tUser> = user;
 
+      // rn now, email is the only optional thing we ask for that has a use
+      // so, we want to let the user decide if they want to share their primary email
       if (userToReturn.privateEmail) {
         userToReturn.email = '';
-      } else if (userToReturn.privateLocation) {
-        userToReturn.city = '';
       }
 
       return userToReturn as tUser;

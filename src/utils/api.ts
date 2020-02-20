@@ -1,6 +1,7 @@
+import loglevel from 'loglevel';
+
 import {agent, objToQueryString} from '.';
 
-// TODO write a README for error handling and api calls
 export const api = async (opts: tApiOpts) => {
   const {method = 'GET', path, query = {}} = opts;
   const qs = objToQueryString(query);
@@ -23,15 +24,27 @@ export const api = async (opts: tApiOpts) => {
     .then((resp: tFetchResponse) => {
       status = resp.status;
       if (!resp.ok) throw resp;
+      if (status === 204) return 'Nothing found';
       return resp.json(); // we only get here if there is no error
     })
-    .then(json => opts.dispatch(opts.success(json)))
+    .then(json => {
+      if (opts.dispatch) return opts.dispatch(opts.success(json));
+      return json;
+    })
     .catch(async (err: tFetchResponse<Error>) => {
       if (err.text) {
         const message = await err.text();
-        return opts.dispatch(opts.failure({message, status}));
+        if (opts.dispatch) {
+          return opts.dispatch(opts.failure({message, status}));
+        }
+
+        return loglevel.error({message, status});
       }
 
-      return opts.dispatch(opts.failure({message: err, status}));
+      if (opts.dispatch) {
+        return opts.dispatch(opts.failure({message: err, status}));
+      }
+
+      loglevel.error({message: err, status});
     });
 };

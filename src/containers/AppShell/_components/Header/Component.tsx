@@ -26,7 +26,7 @@ export const HeaderComponent = memo((props: tComponentProps) => (
         )}
         {props.session.isAuthenticated
           && (
-            <form action="/auth/logout">
+            <form action="/auth/v1/logout">
               <fieldset>
                 <Link
                   id="a11yAdmin"

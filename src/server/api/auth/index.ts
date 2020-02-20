@@ -4,22 +4,18 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import {getSession} from '../../queries';
+import {validateSchema} from '../../utils';
 import {schema} from './_schema';
 
 export const auth = new Router();
 const dataPath = 'state.locals.data';
 
-auth.post('/auth/login', async (ctx: Koa.ParameterizedContext, next) =>
+auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
   passport.authenticate('local', async (err: Error | null, account: tAccount) => {
     if (err) ctx.throw(400, err);
     if (!account) ctx.throw(400, 'Account not found');
 
-    try {
-      await schema.validateAsync(account);
-    } catch (err) {
-      const message = _.get(err, 'details[0].message', 'Bad Request');
-      return ctx.throw(400, message);
-    }
+    await validateSchema<tAccount>(ctx, schema, account);
 
     const query = _.get(ctx, dataPath, {});
     await ctx.login(account);
@@ -32,7 +28,7 @@ auth.post('/auth/login', async (ctx: Koa.ParameterizedContext, next) =>
   })(ctx, next));
 
 // logout just clears the session basically, doesnt matter how you logged in
-auth.get('/auth/logout', async (ctx: Koa.ParameterizedContext, next) =>
+auth.get('/auth/v1/logout', async (ctx: Koa.ParameterizedContext, next) =>
   passport.authenticate('local', () => {
     const {isFormSubmit} = _.get(ctx, dataPath, {});
     const isAuthenticated = ctx.isAuthenticated();
@@ -45,10 +41,10 @@ auth.get('/auth/logout', async (ctx: Koa.ParameterizedContext, next) =>
   })(ctx, next));
 
 
-// app.post('/auth/openid',
+// app.post('/auth/v1/openid',
 //   passport.authenticate('openid'));
 
-// app.get('/auth/openid/return',
+// app.get('/auth/v1/openid/return',
 //   passport.authenticate('openid', { failureRedirect: '/login' }),
 //   function(req, res) {
 //     // Successful authentication, redirect home.

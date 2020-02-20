@@ -108,24 +108,6 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             name="city"
           />
         </label>
-        <div
-          tabIndex={0}
-          role="button"
-          className="fx aiCtr curPtr mB3 fs6"
-          onClick={ev => props.updateState('privateLocation', ev)}
-          onKeyPress={ev => props.updateState('privateLocation', ev)}>
-          <input
-            readOnly
-            type="checkbox"
-            className="mR2"
-            autoComplete="nope"
-            checked={props.privateLocation}
-          />
-          <span>
-            {props.privateLocation && 'Your city is kept private.'}
-            {!props.privateLocation && 'Your city is displayed on your profile.'}
-          </span>
-        </div>
         <label htmlFor="username">
           <h2 className="ffLab fs5 mB1 lh1">
             Username
