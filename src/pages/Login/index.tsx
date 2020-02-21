@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
@@ -28,9 +27,7 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
   login = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const {username, password} = this.state;
-    return this.props
-      .loginDispatch({username, password})
-      .catch(loglevel.error);
+    return this.props.loginDispatch({username, password});
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
@@ -41,6 +38,8 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     const {session} = this.props;
+    // to match how passwordInput expects it to be
+    const error = _.get(session, 'error.message', '');
 
     return (
       <ErrorBoundary status={_.get(session, 'error.status', 200)}>
@@ -60,6 +59,8 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
         {!session.data.isAuthenticated && (
           <LoginComponent
             {...this.state}
+            // if theres a login error, it'll show up here
+            error={error}
             login={this.login}
             updateState={this.updateState}
           />

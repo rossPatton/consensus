@@ -10,7 +10,6 @@ export const AccountComponent = memo((props: tComponentProps) => {
     <form
       action="/api/v1/user"
       autoComplete="off"
-      // className="col"
       encType="multipart/form-data"
       onSubmit={props.save}>
       <fieldset>
@@ -20,7 +19,7 @@ export const AccountComponent = memo((props: tComponentProps) => {
         <div className="mB4">
           <label htmlFor="login">
             <h2 className="ffLab fs5 mB1 lh1">
-              Login
+              Change your Login
             </h2>
             <p className="fs5 copyBlack mB1">
               A unique name that is used just for logging in. Keep secret.
@@ -38,6 +37,7 @@ export const AccountComponent = memo((props: tComponentProps) => {
             newPassword
             id="newPwInput"
             name="newPassword"
+            title="Change your password"
             password={props.newPassword}
             placeholder="Your new password"
             onChange={ev => props.updateState('newPassword', ev)}

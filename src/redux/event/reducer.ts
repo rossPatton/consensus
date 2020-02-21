@@ -23,9 +23,10 @@ export const eventReducer = (state = initialState, action: tActionUnion) => {
   };
 
   switch (action.type) {
+  // initialState here is on purpose
   case GET_INIT:
     return {
-      ...state,
+      ...initialState,
       isLoading: true,
     };
 

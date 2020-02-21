@@ -3,7 +3,6 @@ import _ from 'lodash';
 
 import {knex} from '../db/connection';
 
-// TODO add sanitization/validation
 export const getRSVPByEventId = async (
   ctx: Koa.ParameterizedContext,
   eventId: number): Promise<tRSVP> => {

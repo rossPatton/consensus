@@ -14,10 +14,6 @@ class HomeContainer extends Component<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
 
-    const loggedIn = props.session.isAuthenticated;
-    const isUser = props.session.type === 'user';
-    if (loggedIn && !isUser) return;
-
     props.getGeoDispatch()
       .then(res => {
         const query = {...res.payload};

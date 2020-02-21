@@ -42,7 +42,8 @@ export const getEventByQuery = async (
   const privateRSVPS = [...rsvps].filter(rel => rel.privateRSVP);
 
   // if on an actual event page, we render a list of public attendees below the description
-  const unsafeUsers = await getUsersByIds(ctx, publicRSVPS.map(rsvp => rsvp.userId));
+  const unsafeUsers: tUser[] =
+    await getUsersByIds(ctx, publicRSVPS.map(rsvp => rsvp.userId));
 
   // "unsafe" because we want to check user privacy settings first
   // if this value is set, it should never be a problem. but lets double check anyway

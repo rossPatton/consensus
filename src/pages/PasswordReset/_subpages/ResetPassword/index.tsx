@@ -33,6 +33,7 @@ const ResetPasswordComponent = memo((props: tComponentProps) => (
         required
         newPassword
         id="pwInput"
+        title="New password"
         password={props.password}
         placeholder="Example: correct_horse_battery_staple"
         onChange={ev => props.updateState('password', ev)}

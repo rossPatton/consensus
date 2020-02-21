@@ -18,9 +18,10 @@ export const getEventById = async (
     return ctx.throw(400, err);
   }
 
-  if (!event) {
+  // lookup failed, for example, user entered id for event that doesnt exist
+  if (!event || _.isEmpty(event)) {
     ctx.status = 204;
-    return {} as tEvent;
+    ctx.body = {};
   }
 
   // user role for this particular org
@@ -28,11 +29,10 @@ export const getEventById = async (
   const org = await getOrgById(ctx, event.orgId);
 
   if (!role && org.type !== 'public') {
-    ctx.status = 204;
-    return {} as tEvent;
+    return ctx.throw(401);
   }
 
-  let rsvps = {} as tRSVP[];
+  let rsvps = [] as tRSVP[];
   try {
     rsvps = await knex('users_events')
       .where({

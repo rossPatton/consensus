@@ -24,7 +24,10 @@ export const api = async (opts: tApiOpts) => {
     .then((resp: tFetchResponse) => {
       status = resp.status;
       if (!resp.ok) throw resp;
-      if (status === 204) return 'Nothing found';
+      if (status === 204) {
+        throw Error('204: Nothing found');
+      }
+
       return resp.json(); // we only get here if there is no error
     })
     .then(json => {

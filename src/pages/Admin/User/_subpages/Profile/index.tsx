@@ -28,9 +28,13 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       _.get(props, 'sessionThunk.data.profile', null);
 
     if (user) {
+      // @TODO implement multiple emails per account
+      const email = _.get(props, 'sessionThunk.data.emails[0].email', '');
+
       this.state = {
         ...initialState,
         ...user,
+        email,
       };
     } else {
       this.state = initialState;

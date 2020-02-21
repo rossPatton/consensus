@@ -15,6 +15,7 @@ export type tContainerProps = tStore & {
 }
 
 export type tComponentProps = tState & {
+  error: string,
   login: (ev: React.FormEvent<HTMLFormElement>) => void,
   updateState: (stateKey: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 }

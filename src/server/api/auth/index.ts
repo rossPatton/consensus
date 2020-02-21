@@ -11,7 +11,9 @@ export const auth = new Router();
 const dataPath = 'state.locals.data';
 
 auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
-  passport.authenticate('local', async (err: Error | null, account: tAccount) => {
+  passport.authenticate('local', async (
+    err: Error | null,
+    account: tAccount) => {
     if (err) ctx.throw(400, err);
     if (!account) ctx.throw(400, 'Account not found');
 
@@ -21,7 +23,7 @@ auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
     await ctx.login(account);
 
     const {isFormSubmit} = query;
-    if (isFormSubmit) return ctx.redirect('/admin/profile');
+    if (isFormSubmit) return ctx.redirect('/admin');
 
     const session = await getSession(ctx, account);
     ctx.body = session.data;

@@ -28,7 +28,10 @@ events.get(route, async (ctx: Koa.ParameterizedContext) => {
   const org = await getOrgById(ctx, query.orgId);
 
   // if fetching events for a private org and the user is not a member
-  if (!role && org.type !== 'public') {
+  if (!role && org.type !== 'public') return ctx.throw(401);
+
+  // basically, if a member of the group or public group, but no events scheduled
+  if (!events) {
     ctx.status = 204;
     ctx.body = [];
   }

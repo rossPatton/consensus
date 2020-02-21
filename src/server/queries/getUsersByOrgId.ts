@@ -3,7 +3,6 @@ import _ from 'lodash';
 
 import {knex} from '../db/connection';
 
-// TODO add sanitization/validation
 // TODO this query should be simplfied if at all possible
 export const getUsersByOrgId = async (
   ctx: Koa.ParameterizedContext,
@@ -37,7 +36,6 @@ export const getUsersByOrgId = async (
     return ctx.throw(400, err);
   }
 
-  // TODO refactor where we add role all over the place
   return await Promise.all(roleMaps.map(async roleMap => {
     const userProfile = _.find(users, user => roleMap.userId === user.id) as tUser;
 

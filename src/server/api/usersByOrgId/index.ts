@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import {knex} from '../../db/connection';
 import {getSession} from '../../queries';
-import {filterUserInfoFromClient, validateSchema} from '../../utils';
+import {validateSchema} from '../../utils';
 import {getUsersByOrgId} from './_queries';
 import {deleteSchema, getSchema, patchSchema, postSchema} from './_schema';
 import {tUserByOrgQuery} from './_types';
@@ -23,8 +23,8 @@ usersByOrgId.get(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<tUsersByOrgIdQuery>(ctx, getSchema, query);
 
   const users = await getUsersByOrgId(ctx, query);
-  const cleanUsers = await filterUserInfoFromClient(users);
-  ctx.body = cleanUsers;
+  // const cleanUsers = await filterUserInfoFromClient(users);
+  ctx.body = users;
 });
 
 

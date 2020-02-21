@@ -53,8 +53,12 @@ class EventContainer extends PureComponent<tContainerProps> {
     const orgStatus = _.get(orgThunk, 'error.status', null);
     const status: tStatusUnion = eventStatus || orgStatus;
 
+    // bit hacky, but if event is private, we 401, and if id is wrong we 204
+    // in both cases we want to render the error boundary instead
+    const isLoading = !!status && (status === 200 && orgThunk.isLoading);
+
     return (
-      <ErrorBoundary status={status || 200}>
+      <ErrorBoundary status={status}>
         <Helmet
           canonical=""
           title=""
@@ -66,7 +70,7 @@ class EventContainer extends PureComponent<tContainerProps> {
           ]}
         />
         <GenericLoader
-          isLoading={orgThunk.isLoading}
+          isLoading={isLoading}
           render={() => {
             const privateGroup = orgThunk.data.type !== 'public';
             const userIsLoggedIn = session.isAuthenticated;

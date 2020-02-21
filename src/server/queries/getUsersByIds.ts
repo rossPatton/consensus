@@ -2,7 +2,6 @@ import Koa from 'koa';
 
 import { knex } from '../db/connection';
 
-// TODO add sanitization/validation
 export const getUsersByIds = async (
   ctx: Koa.ParameterizedContext,
   mappedIds: number[]): Promise<tUser[]> => {

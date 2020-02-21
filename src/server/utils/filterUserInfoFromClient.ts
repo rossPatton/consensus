@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import {Mutable} from 'utility-types';
 
+// TODO right now not in use, but keeping around because it might come in handy
+
 // depending on user preferences
 // lets strip out sensitive data before sending to the client, based on user prefs
 // things like the user's email, location, etc
@@ -13,9 +15,9 @@ export const filterUserInfoFromClient = async (users: tUser[]) => {
 
       // rn now, email is the only optional thing we ask for that has a use
       // so, we want to let the user decide if they want to share their primary email
-      if (userToReturn.privateEmail) {
-        userToReturn.email = '';
-      }
+      // if (userToReturn.privateEmail) {
+      //   userToReturn.email = '';
+      // }
 
       return userToReturn as tUser;
     }),

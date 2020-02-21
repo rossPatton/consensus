@@ -20,6 +20,13 @@ declare type tSearchFilterProps = Readonly<{
   onSearchChange: tInputChange,
 }>;
 
-// maybe make a new file for misc types like this?
-declare type tInfoUnion = ErrorInfo | string | null
-declare type tStatusUnion = 200 | 204 | 400 | 404 | 500;
+// @TODO maybe i should make a file for misc types like this?
+declare type tInfoUnion = ErrorInfo | string | null;
+
+// 200 === ok
+// 204 === no error, but nothing was found in the db
+// 400 === bad request. query or params or something are not correct
+// 401 === unauthorized. user is trying to see a page they don't have credentials for
+// 404 === route not found, or potentially a 204 on the server that we render as 404
+// 500 === something went wrong. probably a code error. shit is fucked
+declare type tStatusUnion = 200 | 204 | 400 | 401 | 404 | 500;

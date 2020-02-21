@@ -2,8 +2,6 @@ export const userKeys = [
   'bio',
   'created_at',
   'city',
-  'cityId',
-  'email',
   'id',
   'language',
   'name',

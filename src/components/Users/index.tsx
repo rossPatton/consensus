@@ -10,6 +10,12 @@ class Users extends PureComponent<tProps> {
     const {sessionRole, users} = this.props;
     const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
 
+    if (users.length === 0) {
+      return (
+        <>No users found that meet this criteria.</>
+      );
+    }
+
     return (
       <Paginate
         count={4}

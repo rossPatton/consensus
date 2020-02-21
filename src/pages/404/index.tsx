@@ -1,25 +1,13 @@
 import React, { memo } from 'react';
 
-import {Helmet} from '../../components';
-import {canonical, description, keywords, title} from './_constants';
-
 const NoMatch = memo(() => (
-  <>
-    <Helmet
-      canonical={canonical}
-      title={title}
-      meta={[
-        { name: 'description', content: description },
-        { name: 'keywords', content: keywords },
-        { property: 'og:title', content: title },
-        { property: 'og:description', content: description },
-      ]}
-    />
-    <div className="contain mT4 taCtr">
-      <h1 className="mB2">404</h1>
-      <h2>Hmm, we couldn&apos;t find anything at this url.</h2>
-    </div>
-  </>
+  <div className="contain mT4 taCtr">
+    <h1 className="mB2">404</h1>
+    <h2 className="fs2">
+      Hmm, we couldn&apos;t find anything at this url.
+      <br />Is the url correct?
+    </h2>
+  </div>
 ));
 
 export default NoMatch;

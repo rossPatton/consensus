@@ -1,6 +1,6 @@
 import loadable from '@loadable/component';
 
-const NoMatchComponent = loadable(() =>
+export const NoMatchComponent = loadable(() =>
   import(/* webpackChunkName: "NoMatch" */'../pages/404'),
 );
 

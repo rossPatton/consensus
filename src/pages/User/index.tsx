@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
@@ -12,8 +13,12 @@ class UserContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     const {id: userId} = props.match.params;
-    props.getUserByIdDispatch({id: userId});
-    props.getOrgsByUserIdDispatch({userId});
+    props.getUserByIdDispatch({id: userId}).then(res => {
+      if (!res.payload.privateMemberships) {
+        props.getOrgsByUserIdDispatch({userId});
+      }
+      return null;
+    }).catch(loglevel.error);
   }
 
   render() {

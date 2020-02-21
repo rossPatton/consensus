@@ -1,4 +1,5 @@
 export type tState = Partial<tUser> & {
+  email: string, // email is part of account, but for ease of use we put it here
   password: string,
 };
 

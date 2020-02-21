@@ -22,17 +22,17 @@ export const EventsComponent = memo((props: tComponentProps) => (
         <li
           key={ev.id}
           className={cx({
-            'fx aiCtr mB3': !props.horizontal,
+            'mB4': !props.horizontal,
             'col row': props.horizontal,
             'mR4': props.horizontal && i !== props.events.length - 1,
           })}>
           {!isPastEvent && props.isEditable && (
             <div
               className={cx({
-                'brdB1 p2 pL3 pR3 fx aiCtr fs6 jcEnd': true,
+                'mB2 fx aiCtr fs6': true,
                 hide: props.horizontal,
               })}>
-              <div className="col mR2 fx aiCtr">
+              <div className="mR3 fx aiCtr">
                 <Link
                   to={`/org/${ev.orgId}/planMeeting?${objToQueryString(ev)}`}
                   className="bgWhite p1 pL2 pR2 hvrBgGrey1 trans1 fw600 br4 lh1 noUnderline brdA1">
@@ -47,7 +47,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
               </div>
               <button
                 onClick={e => props.deleteEvent(e, ev.id)}
-                className="bgWhite hvrBgGrey1 trans1 fw600 fx aiCtr lh1 br4 jcEnd">
+                className="bgWhite hvrBgGrey1 trans1 fw600 fx aiCtr lh1 br4">
                 <span
                   role="img"
                   className="mR1"
@@ -60,72 +60,78 @@ export const EventsComponent = memo((props: tComponentProps) => (
           )}
           <div
             className={cx({
-              'mB2 bgWhite': props.horizontal,
-              'mR3 bgGrey2': !props.horizontal,
+              'fx aiCtr': !props.horizontal,
             })}>
-            <PlaceholderImage
-              height={100}
-              width={200}
-            />
-          </div>
-          <div>
             <div
               className={cx({
-                'fx aiCtr mB1 fs7 fw600 lh1': true,
-                o5: isPastEvent,
+                'mB2 bgWhite': props.horizontal,
+                'mR3 bgGrey2': !props.horizontal,
               })}>
-              <time className="mR1" dateTime={ev.date}>
-                {dayJS(ev.date).format('MMM DD | h:mmA')}
-              </time>
-              {!props.horizontal && (
-                <>
-                  <span className="mR1">@</span>
-                  {ev.locationLink && (
-                    <ExternalLink
-                      noFollow
-                      className="mR1"
-                      to={ev.locationLink}>
-                      {ev.location}
-                    </ExternalLink>
-                  )}
-                </>
-              )}
-              {!ev.locationLink && ev.location}
+              <PlaceholderImage
+                height={100}
+                width={200}
+              />
             </div>
-            <h3
-              className={cx({
-                'fx aiCtr ttCap': true,
-                fs4: props.horizontal,
-              })}>
-              <Link
-                className="noUnderline"
-                to={ev.isDraft
-                  ? `/org/${ev.orgId}/planMeeting?${qs.stringify(ev)}`
-                  : `/event/${ev.id}`}>
-                {ev.title}
-              </Link>
-            </h3>
-            {props.showRSVPs && (
+            <div>
               <div
                 className={cx({
-                  'fx aiCtr fs6 lh1': true,
-                  hide: props.horizontal,
+                  'fx aiCtr mB1 fs7 fw600 lh1': true,
                   o5: isPastEvent,
                 })}>
-                {!ev.isDraft && <RSVP event={ev} />}
-                {ev.isDraft && 'This event is not published yet. Click to edit.'}
+                <time className="mR1" dateTime={ev.date}>
+                  {dayJS(ev.date).format('MMM DD | h:mmA')}
+                </time>
+                {!props.horizontal && (
+                  <>
+                    <span className="mR1">@</span>
+                    {ev.locationLink && (
+                      <ExternalLink
+                        noFollow
+                        className="mR1"
+                        to={ev.locationLink}>
+                        {ev.location}
+                      </ExternalLink>
+                    )}
+                  </>
+                )}
+                {!ev.locationLink && ev.location}
               </div>
-            )}
-            {props.showOrgName && (
-              <div
+              <h3
                 className={cx({
-                  'fw600 fs6 lh1': true,
-                  hide: props.horizontal,
-                  o5: isPastEvent,
+                  'fx aiCtr ttCap': true,
+                  fs4: props.horizontal,
                 })}>
-                {ev.orgName}
-              </div>
-            )}
+                <Link
+                  className="noUnderline"
+                  to={ev.isDraft
+                    ? `/org/${ev.orgId}/planMeeting?${qs.stringify(ev)}`
+                    : `/event/${ev.id}`}>
+                  {ev.title}
+                </Link>
+              </h3>
+              {props.showRSVPs && (
+                <div
+                  className={cx({
+                    'fx aiCtr fs6 lh1': true,
+                    hide: props.horizontal,
+                    o5: isPastEvent,
+                  })}>
+                  {!ev.isDraft && <RSVP event={ev} />}
+                  {ev.isDraft && 'This event is not published yet. Click to edit.'}
+                </div>
+              )}
+              {props.showOrgName && (
+                <Link
+                  to={`/org/${ev.orgId}`}
+                  className={cx({
+                    'fw600 fs6 lh1': true,
+                    hide: props.horizontal,
+                    o5: isPastEvent,
+                  })}>
+                  {ev.orgName}
+                </Link>
+              )}
+            </div>
           </div>
         </li>
       );

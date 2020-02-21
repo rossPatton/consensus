@@ -2,10 +2,9 @@ import Koa from 'koa';
 
 import { knex } from '../db/connection';
 
-// TODO add sanitization/validation
 export const getUserByQuery = async (
   ctx: Koa.ParameterizedContext,
-  query: any): Promise<tUser> => {
+  query: tUserQuery): Promise<tUser> => {
 
   let user: tUser;
   try {

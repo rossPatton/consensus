@@ -1,4 +1,5 @@
 export {getAccountRoleRelByOrgId} from './getAccountRoleRelByOrgId';
+export {getEmailsByAccountId} from './getEmailsByAccountId';
 export {getEventByQuery} from './getEventByQuery';
 export {getOrgById} from './getOrgById';
 export {getProfileByAccountId} from './getProfileByAccountId';
@@ -8,4 +9,3 @@ export {getSession} from './getSession';
 export {getUserByQuery} from './getUserByQuery';
 export {getUsersByIds} from './getUsersByIds';
 export {getUsersByOrgId} from './getUsersByOrgId';
-export {getUsersByQuery} from './getUsersByQuery';

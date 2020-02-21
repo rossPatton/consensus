@@ -10,7 +10,8 @@ declare type tUser = Readonly<{
   bio: string,
   city?: string, // city.name
   cityId?: number, // city.id
-  email: string,
+  // lives in accounts_emails table, but we merge into tUser when rendering user pages
+  emails?: string[],
   id: number,
   name: string,
   phone: string,

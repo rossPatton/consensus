@@ -5,7 +5,7 @@ import _ from 'lodash';
 import {knex} from '../../db/connection';
 import {
   encrypt,
-  filterUserInfoFromClient,
+  // filterUserInfoFromClient,
   isValidPw,
   saltedHash,
   validateSchema,
@@ -29,8 +29,25 @@ user.get(route, async (ctx: Koa.ParameterizedContext) => {
     .where({id: query.id})
     .first();
 
-  const cleanedUser = await filterUserInfoFromClient([user]);
-  ctx.body = cleanedUser[0];
+  let emails = [] as {email: string}[];
+  if (!user.privateEmail) {
+    // @TODO maybe adding accountId to other tables as a FK would make things easier
+    const account: tAccount = await knex('accounts')
+      .limit(1)
+      .where({userId: query.id})
+      .select(['id'])
+      .first();
+
+    emails = await knex('accounts_emails')
+      .where({id: account.id})
+      .select(['email']);
+  }
+
+  // const cleanedUser = await filterUserInfoFromClient([user]);
+  ctx.body = {
+    ...user,
+    emails: emails.map(obj => obj.email),
+  };
 });
 
 // user signup form basically

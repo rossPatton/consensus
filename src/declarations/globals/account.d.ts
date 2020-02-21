@@ -1,6 +1,7 @@
 // accounts are currently of 2 types. users, and organization admins
 // we consolidate that in the accounts table, along with shared rows
 declare type tAccountBase = tFormSubmit & Readonly<{
+  emails?: string[],
   id: number,
   isVerified: boolean,
   login: string, // unique login value separate from username or email
@@ -36,10 +37,8 @@ declare type isAuthenticated = Readonly<{
 
 // tSession is like tUser, but with auth data and everything is optional
 // since a user might not be logged in
-declare type tSession<T = tUser> = isAuthenticated & Readonly<{
-  id: number,
-  isVerified: boolean, // has user been confirmed by email
-  login: string, // unique login value separate from username or email
+declare type tSession<T = tUser> = tAccountBase & Readonly<{
+  isAuthenticated: boolean,
   profile: T,
   type: 'org' | 'user',
 }>;

@@ -15,7 +15,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
         <h1 className="fs3 mB3">Edit your profile</h1>
       </legend>
       <div className="mB4">
-        <label className="col row mB3" htmlFor="name">
+        <label className="row mB4" htmlFor="name">
           <h2 className="ffLab fs5 mB1 lh1">
             Name
           </h2>
@@ -28,7 +28,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             name="name"
           />
         </label>
-        <label htmlFor="bio">
+        <label className="row mB4" htmlFor="bio">
           <h2 className="ffLab fs5 mB1 lh1">
             Bio
           </h2>
@@ -39,13 +39,13 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             id="bio"
             rows={6}
             onChange={ev => props.updateState('bio', ev)}
-            className="p3 row mB3"
+            className="p3 row"
             placeholder={props.bio}
             value={props.bio}
             name="bio"
           />
         </label>
-        <label htmlFor="email">
+        <label className="row mB1" htmlFor="email">
           <h2 className="ffLab fs5 mB1 lh1">
             Email address
           </h2>
@@ -54,7 +54,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
           </p>
           <input
             onChange={ev => props.updateState('email', ev)}
-            className="p3 row mB1"
+            className="p3 row"
             placeholder="Update your email here"
             value={props.email}
             name="email"
@@ -63,7 +63,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
         <div
           tabIndex={0}
           role="button"
-          className="fx aiCtr curPtr mB3 fs6"
+          className="fx aiCtr curPtr mB4 fs6"
           onClick={ev => props.updateState('privateEmail', ev)}
           onKeyPress={ev => props.updateState('privateEmail', ev)}>
           <input
@@ -78,7 +78,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             {!props.privateEmail && 'Your email is displayed on your profile.'}
           </span>
         </div>
-        <label className="dBl mB3" htmlFor="phone">
+        <label className="dBl mB4" htmlFor="phone">
           <h2 className="ffLab fs5 mB1 lh1">
             Phone number
           </h2>
@@ -93,7 +93,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             name="phone"
           />
         </label>
-        <label htmlFor="city">
+        <label className="row mB4" htmlFor="city">
           <h2 className="ffLab fs5 mB1 lh1">
             City
           </h2>
@@ -102,13 +102,13 @@ export const ProfileComponent = memo((props: tComponentProps) => (
           </p>
           <input
             onChange={ev => props.updateState('city', ev)}
-            className="p3 row mB1"
+            className="p3 row"
             placeholder="Example: Brooklyn"
             value={props.city}
             name="city"
           />
         </label>
-        <label htmlFor="username">
+        <label className="row mB4" htmlFor="username">
           <h2 className="ffLab fs5 mB1 lh1">
             Username
           </h2>
@@ -118,13 +118,13 @@ export const ProfileComponent = memo((props: tComponentProps) => (
           <input
             id="username"
             onChange={ev => props.updateState('username', ev)}
-            className="p3 row mB3"
+            className="p3 row"
             placeholder="Update your username here"
             value={props.username}
             name="username"
           />
         </label>
-        <h2 className="ffLab fs5 mT3 mB1 lh1">
+        <h2 className="ffLab fs5 mB1 lh1">
           Other privacy settings
         </h2>
         <div
@@ -152,7 +152,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
         <div
           tabIndex={0}
           role="button"
-          className="fx aiCtr curPtr fs6 p1"
+          className="fx aiCtr curPtr fs6 p1 mB5"
           onClick={ev => props.updateState('privateMemberships', ev)}
           onKeyPress={ev => props.updateState('privateMemberships', ev)}>
           <input
