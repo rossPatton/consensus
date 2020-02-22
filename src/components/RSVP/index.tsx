@@ -12,31 +12,36 @@ import {RSVPComponent} from './Component';
 class RSVPContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
-
     const {rsvps} = props;
     const rsvp = _.find(rsvps, rsvp => rsvp.eventId === this.props.event.id);
 
     // only purpose for this state, is to update the UI right away
-    const hasRSVPed = !!rsvp && (rsvp.publicRSVP || rsvp.privateRSVP);
+    const hasRSVPed = !!rsvp && rsvp.value !== null;
 
     this.state = {
       hasRSVPed,
-      initialRSVP: hasRSVPed,
+      isClient: false,
       rsvp,
     };
   }
 
+  componentDidMount() {
+    this.setState({
+      isClient: true,
+    });
+  }
+
+
   // post or patch, depending on RSVP status
   setRsvp = async (opts: tSetRsvpOpts) => {
     opts.ev.preventDefault();
+
     const {rsvp} = this.state;
     const {history, patchRsvpDispatch, postRsvpDispatch, session} = this.props;
     const {profile = {}} = session;
     const {privateRSVP: userRSVPsPrivately = true} = profile as tUser;
 
-    if (!session.isAuthenticated) {
-      return history.push('/login');
-    }
+    if (!session.isAuthenticated) return history.push('/login');
 
     const method = typeof rsvp === 'undefined' ? 'POST' : 'PATCH';
     const dispatch = method === 'PATCH' ? patchRsvpDispatch : postRsvpDispatch;
@@ -46,8 +51,8 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
     try {
       dispatch({
         eventId: opts.eventId,
-        rsvpType: userRSVPsPrivately ? 'private' : 'public',
-        value: opts.value,
+        type: userRSVPsPrivately ? 'private' : 'public',
+        value: opts.ev.currentTarget.value,
       })
         .then(res => {
           return this.setState({
@@ -61,11 +66,14 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
+    if (!this.props.session.isAuthenticated) return null;
+    if (this.props.session.type === 'org') return null;
+
     return (
       <RSVPComponent
         event={this.props.event}
         hasRSVPed={this.state.hasRSVPed}
-        initialRSVP={this.state.initialRSVP}
+        isClient={this.state.isClient}
         rsvp={this.state.rsvp}
         session={this.props.session}
         setRsvp={this.setRsvp}

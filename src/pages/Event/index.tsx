@@ -114,10 +114,14 @@ const mapStateToProps = (store: tStore) => ({
 const mapDispatchToProps = (dispatch: Function) => ({
   getEventDispatch: (query: tIdQuery) =>
     dispatch(getEvent(query)),
+
   getEventsByOrgIdDispatch: (query: tGetEventQuery) =>
     dispatch(getEventsByOrgId(query)),
+
   getOrgByIdDispatch: (query: tIdQuery) => dispatch(getOrg(query)),
+
   getRolesDispatch: () => dispatch(getRoles()),
+
   getRsvpsDispatch: () => dispatch(getRsvps()),
 });
 

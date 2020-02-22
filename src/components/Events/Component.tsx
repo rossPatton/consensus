@@ -67,10 +67,16 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 'mB2 bgWhite': props.horizontal,
                 'mR3 bgGrey2': !props.horizontal,
               })}>
-              <PlaceholderImage
-                height={100}
-                width={200}
-              />
+              <Link
+                className="noUnderline"
+                to={ev.isDraft
+                  ? `/org/${ev.orgId}/planMeeting?${qs.stringify(ev)}`
+                  : `/event/${ev.id}`}>
+                <PlaceholderImage
+                  height={100}
+                  width={200}
+                />
+              </Link>
             </div>
             <div>
               <div

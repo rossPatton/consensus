@@ -5,10 +5,10 @@ export const zipEventsWithAttendees = async (events: tEvent[], rels: any[]) => {
   return Promise.all(
     events.map(async ev => {
       const publicRSVPS = [...rels].filter(
-        rel => rel.eventId === ev.id && rel.publicRSVP,
+        rel => rel.eventId === ev.id && rel.type === 'public',
       ).length;
       const privateRSVPS = [...rels].filter(
-        rel => rel.eventId === ev.id && rel.privateRSVP,
+        rel => rel.eventId === ev.id && rel.type === 'private',
       ).length;
 
       return {

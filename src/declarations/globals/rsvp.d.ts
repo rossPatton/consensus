@@ -1,14 +1,15 @@
+declare type tRSVPValue = 'yes' | 'no' | 'maybe' | '' | null;
+
 declare type tRSVP = Readonly<{
   eventId: number,
   id?: number,
-  // only one can be true at a time
-  privateRSVP: boolean,
-  publicRSVP: boolean,
+  type: 'public' | 'private',
   userId: number,
+  value: tRSVPValue,
 }>;
 
 declare type tRSVPQuery = Readonly<{
   eventId: number,
-  rsvpType: 'public' | 'private',
-  value: boolean,
+  type: 'public' | 'private',
+  value: tRSVPValue,
 }>;

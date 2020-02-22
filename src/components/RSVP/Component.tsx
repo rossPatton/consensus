@@ -1,65 +1,59 @@
+import cx from 'classnames';
 import _ from 'lodash';
 import React from 'react';
 
-import {RSVPCount} from '..';
+// import {RSVPCount} from '..';
 import {tComponentProps} from './_types';
 
 export const RSVPComponent = (props: tComponentProps) => {
-  const {event, hasRSVPed, session, setRsvp} = props;
+  const {event, rsvp, session, setRsvp} = props;
   const {id: eventId} = event;
   const {profile = {}} = session;
   const {privateRSVP: userRSVPsPrivately = true} = profile as tUser;
+  const method = typeof rsvp === 'undefined' ? 'POST' : 'PATCH';
 
   return (
-    <>
-      {session.type !== 'org' && (
-        <>
-          {!hasRSVPed && (
-            <form
-              method="POST"
-              action="/api/v1/rsvps"
-              onSubmit={ev => setRsvp({ev, eventId, value: true})}>
-              <fieldset>
-                <button className="fx aiCtr br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
-                  <span
-                    role="img"
-                    className="mR1"
-                    aria-label="Big Plus Sign Emoji">
-                    ➕
-                  </span>
-                  <legend>RSVP {userRSVPsPrivately ? 'Privately' : 'Publicly'}</legend>
-                </button>
-              </fieldset>
-            </form>
-          )}
-          {hasRSVPed && (
-            <form
-              method="POST"
-              action="/api/v1/rsvps"
-              onSubmit={ev => setRsvp({ev, eventId, value: false})}>
-              <fieldset>
-                <input type="hidden" name="rsvp" value={eventId} />
-                <button
-                  title="Click to cancel your RSVP"
-                  className="fx aiCtr br8 brdA1 p1 pL2 pR2 curPtr hvrBgGrey1 trans1 mR2">
-                  <span
-                    role="img"
-                    className="mR1"
-                    aria-label="Thumbs Up Emoji">
-                    👍
-                  </span>
-                  <legend>You&apos;re going!</legend>
-                </button>
-              </fieldset>
-            </form>
-          )}
-        </>
-      )}
-      <RSVPCount
-        event={event}
-        initialRSVP={props.initialRSVP}
-        rsvp={props.rsvp}
-      />
-    </>
+    <form
+      method={method}
+      action="/api/v1/rsvps"
+      onSubmit={ev => setRsvp({ev, eventId})}>
+      <fieldset>
+        <div className="fx aiCtr fs6 fw600 lh1">
+          <legend className="mR2">
+            RSVP {userRSVPsPrivately ? 'Privately' : 'Publicly'}
+          </legend>
+          <button
+            value="yes"
+            type={props.isClient ? 'button' : 'submit'}
+            onClick={ev => setRsvp({ev, eventId})}
+            className={cx({
+              'p2 pL3 pR3 hvrBgGrey1 trans1 mR1': true,
+              bgGrey2: !!rsvp && rsvp.value === 'yes',
+            })}>
+            Yes
+          </button>
+          <button
+            value="no"
+            type={props.isClient ? 'button' : 'submit'}
+            onClick={ev => setRsvp({ev, eventId})}
+            className={cx({
+              'p2 pL3 pR3 hvrBgGrey1 trans1 mR1': true,
+              bgGrey2: !!rsvp && rsvp.value === 'no',
+            })}>
+            No
+          </button>
+          <button
+            value="maybe"
+            type={props.isClient ? 'button' : 'submit'}
+            onClick={ev => setRsvp({ev, eventId})}
+            className={cx({
+              'p2 pL3 pR3 hvrBgGrey1 trans1': true,
+              bgGrey2: !!rsvp && rsvp.value === 'maybe',
+            })}>
+            Maybe
+          </button>
+        </div>
+      </fieldset>
+    </form>
   );
 };

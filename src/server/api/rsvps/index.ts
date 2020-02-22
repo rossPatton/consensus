@@ -43,17 +43,14 @@ rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, message);
   }
 
-  const {eventId, rsvpType = 'private', value = 'false'} = query;
+  const {eventId, type = 'private', value = 'no'} = query;
   const {userId = 0} = _.get(ctx, sessionPath, {});
-  const rsvp = value === 'true';
-  const publicRSVP = rsvpType !== 'private' && rsvp;
-  const privateRSVP = rsvpType === 'private' && rsvp;
 
   const newRsvp: tRSVP = {
     eventId: parseInt(eventId, 10),
-    publicRSVP,
-    privateRSVP,
+    type,
     userId,
+    value,
   };
 
   // TODO reduce branches or just simplify somehow
@@ -84,17 +81,14 @@ rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, message);
   }
 
-  const {eventId, rsvpType = 'private', value = 'false'} = query;
+  const {eventId, type = 'private', value = 'no'} = query;
   const {userId = 0} = _.get(ctx, sessionPath, {});
-  const rsvp = value === 'true';
-  const publicRSVP = rsvpType !== 'private' && rsvp;
-  const privateRSVP = rsvpType === 'private' && rsvp;
 
   const newRsvp: tRSVP = {
     eventId: parseInt(eventId, 10),
-    publicRSVP,
-    privateRSVP,
+    type,
     userId,
+    value,
   };
 
   let currentRSVPStatus = {} as tRSVP;

@@ -2,9 +2,9 @@ import {History} from 'history';
 import {RouteComponentProps} from 'react-router';
 
 export type tSetRsvpOpts = {
-  ev: React.FormEvent<HTMLFormElement>,
+  ev: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
   eventId: number,
-  value: boolean,
+  // value: boolean,
 }
 
 export type tStore = {
@@ -14,7 +14,7 @@ export type tStore = {
 
 export type tState = {
   hasRSVPed: boolean, // switch for immediately updating UI on client
-  initialRSVP: boolean, // starting status, for the attendee count
+  isClient: boolean,
   rsvp?: tRSVP, // pick out the rsvp from the rsvps state object
 };
 
@@ -35,7 +35,7 @@ export type tContainerProps = RouteComponentProps<any> & tProps & {
 
 export type tComponentProps = tProps & {
   hasRSVPed: boolean,
-  initialRSVP: boolean,
+  isClient: boolean,
   rsvp?: tRSVP,
   setRsvp: (opts: tSetRsvpOpts) => void,
 };

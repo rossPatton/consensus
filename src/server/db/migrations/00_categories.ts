@@ -6,8 +6,6 @@ const categories = [
   { type: 'Cooperative', slug: 'cooperative' },
   { type: 'Union', slug: 'union' },
   { type: 'Political Organization', slug: 'political-organization' },
-  // { type: 'Caucus' },
-  // { type: 'Working Group' },
 ];
 
 exports.up = async (knex: Knex) => {

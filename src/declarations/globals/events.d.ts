@@ -15,7 +15,7 @@ declare type tEvent = Readonly<{
    orgName: string,
    publicRSVPS: number,
    privateRSVPS: number,
-   rsvp: boolean,
+   rsvp: tRSVP,
    slug: string,
    title: string,
 }>;

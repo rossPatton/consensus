@@ -3,9 +3,17 @@ import faker from 'faker';
 import Knex from 'knex';
 
 import orgs from '../../../json/orgs.json';
+import {getRandomNum} from '../../../utils/getRandomNum';
+const categories = [
+  { type: 'Religious', slug: 'religion' },
+  { type: 'Community Center', slug: 'community-center' },
+  { type: 'Cooperative', slug: 'cooperative' },
+  { type: 'Union', slug: 'union' },
+  { type: 'Political Organization', slug: 'political-organization' },
+];
 
 const createOrg = async (org: any) => ({
-  category: org.category,
+  category: org.category[getRandomNum(0, categories.length - 1)].type,
   city: org.city,
   cityId: 16624,
   country: 'United States',

@@ -2,16 +2,18 @@ require('dotenv-safe').config();
 import faker from 'faker';
 import Knex from 'knex';
 
+import {getRandomNum} from '../../../utils/getRandomNum';
 import {range} from '../../../utils/range';
 
 const createUserEventRelation = async (u: number, e: number) => {
-  const publicRSVP = faker.random.boolean();
+  const type = faker.random.boolean() ? 'public' : 'private';
+  const value = ['yes', 'no', 'maybe', null][getRandomNum(0, 3)];
 
   return {
     eventId: e,
-    publicRSVP,
-    privateRSVP: !publicRSVP,
+    type,
     userId: u,
+    value,
   };
 };
 

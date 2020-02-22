@@ -16,8 +16,11 @@ exports.up = async (knex: Knex) => {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
-    table.boolean('publicRSVP').notNullable().defaultTo(false);
-    table.boolean('privateRSVP').notNullable().defaultTo(false);
+    table.enum('type', ['public', 'private'])
+      .notNullable()
+      .defaultTo('private');
+
+    table.enum('value', ['yes', 'no', 'maybe']);
   });
 };
 

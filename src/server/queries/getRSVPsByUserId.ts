@@ -9,10 +9,7 @@ export const getRSVPsByUserId = async (
   userId: string | number = 0): Promise<tRSVP[]> => {
   let rsvps: tRSVP[] = [];
   try {
-    rsvps = await knex('users_events')
-      .where({userId})
-      .where({publicRSVP: true})
-      .orWhere({privateRSVP: true});
+    rsvps = await knex('users_events').where({userId});
   } catch (err) {
     return ctx.throw(400, err);
   }

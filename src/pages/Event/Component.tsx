@@ -25,7 +25,7 @@ export const EventComponent = memo((props: tComponentProps) => {
           <h1 className="fs2 mB3 ttCap">
             {event.title}
           </h1>
-          <div className="fx aiCtr fs6 fw600 lh1 mB3">
+          <div className="mB3">
             <RSVP event={event} />
           </div>
           <div className="fw600 mB3">

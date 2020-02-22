@@ -12,8 +12,6 @@ const dataPath = 'state.locals.data';
 
 // post new rsvp for the logged in user, by eventId
 // this is an upsert basically, post if new, patch if not
-// TODO we should handle this on the client as well, since most of the time
-// users will have javascript enabled, so no point in doing the additional query
 rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, dataPath, {});
 
@@ -24,17 +22,14 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, message);
   }
 
-  const {eventId, type = 'private', value = 'false'} = query;
+  const {eventId, type = 'private', value = 'no'} = query;
   const userId = _.get(ctx, 'state.user.userId', 0);
-  const rsvp = value === 'true';
-  const publicRSVP = type !== 'private' && rsvp;
-  const privateRSVP = type === 'private' && rsvp;
 
   const newRsvp: tRSVP = {
     eventId,
-    publicRSVP,
-    privateRSVP,
+    type,
     userId,
+    value,
   };
 
   let currentRSVPStatus = {} as tRSVP;
