@@ -36,10 +36,12 @@ export const getEventByQuery = async (
   }
 
   // get count of both public and private rsvps
-  const publicRSVPS = [...rsvps].filter(rel => rel.type === 'public');
-  const privateRSVPS = [...rsvps].filter(rel => rel.type === 'private');
+  const publicRSVPS = [...rsvps]
+    .filter(rel => rel.type === 'public' && rel.value === 'yes');
+  const privateRSVPS = [...rsvps]
+    .filter(rel => rel.type === 'private' && rel.value === 'yes');
 
-  // if on an actual event page, we render a list of public attendees below the description
+  // if on an event page, we render a list of public attendees below the description
   const unsafeUsers: tUser[] =
     await getUsersByIds(ctx, publicRSVPS.map(rsvp => rsvp.userId));
 
