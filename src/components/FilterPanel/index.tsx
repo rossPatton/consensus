@@ -21,9 +21,6 @@ const FilterPanel = memo((props: tProps) => (
       <select
         onBlur={props.onFilterOptionChange}
         onChange={props.onFilterOptionChange}>
-        <option key="n/a" value="n/a">
-          Change search filter type
-        </option>
         {props.filterOptions.map(opt => (
           <option key={opt.key} value={opt.key}>
             {opt.display}

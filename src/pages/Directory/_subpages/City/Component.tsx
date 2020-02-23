@@ -15,6 +15,7 @@ export const CityComponent = memo((props: tComponentProps) => (
       className="fx aiCtr p3 bgWhite br8 mB4 fs6 fw600"
       onCategoryChange={props.onChange}
       onSearchChange={props.onSearch}
+      placeholder="Filter by group name"
     />
     <Orgs count={16} orgs={props.orgsToRender} />
   </>

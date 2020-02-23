@@ -1,3 +1,6 @@
+import {lowerCase} from './string';
+
+
 // return numeric score based on fuzzy match strength
 // If `pattern` matches `string`, wrap each matching character
 export const fuzz = function(search: string = '', string: string = '') {
@@ -6,11 +9,12 @@ export const fuzz = function(search: string = '', string: string = '') {
   const len = string.length;
   let totalScore = 0;
   let currScore = 0;
-  // string to compare against
+
+  // string to compare against, whitespace removed
   // this might be a lowercase version of the raw string
-  const compareString = string.toLowerCase();
+  const compareString = lowerCase(string);
   // string to search with
-  const pattern = search.toLowerCase();
+  const pattern = lowerCase(search);
   let ch;
 
   // For each character in the string, either add it to the result

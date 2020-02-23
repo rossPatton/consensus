@@ -13,7 +13,7 @@ const categories = [
 ];
 
 const createOrg = async (org: any) => ({
-  category: org.category[getRandomNum(0, categories.length - 1)].type,
+  category: categories[getRandomNum(0, categories.length - 1)].type,
   city: org.city,
   cityId: 16624,
   country: 'United States',

@@ -27,7 +27,6 @@ export default class SearchFilter extends Component<tProps, tState> {
 
   filterItems = () => {
     const {search} = this.state;
-
     if (!search) return this.props.items;
 
     return fuzzFilterList({

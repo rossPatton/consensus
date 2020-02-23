@@ -1,5 +1,4 @@
 import {fuzz} from './fuzz';
-import {lowerCase} from './string';
 
 type tObjWithScore = {
   [key: string]: any,
@@ -22,12 +21,10 @@ export const fuzzFilterList = (opts: tOpts) => {
     search = '',
   } = opts;
 
-  const searchNorm = lowerCase(search);
 
   return input
     .map(obj => {
-      const orgNorm = lowerCase(obj[key]);
-      const score = fuzz(searchNorm, orgNorm);
+      const score = fuzz(search, obj[key]);
       return {
         ...obj,
         score,
