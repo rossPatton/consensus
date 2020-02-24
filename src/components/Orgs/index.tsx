@@ -8,6 +8,10 @@ import {tContainerProps} from './_types';
 import {OrgsComponent} from './Component';
 
 class OrgsContainer extends PureComponent<tContainerProps> {
+  state = {
+    isHovering: false,
+  };
+
   leaveOrg = (ev: React.MouseEvent<HTMLButtonElement>, orgId: number) => {
     ev.preventDefault();
     if (orgId) {
@@ -15,6 +19,11 @@ class OrgsContainer extends PureComponent<tContainerProps> {
         .catch(loglevel.error);
     }
   }
+
+  setHover = (isHovering: boolean = false) =>
+    this.setState({
+      isHovering,
+    })
 
   render() {
     const {asList, count, isEditable, orgs, roles, showLocation} = this.props;
@@ -30,9 +39,11 @@ class OrgsContainer extends PureComponent<tContainerProps> {
           <OrgsComponent
             asList={asList}
             isEditable={isEditable}
+            isHovering={this.state.isHovering}
             leaveOrg={this.leaveOrg}
             orgs={orgsToRender}
             roles={roles}
+            setHover={this.setHover}
             showLocation={showLocation}
           />
         )}

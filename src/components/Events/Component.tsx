@@ -74,6 +74,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   : `/event/${ev.id}`}>
                 <PlaceholderImage
                   height={100}
+                  seed={ev.id}
                   width={200}
                 />
               </Link>

@@ -90,8 +90,6 @@ const mapStateToProps = (store: tStore) => ({
 const mapDispatchToProps = (dispatch: Function) => ({
   deleteUserByOrgIdDispatch: (query: tDeleteUserByOrgIdQuery) =>
     dispatch(deleteUserByOrgId(query)),
-  // getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
-  //   dispatch(getUsersByOrgId(query)),
   patchUserByOrgIdDispatch: (query: tPatchUserRoleQuery) =>
     dispatch(patchUserByOrgId(query)),
 });

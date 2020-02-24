@@ -17,6 +17,7 @@ class OrganizationInfoContainer extends PureComponent<tContainerProps> {
 
     return (
       <OrganizationInfoComponent
+        match={this.props.match}
         org={this.props.org}
         members={members}
         params={this.props.params}

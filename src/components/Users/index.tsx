@@ -1,37 +1,35 @@
 import _ from 'lodash';
-import React, {PureComponent} from 'react';
+import React, {memo} from 'react';
 
 import {Paginate} from '../../containers';
 import {tProps} from './_types';
 import {UsersComponent} from './Component';
 
-class Users extends PureComponent<tProps> {
-  render() {
-    const {sessionRole, users} = this.props;
-    const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
+const Users = memo((props: tProps) => {
+  const {sessionRole, users} = props;
+  const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
 
-    if (users.length === 0) {
-      return (
-        <>No users found that meet this criteria.</>
-      );
-    }
-
+  if (users.length === 0) {
     return (
-      <Paginate
-        count={4}
-        items={users}
-        render={(usersToRender: tUser[]) => (
-          <UsersComponent
-            removeUser={this.props.removeUser}
-            isEditable={isEditable}
-            sessionRole={sessionRole}
-            setUserRole={this.props.setUserRole}
-            users={usersToRender}
-          />
-        )}
-      />
+      <>No users found that meet this criteria.</>
     );
   }
-}
+
+  return (
+    <Paginate
+      count={4}
+      items={users}
+      render={(usersToRender: tUser[]) => (
+        <UsersComponent
+          removeUser={props.removeUser}
+          isEditable={isEditable}
+          sessionRole={sessionRole}
+          setUserRole={props.setUserRole}
+          users={usersToRender}
+        />
+      )}
+    />
+  );
+});
 
 export default Users;

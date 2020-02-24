@@ -1,5 +1,4 @@
 import React, {memo} from 'react';
-import {Link} from 'react-router-dom';
 
 import {Events, FilterPanel} from '../../../../../components';
 import {tComponentProps} from './_types';
@@ -9,15 +8,8 @@ export const EventsComponent = memo((props: tComponentProps) => (
     <ul className="fx aiCtr mB3" role="navigation">
       <li>
         <h1 className="fs3 mR3">
-          <Link to="">
-            All RSVPs
-          </Link>
+          Your RSVPs
         </h1>
-      </li>
-      <li>
-        <h2 className="grey3 fs3">
-          All Group Meetings
-        </h2>
       </li>
     </ul>
     <FilterPanel

@@ -8,7 +8,7 @@ import {tComponentProps} from './_types';
 export const MembershipsComponent = memo((props: tComponentProps) => (
   <>
     <h1 className="fs3 mB3">
-      All your groups
+      Manage Groups
     </h1>
     <FilterPanel
       className="fx aiCtr mB4 fs6 fw600"

@@ -1,4 +1,3 @@
-import cx from 'classnames';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
@@ -11,14 +10,8 @@ export const UsersComponent = memo((props: tComponentProps) => (
     {props.users.map((user: tUser, i) => (
       <li
         key={i}
-        className="bgWhite br8 mB3">
-        <div
-          className={cx({
-            'p2 pL3 pR3 brdB1': true,
-            bgYellowLite: user.role === 'member',
-            bgGreenLite: user.role === 'facilitator',
-          })}>
-          {(props.sessionRole === 'admin' || props.sessionRole === 'facilitator')
+        className="bgWhite mB3 hvrBgGrey1 br4">
+        {(props.sessionRole === 'admin' || props.sessionRole === 'facilitator')
             && (
               <button
                 className="fs6 bgWhite"
@@ -28,7 +21,6 @@ export const UsersComponent = memo((props: tComponentProps) => (
                   : 'Remove this user'}
               </button>
             )}
-        </div>
         <div className="p3 fx">
           <h3>
             <div className="ffLab fs5">Username:</div>
@@ -36,17 +28,19 @@ export const UsersComponent = memo((props: tComponentProps) => (
               {user.username}
             </Link>
           </h3>
-          {(props.sessionRole === 'admin' || props.sessionRole === 'facilitator')
-            && (
-              <div className="row">
-                <h3 className="ffLab fs5 ttCap mB2">
-                  Current role: {user.role}
-                </h3>
+          <div className="row">
+            <h3 className="ffLab fs5 ttCap">
+              Current role:
+              <div className="fs3 fw600">
+                {user.role}
+              </div>
+            </h3>
+            {(props.sessionRole === 'admin' || props.sessionRole === 'facilitator')
+              && (
                 <select
                   className="row ffLab ttCap"
                   value={user.role as string}
-                  onChange={ev => props.setUserRole(ev, user.id)}
-                >
+                  onChange={ev => props.setUserRole(ev, user.id)}>
                   <option key="default" value={user.role as string}>
                     Choose a new role
                   </option>
@@ -63,8 +57,8 @@ export const UsersComponent = memo((props: tComponentProps) => (
                       )
                   ))}
                 </select>
-              </div>
-            )}
+              )}
+          </div>
         </div>
       </li>
     ))}

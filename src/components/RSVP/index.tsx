@@ -48,9 +48,14 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
     const hasRSVPed = !this.state.hasRSVPed;
     this.setState({hasRSVPed});
 
-    const value = opts.ev.currentTarget.value !== rsvp.value
-      ? opts.ev.currentTarget.value
-      : null;
+    let {value} = opts.ev.currentTarget;
+    if (method === 'PATCH') {
+      // if changing rsvp, use new value.
+      // else if removing rsvp (clicking same option twice), set to null
+      value = opts.ev.currentTarget.value !== rsvp.value
+        ? opts.ev.currentTarget.value
+        : '';
+    }
 
     try {
       dispatch({

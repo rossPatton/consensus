@@ -31,7 +31,6 @@ rsvps.get(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = rsvps;
 });
 
-// get all rsvps for the logged in user, by eventId
 rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const data: tPostRSVPServerQuery = _.get(ctx, dataPath, {});
   const {isFormSubmit, ...query} = data;
@@ -50,11 +49,9 @@ rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
     eventId: parseInt(eventId, 10),
     type,
     userId,
-    value,
+    value: value !== '' ? value : null,
   };
 
-  // TODO reduce branches or just simplify somehow
-  // update existing event or insert new users_events relation
   let rsvpUpdate: tRSVP[] = [];
   try {
     rsvpUpdate = await knex(table)
@@ -69,7 +66,8 @@ rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = rsvpUpdate[0];
 });
 
-// get all rsvps for the logged in user, by eventId
+// this is an upsert, basically.
+// if user doesnt have js enabled, all patches are posts by default
 rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
   const data: tPostRSVPServerQuery = _.get(ctx, dataPath, {});
   const {isFormSubmit, ...query} = data;
@@ -88,7 +86,7 @@ rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
     eventId: parseInt(eventId, 10),
     type,
     userId,
-    value,
+    value: value !== '' ? value : null,
   };
 
   let currentRSVPStatus = {} as tRSVP;
@@ -101,8 +99,6 @@ rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  // TODO reduce branches or just simplify somehow
-  // update existing event or insert new users_events relation
   let rsvpUpdate: tRSVP[] = [];
   if (currentRSVPStatus) {
     try {

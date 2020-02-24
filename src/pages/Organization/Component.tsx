@@ -7,6 +7,7 @@ import {tComponentProps} from './_types';
 export const OrganizationComponent = (props: tComponentProps) => (
   <div className="contain mT4 fx aiStart">
     <OrganizationInfo
+      match={props.match}
       org={props.org}
       params={props.match.params}
       role={props.role}

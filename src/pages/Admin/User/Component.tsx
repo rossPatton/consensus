@@ -1,4 +1,3 @@
-import faker from 'faker';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
@@ -23,11 +22,13 @@ export const UserAdminComponent = memo((props: tProps) => {
           <img
             alt=""
             className="bgGrey3 circ mR3"
-            src={faker.image.avatar()}
+            src="https://s3.amazonaws.com/uifaces/faces/twitter/sta1ex/128.jpg"
             width="70"
           />
           <div>
-            <Link className="noUnderline mB2" to={`/user/${profile.id}`}>
+            <Link
+              to="/admin/events"
+              className="noUnderline mB2">
               {profile.name || profile.username}
             </Link>
             <div>
@@ -38,8 +39,13 @@ export const UserAdminComponent = memo((props: tProps) => {
               </Link>
               <Link
                 to="/admin/profile"
-                className="fs7 fw600">
+                className="mR2 fs7 fw600">
                 Edit profile
+              </Link>
+              <Link
+                to={`/user/${profile.id}`}
+                className="fs7 fw600">
+                View public profile
               </Link>
             </div>
           </div>
@@ -57,7 +63,11 @@ export const UserAdminComponent = memo((props: tProps) => {
                     to={`/org/${group.id}`}
                     className="br8 p2 fx aiCtr noUnderline hvrBgGrey1 trans2">
                     <div className="circ mR2 ovfHide">
-                      <PlaceholderImage height={60} width={60} />
+                      <PlaceholderImage
+                        height={60}
+                        seed={group.id}
+                        width={60}
+                      />
                     </div>
                     <h2 className="fs5 copyBlack lh1">
                       {group.name}

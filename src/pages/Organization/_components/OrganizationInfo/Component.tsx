@@ -7,7 +7,8 @@ import {PlaceholderImage} from '../../../../components';
 import {tComponentProps} from './_types';
 
 export const OrganizationInfoComponent = memo((props: tComponentProps) => {
-  const {org, role} = props;
+  const {match, org, role} = props;
+  const {description = ''} = props.org;
 
   return (
     <div className="bgWhite br8 mR3 c3 col growNone ovfHide">
@@ -32,21 +33,33 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
         <div className="mB3">
           <div className="fx aiCtr">
             <div className="circ mR2 ovfHide">
-              <PlaceholderImage height={60} width={60} />
+              <PlaceholderImage
+                height={60}
+                width={60}
+              />
             </div>
             <div>
               <small className="ttUpper fs7">
                 {props.org.category}
               </small>
               <h1 className="fs3 lh1">
-                {props.org.name}
+                {typeof match.params.section === 'undefined' && (
+                  props.org.name
+                )}
+                {typeof match.params.section !== 'undefined' && (
+                  <Link
+                    to={`/org/${org.id}`}
+                    title="Click to return to events page">
+                    {props.org.name}
+                  </Link>
+                )}
               </h1>
               {props.role
                 && props.role !== 'pending'
                 && props.members.length > 0
                 && (
                   <Link
-                    to="members"
+                    to={`/org/${org.id}/members`}
                     className="fs7"
                     title="Click to browse member list">
                     {props.members.length} Members
@@ -56,7 +69,7 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
           </div>
         </div>
         <p className="fs6">
-          {props.org.description.split('\n')[0]}
+          {description.split('\n')[0]}
         </p>
         <div>
         social media links down here

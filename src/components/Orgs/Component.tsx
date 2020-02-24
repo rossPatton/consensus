@@ -7,10 +7,7 @@ import {PlaceholderImage} from '../../components';
 import {tComponentProps} from './_types';
 
 export const OrgsComponent = memo((props: tComponentProps) => (
-  <ul
-    className={cx({
-      'fx fxWrap': !props.asList,
-    })}>
+  <ul className={cx({'fx fxWrap': !props.asList})}>
     {props.orgs.map((org, i) => {
       const roleMap = _.find(props.roles, r => r.orgId === org.id) || {};
       const {role} = roleMap as tRoleMap;
@@ -19,24 +16,24 @@ export const OrgsComponent = memo((props: tComponentProps) => (
         <li
           key={i}
           className={cx({
-            'mB3 pB3 brdB1': props.asList,
+            'mB3': props.asList && i !== props.orgs.length - 1,
             'col fxg0 fourth mB5 pR3': !props.asList,
           })}>
-          {props.isEditable && (
-            <button
-              className="bgWhite mB2"
-              onClick={ev => props.leaveOrg(ev, org.id)}>
-              Leave {org.name}
-            </button>
-          )}
-          <Link
-            to={`/org/${org.id}`}
+          <div
+            role="button"
+            tabIndex={0}
+            onMouseEnter={() => props.setHover(true)}
+            onMouseLeave={() => props.setHover(false)}
             className={cx({
               'fx aiCtr fs6 lh1 noUnderline': true,
-              'p3 hvrBgGrey1 trans1 br8': props.asList,
+              'p3 hvrBgGrey1 trans1 br4': props.asList,
             })}>
             <div className="circ mR2 ovfHide">
-              <PlaceholderImage height={60} width={60} />
+              <PlaceholderImage
+                height={60}
+                seed={i}
+                width={60}
+              />
             </div>
             <div>
               <div className="fs7 fw600 mB2">
@@ -45,7 +42,9 @@ export const OrgsComponent = memo((props: tComponentProps) => (
                 </span>
               </div>
               <h2 className="dBl lh1 fs3 underline mB2">
-                {org.name}
+                <Link to={`/org/${org.id}`}>
+                  {org.name}
+                </Link>
               </h2>
               <div
                 className={cx({
@@ -75,7 +74,14 @@ export const OrgsComponent = memo((props: tComponentProps) => (
                 )}
               </div>
             </div>
-          </Link>
+            {props.isEditable && props.isHovering && (
+              <div className="col taR">
+                <button onClick={ev => props.leaveOrg(ev, org.id)}>
+                  Leave Group
+                </button>
+              </div>
+            )}
+          </div>
         </li>
       );
     })}
