@@ -15,7 +15,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
       'fx fxdRow taL': props.horizontal,
       'jcBetween': props.horizontal && props.events.length === 4,
     })}>
-    {props.events.map((ev, i) => {
+    {props.events.map((ev: tEvent, i) => {
       const isPastEvent = dayJS(ev.date).isBefore(dayJS());
 
       return (
@@ -127,17 +127,17 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   {ev.isDraft && 'This event is not published yet. Click to edit.'}
                 </div>
               )}
-              {props.showOrgName && (
-                <Link
-                  to={`/org/${ev.orgId}`}
-                  className={cx({
-                    'fw600 fs6 lh1': true,
-                    hide: props.horizontal,
-                    o5: isPastEvent,
-                  })}>
-                  {ev.orgName}
-                </Link>
-              )}
+              {props.showOrgName
+                && (
+                  <Link
+                    to={`/org/${ev.orgId}`}
+                    className={cx({
+                      'fw600 fs6 lh1': true,
+                      o5: isPastEvent,
+                    })}>
+                    {ev.orgName}
+                  </Link>
+                )}
             </div>
           </div>
         </li>

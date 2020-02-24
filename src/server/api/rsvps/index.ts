@@ -3,30 +3,21 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import { knex } from '../../db/connection';
+import { validateSchema } from '../../utils';
 import { getSchema, postSchema } from './_schema';
 import { tPostRSVPServerQuery } from './_types';
 import { getRSVPsByUserId } from './queries';
 
 export const rsvps = new Router();
 const dataPath = 'state.locals.data';
-const errorMsg = 'Bad Request';
-const errorPath = 'details[0].message';
 const route = '/api/v1/rsvps';
 const sessionPath = 'state.user';
 const table = 'users_events';
 
 // get all rsvps for the logged in user, by eventId
 rsvps.get(route, async (ctx: Koa.ParameterizedContext) => {
-  // state.user === account
   const {userId = 0} = _.get(ctx, sessionPath, {});
-
-  try {
-    await getSchema.validateAsync({userId});
-  } catch (err) {
-    const message = _.get(err, errorPath, errorMsg);
-    return ctx.throw(400, message);
-  }
-
+  await validateSchema(ctx, getSchema, {userId});
   const rsvps = await getRSVPsByUserId(ctx, userId);
   ctx.body = rsvps;
 });
@@ -34,13 +25,7 @@ rsvps.get(route, async (ctx: Koa.ParameterizedContext) => {
 rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const data: tPostRSVPServerQuery = _.get(ctx, dataPath, {});
   const {isFormSubmit, ...query} = data;
-
-  try {
-    await postSchema.validateAsync(query);
-  } catch (err) {
-    const message = _.get(err, errorPath, errorMsg);
-    return ctx.throw(400, message);
-  }
+  await validateSchema(ctx, postSchema, query);
 
   const {eventId, type = 'private', value = 'no'} = query;
   const {userId = 0} = _.get(ctx, sessionPath, {});
@@ -71,13 +56,7 @@ rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
 rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
   const data: tPostRSVPServerQuery = _.get(ctx, dataPath, {});
   const {isFormSubmit, ...query} = data;
-
-  try {
-    await postSchema.validateAsync(query);
-  } catch (err) {
-    const message = _.get(err, errorPath, errorMsg);
-    return ctx.throw(400, message);
-  }
+  await validateSchema(ctx, postSchema, query);
 
   const {eventId, type = 'private', value = 'no'} = query;
   const {userId = 0} = _.get(ctx, sessionPath, {});

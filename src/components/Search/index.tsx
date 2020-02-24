@@ -1,5 +1,9 @@
+import loglevel from 'loglevel';
 import React from 'react';
+import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
+
+import {getOrgsBySearch} from '../../redux';
 
 class SearchContainer extends React.PureComponent<any, {value: string}> {
   state = {
@@ -13,12 +17,12 @@ class SearchContainer extends React.PureComponent<any, {value: string}> {
 
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    return this.props.history.push(`/search?value=${this.state.value}`);
+    this.props.getSearchResults({value: this.state.value})
+      .then(this.props.history.push(`/search?value=${this.state.value}`))
+      .catch(loglevel.error);
   }
 
   render() {
-    const {value} = this.state;
-
     return (
       <form
         className="mR2"
@@ -34,7 +38,7 @@ class SearchContainer extends React.PureComponent<any, {value: string}> {
               onChange={this.onChange}
               placeholder="Search group name"
               type="search"
-              value={value}
+              value={this.state.value}
             />
           </label>
         </fieldset>
@@ -43,4 +47,13 @@ class SearchContainer extends React.PureComponent<any, {value: string}> {
   }
 }
 
-export default withRouter(SearchContainer);
+const mapDispatchToProps = (dispatch: Function) => ({
+  getSearchResults: (query: {value: string}) => dispatch(getOrgsBySearch(query)),
+});
+
+const Search = connect(
+  null,
+  mapDispatchToProps,
+)(SearchContainer);
+
+export default withRouter(Search);

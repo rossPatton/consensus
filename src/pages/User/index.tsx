@@ -13,19 +13,18 @@ class UserContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     const {id: userId} = props.match.params;
-    props.getUserByIdDispatch({id: userId}).then(res => {
-      if (!res.payload.privateMemberships) {
-        props.getOrgsByUserIdDispatch({userId});
-      }
-      return null;
-    }).catch(loglevel.error);
+    props.getUserByIdDispatch({id: userId})
+      .then(res => {
+        if (!res.payload.privateMemberships) {
+          props.getOrgsByUserIdDispatch({noPending: true, userId});
+        }
+        return null;
+      }).catch(loglevel.error);
   }
 
   render() {
-    const {user} = this.props;
-
     return (
-      <ErrorBoundary status={_.get(user, 'error.status', 200)}>
+      <ErrorBoundary status={_.get(this.props, 'user.error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -60,6 +59,7 @@ const mapStateToProps = (store: tStore) => ({
 const mapDispatchToProps = (dispatch: Function) => ({
   getUserByIdDispatch: (query: tIdQuery) =>
     dispatch(getUser(query)),
+
   getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) =>
     dispatch(getOrgsByUserId(query)),
 });

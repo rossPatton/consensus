@@ -63,7 +63,7 @@ class CategoryContainer extends PureComponent<tContainerProps> {
                           <FilterPanel
                             className="fx aiCtr p3 bgWhite br8 mB4 fs6 fw600"
                             onSearchChange={searchProps.onSearchChange}
-                            placeholder="Search for a group by name"
+                            placeholder="Filter groups by name"
                           />
                           <Orgs orgs={orgsToRender} />
                         </>

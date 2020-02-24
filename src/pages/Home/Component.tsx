@@ -47,7 +47,11 @@ export const HomeComponent = memo((props: tProps) => (
               className="fs6 fw600 lh1 mL2 mR2">
               <Link to={`/categories/${cat.slug}`}>
                 <div className="mB2">
-                  <PlaceholderImage height={100} width={200} />
+                  <PlaceholderImage
+                    height={100}
+                    seed={i}
+                    width={200}
+                  />
                 </div>
                 {cat.display}
               </Link>

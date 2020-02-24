@@ -7,6 +7,7 @@ declare type tUsersByOrgIdQuery = tBaseQuery & {
 
 // get all orgs that a user belongs to by userId
 declare type tOrgsByUserIdQuery = tBaseQuery & {
+  noPending?: boolean,
   userId: string | number,
 };
 

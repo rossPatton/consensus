@@ -3,6 +3,7 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import { knex } from '../../db/connection';
+import { validateSchema } from '../../utils';
 import { postSchema } from './_schema';
 
 export const rsvp = new Router();
@@ -10,17 +11,14 @@ const route = '/api/v1/rsvp';
 const table = 'users_events';
 const dataPath = 'state.locals.data';
 
+// @TODO not really in use, since rsvps is more practical
+// perhaps remove?
+
 // post new rsvp for the logged in user, by eventId
 // this is an upsert basically, post if new, patch if not
 rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, dataPath, {});
-
-  try {
-    await postSchema.validateAsync({query});
-  } catch (err) {
-    const message = _.get(err, 'details[0].message', 'Bad Request');
-    return ctx.throw(400, message);
-  }
+  await validateSchema(ctx, postSchema, query);
 
   const {eventId, type = 'private', value = 'no'} = query;
   const userId = _.get(ctx, 'state.user.userId', 0);

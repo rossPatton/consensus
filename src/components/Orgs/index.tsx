@@ -1,47 +1,88 @@
-import loglevel from 'loglevel';
+import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Paginate} from '../../containers';
 import {deleteOrgByUserId} from '../../redux';
-import {tContainerProps} from './_types';
+import {tContainerProps, tState} from './_types';
 import {OrgsComponent} from './Component';
 
-class OrgsContainer extends PureComponent<tContainerProps> {
+class OrgsContainer extends PureComponent<tContainerProps, tState> {
   state = {
-    isHovering: false,
+    hoverIndex: null as number | null,
+    // we sometimes split the groups into 2, by membership vs pending
+    // short of splitting this entire thing into 2 nearly identical components
+    // (which might be the best approach honestly)
+    // i'm using this to only render the hover state if the type matches
+    groupType: 'member' as tRole,
   };
+
+  // ie, return an array of only groups that pending
+  filterNonPending = () => {
+    return this.props.orgs.filter(org => {
+      const roleMap = _.find(this.props.roles, r => r.orgId === org.id) || {};
+      const {role} = roleMap as tRoleMap;
+      return role === 'pending';
+    });
+  }
+
+  // only render groups that the user is a member of
+  filterPending = () => {
+    return this.props.orgs.filter(org => {
+      const roleMap = _.find(this.props.roles, r => r.orgId === org.id) || {};
+      const {role} = roleMap as tRoleMap;
+      return role !== 'pending';
+    });
+  }
 
   leaveOrg = (ev: React.MouseEvent<HTMLButtonElement>, orgId: number) => {
     ev.preventDefault();
     if (orgId) {
-      this.props.deleteOrgByUserIdDispatch({orgId})
-        .catch(loglevel.error);
+      this.props.deleteOrgByUserIdDispatch({orgId});
     }
   }
 
-  setHover = (isHovering: boolean = false) =>
+  setHover = (hoverIndex: number | null = null, groupType: tRole) =>
     this.setState({
-      isHovering,
+      groupType,
+      hoverIndex,
     })
 
   render() {
-    const {asList, count, isEditable, orgs, roles, showLocation} = this.props;
-    if (!orgs || orgs instanceof Array && orgs.length === 0) {
+    const {
+      asList,
+      count,
+      isEditable,
+      orgs: originalOrgs,
+      roles,
+      showLocation,
+      showPending = false,
+    } = this.props;
+
+    if (!originalOrgs
+      || (originalOrgs instanceof Array && originalOrgs.length === 0)) {
       return null;
+    }
+
+    // if we're rendering groups based on relation to the user, then we want to
+    // be able to potentially split by user role, pending or not pending
+    let pendingOrgs = [] as tOrg[];
+    if (showPending) {
+      pendingOrgs = this.filterNonPending();
     }
 
     return (
       <Paginate
-        items={orgs}
         count={count}
+        items={this.filterPending()}
         render={(orgsToRender: tOrg[]) => (
           <OrgsComponent
+            {...this.state}
             asList={asList}
             isEditable={isEditable}
-            isHovering={this.state.isHovering}
             leaveOrg={this.leaveOrg}
             orgs={orgsToRender}
+            pendingOrgs={pendingOrgs}
             roles={roles}
             setHover={this.setHover}
             showLocation={showLocation}

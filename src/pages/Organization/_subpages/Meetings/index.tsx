@@ -48,6 +48,7 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
                 render={searchProps => (
                   <EventsComponent
                     {...searchProps}
+                    originalEvents={eventsToRender}
                     events={searchProps.items}
                     hideMeetings={hideMeetings}
                     org={org}

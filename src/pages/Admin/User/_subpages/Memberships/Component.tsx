@@ -11,10 +11,15 @@ export const MembershipsComponent = memo((props: tComponentProps) => (
       Manage Groups
     </h1>
     <FilterPanel
-      className="fx aiCtr mB4 fs6 fw600"
+      className="fx aiCtr mB3 fs6 fw600"
       onSearchChange={props.onSearchChange}
-      placeholder="Search for a group by name"
+      placeholder="Filter groups by name"
     />
-    <Orgs asList isEditable orgs={props.orgs} />
+    <Orgs
+      asList
+      isEditable
+      orgs={props.orgs}
+      showPending
+    />
   </>
 ));

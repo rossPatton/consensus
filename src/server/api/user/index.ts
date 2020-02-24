@@ -101,20 +101,17 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.redirect('/login');
 });
 
-// TODO no-js forms only do GET/POST - figure out how to make patches work w/o js
+// TODO no-js forms only do GET/POST - implement upsert
 user.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...query}: tUserQuery = _.get(ctx, dataPath, {});
   const account = _.get(ctx, 'state.user', {});
-
   await validateSchema<tUserQuery>(ctx, patchSchema, query);
 
   const isValidPW = await isValidPw(query.password, account.password);
-  if (!isValidPW) {
-    return ctx.throw(400, 'Password is not correct');
-  }
+  if (!isValidPW) return ctx.throw(400, 'Password is not correct');
 
-  // password stuff will cause a constraint error - pull out before updating
-  const {password, ...updateQuery} = query;
+  // email and password stuff will cause a constraint error - pull out before updating
+  const {email, password, ...updateQuery} = query as tUserQuery & {email: string};
 
   let updatedUser: tUser[] = [];
   try {

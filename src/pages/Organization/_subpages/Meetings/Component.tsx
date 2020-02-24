@@ -5,10 +5,10 @@ import { tComponentProps } from './_types';
 
 export const EventsComponent = memo((props: tComponentProps) => (
   <>
-    {props.events.length === 0
+    {props.originalEvents.length === 0
       && !props.hideMeetings
       && (
-        <h2 className="fs3 p4">
+        <h2 className="fs3 mB3">
           This group has no upcoming meetings.
         </h2>
       )}
@@ -19,20 +19,28 @@ export const EventsComponent = memo((props: tComponentProps) => (
         </h2>
       )}
     {!props.hideMeetings
-      && props.events.length > 0 && (
-      <>
-        <FilterPanel
-          className="fx aiCtr mB3 fs6 fw600"
-          onSearchChange={props.onSearchChange}
-          placeholder="Filter events by title"
-        />
-        <Events
-          showRSVPs
-          events={props.events}
-          sessionRole={props.role}
-          type={props.type}
-        />
-      </>
-    )}
+      && (
+        <>
+          <FilterPanel
+            className="fx aiCtr mB3 fs6 fw600"
+            onSearchChange={props.onSearchChange}
+            placeholder="Filter events by title"
+          />
+          <Events
+            showRSVPs
+            events={props.events}
+            sessionRole={props.role}
+            type={props.type}
+          />
+        </>
+      )}
+    {/* {!props.hideMeetings && (
+      <Events
+        showRSVPs
+        events={props.events}
+        sessionRole={props.role}
+        type={props.type}
+      />
+    )} */}
   </>
 ));

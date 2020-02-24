@@ -3,6 +3,7 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import { knex } from '../../db/connection';
+import { validateSchema } from '../../utils';
 import { schema } from './_schema';
 
 export const region = new Router();
@@ -10,13 +11,7 @@ const route = '/api/v1/region';
 
 region.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tDirectoryParams = _.get(ctx, 'state.locals.data', {});
-
-  try {
-    await schema.validateAsync(query);
-  } catch (err) {
-    const message = _.get(err, 'details[0].message', 'Bad Request');
-    return ctx.throw(400, message);
-  }
+  await validateSchema<tDirectoryParams>(ctx, schema, query);
 
   const {
     country: countryCode = '',

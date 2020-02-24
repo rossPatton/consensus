@@ -3,6 +3,7 @@ export const userKeys = [
   'created_at',
   'city',
   'id',
+  'facebook',
   'language',
   'name',
   'phone',
@@ -11,4 +12,6 @@ export const userKeys = [
   'privateRSVP',
   'updated_at',
   'username',
+  'twitter',
+  'website',
 ];

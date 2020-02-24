@@ -18,18 +18,24 @@ orgsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let userOrgRels: tAccountRoleRelation[] = [];
   try {
-    userOrgRels = await knex(table)
-      .where(query)
-      .andWhereNot({role: 'pending'});
+    userOrgRels = await knex(table).where(query);
   } catch (err) {
     return ctx.throw(400, err);
   }
 
+  if (query.noPending) {
+    userOrgRels = userOrgRels.filter(accountRoleRel => {
+      return accountRoleRel.role !== 'pending';
+    });
+  }
+
   const mappedIds = userOrgRels.map(idSet => idSet.orgId);
 
-  let orgs: tOrg[] = [];
+  let orgs = [] as tOrg[];
   try {
-    orgs = await knex('orgs').whereIn('id', mappedIds).select(orgKeys);
+    orgs = await knex('orgs')
+      .whereIn('id', mappedIds)
+      .select(orgKeys);
   } catch (err) {
     return ctx.throw(400, err);
   }
