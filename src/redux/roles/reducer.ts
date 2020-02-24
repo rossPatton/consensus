@@ -1,4 +1,7 @@
+import _ from 'lodash';
+
 import { tRolesActionUnion } from './_types';
+import { DELETE_FAILURE, DELETE_SUCCESS } from './delete/_types';
 import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 import { POST_FAILURE, POST_SUCCESS } from './post/_types';
 
@@ -30,6 +33,9 @@ export const rolesReducer = (state = initialState, action: tRolesActionUnion) =>
       isLoading: true,
     };
 
+  case DELETE_FAILURE:
+    return failureReturn;
+
   case GET_FAILURE:
     return failureReturn;
 
@@ -42,6 +48,18 @@ export const rolesReducer = (state = initialState, action: tRolesActionUnion) =>
   case POST_SUCCESS: {
     const {orgId, role} = action.payload;
     const data = [...state.data, {orgId, role}];
+
+    return {
+      ...state,
+      data,
+      isLoading: false,
+    };
+  }
+
+  case DELETE_SUCCESS: {
+    const {orgId} = action.payload;
+    const copy = [...state.data];
+    const data = _.filter(copy, (r: tRoleMap) => orgId !== r.orgId);
 
     return {
       ...state,

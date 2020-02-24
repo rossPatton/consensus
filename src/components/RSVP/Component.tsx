@@ -27,8 +27,8 @@ export const RSVPComponent = (props: tComponentProps) => {
             type={props.isClient ? 'button' : 'submit'}
             onClick={ev => setRsvp({ev, eventId})}
             className={cx({
-              'p2 pL3 pR3 hvrBgGrey1 trans1 mR1': true,
-              bgGrey2: !!rsvp && rsvp.value === 'yes',
+              'p2 pL3 pR3 mR1': true,
+              bgGrey3: !!rsvp && rsvp.value === 'yes',
             })}>
             Yes
           </button>
@@ -37,8 +37,8 @@ export const RSVPComponent = (props: tComponentProps) => {
             type={props.isClient ? 'button' : 'submit'}
             onClick={ev => setRsvp({ev, eventId})}
             className={cx({
-              'p2 pL3 pR3 hvrBgGrey1 trans1 mR1': true,
-              bgGrey2: !!rsvp && rsvp.value === 'no',
+              'p2 pL3 pR3 mR1': true,
+              bgGrey3: !!rsvp && rsvp.value === 'no',
             })}>
             No
           </button>
@@ -47,8 +47,8 @@ export const RSVPComponent = (props: tComponentProps) => {
             type={props.isClient ? 'button' : 'submit'}
             onClick={ev => setRsvp({ev, eventId})}
             className={cx({
-              'p2 pL3 pR3 hvrBgGrey1 trans1': true,
-              bgGrey2: !!rsvp && rsvp.value === 'maybe',
+              'p2 pL3 pR3': true,
+              bgGrey3: !!rsvp && rsvp.value === 'maybe',
             })}>
             Maybe
           </button>

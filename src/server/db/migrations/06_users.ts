@@ -36,6 +36,11 @@ exports.up = async (knex: Knex) => {
     // if set to true, user memberships aren't visible to others in user profile
     table.boolean('privateMemberships').notNullable().defaultTo(true);
 
+    // user's personal website
+    table.string('website').defaultTo('');
+    table.string('facebook').defaultTo('');
+    table.string('twitter').defaultTo('');
+
     table.timestamps(true, true);
   });
 };

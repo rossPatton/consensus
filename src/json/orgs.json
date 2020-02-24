@@ -3,6 +3,17 @@
     "category": "Political Organization",
     "city": "New York",
     "cityId": 16624,
+    "handle": "tech-workers-coalition-nyc",
+    "name": "Tech Workers Coalition NYC",
+    "region": "New York",
+    "regionId": 37,
+    "type": "public",
+    "website": "'https://techworkerscoalition.org/nyc'"
+  },
+  {
+    "category": "Political Organization",
+    "city": "New York",
+    "cityId": 16624,
     "handle": "champlin-and-sons",
     "name": "Champlin and Sons",
     "region": "New York",
@@ -410,7 +421,7 @@
     "type": "private"
   },
   {
-    "category": "Relgious",
+    "category": "Religious",
     "city": "New York",
     "cityId": 16624,
     "handle": "williamson-ortiz-and-koepp",
@@ -808,16 +819,6 @@
     "region": "New York",
     "regionId": 37,
     "type": "invite"
-  },
-  {
-    "category": "Political Organization",
-    "city": "New York",
-    "cityId": 16624,
-    "handle": "tech-workers-coalition-nyc",
-    "name": "Tech Workers Coalition NYC",
-    "region": "New York",
-    "regionId": 37,
-    "type": "public"
   },
   {
     "category": "Political Organization",

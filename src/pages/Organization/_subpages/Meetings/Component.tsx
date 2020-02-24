@@ -24,7 +24,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
         <FilterPanel
           className="fx aiCtr mB3 fs6 fw600"
           onSearchChange={props.onSearchChange}
-          placeholder="Search for events by title"
+          placeholder="Filter events by title"
         />
         <Events
           showRSVPs

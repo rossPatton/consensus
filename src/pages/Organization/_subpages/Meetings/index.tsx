@@ -38,7 +38,7 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
             // but we still render something to show the user they need to join
             const privateGroup = org.type !== 'public';
             const userIsLoggedIn = session.isAuthenticated;
-            const userIsAMemberOfGroup = !!role;
+            const userIsAMemberOfGroup = !!role && role !== 'pending';
             const hideMeetings = privateGroup
               && (!userIsLoggedIn || !userIsAMemberOfGroup);
 

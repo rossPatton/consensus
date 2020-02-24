@@ -8,6 +8,9 @@ declare type tOrg = Readonly<{
    countryId: number,
    created_at?: Date,
    description: string,
+   // lives in accounts_emails table
+   emails?: string[],
+   facebook: string,
    id: number,
    name: string,
    region: string,
@@ -15,6 +18,8 @@ declare type tOrg = Readonly<{
    handle: string,
    updated_at?: Date,
    type: tPrivacyEnum,
+   twitter: string,
+   website: string,
 }>;
 
 // if posting/patching most values are up for grabs

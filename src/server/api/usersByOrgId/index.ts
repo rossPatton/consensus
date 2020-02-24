@@ -17,7 +17,6 @@ const dataPath = 'state.locals.data';
 // api for interacting with the accounts_roles table
 // not for signing up new users, but for getting users that are members of an org
 // or joining an org, or updating member roles within an org
-
 usersByOrgId.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tUsersByOrgIdQuery = _.get(ctx, dataPath, {});
   await validateSchema<tUsersByOrgIdQuery>(ctx, getSchema, query);
@@ -27,16 +26,12 @@ usersByOrgId.get(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = users;
 });
 
-
 // joining an org. uses session data since we don't want people to be able to
 // add others to an org, only the logged-in user should be able to do that
 usersByOrgId.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const {orgId}: tUserByOrgQuery = _.get(ctx, dataPath, {});
-  const {userId} = _.get(ctx, 'state.user', {});
-  await validateSchema<tUserByOrgQuery>(ctx, postSchema, {orgId, userId});
-
-  // 0 means the user isn't logged in basically
-  if (userId === 0) return ctx.redirect('/signup');
+  const query: tUserByOrgQuery = _.get(ctx, dataPath, {});
+  await validateSchema<tUserByOrgQuery>(ctx, postSchema, query);
+  const {orgId, role, userId} = query;
 
   const {id: accountId}: tAccount = await knex('accounts')
     .limit(1)
@@ -44,11 +39,25 @@ usersByOrgId.post(route, async (ctx: Koa.ParameterizedContext) => {
     .first()
     .select('id');
 
-  // insert new user into db
-  try {
-    await knex(table).insert({accountId, orgId, userId, role: 'member'});
-  } catch (err) {
-    return ctx.throw(400, err);
+  const userByOrgIdRel = await knex(table)
+    .limit(1)
+    .where({accountId, orgId, userId, role})
+    .first();
+
+  if (userByOrgIdRel) {
+    try {
+      await knex(table)
+        .where({id: userByOrgIdRel.id})
+        .update({accountId, orgId, userId, role});
+    } catch (err) {
+      return ctx.throw(400, err);
+    }
+  } else {
+    try {
+      await knex(table).insert({accountId, orgId, userId, role});
+    } catch (err) {
+      return ctx.throw(400, err);
+    }
   }
 
   // TODO should probably simplify this or store in server state somehow

@@ -10,10 +10,8 @@ export const getSchema = baseSchema.keys({
 
 export const postSchema = getSchema.keys({
   userId: Joi.number().integer(),
-});
-
-export const patchSchema = postSchema.keys({
   role: Joi.string().alphanum(),
 });
 
 export const deleteSchema = postSchema;
+export const patchSchema = postSchema;

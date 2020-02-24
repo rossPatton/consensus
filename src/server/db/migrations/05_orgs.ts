@@ -63,6 +63,11 @@ exports.up = async (knex: Knex) => {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
+    // group external website and social media, if available
+    table.string('website').defaultTo('');
+    table.string('facebook').defaultTo('');
+    table.string('twitter').defaultTo('');
+
     table.timestamps(true, true);
   });
 };

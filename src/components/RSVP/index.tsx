@@ -48,11 +48,15 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
     const hasRSVPed = !this.state.hasRSVPed;
     this.setState({hasRSVPed});
 
+    const value = opts.ev.currentTarget.value !== rsvp.value
+      ? opts.ev.currentTarget.value
+      : null;
+
     try {
       dispatch({
         eventId: opts.eventId,
         type: userRSVPsPrivately ? 'private' : 'public',
-        value: opts.ev.currentTarget.value,
+        value,
       })
         .then(res => {
           return this.setState({

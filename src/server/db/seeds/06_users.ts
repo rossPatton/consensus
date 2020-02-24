@@ -7,33 +7,34 @@ import {range} from '../../../utils/range';
 const createUser = async () => {
   // user selects city from dropdown with additional info (postcode,etc)
   const city = faker.random.boolean() ? 'New York' : '';
-  // on the backend, we really just want the id of the correct city, cause dupes
-  // city is used for display purposes, but the id is what we use for fetching etc
-  // const cityId = city ? 16624 : null;
 
   return {
     bio: faker.lorem.paragraphs(),
     city,
-    // cityId,
+    facebook: 'yes',
     name: `${faker.name.firstName()} ${faker.name.lastName()}`,
     phone: faker.phone.phoneNumber(),
     privateEmail: faker.random.boolean(),
     privateMemberships: faker.random.boolean(),
     privateRSVP: false,
+    twitter: 'yes',
     username: faker.internet.userName(),
+    website: faker.internet.domainName(),
   };
 };
 
 const createTestUser = async () => ({
   bio: faker.lorem.paragraphs(),
-  city: 'New York', // New York
-  // cityId: 16624,
+  city: 'New York',
+  facebook: 'yes',
   name: 'Test User',
   phone: faker.phone.phoneNumber(),
   privateEmail: faker.random.boolean(),
   privateMemberships: faker.random.boolean(),
   privateRSVP: false,
+  twitter: 'yes',
   username: 'testUsername',
+  website: faker.internet.domainName(),
 });
 
 exports.seed = async (knex: Knex) => {

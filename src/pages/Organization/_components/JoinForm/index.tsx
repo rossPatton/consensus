@@ -10,10 +10,12 @@ class JoinFormContainer extends React.PureComponent<tProps> {
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
-    const {dispatch, org} = this.props;
+    const {dispatch, org, session} = this.props;
+    const role = org.type === 'public' ? 'member' : 'pending';
+    const userId = session.profile.id;
 
-    this.props.postNewUserByOrgIdDispatch({orgId: org.id})
-      .then(() => dispatch(postRoleSuccess({orgId: org.id, role: 'member'})))
+    this.props.postNewUserByOrgIdDispatch({orgId: org.id, role, userId})
+      .then(() => dispatch(postRoleSuccess({orgId: org.id, role})))
       .catch(loglevel.error);
   }
 
@@ -22,8 +24,7 @@ class JoinFormContainer extends React.PureComponent<tProps> {
 
     if (role) {
       return (
-        <span
-          className="bgWhite fs6 br4 lh1 p1 pL2 pR2">
+        <span className="mR2 fs6 white lh1">
           <span className="mR1">✔</span>
           <span className="ttCap">{role}</span>
         </span>

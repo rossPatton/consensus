@@ -35,7 +35,7 @@ export const OrgsComponent = memo((props: tComponentProps) => (
               'fx aiCtr fs6 lh1 noUnderline': true,
               'p3 hvrBgGrey1 trans1 br8': props.asList,
             })}>
-            <div className="circ mR3 ovfHide">
+            <div className="circ mR2 ovfHide">
               <PlaceholderImage height={60} width={60} />
             </div>
             <div>

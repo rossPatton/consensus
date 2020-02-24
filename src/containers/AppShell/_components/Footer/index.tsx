@@ -11,13 +11,8 @@ const Footer = memo(() => (
           </Link>
         </li>
         <li>
-          <Link to="/signup/newUser">
+          <Link to="/signup">
             Sign up
-          </Link>
-        </li>
-        <li>
-          <Link to="/signup/newOrg">
-            Start a new org
           </Link>
         </li>
       </ul>

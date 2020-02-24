@@ -33,7 +33,7 @@ export default class ErrorBoundary extends PureComponent<tProps, tState> {
     // we just render a small error message in place instead
     // a 204 here is not a problem really, a subpage for upcoming events just
     // might not have any, so we only care about codes over 400
-    if (isSubPage && status > 400) {
+    if (isSubPage && status === 500) {
       return (
         <>Something went wrong loading this section. Try refreshing?</>
       );

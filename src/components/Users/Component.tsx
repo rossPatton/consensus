@@ -14,24 +14,19 @@ export const UsersComponent = memo((props: tComponentProps) => (
         className="bgWhite br8 mB3">
         <div
           className={cx({
-            'fx fs6 p2 pL3 pR3 brdB1': true,
+            'p2 pL3 pR3 brdB1': true,
             bgYellowLite: user.role === 'member',
             bgGreenLite: user.role === 'facilitator',
           })}>
-          <div className="col ttCap mR3">
-            {user.role}
-          </div>
           {(props.sessionRole === 'admin' || props.sessionRole === 'facilitator')
             && (
-              <div className="col taR">
-                <button
-                  className="bgWhite"
-                  onClick={ev => props.removeUser(ev, user.id)}>
-                  {user.role === 'pending'
-                    ? 'Reject this user'
-                    : 'Remove this user'}
-                </button>
-              </div>
+              <button
+                className="fs6 bgWhite"
+                onClick={ev => props.removeUser(ev, user.id)}>
+                {user.role === 'pending'
+                  ? 'Reject this user'
+                  : 'Remove this user'}
+              </button>
             )}
         </div>
         <div className="p3 fx">

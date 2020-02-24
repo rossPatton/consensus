@@ -25,7 +25,7 @@ export const CountryComponent = memo((props: tComponentProps) => (
           key={region.name}
           className="col fxg0 third mB3">
           <Link
-            to={`${props.match.url}${region.code}`}
+            to={`${props.match.url}/${region.code}`}
             className="copyBlack fw600 noUnderline">
             {region.name}
           </Link>

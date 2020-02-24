@@ -30,6 +30,11 @@ export {
 // misc thunks
 export { getGeo } from './geo';
 export { getOrgsBySearch } from './orgsBySearch';
-export { getRoles, postRoleFailure, postRoleSuccess } from './roles';
+export {
+  deleteRoleSuccess,
+  getRoles,
+  postRoleFailure,
+  postRoleSuccess,
+} from './roles';
 export { getRsvps, patchRsvps, postRsvps } from './rsvps';
 

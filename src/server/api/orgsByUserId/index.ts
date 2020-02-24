@@ -18,7 +18,9 @@ orgsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let userOrgRels: tAccountRoleRelation[] = [];
   try {
-    userOrgRels = await knex(table).where(query);
+    userOrgRels = await knex(table)
+      .where(query)
+      .andWhereNot({role: 'pending'});
   } catch (err) {
     return ctx.throw(400, err);
   }

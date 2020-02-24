@@ -7,14 +7,8 @@ export type tProps = {
   session: tSession,
 };
 
-export type tComponentProps = {
-  onSubmit: (ev: React.FormEvent<HTMLFormElement>) => void,
-  org: tOrg,
-};
-
 export type tStore = {
-  dispatch: Function,
   org: tThunk<tOrg>,
   session: tThunk<tSession>,
   usersByOrgId: tThunk<tUser[]>,
-}
+};
