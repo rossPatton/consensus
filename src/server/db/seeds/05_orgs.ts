@@ -15,11 +15,12 @@ const categories = [
 
 const createOrg = async (orgId: number) => {
   const org = orgs[orgId];
+  const category = orgId === 0
+    ? 'Political Organization'
+    : categories[getRandomNum(0, categories.length - 1)].type;
 
   return {
-    category: orgId === 1
-      ? 'Political Organization'
-      : categories[getRandomNum(0, categories.length - 1)].type,
+    category,
     city: org.city,
     cityId: 16624,
     country: 'United States',

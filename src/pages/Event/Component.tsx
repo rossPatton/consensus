@@ -1,5 +1,6 @@
 import dayJS from 'dayjs';
 import _ from 'lodash';
+import pluralize from 'pluralize';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
@@ -14,9 +15,13 @@ export const EventComponent = memo((props: tComponentProps) => {
       <Link to={`/org/${org.id}`} className="dBl noUnderline fw600 lh1 mB4">
         {org.name}
       </Link>
-      <div className="fx mB5">
+      <div className="fx mB5 pB2">
         <div className="mR3">
-          <PlaceholderImage height={420} width={640} />
+          <PlaceholderImage
+            height={420}
+            seed={event.id}
+            width={640}
+          />
         </div>
         <div className="row rel">
           <time className="fw600 lh1 mB3" dateTime={event.date}>
@@ -29,14 +34,19 @@ export const EventComponent = memo((props: tComponentProps) => {
             <RSVP event={event} />
           </div>
           <div className="fw600 mB3">
-            {event.locationLink && (
-              <ExternalLink
-                noFollow
-                to={event.locationLink}>
-                {event.location}
-              </ExternalLink>
+            <div>
+              {event.locationLink && (
+                <ExternalLink
+                  noFollow
+                  to={event.locationLink}>
+                  {event.location}
+                </ExternalLink>
+              )}
+              {!event.locationLink && event.location}
+            </div>
+            {event.attendees.length > 0 && (
+              `${event.attendees.length} ${pluralize('attendee', event.attendees.length)}`
             )}
-            {!event.locationLink && event.location}
           </div>
           <div className="fs5">
             {event.description && event.description.split('\n')[0]}
@@ -49,9 +59,9 @@ export const EventComponent = memo((props: tComponentProps) => {
         </div>
       </div>
       {eventsByOrgId && eventsByOrgId.length > 0 && (
-        <aside className="col row mT2">
+        <aside className="col row mB5">
           <h2 className="fs3 mB3 lh1">
-            More upcoming events
+            More events by {org.name}
           </h2>
           <Events
             horizontal
@@ -59,6 +69,17 @@ export const EventComponent = memo((props: tComponentProps) => {
           />
         </aside>
       )}
+      {/* {eventsByOrgId && eventsByOrgId.length > 0 && (
+        <aside className="col row mB5">
+          <h2 className="fs3 mB3 lh1">
+            More {org.category} events in {org.city}
+          </h2>
+          <Events
+            horizontal
+            events={[...eventsByOrgId.reverse()]}
+          />
+        </aside>
+      )} */}
     </div>
   );
 });
