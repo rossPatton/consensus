@@ -7,9 +7,9 @@ export interface tProps {
   isLoading: boolean,
   location: H.Location,
   match: match & {params: tSearchParams},
-  search: tOrg[],
+  orgsBySearch: tOrg[],
 }
 
 export type tStore = {
-  search: tThunk<tOrg[]>,
+  orgsBySearch: tThunk<tOrg[]>,
 };

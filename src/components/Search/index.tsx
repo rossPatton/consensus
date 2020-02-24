@@ -1,7 +1,7 @@
 import React from 'react';
 import {withRouter} from 'react-router';
 
-class SearchContainer extends React.PureComponent<any, any> {
+class SearchContainer extends React.PureComponent<any, {value: string}> {
   state = {
     value: '',
   };

@@ -48,12 +48,16 @@ export const RSVPCount = loadable(() =>
   import(/* webpackChunkName: "RSVPCount" */'./RSVPCount'),
 );
 
+export const ScrollToTop = loadable(() =>
+  import(/* webpackChunkName: "ScrollToTop" */'./ScrollToTop'),
+);
+
 export const Search = loadable(() =>
   import(/* webpackChunkName: "Search" */'./Search'),
 );
 
-export const ScrollToTop = loadable(() =>
-  import(/* webpackChunkName: "ScrollToTop" */'./ScrollToTop'),
+export const SuperSearch = loadable(() =>
+  import(/* webpackChunkName: "SuperSearch" */'./SuperSearch'),
 );
 
 export const Users = loadable(() =>

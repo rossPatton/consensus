@@ -7,24 +7,25 @@ const initialState: tThunk<tOrg[]> = {
   data: [],
 };
 
-export const searchReducer = (state = initialState, action: tSearchActionUnion) => {
-  switch (action.type) {
-  case GET_SUCCESS: {
-    return {
-      ...state,
-      data: action.payload,
-      isLoading: false,
-    };
-  }
+export const orgsBySearchReducer =
+  (state = initialState, action: tSearchActionUnion) => {
+    switch (action.type) {
+    case GET_SUCCESS: {
+      return {
+        ...state,
+        data: action.payload,
+        isLoading: false,
+      };
+    }
 
-  case GET_FAILURE:
-    return {
-      ...state,
-      error: action.payload,
-      isLoading: false,
-    };
+    case GET_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false,
+      };
 
-  default:
-    return state;
-  }
-};
+    default:
+      return state;
+    }
+  };

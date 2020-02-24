@@ -10,7 +10,7 @@ import { eventsByUserIdReducer } from './eventsByUserId/reducer';
 import { geoReducer } from './geo/reducer';
 import { orgReducer } from './org/reducer';
 import { orgsReducer } from './orgs/reducer';
-import { searchReducer } from './orgsBySearch/reducer';
+import { orgsBySearchReducer } from './orgsBySearch/reducer';
 import { orgsByUserIdReducer } from './orgsByUserId/reducer';
 import { regionReducer } from './region/reducer';
 import { rolesReducer } from './roles/reducer';
@@ -28,11 +28,11 @@ export const rootReducer = combineReducers({
   geo: geoReducer,
   org: orgReducer,
   orgs: orgsReducer,
+  orgsBySearch: orgsBySearchReducer,
   orgsByUserId: orgsByUserIdReducer,
   region: regionReducer,
   roles: rolesReducer,
   rsvps: rsvpsReducer,
-  search: searchReducer,
   session: authReducer,
   user: userReducer,
   usersByOrgId: usersByOrgIdReducer,
