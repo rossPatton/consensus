@@ -17,7 +17,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
       <div className="mB4">
         <label className="row mB4" htmlFor="name">
           <h2 className="ffLab fs5 mB1 lh1">
-            Name
+            Real Name
           </h2>
           <input
             id="name"
@@ -91,6 +91,42 @@ export const ProfileComponent = memo((props: tComponentProps) => (
             placeholder="Example: 555-555-5555"
             value={props.phone}
             name="phone"
+          />
+        </label>
+        <label className="dBl mB4" htmlFor="website">
+          <h2 className="ffLab fs5 mB1 lh1">
+            Personal Website
+          </h2>
+          <input
+            onChange={ev => props.updateState('website', ev)}
+            className="p3 row"
+            placeholder="Update your website here"
+            value={props.website}
+            name="website"
+          />
+        </label>
+        <label className="dBl mB4" htmlFor="facebook">
+          <h2 className="ffLab fs5 mB1 lh1">
+            Facebook
+          </h2>
+          <input
+            className="p3 row"
+            name="facebook"
+            onChange={ev => props.updateState('facebook', ev)}
+            placeholder="Link your facebook profile here"
+            value={props.facebook}
+          />
+        </label>
+        <label className="dBl mB4" htmlFor="twitter">
+          <h2 className="ffLab fs5 mB1 lh1">
+            Twitter
+          </h2>
+          <input
+            className="p3 row"
+            name="twitter"
+            onChange={ev => props.updateState('twitter', ev)}
+            placeholder="Link your twitter here"
+            value={props.twitter}
           />
         </label>
         <label className="row mB4" htmlFor="city">
@@ -179,12 +215,12 @@ export const ProfileComponent = memo((props: tComponentProps) => (
         placeholder="Your current password"
         onChange={ev => props.updateState('password', ev)}
       />
+      <button
+        disabled={!props.password}
+        className="p3 pL4 pR4 hvrBgGrey1 trans1">
+        Save Changes
+      </button>
     </fieldset>
-    <button
-      disabled={!props.password}
-      className="p3 pL4 pR4 hvrBgGrey1 trans1">
-      Save Changes
-    </button>
   </form>
 ));
 

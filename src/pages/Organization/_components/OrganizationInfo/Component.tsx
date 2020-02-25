@@ -3,7 +3,7 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {JoinForm, LeaveForm} from '..';
-import {PlaceholderImage} from '../../../../components';
+import {ExternalLink, PlaceholderImage} from '../../../../components';
 import {tComponentProps} from './_types';
 
 export const OrganizationInfoComponent = memo((props: tComponentProps) => {
@@ -71,8 +71,55 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
         <p className="fs6">
           {description.split('\n')[0]}
         </p>
-        <div>
-        social media links down here
+        <div className="fx aiCtr">
+          {org.facebook && (
+            <div className="mR2">
+              <ExternalLink
+                noFollow
+                to={org.facebook}>
+                <img
+                  alt="Our Facebook"
+                  src="/static/images/fb.svg"
+                  width="25"
+                />
+              </ExternalLink>
+            </div>
+          )}
+          {org.twitter && (
+            <div className="mR2">
+              <ExternalLink
+                noFollow
+                to={org.twitter}>
+                <img
+                  alt="Our Twitter"
+                  src="/static/images/twitter.svg"
+                  width="25"
+                />
+              </ExternalLink>
+            </div>
+          )}
+          {org.website && (
+            <div className="mR2">
+              <ExternalLink
+                noFollow
+                to={org.website}>
+                <img
+                  alt="Our Website"
+                  src="/static/images/website.svg"
+                  width="25"
+                />
+              </ExternalLink>
+            </div>
+          )}
+          {org.emails && (
+            <div>
+              <img
+                alt="Email Us!"
+                src="/static/images/email.svg"
+                width="25"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

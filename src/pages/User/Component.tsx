@@ -6,11 +6,16 @@ import {tComponentProps} from './_types';
 export const UserComponent = memo(({orgs, user}: tComponentProps) => (
   <div className="contain mT4 mB5">
     <h1 className="mB3 fs2 ttCap">
-      {/* if user entered a real name, use that, otherwise use id */}
-      {user.name ? user.name : `user ${user.id}`}
+      @{user.username}
     </h1>
-    <h3>Username</h3>
-    <p>{user.username}</p>
+    {user.name && (
+      <>
+        <h2 className="fs3 mB1">
+          Real Name
+        </h2>
+        <p>{user.name}</p>
+      </>
+    )}
     {user.emails
       && !user.privateEmail
       && (
@@ -19,6 +24,14 @@ export const UserComponent = memo(({orgs, user}: tComponentProps) => (
           <p>{user.emails[0]}</p>
         </>
       )}
+    {user.website && (
+      <>
+        <h3 className="mB1">
+          Personal Website
+        </h3>
+        <p>{user.website}</p>
+      </>
+    )}
     {user.bio && (
       <div className="row">
         <h3>Bio</h3>
