@@ -7,7 +7,7 @@ const roles = ['member', 'pending', 'facilitator'];
 
 const createRelation = async (accountId: number, orgId: number) => {
   let role = roles[getRandomNum(0, roles.length - 1)];
-  if (accountId === 101) { // test org admin
+  if (accountId === 101) { // test group admin
     role = 'admin';
   } else if (accountId === 100) { // test user facilitator
     role = 'facilitator';
@@ -34,7 +34,7 @@ exports.seed = async (knex: Knex) => {
   fakeRelations.push(await createRelation(100, 1));
 
   // create test org admin account
-  fakeRelations.push(await createRelation(101, 100));
+  fakeRelations.push(await createRelation(101, 1));
 
   await knex('accounts_roles').del();
   await knex('accounts_roles').insert(fakeRelations);

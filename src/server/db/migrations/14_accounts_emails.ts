@@ -12,8 +12,8 @@ exports.up = async (knex: Knex) => {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
-    // org where the user has the role
     table.string('email').notNullable().unique();
+    table.boolean('isPrimary').notNullable().defaultTo(false);
   });
 };
 

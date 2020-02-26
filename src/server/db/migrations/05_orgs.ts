@@ -1,11 +1,10 @@
 import Knex from 'knex';
 
 const categories = [
-  { type: 'Religious', slug: 'religion' },
-  { type: 'Community Center', slug: 'community-center' },
+  { type: 'Community', slug: 'community' },
   { type: 'Cooperative', slug: 'cooperative' },
   { type: 'Union', slug: 'union' },
-  { type: 'Political Organization', slug: 'political-organization' },
+  { type: 'Political', slug: 'political' },
   // { type: 'Caucus' },
   // { type: 'Working Group' },
 ];
@@ -58,7 +57,7 @@ exports.up = async (knex: Knex) => {
     // activist group, non-profit, union, cooperative, etc
     table.enum('category', categories.map(c => c.type))
       .notNullable()
-      .defaultTo('Political Organization')
+      .defaultTo('Political')
       .references('categories.type')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');

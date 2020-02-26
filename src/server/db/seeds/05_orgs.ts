@@ -6,17 +6,16 @@ import orgs from '../../../json/orgs.json';
 import {getRandomNum} from '../../../utils/getRandomNum';
 import {range} from '../../../utils/range';
 const categories = [
-  { type: 'Religious', slug: 'religion' },
-  { type: 'Community Center', slug: 'community-center' },
+  { type: 'Community', slug: 'community' },
   { type: 'Cooperative', slug: 'cooperative' },
   { type: 'Union', slug: 'union' },
-  { type: 'Political Organization', slug: 'political-organization' },
+  { type: 'Political', slug: 'political' },
 ];
 
 const createOrg = async (orgId: number) => {
   const org = orgs[orgId];
   const category = orgId === 0
-    ? 'Political Organization'
+    ? 'Political'
     : categories[getRandomNum(0, categories.length - 1)].type;
 
   return {
@@ -26,12 +25,12 @@ const createOrg = async (orgId: number) => {
     country: 'United States',
     countryId: 1,
     description: faker.lorem.paragraphs(),
-    facebook: 'yes',
+    facebook: 'https://facebook.com',
     handle: org.handle,
     name: org.name,
     region: org.region,
     regionId: org.regionId,
-    twitter: 'yes',
+    twitter: 'https://twitter.com',
     type: org.type,
     website: org.website || faker.internet.domainName(),
   };

@@ -2,34 +2,23 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
+import {orgKeys} from '../_constants';
 import {knex} from '../../db/connection';
 import {validateSchema} from '../../utils';
-import {orgKeys} from './_constants';
+import {getRoleMapsByUserId} from './_queries';
 import {deleteSchema, getSchema} from './_schema';
 
-export const orgsByUserId = new Router();
 const route = '/api/v1/orgsByUserId';
 const table = 'accounts_roles';
 const dataPath = 'state.locals.data';
+export const orgsByUserId = new Router();
 
 orgsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = _.get(ctx, dataPath, {});
-  await validateSchema(ctx, getSchema, query);
+  const query: tOrgsByUserIdQuery = _.get(ctx, dataPath, {});
+  await validateSchema<tOrgsByUserIdQuery>(ctx, getSchema, query);
 
-  let userOrgRels: tAccountRoleRelation[] = [];
-  try {
-    userOrgRels = await knex(table).where(query);
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
-
-  if (query.noPending) {
-    userOrgRels = userOrgRels.filter(accountRoleRel => {
-      return accountRoleRel.role !== 'pending';
-    });
-  }
-
-  const mappedIds = userOrgRels.map(idSet => idSet.orgId);
+  const userGroupRels = await getRoleMapsByUserId(ctx, query);
+  const mappedIds = userGroupRels.map(idSet => idSet.orgId);
 
   let orgs = [] as tOrg[];
   try {
@@ -47,7 +36,7 @@ orgsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
 // orgs can remove users, via the usersByOrg api, but in both cases
 // we check against the session instead of allowing the client to pass in any id
 orgsByUserId.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  const {orgId} = _.get(ctx, dataPath, {});
+  const {orgId}: tDeleteUserByOrgIdQuery = _.get(ctx, dataPath, {});
   const userId = _.get(ctx, 'state.user.id', 0);
   const query = {orgId, userId};
 

@@ -2,9 +2,9 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
+import {orgKeys} from '../_constants';
 import {knex} from '../../db/connection';
 import {validateSchema} from '../../utils';
-import {orgKeys} from './_constants';
 import {schema} from './_schema';
 
 export const org = new Router();

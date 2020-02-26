@@ -18,19 +18,21 @@ export const UserAdminComponent = memo((props: tProps) => {
   return (
     <div className="contain fx aiStart mT4">
       <aside className="c3 bgWhite br8 p3 mR3">
-        <h1 className="copyBlack fx aiCtr fs4 fw600 pB3 mB3 brdB1">
+        <div className="fx fs4 fw600 pB3 mB3 brdB1">
           <img
             alt=""
             className="bgGrey3 circ mR3"
             src="https://s3.amazonaws.com/uifaces/faces/twitter/sta1ex/128.jpg"
             width="70"
           />
-          <div>
-            <Link
-              to="/admin/events"
-              className="noUnderline mB2">
-              {profile.name || profile.username}
-            </Link>
+          <div className="lh1">
+            <h1>
+              <Link
+                to="/admin/events"
+                className="copyBlack fs4 fw600 noUnderline mB2">
+                {profile.name || profile.username}
+              </Link>
+            </h1>
             <div>
               <Link
                 to="/admin/account"
@@ -49,7 +51,7 @@ export const UserAdminComponent = memo((props: tProps) => {
               </Link>
             </div>
           </div>
-        </h1>
+        </div>
         {!orgsByUserIdThunk.isLoading
           && orgsByUserIdThunk.data.length > 0
           && (

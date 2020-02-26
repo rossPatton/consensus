@@ -1,13 +1,11 @@
-declare type tCategorySlug = 'community-center'
+declare type tCategorySlug = 'community'
   | 'cooperative'
-  | 'political-organization'
-  | 'religious'
+  | 'political'
   | 'union';
 
-declare type tCategory = 'Community Center'
+declare type tCategory = 'Community'
   | 'Cooperative'
-  | 'Political Organization'
-  | 'Religious'
+  | 'Political'
   | 'Union'
   | ''; // entering a category isn't required, just heavily encouraged
 

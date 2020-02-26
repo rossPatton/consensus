@@ -32,6 +32,8 @@ exports.up = async (knex: Knex) => {
     table.enum('role', ['admin', 'member', 'pending', 'facilitator'])
       .notNullable()
       .defaultTo('member');
+
+    table.timestamps(true, true);
   });
 };
 

@@ -14,7 +14,7 @@ export class OrgSignupContainer extends Component<tContainerProps, tState> {
     const location = qs.parse(props.location.search.split('?')[1]);
 
     this.state = {
-      category: 'Political Organization',
+      category: 'Political',
       city: location.city as string,
       cityId: parseInt(location.cityId as string, 10),
       country: location.country as string,

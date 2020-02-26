@@ -1,4 +1,3 @@
-// keys to return to client
 export const orgKeys = [
   'category',
   'city',
@@ -6,10 +5,13 @@ export const orgKeys = [
   'country',
   'countryId',
   'description',
+  'facebook',
   'handle',
   'id',
   'name',
   'region',
   'regionId',
+  'twitter',
   'type',
+  'website',
 ];

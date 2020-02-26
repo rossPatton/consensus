@@ -1,6 +1,6 @@
 import Koa from 'koa';
 
-import {orgKeys} from '../api/org/_constants';
+import {orgKeys} from '../api/_constants';
 import {knex} from '../db/connection';
 
 export const getOrgById = async (

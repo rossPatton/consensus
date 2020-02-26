@@ -21,6 +21,8 @@ exports.up = async (knex: Knex) => {
       .defaultTo('private');
 
     table.enum('value', ['yes', 'no', 'maybe']);
+
+    table.timestamps(true, true);
   });
 };
 

@@ -1,17 +1,15 @@
 export const categories: tCategoryObj[] = [
-  {display: 'Religious', slug: 'religious'},
-  {display: 'Community Center', slug: 'community-center'},
+  {display: 'Community', slug: 'community'},
   {display: 'Cooperative', slug: 'cooperative' },
   {display: 'Union', slug: 'union' },
-  {display: 'Political Organization', slug: 'political-organization' },
+  {display: 'Political', slug: 'political' },
 ];
 
 export const categoryMap: tCategoryMap = {
-  'religious': 'Religious',
-  'community-center': 'Community Center',
+  'community': 'Community',
   'cooperative': 'Cooperative',
   'union': 'Union',
-  'political-organization': 'Political Organization',
+  'political': 'Political',
 };
 
 export const roles: tRole[] = ['member', 'facilitator'];
