@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 
 import {PasswordInput} from '../../../../components';
+import {categories} from '../../../../constants';
 import {tComponentProps} from './_types';
 
 export const OrgSignupComponent = memo((props: tComponentProps) => (
@@ -117,14 +118,17 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
         <p className="fs5 copyBlack mB1">
           Tag your organization using an existing category. Not required but makes it easier for people to find your organization.
         </p>
-        <input
-          id="categoryInput"
-          className="row"
-          name="category"
-          onChange={ev => props.updateState('category', ev)}
-          placeholder="Your organization category here"
-          value={props.category}
-        />
+        <select
+          className="mB3 row"
+          defaultValue={props.category}
+          onBlur={ev => props.updateState('category', ev)}
+          onChange={ev => props.updateState('category', ev)}>
+          {categories.map(({display}) => (
+            <option key={display} value={display}>
+              {display}
+            </option>
+          ))}
+        </select>
       </label>
       <h2 className="ffLab fs5 mB1 lh1">
         Organization Description
@@ -162,8 +166,8 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           <option value="private">
             Private
           </option>
-          <option value="invite">
-            Invite only
+          <option value="hidden">
+            Hidden
           </option>
         </select>
       </label>
@@ -171,7 +175,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
         {/* @TODO maybe have a mixed option here? */}
         {props.type === 'public' && 'Public. Anyone can join, with no vetting process at all. Meetings are public, visible to anyone.'}
         {props.type === 'private' && 'Private. Anyone can join, but members must be approved by a facilitator or admin first. Meetings are visible only to members.'}
-        {props.type === 'invite' && 'Invite only. Members must be invited by the group owner or facilitator. Meetings are visible only to members. Group does not show in internal search results, and is hidden from search engines.'}
+        {props.type === 'hidden' && 'Hidden. Like private, but members must be invited by the group admin or co-organizer. Group does not show in internal search results, and is hidden from search engines.'}
       </div>
       {/* <h2 className="ffLab fs5 mB1 lh1">
         Event privacy defaults

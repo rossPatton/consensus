@@ -25,8 +25,8 @@ exports.up = async (knex: Knex) => {
     // group type determines the level of privacy and vetting for your group
     // public === anyone can join, no questions asked, no screening, everything public
     // private === anyone can join, but we require manual approval. everything private
-    // invite === invite only. private + org is hidden from google and internal search
-    table.enum('type', ['public', 'private', 'invite'])
+    // hidden === hidden only. private + org is hidden from google and internal search
+    table.enum('type', ['public', 'private', 'hidden'])
       .notNullable()
       .defaultTo('public');
 

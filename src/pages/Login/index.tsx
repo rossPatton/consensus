@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 
 import {Helmet} from '../../components';
-import {ErrorBoundary} from '../../containers';
+import {ErrorBoundary, GenericLoader} from '../../containers';
 import {login} from '../../redux';
 import {canonical, description, keywords, title} from './_constants';
 import {tContainerProps, tState, tStateUnion, tStore} from './_types';
@@ -38,7 +38,6 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     const {session} = this.props;
-    // to match how passwordInput expects it to be
     const error = _.get(session, 'error.message', '');
 
     return (
@@ -53,18 +52,25 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
             { property: 'og:description', content: description },
           ]}
         />
-        {session.data.isAuthenticated && (
-          <Redirect to="/admin/events" />
-        )}
-        {!session.data.isAuthenticated && (
-          <LoginComponent
-            {...this.state}
-            // if theres a login error, it'll show up here
-            error={error}
-            login={this.login}
-            updateState={this.updateState}
-          />
-        )}
+        <GenericLoader
+          isLoading={session.isLoading}
+          render={() => (
+            <>
+              {session.data.isAuthenticated && (
+                <Redirect to="/admin/events" />
+              )}
+              {!session.data.isAuthenticated && (
+                <LoginComponent
+                  {...this.state}
+                  // if theres a login error, it'll show up here
+                  error={error}
+                  login={this.login}
+                  updateState={this.updateState}
+                />
+              )}
+            </>
+          )}
+        />
       </ErrorBoundary>
     );
   }

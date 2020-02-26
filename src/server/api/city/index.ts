@@ -78,7 +78,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
       })
       // exclude invite-only orgs from results
       .whereNot({
-        type: 'invite',
+        type: 'hidden',
       })
       .orderBy('name');
   } catch (err) {

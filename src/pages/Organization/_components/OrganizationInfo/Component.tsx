@@ -17,7 +17,7 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
           <small className="fs6 fw600 white">
             {org.type === 'public' && 'Public Group'}
             {org.type === 'private' && 'Private Group'}
-            {org.type === 'invite' && 'Invite-Only Group'}
+            {org.type === 'hidden' && 'Hidden Group'}
           </small>
         )}
         <div

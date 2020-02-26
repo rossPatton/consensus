@@ -1,4 +1,5 @@
-export type tStateUnion = keyof tOrg;
+export type tState = tOrg & {email: string, password: string}
+export type tStateUnion = keyof tState;
 export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export type tStore = {
@@ -10,7 +11,7 @@ export type tContainerProps = {
   sessionThunk: tThunk<tSession>,
 };
 
-export type tComponentProps = tOrg & {
+export type tComponentProps = tState & {
   onSubmit: (ev: React.FormEvent<HTMLFormElement>) => void,
   updateState: (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => void,
 };

@@ -1,104 +1,136 @@
 import _ from 'lodash';
 import React, {memo} from 'react';
-import {Link} from 'react-router-dom';
 
+import {PasswordInput} from '../../../../../components';
+import {categories} from '../../../../../constants';
 import {tComponentProps} from './_types';
 
-export const ProfileComponent = memo((props: tComponentProps) => {
-  const {category: origCategory} = props;
-
-  return (
-    <>
-      <h1 className="fs2 mB3">Manage Your Organization</h1>
-      <form
-        id="form"
-        className="row"
-        onSubmit={props.onSubmit}>
-        <fieldset>
-          <div className="p4 br8 brdA1 mB3">
-            <h2 className="ffLab fs5 mB1 lh1">
-              Organization Name
-            </h2>
-            <div className="mB3 copyBlack">
-              <Link to={`/org/${props.id}`}>{props.name}</Link>
-            </div>
-            <h2 className="ffLab fs5 mB1 lh1">
-              Organization Category
-            </h2>
-            <input
-              className="mB3 row"
-              onChange={ev => props.updateState('category', ev)}
-              placeholder={origCategory}
-              value={props.category}
-            />
-            <h2 className="ffLab fs5 mB1 lh1">
-              Organization Description
-            </h2>
-            <textarea
-              rows={6}
-              spellCheck
-              className="mB3 row fs5"
-              placeholder="Organization Description Here"
-              value={props.description}
-              onChange={ev => props.updateState('description', ev)}
-            />
-            <h2 className="ffLab fs5 mB1 lh1">
-              Group Type
-            </h2>
-            <select
-              className="row"
-              value={props.type}
-              onBlur={ev => props.updateState('type', ev)}
-              onChange={ev => props.updateState('type', ev)}>
-              <option value="public">
-                Public
-              </option>
-              <option value="private">
-                Private
-              </option>
-              <option value="invite">
-                Invite only
-              </option>
-            </select>
-            <small className="dBl mB3 copyBlack">
-              This option only affects future membership approvals
-            </small>
-            <div>
-              {/* @TODO maybe have a mixed option here? */}
-              {props.type === 'public' &&
-                'Public. Anyone can join, with no vetting process at all. Meetings are public, visible to anyone.'}
-              {props.type === 'private' &&
-                'Private. Anyone can join, but members must be approved by a facilitator or admin first. Meetings are visible only to members.'}
-              {props.type === 'invite' &&
-                'Invite only. Members must be invited by the group owner or facilitator. Meetings are visible only to members. Group does not show in internal search results, and is hidden from search engines.'}
-            </div>
-            {/* <h2 className="ffLab fs5 mB1 lh1">
-              Event privacy defaults
-            </h2>
-            <select
-              className="row"
-              value={props.eventPrivacy}
-              onBlur={ev => props.updateState('eventPrivacy', ev)}
-              onChange={ev => props.updateState('eventPrivacy', ev)}>
-              <option value="manual">
-                Manual, event privacy can be changed per event
-              </option>
-              <option value="public">
-                Public, all events are public
-              </option>
-              <option value="private">
-                Private, all events are private
-              </option>
-            </select>
-            <small className="dBl copyBlack">
-              This option only affects future events
-  </small>*/}
-          </div>
-          <button className="p3 pL4 pR4 hvrBgGrey1 trans1">
-            Save Changes
-          </button>
-        </fieldset>
-      </form>
-    </>
-  );
-});
+export const ProfileComponent = memo((props: tComponentProps) => (
+  <form
+    id="form"
+    className="row"
+    onSubmit={props.onSubmit}>
+    <fieldset>
+      <legend>
+        <h1 className="fs3 mB3">
+          Edit your Profile
+        </h1>
+      </legend>
+      <h2 className="ffLab fs5 mB1 lh1">
+        Name
+      </h2>
+      <div className="mB4">
+        {props.name}
+      </div>
+      <h2 className="ffLab fs5 mB1 lh1">
+        Category
+      </h2>
+      <select
+        className="mB4 row"
+        defaultValue={props.category}
+        onBlur={ev => props.updateState('category', ev)}
+        onChange={ev => props.updateState('category', ev)}>
+        {categories.map(({display}) => (
+          <option key={display} value={display}>
+            {display}
+          </option>
+        ))}
+      </select>
+      <h2 className="ffLab fs5 mB1 lh1">
+        Description
+      </h2>
+      <textarea
+        rows={6}
+        spellCheck
+        className="mB4 row fs5"
+        placeholder="Organization Description Here"
+        value={props.description}
+        onChange={ev => props.updateState('description', ev)}
+      />
+      <h2 className="ffLab fs5 mB1 lh1">
+        Group Type
+      </h2>
+      <select
+        className="row mB1"
+        value={props.type}
+        onBlur={ev => props.updateState('type', ev)}
+        onChange={ev => props.updateState('type', ev)}>
+        <option value="public">
+          Public
+        </option>
+        <option value="private">
+          Private
+        </option>
+        <option value="hidden">
+          Hidden
+        </option>
+      </select>
+      <small className="dBl mB4 copyBlack">
+        This option only affects future membership approvals
+      </small>
+      <label className="row mB4" htmlFor="email">
+        <h2 className="ffLab fs5 mB1 lh1">
+          Email address
+        </h2>
+        <p className="fs5 copyBlack mB1">
+          Used for account verification, and so group members can contact you
+        </p>
+        <input
+          onChange={ev => props.updateState('email', ev)}
+          className="p3 row"
+          placeholder="Update your email here"
+          value={props.email}
+          name="email"
+        />
+      </label>
+      <label className="dBl mB4" htmlFor="website">
+        <h2 className="ffLab fs5 mB1 lh1">
+          Personal Website
+        </h2>
+        <input
+          onChange={ev => props.updateState('website', ev)}
+          className="p3 row"
+          placeholder="Update your website here"
+          value={props.website}
+          name="website"
+        />
+      </label>
+      <label className="dBl mB4" htmlFor="facebook">
+        <h2 className="ffLab fs5 mB1 lh1">
+          Facebook
+        </h2>
+        <input
+          className="p3 row"
+          name="facebook"
+          onChange={ev => props.updateState('facebook', ev)}
+          placeholder="Link your facebook profile here"
+          value={props.facebook}
+        />
+      </label>
+      <label className="dBl mB5" htmlFor="twitter">
+        <h2 className="ffLab fs5 mB1 lh1">
+          Twitter
+        </h2>
+        <input
+          className="p3 row"
+          name="twitter"
+          onChange={ev => props.updateState('twitter', ev)}
+          placeholder="Link your twitter here"
+          value={props.twitter}
+        />
+      </label>
+      <PasswordInput
+        id="pwInput"
+        title="Current Password"
+        password={props.password}
+        placeholder="Your current password"
+        onChange={ev => props.updateState('password', ev)}
+      />
+      <button
+        disabled={!props.password}
+        className="p3 pL4 pR4 hvrBgGrey1 trans1">
+        Save Changes
+      </button>
+    </fieldset>
+  </form>
+));

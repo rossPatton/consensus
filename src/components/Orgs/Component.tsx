@@ -11,7 +11,7 @@ export const OrgsComponent = memo((props: tComponentProps) => (
       && props.pendingOrgs.length > 0
       && (
         <li className="fw600 mB2 pB2 brdB1">
-            Current group memberships
+          Current group memberships
         </li>
       )}
     {props.orgs.map((org, i) => (
@@ -32,10 +32,10 @@ export const OrgsComponent = memo((props: tComponentProps) => (
         {props.pendingOrgs.map((pendingOrg, i) => (
           <Org
             {...props}
-            key={pendingOrg.id}
-            org={pendingOrg}
             index={i}
+            key={pendingOrg.id}
             leaveOrg={props.leaveOrg}
+            org={pendingOrg}
             setHover={props.setHover}
           />
         ))}

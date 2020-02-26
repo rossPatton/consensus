@@ -28,7 +28,7 @@
     "name": "Wehner, Grady and Turner",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Religious",
@@ -48,7 +48,7 @@
     "name": "Walter and Sons",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Community Center",
@@ -68,7 +68,7 @@
     "name": "Turcotte - Konopelski",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -88,7 +88,7 @@
     "name": "Brekke LLC",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Community Center",
@@ -198,7 +198,7 @@
     "name": "Upton, Kunde and Cronin",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Cooperative",
@@ -248,7 +248,7 @@
     "name": "VonRueden, Borer and Walker",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Union",
@@ -348,7 +348,7 @@
     "name": "Lockman LLC",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Cooperative",
@@ -388,7 +388,7 @@
     "name": "McCullough, Stracke and Kassulke",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Community Center",
@@ -398,7 +398,7 @@
     "name": "Ryan Inc",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Cooperative",
@@ -428,7 +428,7 @@
     "name": "Williamson, Ortiz and Koepp",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -448,7 +448,7 @@
     "name": "Kirlin - Koepp",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -458,7 +458,7 @@
     "name": "Hyatt, Mann and Reynolds",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -478,7 +478,7 @@
     "name": "Kuhlman - Kreiger",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -498,7 +498,7 @@
     "name": "Schumm and Sons",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -538,7 +538,7 @@
     "name": "Nader LLC",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -558,7 +558,7 @@
     "name": "Romaguera and Sons",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -598,7 +598,7 @@
     "name": "Jast Inc",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -628,7 +628,7 @@
     "name": "Bergnaum - Gerlach",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -668,7 +668,7 @@
     "name": "Braun Group",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -718,7 +718,7 @@
     "name": "Ziemann and Sons",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -728,7 +728,7 @@
     "name": "Flatley - Metz",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -758,7 +758,7 @@
     "name": "Farrell - Konopelski",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -778,7 +778,7 @@
     "name": "Grimes and Sons",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -798,7 +798,7 @@
     "name": "Marks - Quigley",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -818,7 +818,7 @@
     "name": "Collins - Leffler",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -888,7 +888,7 @@
     "name": "Beahan, Hessel and Krajcik",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -898,7 +898,7 @@
     "name": "Greenfelder Inc",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -918,7 +918,7 @@
     "name": "Hegmann, Lehner and Armstrong",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -928,7 +928,7 @@
     "name": "Sawayn and Sons",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -948,7 +948,7 @@
     "name": "Tremblay, Gerhold and Kunde",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",
@@ -988,7 +988,7 @@
     "name": "Veum, Ward and Turner",
     "region": "New York",
     "regionId": 37,
-    "type": "invite"
+    "type": "hidden"
   },
   {
     "category": "Political Organization",

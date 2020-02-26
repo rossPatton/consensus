@@ -46,7 +46,7 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
               { property: 'og:title', content: '' },
               { property: 'og:description', content: '' },
             ];
-            if (org.type === 'invite') {
+            if (org.type === 'hidden') {
               meta = [...meta, {
                 name: 'robots',
                 content: 'noindex',
@@ -62,7 +62,7 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
               role = 'admin';
             }
 
-            const isHidden = org.type === 'invite' && !role;
+            const isHidden = org.type === 'hidden' && !role;
 
             return isHidden
               ? (

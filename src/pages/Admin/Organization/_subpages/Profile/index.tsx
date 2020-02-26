@@ -5,15 +5,20 @@ import {connect} from 'react-redux';
 import {Helmet} from '../../../../../components';
 import {ErrorBoundary, GenericLoader} from '../../../../../containers';
 import {patchOrg} from '../../../../../redux';
-import {tContainerProps, tStateUnion, tStore} from './_types';
+import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 import {ProfileComponent} from './Component';
 
-class ProfileContainer extends PureComponent<tContainerProps, tOrg> {
+class ProfileContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
-    const org: tOrg = _.get(this.props, 'sessionThunk.data.profile', {});
+    const {created_at, updated_at, ...org}: tOrg =
+      _.get(this.props, 'sessionThunk.data.profile', {});
+    const email = _.get(props, 'sessionThunk.data.emails[0].email', '');
+
     this.state = {
       ...org,
+      email,
+      password: '',
     };
   }
 
@@ -32,7 +37,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tOrg> {
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
     this.setState({
       [stateKey]: ev.currentTarget.value,
-    } as Pick<tOrg, tStateUnion>);
+    } as Pick<tState, tStateUnion>);
   }
 
   render() {

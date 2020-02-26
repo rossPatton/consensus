@@ -15,7 +15,7 @@ const GroupAdminContainer = memo((props: tProps) => {
   const isMembers = section === 'memberships';
 
   return (
-    <div className="contain mT4 fx">
+    <div className="contain mT4 fx aiStart">
       <aside className="c3 bgWhite br8 p3 mR3">
         <div className="fx fs4 fw600 pB3 mB3 brdB1">
           <div>
@@ -53,44 +53,36 @@ const GroupAdminContainer = memo((props: tProps) => {
             </div>
           </div>
         </div>
-      </aside>
-      {/* <aside className="bgWhite br8 p3 mR5">
-        <h1>{props.session.profile.name}</h1>
-        <ul>
-          <li className="p1">
-            {!isAccount && (
-              <Link to="/admin/account">
-                Account
-              </Link>
-            )}
-            {isAccount && 'Account'}
+        <ul role="navigation">
+          <li className="fs4 fw600 mB2">
+            Admin Actions
           </li>
-          <li className="p1">
-            {isEvents && 'Events'}
-            {!isEvents && (
-              <Link to="/admin/events">
-                Events
-              </Link>
-            )}
+          <li>
+            <Link
+              to="/admin/events"
+              className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
+              <div className="bgGrey3 circ mR3 p3" />
+              Edit Meetings
+            </Link>
           </li>
-          <li className="p1">
-            {isProfile && 'Profile'}
-            {!isProfile && (
-              <Link to="/admin/profile">
-                Profile
-              </Link>
-            )}
+          <li>
+            <Link
+              to="/admin/memberships"
+              className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
+              <div className="bgGrey3 circ mR3 p3" />
+              Manage Members
+            </Link>
           </li>
-          <li className="p1">
-            {isMembers && 'Members'}
-            {!isMembers && (
-              <Link to="/admin/memberships">
-                Members
-              </Link>
-            )}
+          <li>
+            <Link
+              to="/admin/events"
+              className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
+              <div className="bgGrey3 circ mR3 p3" />
+              Plan Meeting
+            </Link>
           </li>
         </ul>
-      </aside> */}
+      </aside>
       <div className="bgWhite br8 col p3">
         {isAccount && <Account />}
         {isEvents && <Events match={props.match} />}

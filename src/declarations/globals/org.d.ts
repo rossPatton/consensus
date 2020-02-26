@@ -1,4 +1,4 @@
-declare type tPrivacyEnum = 'public' | 'private' | 'invite';
+declare type tPrivacyEnum = 'public' | 'private' | 'hidden';
 
 declare type tOrg = Readonly<{
    category: tCategory,

@@ -210,7 +210,7 @@ export const ProfileComponent = memo((props: tComponentProps) => (
       </div>
       <PasswordInput
         id="pwInput"
-        title="Current password"
+        title="Current Password"
         password={props.password}
         placeholder="Your current password"
         onChange={ev => props.updateState('password', ev)}

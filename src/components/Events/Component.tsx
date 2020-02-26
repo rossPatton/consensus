@@ -15,52 +15,21 @@ export const EventsComponent = memo((props: tComponentProps) => (
       'fx fxdRow taL': props.horizontal,
       'jcBetween': props.horizontal && props.events.length === 4,
     })}>
-    {props.events.map((ev: tEvent, i) => {
+    {props.events.map((ev, i) => {
       const isPastEvent = dayJS(ev.date).isBefore(dayJS());
 
       return (
         <li
           key={ev.id}
           className={cx({
-            'mB4': !props.horizontal,
+            'mB2': !props.horizontal,
             'col row': props.horizontal,
             'mR4': props.horizontal && i !== props.events.length - 1,
           })}>
-          {!isPastEvent && props.isEditable && (
-            <div
-              className={cx({
-                'mB2 fx aiCtr fs6': true,
-                hide: props.horizontal,
-              })}>
-              <div className="mR3 fx aiCtr">
-                <Link
-                  to={`/org/${ev.orgId}/planMeeting?${objToQueryString(ev)}`}
-                  className="bgWhite p1 pL2 pR2 hvrBgGrey1 trans1 fw600 br4 lh1 noUnderline brdA1">
-                  <span
-                    role="img"
-                    className="mR1"
-                    aria-label="Hand with Pen Emoji">
-                    ✍️
-                  </span>
-                  Edit this {ev.isDraft ? 'draft' : 'event'}
-                </Link>
-              </div>
-              <button
-                onClick={e => props.deleteEvent(e, ev.id)}
-                className="bgWhite hvrBgGrey1 trans1 fw600 fx aiCtr lh1 br4">
-                <span
-                  role="img"
-                  className="mR1"
-                  aria-label="Big X Emoji">
-                  ✖️
-                </span>
-                Delete this {ev.isDraft ? 'draft' : 'event'}
-              </button>
-            </div>
-          )}
           <div
             className={cx({
               'fx aiCtr': !props.horizontal,
+              'p3 hvrBgGrey1 br8': props.isEditable,
             })}>
             <div
               className={cx({
@@ -106,6 +75,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
               <h3
                 className={cx({
                   'fx aiCtr ttCap': true,
+                  mB1: props.isEditable,
                   fs4: props.horizontal,
                 })}>
                 <Link
@@ -138,6 +108,38 @@ export const EventsComponent = memo((props: tComponentProps) => (
                     {ev.orgName}
                   </Link>
                 )}
+              {!isPastEvent
+              && props.isEditable
+              && (
+                <div className="fx aiCtr mB1">
+                  <div className="bgGrey4 br4 fs7 lh1 mR2 p1 pL2 pR2 white">
+                    {ev.isDraft ? 'Draft' : 'Published'}
+                  </div>
+                  <div className="fx aiCtr mR1">
+                    <Link
+                      to={`/org/${ev.orgId}/planMeeting?${objToQueryString(ev)}`}
+                      className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2">
+                      <span
+                        role="img"
+                        aria-label="Hand with Pen Emoji">
+                        ✍️
+                      </span>
+                      Edit
+                    </Link>
+                  </div>
+                  <button
+                    onClick={e => props.deleteEvent(e, ev.id)}
+                    className="aiCtr fs7 fw600 fx hvrBgGrey1 lh1">
+                    <span
+                      role="img"
+                      className="mR1"
+                      aria-label="Big X Emoji">
+                      ✖️
+                    </span>
+                    Delete
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </li>

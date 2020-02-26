@@ -36,7 +36,7 @@ const createTestUserAccount = async () => {
   };
 };
 
-const createTestOrgAccount = async () => {
+const createTestGroupAccount = async () => {
   const sha = sha384('test');
   const saltedHash = await bcrypt.hash(sha, salt);
   const password = encrypt(saltedHash);
@@ -44,7 +44,7 @@ const createTestOrgAccount = async () => {
   return {
     isVerified: true,
     login: 'twcNYC',
-    orgId: 100,
+    orgId: 1,
     password,
   };
 };
@@ -57,7 +57,7 @@ exports.seed = async (knex: Knex) => {
   }
 
   fakeAccounts.push(await createTestUserAccount());
-  fakeAccounts.push(await createTestOrgAccount());
+  fakeAccounts.push(await createTestGroupAccount());
 
   await knex('accounts').del();
   await knex('accounts').insert(fakeAccounts);

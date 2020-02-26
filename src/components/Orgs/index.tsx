@@ -46,7 +46,7 @@ class OrgsContainer extends PureComponent<tContainerProps, tState> {
     this.setState({
       groupType,
       hoverIndex,
-    })
+    });
 
   render() {
     const {

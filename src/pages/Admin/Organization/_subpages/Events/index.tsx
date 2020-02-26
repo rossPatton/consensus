@@ -60,6 +60,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
                       {...searchProps}
                       events={searchProps.items}
                       match={this.props.match}
+                      onPublishedFilterChange={publishedProps.onPublishedFilterChange}
                     />
                   )}
                 />

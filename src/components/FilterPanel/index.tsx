@@ -31,10 +31,27 @@ const FilterPanel = memo((props: tProps) => (
     {props.onCategoryChange && (
       <select onBlur={props.onCategoryChange} onChange={props.onCategoryChange}>
         <option value="">
-          Filter by Category
+          Show all categories
         </option>
         {categories.map(({display}) => (
           <option key={display} value={display}>
+            {display}
+          </option>
+        ))}
+      </select>
+    )}
+    {props.onPublishedFilterChange && (
+      <select
+        onBlur={props.onPublishedFilterChange}
+        onChange={props.onPublishedFilterChange}>
+        <option value="n/a">
+          Show all meetings
+        </option>
+        {[
+          {display: 'Only Show Drafts', value: 'draft'},
+          {display: 'Only Show Published', value: 'published'},
+        ].map(({display, value}) => (
+          <option key={display} value={value}>
             {display}
           </option>
         ))}
@@ -45,10 +62,13 @@ const FilterPanel = memo((props: tProps) => (
         onBlur={props.onRoleFilterChange}
         onChange={props.onRoleFilterChange}>
         <option key="n/a" value="n/a">
-          Filter by User Role
+          Show all users
         </option>
         {roles.map(role => (
-          <option key={role} value={role}>
+          <option
+            className="ttCap"
+            key={role}
+            value={role}>
             {role}
           </option>
         ))}
