@@ -20,7 +20,7 @@ export const orgsBySearchReducer =
 
     case GET_FAILURE:
       return {
-        ...state,
+        data: [] as tOrg[],
         error: action.payload,
         isLoading: false,
       };

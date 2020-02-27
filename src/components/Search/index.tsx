@@ -5,8 +5,10 @@ import {withRouter} from 'react-router';
 
 import {getOrgsBySearch} from '../../redux';
 
+// mini search bar located in the header, or maybe homepage
 class SearchContainer extends React.PureComponent<any, {value: string}> {
   state = {
+    key: 'name',
     value: '',
   };
 
@@ -17,8 +19,8 @@ class SearchContainer extends React.PureComponent<any, {value: string}> {
 
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    this.props.getSearchResults({value: this.state.value})
-      .then(this.props.history.push(`/search?value=${this.state.value}`))
+    this.props.getSearchResults(this.state)
+      .then(this.props.history.push('/search'))
       .catch(loglevel.error);
   }
 

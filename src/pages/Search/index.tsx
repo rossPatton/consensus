@@ -8,27 +8,7 @@ import {ErrorBoundary, GenericLoader} from '../../containers';
 import {getOrgsBySearch} from '../../redux';
 import {tProps, tStore} from './_types';
 
-const searchPath = 'location.search';
-
-class SearchContainer extends React.Component<tProps> {
-  constructor(props: tProps) {
-    super(props);
-    const search = _.get(props, searchPath, '');
-    if (search) {
-      const queryObj = qs.parse(search);
-      props.getSearchResults(queryObj);
-    }
-  }
-
-  componentDidUpdate(nextProps: tProps) {
-    const prevSearch = _.get(this.props, searchPath, '');
-    const newSearch = _.get(nextProps, searchPath, '');
-    if (prevSearch !== newSearch) {
-      const queryObj = qs.parse(newSearch);
-      this.props.getSearchResults(queryObj);
-    }
-  }
-
+class SearchContainer extends React.PureComponent<tProps> {
   render() {
     const {isLoading, orgsBySearch} = this.props;
 

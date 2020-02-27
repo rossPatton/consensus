@@ -21,9 +21,9 @@ search.get(route, async (ctx: Koa.ParameterizedContext) => {
     // get all columns, for rows in orgs whose name is similar to search term
     // then sort desc by that similarity/sml (closest first)
     orgsLike = await knex.raw(`
-      SELECT *, similarity(name, '${query.value}') AS sml
+      SELECT *, similarity(${query.key}, '${query.value}') AS sml
       FROM ${table}
-      WHERE name % '${query.value}'
+      WHERE ${query.key} % '${query.value}'
       ORDER BY sml DESC;
     `);
   } catch (err) {
