@@ -4,7 +4,7 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {ExternalLink, PlaceholderImage /* RSVP*/} from '../../components';
+import {ExternalLink, PlaceholderImage, RSVP} from '../../components';
 import {objToQueryString} from '../../utils';
 import {tComponentProps} from './_types';
 
@@ -85,16 +85,18 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   {ev.title}
                 </Link>
               </h3>
-              {/* {props.showRSVPs && (
+              {props.showRSVPs &&
+                !props.isEditable &&
+                !ev.isDraft && (
                 <div
                   className={cx({
                     'fx aiCtr fs6 lh1': true,
                     hide: props.horizontal,
                     o5: isPastEvent,
                   })}>
-                  {!ev.isDraft && <RSVP event={ev} />}
+                  <RSVP event={ev} />
                 </div>
-              )} */}
+              )}
               {props.showOrgName
                 && (
                   <Link

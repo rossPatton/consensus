@@ -75,7 +75,6 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    if (!this.props.session.isAuthenticated) return null;
     if (this.props.session.type === 'org') return null;
 
     return (

@@ -34,13 +34,5 @@ export const EventsComponent = memo((props: tComponentProps) => (
           />
         </>
       )}
-    {/* {!props.hideMeetings && (
-      <Events
-        showRSVPs
-        events={props.events}
-        sessionRole={props.role}
-        type={props.type}
-      />
-    )} */}
   </>
 ));
