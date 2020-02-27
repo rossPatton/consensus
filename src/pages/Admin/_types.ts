@@ -1,3 +1,4 @@
+import {Location} from 'history';
 import {match} from 'react-router';
 
 export type tStore = {
@@ -7,11 +8,17 @@ export type tStore = {
 export type tAdminSections = match & {
   params: {
     page?: string,
-    section: 'account' | 'memberships' | 'profile' | 'events',
+    section: 'account'
+      | 'events'
+      | 'memberships'
+      | 'pendingApprovals'
+      | 'planMeeting'
+      | 'profile',
   }
 };
 
 export type tProps = {
+  location: Location,
   match: tAdminSections,
   sessionThunk: tThunk<tSession>,
 };

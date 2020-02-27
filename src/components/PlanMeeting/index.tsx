@@ -1,13 +1,15 @@
 import dayJS from 'dayjs';
+import _ from 'lodash';
 import loglevel from 'loglevel';
 import qs from 'query-string';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 
-import {Helmet} from '../../../../components';
-import {postEvent} from '../../../../redux';
-import {parseTimeString} from '../../../../utils';
+import {Helmet} from '..';
+import {ErrorBoundary} from '../../containers';
+import {postEvent} from '../../redux';
+import {parseTimeString} from '../../utils';
 import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 import {PlanMeetingComponent} from './Component';
 
@@ -112,7 +114,9 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     const {session} = this.props;
 
     return (
-      <>
+      <ErrorBoundary
+        isSubPage
+        status={_.get(session, 'error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -130,11 +134,10 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
             {...this.state}
             onSubmit={this.onSubmit}
             saveAsDraft={this.saveAsDraft}
-            // setImage={this.setImage}
             updateState={this.updateState}
           />
         )}
-      </>
+      </ErrorBoundary>
     );
   }
 }

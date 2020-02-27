@@ -15,3 +15,16 @@ export const orgKeys = [
   'type',
   'website',
 ];
+
+export const userKeys = [
+  'bio',
+  'city',
+  'id',
+  'language',
+  'name',
+  'phone',
+  'privateEmail',
+  'privateMemberships',
+  'privateRSVP',
+  'username',
+];

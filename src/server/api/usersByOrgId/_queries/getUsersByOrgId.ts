@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import _ from 'lodash';
 
-import {userKeys} from '../_constants';
+import {userKeys} from '../../_constants';
 import {knex} from '../../../db/connection';
 
 export const getUsersByOrgId = async (

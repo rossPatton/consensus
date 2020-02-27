@@ -1,7 +1,8 @@
 import React from 'react';
 
+import {PlanMeeting} from '../../components';
 import {OrganizationInfo, OrganizationTabs} from './_components';
-import {Meetings, Members, PlanMeeting} from './_subpages';
+import {Meetings, Members} from './_subpages';
 import {tComponentProps} from './_types';
 
 export const OrganizationComponent = (props: tComponentProps) => (

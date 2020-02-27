@@ -1,5 +1,6 @@
 // get all members of an org by id
 declare type tUsersByOrgIdQuery = tBaseQuery & {
+  noPending?: 'true' | 'false',
   orgId: string | number,
   userId?: string | number,
   role?: tRole,

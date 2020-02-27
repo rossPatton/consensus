@@ -1,18 +1,22 @@
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router';
 import {Link} from 'react-router-dom';
 
-// import {PlaceholderImage} from '../../../components';
-import {Account, Events, Members, Profile} from './_subpages';
+import {Account, Meetings, Members, PlanMeeting, Profile} from './_subpages';
 import {tProps} from './_types';
 
 const GroupAdminContainer = memo((props: tProps) => {
-  const {section} = props.match.params;
+  const {match, session} = props;
+  const {section} = match.params;
   const isAccount = section === 'account';
   const isEvents = section === 'events';
   const isProfile = section === 'profile';
-  const isMembers = section === 'memberships';
+  const isMembers = section === 'memberships' || section === 'pendingApprovals';
+  const isMeetingForm = section === 'planMeeting';
+
+  if (!session.isAuthenticated) return <Redirect to="" />;
 
   return (
     <div className="contain mT4 fx aiStart">
@@ -62,7 +66,7 @@ const GroupAdminContainer = memo((props: tProps) => {
               to="/admin/events"
               className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
               <div className="bgGrey3 circ mR3 p3" />
-              Edit Meetings
+              Edit Meetings & Drafts
             </Link>
           </li>
           <li>
@@ -75,7 +79,25 @@ const GroupAdminContainer = memo((props: tProps) => {
           </li>
           <li>
             <Link
-              to="/admin/events"
+              to="/admin/pendingApprovals"
+              className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
+              <div className="bgGrey3 circ mR3 p3" />
+              Approve Pending Members
+            </Link>
+          </li>
+          {session.profile.type === 'private' && (
+            <li>
+              <Link
+                to="/admin/pendingApprovals"
+                className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
+                <div className="bgGrey3 circ mR3 p3" />
+              Approve Pending Members
+              </Link>
+            </li>
+          )}
+          <li>
+            <Link
+              to="/admin/planMeeting"
               className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
               <div className="bgGrey3 circ mR3 p3" />
               Plan Meeting
@@ -85,15 +107,21 @@ const GroupAdminContainer = memo((props: tProps) => {
       </aside>
       <div className="bgWhite br8 col p3">
         {isAccount && <Account />}
-        {isEvents && <Events match={props.match} />}
+        {isEvents && <Meetings match={props.match} />}
         {isProfile && <Profile />}
         {isMembers && <Members match={props.match} />}
+        {isMeetingForm && (
+          <PlanMeeting
+            org={props.session.profile as tOrg}
+            router={props.location}
+          />
+        )}
       </div>
     </div>
   );
 });
 
-const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
+const mapStateToProps = (store: {session: tThunk<tSession<tOrg>>}) => ({
   session: store.session.data,
 });
 

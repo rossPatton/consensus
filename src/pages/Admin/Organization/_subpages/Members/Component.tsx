@@ -6,13 +6,15 @@ import {tComponentProps} from './_types';
 
 export const MembersComponent = memo((props: tComponentProps) => (
   <>
-    <h1 className="fs3">
-      Manage Members
-    </h1>
-    <h2 className="fs4 mB3">
-      {props.userTotal} members
-    </h2>
+    <div className="fx aiCtr">
+      <h1 className="fs3 mB2">
+        {props.section === 'memberships'
+          ? `Manage Membership (${props.userTotal} members)`
+          : `${props.userTotal} Pending Approvals`}
+      </h1>
+    </div>
     <FilterPanel
+      className="bgWhite br8 fs6 fw600 fx aiCtr mB3"
       onRoleFilterChange={props.onRoleFilterChange}
       onSearchChange={props.onSearchChange}
     />

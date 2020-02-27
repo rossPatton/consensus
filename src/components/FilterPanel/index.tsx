@@ -14,7 +14,7 @@ const FilterPanel = memo((props: tProps) => (
         id="searchFilter"
         className="bgGrey1 row"
         onChange={props.onSearchChange}
-        placeholder={props.placeholder || 'Filter the results below'}
+        placeholder={props.placeholder || 'Filter all results'}
       />
     </label>
     {props.filterOptions && (
@@ -62,7 +62,7 @@ const FilterPanel = memo((props: tProps) => (
         onBlur={props.onRoleFilterChange}
         onChange={props.onRoleFilterChange}>
         <option key="n/a" value="n/a">
-          Show all users
+          Show all members
         </option>
         {roles.map(role => (
           <option

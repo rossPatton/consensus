@@ -32,6 +32,10 @@ export const PlaceholderImage = loadable(() =>
   import(/* webpackChunkName: "PlaceholderImage" */'./PlaceholderImage'),
 );
 
+export const PlanMeeting = loadable(() =>
+  import(/* webpackChunkName: "PlanMeeting" */'./PlanMeeting'),
+);
+
 export const PrivateRoute = loadable(() =>
   import(/* webpackChunkName: "PrivateRoute" */'./PrivateRoute'),
 );

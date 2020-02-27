@@ -37,7 +37,12 @@ const AdminContainer = (props: tProps) => {
 
           return (
             <>
-              {isGroupAdmin && <GroupAdmin match={match} />}
+              {isGroupAdmin && (
+                <GroupAdmin
+                  location={props.location}
+                  match={match}
+                />
+              )}
               {isUserAdmin && <UserAdmin match={match} />}
             </>
           );

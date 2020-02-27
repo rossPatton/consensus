@@ -132,7 +132,6 @@ export const EventsComponent = memo((props: tComponentProps) => (
                     className="aiCtr fs7 fw600 fx hvrBgGrey1 lh1">
                     <span
                       role="img"
-                      className="mR1"
                       aria-label="Big X Emoji">
                       ✖️
                     </span>

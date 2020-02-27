@@ -11,9 +11,9 @@ import {
 } from '../../../../../containers';
 import {getEventsByOrgId} from '../../../../../redux';
 import {tContainerProps, tStore} from './_types';
-import {EventsComponent} from './Component';
+import {MeetingsComponent} from './Component';
 
-class EventsContainer extends PureComponent<tContainerProps> {
+class MeetingsContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
 
@@ -55,7 +55,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
                 <SearchFilter
                   items={publishedProps.items}
                   render={searchProps => (
-                    <EventsComponent
+                    <MeetingsComponent
                       {...publishedProps}
                       {...searchProps}
                       events={searchProps.items}
@@ -83,9 +83,9 @@ const mapDispatchToProps = (dispatch: Function) => ({
     dispatch(getEventsByOrgId(query)),
 });
 
-const Events = connect(
+const Meetings = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(EventsContainer);
+)(MeetingsContainer);
 
-export default Events;
+export default Meetings;

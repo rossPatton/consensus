@@ -17,7 +17,7 @@ const Users = memo((props: tProps) => {
 
   return (
     <Paginate
-      count={4}
+      count={10}
       items={users}
       render={(usersToRender: tUser[]) => (
         <UsersComponent

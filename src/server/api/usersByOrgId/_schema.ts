@@ -5,6 +5,7 @@ const baseSchema = Joi.object().keys({
 });
 
 export const getSchema = baseSchema.keys({
+  noPending: Joi.bool(),
   orgId: Joi.number().integer(),
 });
 

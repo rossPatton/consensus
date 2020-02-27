@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet} from '../../../../../components';
@@ -14,10 +14,11 @@ import {MembersComponent} from './Component';
 
 const idPath = 'sessionThunk.data.profile.id';
 
-class MembersContainer extends Component<tContainerProps> {
+class MembersContainer extends PureComponent<tContainerProps> {
   constructor (props: tContainerProps) {
     super(props);
     const orgId = _.get(props, idPath, null);
+
     if (orgId) {
       props.getUsersByOrgIdDispatch({orgId});
     }
@@ -41,7 +42,7 @@ class MembersContainer extends Component<tContainerProps> {
   }
 
   render() {
-    const {usersThunk} = this.props;
+    const {match, usersThunk} = this.props;
 
     return (
       <ErrorBoundary status={_.get(usersThunk, 'error.status', 200)}>
@@ -64,17 +65,24 @@ class MembersContainer extends Component<tContainerProps> {
                 <SearchFilter
                   searchKey="username"
                   items={roleProps.items}
-                  render={searchProps => (
-                    <MembersComponent
-                      {...roleProps}
-                      {...searchProps}
-                      removeUser={this.removeUser}
-                      match={this.props.match}
-                      setUserRole={this.setUserRole}
-                      users={searchProps.items}
-                      userTotal={usersThunk.data.length}
-                    />
-                  )}
+                  render={searchProps => {
+                    const {section} = match.params;
+                    const users = section === 'memberships'
+                      ? searchProps.items.filter(user => user.role !== 'pending')
+                      : searchProps.items.filter(user => user.role === 'pending');
+
+                    return (
+                      <MembersComponent
+                        {...roleProps}
+                        {...searchProps}
+                        removeUser={this.removeUser}
+                        section={section}
+                        setUserRole={this.setUserRole}
+                        users={users}
+                        userTotal={users.length}
+                      />
+                    );
+                  }}
                 />
               )}
             />
