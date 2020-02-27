@@ -11,7 +11,7 @@ const GroupAdminContainer = memo((props: tProps) => {
   const {match, session} = props;
   const {section} = match.params;
   const isAccount = section === 'account';
-  const isEvents = section === 'events';
+  const isMeetings = section === 'events';
   const isProfile = section === 'profile';
   const isMembers = section === 'memberships' || section === 'pendingApprovals';
   const isMeetingForm = section === 'planMeeting';
@@ -21,7 +21,7 @@ const GroupAdminContainer = memo((props: tProps) => {
   return (
     <div className="contain mT4 fx aiStart">
       <aside className="c3 bgWhite br8 p3 mR3">
-        <div className="fx fs4 fw600 pB3 mB3 brdB1">
+        <div className="fx aiCtr fw600 pB3 mB3 brdB1">
           <div>
             <img
               alt=""
@@ -31,28 +31,39 @@ const GroupAdminContainer = memo((props: tProps) => {
             />
           </div>
           <div className="lh1">
-            <h1>
+            {props.session.isVerified && (
+              <div className="fx aiCtr mB1 fs7">
+                <span className="mR1">✔</span>
+                Verified Account
+              </div>
+            )}
+            {!props.session.isVerified && (
+              <div className="fx aiCtr mB1 fs7">
+                <span
+                  role="img"
+                  aria-label="Big X Emoji">
+                  ✖️
+                </span>
+                Account is not yet verified
+              </div>
+            )}
+            <h1 className="fs4">
               <Link
-                to="/admin/events"
-                className="fs4 fw600 noUnderline mB2">
+                className="noUnderline"
+                to={`/org/${props.session.profile.id}`}>
                 {props.session.profile.name}
               </Link>
             </h1>
             <div>
               <Link
                 to="/admin/account"
-                className="mR2 fs7 fw600">
+                className="mR2 fs7">
                 Edit account
               </Link>
               <Link
                 to="/admin/profile"
-                className="mR2 fs7 fw600">
+                className="mR2 fs7">
                 Edit profile
-              </Link>
-              <Link
-                to={`/org/${props.session.profile.id}`}
-                className="fs7 fw600">
-                View Group Page
               </Link>
             </div>
           </div>
@@ -61,53 +72,49 @@ const GroupAdminContainer = memo((props: tProps) => {
           <li className="fs4 fw600 mB2">
             Admin Actions
           </li>
-          <li>
-            <Link
-              to="/admin/events"
-              className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
-              <div className="bgGrey3 circ mR3 p3" />
-              Edit Meetings & Drafts
-            </Link>
+          <li className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
+            <div className="bgGrey3 circ mR3 p3" />
+            {isMeetings && 'Edit Meetings & Drafts'}
+            {!isMeetings && (
+              <Link to="/admin/events">
+                Edit Meetings & Drafts
+              </Link>
+            )}
           </li>
-          <li>
-            <Link
-              to="/admin/memberships"
-              className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
-              <div className="bgGrey3 circ mR3 p3" />
-              Manage Members
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/admin/pendingApprovals"
-              className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
-              <div className="bgGrey3 circ mR3 p3" />
-              Approve Pending Members
-            </Link>
+          <li className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
+            <div className="bgGrey3 circ mR3 p3" />
+            {section === 'memberships' && 'Manage Members'}
+            {section !== 'memberships' && (
+              <Link to="/admin/memberships">
+                Manage Members
+              </Link>
+            )}
           </li>
           {session.profile.type === 'private' && (
-            <li>
-              <Link
-                to="/admin/pendingApprovals"
-                className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
-                <div className="bgGrey3 circ mR3 p3" />
-              Approve Pending Members
-              </Link>
+            <li className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
+              <div className="bgGrey3 circ mR3 p3" />
+              {section === 'pendingApprovals' && 'Approve Pending Members'}
+              {section !== 'pendingApprovals' && (
+                <Link to="/admin/pendingApprovals">
+                  Approve Pending Members
+                </Link>
+              )}
             </li>
           )}
-          <li>
-            <Link
-              to="/admin/planMeeting"
-              className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
-              <div className="bgGrey3 circ mR3 p3" />
-              Plan Meeting
-            </Link>
+          <li className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
+            <div className="bgGrey3 circ mR3 p3" />
+            {isMeetingForm && 'Plan Meeting'}
+            {!isMeetingForm && (
+              <Link to="/admin/planMeeting">
+                Plan Meeting
+              </Link>
+            )}
           </li>
         </ul>
       </aside>
       <div className="bgWhite br8 col p3">
         {isAccount && <Account />}
-        {isEvents && <Meetings match={props.match} />}
+        {isMeetings && <Meetings match={props.match} />}
         {isProfile && <Profile />}
         {isMembers && <Members match={props.match} />}
         {isMeetingForm && (
@@ -125,7 +132,4 @@ const mapStateToProps = (store: {session: tThunk<tSession<tOrg>>}) => ({
   session: store.session.data,
 });
 
-export const GroupAdmin = connect(
-  mapStateToProps,
-  null,
-)(GroupAdminContainer);
+export const GroupAdmin = connect(mapStateToProps, null)(GroupAdminContainer);

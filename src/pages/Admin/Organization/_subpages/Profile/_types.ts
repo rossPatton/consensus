@@ -7,6 +7,7 @@ export type tStore = {
 }
 
 export type tContainerProps = {
+  loginDispatch: (query: tLoginQuery) => tThunkPayload,
   patchOrgDispatch: (query: tOrgQuery) => tThunkPayload<tOrg>,
   sessionThunk: tThunk<tSession>,
 };

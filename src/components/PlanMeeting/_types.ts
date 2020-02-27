@@ -16,13 +16,14 @@ export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaEleme
 export type tContainerProps = {
   events: tEvent[],
   org: tOrg,
-  postEvent: (query: tUpsertEventQuery) => tThunkPayload<tEvent>,
+  patchEventDispatch: (query: tUpsertEventQuery) => tThunkPayload<tEvent>,
+  postEventDispatch: (query: tUpsertEventQuery) => tThunkPayload<tEvent>,
   router: Location,
   session: tSession,
 };
 
 export type tComponentProps = tContainerProps & tState & {
-  onSubmit: (ev: React.MouseEvent<HTMLButtonElement>) => void,
-  saveAsDraft: (ev: React.MouseEvent<HTMLButtonElement>) => void,
+  onSubmit: () => void,
+  saveAsDraft: () => void,
   updateState: (stateKey: tStateUnion, value: any) => void,
 };

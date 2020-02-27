@@ -1,10 +1,19 @@
 import Knex from 'knex';
 
+const categories = ['Community', 'Cooperative', 'Union', 'Political'];
+
 exports.up = async (knex: Knex) => {
   await knex.schema.createTable('events', table => {
     table.increments().unsigned().primary();
 
     // columns below are added automatically based on group and group type
+    table
+      .enum('category', categories)
+      .notNullable()
+      .references('categories.type')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+
     table.integer('orgId')
       .notNullable()
       .references('orgs.id')

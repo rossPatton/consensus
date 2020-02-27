@@ -7,6 +7,7 @@ export const patchEvent = (query: tUpsertEventQuery) => {
     return api({
       dispatch,
       failure,
+      method: 'PATCH',
       query,
       path,
       success,

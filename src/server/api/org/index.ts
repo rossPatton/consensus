@@ -33,7 +33,7 @@ org.get(route, async (ctx: Koa.ParameterizedContext) => {
 org.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...newOrg} = _.get(ctx, dataPath, {});
 
-  let updatedOrg = {} as tOrg;
+  let updatedOrg = [] as tOrg[];
   try {
     updatedOrg = await knex(table)
       .limit(1)
@@ -44,7 +44,7 @@ org.patch(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  ctx.body = updatedOrg;
+  ctx.body = updatedOrg[0];
 });
 
 org.post(route, async (ctx: Koa.ParameterizedContext) => {

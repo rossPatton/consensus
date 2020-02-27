@@ -15,6 +15,7 @@ class EventContainer extends PureComponent<tContainerProps> {
     super(props);
     this.dispatch();
     if (!props.session.isAuthenticated) return;
+    if (props.session.type === 'org') return;
     if (!props.rsvpsThunk.fetched) props.getRsvpsDispatch();
     if (!props.rolesThunk.fetched) props.getRolesDispatch();
   }

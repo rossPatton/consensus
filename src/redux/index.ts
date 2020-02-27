@@ -7,10 +7,14 @@ export { getCity } from './city';
 export { getCountry } from './country';
 export { getRegion } from './region';
 
-// event(s) related thunks
+// event(s) related actions.thunks
 export { getEvent, patchEvent, postEvent } from './event';
 export { getEventsByLocation } from './eventsByLocation';
-export { deleteEvent, getEventsByOrgId } from './eventsByOrgId';
+export {
+  deleteEvent,
+  getEventsByOrgId,
+  getEventsByOrgIdSuccess,
+} from './eventsByOrgId';
 export { getEventsByUserId } from './eventsByUserId';
 
 // org/group related actions/thunks

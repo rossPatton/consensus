@@ -112,12 +112,14 @@ export const EventsComponent = memo((props: tComponentProps) => (
               && props.isEditable
               && (
                 <div className="fx aiCtr mB1">
-                  <div className="bgGrey4 br4 fs7 lh1 mR2 p1 pL2 pR2 white">
+                  <div className="bgGrey4 br4 fs7 lh1 mR1 p1 pL2 pR2 white">
                     {ev.isDraft ? 'Draft' : 'Published'}
                   </div>
                   <div className="fx aiCtr mR1">
                     <Link
-                      to={`/org/${ev.orgId}/planMeeting?${objToQueryString(ev)}`}
+                      to={props.sessionRole === 'admin'
+                        ? `/admin/planMeeting?${objToQueryString(ev)}`
+                        : `/org/${ev.orgId}/planMeeting?${objToQueryString(ev)}`}
                       className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2">
                       <span
                         role="img"

@@ -5,28 +5,60 @@ import _ from 'lodash';
 import {knex} from '../../db/connection';
 import {validateSchema} from '../../utils';
 import {getEventById} from './_queries';
-import {getSchema} from './_schema';
-export const event = new Router();
+import {getSchema, upsertSchema} from './_schema';
+
+const dataPath = 'state.locals.data';
 const route = '/api/v1/event';
+export const event = new Router();
 
 event.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tIdQuery = _.get(ctx, 'state.locals.data', {});
+  const query: tIdQuery = _.get(ctx, dataPath, {});
   await validateSchema<tIdQuery>(ctx, getSchema, query);
   ctx.body = await getEventById(ctx, query);
 });
 
-// create a new event
-// route example: admin event creation form
-event.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const data = _.get(ctx, 'state.locals.data', {});
-  const {isFormSubmit, ...newEvent} = data;
+event.patch(route, async (ctx: Koa.ParameterizedContext) => {
+  const query = _.get(ctx, dataPath, {});
+  await validateSchema<Partial<tEvent>>(ctx, upsertSchema, query);
+  const {id, isFormSubmit, ...patch} = query;
 
-  let eventQuery = [] as tEvent[];
+  let patchedEvent = [] as tEvent[];
   try {
-    eventQuery = await knex('events').insert(newEvent).returning('*');
+    patchedEvent = await knex('events')
+      .limit(1)
+      .where({id})
+      .update(patch)
+      .returning('*');
   } catch (err) {
     ctx.throw(400, err);
   }
 
-  ctx.body = eventQuery[0];
+  ctx.body = patchedEvent[0];
+});
+
+// @TODO implement upsert, ie make it work for both patch and post
+event.post(route, async (ctx: Koa.ParameterizedContext) => {
+  const query = _.get(ctx, dataPath, {});
+  await validateSchema<Partial<tEvent>>(ctx, upsertSchema, query);
+  const {id, isFormSubmit, ...event} = query;
+
+  let newEvent = [] as tEvent[];
+  try {
+    if (id) {
+      newEvent = await knex('events')
+        .limit(1)
+        .where({id})
+        .update(event)
+        .returning('*');
+    } else {
+      newEvent = await knex('events')
+        .insert(event)
+        .limit(1)
+        .returning('*');
+    }
+  } catch (err) {
+    ctx.throw(400, err);
+  }
+
+  ctx.body = newEvent[0];
 });

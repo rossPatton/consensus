@@ -8,14 +8,17 @@ import { Redirect } from 'react-router';
 
 import {Helmet} from '..';
 import {ErrorBoundary} from '../../containers';
-import {postEvent} from '../../redux';
+import {getEventsByOrgIdSuccess, patchEvent, postEvent} from '../../redux';
 import {parseTimeString} from '../../utils';
 import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 import {PlanMeetingComponent} from './Component';
 
+// @TODO this is a sub-page of a couple routes, should this be in /components???
 class PlanMeetingContainer extends Component<tContainerProps, tState> {
   state = {
     category: this.props.org.category,
+    // city: this.props.org.city,
+    cityId: this.props.org.cityId,
     date: dayJS().toISOString(),
     description: '',
     duration: 2,
@@ -40,7 +43,9 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
 
     this.state = {
       category: draft.category as tCategory,
-      // convert UTC date with tz to local format for html5 date/time
+      // city: draft.city as string,
+      cityId: parseInt(draft.cityId as string, 10),
+      // convert UTC date with tz to local format for html5 date/time picker
       date: dayJS(draft.date as string).format('YYYY-MM-DD'),
       description: draft.description as string,
       duration: parseInt(draft.duration as string, 10),
@@ -55,24 +60,13 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     };
   }
 
-  saveAsDraft = (ev: React.MouseEvent<HTMLButtonElement>) => {
-    ev.preventDefault();
-
+  saveAsDraft = () =>
     this.setState({
       isDraft: true,
-    }, () => this.onSubmit(ev, true));
-  }
+    }, () => this.onSubmit(true));
 
-  onSubmit = async (
-    ev: React.MouseEvent<HTMLButtonElement>,
-    saveAsDraft: boolean = false) => {
-    ev.preventDefault();
-
-    const {
-      duration,
-      time,
-      ...restOfEvent
-    } = this.state;
+  onSubmit = async (saveAsDraft: boolean = false) => {
+    const {duration, time, ...restOfEvent} = this.state;
 
     const timeArr = parseTimeString(time);
     const dur = typeof duration === 'string' ? parseInt(duration, 10) : duration;
@@ -82,9 +76,19 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
 
     let newEvent: tEvent;
     try {
-      const planMeeting = await this.props.postEvent({
+      const {patchEventDispatch, postEventDispatch} = this.props;
+
+      // if meeting has already been saved as a draft, we will have the id
+      // patch in that case, else post new meeting (initial draft save, or submit)
+      const dispatch = this.state.id
+        ? patchEventDispatch
+        : postEventDispatch;
+
+      const planMeeting = await dispatch({
         ...restOfEvent,
         // we submit drafts to the same table in the DB as well
+        // we only want to save as draft when the user hits the save as draft button
+        // we don't use state here, since we want to set this to false when publishing
         isDraft: saveAsDraft,
         // every date is stored in the db as an ISO string
         date: date.toISOString(),
@@ -94,11 +98,13 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
 
       newEvent = planMeeting.payload;
     } catch (err) {
-      return loglevel.error('failed to save event to db', err);
+      return loglevel.error('failed to save meeting to db', err);
     }
 
-    // update redux on client side on event upload success
-    // getEventsSuccess([newEvent, ...events]);
+    // update redux on client side on meeting upsert success
+    getEventsByOrgIdSuccess([newEvent, ...this.props.events]);
+
+    // this will cause the preview button to render
     this.setState({
       id: newEvent.id,
     });
@@ -148,7 +154,8 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  postEvent: (query: tUpsertEventQuery) => dispatch(postEvent(query)),
+  patchEventDispatch: (query: tUpsertEventQuery) => dispatch(patchEvent(query)),
+  postEventDispatch: (query: tUpsertEventQuery) => dispatch(postEvent(query)),
 });
 
 const PlanMeeting = connect(

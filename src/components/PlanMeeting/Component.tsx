@@ -7,14 +7,21 @@ import {tComponentProps} from './_types';
 
 export const PlanMeetingComponent = memo((props: tComponentProps) => {
   const {updateState} = props;
-  const onChange = (ev: React.ChangeEvent<any>) => updateState(
-    'duration',
-    parseInt(ev.currentTarget.value, 10),
-  );
+  const onDurationChange = (ev: React.ChangeEvent<HTMLSelectElement>) =>
+    updateState(
+      'duration',
+      parseInt(ev.currentTarget.value, 10),
+    );
+
+  const disableSubmit = !props.title
+    || !props.date
+    || !props.duration
+    || !props.time;
 
   return (
     <form
       id="form"
+      method="POST"
       encType="multipart/form-data">
       <fieldset>
         <h3>Meeting Title</h3>
@@ -58,14 +65,14 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
               type="date"
               min={dayJS().toISOString()}
               className="mR2"
-              value={props.date}
+              value={dayJS(props.date).format('YYYY-MM-DD')}
               placeholder="Meeting Date Here"
               onChange={ev => updateState('date', ev.currentTarget.value)}
             />
             <input
               type="time"
-              placeholder="Meeting Time Here"
               value={props.time}
+              placeholder="Meeting Time Here"
               onChange={ev => updateState('time', ev.currentTarget.value)}
             />
           </div>
@@ -73,8 +80,8 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             <h3>How long is it?</h3>
             <select
               value={props.duration}
-              onBlur={onChange}
-              onChange={onChange}>
+              onBlur={onDurationChange}
+              onChange={onDurationChange}>
               <option value="1">1 hour</option>
               <option value="2">2 hours</option>
               <option value="3">3 hours</option>
@@ -84,16 +91,23 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
         </div>
         <div className="brdT1 pT4 pB4 mT4 fx aiCtr">
           <button
-            onClick={props.onSubmit}
-            className="p3 mR2 hvrBgGrey1 trans1">
+            className="p3 mR2 hvrBgGrey1 trans1"
+            disabled={disableSubmit}
+            onClick={ev => {
+              ev.preventDefault();
+              props.onSubmit();
+            }}>
             Publish
           </button>
           <button
-            onClick={props.saveAsDraft}
-            className="p3 mR2 hvrBgGrey1 trans1">
+            className="p3 mR2 hvrBgGrey1 trans1"
+            disabled={disableSubmit}
+            onClick={ev => {
+              ev.preventDefault();
+              props.saveAsDraft();
+            }}>
             Save as Draft
           </button>
-          {/* TODO only show after saving as draft*/}
           {props.id && (
             <Link
               to={`/event/${props.id}?isPreview=true`}

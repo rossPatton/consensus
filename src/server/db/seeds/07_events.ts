@@ -11,6 +11,7 @@ const createMeeting = async (orgId: number, isDraft: boolean = false) => {
   const meetingsPerOrg = loRange(1, orgId === 1 ? 50 : 3);
 
   return meetingsPerOrg.map(() => ({
+    category: org.category,
     cityId: org.cityId,
     date: faker.random.boolean() ? faker.date.future() : faker.date.past(),
     description: faker.lorem.paragraphs(),

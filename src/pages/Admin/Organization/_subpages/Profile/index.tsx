@@ -1,10 +1,11 @@
 import _ from 'lodash';
+import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet} from '../../../../../components';
 import {ErrorBoundary, GenericLoader} from '../../../../../containers';
-import {patchOrg} from '../../../../../redux';
+import {login, patchOrg} from '../../../../../redux';
 import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 import {ProfileComponent} from './Component';
 
@@ -22,16 +23,37 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     };
   }
 
-  onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+  onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const {category, description, type, id} = this.state;
 
-    this.props.patchOrgDispatch({
-      category,
-      description,
-      type,
-      id,
-    });
+    let patchedOrg: tActionPayload<tOrg>;
+    try {
+      patchedOrg = await this.props.patchOrgDispatch({
+        category,
+        description,
+        type,
+        id,
+      });
+    } catch (err) {
+      loglevel.error(err);
+    }
+
+    // TODO trigger error boundary or something
+    if (!patchedOrg.payload) return;
+
+    // update session by 'logging in' again, with the new account info
+    try {
+      await this.props.loginDispatch({
+        username: this.props.sessionThunk.data.login,
+        password: this.state.password,
+      });
+    } catch (err) {
+      loglevel.error(err);
+    }
+
+    // reset password on submit
+    this.setState({password: ''});
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
@@ -75,6 +97,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
+  loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
   patchOrgDispatch: (query: tOrgQuery) => dispatch(patchOrg(query)),
 });
 

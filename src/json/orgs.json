@@ -1,6 +1,6 @@
 [
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "tech-workers-coalition-nyc",
@@ -11,7 +11,7 @@
     "website": "https://techworkerscoalition.org/nyc"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "champlin-and-sons",
@@ -31,7 +31,7 @@
     "type": "hidden"
   },
   {
-    "category": "Religious",
+    "category": "Community",
     "city": "New York",
     "cityId": 16624,
     "handle": "walsh-oreilly-and-lebsack",
@@ -41,7 +41,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "walter-and-sons",
@@ -51,7 +51,7 @@
     "type": "hidden"
   },
   {
-    "category": "Community Center",
+    "category": "Community",
     "city": "New York",
     "cityId": 16624,
     "handle": "stehr-llc",
@@ -71,7 +71,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "fahey-group",
@@ -91,7 +91,7 @@
     "type": "hidden"
   },
   {
-    "category": "Community Center",
+    "category": "Community",
     "city": "New York",
     "cityId": 16624,
     "handle": "lueilwitz-inc",
@@ -101,7 +101,7 @@
     "type": "public"
   },
   {
-    "category": "Religious",
+    "category": "Community",
     "city": "New York",
     "cityId": 16624,
     "handle": "smitham-baumbach",
@@ -121,7 +121,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "west-gottlieb",
@@ -151,7 +151,7 @@
     "type": "private"
   },
   {
-    "category": "Community Center",
+    "category": "Community",
     "city": "New York",
     "cityId": 16624,
     "handle": "stanton-llc",
@@ -161,7 +161,7 @@
     "type": "private"
   },
   {
-    "category": "Religious",
+    "category": "Community",
     "city": "New York",
     "cityId": 16624,
     "handle": "osinski-inc",
@@ -171,7 +171,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "sauer-macgyver-and-dare",
@@ -181,7 +181,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "stiedemann-daugherty-and-leannon",
@@ -191,7 +191,7 @@
     "type": "private"
   },
   {
-    "category": "Community Center",
+    "category": "Community",
     "city": "New York",
     "cityId": 16624,
     "handle": "upton-kunde-and-cronin",
@@ -221,7 +221,7 @@
     "type": "public"
   },
   {
-    "category": "Religious",
+    "category": "Community",
     "city": "New York",
     "cityId": 16624,
     "handle": "weimann-inc",
@@ -231,7 +231,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "flatley-wolff",
@@ -241,7 +241,7 @@
     "type": "private"
   },
   {
-    "category": "Community Center",
+    "category": "Community",
     "city": "New York",
     "cityId": 16624,
     "handle": "vonrueden-borer-and-walker",
@@ -261,7 +261,7 @@
     "type": "public"
   },
   {
-    "category": "Religious",
+    "category": "Union",
     "city": "New York",
     "cityId": 16624,
     "handle": "sauer-larson-and-lynch",
@@ -281,7 +281,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "kulas-nitzsche",
@@ -291,7 +291,7 @@
     "type": "private"
   },
   {
-    "category": "Community Center",
+    "category": "Community",
     "city": "New York",
     "cityId": 16624,
     "handle": "gutkowski-lynch-and-volkman",
@@ -321,7 +321,7 @@
     "type": "public"
   },
   {
-    "category": "Religious",
+    "category": "Union",
     "city": "New York",
     "cityId": 16624,
     "handle": "sauer-kuhlman",
@@ -331,7 +331,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "hilpert-inc",
@@ -341,7 +341,7 @@
     "type": "public"
   },
   {
-    "category": "Community Center",
+    "category": "Community",
     "city": "New York",
     "cityId": 16624,
     "handle": "lockman-llc",
@@ -371,7 +371,7 @@
     "type": "private"
   },
   {
-    "category": "Religious",
+    "category": "Cooperative",
     "city": "New York",
     "cityId": 16624,
     "handle": "morissette-bode-and-pacocha",
@@ -381,7 +381,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "mccullough-stracke-and-kassulke",
@@ -391,7 +391,7 @@
     "type": "hidden"
   },
   {
-    "category": "Community Center",
+    "category": "Community",
     "city": "New York",
     "cityId": 16624,
     "handle": "ryan-inc",
@@ -421,7 +421,7 @@
     "type": "private"
   },
   {
-    "category": "Religious",
+    "category": "Cooperative",
     "city": "New York",
     "cityId": 16624,
     "handle": "williamson-ortiz-and-koepp",
@@ -431,7 +431,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "mosciski-torp",
@@ -441,7 +441,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "kirlin-koepp",
@@ -451,7 +451,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "hyatt-mann-and-reynolds",
@@ -461,7 +461,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "pacocha-schoen",
@@ -471,7 +471,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "kuhlman-kreiger",
@@ -481,7 +481,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "schneider-heidenreich",
@@ -491,7 +491,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "schumm-and-sons",
@@ -501,7 +501,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "toy-stokes",
@@ -511,7 +511,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "stoltenberg-group",
@@ -521,7 +521,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "schmeler-beer-and-tillman",
@@ -531,7 +531,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "nader-llc",
@@ -541,7 +541,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "macgyver-dickinson",
@@ -551,7 +551,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "romaguera-and-sons",
@@ -561,7 +561,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "kiehn-eichmann-and-bins",
@@ -571,7 +571,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "kshlerin-inc",
@@ -581,7 +581,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "leuschke-and-sons",
@@ -591,7 +591,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "jast-inc",
@@ -601,7 +601,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "heller-grimes-and-turner",
@@ -611,7 +611,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "tremblay-dare-and-bruen",
@@ -621,7 +621,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "bergnaum-gerlach",
@@ -631,7 +631,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "brakus-simonis",
@@ -641,7 +641,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "morissette-nader",
@@ -651,7 +651,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "kuphal-and-sons",
@@ -661,7 +661,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "braun-group",
@@ -671,7 +671,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "volkman-quigley-and-wyman",
@@ -681,7 +681,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "daniel-llc",
@@ -691,7 +691,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "carter-inc",
@@ -701,7 +701,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "jakubowski-gerlach",
@@ -711,7 +711,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "ziemann-and-sons",
@@ -721,7 +721,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "flatley-metz",
@@ -731,7 +731,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "gaylord-inc",
@@ -741,7 +741,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "yundt-huels-and-marvin",
@@ -751,7 +751,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "farrell-konopelski",
@@ -761,7 +761,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "hermiston-and-sons",
@@ -771,7 +771,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "grimes-and-sons",
@@ -781,7 +781,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "marquardt-lueilwitz-and-deckow",
@@ -791,7 +791,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "marks-quigley",
@@ -801,7 +801,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "upton-howell",
@@ -811,7 +811,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "collins-leffler",
@@ -821,7 +821,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "bechtelar-and-sons",
@@ -831,7 +831,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "yost-inc",
@@ -841,7 +841,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "boyer-inc",
@@ -851,7 +851,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "beer-abshire",
@@ -861,7 +861,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "hammes-price",
@@ -871,7 +871,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "boyer-rutherford",
@@ -881,7 +881,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "beahan-hessel-and-krajcik",
@@ -891,7 +891,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "greenfelder-inc",
@@ -901,7 +901,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "gislason-armstrong",
@@ -911,7 +911,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "hegmann-lehner-and-armstrong",
@@ -921,7 +921,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "sawayn-and-sons",
@@ -931,7 +931,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "marks-wuckert-and-langosh",
@@ -941,7 +941,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "tremblay-gerhold-and-kunde",
@@ -951,7 +951,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "kirlin-and-sons",
@@ -961,7 +961,7 @@
     "type": "private"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "hilll-kerluke",
@@ -971,7 +971,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "nitzsche-llc",
@@ -981,7 +981,7 @@
     "type": "public"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "veum-ward-and-turner",
@@ -991,7 +991,7 @@
     "type": "hidden"
   },
   {
-    "category": "Political Organization",
+    "category": "Political",
     "city": "New York",
     "cityId": 16624,
     "handle": "homenick-group",
