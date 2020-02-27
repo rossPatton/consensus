@@ -1,11 +1,10 @@
 import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
-import qs from 'query-string';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {ExternalLink, PlaceholderImage, RSVP} from '../../components';
+import {ExternalLink, PlaceholderImage /* RSVP*/} from '../../components';
 import {objToQueryString} from '../../utils';
 import {tComponentProps} from './_types';
 
@@ -39,7 +38,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
               <Link
                 className="noUnderline"
                 to={ev.isDraft
-                  ? `/org/${ev.orgId}/planMeeting?${qs.stringify(ev)}`
+                  ? `/event/${ev.id}?isPreview=true`
                   : `/event/${ev.id}`}>
                 <PlaceholderImage
                   height={100}
@@ -81,12 +80,12 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 <Link
                   className="noUnderline"
                   to={ev.isDraft
-                    ? `/org/${ev.orgId}/planMeeting?${qs.stringify(ev)}`
+                    ? `/event/${ev.id}?isPreview=true`
                     : `/event/${ev.id}`}>
                   {ev.title}
                 </Link>
               </h3>
-              {props.showRSVPs && (
+              {/* {props.showRSVPs && (
                 <div
                   className={cx({
                     'fx aiCtr fs6 lh1': true,
@@ -94,9 +93,8 @@ export const EventsComponent = memo((props: tComponentProps) => (
                     o5: isPastEvent,
                   })}>
                   {!ev.isDraft && <RSVP event={ev} />}
-                  {ev.isDraft && 'This event is not published yet. Click to edit.'}
                 </div>
-              )}
+              )} */}
               {props.showOrgName
                 && (
                   <Link

@@ -1,3 +1,4 @@
+import * as H from 'history';
 import { match } from 'react-router';
 
 export type tStore = {
@@ -26,6 +27,7 @@ export type tContainerProps = tProps & {
   getOrgByIdDispatch: (query: tIdQuery) => tThunkPayload<tOrg>,
   getRolesDispatch: () => tThunkPayload<tRoleMap>,
   getRsvpsDispatch: () => tThunkPayload<tRSVP[]>,
+  location: H.Location,
   match: match & { params: tEventParams },
   orgThunk: tThunk<tOrg>,
   rolesThunk: tThunk<tRoleMap[]>,

@@ -19,9 +19,9 @@ export const getEventById = async (
   }
 
   // lookup failed, for example, user entered id for event that doesnt exist
-  if (!event || _.isEmpty(event)) {
+  if (typeof event === 'undefined' || _.isEmpty(event)) {
     ctx.status = 204;
-    ctx.body = {};
+    return {} as tEvent;
   }
 
   // user role for this particular org
