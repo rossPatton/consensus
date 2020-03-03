@@ -16,7 +16,6 @@ const createUserAccount = async (i: number) => {
   const password = encrypt(saltedHash);
 
   return {
-    isVerified: faker.random.boolean(),
     login: faker.internet.userName(),
     password,
     userId: i,
@@ -24,12 +23,11 @@ const createUserAccount = async (i: number) => {
 };
 
 const createTestUserAccount = async () => {
-  const sha = sha384('test');
+  const sha = sha384('testtesttest');
   const saltedHash = await bcrypt.hash(sha, salt);
   const password = encrypt(saltedHash);
 
   return {
-    isVerified: true,
     login: 'testAccount',
     password,
     userId: 100,
@@ -37,12 +35,11 @@ const createTestUserAccount = async () => {
 };
 
 const createTestGroupAccount = async () => {
-  const sha = sha384('test');
+  const sha = sha384('testtesttest');
   const saltedHash = await bcrypt.hash(sha, salt);
   const password = encrypt(saltedHash);
 
   return {
-    isVerified: true,
     login: 'twcNYC',
     orgId: 1,
     password,

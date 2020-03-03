@@ -1,20 +1,20 @@
 import React, { memo } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { PasswordInput } from '../../../../components';
 import { tProps } from './_types';
 
-const ResetPasswordComponent = memo((props: tProps) => (
+const VerifyTokenComponent = memo((props: tProps) => (
   <form
     className="contain mT4"
-    name="passwordResetForm"
-    action="/email/v1/resetPasswordByEmail"
-    onSubmit={props.resetPasswordByEmail}>
+    name="verifyEmailForm"
+    action="/email/v1/verifyEmail"
+    onSubmit={props.verifyToken}>
     <fieldset>
       <legend>
-        <h1 className="black fs2 mB2">Enter new password</h1>
+        <h1 className="fs2 mB2">Verify your Account</h1>
         <h2 className="fs6 mB4 lh1">
-          Enter the code sent to your email, along with your login credentials
+          Enter the code sent to your email, and your account credentials, to verify your account.
         </h2>
       </legend>
       <label htmlFor="tokenInput">
@@ -50,21 +50,18 @@ const ResetPasswordComponent = memo((props: tProps) => (
       </label>
       <PasswordInput
         required
-        newPassword
         id="pwInput"
-        title="New password"
         password={props.password}
-        placeholder="Example: correct_horse_battery_staple"
         onChange={ev => props.updateState('password', ev)}
       />
       <div className="fx aiCtr">
         <button
           disabled={props.isClient && (!props.login || !props.password)}
           className="p3 pL4 pR4 mR2">
-          Reset Password
+          Verify Me
         </button>
         <Link
-          to="/password-reset"
+          to="/verify-account"
           className="btn p3 pL4 pR4">
           Didn&apos;t get a code?
         </Link>
@@ -73,4 +70,4 @@ const ResetPasswordComponent = memo((props: tProps) => (
   </form>
 ));
 
-export default ResetPasswordComponent;
+export default VerifyTokenComponent;

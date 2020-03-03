@@ -39,7 +39,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
       return loglevel.error(err);
     }
 
-    // TODO trigger error boundary or something
+    // TODO trigger error boundary or display errors or something
     if (!newAccount.payload) return;
 
     // update session by 'logging in' again, with the new account info

@@ -26,10 +26,17 @@ exports.up = async (knex: Knex) => {
 
     // temporary string used for resetting account password
     // once password is reset, token is set back to ''
-    table.string('passwordResetToken');
-
+    table.string('passwordResetToken').defaultTo(null);
     // if user does not reset their password in time, the token is invalidated
-    table.timestamp('passwordResetExpires');
+    table.timestamp('passwordResetExpires').defaultTo(null);
+
+    // temporary string used for verifying that the account is tied to a real person
+    // once verified, token is set back to ''
+    // email change requires new verification
+    table.string('verificationToken').defaultTo(null);
+    // if user does not verify in time, the token is invalidated
+    // and a new one must be generated
+    table.timestamp('verificationExpires').defaultTo(null);
 
     table.timestamps(true, true);
   });

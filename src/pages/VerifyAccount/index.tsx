@@ -8,16 +8,15 @@ import {ErrorBoundary} from '../../containers';
 import {login} from '../../redux';
 import {api} from '../../utils';
 import {canonical, description, keywords, title} from './_constants';
-import {EmailTokenComponent, ResetPasswordComponent} from './_subpages';
+import {EmailTokenComponent, VerifyTokenComponent} from './_subpages';
 import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 
-class PasswordResetContainer extends PureComponent<tContainerProps, tState> {
+class VerifyAccountContainer extends PureComponent<tContainerProps, tState> {
   state = {
     email: '',
     isClient: false,
     login: '',
     password: '',
-    passwordUpdated: false,
     token: '',
   };
 
@@ -28,11 +27,12 @@ class PasswordResetContainer extends PureComponent<tContainerProps, tState> {
     });
   }
 
-  resetPasswordByEmail = (ev: React.FormEvent<HTMLFormElement>) => {
+  verifyToken = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
+
     api({
       method: 'PATCH',
-      path: '/email/v1/resetPasswordByEmail',
+      path: '/email/v1/verifyEmail',
       query: {
         login: this.state.login,
         password: this.state.password,
@@ -52,7 +52,6 @@ class PasswordResetContainer extends PureComponent<tContainerProps, tState> {
             login: '',
             password: '',
             token: '',
-            passwordUpdated: true,
           });
         }
 
@@ -61,28 +60,28 @@ class PasswordResetContainer extends PureComponent<tContainerProps, tState> {
       .catch(loglevel.error);
   }
 
-  sendPasswordResetEmail = (ev: React.FormEvent<HTMLFormElement>) => {
+  sendVerificationToken = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     api({
-      path: '/email/v1/emailResetToken',
+      path: '/email/v1/sendVerificationToken',
       query: {email: this.state.email},
     })
-      .then(() => this.props.history.push('/password-reset/enterCode'))
+      .then(() => this.props.history.push('/verify-account/enterCode'))
       .catch(loglevel.error);
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
     this.setState({
       [stateKey]: ev.currentTarget.value,
-      passwordUpdated: false,
     } as Pick<tState, tStateUnion>);
   }
 
   render() {
+    const {session} = this.props;
     const enterCode = _.get(this.props, 'match.params.section', null);
 
     return (
-      <ErrorBoundary status={_.get(this.props, 'session.error.status', 200)}>
+      <ErrorBoundary status={_.get(session, 'session.error.status', 200)}>
         <Helmet
           canonical={canonical}
           title={title}
@@ -93,22 +92,22 @@ class PasswordResetContainer extends PureComponent<tContainerProps, tState> {
             { property: 'og:description', content: description },
           ]}
         />
-        {this.state.passwordUpdated && (
+        {session.data.isVerified && (
           <div className="row p3 mB3 taCtr bgGreenLite fw600 fs6">
-            Your password has been updated!
+            You&apos;re verified!
           </div>
         )}
         {enterCode && (
-          <ResetPasswordComponent
+          <VerifyTokenComponent
             {...this.state}
-            resetPasswordByEmail={this.resetPasswordByEmail}
+            verifyToken={this.verifyToken}
             updateState={this.updateState}
           />
         )}
         {!enterCode && (
           <EmailTokenComponent
             {...this.state}
-            sendPasswordResetEmail={this.sendPasswordResetEmail}
+            sendVerificationToken={this.sendVerificationToken}
             updateState={this.updateState}
           />
         )}
@@ -125,9 +124,9 @@ const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
 });
 
-const PasswordReset = connect(
+const VerifyAccount = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(PasswordResetContainer);
+)(VerifyAccountContainer);
 
-export default PasswordReset;
+export default VerifyAccount;

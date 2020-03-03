@@ -10,10 +10,16 @@ export const AccountComponent = memo((props: tComponentProps) => {
     <form
       action="/api/v1/user"
       autoComplete="off"
-      className="col"
+      className="rel"
       encType="multipart/form-data"
       onSubmit={props.save}>
       <fieldset>
+        {props.session.isVerified && (
+          <div className="fx aiCtr mB1 fs7 abs t r">
+            <span className="mR1">✔</span>
+            Verified Account
+          </div>
+        )}
         <legend>
           <h1 className="fs3 mB3">
             Manage your account

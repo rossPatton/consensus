@@ -6,5 +6,5 @@ const PasswordResetComponent = loadable(() =>
 
 export const PasswordReset = {
   component: PasswordResetComponent,
-  path: '/password-reset/:token?',
+  path: '/password-reset/:section?',
 };

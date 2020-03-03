@@ -22,6 +22,7 @@ import { rsvps } from './rsvps';
 import { search } from './search';
 import { user } from './user';
 import { usersByOrgId } from './usersByOrgId';
+import { verifyAccountViaEmail } from './verifyAccount';
 
 export const setupApi = (app: Koa) => {
   app.use(account.routes());
@@ -46,6 +47,7 @@ export const setupApi = (app: Koa) => {
   app.use(search.routes());
   app.use(user.routes());
   app.use(usersByOrgId.routes());
+  app.use(verifyAccountViaEmail.routes());
 
   const opts = Object.freeze({
     methodNotAllowed: () => Boom.methodNotAllowed(),
@@ -74,4 +76,5 @@ export const setupApi = (app: Koa) => {
   app.use(search.allowedMethods(opts));
   app.use(user.allowedMethods(opts));
   app.use(usersByOrgId.allowedMethods(opts));
+  app.use(verifyAccountViaEmail.allowedMethods(opts));
 };

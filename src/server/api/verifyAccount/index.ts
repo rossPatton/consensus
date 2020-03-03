@@ -5,13 +5,12 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import {knex} from '../../db/connection';
-import {encrypt, saltedHash, sendEmail, validateSchema} from '../../utils';
+import {sendEmail, validateSchema} from '../../utils';
 import {emailSchema, tokenSchema} from './_schema';
-
 const dataPath = 'state.locals.data';
 
-export const passwordResetViaEmail = new Router();
-passwordResetViaEmail.get('/email/v1/emailResetToken',
+export const verifyAccountViaEmail = new Router();
+verifyAccountViaEmail.get('/email/v1/sendVerificationToken',
   async (ctx: Koa.ParameterizedContext) => {
     const query: {email: string} = _.get(ctx, dataPath, {});
     await validateSchema<{email: string}>(ctx, emailSchema, query);
@@ -37,8 +36,8 @@ passwordResetViaEmail.get('/email/v1/emailResetToken',
       .limit(1)
       .where({id: accountEmailRel.accountId})
       .update({
-        passwordResetToken: token,
-        passwordResetExpires: oneHourFromNow,
+        verificationToken: token,
+        verificationExpires: oneHourFromNow,
       });
 
     // update query returns 0 or 1
@@ -49,15 +48,15 @@ passwordResetViaEmail.get('/email/v1/emailResetToken',
     const email = await sendEmail({
       from: '"Fred Foo 👻" <foo@example.com>', // sender address
       to: 'ross_patton@protonmail.com', // list of receivers
-      subject: 'Password Reset', // Subject line
-      text: 'Hello world?', // plain text body
+      subject: 'Verify your account', // Subject line
+      text: 'Are you real?', // plain text body
       html: `
-      Enter the following authentication code in order to reset your password. This token is only valid for 1 day.
-      <br /><br />
-      Link: https://consensus.local/password-reset/enterCode
-      <br />
-      Code: ${token}
-    `,
+        Enter the following authentication code in order to validate your account. This token is only valid for 1 day.
+        <br /><br />
+        Link: https://consensus.local/verify-account/enterCode
+        <br />
+        Code: ${token}
+      `,
     });
 
     ctx.body = {
@@ -66,7 +65,7 @@ passwordResetViaEmail.get('/email/v1/emailResetToken',
     };
   });
 
-passwordResetViaEmail.patch('/email/v1/resetPasswordByEmail',
+verifyAccountViaEmail.patch('/email/v1/verifyEmail',
   async (ctx: Koa.ParameterizedContext) => {
     const query = _.get(ctx, dataPath, {});
     await validateSchema(ctx, tokenSchema, query);
@@ -75,8 +74,8 @@ passwordResetViaEmail.patch('/email/v1/resetPasswordByEmail',
     try {
       account = await knex('accounts')
         .limit(1)
-        .where({passwordResetToken: query.token})
-        .select(['passwordResetExpires'])
+        .where({verificationToken: query.token})
+        .select(['verificationExpires'])
         .first();
     } catch (err) {
       ctx.throw(400, err);
@@ -91,27 +90,25 @@ passwordResetViaEmail.patch('/email/v1/resetPasswordByEmail',
       return;
     }
 
-    const hasTokenExpired = dayjs().isAfter(account.passwordResetExpires);
+    const hasTokenExpired = dayjs().isAfter(account.verificationExpires);
     if (hasTokenExpired) {
-      ctx.throw(400, 'This reset token has expired.');
+      ctx.throw(400, 'This reset token has expired. Please get a new one.');
     }
 
-    let updatedAccount = {};
-    let safePW = await saltedHash(query.password);
-    safePW = encrypt(safePW);
-
+    let updatedAccount: tAccount[];
     try {
       updatedAccount = await knex('accounts')
         .limit(1)
-        .where({passwordResetToken: query.token})
+        .where({verificationToken: query.token})
         .update({
-          password: safePW,
-          passwordResetToken: null,
-          passwordResetExpires: null,
-        });
+          isVerified: true,
+          verificationToken: null,
+          verificationExpires: null,
+        })
+        .returning('isVerified');
     } catch (err) {
       ctx.throw(400, err);
     }
 
-    ctx.body = updatedAccount;
+    ctx.body = updatedAccount[0];
   });

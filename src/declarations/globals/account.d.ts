@@ -9,6 +9,8 @@ declare type tAccountBase = tFormSubmit & Readonly<{
   passwordResetToken?: string,
   passwordResetExpires?: string,
   userId?: number,
+  verificationToken?: string,
+  verificationExpires?: string,
 }>;
 
 // password is never sent to the client
