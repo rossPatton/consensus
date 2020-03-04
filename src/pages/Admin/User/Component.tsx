@@ -105,12 +105,16 @@ export const UserAdminComponent = memo((props: tProps) => {
             Other actions
           </div>
           <div className="fx aiCtr">
-            <button className="p3 hvrBgGrey1 fw600 mR2">
-              Download your data
-            </button>
+            <form action="/api/v1/download">
+              <fieldset>
+                <button className="p3 hvrBgGrey1 fw600 mR2">
+                  <legend>Download your data</legend>
+                </button>
+              </fieldset>
+            </form>
             <Link
               to="/admin/deleteAccount"
-              className="btn p3 hvrBgGrey1 fw600">
+              className="btn p3 hvrBgGrey1 fw600 noUnderline">
               Delete your account
             </Link>
           </div>

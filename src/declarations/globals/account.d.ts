@@ -1,6 +1,7 @@
 // accounts are currently of 2 types. users, and organization admins
 // we consolidate that in the accounts table, along with shared rows
 declare type tAccountBase = tFormSubmit & Readonly<{
+  created_at?: string,
   emails?: string[],
   id: number,
   isVerified: boolean,
@@ -8,6 +9,7 @@ declare type tAccountBase = tFormSubmit & Readonly<{
   orgId?: number,
   passwordResetToken?: string,
   passwordResetExpires?: string,
+  updated_at?: string,
   userId?: number,
   verificationToken?: string,
   verificationExpires?: string,

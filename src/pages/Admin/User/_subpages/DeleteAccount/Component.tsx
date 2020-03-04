@@ -5,8 +5,8 @@ import {tComponentProps} from './_types';
 
 export const DeleteAccountComponent = memo((props: tComponentProps) => (
   <form
-    action="/api/v1/account"
     autoComplete="off"
+    action="/api/v1/account"
     onSubmit={props.deleteAccount}>
     <fieldset>
       <legend>

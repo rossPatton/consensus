@@ -2,6 +2,7 @@ import Boom from '@hapi/boom';
 import Koa from 'koa';
 
 import { account } from './account';
+import { accountDownload } from './accountDownload';
 import { auth } from './auth';
 import { city } from './city';
 import { country } from './country';
@@ -26,6 +27,7 @@ import { verifyAccountViaEmail } from './verifyAccount';
 
 export const setupApi = (app: Koa) => {
   app.use(account.routes());
+  app.use(accountDownload.routes());
   app.use(auth.routes());
   app.use(city.routes());
   app.use(country.routes());
@@ -56,6 +58,7 @@ export const setupApi = (app: Koa) => {
   });
 
   app.use(account.allowedMethods(opts));
+  app.use(accountDownload.allowedMethods(opts));
   app.use(auth.allowedMethods(opts));
   app.use(city.allowedMethods(opts));
   app.use(country.allowedMethods(opts));
