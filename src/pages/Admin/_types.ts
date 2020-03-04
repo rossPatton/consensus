@@ -9,9 +9,9 @@ export type tAdminSections = match & {
   params: {
     page?: string,
     section: 'account'
-      | 'events'
+      | 'deleteAccount'
+      | 'meetings'
       | 'memberships'
-      | 'pendingApprovals'
       | 'planMeeting'
       | 'profile',
   }

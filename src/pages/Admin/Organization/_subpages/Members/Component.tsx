@@ -8,9 +8,7 @@ export const MembersComponent = memo((props: tComponentProps) => (
   <>
     <div className="fx aiCtr">
       <h1 className="fs3 mB2">
-        {props.section === 'memberships'
-          ? `Manage Membership (${props.userTotal} members)`
-          : `${props.userTotal} Pending Approvals`}
+        Manage Membership ({props.userTotal} members)
       </h1>
     </div>
     <FilterPanel

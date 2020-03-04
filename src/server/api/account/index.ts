@@ -12,18 +12,20 @@ const route = '/api/v1/account';
 const table = 'accounts';
 
 account.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  // TODO add query back, require a password to set deletion timer
-  // also set deletion timer
-  const session: tAccount = _.get(ctx, 'state.user', {});
-  await validateSchema<Mutable<tIdQuery>>(ctx, deleteSchema, {id: session.id});
+  const query: Mutable<tAccountQuery> = _.get(ctx, 'state.locals.data', {});
+  const account: tAccount = _.get(ctx, 'state.user', {});
+  await validateSchema<Mutable<tAccountQuery>>(ctx, deleteSchema, {
+    ...query,
+    id: account.id,
+  });
 
-  // const isValidPW = await isValidPw(query.password, loggedInAccount.password);
-  // if (!isValidPW) return ctx.throw(400, 'Password is not correct');
+  const isValidPW = await isValidPw(query.password, account.password);
+  if (!isValidPW) return ctx.throw(400, 'Password is not correct');
 
   try {
     await knex(table)
       .limit(1)
-      .where({id: session.id})
+      .where({id: account.id})
       .delete();
   } catch (err) {
     return ctx.throw(400, err);

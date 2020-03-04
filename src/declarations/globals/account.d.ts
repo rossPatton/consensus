@@ -1,7 +1,6 @@
 // accounts are currently of 2 types. users, and organization admins
 // we consolidate that in the accounts table, along with shared rows
 declare type tAccountBase = tFormSubmit & Readonly<{
-  deletionDeadline: string, // date account will be deleted
   emails?: string[],
   id: number,
   isVerified: boolean,

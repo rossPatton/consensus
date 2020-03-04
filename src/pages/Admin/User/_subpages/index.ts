@@ -4,8 +4,12 @@ export const Account = loadable(() =>
   import(/* webpackChunkName: "UserAdmin Account" */'./Account'),
 );
 
-export const Events = loadable(() =>
-  import(/* webpackChunkName: "UserAdmin Events" */'./Events'),
+export const DeleteAccount = loadable(() =>
+  import(/* webpackChunkName: "UserAdmin DeleteAccount" */'./DeleteAccount'),
+);
+
+export const Meetings = loadable(() =>
+  import(/* webpackChunkName: "UserAdmin Meetings" */'./Meetings'),
 );
 
 export const Memberships = loadable(() =>

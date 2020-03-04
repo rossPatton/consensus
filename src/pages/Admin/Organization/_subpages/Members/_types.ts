@@ -22,7 +22,6 @@ export type tComponentProps = {
   onRoleFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   setUserRole: (ev: React.ChangeEvent<HTMLSelectElement>, id: number) => void,
-  section: string,
   users: tUser[],
   userTotal: number,
 }

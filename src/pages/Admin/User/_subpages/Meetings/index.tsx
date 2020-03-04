@@ -8,9 +8,9 @@ import {ErrorBoundary, GenericLoader} from '../../../../../containers';
 import {SearchFilter} from '../../../../../containers';
 import {getEventsByUserId} from '../../../../../redux';
 import {tContainerProps, tStore} from './_types';
-import {EventsComponent} from './Component';
+import {MeetingsComponent} from './Component';
 
-class EventsContainer extends PureComponent<tContainerProps> {
+class MeetingsContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     const userId = _.get(props, 'sessionThunk.data.profile.id', null);
@@ -41,7 +41,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
             <SearchFilter
               items={eventsByUserIdThunk.data}
               render={searchProps => (
-                <EventsComponent
+                <MeetingsComponent
                   events={searchProps.items as tEvent[]}
                   onFilterOptionChange={searchProps.onFilterOptionChange}
                   onSearchChange={searchProps.onSearchChange}
@@ -65,9 +65,9 @@ const mapDispatchToProps = (dispatch: Function) => ({
     dispatch(getEventsByUserId(query)),
 });
 
-const Events = connect(
+const Meetings = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(EventsContainer);
+)(MeetingsContainer);
 
-export default Events;
+export default Meetings;

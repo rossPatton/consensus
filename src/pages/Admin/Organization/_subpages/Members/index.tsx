@@ -42,7 +42,7 @@ class MembersContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {match, usersThunk} = this.props;
+    const {usersThunk} = this.props;
 
     return (
       <ErrorBoundary status={_.get(usersThunk, 'error.status', 200)}>
@@ -65,24 +65,16 @@ class MembersContainer extends PureComponent<tContainerProps> {
                 <SearchFilter
                   searchKey="username"
                   items={roleProps.items}
-                  render={searchProps => {
-                    const {section} = match.params;
-                    const users = section === 'memberships'
-                      ? searchProps.items.filter(user => user.role !== 'pending')
-                      : searchProps.items.filter(user => user.role === 'pending');
-
-                    return (
-                      <MembersComponent
-                        {...roleProps}
-                        {...searchProps}
-                        removeUser={this.removeUser}
-                        section={section}
-                        setUserRole={this.setUserRole}
-                        users={users}
-                        userTotal={users.length}
-                      />
-                    );
-                  }}
+                  render={searchProps => (
+                    <MembersComponent
+                      {...roleProps}
+                      {...searchProps}
+                      removeUser={this.removeUser}
+                      setUserRole={this.setUserRole}
+                      users={searchProps.items}
+                      userTotal={usersThunk.data.length}
+                    />
+                  )}
                 />
               )}
             />

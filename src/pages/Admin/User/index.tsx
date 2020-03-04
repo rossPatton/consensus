@@ -4,7 +4,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {GenericLoader} from '../../../containers';
-import {deleteAccount, getOrgsByUserId, getRoles, getRsvps, logout} from '../../../redux';
+import {getOrgsByUserId, getRoles, getRsvps, logout} from '../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {UserAdminComponent} from './Component';
 
@@ -22,19 +22,12 @@ class UserAdminContainer extends PureComponent<tContainerProps> {
     }
   }
 
-  deleteAccount() {
-    this.props.deleteAccountDispatch()
-      .then(this.props.logoutDispatch)
-      .catch(loglevel.error);
-  }
-
   render() {
     return (
       <GenericLoader
         isLoading={this.props.isLoading}
         render={() => (
           <UserAdminComponent
-            deleteAccount={this.deleteAccount}
             match={this.props.match}
             orgsByUserIdThunk={this.props.orgsByUserIdThunk}
             session={this.props.session}
@@ -54,11 +47,8 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  deleteAccountDispatch: () => dispatch(deleteAccount()),
-
   getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) =>
     dispatch(getOrgsByUserId(query)),
-
   getRolesDispatch: () => dispatch(getRoles()),
   getRsvpsDispatch: () => dispatch(getRsvps()),
   logoutDispatch: () => dispatch(logout()),

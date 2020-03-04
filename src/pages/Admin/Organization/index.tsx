@@ -11,9 +11,9 @@ const GroupAdminContainer = memo((props: tProps) => {
   const {match, session} = props;
   const {section} = match.params;
   const isAccount = section === 'account';
-  const isMeetings = section === 'events';
+  const isMeetings = section === 'meetings';
   const isProfile = section === 'profile';
-  const isMembers = section === 'memberships' || section === 'pendingApprovals';
+  const isMembers = section === 'memberships';
   const isMeetingForm = section === 'planMeeting';
 
   if (!session.isAuthenticated) return <Redirect to="" />;
@@ -68,7 +68,7 @@ const GroupAdminContainer = memo((props: tProps) => {
               <div className="bgGrey3 circ mR3 p3" />
               {isMeetings && 'Edit Meetings & Drafts'}
               {!isMeetings && (
-                <Link to="/admin/events">
+                <Link to="/admin/meetings">
                 Edit Meetings & Drafts
                 </Link>
               )}
@@ -78,27 +78,16 @@ const GroupAdminContainer = memo((props: tProps) => {
               {section === 'memberships' && 'Manage Members'}
               {section !== 'memberships' && (
                 <Link to="/admin/memberships">
-                Manage Members
+                  Manage Members
                 </Link>
               )}
             </li>
-            {session.profile.type === 'private' && (
-              <li className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
-                <div className="bgGrey3 circ mR3 p3" />
-                {section === 'pendingApprovals' && 'Approve Pending Members'}
-                {section !== 'pendingApprovals' && (
-                  <Link to="/admin/pendingApprovals">
-                  Approve Pending Members
-                  </Link>
-                )}
-              </li>
-            )}
             <li className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
               <div className="bgGrey3 circ mR3 p3" />
               {isMeetingForm && 'Plan Meeting'}
               {!isMeetingForm && (
                 <Link to="/admin/planMeeting">
-                Plan Meeting
+                  Plan Meeting
                 </Link>
               )}
             </li>

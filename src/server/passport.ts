@@ -13,7 +13,9 @@ passport.serializeUser(async (account: tAccount, done) => {
 passport.deserializeUser(async (account: tAccount, done) => {
   try {
     const row: tAccount = await knex('accounts')
-      .limit(1).where({id: account.id}).first();
+      .limit(1)
+      .where({id: account.id})
+      .first();
     return done(null, row);
   } catch (err) {
     return done(err, null);

@@ -8,14 +8,12 @@ export type tStore = {
 };
 
 export type tProps = {
-  deleteAccount: () => void,
   match: tAdminSections,
   orgsByUserIdThunk: tThunk<tOrg[]>,
   session: tSession<tUser>,
 };
 
 export type tContainerProps = tProps & {
-  deleteAccountDispatch: () => tThunkPayload<any>,
   getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) => tThunkPayload<tOrg[]>,
   getRolesDispatch: () => tThunkPayload<tRoleMap[]>,
   getRsvpsDispatch: () => tThunkPayload<tRSVP[]>,

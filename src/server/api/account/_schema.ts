@@ -7,4 +7,7 @@ export const schema = Joi.object({
 
 export const deleteSchema = Joi.object({
   id: Joi.number().integer().required(),
+  isFormSubmit: Joi.bool(),
+  login: Joi.string().required(),
+  password: Joi.string().min(12).required(),
 });

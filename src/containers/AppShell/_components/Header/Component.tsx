@@ -31,7 +31,7 @@ export const HeaderComponent = memo((props: tComponentProps) => (
                 <Link
                   id="a11yAdmin"
                   className="mR2"
-                  to="/admin/events">
+                  to="/admin/meetings">
                   Account
                 </Link>
                 <button

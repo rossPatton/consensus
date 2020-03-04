@@ -40,7 +40,9 @@ export const UsersComponent = memo((props: tComponentProps) => (
               value={user.role as string}
               onChange={ev => props.setUserRole(ev, user.id)}>
               <option key="default" value={user.role as string}>
-                Assign new role
+                {user.role === 'pending'
+                  ? 'Approve'
+                  : 'Change role'}
               </option>
               {roles.map(role => (
                 role === user.role

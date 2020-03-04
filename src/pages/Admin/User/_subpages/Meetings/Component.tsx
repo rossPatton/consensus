@@ -3,7 +3,7 @@ import React, {memo} from 'react';
 import {Events, FilterPanel} from '../../../../../components';
 import {tComponentProps} from './_types';
 
-export const EventsComponent = memo((props: tComponentProps) => (
+export const MeetingsComponent = memo((props: tComponentProps) => (
   <>
     <ul className="fx aiCtr mB3" role="navigation">
       <li>

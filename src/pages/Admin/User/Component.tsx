@@ -3,21 +3,28 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {PlaceholderImage} from '../../../components';
-import {Account, Events, Memberships, Profile} from './_subpages';
+import {
+  Account,
+  DeleteAccount,
+  Meetings,
+  Memberships,
+  Profile,
+} from './_subpages';
 import {tProps} from './_types';
 
 export const UserAdminComponent = memo((props: tProps) => {
   const section: string = _.get(props, 'match.params.section', '');
   const isAccount = section === 'account';
-  const isEvents = section === 'events';
+  const isDeleteAccount = section === 'deleteAccount';
+  const isMeetings = section === 'meetings';
   const isProfile = section === 'profile';
   const isMemberships = section === 'memberships';
+  const {session, orgsByUserIdThunk} = props;
   const {profile} = props.session;
-  const {orgsByUserIdThunk} = props;
 
   return (
     <>
-      {!props.session.isVerified && (
+      {!session.isVerified && (
         <div className="row p3 mB3 taCtr bgRedLite fw600 fs6">
           <Link to="/verify-account">
             Verify your account
@@ -36,7 +43,7 @@ export const UserAdminComponent = memo((props: tProps) => {
             <div>
               <h1 className="fs4">
                 <Link
-                  to="/admin/events"
+                  to="/admin/meetings"
                   className="fw600 noUnderline">
                   @{profile.username}
                 </Link>
@@ -101,18 +108,17 @@ export const UserAdminComponent = memo((props: tProps) => {
             <button className="p3 hvrBgGrey1 fw600 mR2">
               Download your data
             </button>
-            <button
-              onClick={props.deleteAccount}
-              className="p3 hvrBgGrey1 fw600">
-              {props.session.deletionDeadline
-                ? 'Stop account deletion'
-                : 'Delete your account'}
-            </button>
+            <Link
+              to="/admin/deleteAccount"
+              className="btn p3 hvrBgGrey1 fw600">
+              Delete your account
+            </Link>
           </div>
         </aside>
         <div className="col bgWhite br8 p3">
           {isAccount && <Account />}
-          {isEvents && <Events />}
+          {isDeleteAccount && <DeleteAccount />}
+          {isMeetings && <Meetings />}
           {isProfile && <Profile />}
           {isMemberships && <Memberships />}
         </div>
