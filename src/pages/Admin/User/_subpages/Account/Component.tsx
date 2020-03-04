@@ -23,7 +23,7 @@ export const AccountComponent = memo((props: tComponentProps) => {
         <legend>
           <h1 className="fs3 mB3">Manage your account</h1>
         </legend>
-        <div className="mB4">
+        <div className="mB5">
           <label htmlFor="login">
             <h2 className="ffLab fs5 mB1 lh1">
               Change your Login

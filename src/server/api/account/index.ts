@@ -4,15 +4,35 @@ import _ from 'lodash';
 import {Mutable} from 'utility-types';
 
 import {knex} from '../../db/connection';
-import {encrypt, isValidPw, saltedHash} from '../../utils';
-import {schema} from './_schema';
+import {encrypt, isValidPw, saltedHash, validateSchema} from '../../utils';
+import {deleteSchema, schema} from './_schema';
 
 export const account = new Router();
 const route = '/api/v1/account';
 const table = 'accounts';
 
-// TODO no-js forms only do GET/POST - figure out how to make patches work w/o js
-// this is basically just for updating your user/org info
+account.delete(route, async (ctx: Koa.ParameterizedContext) => {
+  // TODO add query back, require a password to set deletion timer
+  // also set deletion timer
+  const session: tAccount = _.get(ctx, 'state.user', {});
+  await validateSchema<Mutable<tIdQuery>>(ctx, deleteSchema, {id: session.id});
+
+  // const isValidPW = await isValidPw(query.password, loggedInAccount.password);
+  // if (!isValidPW) return ctx.throw(400, 'Password is not correct');
+
+  try {
+    await knex(table)
+      .limit(1)
+      .where({id: session.id})
+      .delete();
+  } catch (err) {
+    return ctx.throw(400, err);
+  }
+
+  ctx.body = {ok: true};
+});
+
+// TODO implement a POST route here as an upsert
 account.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const query: Mutable<tAccountQuery> = _.get(ctx, 'state.locals.data', {});
   const loggedInAccount: tAccount = _.get(ctx, 'state.user', {});

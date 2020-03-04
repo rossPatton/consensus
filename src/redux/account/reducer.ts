@@ -1,4 +1,5 @@
 import { tAccountActionUnion } from './_types';
+import { DELETE_FAILURE, DELETE_SUCCESS } from './delete/_types';
 import { PATCH_FAILURE, PATCH_SUCCESS } from './patch/_types';
 
 const initialState: tThunk<tSession> = {
@@ -21,9 +22,13 @@ export const accountReducer = (state = initialState, action: tAccountActionUnion
   };
 
   switch (action.type) {
+  case DELETE_FAILURE:
+    return failureReturn;
   case PATCH_FAILURE:
     return failureReturn;
 
+  case DELETE_SUCCESS:
+    return successReturn;
   case PATCH_SUCCESS:
     return successReturn;
 

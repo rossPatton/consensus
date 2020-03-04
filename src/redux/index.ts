@@ -1,5 +1,5 @@
 // account or login related thunks
-export { patchAccount } from './account';
+export { deleteAccount, patchAccount } from './account';
 export { login, logout } from './auth';
 
 // directory related thunks

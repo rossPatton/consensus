@@ -24,6 +24,10 @@ exports.up = async (knex: Knex) => {
     // if user puts their email in, we can verify that they're a real person
     table.boolean('isVerified').defaultTo(false);
 
+    // if user chooses to delete their account, we set a deadline of 1 week
+    // if user does not stop deletion in that 1 week, we delete the account
+    table.timestamp('deletionDeadline').defaultTo(null);
+
     // temporary string used for resetting account password
     // once password is reset, token is set back to ''
     table.string('passwordResetToken').defaultTo(null);

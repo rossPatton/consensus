@@ -63,8 +63,8 @@ export const UserAdminComponent = memo((props: tProps) => {
           {!orgsByUserIdThunk.isLoading
             && orgsByUserIdThunk.data.length > 0
             && (
-              <ul role="navigation">
-                <li className="fs4 copyBlack fw600 mB3">
+              <ul className="mB3 pB3" role="navigation">
+                <li className="fs4 fw600 mB3">
                   Your groups
                 </li>
                 {orgsByUserIdThunk.data.slice(0, 3).map((group, i) => (
@@ -94,6 +94,21 @@ export const UserAdminComponent = memo((props: tProps) => {
                 </li>
               </ul>
             )}
+          <div className="fs4 fw600 mB3">
+            Other actions
+          </div>
+          <div className="fx aiCtr">
+            <button className="p3 hvrBgGrey1 fw600 mR2">
+              Download your data
+            </button>
+            <button
+              onClick={props.deleteAccount}
+              className="p3 hvrBgGrey1 fw600">
+              {props.session.deletionDeadline
+                ? 'Stop account deletion'
+                : 'Delete your account'}
+            </button>
+          </div>
         </aside>
         <div className="col bgWhite br8 p3">
           {isAccount && <Account />}
