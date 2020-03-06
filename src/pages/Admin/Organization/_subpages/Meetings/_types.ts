@@ -4,10 +4,11 @@ export type tProps = {
   match: tAdminSections,
 };
 
-export type tComponentProps = tProps & {
+export type tComponentProps = tProps
+  & tPublishedFilterProps
+  & tSearchFilterProps
+  & {
   events: tEvent[],
-  onPublishedFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
-  onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
 };
 
 export type tContainerProps = tProps & {

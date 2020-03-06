@@ -52,17 +52,12 @@ export const UserAdminComponent = memo((props: tProps) => {
                 <Link
                   to="/admin/account"
                   className="mR2 fs7 fw600">
-                  Edit account
+                  Account
                 </Link>
                 <Link
                   to="/admin/profile"
                   className="mR2 fs7 fw600">
-                  Edit profile
-                </Link>
-                <Link
-                  to={`/user/${profile.id}`}
-                  className="fs7 fw600">
-                  View public profile
+                  Profile
                 </Link>
               </div>
             </div>

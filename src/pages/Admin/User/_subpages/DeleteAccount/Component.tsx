@@ -10,10 +10,10 @@ export const DeleteAccountComponent = memo((props: tComponentProps) => (
     onSubmit={props.deleteAccount}>
     <fieldset>
       <legend>
-        <h1 className="fs3 mB3">Delete your account</h1>
+        <h1 className="fs3 mB1">Delete your account</h1>
       </legend>
-      <h2 className="fs4 mB3">
-        Enter your login credentials to trigger the account deletion process. You will have 2 weeks to stop the deletion. You can use the account as normal during this time. After 2 weeks, your account will be <b>permanently</b> deleted.
+      <h2 className="fs5 mB3 copyBlack">
+        Enter your login credentials to trigger the account deletion process. If you do this, your account will be <b>permanently</b> deleted!
       </h2>
       <label htmlFor="login">
         <h2 className="ffLab fs5 mB1 lh1">

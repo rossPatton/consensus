@@ -12,6 +12,7 @@ import {ProfileComponent} from './Component';
 const initialState = {
   bio: '',
   email: '',
+  isLocked: true,
   name: '',
   password: '',
   privateEmail: true,
@@ -70,6 +71,11 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     this.setState({password: ''});
   }
 
+  toggleLock = () =>
+    this.setState({
+      isLocked: !this.state.isLocked,
+    });
+
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
     if (!stateKey) return;
 
@@ -105,6 +111,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
               {...this.state}
               session={sessionThunk.data}
               save={this.save}
+              toggleLock={this.toggleLock}
               updateState={this.updateState}
             />
           )}

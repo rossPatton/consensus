@@ -1,15 +1,15 @@
 import { logoutPath } from '../_constants';
 import { api } from '../../../utils';
-import { logoutFailure, logoutSuccess } from './actions';
+import { failure, success } from './actions';
 
 export const logout = () => {
   return async function (dispatch: Function) {
     return api({
       credentials: true,
       dispatch,
-      failure: logoutFailure,
+      failure,
       path: logoutPath,
-      success: logoutSuccess,
+      success,
     });
   };
 };

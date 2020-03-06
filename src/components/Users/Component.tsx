@@ -11,6 +11,7 @@ export const UsersComponent = memo((props: tComponentProps) => (
       <li
         key={i}
         className="bgWhite mB3 hvrBgGrey1 br4 fx aiCtr p3">
+        <div className="bgGrey3 circ mR3 p3" />
         <div className="col row">
           <h3 className="mB1">
             <Link to={`/user/${user.id}`}>

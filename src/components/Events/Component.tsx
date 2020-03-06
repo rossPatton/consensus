@@ -115,20 +115,30 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   <div className="bgGrey4 br4 fs7 lh1 mR1 p1 pL2 pR2 white">
                     {ev.isDraft ? 'Draft' : 'Published'}
                   </div>
-                  <div className="fx aiCtr mR1">
-                    <Link
-                      to={props.sessionRole === 'admin'
-                        ? `/admin/planMeeting?${objToQueryString(ev)}`
-                        : `/org/${ev.orgId}/planMeeting?${objToQueryString(ev)}`}
-                      className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2">
-                      <span
-                        role="img"
-                        aria-label="Hand with Pen Emoji">
+                  <Link
+                    to={props.sessionRole === 'admin'
+                      ? `/admin/planMeeting?${objToQueryString(ev)}`
+                      : `/org/${ev.orgId}/planMeeting?${objToQueryString(ev)}`}
+                    className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
+                    <span
+                      role="img"
+                      aria-label="Hand with Pen Emoji">
                         ✍️
-                      </span>
-                      Edit
-                    </Link>
-                  </div>
+                    </span>
+                    Edit
+                  </Link>
+                  <Link
+                    to={props.sessionRole === 'admin'
+                      ? `/admin/planMeeting?${objToQueryString(ev)}`
+                      : `/org/${ev.orgId}/planMeeting?${objToQueryString(ev)}`}
+                    className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
+                    <span
+                      role="img"
+                      aria-label="Clipboard Emoji">
+                      📋
+                    </span>
+                    Copy
+                  </Link>
                   <button
                     onClick={e => props.deleteEvent(e, ev.id)}
                     className="aiCtr fs7 fw600 fx hvrBgGrey1 lh1">

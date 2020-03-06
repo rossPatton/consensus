@@ -3,8 +3,7 @@ import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {logout} from '../../../../redux';
-import {logoutSuccess} from '../../../../redux/auth/logout/actions';
+import {logout, logoutSuccess} from '../../../../redux';
 import {tContainerProps} from './_types';
 import {HeaderComponent} from './Component';
 

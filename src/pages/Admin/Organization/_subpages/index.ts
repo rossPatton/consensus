@@ -4,6 +4,10 @@ export const Account = loadable(() =>
   import(/* webpackChunkName: "OrgAdmin Account" */'./Account'),
 );
 
+export const DeleteGroup = loadable(() =>
+  import(/* webpackChunkName: "OrgAdmin DeleteGroup" */'./DeleteGroup'),
+);
+
 export const Meetings = loadable(() =>
   import(/* webpackChunkName: "OrgAdmin Meetings" */'./Meetings'),
 );

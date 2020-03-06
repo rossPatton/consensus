@@ -1,4 +1,3 @@
-import contentDisposition from 'content-disposition';
 import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';

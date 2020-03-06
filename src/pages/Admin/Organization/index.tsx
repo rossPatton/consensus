@@ -1,16 +1,26 @@
+import cx from 'classnames';
+import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 import {Link} from 'react-router-dom';
 
-import {Account, Meetings, Members, PlanMeeting, Profile} from './_subpages';
+import {
+  Account,
+  DeleteGroup,
+  Meetings,
+  Members,
+  PlanMeeting,
+  Profile,
+} from './_subpages';
 import {tProps} from './_types';
 
 const GroupAdminContainer = memo((props: tProps) => {
   const {match, session} = props;
   const {section} = match.params;
   const isAccount = section === 'account';
+  const isDelete = section === 'deleteGroup';
   const isMeetings = section === 'meetings';
   const isProfile = section === 'profile';
   const isMembers = section === 'memberships';
@@ -20,7 +30,16 @@ const GroupAdminContainer = memo((props: tProps) => {
 
   return (
     <>
-      {!props.session.isVerified && (
+      {session.deletionDeadline && (
+        <div
+          className={cx({
+            'row p3 taCtr bgYellowLite fw600 fs6': true,
+            mB3: session.isVerified,
+          })}>
+          Your group will be deleted on {dayJS(session.deletionDeadline).format('MMM DD')}
+        </div>
+      )}
+      {!session.isVerified && (
         <div className="row p3 mB3 taCtr bgRedLite fw600 fs6">
           <Link to="/verify-account">
             Verify your account
@@ -50,26 +69,26 @@ const GroupAdminContainer = memo((props: tProps) => {
                 <Link
                   to="/admin/account"
                   className="mR2 fs7">
-                Edit account
+                  Account
                 </Link>
                 <Link
                   to="/admin/profile"
                   className="mR2 fs7">
-                Edit profile
+                  Profile
                 </Link>
               </div>
             </div>
           </div>
           <ul role="navigation">
             <li className="fs4 fw600 mB2">
-            Admin Actions
+              Admin Actions
             </li>
             <li className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
               <div className="bgGrey3 circ mR3 p3" />
               {isMeetings && 'Edit Meetings & Drafts'}
               {!isMeetings && (
                 <Link to="/admin/meetings">
-                Edit Meetings & Drafts
+                  Edit Meetings & Drafts
                 </Link>
               )}
             </li>
@@ -78,11 +97,11 @@ const GroupAdminContainer = memo((props: tProps) => {
               {section === 'memberships' && 'Manage Members'}
               {section !== 'memberships' && (
                 <Link to="/admin/memberships">
-                  Manage Members
+                  Manage Members & Approvals
                 </Link>
               )}
             </li>
-            <li className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
+            <li className="fx aiCtr fs5 p2 mB3 br4 hvrBgGrey1">
               <div className="bgGrey3 circ mR3 p3" />
               {isMeetingForm && 'Plan Meeting'}
               {!isMeetingForm && (
@@ -92,9 +111,29 @@ const GroupAdminContainer = memo((props: tProps) => {
               )}
             </li>
           </ul>
+          <div className="fs4 fw600 mB3">
+            Other actions
+          </div>
+          <div className="fx aiCtr">
+            <form action="/api/v1/download">
+              <fieldset>
+                <button className="p3 hvrBgGrey1 fw600 mR2">
+                  <legend>Download your data</legend>
+                </button>
+              </fieldset>
+            </form>
+            <Link
+              to="/admin/deleteGroup"
+              className="btn p3 hvrBgGrey1 fw600 noUnderline">
+              {session.deletionDeadline
+                ? 'Cancel group deletion'
+                : 'Delete your Group'}
+            </Link>
+          </div>
         </aside>
         <div className="bgWhite br8 col p3">
           {isAccount && <Account />}
+          {isDelete && <DeleteGroup />}
           {isMeetings && <Meetings match={props.match} />}
           {isProfile && <Profile />}
           {isMembers && <Members match={props.match} />}

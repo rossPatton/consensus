@@ -7,4 +7,5 @@ export type tProps = {
   onRoleFilterChange?: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
   placeholder?: string,
+  publishedFilter: tPublishedFilter,
 };

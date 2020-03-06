@@ -5,12 +5,12 @@ import {
   tSuccessAction,
 } from './_types';
 
-export const logoutFailure = (payload: Error): tFailureAction => ({
+export const failure = (payload: Error): tFailureAction => ({
   type: LOGOUT_FAILURE,
   payload,
 });
 
-export const logoutSuccess = (payload: {isAuthenticated: false}): tSuccessAction => ({
+export const success = (payload: {isAuthenticated: false}): tSuccessAction => ({
   type: LOGOUT_SUCCESS,
   payload,
 });

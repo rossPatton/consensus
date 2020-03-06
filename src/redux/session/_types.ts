@@ -6,8 +6,14 @@ import {
   tFailureAction as tLogoutFailureAction,
   tSuccessAction as tLogoutSuccessAction,
 } from './logout/_types';
+import {
+  tFailureAction as tPatchFailureAction,
+  tSuccessAction as tPatchSuccessAction,
+} from './patch/_types';
 
-export type tAuthActionUnion = tLoginFailureAction
+export type tActionUnion = tLoginFailureAction
   | tLoginSuccessAction
   | tLogoutFailureAction
-  | tLogoutSuccessAction;
+  | tLogoutSuccessAction
+  | tPatchFailureAction
+  | tPatchSuccessAction;

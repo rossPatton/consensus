@@ -42,14 +42,16 @@ const FilterPanel = memo((props: tProps) => (
     )}
     {props.onPublishedFilterChange && (
       <select
+        defaultValue={props.publishedFilter}
         onBlur={props.onPublishedFilterChange}
         onChange={props.onPublishedFilterChange}>
         <option value="n/a">
           Show all meetings
         </option>
         {[
-          {display: 'Only Show Drafts', value: 'draft'},
-          {display: 'Only Show Published', value: 'published'},
+          {display: 'Drafts', value: 'draft'},
+          {display: 'Upcoming', value: 'published'},
+          {display: 'Past', value: 'past'},
         ].map(({display, value}) => (
           <option key={display} value={value}>
             {display}

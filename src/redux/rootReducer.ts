@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 
-import { authReducer } from './auth/reducer';
 import { cityReducer } from './city/reducer';
 import { countryReducer } from './country/reducer';
 import { eventReducer } from './event/reducer';
@@ -15,6 +14,7 @@ import { orgsByUserIdReducer } from './orgsByUserId/reducer';
 import { regionReducer } from './region/reducer';
 import { rolesReducer } from './roles/reducer';
 import { rsvpsReducer } from './rsvps/reducer';
+import { sessionReducer } from './session/reducer';
 import { userReducer } from './user/reducer';
 import { usersByOrgIdReducer } from './usersByOrgId/reducer';
 
@@ -33,7 +33,7 @@ export const rootReducer = combineReducers({
   region: regionReducer,
   roles: rolesReducer,
   rsvps: rsvpsReducer,
-  session: authReducer,
+  session: sessionReducer,
   user: userReducer,
   usersByOrgId: usersByOrgIdReducer,
 });

@@ -1,5 +1,6 @@
 export type tState = Partial<tUser> & {
   email: string, // email is part of account, but for ease of use we put it here
+  isLocked: boolean,
   password: string,
 };
 
@@ -18,6 +19,7 @@ export type tContainerProps = {
 export type tComponentProps = tState & {
   save: (ev: React.FormEvent<HTMLFormElement>) => void,
   session: tSession,
+  toggleLock: () => void,
   updateState: (
     key: tStateUnion,
     ev: React.MouseEvent<HTMLDivElement>

@@ -14,6 +14,8 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
     super(props);
 
     this.state = {
+      email: '',
+      isLocked: true,
       isVerified: _.get(props, 'sessionThunk.data.isVerified', false),
       login: _.get(props, 'sessionThunk.data.login', ''),
       newPassword: '',
@@ -42,8 +44,13 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
       loglevel.error(err);
     }
 
-    this.setState({password: ''});
+    this.setState({isLocked: true, password: ''});
   }
+
+  toggleLock = () =>
+    this.setState({
+      isLocked: !this.state.isLocked,
+    });
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
     this.setState({
@@ -53,6 +60,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     const {sessionThunk} = this.props;
+    console.log('all props for account page => ', this.props);
 
     return (
       <ErrorBoundary status={_.get(sessionThunk, 'error.status', 200)}>
@@ -73,6 +81,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
               {...this.state}
               session={sessionThunk.data}
               save={this.save}
+              toggleLock={this.toggleLock}
               updateState={this.updateState}
             />
           )}

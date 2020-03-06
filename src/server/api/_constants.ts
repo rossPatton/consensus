@@ -1,3 +1,11 @@
+export const accountKeys = [
+  'deletionDeadline',
+  'id',
+  'isVerified',
+  'userId',
+  'orgId',
+];
+
 export const orgKeys = [
   'category',
   'city',

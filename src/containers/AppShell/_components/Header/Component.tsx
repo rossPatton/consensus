@@ -32,7 +32,7 @@ export const HeaderComponent = memo((props: tComponentProps) => (
                   id="a11yAdmin"
                   className="mR2"
                   to="/admin/meetings">
-                  Account
+                  Dashboard
                 </Link>
                 <button
                   id="a11yLogout"

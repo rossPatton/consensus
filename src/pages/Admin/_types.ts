@@ -10,6 +10,7 @@ export type tAdminSections = match & {
     page?: string,
     section: 'account'
       | 'deleteAccount'
+      | 'deleteGroup'
       | 'meetings'
       | 'memberships'
       | 'planMeeting'

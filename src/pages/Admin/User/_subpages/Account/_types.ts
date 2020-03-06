@@ -1,4 +1,6 @@
 export type tState = {
+  email: string,
+  isLocked: boolean,
   isVerified: boolean,
   login: string,
   newPassword: string,
@@ -20,5 +22,6 @@ export type tContainerProps = {
 export type tComponentProps = tState & {
   save: (ev: React.FormEvent<HTMLFormElement>) => void,
   session: tSession,
+  toggleLock: () => void,
   updateState: (key: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 };

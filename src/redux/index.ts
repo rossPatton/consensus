@@ -1,6 +1,5 @@
-// account or login related thunks
+// account related thunks
 export { deleteAccount, patchAccount } from './account';
-export { login, logout } from './auth';
 
 // directory related thunks
 export { getCity } from './city';
@@ -21,6 +20,9 @@ export { getEventsByUserId } from './eventsByUserId';
 export { getOrg, patchOrg, postOrg } from './org';
 export { getOrgs } from './orgs';
 export { deleteOrgByUserId, getOrgsByUserId } from './orgsByUserId';
+
+// session related actions/thunks
+export { login, logout, logoutSuccess, patchSessionSuccess } from './session';
 
 // user related actions/thunks
 export { deleteUser, getUser, patchUser, postUser } from './user';

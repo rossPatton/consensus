@@ -99,7 +99,7 @@ const mapStateToProps = (store: tStore) => ({
 
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
-  patchAccountDispatch: (query: tAccount) => dispatch(patchAccount(query)),
+  patchAccountDispatch: (query: tAccountQuery) => dispatch(patchAccount(query)),
 });
 
 const Account = connect(

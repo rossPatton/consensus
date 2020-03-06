@@ -12,6 +12,7 @@ export const MeetingsComponent = memo((props: tComponentProps) => (
       className="bgWhite br8 fs6 fw600 fx aiCtr mB3"
       onPublishedFilterChange={props.onPublishedFilterChange}
       onSearchChange={props.onSearchChange}
+      publishedFilter={props.publishedFilter}
     />
     <Events
       events={props.events}

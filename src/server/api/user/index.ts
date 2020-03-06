@@ -2,6 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
+import {userKeys} from '../_constants';
 import {knex} from '../../db/connection';
 import {
   encrypt,
@@ -10,7 +11,6 @@ import {
   saltedHash,
   validateSchema,
 } from '../../utils';
-import {userKeys} from './_constants';
 import {getSchema, patchSchema, postSchema} from './_schema';
 import {tUserPostServerQuery} from './_types';
 

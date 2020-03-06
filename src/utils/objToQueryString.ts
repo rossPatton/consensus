@@ -9,7 +9,7 @@ export const objToQueryString = (obj: tObj): string => {
 
   const qs = Object.keys(obj)
     .map(k => {
-      if (!notNull(obj[k])) return '';
+      if (!notNull(obj[k])) return `${k}=null`;
       if (!notUndefined(obj[k])) return '';
 
       // handle nested objects and arrays
