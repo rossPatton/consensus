@@ -61,7 +61,7 @@ const GroupAdminContainer = memo((props: tProps) => {
               <h1 className="fs4">
                 <Link
                   className="noUnderline"
-                  to="/admim/meetings">
+                  to="/admin/meetings">
                   {session.isVerified && (
                     <span
                       aria-label="Verified Account Checkbox"
