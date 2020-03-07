@@ -5,7 +5,7 @@ import {FilterPanel, Users} from '../../../../../components';
 import {tComponentProps} from './_types';
 
 export const MembersComponent = memo((props: tComponentProps) => (
-  <>
+  <div className="bgWhite br8 p3">
     <div className="fx aiCtr">
       <h1 className="fs3 mB2">
         Manage Membership ({props.userTotal} members)
@@ -22,5 +22,5 @@ export const MembersComponent = memo((props: tComponentProps) => (
       setUserRole={props.setUserRole}
       users={props.users}
     />
-  </>
+  </div>
 ));

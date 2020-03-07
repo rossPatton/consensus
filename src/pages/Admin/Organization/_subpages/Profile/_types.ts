@@ -1,4 +1,9 @@
-export type tState = tOrg & {email: string, password: string}
+export type tState = tOrg & {
+  email: string,
+  isLocked: boolean,
+  password: string,
+}
+
 export type tStateUnion = keyof tState;
 export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
@@ -14,5 +19,7 @@ export type tContainerProps = {
 
 export type tComponentProps = tState & {
   onSubmit: (ev: React.FormEvent<HTMLFormElement>) => void,
+  toggleLock: () => void,
+  session: tSession,
   updateState: (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => void,
 };

@@ -8,7 +8,7 @@ import {range} from '../../../utils/range';
 
 const createMeeting = async (orgId: number, isDraft: boolean = false) => {
   const org = orgs[orgId - 1];
-  const meetingsPerOrg = loRange(1, orgId === 1 ? 50 : 3);
+  const meetingsPerOrg = isDraft ? [1, 2, 3] : loRange(1, orgId === 1 ? 50 : 3);
 
   return meetingsPerOrg.map(() => ({
     category: org.category,
@@ -36,7 +36,7 @@ exports.seed = async (knex: Knex) => {
     fakeEvents.push(await createMeeting(orgId));
   }
 
-  for await (const orgId of range(5, true)) {
+  for await (const orgId of range(100, true)) {
     fakeEvents.push(await createMeeting(orgId, true));
   }
 

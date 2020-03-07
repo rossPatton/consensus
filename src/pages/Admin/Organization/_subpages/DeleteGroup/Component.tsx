@@ -6,6 +6,7 @@ import {tComponentProps} from './_types';
 export const DeleteGroupComponent = memo((props: tComponentProps) => (
   <form
     autoComplete="off"
+    className="bgWhite br8 p3"
     action="/api/v1/account"
     onSubmit={props.deleteGroup}>
     <fieldset>

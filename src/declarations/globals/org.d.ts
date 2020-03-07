@@ -1,6 +1,7 @@
 declare type tPrivacyEnum = 'public' | 'private' | 'hidden';
 
 declare type tOrg = Readonly<{
+   allowNonVerified: boolean,
    category: tCategory,
    city: string,
    cityId: number,
@@ -12,6 +13,8 @@ declare type tOrg = Readonly<{
    emails?: string[],
    facebook: string,
    id: number,
+   memberName: string,
+   modName: string,
    name: string,
    region: string,
    regionId: number,

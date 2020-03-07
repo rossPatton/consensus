@@ -49,8 +49,7 @@ const FilterPanel = memo((props: tProps) => (
           Show all meetings
         </option>
         {[
-          {display: 'Drafts', value: 'draft'},
-          {display: 'Upcoming', value: 'published'},
+          {display: 'Upcoming', value: 'upcoming'},
           {display: 'Past', value: 'past'},
         ].map(({display, value}) => (
           <option key={display} value={value}>

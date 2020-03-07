@@ -5,7 +5,7 @@ import {tProps, tState} from './_types';
 // for use with events, decisions, etc
 export default class PublishedFilter extends Component<tProps, tState> {
   state = {
-    publishedFilter: 'published' as tPublishedFilter,
+    publishedFilter: 'upcoming' as tPublishedFilter,
   };
 
   filter = (items: tEvent[]) => {

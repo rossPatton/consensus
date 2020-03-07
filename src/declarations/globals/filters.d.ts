@@ -1,4 +1,4 @@
-declare type tPublishedFilter = 'n/a' | 'published' | 'draft';
+declare type tPublishedFilter = 'n/a' | 'upcoming' | 'past';
 declare type tInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => void;
 declare type tSelectChange = (ev: React.ChangeEvent<HTMLSelectElement>) => void;
 

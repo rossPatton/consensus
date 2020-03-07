@@ -1,4 +1,5 @@
 type tProps = {
+  count?: number,
   events: tEvent[],
   // render alternative version
   horizontal?: boolean,

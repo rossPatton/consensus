@@ -19,6 +19,7 @@ const createOrg = async (orgId: number) => {
     : categories[getRandomNum(0, categories.length - 1)].type;
 
   return {
+    allowNonVerified: org.type === 'public',
     category,
     city: org.city,
     cityId: 16624,
@@ -27,6 +28,8 @@ const createOrg = async (orgId: number) => {
     description: faker.lorem.paragraphs(),
     facebook: 'https://facebook.com',
     handle: org.handle,
+    memberName: 'Member',
+    modName: 'Facilitator',
     name: org.name,
     region: org.region,
     regionId: org.regionId,

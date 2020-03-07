@@ -8,6 +8,7 @@ export type tComponentProps = tProps
   & tPublishedFilterProps
   & tSearchFilterProps
   & {
+    drafts: tEvent[],
   events: tEvent[],
 };
 

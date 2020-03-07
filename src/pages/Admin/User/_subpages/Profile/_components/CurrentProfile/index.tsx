@@ -4,15 +4,13 @@ import {Link} from 'react-router-dom';
 import {tComponentProps} from '../../_types';
 
 const CurrentProfile = memo((props: tComponentProps) => (
-  <>
-    <h1 className="fs3 mB2 lh1">
+  <div className="rel">
+    <h1 className="fs3 mB3 lh1">
       Your profile
     </h1>
-    <h2 className="fs5 copyBlack lh1 fw600 mB4">
-      <Link to={`/user/${props.session.id}`}>
-        View your public profile
-      </Link>
-    </h2>
+    <Link className="fs7 lh1 fw600 abs t r" to={`/user/${props.session.id}`}>
+      View your public profile
+    </Link>
     <h2 className="fs5 mB3 lh1">
       Username: @<span className="copyBlack">
         {props.username}
@@ -83,9 +81,9 @@ const CurrentProfile = memo((props: tComponentProps) => (
     <button
       onClick={props.toggleLock}
       className="p3 pL4 pR4 hvrBgGrey1 trans1">
-      Edit your profile
+      Edit profile
     </button>
-  </>
+  </div>
 ));
 
 export default CurrentProfile;

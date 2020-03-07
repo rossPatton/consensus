@@ -45,6 +45,14 @@ export const UserAdminComponent = memo((props: tProps) => {
                 <Link
                   to="/admin/meetings"
                   className="fw600 noUnderline">
+                  {session.isVerified && (
+                    <span
+                      aria-label="Verified Account Checkbox"
+                      className="dInBl mR1"
+                      role="img">
+                      ✅
+                    </span>
+                  )}
                   @{profile.username}
                 </Link>
               </h1>

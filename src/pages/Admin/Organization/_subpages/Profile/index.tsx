@@ -19,6 +19,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     this.state = {
       ...org,
       email,
+      isLocked: true,
       password: '',
     };
   }
@@ -56,9 +57,21 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     this.setState({password: ''});
   }
 
-  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
+  toggleLock = () =>
     this.setState({
-      [stateKey]: ev.currentTarget.value,
+      isLocked: !this.state.isLocked,
+    });
+
+  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
+    if (!stateKey) return;
+
+    let {value} = ev.currentTarget;
+    if (stateKey === 'allowNonVerified') {
+      value = !this.state[stateKey];
+    }
+
+    this.setState({
+      [stateKey]: value,
     } as Pick<tState, tStateUnion>);
   }
 
@@ -83,6 +96,8 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
             <ProfileComponent
               {...this.state}
               onSubmit={this.onSubmit}
+              session={sessionThunk.data}
+              toggleLock={this.toggleLock}
               updateState={this.updateState}
             />
           )}

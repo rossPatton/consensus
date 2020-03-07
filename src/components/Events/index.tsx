@@ -8,6 +8,10 @@ import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
 
 class EventsContainer extends PureComponent<tContainerProps> {
+  static defaultProps = {
+    count: 4,
+  };
+
   deleteEvent = (ev: React.MouseEvent, id: number) => {
     ev.preventDefault();
     this.props.deleteEventDispatch({id});
@@ -15,6 +19,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
 
   render() {
     const {
+      count,
       events = [],
       sessionRole,
       showOrgName,
@@ -33,7 +38,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
 
     return (
       <Paginate
-        count={4}
+        count={count}
         items={events}
         render={(eventsToRender: tEvent[]) => (
           <EventsComponent

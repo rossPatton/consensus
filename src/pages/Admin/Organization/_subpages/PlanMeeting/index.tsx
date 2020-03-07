@@ -4,7 +4,7 @@ import {Helmet, PlanMeeting as PlanMeetingComponent} from '../../../../../compon
 import {tProps} from './_types';
 
 const PlanMeeting = memo((props: tProps) => (
-  <>
+  <div className="bgWhite br8 p3">
     <Helmet
       canonical=""
       title=""
@@ -22,7 +22,7 @@ const PlanMeeting = memo((props: tProps) => (
       org={props.org}
       router={props.router}
     />
-  </>
+  </div>
 ));
 
 export default PlanMeeting;

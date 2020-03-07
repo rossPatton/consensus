@@ -13,11 +13,11 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
 
-    const session = _.get(props, 'sessionThunk.data', {});
-
     this.state = {
-      isVerified: session.isVerified,
-      login: session.login,
+      email: '',
+      isLocked: true,
+      isVerified: _.get(props, 'sessionThunk.data.isVerified', false),
+      login: _.get(props, 'sessionThunk.data.login', ''),
       newPassword: '',
       password: '',
     };
@@ -25,27 +25,18 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
 
   save = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const accountId = _.get(this.props, 'sessionThunk.data.id', null);
+    const {loginDispatch, patchAccountDispatch, sessionThunk} = this.props;
 
-    if (!accountId) return;
-
-    let newAccount: tActionPayload<tAccount>;
     try {
-      newAccount = await this.props.patchAccountDispatch({
-        ...this.state,
-        id: accountId,
-      });
+      const id = _.get(sessionThunk, 'data.id', null);
+      await patchAccountDispatch({...this.state, id});
     } catch (err) {
       return loglevel.error(err);
     }
 
-    // TODO trigger error boundary or display errors or something
-    if (!newAccount.payload) return;
-
-    // update session by 'logging in' again, with the new account info
-    const {login, newPassword, password} = this.state;
     try {
-      await this.props.loginDispatch({
+      const {login, newPassword, password} = this.state;
+      await loginDispatch({
         username: login,
         password: newPassword || password,
       });
@@ -53,8 +44,13 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
       loglevel.error(err);
     }
 
-    this.setState({password: ''});
+    this.setState({isLocked: true, password: ''});
   }
+
+  toggleLock = () =>
+    this.setState({
+      isLocked: !this.state.isLocked,
+    });
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
     this.setState({
@@ -84,6 +80,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
               {...this.state}
               session={sessionThunk.data}
               save={this.save}
+              toggleLock={this.toggleLock}
               updateState={this.updateState}
             />
           )}
@@ -99,7 +96,9 @@ const mapStateToProps = (store: tStore) => ({
 
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
-  patchAccountDispatch: (query: tAccountQuery) => dispatch(patchAccount(query)),
+
+  patchAccountDispatch: (query: {id: number} & tState) =>
+    dispatch(patchAccount(query)),
 });
 
 const Account = connect(

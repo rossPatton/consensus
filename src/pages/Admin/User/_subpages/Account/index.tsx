@@ -60,7 +60,6 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     const {sessionThunk} = this.props;
-    console.log('all props for account page => ', this.props);
 
     return (
       <ErrorBoundary status={_.get(sessionThunk, 'error.status', 200)}>

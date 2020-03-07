@@ -108,47 +108,53 @@ export const EventsComponent = memo((props: tComponentProps) => (
                     {ev.orgName}
                   </Link>
                 )}
-              {!isPastEvent
-              && props.isEditable
+              {props.isEditable
               && (
                 <div className="fx aiCtr mB1">
                   <div className="bgGrey4 br4 fs7 lh1 mR1 p1 pL2 pR2 white">
-                    {ev.isDraft ? 'Draft' : 'Published'}
+                    {ev.isDraft && 'Draft'}
+                    {!ev.isDraft && (isPastEvent ? 'Past' : 'Upcoming')}
                   </div>
-                  <Link
-                    to={props.sessionRole === 'admin'
-                      ? `/admin/planMeeting?${objToQueryString(ev)}`
-                      : `/org/${ev.orgId}/planMeeting?${objToQueryString(ev)}`}
-                    className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
-                    <span
-                      role="img"
-                      aria-label="Hand with Pen Emoji">
+                  {!isPastEvent && (
+                    <Link
+                      to={props.sessionRole === 'admin'
+                        ? `/admin/planMeeting?${objToQueryString(ev)}`
+                        : `/org/${ev.orgId}/planMeeting?${objToQueryString(ev)}`}
+                      className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
+                      <span
+                        role="img"
+                        aria-label="Hand with Pen Emoji">
                         ✍️
-                    </span>
-                    Edit
-                  </Link>
-                  <Link
-                    to={props.sessionRole === 'admin'
-                      ? `/admin/planMeeting?${objToQueryString(ev)}`
-                      : `/org/${ev.orgId}/planMeeting?${objToQueryString(ev)}`}
-                    className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
-                    <span
-                      role="img"
-                      aria-label="Clipboard Emoji">
-                      📋
-                    </span>
-                    Copy
-                  </Link>
-                  <button
-                    onClick={e => props.deleteEvent(e, ev.id)}
-                    className="aiCtr fs7 fw600 fx hvrBgGrey1 lh1">
-                    <span
-                      role="img"
-                      aria-label="Big X Emoji">
-                      ✖️
-                    </span>
+                      </span>
+                      Edit
+                    </Link>
+                  )}
+                  {isPastEvent && (
+                    <Link
+                      to={props.sessionRole === 'admin'
+                        ? `/admin/planMeeting?${objToQueryString(ev)}`
+                        : `/org/${ev.orgId}/planMeeting?${objToQueryString(ev)}`}
+                      className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
+                      <span
+                        role="img"
+                        aria-label="Clipboard Emoji">
+                        📋
+                      </span>
+                      Copy
+                    </Link>
+                  )}
+                  {!isPastEvent && (
+                    <button
+                      onClick={e => props.deleteEvent(e, ev.id)}
+                      className="aiCtr fs7 fw600 fx hvrBgGrey1 lh1">
+                      <span
+                        role="img"
+                        aria-label="Big X Emoji">
+                        ✖️
+                      </span>
                     Delete
-                  </button>
+                    </button>
+                  )}
                 </div>
               )}
             </div>

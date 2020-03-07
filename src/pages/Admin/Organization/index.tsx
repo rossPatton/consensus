@@ -61,7 +61,15 @@ const GroupAdminContainer = memo((props: tProps) => {
               <h1 className="fs4">
                 <Link
                   className="noUnderline"
-                  to={`/org/${props.session.profile.id}`}>
+                  to="/admim/meetings">
+                  {session.isVerified && (
+                    <span
+                      aria-label="Verified Account Checkbox"
+                      className="dInBl mR1"
+                      role="img">
+                      ✅
+                    </span>
+                  )}
                   {props.session.profile.name}
                 </Link>
               </h1>
@@ -94,7 +102,7 @@ const GroupAdminContainer = memo((props: tProps) => {
             </li>
             <li className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
               <div className="bgGrey3 circ mR3 p3" />
-              {section === 'memberships' && 'Manage Members'}
+              {section === 'memberships' && 'Manage Members & Approvals'}
               {section !== 'memberships' && (
                 <Link to="/admin/memberships">
                   Manage Members & Approvals
@@ -131,7 +139,7 @@ const GroupAdminContainer = memo((props: tProps) => {
             </Link>
           </div>
         </aside>
-        <div className="bgWhite br8 col p3">
+        <div className="col">
           {isAccount && <Account />}
           {isDelete && <DeleteGroup />}
           {isMeetings && <Meetings match={props.match} />}

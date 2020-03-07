@@ -43,54 +43,6 @@ const EditProfile = memo((props: tComponentProps) => (
             name="bio"
           />
         </label>
-        <label className="row mB1" htmlFor="email">
-          <h2 className="ffLab fs5 mB1 lh1">
-            Email address
-          </h2>
-          <p className="fs5 copyBlack mB1">
-            Used for account verification, event reminders, etc.
-          </p>
-          <input
-            onChange={ev => props.updateState('email', ev)}
-            className="p3 row"
-            placeholder="Update your email here"
-            value={props.email}
-            name="email"
-          />
-        </label>
-        <div
-          tabIndex={0}
-          role="button"
-          className="fx aiCtr curPtr mB4 fs6"
-          onClick={ev => props.updateState('privateEmail', ev)}
-          onKeyPress={ev => props.updateState('privateEmail', ev)}>
-          <input
-            readOnly
-            type="checkbox"
-            className="mR2"
-            autoComplete="nope"
-            checked={props.privateEmail}
-          />
-          <span>
-            {props.privateEmail && 'Your email is kept private'}
-            {!props.privateEmail && 'Your email is displayed on your profile.'}
-          </span>
-        </div>
-        <label className="dBl mB4" htmlFor="phone">
-          <h2 className="ffLab fs5 mB1 lh1">
-            Phone number
-          </h2>
-          <p className="fs5 copyBlack mB1">
-            Used as an additional level of account verification. Always private, never shared with anyone.
-          </p>
-          <input
-            onChange={ev => props.updateState('phone', ev)}
-            className="p3 row"
-            placeholder="Example: 555-555-5555"
-            value={props.phone}
-            name="phone"
-          />
-        </label>
         <label className="dBl mB4" htmlFor="website">
           <h2 className="ffLab fs5 mB1 lh1">
             Personal Website

@@ -62,6 +62,10 @@ exports.up = async (knex: Knex) => {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
+    table.string('memberName').defaultTo('Member').notNullable();
+    table.string('modName').defaultTo('Facilitator').notNullable();
+    table.string('allowNonVerified').defaultTo(false).notNullable();
+
     // group external website and social media, if available
     table.string('website').defaultTo('');
     table.string('facebook').defaultTo('');

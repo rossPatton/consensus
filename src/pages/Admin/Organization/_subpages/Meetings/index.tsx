@@ -54,15 +54,25 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
               render={publishedProps => (
                 <SearchFilter
                   items={publishedProps.items}
-                  render={searchProps => (
-                    <MeetingsComponent
-                      {...publishedProps}
-                      {...searchProps}
-                      events={searchProps.items}
-                      match={this.props.match}
-                      onPublishedFilterChange={publishedProps.onPublishedFilterChange}
-                    />
-                  )}
+                  render={searchProps => {
+                    const events: tEvent[] = searchProps.items.filter(ev => {
+                      return !ev.isDraft;
+                    });
+                    const drafts: tEvent[] = eventsByOrgIdThunk.data.filter(ev => {
+                      return ev.isDraft;
+                    });
+
+                    return (
+                      <MeetingsComponent
+                        {...publishedProps}
+                        {...searchProps}
+                        drafts={drafts}
+                        events={events}
+                        match={this.props.match}
+                        onPublishedFilterChange={publishedProps.onPublishedFilterChange}
+                      />
+                    );
+                  }}
                 />
               )}
             />
