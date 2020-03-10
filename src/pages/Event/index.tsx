@@ -3,8 +3,8 @@ import loglevel from 'loglevel';
 import qs from 'query-string';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router';
 
+// import {Redirect} from 'react-router';
 import {Helmet} from '../../components';
 import {ErrorBoundary, GenericLoader} from '../../containers';
 import {getEvent, getEventsByOrgId, getOrg, getRoles, getRsvps} from '../../redux';
@@ -53,7 +53,15 @@ class EventContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {eventThunk, eventsByOrgId, orgThunk, rolesThunk, session} = this.props;
+    const {
+      eventThunk,
+      eventsByOrgId,
+      orgThunk,
+      rolesThunk,
+      rsvpsThunk,
+      session,
+    } = this.props;
+
     const eventStatus = _.get(eventThunk, 'error.status', null);
     const orgStatus = _.get(orgThunk, 'error.status', null);
 
@@ -91,7 +99,7 @@ class EventContainer extends PureComponent<tContainerProps> {
 
             // if user is not logged in or not a member of the group
             if (privateGroup && (!userIsLoggedIn || !userRoleMap)) {
-              return <Redirect to="/login" />;
+              // return <Redirect to="/login" />;
             }
 
             return (
@@ -107,15 +115,21 @@ class EventContainer extends PureComponent<tContainerProps> {
                       const queryObj = qs.parse(search);
 
                       if (queryObj.isPreview === '') {
-                        return <Redirect to="/login" />;
+                        // return <Redirect to="/login" />;
                       }
                     }
+
+                    const rsvp = _.find(
+                      rsvpsThunk.data,
+                      rsvp => rsvp.eventId === event.id,
+                    );
 
                     return (
                       <EventComponent
                         event={event}
                         eventsByOrgId={eventsByOrgId}
                         org={orgThunk.data}
+                        rsvp={rsvp}
                       />
                     );
                   }}

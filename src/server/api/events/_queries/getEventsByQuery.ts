@@ -27,13 +27,9 @@ export const getEventsByQuery = async (
     // if we're excluding events, do it up front
     if (excludeId) events.whereNot({id: excludeId});
 
+    // if no showPast boolean, then return *only* upcoming events
     const showPast = showPastStr === 'true';
     const now = dayJS().toISOString();
-
-    // return old events
-    if (showPast) events.where('date', '<', now);
-
-    // return upcoming events
     if (!showPast) events.where('date', '>=', now);
 
     // we fetch everything by default if you're a group member,

@@ -43,17 +43,8 @@ class SuperSearchContainer extends React.PureComponent<any, any> {
         action="/api/v1/search">
         <fieldset>
           <div className="fx aiCtr">
-            <label className="row" htmlFor="superSearch">
-              <input
-                className="bgGrey1 row p3 br4 mR3"
-                name="superSearch"
-                onChange={this.onChange}
-                placeholder="Search by group name"
-                type="search"
-                value={this.state.value}
-              />
-            </label>
             <select
+              className="mR2"
               onBlur={this.onFilterOptionChange}
               onChange={this.onFilterOptionChange}>
               {filterOptions.map(opt => (
@@ -64,6 +55,16 @@ class SuperSearchContainer extends React.PureComponent<any, any> {
                 </option>
               ))}
             </select>
+            <label className="row" htmlFor="superSearch">
+              <input
+                className="bgGrey1 row p3 br4 mR3"
+                name="superSearch"
+                onChange={this.onChange}
+                placeholder="Search by group name"
+                type="search"
+                value={this.state.value}
+              />
+            </label>
           </div>
         </fieldset>
       </form>

@@ -67,10 +67,9 @@ const FilterPanel = memo((props: tProps) => (
         </option>
         {roles.map(role => (
           <option
-            className="ttCap"
             key={role}
             value={role}>
-            {role}
+            {role === 'member' ? props.memberName : props.modName}
           </option>
         ))}
       </select>

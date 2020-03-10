@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import React, {Component} from 'react';
 
 import {tProps, tState} from './_types';
@@ -9,10 +10,21 @@ export default class PublishedFilter extends Component<tProps, tState> {
   };
 
   filter = (items: tEvent[]) => {
+    const now = dayjs();
     const {publishedFilter} = this.state;
+
     if (publishedFilter === 'n/a') return items;
-    const isDraft = publishedFilter === 'draft';
-    return items.filter(item => item.isDraft === isDraft);
+
+    const isPast = publishedFilter === 'past';
+    if (isPast) {
+      return items.filter(item => {
+        return dayjs(item.date).isBefore(now);
+      });
+    }
+
+    return items.filter(item => {
+      return dayjs(item.date).isAfter(now);
+    });
   };
 
   onChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {

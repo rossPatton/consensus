@@ -6,7 +6,7 @@ import {tProps} from './_types';
 import {UsersComponent} from './Component';
 
 const Users = memo((props: tProps) => {
-  const {sessionRole, users} = props;
+  const {count = 10, sessionRole, users} = props;
   const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
 
   if (users.length === 0) {
@@ -17,10 +17,12 @@ const Users = memo((props: tProps) => {
 
   return (
     <Paginate
-      count={10}
+      count={count}
       items={users}
       render={(usersToRender: tUser[]) => (
         <UsersComponent
+          memberName={props.memberName}
+          modName={props.modName}
           removeUser={props.removeUser}
           isEditable={isEditable}
           sessionRole={sessionRole}

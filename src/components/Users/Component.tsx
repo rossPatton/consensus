@@ -19,9 +19,11 @@ export const UsersComponent = memo((props: tComponentProps) => (
             </Link>
           </h3>
           <div className="fx aiCtr">
-            <span className="p1 lh1 fs7 bgGrey4 white fw600 ttCap br4 mR2">
-              {user.role}
-            </span>
+            {user.role !== 'pending' && (
+              <span className="p1 lh1 fs7 bgGrey4 white fw600 br4 mR2">
+                {user.role === 'member' ? props.memberName : props.modName}
+              </span>
+            )}
             {(props.sessionRole === 'admin' || props.sessionRole === 'facilitator')
                 && (
                   <button
@@ -40,7 +42,7 @@ export const UsersComponent = memo((props: tComponentProps) => (
               className="ttCap"
               value={user.role as string}
               onChange={ev => props.setUserRole(ev, user.id)}>
-              <option key="default" value={user.role as string}>
+              <option key="" value={user.role}>
                 {user.role === 'pending'
                   ? 'Approve'
                   : 'Change role'}
@@ -50,9 +52,9 @@ export const UsersComponent = memo((props: tComponentProps) => (
                   ? null
                   : (
                     <option
-                      key={role as string}
-                      value={role as string}>
-                      {role}
+                      key={role}
+                      value={role}>
+                      {role === 'member' ? props.memberName : props.modName}
                     </option>
                   )
               ))}

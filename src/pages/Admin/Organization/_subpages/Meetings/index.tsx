@@ -27,6 +27,7 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
         orgId,
         limit: -1,
         offset,
+        showPast: true,
       });
     }
   }

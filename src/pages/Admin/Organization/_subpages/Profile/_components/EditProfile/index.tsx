@@ -31,17 +31,6 @@ const EditProfile = memo((props: tComponentProps) => (
         ))}
       </select>
       <h2 className="fs5 mB1 lh1">
-        Description
-      </h2>
-      <textarea
-        rows={6}
-        spellCheck
-        className="mB3 row fs5"
-        placeholder="Organization Description Here"
-        value={props.description}
-        onChange={ev => props.updateState('description', ev)}
-      />
-      <h2 className="fs5 mB1 lh1">
         Group Type
       </h2>
       <select
@@ -62,21 +51,6 @@ const EditProfile = memo((props: tComponentProps) => (
       <small className="dBl mB3 copyBlack">
         This option only affects future membership approvals
       </small>
-      <label className="row mB3" htmlFor="email">
-        <h2 className="fs5 mB1 lh1">
-          Email address
-        </h2>
-        <p className="fs5 copyBlack mB1">
-          Used for account verification, and so group members can contact you
-        </p>
-        <input
-          onChange={ev => props.updateState('email', ev)}
-          className="p3 row"
-          placeholder="Update your email here"
-          value={props.email}
-          name="email"
-        />
-      </label>
       <label className="row mB3" htmlFor="memberName">
         <h2 className="fs5 mB1 lh1">
           Membership Title
@@ -102,30 +76,16 @@ const EditProfile = memo((props: tComponentProps) => (
         />
       </label>
       <h2 className="fs5 mB1 lh1">
-        Should the group be restricted to verified members only?
+        Description
       </h2>
-      <div
-        tabIndex={0}
-        role="button"
-        className="fx aiCtr curPtr fs6 p1 mB3"
-        onClick={ev => props.updateState('allowNonVerified', ev)}
-        onKeyPress={ev => props.updateState('allowNonVerified', ev)}>
-        <input
-          readOnly
-          type="checkbox"
-          className="mR2"
-          autoComplete="nope"
-          checked={props.allowNonVerified}
-        />
-        <span>
-          {props.allowNonVerified && (
-            'Anyone can join this group, regardless of verification status.'
-          )}
-          {!props.allowNonVerified && (
-            'Memberships is limited to only verified accounts.'
-          )}
-        </span>
-      </div>
+      <textarea
+        rows={6}
+        spellCheck
+        className="mB3 row fs5"
+        placeholder="Organization Description Here"
+        value={props.description}
+        onChange={ev => props.updateState('description', ev)}
+      />
       <label className="dBl mB3" htmlFor="website">
         <h2 className="fs5 mB1 lh1">
           Personal Website
@@ -150,7 +110,7 @@ const EditProfile = memo((props: tComponentProps) => (
           value={props.facebook}
         />
       </label>
-      <label className="dBl mB5" htmlFor="twitter">
+      <label className="dBl mB3" htmlFor="twitter">
         <h2 className="fs5 mB1 lh1">
           Twitter
         </h2>
@@ -162,6 +122,31 @@ const EditProfile = memo((props: tComponentProps) => (
           value={props.twitter}
         />
       </label>
+      <h2 className="fs5 mB1 lh1">
+        Should the group be restricted to verified members only?
+      </h2>
+      <div
+        tabIndex={0}
+        role="button"
+        className="fx aiCtr curPtr fs6 p1 mB5"
+        onClick={ev => props.updateState('allowNonVerified', ev)}
+        onKeyPress={ev => props.updateState('allowNonVerified', ev)}>
+        <input
+          readOnly
+          type="checkbox"
+          className="mR2"
+          autoComplete="nope"
+          checked={!props.allowNonVerified}
+        />
+        <span>
+          {props.allowNonVerified && (
+            'Anyone can join this group, regardless of verification status.'
+          )}
+          {!props.allowNonVerified && (
+            'Membership is limited to only verified accounts.'
+          )}
+        </span>
+      </div>
       <PasswordInput
         id="pwInput"
         title="Current Password"

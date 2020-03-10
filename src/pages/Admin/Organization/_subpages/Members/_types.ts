@@ -13,14 +13,16 @@ export type tContainerProps = {
   match: tAdminSections,
   patchUserByOrgIdDispatch: (opts: tPatchUserRoleQuery) =>
     tThunkPayload<tAccountRoleRelation>,
-  sessionThunk: tThunk<tSession>,
+  session: tSession,
   usersThunk: tThunk<tUser[]>,
 }
 
 export type tComponentProps = {
+  approvals: tUser[],
   removeUser: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
   onRoleFilterChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
+  session: tSession,
   setUserRole: (ev: React.ChangeEvent<HTMLSelectElement>, id: number) => void,
   users: tUser[],
   userTotal: number,

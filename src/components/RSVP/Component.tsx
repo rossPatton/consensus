@@ -2,7 +2,6 @@ import cx from 'classnames';
 import _ from 'lodash';
 import React from 'react';
 
-// import {RSVPCount} from '..';
 import {tComponentProps} from './_types';
 
 export const RSVPComponent = (props: tComponentProps) => {

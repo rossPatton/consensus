@@ -44,7 +44,7 @@ declare type isAuthenticated = Readonly<{
 
 // tSession is like tUser, but with auth data and everything is optional
 // since a user might not be logged in
-declare type tSession<T = tUser> = tAccountBase & Readonly<{
+declare type tSession<T = tUser | tOrg> = tAccountBase & Readonly<{
   deletionDeadline?: string,
   isAuthenticated: boolean,
   isVerified: boolean,

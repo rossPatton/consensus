@@ -1,5 +1,4 @@
-export type tState = tOrg & {
-  email: string,
+export type tState = Partial<tOrg> & {
   isLocked: boolean,
   password: string,
 }

@@ -18,6 +18,7 @@ export type tProps = {
 export type tComponentProps = tProps & {
   event: tEvent,
   org: tOrg,
+  rsvp: tRSVP,
 };
 
 export type tContainerProps = tProps & {

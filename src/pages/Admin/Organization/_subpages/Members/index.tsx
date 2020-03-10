@@ -12,7 +12,7 @@ import {
 import {tContainerProps, tStore} from './_types';
 import {MembersComponent} from './Component';
 
-const idPath = 'sessionThunk.data.profile.id';
+const idPath = 'session.profile.id';
 
 class MembersContainer extends PureComponent<tContainerProps> {
   constructor (props: tContainerProps) {
@@ -65,16 +65,27 @@ class MembersContainer extends PureComponent<tContainerProps> {
                 <SearchFilter
                   searchKey="username"
                   items={roleProps.items}
-                  render={searchProps => (
-                    <MembersComponent
-                      {...roleProps}
-                      {...searchProps}
-                      removeUser={this.removeUser}
-                      setUserRole={this.setUserRole}
-                      users={searchProps.items}
-                      userTotal={usersThunk.data.length}
-                    />
-                  )}
+                  render={searchProps => {
+                    const approvals: tUser[] = usersThunk.data.filter(u => {
+                      return u.role === 'pending';
+                    });
+                    const users: tUser[] = searchProps.items.filter(u => {
+                      return u.role !== 'pending';
+                    });
+
+                    return (
+                      <MembersComponent
+                        {...roleProps}
+                        {...searchProps}
+                        approvals={approvals}
+                        removeUser={this.removeUser}
+                        session={this.props.session}
+                        setUserRole={this.setUserRole}
+                        users={users}
+                        userTotal={usersThunk.data.length}
+                      />
+                    );
+                  }}
                 />
               )}
             />
@@ -86,7 +97,7 @@ class MembersContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  sessionThunk: store.session,
+  session: store.session.data,
   usersThunk: store.usersByOrgId,
 });
 

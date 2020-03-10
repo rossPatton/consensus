@@ -9,6 +9,9 @@ export type tRoleOpts = {
 };
 
 export type tProps = {
+  count?: number,
+  memberName?: string,
+  modName?: string,
   removeUser?: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
   setUserRole?: (ev: React.ChangeEvent<HTMLSelectElement>, id: number) => void,
   users: tUser[],

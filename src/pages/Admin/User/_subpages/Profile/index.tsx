@@ -68,7 +68,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       loglevel.error(err);
     }
 
-    this.setState({password: ''});
+    this.setState({isLocked: true, password: ''});
   }
 
   toggleLock = () =>

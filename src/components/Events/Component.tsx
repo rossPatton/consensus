@@ -16,6 +16,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
     })}>
     {props.events.map((ev, i) => {
       const isPastEvent = dayJS(ev.date).isBefore(dayJS());
+      const qs = objToQueryString(ev);
 
       return (
         <li
@@ -115,11 +116,11 @@ export const EventsComponent = memo((props: tComponentProps) => (
                     {ev.isDraft && 'Draft'}
                     {!ev.isDraft && (isPastEvent ? 'Past' : 'Upcoming')}
                   </div>
-                  {!isPastEvent && (
+                  {(!isPastEvent || ev.isDraft) && (
                     <Link
                       to={props.sessionRole === 'admin'
-                        ? `/admin/planMeeting?${objToQueryString(ev)}`
-                        : `/org/${ev.orgId}/planMeeting?${objToQueryString(ev)}`}
+                        ? `/admin/planMeeting?${qs}`
+                        : `/org/${ev.orgId}/planMeeting?${qs}`}
                       className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
                       <span
                         role="img"
@@ -132,18 +133,18 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   {isPastEvent && (
                     <Link
                       to={props.sessionRole === 'admin'
-                        ? `/admin/planMeeting?${objToQueryString(ev)}`
-                        : `/org/${ev.orgId}/planMeeting?${objToQueryString(ev)}`}
+                        ? `/admin/planMeeting?${qs}`
+                        : `/org/${ev.orgId}/planMeeting?${qs}`}
                       className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
                       <span
                         role="img"
                         aria-label="Clipboard Emoji">
                         📋
                       </span>
-                      Copy
+                    Copy
                     </Link>
                   )}
-                  {!isPastEvent && (
+                  {(!isPastEvent || ev.isDraft) && (
                     <button
                       onClick={e => props.deleteEvent(e, ev.id)}
                       className="aiCtr fs7 fw600 fx hvrBgGrey1 lh1">
@@ -152,7 +153,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                         aria-label="Big X Emoji">
                         ✖️
                       </span>
-                    Delete
+                      Delete
                     </button>
                   )}
                 </div>

@@ -12,4 +12,4 @@ export const categoryMap: tCategoryMap = {
   'political': 'Political',
 };
 
-export const roles: tRole[] = ['member', 'facilitator', 'pending'];
+export const roles: tRole[] = ['member', 'facilitator'];

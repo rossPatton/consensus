@@ -5,7 +5,7 @@ import _ from 'lodash';
 import {orgKeys} from '../_constants';
 import {knex} from '../../db/connection';
 import {validateSchema} from '../../utils';
-import {schema} from './_schema';
+import {patchSchema, schema} from './_schema';
 
 export const org = new Router();
 const dataPath = 'state.locals.data';
@@ -31,7 +31,8 @@ org.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 org.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const {isFormSubmit, ...newOrg} = _.get(ctx, dataPath, {});
+  const {email, isFormSubmit, password, ...newOrg} = _.get(ctx, dataPath, {});
+  await validateSchema<tGetOrgQuery>(ctx, patchSchema, newOrg);
 
   let updatedOrg = [] as tOrg[];
   try {
@@ -44,7 +45,10 @@ org.patch(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  ctx.body = updatedOrg[0];
+  ctx.body = {
+    ...updatedOrg[0],
+    email,
+  };
 });
 
 org.post(route, async (ctx: Koa.ParameterizedContext) => {

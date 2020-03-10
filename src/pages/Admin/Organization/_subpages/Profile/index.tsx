@@ -12,13 +12,21 @@ import {ProfileComponent} from './Component';
 class ProfileContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
-    const {created_at, updated_at, ...org}: tOrg =
-      _.get(this.props, 'sessionThunk.data.profile', {});
-    const email = _.get(props, 'sessionThunk.data.emails[0].email', '');
+    const {
+      city,
+      cityId,
+      country,
+      countryId,
+      created_at,
+      name,
+      region,
+      regionId,
+      updated_at,
+      ...editablePartOfGroup
+    }: tOrg = _.get(this.props, 'sessionThunk.data.profile', {});
 
     this.state = {
-      ...org,
-      email,
+      ...editablePartOfGroup,
       isLocked: true,
       password: '',
     };
@@ -26,16 +34,11 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
 
   onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {category, description, type, id} = this.state;
+    const {isLocked, password, ...stuffToPatch} = this.state;
 
     let patchedOrg: tActionPayload<tOrg>;
     try {
-      patchedOrg = await this.props.patchOrgDispatch({
-        category,
-        description,
-        type,
-        id,
-      });
+      patchedOrg = await this.props.patchOrgDispatch(stuffToPatch);
     } catch (err) {
       loglevel.error(err);
     }
@@ -53,8 +56,8 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       loglevel.error(err);
     }
 
-    // reset password on submit
-    this.setState({password: ''});
+    // reset on submit
+    this.setState({isLocked: true, password: ''});
   }
 
   toggleLock = () =>
@@ -94,6 +97,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
           isLoading={sessionThunk.isLoading}
           render={() => (
             <ProfileComponent
+              {...this.props}
               {...this.state}
               onSubmit={this.onSubmit}
               session={sessionThunk.data}

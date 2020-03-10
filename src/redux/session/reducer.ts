@@ -35,7 +35,6 @@ export const sessionReducer = (state = initialState, action: tActionUnion) => {
   case LOGOUT_SUCCESS:
     return successReturn;
   case PATCH_SUCCESS: {
-    console.log('patching session while logged in => ', action);
     return {
       error: null as null,
       data: {

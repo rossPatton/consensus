@@ -113,7 +113,11 @@ const GroupAdminContainer = memo((props: tProps) => {
               <div className="bgGrey3 circ mR3 p3" />
               {isMeetingForm && 'Plan Meeting'}
               {!isMeetingForm && (
-                <Link to="/admin/planMeeting">
+                <Link
+                  to="/admin/planMeeting"
+                  className={cx({
+                    curDisable: !props.session.isVerified,
+                  })}>
                   Plan Meeting
                 </Link>
               )}

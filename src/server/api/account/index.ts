@@ -64,7 +64,6 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
   // password stuff will cause a constraint error - pull out before updating
   const {isFormSubmit, newPassword, password, ...updateQuery} = query;
-  console.log('updateQuery => ', updateQuery);
   if (updateQuery.deletionDeadline === 'null') {
     updateQuery.deletionDeadline = null;
   }
