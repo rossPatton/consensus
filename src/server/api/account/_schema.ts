@@ -2,10 +2,14 @@ import Joi from '@hapi/joi';
 
 const baseSchema = Joi.object({isFormSubmit: Joi.bool()});
 
-export const schema = baseSchema.keys({
-  deletionDeadline: Joi.string(), // Joi.date().allow(null),
+export const patchSchema = baseSchema.keys({
+  deletionDeadline: Joi.date().allow(null).optional(),
+  email: Joi.string().email().optional(),
+  login: Joi.string().optional(),
+  // current password required to make any account changes
   password: Joi.string().min(12).required(),
-  newPassword: Joi.ref('password'),
+  privateEmail: Joi.bool(),
+  newPassword: Joi.string().min(12).optional(),
 });
 
 export const deleteSchema = baseSchema.keys({

@@ -24,6 +24,9 @@ exports.up = async (knex: Knex) => {
     // if user puts their email in, we can verify that they're a real person
     table.boolean('isVerified').defaultTo(false);
 
+    // if set to true, email addresses aren't visible to other users or groups
+    table.boolean('privateEmail').notNullable().defaultTo(true);
+
     // temporary string used for resetting account password
     // once password is reset, token is set back to ''
     table.string('passwordResetToken').defaultTo(null);

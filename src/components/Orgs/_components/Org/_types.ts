@@ -9,6 +9,8 @@ export type tProps = {
   org: tOrg,
   roles: tRoleMap[],
   setHover: (hoverIndex: number | null, groupType?: tRole) => void,
+  showCategory?: boolean,
   showLocation?: boolean,
+  showType?: boolean,
   showPending?: boolean,
 };

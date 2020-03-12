@@ -29,15 +29,14 @@ user.get(route, async (ctx: Koa.ParameterizedContext) => {
     .where({id: query.id})
     .first();
 
-  let emails = [] as {email: string}[];
-  if (!user.privateEmail) {
-    // @TODO maybe adding accountId to other tables as a FK would make things easier
-    const account: tAccount = await knex('accounts')
-      .limit(1)
-      .where({userId: query.id})
-      .select(['id'])
-      .first();
+  const account: tAccount = await knex('accounts')
+    .limit(1)
+    .where({userId: query.id})
+    .select(['id'])
+    .first();
 
+  let emails = [] as {email: string}[];
+  if (!account.privateEmail) {
     emails = await knex('accounts_emails')
       .where({id: account.id})
       .select(['email']);

@@ -15,35 +15,36 @@ const EditAccount = memo((props: any) => (
         <h1 className="fs3 mB3">Edit your account</h1>
       </legend>
       <div className="mB4">
-        <label htmlFor="login">
-          <h2 className="ffLab fs5 mB1 lh1">
-            Change Login
+        <label htmlFor="newLogin">
+          <h2 className="fs5 mB1 lh1">
+            Change login
           </h2>
           <p className="fs5 copyBlack mB1">
-            A unique username that is used just for logging in. Keep secret.
+            A secret username that is used just for logging in. Must be unique.
           </p>
           <input
-            id="login"
-            onChange={ev => props.updateState('login', ev)}
+            autoComplete="nope"
             className="p3 mB3 row"
-            placeholder={props.session.login}
+            onChange={ev => props.updateState('login', ev)}
+            placeholder="a_Secret_Name_Nobody_Can_Guess"
             value={props.login}
-            name="login"
+            name="newLogin"
           />
         </label>
-        <label className="row mB1" htmlFor="email">
-          <h2 className="ffLab fs5 mB1 lh1">
-            Change Email address
+        <label className="row mB1" htmlFor="newEmail">
+          <h2 className="fs5 mB1 lh1">
+            Change email address
           </h2>
           <p className="fs5 copyBlack mB1">
             Used for account verification, event reminders, etc.
           </p>
           <input
+            autoComplete="nope"
             onChange={ev => props.updateState('email', ev)}
             className="p3 row"
-            placeholder="Update your email here"
+            placeholder="yournewemail@example.com"
             value={props.email}
-            name="email"
+            name="newEmail"
           />
         </label>
         <div
@@ -61,7 +62,7 @@ const EditAccount = memo((props: any) => (
           />
           <span>
             {props.privateEmail && 'Your email is kept private'}
-            {!props.privateEmail && 'Your email is displayed on your profile.'}
+            {!props.privateEmail && 'Your email is visible on your public profile.'}
           </span>
         </div>
         <PasswordInput

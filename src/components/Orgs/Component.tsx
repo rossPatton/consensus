@@ -20,8 +20,6 @@ export const OrgsComponent = memo((props: tComponentProps) => (
         key={org.id}
         org={org}
         index={i}
-        leaveOrg={props.leaveOrg}
-        setHover={props.setHover}
       />
     ))}
     {props.pendingOrgs.length > 0 && (
@@ -34,9 +32,7 @@ export const OrgsComponent = memo((props: tComponentProps) => (
             {...props}
             index={i}
             key={pendingOrg.id}
-            leaveOrg={props.leaveOrg}
             org={pendingOrg}
-            setHover={props.setHover}
           />
         ))}
       </>

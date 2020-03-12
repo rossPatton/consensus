@@ -17,6 +17,10 @@ export const CityComponent = memo((props: tComponentProps) => (
       onSearchChange={props.onSearch}
       placeholder="Filter by group name"
     />
-    <Orgs count={16} orgs={props.orgsToRender} />
+    <Orgs
+      count={16}
+      orgs={props.orgsToRender}
+      showType
+    />
   </>
 ));

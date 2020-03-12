@@ -7,12 +7,12 @@ const CurrentAccount = memo((props: tComponentProps) => (
     <h1 className="fs3 mB3 lh1">Your account details</h1>
     <h2 className="fs5 mB3 lh1">
       Login: <span className="copyBlack">
-        {props.login}
+        {props.session.login}
       </span>
     </h2>
     <h2 className="fs5 mB3 lh1">
       Password: <span className="copyBlack">
-        ******
+        ************
       </span>
     </h2>
     {props.session.emails

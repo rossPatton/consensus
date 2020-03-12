@@ -30,6 +30,7 @@ class UserAdminContainer extends PureComponent<tContainerProps> {
           <UserAdminComponent
             match={this.props.match}
             orgsByUserIdThunk={this.props.orgsByUserIdThunk}
+            roles={this.props.rolesThunk.data}
             session={this.props.session}
           />
         )}

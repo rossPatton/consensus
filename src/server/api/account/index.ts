@@ -6,12 +6,11 @@ import {Mutable} from 'utility-types';
 import {accountKeys} from '../_constants';
 import {knex} from '../../db/connection';
 import {encrypt, isValidPw, saltedHash, validateSchema} from '../../utils';
-import {deleteSchema, schema} from './_schema';
+import {deleteSchema, patchSchema} from './_schema';
 
 export const account = new Router();
 const route = '/api/v1/account';
 const table = 'accounts';
-
 
 account.delete(route, async (ctx: Koa.ParameterizedContext) => {
   const query: Mutable<tAccountQuery> = _.get(ctx, 'state.locals.data', {});
@@ -51,7 +50,7 @@ account.delete(route, async (ctx: Koa.ParameterizedContext) => {
 // TODO implement a POST route here as an upsert
 account.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const query: Mutable<tAccountQuery> = _.get(ctx, 'state.locals.data', {});
-  await validateSchema<Mutable<tAccountQuery>>(ctx, schema, query);
+  await validateSchema<Mutable<tAccountQuery>>(ctx, patchSchema, query);
 
   const loggedInAccount: tAccount = _.get(ctx, 'state.user', {});
   const isValidPW = await isValidPw(query.password, loggedInAccount.password);
@@ -63,7 +62,7 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
   }
 
   // password stuff will cause a constraint error - pull out before updating
-  const {isFormSubmit, newPassword, password, ...updateQuery} = query;
+  const {email, isFormSubmit, newPassword, password, ...updateQuery} = query;
   if (updateQuery.deletionDeadline === 'null') {
     updateQuery.deletionDeadline = null;
   }
@@ -80,6 +79,19 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
+  let updatedEmail: any;
+  if (email) {
+    try {
+      updatedEmail = await knex('accounts_emails')
+        .limit(1)
+        .where({id: loggedInAccount.id})
+        .update({email})
+        .returning('email');
+    } catch (err) {
+      return ctx.throw(400, err);
+    }
+  }
+
   if (isFormSubmit) return;
 
   if (!updatedAccount
@@ -88,6 +100,13 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
     ctx.body = {};
   }
 
-  const body: tAccount = updatedAccount[0];
+  let body: tAccount = updatedAccount[0];
+  if (updatedEmail) {
+    body = {
+      ...body,
+      emails: updatedEmail,
+    };
+  }
+
   ctx.body = body;
 });

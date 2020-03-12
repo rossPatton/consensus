@@ -12,6 +12,7 @@ declare type tAccountBase = tFormSubmit & Readonly<{
   orgId?: number,
   passwordResetToken?: string,
   passwordResetExpires?: string,
+  privateEmail: boolean,
   updated_at?: string,
   userId?: number,
   verificationToken?: string,
@@ -24,6 +25,7 @@ declare type tAccount = tAccountBase & Readonly<{
 }>;
 
 declare type tAccountQuery = Partial<tAccountBase> & Readonly<{
+  email?: string,
   password: string,
   newPassword?: string,
 }>;

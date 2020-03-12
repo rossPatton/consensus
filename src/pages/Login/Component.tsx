@@ -53,5 +53,10 @@ export const LoginComponent = memo((props: tComponentProps) => (
         {props.error}
       </div>
     )}
+    <div className="contain">
+      <Link to="/signup">
+        Or create a new account
+      </Link>
+    </div>
   </>
 ));

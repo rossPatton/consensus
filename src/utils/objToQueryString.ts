@@ -1,3 +1,5 @@
+import loglevel from 'loglevel';
+
 import { notNull } from './notNull';
 import { notUndefined } from './notUndefined';
 
@@ -9,8 +11,11 @@ export const objToQueryString = (obj: tObj): string => {
 
   const qs = Object.keys(obj)
     .map(k => {
-      if (!notNull(obj[k])) return `${k}=null`;
-      if (!notUndefined(obj[k])) return '';
+      if (__DEBUG__) loglevel.info('key => ', k, 'value => ', obj[k]);
+
+      if (!notNull(obj[k])) return `${k}=null`; // if null
+      if (!notUndefined(obj[k])) return ''; // if undefined
+      if (obj[k] === '') return ''; // if empty string
 
       // handle nested objects and arrays
       // arrays are converted to comma delimited strings

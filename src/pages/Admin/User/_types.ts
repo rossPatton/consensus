@@ -13,6 +13,10 @@ export type tProps = {
   session: tSession<tUser>,
 };
 
+export type tComponentProps = tProps & {
+  roles: tRoleMap[],
+};
+
 export type tContainerProps = tProps & {
   getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) => tThunkPayload<tOrg[]>,
   getRolesDispatch: () => tThunkPayload<tRoleMap[]>,

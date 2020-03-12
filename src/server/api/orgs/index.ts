@@ -17,7 +17,10 @@ orgs.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let orgs: tOrg[] = [];
   try {
-    orgs = await knex('orgs').where(query).select(orgKeys);
+    orgs = await knex('orgs')
+      .where(query)
+      .andWhereNot({type: 'hidden'})
+      .select(orgKeys);
   } catch (err) {
     return ctx.throw(400, err);
   }

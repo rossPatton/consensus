@@ -34,12 +34,12 @@ const Org = memo((props: tProps) => {
           />
         </div>
         <div>
-          <div className="fs7 fw600 mB2">
-            <span className="ttCap bgGrey4 br4 p1 white mR2">
-              {props.org.type}
-            </span>
-          </div>
-          <h2 className="dBl lh1 fs3 underline mB2">
+          {role && (
+            <div className="fs7 fw600 mB2">
+              You are a {role}
+            </div>
+          )}
+          <h2 className="lh1 fs3 mB2">
             <Link to={`/org/${props.org.id}`}>
               {props.org.name}
             </Link>
@@ -49,26 +49,28 @@ const Org = memo((props: tProps) => {
               'fs7 fw600': true,
               'fx aiCtr': props.asList,
             })}>
-            <span
-              className={cx({
-                'mR2': props.asList,
-                'mB1': !props.asList,
-              })}>
-              {props.org.category}
-            </span>
+            {props.showType && (
+              <span className="dInBl ttCap bgGrey4 br4 p1 white mR2">
+                {props.org.type}
+              </span>
+            )}
+            {props.showCategory && (
+              <span
+                className={cx({
+                  'mR2': props.asList,
+                  'mB1': !props.asList,
+                })}>
+                {props.org.category}
+              </span>
+            )}
             {props.showLocation && (
-              <div
+              <span
                 className={cx({
                   'mR2': true,
                   'mB1': !props.asList,
                 })}>
-            Based in {props.org.city}
-              </div>
-            )}
-            {role && (
-              <div className="ttCap">
-                {role}
-              </div>
+                Based in {props.org.city}
+              </span>
             )}
           </div>
         </div>

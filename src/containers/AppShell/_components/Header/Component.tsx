@@ -18,10 +18,10 @@ export const HeaderComponent = memo((props: tComponentProps) => (
         <Search />
         {!props.session.isAuthenticated && (
           <Link
-            to="/signup"
-            id="a11ySignup"
+            to="/login"
+            id="a11yLogin"
             className="brdA1 br4 p1 pL2 pR2 mR2 fw600 trans1 hvrBgGrey1">
-            Sign Up
+            Login
           </Link>
         )}
         {props.session.isAuthenticated

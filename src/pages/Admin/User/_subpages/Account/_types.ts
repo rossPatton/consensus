@@ -15,7 +15,7 @@ export type tStore = {
 
 export type tContainerProps = {
   loginDispatch: (login: tLoginQuery) => tThunkPayload<tSession>,
-  patchAccountDispatch: (query: {id: number} & tState) => tThunkPayload<tAccount>,
+  patchAccountDispatch: (query: tAccountQuery) => tThunkPayload<tAccount>,
   sessionThunk: tThunk<tSession>,
 };
 

@@ -5,7 +5,9 @@ export type tProps = {
   hoverIndex?: number,
   orgs: tOrg[],
   roles: tRoleMap[],
+  showCategory?: boolean,
   showLocation?: boolean,
+  showType?: boolean,
   showPending?: boolean,
 };
 

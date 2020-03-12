@@ -55,8 +55,10 @@ class OrgsContainer extends PureComponent<tContainerProps, tState> {
       isEditable,
       orgs: originalOrgs,
       roles,
+      showCategory,
       showLocation,
       showPending = false,
+      showType,
     } = this.props;
 
     if (!originalOrgs
@@ -85,7 +87,9 @@ class OrgsContainer extends PureComponent<tContainerProps, tState> {
             pendingOrgs={pendingOrgs}
             roles={roles}
             setHover={this.setHover}
+            showCategory={showCategory}
             showLocation={showLocation}
+            showType={showType}
           />
         )}
       />

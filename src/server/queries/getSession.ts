@@ -18,7 +18,7 @@ export const getSession = async (
   }
 
   // for roles, etc, we want id here to be from the account, not the profile
-  const {deletionDeadline, id, isVerified, login, orgId} = account;
+  const {deletionDeadline, id, isVerified, login, orgId, privateEmail} = account;
 
   // we return things this way to match redux-thunk on the client
   return {
@@ -31,6 +31,7 @@ export const getSession = async (
       isAuthenticated: ctx.isAuthenticated(),
       isVerified, // has the account been verified yet
       login, // unique login for account
+      privateEmail,
       profile, // user or org profile
       type: orgId ? 'org' : 'user', // account type
     },

@@ -10,9 +10,9 @@ import {
   Memberships,
   Profile,
 } from './_subpages';
-import {tProps} from './_types';
+import {tComponentProps} from './_types';
 
-export const UserAdminComponent = memo((props: tProps) => {
+export const UserAdminComponent = memo((props: tComponentProps) => {
   const section: string = _.get(props, 'match.params.section', '');
   const isAccount = section === 'account';
   const isDeleteAccount = section === 'deleteAccount';
@@ -77,31 +77,43 @@ export const UserAdminComponent = memo((props: tProps) => {
                 <li className="fs4 fw600 mB3">
                   Your groups
                 </li>
-                {orgsByUserIdThunk.data.slice(0, 3).map((group, i) => (
-                  <li key={i}>
+                {orgsByUserIdThunk.data.slice(0, 3).map((group, i) => {
+                  const roleMap = _.find(props.roles, r => r.orgId === group.id) || {};
+                  const {role} = roleMap as tRoleMap;
+
+                  return (
+                    <li key={i}>
+                      <Link
+                        to={`/org/${group.id}`}
+                        className="br8 p2 fx aiCtr noUnderline hvrBgGrey1 trans2">
+                        <div className="circ mR2 ovfHide">
+                          <PlaceholderImage
+                            height={60}
+                            seed={group.id}
+                            width={60}
+                          />
+                        </div>
+                        <div>
+                          <div className="fs7 fw600 mB2">
+                            You are a {role}
+                          </div>
+                          <h2 className="fs5 copyBlack lh1">
+                            {group.name}
+                          </h2>
+                        </div>
+                      </Link>
+                    </li>
+                  );
+                })}
+                {orgsByUserIdThunk.data.length > 3 && (
+                  <li>
                     <Link
-                      to={`/org/${group.id}`}
-                      className="br8 p2 fx aiCtr noUnderline hvrBgGrey1 trans2">
-                      <div className="circ mR2 ovfHide">
-                        <PlaceholderImage
-                          height={60}
-                          seed={group.id}
-                          width={60}
-                        />
-                      </div>
-                      <h2 className="fs5 copyBlack lh1">
-                        {group.name}
-                      </h2>
+                      to="/admin/memberships"
+                      className="pL2 fs6 fs600">
+                      View all
                     </Link>
                   </li>
-                ))}
-                <li>
-                  <Link
-                    to="/admin/memberships"
-                    className="pL2 fs6 fs600">
-                    Manage Groups
-                  </Link>
-                </li>
+                )}
               </ul>
             )}
           <div className="fs4 fw600 mB3">

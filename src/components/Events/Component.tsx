@@ -74,7 +74,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
               </div>
               <h3
                 className={cx({
-                  'fx aiCtr ttCap': true,
+                  'fx aiCtr ttCap lh1': true,
                   mB1: props.isEditable,
                   fs4: props.horizontal,
                 })}>
@@ -141,7 +141,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                         aria-label="Clipboard Emoji">
                         📋
                       </span>
-                    Copy
+                      Copy
                     </Link>
                   )}
                   {(!isPastEvent || ev.isDraft) && (

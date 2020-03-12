@@ -18,6 +18,7 @@ const createUserAccount = async (i: number) => {
   return {
     login: faker.internet.userName(),
     password,
+    privateEmail: faker.random.boolean(),
     userId: i,
   };
 };
@@ -30,6 +31,7 @@ const createTestUserAccount = async () => {
   return {
     login: 'testAccount',
     password,
+    privateEmail: faker.random.boolean(),
     userId: 100,
   };
 };
@@ -42,6 +44,7 @@ const createTestGroupAccount = async () => {
   return {
     login: 'twcNYC',
     orgId: 1,
+    privateEmail: faker.random.boolean(),
     password,
   };
 };

@@ -2,6 +2,7 @@ export const accountKeys = [
   'deletionDeadline',
   'id',
   'isVerified',
+  'privateEmail',
   'userId',
   'orgId',
 ];
@@ -31,7 +32,6 @@ export const userKeys = [
   'language',
   'name',
   'phone',
-  'privateEmail',
   'privateMemberships',
   'privateRSVP',
   'username',

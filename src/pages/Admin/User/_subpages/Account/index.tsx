@@ -17,7 +17,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
       email: '',
       isLocked: true,
       isVerified: _.get(props, 'sessionThunk.data.isVerified', false),
-      login: _.get(props, 'sessionThunk.data.login', ''),
+      login: '',
       newPassword: '',
       password: '',
     };
@@ -26,16 +26,17 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
   save = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const {loginDispatch, patchAccountDispatch, sessionThunk} = this.props;
+    const {isLocked, isVerified, ...patchAccountQuery} = this.state;
 
     try {
-      const id = _.get(sessionThunk, 'data.id', null);
-      await patchAccountDispatch({...this.state, id});
+      await patchAccountDispatch(patchAccountQuery);
     } catch (err) {
       return loglevel.error(err);
     }
 
     try {
-      const {login, newPassword, password} = this.state;
+      const {login} = sessionThunk.data;
+      const {newPassword, password} = this.state;
       await loginDispatch({
         username: login,
         password: newPassword || password,
@@ -53,8 +54,15 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
     });
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
+    if (!stateKey) return;
+
+    let {value} = ev.currentTarget;
+    if (stateKey.indexOf('private') !== -1) {
+      value = !this.state[stateKey];
+    }
+
     this.setState({
-      [stateKey]: ev.currentTarget.value,
+      [stateKey]: value,
     } as Pick<tState, tStateUnion>);
   }
 
@@ -96,9 +104,7 @@ const mapStateToProps = (store: tStore) => ({
 
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
-
-  patchAccountDispatch: (query: {id: number} & tState) =>
-    dispatch(patchAccount(query)),
+  patchAccountDispatch: (query: tAccountQuery) => dispatch(patchAccount(query)),
 });
 
 const Account = connect(

@@ -14,9 +14,6 @@ exports.up = async (knex: Knex) => {
     // default name for displaying
     table.string('username').notNullable().defaultTo('');
 
-    // if set to true, email addresses aren't visible to other users or org
-    table.boolean('privateEmail').notNullable().defaultTo(true);
-
     // contact info (useful if in leadership), ideally eventually useful for 2 factor
     table.string('phone').unique();
 
