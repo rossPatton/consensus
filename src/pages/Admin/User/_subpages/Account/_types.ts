@@ -4,7 +4,7 @@ export type tState = {
   isVerified: boolean,
   login: string,
   newPassword: string,
-  password: string,
+  currentPassword: string,
 };
 
 export type tStateUnion = keyof tState;

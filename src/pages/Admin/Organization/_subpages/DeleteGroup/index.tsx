@@ -16,7 +16,7 @@ class DeleteGroupContainer extends PureComponent<tContainerProps, tState> {
 
     this.state = {
       isClient: false,
-      password: '',
+      currentPassword: '',
     };
   }
 
@@ -28,25 +28,25 @@ class DeleteGroupContainer extends PureComponent<tContainerProps, tState> {
 
   deleteGroup = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {password} = this.state;
+    const {currentPassword} = this.state;
     const {sessionThunk: {data}} = this.props;
 
     const oneWeekFromNow = dayJS().add(1, 'week').toISOString();
     const query = data.deletionDeadline
-      ? {password, deletionDeadline: null}
-      : {password, deletionDeadline: oneWeekFromNow};
+      ? {currentPassword, deletionDeadline: null}
+      : {currentPassword, deletionDeadline: oneWeekFromNow};
 
     this.props.patchAccountDispatch(query)
       .then(() => {
         return this.props.loginDispatch({
           // TODO account info should not live in data (profile area), move up 1 level
           username: data.login,
-          password: this.state.password,
+          password: this.state.currentPassword,
         });
       })
       .then(() => {
         return this.setState({
-          password: '',
+          currentPassword: '',
         });
       })
       .catch(loglevel.error);

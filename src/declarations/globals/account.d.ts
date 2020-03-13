@@ -26,7 +26,7 @@ declare type tAccount = tAccountBase & Readonly<{
 
 declare type tAccountQuery = Partial<tAccountBase> & Readonly<{
   email?: string,
-  password: string,
+  currentPassword: string,
   newPassword?: string,
 }>;
 

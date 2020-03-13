@@ -15,29 +15,16 @@ export const DeleteAccountComponent = memo((props: tComponentProps) => (
       <h2 className="fs5 mB3 copyBlack">
         Enter your login credentials to trigger the account deletion process. If you do this, your account will be <b>permanently</b> deleted!
       </h2>
-      <label htmlFor="login">
-        <h2 className="ffLab fs5 mB1 lh1">
-          Login
-        </h2>
-        <input
-          id="login"
-          onChange={ev => props.updateState('login', ev)}
-          className="p3 mB3 row"
-          placeholder=""
-          value={props.login}
-          name="login"
-        />
-      </label>
       <PasswordInput
         id="pwInput"
         title="Current password"
-        password={props.password}
+        password={props.currentPassword}
         placeholder="Your current password"
-        onChange={ev => props.updateState('password', ev)}
+        onChange={ev => props.updateState('currentPassword', ev)}
       />
     </fieldset>
     <button
-      disabled={props.isClient && (!props.login || !props.password)}
+      disabled={props.isClient && !props.currentPassword}
       className="p3 pL4 pR4 hvrBgGrey1 trans1">
       Yes, really delete my account
     </button>

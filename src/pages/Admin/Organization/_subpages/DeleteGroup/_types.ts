@@ -1,6 +1,6 @@
 export type tState = {
   isClient: boolean,
-  password: string,
+  currentPassword: string,
 };
 
 export type tStateUnion = keyof tState;

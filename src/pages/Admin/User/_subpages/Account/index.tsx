@@ -19,7 +19,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
       isVerified: _.get(props, 'sessionThunk.data.isVerified', false),
       login: '',
       newPassword: '',
-      password: '',
+      currentPassword: '',
     };
   }
 
@@ -35,17 +35,23 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
     }
 
     try {
-      const {login} = sessionThunk.data;
-      const {newPassword, password} = this.state;
+      const {login: currentLogin} = sessionThunk.data;
+      const {login, newPassword, currentPassword} = this.state;
       await loginDispatch({
-        username: login,
-        password: newPassword || password,
+        username: login || currentLogin,
+        password: newPassword || currentPassword,
       });
     } catch (err) {
       loglevel.error(err);
     }
 
-    this.setState({isLocked: true, password: ''});
+    this.setState({
+      currentPassword: '',
+      email: '',
+      isLocked: true,
+      login: '',
+      newPassword: '',
+    });
   }
 
   toggleLock = () =>

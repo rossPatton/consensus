@@ -21,10 +21,11 @@ account.delete(route, async (ctx: Koa.ParameterizedContext) => {
     userId: account.userId,
   });
 
-  const isValidPW = await isValidPw(query.password, account.password);
+  const isValidPW = await isValidPw(query.currentPassword, account.password);
   if (!isValidPW) return ctx.throw(400, 'Password is not correct');
 
   // delete account and user references. leave rsvps, etc
+  // group deletions go through a different process
   if (account.userId) {
     try {
       await knex('users')
@@ -53,52 +54,53 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<Mutable<tAccountQuery>>(ctx, patchSchema, query);
 
   const loggedInAccount: tAccount = _.get(ctx, 'state.user', {});
-  const isValidPW = await isValidPw(query.password, loggedInAccount.password);
+  const isValidPW = await isValidPw(query.currentPassword, loggedInAccount.password);
   if (!isValidPW) return ctx.throw(400, 'Password is not correct');
 
-  if (query.newPassword) {
-    const safePW = await saltedHash(query.newPassword);
-    query.password = encrypt(safePW);
-  }
+  const updateQuery: {[key: string]: unknown} = {
+    deletionDeadline: query.deletionDeadline,
+    login: query.login,
+  };
 
-  // password stuff will cause a constraint error - pull out before updating
-  const {email, isFormSubmit, newPassword, password, ...updateQuery} = query;
+  // handle nulls for deletionDeadline
   if (updateQuery.deletionDeadline === 'null') {
     updateQuery.deletionDeadline = null;
   }
 
-  let updatedAccount: tAccount[];
-  try {
-    updatedAccount = await knex(table)
-      .limit(1)
-      .where({id: loggedInAccount.id})
-      .update(updateQuery)
-      // readonly string[] vs string[] trips typescript up
-      .returning(accountKeys as string[]);
-  } catch (err) {
-    return ctx.throw(400, err);
+  // if changing password, salt/hash and encrypt first before updating
+  if (query.newPassword) {
+    const safePW = await saltedHash(query.newPassword);
+    updateQuery.password = encrypt(safePW);
   }
 
-  let updatedEmail: any;
-  if (email) {
+  let updatedAccount: tAccount[] = [];
+  if (!_.isEmpty(updateQuery)) {
+    try {
+      updatedAccount = await knex(table)
+        .limit(1)
+        .where({id: loggedInAccount.id})
+        .update(updateQuery)
+      // readonly string[] vs string[] trips typescript up
+        .returning(accountKeys as string[]);
+    } catch (err) {
+      return ctx.throw(400, err);
+    }
+  }
+
+  let updatedEmail: tEmails = [];
+  if (query.email) {
     try {
       updatedEmail = await knex('accounts_emails')
         .limit(1)
         .where({id: loggedInAccount.id})
-        .update({email})
+        .update({email: query.email})
         .returning('email');
     } catch (err) {
       return ctx.throw(400, err);
     }
   }
 
-  if (isFormSubmit) return;
-
-  if (!updatedAccount
-      || (updatedAccount instanceof Array && updatedAccount.length === 0)) {
-    ctx.status = 204;
-    ctx.body = {};
-  }
+  if (query.isFormSubmit) return;
 
   let body: tAccount = updatedAccount[0];
   if (updatedEmail) {

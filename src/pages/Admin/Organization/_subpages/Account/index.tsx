@@ -17,34 +17,41 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
       email: '',
       isLocked: true,
       isVerified: _.get(props, 'sessionThunk.data.isVerified', false),
-      login: _.get(props, 'sessionThunk.data.login', ''),
+      login: '',
       newPassword: '',
-      password: '',
+      currentPassword: '',
     };
   }
 
   save = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const {loginDispatch, patchAccountDispatch, sessionThunk} = this.props;
+    const {isLocked, isVerified, ...patchAccountQuery} = this.state;
 
     try {
-      const id = _.get(sessionThunk, 'data.id', null);
-      await patchAccountDispatch({...this.state, id});
+      await patchAccountDispatch(patchAccountQuery);
     } catch (err) {
       return loglevel.error(err);
     }
 
     try {
-      const {login, newPassword, password} = this.state;
+      const {login: currentLogin} = sessionThunk.data;
+      const {login, newPassword, currentPassword} = this.state;
       await loginDispatch({
-        username: login,
-        password: newPassword || password,
+        username: login || currentLogin,
+        password: newPassword || currentPassword,
       });
     } catch (err) {
       loglevel.error(err);
     }
 
-    this.setState({isLocked: true, password: ''});
+    this.setState({
+      currentPassword: '',
+      email: '',
+      isLocked: true,
+      login: '',
+      newPassword: '',
+    });
   }
 
   toggleLock = () =>
@@ -103,9 +110,7 @@ const mapStateToProps = (store: tStore) => ({
 
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
-
-  patchAccountDispatch: (query: {id: number} & tState) =>
-    dispatch(patchAccount(query)),
+  patchAccountDispatch: (query: tAccountQuery) => dispatch(patchAccount(query)),
 });
 
 const Account = connect(

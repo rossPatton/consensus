@@ -1,5 +1,5 @@
 import _ from 'lodash';
-// import loglevel from 'loglevel';
+import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
@@ -15,8 +15,7 @@ class DeleteAccountContainer extends PureComponent<tContainerProps, tState> {
 
     this.state = {
       isClient: false,
-      login: '',
-      password: '',
+      currentPassword: '',
     };
   }
 
@@ -28,10 +27,13 @@ class DeleteAccountContainer extends PureComponent<tContainerProps, tState> {
 
   deleteAccount = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {login, password} = this.state;
-    this.props.deleteAccountDispatch({login, password});
+    const {currentPassword} = this.state;
+    this.props
+      .deleteAccountDispatch({currentPassword})
+      .then(this.props.logoutDispatch)
+      .catch(loglevel.error);
     // this.props.logoutDispatch()
-    //   .then(() => this.props.deleteAccountDispatch({login, password}))
+    //   .then(() => this.props.deleteAccountDispatch({login, currentPassword}))
     //   .catch(loglevel.error);
   }
 

@@ -77,15 +77,15 @@ const EditAccount = memo((props: any) => (
       </div>
       <PasswordInput
         id="pwInput"
-        onChange={ev => props.updateState('password', ev)}
-        password={props.password}
+        onChange={ev => props.updateState('currentPassword', ev)}
+        password={props.currentPassword}
         placeholder=""
         title="Current password"
       />
     </fieldset>
     <div className="fx aiCtr">
       <button
-        disabled={!props.password}
+        disabled={!props.currentPassword}
         className="p3 pL4 pR4 mR2 hvrBgGrey1 trans1">
         Save Changes
       </button>

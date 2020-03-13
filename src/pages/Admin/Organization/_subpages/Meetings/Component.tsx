@@ -5,16 +5,18 @@ import {tComponentProps} from './_types';
 
 export const MeetingsComponent = memo((props: tComponentProps) => (
   <>
-    <div className="bgWhite br8 mB3 p3">
-      <h2 className="fs3 mB2">
-        Work on Drafts
-      </h2>
-      <Events
-        count={1}
-        events={props.drafts}
-        sessionRole="admin"
-      />
-    </div>
+    {props.drafts && (
+      <div className="bgWhite br8 mB3 p3">
+        <h2 className="fs3 mB2">
+          Finish Meeting Drafts
+        </h2>
+        <Events
+          count={1}
+          events={props.drafts}
+          sessionRole="admin"
+        />
+      </div>
+    )}
     <div className="bgWhite br8 p3">
       <h2 className="fs3 mB2">
         Manage Meetings

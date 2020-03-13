@@ -7,8 +7,6 @@ const EditAccount = memo((props: any) => (
   <form
     action="/api/v1/user"
     autoComplete="off"
-    className="rel"
-    encType="multipart/form-data"
     onSubmit={props.save}>
     <fieldset>
       <legend>
@@ -16,7 +14,7 @@ const EditAccount = memo((props: any) => (
       </legend>
       <div className="mB4">
         <label htmlFor="login">
-          <h2 className="ffLab fs5 mB1 lh1">
+          <h2 className="fs5 mB1 lh1">
             Change Login
           </h2>
           <p className="fs5 copyBlack mB1">
@@ -24,15 +22,16 @@ const EditAccount = memo((props: any) => (
           </p>
           <input
             id="login"
+            autoComplete="off"
             onChange={ev => props.updateState('login', ev)}
             className="p3 mB3 row"
-            placeholder={props.session.login}
+            placeholder="yourNewSecretLogin"
             value={props.login}
             name="login"
           />
         </label>
-        <label className="row mB1" htmlFor="email">
-          <h2 className="ffLab fs5 mB1 lh1">
+        <label className="row mB3" htmlFor="email">
+          <h2 className="fs5 mB1 lh1">
             Change Email address
           </h2>
           <p className="fs5 copyBlack mB1">
@@ -41,12 +40,13 @@ const EditAccount = memo((props: any) => (
           <input
             onChange={ev => props.updateState('email', ev)}
             className="p3 row"
-            placeholder="Update your email here"
+            autoComplete="off"
+            placeholder="yourNewEmail@example.com"
             value={props.email}
             name="email"
           />
         </label>
-        <div
+        {/* <div
           tabIndex={0}
           role="button"
           className="fx aiCtr curPtr mB3 fs6"
@@ -63,7 +63,7 @@ const EditAccount = memo((props: any) => (
             {props.privateEmail && 'Your email is kept private'}
             {!props.privateEmail && 'Your email is displayed on your profile.'}
           </span>
-        </div>
+        </div> */}
         <PasswordInput
           newPassword
           id="newPwInput"
@@ -76,15 +76,15 @@ const EditAccount = memo((props: any) => (
       </div>
       <PasswordInput
         id="pwInput"
-        onChange={ev => props.updateState('password', ev)}
-        password={props.password}
+        onChange={ev => props.updateState('currentPassword', ev)}
+        password={props.currentPassword}
         placeholder=""
         title="Current password"
       />
     </fieldset>
     <div className="fx aiCtr">
       <button
-        disabled={!props.password}
+        disabled={!props.currentPassword}
         className="p3 pL4 pR4 mR2 hvrBgGrey1 trans1">
         Save Changes
       </button>

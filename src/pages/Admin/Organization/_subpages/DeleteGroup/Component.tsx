@@ -25,13 +25,13 @@ export const DeleteGroupComponent = memo((props: tComponentProps) => (
       <PasswordInput
         id="pwInput"
         title="Current password"
-        password={props.password}
+        password={props.currentPassword}
         placeholder="Your current password"
-        onChange={ev => props.updateState('password', ev)}
+        onChange={ev => props.updateState('currentPassword', ev)}
       />
     </fieldset>
     <button
-      disabled={props.isClient && !props.password}
+      disabled={props.isClient && !props.currentPassword}
       className="p3 pL4 pR4 hvrBgGrey1">
       {props.session.deletionDeadline
         ? 'Cancel group deletion'
