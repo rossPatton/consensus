@@ -11,7 +11,7 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
   return (
     <>
       <label htmlFor={`${props.id}`}>
-        <h3 className="ffLab fs5">
+        <h3 className="fs5">
           {props.title || 'Password'}
         </h3>
         {(!props.newPassword && !props.hideRequiredMessage) && (
@@ -23,6 +23,7 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
           <input
             id={props.id}
             name={name}
+            maxLength={72}
             autoComplete={props.newPassword ? 'new-password' : 'on'}
             required={props.required}
             placeholder={props.placeholder}

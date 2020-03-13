@@ -51,6 +51,7 @@ org.patch(route, async (ctx: Koa.ParameterizedContext) => {
   };
 });
 
+// TODO handle the org/account split on signup, set max password length (72)
 org.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...org} = _.get(ctx, dataPath, {});
 

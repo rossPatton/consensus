@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
@@ -12,12 +13,22 @@ import {OrganizationComponent} from './Component';
 class OrganizationContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    const id = _.get(props, 'match.params.id', null);
+    const idOrHandle = _.get(props, 'match.params.idOrHandle', null);
 
-    if (id) props.getOrgByIdDispatch({id});
-    if (id) {
+    if (isNaN(parseInt(idOrHandle, 10))) {
+      props.getOrgDispatch({handle: idOrHandle})
+        .then((res: tActionPayload<tOrg>) => {
+          return props.getEventsByOrgIdDispatch({
+            orgId: res.payload.id,
+            showPast: false,
+            limit: -1,
+          });
+        })
+        .catch(loglevel.error);
+    } else {
+      props.getOrgDispatch({id: idOrHandle});
       props.getEventsByOrgIdDispatch({
-        orgId: id,
+        orgId: idOrHandle,
         showPast: false,
         limit: -1,
       });
@@ -70,7 +81,7 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
               ) : (
                 <>
                   <Helmet
-                    canonical={`org/${org.id}`}
+                    canonical={`org/${org.handle}`}
                     title={`Consensus: ${org.name}`}
                     meta={meta}
                   />
@@ -102,7 +113,7 @@ const mapStateToProps = (store: tStore) => ({
 const mapDispatchToProps = (dispatch: Function) => ({
   getEventsByOrgIdDispatch:
     (query: tGetEventQuery) => dispatch(getEventsByOrgId(query)),
-  getOrgByIdDispatch: (query: tIdQuery) => dispatch(getOrg(query)),
+  getOrgDispatch: (query: tOrgQuery) => dispatch(getOrg(query)),
   getRolesDispatch: () => dispatch(getRoles()),
   getRsvpsDispatch: () => dispatch(getRsvps()),
 });

@@ -50,6 +50,7 @@ user.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 // user signup form basically
+// TODO handle the user/account split on signup, set max password length (72)
 user.post(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tUserPostServerQuery = _.get(ctx, dataPath, {});
   await validateSchema<tUserPostServerQuery>(ctx, postSchema, query);

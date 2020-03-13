@@ -40,7 +40,7 @@ const Org = memo((props: tProps) => {
             </div>
           )}
           <h2 className="lh1 fs3 mB2">
-            <Link to={`/org/${props.org.id}`}>
+            <Link to={`/org/${props.org.handle}`}>
               {props.org.name}
             </Link>
           </h2>

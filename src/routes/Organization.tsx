@@ -7,5 +7,6 @@ const OrganizationComponent = loadable(() =>
 export const Organization = {
   component: OrganizationComponent,
   exact: true,
-  path: '/org/:id/:section?',
+  // eslint-disable-next-line
+  path: '/org/:idOrHandle/:section?',
 };

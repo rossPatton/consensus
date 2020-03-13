@@ -49,11 +49,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
               </Link>
             </div>
             <div>
-              <div
-                className={cx({
-                  'fx aiCtr mB1 fs7 fw600 lh1': true,
-                  o5: isPastEvent,
-                })}>
+              <div className="fx aiCtr mB2 fs7 fw600 lh1">
                 <time className="mR1" dateTime={ev.date}>
                   {dayJS(ev.date).format('MMM DD | h:mmA')}
                 </time>
@@ -76,6 +72,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 className={cx({
                   'fx aiCtr ttCap lh1': true,
                   mB1: props.isEditable,
+                  mB2: props.showRSVPs,
                   fs4: props.horizontal,
                 })}>
                 <Link
@@ -87,15 +84,15 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 </Link>
               </h3>
               {props.showRSVPs &&
+                !isPastEvent &&
                 !props.isEditable &&
                 !ev.isDraft && (
                 <div
                   className={cx({
-                    'fx aiCtr fs6 lh1': true,
+                    'fx aiCtr fs7 lh1': true,
                     hide: props.horizontal,
-                    o5: isPastEvent,
                   })}>
-                  <RSVP event={ev} />
+                  <RSVP compact event={ev} />
                 </div>
               )}
               {props.showOrgName

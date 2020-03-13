@@ -25,7 +25,7 @@ export type tContainerProps = tProps & {
   eventThunk: tThunk<tEvent>,
   getEventDispatch: (query: tIdQuery) => tThunkPayload<tEvent>,
   getEventsByOrgIdDispatch: (query: tGetEventQuery) => tThunkPayload<tEvent[]>,
-  getOrgByIdDispatch: (query: tIdQuery) => tThunkPayload<tOrg>,
+  getOrgByIdDispatch: (query: tOrgQuery) => tThunkPayload<tOrg>,
   getRolesDispatch: () => tThunkPayload<tRoleMap>,
   getRsvpsDispatch: () => tThunkPayload<tRSVP[]>,
   location: H.Location,

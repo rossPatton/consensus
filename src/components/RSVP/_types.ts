@@ -19,6 +19,7 @@ export type tState = {
 };
 
 type tProps = {
+  compact?: boolean,
   event: tEvent,
   role?: tRole,
   session: tSession,

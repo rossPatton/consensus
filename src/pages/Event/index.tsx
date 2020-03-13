@@ -159,7 +159,7 @@ const mapDispatchToProps = (dispatch: Function) => ({
   getEventsByOrgIdDispatch: (query: tGetEventQuery) =>
     dispatch(getEventsByOrgId(query)),
 
-  getOrgByIdDispatch: (query: tIdQuery) => dispatch(getOrg(query)),
+  getOrgByIdDispatch: (query: tOrgQuery) => dispatch(getOrg(query)),
 
   getRolesDispatch: () => dispatch(getRoles()),
 

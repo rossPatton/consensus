@@ -10,7 +10,7 @@ export const postSchema = Joi.object().keys({
   email: Joi.string().email().optional(),
   login: Joi.string().required(),
   username: Joi.string().required(),
-  password: Joi.string().required(),
+  password: Joi.string().required().max(72),
 });
 
 export const patchSchema = Joi.object().keys({

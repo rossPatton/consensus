@@ -79,6 +79,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
 
     return (
       <RSVPComponent
+        compact={this.props.compact}
         event={this.props.event}
         hasRSVPed={this.state.hasRSVPed}
         isClient={this.state.isClient}
