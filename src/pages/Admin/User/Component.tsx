@@ -41,6 +41,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
               width="70"
             />
             <div>
+              <div className="fs7 mB1">You are signed in as <b>user</b>:</div>
               <h1 className="fs4">
                 <Link
                   to="/admin/meetings"

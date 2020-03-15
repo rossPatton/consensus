@@ -18,6 +18,7 @@ module.exports = {
   ],
   'plugins': [
     // 'react-hot-loader/babel',
+    '@babel/proposal-optional-chaining',
     '@babel/transform-react-constant-elements',
     '@babel/transform-react-display-name',
     '@babel/proposal-object-rest-spread',

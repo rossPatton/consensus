@@ -29,13 +29,13 @@ eventsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(400, err);
   }
 
-  // now only return future events where the user rsvped
+  // only return future events where the user rsvped
   let events: tEvent[] = [];
   try {
     events = await knex('events')
       .whereIn('id', mappedIds)
-      .where('date', '>=', dayJS().toISOString())
-      .where({isDraft: false})
+      .andWhere('date', '>=', dayJS().toISOString())
+      .andWhere({isDraft: false})
       .orderBy('date', 'asc');
   } catch (err) {
     return ctx.throw(400, err);

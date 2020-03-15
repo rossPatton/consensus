@@ -18,7 +18,7 @@ const createUserEventRelation = async (u: number, e: number) => {
 exports.seed = async (knex: Knex) => {
   const fakeUserEventRelations = [];
 
-  for await (const i of range(50, true)) {
+  for await (const i of range(24, true)) {
     fakeUserEventRelations.push(await createUserEventRelation(100, i));
   }
 

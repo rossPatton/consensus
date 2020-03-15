@@ -58,6 +58,7 @@ const GroupAdminContainer = memo((props: tProps) => {
               />
             </div>
             <div className="lh1">
+              <div className="fs7 mB1">You are signed in as the <b>admin</b> for:</div>
               <h1 className="fs4">
                 <Link
                   className="noUnderline"

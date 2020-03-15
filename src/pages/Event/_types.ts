@@ -23,7 +23,7 @@ export type tComponentProps = tProps & {
 
 export type tContainerProps = tProps & {
   eventThunk: tThunk<tEvent>,
-  getEventDispatch: (query: tIdQuery) => tThunkPayload<tEvent>,
+  getEventDispatch: (query: tGetEventQuery) => tThunkPayload<tEvent>,
   getEventsByOrgIdDispatch: (query: tGetEventQuery) => tThunkPayload<tEvent[]>,
   getOrgByIdDispatch: (query: tOrgQuery) => tThunkPayload<tOrg>,
   getRolesDispatch: () => tThunkPayload<tRoleMap>,

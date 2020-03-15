@@ -5,7 +5,7 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {ExternalLink, PlaceholderImage, RSVP} from '../../components';
-import {objToQueryString} from '../../utils';
+import {objToQueryString, slugify} from '../../utils';
 import {tComponentProps} from './_types';
 
 export const EventsComponent = memo((props: tComponentProps) => (
@@ -40,7 +40,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 className="noUnderline"
                 to={ev.isDraft
                   ? `/event/${ev.id}?isPreview=true`
-                  : `/event/${ev.id}`}>
+                  : `/event/${slugify(ev.title)}`}>
                 <PlaceholderImage
                   height={100}
                   seed={ev.id}
@@ -79,7 +79,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   className="noUnderline"
                   to={ev.isDraft
                     ? `/event/${ev.id}?isPreview=true`
-                    : `/event/${ev.id}`}>
+                    : `/event/${slugify(ev.title)}`}>
                   {ev.title}
                 </Link>
               </h3>
@@ -98,7 +98,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
               {props.showOrgName
                 && (
                   <Link
-                    to={`/org/${ev.orgId}`}
+                    to={`/org/${slugify(ev.orgName)}`}
                     className={cx({
                       'fw600 fs6 lh1': true,
                       o5: isPastEvent,

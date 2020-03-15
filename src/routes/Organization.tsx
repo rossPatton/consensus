@@ -8,5 +8,5 @@ export const Organization = {
   component: OrganizationComponent,
   exact: true,
   // eslint-disable-next-line
-  path: '/org/:idOrHandle/:section?',
+  path: '/org/:idOrSlug/:section?',
 };

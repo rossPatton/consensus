@@ -9,10 +9,7 @@ import {tComponentProps} from './_types';
 
 export const EventComponent = memo((props: tComponentProps) => {
   const {event, eventsByOrgId, org, rsvp = {} as tRSVP} = props;
-
-  const now = dayJS();
-  const eventDate = dayJS(event.date);
-  const isPastMeeting = eventDate.isBefore(now);
+  const isPastMeeting = dayJS(event.date).isBefore(dayJS());
 
   return (
     <>
@@ -42,7 +39,7 @@ export const EventComponent = memo((props: tComponentProps) => {
           </div>
           <div className="row rel">
             <time className="fw600 lh1 mB3" dateTime={event.date}>
-              {eventDate.format('ddd MMM DD, h:mmA')}
+              {dayJS(event.date).format('ddd MMM DD YYYY, h:mmA')}
             </time>
             <h1 className="fs2 mB3 ttCap">
               {event.title}

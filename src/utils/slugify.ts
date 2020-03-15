@@ -1,9 +1,6 @@
 /**
  * spaces => dashes. url unfriendly characters removed (().')
- * Emergency Contraception => emergency-contraception
- * alzheimer's disease => alzheimers-disease
- * high-calcium-(hypercalcemia)-from-cancer => high-calcium-hypercalcemia-from-cancer
- * c.-diff-infection => c-diff-infection
+ * Tech Worker's Coalition(NYC) => tech-workers-coalition-nyc
  */
 export const slugify = (string: string): string => {
   if (typeof string !== 'string') return string;
@@ -16,8 +13,10 @@ export const slugify = (string: string): string => {
     .trim();
 };
 
-// takes output of above, and returns human friendly string
-// new-york-city => New York City
+/**
+ * takes slugified output, returns human friendly string
+ * new-york-city => New York City
+*/
 export const deSlugify = (string: string): string => {
   if (typeof string !== 'string') return string;
 

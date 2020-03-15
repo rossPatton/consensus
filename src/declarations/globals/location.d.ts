@@ -1,22 +1,26 @@
 declare type tPaginateParams = Readonly<{
-   page?: string,
+  page?: string,
 }>;
 
 declare type tCrumb = Readonly<{
-   display: string,
-   to: string,
+  display: string,
+  to: string,
 }>;
 
 declare type tRoute = Readonly<{
-   component: React.ReactComponentElement, // React.ReactNode ideally
-   exact?: boolean,
-   path: string,
-   private?: boolean,
-   redirect?: string,
+  component: React.ReactComponentElement, // React.ReactNode ideally
+  exact?: boolean,
+  path: string,
+  private?: boolean,
+  redirect?: string,
+}>;
+
+declare type tEventParams = Readonly<{
+  idOrSlug: number | string,
 }>;
 
 declare type tSearchParams = tPaginateParams & Readonly<{
-   value: string,
+  value: string,
 }>;
 
 // if possible, we try to get the user's location

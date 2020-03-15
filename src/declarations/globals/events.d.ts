@@ -28,7 +28,3 @@ declare type tGetEventQuery = Partial<tEvent> & tBaseQuery & Readonly<{
   isPrivate?: boolean,
   showPast?: boolean,
 }>;
-
-declare type tEventParams = Readonly<{
-   id: number,
-}>;

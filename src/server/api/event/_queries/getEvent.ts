@@ -4,9 +4,9 @@ import _ from 'lodash';
 import {knex} from '../../../db/connection';
 import {getAccountRoleRelByOrgId, getOrgById, getUsersByIds} from '../../../queries';
 
-export const getEventById = async (
+export const getEvent = async (
   ctx: Koa.ParameterizedContext,
-  query: tIdQuery,
+  query: tGetEventQuery,
 ): Promise<tEvent> => {
   let event: tEvent;
   try {

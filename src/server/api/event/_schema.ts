@@ -5,7 +5,8 @@ const baseSchema = Joi.object().keys({
 });
 
 export const getSchema = baseSchema.keys({
-  id: Joi.number().integer().required(),
+  id: Joi.number().integer(),
+  slug: Joi.string().regex(/^[a-zA-Z0-9-]+$/),
 });
 
 // upsert === postin or patchin

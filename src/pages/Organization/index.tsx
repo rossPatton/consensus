@@ -13,10 +13,12 @@ import {OrganizationComponent} from './Component';
 class OrganizationContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    const idOrHandle = _.get(props, 'match.params.idOrHandle', null);
+    const idOrSlug = _.get(props, 'match.params.idOrSlug', null);
+    // org route can be reached by orgId or handle
+    const isHandle = isNaN(parseInt(idOrSlug, 10));
 
-    if (isNaN(parseInt(idOrHandle, 10))) {
-      props.getOrgDispatch({handle: idOrHandle})
+    if (isHandle) {
+      props.getOrgDispatch({handle: idOrSlug})
         .then((res: tActionPayload<tOrg>) => {
           return props.getEventsByOrgIdDispatch({
             orgId: res.payload.id,
@@ -26,9 +28,9 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
         })
         .catch(loglevel.error);
     } else {
-      props.getOrgDispatch({id: idOrHandle});
+      props.getOrgDispatch({id: idOrSlug});
       props.getEventsByOrgIdDispatch({
-        orgId: idOrHandle,
+        orgId: idOrSlug,
         showPast: false,
         limit: -1,
       });

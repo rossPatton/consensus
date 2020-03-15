@@ -1,1 +1,1 @@
-export {getEventById} from './getEventById';
+export {getEvent} from './getEvent';

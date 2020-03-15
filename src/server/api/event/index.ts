@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import {knex} from '../../db/connection';
 import {validateSchema} from '../../utils';
-import {getEventById} from './_queries';
+import {getEvent} from './_queries';
 import {getSchema, upsertSchema} from './_schema';
 
 const dataPath = 'state.locals.data';
@@ -12,9 +12,9 @@ const route = '/api/v1/event';
 export const event = new Router();
 
 event.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tIdQuery = _.get(ctx, dataPath, {});
-  await validateSchema<tIdQuery>(ctx, getSchema, query);
-  ctx.body = await getEventById(ctx, query);
+  const query: tGetEventQuery = _.get(ctx, dataPath, {});
+  await validateSchema<tGetEventQuery>(ctx, getSchema, query);
+  ctx.body = await getEvent(ctx, query);
 });
 
 event.patch(route, async (ctx: Koa.ParameterizedContext) => {

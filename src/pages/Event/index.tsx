@@ -30,26 +30,41 @@ class EventContainer extends PureComponent<tContainerProps> {
     this.dispatch();
   }
 
-  dispatch() {
-    const {id} = this.props.match.params;
+  dispatch = async () => {
+    const {getEventDispatch, match} = this.props;
+    const {idOrSlug} = match.params;
+    // org route can be reached by orgId or handle
+    const isSlug = isNaN(parseInt(idOrSlug as string, 10));
 
-    this.props.getEventDispatch({id})
-      .then((res: tActionPayload<tEvent>) => {
-        // if private group, might 204 here
-        if (res.payload.orgId) {
-          this.props.getOrgByIdDispatch({id: res.payload.orgId});
+    let res = null;
+    try {
+      if (isSlug) {
+        res = await getEventDispatch({slug: idOrSlug as string});
+      } else {
+        res = await getEventDispatch({id: idOrSlug as number});
+      }
+    } catch (err) {
+      loglevel.error(err);
+    }
 
-          return this.props.getEventsByOrgIdDispatch({
-            exclude: id,
-            isDraft: false,
-            limit: 4,
-            orgId: res.payload.orgId,
-          });
-        }
+    if (res && res.payload && res.payload.orgId) {
+      try {
+        this.getRestOfEventsByOrgId(res);
+      } catch (err) {
+        loglevel.error(err);
+      }
+    }
+  }
 
-        return null;
-      })
-      .catch(loglevel.error);
+  getRestOfEventsByOrgId = async (res: tActionPayload<tEvent>) => {
+    await this.props.getOrgByIdDispatch({id: res.payload.orgId});
+
+    return this.props.getEventsByOrgIdDispatch({
+      exclude: res.payload.orgId,
+      isDraft: false,
+      limit: 4,
+      orgId: res.payload.orgId,
+    });
   }
 
   render() {
@@ -153,16 +168,13 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getEventDispatch: (query: tIdQuery) =>
-    dispatch(getEvent(query)),
+  getEventDispatch: (query: tGetEventQuery) => dispatch(getEvent(query)),
 
   getEventsByOrgIdDispatch: (query: tGetEventQuery) =>
     dispatch(getEventsByOrgId(query)),
 
   getOrgByIdDispatch: (query: tOrgQuery) => dispatch(getOrg(query)),
-
   getRolesDispatch: () => dispatch(getRoles()),
-
   getRsvpsDispatch: () => dispatch(getRsvps()),
 });
 

@@ -7,5 +7,5 @@ const EventComponent = loadable(() =>
 export const Event = {
   component: EventComponent,
   exact: true,
-  path: '/event/:id',
+  path: '/event/:idOrSlug',
 };
