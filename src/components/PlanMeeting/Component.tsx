@@ -3,6 +3,7 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
+import {objToQueryString} from '../../utils';
 import {tComponentProps} from './_types';
 
 export const PlanMeetingComponent = memo((props: tComponentProps) => {
@@ -110,7 +111,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
           </button>
           {props.id && (
             <Link
-              to={`/event/${props.id}?isPreview=true`}
+              to={`/draft/${props.id}?${objToQueryString(props)}`}
               className="brdA1 br4 lh1 p3 fs6 hvrBgGrey1 trans1">
               Preview
             </Link>

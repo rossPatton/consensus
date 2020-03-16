@@ -3,21 +3,13 @@ import _ from 'lodash';
 
 import {userKeys} from '../../_constants';
 import {knex} from '../../../db/connection';
+import {getRolesByOrgId} from './getRolesByOrgId';
 
 export const getUsersByOrgId = async (
   ctx: Koa.ParameterizedContext,
   query: tUsersByOrgIdQuery,
 ): Promise<tUser[]> => {
-  const {orgId} = query;
-  const rolesStream = knex('accounts_roles').where({orgId}).stream();
-  const roleMaps: tAccountRoleRelation[] = [];
-  try {
-    for await (const chunk of rolesStream) {
-      roleMaps.push(chunk);
-    }
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
+  const roleMaps = await getRolesByOrgId(ctx, query);
 
   let userIds: number[] = [];
   try {

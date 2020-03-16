@@ -51,7 +51,9 @@ export const EventsComponent = memo((props: tComponentProps) => (
             <div>
               <div className="fx aiCtr mB2 fs7 fw600 lh1">
                 <time className="mR1" dateTime={ev.date}>
-                  {dayJS(ev.date).format('MMM DD | h:mmA')}
+                  {isPastEvent
+                    ? dayJS(ev.date).format('MMM DD YYYY | h:mmA')
+                    : dayJS(ev.date).format('MMM DD | h:mmA')}
                 </time>
                 {!props.horizontal && (
                   <>
@@ -117,7 +119,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                     <Link
                       to={props.sessionRole === 'admin'
                         ? `/admin/planMeeting?${qs}`
-                        : `/org/${ev.orgId}/planMeeting?${qs}`}
+                        : `/org/${ev.orgName}/planMeeting?${qs}`}
                       className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
                       <span
                         role="img"
@@ -127,24 +129,26 @@ export const EventsComponent = memo((props: tComponentProps) => (
                       Edit
                     </Link>
                   )}
-                  {isPastEvent && (
-                    <Link
-                      to={props.sessionRole === 'admin'
-                        ? `/admin/planMeeting?${qs}`
-                        : `/org/${ev.orgId}/planMeeting?${qs}`}
-                      className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
-                      <span
-                        role="img"
-                        aria-label="Clipboard Emoji">
-                        📋
-                      </span>
-                      Copy
-                    </Link>
-                  )}
+                  {isPastEvent
+                    && !ev.isDraft
+                    && (
+                      <Link
+                        to={props.sessionRole === 'admin'
+                          ? `/admin/planMeeting?${qs}`
+                          : `/org/${ev.orgName}/planMeeting?${qs}`}
+                        className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
+                        <span
+                          role="img"
+                          aria-label="Clipboard Emoji">
+                          📋
+                        </span>
+                        Copy
+                      </Link>
+                    )}
                   {(!isPastEvent || ev.isDraft) && (
                     <button
                       onClick={e => props.deleteEvent(e, ev.id)}
-                      className="aiCtr fs7 fw600 fx hvrBgGrey1 lh1">
+                      className="aiCtr fs7 fw600 fx hvrBgGrey1 lh1 mR1">
                       <span
                         role="img"
                         aria-label="Big X Emoji">
@@ -152,6 +156,18 @@ export const EventsComponent = memo((props: tComponentProps) => (
                       </span>
                       Delete
                     </button>
+                  )}
+                  {ev.isDraft && (
+                    <Link
+                      to={`/draft/${ev.orgId}?${qs}`}
+                      className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
+                      <span
+                        role="img"
+                        aria-label="Hand with Pen Emoji">
+                        👁️
+                      </span>
+                      Preview
+                    </Link>
                   )}
                 </div>
               )}

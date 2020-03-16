@@ -20,7 +20,7 @@ class MembersContainer extends PureComponent<tContainerProps> {
     const orgId = _.get(props, idPath, null);
 
     if (orgId) {
-      props.getUsersByOrgIdDispatch({orgId});
+      props.getUsersByOrgIdDispatch({orgId, noPending: 'false'});
     }
   }
 

@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import loglevel from 'loglevel';
-import qs from 'query-string';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 // import {Redirect} from 'react-router';
 import {Helmet} from '../../components';
@@ -11,9 +11,6 @@ import {getEvent, getEventsByOrgId, getOrg, getRoles, getRsvps} from '../../redu
 import {tContainerProps, tStore} from './_types';
 import {EventComponent} from './Component';
 
-// @TODO split up event and event preview page into 2 separate routes
-// then just make the eventPreview route a private route. logic here is
-// starting to get really convoluted and complicated
 class EventContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
@@ -108,13 +105,10 @@ class EventContainer extends PureComponent<tContainerProps> {
             const userIsLoggedIn = session.isAuthenticated;
             const userRoleMap = rolesThunk.fetched
               && _.find(rolesThunk.data, rm => rm.orgId === orgThunk.data.id);
-            const userIsAModOrAdmin = userRoleMap ?
-              userRoleMap.role === 'admin' || userRoleMap.role === 'facilitator'
-              : false;
 
             // if user is not logged in or not a member of the group
             if (privateGroup && (!userIsLoggedIn || !userRoleMap)) {
-              // return <Redirect to="/login" />;
+              return <Redirect to="/login" />;
             }
 
             return (
@@ -123,17 +117,6 @@ class EventContainer extends PureComponent<tContainerProps> {
                   isLoading={eventThunk.isLoading}
                   render={() => {
                     const event = eventThunk.data;
-                    // is user is logged, is a mod or admin, and this is a draft
-                    // if the draft has the right query param, render, else redirect
-                    if (userIsAModOrAdmin && event.isDraft) {
-                      const search = _.get(this.props, 'location.search', '');
-                      const queryObj = qs.parse(search);
-
-                      if (queryObj.isPreview === '') {
-                        // return <Redirect to="/login" />;
-                      }
-                    }
-
                     const rsvp = _.find(
                       rsvpsThunk.data,
                       rsvp => rsvp.eventId === event.id,

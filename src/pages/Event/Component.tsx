@@ -44,13 +44,12 @@ export const EventComponent = memo((props: tComponentProps) => {
             <h1 className="fs2 mB3 ttCap">
               {event.title}
             </h1>
-            {!event.isDraft
-            && !isPastMeeting
-            && (
-              <div className="mB3">
-                <RSVP event={event} />
-              </div>
-            )}
+            {!isPastMeeting
+              && (
+                <div className="mB3">
+                  <RSVP event={event} />
+                </div>
+              )}
             <div className="fw600 mB3">
               <div>
                 {event.locationLink && (

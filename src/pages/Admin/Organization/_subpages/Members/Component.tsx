@@ -25,7 +25,7 @@ export const MembersComponent = memo((props: tComponentProps) => (
     <div className="bgWhite br8 p3">
       <div className="fx aiCtr">
         <h2 className="fs3 mB2">
-          Manage Membership ({props.userTotal} members)
+          Manage Membership ({props.users.length} members)
         </h2>
       </div>
       <FilterPanel

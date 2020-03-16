@@ -42,7 +42,7 @@ const GroupAdminContainer = memo((props: tProps) => {
       {!session.isVerified && (
         <div className="row p3 mB3 taCtr bgRedLite fw600 fs6">
           <Link to="/verify-account">
-            Verify your account
+            Verify your account. Your group will not be listed and some functionality will be unavailable until you do.
           </Link>
         </div>
       )}
@@ -96,7 +96,11 @@ const GroupAdminContainer = memo((props: tProps) => {
               <div className="bgGrey3 circ mR3 p3" />
               {isMeetings && 'Edit Meetings & Drafts'}
               {!isMeetings && (
-                <Link to="/admin/meetings">
+                <Link
+                  to="/admin/meetings"
+                  className={cx({
+                    curDisable: !props.session.isVerified,
+                  })}>
                   Edit Meetings & Drafts
                 </Link>
               )}
@@ -105,7 +109,11 @@ const GroupAdminContainer = memo((props: tProps) => {
               <div className="bgGrey3 circ mR3 p3" />
               {section === 'memberships' && 'Manage Members & Approvals'}
               {section !== 'memberships' && (
-                <Link to="/admin/memberships">
+                <Link
+                  to="/admin/memberships"
+                  className={cx({
+                    curDisable: !props.session.isVerified,
+                  })}>
                   Manage Members & Approvals
                 </Link>
               )}

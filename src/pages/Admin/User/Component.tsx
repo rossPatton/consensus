@@ -27,7 +27,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
       {!session.isVerified && (
         <div className="row p3 mB3 taCtr bgRedLite fw600 fs6">
           <Link to="/verify-account">
-            Verify your account
+            Verify your account. Consensus does not require account verification for users, but some groups may choose to restrict access to you.
           </Link>
         </div>
       )}
