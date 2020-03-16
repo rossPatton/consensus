@@ -8,4 +8,5 @@ export const Draft = {
   component: DraftComponent,
   exact: true,
   path: '/draft/:id',
+  private: true,
 };

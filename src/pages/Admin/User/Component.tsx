@@ -81,6 +81,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
                 {orgsByUserIdThunk.data.slice(0, 3).map((group, i) => {
                   const roleMap = _.find(props.roles, r => r.orgId === group.id) || {};
                   const {role} = roleMap as tRoleMap;
+                  if (role === 'pending') return null;
 
                   return (
                     <li key={i}>
@@ -106,15 +107,13 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
                     </li>
                   );
                 })}
-                {orgsByUserIdThunk.data.length > 3 && (
-                  <li>
-                    <Link
-                      to="/admin/memberships"
-                      className="pL2 fs6 fs600">
-                      View all
-                    </Link>
-                  </li>
-                )}
+                <li>
+                  <Link
+                    to="/admin/memberships"
+                    className="pL2 fs6 fs600">
+                    View all
+                  </Link>
+                </li>
               </ul>
             )}
           <div className="fs4 fw600 mB3">

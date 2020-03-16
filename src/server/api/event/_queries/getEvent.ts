@@ -29,6 +29,7 @@ export const getEvent = async (
   const org = await getOrgById(ctx, event.orgId);
 
   if (!role && org.type !== 'public') {
+    ctx.redirect('/401');
     return ctx.throw(401);
   }
 

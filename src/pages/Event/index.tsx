@@ -80,14 +80,16 @@ class EventContainer extends PureComponent<tContainerProps> {
     // bit hacky, but if event is private, we 401, and if id is wrong we 204
     // in both cases we want to render the error boundary instead
     // in other words, if no error and things are still loading, show loder
-    let isLoading = !!orgStatus && (orgStatus === 200 && orgThunk.isLoading);
+    let isLoading = !!orgStatus
+      && (orgStatus === 200 && orgThunk.isLoading)
+      || eventThunk.isLoading;
     if (session.type === 'user') {
       // if user, dont start rendering til we know their role with the group
       isLoading = isLoading && !rolesThunk.fetched;
     }
 
     return (
-      <ErrorBoundary status={orgStatus}>
+      <ErrorBoundary status={orgStatus || eventStatus}>
         <Helmet
           canonical=""
           title=""
@@ -111,28 +113,19 @@ class EventContainer extends PureComponent<tContainerProps> {
               return <Redirect to="/login" />;
             }
 
-            return (
-              <ErrorBoundary status={eventStatus}>
-                <GenericLoader
-                  isLoading={eventThunk.isLoading}
-                  render={() => {
-                    const event = eventThunk.data;
-                    const rsvp = _.find(
-                      rsvpsThunk.data,
-                      rsvp => rsvp.eventId === event.id,
-                    );
+            const event = eventThunk.data;
+            const rsvp = _.find(
+              rsvpsThunk.data,
+              rsvp => rsvp.eventId === event.id,
+            );
 
-                    return (
-                      <EventComponent
-                        event={event}
-                        eventsByOrgId={eventsByOrgId}
-                        org={orgThunk.data}
-                        rsvp={rsvp}
-                      />
-                    );
-                  }}
-                />
-              </ErrorBoundary>
+            return (
+              <EventComponent
+                event={event}
+                eventsByOrgId={eventsByOrgId}
+                org={orgThunk.data}
+                rsvp={rsvp}
+              />
             );
           }}
         />

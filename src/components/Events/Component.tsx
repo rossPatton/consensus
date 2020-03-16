@@ -163,7 +163,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                       className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
                       <span
                         role="img"
-                        aria-label="Hand with Pen Emoji">
+                        aria-label="Eye Emoji">
                         👁️
                       </span>
                       Preview

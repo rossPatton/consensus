@@ -113,6 +113,11 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             <Link
               to={`/draft/${props.id}?${objToQueryString(props)}`}
               className="brdA1 br4 lh1 p3 fs6 hvrBgGrey1 trans1">
+              <span
+                role="img"
+                aria-label="Eye Emoji">
+                👁️
+              </span>
               Preview
             </Link>
           )}
