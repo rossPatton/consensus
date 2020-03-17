@@ -33,5 +33,5 @@ declare type tApiOpts = Readonly<{
 
 declare type tResponseError = Readonly<{
   message: string;
-  status: 200 | 204 | 400 | 500;
+  status: 200 | 204 | 400 | 401 | 500;
 }>;
