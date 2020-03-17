@@ -4,7 +4,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet} from '../../components';
-import {ErrorBoundary} from '../../containers';
+import {ErrorBoundary, Template} from '../../containers';
 import {login} from '../../redux';
 import {api} from '../../utils';
 import {canonical, description, keywords, title} from './_constants';
@@ -81,37 +81,39 @@ class VerifyAccountContainer extends PureComponent<tContainerProps, tState> {
     const enterCode = _.get(this.props, 'match.params.section', null);
 
     return (
-      <ErrorBoundary status={_.get(session, 'session.error.status', 200)}>
-        <Helmet
-          canonical={canonical}
-          title={title}
-          meta={[
-            { name: 'description', content: description },
-            { name: 'keywords', content: keywords },
-            { property: 'og:title', content: title },
-            { property: 'og:description', content: description },
-          ]}
-        />
-        {session.data.isVerified && (
-          <div className="row p3 mB3 taCtr bgGreenLite fw600 fs6">
+      <Template>
+        <ErrorBoundary status={_.get(session, 'session.error.status', 200)}>
+          <Helmet
+            canonical={canonical}
+            title={title}
+            meta={[
+              { name: 'description', content: description },
+              { name: 'keywords', content: keywords },
+              { property: 'og:title', content: title },
+              { property: 'og:description', content: description },
+            ]}
+          />
+          {session.data.isVerified && (
+            <div className="row p3 mB3 taCtr bgGreenLite fw600 fs6">
             You&apos;re verified!
-          </div>
-        )}
-        {enterCode && (
-          <VerifyTokenComponent
-            {...this.state}
-            verifyToken={this.verifyToken}
-            updateState={this.updateState}
-          />
-        )}
-        {!enterCode && (
-          <EmailTokenComponent
-            {...this.state}
-            sendVerificationToken={this.sendVerificationToken}
-            updateState={this.updateState}
-          />
-        )}
-      </ErrorBoundary>
+            </div>
+          )}
+          {enterCode && (
+            <VerifyTokenComponent
+              {...this.state}
+              verifyToken={this.verifyToken}
+              updateState={this.updateState}
+            />
+          )}
+          {!enterCode && (
+            <EmailTokenComponent
+              {...this.state}
+              sendVerificationToken={this.sendVerificationToken}
+              updateState={this.updateState}
+            />
+          )}
+        </ErrorBoundary>
+      </Template>
     );
   }
 }

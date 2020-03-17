@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
 import {Helmet} from '../../components';
-import {ErrorBoundary, GenericLoader} from '../../containers';
+import {ErrorBoundary, GenericLoader, Template} from '../../containers';
 import {getRoles} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {DraftComponent} from './Component';
@@ -27,43 +27,45 @@ class DraftContainer extends PureComponent<tContainerProps> {
     }
 
     return (
-      <ErrorBoundary status={rolesStatus}>
-        <Helmet
-          canonical=""
-          title=""
-          meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
-          ]}
-        />
-        <GenericLoader
-          isLoading={isLoading}
-          render={() => {
-            const userRoleMap = rolesThunk.fetched
+      <Template>
+        <ErrorBoundary status={rolesStatus}>
+          <Helmet
+            canonical=""
+            title=""
+            meta={[
+              { name: 'description', content: '' },
+              { name: 'keywords', content: '' },
+              { property: 'og:title', content: '' },
+              { property: 'og:description', content: '' },
+            ]}
+          />
+          <GenericLoader
+            isLoading={isLoading}
+            render={() => {
+              const userRoleMap = rolesThunk.fetched
               && _.find(
                 rolesThunk.data,
                 rm => rm.orgId === parseInt(draft.orgId as string, 10,
                 ),
               );
 
-            const userIsAModOrAdmin = userRoleMap ?
-              userRoleMap.role === 'admin' || userRoleMap.role === 'facilitator'
-              : false;
+              const userIsAModOrAdmin = userRoleMap ?
+                userRoleMap.role === 'admin' || userRoleMap.role === 'facilitator'
+                : false;
 
-            if (!userIsAModOrAdmin) {
-              return <Redirect to="/login" />;
-            }
+              if (!userIsAModOrAdmin) {
+                return <Redirect to="/login" />;
+              }
 
-            return (
-              <DraftComponent
-                event={draft as tEvent}
-              />
-            );
-          }}
-        />
-      </ErrorBoundary>
+              return (
+                <DraftComponent
+                  event={draft as tEvent}
+                />
+              );
+            }}
+          />
+        </ErrorBoundary>
+      </Template>
     );
   }
 }

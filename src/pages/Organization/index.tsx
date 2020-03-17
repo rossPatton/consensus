@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 
 import {Helmet} from '../../components';
-import {ErrorBoundary, GenericLoader} from '../../containers';
+import {ErrorBoundary, GenericLoader, Template} from '../../containers';
 import {getEventsByOrgId, getOrg, getRoles, getRsvps} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {OrganizationComponent} from './Component';
@@ -46,59 +46,61 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
     const {isLoading, location, match, orgThunk, rolesThunk, session} = this.props;
 
     return (
-      <ErrorBoundary status={_.get(orgThunk, 'error.status', 200)}>
-        <GenericLoader
-          isLoading={isLoading}
-          render={() => {
-            const {orgThunk: {data: org}} = this.props;
+      <Template>
+        <ErrorBoundary status={_.get(orgThunk, 'error.status', 200)}>
+          <GenericLoader
+            isLoading={isLoading}
+            render={() => {
+              const {orgThunk: {data: org}} = this.props;
 
-            // TODO make real
-            let meta = [
-              { name: 'description', content: '' },
-              { name: 'keywords', content: '' },
-              { property: 'og:title', content: '' },
-              { property: 'og:description', content: '' },
-            ];
-            if (org.type === 'hidden') {
-              meta = [...meta, {
-                name: 'robots',
-                content: 'noindex',
-              }];
-            }
+              // TODO make real
+              let meta = [
+                { name: 'description', content: '' },
+                { name: 'keywords', content: '' },
+                { property: 'og:title', content: '' },
+                { property: 'og:description', content: '' },
+              ];
+              if (org.type === 'hidden') {
+                meta = [...meta, {
+                  name: 'robots',
+                  content: 'noindex',
+                }];
+              }
 
-            const roleMap = rolesThunk.data.find(roleMap => {
-              return roleMap.orgId === org.id;
-            }) as tRoleMap;
+              const roleMap = rolesThunk.data.find(roleMap => {
+                return roleMap.orgId === org.id;
+              }) as tRoleMap;
 
-            let role = roleMap && roleMap.role;
-            if (session.type === 'org' && session.profile.id === org.id) {
-              role = 'admin';
-            }
+              let role = roleMap && roleMap.role;
+              if (session.type === 'org' && session.profile.id === org.id) {
+                role = 'admin';
+              }
 
-            const isHidden = org.type === 'hidden' && !role;
+              const isHidden = org.type === 'hidden' && !role;
 
-            return isHidden
-              ? (
-                <Redirect to="/login" />
-              ) : (
-                <>
-                  <Helmet
-                    canonical={`org/${org.handle}`}
-                    title={`Consensus: ${org.name}`}
-                    meta={meta}
-                  />
-                  <OrganizationComponent
-                    location={location}
-                    match={match}
-                    org={org}
-                    role={role as tRole} // unsure why this errors but should be ok?
-                    session={this.props.session}
-                  />
-                </>
-              );
-          }}
-        />
-      </ErrorBoundary>
+              return isHidden
+                ? (
+                  <Redirect to="/login" />
+                ) : (
+                  <>
+                    <Helmet
+                      canonical={`org/${org.handle}`}
+                      title={`Consensus: ${org.name}`}
+                      meta={meta}
+                    />
+                    <OrganizationComponent
+                      location={location}
+                      match={match}
+                      org={org}
+                      role={role as tRole} // unsure why this errors but should be ok?
+                      session={this.props.session}
+                    />
+                  </>
+                );
+            }}
+          />
+        </ErrorBoundary>
+      </Template>
     );
   }
 }

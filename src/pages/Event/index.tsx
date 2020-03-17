@@ -6,7 +6,7 @@ import {Redirect} from 'react-router-dom';
 
 // import {Redirect} from 'react-router';
 import {Helmet} from '../../components';
-import {ErrorBoundary, GenericLoader} from '../../containers';
+import {ErrorBoundary, GenericLoader, Template} from '../../containers';
 import {getEvent, getEventsByOrgId, getOrg, getRoles, getRsvps} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {EventComponent} from './Component';
@@ -89,47 +89,49 @@ class EventContainer extends PureComponent<tContainerProps> {
     }
 
     return (
-      <ErrorBoundary status={orgStatus || eventStatus}>
-        <Helmet
-          canonical=""
-          title=""
-          meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
-          ]}
-        />
-        <GenericLoader
-          isLoading={isLoading}
-          render={() => {
-            const privateGroup = orgThunk.data.type !== 'public';
-            const userIsLoggedIn = session.isAuthenticated;
-            const userRoleMap = rolesThunk.fetched
+      <Template>
+        <ErrorBoundary status={orgStatus || eventStatus}>
+          <Helmet
+            canonical=""
+            title=""
+            meta={[
+              { name: 'description', content: '' },
+              { name: 'keywords', content: '' },
+              { property: 'og:title', content: '' },
+              { property: 'og:description', content: '' },
+            ]}
+          />
+          <GenericLoader
+            isLoading={isLoading}
+            render={() => {
+              const privateGroup = orgThunk.data.type !== 'public';
+              const userIsLoggedIn = session.isAuthenticated;
+              const userRoleMap = rolesThunk.fetched
               && _.find(rolesThunk.data, rm => rm.orgId === orgThunk.data.id);
 
-            // if user is not logged in or not a member of the group
-            if (privateGroup && (!userIsLoggedIn || !userRoleMap)) {
-              return <Redirect to="/login" />;
-            }
+              // if user is not logged in or not a member of the group
+              if (privateGroup && (!userIsLoggedIn || !userRoleMap)) {
+                return <Redirect to="/login" />;
+              }
 
-            const event = eventThunk.data;
-            const rsvp = _.find(
-              rsvpsThunk.data,
-              rsvp => rsvp.eventId === event.id,
-            );
+              const event = eventThunk.data;
+              const rsvp = _.find(
+                rsvpsThunk.data,
+                rsvp => rsvp.eventId === event.id,
+              );
 
-            return (
-              <EventComponent
-                event={event}
-                eventsByOrgId={eventsByOrgId}
-                org={orgThunk.data}
-                rsvp={rsvp}
-              />
-            );
-          }}
-        />
-      </ErrorBoundary>
+              return (
+                <EventComponent
+                  event={event}
+                  eventsByOrgId={eventsByOrgId}
+                  org={orgThunk.data}
+                  rsvp={rsvp}
+                />
+              );
+            }}
+          />
+        </ErrorBoundary>
+      </Template>
     );
   }
 }

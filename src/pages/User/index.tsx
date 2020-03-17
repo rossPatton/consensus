@@ -4,7 +4,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet} from '../../components';
-import {ErrorBoundary, GenericLoader} from '../../containers';
+import {ErrorBoundary, GenericLoader, Template} from '../../containers';
 import {getOrgsByUserId, getUser} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {UserComponent} from './Component';
@@ -24,28 +24,30 @@ class UserContainer extends PureComponent<tContainerProps> {
 
   render() {
     return (
-      <ErrorBoundary status={_.get(this.props, 'user.error.status', 200)}>
-        <Helmet
-          canonical=""
-          title=""
-          meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
-          ]}
-        />
-        <GenericLoader
-          isLoading={this.props.isLoading}
-          render={() => (
-            <UserComponent
-              match={this.props.match}
-              orgs={this.props.orgsByUserId}
-              user={this.props.user}
-            />
-          )}
-        />
-      </ErrorBoundary>
+      <Template>
+        <ErrorBoundary status={_.get(this.props, 'user.error.status', 200)}>
+          <Helmet
+            canonical=""
+            title=""
+            meta={[
+              { name: 'description', content: '' },
+              { name: 'keywords', content: '' },
+              { property: 'og:title', content: '' },
+              { property: 'og:description', content: '' },
+            ]}
+          />
+          <GenericLoader
+            isLoading={this.props.isLoading}
+            render={() => (
+              <UserComponent
+                match={this.props.match}
+                orgs={this.props.orgsByUserId}
+                user={this.props.user}
+              />
+            )}
+          />
+        </ErrorBoundary>
+      </Template>
     );
   }
 }

@@ -4,7 +4,6 @@ import {Directory} from './Directory';
 import {Draft} from './Draft';
 import {ErrorPage} from './ErrorPage';
 import {Event} from './Event';
-import {GDPR} from './GDPR';
 import {Home} from './Home';
 import {Login} from './Login';
 import {NoMatch} from './NoMatch';
@@ -23,7 +22,6 @@ export const routes = [
   Draft,
   ErrorPage,
   Event,
-  GDPR,
   Home,
   Login,
   Organization,

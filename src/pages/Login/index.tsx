@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 
 import {Helmet} from '../../components';
-import {ErrorBoundary, GenericLoader} from '../../containers';
+import {ErrorBoundary, GenericLoader, Template} from '../../containers';
 import {login} from '../../redux';
 import {canonical, description, keywords, title} from './_constants';
 import {tContainerProps, tState, tStateUnion, tStore} from './_types';
@@ -41,37 +41,39 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
     const error = _.get(session, 'error.message', '');
 
     return (
-      <ErrorBoundary status={_.get(session, 'error.status', 200)}>
-        <Helmet
-          canonical={canonical}
-          title={title}
-          meta={[
-            { name: 'description', content: description },
-            { name: 'keywords', content: keywords },
-            { property: 'og:title', content: title },
-            { property: 'og:description', content: description },
-          ]}
-        />
-        <GenericLoader
-          isLoading={session.isLoading}
-          render={() => (
-            <>
-              {session.data.isAuthenticated && (
-                <Redirect to="/admin/meetings" />
-              )}
-              {!session.data.isAuthenticated && (
-                <LoginComponent
-                  {...this.state}
-                  // if theres a login error, it'll show up here
-                  error={error}
-                  login={this.login}
-                  updateState={this.updateState}
-                />
-              )}
-            </>
-          )}
-        />
-      </ErrorBoundary>
+      <Template>
+        <ErrorBoundary status={_.get(session, 'error.status', 200)}>
+          <Helmet
+            canonical={canonical}
+            title={title}
+            meta={[
+              { name: 'description', content: description },
+              { name: 'keywords', content: keywords },
+              { property: 'og:title', content: title },
+              { property: 'og:description', content: description },
+            ]}
+          />
+          <GenericLoader
+            isLoading={session.isLoading}
+            render={() => (
+              <>
+                {session.data.isAuthenticated && (
+                  <Redirect to="/admin/meetings" />
+                )}
+                {!session.data.isAuthenticated && (
+                  <LoginComponent
+                    {...this.state}
+                    // if theres a login error, it'll show up here
+                    error={error}
+                    login={this.login}
+                    updateState={this.updateState}
+                  />
+                )}
+              </>
+            )}
+          />
+        </ErrorBoundary>
+      </Template>
     );
   }
 }

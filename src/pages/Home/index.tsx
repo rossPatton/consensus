@@ -1,11 +1,10 @@
 import _ from 'lodash';
-import loglevel from 'loglevel';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet} from '../../components';
-import {ErrorBoundary} from '../../containers';
-import {getEventsByLocation, getGeo} from '../../redux';
+import {Template} from '../../containers';
+import {getEventsByLocation} from '../../redux';
 import {canonical, description, keywords, title} from './_constants';
 import {tContainerProps, tStore} from './_types';
 import {HomeComponent} from './Component';
@@ -13,18 +12,12 @@ import {HomeComponent} from './Component';
 class HomeContainer extends Component<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-
-    props.getGeoDispatch()
-      .then(res => {
-        const query = {...res.payload};
-        return props.getEventsByLocationDispatch(query);
-      })
-      .catch(loglevel.error);
+    // props.getEventsByLocationDispatch(props.geo);
   }
 
   render() {
     return (
-      <ErrorBoundary status={200}>
+      <Template>
         <Helmet
           canonical={canonical}
           title={title}
@@ -40,21 +33,19 @@ class HomeContainer extends Component<tContainerProps> {
           geo={this.props.geo}
           isLoading={this.props.isLoading}
         />
-      </ErrorBoundary>
+      </Template>
     );
   }
 }
 
 const mapStateToProps = (store: tStore) => ({
   eventsByLocation: store.eventsByLocation,
-  isLoading: store.geo.isLoading,
   geo: store.geo.data,
   session: store.session.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
   getEventsByLocationDispatch: (query: any) => dispatch(getEventsByLocation(query)),
-  getGeoDispatch: () => dispatch(getGeo()),
 });
 
 export default connect(

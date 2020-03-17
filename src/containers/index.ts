@@ -27,3 +27,7 @@ export const RoleFilter = loadable(() =>
 export const SearchFilter = loadable(() =>
   import(/* webpackChunkName: "SearchFilter" */'./SearchFilter'),
 );
+
+export const Template = loadable(() =>
+  import(/* webpackChunkName: "Template" */'./Template'),
+);

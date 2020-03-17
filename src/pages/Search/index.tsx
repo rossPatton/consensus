@@ -4,7 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet, Orgs, SuperSearch} from '../../components';
-import {ErrorBoundary, GenericLoader} from '../../containers';
+import {ErrorBoundary, GenericLoader, Template} from '../../containers';
 import {getOrgsBySearch} from '../../redux';
 import {tProps, tStore} from './_types';
 
@@ -22,28 +22,30 @@ class SearchContainer extends React.PureComponent<tProps> {
     const renderNoResults = !isLoading && orgsBySearch.length === 0;
 
     return (
-      <ErrorBoundary status={_.get(orgsBySearch, 'error.status', 200)}>
-        <Helmet
-          canonical="search"
-          title="Consensus: Search"
-          meta={meta}
-        />
-        <div className="mT4 contain">
-          <h1 className="fs2 mB3">
-            {renderNoResults ? 'No results!' : 'Your Search Results'}
-          </h1>
-          <SuperSearch />
-          <GenericLoader
-            isLoading={isLoading}
-            render={() => (
-              <Orgs
-                showLocation
-                orgs={orgsBySearch}
-              />
-            )}
+      <Template>
+        <ErrorBoundary status={_.get(orgsBySearch, 'error.status', 200)}>
+          <Helmet
+            canonical="search"
+            title="Consensus: Search"
+            meta={meta}
           />
-        </div>
-      </ErrorBoundary>
+          <div className="mT4 contain">
+            <h1 className="fs2 mB3">
+              {renderNoResults ? 'No results!' : 'Your Search Results'}
+            </h1>
+            <SuperSearch />
+            <GenericLoader
+              isLoading={isLoading}
+              render={() => (
+                <Orgs
+                  showLocation
+                  orgs={orgsBySearch}
+                />
+              )}
+            />
+          </div>
+        </ErrorBoundary>
+      </Template>
     );
   }
 }

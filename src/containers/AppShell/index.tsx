@@ -1,35 +1,26 @@
-import React, {Component} from 'react';
+import React, {memo} from 'react';
 import {HelmetProvider} from 'react-helmet-async';
 import {Switch} from 'react-router-dom';
 
-import {ErrorBoundary} from '..';
 import {RouteWithSubRoutes} from '../../components';
 import {routes} from '../../routes';
-import {Footer, Header} from './_components';
 
-export default class AppShell extends Component<any> {
-  render() {
-    return (
-      <HelmetProvider context={{}}>
-        <ErrorBoundary>
-          <Header />
-          <main className="mT5 mB5 pB5">
-            <Switch>
-              {routes.map((route: tRoute, i) => (
-                <RouteWithSubRoutes
-                  key={i}
-                  {...this.props}
-                  {...this.state}
-                  {...route}
-                />
-              ))}
-            </Switch>
-          </main>
-          <Footer />
-        </ErrorBoundary>
-      </HelmetProvider>
-    );
-  }
-}
+const AppShell = memo((props: any) => (
+  <HelmetProvider context={{}}>
+    <main className="mT5 mB5 pB5">
+      <Switch>
+        {routes.map((route: tRoute, i) => (
+          <RouteWithSubRoutes
+            key={i}
+            {...props}
+            {...route}
+          />
+        ))}
+      </Switch>
+    </main>
+  </HelmetProvider>
+));
+
+export default AppShell;
 
 // export const AppShellHot = hot(module)(AppShellComponent);

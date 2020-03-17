@@ -19,6 +19,10 @@ prod:
 build:
 	docker-compose -f docker-compose.prod.yml build --no-cache --parallel
 
+# setup external nginx network
+nginx:
+	docker-compose -f ./nginx/docker-compose.yml up --remove-orphans
+
 # stops all active containers (as defined by docker-compose)
 reset:
 	docker-compose down
@@ -26,8 +30,8 @@ reset:
 # if installing on new machine, you need to create the shared networks and volumes first
 setup:
 	docker network inspect nginx-proxy >/dev/null || docker network create nginx-proxy;
-		docker volume create db_data;
-		docker volume create node_modules
+		docker network inspect db_data >/dev/null || docker volume create db_data;
+		docker network inspect node_modules >/dev/null || docker volume create node_modules
 
 # just an alias for make dev
 start:

@@ -4,7 +4,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet} from '../../components';
-import {ErrorBoundary} from '../../containers';
+import {ErrorBoundary, Template} from '../../containers';
 import {login} from '../../redux';
 import {api} from '../../utils';
 import {canonical, description, keywords, title} from './_constants';
@@ -82,37 +82,39 @@ class PasswordResetContainer extends PureComponent<tContainerProps, tState> {
     const enterCode = _.get(this.props, 'match.params.section', null);
 
     return (
-      <ErrorBoundary status={_.get(this.props, 'session.error.status', 200)}>
-        <Helmet
-          canonical={canonical}
-          title={title}
-          meta={[
-            { name: 'description', content: description },
-            { name: 'keywords', content: keywords },
-            { property: 'og:title', content: title },
-            { property: 'og:description', content: description },
-          ]}
-        />
-        {this.state.passwordUpdated && (
-          <div className="row p3 mB3 taCtr bgGreenLite fw600 fs6">
+      <Template>
+        <ErrorBoundary status={_.get(this.props, 'session.error.status', 200)}>
+          <Helmet
+            canonical={canonical}
+            title={title}
+            meta={[
+              { name: 'description', content: description },
+              { name: 'keywords', content: keywords },
+              { property: 'og:title', content: title },
+              { property: 'og:description', content: description },
+            ]}
+          />
+          {this.state.passwordUpdated && (
+            <div className="row p3 mB3 taCtr bgGreenLite fw600 fs6">
             Your password has been updated!
-          </div>
-        )}
-        {enterCode && (
-          <ResetPasswordComponent
-            {...this.state}
-            resetPasswordByEmail={this.resetPasswordByEmail}
-            updateState={this.updateState}
-          />
-        )}
-        {!enterCode && (
-          <EmailTokenComponent
-            {...this.state}
-            sendPasswordResetEmail={this.sendPasswordResetEmail}
-            updateState={this.updateState}
-          />
-        )}
-      </ErrorBoundary>
+            </div>
+          )}
+          {enterCode && (
+            <ResetPasswordComponent
+              {...this.state}
+              resetPasswordByEmail={this.resetPasswordByEmail}
+              updateState={this.updateState}
+            />
+          )}
+          {!enterCode && (
+            <EmailTokenComponent
+              {...this.state}
+              sendPasswordResetEmail={this.sendPasswordResetEmail}
+              updateState={this.updateState}
+            />
+          )}
+        </ErrorBoundary>
+      </Template>
     );
   }
 }
