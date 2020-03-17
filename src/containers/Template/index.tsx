@@ -23,7 +23,11 @@ class Template extends PureComponent<any> {
         <ErrorBoundary status={geoStatus}>
           <GenericLoader
             isLoading={geoThunk.isLoading}
-            render={() => children}
+            render={() => (
+              <main className="mT5 mB5 pB5">
+                {children}
+              </main>
+            )}
           />
         </ErrorBoundary>
         <Footer />

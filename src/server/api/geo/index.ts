@@ -8,7 +8,7 @@ import {lowerCase, slugify} from '../../../utils';
 
 export const geo = new Router();
 geo.get('/api/v1/geo', async (ctx: Koa.ParameterizedContext) => {
-  const ip = ctx.req.headers['x-forwarded-for']
+  let ip = ctx.req.headers['x-forwarded-for']
     || ctx.req.connection.remoteAddress;
 
   // if on dev, or failed prod lookup, default to a New York ip

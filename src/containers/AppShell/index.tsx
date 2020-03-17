@@ -7,17 +7,15 @@ import {routes} from '../../routes';
 
 const AppShell = memo((props: any) => (
   <HelmetProvider context={{}}>
-    <main className="mT5 mB5 pB5">
-      <Switch>
-        {routes.map((route: tRoute, i) => (
-          <RouteWithSubRoutes
-            key={i}
-            {...props}
-            {...route}
-          />
-        ))}
-      </Switch>
-    </main>
+    <Switch>
+      {routes.map((route: tRoute, i) => (
+        <RouteWithSubRoutes
+          key={i}
+          {...props}
+          {...route}
+        />
+      ))}
+    </Switch>
   </HelmetProvider>
 ));
 
