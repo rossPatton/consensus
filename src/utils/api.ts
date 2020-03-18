@@ -19,10 +19,10 @@ export const api = async (opts: tApiOpts) => {
 
   if (opts.init) opts.dispatch(opts.init());
 
-  let status = 200;
+  let status = 200 as tStatusUnion;
   return fetch(endpoint, fetchOpts)
     .then((resp: tFetchResponse) => {
-      status = resp.status;
+      status = resp.status as tStatusUnion;
       if (!resp.ok) throw resp;
       if (status === 204) {
         throw Error('204: Nothing found');

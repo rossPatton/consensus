@@ -5,13 +5,12 @@ import {Switch} from 'react-router-dom';
 import {RouteWithSubRoutes} from '../../components';
 import {routes} from '../../routes';
 
-const AppShell = memo((props: any) => (
+const AppShell = memo(() => (
   <HelmetProvider context={{}}>
     <Switch>
       {routes.map((route: tRoute, i) => (
         <RouteWithSubRoutes
           key={i}
-          {...props}
           {...route}
         />
       ))}

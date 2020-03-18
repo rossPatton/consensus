@@ -1,17 +1,14 @@
 export type tState = {
+  currentPassword: string,
   email: string,
   isLocked: boolean,
   isVerified: boolean,
   login: string,
   newPassword: string,
-  currentPassword: string,
+  privateEmail: boolean,
 };
 
-export type tStateUnion = keyof tState;
-
-export type tStore = {
-  session: tThunk<tSession>,
-};
+export type tKeyUnion = keyof tState;
 
 export type tContainerProps = {
   loginDispatch: (login: tLoginQuery) => tThunkPayload<tSession>,
@@ -20,8 +17,12 @@ export type tContainerProps = {
 };
 
 export type tComponentProps = tState & {
-  save: (ev: React.FormEvent<HTMLFormElement>) => void,
+  save: (ev: React.FormEvent<HTMLFormElement>) => Promise<void>,
   session: tSession,
   toggleLock: () => void,
-  updateState: (key: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
+  updateState: (key: tKeyUnion, value: string | boolean) => void,
+};
+
+export type tStore = {
+  session: tThunk<tSession>,
 };

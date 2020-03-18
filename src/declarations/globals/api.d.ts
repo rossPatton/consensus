@@ -15,23 +15,23 @@ declare type tBaseQuery = tFormSubmit & Readonly<{
   offset?: number,
 }>;
 
-// basic id query
 declare type tIdQuery = tBaseQuery & {
   id: string | number,
 };
 
+declare type tResponseError = Readonly<{
+  message: tFetchResponse<Error> | string;
+  status: 200 | 204 | 400 | 401 | 404 | 500;
+}>;
+
+// TODO instead of string or any, we could do a MASSIVE union of action types and payloads
 declare type tApiOpts = Readonly<{
   dispatch?: Function,
   credentials?: boolean,
-  failure?: Function,
-  init?: Function,
+  failure?: (error: tResponseError) => tAction<string, tResponseError>,
+  init?: () => tAction<string, any>,
   method?: 'DELETE' | 'GET' | 'PATCH' | 'POST',
   path: string,
-  success?: (json: any) => any,
-  query?: any,
-}>;
-
-declare type tResponseError = Readonly<{
-  message: string;
-  status: 200 | 204 | 400 | 401 | 500;
+  success?: (payload: any) => tAction<string, any>,
+  query?: object,
 }>;

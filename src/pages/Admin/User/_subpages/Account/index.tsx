@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {Helmet} from '../../../../../components';
 import {ErrorBoundary, GenericLoader} from '../../../../../containers';
 import {login, patchAccount} from '../../../../../redux';
-import {tContainerProps, tState, tStateUnion, tStore} from './_types';
+import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
 import {AccountComponent} from './Component';
 
 class AccountContainer extends PureComponent<tContainerProps, tState> {
@@ -14,12 +14,13 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
     super(props);
 
     this.state = {
+      currentPassword: '',
       email: '',
       isLocked: true,
       isVerified: _.get(props, 'sessionThunk.data.isVerified', false),
       login: '',
       newPassword: '',
-      currentPassword: '',
+      privateEmail: _.get(props, 'sessionThunk.data.privateEmail', false),
     };
   }
 
@@ -59,17 +60,11 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
       isLocked: !this.state.isLocked,
     });
 
-  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
+  updateState = (stateKey: tKeyUnion, value: string | boolean) => {
     if (!stateKey) return;
-
-    let {value} = ev.currentTarget;
-    if (stateKey.indexOf('private') !== -1) {
-      value = !this.state[stateKey];
-    }
-
     this.setState({
       [stateKey]: value,
-    } as Pick<tState, tStateUnion>);
+    } as Pick<tState, tKeyUnion>);
   }
 
   render() {

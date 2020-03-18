@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {Helmet} from '../../../../../components';
 import {ErrorBoundary, GenericLoader} from '../../../../../containers';
 import {login, patchAccount} from '../../../../../redux';
-import {tContainerProps, tState, tStateUnion, tStore} from './_types';
+import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
 import {AccountComponent} from './Component';
 
 class AccountContainer extends PureComponent<tContainerProps, tState> {
@@ -59,7 +59,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
       isLocked: !this.state.isLocked,
     });
 
-  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
+  updateState = (stateKey: tKeyUnion, ev: React.ChangeEvent<any>) => {
     if (!stateKey) return;
 
     let {value} = ev.currentTarget;
@@ -69,7 +69,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
 
     this.setState({
       [stateKey]: value,
-    } as Pick<tState, tStateUnion>);
+    } as Pick<tState, tKeyUnion>);
   }
 
   render() {

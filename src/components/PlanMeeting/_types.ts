@@ -10,7 +10,8 @@ export type tStore = {
   session: tThunk<tSession>,
 };
 
-export type tStateUnion = keyof tState;
+export type tKeyUnion = keyof tState;
+export type tValueUnion = ValueOf<tState>;
 export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export type tContainerProps = {
@@ -25,5 +26,5 @@ export type tContainerProps = {
 export type tComponentProps = tContainerProps & tState & {
   onSubmit: () => void,
   saveAsDraft: () => void,
-  updateState: (stateKey: tStateUnion, value: any) => void,
+  updateState: (stateKey: tKeyUnion, value: tValueUnion) => void,
 };

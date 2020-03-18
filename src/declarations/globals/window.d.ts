@@ -1,5 +1,5 @@
 interface Window {
-  __PRELOADED_STATE__: any;
+  __PRELOADED_STATE__: object;
   __REDUX_DEVTOOLS_EXTENSION__: Function;
 }
 

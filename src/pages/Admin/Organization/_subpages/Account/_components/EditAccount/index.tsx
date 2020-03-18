@@ -1,9 +1,9 @@
 import React, {memo} from 'react';
 
+import {tComponentProps} from '../../_types';
 import {PasswordInput} from '../../../../../../../components';
-// import {tComponentProps} from './_types';
 
-const EditAccount = memo((props: any) => (
+const EditAccount = memo((props: tComponentProps) => (
   <form
     action="/api/v1/user"
     autoComplete="off"
@@ -46,24 +46,6 @@ const EditAccount = memo((props: any) => (
             name="email"
           />
         </label>
-        {/* <div
-          tabIndex={0}
-          role="button"
-          className="fx aiCtr curPtr mB3 fs6"
-          onClick={ev => props.updateState('privateEmail', ev)}
-          onKeyPress={ev => props.updateState('privateEmail', ev)}>
-          <input
-            readOnly
-            type="checkbox"
-            className="mR2"
-            autoComplete="nope"
-            checked={props.privateEmail}
-          />
-          <span>
-            {props.privateEmail && 'Your email is kept private'}
-            {!props.privateEmail && 'Your email is displayed on your profile.'}
-          </span>
-        </div> */}
         <PasswordInput
           newPassword
           id="newPwInput"

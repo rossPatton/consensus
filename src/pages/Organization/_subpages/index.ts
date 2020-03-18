@@ -1,9 +1,5 @@
 import loadable from '@loadable/component';
 
-export const PlanMeeting = loadable(() =>
-  import(/* webpackChunkName: "Plan Meeting" */'./PlanMeeting'),
-);
-
 export const Meetings = loadable(() =>
   import(/* webpackChunkName: "Group Meetings" */'./Meetings'),
 );

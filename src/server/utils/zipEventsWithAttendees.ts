@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 // takes events, and user rsvps, and zips them together
-export const zipEventsWithAttendees = async (events: tEvent[], rels: any[]) => {
+export const zipEventsWithAttendees = async (events: tEvent[], rels: tRSVP[]) => {
   return Promise.all(
     events.map(async ev => {
       const publicRSVPS = [...rels].filter(

@@ -7,7 +7,7 @@ export type tState = {
   currentPassword: string,
 };
 
-export type tStateUnion = keyof tState;
+export type tKeyUnion = keyof tState;
 
 export type tStore = {
   session: tThunk<tSession>,
@@ -23,5 +23,5 @@ export type tComponentProps = tState & {
   save: (ev: React.FormEvent<HTMLFormElement>) => void,
   session: tSession,
   toggleLock: () => void,
-  updateState: (key: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
+  updateState: (key: tKeyUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 };

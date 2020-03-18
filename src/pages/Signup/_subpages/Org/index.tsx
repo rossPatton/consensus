@@ -60,7 +60,7 @@ export class OrgSignupContainer extends Component<tContainerProps, tState> {
 }
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  postOrg: (org: any) => dispatch(postOrg(org)),
+  postOrg: (org: tOrgQuery) => dispatch(postOrg(org)),
 });
 
 export const OrgSignup = connect(

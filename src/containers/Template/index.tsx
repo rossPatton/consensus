@@ -5,10 +5,11 @@ import {connect} from 'react-redux';
 import {ErrorBoundary, GenericLoader} from '..';
 import {getGeo} from '../../redux';
 import {Footer, Header} from './_components';
+import {tProps} from './_types';
 
 // any elements or components or functionality that should be present on all pages
-class Template extends PureComponent<any> {
-  constructor(props: any) {
+class Template extends PureComponent<tProps> {
+  constructor(props: tProps) {
     super(props);
     props.getGeoDispatch();
   }
@@ -36,7 +37,7 @@ class Template extends PureComponent<any> {
   }
 }
 
-const mapStateToProps = (store: any) => ({
+const mapStateToProps = (store: {geo: tThunk<tGeo>}) => ({
   geoThunk: store.geo,
 });
 

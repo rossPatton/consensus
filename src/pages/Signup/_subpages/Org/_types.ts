@@ -22,7 +22,7 @@ export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaEleme
 
 export type tContainerProps = {
   location: Location,
-  postOrg: (query: any) => any,
+  postOrg: (query: tOrgQuery) => any,
 };
 
 export type tComponentProps = tState & {

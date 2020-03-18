@@ -5,7 +5,7 @@ import {
   tSuccessAction,
 } from './_types';
 
-export const deleteEventFailure = (payload: Error): tFailureAction => ({
+export const deleteEventFailure = (payload: tResponseError): tFailureAction => ({
   type: DELETE_FAILURE,
   payload,
 });

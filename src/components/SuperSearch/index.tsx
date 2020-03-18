@@ -73,12 +73,8 @@ class SuperSearchContainer extends React.PureComponent<any, any> {
 }
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getSearchResults: (query: any) => dispatch(getOrgsBySearch(query)),
+  getSearchResults: (query: tSearchQuery) => dispatch(getOrgsBySearch(query)),
 });
 
-const SuperSearch = connect(
-  null,
-  mapDispatchToProps,
-)(SuperSearchContainer);
-
+const SuperSearch = connect(null, mapDispatchToProps)(SuperSearchContainer);
 export default withRouter(SuperSearch);

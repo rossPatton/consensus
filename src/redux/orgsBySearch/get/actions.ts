@@ -5,7 +5,7 @@ import {
   tSuccessAction,
 } from './_types';
 
-export const getOrgsBySearchFailure = (payload: Error): tFailureAction => ({
+export const getOrgsBySearchFailure = (payload: tResponseError): tFailureAction => ({
   type: GET_FAILURE,
   payload,
 });

@@ -10,7 +10,7 @@ import {Helmet} from '..';
 import {ErrorBoundary} from '../../containers';
 import {getEventsByOrgIdSuccess, patchEvent, postEvent} from '../../redux';
 import {parseTimeString} from '../../utils';
-import {tContainerProps, tState, tStateUnion, tStore} from './_types';
+import {tContainerProps, tKeyUnion, tState, tStore, tValueUnion} from './_types';
 import {PlanMeetingComponent} from './Component';
 
 // @TODO this is a sub-page of a couple routes, should this be in /components???
@@ -110,10 +110,10 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     });
   }
 
-  updateState = (stateKey: tStateUnion, value: any) => {
+  updateState = (stateKey: tKeyUnion, value: tValueUnion) => {
     this.setState({
       [stateKey]: value,
-    } as Pick<tState, tStateUnion>);
+    } as Pick<tState, tKeyUnion>);
   }
 
   render() {

@@ -36,7 +36,7 @@ const Org = memo((props: tProps) => {
         <div>
           {role && (
             <div className="fs7 fw600 mB2">
-              You are a {role}
+              You are {role === 'pending' ? role : `a ${role}`}
             </div>
           )}
           <h2 className="lh1 fs3 mB2">

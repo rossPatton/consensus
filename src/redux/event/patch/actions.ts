@@ -5,7 +5,7 @@ import {
   tSuccessAction,
 } from './_types';
 
-export const failure = (payload: Error): tFailureAction => ({
+export const failure = (payload: tResponseError): tFailureAction => ({
   type: PATCH_FAILURE,
   payload,
 });

@@ -1,20 +1,19 @@
 import React, {memo} from 'react';
 
+import {tComponentProps} from '../../_types';
 import {PasswordInput} from '../../../../../../../components';
-// import {tComponentProps} from './_types';
 
-const EditAccount = memo((props: any) => (
+const EditAccount = memo((props: tComponentProps) => (
   <form
     action="/api/v1/user"
     autoComplete="off"
     className="rel"
-    encType="multipart/form-data"
     onSubmit={props.save}>
     <fieldset>
       <legend>
         <h1 className="fs3 mB3">Edit your account</h1>
       </legend>
-      <div className="mB4">
+      <div className="mB5">
         <label htmlFor="newLogin">
           <h2 className="fs5 mB1 lh1">
             Change login
@@ -24,8 +23,8 @@ const EditAccount = memo((props: any) => (
           </p>
           <input
             autoComplete="nope"
-            className="p3 mB3 row"
-            onChange={ev => props.updateState('login', ev)}
+            className="p3 mB4 row"
+            onChange={ev => props.updateState('login', ev.currentTarget.value)}
             placeholder="a_Secret_Name_Nobody_Can_Guess"
             value={props.login}
             name="newLogin"
@@ -40,7 +39,7 @@ const EditAccount = memo((props: any) => (
           </p>
           <input
             autoComplete="nope"
-            onChange={ev => props.updateState('email', ev)}
+            onChange={ev => props.updateState('email', ev.currentTarget.value)}
             className="p3 row"
             placeholder="yournewemail@example.com"
             value={props.email}
@@ -50,9 +49,9 @@ const EditAccount = memo((props: any) => (
         <div
           tabIndex={0}
           role="button"
-          className="fx aiCtr curPtr mB3 fs6"
-          onClick={ev => props.updateState('privateEmail', ev)}
-          onKeyPress={ev => props.updateState('privateEmail', ev)}>
+          className="curPtr lh1 mB4 fs6 ba0"
+          onClick={() => props.updateState('privateEmail', !props.privateEmail)}
+          onKeyPress={() => props.updateState('privateEmail', !props.privateEmail)}>
           <input
             readOnly
             type="checkbox"
@@ -72,12 +71,12 @@ const EditAccount = memo((props: any) => (
           title="Change password"
           password={props.newPassword}
           placeholder="example: a_very_long_and_safe_passphrase"
-          onChange={ev => props.updateState('newPassword', ev)}
+          onChange={ev => props.updateState('newPassword', ev.currentTarget.value)}
         />
       </div>
       <PasswordInput
         id="pwInput"
-        onChange={ev => props.updateState('currentPassword', ev)}
+        onChange={ev => props.updateState('currentPassword', ev.currentTarget.value)}
         password={props.currentPassword}
         placeholder=""
         title="Current password"
