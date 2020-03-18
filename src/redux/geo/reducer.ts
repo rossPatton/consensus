@@ -3,6 +3,7 @@ import { GET_FAILURE, GET_SUCCESS } from './get/_types';
 
 const initialState: tThunk<tGeo> = {
   error: null,
+  fetched: false,
   isLoading: true,
   data: {} as tGeo,
 };
@@ -13,6 +14,7 @@ export const geoReducer = (state = initialState, action: tGeoActionUnion) => {
     return {
       ...state,
       data: action.payload,
+      fetched: true,
       isLoading: false,
     };
 

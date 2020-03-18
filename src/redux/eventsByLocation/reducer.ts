@@ -3,6 +3,7 @@ import { GET_FAILURE, GET_SUCCESS } from './get/_types';
 
 const initialState: tThunk<tEvent[]> = {
   error: null,
+  fetched: false,
   isLoading: true,
   data: [] as tEvent[],
 };
@@ -17,6 +18,7 @@ export const eventsByLocationReducer = (state = initialState, action: tActionUni
   const successReturn = {
     ...state,
     data: action.payload,
+    fetched: true,
     isLoading: false,
   };
 

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet} from '../../components';
@@ -9,10 +9,17 @@ import {canonical, description, keywords, title} from './_constants';
 import {tContainerProps, tStore} from './_types';
 import {HomeComponent} from './Component';
 
-class HomeContainer extends Component<tContainerProps> {
-  constructor(props: tContainerProps) {
-    super(props);
-    // props.getEventsByLocationDispatch(props.geo);
+class HomeContainer extends PureComponent<tContainerProps> {
+  componentDidUpdate() {
+    const {eventsByLocationThunk, geoThunk} = this.props;
+
+    if (!__CLIENT__) return;
+    if (!geoThunk.fetched) return;
+    if (eventsByLocationThunk.fetched) return;
+
+    if (geoThunk.fetched && !eventsByLocationThunk.fetched) {
+      this.props.getEventsByLocationDispatch(geoThunk.data);
+    }
   }
 
   render() {
@@ -29,8 +36,8 @@ class HomeContainer extends Component<tContainerProps> {
           ]}
         />
         <HomeComponent
-          eventsByLocation={this.props.eventsByLocation}
-          geo={this.props.geo}
+          eventsByLocationThunk={this.props.eventsByLocationThunk}
+          geo={this.props.geoThunk.data}
           isLoading={this.props.isLoading}
         />
       </Template>
@@ -39,13 +46,13 @@ class HomeContainer extends Component<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  eventsByLocation: store.eventsByLocation,
-  geo: store.geo.data,
+  eventsByLocationThunk: store.eventsByLocation,
+  geoThunk: store.geo,
   session: store.session.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getEventsByLocationDispatch: (query: any) => dispatch(getEventsByLocation(query)),
+  getEventsByLocationDispatch: (query: tGeo) => dispatch(getEventsByLocation(query)),
 });
 
 export default connect(

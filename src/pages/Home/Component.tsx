@@ -4,9 +4,9 @@ import {Link} from 'react-router-dom';
 import {Events, PlaceholderImage} from '../../components';
 import {categories} from '../../constants';
 import {GenericLoader} from '../../containers';
-import {tProps} from './_types';
+import {tComponentProps} from './_types';
 
-export const HomeComponent = memo((props: tProps) => (
+export const HomeComponent = memo((props: tComponentProps) => (
   <header className="pT5 pB5">
     <div className="contain taCtr">
       <h1 className="mB3 pB1">
@@ -26,14 +26,14 @@ export const HomeComponent = memo((props: tProps) => (
       </Link>
       <GenericLoader
         showLoader={false}
-        isLoading={props.eventsByLocation.isLoading}
+        isLoading={props.eventsByLocationThunk.isLoading}
         render={() => (
           <div className="p4">
             <h2 className="fs4 mB3">Upcoming Meetings in {props.geo.city}</h2>
             <Events
               horizontal
               showOrgName
-              events={props.eventsByLocation.data.slice(0, 4)}
+              events={props.eventsByLocationThunk.data.slice(0, 4)}
             />
           </div>
         )}

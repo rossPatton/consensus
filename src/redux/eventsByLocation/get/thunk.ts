@@ -2,7 +2,7 @@ import { path } from '../_constants';
 import { api } from '../../../utils';
 import { failure, success } from './actions';
 
-export const getEventsByLocation = (query: tGetEventQuery) => {
+export const getEventsByLocation = (query: tGeo) => {
   return async function (dispatch: Function) {
     return api({
       dispatch,

@@ -5,12 +5,16 @@ export type tStore = {
 };
 
 export type tProps = {
-  eventsByLocation: tThunk<tEvent[]>,
-  geo: tGeo,
+  eventsByLocationThunk: tThunk<tEvent[]>,
   isLoading: boolean,
 };
 
+export type tComponentProps = tProps & {
+  geo: tGeo,
+};
+
 export type tContainerProps = tProps & {
-  getEventsByLocationDispatch: (query: any) => tThunkPayload<any>,
+  geoThunk: tThunk<tGeo>,
+  getEventsByLocationDispatch: (query: tGeo) => tThunkPayload<tEvent[]>,
   session: tSession,
 };
