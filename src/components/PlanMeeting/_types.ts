@@ -2,6 +2,7 @@ import {Location} from 'history';
 
 export type tState = Partial<tEvent> & {
   duration: string | number,
+  isCopy: boolean,
   time: string,
 };
 

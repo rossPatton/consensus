@@ -23,6 +23,7 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     description: '',
     duration: 2,
     id: null as number | null,
+    isCopy: false,
     isDraft: false,
     isPrivate: this.props.org.type !== 'public',
     location: '',
@@ -37,27 +38,34 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     super(props);
     const {router: {search}} = props;
     const draft = qs.parse(search);
-    if (!draft.id) return;
 
     const isPrivate = draft.isPrivate === 'true';
+    const isCopy = draft.isCopy === 'true';
 
-    this.state = {
+    // if draft is a copy (to make new event), not an edit (of existing draft or meeting)
+    // then we change a few things here
+    const state = {
       category: draft.category as tCategory,
       // city: draft.city as string,
       cityId: parseInt(draft.cityId as string, 10),
       // convert UTC date with tz to local format for html5 date/time picker
-      date: dayJS(draft.date as string).format('YYYY-MM-DD'),
+      date: isCopy
+        ? dayJS().toISOString()
+        : dayJS(draft.date as string).format('YYYY-MM-DD'),
       description: draft.description as string,
-      duration: parseInt(draft.duration as string, 10),
-      id: parseInt(draft.id as string, 10),
+      duration: isCopy ? 2 : parseInt(draft.duration as string, 10),
+      id: isCopy ? null : parseInt(draft.id as string, 10),
+      isCopy: isCopy,
       isDraft: true,
       isPrivate,
       location: draft.location as string,
       locationLink: draft.locationLink as string,
       orgName: this.props.org.name,
-      time: draft.time as string,
+      time: isCopy ? '19:00' : draft.time as string,
       title: draft.title as string,
     };
+
+    this.state = state;
   }
 
   saveAsDraft = () =>

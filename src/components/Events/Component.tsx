@@ -16,7 +16,9 @@ export const EventsComponent = memo((props: tComponentProps) => (
     })}>
     {props.events.map((ev, i) => {
       const isPastEvent = dayJS(ev.date).isBefore(dayJS());
+      const {id, ...evWithoutId} = ev;
       const qs = objToQueryString(ev);
+      const qsWithCopy = objToQueryString({...evWithoutId, isCopy: true});
 
       return (
         <li
@@ -134,8 +136,8 @@ export const EventsComponent = memo((props: tComponentProps) => (
                     && (
                       <Link
                         to={props.sessionRole === 'admin'
-                          ? `/admin/planMeeting?${qs}`
-                          : `/org/${ev.orgName}/planMeeting?${qs}`}
+                          ? `/admin/planMeeting?${qsWithCopy}`
+                          : `/org/${ev.orgName}/planMeeting?${qsWithCopy}`}
                         className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
                         <span
                           role="img"
