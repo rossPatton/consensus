@@ -14,7 +14,12 @@ class JoinFormContainer extends React.PureComponent<tProps> {
     const role = org.type === 'public' ? 'member' : 'pending';
     const userId = session.profile.id;
 
-    this.props.postNewUserByOrgIdDispatch({orgId: org.id, role, userId})
+    this.props.postNewUserByOrgIdDispatch({
+      allowNonVerified: org.allowNonVerified,
+      orgId: org.id,
+      role,
+      userId,
+    })
       .then(() => dispatch(postRoleSuccess({orgId: org.id, role})))
       .catch(loglevel.error);
   }

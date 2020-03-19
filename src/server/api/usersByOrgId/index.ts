@@ -29,13 +29,17 @@ usersByOrgId.get(route, async (ctx: Koa.ParameterizedContext) => {
 usersByOrgId.post(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tUserByOrgQuery = _.get(ctx, dataPath, {});
   await validateSchema<tUserByOrgQuery>(ctx, postSchema, query);
-  const {orgId, role, userId} = query;
+  const {allowNonVerified, orgId, role, userId} = query;
 
-  const {id: accountId}: tAccount = await knex('accounts')
+  const {id: accountId, isVerified}: tAccount = await knex('accounts')
     .limit(1)
     .where({userId})
     .first()
     .select('id');
+
+  if (!allowNonVerified && !isVerified) {
+    return ctx.throw(400, 'Verify your account before joining this group');
+  }
 
   const userByOrgIdRel = await knex(table)
     .limit(1)

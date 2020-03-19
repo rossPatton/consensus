@@ -10,6 +10,7 @@ export const getSchema = baseSchema.keys({
 });
 
 export const postSchema = getSchema.keys({
+  allowNonVerified: Joi.bool(),
   userId: Joi.number().integer(),
   role: Joi.string().alphanum(),
 });
