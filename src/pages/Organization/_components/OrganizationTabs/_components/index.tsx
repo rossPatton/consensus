@@ -19,8 +19,8 @@ export const Tab = memo((props: tProps) => {
   const to = `/org/${id}${subRoute ? route : ''}`;
   // @ts-ignore
   const text = routeDisplayMap[subRoute];
-  const isEvents = subRoute === '' && typeof section === 'undefined';
-  const isActive = isEvents || section === subRoute;
+  const isMeetings = subRoute === '' && typeof section === 'undefined';
+  const isActive = isMeetings || section === subRoute;
   const className = cx({
     'fs3 ttCap dBl p2 pR3': true,
     'pL3': subRoute !== '',
@@ -29,7 +29,7 @@ export const Tab = memo((props: tProps) => {
   });
 
   // dont render link if you're on the section page itself
-  if (isEvents || section === subRoute) {
+  if (isMeetings || section === subRoute) {
     return (
       <h2 className={className}>
         {text}

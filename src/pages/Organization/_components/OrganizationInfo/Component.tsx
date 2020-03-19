@@ -14,7 +14,7 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
     <div className="bgWhite br8 mR3 c3 col growNone ovfHide">
       <div className="bgGrey4 lh1 fx aiCtr jcBetween p3">
         {!role && (
-          <small className="fs6 fw600 white">
+          <small className="fw600 white">
             {org.type === 'public' && 'Public Group'}
             {org.type === 'private' && 'Private Group'}
             {org.type === 'hidden' && 'Hidden Group'}

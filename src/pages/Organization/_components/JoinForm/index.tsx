@@ -41,6 +41,14 @@ class JoinFormContainer extends React.PureComponent<tProps> {
       );
     }
 
+    if (!session.isVerified && !org.allowNonVerified) {
+      return (
+        <span className="mR2 fs6 white lh1">
+          Verify your account to join
+        </span>
+      );
+    }
+
     return (
       <form
         method="POST"

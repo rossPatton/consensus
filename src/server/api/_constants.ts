@@ -8,6 +8,7 @@ export const accountKeys = [
 ];
 
 export const orgKeys = [
+  'allowNonVerified',
   'category',
   'city',
   'cityId',

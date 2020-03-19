@@ -5,7 +5,6 @@ import {tProps} from './_types';
 
 const OrganizationTabs = memo((props: tProps) => {
   const isMod = props.role === 'admin' || props.role === 'facilitator';
-  if (!isMod) return null;
 
   return (
     <nav className="fs5">
