@@ -10,14 +10,14 @@ import {
   Paginate,
   SearchFilter,
 } from '../../../../containers';
-import { getOrgs } from '../../../../redux';
+import { getGroups } from '../../../../redux';
 import { tContainerProps, tStore } from './_types';
 
 class CategoryContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     const { match: {params} } = props;
-    props.getOrgs({
+    props.getGroups({
       category: categoryMap[params.category],
     });
   }
@@ -58,7 +58,7 @@ class CategoryContainer extends PureComponent<tContainerProps> {
                     <Paginate
                       count={9}
                       items={searchProps.items}
-                      render={(orgsToRender: tOrg[]) => (
+                      render={(orgsToRender: tGroup[]) => (
                         <>
                           <FilterPanel
                             className="fx aiCtr p3 bgWhite br8 mB4 fs6 fw600"
@@ -86,7 +86,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getOrgs: (query: {category: tCategory}) => dispatch(getOrgs(query)),
+  getGroups: (query: {category: tCategory}) => dispatch(getGroups(query)),
 });
 
 const Category = connect(

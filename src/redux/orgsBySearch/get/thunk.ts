@@ -2,16 +2,16 @@ import qs from 'query-string';
 
 import { path } from '../_constants';
 import { api } from '../../../utils';
-import { getOrgsBySearchFailure, getOrgsBySearchSuccess } from './actions';
+import { getGroupsBySearchFailure, getGroupsBySearchSuccess } from './actions';
 
-export const getOrgsBySearch = (query: qs.ParsedQuery) => {
+export const getGroupsBySearch = (query: qs.ParsedQuery) => {
   return async function (dispatch: Function) {
     return api({
       dispatch,
-      failure: getOrgsBySearchFailure,
+      failure: getGroupsBySearchFailure,
       query,
       path,
-      success: getOrgsBySearchSuccess,
+      success: getGroupsBySearchSuccess,
     });
   };
 };

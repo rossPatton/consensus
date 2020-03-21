@@ -12,7 +12,7 @@ declare type tRegion = tCountry & Readonly<{
 }>;
 
 declare type tCity = tRegion & Readonly<{
-   orgs: tOrg[],
+   orgs: tGroup[],
    postcodes: number[],
    region: number, // region.id
 }>;

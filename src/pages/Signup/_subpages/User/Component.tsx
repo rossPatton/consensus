@@ -1,6 +1,6 @@
-import cx from 'classnames';
 import _ from 'lodash';
 import React, {memo} from 'react';
+import {Link} from 'react-router-dom';
 
 import {PasswordInput} from '../../../../components';
 import {tComponentProps} from './_types';
@@ -9,7 +9,6 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
   <form
     method="POST"
     name="userSignupForm"
-    className="p4 br8 brdA1"
     autoComplete="off"
     action="/api/v1/user"
     onSubmit={props.register}>
@@ -17,45 +16,12 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
       <legend>
         <h2 className="mB4">New User</h2>
       </legend>
-      <label htmlFor="emailInput">
-        <h2 className="ffLab fs5 mB1 lh1">Email</h2>
-        <p className="fs5 copyBlack mB1">Used for account verification. Kept private by default.</p>
-        <input
-          required
-          name="email"
-          id="emailInput"
-          value={props.email}
-          placeholder="example@youremail.com"
-          onChange={ev => props.updateState('email', ev)}
-          className={cx({
-            'p3 mB3 row': true,
-            brdRed: props.errors.email && props.errors.email.length > 0,
-          })}
-        />
-      </label>
       <label htmlFor="usernameInput">
-        <h2 className="ffLab fs5 mB1 lh1">
-          Username
-        </h2>
-        <p className="fs5 copyBlack mB1">
-          This will be your publicly visible name. Not private by default.
-        </p>
-        <input
-          required
-          id="usernameInput"
-          name="username"
-          placeholder="theNameOtherUsersWillSee"
-          value={props.username}
-          onChange={ev => props.updateState('username', ev)}
-          className="p3 mB3 row"
-        />
-      </label>
-      <label htmlFor="usernameInput">
-        <h2 className="ffLab fs5 mB1 lh1">
+        <h2 className="fs5 mB1 lh1">
           Login
         </h2>
         <p className="fs5 copyBlack mB1">
-          A unique name that is used just for logging in. Kept private.
+          A unique name that you&apos;ll use to login with. Keep secret!
         </p>
         <input
           required
@@ -77,10 +43,15 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
         onChange={ev => props.updateState('password', ev)}
       />
       <button
-        disabled={props.disabled}
-        className="trans1 hvrBgGrey1 p3 pL4 pR4">
+        disabled={props.isClient && (!props.password || !props.login)}
+        className="trans1 hvrBgGrey1 p3 pL4 pR4 mR2">
         Sign up
       </button>
+      <Link
+        to="/signup"
+        className="btn trans1 hvrBgGrey1 p3 pL4 pR4">
+        Or go back
+      </Link>
       {props.errArr.length > 0 && (
         <ul className="fs6 fw600 brdT1 brdRed pT3 mT3 lh1 red">
           {props.errArr.map((err, i) => (

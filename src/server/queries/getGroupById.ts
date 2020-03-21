@@ -1,21 +1,21 @@
 import Koa from 'koa';
 
-import {orgKeys} from '../api/_constants';
+import {groupKeys} from '../api/_constants';
 import {knex} from '../db/connection';
 
-export const getOrgById = async (
+export const getGroupById = async (
   ctx: Koa.ParameterizedContext,
-  id: string | number): Promise<tOrg> => {
+  id: string | number): Promise<tGroup> => {
 
-  let org = {} as tOrg;
+  let org = {} as tGroup;
   try {
     org = await knex('orgs')
       .limit(1)
       .where({id})
       .first()
-      .select(orgKeys);
+      .select(groupKeys);
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   return org;

@@ -7,21 +7,27 @@ export type tErrorObject = {
   password?: string[],
 };
 
-export type tState = tUserSignupForm & {
-  isClient: boolean,
-  errors: tErrorObject,
+export type tPostUserQuery = {
+  login: string,
+  password: string,
 };
 
-export type tStateUnion = keyof tState;
+export type tState = {
+  errors: tErrorObject,
+  isClient: boolean,
+  login: string,
+  password: string,
+};
+
+export type tKeyUnion = keyof tState;
 
 export type tContainerProps = {
   authenticateSession: (query: tLoginQuery) => tThunkPayload<tSession>,
-  postUser: (arg: tUserSignupForm) => tThunkPayload<tSession>,
+  postUser: (query: tPostUserQuery) => tThunkPayload<tSession>,
 };
 
 export type tComponentProps = tContainerProps & tState & {
-  disabled: boolean,
   errArr: string[],
   register: (ev: React.FormEvent<HTMLFormElement>) => void,
-  updateState: (key: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
+  updateState: (key: tKeyUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 };

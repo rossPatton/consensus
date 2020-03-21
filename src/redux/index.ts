@@ -3,6 +3,7 @@ export { deleteAccount, patchAccount } from './account';
 
 // directory related thunks
 export { getCity } from './city';
+export { getCities } from './cities';
 export { getCountry } from './country';
 export { getRegion } from './region';
 
@@ -17,9 +18,9 @@ export {
 export { getEventsByUserId } from './eventsByUserId';
 
 // org/group related actions/thunks
-export { getOrg, patchOrg, postOrg } from './org';
-export { getOrgs } from './orgs';
-export { deleteOrgByUserId, getOrgsByUserId } from './orgsByUserId';
+export { getGroup, patchOrg, postGroup } from './org';
+export { getGroups } from './orgs';
+export { deleteOrgByUserId, getGroupsByUserId } from './orgsByUserId';
 
 // session related actions/thunks
 export { login, logout, logoutSuccess, patchSessionSuccess } from './session';
@@ -35,7 +36,7 @@ export {
 
 // misc thunks
 export { getGeo } from './geo';
-export { getOrgsBySearch } from './orgsBySearch';
+export { getGroupsBySearch } from './orgsBySearch';
 export {
   deleteRoleSuccess,
   getRoles,

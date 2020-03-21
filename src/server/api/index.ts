@@ -4,6 +4,7 @@ import Koa from 'koa';
 import { account } from './account';
 import { accountDownload } from './accountDownload';
 import { auth } from './auth';
+import { cities } from './cities';
 import { city } from './city';
 import { country } from './country';
 import { event } from './event';
@@ -30,6 +31,7 @@ export const setupApi = (app: Koa) => {
   app.use(accountDownload.routes());
   app.use(auth.routes());
   app.use(city.routes());
+  app.use(cities.routes());
   app.use(country.routes());
   app.use(event.routes());
   app.use(events.routes());
@@ -61,6 +63,7 @@ export const setupApi = (app: Koa) => {
   app.use(accountDownload.allowedMethods(opts));
   app.use(auth.allowedMethods(opts));
   app.use(city.allowedMethods(opts));
+  app.use(cities.allowedMethods(opts));
   app.use(country.allowedMethods(opts));
   app.use(event.allowedMethods(opts));
   app.use(events.allowedMethods(opts));

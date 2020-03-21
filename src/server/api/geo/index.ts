@@ -22,7 +22,7 @@ geo.get('/api/v1/geo', async (ctx: Koa.ParameterizedContext) => {
   try {
     lookup = await maxmind.open<CityResponse>(geolite2.paths.city);
   } catch (err) {
-    ctx.throw(400, err);
+    ctx.throw(500, err);
   }
 
   const cityLookup = lookup.get(ip as string);

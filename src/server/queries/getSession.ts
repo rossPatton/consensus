@@ -7,12 +7,12 @@ import {getEmailsByAccountId, getProfileByAccountId} from '.';
 export const getSession = async (
   ctx: Koa.ParameterizedContext,
   account: tAccount,
-): Promise<tThunk<tSession<tUser | tOrg>>> => {
+): Promise<tThunk<tSession<tUser | tGroup>>> => {
   // we have 2 types of accounts,
   // orgs and users, use account info to fetch the right one
   const profile = await getProfileByAccountId(ctx, account);
 
-  let emails = [] as tEmails;
+  let emails = [] as tEmail[];
   if (account.id) {
     emails = await getEmailsByAccountId(ctx, account.id);
   }

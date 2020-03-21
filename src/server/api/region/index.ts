@@ -25,7 +25,7 @@ region.get(route, async (ctx: Koa.ParameterizedContext) => {
       .where({code: countryCode})
       .first();
   } catch (err) {
-    return ctx.throw('400', err);
+    return ctx.throw(500, err);
   }
 
   let region: tRegion;
@@ -38,7 +38,7 @@ region.get(route, async (ctx: Koa.ParameterizedContext) => {
       })
       .first();
   } catch (err) {
-    return ctx.throw('400', err);
+    return ctx.throw(500, err);
   }
 
   let cities: tCity[];
@@ -50,7 +50,7 @@ region.get(route, async (ctx: Koa.ParameterizedContext) => {
       })
       .orderBy('name', 'asc');
   } catch (err) {
-    return ctx.throw('400', err);
+    return ctx.throw(500, err);
   }
 
   ctx.body = {

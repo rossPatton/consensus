@@ -21,6 +21,6 @@ export const getRolesByOrgId = async (
 
     return roles;
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 };

@@ -6,11 +6,15 @@ import {OrgSignup, UserSignup} from './_subpages';
 import {tProps} from './_types';
 
 export const SignupComponent = memo((props: tProps) => (
-  <div className="contain mT4 taCtr">
-    <h1 className="fs2 mB1">Create an account</h1>
-    <h2 className="fs6 mB3">
-      By signing up, you agree to our Terms and that you have read our Privacy Policy and Content Policy.
-    </h2>
+  <div className="contain mT4">
+    {!props.match.params.type && (
+      <>
+        <h1 className="fs2 mB1">Create an account</h1>
+        <h2 className="fs6 mB3">
+          By signing up, you agree to our Terms and that you have read our Privacy Policy and Content Policy.
+        </h2>
+      </>
+    )}
     {!props.match.params.type && (
       <div className="taCtr">
         <div className="fx aiCtr jcBetween mB3">

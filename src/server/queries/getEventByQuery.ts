@@ -15,7 +15,7 @@ export const getEventByQuery = async (
       .where(query)
       .first();
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   let rsvps = {} as tRSVP[];
@@ -25,7 +25,7 @@ export const getEventByQuery = async (
         eventId: event.id,
       });
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   const account = _.get(ctx, 'state.user', {});

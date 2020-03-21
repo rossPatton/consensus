@@ -4,7 +4,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {GenericLoader} from '../../../containers';
-import {getOrgsByUserId, getRoles, getRsvps, logout} from '../../../redux';
+import {getGroupsByUserId, getRoles, getRsvps, logout} from '../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {UserAdminComponent} from './Component';
 
@@ -17,7 +17,7 @@ class UserAdminContainer extends PureComponent<tContainerProps> {
 
     const userId = _.get(props, 'session.profile.id', null);
     if (userId) {
-      props.getOrgsByUserIdDispatch({userId})
+      props.getGroupsByUserIdDispatch({userId})
         .catch(loglevel.error);
     }
   }
@@ -48,8 +48,8 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) =>
-    dispatch(getOrgsByUserId(query)),
+  getGroupsByUserIdDispatch: (query: tGroupsByUserIdQuery) =>
+    dispatch(getGroupsByUserId(query)),
   getRolesDispatch: () => dispatch(getRoles()),
   getRsvpsDispatch: () => dispatch(getRsvps()),
   logoutDispatch: () => dispatch(logout()),

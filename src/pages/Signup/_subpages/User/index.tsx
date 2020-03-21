@@ -4,17 +4,14 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {login, postUser} from '../../../../redux';
-import {isValidEmail} from '../../../../utils';
-import {tContainerProps, tState, tStateUnion} from './_types';
+import {tContainerProps, tKeyUnion, tPostUserQuery, tState} from './_types';
 import {UserSignupComponent} from './Component';
 
 export class UserSignupContainer extends PureComponent<tContainerProps, tState> {
   state = {
     isClient: false,
-    email: '',
     errors: {},
     login: '',
-    username: '',
     password: '',
   };
 
@@ -26,7 +23,7 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
   }
 
   checkErrors = (): object => {
-    const {email, password: pw} = this.state;
+    const {password: pw} = this.state;
 
     let pwArr = [] as string[];
     if (pw.length > 0 && pw.length < 12) {
@@ -37,16 +34,7 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
       pwArr = [...pwArr, 'Please choose a less common password'];
     }
 
-    let emailArr = [] as string[];
-    if (email.length > 0 && !isValidEmail(email)) {
-      emailArr = ['Email address must be valid'];
-    }
-
-    const errors = {
-      email: emailArr,
-      password: pwArr,
-    };
-
+    const errors = {password: pwArr};
     this.setState({errors});
     return errors;
   }
@@ -66,23 +54,20 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
     return this.props.authenticateSession({username: login, password});
   }
 
-  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
+  updateState = (stateKey: tKeyUnion, ev: React.ChangeEvent<any>) => {
     this.setState({
       [stateKey]: ev.currentTarget.value,
-    } as Pick<tState, tStateUnion>, this.checkErrors);
+    } as Pick<tState, tKeyUnion>, this.checkErrors);
   }
 
   render() {
-    const { email, errors, isClient, password, username } = this.state;
+    const { errors } = this.state;
     const errArr = _.flatten(Object.values(errors as string[]));
-    const disabled = isClient &&
-      (!email || !password || !username || errArr.length > 0);
 
     return (
       <UserSignupComponent
         {...this.props}
         {...this.state}
-        disabled={disabled}
         errArr={errArr}
         register={this.register}
         updateState={this.updateState}
@@ -93,7 +78,7 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
 
 const mapDispatchToProps = (dispatch: Function) => ({
   authenticateSession: (query: tLoginQuery) => dispatch(login(query)),
-  postUser: (user: tUserSignupForm) => dispatch(postUser(user)),
+  postUser: (user: tPostUserQuery) => dispatch(postUser(user)),
 });
 
 export const UserSignup = connect(

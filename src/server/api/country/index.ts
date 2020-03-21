@@ -22,7 +22,7 @@ country.get(route, async (ctx: Koa.ParameterizedContext) => {
       .orderBy('name', 'asc')
       .first();
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   if (!country || (country instanceof Array && country.length === 0)) {
@@ -35,7 +35,7 @@ country.get(route, async (ctx: Koa.ParameterizedContext) => {
       .where({country: country.id})
       .orderBy('name', 'asc');
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   if (!regions ||

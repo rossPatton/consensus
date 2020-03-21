@@ -46,6 +46,6 @@ export const getEventsByQuery = async (
 
     return events;
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 };

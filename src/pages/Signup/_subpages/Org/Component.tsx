@@ -3,6 +3,7 @@ import React, {memo} from 'react';
 
 import {PasswordInput} from '../../../../components';
 import {categories} from '../../../../constants';
+import {slugify} from '../../../../utils';
 import {tComponentProps} from './_types';
 
 export const OrgSignupComponent = memo((props: tComponentProps) => (
@@ -11,61 +12,17 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
     name="orgSignupForm"
     autoComplete="off"
     action="/api/v1/org"
-    className="row p4 brdA1 br8"
     onSubmit={props.onSubmit}>
     <fieldset>
       <legend>
-        <h2 className="mB4">New Organization</h2>
+        <h2 className="mB4">New Group</h2>
       </legend>
-      <h2 className="ffLab fs5 mB1 lh1">
-        Organization Email
+      <h2 className="fs5 mB1 lh1">
+        Group Name
       </h2>
-      <label htmlFor="emailInput" className="mB3">
+      <label htmlFor="nameInput" className="mB4">
         <p className="fs5 copyBlack mB1">
-          Email required for verification + account recovery.
-        </p>
-        <input
-          required
-          id="emailInput"
-          name="email"
-          className="row"
-          onChange={ev => props.updateState('email', ev)}
-          placeholder="Your organization's email here"
-          value={props.email}
-        />
-      </label>
-      <h2 className="ffLab fs5 mB1 lh1">
-        Organization Login
-      </h2>
-      <label htmlFor="loginInput" className="mB3">
-        <p className="fs5 copyBlack mB1">
-          Secret login name, only used for logging in. Kept private.
-        </p>
-        <input
-          required
-          id="loginInput"
-          name="login"
-          className="row"
-          onChange={ev => props.updateState('login', ev)}
-          placeholder="YourSecretOrgLoginHere"
-          value={props.login}
-        />
-      </label>
-      <PasswordInput
-        required
-        newPassword
-        id="password"
-        title="Organization Password"
-        onChange={ev => props.updateState('password', ev)}
-        placeholder="Your organization's password here"
-        password={props.password as string}
-      />
-      <h2 className="ffLab fs5 mB1 lh1">
-        Organization Name
-      </h2>
-      <label htmlFor="nameInput" className="mB3">
-        <p className="fs5 copyBlack mB1">
-          How your organization will get seen in the directory. Is searchable. Determines organization url. Should be unique.
+          What&apos;s your group&apos;s name? Must be unique. Think carefully, you won&apos;t be able to change this!
         </p>
         <input
           required
@@ -73,53 +30,36 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           name="name"
           className="row"
           onChange={ev => props.updateState('name', ev)}
-          placeholder="Your organization name here"
+          placeholder="Your group name here"
           value={props.name}
         />
       </label>
-      <h2 className="ffLab fs5 mB1 lh1">
-        Organization State
+      <h2 className="fs5 mB1 lh1">
+        Group Handle
       </h2>
-      <label htmlFor="stateInput" className="mB3">
+      <label htmlFor="handleInput" className="mB4">
         <p className="fs5 copyBlack mB1">
-          All organizations on Consensus are currently local, city-based organizations. Both State and City is required here. International, National, and Region based organizations are in the works.
+          What will your group&apos;s consensus url be? Must be unique. Think carefully, you won&apos;t be able to change this!
         </p>
         <input
           required
-          id="stateInput"
-          name="state"
+          id="handleInput"
+          name="handle"
           className="row"
-          onChange={ev => props.updateState('region', ev)}
-          placeholder="The state your organization is located in"
-          value={props.region}
+          onChange={ev => props.updateState('handle', ev)}
+          placeholder={slugify(props.name)}
+          value={props.handle || slugify(props.name)}
         />
       </label>
-      <h2 className="ffLab fs5 mB1 lh1">
-        Organization City
+      <h2 className="fs5 mB1 lh1">
+        Category
       </h2>
-      <label htmlFor="cityInput" className="mB3">
+      <label htmlFor="categoryInput" className="mB4">
         <p className="fs5 copyBlack mB1">
-          All organizations on Consensus are currently local, city-based organizations. Both State and City is required here. International, National, and Region based organizations are in the works.
-        </p>
-        <input
-          required
-          id="cityInput"
-          name="city"
-          className="row"
-          onChange={ev => props.updateState('city', ev)}
-          placeholder="The city your organization is located in"
-          value={props.city}
-        />
-      </label>
-      <h2 className="ffLab fs5 mB1 lh1">
-        Organization Category
-      </h2>
-      <label htmlFor="categoryInput" className="mB3">
-        <p className="fs5 copyBlack mB1">
-          Tag your organization using an existing category. Not required but makes it easier for people to find your organization.
+          What category most closely matches your group? You can always change later. PS: more categories are in the works!
         </p>
         <select
-          className="mB3 row"
+          className="mB4 row bgWhite"
           defaultValue={props.category}
           onBlur={ev => props.updateState('category', ev)}
           onChange={ev => props.updateState('category', ev)}>
@@ -130,33 +70,17 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           ))}
         </select>
       </label>
-      <h2 className="ffLab fs5 mB1 lh1">
-        Organization Description
+      <h2 className="fs5 mB1 lh1">
+        Group Type
       </h2>
-      <label htmlFor="categoryInput" className="mB3">
-        <p className="fs5 copyBlack mB1">
-          What&apos;s your organization about? Let people know here.
-        </p>
-        <textarea
-          rows={6}
-          spellCheck
-          className="row fs5"
-          placeholder="Organization Description Here"
-          value={props.description}
-          onChange={ev => props.updateState('description', ev)}
-        />
-      </label>
-      <h2 className="ffLab fs5 mB1 lh1">
-        Membership Vetting Process
-      </h2>
-      <label htmlFor="groupTypeSelect" className="mB3">
+      <label htmlFor="groupTypeSelect">
         <p className="fs5 copyBlack mB1">
           Is anyone free to join your group, or do you want to be able to vet membership?
         </p>
         <select
           name="type"
           id="groupTypeSelect"
-          className="row"
+          className="mB1 row bgWhite"
           value={props.type}
           onBlur={ev => props.updateState('type', ev)}
           onChange={ev => props.updateState('type', ev)}>
@@ -171,40 +95,60 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           </option>
         </select>
       </label>
-      <div>
+      <div className="fs6 black mB4">
         {/* @TODO maybe have a mixed option here? */}
         {props.type === 'public' && 'Public. Anyone can join, with no vetting process at all. Meetings are public, visible to anyone.'}
         {props.type === 'private' && 'Private. Anyone can join, but members must be approved by a facilitator or admin first. Meetings are visible only to members.'}
         {props.type === 'hidden' && 'Hidden. Like private, but members must be invited by the group admin or co-organizer. Group does not show in internal search results, and is hidden from search engines.'}
       </div>
-      {/* <h2 className="ffLab fs5 mB1 lh1">
-        Event privacy defaults
+      <h2 className="fs5 mB1 lh1">
+        City
       </h2>
-      <label htmlFor="eventPrivacySelect" className="mB3">
+      <label htmlFor="cityInput" className="mB4">
         <p className="fs5 copyBlack mB1">
-          When events are created, are they public or private by default?
+          All groups on Consensus are currently local, city-based organizations.
         </p>
-        <select
-          id="eventPrivacySelect"
-          name="eventPrivacy"
-          className="mB4 row"
-          value={props.eventPrivacy}
-          onBlur={ev => props.updateState('eventPrivacy', ev)}
-          onChange={ev => props.updateState('eventPrivacy', ev)}>
-          <option value="manual">
-            Manual, event privacy can be changed per event
-          </option>
-          <option value="public">
-            Public, all events are public
-          </option>
-          <option value="private">
-            Private, all events are private
-          </option>
-        </select>
-</label>*/}
+        <input
+          required
+          id="cityInput"
+          name="city"
+          className="row"
+          onChange={ev => props.updateState('city', ev)}
+          placeholder="The city your organization is located in"
+          value={props.city}
+        />
+      </label>
+      <h2 className="fs5 mB1 lh1">
+        Group Login
+      </h2>
+      <label htmlFor="loginInput" className="mB4">
+        <p className="fs5 copyBlack mB1">
+          A unique name that you&apos;ll use to login with. Keep secret!
+        </p>
+        <input
+          required
+          id="loginInput"
+          name="login"
+          className="row"
+          onChange={ev => props.updateState('login', ev)}
+          placeholder="YourSecretGroupLoginHere"
+          value={props.login}
+        />
+      </label>
+      <PasswordInput
+        required
+        newPassword
+        id="password"
+        title="Group Password"
+        onChange={ev => props.updateState('password', ev)}
+        placeholder="Your organization's password here"
+        password={props.password}
+      />
       <div className="brdT1 pT4 pB4 mT4 fx aiCtr">
-        <button className="p3 pL4 pR4 hvrBgGrey1 trans1">
-          Save
+        <button
+          disabled={props.disabled}
+          className="p3 pL4 pR4 hvrBgGrey1 trans1">
+          Create Group!
         </button>
       </div>
     </fieldset>

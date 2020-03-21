@@ -7,7 +7,7 @@ import {Redirect} from 'react-router-dom';
 // import {Redirect} from 'react-router';
 import {Helmet} from '../../components';
 import {ErrorBoundary, GenericLoader, Template} from '../../containers';
-import {getEvent, getEventsByOrgId, getOrg, getRoles, getRsvps} from '../../redux';
+import {getEvent, getEventsByOrgId, getGroup, getRoles, getRsvps} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {EventComponent} from './Component';
 
@@ -54,7 +54,7 @@ class EventContainer extends PureComponent<tContainerProps> {
   }
 
   getRestOfEventsByOrgId = async (res: tActionPayload<tEvent>) => {
-    await this.props.getOrgByIdDispatch({id: res.payload.orgId});
+    await this.props.getGroupByIdDispatch({id: res.payload.orgId});
 
     return this.props.getEventsByOrgIdDispatch({
       exclude: res.payload.orgId,
@@ -151,7 +151,7 @@ const mapDispatchToProps = (dispatch: Function) => ({
   getEventsByOrgIdDispatch: (query: tGetEventQuery) =>
     dispatch(getEventsByOrgId(query)),
 
-  getOrgByIdDispatch: (query: tOrgQuery) => dispatch(getOrg(query)),
+  getGroupByIdDispatch: (query: tGroupQuery) => dispatch(getGroup(query)),
   getRolesDispatch: () => dispatch(getRoles()),
   getRsvpsDispatch: () => dispatch(getRsvps()),
 });

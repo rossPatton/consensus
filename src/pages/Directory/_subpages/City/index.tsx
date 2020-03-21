@@ -12,7 +12,7 @@ import {CityComponent} from './Component';
 class CityContainer extends PureComponent<tContainerProps, tState> {
   state = {
     category: '' as tCategory,
-    orgsBySearch: [] as tOrg[],
+    orgsBySearch: [] as tGroup[],
   };
 
   constructor(props: tContainerProps) {
@@ -23,7 +23,7 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
   }
 
   // Re-run the filter whenever the list array or filter text changes:
-  filterByCategory = (orgs: tOrg[]) => {
+  filterByCategory = (orgs: tGroup[]) => {
     if (this.state.category === '') return orgs;
     return orgs.filter(org => org.category === this.state.category);
   };

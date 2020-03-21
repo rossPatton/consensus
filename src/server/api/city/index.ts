@@ -28,7 +28,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
       .where({code: countryCode})
       .first();
   } catch (err) {
-    return ctx.throw('400', err);
+    return ctx.throw(500, err);
   }
 
   let region = {} as tRegion;
@@ -41,7 +41,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
       })
       .first();
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   const cityName = deSlugify(citySlug);
@@ -56,7 +56,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
       })
       .first();
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   let postcodes = [] as {code: string}[];
@@ -64,11 +64,11 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
     try {
       postcodes = await knex('postcodes').where({city: city.id}).select('code');
     } catch (err) {
-      return ctx.throw(400, err);
+      return ctx.throw(500, err);
     }
   }
 
-  let orgs = [] as tOrg[];
+  let orgs = [] as tGroup[];
   try {
     orgs = await knex('orgs')
       .where({
@@ -82,7 +82,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
       })
       .orderBy('name');
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   ctx.body = {

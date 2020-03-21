@@ -1,7 +1,7 @@
 import { match } from 'react-router';
 
 export type tStore = {
-  orgsByUserId: tThunk<tOrg[]>,
+  orgsByUserId: tThunk<tGroup[]>,
   user: tThunk<tUser>,
 };
 
@@ -11,14 +11,14 @@ export type tProps = {
 };
 
 export type tComponentProps = tProps & {
-  orgs: tOrg[],
+  orgs: tGroup[],
 }
 
 export type tContainerProps = tProps & {
-  getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) => tThunkPayload<tOrg[]>,
+  getGroupsByUserIdDispatch: (query: tGroupsByUserIdQuery) => tThunkPayload<tGroup[]>,
   getUserByIdDispatch: (query: tIdQuery) => tThunkPayload<tUser>,
   isLoading: boolean,
-  orgsByUserId: tOrg[],
+  orgsByUserId: tGroup[],
 };
 
 

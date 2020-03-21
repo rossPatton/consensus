@@ -14,7 +14,7 @@ export const getRolesByAccountId = async (
       .where({accountId})
       .select('orgId', 'role');
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   return roles;

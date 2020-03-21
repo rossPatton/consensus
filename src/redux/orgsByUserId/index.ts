@@ -1,2 +1,2 @@
 export { deleteOrgByUserId } from './delete/thunk';
-export { getOrgsByUserId } from './get/thunk';
+export { getGroupsByUserId } from './get/thunk';

@@ -30,7 +30,7 @@ event.patch(route, async (ctx: Koa.ParameterizedContext) => {
       .update(patch)
       .returning('*');
   } catch (err) {
-    ctx.throw(400, err);
+    ctx.throw(500, err);
   }
 
   ctx.body = patchedEvent[0];
@@ -57,7 +57,7 @@ event.post(route, async (ctx: Koa.ParameterizedContext) => {
         .returning('*');
     }
   } catch (err) {
-    ctx.throw(400, err);
+    ctx.throw(500, err);
   }
 
   ctx.body = newEvent[0];

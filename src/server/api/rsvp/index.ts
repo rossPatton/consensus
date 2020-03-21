@@ -37,7 +37,7 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
       .where({eventId, userId})
       .first();
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   // TODO reduce branches or just simplify somehow

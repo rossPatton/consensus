@@ -14,7 +14,7 @@ export const getUsersByIds = async (
       users.push(chunk);
     }
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   return users;

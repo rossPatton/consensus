@@ -48,7 +48,7 @@ account.delete(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = {ok: true};
 });
 
-// TODO implement a POST route here as an upsert
+// TODO implement a POST route here as an upsert for non-js environments
 account.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const query: Mutable<tAccountQuery> = _.get(ctx, 'state.locals.data', {});
   await validateSchema<Mutable<tAccountQuery>>(ctx, patchSchema, query);
@@ -83,11 +83,11 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
       // readonly string[] vs string[] trips typescript up
         .returning(accountKeys as string[]);
     } catch (err) {
-      return ctx.throw(400, err);
+      return ctx.throw(500, err);
     }
   }
 
-  let updatedEmail: tEmails = [];
+  let updatedEmail = [] as tEmail[];
   if (query.email) {
     try {
       updatedEmail = await knex('accounts_emails')

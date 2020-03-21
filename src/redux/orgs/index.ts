@@ -1,1 +1,1 @@
-export { getOrgs } from './get/thunk';
+export { getGroups } from './get/thunk';

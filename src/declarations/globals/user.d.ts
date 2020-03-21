@@ -1,10 +1,3 @@
-declare type tUserSignupForm = Readonly<{
-  email: string,
-  login: string,
-  password: string,
-  username: string,
-}>;
-
 declare type tUser = Readonly<{
   created_at?: Date,
   bio: string,

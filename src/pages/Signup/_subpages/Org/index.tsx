@@ -1,15 +1,17 @@
 import qs from 'query-string';
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {postOrg} from '../../../../redux';
-import {slugify} from '../../../../utils';
+import {getCities, postGroup} from '../../../../redux';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {OrgSignupComponent} from './Component';
 
-export class OrgSignupContainer extends Component<tContainerProps, tState> {
+export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
+    if (!props.citiesThunk.fetched) {
+      props.getCitiesDispatch();
+    }
 
     const location = qs.parse(props.location.search.split('?')[1]);
 
@@ -17,10 +19,6 @@ export class OrgSignupContainer extends Component<tContainerProps, tState> {
       category: 'Political',
       city: location.city as string,
       cityId: parseInt(location.cityId as string, 10),
-      country: location.country as string,
-      countryId: parseInt(location.countryId as string, 10),
-      description: '',
-      email: '',
       handle: '',
       login: '',
       name: '',
@@ -33,12 +31,8 @@ export class OrgSignupContainer extends Component<tContainerProps, tState> {
 
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const newOrg = {
-      ...this.state,
-      slug: slugify(this.state.name),
-    };
-
-    this.props.postOrg(newOrg);
+    const newGroup = {...this.state};
+    this.props.postGroupDispatch(newGroup);
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
@@ -48,10 +42,35 @@ export class OrgSignupContainer extends Component<tContainerProps, tState> {
   }
 
   render() {
+    const {
+      category,
+      city,
+      cityId,
+      handle,
+      login,
+      name,
+      password,
+      region,
+      regionId,
+      type,
+    } = this.state;
+
+    const disabled = !category
+      || !city
+      || !cityId
+      || !handle
+      || !login
+      || !name
+      || !password
+      || !region
+      || !regionId
+      || !type;
+
     return (
       <OrgSignupComponent
         {...this.props}
         {...this.state}
+        disabled={disabled}
         onSubmit={this.onSubmit}
         updateState={this.updateState}
       />
@@ -59,11 +78,16 @@ export class OrgSignupContainer extends Component<tContainerProps, tState> {
   }
 }
 
+const mapStateToProps = (store: {cities: tThunk<tCity[]>}) => ({
+  citiesThunk: store.cities,
+});
+
 const mapDispatchToProps = (dispatch: Function) => ({
-  postOrg: (org: tOrgQuery) => dispatch(postOrg(org)),
+  getCitiesDispatch: () => dispatch(getCities()),
+  postGroupDispatch: (org: tGroupQuery) => dispatch(postGroup(org)),
 });
 
 export const OrgSignup = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(OrgSignupContainer);

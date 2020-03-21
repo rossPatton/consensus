@@ -1,3 +1,3 @@
-export { getOrg } from './get/thunk';
+export { getGroup } from './get/thunk';
 export { patchOrg } from './patch/thunk';
-export { postOrg } from './post/thunk';
+export { postGroup } from './post/thunk';

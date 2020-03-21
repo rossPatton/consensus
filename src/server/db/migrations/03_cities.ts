@@ -12,18 +12,28 @@ exports.up = async (knex: Knex) => {
     // name is not id, since many cities have same name
     table.string('name').notNullable();
 
-    table.integer('country')
+    table.integer('countryId')
       .notNullable()
       .references('countries.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE')
       .defaultTo(1);
+    table.string('country')
+      .notNullable()
+      .references('countries.name')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE')
+      .defaultTo('United States');
 
-    table.integer('region')
+    table.integer('regionId')
       .notNullable()
       .references('regions.id')
       .onUpdate('CASCADE')
-      .onDelete('CASCADE');
+      .onDelete('CASCADE')
+      .defaultTo(37);
+    table.string('region')
+      .notNullable()
+      .defaultTo('New York');
   });
 };
 

@@ -1,7 +1,7 @@
 import { tSearchActionUnion } from './_types';
 import { GET_FAILURE, GET_SUCCESS } from './get/_types';
 
-const initialState: tThunk<tOrg[]> = {
+const initialState: tThunk<tGroup[]> = {
   error: null,
   isLoading: true,
   data: [],
@@ -20,7 +20,7 @@ export const orgsBySearchReducer =
 
     case GET_FAILURE:
       return {
-        data: [] as tOrg[],
+        data: [] as tGroup[],
         error: action.payload,
         isLoading: false,
       };

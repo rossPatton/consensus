@@ -10,7 +10,7 @@ export const failure = (payload: tResponseError): tFailureAction => ({
   payload,
 });
 
-export const success = (payload: tOrg[]): tSuccessAction => ({
+export const success = (payload: tGroup[]): tSuccessAction => ({
   type: GET_SUCCESS,
   payload,
 });

@@ -2,7 +2,7 @@ import { path } from '../_constants';
 import { api } from '../../../utils';
 import { failure, success } from './actions';
 
-export const getOrg = (query: tOrgQuery) => {
+export const getGroup = (query: tGroupQuery) => {
   return async function (dispatch: Function) {
     return api({
       dispatch,

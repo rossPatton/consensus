@@ -4,10 +4,6 @@ export type tState = {
   category: tCategory,
   city: string,
   cityId: number,
-  country: string,
-  countryId: number,
-  description: string,
-  email: string,
   handle: string,
   login: string,
   name: string,
@@ -21,11 +17,14 @@ export type tStateUnion = keyof tState;
 export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export type tContainerProps = {
+  citiesThunk: tThunk<tCity[]>,
+  getCitiesDispatch: () => tThunkPayload<tCity[]>,
   location: Location,
-  postOrg: (query: tOrgQuery) => any,
+  postGroupDispatch: (query: tGroupQuery) => tThunkPayload<tGroup>,
 };
 
 export type tComponentProps = tState & {
+  disabled: boolean,
   onSubmit: (ev: React.FormEvent<HTMLFormElement>) => void,
   updateState: (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => void,
 };

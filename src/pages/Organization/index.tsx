@@ -6,7 +6,7 @@ import {Redirect} from 'react-router';
 
 import {Helmet} from '../../components';
 import {ErrorBoundary, GenericLoader, Template} from '../../containers';
-import {getEventsByOrgId, getOrg, getRoles, getRsvps} from '../../redux';
+import {getEventsByOrgId, getGroup, getRoles, getRsvps} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {OrganizationComponent} from './Component';
 
@@ -18,8 +18,8 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
     const isHandle = isNaN(parseInt(idOrSlug, 10));
 
     if (isHandle) {
-      props.getOrgDispatch({handle: idOrSlug})
-        .then((res: tActionPayload<tOrg>) => {
+      props.getGroupDispatch({handle: idOrSlug})
+        .then((res: tActionPayload<tGroup>) => {
           return props.getEventsByOrgIdDispatch({
             orgId: res.payload.id,
             showPast: false,
@@ -28,7 +28,7 @@ class OrganizationContainer extends PureComponent<tContainerProps> {
         })
         .catch(loglevel.error);
     } else {
-      props.getOrgDispatch({id: idOrSlug});
+      props.getGroupDispatch({id: idOrSlug});
       props.getEventsByOrgIdDispatch({
         orgId: idOrSlug,
         showPast: false,
@@ -117,7 +117,7 @@ const mapStateToProps = (store: tStore) => ({
 const mapDispatchToProps = (dispatch: Function) => ({
   getEventsByOrgIdDispatch:
     (query: tGetEventQuery) => dispatch(getEventsByOrgId(query)),
-  getOrgDispatch: (query: tOrgQuery) => dispatch(getOrg(query)),
+  getGroupDispatch: (query: tGroupQuery) => dispatch(getGroup(query)),
   getRolesDispatch: () => dispatch(getRoles()),
   getRsvpsDispatch: () => dispatch(getRsvps()),
 });

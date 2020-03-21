@@ -16,7 +16,7 @@ export const getRSVPByEventId = async (
       .where({userId, eventId})
       .first();
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   return userEventRel;

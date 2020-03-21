@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 
-import {getOrgsBySearch} from '../../redux';
+import {getGroupsBySearch} from '../../redux';
 
 // mini search bar located in the header, or maybe homepage
 class SearchContainer extends React.PureComponent<any, {value: string}> {
@@ -50,7 +50,7 @@ class SearchContainer extends React.PureComponent<any, {value: string}> {
 }
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getSearchResults: (query: {value: string}) => dispatch(getOrgsBySearch(query)),
+  getSearchResults: (query: {value: string}) => dispatch(getGroupsBySearch(query)),
 });
 
 const Search = connect(

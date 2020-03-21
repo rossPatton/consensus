@@ -11,7 +11,7 @@ export const failure = (payload: tResponseError): tFailureAction => ({
 });
 
 
-export const success = (payload: tOrg): tSuccessAction => ({
+export const success = (payload: tGroup): tSuccessAction => ({
   type: POST_SUCCESS,
   payload,
 });

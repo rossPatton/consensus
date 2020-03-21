@@ -7,7 +7,7 @@ export const accountKeys = [
   'orgId',
 ];
 
-export const orgKeys = [
+export const groupKeys = [
   'allowNonVerified',
   'category',
   'city',

@@ -1,7 +1,7 @@
 export type tProps = {
   deleteUserByOrgIdDispatch: (query: tDeleteUserByOrgIdQuery) => tThunkPayload<any>,
   dispatch: Function,
-  org: tOrg,
+  org: tGroup,
   role: tRole,
   session: tSession,
 };

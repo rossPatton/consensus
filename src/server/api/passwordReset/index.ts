@@ -16,10 +16,15 @@ passwordResetViaEmail.get('/email/v1/emailResetToken',
     const query: {email: string} = _.get(ctx, dataPath, {});
     await validateSchema<{email: string}>(ctx, emailSchema, query);
 
-    const accountEmailRel = await knex('accounts_emails')
-      .limit(1)
-      .where(query)
-      .first();
+    let accountEmailRel: tEmail;
+    try {
+      accountEmailRel = await knex('accounts_emails')
+        .limit(1)
+        .where(query)
+        .first();
+    } catch (err) {
+      ctx.throw(500, err);
+    }
 
     // update query returns 0 or 1 status codes
     if (!accountEmailRel) {
@@ -33,15 +38,21 @@ passwordResetViaEmail.get('/email/v1/emailResetToken',
 
     const oneHourFromNow = dayjs().add(1, 'hour');
     const token = crypto.randomBytes(48).toString('hex');
-    const account = await knex('accounts')
-      .limit(1)
-      .where({id: accountEmailRel.accountId})
-      .update({
-        passwordResetToken: token,
-        passwordResetExpires: oneHourFromNow,
-      });
+    let account: tAccount | number;
+    try {
+      account = await knex('accounts')
+        .limit(1)
+        .where({id: accountEmailRel.accountId})
+        .update({
+          passwordResetToken: token,
+          passwordResetExpires: oneHourFromNow,
+        });
+    } catch (err) {
+      ctx.throw(500, err);
+    }
 
-    // update query returns 0 or 1
+    // update query returns 0 or 1.
+    // maybe user entered a valid query, but for another account?
     if (!account || account === 0) {
       return ctx.throw(400, 'Something went wrong! Try again?');
     }
@@ -79,7 +90,7 @@ passwordResetViaEmail.patch('/email/v1/resetPasswordByEmail',
         .select(['passwordResetExpires'])
         .first();
     } catch (err) {
-      ctx.throw(400, err);
+      ctx.throw(500, err);
     }
 
     if (!account) {
@@ -110,7 +121,7 @@ passwordResetViaEmail.patch('/email/v1/resetPasswordByEmail',
           passwordResetExpires: null,
         });
     } catch (err) {
-      ctx.throw(400, err);
+      ctx.throw(500, err);
     }
 
     ctx.body = updatedAccount;

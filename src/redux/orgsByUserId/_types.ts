@@ -7,7 +7,7 @@ import {
   tSuccessAction as tGetSuccessAction,
 } from './get/_types';
 
-export type tOrgsByUserIdActionUnion = tDeleteFailureAction
+export type tGroupsByUserIdActionUnion = tDeleteFailureAction
   | tDeleteSuccessAction
   | tGetFailureAction
   | tGetSuccessAction;

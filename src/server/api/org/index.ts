@@ -2,10 +2,10 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {orgKeys} from '../_constants';
+import {groupKeys} from '../_constants';
 import {knex} from '../../db/connection';
 import {validateSchema} from '../../utils';
-import {patchSchema, schema} from './_schema';
+import {patchSchema, postSchema, schema} from './_schema';
 
 export const org = new Router();
 const dataPath = 'state.locals.data';
@@ -13,54 +13,61 @@ const route = '/api/v1/org';
 const table = 'orgs';
 
 org.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tGetOrgQuery = _.get(ctx, dataPath, {});
-  await validateSchema<tGetOrgQuery>(ctx, schema, query);
+  const query: tGetGroupQuery = _.get(ctx, dataPath, {});
+  await validateSchema<tGetGroupQuery>(ctx, schema, query);
 
-  let org = {} as tOrg;
+  let org = {} as tGroup;
   try {
     org = await knex(table)
       .limit(1)
       .where(query)
       .first()
-      .select(orgKeys);
+      .select(groupKeys);
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   ctx.body = org;
 });
 
 org.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const {email, isFormSubmit, password, ...newOrg} = _.get(ctx, dataPath, {});
-  await validateSchema<tGetOrgQuery>(ctx, patchSchema, newOrg);
+  const {email, isFormSubmit, password, ...update} = _.get(ctx, dataPath, {});
+  await validateSchema<tGroupQuery>(ctx, patchSchema, update);
 
-  let updatedOrg = [] as tOrg[];
+  let updatedGroup = [] as tGroup[];
   try {
-    updatedOrg = await knex(table)
+    updatedGroup = await knex(table)
       .limit(1)
-      .where({id: newOrg.id})
-      .update(newOrg)
-      .returning(orgKeys);
+      .where({id: update.id})
+      .update(update)
+      .returning(groupKeys);
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   ctx.body = {
-    ...updatedOrg[0],
+    ...updatedGroup[0],
     email,
   };
 });
 
-// TODO handle the org/account split on signup, set max password length (72)
 org.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const {isFormSubmit, ...org} = _.get(ctx, dataPath, {});
+  const {isFormSubmit, ...group} = _.get(ctx, dataPath, {});
+  await validateSchema<tGroupQuery>(ctx, postSchema, group);
 
-  let newOrg = {} as tOrg;
-  try {
-    newOrg = await knex(table).insert(org).returning(orgKeys);
-  } catch (err) {
-    return ctx.throw(400, err);
-  }
+  // create the cooresponding account first =>
+  // try {
+  //   await knex('accounts').insert(group).returning(groupKeys);
+  // } catch (err) {
+  //   return ctx.throw(400, err);
+  // }
 
-  ctx.body = newOrg;
+  // let newGroup = {} as tGroup;
+  // try {
+  //   newGroup = await knex(table).insert(group).returning(groupKeys);
+  // } catch (err) {
+  //   return ctx.throw(500, err);
+  // }
+
+  ctx.body = {ok: true}; // newGroup;
 });

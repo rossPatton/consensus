@@ -1,15 +1,15 @@
-import { tOrgActionUnion } from './_types';
+import { tGroupActionUnion } from './_types';
 import { GET_FAILURE, GET_SUCCESS } from './get/_types';
 import { PATCH_FAILURE, PATCH_SUCCESS } from './patch/_types';
 import { POST_FAILURE, POST_SUCCESS } from './post/_types';
 
-const initialState: tThunk<tOrg> = {
+const initialState: tThunk<tGroup> = {
   error: null,
   isLoading: true,
-  data: {} as tOrg,
+  data: {} as tGroup,
 };
 
-export const orgReducer = (state = initialState, action: tOrgActionUnion) => {
+export const orgReducer = (state = initialState, action: tGroupActionUnion) => {
   const failureReturn = {
     ...state,
     error: action.payload,

@@ -1,10 +1,10 @@
 import {tActionUnion} from './_types';
 import { GET_FAILURE, GET_SUCCESS } from './get/_types';
 
-const initialState: tThunk<tOrg[]> = {
+const initialState: tThunk<tGroup[]> = {
   error: null,
   isLoading: true,
-  data: [] as tOrg[],
+  data: [] as tGroup[],
 };
 
 export const orgsReducer = (state = initialState, action: tActionUnion) => {

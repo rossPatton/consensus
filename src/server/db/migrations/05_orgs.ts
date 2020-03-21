@@ -31,8 +31,14 @@ exports.up = async (knex: Knex) => {
       .defaultTo('public');
 
     // display names for ease of use, 99% of what we need on the client usually
+    table.string('country')
+      .defaultTo('United States')
+      .notNullable()
+      .references('countries.name')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+
     table.string('city').notNullable();
-    table.string('country').notNullable();
     table.string('region').notNullable();
 
     // for ease of lookup later if need be
@@ -43,6 +49,7 @@ exports.up = async (knex: Knex) => {
       .onDelete('CASCADE');
 
     table.integer('countryId')
+      .defaultTo(1)
       .notNullable()
       .references('countries.id')
       .onUpdate('CASCADE')

@@ -160,7 +160,7 @@ const GroupAdminContainer = memo((props: tProps) => {
           {isMembers && <Members match={props.match} />}
           {isMeetingForm && (
             <PlanMeeting
-              org={props.session.profile as tOrg}
+              org={props.session.profile as tGroup}
               router={props.location}
             />
           )}
@@ -170,7 +170,7 @@ const GroupAdminContainer = memo((props: tProps) => {
   );
 });
 
-const mapStateToProps = (store: {session: tThunk<tSession<tOrg>>}) => ({
+const mapStateToProps = (store: {session: tThunk<tSession<tGroup>>}) => ({
   session: store.session.data,
 });
 

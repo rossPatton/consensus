@@ -1,1 +1,1 @@
-export { getOrgsBySearch } from './get/thunk';
+export { getGroupsBySearch } from './get/thunk';

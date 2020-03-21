@@ -2,7 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {orgKeys} from '../_constants';
+import {groupKeys} from '../_constants';
 import {knex} from '../../db/connection';
 import {validateSchema} from '../../utils';
 import {getRoleMapsByUserId} from './_queries';
@@ -14,19 +14,19 @@ const dataPath = 'state.locals.data';
 export const orgsByUserId = new Router();
 
 orgsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tOrgsByUserIdQuery = _.get(ctx, dataPath, {});
-  await validateSchema<tOrgsByUserIdQuery>(ctx, getSchema, query);
+  const query: tGroupsByUserIdQuery = _.get(ctx, dataPath, {});
+  await validateSchema<tGroupsByUserIdQuery>(ctx, getSchema, query);
 
   const userGroupRels = await getRoleMapsByUserId(ctx, query);
   const mappedIds = userGroupRels.map(idSet => idSet.orgId);
 
-  let orgs = [] as tOrg[];
+  let orgs = [] as tGroup[];
   try {
     orgs = await knex('orgs')
       .whereIn('id', mappedIds)
-      .select(orgKeys);
+      .select(groupKeys);
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   ctx.body = orgs;
@@ -49,7 +49,7 @@ orgsByUserId.delete(route, async (ctx: Koa.ParameterizedContext) => {
       .first()
       .del();
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   // orgId is needed on client to update redux state

@@ -1,6 +1,6 @@
 import {Location} from 'history';
 
 export type tProps = {
-  org: tOrg,
+  org: tGroup,
   router: Location,
 };

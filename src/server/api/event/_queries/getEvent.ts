@@ -2,7 +2,7 @@ import Koa from 'koa';
 import _ from 'lodash';
 
 import {knex} from '../../../db/connection';
-import {getAccountRoleRelByOrgId, getOrgById, getUsersByIds} from '../../../queries';
+import {getAccountRoleRelByOrgId, getGroupById, getUsersByIds} from '../../../queries';
 
 export const getEvent = async (
   ctx: Koa.ParameterizedContext,
@@ -15,7 +15,7 @@ export const getEvent = async (
       .where(query)
       .first();
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   // lookup failed, for example, user entered id for event that doesnt exist
@@ -26,7 +26,7 @@ export const getEvent = async (
 
   // user role for this particular org
   const {role} = await getAccountRoleRelByOrgId(ctx, event.orgId);
-  const org = await getOrgById(ctx, event.orgId);
+  const org = await getGroupById(ctx, event.orgId);
 
   if (!role && org.type !== 'public') {
     ctx.redirect('/401');
@@ -40,7 +40,7 @@ export const getEvent = async (
         eventId: event.id,
       });
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   // get count for both public and private rsvps

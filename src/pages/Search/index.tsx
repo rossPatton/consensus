@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import {Helmet, Orgs, SuperSearch} from '../../components';
 import {ErrorBoundary, GenericLoader, Template} from '../../containers';
-import {getOrgsBySearch} from '../../redux';
+import {getGroupsBySearch} from '../../redux';
 import {tProps, tStore} from './_types';
 
 class SearchContainer extends React.PureComponent<tProps> {
@@ -56,7 +56,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getSearchResults: (search: qs.ParsedQuery) => dispatch(getOrgsBySearch(search)),
+  getSearchResults: (search: qs.ParsedQuery) => dispatch(getGroupsBySearch(search)),
 });
 
 const Search = connect(

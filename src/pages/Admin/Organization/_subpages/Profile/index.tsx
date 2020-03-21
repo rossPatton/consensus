@@ -23,7 +23,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       regionId,
       updated_at,
       ...editablePartOfGroup
-    }: tOrg = _.get(this.props, 'sessionThunk.data.profile', {});
+    }: tGroup = _.get(this.props, 'sessionThunk.data.profile', {});
 
     this.state = {
       ...editablePartOfGroup,
@@ -36,7 +36,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     ev.preventDefault();
     const {isLocked, password, ...stuffToPatch} = this.state;
 
-    let patchedOrg: tActionPayload<tOrg>;
+    let patchedOrg: tActionPayload<tGroup>;
     try {
       patchedOrg = await this.props.patchOrgDispatch(stuffToPatch);
     } catch (err) {
@@ -117,7 +117,7 @@ const mapStateToProps = (store: tStore) => ({
 
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
-  patchOrgDispatch: (query: tOrgQuery) => dispatch(patchOrg(query)),
+  patchOrgDispatch: (query: tGroupQuery) => dispatch(patchOrg(query)),
 });
 
 const Profile = connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);

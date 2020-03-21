@@ -5,12 +5,12 @@ import {
   tSuccessAction,
 } from './_types';
 
-export const getOrgsBySearchFailure = (payload: tResponseError): tFailureAction => ({
+export const getGroupsBySearchFailure = (payload: tResponseError): tFailureAction => ({
   type: GET_FAILURE,
   payload,
 });
 
-export const getOrgsBySearchSuccess = (payload: tOrg[]): tSuccessAction => ({
+export const getGroupsBySearchSuccess = (payload: tGroup[]): tSuccessAction => ({
   type: GET_SUCCESS,
   payload,
 });

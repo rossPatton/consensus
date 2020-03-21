@@ -1,6 +1,6 @@
 export type tProps = {
   dispatch: Function,
-  org: tOrg,
+  org: tGroup,
   postNewUserByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
     tThunkPayload<tUser>,
   role: tRole,
@@ -8,7 +8,7 @@ export type tProps = {
 };
 
 export type tStore = {
-  org: tThunk<tOrg>,
+  org: tThunk<tGroup>,
   session: tThunk<tSession>,
   usersByOrgId: tThunk<tUser[]>,
 };

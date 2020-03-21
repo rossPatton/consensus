@@ -1,4 +1,4 @@
-export type tState = Partial<tOrg> & {
+export type tState = Partial<tGroup> & {
   isLocked: boolean,
   password: string,
 }
@@ -12,7 +12,7 @@ export type tStore = {
 
 export type tContainerProps = {
   loginDispatch: (query: tLoginQuery) => tThunkPayload,
-  patchOrgDispatch: (query: tOrgQuery) => tThunkPayload<tOrg>,
+  patchOrgDispatch: (query: tGroupQuery) => tThunkPayload<tGroup>,
   sessionThunk: tThunk<tSession>,
 };
 

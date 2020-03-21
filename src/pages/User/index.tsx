@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import {Helmet} from '../../components';
 import {ErrorBoundary, GenericLoader, Template} from '../../containers';
-import {getOrgsByUserId, getUser} from '../../redux';
+import {getGroupsByUserId, getUser} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {UserComponent} from './Component';
 
@@ -16,7 +16,7 @@ class UserContainer extends PureComponent<tContainerProps> {
     props.getUserByIdDispatch({id: userId})
       .then(res => {
         if (!res.payload.privateMemberships) {
-          props.getOrgsByUserIdDispatch({noPending: true, userId});
+          props.getGroupsByUserIdDispatch({noPending: true, userId});
         }
         return null;
       }).catch(loglevel.error);
@@ -62,8 +62,8 @@ const mapDispatchToProps = (dispatch: Function) => ({
   getUserByIdDispatch: (query: tIdQuery) =>
     dispatch(getUser(query)),
 
-  getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) =>
-    dispatch(getOrgsByUserId(query)),
+  getGroupsByUserIdDispatch: (query: tGroupsByUserIdQuery) =>
+    dispatch(getGroupsByUserId(query)),
 });
 
 const User = connect(mapStateToProps, mapDispatchToProps)(UserContainer);

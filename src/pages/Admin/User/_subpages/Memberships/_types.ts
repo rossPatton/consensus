@@ -1,18 +1,18 @@
 export type tComponentProps = {
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  orgs: tOrg[],
+  orgs: tGroup[],
   roles: tRoleMap[],
 };
 
 export type tContainerProps = {
-  getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) => tThunkPayload<tOrg[]>,
-  orgsByUserIdThunk: tThunk<tOrg[]>,
+  getGroupsByUserIdDispatch: (query: tGroupsByUserIdQuery) => tThunkPayload<tGroup[]>,
+  orgsByUserIdThunk: tThunk<tGroup[]>,
   roles: tRoleMap[],
   sessionThunk: tThunk<tSession>,
 };
 
 export type tStore = {
-  orgsByUserId: tThunk<tOrg[]>,
+  orgsByUserId: tThunk<tGroup[]>,
   roles: tThunk<tRoleMap[]>,
   session: tThunk<tSession>,
 };

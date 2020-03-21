@@ -1,16 +1,16 @@
-import { tOrgsByUserIdActionUnion } from './_types';
+import { tGroupsByUserIdActionUnion } from './_types';
 import { DELETE_FAILURE, DELETE_SUCCESS } from './delete/_types';
 import { GET_FAILURE, GET_SUCCESS } from './get/_types';
 
-const initialState: tThunk<tOrg[]> = {
+const initialState: tThunk<tGroup[]> = {
   error: null,
   isLoading: true,
-  data: [] as tOrg[],
+  data: [] as tGroup[],
 };
 
 export const orgsByUserIdReducer = (
   state = initialState,
-  action: tOrgsByUserIdActionUnion,
+  action: tGroupsByUserIdActionUnion,
 ) => {
   const failureReturn = {
     ...state,

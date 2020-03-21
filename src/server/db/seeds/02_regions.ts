@@ -6,7 +6,6 @@ import stateMap from '../../../json/usa/stateCodeMap.json';
 // in our case, just states for now
 const createRegion = async (key: string, value: string) => ({
   code: value.toLowerCase(),
-  country: 1, // United States basically
   name: key,
 });
 

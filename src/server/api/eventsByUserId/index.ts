@@ -26,7 +26,7 @@ eventsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
       userRSVPs.map(async idSet => idSet.eventId),
     ));
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   // only return future events where the user rsvped
@@ -38,7 +38,7 @@ eventsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
       .andWhere({isDraft: false})
       .orderBy('date', 'asc');
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   ctx.body = await zipEventsWithAttendees(events, userRSVPs);

@@ -23,7 +23,7 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
       .where({accountId: account.id})
       .select(['email', 'isPrimary']);
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   let roles: tRoleMap[];
@@ -37,14 +37,14 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
         .where({accountId: account.id})
         .select('role');
     } catch (err) {
-      return ctx.throw(400, err);
+      return ctx.throw(500, err);
     }
     try {
       rsvps = await knex('users_events')
         .where({userId: account.userId})
         .select(['type', 'value']);
     } catch (err) {
-      return ctx.throw(400, err);
+      return ctx.throw(500, err);
     }
   } else {
     try {
@@ -52,7 +52,7 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
         .where({orgId: account.orgId})
         .select('*');
     } catch (err) {
-      return ctx.throw(400, err);
+      return ctx.throw(500, err);
     }
   }
 

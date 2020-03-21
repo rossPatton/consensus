@@ -1,7 +1,7 @@
 import {tAdminSections} from '../_types';
 
 export type tStore = {
-  orgsByUserId: tThunk<tOrg[]>,
+  orgsByUserId: tThunk<tGroup[]>,
   roles: tThunk<tRoleMap[]>,
   rsvps: tThunk<tRSVP[]>,
   session: tThunk<tSession<tUser>>,
@@ -9,7 +9,7 @@ export type tStore = {
 
 export type tProps = {
   match: tAdminSections,
-  orgsByUserIdThunk: tThunk<tOrg[]>,
+  orgsByUserIdThunk: tThunk<tGroup[]>,
   session: tSession<tUser>,
 };
 
@@ -18,7 +18,7 @@ export type tComponentProps = tProps & {
 };
 
 export type tContainerProps = tProps & {
-  getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) => tThunkPayload<tOrg[]>,
+  getGroupsByUserIdDispatch: (query: tGroupsByUserIdQuery) => tThunkPayload<tGroup[]>,
   getRolesDispatch: () => tThunkPayload<tRoleMap[]>,
   getRsvpsDispatch: () => tThunkPayload<tRSVP[]>,
   logoutDispatch: () => tThunkPayload<any>,

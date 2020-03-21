@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {Helmet} from '../../../../../components';
 import {ErrorBoundary, GenericLoader} from '../../../../../containers';
 import {SearchFilter} from '../../../../../containers';
-import {getOrgsByUserId} from '../../../../../redux';
+import {getGroupsByUserId} from '../../../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {MembershipsComponent} from './Component';
 
@@ -47,8 +47,8 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getOrgsByUserIdDispatch: (query: tOrgsByUserIdQuery) =>
-    dispatch(getOrgsByUserId(query)),
+  getGroupsByUserIdDispatch: (query: tGroupsByUserIdQuery) =>
+    dispatch(getGroupsByUserId(query)),
 });
 
 const Memberships = connect(

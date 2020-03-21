@@ -3,7 +3,7 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import {knex} from '../../db/connection';
-import {getAccountRoleRelByOrgId, getOrgById, getRSVPsByUserId} from '../../queries';
+import {getAccountRoleRelByOrgId, getGroupById, getRSVPsByUserId} from '../../queries';
 import {validateSchema, zipEventsWithAttendees} from '../../utils';
 import {getEventsByQuery} from './_queries';
 import {deleteSchema, getSchema} from './_schema';
@@ -25,7 +25,7 @@ events.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   // user role for this particular org
   const {role, userId} = await getAccountRoleRelByOrgId(ctx, query.orgId);
-  const org = await getOrgById(ctx, query.orgId);
+  const org = await getGroupById(ctx, query.orgId);
 
   // if fetching events for a private org and the user is not a member
   if (!role && org.type !== 'public') {
@@ -56,7 +56,7 @@ events.delete(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     await knex(table).limit(1).where({id: query.id}).del();
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   // we use the id on the client to filter out the now deleted event

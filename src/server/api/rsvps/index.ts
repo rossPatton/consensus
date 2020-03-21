@@ -45,7 +45,7 @@ rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
       .update(newRsvp)
       .returning('*');
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   ctx.body = rsvpUpdate[0];
@@ -75,7 +75,7 @@ rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
       .where({eventId, userId})
       .first();
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   let rsvpUpdate: tRSVP[] = [];

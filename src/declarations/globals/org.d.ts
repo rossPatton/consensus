@@ -1,6 +1,6 @@
 declare type tPrivacyEnum = 'public' | 'private' | 'hidden';
 
-declare type tOrg = Readonly<{
+declare type tGroup = Readonly<{
    allowNonVerified: boolean,
    category: tCategory,
    city: string,
@@ -26,12 +26,12 @@ declare type tOrg = Readonly<{
 }>;
 
 // if posting/patching most values are up for grabs
-declare type tOrgQuery = Partial<tOrg>;
+declare type tGroupQuery = Partial<tGroup> & tFormSubmit;
 
 // if getting, add db delimiters
-declare type tGetOrgQuery = Partial<tOrg> & tBaseQuery;
+declare type tGetGroupQuery = Partial<tGroup> & tBaseQuery;
 
-declare type tOrgRouteParams = tPaginateParams & Readonly<{
+declare type tGroupRouteParams = tPaginateParams & Readonly<{
    id: string,
    section?: 'planMeeting' | 'drafts' | 'members' | 'pending',
    slug: string,

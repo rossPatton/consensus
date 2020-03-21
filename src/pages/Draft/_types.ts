@@ -3,7 +3,7 @@ import { match } from 'react-router';
 
 export type tStore = {
   event: tThunk<tEvent>,
-  org: tThunk<tOrg>,
+  org: tThunk<tGroup>,
   isLoading: boolean,
   roles: tThunk<tRoleMap[]>,
   session: tThunk<tSession>
@@ -19,7 +19,7 @@ export type tContainerProps = {
   isLoading: boolean,
   location: H.Location,
   match: match & { params: tEventParams },
-  orgThunk: tThunk<tOrg>,
+  orgThunk: tThunk<tGroup>,
   rolesThunk: tThunk<tRoleMap[]>,
   session: tSession,
 }

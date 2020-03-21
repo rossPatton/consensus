@@ -10,8 +10,8 @@ export type tState = {
 };
 
 export type tBaseProps = {
-  match: match & {params: tOrgRouteParams},
-  org: tOrg,
+  match: match & {params: tGroupRouteParams},
+  org: tGroup,
   role: tRole,
 }
 

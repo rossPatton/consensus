@@ -5,7 +5,7 @@ import {knex} from '../../../db/connection';
 
 export const getRoleMapsByUserId = async (
   ctx: Koa.ParameterizedContext,
-  query: tOrgsByUserIdQuery,
+  query: tGroupsByUserIdQuery,
 ): Promise<tEvent[]> => {
   const {noPending, userId} = query;
 
@@ -14,6 +14,6 @@ export const getRoleMapsByUserId = async (
     if (noPending) userGroupRels.whereNot({role: 'pending'});
     return userGroupRels.where({userId}).orderBy('updated_at', 'asc');
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 };

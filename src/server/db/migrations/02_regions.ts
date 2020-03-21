@@ -13,11 +13,19 @@ exports.up = async (knex: Knex) => {
     table.string('code').notNullable();
 
     // in this case, the US since we have no other options atm
-    table.integer('country')
+    table.integer('countryId')
       .notNullable()
       .references('countries.id')
       .onUpdate('CASCADE')
-      .onDelete('CASCADE');
+      .onDelete('CASCADE')
+      .defaultTo(1);
+
+    table.string('country')
+      .notNullable()
+      .references('countries.name')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE')
+      .defaultTo('United States');
   });
 };
 

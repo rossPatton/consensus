@@ -16,7 +16,7 @@ search.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, 'state.locals.data', {});
   await validateSchema(ctx, schema, query);
 
-  let orgsLike: {rows: tOrg[]};
+  let orgsLike: {rows: tGroup[]};
   try {
     // get all columns, for rows in orgs whose name is similar to search term
     // then sort desc by that similarity/sml (closest first)
@@ -27,7 +27,7 @@ search.get(route, async (ctx: Koa.ParameterizedContext) => {
       ORDER BY sml DESC;
     `);
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   if (orgsLike.rows instanceof Array

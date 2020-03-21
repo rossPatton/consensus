@@ -14,8 +14,8 @@ export const MembersComponent = memo((props: tComponentProps) => (
       </div>
       <Users
         count={1}
-        memberName={(props.session.profile as tOrg).memberName}
-        modName={(props.session.profile as tOrg).modName}
+        memberName={(props.session.profile as tGroup).memberName}
+        modName={(props.session.profile as tGroup).modName}
         removeUser={props.removeUser}
         sessionRole="admin"
         setUserRole={props.setUserRole}
@@ -30,14 +30,14 @@ export const MembersComponent = memo((props: tComponentProps) => (
       </div>
       <FilterPanel
         className="bgWhite br8 fs6 fw600 fx aiCtr mB3"
-        memberName={(props.session.profile as tOrg).memberName}
-        modName={(props.session.profile as tOrg).modName}
+        memberName={(props.session.profile as tGroup).memberName}
+        modName={(props.session.profile as tGroup).modName}
         onRoleFilterChange={props.onRoleFilterChange}
         onSearchChange={props.onSearchChange}
       />
       <Users
-        memberName={(props.session.profile as tOrg).memberName}
-        modName={(props.session.profile as tOrg).modName}
+        memberName={(props.session.profile as tGroup).memberName}
+        modName={(props.session.profile as tGroup).modName}
         removeUser={props.removeUser}
         sessionRole="admin"
         setUserRole={props.setUserRole}

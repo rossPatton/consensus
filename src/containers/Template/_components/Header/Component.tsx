@@ -21,7 +21,7 @@ export const HeaderComponent = memo((props: tComponentProps) => (
             to="/login"
             id="a11yLogin"
             className="brdA1 br4 p1 pL2 pR2 mR2 fw600 trans1 hvrBgGrey1">
-            Login
+            Login/Signup
           </Link>
         )}
         {props.session.isAuthenticated

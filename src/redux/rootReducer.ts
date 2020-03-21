@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 
+import { citiesReducer } from './cities/reducer';
 import { cityReducer } from './city/reducer';
 import { countryReducer } from './country/reducer';
 import { eventReducer } from './event/reducer';
@@ -20,6 +21,7 @@ import { usersByOrgIdReducer } from './usersByOrgId/reducer';
 
 export const rootReducer = combineReducers({
   city: cityReducer,
+  cities: citiesReducer,
   country: countryReducer,
   event: eventReducer,
   eventsByLocation: eventsByLocationReducer,

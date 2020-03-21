@@ -1,9 +1,9 @@
 import {match} from 'react-router';
 
 export type tProps = {
-  match: match & {params: tOrgRouteParams},
-  org: tOrg,
-  params: tOrgRouteParams,
+  match: match & {params: tGroupRouteParams},
+  org: tGroup,
+  params: tGroupRouteParams,
   role: tRole,
 };
 

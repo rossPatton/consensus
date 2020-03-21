@@ -60,7 +60,7 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     hashedPW = await saltedHash(pwInput);
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   let userResult: tUser[] = [];
@@ -70,7 +70,7 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
       .insert({email, username})
       .returning(userKeys);
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   if (!userResult || userResult.length === 0) {
@@ -89,7 +89,7 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
       .insert({login, password, userId: user.id})
       .returning('*');
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   if (!query.isFormSubmit) {
@@ -121,7 +121,7 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
       .update(updateQuery)
       .returning(userKeys);
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   if (isFormSubmit) return;

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 
-import {getOrgsBySearch} from '../../redux';
+import {getGroupsBySearch} from '../../redux';
 
 const filterOptions = [
   {display: 'Group name', key: 'name'},
@@ -73,7 +73,7 @@ class SuperSearchContainer extends React.PureComponent<any, any> {
 }
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getSearchResults: (query: tSearchQuery) => dispatch(getOrgsBySearch(query)),
+  getSearchResults: (query: tSearchQuery) => dispatch(getGroupsBySearch(query)),
 });
 
 const SuperSearch = connect(null, mapDispatchToProps)(SuperSearchContainer);

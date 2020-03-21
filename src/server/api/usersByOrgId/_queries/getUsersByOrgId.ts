@@ -15,7 +15,7 @@ export const getUsersByOrgId = async (
   try {
     userIds = await Promise.all(roleMaps.map(async idSet => idSet.userId));
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   // use the returned ids to query users table
@@ -29,7 +29,7 @@ export const getUsersByOrgId = async (
       users.push(chunk);
     }
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   // TODO refactor where we add role all over the place

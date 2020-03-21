@@ -4,7 +4,7 @@ import { match } from 'react-router';
 export type tStore = {
   event: tThunk<tEvent>,
   eventsByOrgId: tThunk<tEvent[]>,
-  org: tThunk<tOrg>,
+  org: tThunk<tGroup>,
   isLoading: boolean,
   roles: tThunk<tRoleMap[]>,
   rsvps: tThunk<tRSVP[]>,
@@ -17,7 +17,7 @@ export type tProps = {
 
 export type tComponentProps = tProps & {
   event: tEvent,
-  org: tOrg,
+  org: tGroup,
   rsvp: tRSVP,
 };
 
@@ -25,12 +25,12 @@ export type tContainerProps = tProps & {
   eventThunk: tThunk<tEvent>,
   getEventDispatch: (query: tGetEventQuery) => tThunkPayload<tEvent>,
   getEventsByOrgIdDispatch: (query: tGetEventQuery) => tThunkPayload<tEvent[]>,
-  getOrgByIdDispatch: (query: tOrgQuery) => tThunkPayload<tOrg>,
+  getGroupByIdDispatch: (query: tGroupQuery) => tThunkPayload<tGroup>,
   getRolesDispatch: () => tThunkPayload<tRoleMap>,
   getRsvpsDispatch: () => tThunkPayload<tRSVP[]>,
   location: H.Location,
   match: match & { params: tEventParams },
-  orgThunk: tThunk<tOrg>,
+  orgThunk: tThunk<tGroup>,
   rolesThunk: tThunk<tRoleMap[]>,
   rsvpsThunk: tThunk<tRSVP[]>,
   session: tSession,

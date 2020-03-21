@@ -23,7 +23,7 @@ eventsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
       .where({code: query.postcode})
       .limit(1);
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   // now only return future events where the user rsvped
@@ -36,7 +36,7 @@ eventsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
       .orderBy('date', 'asc')
       .limit(100);
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   ctx.body = events;

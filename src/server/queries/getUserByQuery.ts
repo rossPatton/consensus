@@ -10,7 +10,7 @@ export const getUserByQuery = async (
   try {
     user = await knex('users').limit(1).where(query).first();
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   return user;

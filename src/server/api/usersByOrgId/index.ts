@@ -84,7 +84,7 @@ usersByOrgId.patch(route, async (ctx: Koa.ParameterizedContext) => {
       .update({role})
       .returning(['orgId', 'role', 'userId']);
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   ctx.body = updatedAccountRoleRel[0];
@@ -102,7 +102,7 @@ usersByOrgId.delete(route, async (ctx: Koa.ParameterizedContext) => {
       .first()
       .del();
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   ctx.body = {userId: parseInt(query.userId, 10)};

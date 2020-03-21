@@ -9,9 +9,9 @@ exports.up = async (knex: Knex) => {
     table.increments().unsigned().primary();
 
     // United States
-    table.string('name').notNullable();
+    table.string('name').notNullable().unique();
     // US
-    table.string('code').notNullable();
+    table.string('code').notNullable().unique();
     // name for regions in this country (state|province|prefecture|etc)
     table.string('regionType').notNullable().defaultTo('state');
   });

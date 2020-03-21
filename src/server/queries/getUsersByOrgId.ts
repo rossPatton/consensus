@@ -15,14 +15,14 @@ export const getUsersByOrgId = async (
       roleMaps.push(chunk);
     }
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   let userIds: number[];
   try {
     userIds = await Promise.all(roleMaps.map(async idSet => idSet.userId));
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   // use the returned ids to query users table
@@ -33,7 +33,7 @@ export const getUsersByOrgId = async (
       users.push(chunk);
     }
   } catch (err) {
-    return ctx.throw(400, err);
+    return ctx.throw(500, err);
   }
 
   return await Promise.all(roleMaps.map(async roleMap => {

@@ -16,3 +16,17 @@ export const patchSchema = schema.keys({
   type: Joi.string().allow('public', 'private', 'hidden'),
   website: Joi.string().uri(),
 });
+
+export const postSchema = schema.keys({
+  category:
+    Joi.string().allow('Political', 'Cooperative', 'Community', 'Union').required(),
+  city: Joi.string().required(),
+  cityId: Joi.number().integer().required(),
+  handle: Joi.string().regex(/^[a-zA-Z0-9-]+$/).required(),
+  login: Joi.string().required(),
+  name: Joi.string().required(),
+  password: Joi.string().max(72).required(),
+  region: Joi.string().required(),
+  regionId: Joi.number().integer().required(),
+  type: Joi.string().allow('public', 'private', 'hidden').required(),
+});

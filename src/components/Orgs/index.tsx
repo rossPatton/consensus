@@ -68,7 +68,7 @@ class OrgsContainer extends PureComponent<tContainerProps, tState> {
 
     // if we're rendering groups based on relation to the user, then we want to
     // be able to potentially split by user role, pending or not pending
-    let pendingOrgs = [] as tOrg[];
+    let pendingOrgs = [] as tGroup[];
     if (showPending) {
       pendingOrgs = this.filterNonPending();
     }
@@ -77,7 +77,7 @@ class OrgsContainer extends PureComponent<tContainerProps, tState> {
       <Paginate
         count={count}
         items={this.filterPending()}
-        render={(orgsToRender: tOrg[]) => (
+        render={(orgsToRender: tGroup[]) => (
           <OrgsComponent
             {...this.state}
             asList={asList}
