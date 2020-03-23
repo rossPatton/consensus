@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {SearchFilter} from '../../../../containers';
+import {GenericLoader} from '../../../../containers';
 import {getCities, postGroup} from '../../../../redux';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {OrgSignupComponent} from './Component';
@@ -17,13 +17,13 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
       category: 'Political',
       city: '',
       cityId: null,
-      citySearch: '',
       handle: '',
       login: '',
       name: '',
       password: '',
       region: '',
       regionId: null,
+      showRegionField: false,
       type: 'public' as tPrivacyEnum,
     };
   }
@@ -34,9 +34,15 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
     this.props.postGroupDispatch(newGroup);
   }
 
-  updateState = (stateKey: tStateUnion, value: string | number | object) => {
+  updateState = (stateKey: tStateUnion, value: string | number | object | boolean) => {
     if (typeof value === 'object') {
       this.setState(value);
+    }
+
+    if (stateKey === 'region'
+      && typeof value === 'string'
+      && value !== this.props.geo.region) {
+      this.props.getCitiesDispatch({region: value});
     }
 
     this.setState({
@@ -72,14 +78,13 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
       || handleLimiterRe.test(handle);
 
     return (
-      <SearchFilter
-        searchKey="name"
-        items={this.props.citiesThunk.data}
-        render={searchProps => (
+      <GenericLoader
+        isLoading={this.props.citiesThunk.isLoading}
+        render={() => (
           <OrgSignupComponent
             {...this.props}
             {...this.state}
-            {...searchProps}
+            cities={this.props.citiesThunk.data}
             disabled={disabled}
             onSubmit={this.onSubmit}
             updateState={this.updateState}

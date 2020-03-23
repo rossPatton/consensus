@@ -4,13 +4,13 @@ export type tState = {
   category: tCategory,
   city: string,
   cityId: number,
-  citySearch: string,
   handle: string,
   login: string,
   name: string,
   password: string,
   region: string
   regionId: number,
+  showRegionField: boolean,
   type: tPrivacyEnum,
 };
 
@@ -25,8 +25,10 @@ export type tContainerProps = {
   postGroupDispatch: (query: tGroupQuery) => tThunkPayload<tGroup>,
 };
 
-export type tComponentProps = tState & tSearchFilterProps & {
+export type tComponentProps = tState & {
+  cities: tCity[],
   disabled: boolean,
+  geo: tGeo,
   onSubmit: (ev: React.FormEvent<HTMLFormElement>) => void,
-  updateState: (stateKey: tStateUnion, value: string | number | object) => void,
+  updateState: (stateKey: tStateUnion, value: string | number | object | boolean) => void,
 };
