@@ -35,6 +35,19 @@ const createTestUser = async () => ({
   website: faker.internet.domainName(),
 });
 
+const createLongPasswordTestUser = async () => ({
+  bio: faker.lorem.paragraphs(),
+  city: 'New York',
+  facebook: 'yes',
+  name: 'Test User Long Pass',
+  phone: faker.phone.phoneNumber(),
+  privateMemberships: faker.random.boolean(),
+  privateRSVP: false,
+  twitter: 'yes',
+  username: 'testLongPass',
+  website: faker.internet.domainName(),
+});
+
 exports.seed = async (knex: Knex) => {
   const fakeUsers = [];
 
@@ -44,6 +57,7 @@ exports.seed = async (knex: Knex) => {
 
   // testUser === user info for admin account
   fakeUsers.push(await createTestUser());
+  fakeUsers.push(await createLongPasswordTestUser());
 
   // we delete all rows from our tables to get a clean slate
   // if a previous migration or seed ran and it errored, you might to reset

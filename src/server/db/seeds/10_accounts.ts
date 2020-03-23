@@ -8,7 +8,7 @@ import {encrypt} from '../../utils/crypto';
 import {sha384} from '../../utils/sha';
 
 // in production, salt would be generated per hash, but this saves time
-const salt = bcrypt.genSaltSync(10);
+const salt = bcrypt.genSaltSync(12);
 
 const createUserAccount = async (i: number) => {
   const sha = sha384(faker.internet.password());
@@ -36,6 +36,19 @@ const createTestUserAccount = async () => {
   };
 };
 
+const createTestLongPassUserAccount = async () => {
+  const sha = sha384('👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩Morbi hendrerit, tortor et vehicula efficitur, metus lectus viverra felis. ');
+  const saltedHash = await bcrypt.hash(sha, salt);
+  const password = encrypt(saltedHash);
+
+  return {
+    login: 'testLongPassAccount',
+    password,
+    privateEmail: faker.random.boolean(),
+    userId: 101,
+  };
+};
+
 const createTestGroupAccount = async () => {
   const sha = sha384('testtesttest');
   const saltedHash = await bcrypt.hash(sha, salt);
@@ -58,6 +71,7 @@ exports.seed = async (knex: Knex) => {
 
   fakeAccounts.push(await createTestUserAccount());
   fakeAccounts.push(await createTestGroupAccount());
+  fakeAccounts.push(await createTestLongPassUserAccount());
 
   await knex('accounts').del();
   await knex('accounts').insert(fakeAccounts);

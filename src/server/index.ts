@@ -67,7 +67,6 @@ const opts = {
   cert: fs.readFileSync(cert),
 };
 
-// 0.0.0.0 is necessary for docker to work locally
 const httpsServer = https.createServer(opts, app.callback());
 httpsServer.listen(3001, '0.0.0.0' /* needs to be 0.0.0.0 for docker */, () => {
   loglevel.info('✅ https app running on port 3001 ✅');
