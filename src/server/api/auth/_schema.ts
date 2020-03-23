@@ -5,7 +5,7 @@ export const schema = Joi.object({
   id: Joi.number().integer().required(),
   isVerified: Joi.bool(),
   login: Joi.string().required(),
-  password: Joi.string().min(12).required(),
+  password: Joi.string().min(12).max(4096).required(),
   passwordResetExpires: Joi.date().timestamp().allow(null),
   passwordResetToken: Joi.date().timestamp().allow(null),
   privateEmail: Joi.bool(),

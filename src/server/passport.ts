@@ -27,7 +27,10 @@ passport.deserializeUser(async (account: tAccount, done) => {
 passport.use(new LocalStrategy(opts, async (login, pw, done) => {
   let account: tAccount;
   try {
-    account = await knex('accounts').limit(1).where({login}).first();
+    account = await knex('accounts')
+      .limit(1)
+      .where({login})
+      .first();
   } catch (err) {
     return done(err, false);
   }

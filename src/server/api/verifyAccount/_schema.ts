@@ -10,6 +10,6 @@ export const emailSchema = baseSchema.keys({
 
 export const tokenSchema = baseSchema.keys({
   login: Joi.string().required(),
-  password: Joi.string().min(12).required(),
+  password: Joi.string().min(12).max(4096).required(),
   token: Joi.string().hex().required(),
 });

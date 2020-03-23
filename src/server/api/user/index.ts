@@ -42,7 +42,6 @@ user.get(route, async (ctx: Koa.ParameterizedContext) => {
       .select(['email']);
   }
 
-  // const cleanedUser = await filterUserInfoFromClient([user]);
   ctx.body = {
     ...user,
     emails: emails.map(obj => obj.email),

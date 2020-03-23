@@ -2,6 +2,10 @@ import crypto from 'crypto';
 const { PEPPER } = process.env;
 const algo = 'AES-256-CTR';
 
+/**
+ * Base64 encrypt using our secret pepper and some random bytes
+ * @param input the string we want to encrypt. typically double-hashed pws
+ */
 export const encrypt = (input: string) => {
   const IV = Buffer.from(crypto.randomBytes(16));
   const cipher = crypto.createCipheriv(algo, PEPPER as string, IV);
@@ -11,6 +15,10 @@ export const encrypt = (input: string) => {
   return `${cipher.read()}!${IV.toString('base64')}`;
 };
 
+/**
+ * Base64 decrypt using our secret pepper and some random bytes
+ * @param input the string we want to decrypt. typically double-hashed encrypted pws
+ */
 export const decrypt = (input: string) => {
   let result;
   const [cipherText, IV] = input.split('!');

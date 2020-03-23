@@ -2,11 +2,15 @@ import bcrypt from 'bcryptjs';
 
 import { sha384 } from '.';
 
-// takes a text input (usually a password) and returned a salted hash
-export const saltedHash = async (plaintextPW: string) => {
+/**
+ * Convert our user's plaintext password into a bcrypt-safe sha384 hash
+ * Then we run bcrypt against the hash
+ * @param pw user provided plaintext password
+ */
+export const saltedHash = async (pw: string) => {
   // bycrypt truncates inputs over 72 bytes -
   // so this first hash just converts our string to a safe fixed length
-  const sha = sha384(plaintextPW);
+  const sha = sha384(pw);
 
   // 21 rounds before applying the salt to our now safe fixed length sha
   const salt = await bcrypt.genSalt(12);
