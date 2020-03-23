@@ -6,6 +6,8 @@ type tObjWithScore = {
 };
 
 type tOpts = {
+  // if dealing with a long list, we might want to pre-filter the results by some criteria
+  filterBy?: {key: string, value: string},
   input?: any[],
   key?: string,
   search?: string,
@@ -16,11 +18,15 @@ type tOpts = {
 // but can filter by any key, as long as the value is a string
 export const fuzzFilterList = (opts: tOpts) => {
   const {
+    filterBy = null,
     input = [],
     key = 'name',
     search = '',
   } = opts;
 
+  if (filterBy) {
+    input.filter(item => item[filterBy.key] === filterBy.value);
+  }
 
   return input
     .map(obj => {

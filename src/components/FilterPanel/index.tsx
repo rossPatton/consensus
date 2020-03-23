@@ -11,7 +11,7 @@ const FilterPanel = memo((props: tProps) => (
       <input
         spellCheck
         type="search"
-        id="searchFilter"
+        id={props.id || 'searchFilter'}
         className="bgGrey1 row"
         onChange={props.onSearchChange}
         placeholder={props.placeholder || 'Filter all results'}

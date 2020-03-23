@@ -34,6 +34,9 @@ exports.up = async (knex: Knex) => {
     table.string('region')
       .notNullable()
       .defaultTo('New York');
+    table.string('regionCode')
+      .notNullable()
+      .defaultTo('NY');
   });
 };
 

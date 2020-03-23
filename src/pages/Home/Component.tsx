@@ -19,7 +19,7 @@ export const HomeComponent = memo((props: tComponentProps) => (
         className="br4 brdA1 dInBl p2 fs5 fw600 noUnderline mB4"
         to={props.isLoading
           ? '/directory/us/'
-          : `/directory/us/${props.geo.state}/${props.geo.handle}`}>
+          : `/directory/us/${props.geo.region}/${props.geo.handle}`}>
             Join a group {props.isLoading
           ? 'near you'
           : `in ${props.geo.city}`}

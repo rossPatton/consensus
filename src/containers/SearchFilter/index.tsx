@@ -30,6 +30,7 @@ export default class SearchFilter extends Component<tProps, tState> {
     if (!search) return this.props.items;
 
     return fuzzFilterList({
+      filterBy: this.props.filterBy,
       input: this.props.items || [],
       key: this.state.searchKey,
       search,

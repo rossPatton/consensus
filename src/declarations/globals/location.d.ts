@@ -24,6 +24,7 @@ declare type tEventParams = Readonly<{
 declare type tGeo = Readonly<{
   city: string,
   handle: string,
-  state: string,
   postcode: number,
+  region: string,
+  regionCode: string,
 }>;

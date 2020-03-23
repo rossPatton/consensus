@@ -16,7 +16,7 @@ declare type tRoleFilterProps = Readonly<{
 
 declare type tSearchFilterProps = Readonly<{
   items: any[],
-  onFilterOptionChange: tSelectChange,
+  onFilterOptionChange?: tSelectChange,
   onSearchChange: tInputChange,
 }>;
 

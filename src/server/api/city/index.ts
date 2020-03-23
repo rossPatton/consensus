@@ -12,7 +12,6 @@ const route = '/api/v1/city';
 
 city.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tDirectoryParams = _.get(ctx, 'state.locals.data', {});
-
   await validateSchema<tDirectoryParams>(ctx, schema, query);
 
   const {

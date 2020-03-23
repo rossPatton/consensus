@@ -1,6 +1,7 @@
 export type tProps = {
   className?: string,
   filterOptions?: {key: string, display: string}[],
+  id?: string,
   memberName?: string,
   modName?: string,
   onCategoryChange?: (ev: React.ChangeEvent<HTMLSelectElement>) => void,

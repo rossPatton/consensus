@@ -23,7 +23,6 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
           <input
             id={props.id}
             name={name}
-            maxLength={72}
             autoComplete={props.newPassword ? 'new-password' : 'on'}
             required={props.required}
             placeholder={props.placeholder}

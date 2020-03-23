@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import _ from 'lodash';
 import React, {memo} from 'react';
 
@@ -29,7 +30,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           id="nameInput"
           name="name"
           className="row"
-          onChange={ev => props.updateState('name', ev)}
+          onChange={ev => props.updateState('name', ev.currentTarget.value)}
           placeholder="Your group name here"
           value={props.name}
         />
@@ -39,14 +40,14 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
       </h2>
       <label htmlFor="handleInput" className="mB4">
         <p className="fs5 copyBlack mB1">
-          What will your group&apos;s consensus url be? Must be unique. Think carefully, you won&apos;t be able to change this!
+          What will your group&apos;s url be? Must be unique. Only lowercase letters, numbers, and dashes(-) allowed. Think carefully, you won&apos;t be able to change this!
         </p>
         <input
           required
           id="handleInput"
           name="handle"
           className="row"
-          onChange={ev => props.updateState('handle', ev)}
+          onChange={ev => props.updateState('handle', ev.currentTarget.value)}
           placeholder={slugify(props.name)}
           value={props.handle || slugify(props.name)}
         />
@@ -56,13 +57,14 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
       </h2>
       <label htmlFor="categoryInput" className="mB4">
         <p className="fs5 copyBlack mB1">
-          What category most closely matches your group? You can always change later. PS: more categories are in the works!
+          What category most closely matches your group? You can always change it later. PS: more categories are in the works!
         </p>
         <select
+          required
           className="mB4 row bgWhite"
           defaultValue={props.category}
-          onBlur={ev => props.updateState('category', ev)}
-          onChange={ev => props.updateState('category', ev)}>
+          onBlur={ev => props.updateState('category', ev.currentTarget.value)}
+          onChange={ev => props.updateState('category', ev.currentTarget.value)}>
           {categories.map(({display}) => (
             <option key={display} value={display}>
               {display}
@@ -82,8 +84,8 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           id="groupTypeSelect"
           className="mB1 row bgWhite"
           value={props.type}
-          onBlur={ev => props.updateState('type', ev)}
-          onChange={ev => props.updateState('type', ev)}>
+          onBlur={ev => props.updateState('type', ev.currentTarget.value)}
+          onChange={ev => props.updateState('type', ev.currentTarget.value)}>
           <option value="public">
             Public
           </option>
@@ -104,20 +106,82 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
       <h2 className="fs5 mB1 lh1">
         City
       </h2>
-      <label htmlFor="cityInput" className="mB4">
-        <p className="fs5 copyBlack mB1">
-          All groups on Consensus are currently local, city-based organizations.
-        </p>
-        <input
-          required
-          id="cityInput"
-          name="city"
-          className="row"
-          onChange={ev => props.updateState('city', ev)}
-          placeholder="The city your organization is located in"
-          value={props.city}
-        />
-      </label>
+      <p className="fs5 copyBlack mB1">
+        All groups on Consensus are currently local, city-based organizations.
+      </p>
+      <div className="mB4">
+        {!props.city && (
+          <label htmlFor="cityInput" className="dBl">
+            <input
+              required
+              id="cityInput"
+              name="city"
+              className="row"
+              onChange={ev => {
+                props.updateState('citySearch', ev.currentTarget.value);
+                props.onSearchChange(ev);
+              }}
+              placeholder="The city your organization is located in"
+              value={props.citySearch}
+            />
+          </label>
+        )}
+        {props.city && (
+          <div className="brdA1 p3 black bgWhite hvrBgGrey1">
+            <b>{props.city}</b>, <span className="dInBl mR3">{props.region}</span>
+            <button
+              type="button"
+              onClick={() => {
+                props.updateState(null, {
+                  city: '',
+                  cityId: '',
+                  citySearch: '',
+                  region: '',
+                  regionId: '',
+                });
+              }}>
+              Not the right city?
+            </button>
+          </div>
+        )}
+        {props.citySearch
+        && props.items.length > 0
+        && (
+          <ul
+            className="bgWhite ovfScr ovrTouch p3 bxSh1"
+            style={{
+              maxHeight: '200px',
+              maxWidth: '760px',
+            }}>
+            {props.items.map((city: tCity, i) => (
+              <li
+                key={i}
+                className={cx({
+                  'pT2 pB2 fs6 black': true,
+                  brdB1: props.items.length - 1 !== i,
+                })}>
+                <button
+                  type="button"
+                  className="hvrBgGrey1"
+                  onClick={() => {
+                    props.updateState(null, {
+                      city: city.name,
+                      cityId: city.id,
+                      citySearch: '',
+                      region: city.region,
+                      regionId: city.regionId,
+                    });
+                  }}>
+                  <span className="dInBl mR2 fw600">
+                    {city.name},
+                  </span>
+                  {city.region}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
       <h2 className="fs5 mB1 lh1">
         Group Login
       </h2>
@@ -130,7 +194,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           id="loginInput"
           name="login"
           className="row"
-          onChange={ev => props.updateState('login', ev)}
+          onChange={ev => props.updateState('login', ev.currentTarget.value)}
           placeholder="YourSecretGroupLoginHere"
           value={props.login}
         />
@@ -140,7 +204,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
         newPassword
         id="password"
         title="Group Password"
-        onChange={ev => props.updateState('password', ev)}
+        onChange={ev => props.updateState('password', ev.currentTarget.value)}
         placeholder="Your organization's password here"
         password={props.password}
       />

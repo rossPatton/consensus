@@ -1,7 +1,7 @@
-import qs from 'query-string';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
+import {SearchFilter} from '../../../../containers';
 import {getCities, postGroup} from '../../../../redux';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {OrgSignupComponent} from './Component';
@@ -10,21 +10,20 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
     if (!props.citiesThunk.fetched) {
-      props.getCitiesDispatch();
+      props.getCitiesDispatch({region: props.geo.region});
     }
-
-    const location = qs.parse(props.location.search.split('?')[1]);
 
     this.state = {
       category: 'Political',
-      city: location.city as string,
-      cityId: parseInt(location.cityId as string, 10),
+      city: '',
+      cityId: null,
+      citySearch: '',
       handle: '',
       login: '',
       name: '',
       password: '',
-      region: location.region as string,
-      regionId: parseInt(location.regionId as string, 10),
+      region: '',
+      regionId: null,
       type: 'public' as tPrivacyEnum,
     };
   }
@@ -35,9 +34,13 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
     this.props.postGroupDispatch(newGroup);
   }
 
-  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
+  updateState = (stateKey: tStateUnion, value: string | number | object) => {
+    if (typeof value === 'object') {
+      this.setState(value);
+    }
+
     this.setState({
-      [stateKey]: ev.currentTarget.value,
+      [stateKey]: value,
     } as Pick<tState, tStateUnion>);
   }
 
@@ -55,6 +58,7 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
       type,
     } = this.state;
 
+    const handleLimiterRe = /[^a-z0-9-]/;
     const disabled = !category
       || !city
       || !cityId
@@ -64,26 +68,35 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
       || !password
       || !region
       || !regionId
-      || !type;
+      || !type
+      || handleLimiterRe.test(handle);
 
     return (
-      <OrgSignupComponent
-        {...this.props}
-        {...this.state}
-        disabled={disabled}
-        onSubmit={this.onSubmit}
-        updateState={this.updateState}
+      <SearchFilter
+        searchKey="name"
+        items={this.props.citiesThunk.data}
+        render={searchProps => (
+          <OrgSignupComponent
+            {...this.props}
+            {...this.state}
+            {...searchProps}
+            disabled={disabled}
+            onSubmit={this.onSubmit}
+            updateState={this.updateState}
+          />
+        )}
       />
     );
   }
 }
 
-const mapStateToProps = (store: {cities: tThunk<tCity[]>}) => ({
+const mapStateToProps = (store: {geo: tThunk<tGeo>, cities: tThunk<tCity[]>}) => ({
   citiesThunk: store.cities,
+  geo: store.geo.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getCitiesDispatch: () => dispatch(getCities()),
+  getCitiesDispatch: (query: any) => dispatch(getCities(query)),
   postGroupDispatch: (org: tGroupQuery) => dispatch(postGroup(org)),
 });
 
