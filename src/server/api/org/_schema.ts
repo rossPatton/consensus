@@ -22,7 +22,7 @@ export const postSchema = schema.keys({
     Joi.string().allow('Political', 'Cooperative', 'Community', 'Union').required(),
   city: Joi.string().required(),
   cityId: Joi.number().integer().required(),
-  handle: Joi.string().regex(/[^a-z0-9-]/).required(),
+  handle: Joi.string().regex(/[a-z0-9-]/).required(),
   login: Joi.string().required(),
   name: Joi.string().required(),
   password: Joi.string().required(),

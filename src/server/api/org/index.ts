@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import {groupKeys} from '../_constants';
 import {knex} from '../../db/connection';
-import {validateSchema} from '../../utils';
+import {encrypt, saltedHash, validateSchema} from '../../utils';
 import {patchSchema, postSchema, schema} from './_schema';
 
 export const org = new Router();
@@ -53,21 +53,40 @@ org.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
 org.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...group} = _.get(ctx, dataPath, {});
+  console.log('group => ', group);
   await validateSchema<tGroupQuery>(ctx, postSchema, group);
 
-  // create the cooresponding account first =>
-  // try {
-  //   await knex('accounts').insert(group).returning(groupKeys);
-  // } catch (err) {
-  //   return ctx.throw(400, err);
-  // }
+  const {login, password, ...groupToInsert} = group;
 
-  // let newGroup = {} as tGroup;
-  // try {
-  //   newGroup = await knex(table).insert(group).returning(groupKeys);
-  // } catch (err) {
-  //   return ctx.throw(500, err);
-  // }
+  // create the group first =>
+  let newGroupReturning = [] as tGroup[];
+  try {
+    newGroupReturning = await knex(table)
+      .insert(groupToInsert)
+      .returning('*');
+  } catch (err) {
+    return ctx.throw(500, err);
+  }
 
-  ctx.body = {ok: true}; // newGroup;
+  let hashedPW = null;
+  try {
+    hashedPW = await saltedHash(group.password);
+  } catch (err) {
+    return ctx.throw(500, err);
+  }
+
+  const newGroup = newGroupReturning[0];
+
+  // then the cooresponding account for login
+  try {
+    await knex('accounts').insert({
+      login: group.login,
+      orgId: newGroup.id,
+      password: encrypt(hashedPW),
+    });
+  } catch (err) {
+    return ctx.throw(500, err);
+  }
+
+  ctx.body = newGroup;
 });

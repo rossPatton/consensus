@@ -14,7 +14,7 @@ exports.up = async (knex: Knex) => {
     table.increments().unsigned().primary();
 
     // user-input about what the group does
-    table.text('description', 'longtext').notNullable();
+    table.text('description', 'longtext').defaultTo('').notNullable();
 
     // name of the group
     table.string('name').notNullable().unique();

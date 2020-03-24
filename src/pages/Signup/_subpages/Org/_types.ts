@@ -22,6 +22,7 @@ export type tContainerProps = {
   geo: tGeo,
   getCitiesDispatch: (query?: {region: string}) => tThunkPayload<tCity[]>,
   location: Location,
+  loginDispatch: (query: tLoginQuery) => tThunkPayload<tAccount>,
   postGroupDispatch: (query: tGroupQuery) => tThunkPayload<tGroup>,
 };
 

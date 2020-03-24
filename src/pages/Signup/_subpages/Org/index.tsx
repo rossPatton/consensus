@@ -1,8 +1,9 @@
+import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {GenericLoader} from '../../../../containers';
-import {getCities, postGroup} from '../../../../redux';
+import {getCities, login, postGroup} from '../../../../redux';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {OrgSignupComponent} from './Component';
 
@@ -30,13 +31,20 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
 
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const newGroup = {...this.state};
-    this.props.postGroupDispatch(newGroup);
+    const {showRegionField, ...newGroup} = this.state;
+    this.props.postGroupDispatch(newGroup)
+      .then(() =>
+        this.props.loginDispatch({
+          username: newGroup.login,
+          password: newGroup.password,
+        }))
+      .catch(loglevel.error);
   }
 
   updateState = (stateKey: tStateUnion, value: string | number | object | boolean) => {
+    // if making multiple changes at once, don't update at end
     if (typeof value === 'object') {
-      this.setState(value);
+      return this.setState(value);
     }
 
     if (stateKey === 'region'
@@ -64,7 +72,8 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
       type,
     } = this.state;
 
-    const handleLimiterRe = /[^a-z0-9-]/;
+    console.log('all state for group signup => ', this.state);
+
     const disabled = !category
       || !city
       || !cityId
@@ -72,10 +81,11 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
       || !login
       || !name
       || !password
+      || password.length < 12
       || !region
       || !regionId
-      || !type
-      || handleLimiterRe.test(handle);
+      || !type;
+    console.log('disabled => ', disabled);
 
     return (
       <GenericLoader
@@ -102,6 +112,7 @@ const mapStateToProps = (store: {geo: tThunk<tGeo>, cities: tThunk<tCity[]>}) =>
 
 const mapDispatchToProps = (dispatch: Function) => ({
   getCitiesDispatch: (query: any) => dispatch(getCities(query)),
+  loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
   postGroupDispatch: (org: tGroupQuery) => dispatch(postGroup(org)),
 });
 

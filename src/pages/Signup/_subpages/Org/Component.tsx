@@ -32,11 +32,11 @@ export const OrgSignupComponent = memo((props: tComponentProps) => {
           <h2 className="mB4">New Group</h2>
         </legend>
         <h2 className="fs5 mB1 lh1">
-        Group Name
+          Group Name
         </h2>
         <label htmlFor="nameInput" className="mB4">
           <p className="fs5 copyBlack mB1">
-          What&apos;s your group&apos;s name? Think carefully, you won&apos;t be able to change this!
+            What&apos;s your group&apos;s name? Think carefully, you won&apos;t be able to change this!
           </p>
           <input
             required
@@ -49,28 +49,41 @@ export const OrgSignupComponent = memo((props: tComponentProps) => {
           />
         </label>
         <h2 className="fs5 mB1 lh1">
-        Group Handle
+          Group Handle
         </h2>
         <label htmlFor="handleInput" className="mB4">
           <p className="fs5 copyBlack mB1">
-          What will your group&apos;s url be? Only lowercase letters, numbers, and dashes(-) allowed. Think carefully, you won&apos;t be able to change this!
+            What will your group&apos;s url be? Only lowercase letters, numbers, and dashes(-) allowed. Think carefully, you won&apos;t be able to change this!
           </p>
-          <input
-            required
-            id="handleInput"
-            name="handle"
-            className="row"
-            onChange={ev => props.updateState('handle', ev.currentTarget.value)}
-            placeholder={slugify(props.name)}
-            value={props.handle || slugify(props.name)}
-          />
+          <div className="fx">
+            <input
+              required
+              id="handleInput"
+              name="handle"
+              className="row mR3"
+              autoComplete="off"
+              onChange={ev =>
+                props.updateState('handle', slugify(ev.currentTarget.value))
+              }
+              placeholder="your-easily-shareable-group-url"
+              value={props.handle}
+            />
+            <button
+              type="button"
+              className="p3"
+              onClick={() => {
+                props.updateState('handle', slugify(props.name));
+              }}>
+              Make URL from group name
+            </button>
+          </div>
         </label>
         <h2 className="fs5 mB1 lh1">
-        Group Category
+          Group Category
         </h2>
         <label htmlFor="categoryInput" className="mB4">
           <p className="fs5 copyBlack mB1">
-          What category most closely matches your group? You can always change it later. PS: more categories are in the works!
+            What category most closely matches your group? You can always change it later. P.S., more categories are in the works!
           </p>
           <select
             required
@@ -86,11 +99,11 @@ export const OrgSignupComponent = memo((props: tComponentProps) => {
           </select>
         </label>
         <h2 className="fs5 mB1 lh1">
-        Group Type
+          Group Type
         </h2>
         <label htmlFor="groupTypeSelect">
           <p className="fs5 copyBlack mB1">
-          Is anyone free to join your group, or do you want to be able to vet membership?
+            Is anyone free to join your group, or do you want to be able to vet membership?
           </p>
           <select
             name="type"
@@ -119,12 +132,9 @@ export const OrgSignupComponent = memo((props: tComponentProps) => {
         {props.showRegionField && (
           <>
             <h2 className="fs5 mB1 lh1">
-            Pick a different State
+              Pick a different state
             </h2>
             <label htmlFor="stateSelect">
-              <p className="fs5 copyBlack mB1">
-              Is anyone free to join your group, or do you want to be able to vet membership?
-              </p>
               <select
                 name="type"
                 id="stateSelect"
@@ -142,7 +152,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => {
           </>
         )}
         <h2 className="fs5 mB1 lh1">
-        City in <span className="dInBl mR2">
+          City in <span className="dInBl mR2">
             {(!props.showRegionField && props.geo.region) && props.geo.region}
             {(props.showRegionField && props.region) && props.region}
           </span>
@@ -152,12 +162,12 @@ export const OrgSignupComponent = memo((props: tComponentProps) => {
               onClick={() =>
                 props.updateState('showRegionField', !props.showRegionField)
               }>
-            Not the right state?
+              Not the right state?
             </button>
           )}
         </h2>
         <p className="fs5 copyBlack mB1">
-        All groups on Consensus are currently local, city-based organizations.
+          All groups on Consensus are currently local, city-based organizations.
         </p>
         <div className="mB4">
           {!props.cityId && (
@@ -184,8 +194,6 @@ export const OrgSignupComponent = memo((props: tComponentProps) => {
                   props.updateState(null, {
                     city: '',
                     cityId: '',
-                    region: '',
-                    regionId: '',
                   });
                 }}>
                 Not the right city?
@@ -194,7 +202,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => {
           )}
         </div>
         <h2 className="fs5 mB1 lh1">
-        Group Login
+          Group Login
         </h2>
         <label htmlFor="loginInput" className="mB4">
           <p className="fs5 copyBlack mB1">
@@ -205,6 +213,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => {
             id="loginInput"
             name="login"
             className="row"
+            autoComplete="off"
             onChange={ev => props.updateState('login', ev.currentTarget.value)}
             placeholder="YourSecretGroupLoginHere"
             value={props.login}
@@ -223,7 +232,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => {
           <button
             disabled={props.disabled}
             className="p3 pL4 pR4 hvrBgGrey1 trans1">
-          Create Group!
+            Create Group!
           </button>
         </div>
       </fieldset>
