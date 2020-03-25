@@ -2,11 +2,10 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {userKeys} from '../_constants';
+import {accountKeys, userKeys} from '../_constants';
 import {knex} from '../../db/connection';
 import {
   encrypt,
-  // filterUserInfoFromClient,
   isValidPw,
   saltedHash,
   validateSchema,
@@ -49,12 +48,26 @@ user.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 // user signup form basically
-// TODO handle the user/account split on signup, set max password length (72)
 user.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tUserPostServerQuery = _.get(ctx, dataPath, {});
+  const {isFormSubmit, ...query}: tUserPostServerQuery = _.get(ctx, dataPath, {});
   await validateSchema<tUserPostServerQuery>(ctx, postSchema, query);
 
-  const pwInput = query.password;
+  // since we don't require any user info to signup, just insert a blank new row
+  let userResult = [] as tUser[];
+  try {
+    userResult = await knex('users')
+      .insert({})
+      .returning(userKeys);
+  } catch (err) {
+    return ctx.throw(500, err);
+  }
+
+  if (!userResult || userResult.length === 0) {
+    ctx.throw(500, 'Failed to insert user into db');
+  }
+
+  const {login, password} = query;
+  const pwInput = password;
   let hashedPW: string = '';
   try {
     hashedPW = await saltedHash(pwInput);
@@ -62,42 +75,24 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  let userResult: tUser[] = [];
-  try {
-    const {email, username} = query;
-    userResult = await knex('users')
-      .insert({email, username})
-      .returning(userKeys);
-  } catch (err) {
-    return ctx.throw(500, err);
-  }
-
-  if (!userResult || userResult.length === 0) {
-    ctx.throw(400, 'Failed to insert user into db');
-  }
-
-  const {login} = query;
-  const password = encrypt(hashedPW);
-  const user = userResult[0];
-
-  // after we update users, we save login specific stuff to the accounts table
-  let userAccount: tAccount[] = [];
+  // save account info, then login user (either by redirect or client side login)
+  let userAccount = [] as tAccount[];
   try {
     userAccount = await knex('accounts')
       .limit(1)
-      .insert({login, password, userId: user.id})
-      .returning('*');
+      .insert({
+        login,
+        isNew: true,
+        password: encrypt(hashedPW),
+        userId: userResult[0].id,
+      })
+      .returning(accountKeys);
   } catch (err) {
     return ctx.throw(500, err);
   }
 
-  if (!query.isFormSubmit) {
-    const body: tAccount = userAccount[0];
-    ctx.body = body;
-    return;
-  }
-
-  ctx.redirect('/login');
+  if (isFormSubmit) return ctx.redirect('/login');
+  ctx.body = userResult[0];
 });
 
 // TODO no-js forms only do GET/POST - implement upsert

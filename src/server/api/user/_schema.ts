@@ -7,10 +7,9 @@ export const getSchema = Joi.object().keys({
 
 // post new user, ie user signup form
 export const postSchema = Joi.object().keys({
-  email: Joi.string().email().optional(),
+  isFormSubmit: Joi.bool(),
   login: Joi.string().required(),
-  username: Joi.string().required(),
-  password: Joi.string().required(),
+  password: Joi.string().required().min(12),
 });
 
 export const patchSchema = Joi.object().keys({
@@ -21,9 +20,10 @@ export const patchSchema = Joi.object().keys({
   email: Joi.string().email(),
   facebook: Joi.string(),
   id: Joi.number().integer().required(),
+  isNew: Joi.bool(),
   language: Joi.string().alphanum().max(2),
   name: Joi.string(),
-  password: Joi.string().required(),
+  password: Joi.string().min(12).max(4096).required(),
   phone: Joi.string(),
   privateEmail: Joi.bool(),
   privateMemberships: Joi.bool(),
@@ -31,7 +31,6 @@ export const patchSchema = Joi.object().keys({
   username: Joi.string(),
   twitter: Joi.string(),
   website: Joi.string(),
-
   created_at: Joi.date().timestamp(),
   updated_at: Joi.date().timestamp(),
 });

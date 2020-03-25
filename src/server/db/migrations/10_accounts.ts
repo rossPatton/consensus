@@ -7,6 +7,9 @@ exports.up = async (knex: Knex) => {
     table.string('login').notNullable().unique();
     table.string('password').notNullable();
 
+    // when new user or group first sign in, use this flag to display certain messages
+    table.boolean('isNew').notNullable().defaultTo(true);
+
     // if user type
     table.integer('userId')
       .unique()

@@ -186,7 +186,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => {
             </select>
           )}
           {props.cityId && (
-            <div className="brdA1 p3 black bgWhite br8 dInBl">
+            <div className="brdA1 p3 black br8 dInBl">
               <b>{props.city}</b>, <span className="dInBl mR3">{props.region}</span>
               <button
                 type="button"

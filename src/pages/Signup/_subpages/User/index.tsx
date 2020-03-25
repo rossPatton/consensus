@@ -46,12 +46,10 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
     const { errors, isClient, ...state } = this.state;
 
     // add user to db, and log them in on success
-    await this.props.postUser(state);
+    await this.props.postUserDispatch(state);
 
     const {login, password} = this.state;
-
-    // has to be called username here, or passport will fail with no err
-    return this.props.authenticateSession({username: login, password});
+    return this.props.loginDispatch({username: login, password});
   }
 
   updateState = (stateKey: tKeyUnion, ev: React.ChangeEvent<any>) => {
@@ -77,8 +75,8 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
 }
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  authenticateSession: (query: tLoginQuery) => dispatch(login(query)),
-  postUser: (user: tPostUserQuery) => dispatch(postUser(user)),
+  loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
+  postUserDispatch: (user: tPostUserQuery) => dispatch(postUser(user)),
 });
 
 export const UserSignup = connect(

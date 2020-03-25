@@ -22,8 +22,8 @@ export type tState = {
 export type tKeyUnion = keyof tState;
 
 export type tContainerProps = {
-  authenticateSession: (query: tLoginQuery) => tThunkPayload<tSession>,
-  postUser: (query: tPostUserQuery) => tThunkPayload<tSession>,
+  loginDispatch: (query: tLoginQuery) => tThunkPayload<tSession>,
+  postUserDispatch: (query: tPostUserQuery) => tThunkPayload<tSession>,
 };
 
 export type tComponentProps = tContainerProps & tState & {

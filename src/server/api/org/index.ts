@@ -53,7 +53,6 @@ org.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
 org.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...group} = _.get(ctx, dataPath, {});
-  console.log('group => ', group);
   await validateSchema<tGroupQuery>(ctx, postSchema, group);
 
   const {login, password, ...groupToInsert} = group;
@@ -62,7 +61,7 @@ org.post(route, async (ctx: Koa.ParameterizedContext) => {
   let newGroupReturning = [] as tGroup[];
   try {
     newGroupReturning = await knex(table)
-      .insert(groupToInsert)
+      .insert({isNew: true, ...groupToInsert})
       .returning('*');
   } catch (err) {
     return ctx.throw(500, err);

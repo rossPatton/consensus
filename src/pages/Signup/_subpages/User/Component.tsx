@@ -27,6 +27,7 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
           required
           id="loginInput"
           name="login"
+          autoComplete="off"
           placeholder="yourSecretNameForLoggingIn"
           value={props.login}
           onChange={ev => props.updateState('login', ev)}

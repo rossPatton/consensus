@@ -1,4 +1,3 @@
-import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
@@ -29,16 +28,14 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
     };
   }
 
-  onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+  onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const {showRegionField, ...newGroup} = this.state;
-    this.props.postGroupDispatch(newGroup)
-      .then(() =>
-        this.props.loginDispatch({
-          username: newGroup.login,
-          password: newGroup.password,
-        }))
-      .catch(loglevel.error);
+    await this.props.postGroupDispatch(newGroup);
+    await this.props.loginDispatch({
+      username: newGroup.login,
+      password: newGroup.password,
+    });
   }
 
   updateState = (stateKey: tStateUnion, value: string | number | object | boolean) => {
@@ -72,8 +69,6 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
       type,
     } = this.state;
 
-    console.log('all state for group signup => ', this.state);
-
     const disabled = !category
       || !city
       || !cityId
@@ -85,7 +80,6 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
       || !region
       || !regionId
       || !type;
-    console.log('disabled => ', disabled);
 
     return (
       <GenericLoader
