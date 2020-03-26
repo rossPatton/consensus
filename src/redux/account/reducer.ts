@@ -4,6 +4,7 @@ import { PATCH_FAILURE, PATCH_SUCCESS } from './patch/_types';
 
 const initialState: tThunk<tSession> = {
   error: null,
+  fetched: false,
   isLoading: true,
   data: {} as tSession,
 };
@@ -17,6 +18,7 @@ export const accountReducer = (state = initialState, action: tAccountActionUnion
 
   const successReturn = {
     ...state,
+    fetched: true,
     data: action.payload,
     isLoading: false,
   };

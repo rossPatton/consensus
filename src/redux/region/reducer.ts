@@ -3,6 +3,7 @@ import { GET_FAILURE, GET_SUCCESS } from './get/_types';
 
 const initialState: tThunk<tRegion> = {
   error: null,
+  fetched: true,
   isLoading: true,
   data: {} as tRegion,
 };
@@ -19,6 +20,7 @@ export const regionReducer = (state = initialState, action: tRegionActionUnion) 
   case GET_SUCCESS:
     return {
       ...state,
+      fetched: true,
       data: action.payload,
       isLoading: false,
     };

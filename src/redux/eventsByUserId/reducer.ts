@@ -3,6 +3,7 @@ import { GET_FAILURE, GET_SUCCESS } from './get/_types';
 
 const initialState: tThunk<tEvent[]> = {
   error: null,
+  fetched: false,
   isLoading: true,
   data: [] as tEvent[],
 };
@@ -19,6 +20,7 @@ export const eventsByUserIdReducer = (state = initialState, action: tActionUnion
   case GET_SUCCESS:
     return {
       ...state,
+      fetched: true,
       data: action.payload,
       isLoading: false,
     };

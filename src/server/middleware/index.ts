@@ -11,6 +11,7 @@ import { featurePolicyMiddleware } from './featurePolicy';
 import { helmetMiddleware } from './helmet';
 import { loggerMiddleware } from './logger';
 import { normalizeFormMiddleware } from './normalizeForm';
+import { rateLimiterMiddleware } from './rateLimiter';
 import { redirectTrailingSlashMiddleware } from './redirectTrailingSlash';
 import { referrerPolicyMiddleware } from './referrerPolicy';
 import { responseTimeHeaderMiddleware } from './responseTimeHeader';
@@ -23,6 +24,7 @@ export const setupMiddleware = (app: Koa) => {
   compressionMiddleware(app);
 
   // security stuff
+  rateLimiterMiddleware(app);
   corsMiddleware(app);
   sslMiddleware(app);
   helmetMiddleware(app);

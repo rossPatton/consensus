@@ -2,7 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {accountKeys, userKeys} from '../_constants';
+import {userKeys} from '../_constants';
 import {knex} from '../../db/connection';
 import {
   encrypt,
@@ -76,17 +76,15 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
   }
 
   // save account info, then login user (either by redirect or client side login)
-  let userAccount = [] as tAccount[];
   try {
-    userAccount = await knex('accounts')
+    await knex('accounts')
       .limit(1)
       .insert({
         login,
         isNew: true,
         password: encrypt(hashedPW),
         userId: userResult[0].id,
-      })
-      .returning(accountKeys);
+      });
   } catch (err) {
     return ctx.throw(500, err);
   }

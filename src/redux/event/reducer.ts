@@ -5,6 +5,7 @@ import { POST_FAILURE, POST_SUCCESS } from './post/_types';
 
 const initialState: tThunk<tEvent> = {
   error: null,
+  fetched: false,
   isLoading: true,
   data: {} as tEvent,
 };
@@ -18,6 +19,7 @@ export const eventReducer = (state = initialState, action: tActionUnion) => {
 
   const successReturn = {
     ...state,
+    fetched: true,
     data: action.payload,
     isLoading: false,
   };

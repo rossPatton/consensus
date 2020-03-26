@@ -3,6 +3,7 @@ import { GET_FAILURE, GET_SUCCESS } from './get/_types';
 
 const initialState: tThunk<tGroup[]> = {
   error: null,
+  fetched: false,
   isLoading: true,
   data: [] as tGroup[],
 };
@@ -13,6 +14,7 @@ export const orgsReducer = (state = initialState, action: tActionUnion) => {
   case GET_SUCCESS:
     return {
       ...state,
+      fetched: true,
       data: action.payload,
       isLoading: false,
     };

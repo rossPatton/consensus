@@ -5,6 +5,7 @@ import { POST_FAILURE, POST_SUCCESS } from './post/_types';
 
 const initialState: tThunk<tGroup> = {
   error: null,
+  fetched: false,
   isLoading: true,
   data: {} as tGroup,
 };
@@ -18,6 +19,7 @@ export const orgReducer = (state = initialState, action: tGroupActionUnion) => {
 
   const successReturn = {
     ...state,
+    fetched: true,
     data: action.payload,
     isLoading: false,
   };
