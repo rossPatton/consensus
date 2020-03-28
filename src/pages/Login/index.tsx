@@ -57,7 +57,12 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
             isLoading={session.isLoading}
             render={() => (
               <>
-                {session.data.isAuthenticated && (
+                {session.data.isNew
+                  && session.data.isAuthenticated && (
+                  <Redirect to="/admin/profile/edit" />
+                )}
+                {!session.data.isNew
+                  && session.data.isAuthenticated && (
                   <Redirect to="/admin/meetings" />
                 )}
                 {!session.data.isAuthenticated && (

@@ -16,7 +16,8 @@ export type tStore = {
 export type tContainerProps = tProps & {
   deleteEventDispatch: (query: tIdQuery) => tThunkPayload,
   session: tSession,
-  type?: 'drafts' | 'events',
+  // admin drafts vs plain events vs user meeting RSVPs
+  type?: 'drafts' | 'events' | 'rsvps',
 };
 
 export type tComponentProps = tProps & {

@@ -21,5 +21,6 @@ declare type tUser = Readonly<{
 
 // getting/posting/deleting users by org membership
 declare type tUserQuery = Partial<tUser> & tFormSubmit & tBaseQuery & Readonly<{
+  isNew?: boolean,
   password?: string,
 }>;

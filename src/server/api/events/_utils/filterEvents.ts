@@ -1,6 +1,6 @@
 import Koa from 'koa';
 
-import {notNull} from '../../../../utils/notNull';
+import {notNull} from '../../../../utils/nulls';
 
 // this is a server util, because we want to make sure that events get filtered
 // before returning them to the client

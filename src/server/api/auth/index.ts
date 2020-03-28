@@ -22,7 +22,13 @@ auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
     await ctx.login(account);
 
     const {isFormSubmit} = query;
-    if (isFormSubmit) return ctx.redirect('/admin/meetings');
+    if (isFormSubmit) {
+      if (account.isNew) {
+        return ctx.redirect('/admin/profile');
+      }
+      return ctx.redirect('/admin/meetings');
+
+    }
 
     const session = await getSession(ctx, account);
     ctx.body = session.data;

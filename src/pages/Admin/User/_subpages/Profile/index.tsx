@@ -6,16 +6,14 @@ import {connect} from 'react-redux';
 import {Helmet} from '../../../../../components';
 import {ErrorBoundary, GenericLoader} from '../../../../../containers';
 import {login, patchUser} from '../../../../../redux';
-import {tContainerProps, tState, tStateUnion, tStore} from './_types';
+import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
 import {ProfileComponent} from './Component';
 
 const initialState = {
   bio: '',
   email: '',
-  isLocked: true,
   name: '',
   password: '',
-  privateEmail: true,
   privateMemberships: false,
   privateRSVP: false,
   username: '',
@@ -29,13 +27,9 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       _.get(props, 'sessionThunk.data.profile', null);
 
     if (user) {
-      // @TODO implement multiple emails per account
-      const email = _.get(props, 'sessionThunk.data.emails[0].email', '');
-
       this.state = {
         ...initialState,
         ...user,
-        email,
       };
     } else {
       this.state = initialState;
@@ -68,15 +62,10 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       loglevel.error(err);
     }
 
-    this.setState({isLocked: true, password: ''});
+    this.setState({password: ''});
   }
 
-  toggleLock = () =>
-    this.setState({
-      isLocked: !this.state.isLocked,
-    });
-
-  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
+  updateState = (stateKey: tKeyUnion, ev: React.ChangeEvent<any>) => {
     if (!stateKey) return;
 
     let {value} = ev.currentTarget;
@@ -86,11 +75,13 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
 
     this.setState({
       [stateKey]: value,
-    } as Pick<tState, tStateUnion>);
+    } as Pick<tState, tKeyUnion>);
   }
 
   render() {
     const {sessionThunk} = this.props;
+    const subsection: string = _.get(this.props, 'match.params.subsection', '');
+    console.log('all props for profile => ', this.props);
 
     return (
       <ErrorBoundary status={_.get(sessionThunk, 'error.status', 200)}>
@@ -109,9 +100,9 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
           render={() => (
             <ProfileComponent
               {...this.state}
-              session={sessionThunk.data}
               save={this.save}
-              toggleLock={this.toggleLock}
+              session={sessionThunk.data}
+              subsection={subsection}
               updateState={this.updateState}
             />
           )}

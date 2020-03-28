@@ -1,17 +1,12 @@
-export type tState = Partial<tUser> & {
-  email: string, // email is part of account, but for ease of use we put it here
-  isLocked: boolean,
-  password: string,
-};
+import {tAdminSections} from '../../../_types';
 
-export type tStateUnion = keyof tState;
-
-export type tStore = {
-  session: tThunk<tSession>
-};
+export type tState = Partial<tUser> & {password: string};
+export type tStore = {session: tThunk<tSession>};
+export type tKeyUnion = keyof tState;
 
 export type tContainerProps = {
   loginDispatch: (login: tLoginQuery) => tThunkPayload<tSession>,
+  match: tAdminSections,
   patchUserDispatch: (user: tUserQuery) => tThunkPayload<tUser>,
   sessionThunk: tThunk<tSession>,
 }
@@ -19,9 +14,9 @@ export type tContainerProps = {
 export type tComponentProps = tState & {
   save: (ev: React.FormEvent<HTMLFormElement>) => void,
   session: tSession,
-  toggleLock: () => void,
+  subsection: string,
   updateState: (
-    key: tStateUnion,
+    key: tKeyUnion,
     ev: React.MouseEvent<HTMLDivElement>
       | React.KeyboardEvent<HTMLDivElement>
       | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

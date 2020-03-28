@@ -24,6 +24,7 @@ export const MeetingsComponent = memo((props: tComponentProps) => (
     <Events
       events={props.events}
       showOrgName
+      type="rsvps"
     />
   </>
 ));

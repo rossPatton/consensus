@@ -22,7 +22,6 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
 
   render() {
     const {eventsByUserIdThunk} = this.props;
-
     return (
       <ErrorBoundary status={_.get(eventsByUserIdThunk, 'error.status', 200)}>
         <Helmet

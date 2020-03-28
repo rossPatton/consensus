@@ -98,14 +98,14 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...query}: tUserQuery = _.get(ctx, dataPath, {});
   const account = _.get(ctx, 'state.user', {});
   await validateSchema<tUserQuery>(ctx, patchSchema, query);
+  console.log('account => ', account);
 
   const isValidPW = await isValidPw(query.password, account.password);
   if (!isValidPW) return ctx.throw(400, 'Password is not correct');
 
-  // email and password stuff will cause a constraint error - pull out before updating
-  const {email, password, ...updateQuery} = query as tUserQuery & {email: string};
-
-  let updatedUser: tUser[] = [];
+  // password stuff will cause a constraint error - pull out before updating
+  const {password, ...updateQuery} = query;
+  let updatedUser = [] as tUser[];
   try {
     updatedUser = await knex(table)
       .limit(1)
@@ -114,6 +114,18 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
       .returning(userKeys);
   } catch (err) {
     return ctx.throw(500, err);
+  }
+
+  // if user was new
+  if (account.isNew && updatedUser[0].username) {
+    try {
+      await knex('accounts')
+        .limit(1)
+        .where({userId: updatedUser[0].id})
+        .update({isNew: false});
+    } catch (err) {
+      return ctx.throw(500, err);
+    }
   }
 
   if (isFormSubmit) return;

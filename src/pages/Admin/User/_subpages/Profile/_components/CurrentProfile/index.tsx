@@ -78,11 +78,11 @@ const CurrentProfile = memo((props: tComponentProps) => (
         <b>{props.privateMemberships ? 'private' : 'public'}</b>
       </span>
     </div>
-    <button
-      onClick={props.toggleLock}
-      className="p3 pL4 pR4 hvrBgGrey1 trans1">
+    <Link
+      to="/admin/profile/edit"
+      className="btn p3 pL4 pR4 hvrBgGrey1 trans1">
       Edit profile
-    </button>
+    </Link>
   </div>
 ));
 

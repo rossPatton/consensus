@@ -5,10 +5,10 @@ import {tComponentProps} from './_types';
 
 export const ProfileComponent = memo((props: tComponentProps) => (
   <>
-    {props.isLocked && (
+    {!props.subsection && (
       <CurrentProfile {...props} />
     )}
-    {!props.isLocked && (
+    {props.subsection === 'edit' && (
       <EditProfile {...props} />
     )}
   </>

@@ -20,7 +20,6 @@ export const patchSchema = Joi.object().keys({
   email: Joi.string().email(),
   facebook: Joi.string(),
   id: Joi.number().integer().required(),
-  isNew: Joi.bool(),
   language: Joi.string().alphanum().max(2),
   name: Joi.string(),
   password: Joi.string().min(12).max(4096).required(),

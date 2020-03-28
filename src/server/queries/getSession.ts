@@ -29,6 +29,7 @@ export const getSession = async (
       emails,
       id, // account.id
       isAuthenticated: ctx.isAuthenticated(),
+      isNew: account.isNew,
       isVerified, // has the account been verified yet
       login, // unique login for account
       privateEmail,

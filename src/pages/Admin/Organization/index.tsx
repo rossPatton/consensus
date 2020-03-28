@@ -40,7 +40,7 @@ const GroupAdminContainer = memo((props: tProps) => {
         </div>
       )}
       {!session.isVerified && (
-        <div className="row p3 mB3 taCtr bgRedLite fw600 fs6">
+        <div className="row p3 mB3 taCtr fw600 fs6">
           <Link to="/verify-account">
             Verify your account. Your group will not be listed and some functionality will be unavailable until you do.
           </Link>

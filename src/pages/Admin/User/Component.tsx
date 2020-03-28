@@ -14,20 +14,23 @@ import {tComponentProps} from './_types';
 
 export const UserAdminComponent = memo((props: tComponentProps) => {
   const section: string = _.get(props, 'match.params.section', '');
+  const subsection: string = _.get(props, 'match.params.subsection', '');
+  const {session, orgsByUserIdThunk} = props;
+  const {profile} = props.session;
+
   const isAccount = section === 'account';
   const isDeleteAccount = section === 'deleteAccount';
   const isMeetings = section === 'meetings';
   const isProfile = section === 'profile';
   const isMemberships = section === 'memberships';
-  const {session, orgsByUserIdThunk} = props;
-  const {profile} = props.session;
 
   return (
     <>
-      {!session.isVerified && (
-        <div className="row p3 mB3 taCtr bgRedLite fw600 fs6">
+      {/* user isnt new, but still hasnt verified */}
+      {!session.isNew && !session.isVerified && (
+        <div className="row p3 mB3 taCtr fw600 fs6">
           <Link to="/verify-account">
-            Verify your account. Consensus does not require account verification for users, but some groups may choose to restrict access to you.
+            Verify your account. It&apos;s not required, but some groups may choose to restrict access to you.
           </Link>
         </div>
       )}
@@ -134,12 +137,20 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
             </Link>
           </div>
         </aside>
-        <div className="col bgWhite br8 p3">
-          {isAccount && <Account />}
-          {isDeleteAccount && <DeleteAccount />}
-          {isMeetings && <Meetings />}
-          {isProfile && <Profile />}
-          {isMemberships && <Memberships />}
+        <div className="col">
+          {/* user is new. ie, they havent put in a username yet */}
+          {session.isNew && (
+            <div className="p3 br8 mB3 brdA1 brdW2 bsDashed fw600 black">
+              Welcome to Consensus! You still need to pick a username before you can join groups or RSVP to meetings! {(isProfile && !subsection) && 'Click "Edit Profile" below to get started'} {!isProfile && <>Click <Link to="/admin/profile/edit">here</Link> to get started.</>}
+            </div>
+          )}
+          <div className="bgWhite br8 p3">
+            {isAccount && <Account />}
+            {isDeleteAccount && <DeleteAccount />}
+            {isMeetings && <Meetings />}
+            {isProfile && <Profile match={props.match} />}
+            {isMemberships && <Memberships />}
+          </div>
         </div>
       </div>
     </>

@@ -7,6 +7,7 @@ declare type tAccountBase = tFormSubmit & Readonly<{
   deletionDeadline?: Dayjs,
   emails?: tEmail[],
   id: number,
+  isNew: boolean,
   isVerified: boolean,
   login: string, // unique login value separate from username or email
   orgId?: number,

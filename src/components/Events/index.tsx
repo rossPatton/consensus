@@ -31,7 +31,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
     if (events.length === 0) {
       return (
         <h2 className="fs4 p4 taCtr">
-          No {type === 'events' ? 'upcoming meetings!' : 'drafts'}
+          No {type === 'events' && 'upcoming meetings!'} {type === 'drafts' && 'drafts'} {type === 'rsvps' && 'upcoming RSVPs!'}
         </h2>
       );
     }
