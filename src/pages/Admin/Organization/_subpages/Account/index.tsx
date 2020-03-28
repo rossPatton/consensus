@@ -15,7 +15,6 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
 
     this.state = {
       email: '',
-      isLocked: true,
       isVerified: _.get(props, 'sessionThunk.data.isVerified', false),
       login: '',
       newPassword: '',
@@ -26,7 +25,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
   save = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const {loginDispatch, patchAccountDispatch, sessionThunk} = this.props;
-    const {isLocked, isVerified, ...patchAccountQuery} = this.state;
+    const {isVerified, ...patchAccountQuery} = this.state;
 
     try {
       await patchAccountDispatch(patchAccountQuery);
@@ -48,16 +47,10 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
     this.setState({
       currentPassword: '',
       email: '',
-      isLocked: true,
       login: '',
       newPassword: '',
     });
   }
-
-  toggleLock = () =>
-    this.setState({
-      isLocked: !this.state.isLocked,
-    });
 
   updateState = (stateKey: tKeyUnion, ev: React.ChangeEvent<any>) => {
     if (!stateKey) return;
@@ -74,6 +67,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     const {sessionThunk} = this.props;
+    const subsection: string = _.get(this.props, 'match.params.subsection', '');
 
     return (
       <ErrorBoundary status={_.get(sessionThunk, 'error.status', 200)}>
@@ -94,7 +88,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
               {...this.state}
               session={sessionThunk.data}
               save={this.save}
-              toggleLock={this.toggleLock}
+              subsection={subsection}
               updateState={this.updateState}
             />
           )}

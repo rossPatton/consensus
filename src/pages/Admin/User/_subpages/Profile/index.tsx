@@ -81,7 +81,6 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   render() {
     const {sessionThunk} = this.props;
     const subsection: string = _.get(this.props, 'match.params.subsection', '');
-    console.log('all props for profile => ', this.props);
 
     return (
       <ErrorBoundary status={_.get(sessionThunk, 'error.status', 200)}>

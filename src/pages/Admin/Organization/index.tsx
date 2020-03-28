@@ -153,10 +153,10 @@ const GroupAdminContainer = memo((props: tProps) => {
           </div>
         </aside>
         <div className="col">
-          {isAccount && <Account />}
+          {isAccount && <Account match={props.match} />}
           {isDelete && <DeleteGroup />}
           {isMeetings && <Meetings match={props.match} />}
-          {isProfile && <Profile />}
+          {isProfile && <Profile match={props.match} />}
           {isMembers && <Members match={props.match} />}
           {isMeetingForm && (
             <PlanMeeting

@@ -81,11 +81,11 @@ const CurrentProfile = memo((props: tComponentProps) => (
         </div>
       </>
     )}
-    <button
-      onClick={props.toggleLock}
-      className="p3 pL4 pR4 mR2 hvrBgGrey1 trans1">
-      Edit Profile
-    </button>
+    <Link
+      to="/admin/profile/edit"
+      className="btn p3 pL4 pR4 hvrBgGrey1 trans1">
+      Edit profile
+    </Link>
   </div>
 ));
 

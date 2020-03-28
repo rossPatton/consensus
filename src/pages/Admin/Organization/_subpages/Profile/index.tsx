@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {Helmet} from '../../../../../components';
 import {ErrorBoundary, GenericLoader} from '../../../../../containers';
 import {login, patchOrg} from '../../../../../redux';
-import {tContainerProps, tState, tStateUnion, tStore} from './_types';
+import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
 import {ProfileComponent} from './Component';
 
 class ProfileContainer extends PureComponent<tContainerProps, tState> {
@@ -27,14 +27,13 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
 
     this.state = {
       ...editablePartOfGroup,
-      isLocked: true,
       password: '',
     };
   }
 
   onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {isLocked, password, ...stuffToPatch} = this.state;
+    const {password, ...stuffToPatch} = this.state;
 
     let patchedOrg: tActionPayload<tGroup>;
     try {
@@ -57,15 +56,10 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     }
 
     // reset on submit
-    this.setState({isLocked: true, password: ''});
+    this.setState({password: ''});
   }
 
-  toggleLock = () =>
-    this.setState({
-      isLocked: !this.state.isLocked,
-    });
-
-  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
+  updateState = (stateKey: tKeyUnion, ev: React.ChangeEvent<any>) => {
     if (!stateKey) return;
 
     let {value} = ev.currentTarget;
@@ -75,11 +69,12 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
 
     this.setState({
       [stateKey]: value,
-    } as Pick<tState, tStateUnion>);
+    } as Pick<tState, tKeyUnion>);
   }
 
   render() {
     const {sessionThunk} = this.props;
+    const subsection: string = _.get(this.props, 'match.params.subsection', '');
 
     return (
       <ErrorBoundary status={_.get(sessionThunk, 'error.status', 200)}>
@@ -101,7 +96,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
               {...this.state}
               onSubmit={this.onSubmit}
               session={sessionThunk.data}
-              toggleLock={this.toggleLock}
+              subsection={subsection}
               updateState={this.updateState}
             />
           )}

@@ -145,7 +145,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
             </div>
           )}
           <div className="bgWhite br8 p3">
-            {isAccount && <Account />}
+            {isAccount && <Account match={props.match} />}
             {isDeleteAccount && <DeleteAccount />}
             {isMeetings && <Meetings />}
             {isProfile && <Profile match={props.match} />}

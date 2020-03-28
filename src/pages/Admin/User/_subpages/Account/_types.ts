@@ -1,7 +1,8 @@
+import {tAdminSections} from '../../../_types';
+
 export type tState = {
   currentPassword: string,
   email: string,
-  isLocked: boolean,
   isVerified: boolean,
   login: string,
   newPassword: string,
@@ -12,6 +13,7 @@ export type tKeyUnion = keyof tState;
 
 export type tContainerProps = {
   loginDispatch: (login: tLoginQuery) => tThunkPayload<tSession>,
+  match: tAdminSections,
   patchAccountDispatch: (query: tAccountQuery) => tThunkPayload<tAccount>,
   sessionThunk: tThunk<tSession>,
 };
@@ -19,7 +21,7 @@ export type tContainerProps = {
 export type tComponentProps = tState & {
   save: (ev: React.FormEvent<HTMLFormElement>) => Promise<void>,
   session: tSession,
-  toggleLock: () => void,
+  subsection: string,
   updateState: (key: tKeyUnion, value: string | boolean) => void,
 };
 

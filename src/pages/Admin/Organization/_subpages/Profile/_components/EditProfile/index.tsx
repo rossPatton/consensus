@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, {memo} from 'react';
+import {Link} from 'react-router-dom';
 
 import {tComponentProps} from '../../_types';
 import {PasswordInput} from '../../../../../../../components';
@@ -160,11 +161,11 @@ const EditProfile = memo((props: tComponentProps) => (
           className="p3 pL4 pR4 mR2 hvrBgGrey1 trans1">
           Save Changes
         </button>
-        <button
-          onClick={props.toggleLock}
-          className="p3 pL4 pR4 hvrBgGrey1 trans1">
+        <Link
+          to="/admin/profile"
+          className="btn p3 pL4 pR4 hvrBgGrey1 trans1">
           Go back
-        </button>
+        </Link>
       </div>
     </fieldset>
   </form>

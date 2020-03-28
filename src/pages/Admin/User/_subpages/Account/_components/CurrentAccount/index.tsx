@@ -1,4 +1,5 @@
 import React, {memo} from 'react';
+import {Link} from 'react-router-dom';
 
 import {tComponentProps} from '../../_types';
 
@@ -24,11 +25,11 @@ const CurrentAccount = memo((props: tComponentProps) => (
           </span>
         </h2>
       )}
-    <button
-      className="p3 pL4 pR4 hvrBgGrey1 trans1"
-      onClick={props.toggleLock}>
+    <Link
+      to="/admin/account/edit"
+      className="btn p3 pL4 pR4 hvrBgGrey1 trans1">
       Edit account
-    </button>
+    </Link>
   </>
 ));
 
