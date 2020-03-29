@@ -28,3 +28,10 @@ declare type tGeo = Readonly<{
   region: string,
   regionCode: string,
 }>;
+
+declare type tPostCode = Readonly<{
+  city: string,
+  cityId: number,
+  id: number,
+  postcode: number,
+}>;

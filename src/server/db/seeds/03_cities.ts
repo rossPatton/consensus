@@ -11,8 +11,6 @@ const createCity = async (row: {city: string, state: string}) => {
   const regionId = statesByName.findIndex(state => state === row.state) + 1;
 
   return {
-    // countryId: 1,
-    // country: 'United States',
     name: row.city,
     region: row.state,
     regionId,

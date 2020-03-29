@@ -12,18 +12,23 @@ const createCodes = async (row: any, i: number) =>
   }));
 
 exports.seed = async (knex: Knex) => {
-  const codesWithNulls = await Promise.all(postcodes.map(createCodes));
-  const codes = codesWithNulls.filter(c => !!c);
-
   // split processed cities file into chunks
-  // postgres can't handle inserting everything at once unfortunately
-  const [chunk1, chunk2, chunk3, chunk4, chunk5, chunk6] = _.chunk(_.flatten(codes), 6);
+  // postgres can't handle inserting everything at once
+  // use a value here that is a whole integer
+  const [chunk1, chunk2, chunk3, chunk4] = _.chunk(
+    postcodes,
+    postcodes.length / 4,
+  );
+
+  const codes1 = await Promise.all(chunk1.map(createCodes));
+  const codes2 = await Promise.all(chunk2.map(createCodes));
+  const codes3 = await Promise.all(chunk3.map(createCodes));
+  const codes4 = await Promise.all(chunk4.map(createCodes));
 
   await knex('postcodes').del();
-  await knex('postcodes').insert(chunk1);
-  await knex('postcodes').insert(chunk2);
-  await knex('postcodes').insert(chunk3);
-  await knex('postcodes').insert(chunk4);
-  await knex('postcodes').insert(chunk5);
-  await knex('postcodes').insert(chunk6);
+  // TODO there really shouldn't be any dupe city/code combos here
+  await knex('postcodes').insert(_.flattenDeep(codes1));
+  await knex('postcodes').insert(_.flattenDeep(codes2));
+  await knex('postcodes').insert(_.flattenDeep(codes3));
+  await knex('postcodes').insert(_.flattenDeep(codes4));
 };
