@@ -139,11 +139,12 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
         </aside>
         <div className="col">
           {/* user is new. ie, they havent put in a username yet */}
-          {session.isNew && (
-            <div className="p3 br8 mB3 brdA1 brdW2 bsDashed fw600 black">
-              Welcome to Consensus! You still need to pick a username before you can join groups or RSVP to meetings! {(isProfile && !subsection) && 'Click "Edit Profile" below to get started'} {!isProfile && <>Click <Link to="/admin/profile/edit">here</Link> to get started.</>}
-            </div>
-          )}
+          {!session.profile.username
+            && (
+              <div className="p3 br8 mB3 brdA1 brdW2 bsDashed fw600 black">
+                Welcome to Consensus. You&apos;ll need to pick a username before you can join groups or RSVP to meetings. You can change it at anytime. {(isProfile && !subsection) && 'Click "Edit Profile" below to get started'} {!isProfile && <>Click <Link to="/admin/profile/edit">here</Link> to get started.</>}
+              </div>
+            )}
           <div className="bgWhite br8 p3">
             {isAccount && <Account match={props.match} />}
             {isDeleteAccount && <DeleteAccount />}

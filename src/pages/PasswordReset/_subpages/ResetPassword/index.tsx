@@ -18,7 +18,7 @@ const ResetPasswordComponent = memo((props: tProps) => (
         </h2>
       </legend>
       <label htmlFor="tokenInput">
-        <h2 className="ffLab fs5 mB1 lh1">
+        <h2 className="fs5 mB1 lh1">
           Token
         </h2>
         <input
@@ -33,7 +33,7 @@ const ResetPasswordComponent = memo((props: tProps) => (
         />
       </label>
       <label htmlFor="usernameInput">
-        <h2 className="ffLab fs5 mB1 lh1">
+        <h2 className="fs5 mB1 lh1">
           Login
         </h2>
         <input

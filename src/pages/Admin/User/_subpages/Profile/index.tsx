@@ -11,11 +11,15 @@ import {ProfileComponent} from './Component';
 
 const initialState = {
   bio: '',
+  city: '',
+  cityId: null as number | null,
   email: '',
   name: '',
   password: '',
   privateMemberships: false,
   privateRSVP: false,
+  region: '',
+  regionId: null as number | null,
   username: '',
 };
 
@@ -65,16 +69,20 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     this.setState({password: ''});
   }
 
-  updateState = (stateKey: tKeyUnion, ev: React.ChangeEvent<any>) => {
-    if (!stateKey) return;
-
-    let {value} = ev.currentTarget;
-    if (stateKey.indexOf('private') !== -1) {
-      value = !this.state[stateKey];
+  updateState = (key: tKeyUnion, value: string | number | object | boolean) => {
+    // if making multiple changes at once, don't update at end
+    if (typeof value === 'object') {
+      return this.setState(value);
     }
 
+    let newValue = value;
+    if (key.indexOf('private') !== -1) {
+      newValue = !this.state[key];
+    }
+
+    // @ts-ignore
     this.setState({
-      [stateKey]: value,
+      [key]: newValue,
     } as Pick<tState, tKeyUnion>);
   }
 

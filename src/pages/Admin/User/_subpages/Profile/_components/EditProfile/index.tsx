@@ -2,7 +2,7 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {tComponentProps} from '../../_types';
-import {PasswordInput} from '../../../../../../../components';
+import {CitySearch, PasswordInput} from '../../../../../../../components';
 
 const EditProfile = memo((props: tComponentProps) => (
   <form
@@ -14,24 +14,28 @@ const EditProfile = memo((props: tComponentProps) => (
         <h1 className="fs3 mB3">Edit your profile</h1>
       </legend>
       <div className="mB4">
-        <label className="row mB4" htmlFor="name">
-          <h2 className="ffLab fs5 mB1 lh1">
-            Real Name
+        <label className="row mB4" htmlFor="username">
+          <h2 className="fs5 mB1 lh1">
+            Username
           </h2>
           <p className="fs5 copyBlack mB1">
-            Your legal name. Completely optional. Leave blank if you want to be anonymous.
+            This is your display name on the site. Must be unique. You must fill this out in order to join groups or RSVP to events. You may change it at any time.
           </p>
           <input
-            id="name"
+            id="username"
             className="p3 row"
-            onChange={ev => props.updateState('name', ev)}
-            placeholder={props.name}
-            value={props.name}
-            name="name"
+            onChange={ev => props.updateState('username', ev.currentTarget.value)}
+            placeholder="Update your username here"
+            value={props.username}
+            name="username"
           />
         </label>
+        <CitySearch
+          {...props}
+          updateState={props.updateState}
+        />
         <label className="row mB4" htmlFor="bio">
-          <h2 className="ffLab fs5 mB1 lh1">
+          <h2 className="fs5 mB1 lh1">
             Bio
           </h2>
           <p className="fs5 copyBlack mB1">
@@ -40,19 +44,35 @@ const EditProfile = memo((props: tComponentProps) => (
           <textarea
             id="bio"
             rows={6}
-            onChange={ev => props.updateState('bio', ev)}
+            onChange={ev => props.updateState('bio', ev.currentTarget.value)}
             className="p3 row"
             placeholder={props.bio}
             value={props.bio}
             name="bio"
           />
         </label>
+        <label className="row mB4" htmlFor="name">
+          <h2 className="fs5 mB1 lh1">
+            Real Name
+          </h2>
+          <p className="fs5 copyBlack mB1">
+            Your legal name. Completely optional. Leave blank if you want to be anonymous.
+          </p>
+          <input
+            id="name"
+            className="p3 row"
+            onChange={ev => props.updateState('name', ev.currentTarget.value)}
+            placeholder={props.name}
+            value={props.name}
+            name="name"
+          />
+        </label>
         <label className="dBl mB4" htmlFor="website">
-          <h2 className="ffLab fs5 mB1 lh1">
+          <h2 className="fs5 mB1 lh1">
             Personal Website
           </h2>
           <input
-            onChange={ev => props.updateState('website', ev)}
+            onChange={ev => props.updateState('website', ev.currentTarget.value)}
             className="p3 row"
             placeholder="Update your website here"
             value={props.website}
@@ -60,69 +80,38 @@ const EditProfile = memo((props: tComponentProps) => (
           />
         </label>
         <label className="dBl mB4" htmlFor="facebook">
-          <h2 className="ffLab fs5 mB1 lh1">
+          <h2 className="fs5 mB1 lh1">
             Facebook
           </h2>
           <input
             className="p3 row"
             name="facebook"
-            onChange={ev => props.updateState('facebook', ev)}
+            onChange={ev => props.updateState('facebook', ev.currentTarget.value)}
             placeholder="Link your facebook profile here"
             value={props.facebook}
           />
         </label>
         <label className="dBl mB4" htmlFor="twitter">
-          <h2 className="ffLab fs5 mB1 lh1">
+          <h2 className="fs5 mB1 lh1">
             Twitter
           </h2>
           <input
             className="p3 row"
             name="twitter"
-            onChange={ev => props.updateState('twitter', ev)}
+            onChange={ev => props.updateState('twitter', ev.currentTarget.value)}
             placeholder="Link your twitter here"
             value={props.twitter}
           />
         </label>
-        <label className="row mB4" htmlFor="city">
-          <h2 className="ffLab fs5 mB1 lh1">
-            City
-          </h2>
-          <p className="fs5 copyBlack mB1">
-            Share your location with others (if you want!)
-          </p>
-          <input
-            onChange={ev => props.updateState('city', ev)}
-            className="p3 row"
-            placeholder="Example: Brooklyn"
-            value={props.city}
-            name="city"
-          />
-        </label>
-        <label className="row mB4" htmlFor="username">
-          <h2 className="ffLab fs5 mB1 lh1">
-            Username
-          </h2>
-          <p className="fs5 copyBlack mB1">
-            This is your alias. Must be unique, can&apos;t be blank. You must fill this out in order to join groups or RSVP to events. You may change it at any time.
-          </p>
-          <input
-            id="username"
-            onChange={ev => props.updateState('username', ev)}
-            className="p3 row"
-            placeholder="Update your username here"
-            value={props.username}
-            name="username"
-          />
-        </label>
-        <h2 className="ffLab fs5 mB1 lh1">
+        <h2 className="fs5 mB1 lh1">
           Other privacy settings
         </h2>
         <div
           tabIndex={0}
           role="button"
           className="fx aiCtr curPtr fs6 p1"
-          onClick={ev => props.updateState('privateRSVP', ev)}
-          onKeyPress={ev => props.updateState('privateRSVP', ev)}>
+          onClick={() => props.updateState('privateRSVP', !props.privateRSVP)}
+          onKeyPress={() => props.updateState('privateRSVP', !props.privateRSVP)}>
           <input
             readOnly
             type="checkbox"
@@ -143,8 +132,10 @@ const EditProfile = memo((props: tComponentProps) => (
           tabIndex={0}
           role="button"
           className="fx aiCtr curPtr fs6 p1 mB5"
-          onClick={ev => props.updateState('privateMemberships', ev)}
-          onKeyPress={ev => props.updateState('privateMemberships', ev)}>
+          onClick={() =>
+            props.updateState('privateMemberships', !props.privateMemberships)}
+          onKeyPress={() =>
+            props.updateState('privateMemberships', !props.privateMemberships)}>
           <input
             readOnly
             type="checkbox"
@@ -167,7 +158,7 @@ const EditProfile = memo((props: tComponentProps) => (
         title="Current Password"
         password={props.password}
         placeholder="Your current password"
-        onChange={ev => props.updateState('password', ev)}
+        onChange={ev => props.updateState('password', ev.currentTarget.value)}
       />
       <div className="fx aiCtr">
         <button
@@ -187,7 +178,7 @@ const EditProfile = memo((props: tComponentProps) => (
 
 export default EditProfile;
 
-/* <h2 className="ffLab fs5 mB1 lh1">
+/* <h2 className="fs5 mB1 lh1">
             Avatar
           </h2>
           <div className="fx aiCtr mB3">

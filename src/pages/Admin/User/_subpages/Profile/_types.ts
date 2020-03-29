@@ -1,6 +1,12 @@
 import {tAdminSections} from '../../../_types';
 
-export type tState = Partial<tUser> & {password: string};
+export type tState = Partial<tUser> & {
+  city: string,
+  cityId: number | null,
+  password: string,
+  region: string,
+  regionId: number | null,
+};
 export type tStore = {session: tThunk<tSession>};
 export type tKeyUnion = keyof tState;
 
@@ -17,8 +23,6 @@ export type tComponentProps = tState & {
   subsection: string,
   updateState: (
     key: tKeyUnion,
-    ev: React.MouseEvent<HTMLDivElement>
-      | React.KeyboardEvent<HTMLDivElement>
-      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    value: string | number | object | boolean,
   ) => void,
 }

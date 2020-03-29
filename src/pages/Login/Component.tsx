@@ -18,7 +18,7 @@ export const LoginComponent = memo((props: tComponentProps) => (
           <h1 className="fs2 mB3">Login to your account</h1>
         </legend>
         <label htmlFor="loginInput">
-          <h3 className="ffLab fs5 mB1">Login</h3>
+          <h3 className="fs5 mB1">Login</h3>
           <input
             required
             autoComplete="login"

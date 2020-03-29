@@ -4,6 +4,10 @@ export const Breadcrumbs = loadable(() =>
   import(/* webpackChunkName: "Breadcrumbs" */'./Breadcrumbs'),
 );
 
+export const CitySearch = loadable(() =>
+  import(/* webpackChunkName: "CitySearch" */'./CitySearch'),
+);
+
 export const Events = loadable(() =>
   import(/* webpackChunkName: "Events" */'./Events'),
 );
