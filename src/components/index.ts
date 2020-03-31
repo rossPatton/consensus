@@ -1,5 +1,9 @@
 import loadable from '@loadable/component';
 
+export const Avatar = loadable(() =>
+  import(/* webpackChunkName: "Avatar" */'./Avatar'),
+);
+
 export const Breadcrumbs = loadable(() =>
   import(/* webpackChunkName: "Breadcrumbs" */'./Breadcrumbs'),
 );

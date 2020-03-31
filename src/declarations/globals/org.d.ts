@@ -2,6 +2,7 @@ declare type tPrivacyEnum = 'public' | 'private' | 'hidden';
 
 declare type tGroup = Readonly<{
    allowNonVerified: boolean,
+   avatarHash?: string,
    category: tCategory,
    city: string,
    cityId: number,

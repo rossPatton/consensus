@@ -1,8 +1,17 @@
 import crypto from 'crypto';
 
+/**
+ * Convert string into hash. 64 bytes output, bcrypt safe. hexadecimal
+ * @param input user provided string
+ */
+export const sha256 = (input: string) => {
+  const hasher = crypto.createHash('SHA256');
+  hasher.update(input);
+  return hasher.digest('hex');
+};
 
 /**
- * Convert string into hash. 64 bytes output, bcrypt safe
+ * Convert string into hash. 64 bytes output, bcrypt safe. base64.
  * @param input user provided string
  */
 export const sha384 = (input: string) => {

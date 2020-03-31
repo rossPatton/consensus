@@ -7,7 +7,7 @@ import {knex} from '../db/connection';
 export const getProfileByAccountId = async (
   ctx: Koa.ParameterizedContext,
   account: tAccount): Promise<tGroup | tUser> => {
-  const {orgId, userId} = account;
+  const {avatarHash, orgId, userId} = account;
 
   let profile: tGroup | tUser;
   if (orgId) {
@@ -17,7 +17,7 @@ export const getProfileByAccountId = async (
         .where({id: orgId})
         .first();
     } catch (err) {
-      ctx.throw(400, err);
+      ctx.throw(500, err);
     }
   } else if (userId) {
     try {
@@ -26,9 +26,12 @@ export const getProfileByAccountId = async (
         .where({id: userId})
         .first();
     } catch (err) {
-      ctx.throw(400, err);
+      ctx.throw(500, err);
     }
   }
 
-  return profile;
+  return {
+    avatarHash,
+    ...profile,
+  };
 };

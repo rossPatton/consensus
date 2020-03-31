@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {PlaceholderImage} from '../../../components';
+import {Avatar} from '../../../components';
 import {
   Account,
   DeleteAccount,
@@ -37,11 +37,9 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
       <div className="contain fx aiStart mT4">
         <aside className="c3 bgWhite br8 p3 mR3">
           <div className="fx aiCtr fs4 fw600 pB3 mB3 brdB1">
-            <img
-              alt=""
-              className="bgGrey3 circ mR3"
-              src="https://s3.amazonaws.com/uifaces/faces/twitter/sta1ex/128.jpg"
-              width="70"
+            <Avatar
+              url={props.session.profile.avatarHash}
+              type="user"
             />
             <div>
               <div className="fs7 mB1">You are signed in as <b>user</b>:</div>
@@ -92,11 +90,13 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
                         to={`/org/${group.id}`}
                         className="br8 p2 fx aiCtr noUnderline hvrBgGrey1 trans2">
                         <div className="circ mR2 ovfHide">
-                          <PlaceholderImage
-                            height={60}
-                            seed={group.id}
-                            width={60}
-                          />
+                          {group.avatarHash && (
+                            <img
+                              alt={`Avatar for ${group.name}`}
+                              src={group.avatarHash}
+                              width="70"
+                            />
+                          )}
                         </div>
                         <div>
                           <div className="fs7 fw600 mB2">

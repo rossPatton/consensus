@@ -1,6 +1,7 @@
 import Joi from '@hapi/joi';
 
 export const schema = Joi.object({
+  avatarHash: Joi.string().allow(null),
   deletionDeadline: Joi.date().timestamp().allow(null),
   id: Joi.number().integer().required(),
   isVerified: Joi.bool(),

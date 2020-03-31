@@ -3,6 +3,7 @@ import Joi from '@hapi/joi';
 const baseSchema = Joi.object({isFormSubmit: Joi.bool()});
 
 export const patchSchema = baseSchema.keys({
+  avatarEmail: Joi.string().optional(),
   deletionDeadline: Joi.date().allow(null).optional(),
   email: Joi.string().email().optional(),
   isNew: Joi.bool().optional(),

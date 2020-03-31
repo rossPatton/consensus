@@ -3,6 +3,7 @@ declare type tEmail = {accountId: number, email: string, isPrimary: string};
 // accounts are currently of 2 types. users, and organization admins
 // we consolidate that in the accounts table, along with shared rows
 declare type tAccountBase = tFormSubmit & Readonly<{
+  avatarHash?: string,
   created_at?: string,
   deletionDeadline?: Dayjs,
   emails?: tEmail[],
@@ -26,6 +27,7 @@ declare type tAccount = tAccountBase & Readonly<{
 }>;
 
 declare type tAccountQuery = Partial<tAccountBase> & Readonly<{
+  avatarEmail?: string,
   email?: string,
   currentPassword: string,
   newPassword?: string,
@@ -47,7 +49,8 @@ declare type isAuthenticated = Readonly<{
 
 // tSession is like tUser, but with auth data and everything is optional
 // since a user might not be logged in
-declare type tSession<T = tUser | tGroup> = tAccountBase & Readonly<{
+declare type tSession<T = tUser | tGroup> = Partial<tAccountBase>
+& Readonly<{
   deletionDeadline?: string,
   isAuthenticated: boolean,
   isVerified: boolean,

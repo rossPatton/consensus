@@ -33,6 +33,11 @@ exports.up = async (knex: Knex) => {
     // if set to true, user memberships aren't visible to others in user profile
     table.boolean('privateMemberships').notNullable().defaultTo(true);
 
+    // the auto-generated string for a libravatar avatar
+    // it falls back to gravatar if lookup fails
+    // we do NOT store the actual email we are given, just the generated hashed url
+    table.string('avatarHash').defaultTo(null);
+
     // user's personal website
     table.string('website').defaultTo('');
     table.string('facebook').defaultTo('');

@@ -3,7 +3,6 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {PlaceholderImage} from '../../../../components';
 import {tProps} from './_types';
 
 const Org = memo((props: tProps) => {
@@ -27,10 +26,10 @@ const Org = memo((props: tProps) => {
           'p3 hvrBgGrey1 trans1 br4': props.asList,
         })}>
         <div className="circ mR2 ovfHide">
-          <PlaceholderImage
-            height={60}
-            seed={props.index}
-            width={60}
+          <img
+            alt={`Avatar for ${props.org.name}`}
+            src={props.org.avatarHash}
+            width="70"
           />
         </div>
         <div>

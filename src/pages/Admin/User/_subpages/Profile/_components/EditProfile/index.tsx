@@ -56,7 +56,7 @@ const EditProfile = memo((props: tComponentProps) => (
             Real Name
           </h2>
           <p className="fs5 copyBlack mB1">
-            Your legal name. Completely optional. Leave blank if you want to be anonymous.
+            Your legal name. Optional! Leave blank to remain anonymous.
           </p>
           <input
             id="name"

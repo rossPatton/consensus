@@ -14,6 +14,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
     super(props);
 
     this.state = {
+      avatarEmail: '',
       currentPassword: '',
       email: '',
       isVerified: _.get(props, 'sessionThunk.data.isVerified', false),

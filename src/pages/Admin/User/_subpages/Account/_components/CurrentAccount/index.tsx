@@ -16,6 +16,9 @@ const CurrentAccount = memo((props: tComponentProps) => (
         ************
       </span>
     </h2>
+    <h2 className="fs5 mB4 lh1">
+      Avatar Connected? {props.session.avatarHash ? 'Yes' : 'No'}
+    </h2>
     {props.session.emails
       && props.session.emails.length > 0
       && (

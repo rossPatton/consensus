@@ -1,6 +1,7 @@
 import {tAdminSections} from '../../../_types';
 
 export type tState = {
+  avatarEmail: string,
   currentPassword: string,
   email: string,
   isVerified: boolean,

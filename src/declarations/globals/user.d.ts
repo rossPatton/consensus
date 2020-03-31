@@ -1,4 +1,5 @@
 declare type tUser = Readonly<{
+  avatarHash?: string,
   created_at?: Date,
   bio: string,
   city?: string, // city.name
