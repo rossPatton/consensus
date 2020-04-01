@@ -28,6 +28,7 @@ class UserAdminContainer extends PureComponent<tContainerProps> {
         isLoading={this.props.isLoading}
         render={() => (
           <UserAdminComponent
+            history={this.props.history}
             match={this.props.match}
             orgsByUserIdThunk={this.props.orgsByUserIdThunk}
             roles={this.props.rolesThunk.data}

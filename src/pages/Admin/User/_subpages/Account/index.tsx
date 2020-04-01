@@ -14,7 +14,6 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
     super(props);
 
     this.state = {
-      avatarEmail: '',
       currentPassword: '',
       email: '',
       isVerified: _.get(props, 'sessionThunk.data.isVerified', false),
@@ -46,12 +45,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
       loglevel.error(err);
     }
 
-    this.setState({
-      currentPassword: '',
-      email: '',
-      login: '',
-      newPassword: '',
-    });
+    this.props.history.push('/admin/account');
   }
 
   updateState = (stateKey: tKeyUnion, value: string | boolean) => {

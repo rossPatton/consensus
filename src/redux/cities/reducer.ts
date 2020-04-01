@@ -1,5 +1,5 @@
 import { tCityActionUnion } from './_types';
-import { GET_FAILURE, GET_SUCCESS } from './get/_types';
+import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
 const initialState: tThunk<tCity[]> = {
   error: null,
@@ -10,18 +10,24 @@ const initialState: tThunk<tCity[]> = {
 
 export const citiesReducer = (state = initialState, action: tCityActionUnion) => {
   switch (action.type) {
-  case GET_SUCCESS:
+  case GET_INIT:
     return {
       ...state,
-      data: action.payload,
-      fetched: true,
-      isLoading: false,
+      isLoading: true,
     };
 
   case GET_FAILURE:
     return {
       ...state,
       error: action.payload,
+      isLoading: false,
+    };
+
+  case GET_SUCCESS:
+    return {
+      ...state,
+      data: action.payload,
+      fetched: true,
       isLoading: false,
     };
 

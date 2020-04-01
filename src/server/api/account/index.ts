@@ -5,7 +5,7 @@ import {Mutable} from 'utility-types';
 
 import {accountKeys} from '../_constants';
 import {knex} from '../../db/connection';
-import {encrypt, isValidPw, saltedHash, sha256, validateSchema} from '../../utils';
+import {encrypt, isValidPw, saltedHash, validateSchema} from '../../utils';
 import {deleteSchema, patchSchema} from './_schema';
 
 export const account = new Router();
@@ -33,7 +33,7 @@ account.delete(route, async (ctx: Koa.ParameterizedContext) => {
         .where({id: account.userId})
         .delete();
     } catch (err) {
-      return ctx.throw(400, err);
+      return ctx.throw(500, err);
     }
     try {
       await knex(table)
@@ -41,7 +41,7 @@ account.delete(route, async (ctx: Koa.ParameterizedContext) => {
         .where({id: account.id})
         .delete();
     } catch (err) {
-      return ctx.throw(400, err);
+      return ctx.throw(500, err);
     }
   }
 
@@ -61,6 +61,7 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const updateQuery: {[key: string]: unknown} = {
     deletionDeadline: query.deletionDeadline,
     login: query.login,
+    privateEmail: query.privateEmail,
   };
 
   // handle nulls for deletionDeadline
@@ -74,33 +75,6 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
     updateQuery.password = encrypt(safePW);
   }
 
-  let updatedHash = loggedInAccount.avatarHash;
-  if (typeof query.avatarEmail === 'string') {
-    updateQuery.avatarHash = sha256(query.avatarEmail);
-
-    if (loggedInAccount.orgId) {
-      try {
-        updatedHash = await knex('orgs')
-          .limit(1)
-          .where({id: loggedInAccount.orgId})
-          .update({avatarHash: updateQuery.avatarHash})
-          .returning('avatarHash');
-      } catch (err) {
-        return ctx.throw(500, err);
-      }
-    } else if (loggedInAccount.userId) {
-      try {
-        updatedHash = await knex('users')
-          .limit(1)
-          .where({id: loggedInAccount.userId})
-          .update({avatarHash: updateQuery.avatarHash})
-          .returning('avatarHash');
-      } catch (err) {
-        return ctx.throw(500, err);
-      }
-    }
-  }
-
   let updatedAccount: tAccount[] = [];
   if (!_.isEmpty(updateQuery)) {
     try {
@@ -108,8 +82,7 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
         .limit(1)
         .where({id: loggedInAccount.id})
         .update(updateQuery)
-      // readonly string[] vs string[] trips typescript up
-        .returning(accountKeys as string[]);
+        .returning(accountKeys);
     } catch (err) {
       return ctx.throw(500, err);
     }
@@ -135,13 +108,6 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
     body = {
       ...body,
       emails: updatedEmail,
-    };
-  }
-
-  if (updatedHash) {
-    body = {
-      ...body,
-      avatarHash: updatedHash[0],
     };
   }
 

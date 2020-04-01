@@ -1,3 +1,5 @@
+import {History} from 'history';
+
 import {tAdminSections} from '../_types';
 
 export type tStore = {
@@ -8,6 +10,7 @@ export type tStore = {
 };
 
 export type tProps = {
+  history: History,
   match: tAdminSections,
   orgsByUserIdThunk: tThunk<tGroup[]>,
   session: tSession<tUser>,

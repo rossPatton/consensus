@@ -9,6 +9,7 @@ export const accountKeys = [
 ];
 
 export const groupKeys = [
+  'avatarHash',
   'allowNonVerified',
   'category',
   'city',
@@ -28,6 +29,7 @@ export const groupKeys = [
 ];
 
 export const userKeys = [
+  'avatarHash',
   'bio',
   'city',
   'id',

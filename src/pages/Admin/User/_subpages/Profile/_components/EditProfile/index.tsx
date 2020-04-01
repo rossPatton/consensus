@@ -2,7 +2,7 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {tComponentProps} from '../../_types';
-import {CitySearch, PasswordInput} from '../../../../../../../components';
+import {CitySearch, ExternalLink, PasswordInput} from '../../../../../../../components';
 
 const EditProfile = memo((props: tComponentProps) => (
   <form
@@ -13,8 +13,24 @@ const EditProfile = memo((props: tComponentProps) => (
       <legend>
         <h1 className="fs3 mB3">Edit your profile</h1>
       </legend>
-      <div className="mB4">
+      <div className="mB5">
         <label className="row mB4" htmlFor="username">
+          <label htmlFor="avatarEmail">
+            <h2 className="fs5 mB1 lh1">
+            Connect your avatar
+            </h2>
+            <p className="fs5 copyBlack mB1">
+              We use <ExternalLink noFollow to="https://www.libravatar.org">Libravatar</ExternalLink> for avatars. To connect your avatar, enter your Libravatar email below. It does not have to be the same as your Consensus email. We do not store this. Any changes you make to your avatar on Libravatar will be automatically reflected here.
+            </p>
+            <input
+              autoComplete="nope"
+              className="p3 mB4 row"
+              onChange={ev => props.updateState('avatarEmail', ev.currentTarget.value)}
+              placeholder="your_email_here@example.com"
+              value={props.avatarEmail}
+              name="avatarEmail"
+            />
+          </label>
           <h2 className="fs5 mB1 lh1">
             Username
           </h2>
@@ -33,6 +49,7 @@ const EditProfile = memo((props: tComponentProps) => (
         <CitySearch
           {...props}
           updateState={props.updateState}
+          label="What city do you live in? This will help us suggest relevant events and groups for you."
         />
         <label className="row mB4" htmlFor="bio">
           <h2 className="fs5 mB1 lh1">
@@ -177,56 +194,3 @@ const EditProfile = memo((props: tComponentProps) => (
 ));
 
 export default EditProfile;
-
-/* <h2 className="fs5 mB1 lh1">
-            Avatar
-          </h2>
-          <div className="fx aiCtr mB3">
-            {origAvatar && (
-              <div className="bgGrey1 p3 mR3 fx fxdCol aiCtr" id="avatarPreview">
-                <button
-                  onClick={() => {}}
-                  className="bgWhite mB2 p2 pL3 pR3">
-                  <span
-                    role="img"
-                    className="mR1"
-                    aria-label="X Emoji">
-                  ✖️
-                  </span>
-                Remove
-                </button>
-                <img
-                  alt=""
-                  className="row"
-                  height="200"
-                  width="200"
-                  src=""
-                />
-              Current Avatar
-              </div>
-            )}
-            {!origAvatar && (
-              <label
-                htmlFor="fileUpload"
-                className="col rel fx fxdCol aiCtr jcCtr br8 brdA1 bsDashed brdW3 mB3 p5 curPtr">
-                <input
-                  type="file"
-                  name="userAvatar"
-                  id="fileUpload"
-                  onChange={() => {}}
-                  accept="image/png, image/jpeg, image/gif"
-                />
-                <span className="btn fx aiCtr p3 hvrBgGrey1">
-                  <span
-                    role="img"
-                    className="mR1"
-                    aria-label="Camera Emoji">
-                  📷
-                  </span>
-                Upload Your Avatar
-                </span>
-                <small>We recommend a size of at least 200x200px</small>
-              </label>
-            )}
-          </div>
-            */

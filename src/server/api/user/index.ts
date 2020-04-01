@@ -8,6 +8,7 @@ import {
   encrypt,
   isValidPw,
   saltedHash,
+  sha256,
   validateSchema,
 } from '../../utils';
 import {getSchema, patchSchema, postSchema} from './_schema';
@@ -96,14 +97,18 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
 // TODO no-js forms only do GET/POST - implement upsert
 user.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...query}: tUserQuery = _.get(ctx, dataPath, {});
-  const account = _.get(ctx, 'state.user', {});
   await validateSchema<tUserQuery>(ctx, patchSchema, query);
 
-  const isValidPW = await isValidPw(query.password, account.password);
+  const {avatarEmail, password, ...updateQuery} = query;
+  const loggedInAccount = _.get(ctx, 'state.user', {});
+
+  const isValidPW = await isValidPw(password, loggedInAccount.password);
   if (!isValidPW) return ctx.throw(400, 'Password is not correct');
 
-  // password stuff will cause a constraint error - pull out before updating
-  const {password, ...updateQuery} = query;
+  if (typeof avatarEmail === 'string') {
+    updateQuery.avatarHash = sha256(avatarEmail);
+  }
+
   let updatedUser = [] as tUser[];
   try {
     updatedUser = await knex(table)
@@ -113,18 +118,6 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
       .returning(userKeys);
   } catch (err) {
     return ctx.throw(500, err);
-  }
-
-  // if user was new
-  if (account.isNew && updatedUser[0].username) {
-    try {
-      await knex('accounts')
-        .limit(1)
-        .where({userId: updatedUser[0].id})
-        .update({isNew: false});
-    } catch (err) {
-      return ctx.throw(500, err);
-    }
   }
 
   if (isFormSubmit) return;

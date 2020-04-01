@@ -4,7 +4,7 @@ import React, {memo} from 'react';
 import stateCodeMap from '../../json/usa/stateCodeMap.json';
 import {tComponentProps} from './_types';
 
-export const OrgSignupComponent = memo((props: tComponentProps) => {
+export const CitySearchComponent = memo((props: tComponentProps) => {
   const onCityChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
     const city = _.find(props.cities, c => c.name === ev.currentTarget.value);
     if (city) {
@@ -22,9 +22,9 @@ export const OrgSignupComponent = memo((props: tComponentProps) => {
     if (region !== props.region) {
       props.updateState({
         city: '',
-        cityId: null,
+        cityId: 0,
         region,
-        regionId: null,
+        regionId: 0,
       });
     }
   };
@@ -66,26 +66,30 @@ export const OrgSignupComponent = memo((props: tComponentProps) => {
           </button>
         )}
       </h2>
-      <p className="fs5 copyBlack mB1">
-        All groups on Consensus are currently local, city-based organizations.
-      </p>
+      {props.label && (
+        <p className="fs5 copyBlack mB1">
+          {props.label}
+        </p>
+      )}
       <div className="mB4">
-        {!props.cityId && (
-          <select
-            name="type"
-            id="stateSelect"
-            className="row bgWhite"
-            value={props.city}
-            onBlur={onCityChange}
-            onChange={onCityChange}>
-            {props.cities.map((city: tCity) => (
-              <option key={city.id} value={city.name}>
-                {city.name}, {city.region}
-              </option>
-            ))}
-          </select>
+        {props.cityId === 0 && (
+          <label htmlFor="citySelect">
+            <select
+              name="type"
+              id="citySelect"
+              className="row bgWhite"
+              value={props.city}
+              onBlur={onCityChange}
+              onChange={onCityChange}>
+              {props.cities.map((city: tCity) => (
+                <option key={city.id} value={city.name}>
+                  {city.name}, {city.region}
+                </option>
+              ))}
+            </select>
+          </label>
         )}
-        {props.cityId && (
+        {props.cityId > 0 && (
           <div className="brdA1 p3 black br8 dInBl">
             <b>{props.city}</b>, <span className="dInBl mR3">{props.region}</span>
             <button
@@ -93,7 +97,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => {
               onClick={() => {
                 props.updateState({
                   city: '',
-                  cityId: null,
+                  cityId: 0,
                 });
               }}>
               Not the right city?

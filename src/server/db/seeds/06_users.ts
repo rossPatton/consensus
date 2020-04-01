@@ -23,13 +23,17 @@ const createUser = async () => {
 };
 
 const createTestUser = async () => ({
+  avatarHash: '0e55598077105311173b7624dd7619ca6afceecd9b2891638487b00f2c133ac5',
   bio: faker.lorem.paragraphs(),
   city: 'New York',
+  cityId: 16624,
   facebook: 'yes',
   name: 'Test User',
   phone: faker.phone.phoneNumber(),
   privateMemberships: faker.random.boolean(),
   privateRSVP: false,
+  region: 'New York',
+  regionId: 37,
   twitter: 'yes',
   username: 'testUsername',
   website: faker.internet.domainName(),
@@ -38,11 +42,14 @@ const createTestUser = async () => ({
 const createLongPasswordTestUser = async () => ({
   bio: faker.lorem.paragraphs(),
   city: 'New York',
+  cityId: 16624,
   facebook: 'yes',
   name: 'Test User Long Pass',
   phone: faker.phone.phoneNumber(),
   privateMemberships: faker.random.boolean(),
   privateRSVP: false,
+  region: 'New York',
+  regionId: 37,
   twitter: 'yes',
   username: 'testLongPass',
   website: faker.internet.domainName(),

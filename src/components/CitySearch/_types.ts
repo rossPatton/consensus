@@ -4,10 +4,11 @@ type tUpdateState = (key: any, value: string | number | object | boolean) => voi
 // these are inherited by the form
 type tProps = {
   city: string,
-  cityId: number | null,
+  cityId: number,
   geo: tGeo,
+  label?: string,
   region: string,
-  regionId: number | null,
+  regionId: number,
   session: tSession,
 };
 

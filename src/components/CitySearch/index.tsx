@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {GenericLoader} from '../../containers';
 import {getCities} from '../../redux';
 import {tContainerProps, tState, tStore} from './_types';
-import {OrgSignupComponent} from './Component';
+import {CitySearchComponent} from './Component';
 
 // use within an existing form, tie to it's updateState method
 export class CitySearchContainer extends PureComponent<tContainerProps, tState> {
@@ -24,9 +24,9 @@ export class CitySearchContainer extends PureComponent<tContainerProps, tState> 
       showRegionField: !this.state.showRegionField,
     })
 
-  updateState = (state: {[key: string]: unknown}) => {
-    if (state.region !== this.props.geo.region) {
-      this.props.getCitiesDispatch({region: state.region as string});
+  updateState = async (state: {[key: string]: unknown}) => {
+    if (state.region) {
+      await this.props.getCitiesDispatch({region: state.region as string});
     }
 
     // set local state for the city input, but then pass it up to the form
@@ -38,7 +38,7 @@ export class CitySearchContainer extends PureComponent<tContainerProps, tState> 
       <GenericLoader
         isLoading={this.props.citiesThunk.isLoading}
         render={() => (
-          <OrgSignupComponent
+          <CitySearchComponent
             {...this.props}
             cities={this.props.citiesThunk.data}
             geo={this.props.geo}

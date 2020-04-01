@@ -1,4 +1,4 @@
-import {Location} from 'history';
+import {History, Location} from 'history';
 import {match} from 'react-router';
 
 export type tStore = {
@@ -19,6 +19,7 @@ export type tAdminSections = match & {
 };
 
 export type tProps = {
+  history: History,
   location: Location,
   match: tAdminSections,
   sessionThunk: tThunk<tSession>,

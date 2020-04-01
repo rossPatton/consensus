@@ -1,6 +1,6 @@
 import {tAdminSections} from '../../../_types';
 
-export type tState = Partial<tGroup> & {password: string};
+export type tState = Partial<tGroup> & {avatarEmail: string, password: string};
 export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 export type tStore = {session: tThunk<tSession>};
 export type tKeyUnion = keyof tState;

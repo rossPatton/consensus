@@ -13,13 +13,20 @@ class HomeContainer extends PureComponent<tContainerProps> {
   componentDidUpdate() {
     const {eventsByLocationThunk, geoThunk} = this.props;
 
-    if (!__CLIENT__) return;
-    if (!geoThunk.fetched) return;
+    // if (!__CLIENT__) return;
     if (eventsByLocationThunk.fetched) return;
 
-    if (geoThunk.fetched && !eventsByLocationThunk.fetched) {
-      this.props.getEventsByLocationDispatch(geoThunk.data);
-    }
+    // TODO eventually set it up so we dont do this if user is signed in
+    this.props.getEventsByLocationDispatch(geoThunk.data);
+
+    // if (geoThunk.fetched) {
+    //   this.props.getEventsByLocationDispatch(geoThunk.data);
+    // } else if (_.get(session, 'profile.cityId', 0) > 0) {
+    //   this.props.getEventsByLocationDispatch({
+    //     city: session.profile.city,
+    //     region: session.profile.region,
+    //   });
+    // }
   }
 
   render() {
@@ -39,6 +46,7 @@ class HomeContainer extends PureComponent<tContainerProps> {
           eventsByLocationThunk={this.props.eventsByLocationThunk}
           geo={this.props.geoThunk.data}
           isLoading={this.props.isLoading}
+          session={this.props.session}
         />
       </Template>
     );

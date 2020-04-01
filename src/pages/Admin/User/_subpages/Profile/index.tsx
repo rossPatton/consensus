@@ -10,16 +10,17 @@ import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
 import {ProfileComponent} from './Component';
 
 const initialState = {
+  avatarEmail: '',
   bio: '',
   city: '',
-  cityId: null as number | null,
+  cityId: 0,
   email: '',
   name: '',
   password: '',
   privateMemberships: false,
   privateRSVP: false,
   region: '',
-  regionId: null as number | null,
+  regionId: 0,
   username: '',
 };
 
@@ -27,7 +28,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
 
-    const {created_at, updated_at, ...user}: tUser =
+    const {avatarHash, created_at, updated_at, ...user}: tUser =
       _.get(props, 'sessionThunk.data.profile', null);
 
     if (user) {
@@ -66,7 +67,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       loglevel.error(err);
     }
 
-    this.setState({password: ''});
+    this.props.history.push('/admin/profile');
   }
 
   updateState = (key: tKeyUnion, value: string | number | object | boolean) => {

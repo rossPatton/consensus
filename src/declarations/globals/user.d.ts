@@ -13,6 +13,8 @@ declare type tUser = Readonly<{
   privateEmail: boolean,
   privateMemberships: boolean,
   privateRSVP: boolean,
+  region?: string,
+  regionId?: number,
   role?: tRole,
   updated_at?: Date,
   username: string,
@@ -22,6 +24,7 @@ declare type tUser = Readonly<{
 
 // getting/posting/deleting users by org membership
 declare type tUserQuery = Partial<tUser> & tFormSubmit & tBaseQuery & Readonly<{
+  avatarEmail?: string,
   isNew?: boolean,
   password?: string,
 }>;

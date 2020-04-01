@@ -26,14 +26,6 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
 
   return (
     <>
-      {/* user isnt new, but still hasnt verified */}
-      {!session.isNew && !session.isVerified && (
-        <div className="row p3 mB3 taCtr fw600 fs6">
-          <Link to="/verify-account">
-            Verify your account. It&apos;s not required, but some groups may choose to restrict access to you.
-          </Link>
-        </div>
-      )}
       <div className="contain fx aiStart mT4">
         <aside className="c3 bgWhite br8 p3 mR3">
           <div className="fx aiCtr fs4 fw600 pB3 mB3 brdB1">
@@ -90,13 +82,10 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
                         to={`/org/${group.id}`}
                         className="br8 p2 fx aiCtr noUnderline hvrBgGrey1 trans2">
                         <div className="circ mR2 ovfHide">
-                          {group.avatarHash && (
-                            <img
-                              alt={`Avatar for ${group.name}`}
-                              src={group.avatarHash}
-                              width="70"
-                            />
-                          )}
+                          <Avatar
+                            url={group.avatarHash}
+                            type="group"
+                          />
                         </div>
                         <div>
                           <div className="fs7 fw600 mB2">
@@ -146,10 +135,22 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
               </div>
             )}
           <div className="bgWhite br8 p3">
-            {isAccount && <Account match={props.match} />}
+            {isAccount
+            && (
+              <Account
+                history={props.history}
+                match={props.match}
+              />
+            )}
             {isDeleteAccount && <DeleteAccount />}
             {isMeetings && <Meetings />}
-            {isProfile && <Profile match={props.match} />}
+            {isProfile
+              && (
+                <Profile
+                  history={props.history}
+                  match={props.match}
+                />
+              )}
             {isMemberships && <Memberships />}
           </div>
         </div>

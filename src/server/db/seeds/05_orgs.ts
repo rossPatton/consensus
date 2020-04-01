@@ -20,11 +20,10 @@ const createOrg = async (orgId: number) => {
 
   return {
     allowNonVerified: org.type === 'public',
+    avatarHash: '310816ae8db99143324e54bb7b9b01f5cb98d37dde848e8a37292e1cde97c1b9',
     category,
     city: org.city,
     cityId: 16624,
-    country: 'United States',
-    countryId: 1,
     description: faker.lorem.paragraphs(),
     facebook: 'https://facebook.com',
     handle: org.handle,

@@ -29,7 +29,6 @@ const createTestUserAccount = async () => {
   const password = encrypt(saltedHash);
 
   return {
-    avatarHash: '0e55598077105311173b7624dd7619ca6afceecd9b2891638487b00f2c133ac5',
     login: 'testAccount',
     password,
     privateEmail: faker.random.boolean(),

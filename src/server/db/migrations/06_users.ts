@@ -17,11 +17,31 @@ exports.up = async (knex: Knex) => {
     // contact info (useful if in leadership), ideally eventually useful for 2 factor
     table.string('phone').unique();
 
-    // optional - allow user to set their primary city
-    // @TODO eventually build form such that when a user selects a city,
-    // the cooresponding region and zip is shown, so we can use that for geolocation
-    // instead of geolocating every time
-    table.string('city').defaultTo('');
+    table.string('city');
+    table.string('region');
+
+    table.string('country')
+      .defaultTo('United States')
+      .references('countries.name')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+
+    // for ease of lookup later if need be
+    table.integer('cityId')
+      .references('cities.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+
+    table.integer('countryId')
+      .defaultTo(1)
+      .references('countries.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+
+    table.integer('regionId')
+      .references('regions.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
 
     // user's preferred language
     table.string('language').notNullable().defaultTo('en');

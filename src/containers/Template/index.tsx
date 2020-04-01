@@ -11,6 +11,12 @@ import {tProps} from './_types';
 class Template extends PureComponent<tProps> {
   constructor(props: tProps) {
     super(props);
+    // if already fetched, dont do again
+    if (props.geoThunk.fetched) return;
+
+    // if user is logged in and has given us location info
+    // if (_.get(props, 'session.profile.cityId', 0) !== 0) return;
+
     props.getGeoDispatch();
   }
 
@@ -22,14 +28,12 @@ class Template extends PureComponent<tProps> {
       <>
         <Header />
         <ErrorBoundary status={geoStatus}>
-          <GenericLoader
-            isLoading={geoThunk.isLoading}
-            render={() => (
-              <main className="mT5 mB5 pB5">
-                {children}
-              </main>
-            )}
-          />
+          <main className="mT5 mB5 pB5">
+            <GenericLoader
+              isLoading={geoThunk.isLoading}
+              render={() => children}
+            />
+          </main>
         </ErrorBoundary>
         <Footer />
       </>
@@ -37,8 +41,9 @@ class Template extends PureComponent<tProps> {
   }
 }
 
-const mapStateToProps = (store: {geo: tThunk<tGeo>}) => ({
+const mapStateToProps = (store: {geo: tThunk<tGeo>, session: tThunk<tSession>}) => ({
   geoThunk: store.geo,
+  session: store.session.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
@@ -49,5 +54,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(Template);
-
-// export const AppShellHot = hot(module)(AppShellComponent);

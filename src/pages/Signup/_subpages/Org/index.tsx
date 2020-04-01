@@ -1,28 +1,24 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {GenericLoader} from '../../../../containers';
-import {getCities, login, postGroup} from '../../../../redux';
+import {login, postGroup} from '../../../../redux';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {OrgSignupComponent} from './Component';
 
 export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
-    if (!props.citiesThunk.fetched) {
-      props.getCitiesDispatch({region: props.geo.region});
-    }
 
     this.state = {
       category: 'Political',
       city: '',
-      cityId: null,
+      cityId: 0,
       handle: '',
       login: '',
       name: '',
       password: '',
       region: '',
-      regionId: null,
+      regionId: 0,
       showRegionField: false,
       type: 'public' as tPrivacyEnum,
     };
@@ -42,12 +38,6 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
     // if making multiple changes at once, don't update at end
     if (typeof value === 'object') {
       return this.setState(value);
-    }
-
-    if (stateKey === 'region'
-      && typeof value === 'string'
-      && value !== this.props.geo.region) {
-      this.props.getCitiesDispatch({region: value});
     }
 
     this.setState({
@@ -82,30 +72,22 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
       || !type;
 
     return (
-      <GenericLoader
-        isLoading={this.props.citiesThunk.isLoading}
-        render={() => (
-          <OrgSignupComponent
-            {...this.props}
-            {...this.state}
-            cities={this.props.citiesThunk.data}
-            disabled={disabled}
-            onSubmit={this.onSubmit}
-            updateState={this.updateState}
-          />
-        )}
+      <OrgSignupComponent
+        {...this.props}
+        {...this.state}
+        disabled={disabled}
+        onSubmit={this.onSubmit}
+        updateState={this.updateState}
       />
     );
   }
 }
 
 const mapStateToProps = (store: {geo: tThunk<tGeo>, cities: tThunk<tCity[]>}) => ({
-  citiesThunk: store.cities,
   geo: store.geo.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getCitiesDispatch: (query: any) => dispatch(getCities(query)),
   loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
   postGroupDispatch: (org: tGroupQuery) => dispatch(postGroup(org)),
 });

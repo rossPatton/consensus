@@ -18,16 +18,13 @@ export type tStateUnion = keyof tState;
 export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export type tContainerProps = {
-  citiesThunk: tThunk<tCity[]>,
   geo: tGeo,
-  getCitiesDispatch: (query?: {region: string}) => tThunkPayload<tCity[]>,
   location: Location,
   loginDispatch: (query: tLoginQuery) => tThunkPayload<tAccount>,
   postGroupDispatch: (query: tGroupQuery) => tThunkPayload<tGroup>,
 };
 
 export type tComponentProps = tState & {
-  cities: tCity[],
   disabled: boolean,
   geo: tGeo,
   onSubmit: (ev: React.FormEvent<HTMLFormElement>) => void,

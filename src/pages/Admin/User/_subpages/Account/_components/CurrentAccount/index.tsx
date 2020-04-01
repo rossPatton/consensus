@@ -16,16 +16,16 @@ const CurrentAccount = memo((props: tComponentProps) => (
         ************
       </span>
     </h2>
-    <h2 className="fs5 mB4 lh1">
-      Avatar Connected? {props.session.avatarHash ? 'Yes' : 'No'}
-    </h2>
     {props.session.emails
       && props.session.emails.length > 0
       && (
         <h2 className="fs5 mB4 lh1">
-          Email address: <span className="copyBlack">
+          Email: <span className="copyBlack mR3">
             {props.session.emails[0].email}
           </span>
+          <Link to="/verify-account">
+            Verify your acount with this email
+          </Link>
         </h2>
       )}
     <Link

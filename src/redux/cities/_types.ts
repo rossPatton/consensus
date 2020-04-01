@@ -1,2 +1,2 @@
-import { tFailureAction, tSuccessAction } from './get/_types';
-export type tCityActionUnion = tFailureAction | tSuccessAction;
+import { tFailureAction, tInitAction, tSuccessAction } from './get/_types';
+export type tCityActionUnion = tFailureAction | tInitAction | tSuccessAction;

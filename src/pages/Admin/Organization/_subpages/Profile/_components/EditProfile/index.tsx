@@ -3,7 +3,7 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {tComponentProps} from '../../_types';
-import {PasswordInput} from '../../../../../../../components';
+import {ExternalLink, PasswordInput} from '../../../../../../../components';
 import {categories} from '../../../../../../../constants';
 
 const EditProfile = memo((props: tComponentProps) => (
@@ -17,8 +17,24 @@ const EditProfile = memo((props: tComponentProps) => (
           Edit your Profile
         </h1>
       </legend>
+      <label htmlFor="avatarEmail">
+        <h2 className="fs5 mB1 lh1">
+          Change Group Logo
+        </h2>
+        <p className="fs5 copyBlack mB1">
+          We use <ExternalLink noFollow to="https://www.libravatar.org">Libravatar</ExternalLink> for avatars. To connect your avatar, enter your Libravatar email below. It does not have to be the same as your Consensus email. We do not store this. Any changes you make to your avatar on Libravatar will be automatically reflected here.
+        </p>
+        <input
+          autoComplete="nope"
+          className="p3 mB3 row"
+          onChange={ev => props.updateState('avatarEmail', ev)}
+          placeholder="your_email_here@example.com"
+          value={props.avatarEmail}
+          name="avatarEmail"
+        />
+      </label>
       <h2 className="fs5 mB1 lh1">
-        Category
+        Change Category
       </h2>
       <select
         className="mB3 row"
@@ -32,7 +48,7 @@ const EditProfile = memo((props: tComponentProps) => (
         ))}
       </select>
       <h2 className="fs5 mB1 lh1">
-        Group Type
+        Change Group Type
       </h2>
       <select
         className="row mB1"
@@ -54,7 +70,7 @@ const EditProfile = memo((props: tComponentProps) => (
       </small>
       <label className="row mB3" htmlFor="memberName">
         <h2 className="fs5 mB1 lh1">
-          Membership Title
+          Change Membership Title
         </h2>
         <input
           onChange={ev => props.updateState('memberName', ev)}
@@ -66,7 +82,7 @@ const EditProfile = memo((props: tComponentProps) => (
       </label>
       <label className="row mB3" htmlFor="modName">
         <h2 className="fs5 mB1 lh1">
-          Moderator Title
+          Change Moderator Title
         </h2>
         <input
           onChange={ev => props.updateState('modName', ev)}
@@ -77,7 +93,7 @@ const EditProfile = memo((props: tComponentProps) => (
         />
       </label>
       <h2 className="fs5 mB1 lh1">
-        Description
+        Change Description
       </h2>
       <textarea
         rows={6}

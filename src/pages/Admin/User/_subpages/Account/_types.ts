@@ -1,7 +1,8 @@
+import {History} from 'history';
+
 import {tAdminSections} from '../../../_types';
 
 export type tState = {
-  avatarEmail: string,
   currentPassword: string,
   email: string,
   isVerified: boolean,
@@ -13,6 +14,7 @@ export type tState = {
 export type tKeyUnion = keyof tState;
 
 export type tContainerProps = {
+  history: History,
   loginDispatch: (login: tLoginQuery) => tThunkPayload<tSession>,
   match: tAdminSections,
   patchAccountDispatch: (query: tAccountQuery) => tThunkPayload<tAccount>,

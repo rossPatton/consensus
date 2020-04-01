@@ -2,7 +2,7 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {tComponentProps} from '../../_types';
-import {ExternalLink, PasswordInput} from '../../../../../../../components';
+import {PasswordInput} from '../../../../../../../components';
 
 const EditAccount = memo((props: tComponentProps) => (
   <form
@@ -15,22 +15,6 @@ const EditAccount = memo((props: tComponentProps) => (
         <h1 className="fs3 mB3">Edit your account</h1>
       </legend>
       <div className="mB5">
-        <label htmlFor="avatarEmail">
-          <h2 className="fs5 mB1 lh1">
-            Connect your avatar
-          </h2>
-          <p className="fs5 copyBlack mB1">
-            We use <ExternalLink noFollow to="https://www.libravatar.org">Libravatar</ExternalLink> for our avatar system. To connect your avatar, enter your Libravatar email below. It does not have to be the same as your Consensus email. We do not store this email. Any changes you make to your avatar on Libravatar will be automatically reflected here.
-          </p>
-          <input
-            autoComplete="nope"
-            className="p3 mB4 row"
-            onChange={ev => props.updateState('avatarEmail', ev.currentTarget.value)}
-            placeholder="your_email_here@example.com"
-            value={props.avatarEmail}
-            name="avatarEmail"
-          />
-        </label>
         <label htmlFor="newLogin">
           <h2 className="fs5 mB1 lh1">
             Change login
@@ -52,7 +36,7 @@ const EditAccount = memo((props: tComponentProps) => (
             Change email address
           </h2>
           <p className="fs5 copyBlack mB1">
-            Used for account verification, event reminders, etc.
+            Used for account verification.
           </p>
           <input
             autoComplete="nope"

@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 import {Link} from 'react-router-dom';
 
+import {Avatar} from '../../../components';
 import {
   Account,
   DeleteGroup,
@@ -39,24 +40,18 @@ const GroupAdminContainer = memo((props: tProps) => {
           Your group will be deleted on {dayJS(session.deletionDeadline).format('MMM DD')}
         </div>
       )}
-      {!session.isVerified && (
-        <div className="row p3 mB3 taCtr fw600 fs6">
-          <Link to="/verify-account">
-            Verify your account. Your group will not be listed and some functionality will be unavailable until you do.
-          </Link>
+      {(!session.profile.emails || session.profile.emails.length === 0) && (
+        <div className="bgYellow row p3 mB3 taCtr fw600 fs6">
+          Welcome to Consensus! Your group will not be listed and some functionality will be unavailable until you link an email to this account and verify it. Click <Link to="/account/edit">here</Link> to add your email.
         </div>
       )}
       <div className="contain mT4 fx aiStart">
         <aside className="c3 bgWhite br8 p3 mR3">
           <div className="fx aiCtr fw600 pB3 mB3 brdB1">
-            <div>
-              <img
-                alt=""
-                className="bgGrey3 circ mR3"
-                src="https://s3.amazonaws.com/uifaces/faces/twitter/sta1ex/128.jpg"
-                width="70"
-              />
-            </div>
+            <Avatar
+              url={session.profile.avatarHash}
+              type="group"
+            />
             <div className="lh1">
               <div className="fs7 mB1">You are signed in as the <b>admin</b> for:</div>
               <h1 className="fs4">

@@ -29,7 +29,7 @@ export const HomeComponent = memo((props: tComponentProps) => (
         isLoading={props.eventsByLocationThunk.isLoading}
         render={() => (
           <div className="p4">
-            <h2 className="fs4 mB3">Upcoming Meetings in {props.geo.city}</h2>
+            <h2 className="fs4 mB3">Upcoming Meetings in {props.geo.city || props.session.profile.cityId}</h2>
             <Events
               horizontal
               showOrgName

@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import {groupKeys} from '../_constants';
 import {knex} from '../../db/connection';
-import {encrypt, saltedHash, validateSchema} from '../../utils';
+import {encrypt, isValidPw, saltedHash, sha256, validateSchema} from '../../utils';
 import {patchSchema, postSchema, schema} from './_schema';
 
 export const org = new Router();
@@ -31,24 +31,37 @@ org.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 org.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const {email, isFormSubmit, password, ...update} = _.get(ctx, dataPath, {});
-  await validateSchema<tGroupQuery>(ctx, patchSchema, update);
+  const query = _.get(ctx, dataPath, {});
+  await validateSchema<tGroupQuery>(ctx, patchSchema, query);
+
+  const loggedInAccount: tAccount = _.get(ctx, 'state.user', {});
+  const {avatarEmail, isFormSubmit, password, ...updateQuery} = query;
+
+  const isValidPW = await isValidPw(password, loggedInAccount.password);
+  if (!isValidPW) return ctx.throw(400, 'Password is not correct');
+
+  const origHash = loggedInAccount.avatarHash;
+  let newAvatarHash = null;
+
+  if (typeof avatarEmail === 'string') {
+    newAvatarHash = sha256(avatarEmail);
+    if (newAvatarHash !== origHash) {
+      updateQuery.avatarHash = newAvatarHash;
+    }
+  }
 
   let updatedGroup = [] as tGroup[];
   try {
     updatedGroup = await knex(table)
       .limit(1)
-      .where({id: update.id})
-      .update(update)
+      .where({id: updateQuery.id})
+      .update(updateQuery)
       .returning(groupKeys);
   } catch (err) {
     return ctx.throw(500, err);
   }
 
-  ctx.body = {
-    ...updatedGroup[0],
-    email,
-  };
+  ctx.body = updatedGroup[0];
 });
 
 org.post(route, async (ctx: Koa.ParameterizedContext) => {

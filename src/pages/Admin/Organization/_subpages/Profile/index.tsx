@@ -13,6 +13,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
     const {
+      avatarHash,
       city,
       cityId,
       country,
@@ -27,23 +28,18 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
 
     this.state = {
       ...editablePartOfGroup,
+      avatarEmail: '',
       password: '',
     };
   }
 
   onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {password, ...stuffToPatch} = this.state;
-
-    let patchedOrg: tActionPayload<tGroup>;
     try {
-      patchedOrg = await this.props.patchOrgDispatch(stuffToPatch);
+      await this.props.patchOrgDispatch(this.state);
     } catch (err) {
       loglevel.error(err);
     }
-
-    // TODO trigger error boundary or something
-    if (!patchedOrg.payload) return;
 
     // update session by 'logging in' again, with the new account info
     try {

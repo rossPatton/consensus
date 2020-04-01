@@ -44,11 +44,6 @@ exports.up = async (knex: Knex) => {
     // and a new one must be generated
     table.timestamp('verificationExpires').defaultTo(null);
 
-    // the auto-generated string for a libravatar avatar
-    // it falls back to gravatar if lookup fails
-    // we do NOT store the actual email we are given, just the generated hashed url
-    table.string('avatarHash').defaultTo(null);
-
     // if group account and admin iniates group deletion
     // deadline is set for 1 week, cron job will automatically clear out entries
     table.timestamp('deletionDeadline');

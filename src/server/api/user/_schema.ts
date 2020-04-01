@@ -13,9 +13,12 @@ export const postSchema = Joi.object().keys({
 });
 
 export const patchSchema = Joi.object().keys({
+  avatarEmail: Joi.string().email().optional(),
   bio: Joi.string(),
-  city: Joi.string(),
-  cityId: Joi.number().integer(),
+  city: Joi.string().allow(null).optional(),
+  cityId: Joi.number().integer().optional(),
+  country: Joi.string().allow(null).optional(),
+  countryId: Joi.number().integer().optional(),
   // lives in a separate table
   email: Joi.string().email(),
   facebook: Joi.string(),
@@ -27,6 +30,8 @@ export const patchSchema = Joi.object().keys({
   privateEmail: Joi.bool(),
   privateMemberships: Joi.bool(),
   privateRSVP: Joi.bool(),
+  region: Joi.string().allow(null).optional(),
+  regionId: Joi.number().integer().optional(),
   username: Joi.string(),
   twitter: Joi.string(),
   website: Joi.string(),

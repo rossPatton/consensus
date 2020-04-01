@@ -7,7 +7,7 @@ import {knex} from '../db/connection';
 export const getProfileByAccountId = async (
   ctx: Koa.ParameterizedContext,
   account: tAccount): Promise<tGroup | tUser> => {
-  const {avatarHash, orgId, userId} = account;
+  const {orgId, userId} = account;
 
   let profile: tGroup | tUser;
   if (orgId) {
@@ -30,8 +30,5 @@ export const getProfileByAccountId = async (
     }
   }
 
-  return {
-    avatarHash,
-    ...profile,
-  };
+  return profile;
 };

@@ -72,6 +72,7 @@ exports.up = async (knex: Knex) => {
     table.string('memberName').defaultTo('Member').notNullable();
     table.string('modName').defaultTo('Facilitator').notNullable();
     table.boolean('allowNonVerified').defaultTo(false).notNullable();
+
     // the auto-generated string for a libravatar avatar
     // it falls back to gravatar if lookup fails
     // we do NOT store the actual email we are given, just the generated hashed url

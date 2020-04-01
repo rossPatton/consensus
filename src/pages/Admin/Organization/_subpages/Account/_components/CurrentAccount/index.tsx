@@ -19,12 +19,15 @@ const CurrentAccount = memo((props: tComponentProps) => (
     {props.session.emails
       && props.session.emails.length > 0
       && (
-        <h2 className="fs5 mB4 lh1">
+        <h2 className="fs5 mB1 lh1">
           Email address: <span className="copyBlack">
             {props.session.emails[0].email}
           </span>
         </h2>
       )}
+    <Link className="dInBl mB4" to="/verify-account">
+      Verify this email
+    </Link>
     <Link
       to="/admin/account/edit"
       className="btn p3 pL4 pR4 hvrBgGrey1 trans1">
