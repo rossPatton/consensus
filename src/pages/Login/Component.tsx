@@ -8,24 +8,24 @@ export const LoginComponent = memo((props: tComponentProps) => (
   <>
     <form
       method="POST"
-      className="contain mT4 mB3"
+      className="contain mt-4 mb-3"
       name="userLoginForm"
       autoComplete="off"
       action="/auth/v1/login"
       onSubmit={props.login}>
       <fieldset>
         <legend>
-          <h1 className="fs2 mB3">Login to your account</h1>
+          <h1 className="fs2 mb-3">Login to your account</h1>
         </legend>
         <label htmlFor="loginInput">
-          <h3 className="fs5 mB1">Login</h3>
+          <h3 className="fs5 mb-1">Login</h3>
           <input
             required
             autoComplete="login"
             name="username" // for non-js submit and passportjs
             id="loginInput"
             placeholder="yourSecretLogin"
-            className="p3 row mB3"
+            className="p-3 w-full mb-3"
             value={props.username}
             onChange={ev => props.updateState('username', ev)}
           />
@@ -40,16 +40,16 @@ export const LoginComponent = memo((props: tComponentProps) => (
         />
         <button
           disabled={props.isClient && (!props.password || !props.username)}
-          className="p3 pL4 pR4 mR2">
+          className="p-3 pl-4 pR4 mr-2">
           Login
         </button>
-        <Link to="/password-reset" className="btn p3 pL4 pR4">
+        <Link to="/password-reset" className="btn p-3 pl-4 pR4">
           Forget your password?
         </Link>
       </fieldset>
     </form>
     {props.error && (
-      <div className="black fw600 contain">
+      <div className="black text-bold contain">
         {props.error}
       </div>
     )}

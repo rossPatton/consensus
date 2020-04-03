@@ -40,14 +40,8 @@ org.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const isValidPW = await isValidPw(password, loggedInAccount.password);
   if (!isValidPW) return ctx.throw(400, 'Password is not correct');
 
-  const origHash = loggedInAccount.avatarHash;
-  let newAvatarHash = null;
-
   if (typeof avatarEmail === 'string') {
-    newAvatarHash = sha256(avatarEmail);
-    if (newAvatarHash !== origHash) {
-      updateQuery.avatarHash = newAvatarHash;
-    }
+    updateQuery.avatarHash = sha256(avatarEmail);
   }
 
   let updatedGroup = [] as tGroup[];

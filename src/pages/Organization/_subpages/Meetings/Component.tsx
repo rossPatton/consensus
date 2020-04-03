@@ -8,7 +8,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
     {props.originalEvents.length === 0
       && !props.hideMeetings
       && (
-        <h2 className="fs3 mB3">
+        <h2 className="fs3 mb-3">
           This group has no upcoming meetings.
         </h2>
       )}
@@ -22,7 +22,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
       && (
         <>
           <FilterPanel
-            className="fx aiCtr mB3 fs6 fw600"
+            className="flex flex-col d:flex-row items-center mb-3 text-sm text-bold"
             onSearchChange={props.onSearchChange}
             placeholder="Filter events by title"
           />

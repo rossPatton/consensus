@@ -5,15 +5,15 @@ import {tComponentProps} from './_types';
 
 export const MeetingsComponent = memo((props: tComponentProps) => (
   <>
-    <ul className="fx aiCtr mB3" role="navigation">
+    <ul className="flex flex-col d:flex-row items-center mb-3" role="navigation">
       <li>
-        <h1 className="fs3 mR3">
+        <h1 className="fs3 mr-3">
           Your RSVPs
         </h1>
       </li>
     </ul>
     <FilterPanel
-      className="fx aiCtr mB4 fs6 fw600"
+      className="flex flex-col d:flex-row items-center mb-4 text-sm text-bold"
       onFilterOptionChange={props.onFilterOptionChange}
       onSearchChange={props.onSearchChange}
       filterOptions={[

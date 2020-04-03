@@ -8,7 +8,7 @@ const OrganizationTabs = memo((props: tProps) => {
 
   return (
     <nav className="fs5">
-      <ul className="fx aiCtr ovfScr">
+      <ul className="flex flex-col d:flex-row items-center ovfScr">
         <li>
           <Tab
             match={props.match}

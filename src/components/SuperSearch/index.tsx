@@ -36,15 +36,15 @@ class SuperSearchContainer extends React.PureComponent<any, any> {
   render() {
     return (
       <form
-        className="p3 bgWhite br8 mB4 fs6 fw600"
+        className="p-3 bg-white br8 mb-4 text-sm text-bold"
         name="superSearch"
         autoComplete="off"
         onSubmit={this.onSubmit}
         action="/api/v1/search">
         <fieldset>
-          <div className="fx aiCtr">
+          <div className="flex flex-col d:flex-row items-center">
             <select
-              className="mR2"
+              className="mr-2"
               onBlur={this.onFilterOptionChange}
               onChange={this.onFilterOptionChange}>
               {filterOptions.map(opt => (
@@ -55,9 +55,9 @@ class SuperSearchContainer extends React.PureComponent<any, any> {
                 </option>
               ))}
             </select>
-            <label className="row" htmlFor="superSearch">
+            <label className="w-full" htmlFor="superSearch">
               <input
-                className="bgGrey1 row p3 br4 mR3"
+                className="bg-gray-1 w-full p-3 br4 mr-3"
                 name="superSearch"
                 onChange={this.onChange}
                 placeholder="Search by group name"

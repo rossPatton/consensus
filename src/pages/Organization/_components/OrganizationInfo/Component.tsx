@@ -11,10 +11,10 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
   const {description = ''} = props.org;
 
   return (
-    <div className="bgWhite br8 mR3 c3 col growNone ovfHide">
-      <div className="bgGrey4 lh1 fx aiCtr jcBetween p3">
+    <div className="bg-white br8 mr-3 c3  growNone ovfHide">
+      <div className="bgGrey4 leading-none flex items-center jcBetween p-3">
         {!role && (
-          <small className="fw600 white">
+          <small className="text-bold white">
             {org.type === 'public' && 'Public Group'}
             {org.type === 'private' && 'Private Group'}
             {org.type === 'hidden' && 'Hidden Group'}
@@ -22,17 +22,17 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
         )}
         <div
           className={cx({
-            'col fx aiCtr': true,
+            ' flex items-center': true,
             jcEnd: !role,
           })}>
           <JoinForm role={role} />
         </div>
         <LeaveForm org={org} role={role} />
       </div>
-      <div className="p3">
-        <div className="mB3">
-          <div className="fx aiCtr">
-            <div className="circ mR2 ovfHide">
+      <div className="p-3">
+        <div className="mb-3">
+          <div className="flex flex-col d:flex-row items-center">
+            <div className="circ mr-2 ovfHide">
               <PlaceholderImage
                 height={60}
                 width={60}
@@ -42,7 +42,7 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
               <small className="ttUpper fs7">
                 {props.org.category}
               </small>
-              <h1 className="fs3 lh1">
+              <h1 className="fs3 leading-none">
                 {typeof match.params.section === 'undefined' && (
                   props.org.name
                 )}
@@ -68,12 +68,12 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
             </div>
           </div>
         </div>
-        <p className="fs6">
+        <p className="text-sm">
           {description.split('\n')[0]}
         </p>
-        <div className="fx aiCtr">
+        <div className="flex flex-col d:flex-row items-center">
           {org.facebook && (
-            <div className="mR2">
+            <div className="mr-2">
               <ExternalLink
                 noFollow
                 to={org.facebook}>
@@ -86,7 +86,7 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
             </div>
           )}
           {org.twitter && (
-            <div className="mR2">
+            <div className="mr-2">
               <ExternalLink
                 noFollow
                 to={org.twitter}>
@@ -99,7 +99,7 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
             </div>
           )}
           {org.website && (
-            <div className="mR2">
+            <div className="mr-2">
               <ExternalLink
                 noFollow
                 to={org.website}>

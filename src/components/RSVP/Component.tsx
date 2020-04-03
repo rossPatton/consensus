@@ -17,8 +17,8 @@ export const RSVPComponent = (props: tComponentProps) => {
       action="/api/v1/rsvps"
       onSubmit={ev => setRsvp({ev, eventId})}>
       <fieldset>
-        <div className="fx aiCtr fs6 fw600 lh1">
-          <legend className="mR2">
+        <div className="flex items-center text-sm text-bold leading-none">
+          <legend className="mr-2">
             RSVP {userRSVPsPrivately ? 'Privately' : 'Publicly'}
           </legend>
           <button
@@ -26,9 +26,9 @@ export const RSVPComponent = (props: tComponentProps) => {
             type={props.isClient ? 'button' : 'submit'}
             onClick={ev => setRsvp({ev, eventId})}
             className={cx({
-              'mR1 hvrBgGrey1': true,
-              'p2 pL3 pR3': !props.compact,
-              bgGrey3: !!rsvp && rsvp.value === 'yes',
+              'mr-1 hover:bg-gray-11': true,
+              'p-2 pl-3 pr-3': !props.compact,
+              'bg-gray-3': !!rsvp && rsvp.value === 'yes',
             })}>
             Yes
           </button>
@@ -37,9 +37,9 @@ export const RSVPComponent = (props: tComponentProps) => {
             type={props.isClient ? 'button' : 'submit'}
             onClick={ev => setRsvp({ev, eventId})}
             className={cx({
-              'mR1 hvrBgGrey1': true,
-              'p2 pL3 pR3': !props.compact,
-              bgGrey3: !!rsvp && rsvp.value === 'no',
+              'mr-1 hover:bg-gray-1': true,
+              'p-2 pl-3 pr-3': !props.compact,
+              'bg-gray-3': !!rsvp && rsvp.value === 'no',
             })}>
             No
           </button>
@@ -48,9 +48,9 @@ export const RSVPComponent = (props: tComponentProps) => {
             type={props.isClient ? 'button' : 'submit'}
             onClick={ev => setRsvp({ev, eventId})}
             className={cx({
-              'mR1 hvrBgGrey1': true,
-              'p2 pL3 pR3': !props.compact,
-              bgGrey3: !!rsvp && rsvp.value === 'maybe',
+              'mr-1 hover:bg-gray-1': true,
+              'p-2 pl-3 pr-3': !props.compact,
+              'bg-gray-3': !!rsvp && rsvp.value === 'maybe',
             })}>
             Maybe
           </button>

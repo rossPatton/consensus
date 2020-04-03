@@ -7,25 +7,25 @@ import {tComponentProps} from './_types';
 
 export const RegionComponent = memo((props: tComponentProps) => (
   <>
-    <h1 className="mB2">
+    <h1 className="mb-2">
       {props.region.name}
     </h1>
     <FilterPanel
-      className="fx aiCtr p3 bgWhite br8 mB4 fs6 fw600"
+      className="flex flex-col d:flex-row items-center p-3 bg-white br8 mb-4 text-sm text-bold"
       onSearchChange={props.onChange}
     />
-    <h2 className="mB2 fs3">
+    <h2 className="mb-2 fs3">
       {props.citiesToRender.length > 0 && `Cities in ${props.region.name}`}
       {props.citiesToRender.length === 0 && 'No cities found'}
     </h2>
-    <ul className="fx fxWrap">
+    <ul className="flex flex-col d:flex-row fxWrap">
       {props.citiesToRender.map((city, i) => (
         <li
           key={i}
-          className="col fxg0 third mB3">
+          className=" fxg0 third mb-3">
           <Link
             to={`${props.match.url}/${slugify(city.name)}`}
-            className="copyBlack fw600 noUnderline">
+            className="copyBlack text-bold no-underline">
             {city.name}
           </Link>
         </li>

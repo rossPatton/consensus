@@ -4,7 +4,7 @@ import {Helmet, PlanMeeting as PlanMeetingComponent} from '../../../../../compon
 import {tProps} from './_types';
 
 const PlanMeeting = memo((props: tProps) => (
-  <div className="bgWhite br8 p3">
+  <div className="bg-white br8 p-3">
     <Helmet
       canonical=""
       title=""
@@ -15,7 +15,7 @@ const PlanMeeting = memo((props: tProps) => (
         { property: 'og:description', content: '' },
       ]}
     />
-    <h1 className="fs3 mB3">
+    <h1 className="fs3 mb-3">
       Plan Meeting
     </h1>
     <PlanMeetingComponent

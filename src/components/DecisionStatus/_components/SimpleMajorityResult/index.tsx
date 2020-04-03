@@ -12,10 +12,10 @@
 //   return (
 //     <>
 //       {isPassed && (
-//         <small className="bgBlueLite br8 p1 pL2 pR2 mR2">
+//         <small className="bgBlueLite br8 p-1 pl-2 pr-2 mr-2">
 //           <span
 //             role="img"
-//             className="mR1"
+//             className="mr-1"
 //             aria-label="Check Mark Emoji">
 //             ✔️
 //           </span>
@@ -23,10 +23,10 @@
 //         </small>
 //       )}
 //       {!isPassed && (
-//         <small className="bgRedLite br8 p1 pL2 pR2 mR2">
+//         <small className="bgRedLite br8 p-1 pl-2 pr-2 mr-2">
 //           <span
 //             role="img"
-//             className="mR1"
+//             className="mr-1"
 //             aria-label="Big X Emoji">
 //             ❌
 //           </span>

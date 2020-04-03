@@ -27,7 +27,7 @@ class SearchContainer extends React.PureComponent<any, {value: string}> {
   render() {
     return (
       <form
-        className="mR2"
+        className="mr-2"
         name="search"
         autoComplete="off"
         onSubmit={this.onSubmit}
@@ -35,7 +35,7 @@ class SearchContainer extends React.PureComponent<any, {value: string}> {
         <fieldset>
           <label htmlFor="headerSearch">
             <input
-              className="p2 pL3 br4"
+              className="p-2 pl-3 br4"
               name="headerSearch"
               onChange={this.onChange}
               placeholder="Search group name"

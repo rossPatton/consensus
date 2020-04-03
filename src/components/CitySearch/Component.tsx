@@ -33,14 +33,14 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
     <>
       {props.showRegionField && (
         <>
-          <h2 className="fs5 mB1 lh1">
+          <h2 className="fs5 mb-1 leading-none">
             Pick a different state
           </h2>
           <label htmlFor="stateSelect">
             <select
               name="type"
               id="stateSelect"
-              className="mB4 row bgWhite"
+              className="mb-4 w-full bg-white"
               value={props.region}
               onBlur={onRegionChange}
               onChange={onRegionChange}>
@@ -53,8 +53,8 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
           </label>
         </>
       )}
-      <h2 className="fs5 mB1 lh1">
-        City in <span className="dInBl mR2">
+      <h2 className="fs5 mb-1 leading-none">
+        City in <span className="dInBl mr-2">
           {(!props.showRegionField && props.geo.region) && props.geo.region}
           {(props.showRegionField && props.region) && props.region}
         </span>
@@ -67,17 +67,17 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
         )}
       </h2>
       {props.label && (
-        <p className="fs5 copyBlack mB1">
+        <p className="fs5 copyBlack mb-1">
           {props.label}
         </p>
       )}
-      <div className="mB4">
+      <div className="mb-4">
         {props.cityId === 0 && (
           <label htmlFor="citySelect">
             <select
               name="type"
               id="citySelect"
-              className="row bgWhite"
+              className="w-full bg-white"
               value={props.city}
               onBlur={onCityChange}
               onChange={onCityChange}>
@@ -90,8 +90,8 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
           </label>
         )}
         {props.cityId > 0 && (
-          <div className="brdA1 p3 black br8 dInBl">
-            <b>{props.city}</b>, <span className="dInBl mR3">{props.region}</span>
+          <div className="brdA1 p-3 black br8 dInBl">
+            <b>{props.city}</b>, <span className="dInBl mr-3">{props.region}</span>
             <button
               type="button"
               onClick={() => {

@@ -9,35 +9,35 @@ import {categories} from '../../../../../../../constants';
 const EditProfile = memo((props: tComponentProps) => (
   <form
     id="form"
-    className="row"
+    className="w-full"
     onSubmit={props.onSubmit}>
     <fieldset>
       <legend>
-        <h1 className="fs3 mB3 lh1">
+        <h1 className="fs3 mb-3 leading-none">
           Edit your Profile
         </h1>
       </legend>
       <label htmlFor="avatarEmail">
-        <h2 className="fs5 mB1 lh1">
+        <h2 className="fs5 mb-1 leading-none">
           Change Group Logo
         </h2>
-        <p className="fs5 copyBlack mB1">
+        <p className="fs5 copyBlack mb-1">
           We use <ExternalLink noFollow to="https://www.libravatar.org">Libravatar</ExternalLink> for avatars. To connect your avatar, enter your Libravatar email below. It does not have to be the same as your Consensus email. We do not store this. Any changes you make to your avatar on Libravatar will be automatically reflected here.
         </p>
         <input
           autoComplete="nope"
-          className="p3 mB3 row"
+          className="p-3 mb-3 w-full"
           onChange={ev => props.updateState('avatarEmail', ev)}
           placeholder="your_email_here@example.com"
           value={props.avatarEmail}
           name="avatarEmail"
         />
       </label>
-      <h2 className="fs5 mB1 lh1">
+      <h2 className="fs5 mb-1 leading-none">
         Change Category
       </h2>
       <select
-        className="mB3 row"
+        className="mb-3 w-full"
         defaultValue={props.category}
         onBlur={ev => props.updateState('category', ev)}
         onChange={ev => props.updateState('category', ev)}>
@@ -47,11 +47,11 @@ const EditProfile = memo((props: tComponentProps) => (
           </option>
         ))}
       </select>
-      <h2 className="fs5 mB1 lh1">
+      <h2 className="fs5 mb-1 leading-none">
         Change Group Type
       </h2>
       <select
-        className="row mB1"
+        className="w-full mb-1"
         value={props.type}
         onBlur={ev => props.updateState('type', ev)}
         onChange={ev => props.updateState('type', ev)}>
@@ -65,93 +65,93 @@ const EditProfile = memo((props: tComponentProps) => (
           Hidden
         </option>
       </select>
-      <small className="dBl mB3 copyBlack">
+      <small className="dBl mb-3 copyBlack">
         This option only affects future membership approvals
       </small>
-      <label className="row mB3" htmlFor="memberName">
-        <h2 className="fs5 mB1 lh1">
+      <label className="w-full mb-3" htmlFor="memberName">
+        <h2 className="fs5 mb-1 leading-none">
           Change Membership Title
         </h2>
         <input
           onChange={ev => props.updateState('memberName', ev)}
-          className="p3 row"
+          className="p-3 w-full"
           placeholder="What are your members called?"
           value={props.memberName}
           name="memberName"
         />
       </label>
-      <label className="row mB3" htmlFor="modName">
-        <h2 className="fs5 mB1 lh1">
+      <label className="w-full mb-3" htmlFor="modName">
+        <h2 className="fs5 mb-1 leading-none">
           Change Moderator Title
         </h2>
         <input
           onChange={ev => props.updateState('modName', ev)}
-          className="p3 row"
+          className="p-3 w-full"
           placeholder="What should moderators be called?"
           value={props.modName}
           name="modName"
         />
       </label>
-      <h2 className="fs5 mB1 lh1">
+      <h2 className="fs5 mb-1 leading-none">
         Change Description
       </h2>
       <textarea
         rows={6}
         spellCheck
-        className="mB3 row fs5"
+        className="mb-3 w-full fs5"
         placeholder="Organization Description Here"
         value={props.description}
         onChange={ev => props.updateState('description', ev)}
       />
-      <label className="dBl mB3" htmlFor="website">
-        <h2 className="fs5 mB1 lh1">
+      <label className="dBl mb-3" htmlFor="website">
+        <h2 className="fs5 mb-1 leading-none">
           Personal Website
         </h2>
         <input
           onChange={ev => props.updateState('website', ev)}
-          className="p3 row"
+          className="p-3 w-full"
           placeholder="Update your website here"
           value={props.website}
           name="website"
         />
       </label>
-      <label className="dBl mB3" htmlFor="facebook">
-        <h2 className="fs5 mB1 lh1">
+      <label className="dBl mb-3" htmlFor="facebook">
+        <h2 className="fs5 mb-1 leading-none">
           Facebook
         </h2>
         <input
-          className="p3 row"
+          className="p-3 w-full"
           name="facebook"
           onChange={ev => props.updateState('facebook', ev)}
           placeholder="Link your facebook profile here"
           value={props.facebook}
         />
       </label>
-      <label className="dBl mB3" htmlFor="twitter">
-        <h2 className="fs5 mB1 lh1">
+      <label className="dBl mb-3" htmlFor="twitter">
+        <h2 className="fs5 mb-1 leading-none">
           Twitter
         </h2>
         <input
-          className="p3 row"
+          className="p-3 w-full"
           name="twitter"
           onChange={ev => props.updateState('twitter', ev)}
           placeholder="Link your twitter here"
           value={props.twitter}
         />
       </label>
-      <h2 className="fs5 mB1 lh1">
+      <h2 className="fs5 mb-1 leading-none">
         Should the group be restricted to verified members only?
       </h2>
       <div
         tabIndex={0}
         role="button"
-        className="fx aiCtr curPtr fs6 p1 mB5"
+        className="flex flex-col d:flex-row items-center curPtr text-sm p-1 mB5"
         onClick={ev => props.updateState('allowNonVerified', ev)}
         onKeyPress={ev => props.updateState('allowNonVerified', ev)}>
         <input
           readOnly
           type="checkbox"
-          className="mR2"
+          className="mr-2"
           autoComplete="nope"
           checked={!props.allowNonVerified}
         />
@@ -171,15 +171,15 @@ const EditProfile = memo((props: tComponentProps) => (
         placeholder="Your current password"
         onChange={ev => props.updateState('password', ev)}
       />
-      <div className="fx aiCtr">
+      <div className="flex flex-col d:flex-row items-center">
         <button
           disabled={!props.password}
-          className="p3 pL4 pR4 mR2 hvrBgGrey1 trans1">
+          className="p-3 pl-4 pR4 mr-2 hover:bg-gray-11 trans1">
           Save Changes
         </button>
         <Link
           to="/admin/profile"
-          className="btn p3 pL4 pR4 hvrBgGrey1 trans1">
+          className="btn p-3 pl-4 pR4 hover:bg-gray-11 trans1">
           Go back
         </Link>
       </div>

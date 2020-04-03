@@ -30,7 +30,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
     const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
     if (events.length === 0) {
       return (
-        <h2 className="fs4 p4 taCtr">
+        <h2 className="fs4 p4 text-center">
           No {type === 'events' && 'upcoming meetings!'} {type === 'drafts' && 'drafts'} {type === 'rsvps' && 'upcoming RSVPs!'}
         </h2>
       );

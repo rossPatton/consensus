@@ -3,7 +3,6 @@ declare type tEmail = {accountId: number, email: string, isPrimary: string};
 // accounts are currently of 2 types. users, and organization admins
 // we consolidate that in the accounts table, along with shared rows
 declare type tAccountBase = tFormSubmit & Readonly<{
-  avatarHash?: string,
   created_at?: string,
   deletionDeadline?: Dayjs,
   emails?: tEmail[],

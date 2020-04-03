@@ -2,6 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
+import {eventKeys} from '../_constants';
 import {knex} from '../../db/connection';
 import {validateSchema} from '../../utils';
 import {getEvent} from './_queries';
@@ -28,7 +29,7 @@ event.patch(route, async (ctx: Koa.ParameterizedContext) => {
       .limit(1)
       .where({id})
       .update(patch)
-      .returning('*');
+      .returning(eventKeys);
   } catch (err) {
     ctx.throw(500, err);
   }

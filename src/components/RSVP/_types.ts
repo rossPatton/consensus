@@ -4,7 +4,6 @@ import {RouteComponentProps} from 'react-router';
 export type tSetRsvpOpts = {
   ev: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
   eventId: number,
-  // value: boolean,
 }
 
 export type tStore = {

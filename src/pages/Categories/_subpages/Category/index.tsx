@@ -61,7 +61,7 @@ class CategoryContainer extends PureComponent<tContainerProps> {
                       render={(orgsToRender: tGroup[]) => (
                         <>
                           <FilterPanel
-                            className="fx aiCtr p3 bgWhite br8 mB4 fs6 fw600"
+                            className="flex flex-col d:flex-row items-center p-3 bg-white br8 mb-4 text-sm text-bold"
                             onSearchChange={searchProps.onSearchChange}
                             placeholder="Filter groups by name"
                           />

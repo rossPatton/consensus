@@ -7,16 +7,16 @@ import {GenericLoader} from '../../containers';
 import {tComponentProps} from './_types';
 
 export const HomeComponent = memo((props: tComponentProps) => (
-  <header className="pT5 pB5">
-    <div className="contain taCtr">
-      <h1 className="mB3 pB1">
+  <header className="pt-5 pb-5">
+    <div className="contain text-center">
+      <h1 className="mb-3 pb-1">
         Consensus is an events platform<br />for activists and community groups.
       </h1>
-      {/* <h2 className="mB3">
+      {/* <h2 className="mb-3">
           A platform for community groups, organizers, unions, activists, and anyone seeking an ethical, private platform to organize their peers.
         </h2> */}
       <Link
-        className="br4 brdA1 dInBl p2 fs5 fw600 noUnderline mB4"
+        className="br4 brdA1 dInBl p-2 fs5 text-bold no-underline mb-4"
         to={props.isLoading
           ? '/directory/us/'
           : `/directory/us/${props.geo.region}/${props.geo.handle}`}>
@@ -29,7 +29,7 @@ export const HomeComponent = memo((props: tComponentProps) => (
         isLoading={props.eventsByLocationThunk.isLoading}
         render={() => (
           <div className="p4">
-            <h2 className="fs4 mB3">Upcoming Meetings in {props.geo.city || props.session.profile.cityId}</h2>
+            <h2 className="fs4 mb-3">Upcoming Meetings in {props.geo.city || props.session.profile.cityId}</h2>
             <Events
               horizontal
               showOrgName
@@ -39,14 +39,14 @@ export const HomeComponent = memo((props: tComponentProps) => (
         )}
       />
       <div className="p4">
-        <h2 className="fs4 mB2">Or Browse by Category</h2>
-        <ul className="fx jcCtr">
+        <h2 className="fs4 mb-2">Or Browse by Category</h2>
+        <ul className="flex flex-col d:flex-row jcCtr">
           {categories.map((cat, i) => (
             <li
               key={i}
-              className="fs6 fw600 lh1 mL2 mR2">
+              className="text-sm text-bold leading-none mL2 mr-2">
               <Link to={`/categories/${cat.slug}`}>
-                <div className="mB2">
+                <div className="mb-2">
                   <PlaceholderImage
                     height={100}
                     seed={i}

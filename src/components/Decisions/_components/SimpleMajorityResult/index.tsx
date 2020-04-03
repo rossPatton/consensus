@@ -13,7 +13,7 @@
 //   return (
 //     <span
 //       className={cx({
-//         'p1 abs t l b': true,
+//         'p-1 abs t l b': true,
 //         'bgBlue': isPassed,
 //         'bgRed': !isPassed,
 //       })}

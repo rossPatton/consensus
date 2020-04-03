@@ -18,21 +18,21 @@
 //           <li
 //             key={i}
 //             className={cx({
-//               'brdA1 br8 mB3 p3 pT2 rel ovfHide': true,
-//               pL4: decision.isClosed,
+//               'brdA1 br8 mb-3 p-3 pt-2 rel ovfHide': true,
+//               pl-4: decision.isClosed,
 //             })}>
 //             {decision.isClosed && decision.type === POLL && (
 //               <SimpleMajorityResult
 //                 data={decision.data.options as tCustomVoteResults}
 //               />
 //             )}
-//             <time className="mR2 lh1 fw600 fs6 mB2">
+//             <time className="mr-2 leading-none text-bold text-sm mb-2">
 //               {decision.isClosed ? 'Voting ended: ' : 'Vote ends: '}
 //               {dayJS(decision.deadline).format('ddd MMM DD, h:mmA')}
 //             </time>
 //             <h3
 //               className={cx({
-//                 'mB2 lh1 ttCap': true,
+//                 'mb-2 leading-none capitalize': true,
 //                 fs3: !props.tiny,
 //                 fs4: props.tiny,
 //               })}>
@@ -41,11 +41,11 @@
 //               </Link>
 //             </h3>
 //             {!props.tiny && (
-//               <p className="mB3 lineClamp">
+//               <p className="mb-3 lineClamp">
 //                 {decision.description}
 //               </p>
 //             )}
-//             <div className="fx aiCtr fs6 fw600 lh1">
+//             <div className="flex flex-col d:flex-row items-center text-sm text-bold leading-none">
 //               {!props.tiny && <DecisionStatus decision={decision} />}
 //               <Link
 //                 to="/filler"

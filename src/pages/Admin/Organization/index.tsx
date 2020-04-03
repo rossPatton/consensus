@@ -34,34 +34,36 @@ const GroupAdminContainer = memo((props: tProps) => {
       {session.deletionDeadline && (
         <div
           className={cx({
-            'row p3 taCtr bgYellowLite fw600 fs6': true,
-            mB3: session.isVerified,
+            'w-full p-3 text-center bgYellowLite text-bold text-sm': true,
+            'mb-3': session.isVerified,
           })}>
           Your group will be deleted on {dayJS(session.deletionDeadline).format('MMM DD')}
         </div>
       )}
       {(!session.profile.emails || session.profile.emails.length === 0) && (
-        <div className="bgYellow row p3 mB3 taCtr fw600 fs6">
+        <div className="bgYellow w-full p-3 mb-3 text-center text-bold text-sm">
           Welcome to Consensus! Your group will not be listed and some functionality will be unavailable until you link an email to this account and verify it. Click <Link to="/account/edit">here</Link> to add your email.
         </div>
       )}
-      <div className="contain mT4 fx aiStart">
-        <aside className="c3 bgWhite br8 p3 mR3">
-          <div className="fx aiCtr fw600 pB3 mB3 brdB1">
-            <Avatar
-              url={session.profile.avatarHash}
-              type="group"
-            />
-            <div className="lh1">
-              <div className="fs7 mB1">You are signed in as the <b>admin</b> for:</div>
+      <div className="contain mt-4 flex aiStart">
+        <aside className="c3 bg-white br8 p-3 mr-3">
+          <div className="flex flex-col d:flex-row items-center text-bold pb-3 mb-3 brdB1">
+            <div className="mr-3">
+              <Avatar
+                url={session.profile.avatarHash}
+                type="group"
+              />
+            </div>
+            <div className="leading-none">
+              <div className="fs7 mb-1">You are signed in as the <b>admin</b> for:</div>
               <h1 className="fs4">
                 <Link
-                  className="noUnderline"
+                  className="no-underline"
                   to="/admin/meetings">
                   {session.isVerified && (
                     <span
                       aria-label="Verified Account Checkbox"
-                      className="dInBl mR1"
+                      className="dInBl mr-1"
                       role="img">
                       ✅
                     </span>
@@ -72,23 +74,23 @@ const GroupAdminContainer = memo((props: tProps) => {
               <div>
                 <Link
                   to="/admin/account"
-                  className="mR2 fs7">
+                  className="mr-2 fs7">
                   Account
                 </Link>
                 <Link
                   to="/admin/profile"
-                  className="mR2 fs7">
+                  className="mr-2 fs7">
                   Profile
                 </Link>
               </div>
             </div>
           </div>
           <ul role="navigation">
-            <li className="fs4 fw600 mB2">
+            <li className="fs4 text-bold mb-2">
               Admin Actions
             </li>
-            <li className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
-              <div className="bgGrey3 circ mR3 p3" />
+            <li className="flex flex-col d:flex-row items-center fs5 p-2 mb-1 br4 hover:bg-gray-11">
+              <div className="bgGrey3 circ mr-3 p-3" />
               {isMeetings && 'Edit Meetings & Drafts'}
               {!isMeetings && (
                 <Link
@@ -100,8 +102,8 @@ const GroupAdminContainer = memo((props: tProps) => {
                 </Link>
               )}
             </li>
-            <li className="fx aiCtr fs5 p2 mB1 br4 hvrBgGrey1">
-              <div className="bgGrey3 circ mR3 p3" />
+            <li className="flex flex-col d:flex-row items-center fs5 p-2 mb-1 br4 hover:bg-gray-11">
+              <div className="bgGrey3 circ mr-3 p-3" />
               {section === 'memberships' && 'Manage Members & Approvals'}
               {section !== 'memberships' && (
                 <Link
@@ -113,8 +115,8 @@ const GroupAdminContainer = memo((props: tProps) => {
                 </Link>
               )}
             </li>
-            <li className="fx aiCtr fs5 p2 mB3 br4 hvrBgGrey1">
-              <div className="bgGrey3 circ mR3 p3" />
+            <li className="flex flex-col d:flex-row items-center fs5 p-2 mb-3 br4 hover:bg-gray-11">
+              <div className="bgGrey3 circ mr-3 p-3" />
               {isMeetingForm && 'Plan Meeting'}
               {!isMeetingForm && (
                 <Link
@@ -127,27 +129,27 @@ const GroupAdminContainer = memo((props: tProps) => {
               )}
             </li>
           </ul>
-          <div className="fs4 fw600 mB3">
+          <div className="fs4 text-bold mb-3">
             Other actions
           </div>
-          <div className="fx aiCtr">
+          <div className="flex flex-col d:flex-row items-center">
             <form action="/api/v1/download">
               <fieldset>
-                <button className="p3 hvrBgGrey1 fw600 mR2">
+                <button className="p-3 hover:bg-gray-11 text-bold mr-2">
                   <legend>Download your data</legend>
                 </button>
               </fieldset>
             </form>
             <Link
               to="/admin/deleteGroup"
-              className="btn p3 hvrBgGrey1 fw600 noUnderline">
+              className="btn p-3 hover:bg-gray-11 text-bold no-underline">
               {session.deletionDeadline
                 ? 'Cancel group deletion'
                 : 'Delete your Group'}
             </Link>
           </div>
         </aside>
-        <div className="col">
+        <div className="">
           {isAccount && <Account match={props.match} />}
           {isDelete && <DeleteGroup />}
           {isMeetings && <Meetings match={props.match} />}

@@ -27,7 +27,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
       <fieldset>
         <h3>Meeting Title</h3>
         <input
-          className="mB4 row"
+          className="mb-4 w-full"
           placeholder="Your Meeting Title Here"
           value={props.title}
           onChange={ev => updateState('title', ev.currentTarget.value)}
@@ -36,36 +36,36 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
         <textarea
           rows={8}
           spellCheck
-          className="mB4 row"
+          className="mb-4 w-full"
           placeholder="Meeting Description Here"
           value={props.description}
           onChange={ev => updateState('description', ev.currentTarget.value)}
         />
         <h3>Where is your meeting happening?</h3>
-        <div className="fx mB4">
+        <div className="flex flex-col d:flex-row mb-4">
           <input
             results={3}
             spellCheck
-            className="row mR3"
+            className="w-full mr-3"
             placeholder="The name or address of the place here"
             value={props.location}
             onChange={ev => updateState('location', ev.currentTarget.value)}
           />
           <input
             type="url"
-            className="row"
+            className="w-full"
             placeholder="https://example.com"
             value={props.locationLink}
             onChange={ev => updateState('locationLink', ev.currentTarget.value)}
           />
         </div>
-        <div className="fx mB4">
-          <div className="mR3">
+        <div className="flex flex-col d:flex-row mb-4">
+          <div className="mr-3">
             <h3>When&apos;s the meeting?</h3>
             <input
               type="date"
               min={dayJS().toISOString()}
-              className="mR2"
+              className="mr-2"
               value={dayJS(props.date).format('YYYY-MM-DD')}
               placeholder="Meeting Date Here"
               onChange={ev => updateState('date', ev.currentTarget.value)}
@@ -90,9 +90,9 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             </select>
           </div>
         </div>
-        <div className="brdT1 pT4 pB4 mT4 fx aiCtr">
+        <div className="brdT1 pt-4 pb-4 mt-4 flex items-center">
           <button
-            className="p3 mR2 hvrBgGrey1 trans1"
+            className="p-3 mr-2 hover:bg-gray-11 trans1"
             disabled={disableSubmit}
             onClick={ev => {
               ev.preventDefault();
@@ -101,7 +101,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             Publish
           </button>
           <button
-            className="p3 mR2 hvrBgGrey1 trans1"
+            className="p-3 mr-2 hover:bg-gray-11 trans1"
             disabled={disableSubmit}
             onClick={ev => {
               ev.preventDefault();
@@ -112,7 +112,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
           {props.id && (
             <Link
               to={`/draft/${props.id}?${objToQueryString(props)}`}
-              className="brdA1 br4 lh1 p3 fs6 hvrBgGrey1 trans1">
+              className="brdA1 br4 leading-none p-3 text-sm hover:bg-gray-11 trans1">
               <span
                 role="img"
                 aria-label="Eye Emoji">

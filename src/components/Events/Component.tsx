@@ -11,8 +11,8 @@ import {tComponentProps} from './_types';
 export const EventsComponent = memo((props: tComponentProps) => (
   <ul
     className={cx({
-      'fx fxdRow taL': props.horizontal,
-      'jcBetween': props.horizontal && props.events.length === 4,
+      'flex flex-col d:flex-row text-left': props.horizontal,
+      'justify-between': props.horizontal && props.events.length === 4,
     })}>
     {props.events.map((ev, i) => {
       const isPastEvent = dayJS(ev.date).isBefore(dayJS());
@@ -24,22 +24,23 @@ export const EventsComponent = memo((props: tComponentProps) => (
         <li
           key={ev.id}
           className={cx({
-            'mB2': !props.horizontal,
-            'col row': props.horizontal,
-            'mR4': props.horizontal && i !== props.events.length - 1,
+            'mb-4': true,
+            'd:mb-2': !props.horizontal,
+            'w-full': props.horizontal,
+            'd:mr-4': props.horizontal && i !== props.events.length - 1,
           })}>
           <div
             className={cx({
-              'fx aiCtr': !props.horizontal,
-              'p3 hvrBgGrey1 br8': props.isEditable,
+              'flex items-center': !props.horizontal,
+              'p-3 hover:bg-gray-1 br8': props.isEditable,
             })}>
             <div
               className={cx({
-                'mB2 bgWhite': props.horizontal,
-                'mR3 bgGrey2': !props.horizontal,
+                'mb-2 bg-white': props.horizontal,
+                'mr-3 bg-gray-2': !props.horizontal,
               })}>
               <Link
-                className="noUnderline"
+                className="no-underline"
                 to={ev.isDraft
                   ? `/event/${ev.id}?isPreview=true`
                   : `/event/${slugify(ev.title)}`}>
@@ -51,19 +52,19 @@ export const EventsComponent = memo((props: tComponentProps) => (
               </Link>
             </div>
             <div>
-              <div className="fx aiCtr mB2 fs7 fw600 lh1">
-                <time className="mR1" dateTime={ev.date}>
+              <div className="flex flex-col d:flex-row d:items-center mb-2 fs7 text-bold leading-none">
+                <time className="mr-1" dateTime={ev.date}>
                   {isPastEvent
                     ? dayJS(ev.date).format('MMM DD YYYY | h:mmA')
                     : dayJS(ev.date).format('MMM DD | h:mmA')}
                 </time>
                 {!props.horizontal && (
                   <>
-                    <span className="mR1">@</span>
+                    <span className="mr-1">@</span>
                     {ev.locationLink && (
                       <ExternalLink
                         noFollow
-                        className="mR1"
+                        className="mr-1"
                         to={ev.locationLink}>
                         {ev.location}
                       </ExternalLink>
@@ -74,13 +75,13 @@ export const EventsComponent = memo((props: tComponentProps) => (
               </div>
               <h3
                 className={cx({
-                  'fx aiCtr ttCap lh1': true,
-                  mB1: props.isEditable,
-                  mB2: props.showRSVPs,
-                  fs4: props.horizontal,
+                  'flex items-center capitalize leading-none': true,
+                  'mb-1': props.isEditable,
+                  'mb-2': props.showRSVPs,
+                  'text-3': props.horizontal,
                 })}>
                 <Link
-                  className="noUnderline"
+                  className="no-underline"
                   to={ev.isDraft
                     ? `/event/${ev.id}?isPreview=true`
                     : `/event/${slugify(ev.title)}`}>
@@ -93,7 +94,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 !ev.isDraft && (
                 <div
                   className={cx({
-                    'fx aiCtr fs7 lh1': true,
+                    'flex items-center fs7 leading-none': true,
                     hide: props.horizontal,
                   })}>
                   <RSVP compact event={ev} />
@@ -104,7 +105,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   <Link
                     to={`/org/${slugify(ev.orgName)}`}
                     className={cx({
-                      'fw600 fs6 lh1': true,
+                      'text-bold text-sm leading-none': true,
                       o5: isPastEvent,
                     })}>
                     {ev.orgName}
@@ -112,8 +113,8 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 )}
               {props.isEditable
               && (
-                <div className="fx aiCtr mB1">
-                  <div className="bgGrey4 br4 fs7 lh1 mR1 p1 pL2 pR2 white">
+                <div className="flex flex-col d:flex-row items-center mb-1">
+                  <div className="bgGrey4 br4 fs7 leading-none mr-1 p-1 pl-2 pr-2 white">
                     {ev.isDraft && 'Draft'}
                     {!ev.isDraft && (isPastEvent ? 'Past' : 'Upcoming')}
                   </div>
@@ -122,7 +123,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                       to={props.sessionRole === 'admin'
                         ? `/admin/planMeeting?${qs}`
                         : `/org/${ev.orgName}/planMeeting?${qs}`}
-                      className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
+                      className="btn fs7 text-bold hover:bg-gray-11 leading-none p-1 pl-2 pr-2 mr-1">
                       <span
                         role="img"
                         aria-label="Hand with Pen Emoji">
@@ -138,7 +139,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                         to={props.sessionRole === 'admin'
                           ? `/admin/planMeeting?${qsWithCopy}`
                           : `/org/${ev.orgName}/planMeeting?${qsWithCopy}`}
-                        className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
+                        className="btn fs7 text-bold hover:bg-gray-11 leading-none p-1 pl-2 pr-2 mr-1">
                         <span
                           role="img"
                           aria-label="Clipboard Emoji">
@@ -150,7 +151,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   {(!isPastEvent || ev.isDraft) && (
                     <button
                       onClick={e => props.deleteEvent(e, ev.id)}
-                      className="aiCtr fs7 fw600 fx hvrBgGrey1 lh1 mR1">
+                      className="items-center fs7 text-bold flex hover:bg-gray-11 leading-none mr-1">
                       <span
                         role="img"
                         aria-label="Big X Emoji">
@@ -162,7 +163,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                   {ev.isDraft && (
                     <Link
                       to={`/draft/${ev.orgId}?${qs}`}
-                      className="btn fs7 fw600 hvrBgGrey1 lh1 noUnderline p1 pL2 pR2 mR1">
+                      className="btn fs7 text-bold hover:bg-gray-11 leading-none p-1 pl-2 pr-2 mr-1">
                       <span
                         role="img"
                         aria-label="Eye Emoji">

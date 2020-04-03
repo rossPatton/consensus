@@ -6,7 +6,7 @@ import {tProps, tState} from './_types';
 
 class PaginateContainer extends Component<tProps, tState> {
   static defaultProps = {
-    className: 'lsNone fx aiCtr jcCtr fs4 fw600',
+    className: 'lsNone flex items-center jcCtr fs4 text-bold',
     count: 10,
     page: 1,
   };
@@ -77,7 +77,7 @@ class PaginateContainer extends Component<tProps, tState> {
               return (
                 <li key={i}>
                   {isActive && (
-                    <span className="dBl mL2 mR2 pL1 pR1">
+                    <span className="dBl mL2 mr-2 pL1 pR1">
                       {pageNo}
                     </span>
                   )}
@@ -85,7 +85,7 @@ class PaginateContainer extends Component<tProps, tState> {
                     <Link
                       to={to}
                       onClick={() => this.setPage(pageNo)}
-                      className="dBl mL2 mR2 pL1 pR1" >
+                      className="dBl mL2 mr-2 pL1 pR1" >
                       {pageNo}
                     </Link>
                   )}

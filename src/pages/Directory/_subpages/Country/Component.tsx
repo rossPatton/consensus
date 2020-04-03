@@ -7,26 +7,26 @@ import {tComponentProps} from './_types';
 
 export const CountryComponent = memo((props: tComponentProps) => (
   <>
-    <h1 className="mB2">
+    <h1 className="mb-2">
       {props.country.name}
     </h1>
     <FilterPanel
-      className="fx aiCtr p3 bgWhite br8 mB4 fs6 fw600"
+      className="flex flex-col d:flex-row items-center p-3 bg-white br8 mb-4 text-sm text-bold"
       onSearchChange={props.onChange}
     />
-    <h2 className="mB3 fs3">
-      <span className="ttCap">
+    <h2 className="mb-3 fs3">
+      <span className="capitalize">
         {pluralize(props.country.regionType)} and Territories
       </span> in {props.country.name}
     </h2>
-    <ul className="fx fxWrap">
+    <ul className="flex flex-col d:flex-row fxWrap">
       {props.regionsToRender.map(region => (
         <li
           key={region.name}
-          className="col fxg0 third mB3">
+          className=" fxg0 third mb-3">
           <Link
             to={`${props.match.url}/${region.code}`}
-            className="copyBlack fw600 noUnderline">
+            className="copyBlack text-bold no-underline">
             {region.name}
           </Link>
         </li>

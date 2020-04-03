@@ -10,24 +10,24 @@ export const UsersComponent = memo((props: tComponentProps) => (
     {props.users.map((user: tUser, i) => (
       <li
         key={i}
-        className="bgWhite mB3 hvrBgGrey1 br4 fx aiCtr p3">
-        <div className="bgGrey3 circ mR3 p3" />
-        <div className="col row">
-          <h3 className="mB1">
+        className="bg-white mb-3 hover:bg-gray-11 br4 flex items-center p-3">
+        <div className="bgGrey3 circ mr-3 p-3" />
+        <div className="w-full">
+          <h3 className="mb-1">
             <Link to={`/user/${user.id}`}>
               @{user.username}
             </Link>
           </h3>
-          <div className="fx aiCtr">
+          <div className="flex flex-col d:flex-row items-center">
             {user.role !== 'pending' && (
-              <span className="p1 lh1 fs7 bgGrey4 white fw600 br4 mR2">
+              <span className="p-1 leading-none fs7 bgGrey4 white text-bold br4 mr-2">
                 {user.role === 'member' ? props.memberName : props.modName}
               </span>
             )}
             {(props.sessionRole === 'admin' || props.sessionRole === 'facilitator')
                 && (
                   <button
-                    className="fs7 bgWhite"
+                    className="fs7 bg-white"
                     onClick={ev => props.removeUser(ev, user.id)}>
                     {user.role === 'pending'
                       ? 'Reject this user'
@@ -39,7 +39,7 @@ export const UsersComponent = memo((props: tComponentProps) => (
         {(props.sessionRole === 'admin' || props.sessionRole === 'facilitator')
           && (
             <select
-              className="ttCap"
+              className="capitalize"
               value={user.role as string}
               onChange={ev => props.setUserRole(ev, user.id)}>
               <option key="" value={user.role}>

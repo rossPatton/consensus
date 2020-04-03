@@ -1,6 +1,7 @@
 import Koa from 'koa';
 import _ from 'lodash';
 
+import {eventKeys} from '../../_constants';
 import {knex} from '../../../db/connection';
 import {getAccountRoleRelByOrgId, getGroupById, getUsersByIds} from '../../../queries';
 
@@ -13,7 +14,8 @@ export const getEvent = async (
     event = await knex('events')
       .limit(1)
       .where(query)
-      .first();
+      .first()
+      .returning(eventKeys);
   } catch (err) {
     return ctx.throw(500, err);
   }

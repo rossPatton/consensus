@@ -29,9 +29,9 @@ class JoinFormContainer extends React.PureComponent<tProps> {
 
     if (role) {
       return (
-        <span className="mR2 fs6 white lh1">
-          <span className="mR1">✔</span>
-          <span className="ttCap">{role}</span>
+        <span className="mr-2 text-sm white leading-none">
+          <span className="mr-1">✔</span>
+          <span className="capitalize">{role}</span>
         </span>
       );
     }
@@ -40,7 +40,7 @@ class JoinFormContainer extends React.PureComponent<tProps> {
       return (
         <Link
           to="/signup"
-          className="bgWhite fs6 br4 lh1 p1 pL2 pR2">
+          className="bg-white text-sm br4 leading-none p-1 pl-2 pr-2">
           Join this Group
         </Link>
       );
@@ -48,7 +48,7 @@ class JoinFormContainer extends React.PureComponent<tProps> {
 
     if (!session.isVerified && !org.allowNonVerified) {
       return (
-        <span className="mR2 fs6 white lh1">
+        <span className="mr-2 text-sm white leading-none">
           Verify your account to join
         </span>
       );
@@ -61,7 +61,7 @@ class JoinFormContainer extends React.PureComponent<tProps> {
         action="/api/v1/usersByOrg">
         <fieldset>
           <legend>
-            <button className="bgWhite fs6 br4 lh1 p1 pL2 pR2">
+            <button className="bg-white text-sm br4 leading-none p-1 pl-2 pr-2">
               {org.type === 'public' && 'Join'}
               {org.type === 'private' && 'Request'}
             </button>

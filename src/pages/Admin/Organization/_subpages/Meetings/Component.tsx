@@ -6,8 +6,8 @@ import {tComponentProps} from './_types';
 export const MeetingsComponent = memo((props: tComponentProps) => (
   <>
     {props.drafts && (
-      <div className="bgWhite br8 mB3 p3">
-        <h2 className="fs3 mB2">
+      <div className="bg-white br8 mb-3 p-3">
+        <h2 className="fs3 mb-2">
           Finish Meeting Drafts
         </h2>
         <Events
@@ -17,12 +17,12 @@ export const MeetingsComponent = memo((props: tComponentProps) => (
         />
       </div>
     )}
-    <div className="bgWhite br8 p3">
-      <h2 className="fs3 mB2">
+    <div className="bg-white br8 p-3">
+      <h2 className="fs3 mb-2">
         Manage Meetings
       </h2>
       <FilterPanel
-        className="bgWhite br8 fs6 fw600 fx aiCtr mB3"
+        className="bg-white br8 text-sm text-bold flex items-center mb-3"
         onPublishedFilterChange={props.onPublishedFilterChange}
         onSearchChange={props.onSearchChange}
         publishedFilter={props.publishedFilter}

@@ -4,13 +4,13 @@ import {Orgs} from '../../components';
 import {tComponentProps} from './_types';
 
 export const UserComponent = memo(({orgs, user}: tComponentProps) => (
-  <div className="contain mT4 mB5">
-    <h1 className="mB3 fs2 ttCap">
+  <div className="contain mt-4 mB5">
+    <h1 className="mb-3 fs2 capitalize">
       @{user.username}
     </h1>
     {user.name && (
       <>
-        <h2 className="fs3 mB1">
+        <h2 className="fs3 mb-1">
           Real Name
         </h2>
         <p>{user.name}</p>
@@ -26,14 +26,14 @@ export const UserComponent = memo(({orgs, user}: tComponentProps) => (
       )}
     {user.website && (
       <>
-        <h3 className="mB1">
+        <h3 className="mb-1">
           Personal Website
         </h3>
         <p>{user.website}</p>
       </>
     )}
     {user.bio && (
-      <div className="row">
+      <div className="w-full">
         <h3>Bio</h3>
         {user.bio && user.bio.split('\n').map((p, i) => (
           <p key={i} className="copyBlack">{p}</p>
@@ -43,8 +43,8 @@ export const UserComponent = memo(({orgs, user}: tComponentProps) => (
     {!user.privateMemberships
       && orgs.length > 0
       && (
-        <div className="row">
-          <h3 className="mB3">Memberships</h3>
+        <div className="w-full">
+          <h3 className="mb-3">Memberships</h3>
           <Orgs orgs={orgs} />
         </div>
       )}

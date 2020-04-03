@@ -46,7 +46,7 @@ class RSVPCount extends PureComponent<tProps, tState> {
     // if (rsvpCount === 0) return <>Be the first to RSVP</>;
 
     return (
-      <span className="mR3">
+      <span className="mr-3">
         {rsvpCount} {pluralize('attendees', rsvpCount)}
       </span>
     );

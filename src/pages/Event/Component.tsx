@@ -14,43 +14,43 @@ export const EventComponent = memo((props: tComponentProps) => {
   return (
     <>
       {!isPastMeeting && rsvp.value === 'yes' && (
-        <div className="row p3 mB3 taCtr bgGreenLite fw600 fs6">
+        <div className="p-3 mb-3 text-center bg-green-1 font-bold text-sm">
           You&apos;re going to this meeting!
         </div>
       )}
       {isPastMeeting && (
-        <div className="row p3 mB3 taCtr bgYellow fw600 fs6">
+        <div className="w-full p-3 mb-3 text-center bg-yellow-2 font-bold text-sm">
           This meeting has already happened
         </div>
       )}
-      <div className="contain mT4">
-        <div className="mB4">
-          <Link to={`/org/${org.id}`} className="noUnderline fw600 lh1">
+      <div className="contain mt-4">
+        <div className="mb-4">
+          <Link to={`/org/${org.id}`} className="no-underline text-bold leading-none">
             {org.name}
           </Link>
         </div>
-        <div className="fx mB5 pB2">
-          <div className="mR3">
+        <div className="flex flex-col d:flex-row  mb-5 pb-2">
+          <div className="min-w-1/3 d:mr-4 mb-4 d:mb-0">
             <PlaceholderImage
               height={420}
               seed={event.id}
               width={640}
             />
           </div>
-          <div className="row rel">
-            <time className="fw600 lh1 mB3" dateTime={event.date}>
+          <div>
+            <time className="text-bold leading-none mb-3" dateTime={event.date}>
               {dayJS(event.date).format('ddd MMM DD YYYY, h:mmA')}
             </time>
-            <h1 className="fs2 mB3 ttCap">
+            <h1 className="mb-3 capitalize">
               {event.title}
             </h1>
             {!isPastMeeting
               && (
-                <div className="mB3">
+                <div className="mb-3">
                   <RSVP event={event} />
                 </div>
               )}
-            <div className="fw600 mB3">
+            <div className="text-bold mb-3">
               <div>
                 {event.locationLink && (
                   <ExternalLink
@@ -61,9 +61,11 @@ export const EventComponent = memo((props: tComponentProps) => {
                 )}
                 {!event.locationLink && event.location}
               </div>
-              {event.attendees.length > 0 && (
-                `${event.attendees.length} ${pluralize('attendee', event.attendees.length)}`
-              )}
+              {event.attendees
+                && event.attendees.length > 0
+                && (
+                  `${event.attendees.length} ${pluralize('attendee', event.attendees.length)}`
+                )}
             </div>
             {event.description && (
               <div className="fs5">
@@ -77,8 +79,8 @@ export const EventComponent = memo((props: tComponentProps) => {
           </div>
         </div>
         {eventsByOrgId && eventsByOrgId.length > 0 && (
-          <aside className="col row mB5">
-            <h2 className="fs3 mB3 lh1">
+          <aside className="w-full mB5">
+            <h2 className="fs3 mb-3 leading-none">
             More events by {org.name}
             </h2>
             <Events
@@ -88,8 +90,8 @@ export const EventComponent = memo((props: tComponentProps) => {
           </aside>
         )}
         {/* {eventsByOrgId && eventsByOrgId.length > 0 && (
-        <aside className="col row mB5">
-          <h2 className="fs3 mB3 lh1">
+        <aside className=" w-full mB5">
+          <h2 className="fs3 mb-3 leading-none">
             More {org.category} events in {org.city}
           </h2>
           <Events

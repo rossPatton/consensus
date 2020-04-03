@@ -26,23 +26,25 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
 
   return (
     <>
-      <div className="contain fx aiStart mT4">
-        <aside className="c3 bgWhite br8 p3 mR3">
-          <div className="fx aiCtr fs4 fw600 pB3 mB3 brdB1">
-            <Avatar
-              url={props.session.profile.avatarHash}
-              type="user"
-            />
+      <div className="contain flex aiStart mt-4">
+        <aside className="c3 bg-white br8 p-3 mr-3">
+          <div className="flex flex-col d:flex-row items-center fs4 text-bold pb-3 mb-3 brdB1">
+            <div className="mr-3">
+              <Avatar
+                url={props.session.profile.avatarHash}
+                type="user"
+              />
+            </div>
             <div>
-              <div className="fs7 mB1">You are signed in as <b>user</b>:</div>
+              <div className="fs7 mb-1">You are signed in as <b>user</b>:</div>
               <h1 className="fs4">
                 <Link
                   to="/admin/meetings"
-                  className="fw600 noUnderline">
+                  className="text-bold no-underline">
                   {session.isVerified && (
                     <span
                       aria-label="Verified Account Checkbox"
-                      className="dInBl mR1"
+                      className="dInBl mr-1"
                       role="img">
                       ✅
                     </span>
@@ -53,12 +55,12 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
               <div>
                 <Link
                   to="/admin/account"
-                  className="mR2 fs7 fw600">
+                  className="mr-2 fs7 text-bold">
                   Account
                 </Link>
                 <Link
                   to="/admin/profile"
-                  className="mR2 fs7 fw600">
+                  className="mr-2 fs7 text-bold">
                   Profile
                 </Link>
               </div>
@@ -67,8 +69,8 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           {!orgsByUserIdThunk.isLoading
             && orgsByUserIdThunk.data.length > 0
             && (
-              <ul className="mB3 pB3" role="navigation">
-                <li className="fs4 fw600 mB3">
+              <ul className="mb-3 pb-3" role="navigation">
+                <li className="fs4 text-bold mb-3">
                   Your groups
                 </li>
                 {orgsByUserIdThunk.data.slice(0, 3).map((group, i) => {
@@ -79,19 +81,21 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
                   return (
                     <li key={i}>
                       <Link
-                        to={`/org/${group.id}`}
-                        className="br8 p2 fx aiCtr noUnderline hvrBgGrey1 trans2">
-                        <div className="circ mR2 ovfHide">
-                          <Avatar
-                            url={group.avatarHash}
-                            type="group"
-                          />
+                        to={`/org/${group.handle}`}
+                        className="br8 p-2 flex items-center no-underline hover:bg-gray-11 trans2">
+                        <div className="circ mr-2 ovfHide">
+                          <div className="mr-3">
+                            <Avatar
+                              url={group.avatarHash}
+                              type="group"
+                            />
+                          </div>
                         </div>
                         <div>
-                          <div className="fs7 fw600 mB2">
+                          <div className="fs7 text-bold mb-2">
                             You are a {role}
                           </div>
-                          <h2 className="fs5 copyBlack lh1">
+                          <h2 className="fs5 copyBlack leading-none">
                             {group.name}
                           </h2>
                         </div>
@@ -102,39 +106,39 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
                 <li>
                   <Link
                     to="/admin/memberships"
-                    className="pL2 fs6 fs600">
+                    className="pl-2 text-sm text-sm00">
                     View all
                   </Link>
                 </li>
               </ul>
             )}
-          <div className="fs4 fw600 mB3">
+          <div className="fs4 text-bold mb-3">
             Other actions
           </div>
-          <div className="fx aiCtr">
+          <div className="flex flex-col d:flex-row items-center">
             <form action="/api/v1/download">
               <fieldset>
-                <button className="p3 hvrBgGrey1 fw600 mR2">
+                <button className="p-3 hover:bg-gray-11 text-bold mr-2">
                   <legend>Download your data</legend>
                 </button>
               </fieldset>
             </form>
             <Link
               to="/admin/deleteAccount"
-              className="btn p3 hvrBgGrey1 fw600 noUnderline">
+              className="btn p-3 hover:bg-gray-11 text-bold no-underline">
               Delete your account
             </Link>
           </div>
         </aside>
-        <div className="col">
+        <div className="">
           {/* user is new. ie, they havent put in a username yet */}
           {!session.profile.username
             && (
-              <div className="p3 br8 mB3 brdA1 brdW2 bsDashed fw600 black">
+              <div className="p-3 br8 mb-3 brdA1 brdW2 bsDashed text-bold black">
                 Welcome to Consensus. You&apos;ll need to pick a username before you can join groups or RSVP to meetings. You can change it at anytime. {(isProfile && !subsection) && 'Click "Edit Profile" below to get started'} {!isProfile && <>Click <Link to="/admin/profile/edit">here</Link> to get started.</>}
               </div>
             )}
-          <div className="bgWhite br8 p3">
+          <div className="bg-white br8 p-3">
             {isAccount
             && (
               <Account

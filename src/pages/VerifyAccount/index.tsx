@@ -94,7 +94,7 @@ class VerifyAccountContainer extends PureComponent<tContainerProps, tState> {
             ]}
           />
           {session.data.isVerified && (
-            <div className="row p3 mB3 taCtr bgGreenLite fw600 fs6">
+            <div className="w-full p-3 mb-3 text-center bgGreenLite text-bold text-sm">
             You&apos;re verified!
             </div>
           )}

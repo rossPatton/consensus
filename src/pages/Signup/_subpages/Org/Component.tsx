@@ -15,30 +15,30 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
     onSubmit={props.onSubmit}>
     <fieldset>
       <legend>
-        <h2 className="mB4">New Group</h2>
+        <h2 className="mb-4">New Group</h2>
       </legend>
-      <h2 className="fs5 mB1 lh1">
+      <h2 className="fs5 mb-1 leading-none">
           Group Name
       </h2>
-      <label htmlFor="nameInput" className="mB4">
-        <p className="fs5 copyBlack mB1">
+      <label htmlFor="nameInput" className="mb-4">
+        <p className="fs5 copyBlack mb-1">
             What&apos;s your group&apos;s name? Think carefully, you won&apos;t be able to change this!
         </p>
         <input
           required
           id="nameInput"
           name="name"
-          className="row"
+          className="w-full"
           onChange={ev => props.updateState('name', ev.currentTarget.value)}
           placeholder="Your group name here"
           value={props.name}
         />
       </label>
-      <h2 className="fs5 mB1 lh1">
+      <h2 className="fs5 mb-1 leading-none">
           Group Handle
       </h2>
-      <label htmlFor="handleInput" className="mB4">
-        <p className="fs5 copyBlack mB1">
+      <label htmlFor="handleInput" className="mb-4">
+        <p className="fs5 copyBlack mb-1">
             What will your group&apos;s url be? Only lowercase letters, numbers, and dashes(-) allowed. Think carefully, you won&apos;t be able to change this!
         </p>
         <div className="fx">
@@ -46,7 +46,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
             required
             id="handleInput"
             name="handle"
-            className="row mR3"
+            className="w-full mr-3"
             autoComplete="off"
             onChange={ev =>
               props.updateState('handle', slugify(ev.currentTarget.value))
@@ -56,7 +56,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           />
           <button
             type="button"
-            className="p3"
+            className="p-3"
             onClick={() => {
               props.updateState('handle', slugify(props.name));
             }}>
@@ -64,16 +64,16 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           </button>
         </div>
       </label>
-      <h2 className="fs5 mB1 lh1">
+      <h2 className="fs5 mb-1 leading-none">
           Group Category
       </h2>
-      <label htmlFor="categoryInput" className="mB4">
-        <p className="fs5 copyBlack mB1">
+      <label htmlFor="categoryInput" className="mb-4">
+        <p className="fs5 copyBlack mb-1">
             What category most closely matches your group? You can always change it later. P.S., more categories are in the works!
         </p>
         <select
           required
-          className="mB4 row bgWhite"
+          className="mb-4 w-full bg-white"
           defaultValue={props.category}
           onBlur={ev => props.updateState('category', ev.currentTarget.value)}
           onChange={ev => props.updateState('category', ev.currentTarget.value)}>
@@ -84,17 +84,17 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           ))}
         </select>
       </label>
-      <h2 className="fs5 mB1 lh1">
+      <h2 className="fs5 mb-1 leading-none">
           Group Type
       </h2>
       <label htmlFor="groupTypeSelect">
-        <p className="fs5 copyBlack mB1">
+        <p className="fs5 copyBlack mb-1">
           Is anyone free to join your group, or do you want to be able to vet membership?
         </p>
         <select
           name="type"
           id="groupTypeSelect"
-          className="mB1 row bgWhite"
+          className="mb-1 w-full bg-white"
           value={props.type}
           onBlur={ev => props.updateState('type', ev.currentTarget.value)}
           onChange={ev => props.updateState('type', ev.currentTarget.value)}>
@@ -109,7 +109,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           </option>
         </select>
       </label>
-      <div className="fs6 black mB4">
+      <div className="text-sm black mb-4">
         {/* @TODO maybe have a mixed option here? */}
         {props.type === 'public' && 'Anyone can join, with no vetting process. Meetings are public, visible to anyone.'}
         {props.type === 'private' && 'Anyone can join, but members must be approved by a mod or admin first. Meetings are visible only to members.'}
@@ -120,18 +120,18 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
         label="All groups on Consensus are currently local, city-based organizations."
         updateState={props.updateState}
       />
-      <h2 className="fs5 mB1 lh1">
+      <h2 className="fs5 mb-1 leading-none">
         Group Login
       </h2>
-      <label htmlFor="loginInput" className="mB4">
-        <p className="fs5 copyBlack mB1">
+      <label htmlFor="loginInput" className="mb-4">
+        <p className="fs5 copyBlack mb-1">
           A unique name that you&apos;ll use to login with. Keep secret!
         </p>
         <input
           required
           id="loginInput"
           name="login"
-          className="row"
+          className="w-full"
           autoComplete="off"
           onChange={ev => props.updateState('login', ev.currentTarget.value)}
           placeholder="YourSecretGroupLoginHere"
@@ -147,10 +147,10 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
         placeholder="Your organization's password here"
         password={props.password}
       />
-      <div className="brdT1 pT4 pB4 mT4 fx aiCtr">
+      <div className="brdT1 pt-4 pb-4 mt-4 flex items-center">
         <button
           disabled={props.disabled}
-          className="p3 pL4 pR4 hvrBgGrey1 trans1">
+          className="p-3 pl-4 pR4 hover:bg-gray-11 trans1">
           Create Group!
         </button>
       </div>

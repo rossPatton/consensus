@@ -29,8 +29,8 @@ class SearchContainer extends React.PureComponent<tProps> {
             title="Consensus: Search"
             meta={meta}
           />
-          <div className="mT4 contain">
-            <h1 className="fs2 mB3">
+          <div className="mt-4 contain">
+            <h1 className="fs2 mb-3">
               {renderNoResults ? 'No results!' : 'Your Search Results'}
             </h1>
             <SuperSearch />

@@ -3,6 +3,7 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
+import {Avatar} from '../../..';
 import {tProps} from './_types';
 
 const Org = memo((props: tProps) => {
@@ -13,8 +14,8 @@ const Org = memo((props: tProps) => {
     <li
       key={props.index}
       className={cx({
-        'mB3': props.asList,
-        'col fxg0 fourth mB5 pR3': !props.asList,
+        'mb-3': props.asList,
+        ' fxg0 fourth mB5 pr-3': !props.asList,
       })}>
       <div
         role="button"
@@ -22,42 +23,42 @@ const Org = memo((props: tProps) => {
         onMouseEnter={() => props.setHover(props.index, role)}
         onMouseLeave={() => props.setHover(null)}
         className={cx({
-          'fx aiCtr fs6 lh1 noUnderline': true,
-          'p3 hvrBgGrey1 trans1 br4': props.asList,
+          'flex items-center text-sm leading-none no-underline': true,
+          'p-3 hover:bg-gray-11 trans1 br4': props.asList,
         })}>
-        <div className="circ mR2 ovfHide">
-          <img
+        <div className="mr-2">
+          <Avatar
             alt={`Avatar for ${props.org.name}`}
-            src={props.org.avatarHash}
-            width="70"
+            type="group"
+            url={props.org.avatarHash}
           />
         </div>
         <div>
           {role && (
-            <div className="fs7 fw600 mB2">
+            <div className="fs7 text-bold mb-2">
               You are {role === 'pending' ? role : `a ${role}`}
             </div>
           )}
-          <h2 className="lh1 fs3 mB2">
+          <h2 className="leading-none fs3 mb-2">
             <Link to={`/org/${props.org.handle}`}>
               {props.org.name}
             </Link>
           </h2>
           <div
             className={cx({
-              'fs7 fw600': true,
-              'fx aiCtr': props.asList,
+              'fs7 text-bold': true,
+              'flex items-center': props.asList,
             })}>
             {props.showType && (
-              <span className="dInBl ttCap bgGrey4 br4 p1 white mR2">
+              <span className="dInBl capitalize bgGrey4 br4 p-1 white mr-2">
                 {props.org.type}
               </span>
             )}
             {props.showCategory && (
               <span
                 className={cx({
-                  'mR2': props.asList,
-                  'mB1': !props.asList,
+                  'mr-2': props.asList,
+                  'mb-1': !props.asList,
                 })}>
                 {props.org.category}
               </span>
@@ -65,8 +66,8 @@ const Org = memo((props: tProps) => {
             {props.showLocation && (
               <span
                 className={cx({
-                  'mR2': true,
-                  'mB1': !props.asList,
+                  'mr-2': true,
+                  'mb-1': !props.asList,
                 })}>
                 Based in {props.org.city}
               </span>
@@ -77,7 +78,7 @@ const Org = memo((props: tProps) => {
           && props.hoverIndex === props.index
           && props.groupType === role
           && (
-            <div className="col taR">
+            <div className="text-right">
               <button onClick={ev => props.leaveOrg(ev, props.org.id)}>
                 {props.groupType === 'pending'
                   ? 'Cancel Membership Request'

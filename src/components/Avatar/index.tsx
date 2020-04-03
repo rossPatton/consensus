@@ -11,11 +11,11 @@ const Avatar = memo((props: tProps) => {
 
   return (
     <img
-      alt="User or Group Avatar"
-      height="96"
-      className="bgWhite circ ovrHide mR3"
-      src={`${prefix}/${props.url}?default=${props.type === 'group' ? 'identicon' : 'mm'}&size=96`}
-      width="96"
+      alt={props.alt || 'User or Group Avatar'}
+      height={props.size || '96'}
+      className="bg-white circ ovrHide"
+      src={`${prefix}/${props.url}?default=${props.type === 'group' ? 'identicon' : 'mm'}&size=${props.size}`}
+      width={props.size || '96'}
     />
   );
 });

@@ -12,31 +12,31 @@ export const DraftComponent = memo((props: tComponentProps) => {
 
   return (
     <>
-      <div className="row p3 mB3 taCtr bgYellow fw600 fs6">
+      <div className="w-full p-3 mb-3 text-center bgYellow text-bold text-sm">
         This is a draft preview for your meeting.
       </div>
-      <div className="contain mT4">
-        <div className="mB4">
-          <Link to={`/org/${slugify(event.orgName)}`} className="noUnderline fw600 lh1">
+      <div className="contain mt-4">
+        <div className="mb-4">
+          <Link to={`/org/${slugify(event.orgName)}`} className="no-underline text-bold leading-none">
             {event.orgName}
           </Link>
         </div>
-        <div className="fx mB5 pB2">
-          <div className="mR3">
+        <div className="flex flex-col d:flex-row mB5 pb-2">
+          <div className="mr-3">
             <PlaceholderImage
               height={420}
               seed={event.id}
               width={640}
             />
           </div>
-          <div className="row rel">
-            <time className="fw600 lh1 mB3" dateTime={event.date}>
+          <div className="w-full rel">
+            <time className="text-bold leading-none mb-3" dateTime={event.date}>
               {dayJS(event.date).format('ddd MMM DD YYYY, h:mmA')}
             </time>
-            <h1 className="fs2 mB3 ttCap">
+            <h1 className="fs2 mb-3 capitalize">
               {event.title}
             </h1>
-            <div className="fw600 mB3">
+            <div className="text-bold mb-3">
               <div>
                 {event.locationLink && (
                   <ExternalLink

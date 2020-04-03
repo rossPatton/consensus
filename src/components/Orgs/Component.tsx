@@ -6,11 +6,11 @@ import {Org} from './_components';
 import {tComponentProps} from './_types';
 
 export const OrgsComponent = memo((props: tComponentProps) => (
-  <ul className={cx({'fx fxWrap': !props.asList})}>
+  <ul className={cx({'flex fxWrap': !props.asList})}>
     {props.orgs.length > 0
       && props.pendingOrgs.length > 0
       && (
-        <li className="fw600 mB2 pB2 brdB1">
+        <li className="text-bold mb-2 pb-2 brdB1">
           Current group memberships
         </li>
       )}
@@ -24,7 +24,7 @@ export const OrgsComponent = memo((props: tComponentProps) => (
     ))}
     {props.pendingOrgs.length > 0 && (
       <>
-        <li className="fw600 mB2 pB2 brdB1">
+        <li className="text-bold mb-2 pb-2 brdB1">
           Pending group memberships
         </li>
         {props.pendingOrgs.map((pendingOrg, i) => (

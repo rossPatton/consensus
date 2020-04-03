@@ -95,7 +95,7 @@ class PasswordResetContainer extends PureComponent<tContainerProps, tState> {
             ]}
           />
           {this.state.passwordUpdated && (
-            <div className="row p3 mB3 taCtr bgGreenLite fw600 fs6">
+            <div className="w-full p-3 mb-3 text-center bgGreenLite text-bold text-sm">
             Your password has been updated!
             </div>
           )}

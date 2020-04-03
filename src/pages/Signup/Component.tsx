@@ -6,25 +6,25 @@ import {OrgSignup, UserSignup} from './_subpages';
 import {tProps} from './_types';
 
 export const SignupComponent = memo((props: tProps) => (
-  <div className="contain mT4">
+  <div className="contain mt-4">
     {!props.match.params.type && (
       <>
-        <h1 className="fs2 mB1">Create an account</h1>
-        <h2 className="fs6 mB3">
+        <h1 className="fs2 mb-1">Create an account</h1>
+        <h2 className="text-sm mb-3">
           By signing up, you agree to our Terms and that you have read our Privacy Policy and Content Policy.
         </h2>
       </>
     )}
     {!props.match.params.type && (
-      <div className="taCtr">
-        <div className="fx aiCtr jcBetween mB3">
-          <div className="col row mR2">
-            <Link className="bgWhite dBl p4 brdA1 br8" to="/signup/newUser">
+      <div className="text-center">
+        <div className="flex flex-col d:flex-row items-center jcBetween mb-3">
+          <div className=" w-full mr-2">
+            <Link className="bg-white dBl p4 brdA1 br8" to="/signup/newUser">
               New User
             </Link>
           </div>
-          <div className="col row mL2">
-            <Link className="bgWhite dBl p4 brdA1 br8" to="/signup/newOrg">
+          <div className=" w-full mL2">
+            <Link className="bg-white dBl p4 brdA1 br8" to="/signup/newOrg">
               New Organization
             </Link>
           </div>

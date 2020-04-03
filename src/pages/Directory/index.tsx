@@ -12,7 +12,7 @@ const Directory = memo((props: tProps) => {
 
   return (
     <Template>
-      <div className="contain pT3 mB4">
+      <div className="contain pt-3 mb-4">
         {renderCountry && (
           <Country {...props} />
         )}

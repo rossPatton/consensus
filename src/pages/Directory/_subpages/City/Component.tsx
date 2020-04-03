@@ -5,14 +5,14 @@ import { tComponentProps } from './_types';
 
 export const CityComponent = memo((props: tComponentProps) => (
   <>
-    <h1 className="mB1">
+    <h1 className="mb-1">
       Browse groups in {props.city.name}
     </h1>
-    <h2 className="fs3 mB2">
+    <h2 className="fs3 mb-2">
       {props.city.orgs.length} Groups
     </h2>
     <FilterPanel
-      className="fx aiCtr p3 bgWhite br8 mB4 fs6 fw600"
+      className="flex flex-col d:flex-row items-center p-3 bg-white br8 mb-4 text-sm text-bold"
       onCategoryChange={props.onChange}
       onSearchChange={props.onSearch}
       placeholder="Filter by group name"

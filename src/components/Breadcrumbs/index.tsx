@@ -8,14 +8,14 @@ const Breadcrumbs = memo((props: tProps) => {
   if (!(props.crumbs instanceof Array)) return null;
 
   return (
-    <ul className="fs6 fw600 mB2 lh1 lsNone fx fxWrap brdB1 mB3 pB3">
+    <ul className="text-sm text-bold mb-2 leading-none lsNone flex fxWrap brdB1 mb-3 pb-3">
       {props.crumbs.map((crumb: tCrumb, i) => {
         const isLastItem = i === props.crumbs.length - 1;
         const renderLink = !isLastItem && crumb.to;
 
         return (
           <Fragment key={i}>
-            <li className="mR1">
+            <li className="mr-1">
               {!renderLink && crumb.display}
               {renderLink && (
                 <Link to={`/${crumb.to}`}>
@@ -24,7 +24,7 @@ const Breadcrumbs = memo((props: tProps) => {
               )}
             </li>
             {renderLink && (
-              <li className="mHide mR1">/</li>
+              <li className="mHide mr-1">/</li>
             )}
           </Fragment>
         );

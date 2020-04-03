@@ -43,7 +43,7 @@ module.exports = {
       {
         exclude: /node_modules/,
         test: /\.mmdb$/,
-        use: 'ignore-loader',
+        loaders: ['ignore-loader'],
       },
       {
         test: /\.(svg)$/,
@@ -72,29 +72,11 @@ module.exports = {
         ],
       },
       {
-        test: /\.styl$/,
-        exclude: /node_modules/,
+        test: /\.css$/,
         use: [
-          {
-            loader: 'css-loader',
-          },
-          {
-            loader: 'stylus-loader',
-            options: {
-              preferPathResolver: 'webpack',
-              use: [
-                require('nib')(),
-                require('poststylus')([
-                  require('autoprefixer')(),
-                  require('css-mqpacker')(),
-                  require('postcss-unique-selectors')(),
-                  require('postcss-warn-cleaner')({
-                    ignoreFiles: '**/*.styl',
-                  }),
-                ]),
-              ],
-            },
-          },
+          // 'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          'postcss-loader',
         ],
       },
     ],

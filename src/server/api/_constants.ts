@@ -8,6 +8,25 @@ export const accountKeys = [
   'orgId',
 ];
 
+export const eventKeys = [
+  'date',
+  'description',
+  'endDate',
+  'id',
+  'isDraft',
+  'isPrivate',
+  'location',
+  'locationLink',
+  'name',
+  'orgId',
+  'orgName',
+  'publicRSVPS',
+  'privateRSVPS',
+  'rsvp',
+  'slug',
+  'title',
+];
+
 export const groupKeys = [
   'avatarHash',
   'allowNonVerified',

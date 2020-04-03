@@ -8,7 +8,7 @@ const GenericLoader = (props: tProps) => {
   if (isLoading) {
     if (showLoader) {
       return (
-        <div className="p5 row fx jcCtr">
+        <div className="p5 w-full flex jcCtr">
           <div className="loading">
             <div />
             <div />
