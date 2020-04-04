@@ -13,8 +13,9 @@ class HomeContainer extends PureComponent<tContainerProps> {
   componentDidUpdate() {
     const {eventsByLocationThunk, geoThunk} = this.props;
 
-    // if (!__CLIENT__) return;
+    if (!geoThunk.fetched) return;
     if (eventsByLocationThunk.fetched) return;
+    if (eventsByLocationThunk.error) return;
 
     // TODO eventually set it up so we dont do this if user is signed in
     this.props.getEventsByLocationDispatch(geoThunk.data);

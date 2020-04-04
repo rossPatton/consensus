@@ -18,12 +18,12 @@ eventsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
   // mapped set of events that the user has RSVP'd to
   // @TODO this should be querying against postcodes, not cities
   // but there is an issue with the postcode seed where the cityId does not match
-  // this is problematic since there can be dupe city names in a state
+  // this is problematic since there could be dupe city names in a state
   let cityRel = {} as tPostCode;
   try {
     cityRel = await knex('cities')
       .first()
-      .where({name: query.city, region: query.region})
+      .where({name: query.city, regionCode: query.regionCode})
       .limit(1);
   } catch (err) {
     return ctx.throw(500, err);

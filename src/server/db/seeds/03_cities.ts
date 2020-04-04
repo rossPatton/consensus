@@ -3,16 +3,18 @@ import Knex from 'knex';
 import _ from 'lodash';
 
 import citiesMap from '../../../json/usa/cities.json';
-import stateMap from '../../../json/usa/stateCodeMap.json';
+import stateNameToCodeMap from '../../../json/usa/stateNameToCodeMap.json';
 
-const statesByName = Object.keys(stateMap);
+const statesByName = Object.keys(stateNameToCodeMap);
 const createCity = async (row: {city: string, state: string}) => {
   // arr index is 0 based, db is 1 based
   const regionId = statesByName.findIndex(state => state === row.state) + 1;
+  const regionCode = (stateNameToCodeMap as {[k: string]: unknown})[row.state];
 
   return {
     name: row.city,
     region: row.state,
+    regionCode,
     regionId,
   };
 };

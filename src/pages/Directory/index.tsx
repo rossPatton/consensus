@@ -12,17 +12,15 @@ const Directory = memo((props: tProps) => {
 
   return (
     <Template>
-      <div className="contain pt-3 mb-4">
-        {renderCountry && (
-          <Country {...props} />
-        )}
-        {renderRegion && (
-          <Region {...props} />
-        )}
-        {renderCity && (
-          <City {...props} />
-        )}
-      </div>
+      {renderCountry && (
+        <Country {...props} />
+      )}
+      {renderRegion && (
+        <Region {...props} />
+      )}
+      {renderCity && (
+        <City {...props} />
+      )}
     </Template>
   );
 });

@@ -37,13 +37,13 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
             onChange={props.onChange}
             type={props.showPW ? 'text' : 'password'}
             className={cx({
-              'p-2 w-full mr-2': true,
-              brdRed: hasError,
+              'p-2 w-full mb-1 mr-2': true,
+              'border-red-1': hasError,
             })}
           />
           <button
             type="button"
-            className="bg-white hover:bg-gray-1 transition pl-3 pr-3"
+            className="bg-white hover:bg-gray-3 transition pl-3 pr-3"
             onClick={props.togglePWVisibility}>
             {props.showPW ? 'Hide' : 'Reveal'} Password
           </button>
@@ -73,7 +73,7 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
               </div>
             </div>
           )}
-          <ul className="text-sm leading-none list-disc ml-2 mb-3">
+          <ul className="text-sm leading-tight list-disc ml-2 mb-3">
             <li className="mb-1">Passwords must be at least 12 characters long, and can&apos;t be too common like &quot;password&quot;.</li>
             <li className="mb-1">We strongly recommend adding numbers, capitals, or special characters, but they aren&apos;t required.</li>
             <li className="mb-1">Use a password manager to generate and save strong passwords!</li>

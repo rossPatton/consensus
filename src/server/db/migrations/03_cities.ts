@@ -31,12 +31,14 @@ exports.up = async (knex: Knex) => {
       .onUpdate('CASCADE')
       .onDelete('CASCADE')
       .defaultTo(37);
+
     table.string('region')
       .notNullable()
       .defaultTo('New York');
+
     table.string('regionCode')
       .notNullable()
-      .defaultTo('NY');
+      .defaultTo('ny');
   });
 };
 

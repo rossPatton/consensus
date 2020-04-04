@@ -2,8 +2,8 @@ import React, { memo } from 'react';
 import {Link} from 'react-router-dom';
 
 const Footer = memo(() => (
-  <footer className="bg-gray-2">
-    <div className="pt-5 contain m-auto pb-3 border-b">
+  <footer className="pt-4 pb-4 bg-gray-2">
+    <div className="mb-3 contain m-auto">
       <ul>
         <li>
           <Link to="/login">
@@ -29,21 +29,19 @@ const Footer = memo(() => (
         </li>
       </ul>
     </div>
-    <div className="bg-gray-3 pt-4 pb-5">
-      <div className="contain m-auto">
-        <b>© Consensus 2019</b>
-        <ul className="fx">
-          <li className="mr-3">
+    <div className="contain m-auto">
+      <b>© Consensus 2019</b>
+      <ul className="fx">
+        <li className="mr-3">
           Terms of Service
-          </li>
-          <li className="mr-3">
+        </li>
+        <li className="mr-3">
           Privacy Policy
-          </li>
-          <li>
+        </li>
+        <li>
           Cookie Policy
-          </li>
-        </ul>
-      </div>
+        </li>
+      </ul>
     </div>
   </footer>
 ));

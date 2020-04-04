@@ -4,8 +4,8 @@ import Router from 'koa-router';
 import _ from 'lodash';
 import maxmind, { CityResponse } from 'maxmind';
 
-import stateNameMap from '../../../json/usa/stateNameMap.json';
-import {slugify, upperCase} from '../../../utils';
+import stateCodeToNameMap from '../../../json/usa/stateCodeToNameMap.json';
+import {slugify, lowerCase} from '../../../utils';
 
 export const geo = new Router();
 geo.get('/api/v1/geo', async (ctx: Koa.ParameterizedContext) => {
@@ -35,16 +35,15 @@ geo.get('/api/v1/geo', async (ctx: Koa.ParameterizedContext) => {
 
   const city: string = _.get(cityLookup, 'city.names.en', '');
   const postcode: string = _.get(cityLookup, 'postal.code', '');
-  const regionCodeLower: string = _.get(cityLookup, 'subdivisions[0].iso_code', '');
+  const regionCode: string = lowerCase(
+    _.get(cityLookup, 'subdivisions[0].iso_code', '')
+  );
+  const region = (stateCodeToNameMap as {[k: string]: unknown})[regionCode];
 
   if (!city && !postcode) {
     ctx.status = 204;
     ctx.body = {city: null, postcode: null};
   }
-
-  const regionCode = upperCase(regionCodeLower);
-  // @ts-ignore
-  const region = stateNameMap[regionCode];
 
   ctx.body = {
     city,

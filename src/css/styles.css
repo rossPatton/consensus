@@ -11,7 +11,7 @@ html {
 }
 body {
   @apply bg-gray-1;
-  @apply mt-4;
+  @apply mt-5;
   @apply pt-4;
 }
 a {
@@ -27,11 +27,6 @@ select,
 time {
   display: block;
 }
-main {
-  @apply pb-5;
-  min-height: 50vh;
-  overflow-x: hidden;
-}
 ul {
   @apply list-none;
 }
@@ -42,7 +37,7 @@ h4,
 h5,
 h6 {
   @apply font-bold;
-  @apply leading-none;
+  @apply leading-tight;
   margin-block-end: 0;
   margin-block-start: 0;
 }
@@ -70,8 +65,8 @@ button {
   @apply p-2;
   @apply inline-block;
   @apply font-normal;
+  @apply whitespace-no-wrap;
   vertical-align: middle;
-  white-space: nowrap;
 }
 button,
 option,
@@ -79,17 +74,13 @@ select,
 textarea {
   @apply appearance-none;
 }
-button,
 option,
 select {
   @apply leading-none;
 }
-input {
-  @apply rounded-0;
+textarea {
+  @apply leading-loose;
 }
-/* textarea {
-  line-height: 1.5;
-} */
 input,
 select,
 textarea {
@@ -97,12 +88,15 @@ textarea {
   @apply m-0;
   @apply contain-sm;
   @apply p-2;
-  /* font-family: inherit !important; */
+}
+input {
+  @apply transition;
+  @apply rounded-0;
 }
 select {
   @apply rounded-lg;
   @apply transition;
-  white-space: normal;
+  @apply whitespace-normal;
 }
 select:hover {
   @apply bg-gray-3;
@@ -144,9 +138,9 @@ small {
   left: 0;
 }
 .truncate {
+  @apply whitespace-no-wrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 .lineClamp {
   display: -webkit-box;
@@ -155,8 +149,8 @@ small {
   -webkit-box-orient: vertical;
 }
 .loading {
-  display: inline-block;
-  position: relative;
+  @apply relative;
+  @apply inline-block;
   width: 80px;
   height: 80px;
 }

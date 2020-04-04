@@ -13,6 +13,13 @@ module.exports = {
     listStylePosition: false,
     objectFit: false,
     objectPosition: false,
+    resize: false,
+    rotate: false,
+    scale: false,
+    skew: false,
+    stroke: false,
+    strokeWidth: false,
+    tableLayout: false,
   },
   theme: {
     screens: {
@@ -110,7 +117,6 @@ module.exports = {
       normal: '400',
       bold: '700',
     },
-    height: {},
     inset: { },
     letterSpacing: {
       normal: '0',
@@ -137,6 +143,7 @@ module.exports = {
     minHeight: {
       '0': '0',
       full: '100%',
+      halfscreen: '50vh',
       screen: '100vh',
     },
     objectPosition: {},

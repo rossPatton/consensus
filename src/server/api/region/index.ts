@@ -13,40 +13,36 @@ region.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tDirectoryParams = _.get(ctx, 'state.locals.data', {});
   await validateSchema<tDirectoryParams>(ctx, schema, query);
 
-  const {
-    country: countryCode = '',
-    region: regionCode = '',
-  } = query;
+  // @TODO reimplment once there are more countries
+  // let country = {} as tCountry;
+  // try {
+  //   country = await knex('countries')
+  //     .limit(1)
+  //     .where({code: countryCode})
+  //     .first();
+  // } catch (err) {
+  //   return ctx.throw(500, err);
+  // }
 
-  let country: tCountry;
-  try {
-    country = await knex('countries')
-      .limit(1)
-      .where({code: countryCode})
-      .first();
-  } catch (err) {
-    return ctx.throw(500, err);
-  }
-
-  let region: tRegion;
+  let region = {} as tRegion;
   try {
     region = await knex('regions')
       .limit(1)
       .where({
-        country: country.id,
-        code: regionCode,
+        countryId: 1,
+        code: query.regionCode,
       })
       .first();
   } catch (err) {
     return ctx.throw(500, err);
   }
 
-  let cities: tCity[];
+  let cities = [] as tCity[];
   try {
     cities = await knex('cities')
       .where({
-        country: country.id,
-        region: region.id,
+        countryId: 1,
+        regionId: region.id,
       })
       .orderBy('name', 'asc');
   } catch (err) {

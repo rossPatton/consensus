@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, {memo} from 'react';
 
-import stateCodeMap from '../../json/usa/stateCodeMap.json';
+import stateCodeToNameMap from '../../json/usa/stateCodeToNameMap.json';
 import {tComponentProps} from './_types';
 
 export const CitySearchComponent = memo((props: tComponentProps) => {

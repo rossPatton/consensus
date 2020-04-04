@@ -2,7 +2,6 @@ import Joi from '@hapi/joi';
 
 export const schema = Joi.object({
   city: Joi.string().required().regex(/^\w|-+$/),
-  country: Joi.string().alphanum().max(2).required(),
-  // @TODO region === regionCode
-  region: Joi.string().alphanum().max(2).required().allow(' '),
+  countryCode: Joi.string().lowercase().alphanum().max(2).required(),
+  regionCode: Joi.string().lowercase().alphanum().max(2).required(),
 });

@@ -1,7 +1,7 @@
 require('dotenv-safe').config();
 import Knex from 'knex';
 
-import stateMap from '../../../json/usa/stateCodeMap.json';
+import stateMap from '../../../json/usa/stateNameToCodeMap.json';
 
 // in our case, just states for now
 const createRegion = async (key: string, value: string) => ({

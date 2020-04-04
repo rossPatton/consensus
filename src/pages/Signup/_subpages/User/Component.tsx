@@ -20,7 +20,7 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
         <h2 className="text-base mb-1">
           Login
         </h2>
-        <p className="text-gray-4 mb-1">
+        <p className="mb-1">
           A unique name that you&apos;ll use to login with. Keep secret!
         </p>
         <input
@@ -43,18 +43,20 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
         placeholder="correct_horse_battery_staple"
         onChange={ev => props.updateState('password', ev)}
       />
+      <div className='mb-3'>
       <button
         disabled={props.isClient && (!props.password || !props.login)}
-        className="transition hover:bg-gray-1 p-2 pl-3 pr-3 mr-1">
+        className="transition hover:bg-gray-3 p-2 pl-3 pr-3 mr-1">
         Sign up
       </button>
       <Link
         to="/signup"
-        className="btn transition hover:bg-gray-1 p-2 pl-3 pr-3">
+        className="btn transition hover:bg-gray-3 p-2 pl-3 pr-3">
         Or go back
       </Link>
+      </div>
       {props.errArr.length > 0 && (
-        <ul className="text-sm font-bold bt-1 brdRed pt-3 mt-3 leading-none red">
+        <ul className="text-sm font-bold leading-tight">
           {props.errArr.map((err, i) => (
             <li key={i} className="mb-1">
               {err}

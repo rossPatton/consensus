@@ -14,28 +14,25 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tDirectoryParams = _.get(ctx, 'state.locals.data', {});
   await validateSchema<tDirectoryParams>(ctx, schema, query);
 
-  const {
-    city: citySlug = '',
-    country: countryCode = '',
-    region: regionCode = '',
-  } = query;
+  const { city: citySlug, regionCode} = query;
 
-  let country = {} as tCountry;
-  try {
-    country = await knex('countries')
-      .limit(1)
-      .where({code: countryCode})
-      .first();
-  } catch (err) {
-    return ctx.throw(500, err);
-  }
+  // @TODO add back once we have more countries to query
+  // let country = {} as tCountry;
+  // try {
+  //   country = await knex('countries')
+  //     .limit(1)
+  //     .where({code: countryCode})
+  //     .first();
+  // } catch (err) {
+  //   return ctx.throw(500, err);
+  // }
 
   let region = {} as tRegion;
   try {
     region = await knex('regions')
       .limit(1)
       .where({
-        country: country.id,
+        countryId: 1,
         code: regionCode,
       })
       .first();
@@ -49,8 +46,8 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
     city = await knex('cities')
       .limit(1)
       .where({
-        country: country.id,
-        region: region.id,
+        countryId: 1,
+        regionId: region.id,
         name: cityName,
       })
       .first();
@@ -58,21 +55,22 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  let postcodes = [] as {code: string}[];
-  if (city.id) {
-    try {
-      postcodes = await knex('postcodes').where({city: city.id}).select('code');
-    } catch (err) {
-      return ctx.throw(500, err);
-    }
-  }
+  // @TODO eventually work zip codes into the site somehow
+  // let postcodes = [] as {code: string}[];
+  // if (city.id) {
+  //   try {
+  //     postcodes = await knex('postcodes').where({city: city.id}).select('code');
+  //   } catch (err) {
+  //     return ctx.throw(500, err);
+  //   }
+  // }
 
   let orgs = [] as tGroup[];
   try {
     orgs = await knex('orgs')
       .where({
         cityId: city.id,
-        countryId: country.id,
+        countryId: 1,
         regionId: region.id,
       })
       // exclude invite-only orgs from results
@@ -87,6 +85,6 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = {
     ...city,
     orgs: _.uniqBy(orgs, org => org.name),
-    postcodes: postcodes.map(p => parseInt(p.code, 10)),
+    // postcodes: postcodes.map(p => parseInt(p.code, 10)),
   };
 });

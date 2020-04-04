@@ -18,7 +18,10 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
     const {match: {params}} = props;
-    props.getRegion({country: params.country, region: params.region});
+    props.getRegion({
+      countryCode: params.countryCode,
+      regionCode: params.regionCode,
+    });
     props.getCity(params);
   }
 
