@@ -6,7 +6,7 @@ import {tComponentProps} from './_types';
 
 export const MembersComponent = memo((props: tComponentProps) => (
   <>
-    <div className="bg-white br8 p-3 mb-3">
+    <div className="bg-white rounded p-2 mb-2">
       <div className="flex flex-col d:flex-row items-center">
         <h1 className="fs3 mb-2">
           Pending Approvals
@@ -22,14 +22,14 @@ export const MembersComponent = memo((props: tComponentProps) => (
         users={props.approvals}
       />
     </div>
-    <div className="bg-white br8 p-3">
+    <div className="bg-white rounded p-2">
       <div className="flex flex-col d:flex-row items-center">
         <h2 className="fs3 mb-2">
           Manage Membership ({props.users.length} members)
         </h2>
       </div>
       <FilterPanel
-        className="bg-white br8 text-sm text-bold flex items-center mb-3"
+        className="bg-white rounded text-sm font-bold flex items-center mb-2"
         memberName={(props.session.profile as tGroup).memberName}
         modName={(props.session.profile as tGroup).modName}
         onRoleFilterChange={props.onRoleFilterChange}

@@ -13,31 +13,31 @@ const EditProfile = memo((props: tComponentProps) => (
     onSubmit={props.onSubmit}>
     <fieldset>
       <legend>
-        <h1 className="fs3 mb-3 leading-none">
+        <h1 className="fs3 mb-2 leading-none">
           Edit your Profile
         </h1>
       </legend>
       <label htmlFor="avatarEmail">
-        <h2 className="fs5 mb-1 leading-none">
+        <h2 className="text-base mb-1 leading-none">
           Change Group Logo
         </h2>
-        <p className="fs5 copyBlack mb-1">
+        <p className="text-base copyBlack mb-1">
           We use <ExternalLink noFollow to="https://www.libravatar.org">Libravatar</ExternalLink> for avatars. To connect your avatar, enter your Libravatar email below. It does not have to be the same as your Consensus email. We do not store this. Any changes you make to your avatar on Libravatar will be automatically reflected here.
         </p>
         <input
           autoComplete="nope"
-          className="p-3 mb-3 w-full"
+          className="p-2 mb-2 w-full"
           onChange={ev => props.updateState('avatarEmail', ev)}
           placeholder="your_email_here@example.com"
           value={props.avatarEmail}
           name="avatarEmail"
         />
       </label>
-      <h2 className="fs5 mb-1 leading-none">
+      <h2 className="text-base mb-1 leading-none">
         Change Category
       </h2>
       <select
-        className="mb-3 w-full"
+        className="mb-2 w-full"
         defaultValue={props.category}
         onBlur={ev => props.updateState('category', ev)}
         onChange={ev => props.updateState('category', ev)}>
@@ -47,7 +47,7 @@ const EditProfile = memo((props: tComponentProps) => (
           </option>
         ))}
       </select>
-      <h2 className="fs5 mb-1 leading-none">
+      <h2 className="text-base mb-1 leading-none">
         Change Group Type
       </h2>
       <select
@@ -65,81 +65,81 @@ const EditProfile = memo((props: tComponentProps) => (
           Hidden
         </option>
       </select>
-      <small className="dBl mb-3 copyBlack">
+      <small className="block mb-2 copyBlack">
         This option only affects future membership approvals
       </small>
-      <label className="w-full mb-3" htmlFor="memberName">
-        <h2 className="fs5 mb-1 leading-none">
+      <label className="w-full mb-2" htmlFor="memberName">
+        <h2 className="text-base mb-1 leading-none">
           Change Membership Title
         </h2>
         <input
           onChange={ev => props.updateState('memberName', ev)}
-          className="p-3 w-full"
+          className="p-2 w-full"
           placeholder="What are your members called?"
           value={props.memberName}
           name="memberName"
         />
       </label>
-      <label className="w-full mb-3" htmlFor="modName">
-        <h2 className="fs5 mb-1 leading-none">
+      <label className="w-full mb-2" htmlFor="modName">
+        <h2 className="text-base mb-1 leading-none">
           Change Moderator Title
         </h2>
         <input
           onChange={ev => props.updateState('modName', ev)}
-          className="p-3 w-full"
+          className="p-2 w-full"
           placeholder="What should moderators be called?"
           value={props.modName}
           name="modName"
         />
       </label>
-      <h2 className="fs5 mb-1 leading-none">
+      <h2 className="text-base mb-1 leading-none">
         Change Description
       </h2>
       <textarea
         rows={6}
         spellCheck
-        className="mb-3 w-full fs5"
+        className="mb-2 w-full text-base"
         placeholder="Organization Description Here"
         value={props.description}
         onChange={ev => props.updateState('description', ev)}
       />
-      <label className="dBl mb-3" htmlFor="website">
-        <h2 className="fs5 mb-1 leading-none">
+      <label className="block mb-2" htmlFor="website">
+        <h2 className="text-base mb-1 leading-none">
           Personal Website
         </h2>
         <input
           onChange={ev => props.updateState('website', ev)}
-          className="p-3 w-full"
+          className="p-2 w-full"
           placeholder="Update your website here"
           value={props.website}
           name="website"
         />
       </label>
-      <label className="dBl mb-3" htmlFor="facebook">
-        <h2 className="fs5 mb-1 leading-none">
+      <label className="block mb-2" htmlFor="facebook">
+        <h2 className="text-base mb-1 leading-none">
           Facebook
         </h2>
         <input
-          className="p-3 w-full"
+          className="p-2 w-full"
           name="facebook"
           onChange={ev => props.updateState('facebook', ev)}
           placeholder="Link your facebook profile here"
           value={props.facebook}
         />
       </label>
-      <label className="dBl mb-3" htmlFor="twitter">
-        <h2 className="fs5 mb-1 leading-none">
+      <label className="block mb-2" htmlFor="twitter">
+        <h2 className="text-base mb-1 leading-none">
           Twitter
         </h2>
         <input
-          className="p-3 w-full"
+          className="p-2 w-full"
           name="twitter"
           onChange={ev => props.updateState('twitter', ev)}
           placeholder="Link your twitter here"
           value={props.twitter}
         />
       </label>
-      <h2 className="fs5 mb-1 leading-none">
+      <h2 className="text-base mb-1 leading-none">
         Should the group be restricted to verified members only?
       </h2>
       <div
@@ -174,12 +174,12 @@ const EditProfile = memo((props: tComponentProps) => (
       <div className="flex flex-col d:flex-row items-center">
         <button
           disabled={!props.password}
-          className="p-3 pl-4 pR4 mr-2 hover:bg-gray-11 trans1">
+          className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-1 transition">
           Save Changes
         </button>
         <Link
           to="/admin/profile"
-          className="btn p-3 pl-4 pR4 hover:bg-gray-11 trans1">
+          className="btn p-2 pl-3 pr-3 hover:bg-gray-1 transition">
           Go back
         </Link>
       </div>

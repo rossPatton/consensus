@@ -13,7 +13,7 @@ const Avatar = memo((props: tProps) => {
     <img
       alt={props.alt || 'User or Group Avatar'}
       height={props.size || '96'}
-      className="bg-white circ ovrHide"
+      className="bg-white rounded-circ ovrHide"
       src={`${prefix}/${props.url}?default=${props.type === 'group' ? 'identicon' : 'mm'}&size=${props.size}`}
       width={props.size || '96'}
     />

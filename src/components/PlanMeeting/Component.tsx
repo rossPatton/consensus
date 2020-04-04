@@ -90,9 +90,9 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             </select>
           </div>
         </div>
-        <div className="brdT1 pt-4 pb-4 mt-4 flex items-center">
+        <div className="bt-1 pt-4 pb-4 mt-4 flex items-center">
           <button
-            className="p-3 mr-2 hover:bg-gray-11 trans1"
+            className="p-2 mr-2 hover:bg-gray-1 transition"
             disabled={disableSubmit}
             onClick={ev => {
               ev.preventDefault();
@@ -101,7 +101,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             Publish
           </button>
           <button
-            className="p-3 mr-2 hover:bg-gray-11 trans1"
+            className="p-2 mr-2 hover:bg-gray-1 transition"
             disabled={disableSubmit}
             onClick={ev => {
               ev.preventDefault();
@@ -112,7 +112,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
           {props.id && (
             <Link
               to={`/draft/${props.id}?${objToQueryString(props)}`}
-              className="brdA1 br4 leading-none p-3 text-sm hover:bg-gray-11 trans1">
+              className="brdA1 rounded leading-none p-2 text-sm hover:bg-gray-1 transition">
               <span
                 role="img"
                 aria-label="Eye Emoji">

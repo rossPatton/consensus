@@ -11,7 +11,7 @@ const EmailTokenComponent = memo((props: tProps) => (
     onSubmit={props.sendPasswordResetEmail}>
     <fieldset>
       <legend>
-        <h1 className="fs2 mb-2">Password Reset</h1>
+        <h1 className=" mb-2">Password Reset</h1>
       </legend>
       <label htmlFor="emailInput">
         <input
@@ -20,7 +20,7 @@ const EmailTokenComponent = memo((props: tProps) => (
           name="email" // for non-js submit and passportjs
           id="emailInput"
           placeholder="Enter the email address for your account"
-          className="p-3 w-full mb-3"
+          className="p-2 w-full mb-2"
           value={props.email}
           onChange={ev => props.updateState('email', ev)}
           type="email"
@@ -29,12 +29,12 @@ const EmailTokenComponent = memo((props: tProps) => (
       <div className="flex flex-col d:flex-row items-center">
         <button
           disabled={props.isClient && !props.email}
-          className="p-3 pl-4 pR4 mr-2">
+          className="p-2 pl-3 pr-3 mr-2">
           Send Reset Code
         </button>
         <Link
           to="/password-reset/enterCode"
-          className="btn p-3 pl-4 pR4">
+          className="btn p-2 pl-3 pr-3">
           Already have a code?
         </Link>
       </div>

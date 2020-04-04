@@ -18,15 +18,15 @@
 //           <li
 //             key={i}
 //             className={cx({
-//               'brdA1 br8 mb-3 p-3 pt-2 rel ovfHide': true,
-//               pl-4: decision.isClosed,
+//               'brdA1 rounded mb-2 p-2 pt-2 rel ovfHide': true,
+//               pl-3: decision.isClosed,
 //             })}>
 //             {decision.isClosed && decision.type === POLL && (
 //               <SimpleMajorityResult
 //                 data={decision.data.options as tCustomVoteResults}
 //               />
 //             )}
-//             <time className="mr-2 leading-none text-bold text-sm mb-2">
+//             <time className="mr-2 leading-none font-bold text-sm mb-2">
 //               {decision.isClosed ? 'Voting ended: ' : 'Vote ends: '}
 //               {dayJS(decision.deadline).format('ddd MMM DD, h:mmA')}
 //             </time>
@@ -41,11 +41,11 @@
 //               </Link>
 //             </h3>
 //             {!props.tiny && (
-//               <p className="mb-3 lineClamp">
+//               <p className="mb-2 lineClamp">
 //                 {decision.description}
 //               </p>
 //             )}
-//             <div className="flex flex-col d:flex-row items-center text-sm text-bold leading-none">
+//             <div className="flex flex-col d:flex-row items-center text-sm font-bold leading-none">
 //               {!props.tiny && <DecisionStatus decision={decision} />}
 //               <Link
 //                 to="/filler"

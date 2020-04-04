@@ -12,7 +12,7 @@
 //   return (
 //     <>
 //       {isPassed && (
-//         <small className="bgBlueLite br8 p-1 pl-2 pr-2 mr-2">
+//         <small className="bgBlueLite rounded p-1 pl-2 pr-2 mr-2">
 //           <span
 //             role="img"
 //             className="mr-1"
@@ -23,7 +23,7 @@
 //         </small>
 //       )}
 //       {!isPassed && (
-//         <small className="bgRedLite br8 p-1 pl-2 pr-2 mr-2">
+//         <small className="bg-red-2Lite rounded p-1 pl-2 pr-2 mr-2">
 //           <span
 //             role="img"
 //             className="mr-1"

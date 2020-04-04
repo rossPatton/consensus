@@ -17,7 +17,7 @@ const PlaceholderImage = (props: tProps) => {
     <img
       alt="placeholder"
       height={props.height}
-      className="bg-white br4 w-full"
+      className="bg-white rounded w-full"
       src={`${prefix}/${index}/${props.width}/${props.height}`}
       width={props.width}
     />

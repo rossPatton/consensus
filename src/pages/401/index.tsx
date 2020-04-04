@@ -1,16 +1,22 @@
 import React, { memo } from 'react';
+import {connect} from 'react-redux';
 
 // might be a somewhat common scenario given the lengths we're going to hide pages
 // if user lands somewhere private, or they're just not logged in, render this page
-const UnAuthorized = memo(() => (
+const UnAuthorized = memo(props => (
   <div className="contain mt-4 text-center">
-    <h1 className="fs2 mb-3">
+    {console.log('dont you... forget about me... no no no no ', props)}
+    <h1 className=" mb-1">
       You don&apos;t have permission to view this page. If this page belongs to a private or hidden group, you need to join the group first.
     </h1>
-    <h2 className="copyBlack fs5">
-      If you are seeing this because you&apos; outside the US, don&apos;t worry, we are working on having Consensus available for everyone as soon as possible.
+    <h2 className="text-base">
+      If you are seeing this because you&apos;re outside the US, don&apos;t worry, we are working on having Consensus available for everyone as soon as possible.
     </h2>
   </div>
 ));
 
-export default UnAuthorized;
+const mapStateToProps = (store: {geo: tThunk<tGeo>}) => ({
+  geo: store.geo.data,
+});
+
+export default connect(mapStateToProps)(UnAuthorized);

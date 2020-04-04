@@ -7,15 +7,21 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
   const len = props.password.length;
   const {errors = {}, name = 'password'} = props;
   const hasError = errors.password && errors.password.length > 0;
+  const inlineStyle = len === 0
+    ? {}
+    : {
+      height: '5px',
+      width: len > 0 ? `${len * 3.125}%` : '0%',
+    };
 
   return (
     <>
       <label htmlFor={`${props.id}`}>
-        <h3 className="fs5">
+        <h3 className="text-base mb-1">
           {props.title || 'Password'}
         </h3>
         {(!props.newPassword && !props.hideRequiredMessage) && (
-          <p className="fs5 copyBlack mb-1">
+          <p className="text-base mb-1">
             Required to make any changes to your account or profile.
           </p>
         )}
@@ -31,13 +37,13 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
             onChange={props.onChange}
             type={props.showPW ? 'text' : 'password'}
             className={cx({
-              'p-3 w-full mr-2': true,
+              'p-2 w-full mr-2': true,
               brdRed: hasError,
             })}
           />
           <button
             type="button"
-            className="bg-white hover:bg-gray-11 trans1 pl-4 pR4"
+            className="bg-white hover:bg-gray-1 transition pl-3 pr-3"
             onClick={props.togglePWVisibility}>
             {props.showPW ? 'Hide' : 'Reveal'} Password
           </button>
@@ -45,30 +51,29 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
       </label>
       {props.newPassword && (
         <>
-          <div className="mb-2 maxWidth flex items-center">
-            <span className="text-sm mr-2">
-              {len < 12 && 'Weak'}
-              {(len >= 12 && len < 24) && 'Passable'}
-              {(len >= 24 && len < 32) && 'Strong'}
-              {(len >= 32) && 'Very Strong'}
-            </span>
-            <div className=" bgYellowLite brdA1 br8 p-1">
-              <span
-                className={cx({
-                  'br8 dBl trans1 containRow': true,
-                  'p-1': len > 0,
-                  'bg-red-1': len < 12,
-                  'bg-yellow-1': len >= 12 && len < 24,
-                  'bg-green-1': len >= 24 && len < 32,
-                  'bg-green-2': len >= 32,
-                })}
-                style={{
-                  width: len > 0 ? `${len * 3.125}%` : '0%',
-                }}
-              />
+          {len > 0 && (
+            <div className="mb-2 flex items-center">
+              <span className="text-sm mr-2">
+                {len < 12 && 'Weak'}
+                {(len >= 12 && len < 24) && 'Passable'}
+                {(len >= 24 && len < 32) && 'Strong'}
+                {(len >= 32) && 'Very Strong'}
+              </span>
+              <div className="bg-white w-full contain-sm border rounded-lg p-1">
+                <span
+                  className={cx({
+                    'rounded-lg block transition': true,
+                    'bg-red-1': len < 12,
+                    'bg-yellow-2': len >= 12 && len < 24,
+                    'bg-green-1': len >= 24 && len < 32,
+                    'bg-green-2': len >= 32,
+                  })}
+                  style={inlineStyle}
+                />
+              </div>
             </div>
-          </div>
-          <ul className="text-sm leading-none lsDisc mL3 mb-4">
+          )}
+          <ul className="text-sm leading-none list-disc ml-2 mb-3">
             <li className="mb-1">Passwords must be at least 12 characters long, and can&apos;t be too common like &quot;password&quot;.</li>
             <li className="mb-1">We strongly recommend adding numbers, capitals, or special characters, but they aren&apos;t required.</li>
             <li className="mb-1">Use a password manager to generate and save strong passwords!</li>

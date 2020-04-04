@@ -13,7 +13,7 @@
 //       />
 //     )}
 //     {!props.decision.isClosed && (
-//       <small className="bgGreenLite br8 p-1 pl-2 pr-2 mr-2">
+//       <small className="bg-green-1 rounded p-1 pl-2 pr-2 mr-2">
 //         <span
 //           role="img"
 //           className="mr-1"
@@ -24,7 +24,7 @@
 //       </small>
 //     )}
 //     {props.decision.isClosed && (
-//       <small className="bgYellowLite br8 p-1 pl-2 pr-2 mr-2">
+//       <small className="bg-yellow-1 rounded p-1 pl-2 pr-2 mr-2">
 //         <span
 //           role="img"
 //           className="mr-1"

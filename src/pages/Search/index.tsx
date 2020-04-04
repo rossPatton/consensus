@@ -30,7 +30,7 @@ class SearchContainer extends React.PureComponent<tProps> {
             meta={meta}
           />
           <div className="mt-4 contain">
-            <h1 className="fs2 mb-3">
+            <h1 className=" mb-2">
               {renderNoResults ? 'No results!' : 'Your Search Results'}
             </h1>
             <SuperSearch />

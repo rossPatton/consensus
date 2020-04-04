@@ -6,7 +6,7 @@ import {tComponentProps} from './_types';
 export const DeleteGroupComponent = memo((props: tComponentProps) => (
   <form
     autoComplete="off"
-    className="bg-white br8 p-3"
+    className="bg-white rounded p-2"
     action="/api/v1/account"
     onSubmit={props.deleteGroup}>
     <fieldset>
@@ -17,7 +17,7 @@ export const DeleteGroupComponent = memo((props: tComponentProps) => (
             : 'Delete group'}
         </h1>
       </legend>
-      <h2 className="fs5 mb-3 copyBlack">
+      <h2 className="text-base mb-2 copyBlack">
         {props.session.deletionDeadline
           ? 'Enter your password again to cancel the account deletion process.'
           : <>Enter your password to trigger the account deletion process. You will have 1 week to stop it. The group will continue as normal during this time. After 1 week, your group will be <b>permanently</b> deleted.</>}
@@ -32,7 +32,7 @@ export const DeleteGroupComponent = memo((props: tComponentProps) => (
     </fieldset>
     <button
       disabled={props.isClient && !props.currentPassword}
-      className="p-3 pl-4 pR4 hover:bg-gray-11">
+      className="p-2 pl-3 pr-3 hover:bg-gray-1">
       {props.session.deletionDeadline
         ? 'Cancel group deletion'
         : 'Yes, really delete the group'}

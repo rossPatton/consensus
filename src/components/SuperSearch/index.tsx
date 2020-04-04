@@ -36,7 +36,7 @@ class SuperSearchContainer extends React.PureComponent<any, any> {
   render() {
     return (
       <form
-        className="p-3 bg-white br8 mb-4 text-sm text-bold"
+        className="p-2 bg-white rounded mb-4 text-sm font-bold"
         name="superSearch"
         autoComplete="off"
         onSubmit={this.onSubmit}
@@ -57,7 +57,7 @@ class SuperSearchContainer extends React.PureComponent<any, any> {
             </select>
             <label className="w-full" htmlFor="superSearch">
               <input
-                className="bg-gray-1 w-full p-3 br4 mr-3"
+                className="bg-gray-1 w-full p-2 rounded mr-3"
                 name="superSearch"
                 onChange={this.onChange}
                 placeholder="Search by group name"

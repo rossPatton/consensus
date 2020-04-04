@@ -7,7 +7,7 @@ const OrganizationTabs = memo((props: tProps) => {
   const isMod = props.role === 'admin' || props.role === 'facilitator';
 
   return (
-    <nav className="fs5">
+    <nav className="text-base">
       <ul className="flex flex-col d:flex-row items-center ovfScr">
         <li>
           <Tab

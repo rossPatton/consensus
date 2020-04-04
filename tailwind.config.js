@@ -24,29 +24,32 @@ module.exports = {
 
       // with colors, 1 === lightest, then darker from there
       gray: {
-        1: '#f7fafc',
-        2: '#edf2f7',
+        1: '#f6f6f6',
+        2: '#efefef',
         3: '#e2e8f0',
-        4: '#2d3748',
+        4: '#687ea5',
+        5: '#2d3748',
       },
       red: {
-        1: '#dc2849',
+        1: '#ff9f9f',
+        2: '#dc2849',
       },
       yellow: {
         1: '#fefcbf',
-        2: '#f6e05e',
+        2: '#ffc201',
       },
       green: {
-        1: '#c6f6d5',
+        1: '#aedfa5',
+        2: '#0f0',
       },
     },
     spacing: {
       '0': '0',
-      '1': '0.25rem',
-      '2': '0.5rem',
-      '3': '1rem',
-      '4': '2rem',
-      '5': '3rem',
+      '1': '0.5rem',
+      '2': '1rem',
+      '3': '2rem',
+      '4': '3rem',
+      '5': '4rem',
     },
     backgroundColor: theme => theme('colors'),
     backgroundPosition: {},
@@ -98,8 +101,8 @@ module.exports = {
     // sm => small html tag
     fontSize: {
       sm: '0.875rem',
-      // base: '1rem',
-      3: '1.5rem',
+      base: '1rem',
+      3: '1.25rem',
       2: '1.5rem',
       1: '2rem',
     },

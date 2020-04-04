@@ -7,11 +7,11 @@ import {tComponentProps} from './_types';
 
 export const MembershipsComponent = memo((props: tComponentProps) => (
   <>
-    <h1 className="fs3 mb-3">
+    <h1 className="fs3 mb-2">
       Manage Groups
     </h1>
     <FilterPanel
-      className="flex flex-col d:flex-row items-center mb-3 text-sm text-bold"
+      className="flex flex-col d:flex-row items-center mb-2 text-sm font-bold"
       onSearchChange={props.onSearchChange}
       placeholder="Filter groups by name"
     />

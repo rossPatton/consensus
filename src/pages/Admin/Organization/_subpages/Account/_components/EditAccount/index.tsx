@@ -11,36 +11,36 @@ const EditAccount = memo((props: tComponentProps) => (
     onSubmit={props.save}>
     <fieldset>
       <legend>
-        <h1 className="fs3 mb-3">Edit your account</h1>
+        <h1 className="fs3 mb-2">Edit your account</h1>
       </legend>
       <div className="mb-4">
         <label htmlFor="login">
-          <h2 className="fs5 mb-1 leading-none">
+          <h2 className="text-base mb-1 leading-none">
             Change Login
           </h2>
-          <p className="fs5 copyBlack mb-1">
+          <p className="text-base copyBlack mb-1">
             A unique username that is used just for logging in. Keep secret.
           </p>
           <input
             id="login"
             autoComplete="off"
             onChange={ev => props.updateState('login', ev)}
-            className="p-3 mb-3 w-full"
+            className="p-2 mb-2 w-full"
             placeholder="yourNewSecretLogin"
             value={props.login}
             name="login"
           />
         </label>
-        <label className="w-full mb-3" htmlFor="email">
-          <h2 className="fs5 mb-1 leading-none">
+        <label className="w-full mb-2" htmlFor="email">
+          <h2 className="text-base mb-1 leading-none">
             Change Email address
           </h2>
-          <p className="fs5 copyBlack mb-1">
+          <p className="text-base copyBlack mb-1">
             Used for account verification, event reminders, etc.
           </p>
           <input
             onChange={ev => props.updateState('email', ev)}
-            className="p-3 w-full"
+            className="p-2 w-full"
             autoComplete="off"
             placeholder="yourNewEmail@example.com"
             value={props.email}
@@ -68,12 +68,12 @@ const EditAccount = memo((props: tComponentProps) => (
     <div className="flex flex-col d:flex-row items-center">
       <button
         disabled={!props.currentPassword}
-        className="p-3 pl-4 pR4 mr-2 hover:bg-gray-11 trans1">
+        className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-1 transition">
         Save Changes
       </button>
       <Link
         to="/admin/account"
-        className="btn p-3 pl-4 pR4 hover:bg-gray-11 trans1">
+        className="btn p-2 pl-3 pr-3 hover:bg-gray-1 transition">
         Go back
       </Link>
     </div>

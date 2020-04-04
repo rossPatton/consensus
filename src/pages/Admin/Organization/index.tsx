@@ -34,20 +34,20 @@ const GroupAdminContainer = memo((props: tProps) => {
       {session.deletionDeadline && (
         <div
           className={cx({
-            'w-full p-3 text-center bgYellowLite text-bold text-sm': true,
-            'mb-3': session.isVerified,
+            'w-full p-2 text-center bg-yellow-1 font-bold text-sm': true,
+            'mb-2': session.isVerified,
           })}>
           Your group will be deleted on {dayJS(session.deletionDeadline).format('MMM DD')}
         </div>
       )}
       {(!session.profile.emails || session.profile.emails.length === 0) && (
-        <div className="bgYellow w-full p-3 mb-3 text-center text-bold text-sm">
+        <div className="bgYellow w-full p-2 mb-2 text-center font-bold text-sm">
           Welcome to Consensus! Your group will not be listed and some functionality will be unavailable until you link an email to this account and verify it. Click <Link to="/account/edit">here</Link> to add your email.
         </div>
       )}
       <div className="contain mt-4 flex aiStart">
-        <aside className="c3 bg-white br8 p-3 mr-3">
-          <div className="flex flex-col d:flex-row items-center text-bold pb-3 mb-3 brdB1">
+        <aside className="c3 bg-white rounded p-2 mr-3">
+          <div className="flex flex-col d:flex-row items-center font-bold pb-3 mb-2 brdB1">
             <div className="mr-3">
               <Avatar
                 url={session.profile.avatarHash}
@@ -55,7 +55,7 @@ const GroupAdminContainer = memo((props: tProps) => {
               />
             </div>
             <div className="leading-none">
-              <div className="fs7 mb-1">You are signed in as the <b>admin</b> for:</div>
+              <div className="text-sm mb-1">You are signed in as the <b>admin</b> for:</div>
               <h1 className="fs4">
                 <Link
                   className="no-underline"
@@ -74,23 +74,23 @@ const GroupAdminContainer = memo((props: tProps) => {
               <div>
                 <Link
                   to="/admin/account"
-                  className="mr-2 fs7">
+                  className="mr-2 text-sm">
                   Account
                 </Link>
                 <Link
                   to="/admin/profile"
-                  className="mr-2 fs7">
+                  className="mr-2 text-sm">
                   Profile
                 </Link>
               </div>
             </div>
           </div>
           <ul role="navigation">
-            <li className="fs4 text-bold mb-2">
+            <li className="fs4 font-bold mb-2">
               Admin Actions
             </li>
-            <li className="flex flex-col d:flex-row items-center fs5 p-2 mb-1 br4 hover:bg-gray-11">
-              <div className="bgGrey3 circ mr-3 p-3" />
+            <li className="flex flex-col d:flex-row items-center text-base p-2 mb-1 rounded hover:bg-gray-1">
+              <div className="bgGrey3 rounded-circ mr-3 p-2" />
               {isMeetings && 'Edit Meetings & Drafts'}
               {!isMeetings && (
                 <Link
@@ -102,8 +102,8 @@ const GroupAdminContainer = memo((props: tProps) => {
                 </Link>
               )}
             </li>
-            <li className="flex flex-col d:flex-row items-center fs5 p-2 mb-1 br4 hover:bg-gray-11">
-              <div className="bgGrey3 circ mr-3 p-3" />
+            <li className="flex flex-col d:flex-row items-center text-base p-2 mb-1 rounded hover:bg-gray-1">
+              <div className="bgGrey3 rounded-circ mr-3 p-2" />
               {section === 'memberships' && 'Manage Members & Approvals'}
               {section !== 'memberships' && (
                 <Link
@@ -115,8 +115,8 @@ const GroupAdminContainer = memo((props: tProps) => {
                 </Link>
               )}
             </li>
-            <li className="flex flex-col d:flex-row items-center fs5 p-2 mb-3 br4 hover:bg-gray-11">
-              <div className="bgGrey3 circ mr-3 p-3" />
+            <li className="flex flex-col d:flex-row items-center text-base p-2 mb-2 rounded hover:bg-gray-1">
+              <div className="bgGrey3 rounded-circ mr-3 p-2" />
               {isMeetingForm && 'Plan Meeting'}
               {!isMeetingForm && (
                 <Link
@@ -129,20 +129,20 @@ const GroupAdminContainer = memo((props: tProps) => {
               )}
             </li>
           </ul>
-          <div className="fs4 text-bold mb-3">
+          <div className="fs4 font-bold mb-2">
             Other actions
           </div>
           <div className="flex flex-col d:flex-row items-center">
             <form action="/api/v1/download">
               <fieldset>
-                <button className="p-3 hover:bg-gray-11 text-bold mr-2">
+                <button className="p-2 hover:bg-gray-1 font-bold mr-2">
                   <legend>Download your data</legend>
                 </button>
               </fieldset>
             </form>
             <Link
               to="/admin/deleteGroup"
-              className="btn p-3 hover:bg-gray-11 text-bold no-underline">
+              className="btn p-2 hover:bg-gray-1 font-bold no-underline">
               {session.deletionDeadline
                 ? 'Cancel group deletion'
                 : 'Delete your Group'}

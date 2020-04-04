@@ -15,7 +15,7 @@
 //       className={cx({
 //         'p-1 abs t l b': true,
 //         'bgBlue': isPassed,
-//         'bgRed': !isPassed,
+//         'bg-red-2': !isPassed,
 //       })}
 //     />
 //   );

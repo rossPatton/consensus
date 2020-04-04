@@ -28,7 +28,7 @@ class Template extends PureComponent<tProps> {
       <>
         <Header />
         <ErrorBoundary status={geoStatus}>
-          <main className="mt-5 mb-5 pb-5">
+          <main className="contain m-auto">
             <GenericLoader
               isLoading={geoThunk.isLoading}
               render={() => children}

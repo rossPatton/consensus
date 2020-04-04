@@ -40,7 +40,7 @@ class JoinFormContainer extends React.PureComponent<tProps> {
       return (
         <Link
           to="/signup"
-          className="bg-white text-sm br4 leading-none p-1 pl-2 pr-2">
+          className="bg-white text-sm rounded leading-none p-1 pl-2 pr-2">
           Join this Group
         </Link>
       );
@@ -61,7 +61,7 @@ class JoinFormContainer extends React.PureComponent<tProps> {
         action="/api/v1/usersByOrg">
         <fieldset>
           <legend>
-            <button className="bg-white text-sm br4 leading-none p-1 pl-2 pr-2">
+            <button className="bg-white text-sm rounded leading-none p-1 pl-2 pr-2">
               {org.type === 'public' && 'Join'}
               {org.type === 'private' && 'Request'}
             </button>

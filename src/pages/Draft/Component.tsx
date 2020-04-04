@@ -12,12 +12,12 @@ export const DraftComponent = memo((props: tComponentProps) => {
 
   return (
     <>
-      <div className="w-full p-3 mb-3 text-center bgYellow text-bold text-sm">
+      <div className="w-full p-2 mb-2 text-center bgYellow font-bold text-sm">
         This is a draft preview for your meeting.
       </div>
       <div className="contain mt-4">
         <div className="mb-4">
-          <Link to={`/org/${slugify(event.orgName)}`} className="no-underline text-bold leading-none">
+          <Link to={`/org/${slugify(event.orgName)}`} className="no-underline font-bold leading-none">
             {event.orgName}
           </Link>
         </div>
@@ -29,14 +29,14 @@ export const DraftComponent = memo((props: tComponentProps) => {
               width={640}
             />
           </div>
-          <div className="w-full rel">
-            <time className="text-bold leading-none mb-3" dateTime={event.date}>
+          <div className="w-full relative">
+            <time className="font-bold leading-none mb-2" dateTime={event.date}>
               {dayJS(event.date).format('ddd MMM DD YYYY, h:mmA')}
             </time>
-            <h1 className="fs2 mb-3 capitalize">
+            <h1 className=" mb-2 capitalize">
               {event.title}
             </h1>
-            <div className="text-bold mb-3">
+            <div className="font-bold mb-2">
               <div>
                 {event.locationLink && (
                   <ExternalLink
@@ -49,7 +49,7 @@ export const DraftComponent = memo((props: tComponentProps) => {
               </div>
             </div>
             {event.description && (
-              <div className="fs5">
+              <div className="text-base">
                 {event.description.split('\n').map((p: string, i) => (
                   <p key={i} className="fs3">
                     {p}

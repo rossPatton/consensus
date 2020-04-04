@@ -5,7 +5,7 @@ import {tComponentProps} from './_types';
 
 export const UserComponent = memo(({orgs, user}: tComponentProps) => (
   <div className="contain mt-4 mB5">
-    <h1 className="mb-3 fs2 capitalize">
+    <h1 className="mb-2 fs2 capitalize">
       @{user.username}
     </h1>
     {user.name && (
@@ -44,7 +44,7 @@ export const UserComponent = memo(({orgs, user}: tComponentProps) => (
       && orgs.length > 0
       && (
         <div className="w-full">
-          <h3 className="mb-3">Memberships</h3>
+          <h3 className="mb-2">Memberships</h3>
           <Orgs orgs={orgs} />
         </div>
       )}

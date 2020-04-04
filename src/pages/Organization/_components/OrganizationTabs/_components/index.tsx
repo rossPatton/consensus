@@ -22,7 +22,7 @@ export const Tab = memo((props: tProps) => {
   const isMeetings = subRoute === '' && typeof section === 'undefined';
   const isActive = isMeetings || section === subRoute;
   const className = cx({
-    'fs3 capitalize dBl p-2 pr-3': true,
+    'fs3 capitalize block p-2 pr-3': true,
     'pl-3': subRoute !== '',
     'underline black': isActive,
     'no-underline grey3': !isActive,

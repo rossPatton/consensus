@@ -14,13 +14,13 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
     onSubmit={props.register}>
     <fieldset>
       <legend>
-        <h2 className="mb-4">New User</h2>
+        <h2 className="mb-3">New User</h2>
       </legend>
       <label htmlFor="usernameInput">
-        <h2 className="fs5 mb-1 leading-none">
+        <h2 className="text-base mb-1">
           Login
         </h2>
-        <p className="fs5 copyBlack mb-1">
+        <p className="text-gray-4 mb-1">
           A unique name that you&apos;ll use to login with. Keep secret!
         </p>
         <input
@@ -31,7 +31,7 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
           placeholder="yourSecretNameForLoggingIn"
           value={props.login}
           onChange={ev => props.updateState('login', ev)}
-          className="p-3 mb-3 w-full"
+          className="p-2 mb-2 w-full"
         />
       </label>
       <PasswordInput
@@ -45,16 +45,16 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
       />
       <button
         disabled={props.isClient && (!props.password || !props.login)}
-        className="trans1 hover:bg-gray-11 p-3 pl-4 pR4 mr-2">
+        className="transition hover:bg-gray-1 p-2 pl-3 pr-3 mr-1">
         Sign up
       </button>
       <Link
         to="/signup"
-        className="btn trans1 hover:bg-gray-11 p-3 pl-4 pR4">
+        className="btn transition hover:bg-gray-1 p-2 pl-3 pr-3">
         Or go back
       </Link>
       {props.errArr.length > 0 && (
-        <ul className="text-sm text-bold brdT1 brdRed pt-3 mt-3 leading-none red">
+        <ul className="text-sm font-bold bt-1 brdRed pt-3 mt-3 leading-none red">
           {props.errArr.map((err, i) => (
             <li key={i} className="mb-1">
               {err}

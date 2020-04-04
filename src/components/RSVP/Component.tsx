@@ -17,7 +17,7 @@ export const RSVPComponent = (props: tComponentProps) => {
       action="/api/v1/rsvps"
       onSubmit={ev => setRsvp({ev, eventId})}>
       <fieldset>
-        <div className="flex items-center text-sm text-bold leading-none">
+        <div className="flex items-center text-sm font-bold leading-none">
           <legend className="mr-2">
             RSVP {userRSVPsPrivately ? 'Privately' : 'Publicly'}
           </legend>
@@ -26,7 +26,7 @@ export const RSVPComponent = (props: tComponentProps) => {
             type={props.isClient ? 'button' : 'submit'}
             onClick={ev => setRsvp({ev, eventId})}
             className={cx({
-              'mr-1 hover:bg-gray-11': true,
+              'mr-1 hover:bg-gray-1': true,
               'p-2 pl-3 pr-3': !props.compact,
               'bg-gray-3': !!rsvp && rsvp.value === 'yes',
             })}>

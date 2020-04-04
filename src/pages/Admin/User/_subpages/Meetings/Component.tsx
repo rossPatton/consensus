@@ -5,7 +5,7 @@ import {tComponentProps} from './_types';
 
 export const MeetingsComponent = memo((props: tComponentProps) => (
   <>
-    <ul className="flex flex-col d:flex-row items-center mb-3" role="navigation">
+    <ul className="flex flex-col d:flex-row items-center mb-2" role="navigation">
       <li>
         <h1 className="fs3 mr-3">
           Your RSVPs
@@ -13,7 +13,7 @@ export const MeetingsComponent = memo((props: tComponentProps) => (
       </li>
     </ul>
     <FilterPanel
-      className="flex flex-col d:flex-row items-center mb-4 text-sm text-bold"
+      className="flex flex-col d:flex-row items-center mb-4 text-sm font-bold"
       onFilterOptionChange={props.onFilterOptionChange}
       onSearchChange={props.onSearchChange}
       filterOptions={[

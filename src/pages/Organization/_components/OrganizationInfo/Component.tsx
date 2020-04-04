@@ -11,10 +11,10 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
   const {description = ''} = props.org;
 
   return (
-    <div className="bg-white br8 mr-3 c3  growNone ovfHide">
-      <div className="bgGrey4 leading-none flex items-center jcBetween p-3">
+    <div className="bg-white rounded mr-3 c3  growNone ovfHide">
+      <div className="bgGrey4 leading-none flex items-center justify-between p-2">
         {!role && (
-          <small className="text-bold white">
+          <small className="font-bold white">
             {org.type === 'public' && 'Public Group'}
             {org.type === 'private' && 'Private Group'}
             {org.type === 'hidden' && 'Hidden Group'}
@@ -29,17 +29,17 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
         </div>
         <LeaveForm org={org} role={role} />
       </div>
-      <div className="p-3">
-        <div className="mb-3">
+      <div className="p-2">
+        <div className="mb-2">
           <div className="flex flex-col d:flex-row items-center">
-            <div className="circ mr-2 ovfHide">
+            <div className="rounded-circ mr-2 ovfHide">
               <PlaceholderImage
                 height={60}
                 width={60}
               />
             </div>
             <div>
-              <small className="ttUpper fs7">
+              <small className="ttUpper text-sm">
                 {props.org.category}
               </small>
               <h1 className="fs3 leading-none">
@@ -60,7 +60,7 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
                 && (
                   <Link
                     to={`/org/${org.id}/members`}
-                    className="fs7"
+                    className="text-sm"
                     title="Click to browse member list">
                     {props.members.length} Members
                   </Link>

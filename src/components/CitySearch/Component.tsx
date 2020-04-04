@@ -33,7 +33,7 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
     <>
       {props.showRegionField && (
         <>
-          <h2 className="fs5 mb-1 leading-none">
+          <h2 className="text-base mb-1 leading-none">
             Pick a different state
           </h2>
           <label htmlFor="stateSelect">
@@ -53,7 +53,7 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
           </label>
         </>
       )}
-      <h2 className="fs5 mb-1 leading-none">
+      <h2 className="text-base mb-1 leading-none">
         City in <span className="dInBl mr-2">
           {(!props.showRegionField && props.geo.region) && props.geo.region}
           {(props.showRegionField && props.region) && props.region}
@@ -67,7 +67,7 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
         )}
       </h2>
       {props.label && (
-        <p className="fs5 copyBlack mb-1">
+        <p className="text-base copyBlack mb-1">
           {props.label}
         </p>
       )}
@@ -90,7 +90,7 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
           </label>
         )}
         {props.cityId > 0 && (
-          <div className="brdA1 p-3 black br8 dInBl">
+          <div className="brdA1 p-2 black rounded dInBl">
             <b>{props.city}</b>, <span className="dInBl mr-3">{props.region}</span>
             <button
               type="button"

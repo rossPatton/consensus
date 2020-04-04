@@ -5,8 +5,8 @@ import {Avatar, Search} from '../../../../components';
 import {tComponentProps} from './_types';
 
 export const HeaderComponent = memo((props: tComponentProps) => (
-  <header className="bg-white bxSh1 fixed t l r pt-3 pb-3 z-50">
-    <div className="contain flex items-center rel">
+  <header className="bg-white shadow fixed t l r pt-2 pb-2 z-50">
+    <div className="contain m-auto flex items-center relative">
       <div>
         <Link to="/">
           <img
@@ -44,7 +44,7 @@ export const HeaderComponent = memo((props: tComponentProps) => (
                 <fieldset>
                   <button
                     id="a11yLogout"
-                    className="trans1 hover:bg-gray-11"
+                    className="transition hover:bg-gray-1"
                     onClick={props.logout}>
                   Logout
                   </button>

@@ -4,7 +4,7 @@ import {CurrentAccount, EditAccount} from './_components';
 import {tComponentProps} from './_types';
 
 export const AccountComponent = memo((props: tComponentProps) => (
-  <div className="bg-white br8 p-3">
+  <div className="bg-white rounded p-2">
     {!props.subsection && (
       <CurrentAccount {...props} />
     )}

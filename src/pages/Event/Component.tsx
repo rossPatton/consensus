@@ -14,18 +14,18 @@ export const EventComponent = memo((props: tComponentProps) => {
   return (
     <>
       {!isPastMeeting && rsvp.value === 'yes' && (
-        <div className="p-3 mb-3 text-center bg-green-1 font-bold text-sm">
+        <div className="p-2 mb-2 text-center bg-green-1 font-bold text-sm">
           You&apos;re going to this meeting!
         </div>
       )}
       {isPastMeeting && (
-        <div className="w-full p-3 mb-3 text-center bg-yellow-2 font-bold text-sm">
+        <div className="w-full p-2 mb-2 text-center bg-yellow-2 font-bold text-sm">
           This meeting has already happened
         </div>
       )}
       <div className="contain mt-4">
         <div className="mb-4">
-          <Link to={`/org/${org.id}`} className="no-underline text-bold leading-none">
+          <Link to={`/org/${org.id}`} className="no-underline font-bold leading-none">
             {org.name}
           </Link>
         </div>
@@ -38,19 +38,19 @@ export const EventComponent = memo((props: tComponentProps) => {
             />
           </div>
           <div>
-            <time className="text-bold leading-none mb-3" dateTime={event.date}>
+            <time className="font-bold leading-none mb-2" dateTime={event.date}>
               {dayJS(event.date).format('ddd MMM DD YYYY, h:mmA')}
             </time>
-            <h1 className="mb-3 capitalize">
+            <h1 className="mb-2 capitalize">
               {event.title}
             </h1>
             {!isPastMeeting
               && (
-                <div className="mb-3">
+                <div className="mb-2">
                   <RSVP event={event} />
                 </div>
               )}
-            <div className="text-bold mb-3">
+            <div className="font-bold mb-2">
               <div>
                 {event.locationLink && (
                   <ExternalLink
@@ -68,7 +68,7 @@ export const EventComponent = memo((props: tComponentProps) => {
                 )}
             </div>
             {event.description && (
-              <div className="fs5">
+              <div className="text-base">
                 {event.description.split('\n').map((p: string, i) => (
                   <p key={i} className="fs3">
                     {p}
@@ -80,7 +80,7 @@ export const EventComponent = memo((props: tComponentProps) => {
         </div>
         {eventsByOrgId && eventsByOrgId.length > 0 && (
           <aside className="w-full mB5">
-            <h2 className="fs3 mb-3 leading-none">
+            <h2 className="fs3 mb-2 leading-none">
             More events by {org.name}
             </h2>
             <Events
@@ -91,7 +91,7 @@ export const EventComponent = memo((props: tComponentProps) => {
         )}
         {/* {eventsByOrgId && eventsByOrgId.length > 0 && (
         <aside className=" w-full mB5">
-          <h2 className="fs3 mb-3 leading-none">
+          <h2 className="fs3 mb-2 leading-none">
             More {org.category} events in {org.city}
           </h2>
           <Events

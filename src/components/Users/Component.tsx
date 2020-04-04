@@ -10,8 +10,8 @@ export const UsersComponent = memo((props: tComponentProps) => (
     {props.users.map((user: tUser, i) => (
       <li
         key={i}
-        className="bg-white mb-3 hover:bg-gray-11 br4 flex items-center p-3">
-        <div className="bgGrey3 circ mr-3 p-3" />
+        className="bg-white mb-2 hover:bg-gray-1 rounded flex items-center p-2">
+        <div className="bgGrey3 rounded-circ mr-3 p-2" />
         <div className="w-full">
           <h3 className="mb-1">
             <Link to={`/user/${user.id}`}>
@@ -20,14 +20,14 @@ export const UsersComponent = memo((props: tComponentProps) => (
           </h3>
           <div className="flex flex-col d:flex-row items-center">
             {user.role !== 'pending' && (
-              <span className="p-1 leading-none fs7 bgGrey4 white text-bold br4 mr-2">
+              <span className="p-1 leading-none text-sm bgGrey4 white font-bold rounded mr-2">
                 {user.role === 'member' ? props.memberName : props.modName}
               </span>
             )}
             {(props.sessionRole === 'admin' || props.sessionRole === 'facilitator')
                 && (
                   <button
-                    className="fs7 bg-white"
+                    className="text-sm bg-white"
                     onClick={ev => props.removeUser(ev, user.id)}>
                     {user.role === 'pending'
                       ? 'Reject this user'

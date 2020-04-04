@@ -14,7 +14,7 @@ const Org = memo((props: tProps) => {
     <li
       key={props.index}
       className={cx({
-        'mb-3': props.asList,
+        'mb-2': props.asList,
         ' fxg0 fourth mB5 pr-3': !props.asList,
       })}>
       <div
@@ -24,7 +24,7 @@ const Org = memo((props: tProps) => {
         onMouseLeave={() => props.setHover(null)}
         className={cx({
           'flex items-center text-sm leading-none no-underline': true,
-          'p-3 hover:bg-gray-11 trans1 br4': props.asList,
+          'p-2 hover:bg-gray-1 transition rounded': props.asList,
         })}>
         <div className="mr-2">
           <Avatar
@@ -35,7 +35,7 @@ const Org = memo((props: tProps) => {
         </div>
         <div>
           {role && (
-            <div className="fs7 text-bold mb-2">
+            <div className="text-sm font-bold mb-2">
               You are {role === 'pending' ? role : `a ${role}`}
             </div>
           )}
@@ -46,11 +46,11 @@ const Org = memo((props: tProps) => {
           </h2>
           <div
             className={cx({
-              'fs7 text-bold': true,
+              'text-sm font-bold': true,
               'flex items-center': props.asList,
             })}>
             {props.showType && (
-              <span className="dInBl capitalize bgGrey4 br4 p-1 white mr-2">
+              <span className="dInBl capitalize bgGrey4 rounded p-1 white mr-2">
                 {props.org.type}
               </span>
             )}

@@ -27,8 +27,8 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
   return (
     <>
       <div className="contain flex aiStart mt-4">
-        <aside className="c3 bg-white br8 p-3 mr-3">
-          <div className="flex flex-col d:flex-row items-center fs4 text-bold pb-3 mb-3 brdB1">
+        <aside className="c3 bg-white rounded p-2 mr-3">
+          <div className="flex flex-col d:flex-row items-center fs4 font-bold pb-3 mb-2 brdB1">
             <div className="mr-3">
               <Avatar
                 url={props.session.profile.avatarHash}
@@ -36,11 +36,11 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
               />
             </div>
             <div>
-              <div className="fs7 mb-1">You are signed in as <b>user</b>:</div>
+              <div className="text-sm mb-1">You are signed in as <b>user</b>:</div>
               <h1 className="fs4">
                 <Link
                   to="/admin/meetings"
-                  className="text-bold no-underline">
+                  className="font-bold no-underline">
                   {session.isVerified && (
                     <span
                       aria-label="Verified Account Checkbox"
@@ -55,12 +55,12 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
               <div>
                 <Link
                   to="/admin/account"
-                  className="mr-2 fs7 text-bold">
+                  className="mr-2 text-sm font-bold">
                   Account
                 </Link>
                 <Link
                   to="/admin/profile"
-                  className="mr-2 fs7 text-bold">
+                  className="mr-2 text-sm font-bold">
                   Profile
                 </Link>
               </div>
@@ -69,8 +69,8 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           {!orgsByUserIdThunk.isLoading
             && orgsByUserIdThunk.data.length > 0
             && (
-              <ul className="mb-3 pb-3" role="navigation">
-                <li className="fs4 text-bold mb-3">
+              <ul className="mb-2 pb-3" role="navigation">
+                <li className="fs4 font-bold mb-2">
                   Your groups
                 </li>
                 {orgsByUserIdThunk.data.slice(0, 3).map((group, i) => {
@@ -82,8 +82,8 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
                     <li key={i}>
                       <Link
                         to={`/org/${group.handle}`}
-                        className="br8 p-2 flex items-center no-underline hover:bg-gray-11 trans2">
-                        <div className="circ mr-2 ovfHide">
+                        className="rounded p-2 flex items-center no-underline hover:bg-gray-1 trans2">
+                        <div className="rounded-circ mr-2 ovfHide">
                           <div className="mr-3">
                             <Avatar
                               url={group.avatarHash}
@@ -92,10 +92,10 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
                           </div>
                         </div>
                         <div>
-                          <div className="fs7 text-bold mb-2">
+                          <div className="text-sm font-bold mb-2">
                             You are a {role}
                           </div>
-                          <h2 className="fs5 copyBlack leading-none">
+                          <h2 className="text-base copyBlack leading-none">
                             {group.name}
                           </h2>
                         </div>
@@ -106,26 +106,26 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
                 <li>
                   <Link
                     to="/admin/memberships"
-                    className="pl-2 text-sm text-sm00">
+                    className="pl-2 text-sm">
                     View all
                   </Link>
                 </li>
               </ul>
             )}
-          <div className="fs4 text-bold mb-3">
+          <div className="fs4 font-bold mb-2">
             Other actions
           </div>
           <div className="flex flex-col d:flex-row items-center">
             <form action="/api/v1/download">
               <fieldset>
-                <button className="p-3 hover:bg-gray-11 text-bold mr-2">
+                <button className="p-2 hover:bg-gray-1 font-bold mr-2">
                   <legend>Download your data</legend>
                 </button>
               </fieldset>
             </form>
             <Link
               to="/admin/deleteAccount"
-              className="btn p-3 hover:bg-gray-11 text-bold no-underline">
+              className="btn p-2 hover:bg-gray-1 font-bold no-underline">
               Delete your account
             </Link>
           </div>
@@ -134,11 +134,11 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           {/* user is new. ie, they havent put in a username yet */}
           {!session.profile.username
             && (
-              <div className="p-3 br8 mb-3 brdA1 brdW2 bsDashed text-bold black">
+              <div className="p-2 rounded mb-2 brdA1 brdW2 bsDashed font-bold black">
                 Welcome to Consensus. You&apos;ll need to pick a username before you can join groups or RSVP to meetings. You can change it at anytime. {(isProfile && !subsection) && 'Click "Edit Profile" below to get started'} {!isProfile && <>Click <Link to="/admin/profile/edit">here</Link> to get started.</>}
               </div>
             )}
-          <div className="bg-white br8 p-3">
+          <div className="bg-white rounded p-2">
             {isAccount
             && (
               <Account

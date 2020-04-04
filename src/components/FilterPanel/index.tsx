@@ -6,7 +6,7 @@ import {tProps} from './_types';
 // the component half of the search filter container
 // decoupled for ease of placement
 const FilterPanel = memo((props: tProps) => (
-  <div className={props.className || 'flex items-center p-3 bg-white br8 mb-3 text-sm text-bold'}>
+  <div className={props.className || 'flex items-center p-2 bg-white rounded mb-2 text-sm font-bold'}>
     <label className="w-full mr-2" htmlFor="searchFilter">
       <input
         spellCheck

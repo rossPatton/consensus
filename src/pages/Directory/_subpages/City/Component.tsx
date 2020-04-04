@@ -12,7 +12,7 @@ export const CityComponent = memo((props: tComponentProps) => (
       {props.city.orgs.length} Groups
     </h2>
     <FilterPanel
-      className="flex flex-col d:flex-row items-center p-3 bg-white br8 mb-4 text-sm text-bold"
+      className="flex flex-col d:flex-row items-center p-2 bg-white rounded mb-4 text-sm font-bold"
       onCategoryChange={props.onChange}
       onSearchChange={props.onSearch}
       placeholder="Filter by group name"

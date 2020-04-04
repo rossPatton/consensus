@@ -35,7 +35,7 @@ class SearchContainer extends React.PureComponent<any, {value: string}> {
         <fieldset>
           <label htmlFor="headerSearch">
             <input
-              className="p-2 pl-3 br4"
+              className="p-1 pl-2 rounded"
               name="headerSearch"
               onChange={this.onChange}
               placeholder="Search group name"

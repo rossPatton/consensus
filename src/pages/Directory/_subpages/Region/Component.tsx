@@ -11,7 +11,7 @@ export const RegionComponent = memo((props: tComponentProps) => (
       {props.region.name}
     </h1>
     <FilterPanel
-      className="flex flex-col d:flex-row items-center p-3 bg-white br8 mb-4 text-sm text-bold"
+      className="flex flex-col d:flex-row items-center p-2 bg-white rounded mb-4 text-sm font-bold"
       onSearchChange={props.onChange}
     />
     <h2 className="mb-2 fs3">
@@ -22,10 +22,10 @@ export const RegionComponent = memo((props: tComponentProps) => (
       {props.citiesToRender.map((city, i) => (
         <li
           key={i}
-          className=" fxg0 third mb-3">
+          className=" fxg0 third mb-2">
           <Link
             to={`${props.match.url}/${slugify(city.name)}`}
-            className="copyBlack text-bold no-underline">
+            className="copyBlack font-bold no-underline">
             {city.name}
           </Link>
         </li>

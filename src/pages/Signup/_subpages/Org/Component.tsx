@@ -17,11 +17,11 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
       <legend>
         <h2 className="mb-4">New Group</h2>
       </legend>
-      <h2 className="fs5 mb-1 leading-none">
+      <h2 className="text-base mb-1 leading-none">
           Group Name
       </h2>
       <label htmlFor="nameInput" className="mb-4">
-        <p className="fs5 copyBlack mb-1">
+        <p className="text-base copyBlack mb-1">
             What&apos;s your group&apos;s name? Think carefully, you won&apos;t be able to change this!
         </p>
         <input
@@ -34,11 +34,11 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           value={props.name}
         />
       </label>
-      <h2 className="fs5 mb-1 leading-none">
+      <h2 className="text-base mb-1 leading-none">
           Group Handle
       </h2>
       <label htmlFor="handleInput" className="mb-4">
-        <p className="fs5 copyBlack mb-1">
+        <p className="text-base copyBlack mb-1">
             What will your group&apos;s url be? Only lowercase letters, numbers, and dashes(-) allowed. Think carefully, you won&apos;t be able to change this!
         </p>
         <div className="fx">
@@ -56,7 +56,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           />
           <button
             type="button"
-            className="p-3"
+            className="p-2"
             onClick={() => {
               props.updateState('handle', slugify(props.name));
             }}>
@@ -64,11 +64,11 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           </button>
         </div>
       </label>
-      <h2 className="fs5 mb-1 leading-none">
+      <h2 className="text-base mb-1 leading-none">
           Group Category
       </h2>
       <label htmlFor="categoryInput" className="mb-4">
-        <p className="fs5 copyBlack mb-1">
+        <p className="text-base copyBlack mb-1">
             What category most closely matches your group? You can always change it later. P.S., more categories are in the works!
         </p>
         <select
@@ -84,11 +84,11 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           ))}
         </select>
       </label>
-      <h2 className="fs5 mb-1 leading-none">
+      <h2 className="text-base mb-1 leading-none">
           Group Type
       </h2>
       <label htmlFor="groupTypeSelect">
-        <p className="fs5 copyBlack mb-1">
+        <p className="text-base copyBlack mb-1">
           Is anyone free to join your group, or do you want to be able to vet membership?
         </p>
         <select
@@ -120,11 +120,11 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
         label="All groups on Consensus are currently local, city-based organizations."
         updateState={props.updateState}
       />
-      <h2 className="fs5 mb-1 leading-none">
+      <h2 className="text-base mb-1">
         Group Login
       </h2>
       <label htmlFor="loginInput" className="mb-4">
-        <p className="fs5 copyBlack mb-1">
+        <p className="text-base text-gray-4 mb-1">
           A unique name that you&apos;ll use to login with. Keep secret!
         </p>
         <input
@@ -147,10 +147,10 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
         placeholder="Your organization's password here"
         password={props.password}
       />
-      <div className="brdT1 pt-4 pb-4 mt-4 flex items-center">
+      <div className="bt-1 pt-4 pb-4 mt-4 flex items-center">
         <button
           disabled={props.disabled}
-          className="p-3 pl-4 pR4 hover:bg-gray-11 trans1">
+          className="p-2 pl-3 pr-3 hover:bg-gray-1 transition">
           Create Group!
         </button>
       </div>

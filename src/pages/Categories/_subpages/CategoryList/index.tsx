@@ -20,11 +20,11 @@ const CategoryList = memo(() => (
       {categories.map(cat => (
         <li
           key={cat.slug}
-          className=" fxg0 third mb-3">
+          className=" fxg0 third mb-2">
           <Link
             to={`/categories/${cat.slug}`}
-            className="dBl text-sm leading-none p-3 brdA1 br8 hover:bg-gray-11 trans2 no-underline">
-            <h2 className="dBl leading-none fs3 mT1 mb-3 underline">
+            className="block text-sm leading-none p-2 brdA1 rounded hover:bg-gray-1 trans2 no-underline">
+            <h2 className="block leading-none fs3 mT1 mb-2 underline">
               {cat.display}
             </h2>
           </Link>
