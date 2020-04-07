@@ -17,11 +17,15 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
   return (
     <>
       <label htmlFor={`${props.id}`}>
-        <h3 className="text-base mb-1">
+        <h3
+          className={cx({
+            'text-base font-bold leading-none': true,
+            'mb-1': props.newPassword,
+          })}>
           {props.title || 'Password'}
         </h3>
         {(!props.newPassword && !props.hideRequiredMessage) && (
-          <p className="text-base mb-1">
+          <p className="mb-1">
             Required to make any changes to your account or profile.
           </p>
         )}
@@ -37,13 +41,13 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
             onChange={props.onChange}
             type={props.showPW ? 'text' : 'password'}
             className={cx({
-              'p-2 w-full mb-1 mr-2': true,
+              'p-2 w-full mb-1 d:mb-0 mr-2': true,
               'border-red-1': hasError,
             })}
           />
           <button
             type="button"
-            className="bg-white hover:bg-gray-3 transition pl-3 pr-3"
+            className="hover:bg-gray-3 transition p-2 pl-3 pr-3"
             onClick={props.togglePWVisibility}>
             {props.showPW ? 'Hide' : 'Reveal'} Password
           </button>

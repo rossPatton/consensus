@@ -17,7 +17,6 @@ import {PlanMeetingComponent} from './Component';
 class PlanMeetingContainer extends Component<tContainerProps, tState> {
   state = {
     category: this.props.org.category,
-    // city: this.props.org.city,
     cityId: this.props.org.cityId,
     date: dayJS().toISOString(),
     description: '',
@@ -39,6 +38,8 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     const {router: {search}} = props;
     const draft = qs.parse(search);
 
+    if (_.isEmpty(draft)) return;
+
     const isPrivate = draft.isPrivate === 'true';
     const isCopy = draft.isCopy === 'true';
 
@@ -46,8 +47,9 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     // then we change a few things here
     const state = {
       category: draft.category as tCategory,
-      // city: draft.city as string,
-      cityId: parseInt(draft.cityId as string, 10),
+      cityId: typeof draft.cityId === 'string'
+        ? parseInt(draft.cityId as string, 10)
+        : null,
       // convert UTC date with tz to local format for html5 date/time picker
       date: isCopy
         ? dayJS().toISOString()

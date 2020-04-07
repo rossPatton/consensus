@@ -15,7 +15,7 @@ const PlanMeeting = memo((props: tProps) => (
         { property: 'og:description', content: '' },
       ]}
     />
-    <h1 className="fs3 mb-2">
+    <h1 className="text-3 mb-2">
       Plan Meeting
     </h1>
     <PlanMeetingComponent

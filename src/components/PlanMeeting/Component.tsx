@@ -25,28 +25,28 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
       method="POST"
       encType="multipart/form-data">
       <fieldset>
-        <h3>Meeting Title</h3>
+        <h3 className="mb-1">Meeting Title</h3>
         <input
-          className="mb-4 w-full"
+          className="mb-3 w-full"
           placeholder="Your Meeting Title Here"
           value={props.title}
           onChange={ev => updateState('title', ev.currentTarget.value)}
         />
-        <h3>Tell Us About Your Meeting</h3>
+        <h3 className="mb-1">Tell Us About Your Meeting</h3>
         <textarea
           rows={8}
           spellCheck
-          className="mb-4 w-full"
+          className="mb-3 w-full"
           placeholder="Meeting Description Here"
           value={props.description}
           onChange={ev => updateState('description', ev.currentTarget.value)}
         />
-        <h3>Where is your meeting happening?</h3>
-        <div className="flex flex-col d:flex-row mb-4">
+        <h3 className="mb-1">Where is your meeting happening?</h3>
+        <div className="flex flex-col d:flex-row mb-3">
           <input
             results={3}
             spellCheck
-            className="w-full mr-3"
+            className="w-full mr-2"
             placeholder="The name or address of the place here"
             value={props.location}
             onChange={ev => updateState('location', ev.currentTarget.value)}
@@ -59,13 +59,13 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             onChange={ev => updateState('locationLink', ev.currentTarget.value)}
           />
         </div>
-        <div className="flex flex-col d:flex-row mb-4">
-          <div className="mr-3">
-            <h3>When&apos;s the meeting?</h3>
+        <div className="flex flex-col d:flex-row mb-3">
+          <div className="mr-2">
+            <h3 className="mb-1">When&apos;s the meeting?</h3>
             <input
               type="date"
               min={dayJS().toISOString()}
-              className="mr-2"
+              className="mr-1"
               value={dayJS(props.date).format('YYYY-MM-DD')}
               placeholder="Meeting Date Here"
               onChange={ev => updateState('date', ev.currentTarget.value)}
@@ -78,7 +78,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             />
           </div>
           <div>
-            <h3>How long is it?</h3>
+            <h3 className="mb-1">How long is it?</h3>
             <select
               value={props.duration}
               onBlur={onDurationChange}
@@ -90,9 +90,9 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             </select>
           </div>
         </div>
-        <div className="bt-1 pt-4 pb-4 mt-4 flex items-center">
+        <div className="flex flex-col d:flex-row items-center">
           <button
-            className="p-2 mr-2 hover:bg-gray-1 transition"
+            className="p-2 mr-1 hover:bg-gray-3"
             disabled={disableSubmit}
             onClick={ev => {
               ev.preventDefault();
@@ -101,7 +101,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             Publish
           </button>
           <button
-            className="p-2 mr-2 hover:bg-gray-1 transition"
+            className="p-2 mr-1 hover:bg-gray-3"
             disabled={disableSubmit}
             onClick={ev => {
               ev.preventDefault();
@@ -109,10 +109,11 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             }}>
             Save as Draft
           </button>
-          {props.id && (
+          {console.log('plan meeting props => ', props)}
+          {!isNaN(props.id) && (
             <Link
               to={`/draft/${props.id}?${objToQueryString(props)}`}
-              className="brdA1 rounded leading-none p-2 text-sm hover:bg-gray-1 transition">
+              className="btn p-2 text-sm hover:bg-gray-3">
               <span
                 role="img"
                 aria-label="Eye Emoji">

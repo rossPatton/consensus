@@ -18,7 +18,7 @@
 //           <li
 //             key={i}
 //             className={cx({
-//               'brdA1 rounded mb-2 p-2 pt-2 rel ovfHide': true,
+//               'brdA1 rounded mb-2 p-2 pt-2 rel overflow-hidden': true,
 //               pl-3: decision.isClosed,
 //             })}>
 //             {decision.isClosed && decision.type === POLL && (
@@ -33,7 +33,7 @@
 //             <h3
 //               className={cx({
 //                 'mb-2 leading-none capitalize': true,
-//                 fs3: !props.tiny,
+//                 text-3: !props.tiny,
 //                 fs4: props.tiny,
 //               })}>
 //               <Link to={`/decision/${decision.id}`}>

@@ -8,7 +8,7 @@ export const MembersComponent = memo((props: tComponentProps) => (
   <>
     <div className="bg-white rounded p-2 mb-2">
       <div className="flex flex-col d:flex-row items-center">
-        <h1 className="fs3 mb-2">
+        <h1 className="text-3 mb-2">
           Pending Approvals
         </h1>
       </div>
@@ -24,7 +24,7 @@ export const MembersComponent = memo((props: tComponentProps) => (
     </div>
     <div className="bg-white rounded p-2">
       <div className="flex flex-col d:flex-row items-center">
-        <h2 className="fs3 mb-2">
+        <h2 className="text-3 mb-2">
           Manage Membership ({props.users.length} members)
         </h2>
       </div>

@@ -43,17 +43,17 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
         placeholder="correct_horse_battery_staple"
         onChange={ev => props.updateState('password', ev)}
       />
-      <div className='mb-3'>
-      <button
-        disabled={props.isClient && (!props.password || !props.login)}
-        className="transition hover:bg-gray-3 p-2 pl-3 pr-3 mr-1">
-        Sign up
-      </button>
-      <Link
-        to="/signup"
-        className="btn transition hover:bg-gray-3 p-2 pl-3 pr-3">
-        Or go back
-      </Link>
+      <div className="flex mb-3">
+        <button
+          disabled={props.isClient && (!props.password || !props.login)}
+          className="hover:bg-gray-3 p-2 pl-3 pr-3 mr-1">
+          Sign up!
+        </button>
+        <Link
+          to="/signup"
+          className="btn hover:bg-gray-3 p-2 pl-3 pr-3">
+          Or go back
+        </Link>
       </div>
       {props.errArr.length > 0 && (
         <ul className="text-sm font-bold leading-tight">

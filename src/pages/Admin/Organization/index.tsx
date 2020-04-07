@@ -41,16 +41,16 @@ const GroupAdminContainer = memo((props: tProps) => {
         </div>
       )}
       {(!session.profile.emails || session.profile.emails.length === 0) && (
-        <div className="bgYellow w-full p-2 mb-2 text-center font-bold text-sm">
+        <div className="bg-yellow-2 w-full p-2 mb-2 text-center font-bold text-sm">
           Welcome to Consensus! Your group will not be listed and some functionality will be unavailable until you link an email to this account and verify it. Click <Link to="/account/edit">here</Link> to add your email.
         </div>
       )}
-      <div className="contain mt-4 flex aiStart">
+      <div className="flex aiStart">
         <aside className="c3 bg-white rounded p-2 mr-3">
           <div className="flex flex-col d:flex-row items-center font-bold pb-3 mb-2 brdB1">
             <div className="mr-3">
               <Avatar
-                url={session.profile.avatarHash}
+                hash={session.profile.avatarHash}
                 type="group"
               />
             </div>
@@ -63,7 +63,7 @@ const GroupAdminContainer = memo((props: tProps) => {
                   {session.isVerified && (
                     <span
                       aria-label="Verified Account Checkbox"
-                      className="dInBl mr-1"
+                      className="inline-block mr-1"
                       role="img">
                       ✅
                     </span>
@@ -90,7 +90,7 @@ const GroupAdminContainer = memo((props: tProps) => {
               Admin Actions
             </li>
             <li className="flex flex-col d:flex-row items-center text-base p-2 mb-1 rounded hover:bg-gray-1">
-              <div className="bgGrey3 rounded-circ mr-3 p-2" />
+              <div className="bgtext-gray-4 rounded-circ mr-3 p-2" />
               {isMeetings && 'Edit Meetings & Drafts'}
               {!isMeetings && (
                 <Link
@@ -103,7 +103,7 @@ const GroupAdminContainer = memo((props: tProps) => {
               )}
             </li>
             <li className="flex flex-col d:flex-row items-center text-base p-2 mb-1 rounded hover:bg-gray-1">
-              <div className="bgGrey3 rounded-circ mr-3 p-2" />
+              <div className="bgtext-gray-4 rounded-circ mr-3 p-2" />
               {section === 'memberships' && 'Manage Members & Approvals'}
               {section !== 'memberships' && (
                 <Link
@@ -116,7 +116,7 @@ const GroupAdminContainer = memo((props: tProps) => {
               )}
             </li>
             <li className="flex flex-col d:flex-row items-center text-base p-2 mb-2 rounded hover:bg-gray-1">
-              <div className="bgGrey3 rounded-circ mr-3 p-2" />
+              <div className="bgtext-gray-4 rounded-circ mr-3 p-2" />
               {isMeetingForm && 'Plan Meeting'}
               {!isMeetingForm && (
                 <Link

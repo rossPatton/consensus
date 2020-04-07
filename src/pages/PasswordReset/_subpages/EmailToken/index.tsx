@@ -5,7 +5,6 @@ import {tProps} from './_types';
 
 const EmailTokenComponent = memo((props: tProps) => (
   <form
-    className="contain mt-4"
     name="emailTokenForm"
     action="/email/v1/emailResetToken"
     onSubmit={props.sendPasswordResetEmail}>

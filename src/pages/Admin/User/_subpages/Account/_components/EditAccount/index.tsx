@@ -12,19 +12,19 @@ const EditAccount = memo((props: tComponentProps) => (
     onSubmit={props.save}>
     <fieldset>
       <legend>
-        <h1 className="fs3 mb-2">Edit your account</h1>
+        <h1 className="text-2 mb-2">Edit your account</h1>
       </legend>
-      <div className="mB5">
+      <div className="mb-3">
         <label htmlFor="newLogin">
-          <h2 className="text-base mb-1 leading-none">
+          <h2 className="text-base leading-none">
             Change login
           </h2>
-          <p className="text-base copyBlack mb-1">
+          <p className="text-gray-5 mb-1">
             A secret username that is used just for logging in. Must be unique.
           </p>
           <input
             autoComplete="nope"
-            className="p-2 mb-4 w-full"
+            className="p-2 mb-3 w-full"
             onChange={ev => props.updateState('login', ev.currentTarget.value)}
             placeholder="a_Secret_Name_Nobody_Can_Guess"
             value={props.login}
@@ -32,10 +32,10 @@ const EditAccount = memo((props: tComponentProps) => (
           />
         </label>
         <label className="w-full mb-1" htmlFor="newEmail">
-          <h2 className="text-base mb-1 leading-none">
+          <h2 className="text-base leading-none">
             Change email address
           </h2>
-          <p className="text-base copyBlack mb-1">
+          <p className="text-base text-gray-5 mb-1">
             Used for account verification.
           </p>
           <input
@@ -50,7 +50,7 @@ const EditAccount = memo((props: tComponentProps) => (
         <div
           tabIndex={0}
           role="button"
-          className="curPtr leading-none mb-4 text-sm ba0"
+          className="leading-none mb-3 text-sm"
           onClick={() => props.updateState('privateEmail', !props.privateEmail)}
           onKeyPress={() => props.updateState('privateEmail', !props.privateEmail)}>
           <input
@@ -86,12 +86,12 @@ const EditAccount = memo((props: tComponentProps) => (
     <div className="flex flex-col d:flex-row items-center">
       <button
         disabled={!props.currentPassword}
-        className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-1 transition">
+        className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-3">
         Save Changes
       </button>
       <Link
         to="/admin/account"
-        className="btn p-2 pl-3 pr-3 hover:bg-gray-1 transition">
+        className="btn p-2 pl-3 pr-3 hover:bg-gray-3">
         Go back
       </Link>
     </div>

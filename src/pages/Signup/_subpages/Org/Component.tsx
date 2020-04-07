@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, {memo} from 'react';
+import {Link} from 'react-router-dom';
 
 import {CitySearch, PasswordInput} from '../../../../components';
 import {categories} from '../../../../constants';
@@ -15,14 +16,14 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
     onSubmit={props.onSubmit}>
     <fieldset>
       <legend>
-        <h2 className="mb-4">New Group</h2>
+        <h1 className="mb-3">New Group</h1>
       </legend>
-      <h2 className="text-base mb-1 leading-none">
-          Group Name
+      <h2 className="text-base">
+        Group Name
       </h2>
-      <label htmlFor="nameInput" className="mb-4">
-        <p className="text-base copyBlack mb-1">
-            What&apos;s your group&apos;s name? Think carefully, you won&apos;t be able to change this!
+      <label htmlFor="nameInput" className="mb-3">
+        <p className="text-base text-gray-5 mb-1">
+          What&apos;s your group&apos;s name? Think carefully, you won&apos;t be able to change this!
         </p>
         <input
           required
@@ -34,19 +35,19 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           value={props.name}
         />
       </label>
-      <h2 className="text-base mb-1 leading-none">
-          Group Handle
+      <h2 className="text-base">
+        Group Handle
       </h2>
-      <label htmlFor="handleInput" className="mb-4">
-        <p className="text-base copyBlack mb-1">
-            What will your group&apos;s url be? Only lowercase letters, numbers, and dashes(-) allowed. Think carefully, you won&apos;t be able to change this!
+      <label htmlFor="handleInput" className="mb-3">
+        <p className="text-gray-5 mb-1">
+          What will your group&apos;s url be? Only lowercase letters, numbers, and dashes(-) allowed. Think carefully, you won&apos;t be able to change this!
         </p>
-        <div className="fx">
+        <div className="flex flex-col d:flex-row">
           <input
             required
             id="handleInput"
             name="handle"
-            className="w-full mr-3"
+            className="w-full d:mr-2"
             autoComplete="off"
             onChange={ev =>
               props.updateState('handle', slugify(ev.currentTarget.value))
@@ -56,24 +57,24 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           />
           <button
             type="button"
-            className="p-2"
+            className="p-2 hover:bg-gray-3"
             onClick={() => {
               props.updateState('handle', slugify(props.name));
             }}>
-              Make URL from group name
+            Make URL from group name
           </button>
         </div>
       </label>
-      <h2 className="text-base mb-1 leading-none">
-          Group Category
+      <h2 className="text-base">
+        Group Category
       </h2>
-      <label htmlFor="categoryInput" className="mb-4">
-        <p className="text-base copyBlack mb-1">
-            What category most closely matches your group? You can always change it later. P.S., more categories are in the works!
+      <label htmlFor="categoryInput" className="mb-3">
+        <p className="text-base text-gray-5 mb-1">
+          What category most closely matches your group? You can always change it later. P.S., more categories are in the works!
         </p>
         <select
           required
-          className="mb-4 w-full bg-white"
+          className="mb-3 w-full bg-white"
           defaultValue={props.category}
           onBlur={ev => props.updateState('category', ev.currentTarget.value)}
           onChange={ev => props.updateState('category', ev.currentTarget.value)}>
@@ -84,11 +85,11 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           ))}
         </select>
       </label>
-      <h2 className="text-base mb-1 leading-none">
+      <h2 className="text-base">
           Group Type
       </h2>
       <label htmlFor="groupTypeSelect">
-        <p className="text-base copyBlack mb-1">
+        <p className="text-base text-gray-5 mb-1">
           Is anyone free to join your group, or do you want to be able to vet membership?
         </p>
         <select
@@ -109,7 +110,7 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
           </option>
         </select>
       </label>
-      <div className="text-sm black mb-4">
+      <div className="text-sm mb-3">
         {/* @TODO maybe have a mixed option here? */}
         {props.type === 'public' && 'Anyone can join, with no vetting process. Meetings are public, visible to anyone.'}
         {props.type === 'private' && 'Anyone can join, but members must be approved by a mod or admin first. Meetings are visible only to members.'}
@@ -123,8 +124,8 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
       <h2 className="text-base mb-1">
         Group Login
       </h2>
-      <label htmlFor="loginInput" className="mb-4">
-        <p className="text-base text-gray-4 mb-1">
+      <label htmlFor="loginInput" className="mb-3">
+        <p className="mb-1">
           A unique name that you&apos;ll use to login with. Keep secret!
         </p>
         <input
@@ -147,12 +148,17 @@ export const OrgSignupComponent = memo((props: tComponentProps) => (
         placeholder="Your organization's password here"
         password={props.password}
       />
-      <div className="bt-1 pt-4 pb-4 mt-4 flex items-center">
+      <div className="flex">
         <button
           disabled={props.disabled}
-          className="p-2 pl-3 pr-3 hover:bg-gray-1 transition">
+          className="p-2 pl-3 pr-3 hover:bg-gray-3 mr-1">
           Create Group!
         </button>
+        <Link
+          to="/signup"
+          className="btn hover:bg-gray-3 p-2 pl-3 pr-3">
+          Or go back
+        </Link>
       </div>
     </fieldset>
   </form>

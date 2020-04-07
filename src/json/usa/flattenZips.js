@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const citiesJson = require('./cities.json');
 const ogzips = require('./zipsByStateAndCity.json');
-const codeToNameMap = require('./stateNameMap.json');
+const codeToNameMap = require('./stateCodeToNameMap.json');
 
 const flattenOgZips = Promise.all(Object.keys(ogzips).map(statecode => {
   const state = codeToNameMap[statecode];

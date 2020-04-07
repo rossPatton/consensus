@@ -7,13 +7,12 @@ export const MeetingsComponent = memo((props: tComponentProps) => (
   <>
     <ul className="flex flex-col d:flex-row items-center mb-2" role="navigation">
       <li>
-        <h1 className="fs3 mr-3">
+        <h1 className="text-2">
           Your RSVPs
         </h1>
       </li>
     </ul>
     <FilterPanel
-      className="flex flex-col d:flex-row items-center mb-4 text-sm font-bold"
       onFilterOptionChange={props.onFilterOptionChange}
       onSearchChange={props.onSearchChange}
       filterOptions={[

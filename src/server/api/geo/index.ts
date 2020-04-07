@@ -5,7 +5,7 @@ import _ from 'lodash';
 import maxmind, { CityResponse } from 'maxmind';
 
 import stateCodeToNameMap from '../../../json/usa/stateCodeToNameMap.json';
-import {slugify, lowerCase} from '../../../utils';
+import {lowerCase, slugify} from '../../../utils';
 
 export const geo = new Router();
 geo.get('/api/v1/geo', async (ctx: Koa.ParameterizedContext) => {
@@ -36,7 +36,7 @@ geo.get('/api/v1/geo', async (ctx: Koa.ParameterizedContext) => {
   const city: string = _.get(cityLookup, 'city.names.en', '');
   const postcode: string = _.get(cityLookup, 'postal.code', '');
   const regionCode: string = lowerCase(
-    _.get(cityLookup, 'subdivisions[0].iso_code', '')
+    _.get(cityLookup, 'subdivisions[0].iso_code', ''),
   );
   const region = (stateCodeToNameMap as {[k: string]: unknown})[regionCode];
 

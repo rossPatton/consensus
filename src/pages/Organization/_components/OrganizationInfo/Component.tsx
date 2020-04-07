@@ -1,9 +1,8 @@
-import cx from 'classnames';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {JoinForm, LeaveForm} from '..';
-import {ExternalLink, PlaceholderImage} from '../../../../components';
+import {Avatar, ExternalLink} from '../../../../components';
 import {tComponentProps} from './_types';
 
 export const OrganizationInfoComponent = memo((props: tComponentProps) => {
@@ -11,44 +10,37 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
   const {description = ''} = props.org;
 
   return (
-    <div className="bg-white rounded mr-3 c3  growNone ovfHide">
-      <div className="bgGrey4 leading-none flex items-center justify-between p-2">
+    <div className="bg-white rounded mr-2 flex-grow-0 min-w-full d:min-w-1/3">
+      <div className="bg-gray-5 rounded m-1 p-1 text-white flex items-center justify-between">
         {!role && (
-          <small className="font-bold white">
+          <small>
             {org.type === 'public' && 'Public Group'}
             {org.type === 'private' && 'Private Group'}
             {org.type === 'hidden' && 'Hidden Group'}
           </small>
         )}
-        <div
-          className={cx({
-            ' flex items-center': true,
-            jcEnd: !role,
-          })}>
-          <JoinForm role={role} />
-        </div>
+        <JoinForm role={role} />
         <LeaveForm org={org} role={role} />
       </div>
       <div className="p-2">
-        <div className="mb-2">
+        <div className="mb-1">
           <div className="flex flex-col d:flex-row items-center">
-            <div className="rounded-circ mr-2 ovfHide">
-              <PlaceholderImage
-                height={60}
-                width={60}
-              />
-            </div>
+            <Avatar
+              hash={org.avatarHash}
+              size="60"
+              type="group"
+            />
             <div>
-              <small className="ttUpper text-sm">
+              <small className="capitalize leading-none text-sm">
                 {props.org.category}
               </small>
-              <h1 className="fs3 leading-none">
+              <h1 className="leading-none text-3">
                 {typeof match.params.section === 'undefined' && (
                   props.org.name
                 )}
                 {typeof match.params.section !== 'undefined' && (
                   <Link
-                    to={`/org/${org.id}`}
+                    to={`/org/${org.handle}`}
                     title="Click to return to events page">
                     {props.org.name}
                   </Link>
@@ -59,8 +51,8 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
                 && props.members.length > 0
                 && (
                   <Link
-                    to={`/org/${org.id}/members`}
                     className="text-sm"
+                    to={`/org/${org.handle}/members`}
                     title="Click to browse member list">
                     {props.members.length} Members
                   </Link>
@@ -68,12 +60,12 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
             </div>
           </div>
         </div>
-        <p className="text-sm">
+        <p className="mb-2">
           {description.split('\n')[0]}
         </p>
         <div className="flex flex-col d:flex-row items-center">
           {org.facebook && (
-            <div className="mr-2">
+            <div className="mr-1">
               <ExternalLink
                 noFollow
                 to={org.facebook}>
@@ -86,7 +78,7 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
             </div>
           )}
           {org.twitter && (
-            <div className="mr-2">
+            <div className="mr-1">
               <ExternalLink
                 noFollow
                 to={org.twitter}>
@@ -99,7 +91,7 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
             </div>
           )}
           {org.website && (
-            <div className="mr-2">
+            <div className="mr-1">
               <ExternalLink
                 noFollow
                 to={org.website}>

@@ -6,9 +6,10 @@ import {tProps, tState} from './_types';
 
 class PaginateContainer extends Component<tProps, tState> {
   static defaultProps = {
-    className: 'lsNone flex items-center justify-content fs4 font-bold',
+    className: 'flex items-center justify-center font-bold',
     count: 10,
     page: 1,
+    placement: 'bottom' as 'top' | 'bottom',
   };
 
   constructor(props: tProps) {
@@ -48,6 +49,7 @@ class PaginateContainer extends Component<tProps, tState> {
       count,
       items = [],
       location: {pathname, search},
+      placement,
     } = this.props;
 
     const query = qs.parse(search);
@@ -61,7 +63,11 @@ class PaginateContainer extends Component<tProps, tState> {
 
     return (
       <>
-        {this.props.render(itemsToRender)}
+        {/*
+          @TODO this is counter-intuitive, but easy, but eventually
+          separate out the list rendering into another component or something
+        */}
+        {placement === 'bottom' && this.props.render(itemsToRender)}
         {pageCount > 1 && (
           <ul className={className}>
             {pages.map((_, i) => {
@@ -94,6 +100,7 @@ class PaginateContainer extends Component<tProps, tState> {
             })}
           </ul>
         )}
+        {placement === 'top' && this.props.render(itemsToRender)}
       </>
     );
   }

@@ -6,14 +6,14 @@ import {Meetings, Members} from './_subpages';
 import {tComponentProps} from './_types';
 
 export const OrganizationComponent = (props: tComponentProps) => (
-  <div className="contain mt-4 flex aiStart">
+  <div className="flex flex-col d:flex-row items-start">
     <OrganizationInfo
       match={props.match}
       org={props.org}
       params={props.match.params}
       role={props.role}
     />
-    <div className="bg-white rounded p-2 w-full">
+    <div className="bg-white rounded p-2 min-w-full d:min-w-2/3">
       <OrganizationTabs
         match={props.match}
         role={props.role}

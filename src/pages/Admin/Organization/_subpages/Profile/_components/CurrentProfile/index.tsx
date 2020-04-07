@@ -11,58 +11,58 @@ const CurrentProfile = memo((props: tComponentProps) => (
       to={`/org/${props.session.profile.id}`}>
       View Group
     </Link>
-    <h1 className="fs3 mb-2 leading-none">
+    <h1 className="text-3 mb-2 leading-none">
       Group Profile
     </h1>
     <h2 className="text-base mb-2 leading-none">
-      Name: <span className="copyBlack">
+      Name: <span className="text-gray-5">
         {props.session.profile.name}
       </span>
     </h2>
     <h2 className="text-base mb-2 leading-none">
-      URL: <span className="copyBlack">
+      URL: <span className="text-gray-5">
         {props.handle}
       </span>
     </h2>
     <h2 className="text-base mb-2 leading-none">
-      Group Type: <span className="copyBlack capitalize">
+      Group Type: <span className="text-gray-5 capitalize">
         {props.type}
-      </span> and <span className="copyBlack">{props.allowNonVerified
+      </span> and <span className="text-gray-5">{props.allowNonVerified
         ? 'any user can join'
         : 'only verified users can join'}</span>
     </h2>
     <h2 className="text-base mb-2 leading-none">
-      Category: <span className="copyBlack">
+      Category: <span className="text-gray-5">
         {props.category}
       </span>
     </h2>
     <h2 className="text-base mb-2 leading-none">
-      Member title: <span className="copyBlack">
+      Member title: <span className="text-gray-5">
         {props.memberName}
       </span>
     </h2>
     <h2 className="text-base mb-2 leading-none">
-      Moderator title: <span className="copyBlack">
+      Moderator title: <span className="text-gray-5">
         {props.modName}
       </span>
     </h2>
     {props.website && (
       <h2 className="text-base mb-2 leading-none">
-        Group Website <span className="copyBlack">
+        Group Website <span className="text-gray-5">
           {props.website}
         </span>
       </h2>
     )}
     {props.facebook && (
       <h2 className="text-base mb-2 leading-none">
-        Facebook <span className="copyBlack">
+        Facebook <span className="text-gray-5">
           {props.facebook}
         </span>
       </h2>
     )}
     {props.twitter && (
       <h2 className="text-base mb-2 leading-none">
-        Twitter <span className="copyBlack">
+        Twitter <span className="text-gray-5">
           {props.twitter}
         </span>
       </h2>

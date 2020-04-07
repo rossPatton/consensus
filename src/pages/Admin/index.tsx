@@ -38,6 +38,9 @@ const AdminContainer = (props: tProps) => {
 
             return (
               <>
+                <div className="mb-2 text-center">
+                  Welcome back to your {isGroupAdmin ? 'group' : 'user'} dashboard {sessionThunk.data.profile.name}
+                </div>
                 {isGroupAdmin
                   && (
                     <GroupAdmin

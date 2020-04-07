@@ -5,14 +5,14 @@ import {tComponentProps} from '../../_types';
 
 const CurrentAccount = memo((props: tComponentProps) => (
   <>
-    <h1 className="fs3 mb-2 leading-none">Your account details</h1>
+    <h1 className="text-3 mb-2 leading-none">Your account details</h1>
     <h2 className="text-base mb-2 leading-none">
-      Login: <span className="copyBlack">
+      Login: <span className="text-gray-5">
         {props.session.login}
       </span>
     </h2>
     <h2 className="text-base mb-2 leading-none">
-      Password: <span className="copyBlack">
+      Password: <span className="text-gray-5">
         ******
       </span>
     </h2>
@@ -20,12 +20,12 @@ const CurrentAccount = memo((props: tComponentProps) => (
       && props.session.emails.length > 0
       && (
         <h2 className="text-base mb-1 leading-none">
-          Email address: <span className="copyBlack">
+          Email address: <span className="text-gray-5">
             {props.session.emails[0].email}
           </span>
         </h2>
       )}
-    <Link className="dInBl mb-4" to="/verify-account">
+    <Link className="inline-block mb-4" to="/verify-account">
       Verify this email
     </Link>
     <Link

@@ -39,6 +39,8 @@ export const groupKeys = [
   'facebook',
   'handle',
   'id',
+  'memberName',
+  'modName',
   'name',
   'region',
   'regionId',

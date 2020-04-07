@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import qs from 'query-string';
-import React from 'react';
+import React, {memo} from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet, Orgs, SuperSearch} from '../../components';
@@ -8,51 +8,44 @@ import {ErrorBoundary, GenericLoader, Template} from '../../containers';
 import {getGroupsBySearch} from '../../redux';
 import {tProps, tStore} from './_types';
 
-class SearchContainer extends React.PureComponent<tProps> {
-  render() {
-    const {isLoading, orgsBySearch} = this.props;
+const meta = [
+  { name: 'description', content: 'Search page' },
+  { name: 'keywords', content: 'search' },
+  { property: 'og:title', content: 'Consensus: Search' },
+  { property: 'og:description', content: 'lorem ipsum' },
+];
 
-    const meta = [
-      { name: 'description', content: 'Search page' },
-      { name: 'keywords', content: 'search' },
-      { property: 'og:title', content: 'Consensus: Search' },
-      { property: 'og:description', content: 'lorem ipsum' },
-    ];
+const SearchContainer = memo((props: tProps) => {
+  const {orgsBySearch} = props;
 
-    const renderNoResults = !isLoading && orgsBySearch.length === 0;
-
-    return (
-      <Template>
-        <ErrorBoundary status={_.get(orgsBySearch, 'error.status', 200)}>
-          <Helmet
-            canonical="search"
-            title="Consensus: Search"
-            meta={meta}
-          />
-          <div className="mt-4 contain">
-            <h1 className=" mb-2">
-              {renderNoResults ? 'No results!' : 'Your Search Results'}
-            </h1>
-            <SuperSearch />
-            <GenericLoader
-              isLoading={isLoading}
-              render={() => (
-                <Orgs
-                  showLocation
-                  orgs={orgsBySearch}
-                />
-              )}
+  return (
+    <Template>
+      <ErrorBoundary status={_.get(orgsBySearch, 'error.status', 200)}>
+        <Helmet
+          canonical="search"
+          title="Consensus: Search"
+          meta={meta}
+        />
+        <h1 className="mb-1">
+          Search
+        </h1>
+        <SuperSearch />
+        <GenericLoader
+          isLoading={orgsBySearch.isLoading}
+          render={() => (
+            <Orgs
+              showLocation
+              orgs={orgsBySearch.data}
             />
-          </div>
-        </ErrorBoundary>
-      </Template>
-    );
-  }
-}
+          )}
+        />
+      </ErrorBoundary>
+    </Template>
+  );
+});
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.orgsBySearch.isLoading,
-  orgsBySearch: store.orgsBySearch.data,
+  orgsBySearch: store.orgsBySearch,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

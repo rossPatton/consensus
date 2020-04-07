@@ -34,7 +34,7 @@ export const HeaderComponent = memo((props: tComponentProps) => (
                 to="/admin/meetings">
                 <Avatar
                   alt="Your Dashboard"
-                  url={props.session.profile.avatarHash}
+                  hash={props.session.profile.avatarHash}
                   size="40"
                   // @TODO need to re-standardize....
                   type={props.session.type === 'org' ? 'group' : 'user'}

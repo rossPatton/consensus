@@ -28,7 +28,7 @@ class LeaveFormContainer extends React.PureComponent<tProps> {
         action="/api/v1/usersByOrg">
         <fieldset>
           <legend>
-            <button className="bg-white text-sm rounded leading-none p-1 pl-2 pr-2">
+            <button className="text-black text-sm p-1">
               Leave Group
             </button>
           </legend>

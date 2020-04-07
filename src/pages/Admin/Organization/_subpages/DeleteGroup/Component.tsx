@@ -11,13 +11,13 @@ export const DeleteGroupComponent = memo((props: tComponentProps) => (
     onSubmit={props.deleteGroup}>
     <fieldset>
       <legend>
-        <h1 className="fs3">
+        <h1 className="text-3">
           {props.session.deletionDeadline
             ? 'Cancel group deletion'
             : 'Delete group'}
         </h1>
       </legend>
-      <h2 className="text-base mb-2 copyBlack">
+      <h2 className="text-base mb-2 text-gray-5">
         {props.session.deletionDeadline
           ? 'Enter your password again to cancel the account deletion process.'
           : <>Enter your password to trigger the account deletion process. You will have 1 week to stop it. The group will continue as normal during this time. After 1 week, your group will be <b>permanently</b> deleted.</>}

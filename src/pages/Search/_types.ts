@@ -4,10 +4,9 @@ import { match } from 'react-router-dom';
 
 export interface tProps {
   getSearchResults: (searchObj: qs.ParsedQuery) => Promise<tGroup[]>,
-  isLoading: boolean,
   location: H.Location,
   match: match & {params: tSearchParams},
-  orgsBySearch: tGroup[],
+  orgsBySearch: tThunk<tGroup[]>,
 }
 
 export type tStore = {

@@ -5,6 +5,7 @@ export type tState = {
   city: string,
   cityId: number,
   handle: string,
+  isClient: boolean,
   login: string,
   name: string,
   password: string,

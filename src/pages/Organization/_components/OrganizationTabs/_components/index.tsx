@@ -14,18 +14,18 @@ const routeDisplayMap = {
 
 export const Tab = memo((props: tProps) => {
   const { match, subRoute } = props;
-  const { id, section } = match.params;
+  const { idOrSlug, section } = match.params;
   const route = `/${subRoute}`;
-  const to = `/org/${id}${subRoute ? route : ''}`;
+  const to = `/org/${idOrSlug}${subRoute ? route : ''}`;
   // @ts-ignore
   const text = routeDisplayMap[subRoute];
   const isMeetings = subRoute === '' && typeof section === 'undefined';
   const isActive = isMeetings || section === subRoute;
   const className = cx({
-    'fs3 capitalize block p-2 pr-3': true,
-    'pl-3': subRoute !== '',
-    'underline black': isActive,
-    'no-underline grey3': !isActive,
+    'mr-2': true,
+    'ml-2': subRoute !== '',
+    'text-3 text-gray-5': isActive,
+    'no-underline text-gray-4': !isActive,
   });
 
   // dont render link if you're on the section page itself

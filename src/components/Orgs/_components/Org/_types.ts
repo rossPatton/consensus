@@ -7,6 +7,8 @@ export type tProps = {
   isEditable?: boolean,
   leaveOrg: (ev: React.MouseEvent<HTMLButtonElement>, orgId: number) => void,
   org: tGroup,
+  orgs: tGroup[],
+  pendingOrgs: tGroup[],
   roles: tRoleMap[],
   setHover: (hoverIndex: number | null, groupType?: tRole) => void,
   showCategory?: boolean,

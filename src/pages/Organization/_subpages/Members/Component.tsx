@@ -6,13 +6,15 @@ import {tComponentProps} from './_types';
 
 export const MembersComponent = memo((props: tComponentProps) => (
   <>
+    {console.log('all props for members list => ', props)}
     <FilterPanel
-      className="flex flex-col d:flex-row items-center mb-2 text-sm font-bold"
       onRoleFilterChange={props.section === 'members' && props.onRoleFilterChange}
       onSearchChange={props.onSearchChange}
       placeholder="Search for someone by username"
     />
     <Users
+      memberName={props.org.memberName}
+      modName={props.org.modName}
       removeUser={props.removeUser}
       users={props.users}
       sessionRole={props.role}

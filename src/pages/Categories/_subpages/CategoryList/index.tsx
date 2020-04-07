@@ -16,15 +16,15 @@ const CategoryList = memo(() => (
         { property: 'og:description', content: '' },
       ]}
     />
-    <ul className="flex flex-col d:flex-row fxWrap">
+    <ul className="flex flex-col d:flex-row flex-wrap">
       {categories.map(cat => (
         <li
           key={cat.slug}
-          className=" fxg0 third mb-2">
+          className="flex-grow-0 d:w-1/3 mb-2">
           <Link
             to={`/categories/${cat.slug}`}
-            className="block text-sm leading-none p-2 brdA1 rounded hover:bg-gray-1 trans2 no-underline">
-            <h2 className="block leading-none fs3 mT1 mb-2 underline">
+            className="block p-2 border rounded hover:bg-gray-2 transition mt-1 mb-2">
+            <h2 className="leading-none text-3">
               {cat.display}
             </h2>
           </Link>

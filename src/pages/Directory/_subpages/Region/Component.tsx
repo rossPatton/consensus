@@ -11,21 +11,20 @@ export const RegionComponent = memo((props: tComponentProps) => (
       {props.region.name}
     </h1>
     <FilterPanel
-      className="flex flex-col d:flex-row items-center p-2 bg-white rounded mb-4 text-sm font-bold"
       onSearchChange={props.onChange}
     />
-    <h2 className="mb-2 fs3">
+    <h2 className="mb-2 text-3">
       {props.citiesToRender.length > 0 && `Cities in ${props.region.name}`}
       {props.citiesToRender.length === 0 && 'No cities found'}
     </h2>
-    <ul className="flex flex-col d:flex-row fxWrap">
+    <ul className="flex flex-col d:flex-row flex-wrap">
       {props.citiesToRender.map((city, i) => (
         <li
           key={i}
-          className=" fxg0 third mb-2">
+          className="flex-grow-0 d:w-1/3 mb-2">
           <Link
             to={`${props.match.url}/${slugify(city.name)}`}
-            className="copyBlack font-bold no-underline">
+            className="text-gray-5 font-bold no-underline">
             {city.name}
           </Link>
         </li>

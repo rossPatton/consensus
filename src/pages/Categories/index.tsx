@@ -11,17 +11,15 @@ const Categories = (props: tProps) => {
 
   return (
     <Template>
-      <div className="contain mt-4">
-        <h1 className=" mb-2">
-          {renderCategory
-            ? categoryMap[params.category]
-            : 'Categories'}
-        </h1>
-        {!renderCategory && <CategoryList />}
-        {renderCategory && (
-          <Category match={props.match} />
-        )}
-      </div>
+      <h1 className=" mb-2">
+        {renderCategory
+          ? categoryMap[params.category]
+          : 'Categories'}
+      </h1>
+      {!renderCategory && <CategoryList />}
+      {renderCategory && (
+        <Category match={props.match} />
+      )}
     </Template>
   );
 };

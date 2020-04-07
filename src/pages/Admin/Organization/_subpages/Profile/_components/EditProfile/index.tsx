@@ -13,7 +13,7 @@ const EditProfile = memo((props: tComponentProps) => (
     onSubmit={props.onSubmit}>
     <fieldset>
       <legend>
-        <h1 className="fs3 mb-2 leading-none">
+        <h1 className="text-3 mb-2 leading-none">
           Edit your Profile
         </h1>
       </legend>
@@ -21,7 +21,7 @@ const EditProfile = memo((props: tComponentProps) => (
         <h2 className="text-base mb-1 leading-none">
           Change Group Logo
         </h2>
-        <p className="text-base copyBlack mb-1">
+        <p className="text-base text-gray-5 mb-1">
           We use <ExternalLink noFollow to="https://www.libravatar.org">Libravatar</ExternalLink> for avatars. To connect your avatar, enter your Libravatar email below. It does not have to be the same as your Consensus email. We do not store this. Any changes you make to your avatar on Libravatar will be automatically reflected here.
         </p>
         <input
@@ -65,7 +65,7 @@ const EditProfile = memo((props: tComponentProps) => (
           Hidden
         </option>
       </select>
-      <small className="block mb-2 copyBlack">
+      <small className="block mb-2 text-gray-5">
         This option only affects future membership approvals
       </small>
       <label className="w-full mb-2" htmlFor="memberName">
@@ -145,7 +145,7 @@ const EditProfile = memo((props: tComponentProps) => (
       <div
         tabIndex={0}
         role="button"
-        className="flex flex-col d:flex-row items-center curPtr text-sm p-1 mB5"
+        className="flex flex-col d:flex-row items-center curPtr text-sm p-1 mb-4"
         onClick={ev => props.updateState('allowNonVerified', ev)}
         onKeyPress={ev => props.updateState('allowNonVerified', ev)}>
         <input

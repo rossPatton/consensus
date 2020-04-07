@@ -14,43 +14,44 @@ const Org = memo((props: tProps) => {
     <li
       key={props.index}
       className={cx({
+        relative: true,
         'mb-2': props.asList,
-        ' fxg0 fourth mB5 pr-3': !props.asList,
+        'w-full mb-2 d:mb-3': !props.asList,
+        'd:w-1/4': !props.asList && props.orgs.length > 3,
       })}>
       <div
-        role="button"
-        tabIndex={0}
-        onMouseEnter={() => props.setHover(props.index, role)}
-        onMouseLeave={() => props.setHover(null)}
         className={cx({
-          'flex items-center text-sm leading-none no-underline': true,
-          'p-2 hover:bg-gray-1 transition rounded': props.asList,
-        })}>
-        <div className="mr-2">
+          'flex items-center p-1': true,
+          'hover:bg-gray-3': props.isEditable,
+        })}
+        onMouseEnter={() => props.setHover(props.index, role)}
+        onMouseLeave={() => props.setHover(null)}>
+        <div className="mr-1">
           <Avatar
             alt={`Avatar for ${props.org.name}`}
+            hash={props.org.avatarHash}
+            size="60"
             type="group"
-            url={props.org.avatarHash}
           />
         </div>
         <div>
           {role && (
-            <div className="text-sm font-bold mb-2">
+            <small className="leading-none">
               You are {role === 'pending' ? role : `a ${role}`}
-            </div>
+            </small>
           )}
-          <h2 className="leading-none fs3 mb-2">
+          <h3>
             <Link to={`/org/${props.org.handle}`}>
               {props.org.name}
             </Link>
-          </h2>
+          </h3>
           <div
             className={cx({
-              'text-sm font-bold': true,
+              'text-sm text-gray-5 font-bold': true,
               'flex items-center': props.asList,
             })}>
             {props.showType && (
-              <span className="dInBl capitalize bgGrey4 rounded p-1 white mr-2">
+              <span className="capitalize mr-2">
                 {props.org.type}
               </span>
             )}
@@ -78,13 +79,13 @@ const Org = memo((props: tProps) => {
           && props.hoverIndex === props.index
           && props.groupType === role
           && (
-            <div className="text-right">
-              <button onClick={ev => props.leaveOrg(ev, props.org.id)}>
-                {props.groupType === 'pending'
-                  ? 'Cancel Membership Request'
-                  : 'Leave Group'}
-              </button>
-            </div>
+            <button
+              className="absolute r mr-2 p-2"
+              onClick={ev => props.leaveOrg(ev, props.org.id)}>
+              {props.groupType === 'pending'
+                ? 'Cancel Membership Request'
+                : 'Leave Group'}
+            </button>
           )}
       </div>
     </li>

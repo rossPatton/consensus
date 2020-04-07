@@ -24,8 +24,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
         <li
           key={ev.id}
           className={cx({
-            'mb-3': true,
-            'd:mb-3': !props.horizontal,
+            'mb-2': true,
             'd:w-1/4 flex-grow-0': props.horizontal,
             'd:mr-2': props.horizontal && i !== props.events.length - 1,
           })}>
@@ -37,7 +36,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
             <div
               className={cx({
                 'mb-2 bg-white': props.horizontal,
-                'mr-3 bg-gray-2': !props.horizontal,
+                'mr-2 bg-gray-2': !props.horizontal,
               })}>
               <Link
                 className="no-underline"
@@ -75,7 +74,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
               </div>
               <h3
                 className={cx({
-                  'capitalize': true,
+                  'capitalize leading-none mb-1': true,
                   'mb-1': props.isEditable || props.horizontal,
                   'mb-2': props.showRSVPs,
                 })}>
@@ -92,7 +91,6 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 !ev.isDraft && (
                 <div
                   className={cx({
-                    'flex items-center text-sm leading-none': true,
                     hide: props.horizontal,
                   })}>
                   <RSVP compact event={ev} />
@@ -102,76 +100,73 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 && (
                   <Link
                     to={`/org/${slugify(ev.orgName)}`}
-                    className={cx({
-                      'font-bold text-sm leading-none text-gray-4 no-underline': true,
-                      o5: isPastEvent,
-                    })}>
+                    className="font-bold text-sm leading-none text-gray-4 no-underline">
                     {ev.orgName}
                   </Link>
                 )}
               {props.isEditable
-              && (
-                <div className="flex flex-col d:flex-row items-center mb-1">
-                  <div className="bgGrey4 rounded text-sm leading-none mr-1 p-1 pl-2 pr-2 white">
-                    {ev.isDraft && 'Draft'}
-                    {!ev.isDraft && (isPastEvent ? 'Past' : 'Upcoming')}
-                  </div>
-                  {(!isPastEvent || ev.isDraft) && (
-                    <Link
-                      to={props.sessionRole === 'admin'
-                        ? `/admin/planMeeting?${qs}`
-                        : `/org/${ev.orgName}/planMeeting?${qs}`}
-                      className="btn text-sm font-bold hover:bg-gray-1 p-1 pl-2 pr-2 mr-1">
-                      <span
-                        role="img"
-                        aria-label="Hand with Pen Emoji">
-                        ✍️
-                      </span>
-                      Edit
-                    </Link>
-                  )}
-                  {isPastEvent
-                    && !ev.isDraft
-                    && (
+                && (
+                  <div className="flex flex-col d:flex-row items-center">
+                    <div className="text-sm mr-1">
+                      {ev.isDraft && 'Draft'}
+                      {!ev.isDraft && (isPastEvent ? 'Past' : 'Upcoming')}
+                    </div>
+                    {(!isPastEvent || ev.isDraft) && (
                       <Link
+                        className="btn text-sm hover:bg-gray-3 p-1 mr-1"
                         to={props.sessionRole === 'admin'
-                          ? `/admin/planMeeting?${qsWithCopy}`
-                          : `/org/${ev.orgName}/planMeeting?${qsWithCopy}`}
-                        className="btn text-sm font-bold hover:bg-gray-1 p-1 pl-2 pr-2 mr-1">
+                          ? `/admin/planMeeting?${qs}`
+                          : `/org/${ev.orgName}/planMeeting?${qs}`}>
                         <span
                           role="img"
-                          aria-label="Clipboard Emoji">
-                          📋
+                          aria-label="Hand with Pen Emoji">
+                          ✍️
                         </span>
-                        Copy
+                        Edit
                       </Link>
                     )}
-                  {(!isPastEvent || ev.isDraft) && (
-                    <button
-                      onClick={e => props.deleteEvent(e, ev.id)}
-                      className="items-center text-sm font-bold flex hover:bg-gray-1 mr-1">
-                      <span
-                        role="img"
-                        aria-label="Big X Emoji">
-                        ✖️
-                      </span>
-                      Delete
-                    </button>
-                  )}
-                  {ev.isDraft && (
-                    <Link
-                      to={`/draft/${ev.orgId}?${qs}`}
-                      className="btn text-sm font-bold hover:bg-gray-1 p-1 pl-2 pr-2 mr-1">
-                      <span
-                        role="img"
-                        aria-label="Eye Emoji">
-                        👁️
-                      </span>
-                      Preview
-                    </Link>
-                  )}
-                </div>
-              )}
+                    {isPastEvent
+                      && !ev.isDraft
+                      && (
+                        <Link
+                          to={props.sessionRole === 'admin'
+                            ? `/admin/planMeeting?${qsWithCopy}`
+                            : `/org/${ev.orgName}/planMeeting?${qsWithCopy}`}
+                          className="btn text-sm hover:bg-gray-3 p-1 mr-1">
+                          <span
+                            role="img"
+                            aria-label="Clipboard Emoji">
+                            📋
+                          </span>
+                          Copy
+                        </Link>
+                      )}
+                    {(!isPastEvent || ev.isDraft) && (
+                      <button
+                        onClick={e => props.deleteEvent(e, ev.id)}
+                        className="btn text-sm hover:bg-gray-3 p-1 mr-1">
+                        <span
+                          role="img"
+                          aria-label="Big X Emoji">
+                          ✖️
+                        </span>
+                        Delete
+                      </button>
+                    )}
+                    {ev.isDraft && (
+                      <Link
+                        to={`/draft/${ev.orgId}?${qs}`}
+                        className="btn text-sm hover:bg-gray-3 p-1">
+                        <span
+                          role="img"
+                          aria-label="Eye Emoji">
+                          👁️
+                        </span>
+                        Preview
+                      </Link>
+                    )}
+                  </div>
+                )}
             </div>
           </div>
         </li>

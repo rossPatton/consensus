@@ -6,7 +6,6 @@ import { tProps } from './_types';
 
 const VerifyTokenComponent = memo((props: tProps) => (
   <form
-    className="contain mt-4"
     name="verifyEmailForm"
     action="/email/v1/verifyEmail"
     onSubmit={props.verifyToken}>

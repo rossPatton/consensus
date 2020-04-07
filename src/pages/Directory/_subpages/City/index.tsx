@@ -91,6 +91,7 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
                   }}
                 />
                 <CityComponent
+                  category={this.state.category}
                   city={this.props.city.data}
                   match={this.props.match}
                   onChange={this.onChange}

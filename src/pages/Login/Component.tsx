@@ -15,10 +15,14 @@ export const LoginComponent = memo((props: tComponentProps) => (
       onSubmit={props.login}>
       <fieldset>
         <legend>
-          <h1 className=" mb-2">Login to your account</h1>
+          <h1 className="mb-2">
+            Login to your account
+          </h1>
         </legend>
         <label htmlFor="loginInput">
-          <h3 className="text-base mb-1">Login</h3>
+          <h3 className="font-bold text-base mb-1">
+            Login
+          </h3>
           <input
             required
             autoComplete="login"
@@ -43,7 +47,9 @@ export const LoginComponent = memo((props: tComponentProps) => (
           className="p-2 pl-3 pr-3 mr-2">
           Login
         </button>
-        <Link to="/password-reset" className="btn p-2">
+        <Link
+          to="/password-reset"
+          className="btn p-2 pl-3 pr-3">
           Forget your password?
         </Link>
       </fieldset>

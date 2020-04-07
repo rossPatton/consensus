@@ -6,7 +6,6 @@ import { tProps } from './_types';
 
 const ResetPasswordComponent = memo((props: tProps) => (
   <form
-    className="contain mt-4"
     name="passwordResetForm"
     action="/email/v1/resetPasswordByEmail"
     onSubmit={props.resetPasswordByEmail}>

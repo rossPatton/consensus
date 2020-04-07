@@ -33,7 +33,7 @@ declare type tGroupQuery = Partial<tGroup> & tFormSubmit;
 declare type tGetGroupQuery = Partial<tGroup> & tBaseQuery;
 
 declare type tGroupRouteParams = tPaginateParams & Readonly<{
-   id: string,
+   idOrSlug: string,
    section?: 'planMeeting' | 'drafts' | 'members' | 'pending',
    slug: string,
 }>;

@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import React, {memo} from 'react';
 
 import {categories, roles} from '../../constants';
@@ -6,19 +7,15 @@ import {tProps} from './_types';
 // the component half of the search filter container
 // decoupled for ease of placement
 const FilterPanel = memo((props: tProps) => (
-  <div className={props.className || 'flex items-center p-2 bg-white rounded mb-2 text-sm font-bold'}>
-    <label className="w-full mr-2" htmlFor="searchFilter">
-      <input
-        spellCheck
-        type="search"
-        id={props.id || 'searchFilter'}
-        className="bg-gray-1 w-full"
-        onChange={props.onSearchChange}
-        placeholder={props.placeholder || 'Filter all results'}
-      />
-    </label>
+  <div
+    className={cx({
+      [props.className]: !!props.className,
+      'flex flex-col d:flex-row': true,
+      'mb-3': !props.className,
+    })}>
     {props.filterOptions && (
       <select
+        className="w-full d:w-auto mb-1 d:mb-0 d:mr-2"
         onBlur={props.onFilterOptionChange}
         onChange={props.onFilterOptionChange}>
         {props.filterOptions.map(opt => (
@@ -29,7 +26,10 @@ const FilterPanel = memo((props: tProps) => (
       </select>
     )}
     {props.onCategoryChange && (
-      <select onBlur={props.onCategoryChange} onChange={props.onCategoryChange}>
+      <select
+        className="w-full d:w-auto mb-1 d:mb-0 d:mr-2"
+        onBlur={props.onCategoryChange}
+        onChange={props.onCategoryChange}>
         <option value="">
           Show all categories
         </option>
@@ -42,6 +42,7 @@ const FilterPanel = memo((props: tProps) => (
     )}
     {props.onPublishedFilterChange && (
       <select
+        className="w-full d:w-auto mb-1 d:mb-0 d:mr-2"
         defaultValue={props.publishedFilter}
         onBlur={props.onPublishedFilterChange}
         onChange={props.onPublishedFilterChange}>
@@ -60,6 +61,7 @@ const FilterPanel = memo((props: tProps) => (
     )}
     {props.onRoleFilterChange && (
       <select
+        className="w-full d:w-auto mb-1 d:mb-0 d:mr-2"
         onBlur={props.onRoleFilterChange}
         onChange={props.onRoleFilterChange}>
         <option key="n/a" value="n/a">
@@ -74,6 +76,18 @@ const FilterPanel = memo((props: tProps) => (
         ))}
       </select>
     )}
+    <label
+      className="w-full"
+      htmlFor="searchFilter">
+      <input
+        spellCheck
+        type="search"
+        id={props.id || 'searchFilter'}
+        className="bg-white w-full"
+        onChange={props.onSearchChange}
+        placeholder={props.placeholder || 'Filter all results'}
+      />
+    </label>
   </div>
 ));
 

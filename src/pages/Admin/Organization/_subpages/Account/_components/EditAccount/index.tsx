@@ -11,14 +11,14 @@ const EditAccount = memo((props: tComponentProps) => (
     onSubmit={props.save}>
     <fieldset>
       <legend>
-        <h1 className="fs3 mb-2">Edit your account</h1>
+        <h1 className="text-3 mb-2">Edit your account</h1>
       </legend>
       <div className="mb-4">
         <label htmlFor="login">
           <h2 className="text-base mb-1 leading-none">
             Change Login
           </h2>
-          <p className="text-base copyBlack mb-1">
+          <p className="text-base text-gray-5 mb-1">
             A unique username that is used just for logging in. Keep secret.
           </p>
           <input
@@ -35,7 +35,7 @@ const EditAccount = memo((props: tComponentProps) => (
           <h2 className="text-base mb-1 leading-none">
             Change Email address
           </h2>
-          <p className="text-base copyBlack mb-1">
+          <p className="text-base text-gray-5 mb-1">
             Used for account verification, event reminders, etc.
           </p>
           <input

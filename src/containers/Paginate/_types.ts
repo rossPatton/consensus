@@ -10,5 +10,6 @@ export type tProps = RouteComponentProps<any> & tState & {
   count?: number,
   items: object[],
   location: H.Location,
+  placement?: 'top' | 'bottom',
   render: (itemsToRender: any[]) => React.ReactNode,
 };

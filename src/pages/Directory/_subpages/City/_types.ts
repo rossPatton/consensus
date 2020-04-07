@@ -15,6 +15,7 @@ export type tProps = {
 };
 
 export type tComponentProps = tProps & {
+  category: tCategory,
   city: tCity,
   onChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearch: (ev: React.ChangeEvent<HTMLInputElement>) => void,

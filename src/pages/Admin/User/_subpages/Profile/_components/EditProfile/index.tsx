@@ -11,20 +11,20 @@ const EditProfile = memo((props: tComponentProps) => (
     onSubmit={props.save}>
     <fieldset>
       <legend>
-        <h1 className="fs3 mb-2">Edit your profile</h1>
+        <h1 className="text-3 mb-2">Edit your profile</h1>
       </legend>
-      <div className="mB5">
-        <label className="w-full mb-4" htmlFor="username">
+      <div className="mb-3">
+        <label className="w-full mb-3" htmlFor="username">
           <label htmlFor="avatarEmail">
             <h2 className="text-base mb-1 leading-none">
             Connect your avatar
             </h2>
-            <p className="text-base copyBlack mb-1">
+            <p className="text-base text-gray-5 mb-1">
               We use <ExternalLink noFollow to="https://www.libravatar.org">Libravatar</ExternalLink> for avatars. To connect your avatar, enter your Libravatar email below. It does not have to be the same as your Consensus email. We do not store this. Any changes you make to your avatar on Libravatar will be automatically reflected here.
             </p>
             <input
               autoComplete="nope"
-              className="p-2 mb-4 w-full"
+              className="p-2 mb-3 w-full"
               onChange={ev => props.updateState('avatarEmail', ev.currentTarget.value)}
               placeholder="your_email_here@example.com"
               value={props.avatarEmail}
@@ -34,7 +34,7 @@ const EditProfile = memo((props: tComponentProps) => (
           <h2 className="text-base mb-1 leading-none">
             Username
           </h2>
-          <p className="text-base copyBlack mb-1">
+          <p className="text-base text-gray-5 mb-1">
             This is your display name on the site. Must be unique. You must fill this out in order to join groups or RSVP to events. You may change it at any time.
           </p>
           <input
@@ -51,11 +51,11 @@ const EditProfile = memo((props: tComponentProps) => (
           updateState={props.updateState}
           label="What city do you live in? This will help us suggest relevant events and groups for you."
         />
-        <label className="w-full mb-4" htmlFor="bio">
+        <label className="w-full mb-3" htmlFor="bio">
           <h2 className="text-base mb-1 leading-none">
             Bio
           </h2>
-          <p className="text-base copyBlack mb-1">
+          <p className="text-base text-gray-5 mb-1">
             Some space to describe yourself, what you do, what you&apos;re interested in, etc.
           </p>
           <textarea
@@ -68,11 +68,11 @@ const EditProfile = memo((props: tComponentProps) => (
             name="bio"
           />
         </label>
-        <label className="w-full mb-4" htmlFor="name">
+        <label className="w-full mb-3" htmlFor="name">
           <h2 className="text-base mb-1 leading-none">
             Real Name
           </h2>
-          <p className="text-base copyBlack mb-1">
+          <p className="text-base text-gray-5 mb-1">
             Your legal name. Optional! Leave blank to remain anonymous.
           </p>
           <input
@@ -84,7 +84,7 @@ const EditProfile = memo((props: tComponentProps) => (
             name="name"
           />
         </label>
-        <label className="block mb-4" htmlFor="website">
+        <label className="block mb-3" htmlFor="website">
           <h2 className="text-base mb-1 leading-none">
             Personal Website
           </h2>
@@ -96,7 +96,7 @@ const EditProfile = memo((props: tComponentProps) => (
             name="website"
           />
         </label>
-        <label className="block mb-4" htmlFor="facebook">
+        <label className="block mb-3" htmlFor="facebook">
           <h2 className="text-base mb-1 leading-none">
             Facebook
           </h2>
@@ -108,7 +108,7 @@ const EditProfile = memo((props: tComponentProps) => (
             value={props.facebook}
           />
         </label>
-        <label className="block mb-4" htmlFor="twitter">
+        <label className="block mb-3" htmlFor="twitter">
           <h2 className="text-base mb-1 leading-none">
             Twitter
           </h2>
@@ -126,7 +126,7 @@ const EditProfile = memo((props: tComponentProps) => (
         <div
           tabIndex={0}
           role="button"
-          className="flex flex-col d:flex-row items-center curPtr text-sm p-1"
+          className="flex flex-col d:flex-row items-center text-sm mb-1"
           onClick={() => props.updateState('privateRSVP', !props.privateRSVP)}
           onKeyPress={() => props.updateState('privateRSVP', !props.privateRSVP)}>
           <input
@@ -148,7 +148,7 @@ const EditProfile = memo((props: tComponentProps) => (
         <div
           tabIndex={0}
           role="button"
-          className="flex flex-col d:flex-row items-center curPtr text-sm p-1 mB5"
+          className="flex flex-col d:flex-row items-center text-sm mb-3"
           onClick={() =>
             props.updateState('privateMemberships', !props.privateMemberships)}
           onKeyPress={() =>
@@ -180,12 +180,12 @@ const EditProfile = memo((props: tComponentProps) => (
       <div className="flex flex-col d:flex-row items-center">
         <button
           disabled={!props.password}
-          className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-1 transition">
+          className="p-2 pl-3 pr-3 mr-1 hover:bg-gray-3">
           Save Changes
         </button>
         <Link
           to="/admin/profile"
-          className="btn p-2 pl-3 pr-3 hover:bg-gray-1 transition">
+          className="btn p-2 pl-3 pr-3 hover:bg-gray-3">
           Go back
         </Link>
       </div>

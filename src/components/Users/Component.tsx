@@ -2,7 +2,9 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
+import {Avatar} from '../../components';
 import {tComponentProps} from './_types';
+
 const roles: tRole[] = ['member', 'facilitator'];
 
 export const UsersComponent = memo((props: tComponentProps) => (
@@ -10,8 +12,12 @@ export const UsersComponent = memo((props: tComponentProps) => (
     {props.users.map((user: tUser, i) => (
       <li
         key={i}
-        className="bg-white mb-2 hover:bg-gray-1 rounded flex items-center p-2">
-        <div className="bgGrey3 rounded-circ mr-3 p-2" />
+        className="bg-white hover:bg-gray-1 rounded flex items-center mb-1 p-2">
+        <Avatar
+          hash={user.avatarHash}
+          size="66"
+          type="user"
+        />
         <div className="w-full">
           <h3 className="mb-1">
             <Link to={`/user/${user.id}`}>
@@ -20,14 +26,14 @@ export const UsersComponent = memo((props: tComponentProps) => (
           </h3>
           <div className="flex flex-col d:flex-row items-center">
             {user.role !== 'pending' && (
-              <span className="p-1 leading-none text-sm bgGrey4 white font-bold rounded mr-2">
+              <b className="p-1 text-sm mr-1">
                 {user.role === 'member' ? props.memberName : props.modName}
-              </span>
+              </b>
             )}
             {(props.sessionRole === 'admin' || props.sessionRole === 'facilitator')
                 && (
                   <button
-                    className="text-sm bg-white"
+                    className="p-1 text-sm"
                     onClick={ev => props.removeUser(ev, user.id)}>
                     {user.role === 'pending'
                       ? 'Reject this user'

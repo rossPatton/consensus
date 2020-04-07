@@ -46,7 +46,7 @@ class HomeContainer extends PureComponent<tContainerProps> {
         <HomeComponent
           eventsByLocationThunk={this.props.eventsByLocationThunk}
           geo={this.props.geoThunk.data}
-          isLoading={this.props.isLoading}
+          isLoading={this.props.geoThunk.isLoading}
           session={this.props.session}
         />
       </Template>

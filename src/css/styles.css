@@ -12,7 +12,7 @@ html {
 body {
   @apply bg-gray-1;
   @apply mt-5;
-  @apply pt-4;
+  @apply pt-3;
 }
 a {
   text-decoration: underline;
@@ -36,10 +36,13 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-bold;
   @apply leading-tight;
   margin-block-end: 0;
   margin-block-start: 0;
+}
+h1,
+h2 {
+  @apply font-bold;
 }
 h1 {
   @apply text-1;
@@ -59,21 +62,28 @@ h6 {
 button {
   @apply bg-white;
   @apply border;
+  @apply duration-150;
+  @apply font-normal;
+  @apply inline-block;
+  @apply leading-none;
   @apply rounded;
   @apply text-center;
-  @apply leading-none;
-  @apply p-2;
-  @apply inline-block;
-  @apply font-normal;
+  @apply transition;
   @apply whitespace-no-wrap;
   vertical-align: middle;
 }
 button,
-option,
 select,
 textarea {
   @apply appearance-none;
 }
+.btn,
+button,
+select,
+input[type="submit"] {
+  @apply cursor-ptr;
+}
+i,
 option,
 select {
   @apply leading-none;
@@ -89,26 +99,27 @@ textarea {
   @apply contain-sm;
   @apply p-2;
 }
-input {
+input,
+select {
   @apply transition;
+}
+input {
   @apply rounded-0;
 }
 select {
+  @apply bg-white;
   @apply rounded-lg;
-  @apply transition;
   @apply whitespace-normal;
 }
 select:hover {
   @apply bg-gray-3;
 }
 i {
-  @apply leading-none;
   font-style: normal;
   font-variant: normal;
   speak: none;
   text-transform: none;
 }
-.disable,
 [disabled] {
   @apply opacity-5;
   @apply pointer-events-none;
@@ -139,12 +150,12 @@ small {
 }
 .truncate {
   @apply whitespace-no-wrap;
-  overflow: hidden;
+  @apply overflow-hidden;
   text-overflow: ellipsis;
 }
 .lineClamp {
+  @apply overflow-hidden;
   display: -webkit-box;
-  overflow: hidden;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
@@ -155,15 +166,15 @@ small {
   height: 80px;
 }
 .loading div {
+  @apply absolute;
+  @apply block;
+  @apply rounded-circ;
   animation: loading-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-radius: 50%;
   border: 8px solid #000;
   border-color: #000 transparent transparent transparent;
   box-sizing: border-box;
-  display: block;
   height: 64px;
   margin: 8px;
-  position: absolute;
   width: 64px;
 }
 .loading div:nth-child(1) {

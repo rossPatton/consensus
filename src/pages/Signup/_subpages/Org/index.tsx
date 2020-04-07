@@ -14,6 +14,7 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
       city: '',
       cityId: 0,
       handle: '',
+      isClient: false,
       login: '',
       name: '',
       password: '',
@@ -22,6 +23,13 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
       showRegionField: false,
       type: 'public' as tPrivacyEnum,
     };
+  }
+
+  componentDidMount() {
+    // we do this so we only disable form submit when js is available
+    this.setState({
+      isClient: true,
+    });
   }
 
   onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {

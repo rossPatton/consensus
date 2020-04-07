@@ -8,7 +8,7 @@ const GenericLoader = (props: tProps) => {
   if (isLoading) {
     if (showLoader) {
       return (
-        <div className="p5 w-full flex justify-content">
+        <div className="p-3 w-full flex justify-center">
           <div className="loading">
             <div />
             <div />

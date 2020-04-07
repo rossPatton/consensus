@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, {memo} from 'react';
 
-import stateCodeToNameMap from '../../json/usa/stateCodeToNameMap.json';
+import stateNameToCodeMap from '../../json/usa/stateNameToCodeMap.json';
 import {tComponentProps} from './_types';
 
 export const CitySearchComponent = memo((props: tComponentProps) => {
@@ -33,18 +33,18 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
     <>
       {props.showRegionField && (
         <>
-          <h2 className="text-base mb-1 leading-none">
+          <h2 className="text-base mb-1">
             Pick a different state
           </h2>
           <label htmlFor="stateSelect">
             <select
               name="type"
               id="stateSelect"
-              className="mb-4 w-full bg-white"
+              className="mb-3 w-full"
               value={props.region}
               onBlur={onRegionChange}
               onChange={onRegionChange}>
-              {Object.keys(stateCodeMap).map(state => (
+              {Object.keys(stateNameToCodeMap).map(state => (
                 <option key={state} value={state}>
                   {state}
                 </option>
@@ -53,31 +53,32 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
           </label>
         </>
       )}
-      <h2 className="text-base mb-1 leading-none">
-        City in <span className="dInBl mr-2">
+      <h2 className="text-base">
+        City in <span className="inline-block mr-2">
           {(!props.showRegionField && props.geo.region) && props.geo.region}
           {(props.showRegionField && props.region) && props.region}
         </span>
         {!props.showRegionField && (
           <button
             type="button"
+            className="p-1"
             onClick={props.toggleRegionField}>
             Not the right state?
           </button>
         )}
       </h2>
       {props.label && (
-        <p className="text-base copyBlack mb-1">
+        <p className="mb-1">
           {props.label}
         </p>
       )}
-      <div className="mb-4">
+      <div className="mb-3">
         {props.cityId === 0 && (
           <label htmlFor="citySelect">
             <select
               name="type"
               id="citySelect"
-              className="w-full bg-white"
+              className="w-full"
               value={props.city}
               onBlur={onCityChange}
               onChange={onCityChange}>
@@ -90,10 +91,11 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
           </label>
         )}
         {props.cityId > 0 && (
-          <div className="brdA1 p-2 black rounded dInBl">
-            <b>{props.city}</b>, <span className="dInBl mr-3">{props.region}</span>
+          <div className="border p-2 rounded inline-block">
+            <b>{props.city}</b>, <span className="inline-block mr-3">{props.region}</span>
             <button
               type="button"
+              className="p-1"
               onClick={() => {
                 props.updateState({
                   city: '',
