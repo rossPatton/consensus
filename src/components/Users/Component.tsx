@@ -12,7 +12,7 @@ export const UsersComponent = memo((props: tComponentProps) => (
     {props.users.map((user: tUser, i) => (
       <li
         key={i}
-        className="bg-white hover:bg-gray-1 rounded flex items-center mb-1 p-2">
+        className="bg-white hover:bg-gray-2 rounded flex items-center mb-1 p-2">
         <Avatar
           hash={user.avatarHash}
           size="66"
@@ -24,34 +24,30 @@ export const UsersComponent = memo((props: tComponentProps) => (
               @{user.username}
             </Link>
           </h3>
-          <div className="flex flex-col d:flex-row items-center">
+          <div className="flex">
             {user.role !== 'pending' && (
-              <b className="p-1 text-sm mr-1">
+              <b className="p-1 text-sm mr-2">
                 {user.role === 'member' ? props.memberName : props.modName}
               </b>
             )}
             {(props.sessionRole === 'admin' || props.sessionRole === 'facilitator')
                 && (
                   <button
-                    className="p-1 text-sm"
+                    className="p-1 text-sm mr-2"
                     onClick={ev => props.removeUser(ev, user.id)}>
                     {user.role === 'pending'
                       ? 'Reject this user'
-                      : 'Remove this user'}
+                      : 'Remove from group'}
                   </button>
                 )}
-          </div>
-        </div>
-        {(props.sessionRole === 'admin' || props.sessionRole === 'facilitator')
+            {(props.sessionRole === 'admin' || props.sessionRole === 'facilitator')
           && (
             <select
-              className="capitalize"
+              className="capitalize p-1 text-sm"
               value={user.role as string}
               onChange={ev => props.setUserRole(ev, user.id)}>
               <option key="" value={user.role}>
-                {user.role === 'pending'
-                  ? 'Approve'
-                  : 'Change role'}
+                {user.role === 'pending' ? 'Approve' : 'Change role'}
               </option>
               {roles.map(role => (
                 role === user.role
@@ -66,6 +62,8 @@ export const UsersComponent = memo((props: tComponentProps) => (
               ))}
             </select>
           )}
+          </div>
+        </div>
       </li>
     ))}
   </ul>

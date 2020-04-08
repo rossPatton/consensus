@@ -58,10 +58,14 @@ h5,
 h6 {
   @apply text-base;
 }
-.btn,
-button {
+select,
+input[type="submit"] {
+  @apply cursor-ptr;
+}
+.btn {
   @apply bg-white;
   @apply border;
+  @apply cursor-ptr;
   @apply duration-150;
   @apply font-normal;
   @apply inline-block;
@@ -72,16 +76,12 @@ button {
   @apply whitespace-no-wrap;
   vertical-align: middle;
 }
+button {
+  @apply btn;
+}
 button,
-select,
 textarea {
   @apply appearance-none;
-}
-.btn,
-button,
-select,
-input[type="submit"] {
-  @apply cursor-ptr;
 }
 i,
 option,

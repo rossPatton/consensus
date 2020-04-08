@@ -17,6 +17,7 @@ export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaEleme
 
 export type tContainerProps = {
   events: tEvent[],
+  heading?: string,
   org: tGroup,
   patchEventDispatch: (query: tUpsertEventQuery) => tThunkPayload<tEvent>,
   postEventDispatch: (query: tUpsertEventQuery) => tThunkPayload<tEvent>,

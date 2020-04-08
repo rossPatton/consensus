@@ -68,12 +68,12 @@ const EditAccount = memo((props: tComponentProps) => (
     <div className="flex flex-col d:flex-row items-center">
       <button
         disabled={!props.currentPassword}
-        className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-1 transition">
+        className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-3 transition">
         Save Changes
       </button>
       <Link
         to="/admin/account"
-        className="btn p-2 pl-3 pr-3 hover:bg-gray-1 transition">
+        className="btn p-2 pl-3 pr-3 hover:bg-gray-3 transition">
         Go back
       </Link>
     </div>

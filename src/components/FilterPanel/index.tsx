@@ -11,7 +11,7 @@ const FilterPanel = memo((props: tProps) => (
     className={cx({
       [props.className]: !!props.className,
       'flex flex-col d:flex-row': true,
-      'mb-3': !props.className,
+      'mb-2 d:mb-3': !props.className,
     })}>
     {props.filterOptions && (
       <select
@@ -47,9 +47,10 @@ const FilterPanel = memo((props: tProps) => (
         onBlur={props.onPublishedFilterChange}
         onChange={props.onPublishedFilterChange}>
         <option value="n/a">
-          Show all meetings
+          Filter meetings
         </option>
         {[
+          {display: 'Show all meetings', value: 'n/a'},
           {display: 'Upcoming', value: 'upcoming'},
           {display: 'Past', value: 'past'},
         ].map(({display, value}) => (
@@ -64,13 +65,14 @@ const FilterPanel = memo((props: tProps) => (
         className="w-full d:w-auto mb-1 d:mb-0 d:mr-2"
         onBlur={props.onRoleFilterChange}
         onChange={props.onRoleFilterChange}>
-        <option key="n/a" value="n/a">
-          Show all members
+        <option value="n/a">
+          Filter members
         </option>
-        {roles.map(role => (
+        {['n/a', ...roles].map(role => (
           <option
             key={role}
             value={role}>
+            {role === 'n/a' && 'Show all members'}
             {role === 'member' ? props.memberName : props.modName}
           </option>
         ))}

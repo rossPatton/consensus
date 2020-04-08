@@ -26,7 +26,7 @@ export const RSVPComponent = (props: tComponentProps) => {
             type={props.isClient ? 'button' : 'submit'}
             onClick={ev => setRsvp({ev, eventId})}
             className={cx({
-              'mr-1 hover:bg-gray-1': true,
+              'mr-1 hover:bg-gray-3': true,
               'p-2 pl-3 pr-3': !props.compact,
               'bg-gray-3': !!rsvp && rsvp.value === 'yes',
             })}>
@@ -37,7 +37,7 @@ export const RSVPComponent = (props: tComponentProps) => {
             type={props.isClient ? 'button' : 'submit'}
             onClick={ev => setRsvp({ev, eventId})}
             className={cx({
-              'mr-1 hover:bg-gray-1': true,
+              'mr-1 hover:bg-gray-3': true,
               'p-2 pl-3 pr-3': !props.compact,
               'bg-gray-3': !!rsvp && rsvp.value === 'no',
             })}>
@@ -48,7 +48,7 @@ export const RSVPComponent = (props: tComponentProps) => {
             type={props.isClient ? 'button' : 'submit'}
             onClick={ev => setRsvp({ev, eventId})}
             className={cx({
-              'mr-1 hover:bg-gray-1': true,
+              'mr-1 hover:bg-gray-3': true,
               'p-2 pl-3 pr-3': !props.compact,
               'bg-gray-3': !!rsvp && rsvp.value === 'maybe',
             })}>

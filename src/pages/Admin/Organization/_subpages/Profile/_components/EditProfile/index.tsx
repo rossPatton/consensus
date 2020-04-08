@@ -51,7 +51,7 @@ const EditProfile = memo((props: tComponentProps) => (
         Change Group Type
       </h2>
       <select
-        className="w-full mb-1"
+        className="w-full"
         value={props.type}
         onBlur={ev => props.updateState('type', ev)}
         onChange={ev => props.updateState('type', ev)}>
@@ -145,13 +145,13 @@ const EditProfile = memo((props: tComponentProps) => (
       <div
         tabIndex={0}
         role="button"
-        className="flex flex-col d:flex-row items-center curPtr text-sm p-1 mb-4"
+        className="flex items-center text-sm p-1 mb-3 border radius hover:bg-gray-2 contain-sm"
         onClick={ev => props.updateState('allowNonVerified', ev)}
         onKeyPress={ev => props.updateState('allowNonVerified', ev)}>
         <input
           readOnly
           type="checkbox"
-          className="mr-2"
+          className="mr-1"
           autoComplete="nope"
           checked={!props.allowNonVerified}
         />
@@ -174,12 +174,12 @@ const EditProfile = memo((props: tComponentProps) => (
       <div className="flex flex-col d:flex-row items-center">
         <button
           disabled={!props.password}
-          className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-1 transition">
+          className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-3 transition">
           Save Changes
         </button>
         <Link
           to="/admin/profile"
-          className="btn p-2 pl-3 pr-3 hover:bg-gray-1 transition">
+          className="btn p-2 pl-3 pr-3 hover:bg-gray-3 transition">
           Go back
         </Link>
       </div>

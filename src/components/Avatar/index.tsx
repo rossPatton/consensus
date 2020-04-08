@@ -8,8 +8,8 @@ const prefix = 'https://seccdn.libravatar.org/avatar';
 const Avatar = memo((props: tProps) => (
   <div
     className={cx({
-      'rounded-circ overflow-hidden mr-1': true,
-      'bg-white border p-3': !props.hash,
+      'mr-1': true,
+      'bg-white border p-3 rounded': !props.hash,
     })}>
     {props.hash && (
       <img

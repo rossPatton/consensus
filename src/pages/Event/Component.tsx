@@ -14,16 +14,16 @@ export const EventComponent = memo((props: tComponentProps) => {
   return (
     <>
       {!isPastMeeting && rsvp.value === 'yes' && (
-        <b className="block p-2 mb-2 rounded text-center bg-green-1 text-sm">
+        <b className="block p-2 mb-3 rounded text-center bg-green-1 text-sm">
           You&apos;re going to this meeting!
         </b>
       )}
       {isPastMeeting && (
-        <b className="block p-2 mb-2 rounded text-center bg-red-1 text-sm">
+        <b className="block p-2 mb-3 rounded text-center bg-red-1 text-sm">
           This meeting has already happened
         </b>
       )}
-      <div className="mb-1 d:mb-3">
+      <div className="mb-1">
         <Link to={`/org/${org.handle}`} className="no-underline font-bold leading-none">
           {org.name}
         </Link>

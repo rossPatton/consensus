@@ -29,7 +29,6 @@ export const MembersComponent = memo((props: tComponentProps) => (
         </h2>
       </div>
       <FilterPanel
-        className="bg-white rounded text-sm font-bold flex items-center mb-2"
         memberName={(props.session.profile as tGroup).memberName}
         modName={(props.session.profile as tGroup).modName}
         onRoleFilterChange={props.onRoleFilterChange}

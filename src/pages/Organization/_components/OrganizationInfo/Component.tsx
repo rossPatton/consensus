@@ -10,7 +10,7 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
   const {description = ''} = props.org;
 
   return (
-    <div className="bg-white rounded mr-2 flex-grow-0 min-w-full d:min-w-1/3">
+    <div className="bg-white rounded mb-2 d:mb-0 d:mr-2 flex-grow-0 min-w-full d:min-w-1/3">
       <div className="bg-gray-5 rounded m-1 p-1 text-white flex items-center justify-between">
         {!role && (
           <small>
@@ -24,7 +24,7 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
       </div>
       <div className="p-2">
         <div className="mb-1">
-          <div className="flex flex-col d:flex-row items-center">
+          <div className="flex d:items-center">
             <Avatar
               hash={org.avatarHash}
               size="60"
@@ -63,7 +63,7 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
         <p className="mb-2">
           {description.split('\n')[0]}
         </p>
-        <div className="flex flex-col d:flex-row items-center">
+        <div className="flex">
           {org.facebook && (
             <div className="mr-1">
               <ExternalLink

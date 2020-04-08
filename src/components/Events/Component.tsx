@@ -24,41 +24,41 @@ export const EventsComponent = memo((props: tComponentProps) => (
         <li
           key={ev.id}
           className={cx({
-            'mb-2': true,
+            'mb-1': true,
             'd:w-1/4 flex-grow-0': props.horizontal,
             'd:mr-2': props.horizontal && i !== props.events.length - 1,
           })}>
           <div
             className={cx({
-              'flex items-center': !props.horizontal,
-              'p-2 hover:bg-gray-1 rounded': props.isEditable,
+              'flex flex-col d:flex-row d:items-center': !props.horizontal,
+              'p-2 hover:bg-gray-3 rounded': props.isEditable,
             })}>
             <div
               className={cx({
-                'mb-2 bg-white': props.horizontal,
-                'mr-2 bg-gray-2': !props.horizontal,
+                'd:max-w-1/3 mb-2': true,
+                'bg-white': props.horizontal,
+                'd:mb-0 d:mr-2 bg-gray-2': !props.horizontal,
               })}>
               <Link
-                className="no-underline"
                 to={ev.isDraft
-                  ? `/event/${ev.id}?isPreview=true`
+                  ? `/draft/${ev.orgId}?${qs}`
                   : `/event/${slugify(ev.title)}`}>
                 <PlaceholderImage
-                  height={100}
+                  height={240}
                   seed={ev.id}
-                  width={200}
+                  width={480}
                 />
               </Link>
             </div>
             <div>
-              <div className="flex flex-col d:flex-row d:items-center mb-1 text-sm font-bold leading-none">
+              <div className="flex mb-1 text-sm font-bold leading-none">
                 <time className="mr-1" dateTime={ev.date}>
                   {isPastEvent
                     ? dayJS(ev.date).format('MMM DD YYYY | h:mmA')
                     : dayJS(ev.date).format('MMM DD | h:mmA')}
                 </time>
                 {!props.horizontal && (
-                  <>
+                  <span className='hidden d:block'>
                     <span className="mr-1">@</span>
                     {ev.locationLink && (
                       <ExternalLink
@@ -68,22 +68,18 @@ export const EventsComponent = memo((props: tComponentProps) => (
                         {ev.location}
                       </ExternalLink>
                     )}
-                  </>
+                  </span>
                 )}
                 {!ev.locationLink && ev.location}
               </div>
-              <h3
-                className={cx({
-                  'capitalize leading-none mb-1': true,
-                  'mb-1': props.isEditable || props.horizontal,
-                  'mb-2': props.showRSVPs,
-                })}>
-                <Link
-                  to={ev.isDraft
-                    ? `/event/${ev.id}?isPreview=true`
-                    : `/event/${slugify(ev.title)}`}>
-                  {ev.title}
-                </Link>
+              <h3 className='capitalize d:leading-none mb-1'>
+                {ev.isDraft && ev.title}
+                {!ev.isDraft
+                  && (
+                    <Link to={`/event/${slugify(ev.title)}`}>
+                      {ev.title}
+                    </Link>
+                  )}
               </h3>
               {props.showRSVPs &&
                 !isPastEvent &&
@@ -91,7 +87,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 !ev.isDraft && (
                 <div
                   className={cx({
-                    hide: props.horizontal,
+                    hidden: props.horizontal,
                   })}>
                   <RSVP compact event={ev} />
                 </div>
@@ -100,20 +96,16 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 && (
                   <Link
                     to={`/org/${slugify(ev.orgName)}`}
-                    className="font-bold text-sm leading-none text-gray-4 no-underline">
+                    className="font-bold text-sm leading-none text-gray-4 no-underline hidden d:block">
                     {ev.orgName}
                   </Link>
                 )}
               {props.isEditable
                 && (
-                  <div className="flex flex-col d:flex-row items-center">
-                    <div className="text-sm mr-1">
-                      {ev.isDraft && 'Draft'}
-                      {!ev.isDraft && (isPastEvent ? 'Past' : 'Upcoming')}
-                    </div>
+                  <div className="flex items-center">
                     {(!isPastEvent || ev.isDraft) && (
                       <Link
-                        className="btn text-sm hover:bg-gray-3 p-1 mr-1"
+                        className="text-sm mr-2"
                         to={props.sessionRole === 'admin'
                           ? `/admin/planMeeting?${qs}`
                           : `/org/${ev.orgName}/planMeeting?${qs}`}>
@@ -129,10 +121,10 @@ export const EventsComponent = memo((props: tComponentProps) => (
                       && !ev.isDraft
                       && (
                         <Link
+                          className="text-sm mr-2"
                           to={props.sessionRole === 'admin'
                             ? `/admin/planMeeting?${qsWithCopy}`
-                            : `/org/${ev.orgName}/planMeeting?${qsWithCopy}`}
-                          className="btn text-sm hover:bg-gray-3 p-1 mr-1">
+                            : `/org/${ev.orgName}/planMeeting?${qsWithCopy}`}>
                           <span
                             role="img"
                             aria-label="Clipboard Emoji">
@@ -142,21 +134,21 @@ export const EventsComponent = memo((props: tComponentProps) => (
                         </Link>
                       )}
                     {(!isPastEvent || ev.isDraft) && (
-                      <button
+                      <span
                         onClick={e => props.deleteEvent(e, ev.id)}
-                        className="btn text-sm hover:bg-gray-3 p-1 mr-1">
+                        className="text-sm mr-2 underline cursor-ptr">
                         <span
                           role="img"
                           aria-label="Big X Emoji">
                           ✖️
                         </span>
                         Delete
-                      </button>
+                      </span>
                     )}
                     {ev.isDraft && (
                       <Link
                         to={`/draft/${ev.orgId}?${qs}`}
-                        className="btn text-sm hover:bg-gray-3 p-1">
+                        className="text-sm">
                         <span
                           role="img"
                           aria-label="Eye Emoji">

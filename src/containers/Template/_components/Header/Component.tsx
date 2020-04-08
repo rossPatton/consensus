@@ -44,7 +44,7 @@ export const HeaderComponent = memo((props: tComponentProps) => (
                 <fieldset>
                   <button
                     id="a11yLogout"
-                    className="transition hover:bg-gray-1"
+                    className="transition hover:bg-gray-3"
                     onClick={props.logout}>
                   Logout
                   </button>

@@ -7,8 +7,8 @@ const OrganizationTabs = memo((props: tProps) => {
   const isMod = props.role === 'admin' || props.role === 'facilitator';
 
   return (
-    <nav className="mb-2">
-      <ul className="flex flex-col d:flex-row items-center overflow-scroll">
+    <nav className="mb-1 d:mb-2 overflow-scroll">
+      <ul className="flex">
         <li>
           <Tab
             match={props.match}
@@ -17,7 +17,7 @@ const OrganizationTabs = memo((props: tProps) => {
         </li>
         {isMod
           && (
-            <li>
+            <li className='hidden d:block'>
               <Tab
                 match={props.match}
                 subRoute="pending"
@@ -26,7 +26,7 @@ const OrganizationTabs = memo((props: tProps) => {
           )}
         {isMod
           && (
-            <li>
+            <li className='hidden d:block'>
               <Tab
                 match={props.match}
                 subRoute="drafts"
@@ -35,7 +35,7 @@ const OrganizationTabs = memo((props: tProps) => {
           )}
         {isMod
           && (
-            <li>
+            <li className='hidden d:block'>
               <Tab
                 match={props.match}
                 subRoute="planMeeting"

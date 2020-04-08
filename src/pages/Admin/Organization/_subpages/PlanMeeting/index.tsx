@@ -15,12 +15,10 @@ const PlanMeeting = memo((props: tProps) => (
         { property: 'og:description', content: '' },
       ]}
     />
-    <h1 className="text-3 mb-2">
-      Plan Meeting
-    </h1>
     <PlanMeetingComponent
       org={props.org}
       router={props.router}
+      heading="Plan Meeting"
     />
   </div>
 ));

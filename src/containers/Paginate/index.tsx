@@ -6,7 +6,7 @@ import {tProps, tState} from './_types';
 
 class PaginateContainer extends Component<tProps, tState> {
   static defaultProps = {
-    className: 'flex items-center justify-center font-bold',
+    className: 'flex flex-row font-bold',
     count: 10,
     page: 1,
     placement: 'bottom' as 'top' | 'bottom',
@@ -69,36 +69,38 @@ class PaginateContainer extends Component<tProps, tState> {
         */}
         {placement === 'bottom' && this.props.render(itemsToRender)}
         {pageCount > 1 && (
-          <ul className={className}>
-            {pages.map((_, i) => {
-              const pageNo = i + 1;
-              const queryCopy = {
-                ...query,
-                page: pageNo,
-              };
+          <div className='overflow-scroll p-1'>
+            <ul className={className}>
+              {pages.map((_, i) => {
+                const pageNo = i + 1;
+                const queryCopy = {
+                  ...query,
+                  page: pageNo,
+                };
 
-              const isActive = page === pageNo;
-              const to = `${pathname}?${qs.stringify(queryCopy)}`;
+                const isActive = page === pageNo;
+                const to = `${pathname}?${qs.stringify(queryCopy)}`;
 
-              return (
-                <li key={i}>
-                  {isActive && (
-                    <span className="block ml-1 mr-2 pL1 pR1">
-                      {pageNo}
-                    </span>
-                  )}
-                  {!isActive && (
-                    <Link
-                      to={to}
-                      onClick={() => this.setPage(pageNo)}
-                      className="block ml-1 mr-2 pL1 pR1" >
-                      {pageNo}
-                    </Link>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+                return (
+                  <li key={i}>
+                    {isActive && (
+                      <span className="block ml-1 mr-1">
+                        {pageNo}
+                      </span>
+                    )}
+                    {!isActive && (
+                      <Link
+                        to={to}
+                        onClick={() => this.setPage(pageNo)}
+                        className="block ml-1 mr-1" >
+                        {pageNo}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         )}
         {placement === 'top' && this.props.render(itemsToRender)}
       </>

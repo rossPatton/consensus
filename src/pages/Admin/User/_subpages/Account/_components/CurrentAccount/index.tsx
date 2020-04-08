@@ -30,7 +30,7 @@ const CurrentAccount = memo((props: tComponentProps) => (
       )}
     <Link
       to="/admin/account/edit"
-      className="btn p-2 pl-3 pr-3 hover:bg-gray-1 transition">
+      className="btn p-2 pl-3 pr-3 hover:bg-gray-3 transition">
       Edit account
     </Link>
   </>
