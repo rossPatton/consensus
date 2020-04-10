@@ -72,13 +72,13 @@ const CurrentProfile = memo((props: tComponentProps) => (
         <h2 className="text-base mb-1 leading-none">
           Description:
         </h2>
-          {props.description.split('\n').map((p, i) => (
-            <p
+        {props.description.split('\n').map((p, i) => (
+          <p
             key={i}
-              className='mb-1'>
-              {p}
-            </p>
-          ))}
+            className="mb-1">
+            {p}
+          </p>
+        ))}
       </div>
     )}
     <Link

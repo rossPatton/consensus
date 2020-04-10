@@ -29,6 +29,10 @@ module.exports = {
       black: '#000',
       white: '#fff',
 
+      blue: {
+        1: '#0b3dff',
+      },
+
       // with colors, 1 === lightest, then darker from there
       gray: {
         1: '#f6f6f6',
@@ -44,6 +48,7 @@ module.exports = {
       yellow: {
         1: '#fefcbf',
         2: '#ffc201',
+        3: '#db8546',
       },
       green: {
         1: '#aedfa5',

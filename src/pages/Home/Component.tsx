@@ -24,7 +24,7 @@ export const HomeComponent = memo((props: tComponentProps) => (
       isLoading={props.eventsByLocationThunk.isLoading}
       render={() => props.eventsByLocationThunk.data.length > 0
         && (
-          <div className='mb-3'>
+          <div className="mb-3">
             <h2 className="text-3 mb-2">
               Upcoming Meetings in {props.geo.city || props.session.profile.cityId}
             </h2>

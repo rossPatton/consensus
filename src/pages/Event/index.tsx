@@ -6,12 +6,15 @@ import {Redirect} from 'react-router-dom';
 
 // import {Redirect} from 'react-router';
 import {Helmet} from '../../components';
+import {MediaContext} from '../../context/MatchMediaProvider/_context';
 import {ErrorBoundary, GenericLoader, Template} from '../../containers';
 import {getEvent, getEventsByOrgId, getGroup, getRoles, getRsvps} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {EventComponent} from './Component';
 
 class EventContainer extends PureComponent<tContainerProps> {
+  static contextType = MediaContext;
+
   constructor(props: tContainerProps) {
     super(props);
     this.dispatch();
@@ -33,6 +36,7 @@ class EventContainer extends PureComponent<tContainerProps> {
     // org route can be reached by orgId or handle
     const isSlug = isNaN(parseInt(idOrSlug as string, 10));
 
+    // TODO handle this slug vs id logic in redux. make util function
     let res = null;
     try {
       if (isSlug) {
@@ -74,15 +78,18 @@ class EventContainer extends PureComponent<tContainerProps> {
       session,
     } = this.props;
 
+    const {isMobile, isDesktop} = this.context;
     const eventStatus = _.get(eventThunk, 'error.status', null);
     const orgStatus = _.get(orgThunk, 'error.status', null);
 
+    // TODO this still isn't working properly
     // bit hacky, but if event is private, we 401, and if id is wrong we 204
     // in both cases we want to render the error boundary instead
     // in other words, if no error and things are still loading, show loder
     let isLoading = !!orgStatus
       && (orgStatus === 200 && orgThunk.isLoading)
       || eventThunk.isLoading;
+
     if (session.type === 'user') {
       // if user, dont start rendering til we know their role with the group
       isLoading = isLoading && !rolesThunk.fetched;
@@ -124,6 +131,8 @@ class EventContainer extends PureComponent<tContainerProps> {
                 <EventComponent
                   event={event}
                   eventsByOrgId={eventsByOrgId}
+                  isDesktop={isDesktop}
+                  isMobile={isMobile}
                   org={orgThunk.data}
                   rsvp={rsvp}
                 />

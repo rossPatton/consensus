@@ -17,12 +17,12 @@ export const HeaderComponent = memo((props: tComponentProps) => (
         </Link>
       </div>
       <div className="flex items-center absolute r text-right">
-        <Search />
+        <Search className='mr-2 hidden d:block' />
         {!props.session.isAuthenticated && (
           <Link
             to="/login"
             id="a11yLogin"
-            className="font-bold underline">
+            className="font-bold underline text-black">
             Login/Signup
           </Link>
         )}

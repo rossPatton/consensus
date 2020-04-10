@@ -27,6 +27,9 @@ select,
 time {
   display: block;
 }
+header {
+  max-height: 60px;
+}
 ul {
   @apply list-none;
 }
@@ -102,14 +105,20 @@ textarea {
 input,
 select {
   @apply transition;
+  height: 3rem;
 }
 input {
   @apply rounded-0;
 }
+/*
+  HEY @TODO ADD DESKTOP ONLY HEIGHT/TEXT-INDENT HERE WITH RESPONSIVE VARIANT
+  .5rem indent + 3 rem height
+*/
 select {
   @apply bg-white;
   @apply rounded-lg;
   @apply whitespace-normal;
+  text-indent: .5rem;
 }
 select:hover {
   @apply bg-gray-3;
@@ -138,6 +147,9 @@ small {
 }
 .t {
   top: 0;
+}
+.tHdr {
+  top: 60px;
 }
 .r {
   right: 0;

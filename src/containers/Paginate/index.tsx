@@ -69,7 +69,7 @@ class PaginateContainer extends Component<tProps, tState> {
         */}
         {placement === 'bottom' && this.props.render(itemsToRender)}
         {pageCount > 1 && (
-          <div className='overflow-scroll p-1'>
+          <div className="overflow-scroll p-1">
             <ul className={className}>
               {pages.map((_, i) => {
                 const pageNo = i + 1;

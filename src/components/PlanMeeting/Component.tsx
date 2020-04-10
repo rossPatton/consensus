@@ -133,6 +133,6 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
           </div>
         </fieldset>
       </form>
-      </>
-    );
+    </>
+  );
 });

@@ -17,8 +17,6 @@ export type tProps = {
 
 export type tComponentProps = tProps & {
   event: tEvent,
-  isDesktop: boolean,
-  isMobile: boolean,
   org: tGroup,
   rsvp: tRSVP,
 };

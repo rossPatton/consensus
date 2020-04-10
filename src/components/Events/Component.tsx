@@ -24,7 +24,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
         <li
           key={ev.id}
           className={cx({
-            'mb-1': true,
+            'mb-2': !props.horizontal,
             'd:w-1/4 flex-grow-0': props.horizontal,
             'd:mr-2': props.horizontal && i !== props.events.length - 1,
           })}>
@@ -35,9 +35,8 @@ export const EventsComponent = memo((props: tComponentProps) => (
             })}>
             <div
               className={cx({
-                'd:max-w-1/3 mb-2': true,
-                'bg-white': props.horizontal,
-                'd:mb-0 d:mr-2 bg-gray-2': !props.horizontal,
+                'mb-2': true,
+                'd:mb-0 d:mr-2 bg-gray-2 d:max-w-1/3': !props.horizontal,
               })}>
               <Link
                 to={ev.isDraft
@@ -51,14 +50,14 @@ export const EventsComponent = memo((props: tComponentProps) => (
               </Link>
             </div>
             <div>
-              <div className="flex mb-1 text-sm font-bold leading-none">
+              <div className="flex mb-1 text-sm text-yellow-3 font-bold leading-none">
                 <time className="mr-1" dateTime={ev.date}>
                   {isPastEvent
                     ? dayJS(ev.date).format('MMM DD YYYY | h:mmA')
                     : dayJS(ev.date).format('MMM DD | h:mmA')}
                 </time>
                 {!props.horizontal && (
-                  <span className='hidden d:block'>
+                  <span className="hidden d:block">
                     <span className="mr-1">@</span>
                     {ev.locationLink && (
                       <ExternalLink
@@ -72,7 +71,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 )}
                 {!ev.locationLink && ev.location}
               </div>
-              <h3 className='capitalize d:leading-none mb-1'>
+              <h3 className="capitalize leading-none mb-1">
                 {ev.isDraft && ev.title}
                 {!ev.isDraft
                   && (
@@ -96,7 +95,7 @@ export const EventsComponent = memo((props: tComponentProps) => (
                 && (
                   <Link
                     to={`/org/${slugify(ev.orgName)}`}
-                    className="font-bold text-sm leading-none text-gray-4 no-underline hidden d:block">
+                    className="font-bold text-sm text-gray-4 no-underline hidden d:block">
                     {ev.orgName}
                   </Link>
                 )}

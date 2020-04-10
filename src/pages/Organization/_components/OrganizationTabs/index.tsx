@@ -17,7 +17,7 @@ const OrganizationTabs = memo((props: tProps) => {
         </li>
         {isMod
           && (
-            <li className='hidden d:block'>
+            <li className="hidden d:block">
               <Tab
                 match={props.match}
                 subRoute="pending"
@@ -26,7 +26,7 @@ const OrganizationTabs = memo((props: tProps) => {
           )}
         {isMod
           && (
-            <li className='hidden d:block'>
+            <li className="hidden d:block">
               <Tab
                 match={props.match}
                 subRoute="drafts"
@@ -35,7 +35,7 @@ const OrganizationTabs = memo((props: tProps) => {
           )}
         {isMod
           && (
-            <li className='hidden d:block'>
+            <li className="hidden d:block">
               <Tab
                 match={props.match}
                 subRoute="planMeeting"

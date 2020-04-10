@@ -15,9 +15,10 @@ export const RSVPComponent = (props: tComponentProps) => {
     <form
       method={method}
       action="/api/v1/rsvps"
+      className="absolute d:relative tHdr l r p-1 bg-white"
       onSubmit={ev => setRsvp({ev, eventId})}>
       <fieldset>
-        <div className="flex items-center text-sm font-bold leading-none">
+        <div className="flex items-center justify-center d:justify-start text-sm font-bold leading-none">
           <legend className="mr-2">
             RSVP {userRSVPsPrivately ? 'Privately' : 'Publicly'}
           </legend>

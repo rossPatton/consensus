@@ -83,7 +83,7 @@ const GroupAdminContainer = memo((props: tProps) => {
               </div>
             </div>
           </div>
-          <ul className='mb-2' role="navigation">
+          <ul className="mb-2" role="navigation">
             <li className="font-bold">
               Admin Actions
             </li>
