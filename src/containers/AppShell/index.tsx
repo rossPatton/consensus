@@ -2,8 +2,8 @@ import React, {memo} from 'react';
 import {HelmetProvider} from 'react-helmet-async';
 import {Switch} from 'react-router-dom';
 
-import {MatchMediaProvider} from '../../context';
 import {RouteWithSubRoutes} from '../../components';
+import {MatchMediaProvider} from '../../context';
 import {routes} from '../../routes';
 
 const AppShell = memo(() => (

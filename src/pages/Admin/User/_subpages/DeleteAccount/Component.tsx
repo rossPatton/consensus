@@ -26,7 +26,7 @@ export const DeleteAccountComponent = memo((props: tComponentProps) => (
       />
     </fieldset>
     <button
-      disabled={props.isClient && !props.currentPassword}
+      disabled={props.hasMounted && !props.currentPassword}
       className="p-2 pl-3 pr-3 hover:bg-gray-3">
       Yes, really delete my account
     </button>

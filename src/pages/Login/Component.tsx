@@ -43,13 +43,13 @@ export const LoginComponent = memo((props: tComponentProps) => (
           required
         />
         <button
-          disabled={props.isClient && (!props.password || !props.username)}
-          className="p-2 pl-3 pr-3 mr-2">
+          disabled={props.hasMounted && (!props.password || !props.username)}
+          className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-2">
           Login
         </button>
         <Link
           to="/password-reset"
-          className="btn p-2 pl-3 pr-3">
+          className="btn p-2 pl-3 pr-3 hover:bg-gray-2">
           Forget your password?
         </Link>
       </fieldset>

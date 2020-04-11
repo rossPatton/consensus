@@ -13,12 +13,12 @@ export type tStore = {
 
 export type tState = {
   hasRSVPed: boolean, // switch for immediately updating UI on client
-  isClient: boolean,
+  hasMounted: boolean,
   rsvp?: tRSVP, // pick out the rsvp from the rsvps state object
 };
 
 type tProps = {
-  compact?: boolean,
+  className?: string,
   event: tEvent,
   role?: tRole,
   session: tSession,
@@ -33,9 +33,9 @@ export type tContainerProps = RouteComponentProps<any> & tProps & {
   rsvps: tRSVP[],
 };
 
-export type tComponentProps = tProps & {
+export type tComponentProps = tMediaContext & tProps & {
   hasRSVPed: boolean,
-  isClient: boolean,
+  hasMounted: boolean,
   rsvp?: tRSVP,
   setRsvp: (opts: tSetRsvpOpts) => void,
 };

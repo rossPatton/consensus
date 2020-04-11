@@ -8,6 +8,10 @@ export const Breadcrumbs = loadable(() =>
   import(/* webpackChunkName: "Breadcrumbs" */'./Breadcrumbs'),
 );
 
+export const Categories = loadable(() =>
+  import(/* webpackChunkName: "Categories" */'./Categories'),
+);
+
 export const CitySearch = loadable(() =>
   import(/* webpackChunkName: "CitySearch" */'./CitySearch'),
 );

@@ -55,7 +55,7 @@ const VerifyTokenComponent = memo((props: tProps) => (
       />
       <div className="flex flex-col d:flex-row items-center">
         <button
-          disabled={props.isClient && (!props.login || !props.password)}
+          disabled={props.hasMounted && (!props.login || !props.password)}
           className="p-2 pl-3 pr-3 mr-2">
           Verify Me
         </button>

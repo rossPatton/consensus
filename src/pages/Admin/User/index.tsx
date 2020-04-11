@@ -4,11 +4,14 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {GenericLoader} from '../../../containers';
+import {MediaContext} from '../../../context/MatchMediaProvider/_context';
 import {getGroupsByUserId, getRoles, getRsvps, logout} from '../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {UserAdminComponent} from './Component';
 
 class UserAdminContainer extends PureComponent<tContainerProps> {
+  static contextType = MediaContext;
+
   constructor(props: tContainerProps) {
     super(props);
     if (!props.session.isAuthenticated) return;
@@ -29,6 +32,8 @@ class UserAdminContainer extends PureComponent<tContainerProps> {
         render={() => (
           <UserAdminComponent
             history={this.props.history}
+            isDesktop={this.context.isDesktop}
+            isMobile={this.context.isMobile}
             match={this.props.match}
             orgsByUserIdThunk={this.props.orgsByUserIdThunk}
             roles={this.props.rolesThunk.data}

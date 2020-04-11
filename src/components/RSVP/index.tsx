@@ -4,12 +4,14 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 
-// import {GenericLoader} from '../../containers';
+import {MediaContext} from '../../context/MatchMediaProvider/_context';
 import {patchRsvps, postRsvps} from '../../redux';
 import {tContainerProps, tSetRsvpOpts, tState, tStore} from './_types';
 import {RSVPComponent} from './Component';
 
 class RSVPContainer extends PureComponent<tContainerProps, tState> {
+  static contextType = MediaContext;
+
   constructor(props: tContainerProps) {
     super(props);
     const {rsvps} = props;
@@ -20,17 +22,16 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
 
     this.state = {
       hasRSVPed,
-      isClient: false,
+      hasMounted: false,
       rsvp,
     };
   }
 
   componentDidMount() {
     this.setState({
-      isClient: true,
+      hasMounted: true,
     });
   }
-
 
   // post or patch, depending on RSVP status
   setRsvp = async (opts: tSetRsvpOpts) => {
@@ -76,13 +77,16 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     if (this.props.session.type === 'org') return null;
+    const {isMobile, isDesktop} = this.context;
 
     return (
       <RSVPComponent
-        compact={this.props.compact}
+        className={this.props.className}
         event={this.props.event}
+        hasMounted={this.state.hasMounted}
         hasRSVPed={this.state.hasRSVPed}
-        isClient={this.state.isClient}
+        isDesktop={isDesktop}
+        isMobile={isMobile}
         rsvp={this.state.rsvp}
         session={this.props.session}
         setRsvp={this.setRsvp}

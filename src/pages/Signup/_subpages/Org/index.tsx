@@ -14,7 +14,7 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
       city: '',
       cityId: 0,
       handle: '',
-      isClient: false,
+      hasMounted: false,
       login: '',
       name: '',
       password: '',
@@ -28,7 +28,7 @@ export class OrgSignupContainer extends PureComponent<tContainerProps, tState> {
   componentDidMount() {
     // we do this so we only disable form submit when js is available
     this.setState({
-      isClient: true,
+      hasMounted: true,
     });
   }
 

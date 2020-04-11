@@ -6,7 +6,6 @@ import {tComponentProps} from './_types';
 
 export const MembersComponent = memo((props: tComponentProps) => (
   <>
-    {console.log('all props for members list => ', props)}
     <FilterPanel
       onRoleFilterChange={props.section === 'members' && props.onRoleFilterChange}
       onSearchChange={props.onSearchChange}

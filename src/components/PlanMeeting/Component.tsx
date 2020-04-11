@@ -54,8 +54,8 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             <input
               results={3}
               spellCheck
-              className="w-full mr-2"
-              placeholder="The name or address of the place here"
+              className="w-full mb-1 d:mb-0 mr-2"
+              placeholder="The name or address of the place"
               value={props.location}
               onChange={ev => updateState('location', ev.currentTarget.value)}
             />
@@ -68,7 +68,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             />
           </div>
           <div className="flex flex-col d:flex-row mb-3">
-            <div className="mr-2">
+            <div className="mb-3 d:mb-0 mr-2">
               <h3 className="mb-1">When&apos;s the meeting?</h3>
               <input
                 type="date"
@@ -98,7 +98,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
               </select>
             </div>
           </div>
-          <div className="flex flex-col d:flex-row items-center">
+          <div className="flex items-center">
             <button
               className="p-2 mr-1 hover:bg-gray-3"
               disabled={disableSubmit}
@@ -117,7 +117,6 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
               }}>
               Save as Draft
             </button>
-            {console.log('plan meeting props => ', props)}
             {!isNaN(props.id) && (
               <Link
                 to={`/draft/${props.id}?${objToQueryString(props)}`}

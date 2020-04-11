@@ -1,5 +1,5 @@
 export type tState = {
-  isClient: boolean,
+  hasMounted: boolean,
   currentPassword: string,
 };
 

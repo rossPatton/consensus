@@ -17,11 +17,7 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
   return (
     <>
       <label htmlFor={`${props.id}`}>
-        <h3
-          className={cx({
-            'text-base font-bold leading-none': true,
-            'mb-1': props.newPassword,
-          })}>
+        <h3 className="mb-1 text-base font-bold leading-none">
           {props.title || 'Password'}
         </h3>
         {(!props.newPassword && !props.hideRequiredMessage) && (

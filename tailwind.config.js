@@ -63,7 +63,10 @@ module.exports = {
       '4': '3rem',
       '5': '4rem',
     },
-    backgroundColor: theme => theme('colors'),
+    backgroundColor: theme => ({
+      ...theme('colors'),
+      '0': '0',
+    }),
     backgroundPosition: {},
     backgroundSize: {},
     borderColor: theme => ({
@@ -124,8 +127,7 @@ module.exports = {
     },
     inset: { },
     letterSpacing: {
-      normal: '0',
-      wide: '0.03em',
+      none: '0',
     },
     lineHeight: {
       none: '1',

@@ -15,14 +15,14 @@ class DeleteGroupContainer extends PureComponent<tContainerProps, tState> {
     super(props);
 
     this.state = {
-      isClient: false,
+      hasMounted: false,
       currentPassword: '',
     };
   }
 
   componentDidMount() {
     this.setState({
-      isClient: true,
+      hasMounted: true,
     });
   }
 

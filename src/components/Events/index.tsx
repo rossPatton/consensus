@@ -3,11 +3,13 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Paginate} from '../../containers';
+import {MediaContext} from '../../context/MatchMediaProvider/_context';
 import {deleteEvent} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
 
 class EventsContainer extends PureComponent<tContainerProps> {
+  static contextType = MediaContext;
   static defaultProps = {
     count: 4,
   };
@@ -26,6 +28,8 @@ class EventsContainer extends PureComponent<tContainerProps> {
       showRSVPs,
       type = 'events',
     } = this.props;
+
+    const {isMobile, isDesktop} = this.context;
 
     const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
     if (events.length === 0) {
@@ -46,6 +50,8 @@ class EventsContainer extends PureComponent<tContainerProps> {
             events={eventsToRender}
             horizontal={this.props.horizontal}
             isEditable={isEditable}
+            isMobile={isMobile}
+            isDesktop={isDesktop}
             sessionRole={sessionRole}
             showOrgName={showOrgName}
             showRSVPs={showRSVPs}

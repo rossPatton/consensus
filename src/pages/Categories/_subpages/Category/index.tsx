@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { Breadcrumbs, FilterPanel, Helmet, Orgs } from '../../../../components';
+import { FilterPanel, Helmet, Orgs } from '../../../../components';
 import { categoryMap } from '../../../../constants';
 import {
   ErrorBoundary,
@@ -23,7 +23,7 @@ class CategoryContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {match: {params}, isLoading, orgs} = this.props;
+    const {isLoading, orgs} = this.props;
 
     return (
       <ErrorBoundary status={_.get(orgs, 'error.status', 200)}>
@@ -39,41 +39,29 @@ class CategoryContainer extends PureComponent<tContainerProps> {
         />
         <GenericLoader
           isLoading={isLoading}
-          render={() => {
-            const crumbs = [{
-              display: 'All Categories',
-              to: 'categories',
-            }, {
-              display: categoryMap[params.category],
-              to: `categories/${params.category}`,
-            }];
-
-            return (
-              <>
-                <Breadcrumbs crumbs={crumbs} />
-                <SearchFilter
-                  items={orgs.data}
-                  searchKey="name"
-                  render={searchProps => (
-                    <Paginate
-                      count={9}
-                      items={searchProps.items}
-                      render={(orgsToRender: tGroup[]) => (
-                        <>
-                          <FilterPanel
-                            className="flex flex-col d:flex-row items-center p-2 bg-white rounded mb-4 text-sm font-bold"
-                            onSearchChange={searchProps.onSearchChange}
-                            placeholder="Filter groups by name"
-                          />
-                          <Orgs orgs={orgsToRender} />
-                        </>
-                      )}
-                    />
-                  )}
-                />
-              </>
-            );
-          }}
+          render={() => (
+            <>
+              <SearchFilter
+                items={orgs.data}
+                searchKey="name"
+                render={searchProps => (
+                  <Paginate
+                    count={9}
+                    items={searchProps.items}
+                    render={(orgsToRender: tGroup[]) => (
+                      <>
+                        <FilterPanel
+                          onSearchChange={searchProps.onSearchChange}
+                          placeholder="Filter groups by name"
+                        />
+                        <Orgs orgs={orgsToRender} />
+                      </>
+                    )}
+                  />
+                )}
+              />
+            </>
+          )}
         />
       </ErrorBoundary>
     );

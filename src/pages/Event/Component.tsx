@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, {memo} from 'react';
 
-import {DesktopEventPage, MobileEventPage} from './_components';
+import {DesktopEventPage, MobileEventPage} from './_breakpoints';
 import {tComponentProps} from './_types';
 
 export const EventComponent = memo((props: tComponentProps) => {
@@ -10,12 +10,12 @@ export const EventComponent = memo((props: tComponentProps) => {
       <DesktopEventPage
         {...props}
       />
-    )
+    );
   }
 
   return (
     <MobileEventPage
       {...props}
     />
-  )
+  );
 });

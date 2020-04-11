@@ -1,31 +1,27 @@
+import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
-import cx from 'classnames';
-import pluralize from 'pluralize';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {Events, ExternalLink, PlaceholderImage, RSVP} from '../../../../components';
 import {tComponentProps} from './_types';
 
-const DesktopEventComponent = memo((props: tComponentProps) => {
-  const {event, eventsByOrgId, org, rsvp = {} as tRSVP} = props;
+const MobileEventPage = memo((props: tComponentProps) => {
+  const {event, eventsByOrgId, org} = props;
   const isPastMeeting = dayJS(event.date).isBefore(dayJS());
-  console.log('desktop events');
 
   return (
     <>
-      {!isPastMeeting && rsvp.value === 'yes' && (
-        <b className="hidden d:block p-2 mb-3 rounded text-center bg-green-1 text-sm">
-          You&apos;re going to this meeting!
-        </b>
-      )}
       {isPastMeeting && (
         <b className="block p-2 mb-3 rounded text-center bg-red-1 text-sm">
-          This meeting has already happened
+          This meeting already happened
         </b>
       )}
-      <h1 className="mt-4 d:mt-0 capitalize block d:hidden text-2 font-normal">
+      {!isPastMeeting && (
+        <RSVP event={event} />
+      )}
+      <h1 className="mt-5 d:mt-0 capitalize block d:hidden text-2 font-normal">
         {event.title}
       </h1>
       <Link
@@ -43,32 +39,27 @@ const DesktopEventComponent = memo((props: tComponentProps) => {
         </div>
         <div className="flex flex-col">
           <time
-            className="font-bold flex items-center leading-none mb-2 text-gray-5"
-            dateTime={event.date}>
-            <span className='rounded-circ p-1 bg-gray-3 mr-2' />
-            {dayJS(event.date).format('dddd, MMM DD')}
+            className="font-bold leading-none text-gray-5"
+            dateTime={dayJS(event.date).format('YYYY-MM-DDThh:mm:ssTZD')}>
+            <div className="flex items-center mb-2">
+              <span className="rounded-circ p-1 bg-gray-3 mr-2" />
+              {dayJS(event.date).format('dddd, MMM DD')}
+            </div>
+            <div className="flex items-center mb-2">
+              <span className="rounded-circ p-1 bg-gray-3 mr-2" />
+              {dayJS(event.date).format('h:mm')}-{dayJS(event.endDate).format('h:mmA')}
+            </div>
           </time>
-          <time
-            className="font-bold flex items-center leading-none mb-2 text-gray-5"
-            dateTime={event.date}>
-            {console.log(event)}
-            <span className='rounded-circ p-1 bg-gray-3 mr-2' />
-            {dayJS(event.date).format('h:mmA')}
-          </time>
-          <h1 className="mb-2 capitalize hidden d:block">
-            {event.title}
-          </h1>
-          {!isPastMeeting && <RSVP event={event} />}
           <div
             className={cx({
-              "font-bold flex items-center text-gray-5": true,
+              'font-bold flex items-center text-gray-5 mb-2': true,
               'mb-3': !event.attendees || event.attendees.length === 0,
             })}>
-            <span className='rounded-circ p-1 bg-gray-3 mr-2' />
+            <span className="rounded-circ p-1 bg-gray-3 mr-2" />
             {event.locationLink && (
               <ExternalLink
                 noFollow
-                className='no-underline'
+                className="no-underline"
                 to={event.locationLink}>
                 {event.location}
               </ExternalLink>
@@ -78,13 +69,13 @@ const DesktopEventComponent = memo((props: tComponentProps) => {
           {event.attendees
             && event.attendees.length > 0 && (
             <div className="flex items-center mb-3">
-              <span className='rounded-circ p-1 bg-gray-3 mr-2' />
-              {event.attendees.length} {pluralize('attendee', event.attendees.length)}
+              <span className="rounded-circ p-1 bg-gray-3 mr-2" />
+              {event.attendees.length} Going
             </div>
           )}
           {event.description && (
             <>
-              <h2 className='text-3'>
+              <h2 className="text-3">
                 Meeting Description
               </h2>
               {event.description.split('\n').map((p, i) => (
@@ -97,12 +88,13 @@ const DesktopEventComponent = memo((props: tComponentProps) => {
         </div>
       </div>
       {eventsByOrgId && eventsByOrgId.length > 0 && (
-        <aside className="w-full mb-4">
+        <aside className="mb-4">
           <h2 className="text-3 mb-2 leading-none">
-            More events by {org.name}
+            More Upcoming Events
           </h2>
           <Events
             horizontal
+            showOrgName
             events={eventsByOrgId}
           />
         </aside>
@@ -122,4 +114,4 @@ const DesktopEventComponent = memo((props: tComponentProps) => {
   );
 });
 
-export default DesktopEventComponent;
+export default MobileEventPage;

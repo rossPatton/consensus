@@ -27,7 +27,7 @@ const EmailTokenComponent = memo((props: tProps) => (
       </label>
       <div className="flex flex-col d:flex-row items-center">
         <button
-          disabled={props.isClient && !props.email}
+          disabled={props.hasMounted && !props.email}
           className="p-2 pl-3 pr-3 mr-2">
           Send Reset Code
         </button>

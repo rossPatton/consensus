@@ -15,7 +15,7 @@ const FilterPanel = memo((props: tProps) => (
     })}>
     {props.filterOptions && (
       <select
-        className="w-full d:w-auto mb-1 d:mb-0 d:mr-2"
+        className="w-full d:w-1/4 mb-1 d:mb-0 d:mr-2"
         onBlur={props.onFilterOptionChange}
         onChange={props.onFilterOptionChange}>
         {props.filterOptions.map(opt => (
@@ -27,11 +27,11 @@ const FilterPanel = memo((props: tProps) => (
     )}
     {props.onCategoryChange && (
       <select
-        className="w-full d:w-auto mb-1 d:mb-0 d:mr-2"
+        className="w-full d:w-1/4 mb-1 d:mb-0 d:mr-2"
         onBlur={props.onCategoryChange}
         onChange={props.onCategoryChange}>
         <option value="">
-          Show all categories
+          Show all
         </option>
         {categories.map(({display}) => (
           <option key={display} value={display}>
@@ -42,7 +42,7 @@ const FilterPanel = memo((props: tProps) => (
     )}
     {props.onPublishedFilterChange && (
       <select
-        className="w-full d:w-auto mb-1 d:mb-0 d:mr-2"
+        className="w-full d:w-1/4 mb-1 d:mb-0 d:mr-2"
         defaultValue={props.publishedFilter}
         onBlur={props.onPublishedFilterChange}
         onChange={props.onPublishedFilterChange}>
@@ -62,7 +62,7 @@ const FilterPanel = memo((props: tProps) => (
     )}
     {props.onRoleFilterChange && (
       <select
-        className="w-full d:w-auto mb-1 d:mb-0 d:mr-2"
+        className="w-full d:w-1/4 mb-1 d:mb-0 d:mr-2"
         onBlur={props.onRoleFilterChange}
         onChange={props.onRoleFilterChange}>
         <option value="n/a">
@@ -85,7 +85,7 @@ const FilterPanel = memo((props: tProps) => (
         spellCheck
         type="search"
         id={props.id || 'searchFilter'}
-        className="bg-white w-full"
+        className="w-full"
         onChange={props.onSearchChange}
         placeholder={props.placeholder || 'Filter all results'}
       />

@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 // if user lands somewhere private, or they're just not logged in, render this page
 const UnAuthorized = memo(props => (
   <div className="text-center">
-    {console.log('dont you... forget about me(geo)... no no no no ', props)}
     <h1 className="mb-1">
       You don&apos;t have permission to view this page. If this page belongs to a private or hidden group, you need to join the group first.
     </h1>

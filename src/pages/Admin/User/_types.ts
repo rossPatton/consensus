@@ -17,6 +17,8 @@ export type tProps = {
 };
 
 export type tComponentProps = tProps & {
+  isDesktop: boolean,
+  isMobile: boolean,
   roles: tRoleMap[],
 };
 

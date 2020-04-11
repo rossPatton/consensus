@@ -3,7 +3,7 @@ import {match} from 'react-router-dom';
 
 export type tState = {
   email: string,
-  isClient: boolean,
+  hasMounted: boolean,
   login: string,
   password: string,
   token: string,

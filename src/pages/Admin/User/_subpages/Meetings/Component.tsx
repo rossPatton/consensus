@@ -16,8 +16,8 @@ export const MeetingsComponent = memo((props: tComponentProps) => (
       onFilterOptionChange={props.onFilterOptionChange}
       onSearchChange={props.onSearchChange}
       filterOptions={[
-        {key: 'title', display: 'Event Title'},
-        {key: 'orgName', display: 'Organization Name'},
+        {key: 'title', display: 'Title'},
+        {key: 'orgName', display: 'Group'},
       ]}
     />
     <Events

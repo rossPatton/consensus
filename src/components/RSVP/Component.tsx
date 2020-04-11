@@ -15,43 +15,49 @@ export const RSVPComponent = (props: tComponentProps) => {
     <form
       method={method}
       action="/api/v1/rsvps"
-      className="absolute d:relative tHdr l r p-1 bg-white"
-      onSubmit={ev => setRsvp({ev, eventId})}>
+      onSubmit={ev => setRsvp({ev, eventId})}
+      className={cx({
+        [props.className]: typeof props.className === 'string',
+        'absolute t-hdr l r pt-2 pb-2 bg-gray-2': props.isMobile,
+      })}>
       <fieldset>
-        <div className="flex items-center justify-center d:justify-start text-sm font-bold leading-none">
+        <div className="flex items-center justify-center d:justify-start text-sm leading-none">
           <legend className="mr-2">
             RSVP {userRSVPsPrivately ? 'Privately' : 'Publicly'}
           </legend>
           <button
             value="yes"
-            type={props.isClient ? 'button' : 'submit'}
+            type={props.hasMounted ? 'button' : 'submit'}
             onClick={ev => setRsvp({ev, eventId})}
             className={cx({
-              'mr-1 hover:bg-gray-3': true,
-              'p-2 pl-3 pr-3': !props.compact,
-              'bg-gray-3': !!rsvp && rsvp.value === 'yes',
+              'p-2 pl-3 pr-3 mr-1 hover:bg-green-1': true,
+              'bg-white': props.isDesktop && rsvp.value === 'yes',
+              'bg-0': props.isDesktop && rsvp.value !== 'yes',
+              'bg-green-1': props.isMobile && rsvp.value === 'yes',
             })}>
             Yes
           </button>
           <button
             value="no"
-            type={props.isClient ? 'button' : 'submit'}
+            type={props.hasMounted ? 'button' : 'submit'}
             onClick={ev => setRsvp({ev, eventId})}
             className={cx({
-              'mr-1 hover:bg-gray-3': true,
-              'p-2 pl-3 pr-3': !props.compact,
-              'bg-gray-3': !!rsvp && rsvp.value === 'no',
+              'p-2 pl-3 pr-3 mr-1 hover:bg-red-1': true,
+              'bg-white': props.isDesktop && rsvp.value === 'no',
+              'bg-0': props.isDesktop && rsvp.value !== 'no',
+              'bg-red-1': props.isMobile && rsvp.value === 'no',
             })}>
             No
           </button>
           <button
             value="maybe"
-            type={props.isClient ? 'button' : 'submit'}
+            type={props.hasMounted ? 'button' : 'submit'}
             onClick={ev => setRsvp({ev, eventId})}
             className={cx({
-              'mr-1 hover:bg-gray-3': true,
-              'p-2 pl-3 pr-3': !props.compact,
-              'bg-gray-3': !!rsvp && rsvp.value === 'maybe',
+              'p-2 pl-3 pr-3 mr-1 hover:bg-yellow-1': true,
+              'bg-white': props.isDesktop && rsvp.value === 'maybe',
+              'bg-0': props.isDesktop && rsvp.value !== 'maybe',
+              'bg-yellow-1': props.isMobile && rsvp.value === 'maybe',
             })}>
             Maybe
           </button>

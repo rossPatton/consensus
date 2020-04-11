@@ -3,8 +3,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 
-import {tProps, tState} from './_types';
 import {getGroupsBySearch} from '../../redux';
+import {tProps, tState} from './_types';
 
 // mini search bar located in the header, or maybe homepage
 class SearchContainer extends React.PureComponent<tProps, tState> {
@@ -28,7 +28,7 @@ class SearchContainer extends React.PureComponent<tProps, tState> {
   render() {
     return (
       <form
-        className={this.props.className || "mr-2"}
+        className={this.props.className || 'mr-2'}
         name="search"
         autoComplete="off"
         onSubmit={this.onSubmit}
@@ -54,5 +54,5 @@ const mapDispatchToProps = (dispatch: Function) => ({
   getSearchResults: (query: {value: string}) => dispatch(getGroupsBySearch(query)),
 });
 
-const Search = connect(null,mapDispatchToProps)(SearchContainer);
+const Search = connect(null, mapDispatchToProps)(SearchContainer);
 export default withRouter(Search);

@@ -14,7 +14,7 @@ import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 class VerifyAccountContainer extends PureComponent<tContainerProps, tState> {
   state = {
     email: '',
-    isClient: false,
+    hasMounted: false,
     login: '',
     password: '',
     token: '',
@@ -23,7 +23,7 @@ class VerifyAccountContainer extends PureComponent<tContainerProps, tState> {
   componentDidMount() {
     // we do this so we only disable form submit when js is available
     this.setState({
-      isClient: true,
+      hasMounted: true,
     });
   }
 

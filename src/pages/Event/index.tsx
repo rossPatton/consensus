@@ -6,8 +6,8 @@ import {Redirect} from 'react-router-dom';
 
 // import {Redirect} from 'react-router';
 import {Helmet} from '../../components';
-import {MediaContext} from '../../context/MatchMediaProvider/_context';
 import {ErrorBoundary, GenericLoader, Template} from '../../containers';
+import {MediaContext} from '../../context/MatchMediaProvider/_context';
 import {getEvent, getEventsByOrgId, getGroup, getRoles, getRsvps} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {EventComponent} from './Component';

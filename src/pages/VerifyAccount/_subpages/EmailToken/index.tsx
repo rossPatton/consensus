@@ -10,7 +10,7 @@ const EmailFormComponent = memo((props: tProps) => (
     onSubmit={props.sendVerificationToken}>
     <fieldset>
       <legend>
-        <h1 className=" mb-2">Verify your Account</h1>
+        <h1 className="mb-2">Verify your Account</h1>
       </legend>
       <label htmlFor="emailInput">
         <input
@@ -25,15 +25,15 @@ const EmailFormComponent = memo((props: tProps) => (
           type="email"
         />
       </label>
-      <div className="flex flex-col d:flex-row items-center">
+      <div className="flex flex-col d:flex-row">
         <button
-          disabled={props.isClient && !props.email}
-          className="p-2 pl-3 pr-3 mr-2">
+          disabled={props.hasMounted && !props.email}
+          className="p-2 pl-3 pr-3 d:mr-2 mb-1 d:mb-0 hover:bg-gray-2">
           Send Verification Code
         </button>
         <Link
           to="/verify-account/enterCode"
-          className="btn p-2 pl-3 pr-3">
+          className="btn p-2 pl-3 pr-3 hover:bg-gray-2">
           Already have a code?
         </Link>
       </div>

@@ -5,7 +5,7 @@ import {Avatar, Search} from '../../../../components';
 import {tComponentProps} from './_types';
 
 export const HeaderComponent = memo((props: tComponentProps) => (
-  <header className="bg-white shadow fixed t l r pt-2 pb-2 z-50">
+  <header className="flex bg-white shadow fixed t l r z-50">
     <div className="contain m-auto flex items-center relative">
       <div>
         <Link to="/">
@@ -17,7 +17,7 @@ export const HeaderComponent = memo((props: tComponentProps) => (
         </Link>
       </div>
       <div className="flex items-center absolute r text-right">
-        <Search className='mr-2 hidden d:block' />
+        <Search className="mr-2 hidden d:block" />
         {!props.session.isAuthenticated && (
           <Link
             to="/login"

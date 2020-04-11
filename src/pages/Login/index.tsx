@@ -12,7 +12,7 @@ import {LoginComponent} from './Component';
 
 class LoginContainer extends PureComponent<tContainerProps, tState> {
   state = {
-    isClient: false,
+    hasMounted: false,
     password: '',
     username: '', // actually login in the DB, but passportjs expects 'username'
   };
@@ -20,7 +20,7 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
   componentDidMount() {
     // we do this so we only disable form submit when js is available
     this.setState({
-      isClient: true,
+      hasMounted: true,
     });
   }
 

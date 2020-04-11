@@ -20,7 +20,7 @@ export type tContainerProps = tProps & {
   type?: 'drafts' | 'events' | 'rsvps',
 };
 
-export type tComponentProps = tProps & {
+export type tComponentProps = tMediaContext & tProps & {
   deleteEvent: (ev: React.MouseEvent, id: number) => void,
   // if user is an admin, they can edit events
   isEditable?: boolean,

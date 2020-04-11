@@ -14,7 +14,7 @@ export type tPostUserQuery = {
 
 export type tState = {
   errors: tErrorObject,
-  isClient: boolean,
+  hasMounted: boolean,
   login: string,
   password: string,
 };

@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import React from 'react';
 
-import { MediaContext } from './_context';
 import { DESKTOP, MOBILE } from './_constants';
+import { MediaContext } from './_context';
 import { tState } from './_types';
 
 /**
@@ -27,7 +27,7 @@ class MatchMediaProvider extends React.PureComponent<{}, tState> {
         isDesktop: false,
       };
     }
-  };
+  }
 
   componentDidMount() {
     this.setState(this._runMediaQuery());
@@ -52,7 +52,7 @@ class MatchMediaProvider extends React.PureComponent<{}, tState> {
       <MediaContext.Provider value={this.state}>
         {this.props.children}
       </MediaContext.Provider>
-    )
+    );
   }
 }
 
