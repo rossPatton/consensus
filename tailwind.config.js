@@ -65,7 +65,7 @@ module.exports = {
     },
     backgroundColor: theme => ({
       ...theme('colors'),
-      '0': '0',
+      '0': 'transparent',
     }),
     backgroundPosition: {},
     backgroundSize: {},

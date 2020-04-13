@@ -73,7 +73,6 @@ input[type="submit"] {
 .btn {
   @apply bg-white;
   @apply border;
-  @apply cursor-ptr;
   @apply duration-150;
   @apply font-normal;
   @apply inline-block;
@@ -121,14 +120,11 @@ select {
 input {
   @apply rounded-0;
 }
-/*
-  HEY @TODO ADD DESKTOP ONLY HEIGHT/TEXT-INDENT HERE WITH RESPONSIVE VARIANT
-  .5rem indent + 3 rem height
-*/
 select {
   @apply bg-white;
   @apply rounded-lg;
-  @apply whitespace-normal;
+  @apply whitespace-no-wrap;
+  min-width: 8rem;
   text-indent: .5rem;
 }
 select:hover {
@@ -137,7 +133,7 @@ select:hover {
 i {
   font-style: normal;
   font-variant: normal;
-  speak: none;
+  /* speak: none; */
   text-transform: none;
 }
 [disabled] {
@@ -154,7 +150,6 @@ i {
 }
 small {
   @apply text-sm;
-  @apply leading-loose;
 }
 .t {
   top: 0;

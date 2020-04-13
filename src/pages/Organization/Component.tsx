@@ -13,7 +13,7 @@ export const OrganizationComponent = (props: tComponentProps) => (
       params={props.match.params}
       role={props.role}
     />
-    <div className="bg-white rounded p-2 min-w-full d:min-w-2/3">
+    <div className="min-w-full d:min-w-2/3">
       <OrganizationTabs
         match={props.match}
         role={props.role}

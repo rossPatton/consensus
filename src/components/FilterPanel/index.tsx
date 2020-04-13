@@ -72,8 +72,9 @@ const FilterPanel = memo((props: tProps) => (
           <option
             key={role}
             value={role}>
-            {role === 'n/a' && 'Show all members'}
-            {role === 'member' ? props.memberName : props.modName}
+            {role === 'n/a'
+              ? 'Show all members'
+              : role === 'member' ? props.memberName : props.modName}
           </option>
         ))}
       </select>

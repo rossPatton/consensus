@@ -4,15 +4,16 @@ import {Link} from 'react-router-dom';
 
 import {tProps} from './_types';
 
-const routeDisplayMap = {
-  '': 'Upcoming Meetings',
-  planMeeting: 'Plan Meeting',
-  drafts: 'Event Drafts',
-  events: 'Upcoming Meetings',
-  pending: 'Pending Members',
-};
-
 export const Tab = memo((props: tProps) => {
+  const routeDisplayMap = {
+    '': props.isDesktop ? 'Upcoming Meetings' : 'Meetings',
+    planMeeting: props.isDesktop ? 'Plan Meeting' : 'Plan',
+    drafts: props.isDesktop ? 'Meeting Drafts' : 'Drafts',
+    events: props.isDesktop ? 'Upcoming Meetings' : 'Meetings',
+    pending: props.isDesktop ? 'Pending Approvals' : 'Pending',
+    members: props.isDesktop ? 'Current Members' : 'Members',
+  };
+
   const { match, subRoute } = props;
   const { idOrSlug, section } = match.params;
   const route = `/${subRoute}`;
@@ -22,9 +23,9 @@ export const Tab = memo((props: tProps) => {
   const isMeetings = subRoute === '' && typeof section === 'undefined';
   const isActive = isMeetings || section === subRoute;
   const className = cx({
-    'mr-2': true,
-    'ml-2': subRoute !== '',
-    'text-3 text-gray-5': isActive,
+    'd:mr-2': true,
+    'd:ml-2': ['', 'members'].indexOf(subRoute) === -1,
+    'text-base d:text-3 text-gray-5': isActive,
     'no-underline text-gray-4': !isActive,
   });
 

@@ -1,5 +1,5 @@
 export type tState = {
-  role: tRole,
+  showMobileControls: number | null,
 };
 
 export type tRoleOpts = {
@@ -15,9 +15,10 @@ export type tProps = {
   removeUser?: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
   setUserRole?: (ev: React.ChangeEvent<HTMLSelectElement>, id: number) => void,
   users: tUser[],
-  sessionRole: tRole, // to distinguish from user roles, and to shut up eslint
+  sessionRole?: tRole, // to distinguish from user roles, and to shut up eslint
 }
 
-export type tComponentProps = tProps & {
+export type tComponentProps = tMediaContext & tProps & tState & {
   isEditable: boolean,
+  toggleMobileControls: (index: number) => void,
 };

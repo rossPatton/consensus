@@ -24,39 +24,47 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
       </div>
       <div className="p-2">
         <div className="mb-1">
-          <div className="flex d:items-center">
+          <div className="flex items-center">
             <Avatar
               hash={org.avatarHash}
               size="60"
               type="group"
             />
             <div>
-              <small className="capitalize leading-none text-sm">
-                {props.org.category}
-              </small>
-              <h1 className="leading-none text-3">
+              <div className='flex items-center text-sm'>
+                <span className="capitalize mr-1">
+                  {props.org.category}
+                </span>
+                {props.role
+                  && props.role !== 'pending'
+                  && props.members.length > 0
+                  && (
+                    <>
+                      {match.params.section !== 'members' && (
+                        <Link
+                          to={`/org/${org.handle}/members`}
+                          title="Click to browse member list">
+                          {props.members.length} Members
+                        </Link>
+                      )}
+                      {match.params.section === 'members' && (
+                        `${props.members.length} Members`
+                      )}
+                    </>
+                  )}
+              </div>
+              <h1 className="text-3">
                 {typeof match.params.section === 'undefined' && (
                   props.org.name
                 )}
                 {typeof match.params.section !== 'undefined' && (
                   <Link
                     to={`/org/${org.handle}`}
-                    title="Click to return to events page">
+                    title="Click to return to upcoming meetings page">
                     {props.org.name}
                   </Link>
                 )}
               </h1>
-              {props.role
-                && props.role !== 'pending'
-                && props.members.length > 0
-                && (
-                  <Link
-                    className="text-sm"
-                    to={`/org/${org.handle}/members`}
-                    title="Click to browse member list">
-                    {props.members.length} Members
-                  </Link>
-                )}
             </div>
           </div>
         </div>

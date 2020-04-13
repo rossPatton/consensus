@@ -5,7 +5,7 @@ import React from 'react';
 import {tComponentProps} from './_types';
 
 export const RSVPComponent = (props: tComponentProps) => {
-  const {event, rsvp, session, setRsvp} = props;
+  const {event, rsvp = {} as tRSVP, session, setRsvp} = props;
   const {id: eventId} = event;
   const {profile = {}} = session;
   const {privateRSVP: userRSVPsPrivately = true} = profile as tUser;

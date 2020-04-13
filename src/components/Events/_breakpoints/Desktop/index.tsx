@@ -25,7 +25,7 @@ const DesktopEvents = memo((props: tComponentProps) => (
           key={ev.id}
           className={cx({
             'mb-2': !props.horizontal,
-            'w-1/4 flex-grow-0': props.horizontal,
+            'd:mb-1 w-1/4 flex-grow-0': props.horizontal,
             'mr-2': props.horizontal && i !== props.events.length - 1,
           })}>
           <div
@@ -36,7 +36,7 @@ const DesktopEvents = memo((props: tComponentProps) => (
             <div
               className={cx({
                 'mb-2': true,
-                'mb-0 mr-2 bg-gray-2 max-w-1/3': !props.horizontal,
+                'd:mb-0 mr-2 bg-gray-2 max-w-1/3': !props.horizontal,
               })}>
               <Link
                 to={ev.isDraft
