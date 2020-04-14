@@ -4,7 +4,7 @@ import { Events, FilterPanel } from '../../../../components';
 import { tComponentProps } from './_types';
 
 export const EventsComponent = memo((props: tComponentProps) => (
-  <div className='bg-white rounded p-2'>
+  <div className="bg-white rounded p-2">
     {props.originalEvents.length === 0
       && !props.hideMeetings
       && (

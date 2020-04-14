@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {memo} from 'react';
@@ -21,7 +22,10 @@ const MobileEvents = memo((props: tComponentProps) => (
           className="flex flex-row mb-2">
           {!ev.isDraft && (
             <Link
-              className="max-w-1/2"
+              className={cx({
+                'max-w-1/2': !props.isEditable,
+                'max-w-1/3': props.isEditable,
+              })}
               to={ev.isDraft
                 ? `/draft/${ev.orgId}?${qs}`
                 : `/event/${slugify(ev.title)}`}>
@@ -33,7 +37,7 @@ const MobileEvents = memo((props: tComponentProps) => (
             </Link>
           )}
           {ev.isDraft && (
-            <div className='max-w-1/2'>
+            <div className="max-w-1/3">
               <PlaceholderImage
                 height={240}
                 seed={ev.id}
@@ -41,7 +45,7 @@ const MobileEvents = memo((props: tComponentProps) => (
               />
             </div>
           )}
-          <div className="pt-1 pl-1">
+          <div className="pl-1">
             <div className="flex mb-1 text-sm text-yellow-3 leading-none">
               <time className="mr-1" dateTime={ev.date}>
                 {isPastEvent

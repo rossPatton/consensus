@@ -65,15 +65,12 @@ const FilterPanel = memo((props: tProps) => (
         className="w-full d:w-1/4 mb-1 d:mb-0 d:mr-2"
         onBlur={props.onRoleFilterChange}
         onChange={props.onRoleFilterChange}>
-        <option value="n/a">
-          Filter members
-        </option>
         {['n/a', ...roles].map(role => (
           <option
             key={role}
             value={role}>
             {role === 'n/a'
-              ? 'Show all members'
+              ? 'Show all'
               : role === 'member' ? props.memberName : props.modName}
           </option>
         ))}

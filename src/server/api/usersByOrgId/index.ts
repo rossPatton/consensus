@@ -69,14 +69,12 @@ usersByOrgId.post(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = _.get(session, 'data.profile', {});
 });
 
-
 usersByOrgId.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const query: tPatchUserRoleQuery = _.get(ctx, dataPath, {});
   const {orgId, role, userId} = query;
-
   await validateSchema<tPatchUserRoleQuery>(ctx, patchSchema, {orgId, role, userId});
 
-  let updatedAccountRoleRel: tAccountRoleRelation[] = [];
+  let updatedAccountRoleRel = [] as tAccountRoleRelation[];
   try {
     updatedAccountRoleRel = await knex(table)
       .limit(1)

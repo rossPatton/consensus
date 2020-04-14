@@ -37,19 +37,15 @@ export const OrganizationComponent = (props: tComponentProps) => (
       {props.match.params.section === 'members' && (
         <Members
           match={props.match}
-          org={props.org}
+          group={props.org}
           role={props.role}
-          router={props.location}
-          session={props.session}
         />
       )}
       {props.match.params.section === 'pending' && (
         <Members
           match={props.match}
-          org={props.org}
+          group={props.org}
           role={props.role}
-          router={props.location}
-          session={props.session}
         />
       )}
       {props.match.params.section === 'planMeeting' && (

@@ -1,7 +1,7 @@
+import cx from 'classnames';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
-import cx from 'classnames';
 
 import {tProps} from '../../_types';
 import {Avatar} from '../../../../../../../components';
@@ -11,7 +11,7 @@ const Aside = memo((props: tProps) => {
 
   return (
     <aside className="order-1 min-w-1/3 bg-white rounded p-2 mr-2">
-      <div className="text-left flex items-center mb-2 text-center">
+      <div className="flex items-center mb-2">
         <Avatar
           hash={session.profile.avatarHash}
           size="60"

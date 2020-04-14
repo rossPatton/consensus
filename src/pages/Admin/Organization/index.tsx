@@ -6,6 +6,8 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 import {Link} from 'react-router-dom';
 
+import {MediaContext} from '../../../context/MatchMediaProvider/_context';
+import {Aside} from './_components';
 import {
   Account,
   DeleteGroup,
@@ -14,8 +16,6 @@ import {
   PlanMeeting,
   Profile,
 } from './_subpages';
-import {Aside} from './_components';
-import {MediaContext} from '../../../context/MatchMediaProvider/_context';
 import {tProps} from './_types';
 
 class GroupAdminContainer extends React.PureComponent<tProps> {
@@ -63,7 +63,12 @@ class GroupAdminContainer extends React.PureComponent<tProps> {
             {isDelete && <DeleteGroup />}
             {isMeetings && <Meetings match={this.props.match} />}
             {isProfile && <Profile match={this.props.match} />}
-            {isMembers && <Members match={this.props.match} />}
+            {isMembers && (
+              <Members
+                group={this.props.session.profile as tGroup}
+                match={this.props.match}
+              />
+            )}
             {isMeetingForm && (
               <PlanMeeting
                 org={this.props.session.profile as tGroup}

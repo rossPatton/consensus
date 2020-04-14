@@ -1,17 +1,51 @@
 import _ from 'lodash';
 import React from 'react';
+import {connect} from 'react-redux';
 
+import {GenericLoader, Paginate, RoleFilter, SearchFilter} from '../../containers';
 import {MediaContext} from '../../context/MatchMediaProvider/_context';
-import {Paginate} from '../../containers';
-import {tProps, tState} from './_types';
+import {deleteUserByOrgId, getUsersByOrgId, patchUserByOrgId} from '../../redux';
+import {tContainerProps, tState} from './_types';
 import {UsersComponent} from './Component';
 
-class Users extends React.PureComponent<tProps, tState> {
+class UsersContainer extends React.PureComponent<tContainerProps, tState> {
   static contextType = MediaContext;
 
   state = {
     showMobileControls: null as number | null,
   };
+
+  constructor (props: tContainerProps) {
+    super(props);
+    console.log('users props => ', props)
+    const orgId = props.group.id;
+
+    if (orgId) {
+      props.getUsersByOrgIdDispatch({orgId, noPending: 'false'});
+    }
+  }
+
+  removeUser = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {
+    ev.preventDefault();
+    const {deleteUserByOrgIdDispatch, group} = this.props;
+    deleteUserByOrgIdDispatch({
+      userId,
+      orgId: group.id,
+    });
+  }
+
+  setUserRole = (ev: React.ChangeEvent<HTMLSelectElement>, userId: number) => {
+    ev.preventDefault();
+    const role = ev.currentTarget.value as tRole;
+    const orgId = this.props.group.id;
+    if (orgId && userId && role) {
+      this.props.patchUserByOrgIdDispatch({role, orgId, userId});
+    }
+
+    this.setState({
+      showMobileControls: null,
+    });
+  }
 
   toggleMobileControls = (index: number) => {
     let showMobileControls = index;
@@ -25,31 +59,56 @@ class Users extends React.PureComponent<tProps, tState> {
   }
 
   render() {
-    const {count = 10, sessionRole, users} = this.props;
+    const {count = 10, isLoading, sessionRole, type, usersByOrgId} = this.props;
     const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
+    console.log('users render props => ', this.props)
 
-    if (users.length === 0) {
+    let itemsToRender = usersByOrgId.filter(u => u.role !== 'pending');
+    if (type === 'pending') {
+      const approvals: tUser[] = usersByOrgId.filter(u => u.role === 'pending');
+      itemsToRender = approvals;
+    }
+
+    if (itemsToRender.length === 0) {
       return (
         <>No users found that meet this criteria.</>
       );
     }
 
     return (
-      <Paginate
-        count={count}
-        items={users}
-        render={(usersToRender: tUser[]) => (
-          <UsersComponent
-            isDesktop={this.context.isDesktop}
-            isEditable={isEditable}
-            isMobile={this.context.isMobile}
-            memberName={this.props.memberName}
-            modName={this.props.modName}
-            removeUser={this.props.removeUser}
-            setUserRole={this.props.setUserRole}
-            showMobileControls={this.state.showMobileControls}
-            toggleMobileControls={this.toggleMobileControls}
-            users={usersToRender}
+      <GenericLoader
+        isLoading={isLoading}
+        render={() => (
+          <RoleFilter
+            items={itemsToRender}
+            render={roleProps => (
+              <SearchFilter
+                searchKey="username"
+                items={roleProps.items}
+                render={searchProps => (
+                  <Paginate
+                    count={count}
+                    items={searchProps.items}
+                    render={(usersToRender: tUser[]) => (
+                      <UsersComponent
+                        // mobile/desktop props
+                        {...this.context}
+                        // passed in props
+                        {...this.props}
+                        isEditable={isEditable}
+                        onRoleFilterChange={roleProps.onRoleFilterChange}
+                        onSearchChange={searchProps.onSearchChange}
+                        removeUser={this.removeUser}
+                        setUserRole={this.setUserRole}
+                        showMobileControls={this.state.showMobileControls}
+                        toggleMobileControls={this.toggleMobileControls}
+                        users={usersToRender}
+                      />
+                    )}
+                  />
+                )}
+              />
+            )}
           />
         )}
       />
@@ -57,4 +116,21 @@ class Users extends React.PureComponent<tProps, tState> {
   }
 }
 
+const mapStateToProps = (store: any) => ({
+  isLoading: store.usersByOrgId.isLoading,
+  usersByOrgId: store.usersByOrgId.data,
+});
+
+const mapDispatchToProps = (dispatch: Function) => ({
+  getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
+    dispatch(getUsersByOrgId(query)),
+
+  deleteUserByOrgIdDispatch: (query: tDeleteUserByOrgIdQuery) =>
+    dispatch(deleteUserByOrgId(query)),
+
+  patchUserByOrgIdDispatch: (query: tPatchUserRoleQuery) =>
+    dispatch(patchUserByOrgId(query)),
+});
+
+const Users = connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
 export default Users;

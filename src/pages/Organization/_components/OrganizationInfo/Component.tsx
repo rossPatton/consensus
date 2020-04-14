@@ -1,3 +1,4 @@
+import pluralize from 'pluralize';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
@@ -10,13 +11,15 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
   const {description = ''} = props.org;
 
   return (
-    <div className="bg-white rounded mb-2 d:mb-0 d:mr-2 flex-grow-0 min-w-full d:min-w-1/3">
-      <div className="bg-gray-5 rounded m-1 p-1 text-white flex items-center justify-between">
+    <div className="bg-white rounded mb-3 d:mb-0 d:mr-2 flex-grow-0 min-w-full d:min-w-1/3">
+      <div className="bg-gray-5 rounded m-1 p-1 flex items-center justify-between">
         {!role && (
-          <small>
+          <small className="text-white">
             {org.type === 'public' && 'Public Group'}
             {org.type === 'private' && 'Private Group'}
             {org.type === 'hidden' && 'Hidden Group'}
+            {/* should never happen, but why not*/}
+            {!org.type && 'Group'}
           </small>
         )}
         <JoinForm role={role} />
@@ -31,27 +34,12 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
               type="group"
             />
             <div>
-              <div className='flex items-center text-sm'>
+              <div className="flex items-center text-sm">
                 <span className="capitalize mr-1">
                   {props.org.category}
                 </span>
-                {props.role
-                  && props.role !== 'pending'
-                  && props.members.length > 0
-                  && (
-                    <>
-                      {match.params.section !== 'members' && (
-                        <Link
-                          to={`/org/${org.handle}/members`}
-                          title="Click to browse member list">
-                          {props.members.length} Members
-                        </Link>
-                      )}
-                      {match.params.section === 'members' && (
-                        `${props.members.length} Members`
-                      )}
-                    </>
-                  )}
+                {props.members.length > 0
+                  && `${props.members.length} ${pluralize(props.org.memberName, props.members.length)}`}
               </div>
               <h1 className="text-3">
                 {typeof match.params.section === 'undefined' && (
