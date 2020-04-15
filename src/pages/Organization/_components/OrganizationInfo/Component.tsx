@@ -3,7 +3,7 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {JoinForm, LeaveForm} from '..';
-import {Avatar, ExternalLink} from '../../../../components';
+import {Avatar, Description, ExternalLink} from '../../../../components';
 import {tComponentProps} from './_types';
 
 export const OrganizationInfoComponent = memo((props: tComponentProps) => {
@@ -56,9 +56,9 @@ export const OrganizationInfoComponent = memo((props: tComponentProps) => {
             </div>
           </div>
         </div>
-        <p className="mb-2">
-          {description.split('\n')[0]}
-        </p>
+        <Description
+          description={description}
+        />
         <div className="flex">
           {org.facebook && (
             <div className="mr-1">

@@ -4,7 +4,7 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {Events, ExternalLink, PlaceholderImage, RSVP} from '../../../../components';
+import {Description, Events, ExternalLink, PlaceholderImage, RSVP} from '../../../../components';
 import {tComponentProps} from './_types';
 
 const DesktopEventComponent = memo((props: tComponentProps) => {
@@ -79,11 +79,9 @@ const DesktopEventComponent = memo((props: tComponentProps) => {
               <h2 className="text-3">
                 Meeting Description
               </h2>
-              {event.description.split('\n').map((p, i) => (
-                <p key={i} className="mb-1">
-                  {p}
-                </p>
-              ))}
+              <Description
+                description={event.description}
+              />
             </>
           )}
         </div>

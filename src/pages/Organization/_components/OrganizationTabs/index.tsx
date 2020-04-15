@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import React from 'react';
 
 import {MediaContext} from '../../../../context/MatchMediaProvider/_context';
@@ -14,7 +15,11 @@ class OrganizationTabs extends React.PureComponent<tProps> {
 
     return (
       <nav className="mb-1 d:mb-2 overflow-scroll">
-        <ul className="flex items-center justify-evenly whitespace-no-wrap">
+        <ul
+          className={cx({
+            'flex items-center whitespace-no-wrap': true,
+            'justify-evenly': isMod,
+          })}>
           <li>
             <Tab
               {...this.context}

@@ -17,7 +17,6 @@ class UsersContainer extends React.PureComponent<tContainerProps, tState> {
 
   constructor (props: tContainerProps) {
     super(props);
-    console.log('users props => ', props)
     const orgId = props.group.id;
 
     if (orgId) {
@@ -61,7 +60,6 @@ class UsersContainer extends React.PureComponent<tContainerProps, tState> {
   render() {
     const {count = 10, isLoading, sessionRole, type, usersByOrgId} = this.props;
     const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
-    console.log('users render props => ', this.props)
 
     let itemsToRender = usersByOrgId.filter(u => u.role !== 'pending');
     if (type === 'pending') {

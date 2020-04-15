@@ -3,14 +3,18 @@ import {connect} from 'react-redux';
 
 // might be a somewhat common scenario given the lengths we're going to hide pages
 // if user lands somewhere private, or they're just not logged in, render this page
-const UnAuthorized = memo(props => (
+const UnAuthorized = memo((props: {geo: tGeo}) => (
   <div className="text-center">
-    <h1 className="mb-1">
-      You don&apos;t have permission to view this page. If this page belongs to a private or hidden group, you need to join the group first.
-    </h1>
-    <h2 className="text-base">
-      If you are seeing this because you&apos;re outside the US, don&apos;t worry, we are working on having Consensus available for everyone as soon as possible.
-    </h2>
+    {props.geo.countryCode === 'US' && (
+      <h1 className="mb-1">
+        You don&apos;t have permission to view this page. If this page belongs to a private or hidden group, you need to join the group first.
+      </h1>
+    )}
+    {props.geo.countryCode !== 'US' && (
+      <h1>
+        You&apos;re seeing this because you are outside the US. We&apos;re working on having Consensus available for everyone as soon as possible!
+      </h1>
+    )}
   </div>
 ));
 

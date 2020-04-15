@@ -25,7 +25,7 @@ export const MembersComponent = memo((props: {group: tGroup}) => (
         </h2>
       </div>
       <Users
-      group={props.group}
+        group={props.group}
         sessionRole="admin"
         type="members"
       />

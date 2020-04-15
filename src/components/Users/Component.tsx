@@ -3,7 +3,7 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {Avatar, FilterPanel} from '../../components';
+import {Avatar, Emoji, FilterPanel} from '../../components';
 import {tComponentProps} from './_types';
 
 const roles: tRole[] = ['member', 'facilitator'];
@@ -44,7 +44,10 @@ export const UsersComponent = memo((props: tComponentProps) => {
                   <button
                     className="border-0 bg-0 mr-2"
                     onClick={ev => props.removeUser(ev, user.id)}>
-                    <small>❌</small>
+                    <Emoji
+                      label="Big Red X Emoji"
+                      emoji="❌"
+                    />
                     {user.role === 'pending' ? 'Reject' : 'Remove'}
                   </button>
                   <select

@@ -4,7 +4,7 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {PlaceholderImage} from '../../../../components';
+import {Emoji, PlaceholderImage} from '../../../../components';
 import {objToQueryString, slugify} from '../../../../utils';
 import {tComponentProps} from './_types';
 
@@ -81,11 +81,10 @@ const MobileEvents = memo((props: tComponentProps) => (
                       to={props.sessionRole === 'admin'
                         ? `/admin/planMeeting?${qs}`
                         : `/org/${ev.orgName}/planMeeting?${qs}`}>
-                      <span
-                        role="img"
-                        aria-label="Hand with Pen Emoji">
-                        ✍️
-                      </span>
+                      <Emoji
+                        label="Hand with Pen Emoji"
+                        emoji="✍️"
+                      />
                       Edit
                     </Link>
                   )}
@@ -97,33 +96,30 @@ const MobileEvents = memo((props: tComponentProps) => (
                         to={props.sessionRole === 'admin'
                           ? `/admin/planMeeting?${qsWithCopy}`
                           : `/org/${ev.orgName}/planMeeting?${qsWithCopy}`}>
-                        <span
-                          role="img"
-                          aria-label="Clipboard Emoji">
-                          📋
-                        </span>
+                        <Emoji
+                          label="Clipboard Emoji"
+                          emoji="📋"
+                        />
                         Copy
                       </Link>
                     )}
                   {(!isPastEvent || ev.isDraft) && (
-                    <span
+                    <button
                       onClick={e => props.deleteEvent(e, ev.id)}
-                      className="mr-1 d:mr-2 underline cursor-ptr">
-                      <span
-                        role="img"
-                        aria-label="Big X Emoji">
-                        ✖️
-                      </span>
+                      className="border-0 bg-0 mr-1 underline">
+                      <Emoji
+                        label="Big X Emoji"
+                        emoji="✖️"
+                      />
                       Delete
-                    </span>
+                    </button>
                   )}
                   {ev.isDraft && (
                     <Link to={`/draft/${ev.orgId}?${qs}`}>
-                      <span
-                        role="img"
-                        aria-label="Eye Emoji">
-                        👁️
-                      </span>
+                      <Emoji
+                        label="Eye Emoji"
+                        emoji="👁️"
+                      />
                       Preview
                     </Link>
                   )}

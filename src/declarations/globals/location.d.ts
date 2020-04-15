@@ -23,6 +23,7 @@ declare type tEventParams = Readonly<{
 // if the user is not logged in, or if they haven't provided a location themselves
 declare type tGeo = Readonly<{
   city: string,
+  countryCode: string,
   handle: string,
   postcode: number,
   region: string,

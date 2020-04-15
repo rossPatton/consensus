@@ -21,7 +21,7 @@ declare type tCity = tRegion & Readonly<{
 }>;
 
 declare type tDirectoryParams = tPaginateParams & Readonly<{
-   city?: string,
-   countryCode: string,
-   regionCode?: string,
+  city?: string,
+  countryCode: string,
+  regionCode?: string,
 }>;

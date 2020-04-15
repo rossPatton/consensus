@@ -20,6 +20,8 @@ const Org = memo((props: tProps) => {
         'd:w-1/4': !props.asList && props.orgs.length > 3,
       })}>
       <div
+        role="button"
+        tabIndex={0}
         className={cx({
           'flex items-center p-1': true,
           'hover:bg-gray-3': props.isEditable,

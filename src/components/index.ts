@@ -16,6 +16,14 @@ export const CitySearch = loadable(() =>
   import(/* webpackChunkName: "CitySearch" */'./CitySearch'),
 );
 
+export const Description = loadable(() =>
+  import(/* webpackChunkName: "Description" */'./Description'),
+);
+
+export const Emoji = loadable(() =>
+  import(/* webpackChunkName: "Emoji" */'./Emoji'),
+);
+
 export const Events = loadable(() =>
   import(/* webpackChunkName: "Events" */'./Events'),
 );
