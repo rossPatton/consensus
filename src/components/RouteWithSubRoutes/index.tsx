@@ -1,7 +1,7 @@
+import {PrivateRoute} from '@app/components';
 import React from 'react';
 import {Route, RouteComponentProps} from 'react-router-dom';
 
-import {PrivateRoute} from '..';
 import {tProps} from './_types';
 
 // for nested static routes

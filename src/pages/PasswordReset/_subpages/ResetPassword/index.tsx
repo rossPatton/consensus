@@ -1,7 +1,7 @@
+import { PasswordInput } from '@app/components';
 import React, { memo } from 'react';
 import {Link} from 'react-router-dom';
 
-import { PasswordInput } from '../../../../components';
 import { tProps } from './_types';
 
 const ResetPasswordComponent = memo((props: tProps) => (

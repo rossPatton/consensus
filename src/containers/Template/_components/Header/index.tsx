@@ -1,9 +1,9 @@
+import {logout, logoutSuccess} from '@app/redux';
 import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {logout, logoutSuccess} from '../../../../redux';
 import {tContainerProps} from './_types';
 import {HeaderComponent} from './Component';
 

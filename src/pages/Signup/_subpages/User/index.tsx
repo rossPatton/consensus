@@ -1,9 +1,9 @@
+import {login, postUser} from '@app/redux';
 import commonPasswordList from 'fxa-common-password-list';
 import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {login, postUser} from '../../../../redux';
 import {tContainerProps, tKeyUnion, tPostUserQuery, tState} from './_types';
 import {UserSignupComponent} from './Component';
 

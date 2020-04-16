@@ -1,11 +1,11 @@
+import {Breadcrumbs, Helmet} from '@app/components';
+import {ErrorBoundary, GenericLoader} from '@app/containers';
+import {getRegion} from '@app/redux';
+import {fuzzFilterList} from '@app/utils';
 import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import {Breadcrumbs, Helmet} from '../../../../components';
-import {ErrorBoundary, GenericLoader} from '../../../../containers';
-import {getRegion} from '../../../../redux';
-import {fuzzFilterList} from '../../../../utils';
 import {tContainerProps, tStore} from './_types';
 import {RegionComponent} from './Component';
 

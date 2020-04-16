@@ -1,7 +1,7 @@
 import loadable from '@loadable/component';
 
 const SearchComponent = loadable(() =>
-  import(/* webpackChunkName: "Search" */'../pages/Search'),
+  import(/* webpackChunkName: "Search" */'@app/pages/Search'),
 );
 
 export const Search = {

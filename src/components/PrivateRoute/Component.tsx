@@ -3,7 +3,6 @@ import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 
 import { tProps } from './_types';
 
-// for nested static routes
 export const PrivateRouteComponent = (ownProps: tProps) => (
   <Route
     path={ownProps.path}

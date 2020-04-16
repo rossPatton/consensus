@@ -1,6 +1,6 @@
+import {PasswordInput} from '@app/components';
 import React, {memo} from 'react';
 
-import {PasswordInput} from '../../../../../components';
 import {tComponentProps} from './_types';
 
 export const DeleteGroupComponent = memo((props: tComponentProps) => (

@@ -1,9 +1,9 @@
+import {objToQueryString} from '@app/utils';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {objToQueryString} from '../../utils';
 import {tComponentProps} from './_types';
 
 export const PlanMeetingComponent = memo((props: tComponentProps) => {

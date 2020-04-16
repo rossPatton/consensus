@@ -1,7 +1,7 @@
 import loadable from '@loadable/component';
 
 const SignupComponent = loadable(() =>
-  import(/* webpackChunkName: "Signup" */'../pages/Signup'),
+  import(/* webpackChunkName: "Signup" */'@app/pages/Signup'),
 );
 
 export const Signup = {

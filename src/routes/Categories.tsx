@@ -1,7 +1,7 @@
 import loadable from '@loadable/component';
 
 const CategoriesComponent = loadable(() =>
-  import(/* webpackChunkName: "Categories" */'../pages/Categories'),
+  import(/* webpackChunkName: "Categories" */'@app/pages/Categories'),
 );
 
 export const Categories = {

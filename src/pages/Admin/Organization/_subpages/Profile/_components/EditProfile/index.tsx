@@ -1,10 +1,10 @@
+import {ExternalLink, PasswordInput} from '@app/components';
+import {categories} from '@app/constants';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {tComponentProps} from '../../_types';
-import {ExternalLink, PasswordInput} from '../../../../../../../components';
-import {categories} from '../../../../../../../constants';
 
 const EditProfile = memo((props: tComponentProps) => (
   <form

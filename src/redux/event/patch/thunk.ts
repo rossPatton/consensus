@@ -1,5 +1,6 @@
+import { api } from '@app/utils';
+
 import { path } from '../_constants';
-import { api } from '../../../utils';
 import { failure, success } from './actions';
 
 export const patchEvent = (query: tUpsertEventQuery) => {

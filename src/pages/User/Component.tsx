@@ -1,6 +1,6 @@
+import {Orgs} from '@app/components';
 import React, {memo} from 'react';
 
-import {Orgs} from '../../components';
 import {tComponentProps} from './_types';
 
 export const UserComponent = memo(({orgs, user}: tComponentProps) => (

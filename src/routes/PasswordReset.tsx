@@ -1,7 +1,7 @@
 import loadable from '@loadable/component';
 
 const PasswordResetComponent = loadable(() =>
-  import(/* webpackChunkName: "PasswordReset" */'../pages/PasswordReset'),
+  import(/* webpackChunkName: "PasswordReset" */'@app/pages/PasswordReset'),
 );
 
 export const PasswordReset = {

@@ -1,8 +1,8 @@
+import {PasswordInput} from '@app/components';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {PasswordInput} from '../../../../components';
 import {tComponentProps} from './_types';
 
 export const UserSignupComponent = memo((props: tComponentProps) => (

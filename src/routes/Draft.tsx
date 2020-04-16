@@ -1,7 +1,7 @@
 import loadable from '@loadable/component';
 
 const DraftComponent = loadable(() =>
-  import(/* webpackChunkName: "Draft" */'../pages/Draft'),
+  import(/* webpackChunkName: "Draft" */'@app/pages/Draft'),
 );
 
 export const Draft = {

@@ -1,16 +1,16 @@
-import _ from 'lodash';
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-
-import { FilterPanel, Helmet, Orgs } from '../../../../components';
-import { categoryMap } from '../../../../constants';
+import { FilterPanel, Helmet, Orgs } from '@app/components';
+import { categoryMap } from '@app/constants';
 import {
   ErrorBoundary,
   GenericLoader,
   Paginate,
   SearchFilter,
-} from '../../../../containers';
-import { getGroups } from '../../../../redux';
+} from '@app/containers';
+import { getGroups } from '@app/redux';
+import _ from 'lodash';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+
 import { tContainerProps, tStore } from './_types';
 
 class CategoryContainer extends PureComponent<tContainerProps> {

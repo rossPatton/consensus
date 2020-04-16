@@ -1,9 +1,9 @@
+import {Paginate} from '@app/containers';
+import {deleteOrgByUserId} from '@app/redux';
 import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Paginate} from '../../containers';
-import {deleteOrgByUserId} from '../../redux';
 import {tContainerProps, tState} from './_types';
 import {OrgsComponent} from './Component';
 

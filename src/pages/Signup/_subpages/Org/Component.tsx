@@ -1,10 +1,10 @@
+import {CitySearch, PasswordInput} from '@app/components';
+import {categories} from '@app/constants';
+import {slugify} from '@app/utils';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {CitySearch, PasswordInput} from '../../../../components';
-import {categories} from '../../../../constants';
-import {slugify} from '../../../../utils';
 import {tComponentProps} from './_types';
 
 export const OrgSignupComponent = memo((props: tComponentProps) => (

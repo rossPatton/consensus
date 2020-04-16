@@ -1,8 +1,7 @@
+import {Helmet} from '@app/components';
+import {categories} from '@app/constants';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
-
-import {Helmet} from '../../../../components';
-import {categories} from '../../../../constants';
 
 const CategoryList = memo(() => (
   <>

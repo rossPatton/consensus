@@ -1,9 +1,9 @@
+import {getGroupsBySearch} from '@app/redux';
 import loglevel from 'loglevel';
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
-import {getGroupsBySearch} from '../../redux';
 import {tProps, tState} from './_types';
 
 // mini search bar located in the header, or maybe homepage

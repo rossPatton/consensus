@@ -1,7 +1,7 @@
 import loadable from '@loadable/component';
 
 const VerifyAccountComponent = loadable(() =>
-  import(/* webpackChunkName: "VerifyAccount" */'../pages/VerifyAccount'),
+  import(/* webpackChunkName: "VerifyAccount" */'@app/pages/VerifyAccount'),
 );
 
 export const VerifyAccount = {

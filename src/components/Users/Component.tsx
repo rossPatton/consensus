@@ -1,12 +1,11 @@
+import {Avatar, Emoji, FilterPanel} from '@app/components';
+import {roles} from '@app/constants';
 import cx from 'classnames';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {Avatar, Emoji, FilterPanel} from '../../components';
 import {tComponentProps} from './_types';
-
-const roles: tRole[] = ['member', 'facilitator'];
 
 export const UsersComponent = memo((props: tComponentProps) => {
   const {group: {memberName, modName}, isEditable, type} = props;

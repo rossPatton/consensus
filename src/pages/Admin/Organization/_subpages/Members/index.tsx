@@ -1,9 +1,9 @@
+import {Helmet} from '@app/components';
+import {ErrorBoundary} from '@app/containers';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '../../../../../components';
-import {ErrorBoundary} from '../../../../../containers';
 import {tContainerProps, tStore} from './_types';
 import {MembersComponent} from './Component';
 

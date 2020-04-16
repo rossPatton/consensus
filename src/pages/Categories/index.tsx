@@ -1,7 +1,7 @@
+import {categoryMap} from '@app/constants';
+import {Template} from '@app/containers';
 import React, {memo} from 'react';
 
-import {categoryMap} from '../../constants';
-import {Template} from '../../containers';
 import {Category, CategoryList} from './_subpages';
 import {tProps} from './_types';
 

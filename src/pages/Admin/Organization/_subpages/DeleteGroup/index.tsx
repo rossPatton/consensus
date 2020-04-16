@@ -1,12 +1,12 @@
+import {Helmet} from '@app/components';
+import {ErrorBoundary} from '@app/containers';
+import {login, patchAccount} from '@app/redux';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '../../../../../components';
-import {ErrorBoundary} from '../../../../../containers';
-import {login, patchAccount} from '../../../../../redux';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {DeleteGroupComponent} from './Component';
 

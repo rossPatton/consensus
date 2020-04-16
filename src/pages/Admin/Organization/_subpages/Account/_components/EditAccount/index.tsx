@@ -1,8 +1,8 @@
+import {PasswordInput} from '@app/components';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {tComponentProps} from '../../_types';
-import {PasswordInput} from '../../../../../../../components';
 
 const EditAccount = memo((props: tComponentProps) => (
   <form

@@ -1,10 +1,10 @@
+import {ExternalLink, PlaceholderImage} from '@app/components';
+import {slugify} from '@app/utils';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {ExternalLink, PlaceholderImage} from '../../components';
-import {slugify} from '../../utils';
 import {tComponentProps} from './_types';
 
 export const DraftComponent = memo((props: tComponentProps) => {

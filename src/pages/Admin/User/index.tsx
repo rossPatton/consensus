@@ -1,11 +1,11 @@
+import {GenericLoader} from '@app/containers';
+import {MediaContext} from '@app/context/MatchMediaProvider/_context';
+import {getGroupsByUserId, getRoles, getRsvps, logout} from '@app/redux';
 import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {GenericLoader} from '../../../containers';
-import {MediaContext} from '../../../context/MatchMediaProvider/_context';
-import {getGroupsByUserId, getRoles, getRsvps, logout} from '../../../redux';
 import {tContainerProps, tStore} from './_types';
 import {UserAdminComponent} from './Component';
 

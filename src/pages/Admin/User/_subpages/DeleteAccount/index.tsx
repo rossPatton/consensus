@@ -1,11 +1,11 @@
+import {Helmet} from '@app/components';
+import {ErrorBoundary} from '@app/containers';
+import {deleteAccount, logout} from '@app/redux';
 import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '../../../../../components';
-import {ErrorBoundary} from '../../../../../containers';
-import {deleteAccount, logout} from '../../../../../redux';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {DeleteAccountComponent} from './Component';
 

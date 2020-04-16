@@ -1,11 +1,11 @@
+import {Helmet} from '@app/components';
+import {ErrorBoundary, GenericLoader, Template} from '@app/containers';
+import {login} from '@app/redux';
 import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 
-import {Helmet} from '../../components';
-import {ErrorBoundary, GenericLoader, Template} from '../../containers';
-import {login} from '../../redux';
 import {canonical, description, keywords, title} from './_constants';
 import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 import {LoginComponent} from './Component';

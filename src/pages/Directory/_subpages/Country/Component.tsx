@@ -1,8 +1,8 @@
+import {FilterPanel} from '@app/components';
 import pluralize from 'pluralize';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {FilterPanel} from '../../../../components';
 import {tComponentProps} from './_types';
 
 export const CountryComponent = memo((props: tComponentProps) => (

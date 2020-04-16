@@ -3,9 +3,9 @@
 // import React, {memo} from 'react';
 // import {Link} from 'react-router-dom';
 
-// import {DecisionStatus} from '../../components';
-// import {POLL} from '../../constants/decisions';
-// import {Paginate} from '../../containers';
+// import {DecisionStatus} from '@app/components';
+// import {POLL} from '@app/constants/decisions';
+// import {Paginate} from '@app/containers';
 // import {SimpleMajorityResult} from './_components';
 // import {tProps} from './_types';
 

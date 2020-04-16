@@ -1,3 +1,4 @@
+import {MediaContext} from '@app/context/MatchMediaProvider/_context';
 import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
@@ -6,7 +7,6 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 import {Link} from 'react-router-dom';
 
-import {MediaContext} from '../../../context/MatchMediaProvider/_context';
 import {Aside} from './_components';
 import {
   Account,

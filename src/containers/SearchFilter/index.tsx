@@ -1,6 +1,6 @@
+import {fuzzFilterList} from '@app/utils';
 import React, {Component} from 'react';
 
-import {fuzzFilterList} from '../../utils';
 import {tProps, tState} from './_types';
 
 export default class SearchFilter extends Component<tProps, tState> {

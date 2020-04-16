@@ -1,8 +1,8 @@
+import {GenericLoader} from '@app/containers';
+import {getCities} from '@app/redux';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {GenericLoader} from '../../containers';
-import {getCities} from '../../redux';
 import {tContainerProps, tState, tStore} from './_types';
 import {CitySearchComponent} from './Component';
 

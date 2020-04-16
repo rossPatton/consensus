@@ -1,8 +1,8 @@
+import {deleteRoleSuccess, deleteUserByOrgId} from '@app/redux';
 import loglevel from 'loglevel';
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {deleteRoleSuccess, deleteUserByOrgId} from '../../../../redux';
 import {tProps} from './_types';
 
 class LeaveFormContainer extends React.PureComponent<tProps> {

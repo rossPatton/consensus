@@ -1,5 +1,6 @@
+import { api } from '@app/utils';
+
 import { path } from '../_constants';
-import { api } from '../../../utils';
 import { failure, init, success } from './actions';
 
 export const getGeo = () => {

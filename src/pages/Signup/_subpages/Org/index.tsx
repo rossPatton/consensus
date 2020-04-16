@@ -1,7 +1,7 @@
+import {login, postGroup} from '@app/redux';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {login, postGroup} from '../../../../redux';
 import {tContainerProps, tState, tStateUnion} from './_types';
 import {OrgSignupComponent} from './Component';
 

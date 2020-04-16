@@ -1,9 +1,9 @@
+import {postRoleSuccess, postUserByOrgId} from '@app/redux';
 import loglevel from 'loglevel';
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import {postRoleSuccess, postUserByOrgId} from '../../../../redux';
 import {tProps, tStore} from './_types';
 
 class JoinFormContainer extends React.PureComponent<tProps> {

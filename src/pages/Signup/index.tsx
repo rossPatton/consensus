@@ -1,10 +1,10 @@
+import {Helmet} from '@app/components';
+import {ErrorBoundary, Template} from '@app/containers';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 
-import {Helmet} from '../../components';
-import {ErrorBoundary, Template} from '../../containers';
 import {tProps, tStore} from './_types';
 import {SignupComponent} from './Component';
 

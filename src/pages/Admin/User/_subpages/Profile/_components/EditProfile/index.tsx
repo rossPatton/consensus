@@ -1,8 +1,8 @@
+import {CitySearch, ExternalLink, PasswordInput} from '@app/components';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {tComponentProps} from '../../_types';
-import {CitySearch, ExternalLink, PasswordInput} from '../../../../../../../components';
 
 const EditProfile = memo((props: tComponentProps) => (
   <form

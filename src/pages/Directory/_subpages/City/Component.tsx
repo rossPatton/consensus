@@ -1,6 +1,6 @@
+import { FilterPanel, Orgs } from '@app/components';
 import React, { memo } from 'react';
 
-import { FilterPanel, Orgs } from '../../../../components';
 import { tComponentProps } from './_types';
 
 export const CityComponent = memo((props: tComponentProps) => (

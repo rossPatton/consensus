@@ -1,9 +1,9 @@
+import {Avatar} from '@app/components';
 import cx from 'classnames';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {Avatar} from '../../..';
 import {tProps} from './_types';
 
 const Org = memo((props: tProps) => {

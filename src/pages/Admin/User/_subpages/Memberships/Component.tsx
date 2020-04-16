@@ -1,8 +1,8 @@
+// import {Link} from 'react-router-dom';
+import {FilterPanel, Orgs} from '@app/components';
 import _ from 'lodash';
 import React, {memo} from 'react';
 
-// import {Link} from 'react-router-dom';
-import {FilterPanel, Orgs} from '../../../../../components';
 import {tComponentProps} from './_types';
 
 export const MembershipsComponent = memo((props: tComponentProps) => (

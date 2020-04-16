@@ -1,12 +1,12 @@
+import {Helmet} from '@app/components';
+import {ErrorBoundary, GenericLoader, Template} from '@app/containers';
+import {getRoles} from '@app/redux';
 import _ from 'lodash';
 import qs from 'query-string';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
-import {Helmet} from '../../components';
-import {ErrorBoundary, GenericLoader, Template} from '../../containers';
-import {getRoles} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {DraftComponent} from './Component';
 

@@ -1,9 +1,9 @@
+import {Helmet} from '@app/components';
+import {ErrorBoundary, GenericLoader, SearchFilter} from '@app/containers';
 import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '../../../../components';
-import {ErrorBoundary, GenericLoader, SearchFilter} from '../../../../containers';
 import {tContainerProps, tStore} from './_types';
 import {EventsComponent} from './Component';
 

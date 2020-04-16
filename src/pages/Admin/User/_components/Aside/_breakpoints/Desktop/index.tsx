@@ -1,9 +1,9 @@
+import {Avatar} from '@app/components';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {tProps} from '../../_types';
-import {Avatar} from '../../../../../../../components';
 
 const Aside = memo((props: tProps) => {
   const {session, orgsByUserIdThunk} = props;

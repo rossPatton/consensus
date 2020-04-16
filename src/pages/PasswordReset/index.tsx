@@ -1,12 +1,12 @@
+import {Helmet} from '@app/components';
+import {ErrorBoundary, Template} from '@app/containers';
+import {login} from '@app/redux';
+import {api} from '@app/utils';
 import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '../../components';
-import {ErrorBoundary, Template} from '../../containers';
-import {login} from '../../redux';
-import {api} from '../../utils';
 import {canonical, description, keywords, title} from './_constants';
 import {EmailTokenComponent, ResetPasswordComponent} from './_subpages';
 import {tContainerProps, tState, tStateUnion, tStore} from './_types';

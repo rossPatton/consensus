@@ -1,10 +1,10 @@
+import {GenericLoader, Paginate, RoleFilter, SearchFilter} from '@app/containers';
+import {MediaContext} from '@app/context/MatchMediaProvider/_context';
+import {deleteUserByOrgId, getUsersByOrgId, patchUserByOrgId} from '@app/redux';
 import _ from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {GenericLoader, Paginate, RoleFilter, SearchFilter} from '../../containers';
-import {MediaContext} from '../../context/MatchMediaProvider/_context';
-import {deleteUserByOrgId, getUsersByOrgId, patchUserByOrgId} from '../../redux';
 import {tContainerProps, tState} from './_types';
 import {UsersComponent} from './Component';
 

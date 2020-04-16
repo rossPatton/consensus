@@ -1,5 +1,6 @@
+import { api } from '@app/utils';
+
 import { loginPath } from '../_constants';
-import { api } from '../../../utils';
 import { failure, success } from './actions';
 
 export const login = (query: tLoginQuery) => {

@@ -1,9 +1,9 @@
+import {ErrorBoundary, GenericLoader} from '@app/containers';
+import {getGeo} from '@app/redux';
 import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {ErrorBoundary, GenericLoader} from '..';
-import {getGeo} from '../../redux';
 import {Footer, Header} from './_components';
 import {tProps} from './_types';
 

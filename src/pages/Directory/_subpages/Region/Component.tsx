@@ -1,8 +1,8 @@
+import {FilterPanel} from '@app/components';
+import {slugify} from '@app/utils';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {FilterPanel} from '../../../../components';
-import {slugify} from '../../../../utils';
 import {tComponentProps} from './_types';
 
 export const RegionComponent = memo((props: tComponentProps) => (

@@ -1,11 +1,11 @@
+import {Helmet} from '@app/components';
+import {ErrorBoundary, GenericLoader, Template} from '@app/containers';
+import {getGroupsByUserId, getUser} from '@app/redux';
 import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '../../components';
-import {ErrorBoundary, GenericLoader, Template} from '../../containers';
-import {getGroupsByUserId, getUser} from '../../redux';
 import {tContainerProps, tStore} from './_types';
 import {UserComponent} from './Component';
 

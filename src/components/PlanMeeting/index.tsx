@@ -1,3 +1,7 @@
+import {Helmet} from '@app/components';
+import {ErrorBoundary} from '@app/containers';
+import {getEventsByOrgIdSuccess, patchEvent, postEvent} from '@app/redux';
+import {parseTimeString} from '@app/utils';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import loglevel from 'loglevel';
@@ -6,10 +10,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 
-import {Helmet} from '..';
-import {ErrorBoundary} from '../../containers';
-import {getEventsByOrgIdSuccess, patchEvent, postEvent} from '../../redux';
-import {parseTimeString} from '../../utils';
 import {tContainerProps, tKeyUnion, tState, tStore, tValueUnion} from './_types';
 import {PlanMeetingComponent} from './Component';
 
