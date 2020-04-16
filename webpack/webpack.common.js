@@ -8,6 +8,7 @@ const webpack = require('webpack');
 const env = require('./webpack.env');
 
 const srcPath = (subdir) => path.join(env.CWD, 'src', subdir);
+console.log('srcPath => ', srcPath(''))
 const devPlugins = env.DEV ? [new FriendlyErrorsWebpackPlugin()] : [];
 
 process.traceDeprecation = env.DEV;
@@ -20,11 +21,10 @@ module.exports = {
   stats: env.DEV ? env.stats : 'errors-only',
 
   resolve: {
-    // alias: {
-    //   // 'react-dom': '@hot-loader/react-dom',
-    //   '@components': srcPath('components'),
-    //   '@containers': srcPath('containers'),
-    // },
+    alias: {
+      // 'react-dom': '@hot-loader/react-dom',
+      '@app': srcPath(''),
+    },
     modules: ['./node_modules', './src'],
     extensions: ['.js', '.ts', '.tsx', '.json', '.css', '.styl'],
   },

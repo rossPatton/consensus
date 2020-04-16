@@ -1,22 +1,24 @@
+import {Categories, Events} from '@app/components';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {Categories, Events} from '../../components';
 import {GenericLoader} from '../../containers';
-import {tComponentProps} from './_types';
+import {tProps} from './_types';
 
-export const HomeComponent = memo((props: tComponentProps) => (
+export const HomeComponent = memo((props: tProps) => (
   <div className="text-center">
     <h1 className="mb-2">
       Consensus is an events platform for activists and community groups.
     </h1>
     <Link
       className="btn p-2 hover:bg-gray-3 mb-4"
-      to={props.isLoading
+      to={props.geoThunk.fetched
         ? '/directory/us/'
-        : `/directory/us/${props.geo.regionCode}/${props.geo.handle}`
+        : `/directory/us/${props.geoThunk.data.regionCode}/${props.geoThunk.data.handle}`
       }>
-      Join a group {props.isLoading ? 'near you' : `in ${props.geo.city}`}
+      Join a group {props.geoThunk.fetched
+        ? 'near you' :
+        `in ${props.geoThunk.data.city}`}
     </Link>
     <GenericLoader
       showLoader={false}
@@ -25,7 +27,7 @@ export const HomeComponent = memo((props: tComponentProps) => (
         && (
           <div className="mb-4">
             <h2 className="text-3 mb-2">
-              Upcoming Meetings in {props.geo.city || props.session.profile.cityId}
+              Upcoming Meetings in {props.geoThunk.data.city || props.session.profile.cityId}
             </h2>
             <Events
               horizontal

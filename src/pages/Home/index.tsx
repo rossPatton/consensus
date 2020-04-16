@@ -1,8 +1,8 @@
+import {Helmet} from '@app/components';
 import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '../../components';
 import {Template} from '../../containers';
 import {getEventsByLocation} from '../../redux';
 import {canonical, description, keywords, title} from './_constants';
@@ -45,8 +45,7 @@ class HomeContainer extends PureComponent<tContainerProps> {
         />
         <HomeComponent
           eventsByLocationThunk={this.props.eventsByLocationThunk}
-          geo={this.props.geoThunk.data}
-          isLoading={this.props.geoThunk.isLoading}
+          geoThunk={this.props.geoThunk}
           session={this.props.session}
         />
       </Template>

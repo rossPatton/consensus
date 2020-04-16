@@ -18,6 +18,11 @@ module.exports = {
   ],
   'plugins': [
     // 'react-hot-loader/babel',
+    ['module-resolver', {
+      'alias': {
+        '@app': './src',
+      },
+    }],
     // '@babel/proposal-optional-chaining',
     '@babel/transform-react-constant-elements',
     '@babel/transform-react-display-name',
@@ -25,13 +30,5 @@ module.exports = {
     '@babel/proposal-class-properties',
     '@babel/syntax-dynamic-import',
     '@loadable/babel-plugin',
-    // ['babel-plugin-module-resolver', {
-    //   'cwd': 'babel.config.js',
-    //   'root': ['src/'],
-    //   'alias': {
-    //     '@components': 'components/',
-    //     '@containers': 'containers/',
-    //   },
-    // }],
   ],
 };

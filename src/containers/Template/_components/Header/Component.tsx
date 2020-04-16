@@ -1,7 +1,7 @@
+import {Avatar, Search} from '@app/components';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {Avatar, Search} from '../../../../components';
 import {tComponentProps} from './_types';
 
 export const HeaderComponent = memo((props: tComponentProps) => (
