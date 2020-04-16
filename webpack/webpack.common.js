@@ -8,7 +8,6 @@ const webpack = require('webpack');
 const env = require('./webpack.env');
 
 const srcPath = (subdir) => path.join(env.CWD, 'src', subdir);
-console.log('srcPath => ', srcPath(''))
 const devPlugins = env.DEV ? [new FriendlyErrorsWebpackPlugin()] : [];
 
 process.traceDeprecation = env.DEV;

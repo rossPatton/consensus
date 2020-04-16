@@ -4,14 +4,11 @@ const merge = require('webpack-merge');
 // const DashboardPlugin = require('webpack-dashboard/plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyPlugin = require('copy-webpack-plugin');
-const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const webpack = require('webpack');
 
 const devServer = require('./webpack.devServer');
 const common = require('./webpack.common.js');
 const env = require('./webpack.env');
-
-const devPlugins = env.DEV ? [new ErrorOverlayPlugin()] : [];
 
 module.exports = merge(common, {
   target: 'web',
@@ -50,9 +47,6 @@ module.exports = merge(common, {
 
     // dashboard to keep us updated on bundle rebuilding times, etc. client only
     // new DashboardPlugin({ port: 3002 }),
-
-    // better client side error message for development
-    ...devPlugins,
 
     // copy static content over to dist dir. stuff like favicons, certs, images, etc
     new CopyPlugin([{

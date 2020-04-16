@@ -1,7 +1,7 @@
 # install dependencies. npm install, basically
 # useful for local development to decouple build/run steps
 install:
-	docker-compose -f docker-compose.install.yml run --rm install
+	docker-compose -f docker-compose.install.yml run --rm install; npm audit fix;
 
 # runs debug mode locally
 debug:
@@ -30,8 +30,8 @@ reset:
 # if installing on new machine, you need to create the shared networks and volumes first
 setup:
 	docker network inspect nginx-proxy >/dev/null || docker network create nginx-proxy;
-		docker network inspect db_data >/dev/null || docker volume create db_data;
-		docker network inspect node_modules >/dev/null || docker volume create node_modules
+	docker network inspect db_data >/dev/null || docker volume create db_data;
+	docker network inspect node_modules >/dev/null || docker volume create node_modules
 
 # just an alias for make dev
 start:
