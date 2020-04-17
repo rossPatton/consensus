@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ForceCaseSensitivityPlugin = require('case-sensitive-paths-webpack-plugin');
 const webpack = require('webpack');
@@ -109,6 +110,13 @@ module.exports = {
 
     // force webpack environment to be whatever we set NODE_ENV to, just to be safe
     new webpack.EnvironmentPlugin('NODE_ENV'),
+
+    // opt-in lodash list. anything not here, does not get added to the bundle
+    new LodashModuleReplacementPlugin({
+      collections: true,
+      flattening: true,
+      paths: true,
+    }),
 
     // fun plugins here
     // better error reporting
