@@ -1,27 +1,31 @@
-# local development w/ nodejs, koa and webpack debug mode activated
+# local development
 version: '3'
 services:
   dev:
-    container_name: dev
-    command: "npx concurrently \"webpack -d --watch --config webpack/\" \"DEBUG=koa* nodemon --inspect ./dist/server.js\""
+    container_name: debug
+    command: "npx concurrently \"webpack --watch --config webpack/\" \"npx pm2-dev pm2.config.js --no-daemon\""
     depends_on:
       - db
+      - redis
     env_file:
       - .env
     environment:
       - DB=development
-      - DEBUG=false
+      - DEBUG=true
       - ENABLE_IPV6=true
       - NETWORK_ACCESS=internal
       - NODE_ENV=development
       - VIRTUAL_HOST=consensus.local
       - VIRTUAL_PORT=3001
       - VIRTUAL_PROTO=https
+    expose:
+      - 3001
+      - 9229
     image: node:12.3.0-alpine
     working_dir: /app
     volumes:
-      - node_modules:/app/node_modules
       - .:/app
+      - node_modules:/app/node_modules
 
   db:
     container_name: db
@@ -35,9 +39,16 @@ services:
     container_name: redis
     image: redis:alpine
     sysctls:
-      # fixes warning when using the barebones alpine image
+      # fixes warning when using redis with the barebones alpine image
       net.core.somaxconn: '511'
 
+# connect our localhost to the nginx reverse proxy
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
+# ties our local directory and db to the running docker container
 volumes:
   db_data:
     external: true

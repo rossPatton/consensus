@@ -22,9 +22,6 @@ services:
       - 3001
       - 9229
     image: node:12.3.0-alpine
-    # ports:
-    #   - "3001:3001"
-    #   - "9229:9229"
     working_dir: /app
     volumes:
       - .:/app
