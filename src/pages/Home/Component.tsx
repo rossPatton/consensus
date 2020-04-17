@@ -12,13 +12,13 @@ export const HomeComponent = memo((props: tProps) => (
     </h1>
     <Link
       className="btn p-2 hover:bg-gray-3 mb-4"
-      to={props.geoThunk.fetched
+      to={!props.geoThunk.fetched
         ? '/directory/us/'
         : `/directory/us/${props.geoThunk.data.regionCode}/${props.geoThunk.data.handle}`
       }>
-      Join a group {props.geoThunk.fetched
-        ? 'near you' :
-        `in ${props.geoThunk.data.city}`}
+      Join a group {!props.geoThunk.fetched
+        ? 'near you'
+        : `in ${props.geoThunk.data.city}`}
     </Link>
     <GenericLoader
       showLoader={false}

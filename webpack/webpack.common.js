@@ -25,7 +25,7 @@ module.exports = {
       '@app': srcPath(''),
     },
     modules: ['./node_modules', './src'],
-    extensions: ['.js', '.ts', '.tsx', '.json', '.css', '.styl'],
+    extensions: ['.js', '.ts', '.tsx', '.json', '.css'],
   },
 
   module: {
@@ -73,7 +73,6 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          // 'style-loader',
           { loader: 'css-loader', options: { importLoaders: 1 } },
           'postcss-loader',
         ],
