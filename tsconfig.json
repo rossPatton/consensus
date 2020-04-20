@@ -24,7 +24,7 @@
     "strictNullChecks": false,
     "target": "esnext",
     "paths": {
-      "@app/*": ["./src/*"]
+      "~app/*": ["./src/*"]
       // "@components/*": ["./src/components/*"]
     }
   },

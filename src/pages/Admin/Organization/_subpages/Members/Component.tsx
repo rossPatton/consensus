@@ -1,6 +1,7 @@
-import {Users} from '@app/components';
 import _ from 'lodash';
 import React, {memo} from 'react';
+
+import {Users} from '~app/components';
 
 export const MembersComponent = memo((props: {group: tGroup}) => (
   <>

@@ -1,5 +1,6 @@
-import {Events, FilterPanel} from '@app/components';
 import React, {memo} from 'react';
+
+import {Events, FilterPanel} from '~app/components';
 
 import {tComponentProps} from './_types';
 

@@ -1,5 +1,3 @@
-import { AppShell } from '@app/containers';
-import styles from '@app/css/styles.css';
 import { ChunkExtractor } from '@loadable/server';
 import Koa from 'koa';
 import _ from 'lodash';
@@ -8,6 +6,9 @@ import React from 'react';
 import { renderToNodeStream } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
+
+import { AppShell } from '~app/containers';
+import styles from '~app/css/styles.css';
 
 import { initStoreForSSR } from './initStore';
 

@@ -1,9 +1,10 @@
-import {Helmet} from '@app/components';
-import {ErrorBoundary, GenericLoader, Template} from '@app/containers';
 import _ from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
+
+import {Helmet} from '~app/components';
+import {ErrorBoundary, GenericLoader, Template} from '~app/containers';
 
 import {tProps, tStore} from './_types';
 import {GroupAdmin} from './Organization';

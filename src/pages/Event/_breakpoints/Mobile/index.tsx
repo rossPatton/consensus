@@ -1,9 +1,10 @@
-import {Description, Events, ExternalLink, PlaceholderImage, RSVP} from '@app/components';
 import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
+
+import {Description, Events, ExternalLink, PlaceholderImage, RSVP} from '~app/components';
 
 import {tComponentProps} from './_types';
 

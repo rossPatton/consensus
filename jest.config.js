@@ -9,7 +9,7 @@ module.exports = {
     __NODE_ENV__: 'test',
   },
   moduleNameMapper: {
-    '^@app/(.*)$': '<rootDir>/src/$1',
+    '^~app/(.*)$': '<rootDir>/src/$1',
   },
   setupFiles: [
     '<rootDir>/jest.mocks.js',

@@ -1,6 +1,7 @@
-import {MediaContext} from '@app/context/MatchMediaProvider/_context';
 import cx from 'classnames';
 import React from 'react';
+
+import {MediaContext} from '~app/context/MatchMediaProvider/_context';
 
 import {Tab} from './_components';
 import {tProps} from './_types';

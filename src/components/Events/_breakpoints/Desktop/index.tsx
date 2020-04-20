@@ -1,10 +1,11 @@
-import {Emoji, ExternalLink, PlaceholderImage} from '@app/components';
-import {objToQueryString, slugify} from '@app/utils';
 import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
+
+import {Emoji, ExternalLink, PlaceholderImage} from '~app/components';
+import {objToQueryString, slugify} from '~app/utils';
 
 import {tComponentProps} from './_types';
 

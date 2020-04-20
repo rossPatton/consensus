@@ -1,14 +1,15 @@
-import {Helmet} from '@app/components';
+import _ from 'lodash';
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
+
+import {Helmet} from '~app/components';
 import {
   ErrorBoundary,
   GenericLoader,
   PublishedFilter,
   SearchFilter,
-} from '@app/containers';
-import {getEventsByOrgId} from '@app/redux';
-import _ from 'lodash';
-import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
+} from '~app/containers';
+import {getEventsByOrgId} from '~app/redux';
 
 import {tContainerProps, tStore} from './_types';
 import {MeetingsComponent} from './Component';

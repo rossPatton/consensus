@@ -1,5 +1,6 @@
-import {Orgs} from '@app/components';
 import React, {memo} from 'react';
+
+import {Orgs} from '~app/components';
 
 import {tComponentProps} from './_types';
 

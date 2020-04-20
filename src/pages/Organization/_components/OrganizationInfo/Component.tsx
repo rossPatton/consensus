@@ -1,7 +1,8 @@
-import {Avatar, Description, ExternalLink} from '@app/components';
 import pluralize from 'pluralize';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
+
+import {Avatar, Description, ExternalLink} from '~app/components';
 
 import {JoinForm, LeaveForm} from '..';
 import {tComponentProps} from './_types';

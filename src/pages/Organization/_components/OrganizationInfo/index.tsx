@@ -1,6 +1,7 @@
-import {getUsersByOrgId} from '@app/redux';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
+
+import {getUsersByOrgId} from '~app/redux';
 
 import {tContainerProps, tStore} from './_types';
 import {OrganizationInfoComponent} from './Component';

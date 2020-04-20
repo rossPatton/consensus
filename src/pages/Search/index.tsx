@@ -1,10 +1,11 @@
-import {Helmet, Orgs, SuperSearch} from '@app/components';
-import {ErrorBoundary, GenericLoader, Template} from '@app/containers';
-import {getGroupsBySearch} from '@app/redux';
 import _ from 'lodash';
 import qs from 'query-string';
 import React, {memo} from 'react';
 import {connect} from 'react-redux';
+
+import {Helmet, Orgs, SuperSearch} from '~app/components';
+import {ErrorBoundary, GenericLoader, Template} from '~app/containers';
+import {getGroupsBySearch} from '~app/redux';
 
 import {tProps, tStore} from './_types';
 

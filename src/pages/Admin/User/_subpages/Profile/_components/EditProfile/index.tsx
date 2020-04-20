@@ -1,6 +1,7 @@
-import {CitySearch, ExternalLink, PasswordInput} from '@app/components';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
+
+import {CitySearch, ExternalLink, PasswordInput} from '~app/components';
 
 import {tComponentProps} from '../../_types';
 

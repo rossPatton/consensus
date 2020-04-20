@@ -1,7 +1,8 @@
-import {getGroupsBySearch} from '@app/redux';
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+
+import {getGroupsBySearch} from '~app/redux';
 
 const filterOptions = [
   {display: 'Group name', key: 'name'},

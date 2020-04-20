@@ -1,6 +1,7 @@
-import {categories, roles} from '@app/constants';
 import cx from 'classnames';
 import React, {memo} from 'react';
+
+import {categories, roles} from '~app/constants';
 
 import {tProps} from './_types';
 

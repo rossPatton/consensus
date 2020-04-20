@@ -1,7 +1,7 @@
 import loadable from '@loadable/component';
 
 const OrganizationComponent = loadable(() =>
-  import(/* webpackChunkName: "Organization" */'@app/pages/Organization'),
+  import(/* webpackChunkName: "Organization" */'~app/pages/Organization'),
 );
 
 export const Organization = {

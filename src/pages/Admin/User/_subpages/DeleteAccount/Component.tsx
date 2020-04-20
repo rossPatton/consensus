@@ -1,5 +1,6 @@
-import {PasswordInput} from '@app/components';
 import React, {memo} from 'react';
+
+import {PasswordInput} from '~app/components';
 
 import {tComponentProps} from './_types';
 

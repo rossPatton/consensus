@@ -1,5 +1,6 @@
-import {getRandomNum} from '@app/utils';
 import React from 'react';
+
+import {getRandomNum} from '~app/utils';
 
 import {tProps} from './_types';
 

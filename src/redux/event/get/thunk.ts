@@ -1,4 +1,4 @@
-import {api} from '@app/utils';
+import {api} from '~app/utils';
 
 import {path} from '../_constants';
 import {failure, init, success} from './actions';

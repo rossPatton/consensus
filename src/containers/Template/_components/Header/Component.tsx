@@ -1,6 +1,7 @@
-import {Avatar, Search} from '@app/components';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
+
+import {Avatar, Search} from '~app/components';
 
 import {tComponentProps} from './_types';
 

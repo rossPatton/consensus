@@ -1,5 +1,6 @@
-import {PlanMeeting} from '@app/components';
 import React from 'react';
+
+import {PlanMeeting} from '~app/components';
 
 import {OrganizationInfo, OrganizationTabs} from './_components';
 import {Meetings, Members} from './_subpages';

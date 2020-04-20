@@ -1,11 +1,12 @@
-import {Helmet} from '@app/components';
-import {ErrorBoundary, GenericLoader} from '@app/containers';
-import {SearchFilter} from '@app/containers';
-import {getEventsByUserId} from '@app/redux';
 import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
+
+import {Helmet} from '~app/components';
+import {ErrorBoundary, GenericLoader} from '~app/containers';
+import {SearchFilter} from '~app/containers';
+import {getEventsByUserId} from '~app/redux';
 
 import {tContainerProps, tStore} from './_types';
 import {MeetingsComponent} from './Component';

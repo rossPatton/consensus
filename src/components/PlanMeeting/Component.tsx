@@ -1,8 +1,9 @@
-import {objToQueryString} from '@app/utils';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
+
+import {objToQueryString} from '~app/utils';
 
 import {tComponentProps} from './_types';
 

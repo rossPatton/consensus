@@ -1,9 +1,10 @@
-import {Avatar, Emoji, FilterPanel} from '@app/components';
-import {roles} from '@app/constants';
 import cx from 'classnames';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
+
+import {Avatar, Emoji, FilterPanel} from '~app/components';
+import {roles} from '~app/constants';
 
 import {tComponentProps} from './_types';
 

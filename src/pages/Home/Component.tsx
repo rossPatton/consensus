@@ -1,7 +1,8 @@
-import {Categories, Events} from '@app/components';
-import {GenericLoader} from '@app/containers';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
+
+import {Categories, Events} from '~app/components';
+import {GenericLoader} from '~app/containers';
 
 import {tProps} from './_types';
 

@@ -1,5 +1,6 @@
-import {fuzzFilterList} from '@app/utils';
 import React, {Component} from 'react';
+
+import {fuzzFilterList} from '~app/utils';
 
 import {tProps, tState} from './_types';
 

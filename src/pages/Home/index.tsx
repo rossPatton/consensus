@@ -1,9 +1,10 @@
-import {Helmet} from '@app/components';
-import {Template} from '@app/containers';
-import {getEventsByLocation} from '@app/redux';
 import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
+
+import {Helmet} from '~app/components';
+import {Template} from '~app/containers';
+import {getEventsByLocation} from '~app/redux';
 
 import {canonical, description, keywords, title} from './_constants';
 import {tContainerProps, tStore} from './_types';

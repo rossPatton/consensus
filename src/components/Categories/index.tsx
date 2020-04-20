@@ -1,6 +1,7 @@
-import {categories} from '@app/constants';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
+
+import {categories} from '~app/constants';
 
 const Categories = memo(() => (
   <ul className="flex flex-row flex-wrap justify-center leading-none">

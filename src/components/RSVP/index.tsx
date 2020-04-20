@@ -1,10 +1,11 @@
-import {MediaContext} from '@app/context/MatchMediaProvider/_context';
-import {patchRsvps, postRsvps} from '@app/redux';
 import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+
+import {MediaContext} from '~app/context/MatchMediaProvider/_context';
+import {patchRsvps, postRsvps} from '~app/redux';
 
 import {tContainerProps, tSetRsvpOpts, tState, tStore} from './_types';
 import {RSVPComponent} from './Component';

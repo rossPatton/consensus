@@ -1,5 +1,6 @@
-import {Helmet, PlanMeeting as PlanMeetingComponent} from '@app/components';
 import React, { memo } from 'react';
+
+import {Helmet, PlanMeeting as PlanMeetingComponent} from '~app/components';
 
 import {tProps} from './_types';
 

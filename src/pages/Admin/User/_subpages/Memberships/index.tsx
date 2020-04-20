@@ -1,10 +1,11 @@
-import {Helmet} from '@app/components';
-import {ErrorBoundary, GenericLoader} from '@app/containers';
-import {SearchFilter} from '@app/containers';
-import {getGroupsByUserId} from '@app/redux';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {connect} from 'react-redux';
+
+import {Helmet} from '~app/components';
+import {ErrorBoundary, GenericLoader} from '~app/containers';
+import {SearchFilter} from '~app/containers';
+import {getGroupsByUserId} from '~app/redux';
 
 import {tContainerProps, tStore} from './_types';
 import {MembershipsComponent} from './Component';

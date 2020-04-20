@@ -1,5 +1,6 @@
-import {Template} from '@app/containers';
 import React, {memo} from 'react';
+
+import {Template} from '~app/containers';
 
 import {City, Country, Region} from './_subpages';
 import {tProps} from './_types';

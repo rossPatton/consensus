@@ -1,13 +1,14 @@
 // import {Redirect} from 'react-router';
-import {Helmet} from '@app/components';
-import {ErrorBoundary, GenericLoader, Template} from '@app/containers';
-import {MediaContext} from '@app/context/MatchMediaProvider/_context';
-import {getEvent, getEventsByOrgId, getGroup, getRoles, getRsvps} from '@app/redux';
 import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
+
+import {Helmet} from '~app/components';
+import {ErrorBoundary, GenericLoader, Template} from '~app/containers';
+import {MediaContext} from '~app/context/MatchMediaProvider/_context';
+import {getEvent, getEventsByOrgId, getGroup, getRoles, getRsvps} from '~app/redux';
 
 import {tContainerProps, tStore} from './_types';
 import {EventComponent} from './Component';

@@ -1,5 +1,6 @@
-import { api } from '@app/utils';
 import qs from 'query-string';
+
+import { api } from '~app/utils';
 
 import { path } from '../_constants';
 import { getGroupsBySearchFailure, getGroupsBySearchSuccess } from './actions';

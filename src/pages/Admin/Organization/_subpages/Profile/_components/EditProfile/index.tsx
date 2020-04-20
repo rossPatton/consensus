@@ -1,8 +1,9 @@
-import {ExternalLink, PasswordInput} from '@app/components';
-import {categories} from '@app/constants';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
+
+import {ExternalLink, PasswordInput} from '~app/components';
+import {categories} from '~app/constants';
 
 import {tComponentProps} from '../../_types';
 
