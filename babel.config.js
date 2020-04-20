@@ -1,3 +1,4 @@
+/* eslint-disable */
 const baseBabelConfig = {
   corejs: '3',
   // enable more aggressive transformations
@@ -50,7 +51,7 @@ module.exports = {
     test: {
       presets: [
         ['@babel/env', {
-          ...baseBabelConfig,
+          targets: { node: 'current' },
           modules: false,
         }],
         '@babel/react',
@@ -65,5 +66,5 @@ module.exports = {
         ...plugins,
       ],
     },
-  }
+  },
 };

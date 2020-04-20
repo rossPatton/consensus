@@ -1,22 +1,23 @@
 import React from 'react';
 import render from 'react-test-renderer';
 
-import Breadcrumbs from '.';
+import Emoji from '.';
 
 it('renders without crashing', () => {
-  render.create(<Breadcrumbs />);
+  render.create(<Emoji />);
 });
 
-it('renders null when no props', () => {
-  const component = render.create(<Breadcrumbs />);
+it('renders null when no props passed in', () => {
+  const component = render.create(<Emoji />);
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-it('renders breadcrumbs when crumb prop passed in', () => {
+it('renders as expected', () => {
   const component = render.create((
-    <Breadcrumbs
-      crumbs={[{display: 'Test', to: '/test'}]}
+    <Emoji
+      label="testing butt emoji"
+      emoji="🍑"
     />
   ));
   const tree = component.toJSON();

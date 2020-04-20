@@ -16,6 +16,9 @@ class Description extends PureComponent<
   render() {
     const {description} = this.props;
     const {showAll} = this.state;
+    if (typeof description !== 'string' || description === '') {
+      return null;
+    }
 
     return (
       <>

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders breadcrumbs when crumb prop passed in 1`] = `
+<ul
+  className="text-sm text-gray-5 mb-1 flex flex-wrap"
+>
+  <li
+    className="mr-1"
+  >
+    Test
+  </li>
+</ul>
+`;
+
+exports[`renders null when no props 1`] = `null`;

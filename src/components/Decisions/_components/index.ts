@@ -1,2 +1,0 @@
-// export {SimpleMajorityResult} from './SimpleMajorityResult';
-// //

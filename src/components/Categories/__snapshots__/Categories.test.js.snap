@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected 1`] = `
+<ul
+  className="flex flex-row flex-wrap justify-center leading-none"
+>
+  <li
+    className="w-1/2 d:w-1/4 p-1 mb-1"
+  >
+    <div
+      className="w-full block d:mr-1 d:mr-0 mb-1 d:mb-2"
+    >
+      <img
+        alt="Consensus"
+        src="/static/images/community.svg"
+        width="480"
+      />
+    </div>
+    <a
+      href="/categories/community"
+      onClick={[Function]}
+    >
+      Community
+    </a>
+  </li>
+  <li
+    className="w-1/2 d:w-1/4 p-1 mb-1"
+  >
+    <div
+      className="w-full block d:mr-1 d:mr-0 mb-1 d:mb-2"
+    >
+      <img
+        alt="Consensus"
+        src="/static/images/cooperative.svg"
+        width="480"
+      />
+    </div>
+    <a
+      href="/categories/cooperative"
+      onClick={[Function]}
+    >
+      Cooperative
+    </a>
+  </li>
+  <li
+    className="w-1/2 d:w-1/4 p-1 mb-1"
+  >
+    <div
+      className="w-full block d:mr-1 d:mr-0 mb-1 d:mb-2"
+    >
+      <img
+        alt="Consensus"
+        src="/static/images/union.svg"
+        width="480"
+      />
+    </div>
+    <a
+      href="/categories/union"
+      onClick={[Function]}
+    >
+      Union
+    </a>
+  </li>
+  <li
+    className="w-1/2 d:w-1/4 p-1 mb-1"
+  >
+    <div
+      className="w-full block d:mr-1 d:mr-0 mb-1 d:mb-2"
+    >
+      <img
+        alt="Consensus"
+        src="/static/images/political.svg"
+        width="480"
+      />
+    </div>
+    <a
+      href="/categories/political"
+      onClick={[Function]}
+    >
+      Political
+    </a>
+  </li>
+</ul>
+`;

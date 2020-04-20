@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected 1`] = `
+<small
+  aria-label="testing butt emoji"
+  role="img"
+>
+  🍑
+</small>
+`;
+
+exports[`renders null when no props passed in 1`] = `null`;
