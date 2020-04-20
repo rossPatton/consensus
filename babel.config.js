@@ -7,14 +7,6 @@ const baseBabelConfig = {
   useBuiltIns: 'entry',
 };
 
-const presets = [
-  '@babel/react',
-  ['@babel/typescript', {
-    allExtensions: true,
-    isTSX: true,
-  }],
-];
-
 const plugins = [
   ['module-resolver', {
     'alias': {
@@ -36,14 +28,22 @@ module.exports = {
     development: {
       presets: [
         ['@babel/env', baseBabelConfig],
-        ...presets,
+        '@babel/react',
+        ['@babel/typescript', {
+          allExtensions: true,
+          isTSX: true,
+        }],
       ],
       plugins,
     },
     production: {
       presets: [
         ['@babel/env', baseBabelConfig],
-        ...presets,
+        '@babel/react',
+        ['@babel/typescript', {
+          allExtensions: true,
+          isTSX: true,
+        }],
       ],
       plugins,
     },
@@ -53,7 +53,11 @@ module.exports = {
           ...baseBabelConfig,
           modules: false,
         }],
-        ...presets,
+        '@babel/react',
+        ['@babel/typescript', {
+          allExtensions: true,
+          isTSX: true,
+        }],
       ],
       plugins: [
         'transform-es2015-modules-commonjs',
