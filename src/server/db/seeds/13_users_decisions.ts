@@ -1,7 +1,6 @@
 require('dotenv-safe').config();
 import Knex from 'knex';
-
-import {range} from '../../../utils/range';
+import {range} from 'lodash';
 
 const createUserDecisionRelation = async (i: number) => ({
   decisionId: i,
@@ -11,7 +10,7 @@ const createUserDecisionRelation = async (i: number) => ({
 exports.seed = async (knex: Knex) => {
   const fakeUserDecisionRelations = [];
 
-  for await (const i of range(100, true)) {
+  for await (const i of range(1, 100)) {
     fakeUserDecisionRelations.push(await createUserDecisionRelation(i));
   }
 

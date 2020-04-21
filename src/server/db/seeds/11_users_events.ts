@@ -1,8 +1,8 @@
 require('dotenv-safe').config();
 import Knex from 'knex';
+import {range} from 'lodash';
 
 import {getRandomNum} from '../../../utils/getRandomNum';
-import {range} from '../../../utils/range';
 
 const createUserEventRelation = async (u: number, e: number) => {
   const value = ['yes', 'no', 'maybe', null][getRandomNum(0, 3)];
@@ -18,7 +18,7 @@ const createUserEventRelation = async (u: number, e: number) => {
 exports.seed = async (knex: Knex) => {
   const fakeUserEventRelations = [];
 
-  for await (const i of range(24, true)) {
+  for await (const i of range(1, 24)) {
     fakeUserEventRelations.push(await createUserEventRelation(100, i));
   }
 

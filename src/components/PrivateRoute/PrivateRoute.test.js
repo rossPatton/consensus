@@ -1,8 +1,8 @@
 import React from 'react';
-import render from 'react-test-renderer';
 import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { BrowserRouter as Router } from 'react-router-dom';
+import render from 'react-test-renderer';
+import configureStore from 'redux-mock-store';
 
 import PrivateRoute from '.';
 const mockStore = configureStore({});

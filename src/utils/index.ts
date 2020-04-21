@@ -1,16 +1,10 @@
 export { agent } from './agent';
 export { api } from './api';
-export { fuzz } from './fuzz';
-export { fuzzFilterList } from './fuzzFilterList';
+export { fuzzyScore, fuzzFilterList } from './fuzzySearch';
 export { getRandomNum } from './getRandomNum';
 export { isValidEmail } from './isValidEmail';
 export { isNull, notNull } from './nulls';
 export { isUndefined, notUndefined } from './undefineds';
 export { objToQueryString } from './objToQueryString';
-export { padDate } from './padDate';
-export { parseISOLocalString } from './parseISOLocalString';
 export { parseTimeString } from './parseTimeString';
-export { range } from './range';
-export { deSlugify, slugify } from './slugify';
-export { lowerCase, upperCase } from './string';
-export { utcToDateString } from './utcToDateString';
+export { deSlugify, slugify, lowerCase, upperCase } from './strings';

@@ -1,7 +1,6 @@
 import faker from 'faker';
 import Knex from 'knex';
-
-import {range} from '../../../utils/range';
+import {range} from 'lodash';
 
 const createRelation = async (id: number) => ({
   accountId: id,
@@ -15,7 +14,7 @@ const createRelation = async (id: number) => ({
 exports.seed = async (knex: Knex) => {
   const fakeRelations = [];
 
-  for await (const accountId of range(99, true)) {
+  for await (const accountId of range(1, 99)) {
     fakeRelations.push(await createRelation(accountId));
   }
 

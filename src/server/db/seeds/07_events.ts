@@ -1,15 +1,14 @@
 require('dotenv-safe').config();
 import faker from 'faker';
 import Knex from 'knex';
-import {flatten, range as loRange} from 'lodash';
+import {flatten, range} from 'lodash';
 
 import orgs from '../../../json/orgs.json';
-import {range} from '../../../utils/range';
-import {slugify} from '../../../utils/slugify';
+import {slugify} from '../../../utils/strings';
 
 const createMeeting = async (orgId: number, isDraft: boolean = false) => {
   const org = orgs[orgId - 1];
-  const meetingsPerOrg = isDraft ? [1, 2, 3] : loRange(1, orgId === 1 ? 25 : 3);
+  const meetingsPerOrg = isDraft ? [1, 2, 3] : range(1, orgId === 1 ? 25 : 3);
 
   return meetingsPerOrg.map(() => {
     const title = faker.lorem.words(5);
@@ -39,11 +38,11 @@ const createMeeting = async (orgId: number, isDraft: boolean = false) => {
 exports.seed = async (knex: Knex) => {
   const fakeEvents = [];
 
-  for await (const orgId of range(100, true)) {
+  for await (const orgId of range(1, 100)) {
     fakeEvents.push(await createMeeting(orgId));
   }
 
-  for await (const orgId of range(100, true)) {
+  for await (const orgId of range(1, 100)) {
     fakeEvents.push(await createMeeting(orgId, true));
   }
 

@@ -2,9 +2,9 @@ require('dotenv-safe').config();
 import dayJS from 'dayjs';
 import faker from 'faker';
 import Knex from 'knex';
+import {range} from 'lodash';
 
 import {getRandomNum} from '../../../utils/getRandomNum';
-import {range} from '../../../utils/range';
 
 const CONSENSUS = 'Consensus';
 const SIMPLE_POLL = 'Simple Poll';
@@ -72,7 +72,7 @@ const createDecision = async () => {
 exports.seed = async (knex: Knex) => {
   const fakeDecisions = [];
 
-  for await (const _ of range(100, true)) {
+  for await (const _ of range(1, 100)) {
     fakeDecisions.push(await createDecision());
   }
 

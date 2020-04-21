@@ -2,8 +2,8 @@ require('dotenv-safe').config();
 import bcrypt from 'bcryptjs';
 import faker from 'faker';
 import Knex from 'knex';
+import {range} from 'lodash';
 
-import {range} from '../../../utils/range';
 import {encrypt} from '../../utils/crypto';
 import {sha384} from '../../utils/sha';
 
@@ -67,7 +67,7 @@ const createTestGroupAccount = async () => {
 exports.seed = async (knex: Knex) => {
   const fakeAccounts = [];
 
-  for await (const i of range(99, true)) {
+  for await (const i of range(1, 99)) {
     fakeAccounts.push(await createUserAccount(i));
   }
 

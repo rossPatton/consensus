@@ -1,8 +1,7 @@
 require('dotenv-safe').config();
 import faker from 'faker';
 import Knex from 'knex';
-
-import {range} from '../../../utils/range';
+import {range} from 'lodash';
 
 const createUser = async () => {
   // user selects city from dropdown with additional info (postcode,etc)
@@ -58,7 +57,7 @@ const createLongPasswordTestUser = async () => ({
 exports.seed = async (knex: Knex) => {
   const fakeUsers = [];
 
-  for await (const _ of range(99, true)) {
+  for await (const _ of range(1, 99)) {
     fakeUsers.push(await createUser());
   }
 

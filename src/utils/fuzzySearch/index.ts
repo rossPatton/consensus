@@ -1,9 +1,9 @@
-import {lowerCase} from './string';
-
+import {lowerCase} from '..';
+import {tObjWithScore, tOpts} from './_types';
 
 // return numeric score based on fuzzy match strength
 // If `pattern` matches `string`, wrap each matching character
-export const fuzz = function(search: string = '', string: string = '') {
+export const fuzzyScore = function(search: string = '', string: string = '') {
   let patternIdx = 0;
   const result = [];
   const len = string.length;
@@ -38,4 +38,35 @@ export const fuzz = function(search: string = '', string: string = '') {
   // return rendered string if we have a match for every char
   if (patternIdx === pattern.length) return totalScore;
   return 0;
+};
+
+// takes an array of objects, returns a sorted and filtered array
+// defaults to fuzzy matching against a 'name' key
+// but can filter by any key, as long as the value is a string
+export const fuzzFilterList = (opts: tOpts) => {
+  const {
+    filterBy = null,
+    input = [],
+    key = 'name',
+    search = '',
+  } = opts;
+
+  if (filterBy) {
+    input.filter(item => item[filterBy.key] === filterBy.value);
+  }
+
+  return input
+    .map(obj => {
+      const score = fuzzyScore(search, obj[key]);
+      return {
+        ...obj,
+        score,
+      };
+    })
+    .filter((obj: tObjWithScore) => obj.score > 0)
+    .sort((a: tObjWithScore, b: tObjWithScore) => {
+      if (a.score > b.score) return -1;
+      if (a.score < b.score) return 1;
+      return 0;
+    });
 };

@@ -1,10 +1,11 @@
 import React from 'react';
-import render from 'react-test-renderer';
 import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { BrowserRouter as Router } from 'react-router-dom';
+import render from 'react-test-renderer';
+import configureStore from 'redux-mock-store';
 
 import MatchMediaProvider from '~app/context/MatchMediaProvider';
+
 import RSVP from '.';
 
 const mockStore = configureStore({});
@@ -18,10 +19,10 @@ describe('RSVP component', () => {
       rsvps: {
         data: [{
           eventId: 1,
-          type: "public",
+          type: 'public',
           userId: 100,
           value: 'yes',
-        }]
+        }],
       },
       session: {
         data: {

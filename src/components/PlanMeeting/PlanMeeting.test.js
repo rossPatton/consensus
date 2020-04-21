@@ -1,6 +1,6 @@
 import React from 'react';
-import render from 'react-test-renderer';
 import { Provider } from 'react-redux';
+import render from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 
 import PlanMeeting from '.';
@@ -30,7 +30,7 @@ describe('PlanMeeting component', () => {
       <Provider store={store}>
         <PlanMeeting
           org={testGroup}
-          router={{search: ""}}
+          router={{search: ''}}
         />
       </Provider>
     ));

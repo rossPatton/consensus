@@ -1,6 +1,6 @@
 import React from 'react';
-import render from 'react-test-renderer';
 import { BrowserRouter as Router } from 'react-router-dom';
+import render from 'react-test-renderer';
 
 import ScrollToTop from '.';
 

@@ -1,10 +1,10 @@
 import loglevel from 'loglevel';
 
-import { isNull } from './nulls';
-import { isUndefined } from './undefineds';
+import { isNull, isUndefined } from '..';
 
 type tObj = {[key: string]: any};
 export const objToQueryString = (obj: tObj): string => {
+  if (isNull(obj) || isUndefined(obj)) return '';
   if (typeof obj !== 'object') return '';
   if (obj instanceof Array) return '';
   if (Object.keys(obj).length === 0) return '';

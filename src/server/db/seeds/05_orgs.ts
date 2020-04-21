@@ -1,10 +1,10 @@
 require('dotenv-safe').config();
 import faker from 'faker';
 import Knex from 'knex';
+import _ from 'lodash';
 
 import orgs from '../../../json/orgs.json';
 import {getRandomNum} from '../../../utils/getRandomNum';
-import {range} from '../../../utils/range';
 const categories = [
   { type: 'Community', slug: 'community' },
   { type: 'Cooperative', slug: 'cooperative' },
@@ -41,7 +41,7 @@ const createOrg = async (orgId: number) => {
 exports.seed = async (knex: Knex) => {
   const fakeOrgs = [];
 
-  for await (const orgId of range(orgs.length - 1)) {
+  for await (const orgId of _.range(orgs.length - 1)) {
     fakeOrgs.push(await createOrg(orgId));
   }
 
