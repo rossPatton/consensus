@@ -1,7 +1,7 @@
 import { api } from '~app/utils';
 
 import { path } from '../_constants';
-import { failure, success } from './actions';
+import { failure, init, success } from './actions';
 
 export const deleteAccount = (query: tAccountQuery) => {
   return async function (dispatch: Function) {
@@ -9,6 +9,7 @@ export const deleteAccount = (query: tAccountQuery) => {
       credentials: true,
       dispatch,
       failure,
+      init,
       method: 'DELETE',
       path,
       query,
