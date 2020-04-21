@@ -11,6 +11,7 @@ const RouteWithSubRoutes = (route: tProps) => (
     path={route.path}
     render={(props: RouteComponentProps<any>) => {
       const { component: Component } = route;
+      if (!Component) return null;
 
       // pass the sub-routes down to keep nesting
       if (route.private) {

@@ -1,4 +1,7 @@
 import jest from 'jest-mock';
+import fetch from 'jest-fetch-mock';
+
+Object.defineProperty(global, 'fetch', fetch);
 
 Object.defineProperty(global, 'matchMedia', {
   writable: true,

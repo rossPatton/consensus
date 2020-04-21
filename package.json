@@ -187,6 +187,7 @@
     "friendly-errors-webpack-plugin": "^1.7.0",
     "ignore-loader": "^0.1.2",
     "jest": "^24.9.0",
+    "jest-fetch-mock": "^3.0.3",
     "jest-mock": "^25.4.0",
     "koa-logger": "^3.2.1",
     "koa-webpack": "^3.0.2",

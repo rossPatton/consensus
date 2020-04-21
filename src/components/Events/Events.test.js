@@ -8,7 +8,7 @@ import MatchMediaProvider from '~app/context/MatchMediaProvider';
 const mockStore = configureStore({});
 import Events from '.';
 
-describe('test suite for Events comonent', () => {
+describe('Events component', () => {
   let store = {};
 
   beforeEach(() => {

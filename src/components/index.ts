@@ -68,10 +68,6 @@ export const RSVP = loadable(() =>
   import(/* webpackChunkName: "RSVP" */'./RSVP'),
 );
 
-export const RSVPCount = loadable(() =>
-  import(/* webpackChunkName: "RSVPCount" */'./RSVPCount'),
-);
-
 export const ScrollToTop = loadable(() =>
   import(/* webpackChunkName: "ScrollToTop" */'./ScrollToTop'),
 );
