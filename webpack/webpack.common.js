@@ -23,7 +23,7 @@ module.exports = {
   resolve: {
     alias: {
       // 'react-dom': '@hot-loader/react-dom',
-      '@app': srcPath(''),
+      '~app': srcPath(''),
     },
     modules: ['./node_modules', './src'],
     extensions: ['.js', '.ts', '.tsx', '.json', '.css'],

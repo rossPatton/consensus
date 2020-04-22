@@ -31,22 +31,3 @@ exports[`components/Avatar renders user image tag when hash prop provided 1`] = 
   />
 </div>
 `;
-
-exports[`renders empty div when no props 1`] = `
-<div
-  className="mr-1 bg-white border p-3 rounded"
-/>
-`;
-
-exports[`renders image tag when hash prop provided 1`] = `
-<div
-  className="mr-1"
->
-  <img
-    alt="User or Group Avatar"
-    height="96"
-    src="https://seccdn.libravatar.org/avatar/notARealHash?default=mm&size=undefined"
-    width="96"
-  />
-</div>
-`;
