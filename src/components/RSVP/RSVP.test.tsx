@@ -8,10 +8,10 @@ import MatchMediaProvider from '~app/context/MatchMediaProvider';
 
 import RSVP from '.';
 
-const mockStore = configureStore({});
+const mockStore = configureStore();
 
 describe('RSVP component', () => {
-  let store = {};
+  let store = mockStore({});
 
   beforeEach(() => {
     store = mockStore({
@@ -34,11 +34,27 @@ describe('RSVP component', () => {
   });
 
   it('renders mobile without crashing', () => {
+    const event = {id: 1} as tEvent;
+
     render.create((
       <Provider store={store}>
         <Router>
-          <MatchMediaProvider value={{isMobile: true}}>
-            <RSVP event={{id: 1}} />
+          <MatchMediaProvider isMobile>
+            <RSVP event={event} />
+          </MatchMediaProvider>
+        </Router>
+      </Provider>
+    ));
+  });
+
+  it('renders desktop without crashing', () => {
+    const event = {id: 1} as tEvent;
+
+    render.create((
+      <Provider store={store}>
+        <Router>
+          <MatchMediaProvider isDesktop>
+            <RSVP event={event} />
           </MatchMediaProvider>
         </Router>
       </Provider>

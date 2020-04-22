@@ -1,5 +1,5 @@
 import { Route } from 'react-router-dom';
 
-export interface tProps extends tRoute {
+export type tProps = tRoute & {
   routes?: Route[],
-}
+};

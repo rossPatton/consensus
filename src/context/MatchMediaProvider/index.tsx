@@ -10,7 +10,17 @@ import { tState } from './_types';
  * This is used to render components adaptively when responsive design starts to
  * get overly complicated, or to make it easier to split up component types
  */
-class MatchMediaProvider extends React.PureComponent<{}, tState> {
+class MatchMediaProvider extends React.PureComponent<Partial<tState>, tState> {
+  static defaultProps = {
+    isMobile: true,
+    isDesktop: false,
+  };
+
+  state = {
+    isMobile: this.props.isMobile,
+    isDesktop: this.props.isDesktop,
+  };
+
   constructor(props: any) {
     super(props);
 
@@ -20,11 +30,6 @@ class MatchMediaProvider extends React.PureComponent<{}, tState> {
       this.state = {
         isMobile,
         isDesktop,
-      };
-    } else {
-      this.state = {
-        isMobile: true,
-        isDesktop: false,
       };
     }
   }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 
 import {getRandomNum} from '~app/utils';
 
@@ -6,7 +6,7 @@ import {tProps} from './_types';
 
 // the component half of the search filter container
 // decoupled for ease of placement
-const PlaceholderImage = (props: tProps) => {
+const PlaceholderImage = memo((props: tProps) => {
   let prefix = 'https://picsum.photos/id';
   let index = getRandomNum(1, 200);
   if (props.seed) {
@@ -23,6 +23,6 @@ const PlaceholderImage = (props: tProps) => {
       width={props.width}
     />
   );
-};
+});
 
 export default PlaceholderImage;

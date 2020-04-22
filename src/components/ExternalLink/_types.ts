@@ -1,6 +1,6 @@
 export type tProps = {
   children: React.ReactNode,
   className?: string,
-  noFollow: boolean,
+  noFollow?: boolean,
   to: string,
 };

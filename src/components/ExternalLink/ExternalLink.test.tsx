@@ -4,12 +4,8 @@ import render from 'react-test-renderer';
 import ExternalLink from '.';
 
 it('renders without crashing', () => {
-  render.create(<ExternalLink />);
-});
-
-it('renders as expected (simple)', () => {
   const component = render.create((
-    <ExternalLink>
+    <ExternalLink to="https://www.test.com">
       test
     </ExternalLink>
   ));
@@ -21,7 +17,8 @@ it('renders as expected (className/noFollow)', () => {
   const component = render.create((
     <ExternalLink
       noFollow
-      className="test">
+      className="test"
+      to="https://www.test.com">
       test
     </ExternalLink>
   ));

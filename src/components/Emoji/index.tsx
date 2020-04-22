@@ -1,16 +1,11 @@
 import React, {memo} from 'react';
 
 const Emoji = memo((props: {label: string, emoji: string}) => (
-  <>
-    {props.emoji
-      ? (
-        <small
-          role="img"
-          aria-label={props.label}>
-          {props.emoji}
-        </small>
-      ) : null}
-  </>
+  <small
+    role="img"
+    aria-label={props.label}>
+    {props.emoji}
+  </small>
 ));
 
 export default Emoji;

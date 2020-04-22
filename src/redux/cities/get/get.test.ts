@@ -1,15 +1,15 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import {PATCH_FAILURE, PATCH_INIT, PATCH_SUCCESS} from './_types';
+import {GET_FAILURE, GET_INIT, GET_SUCCESS} from './_types';
 import {failure, init, success} from './actions';
 
 const mockStore = configureStore([thunk]);
 
-describe('redux/account/patch', () => {
-  it('creates correct PATCH_INIT action', () => {
+describe('redux/cities/get', () => {
+  it('creates correct GET_INIT action', () => {
     const expectedActionPayload = [{
-      type: PATCH_INIT,
+      type: GET_INIT,
     }];
 
     const store = mockStore({});
@@ -19,26 +19,43 @@ describe('redux/account/patch', () => {
     expect(store.getActions()).toStrictEqual(expectedActionPayload);
   });
 
-  it('creates correct PATCH_SUCCESS action', () => {
+  it('creates correct GET_SUCCESS action', () => {
     const expectedActionPayload = [{
-      type: PATCH_SUCCESS,
-      payload: {isAuthenticated: true},
+      type: GET_SUCCESS,
+      payload: [{
+        countryId: 1,
+        country: 'United States',
+        regionId: 1,
+        region: 'New York',
+        id: 1,
+        name: 'New York',
+        orgs: [{}] as tGroup[],
+        postcodes: [10002],
+      }],
     }];
 
     const store = mockStore({});
 
-    // @ts-ignore @TODO mock common data types for jest
-    store.dispatch(success({isAuthenticated: true}));
+    store.dispatch(success([{
+      countryId: 1,
+      country: 'United States',
+      regionId: 1,
+      region: 'New York',
+      id: 1,
+      name: 'New York',
+      orgs: [{}] as tGroup[],
+      postcodes: [10002],
+    }]));
     expect(store.getActions()).toStrictEqual(expectedActionPayload);
   });
 
-  it('creates correct PATCH_FAILURE action', () => {
+  it('creates correct GET_FAILURE action', () => {
     const expectedActionPayload = [{
       payload: {
         message: 'Oh no! An Error occurred',
         status: 500,
       },
-      type: PATCH_FAILURE,
+      type: GET_FAILURE,
     }];
 
     const store = mockStore({});

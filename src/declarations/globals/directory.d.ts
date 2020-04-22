@@ -13,11 +13,15 @@ declare type tRegion = tCountry & Readonly<{
    country: string,
 }>;
 
-declare type tCity = tRegion & Readonly<{
+declare type tCity = Readonly<{
+   countryId: number,
+   country: string,
+   id: number,
+   name: string, // United States
    orgs: tGroup[],
    postcodes: number[],
    region: string,
-   regionId: 2,
+   regionId: number,
 }>;
 
 declare type tDirectoryParams = tPaginateParams & Readonly<{

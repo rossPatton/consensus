@@ -6,7 +6,10 @@ import PlaceholderImage from '.';
 describe('PlaceholderImage component', () => {
   it('renders without crashing', () => {
     render.create((
-      <PlaceholderImage />
+      <PlaceholderImage
+        height="50"
+        width="50"
+      />
     ));
   });
 });

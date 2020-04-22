@@ -6,28 +6,27 @@ import {PrivateRoute} from '~app/components';
 import {tProps} from './_types';
 
 // for nested static routes
-const RouteWithSubRoutes = (route: tProps) => (
+const RouteWithSubRoutes = (props: tProps) => (
   <Route
-    path={route.path}
-    render={(props: RouteComponentProps<any>) => {
-      const { component: Component } = route;
-      if (!Component) return null;
+    path={props.path}
+    render={(route: RouteComponentProps<any>) => {
+      const { component: Component } = props;
 
       // pass the sub-routes down to keep nesting
-      if (route.private) {
+      if (props.private) {
         return (
           <PrivateRoute
-            {...props}
             {...route}
-            routes={route.routes}
+            {...props}
+            routes={props.routes}
           />
         );
       }
 
       return (
         <Component
-          {...props}
-          routes={route.routes}
+          {...route}
+          routes={props.routes}
         />
       );
     }}

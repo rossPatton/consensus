@@ -8,19 +8,17 @@ const mockStore = configureStore([thunk]);
 import Users from '.';
 
 describe('Users component', () => {
-  let store = {};
-
-  beforeEach(() => {
-    store = mockStore({
+  it('renders without crashing', () => {
+    const store = mockStore({
       isLoading: false,
       usersByOrgId: {data: [{id: 100}]},
     });
-  });
 
-  it('renders without crashing', () => {
+    const group = {id: 1} as tGroup;
+
     render.create((
       <Provider store={store}>
-        <Users group={{id: 1}} />
+        <Users group={group} />
       </Provider>
     ));
   });

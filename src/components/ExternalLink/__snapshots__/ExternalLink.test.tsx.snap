@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected (className/noFollow) 1`] = `
+<a
+  className="test"
+  href="https://www.test.com"
+  rel="noopener noreferrer nofollow"
+>
+  test
+</a>
+`;
+
+exports[`renders without crashing 1`] = `
+<a
+  className=""
+  href="https://www.test.com"
+  rel="noopener noreferrer "
+>
+  test
+</a>
+`;

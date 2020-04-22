@@ -6,7 +6,10 @@ import PasswordInput from '.';
 describe('PasswordInput component', () => {
   it('renders without crashing', () => {
     render.create((
-      <PasswordInput />
+      <PasswordInput
+        id="test"
+        onChange={() => {}}
+      />
     ));
   });
 });

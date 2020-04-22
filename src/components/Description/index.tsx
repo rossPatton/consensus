@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 
 class Description extends PureComponent<
-  {description: string},
+  {description?: string},
   {showAll: boolean}
 > {
   state = {

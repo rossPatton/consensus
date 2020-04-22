@@ -7,7 +7,7 @@ import FilterPanel from '.';
 describe('FilterPanel component', () => {
   it('renders without crashing', () => {
     render.create((
-      <FilterPanel />
+      <FilterPanel onSearchChange={() => {}} />
     ));
   });
 });

@@ -6,16 +6,12 @@ import configureStore from 'redux-mock-store';
 
 import SuperSearch from '.';
 
-const mockStore = configureStore({});
+const mockStore = configureStore();
 
 describe('SuperSearch component', () => {
-  let store = {};
-
-  beforeEach(() => {
-    store = mockStore({});
-  });
-
   it('renders mobile without crashing', () => {
+    const store = mockStore({});
+
     render.create((
       <Router>
         <Provider store={store}>

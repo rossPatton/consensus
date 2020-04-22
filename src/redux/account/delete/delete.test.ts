@@ -1,7 +1,7 @@
 import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk'
+import thunk from 'redux-thunk';
 
-import {DELETE_INIT, DELETE_FAILURE, DELETE_SUCCESS} from './_types';
+import {DELETE_FAILURE, DELETE_INIT, DELETE_SUCCESS} from './_types';
 import {failure, init, success} from './actions';
 
 const mockStore = configureStore([thunk]);
@@ -22,7 +22,7 @@ describe('redux/account/delete', () => {
   it('creates correct DELETE_SUCCESS action', () => {
     const expectedActionPayload = [{
       type: DELETE_SUCCESS,
-      payload: {isAuthenticated: true}
+      payload: {isAuthenticated: true},
     }];
 
     const store = mockStore({});
@@ -35,7 +35,7 @@ describe('redux/account/delete', () => {
   it('creates correct DELETE_FAILURE action', () => {
     const expectedActionPayload = [{
       payload: {
-        message: "Oh no! An Error occurred",
+        message: 'Oh no! An Error occurred',
         status: 500,
       },
       type: DELETE_FAILURE,
@@ -45,7 +45,7 @@ describe('redux/account/delete', () => {
 
     // @ts-ignore @TODO mock common data types for jest
     store.dispatch(failure({
-      message: "Oh no! An Error occurred",
+      message: 'Oh no! An Error occurred',
       status: 500,
     }));
     expect(store.getActions()).toStrictEqual(expectedActionPayload);

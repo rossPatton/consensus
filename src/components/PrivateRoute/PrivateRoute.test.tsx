@@ -5,22 +5,18 @@ import render from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 
 import PrivateRoute from '.';
-const mockStore = configureStore({});
+const mockStore = configureStore();
 
 describe('PrivateRoute component', () => {
-  let store = {};
-
-  beforeEach(() => {
-    store = mockStore({
+  it('renders without crashing', () => {
+    const store = mockStore({
       session: {data: {isAuthenticated: false}},
     });
-  });
 
-  it('renders without crashing', () => {
     render.create((
       <Provider store={store}>
         <Router>
-          <PrivateRoute />
+          <PrivateRoute path="/" component={<></>} />
         </Router>
       </Provider>
     ));

@@ -5,32 +5,28 @@ import configureStore from 'redux-mock-store';
 
 import PlanMeeting from '.';
 
-const mockStore = configureStore({});
+const mockStore = configureStore();
 const testGroup = {
   category: 'Political',
   cityId: 1,
-  orgName: 'Test Group',
+  name: 'Test Group',
   type: 'public',
-};
+} as tGroup;
 
 describe('PlanMeeting component', () => {
-  let store = {};
-
-  beforeEach(() => {
-    store = mockStore({
+  it('renders without crashing', () => {
+    const store = mockStore({
       eventsByOrgId: {
         data: [{}],
       },
       session: {data: {isAuthenticated: false}},
     });
-  });
 
-  it('renders without crashing', () => {
     render.create((
       <Provider store={store}>
         <PlanMeeting
           org={testGroup}
-          router={{search: ''}}
+          router={{pathname: '', state: {}, hash: '', search: ''}}
         />
       </Provider>
     ));

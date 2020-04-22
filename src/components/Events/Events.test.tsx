@@ -5,33 +5,33 @@ import configureStore from 'redux-mock-store';
 
 import MatchMediaProvider from '~app/context/MatchMediaProvider';
 
-const mockStore = configureStore({});
+const mockStore = configureStore();
 import Events from '.';
 
 describe('Events component', () => {
-  let store = {};
-
-  beforeEach(() => {
-    store = mockStore({
+  it('renders mobile without crashing', () => {
+    const store = mockStore({
       session: {isAuthenticated: false},
     });
-  });
 
-  it('renders mobile without crashing', () => {
     render.create((
       <Provider store={store}>
-        <MatchMediaProvider value={{isMobile: true}}>
-          <Events />
+        <MatchMediaProvider isMobile>
+          <Events events={[]} />
         </MatchMediaProvider>
       </Provider>
     ));
   });
 
   it('renders desktop without crashing', () => {
+    const store = mockStore({
+      session: {isAuthenticated: false},
+    });
+
     render.create((
       <Provider store={store}>
-        <MatchMediaProvider value={{isDesktop: true}}>
-          <Events />
+        <MatchMediaProvider isDesktop>
+          <Events events={[]} />
         </MatchMediaProvider>
       </Provider>
     ));
