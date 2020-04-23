@@ -1,17 +1,17 @@
 import {api} from '~app/utils';
 
 import {path} from '../_constants';
-import {deleteEventFailure, deleteEventSuccess} from './actions';
+import {failure, success} from './actions';
 
 export const deleteEvent = (query: tIdQuery) => {
   return async function (dispatch: Function) {
     return api({
       dispatch,
-      failure: deleteEventFailure,
+      failure,
       method: 'DELETE',
       query,
       path,
-      success: deleteEventSuccess,
+      success,
     });
   };
 };

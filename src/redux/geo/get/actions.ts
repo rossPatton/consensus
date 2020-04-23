@@ -16,7 +16,7 @@ export const failure = (payload: tResponseError): tFailureAction => ({
   payload,
 });
 
-export const success = (payload: tCity): tSuccessAction => ({
+export const success = (payload: tGeo): tSuccessAction => ({
   type: GET_SUCCESS,
   payload,
 });

@@ -12,7 +12,7 @@ declare type tGroup = Readonly<{
    description: string,
    // lives in accounts_emails table
    emails?: string[],
-   facebook: string,
+   facebook?: string,
    id: number,
    memberName: string,
    modName: string,
@@ -22,8 +22,8 @@ declare type tGroup = Readonly<{
    handle: string,
    updated_at?: Date,
    type: tPrivacyEnum,
-   twitter: string,
-   website: string,
+   twitter?: string,
+   website?: string,
 }>;
 
 // if posting/patching most values are up for grabs

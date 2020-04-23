@@ -1,16 +1,22 @@
 import {
+  GET_INIT,
   GET_FAILURE,
   GET_SUCCESS,
+  tInitAction,
   tFailureAction,
   tSuccessAction,
 } from './_types';
 
-export const getGroupsBySearchFailure = (payload: tResponseError): tFailureAction => ({
+export const init = (): tInitAction => ({
+  type: GET_INIT,
+});
+
+export const failure = (payload: tResponseError): tFailureAction => ({
   type: GET_FAILURE,
   payload,
 });
 
-export const getGroupsBySearchSuccess = (payload: tGroup[]): tSuccessAction => ({
+export const success = (payload: tGroup[]): tSuccessAction => ({
   type: GET_SUCCESS,
   payload,
 });

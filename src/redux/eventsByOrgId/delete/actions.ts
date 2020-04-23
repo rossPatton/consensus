@@ -1,16 +1,22 @@
 import {
+  DELETE_INIT,
   DELETE_FAILURE,
   DELETE_SUCCESS,
+  tInitAction,
   tFailureAction,
   tSuccessAction,
 } from './_types';
 
-export const deleteEventFailure = (payload: tResponseError): tFailureAction => ({
+export const init = (): tInitAction => ({
+  type: DELETE_INIT,
+});
+
+export const failure = (payload: tResponseError): tFailureAction => ({
   type: DELETE_FAILURE,
   payload,
 });
 
-export const deleteEventSuccess = (payload: tIdQuery): tSuccessAction => ({
+export const success = (payload: tIdQuery): tSuccessAction => ({
   type: DELETE_SUCCESS,
   payload,
 });
