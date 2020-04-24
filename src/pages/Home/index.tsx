@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {Helmet} from '~app/components';
 import {Template} from '~app/containers';
-import {getEventsByLocation} from '~app/redux';
+import {getMeetingsByLocation} from '~app/redux';
 
 import {canonical, description, keywords, title} from './_constants';
 import {tContainerProps, tStore} from './_types';
@@ -12,19 +12,19 @@ import {HomeComponent} from './Component';
 
 class HomeContainer extends PureComponent<tContainerProps> {
   componentDidUpdate() {
-    const {eventsByLocationThunk, geoThunk} = this.props;
+    const {meetingsByLocationThunk, geoThunk} = this.props;
 
     if (!geoThunk.fetched) return;
-    if (eventsByLocationThunk.fetched) return;
-    if (eventsByLocationThunk.error) return;
+    if (meetingsByLocationThunk.fetched) return;
+    if (meetingsByLocationThunk.error) return;
 
     // TODO eventually set it up so we dont do this if user is signed in
-    this.props.getEventsByLocationDispatch(geoThunk.data);
+    this.props.getMeetingsByLocationDispatch(geoThunk.data);
 
     // if (geoThunk.fetched) {
-    //   this.props.getEventsByLocationDispatch(geoThunk.data);
+    //   this.props.getMeetingsByLocationDispatch(geoThunk.data);
     // } else if (_.get(session, 'profile.cityId', 0) > 0) {
-    //   this.props.getEventsByLocationDispatch({
+    //   this.props.getMeetingsByLocationDispatch({
     //     city: session.profile.city,
     //     region: session.profile.region,
     //   });
@@ -45,7 +45,7 @@ class HomeContainer extends PureComponent<tContainerProps> {
           ]}
         />
         <HomeComponent
-          eventsByLocationThunk={this.props.eventsByLocationThunk}
+          meetingsByLocationThunk={this.props.meetingsByLocationThunk}
           geoThunk={this.props.geoThunk}
           session={this.props.session}
         />
@@ -55,13 +55,13 @@ class HomeContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  eventsByLocationThunk: store.eventsByLocation,
+  meetingsByLocationThunk: store.meetingsByLocation,
   geoThunk: store.geo,
   session: store.session.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getEventsByLocationDispatch: (query: tGeo) => dispatch(getEventsByLocation(query)),
+  getMeetingsByLocationDispatch: (query: tGeo) => dispatch(getMeetingsByLocation(query)),
 });
 
 export default connect(

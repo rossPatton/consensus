@@ -42,7 +42,7 @@ class UserContainer extends PureComponent<tContainerProps> {
             render={() => (
               <UserComponent
                 match={this.props.match}
-                orgs={this.props.orgsByUserId}
+                groups={this.props.groupsByUserId}
                 user={this.props.user}
               />
             )}
@@ -55,7 +55,7 @@ class UserContainer extends PureComponent<tContainerProps> {
 
 const mapStateToProps = (store: tStore) => ({
   isLoading: store.user.isLoading,
-  orgsByUserId: store.orgsByUserId.data,
+  groupsByUserId: store.groupsByUserId.data,
   user: store.user.data,
 });
 

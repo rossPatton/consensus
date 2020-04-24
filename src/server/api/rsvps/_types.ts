@@ -1,5 +1,5 @@
 export type tPostRSVPServerQuery = tFormSubmit & {
-  eventId: string,
+  meetingId: string,
   type: 'public' | 'private',
   value: tRSVPValue,
 };

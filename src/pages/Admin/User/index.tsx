@@ -36,7 +36,7 @@ class UserAdminContainer extends PureComponent<tContainerProps> {
             isDesktop={this.context.isDesktop}
             isMobile={this.context.isMobile}
             match={this.props.match}
-            orgsByUserIdThunk={this.props.orgsByUserIdThunk}
+            groupsByUserIdThunk={this.props.groupsByUserIdThunk}
             roles={this.props.rolesThunk.data}
             session={this.props.session}
           />
@@ -48,7 +48,7 @@ class UserAdminContainer extends PureComponent<tContainerProps> {
 
 const mapStateToProps = (store: tStore) => ({
   isLoading: store.roles.isLoading || store.rsvps.isLoading,
-  orgsByUserIdThunk: store.orgsByUserId,
+  groupsByUserIdThunk: store.groupsByUserId,
   rolesThunk: store.roles,
   rsvpsThunk: store.rsvps,
   session: store.session.data,

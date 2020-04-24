@@ -10,7 +10,7 @@ declare type tAccountBase = tFormSubmit & Readonly<{
   isNew: boolean,
   isVerified: boolean,
   login: string, // unique login value separate from username or email
-  orgId?: number,
+  groupId?: number,
   passwordResetToken?: string,
   passwordResetExpires?: string,
   privateEmail: boolean,
@@ -58,15 +58,15 @@ declare type tSession<T = tUser | tGroup> = Partial<tAccountBase>
 }>;
 
 // pending => user wants to join the group, but isn't approved yet
-// member => can RSVP to events, partake in decisions
-// facilitator => can create events, decisions
+// member => can RSVP to meetings, partake in decisions
+// facilitator => can create meetings, decisions
 // admin => can do all the above plus manage the group
 // n/a => inputs cant have null values, so we use this sometimes
 // null => often happens if we're trying to tie roles to users, and there's no match
 declare type tRole = 'pending' | 'member' | 'facilitator' | 'admin' | 'n/a' | null;
 
 declare type tRoleMap = Readonly<{
-  orgId: number,
+  groupId: number,
   role: tRole,
 }>;
 

@@ -16,7 +16,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
     const {rsvps} = props;
-    const rsvp = _.find(rsvps, rsvp => rsvp.eventId === this.props.event.id);
+    const rsvp = _.find(rsvps, rsvp => rsvp.meetingId === this.props.meeting.id);
 
     // only purpose for this state, is to update the UI right away
     const hasRSVPed = !!rsvp && rsvp.value !== null;
@@ -61,7 +61,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
 
     try {
       dispatch({
-        eventId: opts.eventId,
+        meetingId: opts.meetingId,
         type: userRSVPsPrivately ? 'private' : 'public',
         value,
       })
@@ -83,7 +83,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
     return (
       <RSVPComponent
         className={this.props.className}
-        event={this.props.event}
+        meeting={this.props.meeting}
         hasMounted={this.state.hasMounted}
         hasRSVPed={this.state.hasRSVPed}
         isDesktop={isDesktop}

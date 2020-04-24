@@ -9,7 +9,7 @@ export const getRSVPsByUserId = async (
   userId: string | number = 0): Promise<tRSVP[]> => {
   let rsvps: tRSVP[] = [];
   try {
-    rsvps = await knex('users_events')
+    rsvps = await knex('users_meetings')
       .where({
         userId,
         value: 'yes',

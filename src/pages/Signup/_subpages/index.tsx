@@ -1,2 +1,2 @@
-export {OrgSignup} from './Org';
+export {GroupSignup} from './Group';
 export {UserSignup} from './User';

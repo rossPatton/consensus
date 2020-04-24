@@ -12,9 +12,9 @@ export const rsvps = new Router();
 const dataPath = 'state.locals.data';
 const route = '/api/v1/rsvps';
 const sessionPath = 'state.user';
-const table = 'users_events';
+const table = 'users_meetings';
 
-// get all rsvps for the logged in user, by eventId
+// get all rsvps for the logged in user, by meetingId
 rsvps.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {userId = 0} = _.get(ctx, sessionPath, {});
   await validateSchema(ctx, getSchema, {userId});
@@ -27,11 +27,11 @@ rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...query} = data;
   await validateSchema(ctx, postSchema, query);
 
-  const {eventId, type = 'private', value = 'no'} = query;
+  const {meetingId, type = 'private', value = 'no'} = query;
   const {userId = 0} = _.get(ctx, sessionPath, {});
 
   const newRsvp: tRSVP = {
-    eventId: parseInt(eventId, 10),
+    meetingId: parseInt(meetingId, 10),
     type,
     userId,
     value: value !== '' ? value : null,
@@ -41,7 +41,7 @@ rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     rsvpUpdate = await knex(table)
       .first()
-      .where({eventId, userId})
+      .where({meetingId, userId})
       .update(newRsvp)
       .returning('*');
   } catch (err) {
@@ -58,11 +58,11 @@ rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...query} = data;
   await validateSchema(ctx, postSchema, query);
 
-  const {eventId, type = 'private', value = 'no'} = query;
+  const {meetingId, type = 'private', value = 'no'} = query;
   const {userId = 0} = _.get(ctx, sessionPath, {});
 
   const newRsvp: tRSVP = {
-    eventId: parseInt(eventId, 10),
+    meetingId: parseInt(meetingId, 10),
     type,
     userId,
     value: value !== '' ? value : null,
@@ -72,7 +72,7 @@ rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     currentRSVPStatus = await knex(table)
       .limit(1)
-      .where({eventId, userId})
+      .where({meetingId, userId})
       .first();
   } catch (err) {
     return ctx.throw(500, err);

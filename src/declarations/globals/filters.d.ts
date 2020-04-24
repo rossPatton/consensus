@@ -3,7 +3,7 @@ declare type tInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => void;
 declare type tSelectChange = (ev: React.ChangeEvent<HTMLSelectElement>) => void;
 
 declare type tPublishedFilterProps = Readonly<{
-  items: tEvent[],
+  items: tMeeting[],
   onPublishedFilterChange: tSelectChange,
   publishedFilter: tPublishedFilter,
 }>;

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {GenericLoader, Paginate, RoleFilter, SearchFilter} from '~app/containers';
 import {MediaContext} from '~app/context/MatchMediaProvider/_context';
-import {deleteUserByOrgId, getUsersByOrgId, patchUserByOrgId} from '~app/redux';
+import {deleteUserByGroupId, getUsersByGroupId, patchUserByGroupId} from '~app/redux';
 
 import {tContainerProps, tState} from './_types';
 import {UsersComponent} from './Component';
@@ -18,28 +18,28 @@ class UsersContainer extends React.PureComponent<tContainerProps, tState> {
 
   constructor (props: tContainerProps) {
     super(props);
-    const orgId = props.group.id;
+    const groupId = props.group.id;
 
-    if (orgId) {
-      props.getUsersByOrgIdDispatch({orgId, noPending: 'false'});
+    if (groupId) {
+      props.getUsersByGroupIdDispatch({groupId, noPending: 'false'});
     }
   }
 
   removeUser = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {
     ev.preventDefault();
-    const {deleteUserByOrgIdDispatch, group} = this.props;
-    deleteUserByOrgIdDispatch({
+    const {deleteUserByGroupIdDispatch, group} = this.props;
+    deleteUserByGroupIdDispatch({
       userId,
-      orgId: group.id,
+      groupId: group.id,
     });
   }
 
   setUserRole = (ev: React.ChangeEvent<HTMLSelectElement>, userId: number) => {
     ev.preventDefault();
     const role = ev.currentTarget.value as tRole;
-    const orgId = this.props.group.id;
-    if (orgId && userId && role) {
-      this.props.patchUserByOrgIdDispatch({role, orgId, userId});
+    const groupId = this.props.group.id;
+    if (groupId && userId && role) {
+      this.props.patchUserByGroupIdDispatch({role, groupId, userId});
     }
 
     this.setState({
@@ -59,12 +59,12 @@ class UsersContainer extends React.PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const {count = 10, isLoading, sessionRole, type, usersByOrgId} = this.props;
+    const {count = 10, isLoading, sessionRole, type, usersByGroupId} = this.props;
     const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
 
-    let itemsToRender = usersByOrgId.filter(u => u.role !== 'pending');
+    let itemsToRender = usersByGroupId.filter(u => u.role !== 'pending');
     if (type === 'pending') {
-      const approvals: tUser[] = usersByOrgId.filter(u => u.role === 'pending');
+      const approvals: tUser[] = usersByGroupId.filter(u => u.role === 'pending');
       itemsToRender = approvals;
     }
 
@@ -116,19 +116,19 @@ class UsersContainer extends React.PureComponent<tContainerProps, tState> {
 }
 
 const mapStateToProps = (store: any) => ({
-  isLoading: store.usersByOrgId.isLoading,
-  usersByOrgId: store.usersByOrgId.data,
+  isLoading: store.usersByGroupId.isLoading,
+  usersByGroupId: store.usersByGroupId.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
-    dispatch(getUsersByOrgId(query)),
+  getUsersByGroupIdDispatch: (query: tUsersByGroupIdQuery) =>
+    dispatch(getUsersByGroupId(query)),
 
-  deleteUserByOrgIdDispatch: (query: tDeleteUserByOrgIdQuery) =>
-    dispatch(deleteUserByOrgId(query)),
+  deleteUserByGroupIdDispatch: (query: tDeleteUserByGroupIdQuery) =>
+    dispatch(deleteUserByGroupId(query)),
 
-  patchUserByOrgIdDispatch: (query: tPatchUserRoleQuery) =>
-    dispatch(patchUserByOrgId(query)),
+  patchUserByGroupIdDispatch: (query: tPatchUserRoleQuery) =>
+    dispatch(patchUserByGroupId(query)),
 });
 
 const Users = connect(mapStateToProps, mapDispatchToProps)(UsersContainer);

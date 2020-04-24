@@ -29,7 +29,7 @@ describe('redux/city/get', () => {
         region: 'New York',
         id: 1,
         name: 'New York',
-        orgs: [{}] as tGroup[],
+        group: [{}] as tGroup[],
         postcodes: [10002],
       },
     }];
@@ -43,7 +43,7 @@ describe('redux/city/get', () => {
       region: 'New York',
       id: 1,
       name: 'New York',
-      orgs: [{}] as tGroup[],
+      group: [{}] as tGroup[],
       postcodes: [10002],
     }));
     expect(store.getActions()).toStrictEqual(expectedActionPayload);

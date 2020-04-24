@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {Helmet} from '~app/components';
 import {ErrorBoundary, GenericLoader} from '~app/containers';
 import {SearchFilter} from '~app/containers';
-import {getEventsByUserId} from '~app/redux';
+import {getMeetingsByUserId} from '~app/redux';
 
 import {tContainerProps, tStore} from './_types';
 import {MeetingsComponent} from './Component';
@@ -16,15 +16,15 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
     super(props);
     const userId = _.get(props, 'sessionThunk.data.profile.id', null);
     if (userId) {
-      props.getEventsByUserIdDispatch({userId})
+      props.getMeetingsByUserIdDispatch({userId})
         .catch(loglevel.error);
     }
   }
 
   render() {
-    const {eventsByUserIdThunk} = this.props;
+    const {meetingsByUserIdThunk} = this.props;
     return (
-      <ErrorBoundary status={_.get(eventsByUserIdThunk, 'error.status', 200)}>
+      <ErrorBoundary status={_.get(meetingsByUserIdThunk, 'error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -36,13 +36,13 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
           ]}
         />
         <GenericLoader
-          isLoading={eventsByUserIdThunk.isLoading}
+          isLoading={meetingsByUserIdThunk.isLoading}
           render={() => (
             <SearchFilter
-              items={eventsByUserIdThunk.data}
+              items={meetingsByUserIdThunk.data}
               render={searchProps => (
                 <MeetingsComponent
-                  events={searchProps.items as tEvent[]}
+                  meetings={searchProps.items as tMeeting[]}
                   onFilterOptionChange={searchProps.onFilterOptionChange}
                   onSearchChange={searchProps.onSearchChange}
                 />
@@ -56,13 +56,13 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  eventsByUserIdThunk: store.eventsByUserId,
+  meetingsByUserIdThunk: store.meetingsByUserId,
   sessionThunk: store.session,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getEventsByUserIdDispatch: (query: {userId: number}) =>
-    dispatch(getEventsByUserId(query)),
+  getMeetingsByUserIdDispatch: (query: {userId: number}) =>
+    dispatch(getMeetingsByUserId(query)),
 });
 
 const Meetings = connect(

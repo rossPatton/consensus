@@ -8,7 +8,7 @@ import { Redirect } from 'react-router';
 
 import {Helmet} from '~app/components';
 import {ErrorBoundary} from '~app/containers';
-import {getEventsByOrgIdSuccess, patchEvent, postEvent} from '~app/redux';
+import {getMeetingsByGroupIdSuccess, patchEvent, postMeeting} from '~app/redux';
 import {parseTimeString} from '~app/utils';
 
 import {tContainerProps, tKeyUnion, tState, tStore, tValueUnion} from './_types';
@@ -17,23 +17,23 @@ import {PlanMeetingComponent} from './Component';
 // @TODO this is a sub-page of a couple routes, should this be in /components???
 class PlanMeetingContainer extends Component<tContainerProps, tState> {
   state = {
-    category: this.props.org.category,
-    cityId: this.props.org.cityId,
+    category: this.props.group.category,
+    cityId: this.props.group.cityId,
     date: dayJS().toISOString(),
     description: '',
     duration: 2,
     id: null as number | null,
     isCopy: false,
     isDraft: false,
-    isPrivate: this.props.org.type !== 'public',
+    isPrivate: this.props.group.type !== 'public',
     location: '',
     locationLink: '',
-    orgName: this.props.org.name,
+    groupName: this.props.group.name,
     time: '19:00',
     title: '',
   };
 
-  // we use query params to populate the form when editing an event
+  // we use query params to populate the form when editing an meeting
   constructor(props: tContainerProps) {
     super(props);
     const {router: {search}} = props;
@@ -44,7 +44,7 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     const isPrivate = draft.isPrivate === 'true';
     const isCopy = draft.isCopy === 'true';
 
-    // if draft is a copy (to make new event), not an edit (of existing draft or meeting)
+    // if draft is a copy (to make new meeting), not an edit (of existing draft or meeting)
     // then we change a few things here
     const state = {
       category: draft.category as tCategory,
@@ -63,7 +63,7 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
       isPrivate,
       location: draft.location as string,
       locationLink: draft.locationLink as string,
-      orgName: this.props.org.name,
+      groupName: this.props.group.name,
       time: isCopy ? '19:00' : draft.time as string,
       title: draft.title as string,
     };
@@ -85,15 +85,15 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     const endDate = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
     endDate.hour(endDate.hour() + dur);
 
-    let newEvent: tEvent;
+    let newEvent: tMeeting;
     try {
-      const {patchEventDispatch, postEventDispatch} = this.props;
+      const {patchEventDispatch, postMeetingDispatch} = this.props;
 
       // if meeting has already been saved as a draft, we will have the id
       // patch in that case, else post new meeting (initial draft save, or submit)
       const dispatch = this.state.id
         ? patchEventDispatch
-        : postEventDispatch;
+        : postMeetingDispatch;
 
       const planMeeting = await dispatch({
         ...restOfEvent,
@@ -104,7 +104,7 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
         // every date is stored in the db as an ISO string
         date: date.toISOString(),
         endDate: endDate.toISOString(),
-        orgId: this.props.org.id as number,
+        groupId: this.props.group.id as number,
       });
 
       newEvent = planMeeting.payload;
@@ -113,7 +113,7 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     }
 
     // update redux on client side on meeting upsert success
-    getEventsByOrgIdSuccess([newEvent, ...this.props.events]);
+    getMeetingsByGroupIdSuccess([newEvent, ...this.props.meetings]);
 
     // this will cause the preview button to render
     this.setState({
@@ -160,13 +160,13 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  events: store.eventsByOrgId.data,
+  meetings: store.meetingsByGroupId.data,
   session: store.session.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  patchEventDispatch: (query: tUpsertEventQuery) => dispatch(patchEvent(query)),
-  postEventDispatch: (query: tUpsertEventQuery) => dispatch(postEvent(query)),
+  patchEventDispatch: (query: tUpsertMeetingQuery) => dispatch(patchEvent(query)),
+  postMeetingDispatch: (query: tUpsertMeetingQuery) => dispatch(postMeeting(query)),
 });
 
 const PlanMeeting = connect(

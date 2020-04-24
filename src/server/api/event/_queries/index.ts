@@ -1,1 +1,0 @@
-export {getEvent} from './getEvent';

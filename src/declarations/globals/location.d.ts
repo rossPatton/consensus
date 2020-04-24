@@ -15,7 +15,7 @@ declare type tRoute = Readonly<{
   redirect?: string,
 }>;
 
-declare type tEventParams = Readonly<{
+declare type tMeetingParams = Readonly<{
   idOrSlug: number | string,
 }>;
 

@@ -1,7 +1,7 @@
 declare type tRSVPValue = 'yes' | 'no' | 'maybe' | '' | null;
 
 declare type tRSVP = Readonly<{
-  eventId: number,
+  meetingId: number,
   id?: number,
   type: 'public' | 'private',
   userId: number,
@@ -9,7 +9,7 @@ declare type tRSVP = Readonly<{
 }>;
 
 declare type tRSVPQuery = Readonly<{
-  eventId: number,
+  meetingId: number,
   type: 'public' | 'private',
   value: tRSVPValue,
 }>;

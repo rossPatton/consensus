@@ -7,9 +7,9 @@ export const getGroupById = async (
   ctx: Koa.ParameterizedContext,
   id: string | number): Promise<tGroup> => {
 
-  let org = {} as tGroup;
+  let group = {} as tGroup;
   try {
-    org = await knex('orgs')
+    group = await knex('groups')
       .limit(1)
       .where({id})
       .first()
@@ -18,5 +18,5 @@ export const getGroupById = async (
     return ctx.throw(500, err);
   }
 
-  return org;
+  return group;
 };

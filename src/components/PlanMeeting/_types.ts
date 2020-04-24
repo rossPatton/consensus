@@ -1,26 +1,26 @@
 import {Location} from 'history';
 
-export type tState = Partial<tEvent> & {
+export type tState = Partial<tMeeting> & {
   duration: string | number,
   isCopy: boolean,
   time: string,
 };
 
 export type tStore = {
-  eventsByOrgId: tThunk<tEvent[]>,
+  meetingsByGroupId: tThunk<tMeeting[]>,
   session: tThunk<tSession>,
 };
 
 export type tKeyUnion = keyof tState;
 export type tValueUnion = ValueOf<tState>;
-export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
+export type tMeetingTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export type tContainerProps = {
-  events: tEvent[],
+  meetings: tMeeting[],
   heading?: string,
-  org: tGroup,
-  patchEventDispatch: (query: tUpsertEventQuery) => tThunkPayload<tEvent>,
-  postEventDispatch: (query: tUpsertEventQuery) => tThunkPayload<tEvent>,
+  group: tGroup,
+  patchEventDispatch: (query: tUpsertMeetingQuery) => tThunkPayload<tMeetingSingular>,
+  postMeetingDispatch: (query: tUpsertMeetingQuery) => tThunkPayload<tMeetingSingular>,
   router: Location,
   session: tSession,
 };

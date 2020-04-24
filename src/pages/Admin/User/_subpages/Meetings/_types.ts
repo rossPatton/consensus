@@ -1,16 +1,16 @@
 export type tStore = {
-  eventsByUserId: tThunk<tEvent[]>,
+  meetingsByUserId: tThunk<tMeeting[]>,
   session: tThunk<tSession>,
 };
 
 export type tComponentProps = {
-  events: tEvent[],
+  meetings: tMeeting[],
   onFilterOptionChange: tSelectChange,
   onSearchChange: tInputChange,
 };
 
 export type tContainerProps = {
-  eventsByUserIdThunk: tThunk<tEvent[]>,
-  getEventsByUserIdDispatch: (query: {userId: number}) => tThunkPayload<tEvent[]>,
+  meetingsByUserIdThunk: tThunk<tMeeting[]>,
+  getMeetingsByUserIdDispatch: (query: {userId: number}) => tThunkPayload<tMeeting[]>,
   sessionThunk: tThunk<tSession>,
 };

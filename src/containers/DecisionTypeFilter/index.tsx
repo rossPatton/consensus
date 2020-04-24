@@ -2,7 +2,7 @@
 
 // import {tProps, tState} from './_types';
 
-// // for use with events
+// // for use with meetings
 // export default class DecisionTypeFilter extends Component<tProps, tState> {
 //   state = {
 //     decisionFilter: 'n/a' as tDecisionType,

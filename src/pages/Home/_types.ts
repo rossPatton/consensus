@@ -1,16 +1,16 @@
 export type tStore = {
-  eventsByLocation: tThunk<tEvent[]>,
+  meetingsByLocation: tThunk<tMeeting[]>,
   geo: tThunk<tGeo>,
   session: tThunk<tSession>,
 };
 
 export type tProps = {
-  eventsByLocationThunk: tThunk<tEvent[]>,
+  meetingsByLocationThunk: tThunk<tMeeting[]>,
   geoThunk: tThunk<tGeo>,
   session: tSession,
 };
 
 export type tContainerProps = tProps & {
-  getEventsByLocationDispatch: (query: tGeo) => tThunkPayload<tEvent[]>,
+  getMeetingsByLocationDispatch: (query: tGeo) => tThunkPayload<tMeeting[]>,
   isLoading: boolean,
 };

@@ -10,7 +10,7 @@ export const failure = (payload: tResponseError): tFailureAction => ({
   payload,
 });
 
-export const success = (payload: tEvent[]): tSuccessAction => ({
+export const success = (payload: tMeeting[]): tSuccessAction => ({
   type: GET_SUCCESS,
   payload,
 });

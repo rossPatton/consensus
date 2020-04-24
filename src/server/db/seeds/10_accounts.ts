@@ -58,7 +58,7 @@ const createTestGroupAccount = async () => {
 
   return {
     login: 'twcNYC',
-    orgId: 1,
+    groupId: 1,
     privateEmail: faker.random.boolean(),
     password,
   };

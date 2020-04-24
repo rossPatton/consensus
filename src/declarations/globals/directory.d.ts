@@ -18,7 +18,7 @@ declare type tCity = Readonly<{
    country: string,
    id: number,
    name: string, // United States
-   orgs: tGroup[],
+   group: tGroup[],
    postcodes: number[],
    region: string,
    regionId: number,

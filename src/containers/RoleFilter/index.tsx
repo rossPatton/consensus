@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import {tProps, tState} from './_types';
 
-// for use with events
+// for use with meetings
 export default class RoleFilter extends Component<tProps, tState> {
   state = {
     roleFilter: 'n/a' as tRole,

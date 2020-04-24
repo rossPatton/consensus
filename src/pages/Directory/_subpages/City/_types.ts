@@ -2,7 +2,7 @@ import { match } from 'react-router-dom';
 
 export type tState = {
   category: tCategory,
-  orgsBySearch: tGroup[],
+  groupsBySearch: tGroup[],
 };
 
 export type tStore = {
@@ -19,7 +19,7 @@ export type tComponentProps = tProps & {
   city: tCity,
   onChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
   onSearch: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  orgsToRender: tGroup[],
+  groupsToRender: tGroup[],
 };
 
 export type tContainerProps = tProps & {

@@ -11,7 +11,7 @@ import {tContainerProps, tStore} from './_types';
 import {MembershipsComponent} from './Component';
 
 const MembershipsContainer = memo((props: tContainerProps) => (
-  <ErrorBoundary status={_.get(props, 'orgsByUserIdThunk.error.status', 200)}>
+  <ErrorBoundary status={_.get(props, 'groupsByUserIdThunk.error.status', 200)}>
     <Helmet
       canonical=""
       title=""
@@ -23,15 +23,15 @@ const MembershipsContainer = memo((props: tContainerProps) => (
       ]}
     />
     <GenericLoader
-      isLoading={props.orgsByUserIdThunk.isLoading}
+      isLoading={props.groupsByUserIdThunk.isLoading}
       render={() => (
         <SearchFilter
           searchKey="name"
-          items={props.orgsByUserIdThunk.data}
+          items={props.groupsByUserIdThunk.data}
           render={searchProps => (
             <MembershipsComponent
               onSearchChange={searchProps.onSearchChange}
-              orgs={searchProps.items}
+              groups={searchProps.items}
               roles={props.roles}
             />
           )}
@@ -42,7 +42,7 @@ const MembershipsContainer = memo((props: tContainerProps) => (
 ));
 
 const mapStateToProps = (store: tStore) => ({
-  orgsByUserIdThunk: store.orgsByUserId,
+  groupsByUserIdThunk: store.groupsByUserId,
   roles: store.roles.data,
   sessionThunk: store.session,
 });

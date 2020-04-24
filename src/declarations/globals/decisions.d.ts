@@ -32,8 +32,8 @@
 //    description: string,
 //    id: number,
 //    isClosed: boolean,
-//    orgId: number,
-//    orgName: string,
+//    groupId: number,
+//    groupName: string,
 //    title: string,
 //    type: tDecisionType,
 // }
@@ -41,5 +41,5 @@
 // declare type tVote = {
 //   data: any,
 //   decisionId: number,
-//   orgId: number,
+//   groupId: number,
 // }

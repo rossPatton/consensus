@@ -5,7 +5,7 @@ import {range} from 'lodash';
 import {getRandomNum} from '../../../utils/getRandomNum';
 const roles = ['member', 'pending', 'facilitator'];
 
-const createRelation = async (accountId: number, orgId: number) => {
+const createRelation = async (accountId: number, groupId: number) => {
   let role = roles[getRandomNum(0, roles.length - 1)];
   if (accountId === 101) { // test group admin
     role = 'admin';
@@ -15,7 +15,7 @@ const createRelation = async (accountId: number, orgId: number) => {
 
   return {
     accountId,
-    orgId,
+    groupId,
     role,
     userId: accountId === 101 ? null : accountId,
   };
@@ -25,8 +25,8 @@ exports.seed = async (knex: Knex) => {
   const fakeRelations = [];
 
   for await (const accountId of range(1, 99)) {
-    for await (const orgId of range(1, 100)) {
-      fakeRelations.push(await createRelation(accountId, orgId));
+    for await (const groupId of range(1, 100)) {
+      fakeRelations.push(await createRelation(accountId, groupId));
     }
   }
 

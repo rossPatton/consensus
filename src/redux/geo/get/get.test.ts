@@ -5,8 +5,8 @@ import {
   GET_FAILURE,
   GET_INIT,
   GET_SUCCESS,
-  tInitAction,
   tFailureAction,
+  tInitAction,
   tSuccessAction,
 } from './_types';
 import {failure, init, success} from './actions';

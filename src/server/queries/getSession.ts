@@ -9,7 +9,7 @@ export const getSession = async (
   account: tAccount,
 ): Promise<tThunk<tSession<tUser | tGroup>>> => {
   // we have 2 types of accounts,
-  // orgs and users, use account info to fetch the right one
+  // group and users, use account info to fetch the right one
   const profile = await getProfileByAccountId(ctx, account);
 
   let emails = [] as tEmail[];
@@ -18,7 +18,7 @@ export const getSession = async (
   }
 
   // for roles, etc, we want id here to be from the account, not the profile
-  const {deletionDeadline, id, isVerified, login, orgId, privateEmail} = account;
+  const {deletionDeadline, id, isVerified, login, groupId, privateEmail} = account;
 
   // we return things this way to match redux-thunk on the client
   return {
@@ -34,7 +34,7 @@ export const getSession = async (
       login, // unique login for account
       privateEmail,
       profile, // user or org profile
-      type: orgId ? 'org' : 'user', // account type
+      type: groupId ? 'org' : 'user', // account type
     },
   };
 };

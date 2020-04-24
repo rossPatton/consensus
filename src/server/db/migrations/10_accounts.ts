@@ -18,9 +18,9 @@ exports.up = async (knex: Knex) => {
       .onDelete('CASCADE');
 
     // if org type
-    table.integer('orgId')
+    table.integer('groupId')
       .unique()
-      .references('orgs.id')
+      .references('groups.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 

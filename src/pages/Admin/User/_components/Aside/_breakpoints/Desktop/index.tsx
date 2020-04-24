@@ -7,7 +7,7 @@ import {Avatar} from '~app/components';
 import {tProps} from '../../_types';
 
 const Aside = memo((props: tProps) => {
-  const {session, orgsByUserIdThunk} = props;
+  const {session, groupsByUserIdThunk} = props;
   const {profile} = props.session;
 
   return (
@@ -44,22 +44,22 @@ const Aside = memo((props: tProps) => {
           </div>
         </div>
       </div>
-      {!orgsByUserIdThunk.isLoading
-        && orgsByUserIdThunk.data.length > 0
+      {!groupsByUserIdThunk.isLoading
+        && groupsByUserIdThunk.data.length > 0
         && (
           <ul className="mb-3" role="navigation">
             <li className="mb-1">
               Your groups
             </li>
-            {orgsByUserIdThunk.data.slice(0, 3).map((group, i) => {
-              const roleMap = _.find(props.roles, r => r.orgId === group.id) || {};
+            {groupsByUserIdThunk.data.slice(0, 3).map((group, i) => {
+              const roleMap = _.find(props.roles, r => r.groupId === group.id) || {};
               const {role} = roleMap as tRoleMap;
               if (role === 'pending') return null;
 
               return (
                 <li key={i}>
                   <Link
-                    to={`/org/${group.handle}`}
+                    to={`/group/${group.handle}`}
                     className="rounded p-1 flex items-center no-underline hover:bg-gray-2 transition duration-150">
                     <Avatar
                       hash={group.avatarHash}

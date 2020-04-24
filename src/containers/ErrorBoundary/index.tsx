@@ -32,7 +32,7 @@ export default class ErrorBoundary extends PureComponent<tProps, tState> {
     // @TODO perhaps expand the options here a bit
     // we put error boundaries on subpages as well, and instead of blowing up the page
     // we just render a small error message in place instead
-    // a 204 here is not a problem really, a subpage for upcoming events just
+    // a 204 here is not a problem really, a subpage for upcoming meetings just
     // might not have any, so we only care about codes over 400
     if (isSubPage && status === 500) {
       return (

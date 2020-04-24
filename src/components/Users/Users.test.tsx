@@ -11,7 +11,7 @@ describe('Users component', () => {
   it('renders without crashing', () => {
     const store = mockStore({
       isLoading: false,
-      usersByOrgId: {data: [{id: 100}]},
+      usersByGroupId: {data: [{id: 100}]},
     });
 
     const group = {id: 1} as tGroup;

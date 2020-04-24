@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {OrgSignup, UserSignup} from './_subpages';
+import {GroupSignup, UserSignup} from './_subpages';
 import {tProps} from './_types';
 
 export const SignupComponent = memo((props: tProps) => (
@@ -40,7 +40,7 @@ export const SignupComponent = memo((props: tProps) => (
       <UserSignup />
     )}
     {props.match.params.type === 'newOrg' && (
-      <OrgSignup location={props.location} />
+      <GroupSignup location={props.location} />
     )}
   </>
 ));

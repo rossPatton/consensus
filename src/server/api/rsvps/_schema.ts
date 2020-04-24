@@ -5,7 +5,7 @@ export const getSchema = Joi.object({
 });
 
 export const postSchema = Joi.object({
-  eventId: Joi.number().integer().required(),
+  meetingId: Joi.number().integer().required(),
   type: Joi.string().valid('public', 'private').required(),
   value: Joi.string().valid('yes', 'no', 'maybe', '').required(),
 });

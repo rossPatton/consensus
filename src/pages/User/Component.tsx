@@ -1,10 +1,10 @@
 import React, {memo} from 'react';
 
-import {Orgs} from '~app/components';
+import {Groups} from '~app/components';
 
 import {tComponentProps} from './_types';
 
-export const UserComponent = memo(({orgs, user}: tComponentProps) => (
+export const UserComponent = memo(({groups, user}: tComponentProps) => (
   <>
     <h1 className="mb-2 fs2 capitalize">
       @{user.username}
@@ -42,11 +42,11 @@ export const UserComponent = memo(({orgs, user}: tComponentProps) => (
       </div>
     )}
     {!user.privateMemberships
-      && orgs.length > 0
+      && groups.length > 0
       && (
         <div className="w-full">
           <h3 className="mb-2">Memberships</h3>
-          <Orgs orgs={orgs} />
+          <Groups groups={groups} />
         </div>
       )}
   </>

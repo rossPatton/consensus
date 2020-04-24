@@ -18,7 +18,7 @@ describe('RSVP component', () => {
       isLoading: false,
       rsvps: {
         data: [{
-          eventId: 1,
+          meetingId: 1,
           type: 'public',
           userId: 100,
           value: 'yes',
@@ -34,13 +34,13 @@ describe('RSVP component', () => {
   });
 
   it('renders mobile without crashing', () => {
-    const event = {id: 1} as tEvent;
+    const meeting = {id: 1} as tMeeting;
 
     render.create((
       <Provider store={store}>
         <Router>
           <MatchMediaProvider isMobile>
-            <RSVP event={event} />
+            <RSVP meeting={meeting} />
           </MatchMediaProvider>
         </Router>
       </Provider>
@@ -48,13 +48,13 @@ describe('RSVP component', () => {
   });
 
   it('renders desktop without crashing', () => {
-    const event = {id: 1} as tEvent;
+    const meeting = {id: 1} as tMeeting;
 
     render.create((
       <Provider store={store}>
         <Router>
           <MatchMediaProvider isDesktop>
-            <RSVP event={event} />
+            <RSVP meeting={meeting} />
           </MatchMediaProvider>
         </Router>
       </Provider>

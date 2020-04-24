@@ -24,8 +24,8 @@ export const Emoji = loadable(() =>
   import(/* webpackChunkName: "Emoji" */'./Emoji'),
 );
 
-export const Events = loadable(() =>
-  import(/* webpackChunkName: "Events" */'./Events'),
+export const Meetings = loadable(() =>
+  import(/* webpackChunkName: "Meetings" */'./Meetings'),
 );
 
 export const ExternalLink = loadable(() =>
@@ -40,8 +40,8 @@ export const Helmet = loadable(() =>
   import(/* webpackChunkName: "Helmet" */'./Helmet'),
 );
 
-export const Orgs = loadable(() =>
-  import(/* webpackChunkName: "Orgs" */'./Orgs'),
+export const Groups = loadable(() =>
+  import(/* webpackChunkName: "Group" */'./Groups'),
 );
 
 export const PasswordInput = loadable(() =>

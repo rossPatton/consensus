@@ -7,20 +7,20 @@ export { getCities } from './cities';
 export { getCountry } from './country';
 export { getRegion } from './region';
 
-// event(s) related actions.thunks
-export { getEvent, patchEvent, postEvent } from './event';
-export { getEventsByLocation } from './eventsByLocation';
+// meeting(s) related actions.thunks
+export { getMeeting, patchEvent, postMeeting } from './meeting';
+export { getMeetingsByLocation } from './meetingsByLocation';
 export {
   deleteEvent,
-  getEventsByOrgId,
-  getEventsByOrgIdSuccess,
-} from './eventsByOrgId';
-export { getEventsByUserId } from './eventsByUserId';
+  getMeetingsByGroupId,
+  getMeetingsByGroupIdSuccess,
+} from './meetingsByGroupId';
+export { getMeetingsByUserId } from './meetingsByUserId';
 
-// org/group related actions/thunks
-export { getGroup, patchOrg, postGroup } from './org';
-export { getGroups } from './orgs';
-export { deleteOrgByUserId, getGroupsByUserId } from './orgsByUserId';
+// group/group related actions/thunks
+export { getGroup, patchOrg, postGroup } from './group';
+export { getGroups } from './groups';
+export { deleteOrgByUserId, getGroupsByUserId } from './groupsByUserId';
 
 // session related actions/thunks
 export { login, logout, logoutSuccess, patchSessionSuccess } from './session';
@@ -28,15 +28,15 @@ export { login, logout, logoutSuccess, patchSessionSuccess } from './session';
 // user related actions/thunks
 export { deleteUser, getUser, patchUser, postUser } from './user';
 export {
-  deleteUserByOrgId,
-  getUsersByOrgId,
-  patchUserByOrgId,
-  postUserByOrgId,
-} from './usersByOrgId';
+  deleteUserByGroupId,
+  getUsersByGroupId,
+  patchUserByGroupId,
+  postUserByGroupId,
+} from './usersByGroupId';
 
 // misc thunks
 export { getGeo } from './geo';
-export { getGroupsBySearch } from './orgsBySearch';
+export { getGroupsBySearch } from './groupsBySearch';
 export {
   deleteRoleSuccess,
   getRoles,

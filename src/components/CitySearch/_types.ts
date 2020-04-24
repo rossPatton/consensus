@@ -1,4 +1,4 @@
-export type tEventTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
+export type tMeetingTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 type tUpdateState = (key: any, value: string | number | object | boolean) => void;
 
 // these are inherited by the form

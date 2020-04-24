@@ -8,7 +8,7 @@ exports.up = async (knex: Knex) => {
     table.text('bio', 'longtext');
 
     // user's real name, optional value
-    // visible on profile and attendee list for events
+    // visible on profile and attendee list for meetings
     table.string('name');
 
     // default name for displaying
@@ -47,7 +47,7 @@ exports.up = async (knex: Knex) => {
     table.string('language').notNullable().defaultTo('en');
 
     // if set to true, user RSVPS show up in the count but aren't visible in RSVP list
-    // user will also be hidden from the attendees list on the event page
+    // user will also be hidden from the attendees list on the meeting page
     table.boolean('privateRSVP').notNullable().defaultTo(true);
 
     // if set to true, user memberships aren't visible to others in user profile

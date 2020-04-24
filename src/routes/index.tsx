@@ -3,11 +3,11 @@ import {Categories} from './Categories';
 import {Directory} from './Directory';
 import {Draft} from './Draft';
 import {ErrorPage} from './ErrorPage';
-import {Event} from './Event';
+import {Group} from './Group';
 import {Home} from './Home';
 import {Login} from './Login';
+import {Meeting} from './Meeting';
 import {NoMatch} from './NoMatch';
-import {Organization} from './Organization';
 import {PasswordReset} from './PasswordReset';
 import {Search} from './Search';
 import {Signup} from './Signup';
@@ -21,10 +21,10 @@ export const routes = [
   Directory,
   Draft,
   ErrorPage,
-  Event,
+  Meeting,
   Home,
   Login,
-  Organization,
+  Group,
   PasswordReset,
   Search,
   Signup,

@@ -1,14 +1,14 @@
 import _ from 'lodash';
 
-// takes events, and user rsvps, and zips them together
-export const zipEventsWithAttendees = async (events: tEvent[], rels: tRSVP[]) => {
+// takes meetings, and user rsvps, and zips them together
+export const zipEventsWithAttendees = async (meetings: tMeeting[], rels: tRSVP[]) => {
   return Promise.all(
-    events.map(async ev => {
+    meetings.map(async ev => {
       const publicRSVPS = [...rels].filter(
-        rel => rel.eventId === ev.id && rel.type === 'public',
+        rel => rel.meetingId === ev.id && rel.type === 'public',
       ).length;
       const privateRSVPS = [...rels].filter(
-        rel => rel.eventId === ev.id && rel.type === 'private',
+        rel => rel.meetingId === ev.id && rel.type === 'private',
       ).length;
 
       return {

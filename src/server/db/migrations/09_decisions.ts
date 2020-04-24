@@ -6,11 +6,11 @@ exports.up = async (knex: Knex) => {
     table.timestamps(true, true);
 
     // the org that made the decision / poll
-    table.integer('orgId').notNullable().references('orgs.id')
+    table.integer('groupId').notNullable().references('groups.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
-    table.string('orgName').notNullable();
+    table.string('groupName').notNullable();
 
     // the type of voting system the decision used (defaults to simple majority)
     table.string('type')

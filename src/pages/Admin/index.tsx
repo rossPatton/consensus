@@ -7,7 +7,7 @@ import {Helmet} from '~app/components';
 import {ErrorBoundary, GenericLoader, Template} from '~app/containers';
 
 import {tProps, tStore} from './_types';
-import {GroupAdmin} from './Organization';
+import {GroupAdmin} from './Group';
 import {UserAdmin} from './User';
 
 const AdminContainer = (props: tProps) => {

@@ -11,7 +11,7 @@ export const schema = Joi.object({
   passwordResetExpires: Joi.date().timestamp().allow(null),
   passwordResetToken: Joi.date().timestamp().allow(null),
   privateEmail: Joi.bool(),
-  orgId: Joi.number().integer().allow(null),
+  groupId: Joi.number().integer().allow(null),
   userId: Joi.number().integer().allow(null),
   verificationExpires: Joi.date().timestamp().allow(null),
   verificationToken: Joi.date().timestamp().allow(null),

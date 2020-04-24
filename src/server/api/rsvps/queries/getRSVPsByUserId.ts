@@ -10,7 +10,7 @@ export const getRSVPsByUserId = async (
 
   let rsvps: tRSVP[] = [];
   try {
-    rsvps = await knex('users_events').where({userId});
+    rsvps = await knex('users_meetings').where({userId});
   } catch (err) {
     return ctx.throw(500, err);
   }

@@ -8,23 +8,23 @@ import { postSchema } from './_schema';
 
 export const rsvp = new Router();
 const route = '/api/v1/rsvp';
-const table = 'users_events';
+const table = 'users_meetings';
 const dataPath = 'state.locals.data';
 
 // @TODO not really in use, since rsvps is more practical
 // perhaps remove?
 
-// post new rsvp for the logged in user, by eventId
+// post new rsvp for the logged in user, by meetingId
 // this is an upsert basically, post if new, patch if not
 rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, dataPath, {});
   await validateSchema(ctx, postSchema, query);
 
-  const {eventId, type = 'private', value = 'no'} = query;
+  const {meetingId, type = 'private', value = 'no'} = query;
   const userId = _.get(ctx, 'state.user.userId', 0);
 
   const newRsvp: tRSVP = {
-    eventId,
+    meetingId,
     type,
     userId,
     value,
@@ -34,14 +34,14 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     currentRSVPStatus = await knex(table)
       .limit(1)
-      .where({eventId, userId})
+      .where({meetingId, userId})
       .first();
   } catch (err) {
     return ctx.throw(500, err);
   }
 
   // TODO reduce branches or just simplify somehow
-  // update existing event or insert new users_events relation
+  // update existing meeting or insert new users_meetings relation
   if (currentRSVPStatus) {
     try {
       const update: tRSVP[] = await knex(table)

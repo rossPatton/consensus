@@ -1,22 +1,22 @@
 import React, { memo } from 'react';
 
-import { FilterPanel, Orgs } from '~app/components';
+import { FilterPanel, Groups } from '~app/components';
 
 import { tComponentProps } from './_types';
 
 export const CityComponent = memo((props: tComponentProps) => (
   <>
     <h1 className="mb-1">
-      Browse {props.city.orgs.length} {props.category} groups in {props.city.name}
+      Browse {props.city.group.length} {props.category} groups in {props.city.name}
     </h1>
     <FilterPanel
       onCategoryChange={props.onChange}
       onSearchChange={props.onSearch}
       placeholder="Filter by group name"
     />
-    <Orgs
+    <Groups
       count={16}
-      orgs={props.orgsToRender}
+      groups={props.groupsToRender}
       showType
     />
   </>

@@ -65,15 +65,15 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
   //   }
   // }
 
-  let orgs = [] as tGroup[];
+  let group = [] as tGroup[];
   try {
-    orgs = await knex('orgs')
+    group = await knex('groups')
       .where({
         cityId: city.id,
         countryId: 1,
         regionId: region.id,
       })
-      // exclude invite-only orgs from results
+      // exclude invite-only group from results
       .whereNot({
         type: 'hidden',
       })
@@ -84,7 +84,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   ctx.body = {
     ...city,
-    orgs: _.uniqBy(orgs, org => org.name),
+    group: _.uniqBy(group, group => group.name),
     // postcodes: postcodes.map(p => parseInt(p.code, 10)),
   };
 });

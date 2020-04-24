@@ -57,7 +57,7 @@ const createLongPasswordTestUser = async () => ({
 exports.seed = async (knex: Knex) => {
   const fakeUsers = [];
 
-  for await (const _ of range(1, 99)) {
+  for await (const _ of range(1, 100)) {
     fakeUsers.push(await createUser());
   }
 

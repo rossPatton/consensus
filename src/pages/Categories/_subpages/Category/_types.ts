@@ -4,9 +4,9 @@ export type tContainerProps = {
   getGroups: (query: {category: tCategory}) => tThunkPayload<tGroup[]>,
   isLoading: boolean,
   match: match & { params: tCategoryParams },
-  orgs: tThunk<tGroup[]>,
+  group: tThunk<tGroup[]>,
 }
 
 export type tStore = {
-  orgs: tThunk<tGroup[]>,
+  group: tThunk<tGroup[]>,
 };

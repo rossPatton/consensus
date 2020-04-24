@@ -5,7 +5,7 @@ export const accountKeys = [
   'isVerified',
   'privateEmail',
   'userId',
-  'orgId',
+  'groupId',
 ];
 
 export const eventKeys = [
@@ -18,8 +18,8 @@ export const eventKeys = [
   'location',
   'locationLink',
   'name',
-  'orgId',
-  'orgName',
+  'groupId',
+  'groupName',
   'publicRSVPS',
   'privateRSVPS',
   'rsvp',

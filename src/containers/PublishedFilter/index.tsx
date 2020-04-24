@@ -3,13 +3,13 @@ import React, {Component} from 'react';
 
 import {tProps, tState} from './_types';
 
-// for use with events, decisions, etc
+// for use with meetings, decisions, etc
 export default class PublishedFilter extends Component<tProps, tState> {
   state = {
     publishedFilter: 'upcoming' as tPublishedFilter,
   };
 
-  filter = (items: tEvent[]) => {
+  filter = (items: tMeeting[]) => {
     const now = dayjs();
     const {publishedFilter} = this.state;
 

@@ -46,7 +46,7 @@ class DraftContainer extends PureComponent<tContainerProps> {
               const userRoleMap = rolesThunk.fetched
               && _.find(
                 rolesThunk.data,
-                rm => rm.orgId === parseInt(draft.orgId as string, 10,
+                rm => rm.groupId === parseInt(draft.groupId as string, 10,
                 ),
               );
 
@@ -60,7 +60,7 @@ class DraftContainer extends PureComponent<tContainerProps> {
 
               return (
                 <DraftComponent
-                  event={draft as tEvent}
+                  meeting={draft as tMeeting}
                 />
               );
             }}

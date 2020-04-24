@@ -36,7 +36,7 @@ const EditProfile = memo((props: tComponentProps) => (
             Username
           </h2>
           <p className="text-base text-gray-5 mb-1">
-            This is your display name on the site. Must be unique. You must fill this out in order to join groups or RSVP to events. You may change it at any time.
+            This is your display name on the site. Must be unique. You must fill this out in order to join groups or RSVP to meetings. You may change it at any time.
           </p>
           <input
             id="username"
@@ -50,7 +50,7 @@ const EditProfile = memo((props: tComponentProps) => (
         <CitySearch
           {...props}
           updateState={props.updateState}
-          label="What city do you live in? This will help us suggest relevant events and groups for you."
+          label="What city do you live in? This will help us suggest relevant meetings and groups for you."
         />
         <label className="w-full mb-3" htmlFor="bio">
           <h2 className="text-base mb-1 leading-none">
@@ -142,7 +142,7 @@ const EditProfile = memo((props: tComponentProps) => (
               'Only you can see your RSVPS.'
             )}
             {!props.privateRSVP && (
-              'RSVPs will be shown publicly on events you have RSVPd to.'
+              'RSVPs will be shown publicly on meetings you have RSVPd to.'
             )}
           </span>
         </div>

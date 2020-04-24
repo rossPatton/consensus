@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { FilterPanel, Helmet, Orgs } from '~app/components';
+import { FilterPanel, Groups, Helmet } from '~app/components';
 import { categoryMap } from '~app/constants';
 import {
   ErrorBoundary,
@@ -24,10 +24,10 @@ class CategoryContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {isLoading, orgs} = this.props;
+    const {isLoading, group} = this.props;
 
     return (
-      <ErrorBoundary status={_.get(orgs, 'error.status', 200)}>
+      <ErrorBoundary status={_.get(group, 'error.status', 200)}>
         <Helmet
           canonical=""
           title=""
@@ -43,19 +43,19 @@ class CategoryContainer extends PureComponent<tContainerProps> {
           render={() => (
             <>
               <SearchFilter
-                items={orgs.data}
+                items={group.data}
                 searchKey="name"
                 render={searchProps => (
                   <Paginate
                     count={9}
                     items={searchProps.items}
-                    render={(orgsToRender: tGroup[]) => (
+                    render={(groupsToRender: tGroup[]) => (
                       <>
                         <FilterPanel
                           onSearchChange={searchProps.onSearchChange}
                           placeholder="Filter groups by name"
                         />
-                        <Orgs orgs={orgsToRender} />
+                        <Groups groups={groupsToRender} />
                       </>
                     )}
                   />
@@ -70,8 +70,8 @@ class CategoryContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.orgs.isLoading,
-  orgs: store.orgs,
+  isLoading: store.group.isLoading,
+  group: store.group,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

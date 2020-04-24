@@ -1,7 +1,7 @@
 import React from 'react';
 
 export interface tProps {
-  items: tEvent[],
+  items: tMeeting[],
   render: (renderProps: tPublishedFilterProps) => React.ReactNode,
 }
 

@@ -23,8 +23,8 @@ const Footer = memo(() => (
           </Link>
         </li>
         <li>
-          <Link to="/event/100">
-            Events
+          <Link to="/meeting/100">
+            Meetings
           </Link>
         </li>
       </ul>

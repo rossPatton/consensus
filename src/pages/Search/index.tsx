@@ -3,7 +3,7 @@ import qs from 'query-string';
 import React, {memo} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet, Orgs, SuperSearch} from '~app/components';
+import {Groups, Helmet, SuperSearch} from '~app/components';
 import {ErrorBoundary, GenericLoader, Template} from '~app/containers';
 import {getGroupsBySearch} from '~app/redux';
 
@@ -17,11 +17,11 @@ const meta = [
 ];
 
 const SearchContainer = memo((props: tProps) => {
-  const {orgsBySearch} = props;
+  const {groupsBySearch} = props;
 
   return (
     <Template>
-      <ErrorBoundary status={_.get(orgsBySearch, 'error.status', 200)}>
+      <ErrorBoundary status={_.get(groupsBySearch, 'error.status', 200)}>
         <Helmet
           canonical="search"
           title="Consensus: Search"
@@ -32,11 +32,11 @@ const SearchContainer = memo((props: tProps) => {
         </h1>
         <SuperSearch />
         <GenericLoader
-          isLoading={orgsBySearch.isLoading}
+          isLoading={groupsBySearch.isLoading}
           render={() => (
-            <Orgs
+            <Groups
               showLocation
-              orgs={orgsBySearch.data}
+              groups={groupsBySearch.data}
             />
           )}
         />
@@ -46,7 +46,7 @@ const SearchContainer = memo((props: tProps) => {
 });
 
 const mapStateToProps = (store: tStore) => ({
-  orgsBySearch: store.orgsBySearch,
+  groupsBySearch: store.groupsBySearch,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

@@ -3,7 +3,7 @@ import {RouteComponentProps} from 'react-router';
 
 export type tSetRsvpOpts = {
   ev: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
-  eventId: number,
+  meetingId: number,
 }
 
 export type tStore = {
@@ -19,7 +19,7 @@ export type tState = {
 
 type tProps = {
   className?: string,
-  event: tEvent,
+  meeting: tMeeting,
   role?: tRole,
   session: tSession,
 };

@@ -1,0 +1,1 @@
+export {getMeetingsByQuery} from './getMeetingsByQuery';

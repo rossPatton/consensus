@@ -1,20 +1,20 @@
 // get all members of an org by id
-declare type tUsersByOrgIdQuery = tBaseQuery & {
+declare type tUsersByGroupIdQuery = tBaseQuery & {
   allowNonVerified?: boolean,
   noPending?: 'true' | 'false',
-  orgId: string | number,
+  groupId: string | number,
   userId?: string | number,
   role?: tRole,
 };
 
-// get all orgs that a user belongs to by userId
+// get all group that a user belongs to by userId
 declare type tGroupsByUserIdQuery = tBaseQuery & {
   noPending?: boolean,
   userId: string | number,
 };
 
 // you can both leave an org yourself or be removed, so userId is needed here
-declare type tDeleteUserByOrgIdQuery = tUserByOrgQuery & {
+declare type tDeleteUserByGroupIdQuery = tUserByOrgQuery & {
   userId: string | number,
 };
 

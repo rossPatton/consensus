@@ -1,6 +1,6 @@
 // everything gets turned into strings
-export type tEventsServerQuery = {
-  eventId: string,
+export type tMeetingsServerQuery = {
+  meetingId: string,
   type: 'public' | 'private',
   value: 'true' | 'false',
 };

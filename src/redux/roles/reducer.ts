@@ -46,8 +46,8 @@ export const rolesReducer = (state = initialState, action: tRolesActionUnion) =>
     return successReturn;
 
   case POST_SUCCESS: {
-    const {orgId, role} = action.payload;
-    const data = [...state.data, {orgId, role}];
+    const {groupId, role} = action.payload;
+    const data = [...state.data, {groupId, role}];
 
     return {
       ...state,
@@ -57,9 +57,9 @@ export const rolesReducer = (state = initialState, action: tRolesActionUnion) =>
   }
 
   case DELETE_SUCCESS: {
-    const {orgId} = action.payload;
+    const {groupId} = action.payload;
     const copy = [...state.data];
-    const data = _.filter(copy, (r: tRoleMap) => orgId !== r.orgId);
+    const data = _.filter(copy, (r: tRoleMap) => groupId !== r.groupId);
 
     return {
       ...state,

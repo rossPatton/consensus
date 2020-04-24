@@ -12,9 +12,9 @@ exports.up = async (knex: Knex) => {
       .onDelete('CASCADE');
 
     // org where the user has the role
-    table.integer('orgId')
+    table.integer('groupId')
       .notNullable()
-      .references('orgs.id')
+      .references('groups.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
@@ -25,7 +25,7 @@ exports.up = async (knex: Knex) => {
       .onDelete('CASCADE');
 
     // create unique composite key. a user can only have 1 role per org
-    table.unique(['orgId', 'accountId', 'userId']);
+    table.unique(['groupId', 'accountId', 'userId']);
 
     // relation the account has to the org
     // 'admin' || 'member' || pending || 'facilitator'

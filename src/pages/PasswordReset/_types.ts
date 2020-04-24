@@ -23,7 +23,7 @@ export type tContainerProps = tStore & {
 }
 
 export type tComponentProps = tState & {
-  resetPasswordByEmail: (event: React.FormEvent<HTMLFormElement>) => void,
-  sendPasswordResetEmail: (event: React.FormEvent<HTMLFormElement>) => void,
+  resetPasswordByEmail: (meeting: React.FormEvent<HTMLFormElement>) => void,
+  sendPasswordResetEmail: (meeting: React.FormEvent<HTMLFormElement>) => void,
   updateState: (key: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 }

@@ -3,7 +3,7 @@ export type tState = {
 };
 
 export type tRoleOpts = {
-  orgId: number,
+  groupId: number,
   role: tRole,
   userId: number,
 };
@@ -16,14 +16,14 @@ export type tProps = {
 }
 
 export type tContainerProps = tProps & {
-  deleteUserByOrgIdDispatch: (query: tDeleteUserByOrgIdQuery) =>
+  deleteUserByGroupIdDispatch: (query: tDeleteUserByGroupIdQuery) =>
     tThunkPayload<{ok: true}>,
-  getUsersByOrgIdDispatch: (query: tUsersByOrgIdQuery) =>
+  getUsersByGroupIdDispatch: (query: tUsersByGroupIdQuery) =>
     tThunkPayload<tUser[]>,
   isLoading: boolean,
-  patchUserByOrgIdDispatch: (opts: tPatchUserRoleQuery) =>
+  patchUserByGroupIdDispatch: (opts: tPatchUserRoleQuery) =>
     tThunkPayload<tUser>,
-  usersByOrgId: tUser[],
+  usersByGroupId: tUser[],
 }
 
 export type tComponentProps = tMediaContext

@@ -16,7 +16,7 @@ const testGroup = {
 describe('PlanMeeting component', () => {
   it('renders without crashing', () => {
     const store = mockStore({
-      eventsByOrgId: {
+      meetingsByGroupId: {
         data: [{}],
       },
       session: {data: {isAuthenticated: false}},
@@ -25,7 +25,7 @@ describe('PlanMeeting component', () => {
     render.create((
       <Provider store={store}>
         <PlanMeeting
-          org={testGroup}
+          group={testGroup}
           router={{pathname: '', state: {}, hash: '', search: ''}}
         />
       </Provider>

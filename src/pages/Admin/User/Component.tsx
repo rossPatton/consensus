@@ -78,7 +78,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
         <Aside
           isDesktop={props.isDesktop}
           isMobile={props.isMobile}
-          orgsByUserIdThunk={props.orgsByUserIdThunk}
+          groupsByUserIdThunk={props.groupsByUserIdThunk}
           roles={props.roles}
           session={props.session}
         />

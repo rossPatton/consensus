@@ -3,39 +3,39 @@ import { combineReducers } from 'redux';
 import { citiesReducer } from './cities/reducer';
 import { cityReducer } from './city/reducer';
 import { countryReducer } from './country/reducer';
-import { eventReducer } from './event/reducer';
-import { eventsByLocationReducer } from './eventsByLocation/reducer';
-import { eventsByOrgIdReducer } from './eventsByOrgId/reducer';
-import { eventsByUserIdReducer } from './eventsByUserId/reducer';
 import { geoReducer } from './geo/reducer';
-import { orgReducer } from './org/reducer';
-import { orgsReducer } from './orgs/reducer';
-import { orgsBySearchReducer } from './orgsBySearch/reducer';
-import { orgsByUserIdReducer } from './orgsByUserId/reducer';
+import { groupReducer } from './group/reducer';
+import { groupsReducer } from './groups/reducer';
+import { groupsBySearchReducer } from './groupsBySearch/reducer';
+import { groupsByUserIdReducer } from './groupsByUserId/reducer';
+import { eventReducer } from './meeting/reducer';
+import { meetingsByGroupIdReducer } from './meetingsByGroupId/reducer';
+import { meetingsByLocationReducer } from './meetingsByLocation/reducer';
+import { meetingsByUserIdReducer } from './meetingsByUserId/reducer';
 import { regionReducer } from './region/reducer';
 import { rolesReducer } from './roles/reducer';
 import { rsvpsReducer } from './rsvps/reducer';
 import { sessionReducer } from './session/reducer';
 import { userReducer } from './user/reducer';
-import { usersByOrgIdReducer } from './usersByOrgId/reducer';
+import { usersByGroupIdReducer } from './usersByGroupId/reducer';
 
 export const rootReducer = combineReducers({
   city: cityReducer,
   cities: citiesReducer,
   country: countryReducer,
-  event: eventReducer,
-  eventsByLocation: eventsByLocationReducer,
-  eventsByOrgId: eventsByOrgIdReducer,
-  eventsByUserId: eventsByUserIdReducer,
+  meeting: eventReducer,
+  meetingsByLocation: meetingsByLocationReducer,
+  meetingsByGroupId: meetingsByGroupIdReducer,
+  meetingsByUserId: meetingsByUserIdReducer,
   geo: geoReducer,
-  org: orgReducer,
-  orgs: orgsReducer,
-  orgsBySearch: orgsBySearchReducer,
-  orgsByUserId: orgsByUserIdReducer,
+  group: groupReducer,
+  groups: groupsReducer,
+  groupsBySearch: groupsBySearchReducer,
+  groupsByUserId: groupsByUserIdReducer,
   region: regionReducer,
   roles: rolesReducer,
   rsvps: rsvpsReducer,
   session: sessionReducer,
   user: userReducer,
-  usersByOrgId: usersByOrgIdReducer,
+  usersByGroupId: usersByGroupIdReducer,
 });

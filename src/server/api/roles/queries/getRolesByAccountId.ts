@@ -12,7 +12,7 @@ export const getRolesByAccountId = async (
   try {
     roles = await knex('accounts_roles')
       .where({accountId})
-      .select('orgId', 'role');
+      .select('groupId', 'role');
   } catch (err) {
     return ctx.throw(500, err);
   }

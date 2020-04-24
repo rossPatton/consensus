@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 
-import {Events, FilterPanel} from '~app/components';
+import {FilterPanel, Meetings} from '~app/components';
 
 import {tComponentProps} from './_types';
 
@@ -18,11 +18,11 @@ export const MeetingsComponent = memo((props: tComponentProps) => (
       onSearchChange={props.onSearchChange}
       filterOptions={[
         {key: 'title', display: 'Title'},
-        {key: 'orgName', display: 'Group'},
+        {key: 'groupName', display: 'Group'},
       ]}
     />
-    <Events
-      events={props.events}
+    <Meetings
+      meetings={props.meetings}
       showOrgName
       type="rsvps"
     />

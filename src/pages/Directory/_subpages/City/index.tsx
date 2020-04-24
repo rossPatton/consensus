@@ -13,7 +13,7 @@ import {CityComponent} from './Component';
 class CityContainer extends PureComponent<tContainerProps, tState> {
   state = {
     category: '' as tCategory,
-    orgsBySearch: [] as tGroup[],
+    groupsBySearch: [] as tGroup[],
   };
 
   constructor(props: tContainerProps) {
@@ -27,9 +27,9 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
   }
 
   // Re-run the filter whenever the list array or filter text changes:
-  filterByCategory = (orgs: tGroup[]) => {
-    if (this.state.category === '') return orgs;
-    return orgs.filter(org => org.category === this.state.category);
+  filterByCategory = (group: tGroup[]) => {
+    if (this.state.category === '') return group;
+    return group.filter(group => group.category === this.state.category);
   };
 
   onChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
@@ -42,8 +42,8 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
   onSearch = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
     this.setState({
-      orgsBySearch: fuzzFilterList({
-        input: this.props.city.data.orgs,
+      groupsBySearch: fuzzFilterList({
+        input: this.props.city.data.group,
         search: ev.currentTarget.value,
       }),
     });
@@ -65,10 +65,10 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
         <GenericLoader
           isLoading={this.props.isCityLoading}
           render={() => {
-            const {orgsBySearch} = this.state;
-            const orgsToRender = orgsBySearch.length > 0
-              ? orgsBySearch
-              : this.props.city.data.orgs;
+            const {groupsBySearch} = this.state;
+            const groupsToRender = groupsBySearch.length > 0
+              ? groupsBySearch
+              : this.props.city.data.group;
 
             return (
               <>
@@ -97,7 +97,7 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
                   match={this.props.match}
                   onChange={this.onChange}
                   onSearch={this.onSearch}
-                  orgsToRender={this.filterByCategory(orgsToRender)}
+                  groupsToRender={this.filterByCategory(groupsToRender)}
                 />
               </>
             );

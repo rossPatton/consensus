@@ -6,9 +6,9 @@ export interface tProps {
   getSearchResults: (searchObj: qs.ParsedQuery) => Promise<tGroup[]>,
   location: H.Location,
   match: match & {params: tSearchParams},
-  orgsBySearch: tThunk<tGroup[]>,
+  groupsBySearch: tThunk<tGroup[]>,
 }
 
 export type tStore = {
-  orgsBySearch: tThunk<tGroup[]>,
+  groupsBySearch: tThunk<tGroup[]>,
 };

@@ -28,8 +28,8 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let roles: tRoleMap[];
   let rsvps: tRSVP[];
-  let meetings: tEvent[];
-  const type = account.orgId ? 'org' : 'user';
+  let meetings: tMeeting[];
+  const type = account.groupId ? 'org' : 'user';
 
   if (type === 'user') {
     try {
@@ -40,7 +40,7 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
       return ctx.throw(500, err);
     }
     try {
-      rsvps = await knex('users_events')
+      rsvps = await knex('users_meetings')
         .where({userId: account.userId})
         .select(['type', 'value']);
     } catch (err) {
@@ -48,8 +48,8 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
     }
   } else {
     try {
-      meetings = await knex('events')
-        .where({orgId: account.orgId})
+      meetings = await knex('meetings')
+        .where({groupId: account.groupId})
         .select('*');
     } catch (err) {
       return ctx.throw(500, err);

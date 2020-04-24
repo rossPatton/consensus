@@ -9,7 +9,7 @@ import {slugify} from '~app/utils';
 import {tComponentProps} from './_types';
 
 export const DraftComponent = memo((props: tComponentProps) => {
-  const {event} = props;
+  const {meeting} = props;
 
   return (
     <>
@@ -18,41 +18,41 @@ export const DraftComponent = memo((props: tComponentProps) => {
       </div>
       <div className="mb-2">
         <Link
-          to={`/org/${slugify(event.orgName)}`}
+          to={`/group/${slugify(meeting.groupName)}`}
           className="no-underline font-bold leading-none">
-          {event.orgName}
+          {meeting.groupName}
         </Link>
       </div>
       <div className="flex flex-col d:flex-row mb-4 pb-2">
         <div className="mr-3">
           <PlaceholderImage
             height={420}
-            seed={event.id}
+            seed={meeting.id}
             width={640}
           />
         </div>
         <div className="w-full relative">
-          <time className="font-bold leading-none mb-2" dateTime={event.date}>
-            {dayJS(event.date).format('ddd MMM DD YYYY, h:mmA')}
+          <time className="font-bold leading-none mb-2" dateTime={meeting.date}>
+            {dayJS(meeting.date).format('ddd MMM DD YYYY, h:mmA')}
           </time>
           <h1 className=" mb-2 capitalize">
-            {event.title}
+            {meeting.title}
           </h1>
           <div className="font-bold mb-2">
             <div>
-              {event.locationLink && (
+              {meeting.locationLink && (
                 <ExternalLink
                   noFollow
-                  to={event.locationLink}>
-                  {event.location}
+                  to={meeting.locationLink}>
+                  {meeting.location}
                 </ExternalLink>
               )}
-              {!event.locationLink && event.location}
+              {!meeting.locationLink && meeting.location}
             </div>
           </div>
-          {event.description && (
+          {meeting.description && (
             <div className="text-base">
-              {event.description.split('\n').map((p: string, i) => (
+              {meeting.description.split('\n').map((p: string, i) => (
                 <p key={i} className="text-3">
                   {p}
                 </p>

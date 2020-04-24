@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import React, {memo} from 'react';
 
-import {FilterPanel, Orgs} from '~app/components';
+import {FilterPanel, Groups} from '~app/components';
 
 import {tComponentProps} from './_types';
 
@@ -16,10 +16,10 @@ export const MembershipsComponent = memo((props: tComponentProps) => (
       onSearchChange={props.onSearchChange}
       placeholder="Filter groups by name"
     />
-    <Orgs
+    <Groups
       asList
       isEditable
-      orgs={props.orgs}
+      groups={props.groups}
       showPending
     />
   </>
