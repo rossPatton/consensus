@@ -6,11 +6,13 @@ declare type tCountry = Readonly<{
    regionType: 'state'|'province'|'prefecture';
 }>;
 
-declare type tRegion = tCountry & Readonly<{
+declare type tRegion = Readonly<{
    cities?: tCity[],
    code: string,
-   countryId: number,
    country: string,
+   countryId: number,
+   id: number,
+   name: string, // United States
 }>;
 
 declare type tCity = Readonly<{

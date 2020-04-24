@@ -1,7 +1,7 @@
 declare type tUser = Readonly<{
   avatarHash?: string,
   created_at?: Date,
-  bio: string,
+  bio?: string,
   city?: string, // city.name
   cityId?: number, // city.id
   // lives in accounts_emails table, but we merge into tUser when rendering user pages
