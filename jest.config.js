@@ -1,4 +1,7 @@
 module.exports = {
+  "collectCoverage": true,
+  "coverageReporters": ["html"],
+  "coverageDirectory": "coverage",
   globals: {
     __CLIENT__: true,
     __SERVER__: false,
