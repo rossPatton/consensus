@@ -1,41 +1,47 @@
-import { tActionUnion } from './_types';
-import { DELETE_FAILURE, DELETE_SUCCESS } from './delete/_types';
-import { GET_FAILURE, GET_SUCCESS } from './get/_types';
+import { tActions } from './_types';
+import { DELETE_FAILURE, DELETE_INIT, DELETE_SUCCESS } from './delete/_types';
+import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
-const initialState: tThunk<tMeeting[]> = {
+export const initialState: tThunk<tMeeting[]> = {
   error: null,
   fetched: false,
-  isLoading: true,
+  isLoading: false,
   data: [] as tMeeting[],
 };
 
-export const meetingsByGroupIdReducer = (state = initialState, action: tActionUnion) => {
+export const meetingsByGroupIdReducer = (state = initialState, action: tActions) => {
+  const initReturn = {
+    ...state,
+    isLoading: true,
+  };
+
   const failureReturn = {
     ...state,
     error: action.payload,
-    isLoading: false,
   };
 
   const successReturn = {
     ...state,
     fetched: true,
     data: action.payload,
-    isLoading: false,
   };
 
   switch (action.type) {
+  case DELETE_INIT:
+    return initReturn;
+  case GET_INIT:
+    return initReturn;
+
   case DELETE_FAILURE:
     return failureReturn;
-
   case GET_FAILURE:
     return failureReturn;
 
   case DELETE_SUCCESS: {
     const {id} = action.payload;
     return {
-      error: null,
+      ...state,
       data: [...state.data].filter(ev => ev.id !== id),
-      isLoading: false,
     };
   }
 

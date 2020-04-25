@@ -3,26 +3,24 @@ import thunk from 'redux-thunk';
 
 import {
   PATCH_FAILURE,
-  PATCH_INIT,
   PATCH_SUCCESS,
   tFailureAction,
-  tInitAction,
   tSuccessAction,
 } from './_types';
-import {failure, init, success} from './actions';
+import {failure, success} from './actions';
 
 const mockStore = configureStore([thunk]);
 
 describe('redux/session/patch', () => {
-  it('creates correct PATCH_INIT action', () => {
-    const expectedActionPayload: tInitAction[] = [{
-      type: PATCH_INIT,
-    }];
+  // it('creates correct PATCH_INIT action', () => {
+  //   const expectedActionPayload: tInitAction[] = [{
+  //     type: PATCH_INIT,
+  //   }];
 
-    const store = mockStore({});
-    store.dispatch(init());
-    expect(store.getActions()).toStrictEqual(expectedActionPayload);
-  });
+  //   const store = mockStore({});
+  //   store.dispatch(init());
+  //   expect(store.getActions()).toStrictEqual(expectedActionPayload);
+  // });
 
   it('creates correct PATCH_SUCCESS action', () => {
     const testSession = {

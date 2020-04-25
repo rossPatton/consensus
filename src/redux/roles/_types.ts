@@ -1,5 +1,6 @@
 import {
   tFailureAction as tDeleteFailureAction,
+  tInitAction as tDeleteInitAction,
   tSuccessAction as tDeleteSuccessAction,
 } from './delete/_types';
 import {
@@ -9,13 +10,16 @@ import {
 } from './get/_types';
 import {
   tFailureAction as tPostFailureAction,
+  tInitAction as tPostInitAction,
   tSuccessAction as tPostSuccessAction,
 } from './post/_types';
 
-export type tRolesActionUnion = tDeleteFailureAction
+export type tActions = tDeleteInitAction
+  | tDeleteFailureAction
   | tDeleteSuccessAction
   | tGetInitAction
   | tGetFailureAction
   | tGetSuccessAction
+  | tPostInitAction
   | tPostFailureAction
   | tPostSuccessAction;

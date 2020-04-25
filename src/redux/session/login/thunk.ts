@@ -1,7 +1,7 @@
 import { api } from '~app/utils';
 
 import { loginPath } from '../_constants';
-import { failure, success } from './actions';
+import { failure, init, success } from './actions';
 
 export const login = (query: tLoginQuery) => {
   return async function (dispatch: Function) {
@@ -9,6 +9,7 @@ export const login = (query: tLoginQuery) => {
       credentials: true,
       dispatch,
       failure,
+      init,
       method: 'POST',
       query,
       path: loginPath,

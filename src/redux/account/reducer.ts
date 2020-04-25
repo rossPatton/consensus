@@ -2,7 +2,7 @@ import { tAccountActionUnion } from './_types';
 import { DELETE_FAILURE, DELETE_SUCCESS } from './delete/_types';
 import { PATCH_FAILURE, PATCH_SUCCESS } from './patch/_types';
 
-const initialState: tThunk<tSession> = {
+export const initialState: tThunk<tSession> = {
   error: null,
   fetched: false,
   isLoading: true,

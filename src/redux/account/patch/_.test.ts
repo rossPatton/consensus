@@ -1,50 +1,44 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import {PATCH_FAILURE, PATCH_INIT, PATCH_SUCCESS} from './_types';
-import {failure, init, success} from './actions';
+import * as types from './_types';
+import * as actions from './actions';
 
 const mockStore = configureStore([thunk]);
 
 describe('redux/account/patch', () => {
   it('creates correct PATCH_INIT action', () => {
-    const expectedActionPayload = [{
-      type: PATCH_INIT,
+    const expectedActionPayload: types.tInitAction[] = [{
+      type: types.PATCH_INIT,
     }];
 
     const store = mockStore({});
-
-    // @ts-ignore @TODO mock common data types for jest
-    store.dispatch(init());
+    store.dispatch(actions.init());
     expect(store.getActions()).toStrictEqual(expectedActionPayload);
   });
 
   it('creates correct PATCH_SUCCESS action', () => {
-    const expectedActionPayload = [{
-      type: PATCH_SUCCESS,
-      payload: {isAuthenticated: true},
+    const expectedActionPayload: types.tSuccessAction[] = [{
+      type: types.PATCH_SUCCESS,
+      payload: {isAuthenticated: true} as tSession,
     }];
 
     const store = mockStore({});
-
-    // @ts-ignore @TODO mock common data types for jest
-    store.dispatch(success({isAuthenticated: true}));
+    store.dispatch(actions.success({isAuthenticated: true} as tSession));
     expect(store.getActions()).toStrictEqual(expectedActionPayload);
   });
 
   it('creates correct PATCH_FAILURE action', () => {
-    const expectedActionPayload = [{
+    const expectedActionPayload: types.tFailureAction[] = [{
       payload: {
         message: 'Oh no! An Error occurred',
         status: 500,
       },
-      type: PATCH_FAILURE,
+      type: types.PATCH_FAILURE,
     }];
 
     const store = mockStore({});
-
-    // @ts-ignore @TODO mock common data types for jest
-    store.dispatch(failure({
+    store.dispatch(actions.failure({
       message: 'Oh no! An Error occurred',
       status: 500,
     }));

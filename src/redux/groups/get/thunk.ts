@@ -1,13 +1,14 @@
 import { api } from '~app/utils';
 
 import { path } from '../_constants';
-import { failure, success } from './actions';
+import { failure, init, success } from './actions';
 
 export const getGroups = (query: tGetGroupQuery) => {
   return async function (dispatch: Function) {
     return api({
       dispatch,
       failure,
+      init,
       query,
       path,
       success,

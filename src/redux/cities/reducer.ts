@@ -1,14 +1,14 @@
-import { tCityActionUnion } from './_types';
+import { tCitiesActionUnion } from './_types';
 import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
-const initialState: tThunk<tCity[]> = {
+export const initialState: tThunk<tCity[]> = {
   error: null,
   fetched: false,
-  isLoading: true,
+  isLoading: false,
   data: [] as tCity[],
 };
 
-export const citiesReducer = (state = initialState, action: tCityActionUnion) => {
+export const citiesReducer = (state = initialState, action: tCitiesActionUnion) => {
   switch (action.type) {
   case GET_INIT:
     return {

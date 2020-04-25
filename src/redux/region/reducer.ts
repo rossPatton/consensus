@@ -1,20 +1,25 @@
-import { tRegionActionUnion } from './_types';
-import { GET_FAILURE, GET_SUCCESS } from './get/_types';
+import { tActions } from './_types';
+import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
-const initialState: tThunk<tRegion> = {
+export const initialState: tThunk<tRegion> = {
   error: null,
   fetched: true,
-  isLoading: true,
+  isLoading: false,
   data: {} as tRegion,
 };
 
-export const regionReducer = (state = initialState, action: tRegionActionUnion) => {
+export const regionReducer = (state = initialState, action: tActions) => {
   switch (action.type) {
+  case GET_INIT:
+    return {
+      ...state,
+      isLoading: true,
+    };
+
   case GET_FAILURE:
     return {
       ...state,
       error: action.payload,
-      isLoading: false,
     };
 
   case GET_SUCCESS:
@@ -22,7 +27,6 @@ export const regionReducer = (state = initialState, action: tRegionActionUnion) 
       ...state,
       fetched: true,
       data: action.payload,
-      isLoading: false,
     };
 
   default:

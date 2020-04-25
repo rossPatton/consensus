@@ -1,7 +1,7 @@
 import { tCountryActionUnion } from './_types';
 import { GET_FAILURE, GET_SUCCESS } from './get/_types';
 
-const initialState: tThunk<tCountry> = {
+export const initialState: tThunk<tCountry> = {
   error: null,
   fetched: false,
   isLoading: true,

@@ -1,44 +1,46 @@
 import _ from 'lodash';
 
-import { tRolesActionUnion } from './_types';
-import { DELETE_FAILURE, DELETE_SUCCESS } from './delete/_types';
+import { tActions } from './_types';
+import { DELETE_FAILURE, DELETE_INIT, DELETE_SUCCESS } from './delete/_types';
 import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
-import { POST_FAILURE, POST_SUCCESS } from './post/_types';
+import { POST_FAILURE, POST_INIT, POST_SUCCESS } from './post/_types';
 
-const initialState: tThunk<tRoleMap[]> = {
+export const initialState: tThunk<tRoleMap[]> = {
   error: null,
   fetched: false,
-  isLoading: true,
+  isLoading: false,
   data: [],
 };
 
-export const rolesReducer = (state = initialState, action: tRolesActionUnion) => {
+export const rolesReducer = (state = initialState, action: tActions) => {
+  const initReturn = {
+    ...state,
+    isLoading: true,
+  };
+
   const failureReturn = {
     ...state,
     error: action.payload,
-    isLoading: false,
   };
 
   const successReturn = {
     ...state,
     data: action.payload,
-    isLoading: false,
     fetched: true,
   };
 
   switch (action.type) {
   case GET_INIT:
-    return {
-      ...state,
-      isLoading: true,
-    };
+    return initReturn;
+  case DELETE_INIT:
+    return initReturn;
+  case POST_INIT:
+    return initReturn;
 
   case DELETE_FAILURE:
     return failureReturn;
-
   case GET_FAILURE:
     return failureReturn;
-
   case POST_FAILURE:
     return failureReturn;
 
@@ -52,7 +54,6 @@ export const rolesReducer = (state = initialState, action: tRolesActionUnion) =>
     return {
       ...state,
       data,
-      isLoading: false,
     };
   }
 
@@ -64,7 +65,6 @@ export const rolesReducer = (state = initialState, action: tRolesActionUnion) =>
     return {
       ...state,
       data,
-      isLoading: false,
     };
   }
 

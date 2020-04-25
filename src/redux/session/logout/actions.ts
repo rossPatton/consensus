@@ -1,9 +1,9 @@
 import {
-  LOGOUT_INIT,
   LOGOUT_FAILURE,
+  LOGOUT_INIT,
   LOGOUT_SUCCESS,
-  tInitAction,
   tFailureAction,
+  tInitAction,
   tSuccessAction,
 } from './_types';
 

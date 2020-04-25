@@ -3,7 +3,7 @@ import { GET_FAILURE, GET_SUCCESS } from './get/_types';
 import { PATCH_FAILURE, PATCH_SUCCESS } from './patch/_types';
 import { POST_FAILURE, POST_SUCCESS } from './post/_types';
 
-const initialState: tThunk<tGroup> = {
+export const initialState: tThunk<tGroup> = {
   error: null,
   fetched: false,
   isLoading: true,

@@ -1,9 +1,11 @@
 import {
   tFailureAction as tLoginFailureAction,
+  tInitAction as tLoginInitAction,
   tSuccessAction as tLoginSuccessAction,
 } from './login/_types';
 import {
   tFailureAction as tLogoutFailureAction,
+  tInitAction as tLogoutInitAction,
   tSuccessAction as tLogoutSuccessAction,
 } from './logout/_types';
 import {
@@ -11,8 +13,10 @@ import {
   tSuccessAction as tPatchSuccessAction,
 } from './patch/_types';
 
-export type tActionUnion = tLoginFailureAction
+export type tActions = tLoginInitAction
+  | tLoginFailureAction
   | tLoginSuccessAction
+  | tLogoutInitAction
   | tLogoutFailureAction
   | tLogoutSuccessAction
   | tPatchFailureAction

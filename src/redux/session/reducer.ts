@@ -1,30 +1,37 @@
-import { tActionUnion } from './_types';
-import { LOGIN_FAILURE, LOGIN_SUCCESS } from './login/_types';
-import { LOGOUT_FAILURE, LOGOUT_SUCCESS } from './logout/_types';
+import { tActions } from './_types';
+import { LOGIN_FAILURE, LOGIN_INIT, LOGIN_SUCCESS } from './login/_types';
+import { LOGOUT_FAILURE, LOGOUT_INIT, LOGOUT_SUCCESS } from './logout/_types';
 import { PATCH_FAILURE, PATCH_SUCCESS } from './patch/_types';
 
-const initialState: tThunk<tSession> = {
+export const initialState: tThunk<tSession> = {
   error: null,
   fetched: false,
-  isLoading: true,
+  isLoading: false,
   data: { isAuthenticated: false } as tSession,
 };
 
-export const sessionReducer = (state = initialState, action: tActionUnion) => {
+export const sessionReducer = (state = initialState, action: tActions) => {
   const failureReturn = {
     ...state,
     error: action.payload,
-    isLoading: false,
   };
 
   const successReturn = {
     ...state,
-    fetched: true,
     data: action.payload,
-    isLoading: false,
+  };
+
+  const initReturn = {
+    ...state,
+    isLoading: true,
   };
 
   switch (action.type) {
+  case LOGIN_INIT:
+    return initReturn;
+  case LOGOUT_INIT:
+    return initReturn;
+
   case LOGIN_FAILURE:
     return failureReturn;
   case LOGOUT_FAILURE:
@@ -33,17 +40,22 @@ export const sessionReducer = (state = initialState, action: tActionUnion) => {
     return failureReturn;
 
   case LOGIN_SUCCESS:
-    return successReturn;
+    return {
+      ...successReturn,
+      fetched: true,
+    };
   case LOGOUT_SUCCESS:
-    return successReturn;
+    return {
+      ...successReturn,
+      fetched: false,
+    };
   case PATCH_SUCCESS: {
     return {
-      error: null as null,
+      ...state,
       data: {
         ...state.data,
         ...action.payload,
       },
-      isLoading: false,
     };
   }
 

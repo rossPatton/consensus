@@ -1,9 +1,9 @@
 import {
-  GET_INIT,
   GET_FAILURE,
+  GET_INIT,
   GET_SUCCESS,
-  tInitAction,
   tFailureAction,
+  tInitAction,
   tSuccessAction,
 } from './_types';
 

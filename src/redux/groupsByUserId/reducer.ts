@@ -1,18 +1,20 @@
-import { tGroupsByUserIdActionUnion } from './_types';
-import { DELETE_FAILURE, DELETE_SUCCESS } from './delete/_types';
-import { GET_FAILURE, GET_SUCCESS } from './get/_types';
+import { tActions } from './_types';
+import { DELETE_FAILURE, DELETE_INIT, DELETE_SUCCESS } from './delete/_types';
+import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
-const initialState: tThunk<tGroup[]> = {
+export const initialState: tThunk<tGroup[]> = {
   error: null,
   fetched: false,
-  isLoading: true,
+  isLoading: false,
   data: [] as tGroup[],
 };
 
-export const groupsByUserIdReducer = (
-  state = initialState,
-  action: tGroupsByUserIdActionUnion,
-) => {
+export const groupsByUserIdReducer = (state = initialState, action: tActions) => {
+  const initReturn = {
+    ...state,
+    isLoading: true,
+  };
+
   const failureReturn = {
     ...state,
     error: action.payload,
@@ -27,9 +29,13 @@ export const groupsByUserIdReducer = (
   };
 
   switch (action.type) {
+  case DELETE_INIT:
+    return initReturn;
+  case GET_INIT:
+    return initReturn;
+
   case DELETE_FAILURE:
     return failureReturn;
-
   case GET_FAILURE:
     return failureReturn;
 

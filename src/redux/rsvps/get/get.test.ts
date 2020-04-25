@@ -28,7 +28,7 @@ describe('redux/rsvps/get', () => {
     const testRSVP = {
       meetingId: 1,
       id: 1,
-      type: "private",
+      type: 'private',
       userId: 1,
       value: 'yes',
     } as tRSVP;

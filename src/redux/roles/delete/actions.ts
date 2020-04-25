@@ -1,9 +1,9 @@
 import {
-  DELETE_INIT,
   DELETE_FAILURE,
+  DELETE_INIT,
   DELETE_SUCCESS,
-  tInitAction,
   tFailureAction,
+  tInitAction,
   tSuccessAction,
 } from './_types';
 

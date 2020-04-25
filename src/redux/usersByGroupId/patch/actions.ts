@@ -1,9 +1,9 @@
 import {
-  PATCH_INIT,
   PATCH_FAILURE,
+  PATCH_INIT,
   PATCH_SUCCESS,
-  tInitAction,
   tFailureAction,
+  tInitAction,
   tSuccessAction,
 } from './_types';
 
@@ -16,7 +16,7 @@ export const failure = (payload: tResponseError): tFailureAction => ({
   payload,
 });
 
-export const success = (payload: tUser): tSuccessAction => ({
+export const success = (payload: tAccountRoleRelation): tSuccessAction => ({
   type: PATCH_SUCCESS,
   payload,
 });

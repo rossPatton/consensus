@@ -1,7 +1,7 @@
 import { tGeoActionUnion } from './_types';
 import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
-const initialState: tThunk<tGeo> = {
+export const initialState: tThunk<tGeo> = {
   error: null,
   fetched: false,
   isLoading: false,

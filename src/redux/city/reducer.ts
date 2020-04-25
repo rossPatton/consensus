@@ -1,7 +1,7 @@
 import { tCityActionUnion } from './_types';
 import { GET_FAILURE, GET_SUCCESS } from './get/_types';
 
-const initialState: tThunk<tCity> = {
+export const initialState: tThunk<tCity> = {
   error: null,
   fetched: false,
   isLoading: true,

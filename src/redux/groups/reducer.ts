@@ -1,15 +1,21 @@
 import {tActionUnion} from './_types';
-import { GET_FAILURE, GET_SUCCESS } from './get/_types';
+import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
-const initialState: tThunk<tGroup[]> = {
+export const initialState: tThunk<tGroup[]> = {
   error: null,
   fetched: false,
-  isLoading: true,
+  isLoading: false,
   data: [] as tGroup[],
 };
 
 export const groupsReducer = (state = initialState, action: tActionUnion) => {
   switch (action.type) {
+
+  case GET_INIT:
+    return {
+      ...state,
+      isLoading: true,
+    };
 
   case GET_SUCCESS:
     return {

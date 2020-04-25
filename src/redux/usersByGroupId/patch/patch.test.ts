@@ -25,19 +25,17 @@ describe('redux/usersByGroupId/patch', () => {
   });
 
   it('creates correct PATCH_SUCCESS action', () => {
-    const testUser = {
-      id: 1,
-      bio: '',
-      username: 'testUser',
-    } as tUser;
+    const testRel = {
+      userId: 1,
+    } as tAccountRoleRelation;
 
     const expectedActionPayload: tSuccessAction[] = [{
       type: PATCH_SUCCESS,
-      payload: testUser,
+      payload: testRel,
     }];
 
     const store = mockStore({});
-    store.dispatch(success(testUser));
+    store.dispatch(success(testRel));
     expect(store.getActions()).toStrictEqual(expectedActionPayload);
   });
 

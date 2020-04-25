@@ -1,20 +1,25 @@
-import { tActionUnion } from './_types';
-import { GET_FAILURE, GET_SUCCESS } from './get/_types';
+import { tActions } from './_types';
+import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
-const initialState: tThunk<tMeeting[]> = {
+export const initialState: tThunk<tMeeting[]> = {
   error: null,
   fetched: false,
-  isLoading: true,
+  isLoading: false,
   data: [] as tMeeting[],
 };
 
-export const meetingsByUserIdReducer = (state = initialState, action: tActionUnion) => {
+export const meetingsByUserIdReducer = (state = initialState, action: tActions) => {
   switch (action.type) {
   case GET_FAILURE:
     return {
       ...state,
       error: action.payload,
-      isLoading: false,
+    };
+
+  case GET_INIT:
+    return {
+      ...state,
+      isLoading: true,
     };
 
   case GET_SUCCESS:
@@ -22,7 +27,6 @@ export const meetingsByUserIdReducer = (state = initialState, action: tActionUni
       ...state,
       fetched: true,
       data: action.payload,
-      isLoading: false,
     };
 
   default:

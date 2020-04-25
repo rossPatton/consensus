@@ -1,9 +1,9 @@
 import {
-  POST_INIT,
   POST_FAILURE,
+  POST_INIT,
   POST_SUCCESS,
-  tInitAction,
   tFailureAction,
+  tInitAction,
   tSuccessAction,
 } from './_types';
 

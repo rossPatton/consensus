@@ -8,7 +8,7 @@ import { groupReducer } from './group/reducer';
 import { groupsReducer } from './groups/reducer';
 import { groupsBySearchReducer } from './groupsBySearch/reducer';
 import { groupsByUserIdReducer } from './groupsByUserId/reducer';
-import { eventReducer } from './meeting/reducer';
+import { meetingReducer } from './meeting/reducer';
 import { meetingsByGroupIdReducer } from './meetingsByGroupId/reducer';
 import { meetingsByLocationReducer } from './meetingsByLocation/reducer';
 import { meetingsByUserIdReducer } from './meetingsByUserId/reducer';
@@ -23,7 +23,7 @@ export const rootReducer = combineReducers({
   city: cityReducer,
   cities: citiesReducer,
   country: countryReducer,
-  meeting: eventReducer,
+  meeting: meetingReducer,
   meetingsByLocation: meetingsByLocationReducer,
   meetingsByGroupId: meetingsByGroupIdReducer,
   meetingsByUserId: meetingsByUserIdReducer,

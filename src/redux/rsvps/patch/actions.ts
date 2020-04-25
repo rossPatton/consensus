@@ -1,9 +1,9 @@
 import {
-  PATCH_INIT,
   PATCH_FAILURE,
+  PATCH_INIT,
   PATCH_SUCCESS,
-  tInitAction,
   tFailureAction,
+  tInitAction,
   tSuccessAction,
 } from './_types';
 

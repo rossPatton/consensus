@@ -1,33 +1,38 @@
-import { tSearchActionUnion } from './_types';
-import { GET_FAILURE, GET_SUCCESS } from './get/_types';
+import { tActionUnion } from './_types';
+import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
-const initialState: tThunk<tGroup[]> = {
+export const initialState: tThunk<tGroup[]> = {
   error: null,
   fetched: false,
   isLoading: false,
   data: [],
 };
 
-export const groupsBySearchReducer =
-  (state = initialState, action: tSearchActionUnion) => {
-    switch (action.type) {
-    case GET_SUCCESS: {
-      return {
-        ...state,
-        fetched: true,
-        data: action.payload,
-        isLoading: false,
-      };
-    }
+export const groupsBySearchReducer = (state = initialState, action: tActionUnion) => {
+  switch (action.type) {
+  case GET_INIT: {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
 
-    case GET_FAILURE:
-      return {
-        data: [] as tGroup[],
-        error: action.payload,
-        isLoading: false,
-      };
+  case GET_SUCCESS: {
+    return {
+      ...state,
+      fetched: true,
+      data: action.payload,
+      isLoading: false,
+    };
+  }
 
-    default:
-      return state;
-    }
-  };
+  case GET_FAILURE:
+    return {
+      ...state,
+      error: action.payload,
+    };
+
+  default:
+    return state;
+  }
+};
