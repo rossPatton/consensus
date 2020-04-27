@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
@@ -43,15 +42,17 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
     ev.preventDefault();
     this.setState({
       groupsBySearch: fuzzFilterList({
-        input: this.props.city.data.group,
+        input: this.props.cityThunk.data.groups,
         search: ev.currentTarget.value,
       }),
     });
   }
 
   render() {
+    const {cityThunk, isCityLoading, region, isRegionLoading} = this.props;
+
     return (
-      <ErrorBoundary status={_.get(this.props.city, 'error.status', 200)}>
+      <ErrorBoundary status={cityThunk?.error?.status}>
         <Helmet
           canonical=""
           title=""
@@ -63,20 +64,18 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
           ]}
         />
         <GenericLoader
-          isLoading={this.props.isCityLoading}
+          isLoading={isCityLoading}
           render={() => {
             const {groupsBySearch} = this.state;
             const groupsToRender = groupsBySearch.length > 0
               ? groupsBySearch
-              : this.props.city.data.group;
+              : this.props.cityThunk.data.groups;
 
             return (
               <>
                 <GenericLoader
-                  isLoading={this.props.isRegionLoading}
+                  isLoading={isRegionLoading}
                   render={() => {
-                    const {city, region} = this.props;
-
                     const crumbs = [{
                       display: 'United States',
                       to: 'directory/us',
@@ -84,8 +83,8 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
                       display: region.name,
                       to: `directory/us/${region.code}`,
                     }, {
-                      display: city.data.name,
-                      to: `directory/us/${region.code}/${slugify(city.data.name)}`,
+                      display: cityThunk.data.name,
+                      to: `directory/us/${region.code}/${slugify(cityThunk.data.name)}`,
                     }];
 
                     return <Breadcrumbs crumbs={crumbs} />;
@@ -93,7 +92,7 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
                 />
                 <CityComponent
                   category={this.state.category}
-                  city={this.props.city.data}
+                  city={this.props.cityThunk.data}
                   match={this.props.match}
                   onChange={this.onChange}
                   onSearch={this.onSearch}
@@ -111,7 +110,7 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
 const mapStateToProps = (store: tStore) => ({
   isCityLoading: store.city.isLoading,
   isRegionLoading: store.region.isLoading,
-  city: store.city,
+  cityThunk: store.city,
   region: store.region.data,
 });
 

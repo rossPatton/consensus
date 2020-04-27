@@ -8,11 +8,10 @@ import {validateSchema} from '../../utils';
 import {schema} from './_schema';
 
 export const groups = new Router();
-const dataPath = 'state.locals.data';
 const route = '/api/v1/groups';
 
 groups.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = _.get(ctx, dataPath, {});
+  const query = ctx?.state?.locals?.data;
   await validateSchema(ctx, schema, query);
 
   let group: ts.group[] = [];

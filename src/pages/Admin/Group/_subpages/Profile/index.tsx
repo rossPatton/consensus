@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
@@ -13,6 +12,7 @@ import {ProfileComponent} from './Component';
 class ProfileContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
+    const group: ts.group = props?.sessionThunk?.data?.profile || {};
     const {
       avatarHash,
       city,
@@ -25,7 +25,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       regionId,
       updated_at,
       ...editablePartOfGroup
-    }: ts.group = _.get(this.props, 'sessionThunk.data.profile', {});
+    } = group;
 
     this.state = {
       ...editablePartOfGroup,
@@ -70,11 +70,11 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const {sessionThunk} = this.props;
-    const subsection: string = _.get(this.props, 'match.params.subsection', '');
+    const {match, sessionThunk} = this.props;
+    const {subsection} = match?.params;
 
     return (
-      <ErrorBoundary status={_.get(sessionThunk, 'error.status', 200)}>
+      <ErrorBoundary status={sessionThunk?.error?.status}>
         <Helmet
           canonical=""
           title=""

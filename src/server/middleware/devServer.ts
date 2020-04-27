@@ -7,7 +7,7 @@ import devMiddleware from 'webpack-dev-middleware';
 import webpackConfig from '../../../webpack';
 
 const compiler = webpack(webpackConfig);
-const { publicPath } = webpackConfig[0].output;
+const { publicPath } = webpackConfig?.[0].output;
 
 export const devServerMiddleware = async (app: Koa) => {
   app.use(c2k(devMiddleware(compiler, {

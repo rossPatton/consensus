@@ -21,7 +21,7 @@ const CurrentAccount = memo((props: tComponentProps) => (
       && (
         <h2 className="text-base mb-3 leading-none">
           Email: <span className="text-gray-5 mr-2">
-            {props.session.emails[0].email}
+            {props.session.emails?.[0].email}
           </span>
           <Link to="/verify-account">
             Verify your acount with this email

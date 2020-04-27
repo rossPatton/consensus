@@ -7,7 +7,7 @@ import {MediaContext} from '~app/context/MatchMediaProvider/_context';
 import {deleteEvent} from '~app/redux';
 
 import {tContainerProps, tStore} from './_types';
-import {EventsComponent} from './Component';
+import {MeetingsComponent} from './Component';
 
 class EventsContainer extends PureComponent<tContainerProps> {
   static contextType = MediaContext;
@@ -45,10 +45,10 @@ class EventsContainer extends PureComponent<tContainerProps> {
       <Paginate
         count={count}
         items={meetings}
-        render={(eventsToRender: ts.meeting[]) => (
-          <EventsComponent
+        render={(meetingsToRender: ts.meeting[]) => (
+          <MeetingsComponent
             deleteEvent={this.deleteEvent}
-            meetings={eventsToRender}
+            meetings={meetingsToRender}
             horizontal={this.props.horizontal}
             isEditable={isEditable}
             isMobile={isMobile}

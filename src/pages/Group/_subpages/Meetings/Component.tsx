@@ -4,15 +4,8 @@ import { FilterPanel, Meetings } from '~app/components';
 
 import { tComponentProps } from './_types';
 
-export const EventsComponent = memo((props: tComponentProps) => (
+export const MeetingsComponent = memo((props: tComponentProps) => (
   <div className="bg-white rounded p-2">
-    {props.originalEvents.length === 0
-      && !props.hideMeetings
-      && (
-        <h3>
-          This group has no upcoming meetings.
-        </h3>
-      )}
     {props.hideMeetings
       && (
         <h3>

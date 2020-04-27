@@ -21,7 +21,7 @@ namespace ts {
     country: string,
     id: number,
     name: string,
-    group: ts.group[],
+    groups: ts.group[],
     postcodes: number[],
     region: string,
     regionId: number,

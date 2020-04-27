@@ -35,7 +35,7 @@ namespace ts {
 
   declare type groupRouteParams = ts.paginateParams & Readonly<{
     idOrSlug: string,
-    section?: 'planMeeting' | 'drafts' | 'members' | 'pending',
+    section?: 'planMeeting' | 'drafts' | 'members' | 'pending' | 'meetings',
     slug: string,
   }>;
 }

@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
@@ -24,9 +23,10 @@ class UserContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
+    const {userThunk} = this.props;
     return (
       <Template>
-        <ErrorBoundary status={_.get(this.props, 'user.error.status', 200)}>
+        <ErrorBoundary status={userThunk?.error?.status}>
           <Helmet
             canonical=""
             title=""
@@ -38,12 +38,12 @@ class UserContainer extends PureComponent<tContainerProps> {
             ]}
           />
           <GenericLoader
-            isLoading={this.props.isLoading}
+            isLoading={userThunk.isLoading}
             render={() => (
               <UserComponent
                 match={this.props.match}
                 groups={this.props.groupsByUserId}
-                user={this.props.user}
+                user={userThunk.data}
               />
             )}
           />
@@ -54,9 +54,8 @@ class UserContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.user.isLoading,
   groupsByUserId: store.groupsByUserId.data,
-  user: store.user.data,
+  userThunk: store.user,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

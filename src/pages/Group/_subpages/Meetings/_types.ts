@@ -8,7 +8,6 @@ type tProps = {
 export type tComponentProps = ts.searchFilterProps & tProps & {
   meetings: ts.meeting[],
   hideMeetings: boolean,
-  originalEvents: ts.meeting[],
   type: 'drafts' | 'meetings',
 };
 

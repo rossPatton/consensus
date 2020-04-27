@@ -8,12 +8,11 @@ import {knex} from '../../db/connection';
 import {encrypt, saltedHash, sendEmail, validateSchema} from '../../utils';
 import {emailSchema, tokenSchema} from './_schema';
 
-const dataPath = 'state.locals.data';
 
 export const passwordResetViaEmail = new Router();
 passwordResetViaEmail.get('/email/v1/emailResetToken',
   async (ctx: Koa.ParameterizedContext) => {
-    const query: {email: string} = _.get(ctx, dataPath, {});
+    const query: {email: string} = ctx?.state?.locals?.data;
     await validateSchema<{email: string}>(ctx, emailSchema, query);
 
     let accountEmailRel: ts.email;
@@ -79,7 +78,7 @@ passwordResetViaEmail.get('/email/v1/emailResetToken',
 
 passwordResetViaEmail.patch('/email/v1/resetPasswordByEmail',
   async (ctx: Koa.ParameterizedContext) => {
-    const query = _.get(ctx, dataPath, {});
+    const query = ctx?.state?.locals?.data;
     await validateSchema(ctx, tokenSchema, query);
 
     let account: ts.account;

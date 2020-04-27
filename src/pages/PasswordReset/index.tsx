@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
@@ -80,11 +79,11 @@ class PasswordResetContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const enterCode = _.get(this.props, 'match.params.section', null);
+    const enterCode = this.props?.match?.params?.section;
 
     return (
       <Template>
-        <ErrorBoundary status={_.get(this.props, 'session.error.status', 200)}>
+        <ErrorBoundary status={this.props?.session?.error?.status}>
           <Helmet
             canonical={canonical}
             title={title}

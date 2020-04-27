@@ -16,12 +16,12 @@ export type tContainerProps = {
   loginDispatch: (login: ts.loginQuery) => ts.thunkPayload<ts.session>,
   match: ts.adminSectionParams,
   patchUserDispatch: (user: ts.userQuery) => ts.thunkPayload<ts.user>,
-  sessionThunk: ts.thunk<ts.session>,
+  sessionThunk: ts.thunk<ts.session<ts.user>>,
 }
 
 export type tComponentProps = tState & {
   save: (ev: React.FormEvent<HTMLFormElement>) => void,
-  session: ts.session,
+  session: ts.session<ts.user>,
   subsection: string,
   updateState: (
     key: tKeyUnion,

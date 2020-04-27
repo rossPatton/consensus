@@ -7,11 +7,11 @@ export type tStore = {
 
 export type tProps = {
   match: ts.match & { params: {id: string} },
-  user: ts.user,
 };
 
 export type tComponentProps = tProps & {
   groups: ts.group[],
+  user: ts.user,
 }
 
 export type tContainerProps = tProps & {
@@ -19,6 +19,7 @@ export type tContainerProps = tProps & {
   getUserByIdDispatch: (query: ts.idQuery) => ts.thunkPayload<ts.user>,
   isLoading: boolean,
   groupsByUserId: ts.group[],
+  userThunk: ts.thunk<ts.user>,
 };
 
 

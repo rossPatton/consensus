@@ -12,7 +12,7 @@ export const HomeComponent = memo((props: tProps) => (
       Consensus is an meetings platform for activists and community groups.
     </h1>
     <Link
-      className="btn p-2 hover:bg-gray-3 mb-4"
+      className="btn p-2 hover:bg-gray-3 mb-4 font-bold no-underline"
       to={!props.geoThunk.fetched
         ? '/directory/us/'
         : `/directory/us/${props.geoThunk.data.regionCode}/${props.geoThunk.data.handle}`

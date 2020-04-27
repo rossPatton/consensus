@@ -60,8 +60,9 @@ class DeleteGroupContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
+    const {sessionThunk} = this.props;
     return (
-      <ErrorBoundary status={_.get(this.props, 'sessionThunk.error.status', 200)}>
+      <ErrorBoundary status={sessionThunk?.error?.status}>
         <Helmet
           canonical=""
           title=""
@@ -75,7 +76,7 @@ class DeleteGroupContainer extends PureComponent<tContainerProps, tState> {
         <DeleteGroupComponent
           {...this.state}
           deleteGroup={this.deleteGroup}
-          session={this.props.sessionThunk.data}
+          session={sessionThunk.data}
           updateState={this.updateState}
         />
       </ErrorBoundary>

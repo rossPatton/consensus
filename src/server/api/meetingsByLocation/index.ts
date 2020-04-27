@@ -8,23 +8,18 @@ import {validateSchema} from '../../utils';
 import {schema} from './_schema';
 
 export const meetingsByLocation = new Router();
-const dataPath = 'state.locals.data';
 const route = '/api/v1/meetingsByLocation';
 
 meetingsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.meetingsByLocationQuery = _.get(ctx, dataPath, {});
+  const query: ts.meetingsByLocationQuery = ctx?.state?.locals?.data;
   await validateSchema<ts.meetingsByLocationQuery>(ctx, schema, query);
 
   // @TODO this should be querying against postcodes, eventually
   let cityRel = {} as ts.city;
   try {
-    const where = query.cityId
-      ? {id: query.cityId, regionId: query.regionId}
-      : {name: query.name, regionCode: query.regionCode};
-
     cityRel = await knex('cities')
       .first()
-      .where(where)
+      .where({name: query.city, regionCode: query.regionCode})
       .limit(1);
   } catch (err) {
     return ctx.throw(500, err);

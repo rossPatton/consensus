@@ -55,7 +55,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  // @TODO eventually work zip codes into the site somehow
+  // @TODO eventually add post codes
   // let postcodes = [] as {code: string}[];
   // if (city.id) {
   //   try {
@@ -65,9 +65,9 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
   //   }
   // }
 
-  let group = [] as ts.group[];
+  let groups = [] as ts.group[];
   try {
-    group = await knex('groups')
+    groups = await knex('groups')
       .where({
         cityId: city.id,
         countryId: 1,
@@ -84,7 +84,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   ctx.body = {
     ...city,
-    group: _.uniqBy(group, group => group.name),
+    groups: _.uniqBy(groups, group => group.name),
     // postcodes: postcodes.map(p => parseInt(p.code, 10)),
   };
 });

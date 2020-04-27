@@ -27,7 +27,10 @@ class HomeContainer extends PureComponent<tContainerProps> {
     if (meetingsByLocationThunk.fetched) return;
     if (meetingsByLocationThunk.error) return;
 
-    this.props.getMeetingsByLocationDispatch(geoThunk.data);
+    this.props.getMeetingsByLocationDispatch({
+      city: geoThunk.data.city,
+      regionCode: geoThunk.data.regionCode,
+    });
   }
 
   render() {

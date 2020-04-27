@@ -16,11 +16,11 @@ import {tUserPostServerQuery} from './_types';
 
 export const user = new Router();
 const route = '/api/v1/user';
-const dataPath = 'state.locals.data';
+
 const table = 'users';
 
 user.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.idQuery = _.get(ctx, dataPath, {});
+  const query: ts.idQuery = ctx?.state?.locals?.data;
   await validateSchema<ts.idQuery>(ctx, getSchema, query);
 
   const user: ts.user = await knex('users')
@@ -50,7 +50,7 @@ user.get(route, async (ctx: Koa.ParameterizedContext) => {
 
 // user signup form basically
 user.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const {isFormSubmit, ...query}: tUserPostServerQuery = _.get(ctx, dataPath, {});
+  const {isFormSubmit, ...query}: tUserPostServerQuery = ctx?.state?.locals?.data;
   await validateSchema<tUserPostServerQuery>(ctx, postSchema, query);
 
   // since we don't require any user info to signup, just insert a blank new row
@@ -84,19 +84,19 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
         login,
         isNew: true,
         password: encrypt(hashedPW),
-        userId: userResult[0].id,
+        userId: userResult?.[0].id,
       });
   } catch (err) {
     return ctx.throw(500, err);
   }
 
   if (isFormSubmit) return ctx.redirect('/login');
-  ctx.body = userResult[0];
+  ctx.body = userResult?.[0];
 });
 
 // TODO no-js forms only do GET/POST - implement upsert
 user.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const {isFormSubmit, ...query}: ts.userQuery = _.get(ctx, dataPath, {});
+  const {isFormSubmit, ...query}: ts.userQuery = ctx?.state?.locals?.data;
   await validateSchema<ts.userQuery>(ctx, patchSchema, query);
 
   const {avatarEmail, password, ...updateQuery} = query;
@@ -121,5 +121,5 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
   }
 
   if (isFormSubmit) return;
-  ctx.body = updatedUser[0];
+  ctx.body = updatedUser?.[0];
 });

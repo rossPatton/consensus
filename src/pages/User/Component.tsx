@@ -22,7 +22,7 @@ export const UserComponent = memo(({groups, user}: tComponentProps) => (
       && (
         <>
           <h3>Email</h3>
-          <p>{user.emails[0]}</p>
+          <p>{user.emails?.[0]}</p>
         </>
       )}
     {user.website && (

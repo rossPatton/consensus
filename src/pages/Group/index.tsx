@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
@@ -14,8 +13,8 @@ import {GroupComponent} from './Component';
 class GroupContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    const idOrSlug = _.get(props, 'match.params.idOrSlug', null);
-    // org route can be reached by groupId or handle
+    const {idOrSlug} = props?.match?.params;
+    // group route can be reached by groupId or handle
     const isHandle = isNaN(parseInt(idOrSlug, 10));
 
     if (isHandle) {
@@ -29,9 +28,10 @@ class GroupContainer extends PureComponent<tContainerProps> {
         })
         .catch(loglevel.error);
     } else {
-      props.getGroupDispatch({id: idOrSlug});
+      const id = parseInt(idOrSlug, 10);
+      props.getGroupDispatch({id});
       props.getMeetingsByGroupIdDispatch({
-        groupId: idOrSlug,
+        groupId: id,
         showPast: false,
         limit: -1,
       });
@@ -48,7 +48,7 @@ class GroupContainer extends PureComponent<tContainerProps> {
 
     return (
       <Template>
-        <ErrorBoundary status={_.get(groupThunk, 'error.status', 200)}>
+        <ErrorBoundary status={groupThunk?.error?.status}>
           <GenericLoader
             isLoading={isLoading}
             render={() => {

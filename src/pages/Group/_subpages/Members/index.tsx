@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, {memo} from 'react';
 import {connect} from 'react-redux';
 
@@ -13,7 +12,7 @@ const MembersContainer = memo((props: tContainerProps) => {
   const {section} = params;
 
   return (
-    <ErrorBoundary status={_.get(usersThunk, 'error.status', 200)}>
+    <ErrorBoundary status={usersThunk?.error?.status}>
       <Helmet
         canonical=""
         title=""

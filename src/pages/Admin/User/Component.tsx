@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
@@ -13,8 +12,8 @@ import {
 import {tComponentProps} from './_types';
 
 export const UserAdminComponent = memo((props: tComponentProps) => {
-  const section: string = _.get(props, 'match.params.section', '');
-  const subsection: string = _.get(props, 'match.params.subsection', '');
+  const {params} = props.match;
+  const {section, subsection} = params;
 
   const isAccount = section === 'account';
   const isDeleteAccount = section === 'deleteAccount';

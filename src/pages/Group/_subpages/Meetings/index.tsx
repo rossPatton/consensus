@@ -6,7 +6,7 @@ import {Helmet} from '~app/components';
 import {ErrorBoundary, GenericLoader, SearchFilter} from '~app/containers';
 
 import {tContainerProps, tStore} from './_types';
-import {EventsComponent} from './Component';
+import {MeetingsComponent} from './Component';
 
 class MeetingsContainer extends PureComponent<tContainerProps> {
   render() {
@@ -15,7 +15,7 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
     return (
       <ErrorBoundary
         isSubPage
-        status={_.get(meetingsByGroupIdThunk, 'error.status', 200)}>
+        status={meetingsByGroupIdThunk?.error?.status}>
         <Helmet
           canonical=""
           title=""
@@ -29,13 +29,13 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
         <GenericLoader
           isLoading={this.props.isLoading}
           render={() => {
-            const type = _.get(match, 'params.section', 'meetings');
+            const type = match?.params?.section as 'drafts' | 'meetings';
             const meetings = meetingsByGroupIdThunk.data;
-            const eventsToRender = type === 'meetings'
+            const meetingsToRender = type === 'meetings'
               ? meetings.filter(ev => !ev.isDraft)
               : meetings.filter(ev => ev.isDraft);
 
-            // on server, we don't return anything if user isn't a member of the group
+            // on server, we don't return if user isn't a member of the group
             // but we still render something to show the user they need to join
             const privateGroup = group.type !== 'public';
             const userIsLoggedIn = session.isAuthenticated;
@@ -45,11 +45,10 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
 
             return (
               <SearchFilter
-                items={eventsToRender}
+                items={meetingsToRender}
                 render={searchProps => (
-                  <EventsComponent
+                  <MeetingsComponent
                     {...searchProps}
-                    originalEvents={eventsToRender}
                     meetings={searchProps.items}
                     hideMeetings={hideMeetings}
                     group={group}

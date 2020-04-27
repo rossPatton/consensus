@@ -1,6 +1,6 @@
 import Koa from 'koa';
 
-import {knex} from '../../../db/connection';
+import {knex} from '~app/server/db/connection';
 
 // use login info to return session for client
 // ideally only happens once per visit, on login. but if user refreshes, we do again

@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
@@ -14,7 +13,7 @@ import {MeetingsComponent} from './Component';
 class MeetingsContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    const userId = _.get(props, 'sessionThunk.data.profile.id', null);
+    const userId = props?.sessionThunk?.data?.profile?.id;
     if (userId) {
       props.getMeetingsByUserIdDispatch({userId})
         .catch(loglevel.error);
@@ -24,7 +23,7 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
   render() {
     const {meetingsByUserIdThunk} = this.props;
     return (
-      <ErrorBoundary status={_.get(meetingsByUserIdThunk, 'error.status', 200)}>
+      <ErrorBoundary status={meetingsByUserIdThunk?.error?.status}>
         <Helmet
           canonical=""
           title=""

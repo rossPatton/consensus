@@ -2,14 +2,14 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
+import { validateSchema } from '~app/server/utils';
+
 import { knex } from '../../db/connection';
-import { validateSchema } from '../../utils';
 import { getSchema, postSchema } from './_schema';
-import { tPostRSVPServerQuery } from './_types';
 import { getRSVPsByUserId } from './queries';
 
 export const rsvps = new Router();
-const dataPath = 'state.locals.data';
+
 const route = '/api/v1/rsvps';
 const sessionPath = 'state.user';
 const table = 'users_meetings';
@@ -23,7 +23,7 @@ rsvps.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const data: tPostRSVPServerQuery = _.get(ctx, dataPath, {});
+  const {data} = ctx?.state?.locals;
   const {isFormSubmit, ...query} = data;
   await validateSchema(ctx, postSchema, query);
 
@@ -48,13 +48,13 @@ rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  ctx.body = rsvpUpdate[0];
+  ctx.body = rsvpUpdate?.[0];
 });
 
 // this is an upsert, basically.
 // if user doesnt have js enabled, all patches are posts by default
 rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const data: tPostRSVPServerQuery = _.get(ctx, dataPath, {});
+  const {data} = ctx?.state?.locals;
   const {isFormSubmit, ...query} = data;
   await validateSchema(ctx, postSchema, query);
 
@@ -100,6 +100,6 @@ rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
     }
   }
 
-  ctx.body = rsvpUpdate[0];
+  ctx.body = rsvpUpdate?.[0];
 });
 

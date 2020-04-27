@@ -8,7 +8,7 @@ import {validateSchema} from '../../utils';
 import {schema} from './_schema';
 
 export const auth = new Router();
-const dataPath = 'state.locals.data';
+
 
 auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
   passport.authenticate('local', async (
@@ -18,7 +18,7 @@ auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
     if (!account) ctx.throw(400, 'Account not found');
     await validateSchema<ts.account>(ctx, schema, account);
 
-    const query = _.get(ctx, dataPath, {});
+    const query = ctx?.state?.locals?.data;
     await ctx.login(account);
 
     const {isFormSubmit} = query;
@@ -37,7 +37,7 @@ auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
 // logout just clears the session basically, doesnt matter how you logged in
 auth.get('/auth/v1/logout', async (ctx: Koa.ParameterizedContext, next) =>
   passport.authenticate('local', () => {
-    const {isFormSubmit} = _.get(ctx, dataPath, {});
+    const {isFormSubmit} = ctx?.state?.locals?.data;
     const isAuthenticated = ctx.isAuthenticated();
     if (!isAuthenticated) return ctx.throw(400, 'You are not logged in');
 

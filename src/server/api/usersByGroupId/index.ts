@@ -2,9 +2,10 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {knex} from '../../db/connection';
-import {getSession} from '../../queries';
-import {validateSchema} from '../../utils';
+import {knex} from '~app/server/db/connection';
+import {getSession} from '~app/server/queries';
+import {validateSchema} from '~app/server/utils';
+
 import {getUsersByGroupId} from './_queries';
 import {deleteSchema, getSchema, patchSchema, postSchema} from './_schema';
 import {tUserByOrgQuery} from './_types';
@@ -12,13 +13,13 @@ import {tUserByOrgQuery} from './_types';
 export const usersByGroupId = new Router();
 const route = '/api/v1/usersByGroupId';
 const table = 'accounts_roles';
-const dataPath = 'state.locals.data';
+
 
 // api for interacting with the accounts_roles table
 // not for signing up new users, but for getting users that are members of an org
 // or joining an group, or updating member roles within an org
 usersByGroupId.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.usersByGroupIdQuery = _.get(ctx, dataPath, {});
+  const query: ts.usersByGroupIdQuery = ctx?.state?.locals?.data;
   await validateSchema<ts.usersByGroupIdQuery>(ctx, getSchema, query);
   const users = await getUsersByGroupId(ctx, query);
   ctx.body = users;
@@ -27,7 +28,7 @@ usersByGroupId.get(route, async (ctx: Koa.ParameterizedContext) => {
 // joining an group. uses session data since we don't want people to be able to
 // add others to an group, only the logged-in user should be able to do that
 usersByGroupId.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tUserByOrgQuery = _.get(ctx, dataPath, {});
+  const query: tUserByOrgQuery = ctx?.state?.locals?.data;
   await validateSchema<tUserByOrgQuery>(ctx, postSchema, query);
   const {allowNonVerified, groupId, role, userId} = query;
 
@@ -70,7 +71,7 @@ usersByGroupId.post(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 usersByGroupId.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.patchUserRoleQuery = _.get(ctx, dataPath, {});
+  const query: ts.patchUserRoleQuery = ctx?.state?.locals?.data;
   const {groupId, role, userId} = query;
   await validateSchema<ts.patchUserRoleQuery>(ctx, patchSchema, {groupId, role, userId});
 
@@ -85,11 +86,11 @@ usersByGroupId.patch(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  ctx.body = updatedAccountRoleRel[0];
+  ctx.body = updatedAccountRoleRel?.[0];
 });
 
 usersByGroupId.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tUserByOrgQuery = _.get(ctx, dataPath, {});
+  const query: tUserByOrgQuery = ctx?.state?.locals?.data;
 
   await validateSchema<tUserByOrgQuery>(ctx, deleteSchema, query);
 

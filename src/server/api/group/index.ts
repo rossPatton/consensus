@@ -8,12 +8,12 @@ import {encrypt, isValidPw, saltedHash, sha256, validateSchema} from '../../util
 import {patchSchema, postSchema, schema} from './_schema';
 
 export const group = new Router();
-const dataPath = 'state.locals.data';
+
 const route = '/api/v1/group';
 const table = 'groups';
 
 group.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.getGroupQuery = _.get(ctx, dataPath, {});
+  const query: ts.getGroupQuery = ctx?.state?.locals?.data;
   await validateSchema<ts.getGroupQuery>(ctx, schema, query);
 
   let group = {} as ts.group;
@@ -31,7 +31,7 @@ group.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 group.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = _.get(ctx, dataPath, {});
+  const query = ctx?.state?.locals?.data;
   await validateSchema<ts.groupQuery>(ctx, patchSchema, query);
 
   const loggedInAccount: ts.account = _.get(ctx, 'state.user', {});
@@ -55,11 +55,11 @@ group.patch(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  ctx.body = updatedGroup[0];
+  ctx.body = updatedGroup?.[0];
 });
 
 group.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const {isFormSubmit, ...group} = _.get(ctx, dataPath, {});
+  const {isFormSubmit, ...group} = ctx?.state?.locals?.data;
   await validateSchema<ts.groupQuery>(ctx, postSchema, group);
 
   const {login, password, ...groupToInsert} = group;
@@ -81,7 +81,7 @@ group.post(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  const newGroup = newGroupReturning[0];
+  const newGroup = newGroupReturning?.[0];
 
   // then the cooresponding account for login
   try {

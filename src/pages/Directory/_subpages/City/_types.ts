@@ -17,13 +17,13 @@ export type tProps = {
 export type tComponentProps = tProps & {
   category: ts.category,
   city: ts.city,
-  onChange: (ev: React.ChangeEvent<HTMLSelectElement>) => void,
-  onSearch: (ev: React.ChangeEvent<HTMLInputElement>) => void,
+  onChange: ts.selectChange
+  onSearch: ts.inputChange
   groupsToRender: ts.group[],
 };
 
 export type tContainerProps = tProps & {
-  city: ts.thunk<ts.city>,
+  cityThunk: ts.thunk<ts.city>,
   getCity: (params: ts.directoryParams) => ts.thunk<ts.city>,
   getRegion: (params: ts.directoryParams) => ts.thunk<ts.region>,
   isCityLoading: boolean,

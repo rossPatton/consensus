@@ -7,12 +7,12 @@ import _ from 'lodash';
 import {knex} from '../../db/connection';
 import {sendEmail, validateSchema} from '../../utils';
 import {emailSchema, tokenSchema} from './_schema';
-const dataPath = 'state.locals.data';
+
 
 export const verifyAccountViaEmail = new Router();
 verifyAccountViaEmail.get('/email/v1/sendVerificationToken',
   async (ctx: Koa.ParameterizedContext) => {
-    const query: {email: string} = _.get(ctx, dataPath, {});
+    const query: {email: string} = ctx?.state?.locals?.data;
     await validateSchema<{email: string}>(ctx, emailSchema, query);
 
     const accountEmailRel = await knex('accounts_emails')
@@ -67,7 +67,7 @@ verifyAccountViaEmail.get('/email/v1/sendVerificationToken',
 
 verifyAccountViaEmail.patch('/email/v1/verifyEmail',
   async (ctx: Koa.ParameterizedContext) => {
-    const query = _.get(ctx, dataPath, {});
+    const query = ctx?.state?.locals?.data;
     await validateSchema(ctx, tokenSchema, query);
 
     let account: ts.account;
@@ -110,5 +110,5 @@ verifyAccountViaEmail.patch('/email/v1/verifyEmail',
       ctx.throw(400, err);
     }
 
-    ctx.body = updatedAccount[0];
+    ctx.body = updatedAccount?.[0];
   });

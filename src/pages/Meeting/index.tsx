@@ -1,4 +1,3 @@
-// import {Redirect} from 'react-router';
 import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
@@ -80,8 +79,8 @@ class EventContainer extends PureComponent<tContainerProps> {
     } = this.props;
 
     const {isMobile, isDesktop} = this.context;
-    const eventStatus = _.get(eventThunk, 'error.status', null);
-    const orgStatus = _.get(groupThunk, 'error.status', null);
+    const eventStatus = eventThunk?.error?.status;
+    const orgStatus = groupThunk?.error?.status;
 
     // TODO this still isn't working properly
     // bit hacky, but if meeting is private, we 401, and if id is wrong we 204

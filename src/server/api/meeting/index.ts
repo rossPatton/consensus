@@ -8,18 +8,18 @@ import {getMeetingByQuery} from '../../queries';
 import {validateSchema} from '../../utils';
 import {getSchema, upsertSchema} from './_schema';
 
-const dataPath = 'state.locals.data';
+
 const route = '/api/v1/meeting';
 export const meeting = new Router();
 
 meeting.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.getMeetingQuery = _.get(ctx, dataPath, {});
+  const query: ts.getMeetingQuery = ctx?.state?.locals?.data;
   await validateSchema<ts.getMeetingQuery>(ctx, getSchema, query);
   ctx.body = await getMeetingByQuery(ctx, query);
 });
 
 meeting.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = _.get(ctx, dataPath, {});
+  const query = ctx?.state?.locals?.data;
   await validateSchema<Partial<ts.meetingSingular>>(ctx, upsertSchema, query);
   const {id, isFormSubmit, ...patch} = query;
 
@@ -34,12 +34,12 @@ meeting.patch(route, async (ctx: Koa.ParameterizedContext) => {
     ctx.throw(500, err);
   }
 
-  ctx.body = patchedEvent[0];
+  ctx.body = patchedEvent?.[0];
 });
 
 // @TODO implement upsert, ie make it work for both patch and post
 meeting.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = _.get(ctx, dataPath, {});
+  const query = ctx?.state?.locals?.data;
   await validateSchema<Partial<ts.meeting>>(ctx, upsertSchema, query);
   const {id, isFormSubmit, ...meeting} = query;
 
@@ -61,5 +61,5 @@ meeting.post(route, async (ctx: Koa.ParameterizedContext) => {
     ctx.throw(500, err);
   }
 
-  ctx.body = newEvent[0];
+  ctx.body = newEvent?.[0];
 });

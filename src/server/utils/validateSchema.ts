@@ -10,7 +10,7 @@ export const validateSchema = async <T>(
   try {
     await schema.validateAsync(query);
   } catch (err) {
-    const message = _.get(err, 'details[0].message', 'Bad Request');
+    const message = _.get(err, 'details?.[0].message', 'Bad Request');
     return ctx.throw(400, message);
   }
 };

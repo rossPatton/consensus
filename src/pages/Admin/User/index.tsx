@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
@@ -19,7 +18,7 @@ class UserAdminContainer extends PureComponent<tContainerProps> {
     if (!props.rolesThunk.fetched) props.getRolesDispatch();
     if (!props.rsvpsThunk.fetched) props.getRsvpsDispatch();
 
-    const userId = _.get(props, 'session.profile.id', null);
+    const userId = props?.session?.profile?.id;
     if (userId) {
       props.getGroupsByUserIdDispatch({userId})
         .catch(loglevel.error);

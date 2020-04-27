@@ -10,11 +10,11 @@ import {schema} from './_schema';
 import {tMeetingsByUserServerQuery} from './_types';
 
 export const meetingsByUserId = new Router();
-const dataPath = 'state.locals.data';
+
 const route = '/api/v1/meetingsByUserId';
 
 meetingsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tMeetingsByUserServerQuery = _.get(ctx, dataPath, {});
+  const query: tMeetingsByUserServerQuery = ctx?.state?.locals?.data;
   await validateSchema(ctx, schema, query);
 
   const userRSVPs = await getRSVPsByUserId(ctx, query.userId);

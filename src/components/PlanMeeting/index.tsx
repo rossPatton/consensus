@@ -81,8 +81,8 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
 
     const timeArr = parseTimeString(time);
     const dur = typeof duration === 'string' ? parseInt(duration, 10) : duration;
-    const date = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
-    const endDate = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
+    const date = dayJS(this.state.date).hour(timeArr?.[0]).minute(timeArr[1]);
+    const endDate = dayJS(this.state.date).hour(timeArr?.[0]).minute(timeArr[1]);
     endDate.hour(endDate.hour() + dur);
 
     let newEvent: ts.meeting;

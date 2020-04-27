@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
@@ -46,7 +45,7 @@ class DeleteAccountContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     return (
-      <ErrorBoundary status={_.get(this.props, 'sessionThunk.error.status', 200)}>
+      <ErrorBoundary status={this.props?.sessionThunk?.error?.status}>
         <Helmet
           canonical=""
           title=""

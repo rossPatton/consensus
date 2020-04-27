@@ -109,7 +109,8 @@ module.exports = {
       default: '1',
     },
     fontFamily: {
-      sans: ['Lab', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', 'system-ui', 'sans-serif'],
+      lab: ['Lab', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', 'system-ui', 'sans-serif'],
+      sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Roboto', "Helvetica Neue", 'Arial', "Noto Sans", 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"]
     },
     // numbers => header sizes basically
     // base default size everywhere
@@ -123,6 +124,7 @@ module.exports = {
     },
     fontWeight: {
       normal: '400',
+      semibold: '500',
       bold: '700',
     },
     inset: { },

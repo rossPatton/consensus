@@ -13,6 +13,7 @@ body {
   @apply bg-gray-1;
   @apply mt-5;
   @apply pt-3;
+  @apply font-sans;
   letter-spacing: .03rem;
 }
 a {
@@ -49,6 +50,7 @@ h4,
 h5,
 h6 {
   @apply leading-tight;
+  @apply font-lab;
   margin-block-end: 0;
   margin-block-start: 0;
 }
@@ -74,7 +76,7 @@ input[type="submit"] {
   @apply bg-white;
   @apply border;
   @apply duration-150;
-  @apply font-normal;
+  @apply font-semibold;
   @apply inline-block;
   @apply leading-none;
   @apply rounded;

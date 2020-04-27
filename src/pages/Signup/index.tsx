@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, {memo} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
@@ -11,7 +10,7 @@ import {SignupComponent} from './Component';
 
 const SignupContainer = memo((props: tProps) => (
   <Template>
-    <ErrorBoundary status={_.get(props, 'session.error.status', 200)}>
+    <ErrorBoundary status={props?.session?.error?.status}>
       <Helmet
         canonical=""
         title=""

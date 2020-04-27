@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
@@ -19,10 +18,10 @@ const CurrentAccount = memo((props: tComponentProps) => (
     </h2>
     <h2 className="text-base leading-none">
       Email address: <span className="text-gray-4">
-        {_.get(props, 'session.emails[0].email', 'N/A')}
+        {props?.session?.emails?.[0]?.email || 'N/A'}
       </span>
     </h2>
-    {typeof _.get(props, 'session.emails[0].email', null) === 'string'
+    {typeof props?.session?.emails?.[0]?.email === 'string'
       && (
         <Link className="block mb-3" to="/verify-account">
           Verify this email

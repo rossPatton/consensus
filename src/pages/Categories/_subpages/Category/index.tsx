@@ -24,10 +24,10 @@ class CategoryContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {isLoading, group} = this.props;
+    const {groupsThunk} = this.props;
 
     return (
-      <ErrorBoundary status={_.get(group, 'error.status', 200)}>
+      <ErrorBoundary status={groupsThunk?.error?.status}>
         <Helmet
           canonical=""
           title=""
@@ -39,11 +39,11 @@ class CategoryContainer extends PureComponent<tContainerProps> {
           ]}
         />
         <GenericLoader
-          isLoading={isLoading}
+          isLoading={groupsThunk.isLoading}
           render={() => (
             <>
               <SearchFilter
-                items={group.data}
+                items={groupsThunk.data}
                 searchKey="name"
                 render={searchProps => (
                   <Paginate
@@ -70,8 +70,7 @@ class CategoryContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.group.isLoading,
-  group: store.group,
+  groupsThunk: store.groups,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

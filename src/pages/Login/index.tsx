@@ -39,11 +39,11 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     const {session} = this.props;
-    const error = _.get(session, 'error.message', '');
+    const error = session?.error?.message;
 
     return (
       <Template>
-        <ErrorBoundary status={_.get(session, 'error.status', 200)}>
+        <ErrorBoundary status={session?.error?.status}>
           <Helmet
             canonical={canonical}
             title={title}

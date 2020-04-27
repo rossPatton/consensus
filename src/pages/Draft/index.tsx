@@ -20,7 +20,7 @@ class DraftContainer extends PureComponent<tContainerProps> {
 
   render() {
     const { isLoading, location: {search}, rolesThunk, session} = this.props;
-    const rolesStatus = _.get(rolesThunk, 'error.status', null);
+    const rolesStatus = rolesThunk?.error?.status;
     const draft: {[key: string]: unknown} = qs.parse(search);
 
     if (!session.isAuthenticated) {

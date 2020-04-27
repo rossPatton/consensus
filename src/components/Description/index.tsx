@@ -24,7 +24,7 @@ class Description extends PureComponent<
       <>
         {!showAll && (
           <p className="mb-1">
-            {description.split('\n')[0]}
+            {description.split('\n')?.[0]}
           </p>
         )}
         {showAll

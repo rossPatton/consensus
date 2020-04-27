@@ -4,8 +4,8 @@ import Router from 'koa-router';
 import _ from 'lodash';
 import maxmind, { CityResponse } from 'maxmind';
 
-import stateCodeToNameMap from '../../../json/usa/stateCodeToNameMap.json';
-import {lowerCase, slugify} from '../../../utils';
+import stateCodeToNameMap from '~app/json/usa/stateCodeToNameMap.json';
+import {lowerCase, slugify} from '~app/utils';
 
 export const geo = new Router();
 geo.get('/api/v1/geo', async (ctx: Koa.ParameterizedContext) => {
@@ -27,16 +27,16 @@ geo.get('/api/v1/geo', async (ctx: Koa.ParameterizedContext) => {
   }
 
   const cityLookup = lookup.get(ip as string);
-  const country: string = _.get(cityLookup, 'registered_country.iso_code', '');
+  const country = cityLookup?.registered_country?.iso_code || '';
   if (country !== 'US') {
     ctx.redirect('/gdpr');
     return ctx.throw(401);
   }
 
-  const city: string = _.get(cityLookup, 'city.names.en', '');
-  const postcode: string = _.get(cityLookup, 'postal.code', '');
+  const city: string = cityLookup?.city?.names.en || '';
+  const postcode: string = cityLookup?.postal?.code || '';
   const regionCode: string = lowerCase(
-    _.get(cityLookup, 'subdivisions[0].iso_code', ''),
+    cityLookup?.subdivisions?.[0]?.iso_code || '',
   );
   const region = (stateCodeToNameMap as {[k: string]: unknown})[regionCode];
 

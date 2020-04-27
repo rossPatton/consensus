@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import qs from 'query-string';
 import React, {memo} from 'react';
 import {connect} from 'react-redux';
@@ -21,7 +20,7 @@ const SearchContainer = memo((props: tProps) => {
 
   return (
     <Template>
-      <ErrorBoundary status={_.get(groupsBySearch, 'error.status', 200)}>
+      <ErrorBoundary status={groupsBySearch?.error?.status}>
         <Helmet
           canonical="search"
           title="Consensus: Search"

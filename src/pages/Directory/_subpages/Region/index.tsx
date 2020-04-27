@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
@@ -37,7 +36,7 @@ class RegionContainer extends PureComponent<tContainerProps> {
     const {isLoading, match, region} = this.props;
 
     return (
-      <ErrorBoundary status={_.get(region, 'error.status', 200)}>
+      <ErrorBoundary status={region?.error?.status}>
         <Helmet
           canonical=""
           title=""

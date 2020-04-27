@@ -29,8 +29,12 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
 
-    const {avatarHash, created_at, updated_at, ...user}: ts.user =
-      _.get(props, 'sessionThunk.data.profile', null);
+    const {
+      avatarHash,
+      created_at,
+      updated_at,
+      ...user
+    } = props?.sessionThunk?.data?.profile;
 
     if (user) {
       this.state = {
@@ -89,11 +93,11 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const {sessionThunk} = this.props;
-    const subsection: string = _.get(this.props, 'match.params.subsection', '');
+    const {match, sessionThunk} = this.props;
+    const {subsection} = match?.params;
 
     return (
-      <ErrorBoundary status={_.get(sessionThunk, 'error.status', 200)}>
+      <ErrorBoundary status={sessionThunk?.error?.status}>
         <Helmet
           canonical=""
           title=""

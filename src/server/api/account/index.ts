@@ -103,7 +103,7 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
   if (query.isFormSubmit) return;
 
-  let body: ts.account = updatedAccount[0];
+  let body: ts.account = updatedAccount?.[0];
   if (updatedEmail) {
     body = {
       ...body,

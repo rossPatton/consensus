@@ -36,11 +36,7 @@ namespace ts {
   }>;
 
   declare type meetingsByLocationQuery = Readonly<{
-    // one or the other will be used, depending on whats passed in
-    cityId?: number,
-    name?: string,
-    // same for the following
-    regionCode?: string,
-    regionId?: number,
+    city: string,
+    regionCode: string,
   }>;
 }

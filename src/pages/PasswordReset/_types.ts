@@ -1,6 +1,5 @@
 import {History} from 'history';
 
-
 export type tState = {
   email: string,
   hasMounted: boolean,
@@ -19,7 +18,9 @@ export type tStore = {
 export type tContainerProps = tStore & {
   history: History,
   loginDispatch: (query: ts.loginQuery) => ts.thunkPayload<ts.roleMap>,
-  match: ts.match,
+  match: ts.match & {
+    params: { section: string }
+  },
 }
 
 export type tComponentProps = tState & {

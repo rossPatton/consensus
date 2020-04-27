@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
@@ -78,12 +77,12 @@ class VerifyAccountContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const {session} = this.props;
-    const enterCode = _.get(this.props, 'match.params.section', null);
+    const {match, session} = this.props;
+    const enterCode = match?.params?.section;
 
     return (
       <Template>
-        <ErrorBoundary status={_.get(session, 'session.error.status', 200)}>
+        <ErrorBoundary status={session?.error?.status}>
           <Helmet
             canonical={canonical}
             title={title}

@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
@@ -17,10 +16,10 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
     this.state = {
       currentPassword: '',
       email: '',
-      isVerified: _.get(props, 'sessionThunk.data.isVerified', false),
+      isVerified: !!props?.sessionThunk?.data?.isVerified,
       login: '',
       newPassword: '',
-      privateEmail: _.get(props, 'sessionThunk.data.privateEmail', false),
+      privateEmail: !!props?.sessionThunk?.data?.privateEmail,
     };
   }
 
@@ -57,11 +56,11 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const {sessionThunk} = this.props;
-    const subsection: string = _.get(this.props, 'match.params.subsection', '');
+    const {match, sessionThunk} = this.props;
+    const {subsection} = match?.params;
 
     return (
-      <ErrorBoundary status={_.get(sessionThunk, 'error.status', 200)}>
+      <ErrorBoundary status={sessionThunk?.error?.status}>
         <Helmet
           canonical=""
           title=""
