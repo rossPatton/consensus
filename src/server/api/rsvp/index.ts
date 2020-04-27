@@ -23,14 +23,14 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {meetingId, type = 'private', value = 'no'} = query;
   const userId = _.get(ctx, 'state.user.userId', 0);
 
-  const newRsvp: tRSVP = {
+  const newRsvp: ts.rsvp = {
     meetingId,
     type,
     userId,
     value,
   };
 
-  let currentRSVPStatus = {} as tRSVP;
+  let currentRSVPStatus = {} as ts.rsvp;
   try {
     currentRSVPStatus = await knex(table)
       .limit(1)
@@ -44,7 +44,7 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
   // update existing meeting or insert new users_meetings relation
   if (currentRSVPStatus) {
     try {
-      const update: tRSVP[] = await knex(table)
+      const update: ts.rsvp[] = await knex(table)
         .where({id: currentRSVPStatus.id})
         .update(newRsvp)
         .returning('*');
@@ -54,7 +54,7 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
     }
   } else {
     try {
-      const insert: tRSVP[] = await knex(table)
+      const insert: ts.rsvp[] = await knex(table)
         .insert(newRsvp)
         .returning('*');
       ctx.body = insert[0];

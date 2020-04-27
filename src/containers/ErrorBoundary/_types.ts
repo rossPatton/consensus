@@ -1,9 +1,9 @@
 export type tProps = {
   error?: any,
   isSubPage?: boolean,
-  status?: tStatusUnion,
+  status?: ts.statusUnion,
 }
 
 export type tState = tProps & {
-  info: tInfoUnion | null,
+  info: ts.infoUnon | null,
 };

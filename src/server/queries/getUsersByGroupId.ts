@@ -7,7 +7,7 @@ import {knex} from '../db/connection';
 export const getUsersByGroupId = async (
   ctx: Koa.ParameterizedContext,
   groupId: number,
-): Promise<tUser[]> => {
+): Promise<ts.user[]> => {
   const rolesStream = knex('accounts_roles').where({groupId}).stream();
   const roleMaps: ts.roleRel[] = [];
   try {
@@ -27,7 +27,7 @@ export const getUsersByGroupId = async (
 
   // use the returned ids to query users table
   const usersStream = knex('users').whereIn('id', userIds).stream();
-  const users: tUser[] = [];
+  const users: ts.user[] = [];
   try {
     for await (const chunk of usersStream) {
       users.push(chunk);
@@ -37,7 +37,7 @@ export const getUsersByGroupId = async (
   }
 
   return await Promise.all(roleMaps.map(async roleMap => {
-    const userProfile = _.find(users, user => roleMap.userId === user.id) as tUser;
+    const userProfile = _.find(users, user => roleMap.userId === user.id) as ts.user;
 
     return {
       ...userProfile,

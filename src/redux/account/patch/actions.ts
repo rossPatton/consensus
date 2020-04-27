@@ -11,7 +11,7 @@ export const init = (): tInitAction => ({
   type: PATCH_INIT,
 });
 
-export const failure = (payload: tResponseError): tFailureAction => ({
+export const failure = (payload: ts.responseError): tFailureAction => ({
   type: PATCH_FAILURE,
   payload,
 });

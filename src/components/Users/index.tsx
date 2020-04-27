@@ -64,7 +64,7 @@ class UsersContainer extends React.PureComponent<tContainerProps, tState> {
 
     let itemsToRender = usersByGroupId.filter(u => u.role !== 'pending');
     if (type === 'pending') {
-      const approvals: tUser[] = usersByGroupId.filter(u => u.role === 'pending');
+      const approvals: ts.user[] = usersByGroupId.filter(u => u.role === 'pending');
       itemsToRender = approvals;
     }
 
@@ -88,7 +88,7 @@ class UsersContainer extends React.PureComponent<tContainerProps, tState> {
                   <Paginate
                     count={count}
                     items={searchProps.items}
-                    render={(usersToRender: tUser[]) => (
+                    render={(usersToRender: ts.user[]) => (
                       <UsersComponent
                         // mobile/desktop props
                         {...this.context}
@@ -121,13 +121,13 @@ const mapStateToProps = (store: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getUsersByGroupIdDispatch: (query: tUsersByGroupIdQuery) =>
+  getUsersByGroupIdDispatch: (query: ts.usersByGroupIdQuery) =>
     dispatch(getUsersByGroupId(query)),
 
-  deleteUserByGroupIdDispatch: (query: tDeleteUserByGroupIdQuery) =>
+  deleteUserByGroupIdDispatch: (query: ts.deleteUserByGroupIdQuery) =>
     dispatch(deleteUserByGroupId(query)),
 
-  patchUserByGroupIdDispatch: (query: tPatchUserRoleQuery) =>
+  patchUserByGroupIdDispatch: (query: ts.patchUserRoleQuery) =>
     dispatch(patchUserByGroupId(query)),
 });
 

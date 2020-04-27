@@ -37,7 +37,7 @@ describe('redux/geo/reducer', () => {
   it('should handle GET_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@geo/GET_SUCCESS',
-      payload: {} as tGeo,
+      payload: {} as ts.geo,
     })).toStrictEqual({
       error: null,
       fetched: true,

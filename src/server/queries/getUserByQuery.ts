@@ -4,9 +4,9 @@ import { knex } from '../db/connection';
 
 export const getUserByQuery = async (
   ctx: Koa.ParameterizedContext,
-  query: tUserQuery): Promise<tUser> => {
+  query: ts.userQuery): Promise<ts.user> => {
 
-  let user: tUser;
+  let user: ts.user;
   try {
     user = await knex('users').limit(1).where(query).first();
   } catch (err) {

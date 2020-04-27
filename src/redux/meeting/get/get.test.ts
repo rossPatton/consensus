@@ -7,14 +7,14 @@ import {failure, init, success} from './actions';
 const mockStore = configureStore([thunk]);
 
 const testMeeting = {
-  attendees: [{id: 1}] as tUser[],
+  attendees: [{id: 1}] as ts.user[],
   publicRSVPS: 5,
   privateRSVPS: 6,
   rsvp: {
     userId: 1,
   },
   id: 12,
-  category: 'Political' as tCategory,
+  category: 'Political' as ts.category,
   groupId: 1,
   cityId: 16624,
   groupName: 'Tech Workers Coalition NYC',

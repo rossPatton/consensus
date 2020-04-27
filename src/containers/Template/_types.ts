@@ -1,5 +1,5 @@
 export type tProps = {
-  geoThunk: tThunk<tGeo>,
-  getGeoDispatch: () => tActionPayload<tGeo>,
+  geoThunk: ts.thunk<ts.geo>,
+  getGeoDispatch: () => ts.payload<ts.geo>,
   session: ts.session,
 };

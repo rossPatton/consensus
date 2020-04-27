@@ -17,7 +17,7 @@ class RegionContainer extends PureComponent<tContainerProps> {
   }
 
   state = {
-    citiesBySearch: [] as tCity[],
+    citiesBySearch: [] as ts.city[],
   };
 
   onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,7 +89,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getRegion: (params: tDirectoryParams) => dispatch(getRegion(params)),
+  getRegion: (params: ts.directoryParams) => dispatch(getRegion(params)),
 });
 
 const Region = connect(

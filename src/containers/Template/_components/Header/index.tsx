@@ -30,7 +30,7 @@ class HeaderContainer extends PureComponent<tContainerProps> {
   }
 }
 
-const mapStateToProps = (store: {session: tThunk<ts.session>}) => ({
+const mapStateToProps = (store: {session: ts.thunk<ts.session>}) => ({
   session: store.session.data,
 });
 

@@ -20,10 +20,10 @@ const dataPath = 'state.locals.data';
 const table = 'users';
 
 user.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tIdQuery = _.get(ctx, dataPath, {});
-  await validateSchema<tIdQuery>(ctx, getSchema, query);
+  const query: ts.idQuery = _.get(ctx, dataPath, {});
+  await validateSchema<ts.idQuery>(ctx, getSchema, query);
 
-  const user: tUser = await knex('users')
+  const user: ts.user = await knex('users')
     .limit(1)
     .select(userKeys)
     .where({id: query.id})
@@ -54,7 +54,7 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<tUserPostServerQuery>(ctx, postSchema, query);
 
   // since we don't require any user info to signup, just insert a blank new row
-  let userResult = [] as tUser[];
+  let userResult = [] as ts.user[];
   try {
     userResult = await knex('users')
       .insert({})
@@ -96,8 +96,8 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
 
 // TODO no-js forms only do GET/POST - implement upsert
 user.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const {isFormSubmit, ...query}: tUserQuery = _.get(ctx, dataPath, {});
-  await validateSchema<tUserQuery>(ctx, patchSchema, query);
+  const {isFormSubmit, ...query}: ts.userQuery = _.get(ctx, dataPath, {});
+  await validateSchema<ts.userQuery>(ctx, patchSchema, query);
 
   const {avatarEmail, password, ...updateQuery} = query;
   const loggedInAccount = _.get(ctx, 'state.user', {});
@@ -109,7 +109,7 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
     updateQuery.avatarHash = sha256(avatarEmail);
   }
 
-  let updatedUser = [] as tUser[];
+  let updatedUser = [] as ts.user[];
   try {
     updatedUser = await knex(table)
       .limit(1)

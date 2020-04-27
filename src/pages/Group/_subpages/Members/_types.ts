@@ -1,17 +1,17 @@
-import {match} from 'react-router';
+
 
 export type tStore = {
-  usersByGroupId: tThunk<tUser[]>,
+  usersByGroupId: ts.thunk<ts.user[]>,
 };
 
 type tProps = {
-  group: tGroup,
+  group: ts.group,
   role: ts.role,
 };
 
 export type tContainerProps = tProps & {
-  match: match & {params: tGroupRouteParams},
-  usersThunk: tThunk<tUser[]>,
+  match: ts.match & {params: ts.groupRouteParams},
+  usersThunk: ts.thunk<ts.user[]>,
 };
 
 export type tComponentProps = tProps & {

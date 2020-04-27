@@ -83,7 +83,7 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
               value={props.city}
               onBlur={onCityChange}
               onChange={onCityChange}>
-              {props.cities.map((city: tCity) => (
+              {props.cities.map((city: ts.city) => (
                 <option key={city.id} value={city.name}>
                   {city.name}, {city.region}
                 </option>

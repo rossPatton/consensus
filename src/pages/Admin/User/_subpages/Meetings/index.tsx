@@ -42,7 +42,7 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
               items={meetingsByUserIdThunk.data}
               render={searchProps => (
                 <MeetingsComponent
-                  meetings={searchProps.items as tMeeting[]}
+                  meetings={searchProps.items as ts.meeting[]}
                   onFilterOptionChange={searchProps.onFilterOptionChange}
                   onSearchChange={searchProps.onSearchChange}
                 />

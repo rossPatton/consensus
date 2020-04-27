@@ -11,7 +11,7 @@ export const init = (): tInitAction => ({
   type: DELETE_INIT,
 });
 
-export const failure = (payload: tResponseError): tFailureAction => ({
+export const failure = (payload: ts.responseError): tFailureAction => ({
   type: DELETE_FAILURE,
   payload,
 });

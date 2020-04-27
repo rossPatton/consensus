@@ -1,11 +1,11 @@
 import { tActions } from './_types';
 import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
-export const initialState: tThunk<tGeo> = {
+export const initialState: ts.thunk<ts.geo> = {
   error: null,
   fetched: false,
   isLoading: false,
-  data: {} as tGeo,
+  data: {} as ts.geo,
 };
 
 export const geoReducer = (state = initialState, action: tActions) => {

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 // might be a somewhat common scenario given the lengths we're going to hide pages
 // if user lands somewhere private, or they're just not logged in, render this page
-const UnAuthorized = memo((props: {geo: tGeo}) => (
+const UnAuthorized = memo((props: {geo: ts.geo}) => (
   <div className="text-center">
     {props.geo.countryCode === 'US' && (
       <h1 className="mb-1">
@@ -18,7 +18,7 @@ const UnAuthorized = memo((props: {geo: tGeo}) => (
   </div>
 ));
 
-const mapStateToProps = (store: {geo: tThunk<tGeo>}) => ({
+const mapStateToProps = (store: {geo: ts.thunk<ts.geo>}) => ({
   geo: store.geo.data,
 });
 

@@ -9,12 +9,12 @@ import {
 
 export const init = (): tInitAction => ({type: GET_INIT});
 
-export const failure = (payload: tResponseError): tFailureAction => ({
+export const failure = (payload: ts.responseError): tFailureAction => ({
   type: GET_FAILURE,
   payload,
 });
 
-export const success = (payload: tMeetingSingular): tSuccessAction => ({
+export const success = (payload: ts.meetingSingular): tSuccessAction => ({
   type: GET_SUCCESS,
   payload,
 });

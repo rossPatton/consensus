@@ -12,8 +12,8 @@ import {CityComponent} from './Component';
 
 class CityContainer extends PureComponent<tContainerProps, tState> {
   state = {
-    category: '' as tCategory,
-    groupsBySearch: [] as tGroup[],
+    category: '' as ts.category,
+    groupsBySearch: [] as ts.group[],
   };
 
   constructor(props: tContainerProps) {
@@ -27,7 +27,7 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
   }
 
   // Re-run the filter whenever the list array or filter text changes:
-  filterByCategory = (group: tGroup[]) => {
+  filterByCategory = (group: ts.group[]) => {
     if (this.state.category === '') return group;
     return group.filter(group => group.category === this.state.category);
   };
@@ -35,7 +35,7 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
   onChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
     ev.preventDefault();
     this.setState({
-      category: ev.currentTarget.value as tCategory,
+      category: ev.currentTarget.value as ts.category,
     });
   }
 
@@ -116,8 +116,8 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getCity: (params: tDirectoryParams) => dispatch(getCity(params)),
-  getRegion: (params: tDirectoryParams) => dispatch(getRegion(params)),
+  getCity: (params: ts.directoryParams) => dispatch(getCity(params)),
+  getRegion: (params: ts.directoryParams) => dispatch(getRegion(params)),
 });
 
 const City = connect(

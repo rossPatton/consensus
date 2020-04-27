@@ -1,17 +1,17 @@
 import {History} from 'history';
 
 export type tStore = {
-  groupsByUserId: tThunk<tGroup[]>,
-  roles: tThunk<ts.roleMap[]>,
-  rsvps: tThunk<tRSVP[]>,
-  session: tThunk<ts.session<tUser>>,
+  groupsByUserId: ts.thunk<ts.group[]>,
+  roles: ts.thunk<ts.roleMap[]>,
+  rsvps: ts.thunk<ts.rsvp[]>,
+  session: ts.thunk<ts.session<ts.user>>,
 };
 
 export type tProps = {
   history: History,
   match: ts.adminSectionParams,
-  groupsByUserIdThunk: tThunk<tGroup[]>,
-  session: ts.session<tUser>,
+  groupsByUserIdThunk: ts.thunk<ts.group[]>,
+  session: ts.session<ts.user>,
 };
 
 export type tComponentProps = tProps & {
@@ -21,12 +21,12 @@ export type tComponentProps = tProps & {
 };
 
 export type tContainerProps = tProps & {
-  getGroupsByUserIdDispatch: (query: tGroupsByUserIdQuery) => tThunkPayload<tGroup[]>,
-  getRolesDispatch: () => tThunkPayload<ts.roleMap[]>,
-  getRsvpsDispatch: () => tThunkPayload<tRSVP[]>,
-  logoutDispatch: () => tThunkPayload<ts.isAuthenticated>,
+  getGroupsByUserIdDispatch: (query: ts.groupsByUserIdQuery) => ts.thunkPayload<ts.group[]>,
+  getRolesDispatch: () => ts.thunkPayload<ts.roleMap[]>,
+  getRsvpsDispatch: () => ts.thunkPayload<ts.rsvp[]>,
+  logoutDispatch: () => ts.thunkPayload<ts.isAuthenticated>,
   isLoading: boolean,
-  rolesThunk: tThunk<ts.roleMap[]>,
-  rsvpsThunk: tThunk<tRSVP[]>,
+  rolesThunk: ts.thunk<ts.roleMap[]>,
+  rsvpsThunk: ts.thunk<ts.rsvp[]>,
   session: ts.session,
 };

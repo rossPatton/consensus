@@ -7,19 +7,19 @@ export type tSetRsvpOpts = {
 }
 
 export type tStore = {
-  rsvps: tThunk<tRSVP[]>,
-  session: tThunk<ts.session>,
+  rsvps: ts.thunk<ts.rsvp[]>,
+  session: ts.thunk<ts.session>,
 };
 
 export type tState = {
   hasRSVPed: boolean, // switch for immediately updating UI on client
   hasMounted: boolean,
-  rsvp?: tRSVP, // pick out the rsvp from the rsvps state object
+  rsvp?: ts.rsvp, // pick out the rsvp from the rsvps state object
 };
 
 type tProps = {
   className?: string,
-  meeting: tMeeting,
+  meeting: ts.meeting,
   role?: ts.role,
   session: ts.session,
 };
@@ -27,15 +27,15 @@ type tProps = {
 export type tContainerProps = RouteComponentProps<any> & tProps & {
   history: History,
   isLoading: boolean,
-  patchRsvpDispatch: (query: tRSVPQuery) => tThunkPayload<tRSVP>,
-  postRsvpDispatch: (query: tRSVPQuery) => tThunkPayload<tRSVP>,
-  rsvp?: tRSVP,
-  rsvps: tRSVP[],
+  patchRsvpDispatch: (query: ts.rsvpQuery) => ts.thunkPayload<ts.rsvp>,
+  postRsvpDispatch: (query: ts.rsvpQuery) => ts.thunkPayload<ts.rsvp>,
+  rsvp?: ts.rsvp,
+  rsvps: ts.rsvp[],
 };
 
-export type tComponentProps = tMediaContext & tProps & {
+export type tComponentProps = ts.mediaContext & tProps & {
   hasRSVPed: boolean,
   hasMounted: boolean,
-  rsvp?: tRSVP,
+  rsvp?: ts.rsvp,
   setRsvp: (opts: tSetRsvpOpts) => void,
 };

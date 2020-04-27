@@ -1,33 +1,35 @@
-declare type tCountry = Readonly<{
-   code: string, // us
-   id: number,
-   name: string, // United States
-   regions?: tRegion[],
-   regionType: 'state'|'province'|'prefecture';
-}>;
+namespace ts {
+  declare type country = Readonly<{
+    code: string, // us
+    id: number,
+    name: string, // United States
+    regions?: ts.region[],
+    regionType: 'state'|'province'|'prefecture';
+  }>;
 
-declare type tRegion = Readonly<{
-   cities?: tCity[],
-   code: string,
-   country: string,
-   countryId: number,
-   id: number,
-   name: string, // United States
-}>;
+  declare type region = Readonly<{
+    cities?: ts.city[],
+    code: string,
+    country: string,
+    countryId: number,
+    id: number,
+    name: string,
+  }>;
 
-declare type tCity = Readonly<{
-   countryId: number,
-   country: string,
-   id: number,
-   name: string, // United States
-   group: tGroup[],
-   postcodes: number[],
-   region: string,
-   regionId: number,
-}>;
+  declare type city = Readonly<{
+    countryId: number,
+    country: string,
+    id: number,
+    name: string,
+    group: ts.group[],
+    postcodes: number[],
+    region: string,
+    regionId: number,
+  }>;
 
-declare type tDirectoryParams = tPaginateParams & Readonly<{
-  city?: string,
-  countryCode: string,
-  regionCode?: string,
-}>;
+  declare type directoryParams = ts.paginateParams & Readonly<{
+    city?: string,
+    countryCode: string,
+    regionCode?: string,
+  }>;
+}

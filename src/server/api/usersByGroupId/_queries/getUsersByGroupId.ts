@@ -7,8 +7,8 @@ import {getRolesByGroupId} from './getRolesByGroupId';
 
 export const getUsersByGroupId = async (
   ctx: Koa.ParameterizedContext,
-  query: tUsersByGroupIdQuery,
-): Promise<tUser[]> => {
+  query: ts.usersByGroupIdQuery,
+): Promise<ts.user[]> => {
   const roleMaps = await getRolesByGroupId(ctx, query);
 
   let userIds: number[] = [];
@@ -23,7 +23,7 @@ export const getUsersByGroupId = async (
     .whereIn('id', userIds)
     .select(userKeys)
     .stream();
-  const users: tUser[] = [];
+  const users: ts.user[] = [];
   try {
     for await (const chunk of usersStream) {
       users.push(chunk);
@@ -34,7 +34,7 @@ export const getUsersByGroupId = async (
 
   // TODO refactor where we add role all over the place
   return await Promise.all(roleMaps.map(async roleMap => {
-    const userProfile = _.find(users, user => roleMap.userId === user.id) as tUser;
+    const userProfile = _.find(users, user => roleMap.userId === user.id) as ts.user;
 
     return {
       ...userProfile,

@@ -11,10 +11,10 @@ const route = '/api/v1/cities';
 
 // get ALL cities (by country, which is just the US)
 cities.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tDirectoryParams = _.get(ctx, 'state.locals.data', {});
-  await validateSchema<tDirectoryParams>(ctx, schema, query);
+  const query: ts.directoryParams = _.get(ctx, 'state.locals.data', {});
+  await validateSchema<ts.directoryParams>(ctx, schema, query);
 
-  let allCities = [] as tCity[];
+  let allCities = [] as ts.city[];
   try {
     allCities = await knex('cities').where({
       ...query,

@@ -35,7 +35,7 @@ describe('redux/groupsByUserId/reducer', () => {
   it('should handle GET_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@groupsByUserId/GET_SUCCESS',
-      payload: [{}] as tGroup[],
+      payload: [{}] as ts.group[],
     })).toStrictEqual({
       ...initialState,
       fetched: true,

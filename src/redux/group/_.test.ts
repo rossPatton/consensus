@@ -37,7 +37,7 @@ describe('redux/group/reducer', () => {
   it('should handle GET_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@group/GET_SUCCESS',
-      payload: {} as tGroup,
+      payload: {} as ts.group,
     })).toStrictEqual({
       error: null,
       fetched: true,
@@ -67,7 +67,7 @@ describe('redux/group/reducer', () => {
   it('should handle PATCH_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@group/PATCH_SUCCESS',
-      payload: {} as tGroup,
+      payload: {} as ts.group,
     })).toStrictEqual({
       error: null,
       fetched: true,
@@ -97,7 +97,7 @@ describe('redux/group/reducer', () => {
   it('should handle POST_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@group/POST_SUCCESS',
-      payload: {} as tGroup,
+      payload: {} as ts.group,
     })).toStrictEqual({
       error: null,
       fetched: true,

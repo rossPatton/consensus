@@ -1,37 +1,30 @@
-declare interface tFetchResponse<T = any> extends Response {
-  json<P = T>(): Promise<P>
-};
+namespace ts {
+  declare type fetchResponse<T = any> = Response & {
+    json<P = T>(): Promise<P>
+  };
 
-// form submit boolean we add in middleware
-declare type tFormSubmit = Readonly<{
-  isFormSubmit?: boolean,
-}>;
+  declare type infoUnon = ErrorInfo | string | null;
+  declare type statusUnion = 200 | 204 | 400 | 401 | 404 | 500;
 
-// standard db query modifiers + form submit boolean we add in middleware
-declare type tBaseQuery = tFormSubmit & Readonly<{
-  // exclude an id, or something else
-  exclude?: number,
-  limit?: number,
-  offset?: number,
-}>;
+  // form submit boolean we add in middleware
+  declare type formSubmit = Readonly<{
+    isFormSubmit?: boolean,
+  }>;
 
-declare type tIdQuery = tBaseQuery & {
-  id: string | number,
-};
+  // standard db query modifiers + form submit boolean we add in middleware
+  declare type baseQuery = formSubmit & Readonly<{
+    // exclude an id, or something else
+    exclude?: number,
+    limit?: number,
+    offset?: number,
+  }>;
 
-declare type tResponseError = Readonly<{
-  message: tFetchResponse<Error> | string;
-  status: 200 | 204 | 400 | 401 | 404 | 500;
-}>;
+  declare type idQuery = baseQuery & {
+    id: string | number,
+  };
 
-// TODO instead of string or any, we could do a MASSIVE union of action types and payloads
-declare type tApiOpts = Readonly<{
-  dispatch?: Function,
-  credentials?: boolean,
-  failure?: (error: tResponseError) => tAction<string, tResponseError>,
-  init?: () => tAction<string, any>,
-  method?: 'DELETE' | 'GET' | 'PATCH' | 'POST',
-  path: string,
-  success?: (payload: any) => tAction<string, any>,
-  query?: object,
-}>;
+  declare type responseError = Readonly<{
+    message: fetchResponse<Error> | string;
+    status: 200 | 204 | 400 | 401 | 404 | 500;
+  }>;
+}

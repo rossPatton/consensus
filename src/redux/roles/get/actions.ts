@@ -9,7 +9,7 @@ import {
 
 export const init = (): tInitAction => ({type: GET_INIT});
 
-export const failure = (payload: tResponseError): tFailureAction => ({
+export const failure = (payload: ts.responseError): tFailureAction => ({
   type: GET_FAILURE,
   payload,
 });

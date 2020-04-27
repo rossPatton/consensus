@@ -47,7 +47,7 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     // if draft is a copy (to make new meeting), not an edit (of existing draft or meeting)
     // then we change a few things here
     const state = {
-      category: draft.category as tCategory,
+      category: draft.category as ts.category,
       cityId: typeof draft.cityId === 'string'
         ? parseInt(draft.cityId as string, 10)
         : null,
@@ -85,7 +85,7 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     const endDate = dayJS(this.state.date).hour(timeArr[0]).minute(timeArr[1]);
     endDate.hour(endDate.hour() + dur);
 
-    let newEvent: tMeeting;
+    let newEvent: ts.meeting;
     try {
       const {patchEventDispatch, postMeetingDispatch} = this.props;
 
@@ -165,8 +165,8 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  patchEventDispatch: (query: tUpsertMeetingQuery) => dispatch(patchEvent(query)),
-  postMeetingDispatch: (query: tUpsertMeetingQuery) => dispatch(postMeeting(query)),
+  patchEventDispatch: (query: ts.upsertMeetingQuery) => dispatch(patchEvent(query)),
+  postMeetingDispatch: (query: ts.upsertMeetingQuery) => dispatch(postMeeting(query)),
 });
 
 const PlanMeeting = connect(

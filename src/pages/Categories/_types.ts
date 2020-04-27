@@ -1,5 +1,3 @@
-import { match } from 'react-router';
-
 export type tProps = {
-  match: match & { params: tCategoryParams },
+  match: ts.match & { params: ts.categoryParams },
 }

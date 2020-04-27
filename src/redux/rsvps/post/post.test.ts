@@ -31,7 +31,7 @@ describe('redux/rsvps/post', () => {
       type: 'private',
       userId: 1,
       value: 'yes',
-    } as tRSVP;
+    } as ts.rsvp;
 
     const expectedActionPayload: tSuccessAction[] = [{
       type: POST_SUCCESS,

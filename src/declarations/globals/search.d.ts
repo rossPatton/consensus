@@ -1,10 +1,12 @@
-// search query vs query strings
-declare type tSearchParams = tPaginateParams & Readonly<{
-  value: string,
-}>;
+namespace ts {
+  // search query vs query strings
+  declare type searchParams = ts.paginateParams & Readonly<{
+    value: string,
+  }>;
 
-// search query via direct api call
-declare type tSearchQuery = ReadOnly<{
-  key: string, // key to search against
-  value: string, // value we're looking for
-}>;
+  // search query via direct api call
+  declare type searchQuery = ReadOnly<{
+    key: string, // key to search against
+    value: string, // value we're looking for
+  }>;
+}

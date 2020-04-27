@@ -1,13 +1,13 @@
-export type tState = Partial<tGroup> & {avatarEmail: string, password: string};
+export type tState = Partial<ts.group> & {avatarEmail: string, password: string};
 export type tMeetingTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
-export type tStore = {session: tThunk<ts.session>};
+export type tStore = {session: ts.thunk<ts.session>};
 export type tKeyUnion = keyof tState;
 
 export type tContainerProps = {
-  loginDispatch: (query: ts.loginQuery) => tThunkPayload,
+  loginDispatch: (query: ts.loginQuery) => ts.thunkPayload,
   match: ts.adminSectionParams,
-  patchOrgDispatch: (query: tGroupQuery) => tThunkPayload<tGroup>,
-  sessionThunk: tThunk<ts.session>,
+  patchOrgDispatch: (query: ts.groupQuery) => ts.thunkPayload<ts.group>,
+  sessionThunk: ts.thunk<ts.session>,
 };
 
 export type tComponentProps = tState & {

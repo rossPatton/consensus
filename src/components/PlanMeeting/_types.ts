@@ -1,28 +1,29 @@
 import {Location} from 'history';
+import {ValuesType} from 'utility-types';
 
-export type tState = Partial<tMeeting> & {
+export type tState = Partial<ts.meeting> & {
   duration: string | number,
   isCopy: boolean,
   time: string,
 };
 
 export type tStore = {
-  meetingsByGroupId: tThunk<tMeeting[]>,
-  session: tThunk<ts.session>,
+  meetingsByGroupId: ts.thunk<ts.meeting[]>,
+  session: ts.thunk<ts.session>,
 };
 
 export type tKeyUnion = keyof tState;
-export type tValueUnion = ValueOf<tState>;
+export type tValueUnion = ValuesType<tState>;
 export type tMeetingTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export type tContainerProps = {
-  meetings: tMeeting[],
+  meetings: ts.meeting[],
   heading?: string,
-  group: tGroup,
-  patchEventDispatch: (query: tUpsertMeetingQuery) => tThunkPayload<tMeetingSingular>,
-  postMeetingDispatch: (query: tUpsertMeetingQuery) => tThunkPayload<tMeetingSingular>,
+  group: ts.group,
+  patchEventDispatch: (query: ts.upsertMeetingQuery) => ts.thunkPayload<ts.meetingSingular>,
+  postMeetingDispatch: (query: ts.upsertMeetingQuery) => ts.thunkPayload<ts.meetingSingular>,
   router: Location,
-  sessionThunk: tThunk<ts.session>,
+  sessionThunk: ts.thunk<ts.session>,
 };
 
 export type tComponentProps = tContainerProps & tState & {

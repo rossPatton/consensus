@@ -6,9 +6,9 @@ import {getUsersByIds} from './getUsersByIds';
 
 export const getMeetingByQuery = async (
   ctx: Koa.ParameterizedContext,
-  query: tGetMeetingQuery,
-): Promise<tMeetingSingular> => {
-  let meeting: tMeetingSingular;
+  query: ts.getMeetingQuery,
+): Promise<ts.meetingSingular> => {
+  let meeting: ts.meetingSingular;
   try {
     meeting = await knex('meetings')
       .limit(1)
@@ -18,7 +18,7 @@ export const getMeetingByQuery = async (
     return ctx.throw(500, err);
   }
 
-  let rsvps = {} as tRSVP[];
+  let rsvps = {} as ts.rsvp[];
   try {
     rsvps = await knex('users_meetings')
       .where({
@@ -32,7 +32,7 @@ export const getMeetingByQuery = async (
 
   let rsvp = null;
   if (account.userId) {
-    rsvp = _.find(rsvps, (rel: tRSVP) => rel.userId === account.userId);
+    rsvp = _.find(rsvps, (rel: ts.rsvp) => rel.userId === account.userId);
   }
 
   // get count of both public and private rsvps
@@ -42,7 +42,7 @@ export const getMeetingByQuery = async (
     .filter(rel => rel.type === 'private' && rel.value === 'yes');
 
   // if on an meeting page, we render a list of public attendees below the description
-  const unsafeUsers: tUser[] =
+  const unsafeUsers: ts.user[] =
     await getUsersByIds(ctx, publicRSVPS.map(rsvp => rsvp.userId));
 
   // "unsafe" because we want to check user privacy settings first

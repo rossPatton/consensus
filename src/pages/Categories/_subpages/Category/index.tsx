@@ -49,7 +49,7 @@ class CategoryContainer extends PureComponent<tContainerProps> {
                   <Paginate
                     count={9}
                     items={searchProps.items}
-                    render={(groupsToRender: tGroup[]) => (
+                    render={(groupsToRender: ts.group[]) => (
                       <>
                         <FilterPanel
                           onSearchChange={searchProps.onSearchChange}
@@ -75,7 +75,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getGroups: (query: {category: tCategory}) => dispatch(getGroups(query)),
+  getGroups: (query: {category: ts.category}) => dispatch(getGroups(query)),
 });
 
 const Category = connect(

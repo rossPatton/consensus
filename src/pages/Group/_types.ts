@@ -1,33 +1,33 @@
 import {Location} from 'history';
-import {match} from 'react-router';
+
 
 export type tProps = {
   location: Location,
-  match: match & {params: tGroupRouteParams},
+  match: ts.match & {params: ts.groupRouteParams},
   session: ts.session,
 };
 
 export type tComponentProps = tProps & {
-  group: tGroup,
+  group: ts.group,
   role: ts.role,
 };
 
 export type tContainerProps = tProps & {
-  getMeetingsByGroupIdDispatch: (query: tGetMeetingQuery) => tThunkPayload<tMeeting[]>,
-  getGroupDispatch: (query: tGroupQuery) => tThunkPayload<tGroup>,
-  getRolesDispatch: () => tThunkPayload<ts.roleMap[]>,
-  getRsvpsDispatch: () => tThunkPayload<tRSVP[]>,
+  getMeetingsByGroupIdDispatch: (query: ts.getMeetingQuery) => ts.thunkPayload<ts.meeting[]>,
+  getGroupDispatch: (query: ts.groupQuery) => ts.thunkPayload<ts.group>,
+  getRolesDispatch: () => ts.thunkPayload<ts.roleMap[]>,
+  getRsvpsDispatch: () => ts.thunkPayload<ts.rsvp[]>,
   isLoading: boolean,
-  groupThunk: tThunk<tGroup>,
-  rolesThunk: tThunk<ts.roleMap[]>,
-  rsvpsThunk: tThunk<tRSVP[]>,
+  groupThunk: ts.thunk<ts.group>,
+  rolesThunk: ts.thunk<ts.roleMap[]>,
+  rsvpsThunk: ts.thunk<ts.rsvp[]>,
   session: ts.session,
 };
 
 export type tStore = {
-  meetingsByGroupId: tThunk<tMeeting[]>,
-  group: tThunk<tGroup>,
-  roles: tThunk<ts.roleMap[]>,
-  rsvps: tThunk<tRSVP[]>,
-  session: tThunk<ts.session>,
+  meetingsByGroupId: ts.thunk<ts.meeting[]>,
+  group: ts.thunk<ts.group>,
+  roles: ts.thunk<ts.roleMap[]>,
+  rsvps: ts.thunk<ts.rsvp[]>,
+  session: ts.thunk<ts.session>,
 };

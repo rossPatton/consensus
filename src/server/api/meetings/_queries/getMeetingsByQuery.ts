@@ -10,7 +10,7 @@ import {knex} from '../../../db/connection';
 export const getMeetingsByQuery = async (
   ctx: Koa.ParameterizedContext,
   query: tMeetingsServerQuery,
-): Promise<tMeeting[]> => {
+): Promise<ts.meeting[]> => {
   const {
     exclude: excludeId,
     isDraft: isDraftStr,

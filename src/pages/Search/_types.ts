@@ -1,14 +1,14 @@
 import * as H from 'history';
 import qs from 'query-string';
-import { match } from 'react-router-dom';
+
 
 export interface tProps {
-  getSearchResults: (searchObj: qs.ParsedQuery) => Promise<tGroup[]>,
+  getSearchResults: (searchObj: qs.ParsedQuery) => Promise<ts.group[]>,
   location: H.Location,
-  match: match & {params: tSearchParams},
-  groupsBySearch: tThunk<tGroup[]>,
+  match: ts.match & {params: ts.searchParams},
+  groupsBySearch: ts.thunk<ts.group[]>,
 }
 
 export type tStore = {
-  groupsBySearch: tThunk<tGroup[]>,
+  groupsBySearch: ts.thunk<ts.group[]>,
 };

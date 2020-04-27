@@ -6,9 +6,9 @@ export type tState = {
 export type tStateUnion = keyof tState;
 
 export type tContainerProps = {
-  loginDispatch: (query: ts.loginQuery) => tThunkPayload<ts.session>,
-  patchAccountDispatch: (query: ts.accountQuery) => tThunkPayload<ts.session>,
-  sessionThunk: tThunk<ts.session>,
+  loginDispatch: (query: ts.loginQuery) => ts.thunkPayload<ts.session>,
+  patchAccountDispatch: (query: ts.accountQuery) => ts.thunkPayload<ts.session>,
+  sessionThunk: ts.thunk<ts.session>,
 };
 
 export type tComponentProps = tState & {

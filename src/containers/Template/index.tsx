@@ -37,7 +37,7 @@ class Template extends PureComponent<tProps> {
   }
 }
 
-const mapStateToProps = (store: {geo: tThunk<tGeo>, session: tThunk<ts.session>}) => ({
+const mapStateToProps = (store: {geo: ts.thunk<ts.geo>, session: ts.thunk<ts.session>}) => ({
   geoThunk: store.geo,
   session: store.session.data,
 });

@@ -70,7 +70,7 @@ describe('redux/meetingsByGroupId/reducer', () => {
   it('should handle GET_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@meetingsByGroupId/GET_SUCCESS',
-      payload: [{}] as tMeeting[],
+      payload: [{}] as ts.meeting[],
     })).toStrictEqual({
       ...initialState,
       fetched: true,

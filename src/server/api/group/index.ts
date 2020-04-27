@@ -13,10 +13,10 @@ const route = '/api/v1/group';
 const table = 'groups';
 
 group.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tGetGroupQuery = _.get(ctx, dataPath, {});
-  await validateSchema<tGetGroupQuery>(ctx, schema, query);
+  const query: ts.getGroupQuery = _.get(ctx, dataPath, {});
+  await validateSchema<ts.getGroupQuery>(ctx, schema, query);
 
-  let group = {} as tGroup;
+  let group = {} as ts.group;
   try {
     group = await knex(table)
       .limit(1)
@@ -32,7 +32,7 @@ group.get(route, async (ctx: Koa.ParameterizedContext) => {
 
 group.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, dataPath, {});
-  await validateSchema<tGroupQuery>(ctx, patchSchema, query);
+  await validateSchema<ts.groupQuery>(ctx, patchSchema, query);
 
   const loggedInAccount: ts.account = _.get(ctx, 'state.user', {});
   const {avatarEmail, isFormSubmit, password, ...updateQuery} = query;
@@ -44,7 +44,7 @@ group.patch(route, async (ctx: Koa.ParameterizedContext) => {
     updateQuery.avatarHash = sha256(avatarEmail);
   }
 
-  let updatedGroup = [] as tGroup[];
+  let updatedGroup = [] as ts.group[];
   try {
     updatedGroup = await knex(table)
       .limit(1)
@@ -60,12 +60,12 @@ group.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
 group.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...group} = _.get(ctx, dataPath, {});
-  await validateSchema<tGroupQuery>(ctx, postSchema, group);
+  await validateSchema<ts.groupQuery>(ctx, postSchema, group);
 
   const {login, password, ...groupToInsert} = group;
 
   // create the group first =>
-  let newGroupReturning = [] as tGroup[];
+  let newGroupReturning = [] as ts.group[];
   try {
     newGroupReturning = await knex(table)
       .insert({isNew: true, ...groupToInsert})

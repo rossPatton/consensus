@@ -12,11 +12,11 @@ const dataPath = 'state.locals.data';
 const route = '/api/v1/meetingsByLocation';
 
 meetingsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tMeetingsByLocationQuery = _.get(ctx, dataPath, {});
-  await validateSchema<tMeetingsByLocationQuery>(ctx, schema, query);
+  const query: ts.meetingsByLocationQuery = _.get(ctx, dataPath, {});
+  await validateSchema<ts.meetingsByLocationQuery>(ctx, schema, query);
 
   // @TODO this should be querying against postcodes, eventually
-  let cityRel = {} as tPostCode;
+  let cityRel = {} as ts.city;
   try {
     const where = query.cityId
       ? {id: query.cityId, regionId: query.regionId}
@@ -30,7 +30,7 @@ meetingsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  let meetings = [] as tMeeting[];
+  let meetings = [] as ts.meeting[];
   try {
     meetings = await knex('meetings')
       .where({cityId: cityRel.id})

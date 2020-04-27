@@ -20,7 +20,7 @@ class GroupContainer extends PureComponent<tContainerProps> {
 
     if (isHandle) {
       props.getGroupDispatch({handle: idOrSlug})
-        .then((res: tActionPayload<tGroup>) => {
+        .then((res: ts.payload<ts.group>) => {
           return props.getMeetingsByGroupIdDispatch({
             groupId: res.payload.id,
             showPast: false,
@@ -118,8 +118,8 @@ const mapStateToProps = (store: tStore) => ({
 
 const mapDispatchToProps = (dispatch: Function) => ({
   getMeetingsByGroupIdDispatch:
-    (query: tGetMeetingQuery) => dispatch(getMeetingsByGroupId(query)),
-  getGroupDispatch: (query: tGroupQuery) => dispatch(getGroup(query)),
+    (query: ts.getMeetingQuery) => dispatch(getMeetingsByGroupId(query)),
+  getGroupDispatch: (query: ts.groupQuery) => dispatch(getGroup(query)),
   getRolesDispatch: () => dispatch(getRoles()),
   getRsvpsDispatch: () => dispatch(getRsvps()),
 });

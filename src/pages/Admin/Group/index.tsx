@@ -66,13 +66,13 @@ class GroupAdminContainer extends React.PureComponent<tProps> {
             {isProfile && <Profile match={this.props.match} />}
             {isMembers && (
               <Members
-                group={this.props.session.profile as tGroup}
+                group={this.props.session.profile as ts.group}
                 match={this.props.match}
               />
             )}
             {isMeetingForm && (
               <PlanMeeting
-                group={this.props.session.profile as tGroup}
+                group={this.props.session.profile as ts.group}
                 router={this.props.location}
               />
             )}
@@ -83,7 +83,7 @@ class GroupAdminContainer extends React.PureComponent<tProps> {
   }
 }
 
-const mapStateToProps = (store: {session: tThunk<ts.session<tGroup>>}) => ({
+const mapStateToProps = (store: {session: ts.thunk<ts.session<ts.group>>}) => ({
   session: store.session.data,
 });
 

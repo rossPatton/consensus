@@ -4,7 +4,7 @@ import {GET_FAILURE, GET_INIT, GET_SUCCESS} from './get/_types';
 import {PATCH_FAILURE, PATCH_INIT, PATCH_SUCCESS} from './patch/_types';
 import {POST_FAILURE, POST_INIT, POST_SUCCESS} from './post/_types';
 
-export const initialState: tThunk<tUser[]> = {
+export const initialState: ts.thunk<ts.user[]> = {
   error: null,
   fetched: false,
   isLoading: false,

@@ -35,7 +35,7 @@ describe('redux/cities/reducer', () => {
   it('should handle GET_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@cities/GET_SUCCESS',
-      payload: [{}] as tCity[],
+      payload: [{}] as ts.city[],
     })).toStrictEqual({
       ...initialState,
       fetched: true,

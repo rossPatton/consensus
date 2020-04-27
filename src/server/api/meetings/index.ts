@@ -50,8 +50,8 @@ meetings.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 meetings.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tIdQuery = _.get(ctx, dataPath, {});
-  await validateSchema<tIdQuery>(ctx, deleteSchema, query);
+  const query: ts.idQuery = _.get(ctx, dataPath, {});
+  await validateSchema<ts.idQuery>(ctx, deleteSchema, query);
 
   try {
     await knex(table).limit(1).where({id: query.id}).del();

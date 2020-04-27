@@ -16,7 +16,7 @@ search.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, 'state.locals.data', {});
   await validateSchema(ctx, schema, query);
 
-  let groupsLike: {rows: tGroup[]};
+  let groupsLike: {rows: ts.group[]};
   try {
     // get all columns, for rows in group whose name is similar to search term
     // then sort desc by that similarity/sml (closest first)

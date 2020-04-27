@@ -1,15 +1,17 @@
-declare type tRSVPValue = 'yes' | 'no' | 'maybe' | '' | null;
+namespace ts {
+  declare type rsvpEnum = 'yes' | 'no' | 'maybe' | '' | null;
 
-declare type tRSVP = Readonly<{
-  meetingId: number,
-  id?: number,
-  type: 'public' | 'private',
-  userId: number,
-  value: tRSVPValue,
-}>;
+  declare type rsvp = Readonly<{
+    meetingId: number,
+    id?: number,
+    type: 'public' | 'private',
+    userId: number,
+    value: ts.rsvpEnum,
+  }>;
 
-declare type tRSVPQuery = Readonly<{
-  meetingId: number,
-  type: 'public' | 'private',
-  value: tRSVPValue,
-}>;
+  declare type rsvpQuery = Readonly<{
+    meetingId: number,
+    type: 'public' | 'private',
+    value: ts.rsvpEnum,
+  }>;
+}

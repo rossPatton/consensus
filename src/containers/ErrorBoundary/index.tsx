@@ -10,12 +10,12 @@ import {tProps, tState} from './_types';
 export default class ErrorBoundary extends PureComponent<tProps, tState> {
   static defaultProps = {
     error: null as any,
-    status: 200 as tStatusUnion,
+    status: 200 as ts.statusUnion,
   };
 
   state = {
     error: this.props.error,
-    info: null as tInfoUnion,
+    info: null as ts.infoUnon,
   };
 
   componentDidCatch(error: Error, info: ErrorInfo) {

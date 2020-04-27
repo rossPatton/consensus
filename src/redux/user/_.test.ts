@@ -35,7 +35,7 @@ describe('redux/user/reducer', () => {
   it('should handle DELETE_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@user/DELETE_SUCCESS',
-      payload: {} as tUser,
+      payload: {} as ts.user,
     })).toStrictEqual({
       ...initialState,
       fetched: true,
@@ -71,7 +71,7 @@ describe('redux/user/reducer', () => {
   it('should handle GET_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@user/GET_SUCCESS',
-      payload: {} as tUser,
+      payload: {} as ts.user,
     })).toStrictEqual({
       ...initialState,
       fetched: true,
@@ -107,7 +107,7 @@ describe('redux/user/reducer', () => {
   it('should handle PATCH_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@user/PATCH_SUCCESS',
-      payload: {} as tUser,
+      payload: {} as ts.user,
     })).toStrictEqual({
       ...initialState,
       fetched: true,
@@ -143,7 +143,7 @@ describe('redux/user/reducer', () => {
   it('should handle POST_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@user/POST_SUCCESS',
-      payload: {} as tUser,
+      payload: {} as ts.user,
     })).toStrictEqual({
       ...initialState,
       fetched: true,

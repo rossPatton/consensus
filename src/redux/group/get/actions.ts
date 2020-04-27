@@ -11,12 +11,12 @@ export const init = (): tInitAction => ({
   type: GET_INIT,
 });
 
-export const failure = (payload: tResponseError): tFailureAction => ({
+export const failure = (payload: ts.responseError): tFailureAction => ({
   type: GET_FAILURE,
   payload,
 });
 
-export const success = (payload: tGroup): tSuccessAction => ({
+export const success = (payload: ts.group): tSuccessAction => ({
   type: GET_SUCCESS,
   payload,
 });

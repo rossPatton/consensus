@@ -1,11 +1,11 @@
 import { tActions } from './_types';
 import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
-export const initialState: tThunk<tCity[]> = {
+export const initialState: ts.thunk<ts.city[]> = {
   error: null,
   fetched: false,
   isLoading: false,
-  data: [] as tCity[],
+  data: [] as ts.city[],
 };
 
 export const citiesReducer = (state = initialState, action: tActions) => {

@@ -30,14 +30,14 @@ rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {meetingId, type = 'private', value = 'no'} = query;
   const {userId = 0} = _.get(ctx, sessionPath, {});
 
-  const newRsvp: tRSVP = {
+  const newRsvp: ts.rsvp = {
     meetingId: parseInt(meetingId, 10),
     type,
     userId,
     value: value !== '' ? value : null,
   };
 
-  let rsvpUpdate: tRSVP[] = [];
+  let rsvpUpdate: ts.rsvp[] = [];
   try {
     rsvpUpdate = await knex(table)
       .first()
@@ -61,14 +61,14 @@ rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {meetingId, type = 'private', value = 'no'} = query;
   const {userId = 0} = _.get(ctx, sessionPath, {});
 
-  const newRsvp: tRSVP = {
+  const newRsvp: ts.rsvp = {
     meetingId: parseInt(meetingId, 10),
     type,
     userId,
     value: value !== '' ? value : null,
   };
 
-  let currentRSVPStatus = {} as tRSVP;
+  let currentRSVPStatus = {} as ts.rsvp;
   try {
     currentRSVPStatus = await knex(table)
       .limit(1)
@@ -78,7 +78,7 @@ rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  let rsvpUpdate: tRSVP[] = [];
+  let rsvpUpdate: ts.rsvp[] = [];
   if (currentRSVPStatus) {
     try {
       rsvpUpdate = await knex(table)

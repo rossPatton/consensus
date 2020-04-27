@@ -22,7 +22,7 @@ export const UsersComponent = memo((props: tComponentProps) => {
         placeholder="Search for someone by username"
       />
       <ul>
-        {props.users.map((user: tUser, i) => {
+        {props.users.map((user, i) => {
           let showControls = isEditable && props.isDesktop;
           if (props.isMobile) {
             showControls = isEditable && props.showMobileControls === i;

@@ -1,18 +1,18 @@
 export type tComponentProps = {
   onSearchChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  groups: tGroup[],
+  groups: ts.group[],
   roles: ts.roleMap[],
 };
 
 export type tContainerProps = {
-  getGroupsByUserIdDispatch: (query: tGroupsByUserIdQuery) => tThunkPayload<tGroup[]>,
-  groupsByUserIdThunk: tThunk<tGroup[]>,
+  getGroupsByUserIdDispatch: (query: ts.groupsByUserIdQuery) => ts.thunkPayload<ts.group[]>,
+  groupsByUserIdThunk: ts.thunk<ts.group[]>,
   roles: ts.roleMap[],
-  sessionThunk: tThunk<ts.session>,
+  sessionThunk: ts.thunk<ts.session>,
 };
 
 export type tStore = {
-  groupsByUserId: tThunk<tGroup[]>,
-  roles: tThunk<ts.roleMap[]>,
-  session: tThunk<ts.session>,
+  groupsByUserId: ts.thunk<ts.group[]>,
+  roles: ts.thunk<ts.roleMap[]>,
+  session: ts.thunk<ts.session>,
 };

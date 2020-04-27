@@ -11,7 +11,7 @@ const testGroup = {
   cityId: 1,
   name: 'Test Group',
   type: 'public',
-} as tGroup;
+} as ts.group;
 
 describe('PlanMeeting component', () => {
   it('renders without crashing', () => {

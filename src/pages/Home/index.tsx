@@ -60,7 +60,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getMeetingsByLocationDispatch: (query: tMeetingsByLocationQuery) =>
+  getMeetingsByLocationDispatch: (query: ts.meetingsByLocationQuery) =>
     dispatch(getMeetingsByLocation(query)),
 });
 

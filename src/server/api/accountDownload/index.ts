@@ -15,7 +15,7 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
   // const query: Mutable<ts.accountQuery> = _.get(ctx, 'state.locals.data', {});
   const account: ts.account = _.get(ctx, 'state.user', {});
   const profile = await getProfileByAccountId(ctx, account);
-  await validateSchema<Mutable<tIdQuery>>(ctx, schema, {id: account.id});
+  await validateSchema<Mutable<ts.idQuery>>(ctx, schema, {id: account.id});
 
   let emails: string[];
   try {
@@ -27,8 +27,8 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
   }
 
   let roles: ts.roleMap[];
-  let rsvps: tRSVP[];
-  let meetings: tMeeting[];
+  let rsvps: ts.rsvp[];
+  let meetings: ts.meeting[];
   const type = account.groupId ? 'org' : 'user';
 
   if (type === 'user') {

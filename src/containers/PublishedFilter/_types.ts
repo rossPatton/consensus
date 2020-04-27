@@ -1,10 +1,10 @@
 import React from 'react';
 
 export interface tProps {
-  items: tMeeting[],
-  render: (renderProps: tPublishedFilterProps) => React.ReactNode,
+  items: ts.meeting[],
+  render: (renderProps: ts.publishedFilterProps) => React.ReactNode,
 }
 
 export interface tState {
-  publishedFilter: tPublishedFilter,
+  publishedFilter: ts.filterEnum,
 }

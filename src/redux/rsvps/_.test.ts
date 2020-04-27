@@ -96,7 +96,7 @@ describe('redux/rsvps/reducer', () => {
         userId: 2,
         value: 'no',
       }],
-    } as tThunk<tRSVP[]>;
+    } as ts.thunk<ts.rsvp[]>;
 
     expect(reducer(initialState, {
       type: '@@rsvps/PATCH_SUCCESS',

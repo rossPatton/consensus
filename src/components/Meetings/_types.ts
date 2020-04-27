@@ -1,6 +1,6 @@
 type tProps = {
   count?: number,
-  meetings: tMeeting[],
+  meetings: ts.meeting[],
   // render alternative version
   horizontal?: boolean,
   // just because eslint complains about using role with non-ARIA strings
@@ -10,17 +10,17 @@ type tProps = {
 };
 
 export type tStore = {
-  session: tThunk<ts.session>,
+  session: ts.thunk<ts.session>,
 };
 
 export type tContainerProps = tProps & {
-  deleteEventDispatch: (query: tIdQuery) => tThunkPayload,
+  deleteEventDispatch: (query: ts.idQuery) => ts.thunkPayload,
   session: ts.session,
   // admin drafts vs plain meetings vs user meeting RSVPs
   type?: 'drafts' | 'meetings' | 'rsvps',
 };
 
-export type tComponentProps = tMediaContext & tProps & {
+export type tComponentProps = ts.mediaContext & tProps & {
   deleteEvent: (ev: React.MouseEvent, id: number) => void,
   // if user is an admin, they can edit meetings
   isEditable?: boolean,

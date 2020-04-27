@@ -60,7 +60,7 @@ class DraftContainer extends PureComponent<tContainerProps> {
 
               return (
                 <DraftComponent
-                  meeting={draft as tMeeting}
+                  meeting={draft as ts.meeting}
                 />
               );
             }}

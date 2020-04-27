@@ -29,7 +29,7 @@ describe('redux/user/patch', () => {
       id: 1,
       bio: '',
       username: 'testUser',
-    } as tUser;
+    } as ts.user;
 
     const expectedActionPayload: tSuccessAction[] = [{
       type: PATCH_SUCCESS,

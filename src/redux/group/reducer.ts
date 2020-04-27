@@ -3,11 +3,11 @@ import { GET_FAILURE, GET_SUCCESS } from './get/_types';
 import { PATCH_FAILURE, PATCH_SUCCESS } from './patch/_types';
 import { POST_FAILURE, POST_SUCCESS } from './post/_types';
 
-export const initialState: tThunk<tGroup> = {
+export const initialState: ts.thunk<ts.group> = {
   error: null,
   fetched: false,
   isLoading: true,
-  data: {} as tGroup,
+  data: {} as ts.group,
 };
 
 export const groupReducer = (state = initialState, action: tActions) => {

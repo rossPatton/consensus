@@ -82,7 +82,7 @@ const mapStateToProps = (store: tStore) => ({
 
 const mapDispatchToProps = (dispatch: Function) => ({
   dispatch,
-  postNewUserByGroupIdDispatch: (query: tUsersByGroupIdQuery) =>
+  postNewUserByGroupIdDispatch: (query: ts.usersByGroupIdQuery) =>
     dispatch(postUserByGroupId(query)),
 });
 

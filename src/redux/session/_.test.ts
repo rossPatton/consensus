@@ -36,7 +36,7 @@ describe('redux/session/reducer', () => {
     const testSession = {
       isAuthenticated: true,
       isVerified: true,
-      profile: {} as tUser,
+      profile: {} as ts.user,
       type: 'user',
     } as ts.session;
 
@@ -109,7 +109,7 @@ describe('redux/session/reducer', () => {
     const testSession = {
       isAuthenticated: true,
       isVerified: true,
-      profile: {} as tUser,
+      profile: {} as ts.user,
       type: 'user',
     } as ts.session;
 

@@ -3,7 +3,7 @@ import {RouteComponentProps} from 'react-router';
 
 export type tProps = RouteComponentProps<any> & {
   className?: string,
-  getSearchResults: (query: {value: string}) => tThunkPayload<tGroup[]>,
+  getSearchResults: (query: {value: string}) => ts.thunkPayload<ts.group[]>,
   history: History,
 };
 

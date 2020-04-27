@@ -6,8 +6,8 @@ import {knex} from '../db/connection';
 // ideally only happens once per visit, on login. but if user refreshes, we do again
 export const getRSVPsByUserId = async (
   ctx: Koa.ParameterizedContext,
-  userId: string | number = 0): Promise<tRSVP[]> => {
-  let rsvps: tRSVP[] = [];
+  userId: string | number = 0): Promise<ts.rsvp[]> => {
+  let rsvps: ts.rsvp[] = [];
   try {
     rsvps = await knex('users_meetings')
       .where({

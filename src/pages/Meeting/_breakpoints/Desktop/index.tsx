@@ -9,7 +9,7 @@ import {Description, ExternalLink, Meetings, PlaceholderImage, RSVP} from '~app/
 import {tComponentProps} from '../../_types';
 
 const DesktopEventComponent = memo((props: tComponentProps) => {
-  const {meeting, meetingsByGroupId, group, rsvp = {} as tRSVP} = props;
+  const {meeting, meetingsByGroupId, group, rsvp = {} as ts.rsvp} = props;
   const isPastMeeting = dayJS(meeting.date).isBefore(dayJS());
 
   return (

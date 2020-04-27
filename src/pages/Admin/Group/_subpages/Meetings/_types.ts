@@ -3,20 +3,20 @@ export type tProps = {
 };
 
 export type tComponentProps = tProps
-  & tPublishedFilterProps
-  & tSearchFilterProps
+  & ts.publishedFilterProps
+  & ts.searchFilterProps
   & {
-    drafts: tMeeting[],
-    meetings: tMeeting[],
+    drafts: ts.meeting[],
+    meetings: ts.meeting[],
 };
 
 export type tContainerProps = tProps & {
-  meetingsByGroupIdThunk: tThunk<tMeeting[]>,
-  getMeetingsByGroupIdDispatch: (query: tGetMeetingQuery) => tThunkPayload<tMeeting[]>,
-  sessionThunk: tThunk<ts.session>,
+  meetingsByGroupIdThunk: ts.thunk<ts.meeting[]>,
+  getMeetingsByGroupIdDispatch: (query: ts.getMeetingQuery) => ts.thunkPayload<ts.meeting[]>,
+  sessionThunk: ts.thunk<ts.session>,
 };
 
 export type tStore = {
-  meetingsByGroupId: tThunk<tMeeting[]>,
-  session: tThunk<ts.session>,
+  meetingsByGroupId: ts.thunk<ts.meeting[]>,
+  session: ts.thunk<ts.session>,
 };

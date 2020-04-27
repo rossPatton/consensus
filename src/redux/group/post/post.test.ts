@@ -15,7 +15,7 @@ const mockStore = configureStore([thunk]);
 
 const testGroup = {
   allowNonVerified: true,
-  category: 'Union' as tCategory,
+  category: 'Union' as ts.category,
   city: 'New York',
   cityId: 1,
   country: 'United States',
@@ -28,7 +28,7 @@ const testGroup = {
   region: 'New York',
   regionId: 1,
   handle: 'tech-workers-coalition-chapter',
-  type: 'private' as tPrivacyEnum,
+  type: 'private' as ts.privacyEnum,
 };
 
 describe('redux/group/post', () => {

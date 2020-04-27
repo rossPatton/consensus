@@ -28,7 +28,7 @@ describe('redux/country/reducer', () => {
   it('should handle GET_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@country/GET_SUCCESS',
-      payload: {} as tCountry,
+      payload: {} as ts.country,
     })).toStrictEqual({
       error: null,
       fetched: true,

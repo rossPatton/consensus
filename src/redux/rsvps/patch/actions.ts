@@ -11,12 +11,12 @@ export const init = (): tInitAction => ({
   type: PATCH_INIT,
 });
 
-export const failure = (payload: tResponseError): tFailureAction => ({
+export const failure = (payload: ts.responseError): tFailureAction => ({
   type: PATCH_FAILURE,
   payload,
 });
 
-export const success = (payload: tRSVP): tSuccessAction => ({
+export const success = (payload: ts.rsvp): tSuccessAction => ({
   type: PATCH_SUCCESS,
   payload,
 });

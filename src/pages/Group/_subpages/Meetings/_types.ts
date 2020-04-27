@@ -1,25 +1,25 @@
-import {match} from 'react-router';
+
 
 type tProps = {
-  group: tGroup,
+  group: ts.group,
   role: ts.role,
 };
 
-export type tComponentProps = tSearchFilterProps & tProps & {
-  meetings: tMeeting[],
+export type tComponentProps = ts.searchFilterProps & tProps & {
+  meetings: ts.meeting[],
   hideMeetings: boolean,
-  originalEvents: tMeeting[],
+  originalEvents: ts.meeting[],
   type: 'drafts' | 'meetings',
 };
 
 export type tContainerProps = tProps & {
-  meetingsByGroupIdThunk: tThunk<tMeeting[]>,
+  meetingsByGroupIdThunk: ts.thunk<ts.meeting[]>,
   isLoading: boolean,
-  match: match & {params: tGroupRouteParams},
-  session: ts.session<tUser | tGroup>,
+  match: ts.match & {params: ts.groupRouteParams},
+  session: ts.session<ts.user | ts.group>,
 };
 
 export type tStore = {
-  meetingsByGroupId: tThunk<tMeeting[]>,
-  session: tThunk<ts.session<tUser | tGroup>>,
+  meetingsByGroupId: ts.thunk<ts.meeting[]>,
+  session: ts.thunk<ts.session<ts.user | ts.group>>,
 };

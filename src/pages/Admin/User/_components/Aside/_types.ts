@@ -1,7 +1,7 @@
 export type tProps = {
   isDesktop: boolean,
   isMobile: boolean,
-  groupsByUserIdThunk: tThunk<tGroup[]>,
+  groupsByUserIdThunk: ts.thunk<ts.group[]>,
   roles: ts.roleMap[],
-  session: ts.session<tUser>,
+  session: ts.session<ts.user>,
 };

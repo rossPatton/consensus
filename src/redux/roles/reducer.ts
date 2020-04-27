@@ -5,7 +5,7 @@ import { DELETE_FAILURE, DELETE_INIT, DELETE_SUCCESS } from './delete/_types';
 import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 import { POST_FAILURE, POST_INIT, POST_SUCCESS } from './post/_types';
 
-export const initialState: tThunk<ts.roleMap[]> = {
+export const initialState: ts.thunk<ts.roleMap[]> = {
   error: null,
   fetched: false,
   isLoading: false,

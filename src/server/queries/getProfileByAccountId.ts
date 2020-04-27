@@ -6,10 +6,10 @@ import {knex} from '../db/connection';
 // ideally only happens once per visit, on login. but if user refreshes, we do again
 export const getProfileByAccountId = async (
   ctx: Koa.ParameterizedContext,
-  account: ts.account): Promise<tGroup | tUser> => {
+  account: ts.account): Promise<ts.group | ts.user> => {
   const {groupId, userId} = account;
 
-  let profile: tGroup | tUser;
+  let profile: ts.group | ts.user;
   if (groupId) {
     try {
       profile = await knex('groups')

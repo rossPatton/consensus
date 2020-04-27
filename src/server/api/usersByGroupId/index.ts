@@ -18,8 +18,8 @@ const dataPath = 'state.locals.data';
 // not for signing up new users, but for getting users that are members of an org
 // or joining an group, or updating member roles within an org
 usersByGroupId.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tUsersByGroupIdQuery = _.get(ctx, dataPath, {});
-  await validateSchema<tUsersByGroupIdQuery>(ctx, getSchema, query);
+  const query: ts.usersByGroupIdQuery = _.get(ctx, dataPath, {});
+  await validateSchema<ts.usersByGroupIdQuery>(ctx, getSchema, query);
   const users = await getUsersByGroupId(ctx, query);
   ctx.body = users;
 });
@@ -70,9 +70,9 @@ usersByGroupId.post(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 usersByGroupId.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tPatchUserRoleQuery = _.get(ctx, dataPath, {});
+  const query: ts.patchUserRoleQuery = _.get(ctx, dataPath, {});
   const {groupId, role, userId} = query;
-  await validateSchema<tPatchUserRoleQuery>(ctx, patchSchema, {groupId, role, userId});
+  await validateSchema<ts.patchUserRoleQuery>(ctx, patchSchema, {groupId, role, userId});
 
   let updatedAccountRoleRel = [] as ts.roleRel[];
   try {

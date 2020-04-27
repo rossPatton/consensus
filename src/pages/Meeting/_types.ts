@@ -1,40 +1,40 @@
 import * as H from 'history';
-import { match } from 'react-router';
+
 
 export type tStore = {
-  meeting: tThunk<tMeetingSingular>,
-  meetingsByGroupId: tThunk<tMeeting[]>,
-  group: tThunk<tGroup>,
+  meeting: ts.thunk<ts.meetingSingular>,
+  meetingsByGroupId: ts.thunk<ts.meeting[]>,
+  group: ts.thunk<ts.group>,
   isLoading: boolean,
-  roles: tThunk<ts.roleMap[]>,
-  rsvps: tThunk<tRSVP[]>,
-  session: tThunk<ts.session>
+  roles: ts.thunk<ts.roleMap[]>,
+  rsvps: ts.thunk<ts.rsvp[]>,
+  session: ts.thunk<ts.session>
 }
 
 export type tProps = {
-  meetingsByGroupId: tMeeting[],
+  meetingsByGroupId: ts.meeting[],
 };
 
 export type tComponentProps = tProps & {
-  meeting: tMeetingSingular,
+  meeting: ts.meetingSingular,
   isDesktop: boolean,
   isMobile: boolean,
-  group: tGroup,
-  rsvp: tRSVP,
+  group: ts.group,
+  rsvp: ts.rsvp,
 };
 
 export type tContainerProps = tProps & {
-  eventThunk: tThunk<tMeetingSingular>,
-  getMeetingDispatch: (query: tGetMeetingQuery) => tThunkPayload<tMeetingSingular>,
-  getMeetingsByGroupIdDispatch: (query: tGetMeetingQuery) => tThunkPayload<tMeeting[]>,
-  getGroupByIdDispatch: (query: tGroupQuery) => tThunkPayload<tGroup>,
-  getRolesDispatch: () => tThunkPayload<ts.roleMap>,
-  getRsvpsDispatch: () => tThunkPayload<tRSVP[]>,
+  eventThunk: ts.thunk<ts.meetingSingular>,
+  getMeetingDispatch: (query: ts.getMeetingQuery) => ts.thunkPayload<ts.meetingSingular>,
+  getMeetingsByGroupIdDispatch: (query: ts.getMeetingQuery) => ts.thunkPayload<ts.meeting[]>,
+  getGroupByIdDispatch: (query: ts.groupQuery) => ts.thunkPayload<ts.group>,
+  getRolesDispatch: () => ts.thunkPayload<ts.roleMap>,
+  getRsvpsDispatch: () => ts.thunkPayload<ts.rsvp[]>,
   location: H.Location,
-  match: match & { params: tMeetingParams },
-  groupThunk: tThunk<tGroup>,
-  rolesThunk: tThunk<ts.roleMap[]>,
-  rsvpsThunk: tThunk<tRSVP[]>,
+  match: ts.match & { params: ts.meetingParams },
+  groupThunk: ts.thunk<ts.group>,
+  rolesThunk: ts.thunk<ts.roleMap[]>,
+  rsvpsThunk: ts.thunk<ts.rsvp[]>,
   session: ts.session,
 }
 

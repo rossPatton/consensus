@@ -3,7 +3,7 @@ import React, {memo} from 'react';
 
 import {Users} from '~app/components';
 
-export const MembersComponent = memo((props: {group: tGroup}) => (
+export const MembersComponent = memo((props: {group: ts.group}) => (
   <>
     <div className="bg-white rounded p-2 mb-2">
       <div className="flex flex-col d:flex-row items-center">

@@ -13,10 +13,10 @@ export type tKeyUnion = keyof tState;
 
 export type tContainerProps = {
   history: History,
-  loginDispatch: (login: ts.loginQuery) => tThunkPayload<ts.session>,
+  loginDispatch: (login: ts.loginQuery) => ts.thunkPayload<ts.session>,
   match: ts.adminSectionParams,
-  patchAccountDispatch: (query: ts.accountQuery) => tThunkPayload<ts.account>,
-  sessionThunk: tThunk<ts.session>,
+  patchAccountDispatch: (query: ts.accountQuery) => ts.thunkPayload<ts.account>,
+  sessionThunk: ts.thunk<ts.session>,
 };
 
 export type tComponentProps = tState & {
@@ -27,5 +27,5 @@ export type tComponentProps = tState & {
 };
 
 export type tStore = {
-  session: tThunk<ts.session>,
+  session: ts.thunk<ts.session>,
 };

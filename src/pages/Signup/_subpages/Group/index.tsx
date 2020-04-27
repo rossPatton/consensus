@@ -22,7 +22,7 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
       region: '',
       regionId: 0,
       showRegionField: false,
-      type: 'public' as tPrivacyEnum,
+      type: 'public' as ts.privacyEnum,
     };
   }
 
@@ -92,13 +92,13 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
   }
 }
 
-const mapStateToProps = (store: {geo: tThunk<tGeo>, cities: tThunk<tCity[]>}) => ({
+const mapStateToProps = (store: {geo: ts.thunk<ts.geo>, cities: ts.thunk<ts.city[]>}) => ({
   geo: store.geo.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
-  postGroupDispatch: (group: tGroupQuery) => dispatch(postGroup(group)),
+  postGroupDispatch: (group: ts.groupQuery) => dispatch(postGroup(group)),
 });
 
 export const GroupSignup = connect(

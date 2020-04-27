@@ -28,7 +28,7 @@ describe('redux/session/login', () => {
     const testSession = {
       isAuthenticated: true,
       isVerified: true,
-      profile: {} as tUser,
+      profile: {} as ts.user,
       type: 'user',
     } as ts.session;
 

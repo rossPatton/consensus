@@ -11,7 +11,7 @@ export const init = (): tInitAction => ({
   type: LOGOUT_INIT,
 });
 
-export const failure = (payload: tResponseError): tFailureAction => ({
+export const failure = (payload: ts.responseError): tFailureAction => ({
   type: LOGOUT_FAILURE,
   payload,
 });

@@ -70,7 +70,7 @@ describe('redux/usersByGroupId/reducer', () => {
   it('should handle GET_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@usersByGroupId/GET_SUCCESS',
-      payload: [{}] as tUser[],
+      payload: [{}] as ts.user[],
     })).toStrictEqual({
       ...initialState,
       fetched: true,
@@ -141,7 +141,7 @@ describe('redux/usersByGroupId/reducer', () => {
   it('should handle POST_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@usersByGroupId/POST_SUCCESS',
-      payload: {} as tUser,
+      payload: {} as ts.user,
     })).toStrictEqual({
       ...initialState,
       data: [{}],

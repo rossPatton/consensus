@@ -3,7 +3,7 @@ export type tProps = {
   count?: number,
   isEditable?: boolean,
   hoverIndex?: number,
-  groups: tGroup[],
+  groups: ts.group[],
   roles: ts.roleMap[],
   showCategory?: boolean,
   showLocation?: boolean,
@@ -13,12 +13,12 @@ export type tProps = {
 
 export type tComponentProps = tProps & {
   leaveOrg: (ev: React.MouseEvent<HTMLButtonElement>, groupId: number) => void,
-  pendingOrgs: tGroup[],
+  pendingOrgs: ts.group[],
   setHover: (hoverIndex: number | null, groupType?: ts.role) => void,
 };
 
 export type tContainerProps = tProps & {
-  deleteOrgByUserIdDispatch: (query: tDeleteUserByGroupIdQuery) => tThunkPayload<tGroup>,
+  deleteOrgByUserIdDispatch: (query: ts.deleteUserByGroupIdQuery) => ts.thunkPayload<ts.group>,
 };
 
 export type tState = {

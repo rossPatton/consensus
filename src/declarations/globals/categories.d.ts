@@ -1,23 +1,25 @@
-declare type tCategorySlug = 'community'
-  | 'cooperative'
-  | 'political'
-  | 'union';
+namespace ts {
+  declare type categorySlug = 'community'
+    | 'cooperative'
+    | 'political'
+    | 'union';
 
-declare type tCategory = 'Community'
-  | 'Cooperative'
-  | 'Political'
-  | 'Union'
-  | ''; // entering a category isn't required, just heavily encouraged
+  declare type category = 'Community'
+    | 'Cooperative'
+    | 'Political'
+    | 'Union'
+    | ''; // entering a category isn't required, just heavily encouraged
 
-declare type tCategoryMap = Readonly<{
-   [key: string]: tCategory,
-}>;
+  declare type categoryMap = Readonly<{
+    [key: string]: ts.category,
+  }>;
 
-declare type tCategoryObj = Readonly<{
-   display: tCategory,
-   slug: tCategorySlug,
-}>;
+  declare type categoryObj = Readonly<{
+    display: ts.category,
+    slug: categorySlug,
+  }>;
 
-declare type tCategoryParams = tPaginateParams & Readonly<{
-   category: tCategorySlug,
-}>;
+  declare type categoryParams = ts.paginateParams & Readonly<{
+    category: categorySlug,
+  }>;
+}

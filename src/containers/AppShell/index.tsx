@@ -11,7 +11,7 @@ const AppShell = memo(() => (
     <MatchMediaProvider>
       <SessionProvider>
         <Switch>
-          {routes.map((route: tRoute, i) => (
+          {routes.map((route: ts.route, i) => (
             <RouteWithSubRoutes
               key={i}
               {...route}

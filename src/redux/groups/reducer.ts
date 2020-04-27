@@ -1,11 +1,11 @@
 import { tActions } from './_types';
 import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
-export const initialState: tThunk<tGroup[]> = {
+export const initialState: ts.thunk<ts.group[]> = {
   error: null,
   fetched: false,
   isLoading: false,
-  data: [] as tGroup[],
+  data: [] as ts.group[],
 };
 
 export const groupsReducer = (state = initialState, action: tActions) => {

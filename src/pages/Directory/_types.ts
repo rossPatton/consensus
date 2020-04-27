@@ -1,5 +1,5 @@
-import { match } from 'react-router';
+
 
 export type tProps = {
-  match: match & { params: tDirectoryParams },
+  match: ts.match & { params: ts.directoryParams },
 };

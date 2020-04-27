@@ -1,6 +1,6 @@
-import { match } from 'react-router';
+
 
 export type tProps = {
-  match: match & {params: tGroupRouteParams},
+  match: ts.match & {params: ts.groupRouteParams},
   role: ts.role,
 };

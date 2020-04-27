@@ -1,5 +1,5 @@
 import {History} from 'history';
-import {match} from 'react-router-dom';
+
 
 export type tState = {
   email: string,
@@ -13,13 +13,13 @@ export type tState = {
 export type tStateUnion = keyof tState;
 
 export type tStore = {
-  session: tThunk<ts.session>,
+  session: ts.thunk<ts.session>,
 };
 
 export type tContainerProps = tStore & {
   history: History,
-  loginDispatch: (query: ts.loginQuery) => tThunkPayload<ts.roleMap>,
-  match: match,
+  loginDispatch: (query: ts.loginQuery) => ts.thunkPayload<ts.roleMap>,
+  match: ts.match,
 }
 
 export type tComponentProps = tState & {

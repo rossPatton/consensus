@@ -5,8 +5,8 @@ import {knex} from '../../../db/connection';
 
 export const getRoleMapsByUserId = async (
   ctx: Koa.ParameterizedContext,
-  query: tGroupsByUserIdQuery,
-): Promise<tMeeting[]> => {
+  query: ts.groupsByUserIdQuery,
+): Promise<ts.meeting[]> => {
   const {noPending, userId} = query;
 
   try {

@@ -30,7 +30,7 @@ meetingsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
   }
 
   // only return future meetings where the user rsvped
-  let meetings: tMeeting[] = [];
+  let meetings: ts.meeting[] = [];
   try {
     meetings = await knex('meetings')
       .whereIn('id', mappedIds)

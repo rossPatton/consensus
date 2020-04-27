@@ -14,7 +14,7 @@ describe('Users component', () => {
       usersByGroupId: {data: [{id: 100}]},
     });
 
-    const group = {id: 1} as tGroup;
+    const group = {id: 1} as ts.group;
 
     render.create((
       <Provider store={store}>

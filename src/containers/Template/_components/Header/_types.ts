@@ -4,6 +4,6 @@ export type tComponentProps = {
 };
 
 export type tContainerProps = {
-  logoutDispatch: () => tThunkPayload,
+  logoutDispatch: () => ts.thunkPayload,
   session: ts.session,
 };

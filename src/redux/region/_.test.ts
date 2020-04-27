@@ -35,7 +35,7 @@ describe('redux/region/reducer', () => {
   it('should handle GET_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@region/GET_SUCCESS',
-      payload: {} as tRegion,
+      payload: {} as ts.region,
     })).toStrictEqual({
       ...initialState,
       fetched: true,

@@ -1,9 +1,9 @@
 export type tStore = {
-  usersByGroupId: tThunk<tUser[]>,
+  usersByGroupId: ts.thunk<ts.user[]>,
 };
 
 export type tContainerProps = {
-  group: tGroup,
+  group: ts.group,
   match: ts.adminSectionParams,
-  usersThunk: tThunk<tUser[]>,
+  usersThunk: ts.thunk<ts.user[]>,
 };

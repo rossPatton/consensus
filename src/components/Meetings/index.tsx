@@ -45,7 +45,7 @@ class EventsContainer extends PureComponent<tContainerProps> {
       <Paginate
         count={count}
         items={meetings}
-        render={(eventsToRender: tMeeting[]) => (
+        render={(eventsToRender: ts.meeting[]) => (
           <EventsComponent
             deleteEvent={this.deleteEvent}
             meetings={eventsToRender}
@@ -68,7 +68,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  deleteEventDispatch: (query: tIdQuery) => dispatch(deleteEvent(query)),
+  deleteEventDispatch: (query: ts.idQuery) => dispatch(deleteEvent(query)),
 });
 
 const Meetings = connect(mapStateToProps, mapDispatchToProps)(EventsContainer);

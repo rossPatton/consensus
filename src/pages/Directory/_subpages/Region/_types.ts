@@ -1,20 +1,20 @@
-import { match } from 'react-router-dom';
+
 
 type tProps = {
-  match: match & {params: tDirectoryParams},
+  match: ts.match & {params: ts.directoryParams},
 }
 
 export type tStore = {
-  region: tThunk<tRegion>,
+  region: ts.thunk<ts.region>,
 };
 
 export type tComponentProps = tProps & {
-  citiesToRender: tCity[],
+  citiesToRender: ts.city[],
   onChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  region: tRegion,
+  region: ts.region,
 };
 
 export type tContainerProps = tStore & tProps & {
-  getRegion: (params: tDirectoryParams) => tThunk<tRegion>,
+  getRegion: (params: ts.directoryParams) => ts.thunk<ts.region>,
   isLoading: boolean,
 };

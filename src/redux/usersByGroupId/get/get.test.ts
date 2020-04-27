@@ -29,7 +29,7 @@ describe('redux/usersByGroupId/get', () => {
       id: 1,
       bio: '',
       username: 'testUser',
-    } as tUser;
+    } as ts.user;
 
     const expectedActionPayload: tSuccessAction[] = [{
       type: GET_SUCCESS,

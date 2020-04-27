@@ -1,26 +1,26 @@
 import * as H from 'history';
-import { match } from 'react-router';
+
 
 export type tStore = {
-  meeting: tThunk<tMeetingSingular>,
-  group: tThunk<tGroup>,
+  meeting: ts.thunk<ts.meetingSingular>,
+  group: ts.thunk<ts.group>,
   isLoading: boolean,
-  roles: tThunk<ts.roleMap[]>,
-  session: tThunk<ts.session>
+  roles: ts.thunk<ts.roleMap[]>,
+  session: ts.thunk<ts.session>
 }
 
 export type tComponentProps = {
-  meeting: tMeeting,
+  meeting: ts.meeting,
 };
 
 export type tContainerProps = {
-  eventThunk: tThunk<tMeetingSingular>,
-  getRolesDispatch: () => tThunkPayload<ts.roleMap>,
+  eventThunk: ts.thunk<ts.meetingSingular>,
+  getRolesDispatch: () => ts.thunkPayload<ts.roleMap>,
   isLoading: boolean,
   location: H.Location,
-  match: match & { params: tMeetingParams },
-  groupThunk: tThunk<tGroup>,
-  rolesThunk: tThunk<ts.roleMap[]>,
+  match: ts.match & { params: ts.meetingParams },
+  groupThunk: ts.thunk<ts.group>,
+  rolesThunk: ts.thunk<ts.roleMap[]>,
   session: ts.session,
 }
 

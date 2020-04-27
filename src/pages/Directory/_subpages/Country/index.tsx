@@ -17,7 +17,7 @@ class CountryContainer extends PureComponent<tContainerProps, tState> {
   }
 
   state = {
-    regionsBySearch: [] as tRegion[],
+    regionsBySearch: [] as ts.region[],
   };
 
   onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +86,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getCountry: (params: tDirectoryParams) => dispatch(getCountry(params)),
+  getCountry: (params: ts.directoryParams) => dispatch(getCountry(params)),
 });
 
 const Country = connect(

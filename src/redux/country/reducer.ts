@@ -1,11 +1,11 @@
 import { tActions } from './_types';
 import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
-export const initialState: tThunk<tCountry> = {
+export const initialState: ts.thunk<ts.country> = {
   error: null,
   fetched: false,
   isLoading: false,
-  data: {} as tCountry,
+  data: {} as ts.country,
 };
 
 export const countryReducer = (state = initialState, action: tActions) => {

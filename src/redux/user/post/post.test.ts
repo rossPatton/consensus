@@ -29,7 +29,7 @@ describe('redux/user/post', () => {
       id: 1,
       bio: '',
       username: 'testUser',
-    } as tUser;
+    } as ts.user;
 
     const expectedActionPayload: tSuccessAction[] = [{
       type: POST_SUCCESS,

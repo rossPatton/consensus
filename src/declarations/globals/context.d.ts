@@ -1,4 +1,6 @@
-declare type tMediaContext = {
-  isMobile: boolean,
-  isDesktop: boolean,
-};
+namespace ts {
+  declare type mediaContext = {
+    isMobile: boolean,
+    isDesktop: boolean,
+  };
+}

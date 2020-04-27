@@ -39,13 +39,13 @@ class LeaveFormContainer extends React.PureComponent<tProps> {
   }
 }
 
-const mapStateToProps = (store: {session: tThunk<ts.session>}) => ({
+const mapStateToProps = (store: {session: ts.thunk<ts.session>}) => ({
   session: store.session.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
   dispatch,
-  deleteUserByGroupIdDispatch: (query: tUsersByGroupIdQuery) =>
+  deleteUserByGroupIdDispatch: (query: ts.usersByGroupIdQuery) =>
     dispatch(deleteUserByGroupId(query)),
 });
 

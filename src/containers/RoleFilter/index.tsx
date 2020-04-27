@@ -10,7 +10,7 @@ export default class RoleFilter extends Component<tProps, tState> {
 
   // re-run the filter whenever the list array or filter text changes:
   // TODO maybe memoize
-  filter = (users: tUser[]) => {
+  filter = (users: ts.user[]) => {
     if (this.state.roleFilter === 'n/a') return users;
     return users.filter(user => user.role === this.state.roleFilter);
   };

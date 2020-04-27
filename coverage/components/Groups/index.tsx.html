@@ -303,14 +303,14 @@ class GroupsContainer extends PureComponent&lt;tContainerProps, tState&gt; {
     // short of splitting this entire thing into 2 nearly identical components
     // (which might be the best approach honestly)
     // i'm using this to only render the hover state if the type matches
-    groupType: 'member' as tRole,
+    groupType: 'member' as ts.role,
   };
 &nbsp;
   // ie, return an array of only groups that pending
   filterNonPending = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >    return this.props.groups.filter(<span class="fstat-no" title="function not covered" >gr</span>oup =&gt; {</span>
       const roleMap = <span class="cstat-no" title="statement not covered" >_.find(this.props.roles, <span class="fstat-no" title="function not covered" >r </span>=&gt; <span class="cstat-no" title="statement not covered" >r.groupId === group.id)</span> || {};</span>
-      const {role} = <span class="cstat-no" title="statement not covered" >roleMap as tRoleMap;</span>
+      const {role} = <span class="cstat-no" title="statement not covered" >roleMap as ts.roleMap;</span>
 <span class="cstat-no" title="statement not covered" >      return role === 'pending';</span>
     });
   }
@@ -319,7 +319,7 @@ class GroupsContainer extends PureComponent&lt;tContainerProps, tState&gt; {
   filterPending = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >    return this.props.groups.filter(<span class="fstat-no" title="function not covered" >gr</span>oup =&gt; {</span>
       const roleMap = <span class="cstat-no" title="statement not covered" >_.find(this.props.roles, <span class="fstat-no" title="function not covered" >r </span>=&gt; <span class="cstat-no" title="statement not covered" >r.groupId === group.id)</span> || {};</span>
-      const {role} = <span class="cstat-no" title="statement not covered" >roleMap as tRoleMap;</span>
+      const {role} = <span class="cstat-no" title="statement not covered" >roleMap as ts.roleMap;</span>
 <span class="cstat-no" title="statement not covered" >      return role !== 'pending';</span>
     });
   }
@@ -331,7 +331,7 @@ class GroupsContainer extends PureComponent&lt;tContainerProps, tState&gt; {
     }
   }
 &nbsp;
-  setHover = <span class="fstat-no" title="function not covered" >(h</span>overIndex: number | null = <span class="branch-0 cbranch-no" title="branch not covered" >null,</span> groupType: tRole) =&gt;
+  setHover = <span class="fstat-no" title="function not covered" >(h</span>overIndex: number | null = <span class="branch-0 cbranch-no" title="branch not covered" >null,</span> groupType: ts.role) =&gt;
 <span class="cstat-no" title="statement not covered" >    this.setState({</span>
       groupType,
       hoverIndex,
@@ -357,7 +357,7 @@ class GroupsContainer extends PureComponent&lt;tContainerProps, tState&gt; {
 &nbsp;
     // if we're rendering groups based on relation to the user, then we want to
     // be able to potentially split by user role, pending or not pending
-    let pendingOrgs = <span class="cstat-no" title="statement not covered" >[] as tGroup[];</span>
+    let pendingOrgs = <span class="cstat-no" title="statement not covered" >[] as ts.group[];</span>
 <span class="cstat-no" title="statement not covered" >    if (showPending) {</span>
 <span class="cstat-no" title="statement not covered" >      pendingOrgs = this.filterNonPending();</span>
     }
@@ -366,7 +366,7 @@ class GroupsContainer extends PureComponent&lt;tContainerProps, tState&gt; {
       &lt;Paginate
         count={count}
         items={this.filterPending()}
-        render={<span class="fstat-no" title="function not covered" >(g</span>roupsToRender: tGroup[]) =&gt; (
+        render={<span class="fstat-no" title="function not covered" >(g</span>roupsToRender: ts.group[]) =&gt; (
 <span class="cstat-no" title="statement not covered" >          &lt;GroupsComponent</span>
             {...this.state}
             asList={asList}
@@ -386,12 +386,12 @@ class GroupsContainer extends PureComponent&lt;tContainerProps, tState&gt; {
   }
 }
 &nbsp;
-const mapStateToProps = (store: {roles: tThunk&lt;tRoleMap[]&gt;}) =&gt; ({
+const mapStateToProps = (store: {roles: ts.thunk&lt;ts.roleMap[]&gt;}) =&gt; ({
   roles: store.roles.data,
 });
 &nbsp;
 const mapDispatchToProps = (dispatch: Function) =&gt; ({
-  deleteOrgByUserIdDispatch: <span class="fstat-no" title="function not covered" >(q</span>uery: tDeleteUserByGroupIdQuery) =&gt;
+  deleteOrgByUserIdDispatch: <span class="fstat-no" title="function not covered" >(q</span>uery: ts.deleteUserByGroupIdQuery) =&gt;
 <span class="cstat-no" title="statement not covered" >    dispatch(deleteOrgByUserId(query)),</span>
 });
 &nbsp;
@@ -408,7 +408,7 @@ export default Group;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Apr 26 2020 18:17:24 GMT-0400 (Eastern Daylight Time)
+                at Sun Apr 26 2020 20:58:59 GMT-0400 (Eastern Daylight Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

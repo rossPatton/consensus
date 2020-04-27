@@ -69,7 +69,7 @@ class GroupsContainer extends PureComponent<tContainerProps, tState> {
 
     // if we're rendering groups based on relation to the user, then we want to
     // be able to potentially split by user role, pending or not pending
-    let pendingOrgs = [] as tGroup[];
+    let pendingOrgs = [] as ts.group[];
     if (showPending) {
       pendingOrgs = this.filterNonPending();
     }
@@ -78,7 +78,7 @@ class GroupsContainer extends PureComponent<tContainerProps, tState> {
       <Paginate
         count={count}
         items={this.filterPending()}
-        render={(groupsToRender: tGroup[]) => (
+        render={(groupsToRender: ts.group[]) => (
           <GroupsComponent
             {...this.state}
             asList={asList}
@@ -98,12 +98,12 @@ class GroupsContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (store: {roles: tThunk<ts.roleMap[]>}) => ({
+const mapStateToProps = (store: {roles: ts.thunk<ts.roleMap[]>}) => ({
   roles: store.roles.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  deleteOrgByUserIdDispatch: (query: tDeleteUserByGroupIdQuery) =>
+  deleteOrgByUserIdDispatch: (query: ts.deleteUserByGroupIdQuery) =>
     dispatch(deleteOrgByUserId(query)),
 });
 

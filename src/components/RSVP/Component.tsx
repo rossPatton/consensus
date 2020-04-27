@@ -5,10 +5,10 @@ import React from 'react';
 import {tComponentProps} from './_types';
 
 export const RSVPComponent = (props: tComponentProps) => {
-  const {meeting, rsvp = {} as tRSVP, session, setRsvp} = props;
+  const {meeting, rsvp = {} as ts.rsvp, session, setRsvp} = props;
   const {id: meetingId} = meeting;
   const {profile = {}} = session;
-  const {privateRSVP: userRSVPsPrivately = true} = profile as tUser;
+  const {privateRSVP: userRSVPsPrivately = true} = profile as ts.user;
   const method = typeof rsvp === 'undefined' ? 'POST' : 'PATCH';
 
   return (

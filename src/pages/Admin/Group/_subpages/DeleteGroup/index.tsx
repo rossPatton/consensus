@@ -83,7 +83,7 @@ class DeleteGroupContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (store: {session: tThunk<ts.session>}) => ({
+const mapStateToProps = (store: {session: ts.thunk<ts.session>}) => ({
   sessionThunk: store.session,
 });
 

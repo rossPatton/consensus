@@ -10,31 +10,31 @@ export type tRoleOpts = {
 
 export type tProps = {
   count?: number,
-  group: tGroup,
+  group: ts.group,
   sessionRole?: ts.role, // to distinguish from user roles, and to shut up eslint
   type?: string,
 }
 
 export type tContainerProps = tProps & {
-  deleteUserByGroupIdDispatch: (query: tDeleteUserByGroupIdQuery) =>
-    tThunkPayload<{ok: true}>,
-  getUsersByGroupIdDispatch: (query: tUsersByGroupIdQuery) =>
-    tThunkPayload<tUser[]>,
+  deleteUserByGroupIdDispatch: (query: ts.deleteUserByGroupIdQuery) =>
+    ts.thunkPayload<{ok: true}>,
+  getUsersByGroupIdDispatch: (query: ts.usersByGroupIdQuery) =>
+    ts.thunkPayload<ts.user[]>,
   isLoading: boolean,
-  patchUserByGroupIdDispatch: (opts: tPatchUserRoleQuery) =>
-    tThunkPayload<tUser>,
-  usersByGroupId: tUser[],
+  patchUserByGroupIdDispatch: (opts: ts.patchUserRoleQuery) =>
+    ts.thunkPayload<ts.user>,
+  usersByGroupId: ts.user[],
 }
 
-export type tComponentProps = tMediaContext
+export type tComponentProps = ts.mediaContext
   & tProps
   & tState
-  & tSearchFilterProps
-  & tRoleFilterProps
+  & ts.searchFilterProps
+  & ts.roleFilterProps
   & {
   isEditable: boolean,
   removeUser: (ev: React.MouseEvent<HTMLButtonElement>, id: number) => void,
   setUserRole: (ev: React.ChangeEvent<HTMLSelectElement>, id: number) => void,
   toggleMobileControls: (index: number) => void,
-  users: tUser[],
+  users: ts.user[],
 };

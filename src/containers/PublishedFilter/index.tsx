@@ -6,10 +6,10 @@ import {tProps, tState} from './_types';
 // for use with meetings, decisions, etc
 export default class PublishedFilter extends Component<tProps, tState> {
   state = {
-    publishedFilter: 'upcoming' as tPublishedFilter,
+    publishedFilter: 'upcoming' as ts.filterEnum,
   };
 
-  filter = (items: tMeeting[]) => {
+  filter = (items: ts.meeting[]) => {
     const now = dayjs();
     const {publishedFilter} = this.state;
 
@@ -30,7 +30,7 @@ export default class PublishedFilter extends Component<tProps, tState> {
   onChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
     ev.preventDefault();
     this.setState({
-      publishedFilter: ev.currentTarget.value as tPublishedFilter,
+      publishedFilter: ev.currentTarget.value as ts.filterEnum,
     });
   }
 

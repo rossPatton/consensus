@@ -29,7 +29,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
 
-    const {avatarHash, created_at, updated_at, ...user}: tUser =
+    const {avatarHash, created_at, updated_at, ...user}: ts.user =
       _.get(props, 'sessionThunk.data.profile', null);
 
     if (user) {
@@ -127,7 +127,7 @@ const mapStateToProps = (store: tStore) => ({
 
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
-  patchUserDispatch: (user: Partial<tUser>) => dispatch(patchUser(user)),
+  patchUserDispatch: (user: Partial<ts.user>) => dispatch(patchUser(user)),
 });
 
 const Profile = connect(

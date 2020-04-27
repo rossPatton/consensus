@@ -5,9 +5,9 @@ import {knex} from '../db/connection';
 
 export const getGroupById = async (
   ctx: Koa.ParameterizedContext,
-  id: string | number): Promise<tGroup> => {
+  id: string | number): Promise<ts.group> => {
 
-  let group = {} as tGroup;
+  let group = {} as ts.group;
   try {
     group = await knex('groups')
       .limit(1)

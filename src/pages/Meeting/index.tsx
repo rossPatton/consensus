@@ -58,7 +58,7 @@ class EventContainer extends PureComponent<tContainerProps> {
     }
   }
 
-  getRestOfEventsByGroupId = async (res: tActionPayload<tMeetingSingular>) => {
+  getRestOfEventsByGroupId = async (res: ts.payload<ts.meetingSingular>) => {
     await this.props.getGroupByIdDispatch({id: res.payload.groupId});
 
     return this.props.getMeetingsByGroupIdDispatch({
@@ -156,12 +156,12 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getMeetingDispatch: (query: tGetMeetingQuery) => dispatch(getMeeting(query)),
+  getMeetingDispatch: (query: ts.getMeetingQuery) => dispatch(getMeeting(query)),
 
-  getMeetingsByGroupIdDispatch: (query: tGetMeetingQuery) =>
+  getMeetingsByGroupIdDispatch: (query: ts.getMeetingQuery) =>
     dispatch(getMeetingsByGroupId(query)),
 
-  getGroupByIdDispatch: (query: tGroupQuery) => dispatch(getGroup(query)),
+  getGroupByIdDispatch: (query: ts.groupQuery) => dispatch(getGroup(query)),
   getRolesDispatch: () => dispatch(getRoles()),
   getRsvpsDispatch: () => dispatch(getRsvps()),
 });

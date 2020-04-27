@@ -6,8 +6,8 @@ export type tState = {
 export type tStateUnion = keyof tState;
 
 export type tContainerProps = {
-  deleteAccountDispatch: (query: ts.accountQuery) => tThunkPayload<ts.roleMap>,
-  logoutDispatch: () => tThunkPayload<any>,
+  deleteAccountDispatch: (query: ts.accountQuery) => ts.thunkPayload<ts.roleMap>,
+  logoutDispatch: () => ts.thunkPayload<any>,
 };
 
 export type tComponentProps = tState & {

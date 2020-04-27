@@ -10,11 +10,11 @@ export const region = new Router();
 const route = '/api/v1/region';
 
 region.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tDirectoryParams = _.get(ctx, 'state.locals.data', {});
-  await validateSchema<tDirectoryParams>(ctx, schema, query);
+  const query: ts.directoryParams = _.get(ctx, 'state.locals.data', {});
+  await validateSchema<ts.directoryParams>(ctx, schema, query);
 
   // @TODO reimplment once there are more countries
-  // let country = {} as tCountry;
+  // let country = {} as ts.country;
   // try {
   //   country = await knex('countries')
   //     .limit(1)
@@ -24,7 +24,7 @@ region.get(route, async (ctx: Koa.ParameterizedContext) => {
   //   return ctx.throw(500, err);
   // }
 
-  let region = {} as tRegion;
+  let region = {} as ts.region;
   try {
     region = await knex('regions')
       .limit(1)
@@ -37,7 +37,7 @@ region.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  let cities = [] as tCity[];
+  let cities = [] as ts.city[];
   try {
     cities = await knex('cities')
       .where({

@@ -33,7 +33,7 @@ describe('redux/region/get', () => {
       id: 1,
       name: 'New York',
       code: 'ny',
-      cities: [] as tCity[],
+      cities: [] as ts.city[],
     };
 
     const expectedActionPayload: tSuccessAction[] = [{

@@ -57,10 +57,10 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
                 <SearchFilter
                   items={publishedProps.items}
                   render={searchProps => {
-                    const meetings: tMeeting[] = searchProps.items.filter(ev => {
+                    const meetings: ts.meeting[] = searchProps.items.filter(ev => {
                       return !ev.isDraft;
                     });
-                    const drafts: tMeeting[] = meetingsByGroupIdThunk.data.filter(ev => {
+                    const drafts: ts.meeting[] = meetingsByGroupIdThunk.data.filter(ev => {
                       return ev.isDraft;
                     });
 
@@ -91,7 +91,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getMeetingsByGroupIdDispatch: (query: tGetMeetingQuery) =>
+  getMeetingsByGroupIdDispatch: (query: ts.getMeetingQuery) =>
     dispatch(getMeetingsByGroupId(query)),
 });
 

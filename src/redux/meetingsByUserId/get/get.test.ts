@@ -15,7 +15,7 @@ const mockStore = configureStore([thunk]);
 
 const testMeeting = {
   id: 12,
-  category: 'Political' as tCategory,
+  category: 'Political' as ts.category,
   groupId: 1,
   cityId: 16624,
   groupName: 'Tech Workers Coalition NYC',

@@ -25,7 +25,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       regionId,
       updated_at,
       ...editablePartOfGroup
-    }: tGroup = _.get(this.props, 'sessionThunk.data.profile', {});
+    }: ts.group = _.get(this.props, 'sessionThunk.data.profile', {});
 
     this.state = {
       ...editablePartOfGroup,
@@ -109,7 +109,7 @@ const mapStateToProps = (store: tStore) => ({
 
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
-  patchOrgDispatch: (query: tGroupQuery) => dispatch(patchOrg(query)),
+  patchOrgDispatch: (query: ts.groupQuery) => dispatch(patchOrg(query)),
 });
 
 const Profile = connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);

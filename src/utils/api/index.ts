@@ -1,6 +1,7 @@
 import loglevel from 'loglevel';
 
-import {agent, objToQueryString} from '.';
+import {agent, objToQueryString} from '..';
+import {tApiOpts} from './_types';
 
 export const api = async (opts: tApiOpts) => {
   const {method = 'GET', path, query = {}} = opts;
@@ -19,10 +20,10 @@ export const api = async (opts: tApiOpts) => {
 
   if (opts.init) opts.dispatch(opts.init());
 
-  let status = 200 as tStatusUnion;
+  let status = 200 as ts.statusUnion;
   return fetch(endpoint, fetchOpts)
-    .then((resp: tFetchResponse) => {
-      status = resp.status as tStatusUnion;
+    .then((resp: ts.fetchResponse) => {
+      status = resp.status as ts.statusUnion;
       if (!resp.ok) throw resp;
       if (status === 204) {
         throw Error('204: Nothing found');
@@ -34,7 +35,7 @@ export const api = async (opts: tApiOpts) => {
       if (opts.dispatch) return opts.dispatch(opts.success(json));
       return json;
     })
-    .catch(async (err: tFetchResponse<Error>) => {
+    .catch(async (err: ts.fetchResponse<Error>) => {
       if (err.text) {
         const message = await err.text();
         if (opts.dispatch) {

@@ -15,7 +15,7 @@ groups.get(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, dataPath, {});
   await validateSchema(ctx, schema, query);
 
-  let group: tGroup[] = [];
+  let group: ts.group[] = [];
   try {
     group = await knex('groups')
       .where(query)

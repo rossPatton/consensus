@@ -35,7 +35,7 @@ describe('redux/meeting/reducer', () => {
   it('should handle GET_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@meeting/GET_SUCCESS',
-      payload: {} as tMeetingSingular,
+      payload: {} as ts.meetingSingular,
     })).toStrictEqual({
       ...initialState,
       fetched: true,
@@ -71,7 +71,7 @@ describe('redux/meeting/reducer', () => {
   it('should handle PATCH_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@meeting/PATCH_SUCCESS',
-      payload: {} as tMeetingSingular,
+      payload: {} as ts.meetingSingular,
     })).toStrictEqual({
       ...initialState,
       fetched: true,
@@ -107,7 +107,7 @@ describe('redux/meeting/reducer', () => {
   it('should handle POST_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@meeting/POST_SUCCESS',
-      payload: {} as tMeetingSingular,
+      payload: {} as ts.meetingSingular,
     })).toStrictEqual({
       ...initialState,
       fetched: true,

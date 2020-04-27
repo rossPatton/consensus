@@ -60,10 +60,10 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getUserByIdDispatch: (query: tIdQuery) =>
+  getUserByIdDispatch: (query: ts.idQuery) =>
     dispatch(getUser(query)),
 
-  getGroupsByUserIdDispatch: (query: tGroupsByUserIdQuery) =>
+  getGroupsByUserIdDispatch: (query: ts.groupsByUserIdQuery) =>
     dispatch(getGroupsByUserId(query)),
 });
 

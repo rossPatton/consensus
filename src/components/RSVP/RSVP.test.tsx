@@ -34,7 +34,7 @@ describe('RSVP component', () => {
   });
 
   it('renders mobile without crashing', () => {
-    const meeting = {id: 1} as tMeeting;
+    const meeting = {id: 1} as ts.meeting;
 
     render.create((
       <Provider store={store}>
@@ -48,7 +48,7 @@ describe('RSVP component', () => {
   });
 
   it('renders desktop without crashing', () => {
-    const meeting = {id: 1} as tMeeting;
+    const meeting = {id: 1} as ts.meeting;
 
     render.create((
       <Provider store={store}>

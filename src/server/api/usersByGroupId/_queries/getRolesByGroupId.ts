@@ -7,7 +7,7 @@ import {knex} from '../../../db/connection';
 // ideally only happens once per visit, on login. but if user refreshes, we do again
 export const getRolesByGroupId = async (
   ctx: Koa.ParameterizedContext,
-  query: tUsersByGroupIdQuery,
+  query: ts.usersByGroupIdQuery,
 ): Promise<ts.roleRel[]> => {
   const {groupId, noPending} = query;
   try {

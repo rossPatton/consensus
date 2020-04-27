@@ -41,7 +41,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
     const {rsvp} = this.state;
     const {history, patchRsvpDispatch, postRsvpDispatch, session} = this.props;
     const {profile = {}} = session;
-    const {privateRSVP: userRSVPsPrivately = true} = profile as tUser;
+    const {privateRSVP: userRSVPsPrivately = true} = profile as ts.user;
 
     if (!session.isAuthenticated) return history.push('/login');
 
@@ -103,8 +103,8 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  patchRsvpDispatch: (query: tRSVPQuery) => dispatch(patchRsvps(query)),
-  postRsvpDispatch: (query: tRSVPQuery) => dispatch(postRsvps(query)),
+  patchRsvpDispatch: (query: ts.rsvpQuery) => dispatch(patchRsvps(query)),
+  postRsvpDispatch: (query: ts.rsvpQuery) => dispatch(postRsvps(query)),
 });
 
 const RSVP = connect(mapStateToProps, mapDispatchToProps)(RSVPContainer);
