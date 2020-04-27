@@ -1,9 +1,7 @@
 import {Location} from 'history';
 
-import {tAdminSections} from '../_types';
-
 export type tProps = {
   location: Location,
-  match: tAdminSections,
-  session: tSession<tGroup>,
+  match: ts.adminSectionParams,
+  session: ts.session<tGroup>,
 };

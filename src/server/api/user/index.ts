@@ -29,7 +29,7 @@ user.get(route, async (ctx: Koa.ParameterizedContext) => {
     .where({id: query.id})
     .first();
 
-  const account: tAccount = await knex('accounts')
+  const account: ts.account = await knex('accounts')
     .limit(1)
     .where({userId: query.id})
     .select(['id'])

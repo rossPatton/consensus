@@ -1,4 +1,4 @@
-import { tGroupActionUnion } from './_types';
+import { tActions } from './_types';
 import { GET_FAILURE, GET_SUCCESS } from './get/_types';
 import { PATCH_FAILURE, PATCH_SUCCESS } from './patch/_types';
 import { POST_FAILURE, POST_SUCCESS } from './post/_types';
@@ -10,7 +10,7 @@ export const initialState: tThunk<tGroup> = {
   data: {} as tGroup,
 };
 
-export const groupReducer = (state = initialState, action: tGroupActionUnion) => {
+export const groupReducer = (state = initialState, action: tActions) => {
   const failureReturn = {
     ...state,
     error: action.payload,

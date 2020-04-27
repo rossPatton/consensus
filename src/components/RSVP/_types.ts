@@ -8,7 +8,7 @@ export type tSetRsvpOpts = {
 
 export type tStore = {
   rsvps: tThunk<tRSVP[]>,
-  session: tThunk<tSession>,
+  session: tThunk<ts.session>,
 };
 
 export type tState = {
@@ -20,8 +20,8 @@ export type tState = {
 type tProps = {
   className?: string,
   meeting: tMeeting,
-  role?: tRole,
-  session: tSession,
+  role?: ts.role,
+  session: ts.session,
 };
 
 export type tContainerProps = RouteComponentProps<any> & tProps & {

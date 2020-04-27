@@ -3,7 +3,7 @@ import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
 export const initialState: tThunk<tRegion> = {
   error: null,
-  fetched: true,
+  fetched: false,
   isLoading: false,
   data: {} as tRegion,
 };
@@ -20,6 +20,7 @@ export const regionReducer = (state = initialState, action: tActions) => {
     return {
       ...state,
       error: action.payload,
+      isLoading: false,
     };
 
   case GET_SUCCESS:
@@ -27,6 +28,7 @@ export const regionReducer = (state = initialState, action: tActions) => {
       ...state,
       fetched: true,
       data: action.payload,
+      isLoading: false,
     };
 
   default:

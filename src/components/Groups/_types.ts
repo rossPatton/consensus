@@ -4,7 +4,7 @@ export type tProps = {
   isEditable?: boolean,
   hoverIndex?: number,
   groups: tGroup[],
-  roles: tRoleMap[],
+  roles: ts.roleMap[],
   showCategory?: boolean,
   showLocation?: boolean,
   showType?: boolean,
@@ -14,7 +14,7 @@ export type tProps = {
 export type tComponentProps = tProps & {
   leaveOrg: (ev: React.MouseEvent<HTMLButtonElement>, groupId: number) => void,
   pendingOrgs: tGroup[],
-  setHover: (hoverIndex: number | null, groupType?: tRole) => void,
+  setHover: (hoverIndex: number | null, groupType?: ts.role) => void,
 };
 
 export type tContainerProps = tProps & {
@@ -22,6 +22,6 @@ export type tContainerProps = tProps & {
 };
 
 export type tState = {
-  groupType: tRole,
+  groupType: ts.role,
   hoverIndex: number | null,
 };

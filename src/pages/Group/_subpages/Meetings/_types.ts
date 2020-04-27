@@ -2,7 +2,7 @@ import {match} from 'react-router';
 
 type tProps = {
   group: tGroup,
-  role: tRole,
+  role: ts.role,
 };
 
 export type tComponentProps = tSearchFilterProps & tProps & {
@@ -16,10 +16,10 @@ export type tContainerProps = tProps & {
   meetingsByGroupIdThunk: tThunk<tMeeting[]>,
   isLoading: boolean,
   match: match & {params: tGroupRouteParams},
-  session: tSession<tUser | tGroup>,
+  session: ts.session<tUser | tGroup>,
 };
 
 export type tStore = {
   meetingsByGroupId: tThunk<tMeeting[]>,
-  session: tThunk<tSession<tUser | tGroup>>,
+  session: tThunk<ts.session<tUser | tGroup>>,
 };

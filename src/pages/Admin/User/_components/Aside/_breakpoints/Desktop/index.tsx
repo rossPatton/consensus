@@ -53,7 +53,7 @@ const Aside = memo((props: tProps) => {
             </li>
             {groupsByUserIdThunk.data.slice(0, 3).map((group, i) => {
               const roleMap = _.find(props.roles, r => r.groupId === group.id) || {};
-              const {role} = roleMap as tRoleMap;
+              const {role} = roleMap as ts.roleMap;
               if (role === 'pending') return null;
 
               return (

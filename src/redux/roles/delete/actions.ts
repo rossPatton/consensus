@@ -16,7 +16,7 @@ export const failure = (payload: tResponseError): tFailureAction => ({
   payload,
 });
 
-export const success = (payload: tRoleMap): tSuccessAction => ({
+export const success = (payload: ts.roleMap): tSuccessAction => ({
   type: DELETE_SUCCESS,
   payload,
 });

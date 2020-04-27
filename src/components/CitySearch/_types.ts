@@ -9,7 +9,7 @@ type tProps = {
   label?: string,
   region: string,
   regionId: number,
-  session: tSession,
+  session: ts.session,
 };
 
 export type tContainerProps = tProps & {
@@ -32,5 +32,5 @@ export type tComponentProps = tState & tProps & {
 export type tStore = {
   cities: tThunk<tCity[]>,
   geo: tThunk<tGeo>,
-  session: tThunk<tSession>,
+  session: tThunk<ts.session>,
 };

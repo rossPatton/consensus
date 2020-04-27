@@ -9,7 +9,7 @@ export const getUsersByGroupId = async (
   groupId: number,
 ): Promise<tUser[]> => {
   const rolesStream = knex('accounts_roles').where({groupId}).stream();
-  const roleMaps: tAccountRoleRelation[] = [];
+  const roleMaps: ts.roleRel[] = [];
   try {
     for await (const chunk of rolesStream) {
       roleMaps.push(chunk);

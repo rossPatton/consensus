@@ -11,7 +11,7 @@ declare type tPublishedFilterProps = Readonly<{
 declare type tRoleFilterProps = Readonly<{
   items: tUser[],
   onRoleFilterChange: tSelectChange,
-  roleFilter: tRole,
+  roleFilter: ts.role,
 }>;
 
 declare type tSearchFilterProps = Readonly<{

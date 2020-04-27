@@ -70,7 +70,7 @@ class GroupContainer extends PureComponent<tContainerProps> {
 
               const roleMap = rolesThunk.data.find(roleMap => {
                 return roleMap.groupId === group.id;
-              }) as tRoleMap;
+              }) as ts.roleMap;
 
               let role = roleMap && roleMap.role;
               if (session.type === 'org' && session.profile.id === group.id) {
@@ -94,7 +94,7 @@ class GroupContainer extends PureComponent<tContainerProps> {
                       match={match}
                       group={group}
                       // unsure why this errors but should be ok?
-                      role={role as tRole}
+                      role={role as ts.role}
                       session={this.props.session}
                     />
                   </>

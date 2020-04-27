@@ -67,12 +67,12 @@ class DeleteAccountContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
+const mapStateToProps = (store: {session: tThunk<ts.session>}) => ({
   sessionThunk: store.session,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  deleteAccountDispatch: (query: tAccountQuery) => dispatch(deleteAccount(query)),
+  deleteAccountDispatch: (query: ts.accountQuery) => dispatch(deleteAccount(query)),
   logoutDispatch: () => dispatch(logout()),
 });
 

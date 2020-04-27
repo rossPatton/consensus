@@ -3,22 +3,24 @@ import { LOGIN_FAILURE, LOGIN_INIT, LOGIN_SUCCESS } from './login/_types';
 import { LOGOUT_FAILURE, LOGOUT_INIT, LOGOUT_SUCCESS } from './logout/_types';
 import { PATCH_FAILURE, PATCH_SUCCESS } from './patch/_types';
 
-export const initialState: tThunk<tSession> = {
+export const initialState: tThunk<ts.session> = {
   error: null,
   fetched: false,
   isLoading: false,
-  data: { isAuthenticated: false } as tSession,
+  data: { isAuthenticated: false } as ts.session,
 };
 
 export const sessionReducer = (state = initialState, action: tActions) => {
   const failureReturn = {
     ...state,
     error: action.payload,
+    isLoading: false,
   };
 
   const successReturn = {
     ...state,
     data: action.payload,
+    isLoading: false,
   };
 
   const initReturn = {

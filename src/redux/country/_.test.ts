@@ -3,7 +3,7 @@ import {countryReducer as reducer, initialState} from './reducer';
 
 describe('redux/country/reducer', () => {
   it('should return initial state, even with a bunk action', () => {
-    expect(reducer(undefined, {} as types.tCountryActionUnion))
+    expect(reducer(undefined, {} as types.tActions))
       .toStrictEqual(initialState);
   });
 

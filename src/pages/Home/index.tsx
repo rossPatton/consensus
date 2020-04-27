@@ -11,24 +11,23 @@ import {tContainerProps, tStore} from './_types';
 import {HomeComponent} from './Component';
 
 class HomeContainer extends PureComponent<tContainerProps> {
+  constructor(props: tContainerProps) {
+    super(props);
+    this._getMeetingsByLocation();
+  }
+
   componentDidUpdate() {
+    this._getMeetingsByLocation();
+  }
+
+  _getMeetingsByLocation = () => {
     const {meetingsByLocationThunk, geoThunk} = this.props;
 
     if (!geoThunk.fetched) return;
     if (meetingsByLocationThunk.fetched) return;
     if (meetingsByLocationThunk.error) return;
 
-    // TODO eventually set it up so we dont do this if user is signed in
     this.props.getMeetingsByLocationDispatch(geoThunk.data);
-
-    // if (geoThunk.fetched) {
-    //   this.props.getMeetingsByLocationDispatch(geoThunk.data);
-    // } else if (_.get(session, 'profile.cityId', 0) > 0) {
-    //   this.props.getMeetingsByLocationDispatch({
-    //     city: session.profile.city,
-    //     region: session.profile.region,
-    //   });
-    // }
   }
 
   render() {
@@ -61,7 +60,8 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getMeetingsByLocationDispatch: (query: tGeo) => dispatch(getMeetingsByLocation(query)),
+  getMeetingsByLocationDispatch: (query: tMeetingsByLocationQuery) =>
+    dispatch(getMeetingsByLocation(query)),
 });
 
 export default connect(

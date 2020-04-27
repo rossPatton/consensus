@@ -30,7 +30,7 @@ describe('redux/session/login', () => {
       isVerified: true,
       profile: {} as tUser,
       type: 'user',
-    } as tSession;
+    } as ts.session;
 
     const expectedActionPayload: tSuccessAction[] = [{
       type: LOGIN_SUCCESS,

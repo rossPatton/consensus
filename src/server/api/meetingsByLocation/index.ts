@@ -12,24 +12,24 @@ const dataPath = 'state.locals.data';
 const route = '/api/v1/meetingsByLocation';
 
 meetingsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = _.get(ctx, dataPath, {});
-  await validateSchema(ctx, schema, query);
+  const query: tMeetingsByLocationQuery = _.get(ctx, dataPath, {});
+  await validateSchema<tMeetingsByLocationQuery>(ctx, schema, query);
 
-  // mapped set of meetings that the user has RSVP'd to
-  // @TODO this should be querying against postcodes, not cities
-  // but there is an issue with the postcode seed where the cityId does not match
-  // this is problematic since there could be dupe city names in a state
+  // @TODO this should be querying against postcodes, eventually
   let cityRel = {} as tPostCode;
   try {
+    const where = query.cityId
+      ? {id: query.cityId, regionId: query.regionId}
+      : {name: query.name, regionCode: query.regionCode};
+
     cityRel = await knex('cities')
       .first()
-      .where({name: query.city, regionCode: query.regionCode})
+      .where(where)
       .limit(1);
   } catch (err) {
     return ctx.throw(500, err);
   }
 
-  // now only return future meetings where the user rsvped
   let meetings = [] as tMeeting[];
   try {
     meetings = await knex('meetings')

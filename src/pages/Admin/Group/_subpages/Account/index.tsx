@@ -16,7 +16,7 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
 
     this.state = {
       email: '',
-      isVerified: _.get(props, 'sessionThunk.data.isVerified', false),
+      isVerified: props?.sessionThunk?.data?.isVerified || false,
       login: '',
       newPassword: '',
       currentPassword: '',
@@ -67,11 +67,11 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const {sessionThunk} = this.props;
-    const subsection: string = _.get(this.props, 'match.params.subsection', '');
+    const {match, sessionThunk} = this.props;
+    const subsection = match?.params?.subsection || '';
 
     return (
-      <ErrorBoundary status={_.get(sessionThunk, 'error.status', 200)}>
+      <ErrorBoundary status={sessionThunk?.error?.status}>
         <Helmet
           canonical=""
           title=""
@@ -104,8 +104,8 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
-  patchAccountDispatch: (query: tAccountQuery) => dispatch(patchAccount(query)),
+  loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
+  patchAccountDispatch: (query: ts.accountQuery) => dispatch(patchAccount(query)),
 });
 
 const Account = connect(

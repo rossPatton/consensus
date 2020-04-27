@@ -128,12 +128,12 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
   }
 
   render() {
-    const {session} = this.props;
+    const {sessionThunk} = this.props;
 
     return (
       <ErrorBoundary
         isSubPage
-        status={_.get(session, 'error.status', 200)}>
+        status={sessionThunk?.error?.status}>
         <Helmet
           canonical=""
           title=""
@@ -144,8 +144,8 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
             { property: 'og:description', content: '' },
           ]}
         />
-        {!session.isAuthenticated && <Redirect to="" />}
-        {session.isAuthenticated && (
+        {!sessionThunk.data.isAuthenticated && <Redirect to="" />}
+        {sessionThunk.data.isAuthenticated && (
           <PlanMeetingComponent
             {...this.props}
             {...this.state}
@@ -161,7 +161,7 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
 
 const mapStateToProps = (store: tStore) => ({
   meetings: store.meetingsByGroupId.data,
-  session: store.session.data,
+  sessionThunk: store.session,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

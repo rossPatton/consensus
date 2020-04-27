@@ -7,11 +7,11 @@ export type tState = {
 export type tStateUnion = keyof tState;
 
 export type tStore = {
-  session: tThunk<tSession>,
+  session: tThunk<ts.session>,
 };
 
 export type tContainerProps = tStore & {
-  loginDispatch: (query: tLoginQuery) => tThunkPayload<tAccount>,
+  loginDispatch: (query: ts.loginQuery) => tThunkPayload<ts.roleMap>,
 }
 
 export type tComponentProps = tState & {

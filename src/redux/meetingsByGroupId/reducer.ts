@@ -18,12 +18,14 @@ export const meetingsByGroupIdReducer = (state = initialState, action: tActions)
   const failureReturn = {
     ...state,
     error: action.payload,
+    isLoading: false,
   };
 
   const successReturn = {
     ...state,
     fetched: true,
     data: action.payload,
+    isLoading: false,
   };
 
   switch (action.type) {

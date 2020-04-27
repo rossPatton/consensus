@@ -1,5 +1,3 @@
-import {tAdminSections} from '../../../_types';
-
 export type tState = {
   currentPassword: string,
   email: string,
@@ -9,18 +7,18 @@ export type tState = {
 };
 
 export type tKeyUnion = keyof tState;
-export type tStore = {session: tThunk<tSession>};
+export type tStore = {session: tThunk<ts.session>};
 
 export type tContainerProps = {
-  loginDispatch: (login: tLoginQuery) => tThunkPayload<tSession>,
-  match: tAdminSections,
-  patchAccountDispatch: (query: tAccountQuery) => tThunkPayload<tAccount>,
-  sessionThunk: tThunk<tSession>,
+  loginDispatch: (login: ts.loginQuery) => tThunkPayload<ts.session>,
+  match: ts.adminSectionParams,
+  patchAccountDispatch: (query: ts.accountQuery) => tThunkPayload<ts.account>,
+  sessionThunk: tThunk<ts.session>,
 };
 
 export type tComponentProps = tState & {
   save: (ev: React.FormEvent<HTMLFormElement>) => void,
-  session: tSession,
+  session: ts.session,
   subsection: string,
   updateState: (key: tKeyUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 };

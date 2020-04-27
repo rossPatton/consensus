@@ -1,5 +1,5 @@
 export type tStore = {
-  session: tThunk<tSession>,
+  session: tThunk<ts.session>,
 };
 
 export type tErrorObject = {
@@ -22,8 +22,8 @@ export type tState = {
 export type tKeyUnion = keyof tState;
 
 export type tContainerProps = {
-  loginDispatch: (query: tLoginQuery) => tThunkPayload<tSession>,
-  postUserDispatch: (query: tPostUserQuery) => tThunkPayload<tSession>,
+  loginDispatch: (query: ts.loginQuery) => tThunkPayload<ts.session>,
+  postUserDispatch: (query: tPostUserQuery) => tThunkPayload<ts.session>,
 };
 
 export type tComponentProps = tContainerProps & tState & {

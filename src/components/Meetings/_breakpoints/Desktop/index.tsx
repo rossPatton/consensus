@@ -72,7 +72,7 @@ const DesktopEvents = memo((props: tComponentProps) => (
                 )}
                 {!ev.locationLink && ev.location}
               </div>
-              <h3 className="capitalize leading-none mb-1">
+              <h3 className="capitalize mb-1">
                 {ev.isDraft && ev.title}
                 {!ev.isDraft
                   && (

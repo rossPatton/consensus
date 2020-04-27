@@ -70,7 +70,7 @@ verifyAccountViaEmail.patch('/email/v1/verifyEmail',
     const query = _.get(ctx, dataPath, {});
     await validateSchema(ctx, tokenSchema, query);
 
-    let account: tAccount;
+    let account: ts.account;
     try {
       account = await knex('accounts')
         .limit(1)
@@ -95,7 +95,7 @@ verifyAccountViaEmail.patch('/email/v1/verifyEmail',
       ctx.throw(400, 'This reset token has expired. Please get a new one.');
     }
 
-    let updatedAccount: tAccount[];
+    let updatedAccount: ts.account[];
     try {
       updatedAccount = await knex('accounts')
         .limit(1)

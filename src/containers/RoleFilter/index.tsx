@@ -5,7 +5,7 @@ import {tProps, tState} from './_types';
 // for use with meetings
 export default class RoleFilter extends Component<tProps, tState> {
   state = {
-    roleFilter: 'n/a' as tRole,
+    roleFilter: 'n/a' as ts.role,
   };
 
   // re-run the filter whenever the list array or filter text changes:
@@ -18,7 +18,7 @@ export default class RoleFilter extends Component<tProps, tState> {
   onChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
     ev.preventDefault();
     this.setState({
-      roleFilter: ev.currentTarget.value as tRole,
+      roleFilter: ev.currentTarget.value as ts.role,
     });
   }
 

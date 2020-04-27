@@ -3,12 +3,12 @@ export type tProps = {
   group: tGroup,
   postNewUserByGroupIdDispatch: (query: tUsersByGroupIdQuery) =>
     tThunkPayload<tUser>,
-  role: tRole,
-  session: tSession,
+  role: ts.role,
+  session: ts.session,
 };
 
 export type tStore = {
   group: tThunk<tGroup>,
-  session: tThunk<tSession>,
+  session: tThunk<ts.session>,
   usersByGroupId: tThunk<tUser[]>,
 };

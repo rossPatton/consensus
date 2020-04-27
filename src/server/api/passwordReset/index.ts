@@ -16,7 +16,7 @@ passwordResetViaEmail.get('/email/v1/emailResetToken',
     const query: {email: string} = _.get(ctx, dataPath, {});
     await validateSchema<{email: string}>(ctx, emailSchema, query);
 
-    let accountEmailRel: tEmail;
+    let accountEmailRel: ts.email;
     try {
       accountEmailRel = await knex('accounts_emails')
         .limit(1)
@@ -38,7 +38,7 @@ passwordResetViaEmail.get('/email/v1/emailResetToken',
 
     const oneHourFromNow = dayjs().add(1, 'hour');
     const token = crypto.randomBytes(48).toString('hex');
-    let account: tAccount | number;
+    let account: ts.account | number;
     try {
       account = await knex('accounts')
         .limit(1)
@@ -82,7 +82,7 @@ passwordResetViaEmail.patch('/email/v1/resetPasswordByEmail',
     const query = _.get(ctx, dataPath, {});
     await validateSchema(ctx, tokenSchema, query);
 
-    let account: tAccount;
+    let account: ts.account;
     try {
       account = await knex('accounts')
         .limit(1)

@@ -12,8 +12,8 @@ export const accountDownload = new Router();
 const route = '/api/v1/download';
 
 accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
-  // const query: Mutable<tAccountQuery> = _.get(ctx, 'state.locals.data', {});
-  const account: tAccount = _.get(ctx, 'state.user', {});
+  // const query: Mutable<ts.accountQuery> = _.get(ctx, 'state.locals.data', {});
+  const account: ts.account = _.get(ctx, 'state.user', {});
   const profile = await getProfileByAccountId(ctx, account);
   await validateSchema<Mutable<tIdQuery>>(ctx, schema, {id: account.id});
 
@@ -26,7 +26,7 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  let roles: tRoleMap[];
+  let roles: ts.roleMap[];
   let rsvps: tRSVP[];
   let meetings: tMeeting[];
   const type = account.groupId ? 'org' : 'user';

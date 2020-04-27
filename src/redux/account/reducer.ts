@@ -1,15 +1,14 @@
-import { tAccountActionUnion } from './_types';
+import { tActions } from './_types';
 import { DELETE_FAILURE, DELETE_SUCCESS } from './delete/_types';
 import { PATCH_FAILURE, PATCH_SUCCESS } from './patch/_types';
 
-export const initialState: tThunk<tSession> = {
+export const initialState: tThunk<ts.session> = {
   error: null,
-  fetched: false,
   isLoading: true,
-  data: {} as tSession,
+  data: {} as ts.session,
 };
 
-export const accountReducer = (state = initialState, action: tAccountActionUnion) => {
+export const accountReducer = (state = initialState, action: tActions) => {
   const failureReturn = {
     ...state,
     error: action.payload,
@@ -18,7 +17,6 @@ export const accountReducer = (state = initialState, action: tAccountActionUnion
 
   const successReturn = {
     ...state,
-    fetched: true,
     data: action.payload,
     isLoading: false,
   };

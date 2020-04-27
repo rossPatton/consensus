@@ -1,34 +1,32 @@
 import {History} from 'history';
 
-import {tAdminSections} from '../_types';
-
 export type tStore = {
   groupsByUserId: tThunk<tGroup[]>,
-  roles: tThunk<tRoleMap[]>,
+  roles: tThunk<ts.roleMap[]>,
   rsvps: tThunk<tRSVP[]>,
-  session: tThunk<tSession<tUser>>,
+  session: tThunk<ts.session<tUser>>,
 };
 
 export type tProps = {
   history: History,
-  match: tAdminSections,
+  match: ts.adminSectionParams,
   groupsByUserIdThunk: tThunk<tGroup[]>,
-  session: tSession<tUser>,
+  session: ts.session<tUser>,
 };
 
 export type tComponentProps = tProps & {
   isDesktop: boolean,
   isMobile: boolean,
-  roles: tRoleMap[],
+  roles: ts.roleMap[],
 };
 
 export type tContainerProps = tProps & {
   getGroupsByUserIdDispatch: (query: tGroupsByUserIdQuery) => tThunkPayload<tGroup[]>,
-  getRolesDispatch: () => tThunkPayload<tRoleMap[]>,
+  getRolesDispatch: () => tThunkPayload<ts.roleMap[]>,
   getRsvpsDispatch: () => tThunkPayload<tRSVP[]>,
-  logoutDispatch: () => tThunkPayload<any>,
+  logoutDispatch: () => tThunkPayload<ts.isAuthenticated>,
   isLoading: boolean,
-  rolesThunk: tThunk<tRoleMap[]>,
+  rolesThunk: tThunk<ts.roleMap[]>,
   rsvpsThunk: tThunk<tRSVP[]>,
-  session: tSession,
+  session: ts.session,
 };

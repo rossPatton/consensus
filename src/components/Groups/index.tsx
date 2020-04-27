@@ -15,14 +15,14 @@ class GroupsContainer extends PureComponent<tContainerProps, tState> {
     // short of splitting this entire thing into 2 nearly identical components
     // (which might be the best approach honestly)
     // i'm using this to only render the hover state if the type matches
-    groupType: 'member' as tRole,
+    groupType: 'member' as ts.role,
   };
 
   // ie, return an array of only groups that pending
   filterNonPending = () => {
     return this.props.groups.filter(group => {
       const roleMap = _.find(this.props.roles, r => r.groupId === group.id) || {};
-      const {role} = roleMap as tRoleMap;
+      const {role} = roleMap as ts.roleMap;
       return role === 'pending';
     });
   }
@@ -31,7 +31,7 @@ class GroupsContainer extends PureComponent<tContainerProps, tState> {
   filterPending = () => {
     return this.props.groups.filter(group => {
       const roleMap = _.find(this.props.roles, r => r.groupId === group.id) || {};
-      const {role} = roleMap as tRoleMap;
+      const {role} = roleMap as ts.roleMap;
       return role !== 'pending';
     });
   }
@@ -43,7 +43,7 @@ class GroupsContainer extends PureComponent<tContainerProps, tState> {
     }
   }
 
-  setHover = (hoverIndex: number | null = null, groupType: tRole) =>
+  setHover = (hoverIndex: number | null = null, groupType: ts.role) =>
     this.setState({
       groupType,
       hoverIndex,
@@ -98,7 +98,7 @@ class GroupsContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (store: {roles: tThunk<tRoleMap[]>}) => ({
+const mapStateToProps = (store: {roles: tThunk<ts.roleMap[]>}) => ({
   roles: store.roles.data,
 });
 

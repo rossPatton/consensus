@@ -7,8 +7,8 @@ import { knex } from '../../../db/connection';
 export const getRolesByAccountId = async (
   ctx: Koa.ParameterizedContext,
   accountId: number = 0,
-): Promise<tRoleMap[]> => {
-  let roles: tRoleMap[] = [];
+): Promise<ts.roleMap[]> => {
+  let roles: ts.roleMap[] = [];
   try {
     roles = await knex('accounts_roles')
       .where({accountId})

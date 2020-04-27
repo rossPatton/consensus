@@ -14,6 +14,7 @@ export const meetingsByUserIdReducer = (state = initialState, action: tActions) 
     return {
       ...state,
       error: action.payload,
+      isLoading: false,
     };
 
   case GET_INIT:
@@ -27,6 +28,7 @@ export const meetingsByUserIdReducer = (state = initialState, action: tActions) 
       ...state,
       fetched: true,
       data: action.payload,
+      isLoading: false,
     };
 
   default:

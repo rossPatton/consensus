@@ -11,7 +11,7 @@ import {
   tSuccessAction as tPostSuccessAction,
 } from './post/_types';
 
-export type tGroupActionUnion = tGetFailureAction
+export type tActions = tGetFailureAction
   | tGetSuccessAction
   | tPatchFailureAction
   | tPatchSuccessAction

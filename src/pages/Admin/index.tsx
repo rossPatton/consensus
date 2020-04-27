@@ -15,7 +15,7 @@ const AdminContainer = (props: tProps) => {
 
   return (
     <Template>
-      <ErrorBoundary status={_.get(sessionThunk, 'error.status', 200)}>
+      <ErrorBoundary status={sessionThunk?.error?.status}>
         <Helmet
           canonical=""
           title=""
@@ -29,7 +29,7 @@ const AdminContainer = (props: tProps) => {
         <GenericLoader
           isLoading={sessionThunk.isLoading}
           render={() => {
-            const isAuthenticated = _.get(sessionThunk, 'data.isAuthenticated', false);
+            const {isAuthenticated} = sessionThunk.data;
 
             if (!isAuthenticated) return <Redirect to="" />;
 

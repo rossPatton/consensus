@@ -27,7 +27,7 @@ describe('redux/usersByGroupId/patch', () => {
   it('creates correct PATCH_SUCCESS action', () => {
     const testRel = {
       userId: 1,
-    } as tAccountRoleRelation;
+    } as ts.roleRel;
 
     const expectedActionPayload: tSuccessAction[] = [{
       type: PATCH_SUCCESS,

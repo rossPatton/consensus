@@ -6,13 +6,13 @@ import {getEmailsByAccountId, getProfileByAccountId} from '.';
 // ideally only happens once per visit, on login. but if user refreshes, we do again
 export const getSession = async (
   ctx: Koa.ParameterizedContext,
-  account: tAccount,
-): Promise<tThunk<tSession<tUser | tGroup>>> => {
+  account: ts.account,
+): Promise<tThunk<ts.session<tUser | tGroup>>> => {
   // we have 2 types of accounts,
   // group and users, use account info to fetch the right one
   const profile = await getProfileByAccountId(ctx, account);
 
-  let emails = [] as tEmail[];
+  let emails = [] as ts.email[];
   if (account.id) {
     emails = await getEmailsByAccountId(ctx, account.id);
   }

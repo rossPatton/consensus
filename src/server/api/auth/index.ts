@@ -13,10 +13,10 @@ const dataPath = 'state.locals.data';
 auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
   passport.authenticate('local', async (
     err: Error | null,
-    account: tAccount) => {
+    account: ts.account) => {
     if (err) ctx.throw(400, err);
     if (!account) ctx.throw(400, 'Account not found');
-    await validateSchema<tAccount>(ctx, schema, account);
+    await validateSchema<ts.account>(ctx, schema, account);
 
     const query = _.get(ctx, dataPath, {});
     await ctx.login(account);

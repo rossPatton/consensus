@@ -6,13 +6,13 @@ import {isValidPw} from './utils';
 
 const opts = {};
 
-passport.serializeUser(async (account: tAccount, done) => {
+passport.serializeUser(async (account: ts.account, done) => {
   return done(null, account);
 });
 
-passport.deserializeUser(async (account: tAccount, done) => {
+passport.deserializeUser(async (account: ts.account, done) => {
   try {
-    const row: tAccount = await knex('accounts')
+    const row: ts.account = await knex('accounts')
       .limit(1)
       .where({id: account.id})
       .first();
@@ -25,7 +25,7 @@ passport.deserializeUser(async (account: tAccount, done) => {
 // due to stupid passportjs limitations, the login value here has to be set as
 // 'username' in the login form. but it cooresponds to the login value in accounts
 passport.use(new LocalStrategy(opts, async (login, pw, done) => {
-  let account: tAccount;
+  let account: ts.account;
   try {
     account = await knex('accounts')
       .limit(1)

@@ -8,7 +8,7 @@ export type tState = Partial<tMeeting> & {
 
 export type tStore = {
   meetingsByGroupId: tThunk<tMeeting[]>,
-  session: tThunk<tSession>,
+  session: tThunk<ts.session>,
 };
 
 export type tKeyUnion = keyof tState;
@@ -22,7 +22,7 @@ export type tContainerProps = {
   patchEventDispatch: (query: tUpsertMeetingQuery) => tThunkPayload<tMeetingSingular>,
   postMeetingDispatch: (query: tUpsertMeetingQuery) => tThunkPayload<tMeetingSingular>,
   router: Location,
-  session: tSession,
+  sessionThunk: tThunk<ts.session>,
 };
 
 export type tComponentProps = tContainerProps & tState & {

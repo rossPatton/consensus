@@ -76,7 +76,7 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
 }
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
+  loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
   postUserDispatch: (user: tPostUserQuery) => dispatch(postUser(user)),
 });
 

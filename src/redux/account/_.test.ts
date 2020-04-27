@@ -3,7 +3,7 @@ import {accountReducer as reducer, initialState} from './reducer';
 
 describe('redux/account/reducer', () => {
   it('should return initial state, even with a bunk action', () => {
-    expect(reducer(undefined, {} as types.tAccountActionUnion))
+    expect(reducer(undefined, {} as types.tActions))
       .toStrictEqual(initialState);
   });
 
@@ -19,7 +19,6 @@ describe('redux/account/reducer', () => {
         message: 'Error!',
         status: 500,
       },
-      fetched: false,
       isLoading: false,
       data: {},
     });
@@ -28,10 +27,9 @@ describe('redux/account/reducer', () => {
   it('should handle DELETE_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@account/DELETE_SUCCESS',
-      payload: {} as tSession,
+      payload: {} as ts.session,
     })).toStrictEqual({
       error: null,
-      fetched: true,
       isLoading: false,
       data: {},
     });
@@ -49,7 +47,6 @@ describe('redux/account/reducer', () => {
         message: 'Error!',
         status: 500,
       },
-      fetched: false,
       isLoading: false,
       data: {},
     });
@@ -58,10 +55,9 @@ describe('redux/account/reducer', () => {
   it('should handle PATCH_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@account/PATCH_SUCCESS',
-      payload: {isVerified: true} as tSession,
+      payload: {isVerified: true} as ts.session,
     })).toStrictEqual({
       error: null,
-      fetched: true,
       isLoading: false,
       data: {isVerified: true},
     });

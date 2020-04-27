@@ -4,7 +4,7 @@ import { logoutPath } from '../_constants';
 import { failure, init, success } from './actions';
 
 export const logout = () => {
-  return async function (dispatch: Function) {
+  return async function (dispatch: Function): Promise<ts.isAuthenticated> {
     return api({
       credentials: true,
       dispatch,

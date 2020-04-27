@@ -4,14 +4,14 @@ export type tState = {
 
 export type tRoleOpts = {
   groupId: number,
-  role: tRole,
+  role: ts.role,
   userId: number,
 };
 
 export type tProps = {
   count?: number,
   group: tGroup,
-  sessionRole?: tRole, // to distinguish from user roles, and to shut up eslint
+  sessionRole?: ts.role, // to distinguish from user roles, and to shut up eslint
   type?: string,
 }
 

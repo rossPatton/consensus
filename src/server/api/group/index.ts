@@ -34,7 +34,7 @@ group.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const query = _.get(ctx, dataPath, {});
   await validateSchema<tGroupQuery>(ctx, patchSchema, query);
 
-  const loggedInAccount: tAccount = _.get(ctx, 'state.user', {});
+  const loggedInAccount: ts.account = _.get(ctx, 'state.user', {});
   const {avatarEmail, isFormSubmit, password, ...updateQuery} = query;
 
   const isValidPW = await isValidPw(password, loggedInAccount.password);

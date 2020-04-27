@@ -13,12 +13,12 @@ export type tState = {
 export type tStateUnion = keyof tState;
 
 export type tStore = {
-  session: tThunk<tSession>,
+  session: tThunk<ts.session>,
 };
 
 export type tContainerProps = tStore & {
   history: History,
-  loginDispatch: (query: tLoginQuery) => tThunkPayload<tAccount>,
+  loginDispatch: (query: ts.loginQuery) => tThunkPayload<ts.roleMap>,
   match: match,
 }
 

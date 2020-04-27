@@ -13,7 +13,7 @@ class HeaderContainer extends PureComponent<tContainerProps> {
     ev.preventDefault();
 
     // trigger logout immediately on client side while server works
-    logoutSuccess({isAuthenticated: false} as tSession);
+    logoutSuccess({isAuthenticated: false} as ts.session);
 
     this.props.logoutDispatch()
       .then(() => window.location.reload())
@@ -30,7 +30,7 @@ class HeaderContainer extends PureComponent<tContainerProps> {
   }
 }
 
-const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
+const mapStateToProps = (store: {session: tThunk<ts.session>}) => ({
   session: store.session.data,
 });
 

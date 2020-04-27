@@ -4,5 +4,5 @@ export type tProps = {
   isMeetings: boolean,
   isMembers: boolean,
   isMeetingForm: boolean,
-  session: tSession<tGroup>,
+  session: ts.session<tGroup>,
 };

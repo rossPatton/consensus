@@ -7,10 +7,10 @@ import {knex} from '../db/connection';
 // ideally only happens once per visit, on login. but if user refreshes, we do again
 export const getAccountRoleRelByGroupId = async (
   ctx: Koa.ParameterizedContext,
-  groupId: string | number = 0): Promise<tAccountRoleRelation> => {
+  groupId: string | number = 0): Promise<ts.roleRel> => {
   const account = _.get(ctx, 'state.user', {});
 
-  let accountRoleRel: tAccountRoleRelation;
+  let accountRoleRel: ts.roleRel;
   if (account.id) {
     try {
       accountRoleRel = await knex('accounts_roles')
@@ -22,5 +22,5 @@ export const getAccountRoleRelByGroupId = async (
     }
   }
 
-  return accountRoleRel || {} as tAccountRoleRelation;
+  return accountRoleRel || {} as ts.roleRel;
 };

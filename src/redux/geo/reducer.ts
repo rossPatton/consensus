@@ -1,4 +1,4 @@
-import { tGeoActionUnion } from './_types';
+import { tActions } from './_types';
 import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
 export const initialState: tThunk<tGeo> = {
@@ -8,7 +8,7 @@ export const initialState: tThunk<tGeo> = {
   data: {} as tGeo,
 };
 
-export const geoReducer = (state = initialState, action: tGeoActionUnion) => {
+export const geoReducer = (state = initialState, action: tActions) => {
   switch (action.type) {
   case GET_INIT:
     return {

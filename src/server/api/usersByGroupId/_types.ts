@@ -2,6 +2,6 @@ export type tUserByOrgQuery = {
   allowNonVerified: boolean,
   isFormSubmit?: boolean,
   groupId: string,
-  role: tRole,
+  role: ts.role,
   userId: string,
 };

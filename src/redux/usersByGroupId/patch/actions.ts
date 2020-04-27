@@ -16,7 +16,7 @@ export const failure = (payload: tResponseError): tFailureAction => ({
   payload,
 });
 
-export const success = (payload: tAccountRoleRelation): tSuccessAction => ({
+export const success = (payload: ts.roleRel): tSuccessAction => ({
   type: PATCH_SUCCESS,
   payload,
 });

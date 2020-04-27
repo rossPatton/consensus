@@ -126,7 +126,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
+  loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
   patchUserDispatch: (user: Partial<tUser>) => dispatch(patchUser(user)),
 });
 

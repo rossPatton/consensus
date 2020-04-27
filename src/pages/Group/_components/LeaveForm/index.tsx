@@ -39,7 +39,7 @@ class LeaveFormContainer extends React.PureComponent<tProps> {
   }
 }
 
-const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
+const mapStateToProps = (store: {session: tThunk<ts.session>}) => ({
   session: store.session.data,
 });
 

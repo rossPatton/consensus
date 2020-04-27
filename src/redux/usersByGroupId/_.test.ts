@@ -106,7 +106,7 @@ describe('redux/usersByGroupId/reducer', () => {
   it('should handle PATCH_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@usersByGroupId/PATCH_SUCCESS',
-      payload: {} as tAccountRoleRelation,
+      payload: {} as ts.roleRel,
     })).toStrictEqual({
       ...initialState,
       data: [],

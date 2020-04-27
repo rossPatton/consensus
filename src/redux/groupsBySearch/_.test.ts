@@ -3,7 +3,7 @@ import {groupsBySearchReducer as reducer, initialState} from './reducer';
 
 describe('redux/groupsBySearch/reducer', () => {
   it('should return initial state, even with a bunk action', () => {
-    expect(reducer(undefined, {} as types.tActionUnion))
+    expect(reducer(undefined, {} as types.tActions))
       .toStrictEqual(initialState);
   });
 

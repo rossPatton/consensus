@@ -31,7 +31,7 @@ usersByGroupId.post(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<tUserByOrgQuery>(ctx, postSchema, query);
   const {allowNonVerified, groupId, role, userId} = query;
 
-  const {id: accountId, isVerified}: tAccount = await knex('accounts')
+  const {id: accountId, isVerified}: ts.account = await knex('accounts')
     .limit(1)
     .where({userId})
     .first()
@@ -74,7 +74,7 @@ usersByGroupId.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {groupId, role, userId} = query;
   await validateSchema<tPatchUserRoleQuery>(ctx, patchSchema, {groupId, role, userId});
 
-  let updatedAccountRoleRel = [] as tAccountRoleRelation[];
+  let updatedAccountRoleRel = [] as ts.roleRel[];
   try {
     updatedAccountRoleRel = await knex(table)
       .limit(1)

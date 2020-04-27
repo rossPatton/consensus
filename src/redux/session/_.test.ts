@@ -38,7 +38,7 @@ describe('redux/session/reducer', () => {
       isVerified: true,
       profile: {} as tUser,
       type: 'user',
-    } as tSession;
+    } as ts.session;
 
     expect(reducer(undefined, {
       type: '@@session/LOGIN_SUCCESS',
@@ -78,7 +78,7 @@ describe('redux/session/reducer', () => {
   it('should handle LOGOUT_SUCCESS', () => {
     const testSession = {
       isAuthenticated: false,
-    } as tSession;
+    } as ts.isAuthenticated;
 
     expect(reducer(undefined, {
       type: '@@session/LOGOUT_SUCCESS',
@@ -111,7 +111,7 @@ describe('redux/session/reducer', () => {
       isVerified: true,
       profile: {} as tUser,
       type: 'user',
-    } as tSession;
+    } as ts.session;
 
     expect(reducer(undefined, {
       type: '@@session/PATCH_SUCCESS',

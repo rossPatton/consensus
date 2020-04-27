@@ -12,18 +12,13 @@ import {tProps} from './_types';
 class Template extends PureComponent<tProps> {
   constructor(props: tProps) {
     super(props);
-    // if already fetched, dont do again
     if (props.geoThunk.fetched) return;
-
-    // if user is logged in and has given us location info
-    // if (_.get(props, 'session.profile.cityId', 0) !== 0) return;
-
     props.getGeoDispatch();
   }
 
   render() {
     const {children, geoThunk} = this.props;
-    const geoStatus = _.get(geoThunk, 'error.status', null);
+    const geoStatus = geoThunk?.error?.status;
 
     return (
       <>
@@ -42,7 +37,7 @@ class Template extends PureComponent<tProps> {
   }
 }
 
-const mapStateToProps = (store: {geo: tThunk<tGeo>, session: tThunk<tSession>}) => ({
+const mapStateToProps = (store: {geo: tThunk<tGeo>, session: tThunk<ts.session>}) => ({
   geoThunk: store.geo,
   session: store.session.data,
 });

@@ -3,7 +3,7 @@ import {citiesReducer as reducer, initialState} from './reducer';
 
 describe('redux/cities/reducer', () => {
   it('bunk action returns initial state', () => {
-    expect(reducer(undefined, {} as types.tCitiesActionUnion))
+    expect(reducer(undefined, {} as types.tActions))
       .toStrictEqual(initialState);
   });
 

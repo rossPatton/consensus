@@ -15,7 +15,7 @@ declare type tUser = Readonly<{
   privateRSVP: boolean,
   region?: string,
   regionId?: number,
-  role?: tRole,
+  role?: ts.role,
   updated_at?: Date,
   username: string,
   twitter: string,

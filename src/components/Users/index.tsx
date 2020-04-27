@@ -36,7 +36,7 @@ class UsersContainer extends React.PureComponent<tContainerProps, tState> {
 
   setUserRole = (ev: React.ChangeEvent<HTMLSelectElement>, userId: number) => {
     ev.preventDefault();
-    const role = ev.currentTarget.value as tRole;
+    const role = ev.currentTarget.value as ts.role;
     const groupId = this.props.group.id;
     if (groupId && userId && role) {
       this.props.patchUserByGroupIdDispatch({role, groupId, userId});

@@ -28,7 +28,7 @@ describe('redux/session/patch', () => {
       isVerified: true,
       profile: {} as tUser,
       type: 'user',
-    } as tSession;
+    } as ts.session;
 
     const expectedActionPayload: tSuccessAction[] = [{
       type: PATCH_SUCCESS,

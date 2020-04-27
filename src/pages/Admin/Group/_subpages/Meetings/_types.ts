@@ -1,7 +1,5 @@
-import {tAdminSections} from '../../../_types';
-
 export type tProps = {
-  match: tAdminSections,
+  match: ts.adminSectionParams,
 };
 
 export type tComponentProps = tProps
@@ -9,16 +7,16 @@ export type tComponentProps = tProps
   & tSearchFilterProps
   & {
     drafts: tMeeting[],
-  meetings: tMeeting[],
+    meetings: tMeeting[],
 };
 
 export type tContainerProps = tProps & {
   meetingsByGroupIdThunk: tThunk<tMeeting[]>,
   getMeetingsByGroupIdDispatch: (query: tGetMeetingQuery) => tThunkPayload<tMeeting[]>,
-  sessionThunk: tThunk<tSession>,
+  sessionThunk: tThunk<ts.session>,
 };
 
 export type tStore = {
   meetingsByGroupId: tThunk<tMeeting[]>,
-  session: tThunk<tSession>,
+  session: tThunk<ts.session>,
 };

@@ -1,7 +1,5 @@
 import {History} from 'history';
 
-import {tAdminSections} from '../../../_types';
-
 export type tState = {
   currentPassword: string,
   email: string,
@@ -15,19 +13,19 @@ export type tKeyUnion = keyof tState;
 
 export type tContainerProps = {
   history: History,
-  loginDispatch: (login: tLoginQuery) => tThunkPayload<tSession>,
-  match: tAdminSections,
-  patchAccountDispatch: (query: tAccountQuery) => tThunkPayload<tAccount>,
-  sessionThunk: tThunk<tSession>,
+  loginDispatch: (login: ts.loginQuery) => tThunkPayload<ts.session>,
+  match: ts.adminSectionParams,
+  patchAccountDispatch: (query: ts.accountQuery) => tThunkPayload<ts.account>,
+  sessionThunk: tThunk<ts.session>,
 };
 
 export type tComponentProps = tState & {
   save: (ev: React.FormEvent<HTMLFormElement>) => Promise<void>,
-  session: tSession,
+  session: ts.session,
   subsection: string,
   updateState: (key: tKeyUnion, value: string | boolean) => void,
 };
 
 export type tStore = {
-  session: tThunk<tSession>,
+  session: tThunk<ts.session>,
 };

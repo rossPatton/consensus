@@ -83,13 +83,13 @@ class DeleteGroupContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (store: {session: tThunk<tSession>}) => ({
+const mapStateToProps = (store: {session: tThunk<ts.session>}) => ({
   sessionThunk: store.session,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
-  patchAccountDispatch: (query: tAccountQuery) => dispatch(patchAccount(query)),
+  loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
+  patchAccountDispatch: (query: ts.accountQuery) => dispatch(patchAccount(query)),
 });
 
 const DeleteGroup = connect(

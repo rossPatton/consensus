@@ -21,7 +21,7 @@ export type tMeetingTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaEle
 export type tContainerProps = {
   geo: tGeo,
   location: Location,
-  loginDispatch: (query: tLoginQuery) => tThunkPayload<tAccount>,
+  loginDispatch: (query: ts.loginQuery) => tThunkPayload<ts.roleMap>,
   postGroupDispatch: (query: tGroupQuery) => tThunkPayload<tGroup>,
 };
 

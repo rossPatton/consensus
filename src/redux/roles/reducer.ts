@@ -5,7 +5,7 @@ import { DELETE_FAILURE, DELETE_INIT, DELETE_SUCCESS } from './delete/_types';
 import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 import { POST_FAILURE, POST_INIT, POST_SUCCESS } from './post/_types';
 
-export const initialState: tThunk<tRoleMap[]> = {
+export const initialState: tThunk<ts.roleMap[]> = {
   error: null,
   fetched: false,
   isLoading: false,
@@ -21,12 +21,14 @@ export const rolesReducer = (state = initialState, action: tActions) => {
   const failureReturn = {
     ...state,
     error: action.payload,
+    isLoading: false,
   };
 
   const successReturn = {
     ...state,
     data: action.payload,
     fetched: true,
+    isLoading: false,
   };
 
   switch (action.type) {
@@ -60,7 +62,7 @@ export const rolesReducer = (state = initialState, action: tActions) => {
   case DELETE_SUCCESS: {
     const {groupId} = action.payload;
     const copy = [...state.data];
-    const data = _.filter(copy, (r: tRoleMap) => groupId !== r.groupId);
+    const data = _.filter(copy, (r: ts.roleMap) => groupId !== r.groupId);
 
     return {
       ...state,

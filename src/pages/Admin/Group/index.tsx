@@ -83,7 +83,7 @@ class GroupAdminContainer extends React.PureComponent<tProps> {
   }
 }
 
-const mapStateToProps = (store: {session: tThunk<tSession<tGroup>>}) => ({
+const mapStateToProps = (store: {session: tThunk<ts.session<tGroup>>}) => ({
   session: store.session.data,
 });
 

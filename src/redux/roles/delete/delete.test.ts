@@ -28,7 +28,7 @@ describe('redux/roles/delete', () => {
     const testRoleMap = {
       groupId: 100,
       role: 'member',
-    } as tRoleMap;
+    } as ts.roleMap;
 
     const expectedActionPayload: tSuccessAction[] = [{
       type: DELETE_SUCCESS,

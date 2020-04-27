@@ -9,7 +9,7 @@ import {tProps} from './_types';
 
 const Group = memo((props: tProps) => {
   const roleMap = _.find(props.roles, r => r.groupId === props.group.id) || {};
-  const {role} = roleMap as tRoleMap;
+  const {role} = roleMap as ts.roleMap;
 
   return (
     <li

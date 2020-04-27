@@ -24,8 +24,8 @@ export const meetingReducer = (state = initialState, action: tActions) => {
 
   const successReturn = {
     ...state,
-    fetched: true,
     data: action.payload,
+    fetched: true,
     isLoading: false,
   };
 

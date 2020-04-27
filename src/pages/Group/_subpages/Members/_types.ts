@@ -6,7 +6,7 @@ export type tStore = {
 
 type tProps = {
   group: tGroup,
-  role: tRole,
+  role: ts.role,
 };
 
 export type tContainerProps = tProps & {

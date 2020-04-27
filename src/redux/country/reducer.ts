@@ -1,15 +1,21 @@
-import { tCountryActionUnion } from './_types';
-import { GET_FAILURE, GET_SUCCESS } from './get/_types';
+import { tActions } from './_types';
+import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
 export const initialState: tThunk<tCountry> = {
   error: null,
   fetched: false,
-  isLoading: true,
+  isLoading: false,
   data: {} as tCountry,
 };
 
-export const countryReducer = (state = initialState, action: tCountryActionUnion) => {
+export const countryReducer = (state = initialState, action: tActions) => {
   switch (action.type) {
+  case GET_INIT:
+    return {
+      ...state,
+      isLoading: true,
+    };
+
   case GET_FAILURE:
     return {
       ...state,

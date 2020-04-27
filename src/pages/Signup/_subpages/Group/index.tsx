@@ -97,7 +97,7 @@ const mapStateToProps = (store: {geo: tThunk<tGeo>, cities: tThunk<tCity[]>}) =>
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  loginDispatch: (query: tLoginQuery) => dispatch(login(query)),
+  loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
   postGroupDispatch: (group: tGroupQuery) => dispatch(postGroup(group)),
 });
 

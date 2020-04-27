@@ -7,7 +7,7 @@ import {
   tSuccessAction as tPatchSuccess,
 } from './patch/_types';
 
-export type tAccountActionUnion = tDeleteFailure
+export type tActions = tDeleteFailure
   | tDeleteSuccess
   | tPatchFailure
   | tPatchSuccess;

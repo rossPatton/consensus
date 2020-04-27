@@ -20,11 +20,11 @@ describe('redux/account/patch', () => {
   it('creates correct PATCH_SUCCESS action', () => {
     const expectedActionPayload: types.tSuccessAction[] = [{
       type: types.PATCH_SUCCESS,
-      payload: {isAuthenticated: true} as tSession,
+      payload: {isAuthenticated: true} as ts.session,
     }];
 
     const store = mockStore({});
-    store.dispatch(actions.success({isAuthenticated: true} as tSession));
+    store.dispatch(actions.success({isAuthenticated: true} as ts.session));
     expect(store.getActions()).toStrictEqual(expectedActionPayload);
   });
 

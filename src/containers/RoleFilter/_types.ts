@@ -4,5 +4,5 @@ export interface tProps {
 }
 
 export interface tState {
-  roleFilter: tRole,
+  roleFilter: ts.role,
 }

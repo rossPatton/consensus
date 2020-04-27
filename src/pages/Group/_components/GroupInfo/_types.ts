@@ -4,7 +4,7 @@ export type tProps = {
   match: match & {params: tGroupRouteParams},
   group: tGroup,
   params: tGroupRouteParams,
-  role: tRole,
+  role: ts.role,
 };
 
 export type tComponentProps = tProps & {

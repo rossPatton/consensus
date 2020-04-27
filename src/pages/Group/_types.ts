@@ -4,30 +4,30 @@ import {match} from 'react-router';
 export type tProps = {
   location: Location,
   match: match & {params: tGroupRouteParams},
-  session: tSession,
+  session: ts.session,
 };
 
 export type tComponentProps = tProps & {
   group: tGroup,
-  role: tRole,
+  role: ts.role,
 };
 
 export type tContainerProps = tProps & {
   getMeetingsByGroupIdDispatch: (query: tGetMeetingQuery) => tThunkPayload<tMeeting[]>,
   getGroupDispatch: (query: tGroupQuery) => tThunkPayload<tGroup>,
-  getRolesDispatch: () => tThunkPayload<tRoleMap[]>,
+  getRolesDispatch: () => tThunkPayload<ts.roleMap[]>,
   getRsvpsDispatch: () => tThunkPayload<tRSVP[]>,
   isLoading: boolean,
   groupThunk: tThunk<tGroup>,
-  rolesThunk: tThunk<tRoleMap[]>,
+  rolesThunk: tThunk<ts.roleMap[]>,
   rsvpsThunk: tThunk<tRSVP[]>,
-  session: tSession,
+  session: ts.session,
 };
 
 export type tStore = {
   meetingsByGroupId: tThunk<tMeeting[]>,
   group: tThunk<tGroup>,
-  roles: tThunk<tRoleMap[]>,
+  roles: tThunk<ts.roleMap[]>,
   rsvps: tThunk<tRSVP[]>,
-  session: tThunk<tSession>,
+  session: tThunk<ts.session>,
 };

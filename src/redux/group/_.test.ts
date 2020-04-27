@@ -3,7 +3,7 @@ import {groupReducer as reducer, initialState} from './reducer';
 
 describe('redux/group/reducer', () => {
   it('should return initial state, even with a bunk action', () => {
-    expect(reducer(undefined, {} as types.tGroupActionUnion))
+    expect(reducer(undefined, {} as types.tActions))
       .toStrictEqual(initialState);
   });
 

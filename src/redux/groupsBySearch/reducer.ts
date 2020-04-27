@@ -1,4 +1,4 @@
-import { tActionUnion } from './_types';
+import { tActions } from './_types';
 import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
 
 export const initialState: tThunk<tGroup[]> = {
@@ -8,7 +8,7 @@ export const initialState: tThunk<tGroup[]> = {
   data: [],
 };
 
-export const groupsBySearchReducer = (state = initialState, action: tActionUnion) => {
+export const groupsBySearchReducer = (state = initialState, action: tActions) => {
   switch (action.type) {
   case GET_INIT: {
     return {

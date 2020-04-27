@@ -28,7 +28,7 @@ describe('redux/roles/post', () => {
     const testRoleMap = {
       groupId: 100,
       role: 'member',
-    } as tRoleMap;
+    } as ts.roleMap;
 
     const expectedActionPayload: tSuccessAction[] = [{
       type: POST_SUCCESS,

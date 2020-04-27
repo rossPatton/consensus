@@ -1,7 +1,5 @@
 import {History} from 'history';
 
-import {tAdminSections} from '../../../_types';
-
 export type tState = Partial<tUser> & {
   avatarEmail: string,
   city: string,
@@ -10,20 +8,20 @@ export type tState = Partial<tUser> & {
   region: string,
   regionId: number,
 };
-export type tStore = {session: tThunk<tSession>};
+export type tStore = {session: tThunk<ts.session>};
 export type tKeyUnion = keyof tState;
 
 export type tContainerProps = {
   history: History,
-  loginDispatch: (login: tLoginQuery) => tThunkPayload<tSession>,
-  match: tAdminSections,
+  loginDispatch: (login: ts.loginQuery) => tThunkPayload<ts.session>,
+  match: ts.adminSectionParams,
   patchUserDispatch: (user: tUserQuery) => tThunkPayload<tUser>,
-  sessionThunk: tThunk<tSession>,
+  sessionThunk: tThunk<ts.session>,
 }
 
 export type tComponentProps = tState & {
   save: (ev: React.FormEvent<HTMLFormElement>) => void,
-  session: tSession,
+  session: ts.session,
   subsection: string,
   updateState: (
     key: tKeyUnion,

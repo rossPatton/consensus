@@ -2,8 +2,8 @@ export type tProps = {
   deleteUserByGroupIdDispatch: (query: tDeleteUserByGroupIdQuery) => tThunkPayload<any>,
   dispatch: Function,
   group: tGroup,
-  role: tRole,
-  session: tSession,
+  role: ts.role,
+  session: ts.session,
 };
 
 export type tStore = {

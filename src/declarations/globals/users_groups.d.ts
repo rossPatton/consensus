@@ -4,7 +4,7 @@ declare type tUsersByGroupIdQuery = tBaseQuery & {
   noPending?: 'true' | 'false',
   groupId: string | number,
   userId?: string | number,
-  role?: tRole,
+  role?: ts.role,
 };
 
 // get all group that a user belongs to by userId
@@ -20,5 +20,5 @@ declare type tDeleteUserByGroupIdQuery = tUserByOrgQuery & {
 
 // an org can change your user role, so all values needed
 declare type tPatchUserRoleQuery = tDeleteUserByOrgQuery & Readonly<{
-  role: tRole,
+  role: ts.role,
 }>;

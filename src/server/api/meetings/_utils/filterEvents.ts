@@ -11,7 +11,7 @@ import {notNull} from '../../../../utils/nulls';
 export const filterEvents = async (
   ctx: Koa.ParameterizedContext,
   meetings: tMeeting[],
-  role: tRole,
+  role: ts.role,
 ): Promise<tMeeting[]> => {
   const isAuthenticated = ctx.isAuthenticated();
 

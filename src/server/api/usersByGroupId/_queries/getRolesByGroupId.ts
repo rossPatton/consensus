@@ -8,7 +8,7 @@ import {knex} from '../../../db/connection';
 export const getRolesByGroupId = async (
   ctx: Koa.ParameterizedContext,
   query: tUsersByGroupIdQuery,
-): Promise<tAccountRoleRelation[]> => {
+): Promise<ts.roleRel[]> => {
   const {groupId, noPending} = query;
   try {
     const roles = knex('accounts_roles');

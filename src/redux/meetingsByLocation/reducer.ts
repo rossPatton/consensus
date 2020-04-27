@@ -12,12 +12,14 @@ export const meetingsByLocationReducer = (state = initialState, action: tActions
   const failureReturn = {
     ...state,
     error: action.payload,
+    isLoading: false,
   };
 
   const successReturn = {
     ...state,
     data: action.payload,
     fetched: true,
+    isLoading: false,
   };
 
   switch (action.type) {

@@ -5,8 +5,8 @@ export type tStore = {
   meeting: tThunk<tMeetingSingular>,
   group: tThunk<tGroup>,
   isLoading: boolean,
-  roles: tThunk<tRoleMap[]>,
-  session: tThunk<tSession>
+  roles: tThunk<ts.roleMap[]>,
+  session: tThunk<ts.session>
 }
 
 export type tComponentProps = {
@@ -15,12 +15,12 @@ export type tComponentProps = {
 
 export type tContainerProps = {
   eventThunk: tThunk<tMeetingSingular>,
-  getRolesDispatch: () => tThunkPayload<tRoleMap>,
+  getRolesDispatch: () => tThunkPayload<ts.roleMap>,
   isLoading: boolean,
   location: H.Location,
   match: match & { params: tMeetingParams },
   groupThunk: tThunk<tGroup>,
-  rolesThunk: tThunk<tRoleMap[]>,
-  session: tSession,
+  rolesThunk: tThunk<ts.roleMap[]>,
+  session: ts.session,
 }
 
