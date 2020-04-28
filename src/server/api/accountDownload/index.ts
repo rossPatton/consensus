@@ -1,6 +1,5 @@
 import Koa from 'koa';
 import Router from 'koa-router';
-import _ from 'lodash';
 import {Mutable} from 'utility-types';
 
 import {knex} from '../../db/connection';
@@ -12,8 +11,7 @@ export const accountDownload = new Router();
 const route = '/api/v1/download';
 
 accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
-  // const query: Mutable<ts.accountQuery> = _.get(ctx, 'state.locals.data', {});
-  const account: ts.account = _.get(ctx, 'state.user', {});
+  const account: ts.account = ctx?.state?.user || {};
   const profile = await getProfileByAccountId(ctx, account);
   await validateSchema<Mutable<ts.idQuery>>(ctx, schema, {id: account.id});
 

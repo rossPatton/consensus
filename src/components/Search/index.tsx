@@ -37,10 +37,10 @@ class SearchContainer extends React.PureComponent<tProps, tState> {
         <fieldset>
           <label htmlFor="headerSearch">
             <input
-              className="p-1 pl-2 rounded"
+              className="p-1 pl-2 rounded w-full"
               name="headerSearch"
               onChange={this.onChange}
-              placeholder="Search group name"
+              placeholder="Search for group by name"
               type="search"
               value={this.state.value}
             />

@@ -24,11 +24,13 @@ const DesktopEventComponent = memo((props: tComponentProps) => {
           This meeting has already happened
         </b>
       )}
-      <Link
-        to={`/group/${group.handle}`}
-        className="inline-block no-underline leading-none mb-2 text-blue-1">
-        {group.name}
-      </Link>
+      {group.name && (
+        <Link
+          to={`/group/${group.handle}`}
+          className="inline-block no-underline leading-none mb-2 text-blue-1">
+          {group.name}
+        </Link>
+      )}
       <div className="flex flex-row mb-4">
         <div className="min-w-1/3 mr-3">
           <PlaceholderImage

@@ -4,11 +4,11 @@ import _ from 'lodash';
 
 import {knex} from '../../db/connection';
 import {getAccountRoleRelByGroupId, getGroupById, getRSVPsByUserId} from '../../queries';
-import {validateSchema, zipEventsWithAttendees} from '../../utils';
+import {validateSchema, zipMeetingsWithAttendees} from '../../utils';
 import {getMeetingsByQuery} from './_queries';
 import {deleteSchema, getSchema} from './_schema';
 import {tMeetingsServerQuery} from './_types';
-import {filterEvents} from './_utils';
+import {filterMeetings} from './_utils';
 
 export const meetings = new Router();
 const route = '/api/v1/meetings';
@@ -42,10 +42,10 @@ meetings.get(route, async (ctx: Koa.ParameterizedContext) => {
   // all user rsvps
   const userRSVPs = await getRSVPsByUserId(ctx, userId);
   // zip rsvps up with meetings, split by public vs private rsvps
-  const eventsWithRSVPCount = await zipEventsWithAttendees(meetings, userRSVPs);
+  const eventsWithRSVPCount = await zipMeetingsWithAttendees(meetings, userRSVPs);
 
   // return zipped meetings, filtered based on user login status, role, etc
-  const body = await filterEvents(ctx, eventsWithRSVPCount, role);
+  const body = await filterMeetings(ctx, eventsWithRSVPCount, role);
   ctx.body = body;
 });
 

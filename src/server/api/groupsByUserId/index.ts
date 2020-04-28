@@ -1,6 +1,5 @@
 import Koa from 'koa';
 import Router from 'koa-router';
-import _ from 'lodash';
 
 import {groupKeys} from '../_constants';
 import {knex} from '../../db/connection';
@@ -37,7 +36,7 @@ groupsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
 // we check against the session instead of allowing the client to pass in any id
 groupsByUserId.delete(route, async (ctx: Koa.ParameterizedContext) => {
   const {groupId}: ts.deleteUserByGroupIdQuery = ctx?.state?.locals?.data;
-  const userId = _.get(ctx, 'state.user.id', 0);
+  const userId = ctx?.state?.user?.id;
   const query = {groupId, userId};
 
   await validateSchema<ts.deleteUserByGroupIdQuery>(ctx, deleteSchema, query);

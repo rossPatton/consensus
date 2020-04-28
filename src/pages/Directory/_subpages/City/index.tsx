@@ -18,11 +18,11 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
     const {match: {params}} = props;
+    props.getCity(params);
     props.getRegion({
       countryCode: params.countryCode,
       regionCode: params.regionCode,
     });
-    props.getCity(params);
   }
 
   // Re-run the filter whenever the list array or filter text changes:
@@ -49,7 +49,7 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const {cityThunk, isCityLoading, region, isRegionLoading} = this.props;
+    const {cityThunk, regionThunk} = this.props;
 
     return (
       <ErrorBoundary status={cityThunk?.error?.status}>
@@ -64,18 +64,20 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
           ]}
         />
         <GenericLoader
-          isLoading={isCityLoading}
+          isLoading={cityThunk.isLoading}
           render={() => {
+            const city = cityThunk.data;
             const {groupsBySearch} = this.state;
             const groupsToRender = groupsBySearch.length > 0
               ? groupsBySearch
-              : this.props.cityThunk.data.groups;
+              : city.groups;
 
             return (
               <>
                 <GenericLoader
-                  isLoading={isRegionLoading}
+                  isLoading={regionThunk.isLoading}
                   render={() => {
+                    const region = regionThunk.data;
                     const crumbs = [{
                       display: 'United States',
                       to: 'directory/us',
@@ -83,8 +85,8 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
                       display: region.name,
                       to: `directory/us/${region.code}`,
                     }, {
-                      display: cityThunk.data.name,
-                      to: `directory/us/${region.code}/${slugify(cityThunk.data.name)}`,
+                      display: city.name,
+                      to: `directory/us/${region.code}/${slugify(city.name)}`,
                     }];
 
                     return <Breadcrumbs crumbs={crumbs} />;
@@ -92,7 +94,7 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
                 />
                 <CityComponent
                   category={this.state.category}
-                  city={this.props.cityThunk.data}
+                  city={city}
                   match={this.props.match}
                   onChange={this.onChange}
                   onSearch={this.onSearch}
@@ -108,10 +110,8 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isCityLoading: store.city.isLoading,
-  isRegionLoading: store.region.isLoading,
   cityThunk: store.city,
-  region: store.region.data,
+  regionThunk: store.region,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

@@ -1,5 +1,4 @@
 import Koa from 'koa';
-import _ from 'lodash';
 
 import {knex} from '../db/connection';
 
@@ -8,7 +7,7 @@ import {knex} from '../db/connection';
 export const getAccountRoleRelByGroupId = async (
   ctx: Koa.ParameterizedContext,
   groupId: string | number = 0): Promise<ts.roleRel> => {
-  const account = _.get(ctx, 'state.user', {});
+  const account = ctx?.state?.user || {};
 
   let accountRoleRel: ts.roleRel;
   if (account.id) {

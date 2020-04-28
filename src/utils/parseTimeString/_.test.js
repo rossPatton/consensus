@@ -1,6 +1,3 @@
-import React from 'react';
-import render from 'react-test-renderer';
-
 import {parseTimeString} from '.';
 
 describe('utils/parseTimeString', () => {

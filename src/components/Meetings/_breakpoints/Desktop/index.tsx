@@ -9,7 +9,7 @@ import {objToQueryString, slugify} from '~app/utils';
 
 import {tComponentProps} from './_types';
 
-const DesktopEvents = memo((props: tComponentProps) => (
+const DesktopMeetings = memo((props: tComponentProps) => (
   <ul
     className={cx({
       'flex flex-row text-left': props.horizontal,
@@ -152,4 +152,4 @@ const DesktopEvents = memo((props: tComponentProps) => (
   </ul>
 ));
 
-export default DesktopEvents;
+export default DesktopMeetings;

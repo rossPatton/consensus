@@ -1,1 +1,1 @@
-export {filterEvents} from './filterEvents';
+export {filterMeetings} from './filterMeetings';

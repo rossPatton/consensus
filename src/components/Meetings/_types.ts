@@ -16,8 +16,9 @@ export type tStore = {
 export type tContainerProps = tProps & {
   deleteEventDispatch: (query: ts.idQuery) => ts.thunkPayload,
   session: ts.session,
-  // admin drafts vs plain meetings vs user meeting RSVPs
-  type?: 'drafts' | 'meetings' | 'rsvps',
+  // realistically just 3 options:
+  // admin 'drafts' vs plain 'meetings' vs user meeting 'rsvps'
+  type?: ts.groupRouteParams['section'] | 'rsvps';
 };
 
 export type tComponentProps = ts.mediaContext & tProps & {

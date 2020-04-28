@@ -4,11 +4,21 @@ import {connect} from 'react-redux';
 
 import {Helmet} from '~app/components';
 import {ErrorBoundary, GenericLoader, SearchFilter} from '~app/containers';
+import {getMeetingsByGroupId} from '~app/redux';
 
 import {tContainerProps, tStore} from './_types';
 import {MeetingsComponent} from './Component';
 
 class MeetingsContainer extends PureComponent<tContainerProps> {
+  constructor(props: tContainerProps) {
+    super(props);
+    props.getMeetingsByGroupIdDispatch({
+      groupId: props.group.id,
+      showPast: false,
+      limit: -1,
+    });
+  }
+
   render() {
     const {meetingsByGroupIdThunk, match, group, role, session} = this.props;
 
@@ -27,9 +37,9 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
           ]}
         />
         <GenericLoader
-          isLoading={this.props.isLoading}
+          isLoading={meetingsByGroupIdThunk.isLoading}
           render={() => {
-            const type = match?.params?.section as 'drafts' | 'meetings';
+            const type = match?.params?.section || 'meetings';
             const meetings = meetingsByGroupIdThunk.data;
             const meetingsToRender = type === 'meetings'
               ? meetings.filter(ev => !ev.isDraft)
@@ -67,8 +77,12 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
 
 const mapStateToProps = (store: tStore) => ({
   meetingsByGroupIdThunk: store.meetingsByGroupId,
-  isLoading: store.meetingsByGroupId.isLoading,
 });
 
-const Meetings = connect(mapStateToProps)(MeetingsContainer);
+const mapDispatchToProps = (dispatch: Function) => ({
+  getMeetingsByGroupIdDispatch:
+    (query: ts.getMeetingQuery) => dispatch(getMeetingsByGroupId(query)),
+});
+
+const Meetings = connect(mapStateToProps, mapDispatchToProps)(MeetingsContainer);
 export default Meetings;

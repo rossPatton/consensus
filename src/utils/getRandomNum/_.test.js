@@ -1,6 +1,3 @@
-import React from 'react';
-import render from 'react-test-renderer';
-
 import {getRandomNum} from '.';
 
 describe('utils/getRandomNum', () => {

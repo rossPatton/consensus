@@ -100,7 +100,7 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.userQuery>(ctx, patchSchema, query);
 
   const {avatarEmail, password, ...updateQuery} = query;
-  const loggedInAccount = _.get(ctx, 'state.user', {});
+  const loggedInAccount = ctx?.state?.user;
 
   const isValidPW = await isValidPw(password, loggedInAccount.password);
   if (!isValidPW) return ctx.throw(400, 'Password is not correct');

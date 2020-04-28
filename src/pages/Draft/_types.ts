@@ -14,7 +14,7 @@ export type tComponentProps = {
 };
 
 export type tContainerProps = {
-  eventThunk: ts.thunk<ts.meetingSingular>,
+  meetingThunk: ts.thunk<ts.meetingSingular>,
   getRolesDispatch: () => ts.thunkPayload<ts.roleMap>,
   isLoading: boolean,
   location: H.Location,

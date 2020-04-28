@@ -26,7 +26,5 @@ export type tContainerProps = tProps & {
   cityThunk: ts.thunk<ts.city>,
   getCity: (params: ts.directoryParams) => ts.thunk<ts.city>,
   getRegion: (params: ts.directoryParams) => ts.thunk<ts.region>,
-  isCityLoading: boolean,
-  isRegionLoading: boolean,
-  region: ts.region,
+  regionThunk: ts.thunk<ts.region>,
 };

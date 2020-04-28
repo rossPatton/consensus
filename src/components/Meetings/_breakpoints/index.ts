@@ -1,10 +1,10 @@
 import loadable from '@loadable/component';
 
-export const DesktopEvents = loadable(() =>
+export const DesktopMeetings = loadable(() =>
   import(/* webpackChunkName: "Desktop Meetings Component" */'./Desktop'),
 );
 
-export const MobileEvents = loadable(() =>
+export const MobileMeetings = loadable(() =>
   import(/* webpackChunkName: "Mobile Meetings Component" */'./Mobile'),
 );
 

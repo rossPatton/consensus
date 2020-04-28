@@ -2,7 +2,7 @@
 
 exports[`renders breadcrumbs when crumb prop passed in 1`] = `
 <ul
-  className="text-sm text-gray-5 mb-1 flex flex-wrap"
+  className="text-sm text-gray-5 mb-1 flex flex-wrap font-bold"
 >
   <li
     className="mr-1"

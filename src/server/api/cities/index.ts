@@ -1,6 +1,5 @@
 import Koa from 'koa';
 import Router from 'koa-router';
-import _ from 'lodash';
 
 import { knex } from '../../db/connection';
 import { validateSchema } from '../../utils';
@@ -11,7 +10,7 @@ const route = '/api/v1/cities';
 
 // get ALL cities (by country, which is just the US)
 cities.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.directoryParams = _.get(ctx, 'state.locals.data', {});
+  const query: ts.directoryParams = ctx?.state?.locals?.data || {};
   await validateSchema<ts.directoryParams>(ctx, schema, query);
 
   let allCities = [] as ts.city[];

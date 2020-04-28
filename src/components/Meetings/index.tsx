@@ -9,7 +9,7 @@ import {deleteEvent} from '~app/redux';
 import {tContainerProps, tStore} from './_types';
 import {MeetingsComponent} from './Component';
 
-class EventsContainer extends PureComponent<tContainerProps> {
+class MeetingsContainer extends PureComponent<tContainerProps> {
   static contextType = MediaContext;
   static defaultProps = {
     count: 4,
@@ -71,5 +71,5 @@ const mapDispatchToProps = (dispatch: Function) => ({
   deleteEventDispatch: (query: ts.idQuery) => dispatch(deleteEvent(query)),
 });
 
-const Meetings = connect(mapStateToProps, mapDispatchToProps)(EventsContainer);
+const Meetings = connect(mapStateToProps, mapDispatchToProps)(MeetingsContainer);
 export default Meetings;

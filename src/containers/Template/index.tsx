@@ -3,17 +3,25 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {ErrorBoundary, GenericLoader} from '~app/containers';
-import {getGeo} from '~app/redux';
+import {getGeo, getRoles, getRsvps} from '~app/redux';
 
 import {Footer, Header} from './_components';
-import {tProps} from './_types';
+import {tProps, tStore} from './_types';
 
-// any elements or components or functionality that should be present on all pages
+/**
+ * @description wrapper container that contains the repeated visual components + handles fetching some data we only want to fetch once
+ */
 class Template extends PureComponent<tProps> {
   constructor(props: tProps) {
     super(props);
-    if (props.geoThunk.fetched) return;
-    props.getGeoDispatch();
+    if (!props.geoThunk.fetched) {
+      props.getGeoDispatch();
+    }
+
+    if (!props.session.isAuthenticated) return;
+    if (props.session.type === 'org') return;
+    if (!props.rsvpsThunk.fetched) props.getRsvpsDispatch();
+    if (!props.rolesThunk.fetched) props.getRolesDispatch();
   }
 
   render() {
@@ -37,13 +45,17 @@ class Template extends PureComponent<tProps> {
   }
 }
 
-const mapStateToProps = (store: {geo: ts.thunk<ts.geo>, session: ts.thunk<ts.session>}) => ({
+const mapStateToProps = (store: tStore) => ({
   geoThunk: store.geo,
+  rolesThunk: store.roles,
+  rsvpsThunk: store.rsvps,
   session: store.session.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
   getGeoDispatch: () => dispatch(getGeo()),
+  getRolesDispatch: () => dispatch(getRoles()),
+  getRsvpsDispatch: () => dispatch(getRsvps()),
 });
 
 export default connect(

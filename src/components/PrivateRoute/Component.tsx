@@ -19,7 +19,7 @@ export const PrivateRouteComponent = (ownProps: tProps) => (
       }
 
       return (
-        <Redirect to={ownProps.redirect || ''} />
+        <Redirect to={ownProps.redirect || '/login'} />
       );
     }}
   />

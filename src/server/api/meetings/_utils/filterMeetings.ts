@@ -1,14 +1,11 @@
 import Koa from 'koa';
 
-import {notNull} from '../../../../utils/nulls';
+import {notNull} from '~app/utils';
 
-// this is a server util, because we want to make sure that meetings get filtered
-// before returning them to the client
-
-// this is because depending on user/group permissions, or login state, we might
-// want to hide certain meetings and/or drafts
-
-export const filterEvents = async (
+/**
+ * @description we want to make sure that meetings get filtered before returning them to the client, depending on membership or login status
+ */
+export const filterMeetings = async (
   ctx: Koa.ParameterizedContext,
   meetings: ts.meeting[],
   role: ts.role,

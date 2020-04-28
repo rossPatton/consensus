@@ -28,7 +28,7 @@ export const getMeetingByQuery = async (
     return ctx.throw(500, err);
   }
 
-  const account = _.get(ctx, 'state.user', {});
+  const account = ctx?.state?.user || {};
 
   let rsvp = null;
   if (account.userId) {

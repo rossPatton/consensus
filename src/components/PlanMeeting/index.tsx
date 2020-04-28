@@ -128,20 +128,20 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
   }
 
   render() {
-    const {sessionThunk} = this.props;
+    const {group, sessionThunk} = this.props;
 
     return (
       <ErrorBoundary
         isSubPage
         status={sessionThunk?.error?.status}>
         <Helmet
-          canonical=""
+          canonical={`/group/${group.handle}/planMeeting`}
           title=""
           meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
+            { name: 'description', content: `Plan your next meeting with ${group.name}` },
+            { name: 'keywords', content: 'plan,meeting' },
+            { property: 'og:title', content: `Consensus: Plan Meeting for ${group.name}` },
+            { property: 'og:description', content: `Plan your next meeting with ${group.name}` },
           ]}
         />
         {!sessionThunk.data.isAuthenticated && <Redirect to="" />}

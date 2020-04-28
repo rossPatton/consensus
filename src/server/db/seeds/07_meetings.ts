@@ -36,16 +36,16 @@ const createMeeting = async (groupId: number, isDraft: boolean = false) => {
 };
 
 exports.seed = async (knex: Knex) => {
-  const fakeEvents = [];
+  const fakeMeetings = [];
 
   for await (const groupId of range(1, 100)) {
-    fakeEvents.push(await createMeeting(groupId));
+    fakeMeetings.push(await createMeeting(groupId));
   }
 
   for await (const groupId of range(1, 100)) {
-    fakeEvents.push(await createMeeting(groupId, true));
+    fakeMeetings.push(await createMeeting(groupId, true));
   }
 
   await knex('meetings').del();
-  await knex('meetings').insert(flatten(fakeEvents));
+  await knex('meetings').insert(flatten(fakeMeetings));
 };

@@ -5,4 +5,4 @@ export {saltedHash} from './saltedHash';
 export {sendEmail} from './sendEmail';
 export {sha256, sha384} from './sha';
 export {validateSchema} from './validateSchema';
-export {zipEventsWithAttendees} from './zipEventsWithAttendees';
+export {zipMeetingsWithAttendees} from './zipMeetingsWithAttendees';

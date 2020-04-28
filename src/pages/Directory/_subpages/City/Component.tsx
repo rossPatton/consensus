@@ -6,9 +6,11 @@ import { tComponentProps } from './_types';
 
 export const CityComponent = memo((props: tComponentProps) => (
   <>
-    <h1 className="mb-1">
-      Browse {props.city.groups.length} {props.category} groups in {props.city.name}
-    </h1>
+    {props.city && (
+      <h1 className="mb-1">
+        Browse {props.city.groups && props.city.groups.length} {props.category} groups {props.city.name && `in ${props.city.name}`}
+      </h1>
+    )}
     <FilterPanel
       onCategoryChange={props.onChange}
       onSearchChange={props.onSearch}

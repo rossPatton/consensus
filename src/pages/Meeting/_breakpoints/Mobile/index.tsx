@@ -25,11 +25,13 @@ const MobileEventPage = memo((props: tComponentProps) => {
       <h1 className="mt-5 d:mt-0 capitalize block d:hidden text-2 font-normal">
         {meeting.title}
       </h1>
-      <Link
-        to={`/group/${group.handle}`}
-        className="inline-block no-underline leading-none mb-2 text-blue-1">
-        {group.name}
-      </Link>
+      {group.name && (
+        <Link
+          to={`/group/${group.handle}`}
+          className="inline-block no-underline leading-none mb-2 text-blue-1">
+          {group.name}
+        </Link>
+      )}
       <div className="flex flex-col d:flex-row mb-4">
         <div className="min-w-1/3 d:mr-3 mb-2 d:mb-0">
           <PlaceholderImage

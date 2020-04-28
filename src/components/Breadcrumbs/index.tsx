@@ -8,7 +8,7 @@ const Breadcrumbs = memo((props: tProps) => {
   if (!(props.crumbs instanceof Array)) return null;
 
   return (
-    <ul className="text-sm text-gray-5 mb-1 flex flex-wrap">
+    <ul className="text-sm text-gray-5 mb-1 flex flex-wrap font-bold">
       {props.crumbs.map((crumb: ts.breadcrumb, i) => {
         const isLastItem = i === props.crumbs.length - 1;
         const renderLink = !isLastItem && crumb.to;

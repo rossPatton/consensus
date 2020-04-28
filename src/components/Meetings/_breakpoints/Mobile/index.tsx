@@ -9,7 +9,7 @@ import {objToQueryString, slugify} from '~app/utils';
 
 import {tComponentProps} from './_types';
 
-const MobileEvents = memo((props: tComponentProps) => (
+const MobileMeetings = memo((props: tComponentProps) => (
   <ul className="text-left">
     {props.meetings.map(ev => {
       const isPastMeeting = dayJS(ev.date).isBefore(dayJS());
@@ -133,4 +133,4 @@ const MobileEvents = memo((props: tComponentProps) => (
   </ul>
 ));
 
-export default MobileEvents;
+export default MobileMeetings;

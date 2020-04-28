@@ -16,7 +16,7 @@ import { initStoreForSSR } from './initStore';
 const statsFile = path.resolve('./dist/loadable-stats.json');
 
 export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
-  const nonce = _.get(app, 'context.state.nonce', '');
+  const nonce = app?.context?.state?.nonce || '';
   // need to be set for server streaming, if not set, then koa will crap out
   ctx.respond = false;
   ctx.type = 'text/html';

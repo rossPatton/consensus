@@ -11,7 +11,7 @@ export const city = new Router();
 const route = '/api/v1/city';
 
 city.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.directoryParams = _.get(ctx, 'state.locals.data', {});
+  const query: ts.directoryParams = ctx?.state?.locals?.data || {};
   await validateSchema<ts.directoryParams>(ctx, schema, query);
 
   const { city: citySlug, regionCode} = query;

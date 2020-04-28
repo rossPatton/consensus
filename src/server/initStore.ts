@@ -8,9 +8,9 @@ import {getSession} from './queries';
 // pull out passport session info, use to populate the `auth` and `session` state
 export const initStoreForSSR = async (ctx: Koa.ParameterizedContext) => {
   // get authentication status + active session data
-  const passport = await ctx.redis.get(ctx.session._sessCtx.externalKey);
+  const passportSession = await ctx.redis.get(ctx.session._sessCtx.externalKey);
   // get user/org account. this object is determined by our serialization strategy
-  const account = _.get(passport, 'passport.user', {});
+  const account = passportSession?.passport?.user || {};
   // take all that and build our session
   const session = await getSession(ctx, account);
   // generate initial state for Redux store, with defaults + session if applicable

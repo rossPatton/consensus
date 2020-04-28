@@ -13,7 +13,7 @@ const table = 'groups';
 // searching is a little different from a standard group fetch
 // uses a postgres extension to do fuzzy matching
 search.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = _.get(ctx, 'state.locals.data', {});
+  const query = ctx?.state?.locals?.data;
   await validateSchema(ctx, schema, query);
 
   let groupsLike: {rows: ts.group[]};

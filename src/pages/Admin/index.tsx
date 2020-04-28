@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router';
 
 import {Helmet} from '~app/components';
 import {ErrorBoundary, GenericLoader, Template} from '~app/containers';
@@ -29,10 +28,6 @@ const AdminContainer = (props: tProps) => {
         <GenericLoader
           isLoading={sessionThunk.isLoading}
           render={() => {
-            const {isAuthenticated} = sessionThunk.data;
-
-            if (!isAuthenticated) return <Redirect to="" />;
-
             const {type} = sessionThunk.data;
             const isGroupAdmin = type === 'org';
             const isUserAdmin = type === 'user';

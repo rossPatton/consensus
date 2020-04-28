@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import {knex} from '../../db/connection';
 import {getRSVPsByUserId} from '../../queries';
-import {validateSchema, zipEventsWithAttendees} from '../../utils';
+import {validateSchema, zipMeetingsWithAttendees} from '../../utils';
 import {schema} from './_schema';
 import {tMeetingsByUserServerQuery} from './_types';
 
@@ -41,5 +41,5 @@ meetingsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  ctx.body = await zipEventsWithAttendees(meetings, userRSVPs);
+  ctx.body = await zipMeetingsWithAttendees(meetings, userRSVPs);
 });

@@ -1,6 +1,5 @@
 import Koa from 'koa';
 import Router from 'koa-router';
-import _ from 'lodash';
 
 import {knex} from '~app/server/db/connection';
 import {getSession} from '~app/server/queries';
@@ -66,8 +65,8 @@ usersByGroupId.post(route, async (ctx: Koa.ParameterizedContext) => {
   // TODO should probably simplify this or store in server state somehow
   // get authentication status + active session data
   const passport = await ctx.redis.get(ctx.session._sessCtx.externalKey);
-  const session = await getSession(ctx, _.get(passport, 'passport.user', {}));
-  ctx.body = _.get(session, 'data.profile', {});
+  const session = await getSession(ctx, passport?.passport?.user);
+  ctx.body = session?.data?.profile || {};
 });
 
 usersByGroupId.patch(route, async (ctx: Koa.ParameterizedContext) => {

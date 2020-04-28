@@ -8,3 +8,4 @@ export { isUndefined, notUndefined } from './undefineds';
 export { objToQueryString } from './objToQueryString';
 export { parseTimeString } from './parseTimeString';
 export { deSlugify, slugify, lowerCase, upperCase } from './strings';
+export { typesafeIdOrSlug } from './typesafeIdOrSlug';

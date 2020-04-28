@@ -24,12 +24,11 @@ export type tComponentProps = tProps & {
 };
 
 export type tContainerProps = tProps & {
-  eventThunk: ts.thunk<ts.meetingSingular>,
+  isLoading: boolean,
+  meetingThunk: ts.thunk<ts.meetingSingular>,
   getMeetingDispatch: (query: ts.getMeetingQuery) => ts.thunkPayload<ts.meetingSingular>,
   getMeetingsByGroupIdDispatch: (query: ts.getMeetingQuery) => ts.thunkPayload<ts.meeting[]>,
   getGroupByIdDispatch: (query: ts.groupQuery) => ts.thunkPayload<ts.group>,
-  getRolesDispatch: () => ts.thunkPayload<ts.roleMap>,
-  getRsvpsDispatch: () => ts.thunkPayload<ts.rsvp[]>,
   location: H.Location,
   match: ts.match & { params: ts.meetingParams },
   groupThunk: ts.thunk<ts.group>,

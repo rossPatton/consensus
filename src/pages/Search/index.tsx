@@ -12,37 +12,33 @@ const meta = [
   { name: 'description', content: 'Search page' },
   { name: 'keywords', content: 'search' },
   { property: 'og:title', content: 'Consensus: Search' },
-  { property: 'og:description', content: 'lorem ipsum' },
+  { property: 'og:description', content: 'Search for groups by name, category, city or state.' },
 ];
 
-const SearchContainer = memo((props: tProps) => {
-  const {groupsBySearch} = props;
-
-  return (
-    <Template>
-      <ErrorBoundary status={groupsBySearch?.error?.status}>
-        <Helmet
-          canonical="search"
-          title="Consensus: Search"
-          meta={meta}
-        />
-        <h1 className="mb-1">
-          Search
-        </h1>
-        <SuperSearch />
-        <GenericLoader
-          isLoading={groupsBySearch.isLoading}
-          render={() => (
-            <Groups
-              showLocation
-              groups={groupsBySearch.data}
-            />
-          )}
-        />
-      </ErrorBoundary>
-    </Template>
-  );
-});
+const SearchContainer = memo((props: tProps) => (
+  <Template>
+    <ErrorBoundary status={props.groupsBySearch?.error?.status}>
+      <Helmet
+        canonical="search"
+        title="Consensus: Search"
+        meta={meta}
+      />
+      <h1 className="mb-1">
+        Search
+      </h1>
+      <SuperSearch />
+      <GenericLoader
+        isLoading={props.groupsBySearch.isLoading}
+        render={() => (
+          <Groups
+            showLocation
+            groups={props.groupsBySearch.data}
+          />
+        )}
+      />
+    </ErrorBoundary>
+  </Template>
+));
 
 const mapStateToProps = (store: tStore) => ({
   groupsBySearch: store.groupsBySearch,

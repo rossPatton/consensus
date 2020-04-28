@@ -9,6 +9,9 @@ export const HeaderComponent = memo((props: tComponentProps) => (
   <header className="flex bg-white shadow fixed t l r z-50">
     <div className="contain m-auto flex items-center relative">
       <div>
+        make nav
+      </div>
+      <div>
         <Link to="/">
           <img
             alt="Consensus"
@@ -17,8 +20,8 @@ export const HeaderComponent = memo((props: tComponentProps) => (
           />
         </Link>
       </div>
-      <div className="flex items-center absolute r text-right">
-        <Search className="mr-2 hidden d:block" />
+      <div className="flex items-center absolute r text-right d:w-1/3">
+        <Search className="mr-2 hidden d:block d:w-full" />
         {!props.session.isAuthenticated && (
           <Link
             to="/login"

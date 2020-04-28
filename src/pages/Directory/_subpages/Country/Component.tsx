@@ -1,4 +1,3 @@
-import pluralize from 'pluralize';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
@@ -17,8 +16,8 @@ export const CountryComponent = memo((props: tComponentProps) => (
     />
     <h2 className="mb-2 text-3">
       <span className="capitalize">
-        {pluralize(props.country.regionType)} and Territories
-      </span> in {props.country.name}
+        States and Territories
+      </span> {props.country.name && `in ${props.country.name}`}
     </h2>
     <ul className="flex flex-col d:flex-row flex-wrap">
       {props.regionsToRender.map(region => (

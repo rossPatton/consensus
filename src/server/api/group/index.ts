@@ -1,6 +1,5 @@
 import Koa from 'koa';
 import Router from 'koa-router';
-import _ from 'lodash';
 
 import {groupKeys} from '../_constants';
 import {knex} from '../../db/connection';
@@ -34,7 +33,7 @@ group.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const query = ctx?.state?.locals?.data;
   await validateSchema<ts.groupQuery>(ctx, patchSchema, query);
 
-  const loggedInAccount: ts.account = _.get(ctx, 'state.user', {});
+  const loggedInAccount: ts.account = ctx?.state?.user || {};
   const {avatarEmail, isFormSubmit, password, ...updateQuery} = query;
 
   const isValidPW = await isValidPw(password, loggedInAccount.password);

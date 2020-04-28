@@ -1,22 +1,19 @@
 import Koa from 'koa';
 import Router from 'koa-router';
-import _ from 'lodash';
 
+import { knex } from '~app/server/db/connection';
 import { validateSchema } from '~app/server/utils';
 
-import { knex } from '../../db/connection';
-import { getSchema, postSchema } from './_schema';
+import { getSchema, upsertSchema } from './_schema';
 import { getRSVPsByUserId } from './queries';
 
 export const rsvps = new Router();
-
 const route = '/api/v1/rsvps';
-const sessionPath = 'state.user';
 const table = 'users_meetings';
 
 // get all rsvps for the logged in user, by meetingId
 rsvps.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const {userId = 0} = _.get(ctx, sessionPath, {});
+  const {userId} = ctx?.state?.user;
   await validateSchema(ctx, getSchema, {userId});
   const rsvps = await getRSVPsByUserId(ctx, userId);
   ctx.body = rsvps;
@@ -24,11 +21,11 @@ rsvps.get(route, async (ctx: Koa.ParameterizedContext) => {
 
 rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {data} = ctx?.state?.locals;
+  const {userId} = ctx?.state?.user;
   const {isFormSubmit, ...query} = data;
-  await validateSchema(ctx, postSchema, query);
+  await validateSchema(ctx, upsertSchema, {...query, userId});
 
   const {meetingId, type = 'private', value = 'no'} = query;
-  const {userId = 0} = _.get(ctx, sessionPath, {});
 
   const newRsvp: ts.rsvp = {
     meetingId: parseInt(meetingId, 10),
@@ -56,10 +53,10 @@ rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
 rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {data} = ctx?.state?.locals;
   const {isFormSubmit, ...query} = data;
-  await validateSchema(ctx, postSchema, query);
+  const {userId} = ctx?.state.user;
+  await validateSchema(ctx, upsertSchema, {...query, userId});
 
   const {meetingId, type = 'private', value = 'no'} = query;
-  const {userId = 0} = _.get(ctx, sessionPath, {});
 
   const newRsvp: ts.rsvp = {
     meetingId: parseInt(meetingId, 10),
