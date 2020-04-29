@@ -1,12 +1,5 @@
-
-
 export type tState = {
   regionsBySearch: ts.region[],
-};
-
-export type tStore = {
-  country: ts.thunk<ts.country>,
-  isLoading: boolean,
 };
 
 export type tProps = {
@@ -19,6 +12,7 @@ export type tComponentProps = tProps & {
   regionsToRender: ts.region[],
 };
 
-export type tContainerProps = tStore & tProps & {
+export type tContainerProps = tProps & {
+  countryThunk: ts.thunk<ts.country>,
   getCountry: (params: ts.directoryParams) => ts.thunk<ts.country>,
 };

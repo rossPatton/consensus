@@ -8,20 +8,16 @@ import {getGroupsBySearch} from '~app/redux';
 
 import {tProps, tStore} from './_types';
 
-const meta = [
-  { name: 'description', content: 'Search page' },
-  { name: 'keywords', content: 'search' },
-  { property: 'og:title', content: 'Consensus: Search' },
-  { property: 'og:description', content: 'Search for groups by name, category, city or state.' },
-];
-
 const SearchContainer = memo((props: tProps) => (
   <Template>
     <ErrorBoundary status={props.groupsBySearch?.error?.status}>
       <Helmet
-        canonical="search"
+        canonical="/search"
         title="Consensus: Search"
-        meta={meta}
+        meta={[
+          { name: 'description', content: 'Search page' },
+          { name: 'keywords', content: 'search' },
+        ]}
       />
       <h1 className="mb-1">
         Search

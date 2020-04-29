@@ -28,13 +28,11 @@ class UserContainer extends PureComponent<tContainerProps> {
       <Template>
         <ErrorBoundary status={userThunk?.error?.status}>
           <Helmet
-            canonical=""
-            title=""
+            canonical={`/user/${userThunk.data.id}`}
+            title={`User Profile for ${userThunk.data.username}`}
             meta={[
-              { name: 'description', content: '' },
-              { name: 'keywords', content: '' },
-              { property: 'og:title', content: '' },
-              { property: 'og:description', content: '' },
+              { name: 'description', content: userThunk.data.bio || '' },
+              { name: 'keywords', content: 'user,profile' },
             ]}
           />
           <GenericLoader

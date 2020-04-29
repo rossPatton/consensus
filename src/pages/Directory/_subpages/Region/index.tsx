@@ -6,7 +6,7 @@ import {ErrorBoundary, GenericLoader} from '~app/containers';
 import {getRegion} from '~app/redux';
 import {fuzzFilterList} from '~app/utils';
 
-import {tContainerProps, tStore} from './_types';
+import {tContainerProps} from './_types';
 import {RegionComponent} from './Component';
 
 class RegionContainer extends PureComponent<tContainerProps> {
@@ -21,8 +21,7 @@ class RegionContainer extends PureComponent<tContainerProps> {
 
   onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
-
-    const {cities = []} = this.props.region.data;
+    const {cities = []} = this.props.regionThunk.data;
 
     this.setState({
       citiesBySearch: fuzzFilterList({
@@ -33,32 +32,30 @@ class RegionContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {isLoading, match, region} = this.props;
+    const {match, regionThunk} = this.props;
 
     return (
-      <ErrorBoundary status={region?.error?.status}>
+      <ErrorBoundary status={regionThunk?.error?.status}>
         <Helmet
-          canonical=""
-          title=""
+          canonical={`/us/${regionThunk.data.code}`}
+          title="Consensus Directory: Cities by Region"
           meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
+            { name: 'description', content: "Search for cities by region or state. Find your city and see what's happening!" },
+            { name: 'keywords', content: 'directory,search,region' },
           ]}
         />
         <GenericLoader
-          isLoading={isLoading}
+          isLoading={regionThunk.isLoading}
           render={() => {
             const crumbs = [{
               display: 'United States',
               to: 'directory/us',
             }, {
-              display: region.data.name,
-              to: `directory/us/${region.data.code}`,
+              display: regionThunk.data.name,
+              to: `directory/us/${regionThunk.data.code}`,
             }];
 
-            const {cities = []} = region.data;
+            const {cities = []} = regionThunk.data;
             const {citiesBySearch} = this.state;
             const citiesToRender = citiesBySearch.length > 0
               ? citiesBySearch
@@ -71,7 +68,7 @@ class RegionContainer extends PureComponent<tContainerProps> {
                   citiesToRender={citiesToRender}
                   match={match}
                   onChange={this.onChange}
-                  region={region.data}
+                  region={regionThunk.data}
                 />
               </>
             );
@@ -82,9 +79,8 @@ class RegionContainer extends PureComponent<tContainerProps> {
   }
 }
 
-const mapStateToProps = (store: tStore) => ({
-  isLoading: store.region.isLoading,
-  region: store.region,
+const mapStateToProps = (store: {region: ts.thunk<ts.region>}) => ({
+  regionThunk: store.region,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

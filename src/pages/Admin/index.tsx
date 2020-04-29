@@ -16,13 +16,8 @@ const AdminContainer = (props: tProps) => {
     <Template>
       <ErrorBoundary status={sessionThunk?.error?.status}>
         <Helmet
-          canonical=""
-          title=""
           meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
+            { name: 'robots', content: 'noindex' },
           ]}
         />
         <GenericLoader

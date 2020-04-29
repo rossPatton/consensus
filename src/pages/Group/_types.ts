@@ -1,6 +1,5 @@
 import {Location} from 'history';
 
-
 export type tProps = {
   location: Location,
   match: ts.match & {params: ts.groupRouteParams},

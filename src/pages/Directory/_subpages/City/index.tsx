@@ -54,13 +54,11 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
     return (
       <ErrorBoundary status={cityThunk?.error?.status}>
         <Helmet
-          canonical=""
-          title=""
+          canonical={`/us/${regionThunk.data.code}/${cityThunk.data.name}`}
+          title="Consensus Directory: Groups by City"
           meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
+            { name: 'description', content: 'Search for local groups to join in your city!' },
+            { name: 'keywords', content: 'directory,search,city' },
           ]}
         />
         <GenericLoader

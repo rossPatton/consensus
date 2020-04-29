@@ -25,7 +25,7 @@ export const SignupComponent = memo((props: tProps) => (
           </Link>
           <Link
             className="hover:bg-gray-3 min-w-full d:min-w-0 btn p-2 pl-3 pr-3"
-            to="/signup/newOrg">
+            to="/signup/newGroup">
             New Group
           </Link>
         </div>
@@ -39,7 +39,7 @@ export const SignupComponent = memo((props: tProps) => (
     {props.match.params.type === 'newUser' && (
       <UserSignup />
     )}
-    {props.match.params.type === 'newOrg' && (
+    {props.match.params.type === 'newGroup' && (
       <GroupSignup location={props.location} />
     )}
   </>

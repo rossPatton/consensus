@@ -3,8 +3,6 @@ import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '~app/components';
-import {ErrorBoundary, GenericLoader} from '~app/containers';
 import {login, patchAccount} from '~app/redux';
 
 import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
@@ -71,30 +69,13 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
     const subsection = match?.params?.subsection || '';
 
     return (
-      <ErrorBoundary status={sessionThunk?.error?.status}>
-        <Helmet
-          canonical=""
-          title=""
-          meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
-          ]}
-        />
-        <GenericLoader
-          isLoading={sessionThunk.isLoading}
-          render={() => (
-            <AccountComponent
-              {...this.state}
-              session={sessionThunk.data}
-              save={this.save}
-              subsection={subsection}
-              updateState={this.updateState}
-            />
-          )}
-        />
-      </ErrorBoundary>
+      <AccountComponent
+        {...this.state}
+        session={sessionThunk.data}
+        save={this.save}
+        subsection={subsection}
+        updateState={this.updateState}
+      />
     );
   }
 }

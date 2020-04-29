@@ -110,8 +110,6 @@ class MeetingContainer extends PureComponent<tContainerProps> {
                     meta={[
                       { name: 'description', content: meeting.description },
                       { name: 'keywords', content: meeting.category },
-                      { property: 'og:title', content: meeting.title },
-                      { property: 'og:description', content: meeting.description },
                     ]}
                   />
                   <EventComponent

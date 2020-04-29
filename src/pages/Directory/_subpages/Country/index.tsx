@@ -6,7 +6,7 @@ import {ErrorBoundary, GenericLoader} from '~app/containers';
 import {getCountry} from '~app/redux';
 import {fuzzFilterList} from '~app/utils';
 
-import {tContainerProps, tState, tStore} from './_types';
+import {tContainerProps, tState} from './_types';
 import {CountryComponent} from './Component';
 
 class CountryContainer extends PureComponent<tContainerProps, tState> {
@@ -21,8 +21,7 @@ class CountryContainer extends PureComponent<tContainerProps, tState> {
 
   onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
-
-    const {regions = []} = this.props.country.data;
+    const {regions = []} = this.props.countryThunk.data;
 
     this.setState({
       regionsBySearch: fuzzFilterList({
@@ -33,29 +32,27 @@ class CountryContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const {country, isLoading, match} = this.props;
+    const {countryThunk, match} = this.props;
 
     return (
-      <ErrorBoundary status={country?.error?.status}>
+      <ErrorBoundary status={countryThunk?.error?.status}>
         <Helmet
-          canonical=""
-          title=""
+          canonical="/us"
+          title="Consensus Directory: Regions by Country"
           meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
+            { name: 'description', content: 'Search for local groups to join in your city!' },
+            { name: 'keywords', content: 'directory,search,city' },
           ]}
         />
         <GenericLoader
-          isLoading={isLoading}
+          isLoading={countryThunk.isLoading}
           render={() => {
             const crumbs = [{
               display: 'United States',
               to: 'directory/us',
             }];
 
-            const {regions = []} = country.data;
+            const {regions = []} = countryThunk.data;
             const {regionsBySearch} = this.state;
             const regionsToRender = regionsBySearch.length > 0
               ? regionsBySearch
@@ -65,7 +62,7 @@ class CountryContainer extends PureComponent<tContainerProps, tState> {
               <>
                 <Breadcrumbs crumbs={crumbs} />
                 <CountryComponent
-                  country={country.data}
+                  country={countryThunk.data}
                   match={match}
                   onChange={this.onChange}
                   regionsToRender={regionsToRender}
@@ -79,9 +76,8 @@ class CountryContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (store: tStore) => ({
-  country: store.country,
-  isLoading: store.country.isLoading,
+const mapStateToProps = (store: {country: ts.thunk<ts.country>}) => ({
+  countryThunk: store.country,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

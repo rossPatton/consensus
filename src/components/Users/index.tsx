@@ -70,7 +70,10 @@ class UsersContainer extends React.PureComponent<tContainerProps, tState> {
 
     if (itemsToRender.length === 0) {
       return (
-        <>No users found that meet this criteria.</>
+        <>
+          {type === 'pending' && 'No users pending approval.'}
+          {type !== 'pending' && 'No users found that meet this criteria.'}
+        </>
       );
     }
 

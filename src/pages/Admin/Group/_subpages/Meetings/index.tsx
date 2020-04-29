@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '~app/components';
 import {
   ErrorBoundary,
   GenericLoader,
@@ -37,16 +36,6 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
 
     return (
       <ErrorBoundary status={meetingsByGroupIdThunk?.error?.status}>
-        <Helmet
-          canonical=""
-          title=""
-          meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
-          ]}
-        />
         <GenericLoader
           isLoading={meetingsByGroupIdThunk.isLoading}
           render={() => (

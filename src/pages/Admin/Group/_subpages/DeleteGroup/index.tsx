@@ -4,8 +4,6 @@ import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '~app/components';
-import {ErrorBoundary} from '~app/containers';
 import {login, patchAccount} from '~app/redux';
 
 import {tContainerProps, tState, tStateUnion} from './_types';
@@ -30,18 +28,17 @@ class DeleteGroupContainer extends PureComponent<tContainerProps, tState> {
   deleteGroup = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const {currentPassword} = this.state;
-    const {sessionThunk: {data}} = this.props;
+    const {session} = this.props;
 
     const oneWeekFromNow = dayJS().add(1, 'week').toISOString();
-    const query = data.deletionDeadline
+    const query = session.deletionDeadline
       ? {currentPassword, deletionDeadline: null}
       : {currentPassword, deletionDeadline: oneWeekFromNow};
 
     this.props.patchAccountDispatch(query)
       .then(() => {
         return this.props.loginDispatch({
-          // TODO account info should not live in data (profile area), move up 1 level
-          username: data.login,
+          username: session.login,
           password: this.state.currentPassword,
         });
       })
@@ -60,32 +57,19 @@ class DeleteGroupContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const {sessionThunk} = this.props;
     return (
-      <ErrorBoundary status={sessionThunk?.error?.status}>
-        <Helmet
-          canonical=""
-          title=""
-          meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
-          ]}
-        />
-        <DeleteGroupComponent
-          {...this.state}
-          deleteGroup={this.deleteGroup}
-          session={sessionThunk.data}
-          updateState={this.updateState}
-        />
-      </ErrorBoundary>
+      <DeleteGroupComponent
+        {...this.state}
+        deleteGroup={this.deleteGroup}
+        session={this.props.session}
+        updateState={this.updateState}
+      />
     );
   }
 }
 
 const mapStateToProps = (store: {session: ts.thunk<ts.session>}) => ({
-  sessionThunk: store.session,
+  session: store.session.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

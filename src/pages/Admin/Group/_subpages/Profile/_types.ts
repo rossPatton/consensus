@@ -13,6 +13,6 @@ export type tContainerProps = {
 export type tComponentProps = tState & {
   onSubmit: (ev: React.FormEvent<HTMLFormElement>) => void,
   subsection: string
-  session: ts.session,
+  session: ts.session<ts.group>,
   updateState: (stateKey: tKeyUnion, ev: React.ChangeEvent<any>) => void,
 };

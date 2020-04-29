@@ -3,21 +3,14 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {GenericLoader} from '~app/containers';
-import {MediaContext} from '~app/context/MatchMediaProvider/_context';
-import {getGroupsByUserId, getRoles, getRsvps, logout} from '~app/redux';
+import {getGroupsByUserId, logout} from '~app/redux';
 
 import {tContainerProps, tStore} from './_types';
 import {UserAdminComponent} from './Component';
 
 class UserAdminContainer extends PureComponent<tContainerProps> {
-  static contextType = MediaContext;
-
   constructor(props: tContainerProps) {
     super(props);
-    if (!props.session.isAuthenticated) return;
-    if (!props.rolesThunk.fetched) props.getRolesDispatch();
-    if (!props.rsvpsThunk.fetched) props.getRsvpsDispatch();
-
     const userId = props?.session?.profile?.id;
     if (userId) {
       props.getGroupsByUserIdDispatch({userId})
@@ -32,8 +25,6 @@ class UserAdminContainer extends PureComponent<tContainerProps> {
         render={() => (
           <UserAdminComponent
             history={this.props.history}
-            isDesktop={this.context.isDesktop}
-            isMobile={this.context.isMobile}
             match={this.props.match}
             groupsByUserIdThunk={this.props.groupsByUserIdThunk}
             roles={this.props.rolesThunk.data}
@@ -56,8 +47,6 @@ const mapStateToProps = (store: tStore) => ({
 const mapDispatchToProps = (dispatch: Function) => ({
   getGroupsByUserIdDispatch: (query: ts.groupsByUserIdQuery) =>
     dispatch(getGroupsByUserId(query)),
-  getRolesDispatch: () => dispatch(getRoles()),
-  getRsvpsDispatch: () => dispatch(getRsvps()),
   logoutDispatch: () => dispatch(logout()),
 });
 

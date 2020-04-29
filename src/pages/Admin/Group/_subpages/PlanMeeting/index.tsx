@@ -1,21 +1,11 @@
 import React, { memo } from 'react';
 
-import {Helmet, PlanMeeting as PlanMeetingComponent} from '~app/components';
+import {PlanMeeting as PlanMeetingComponent} from '~app/components';
 
 import {tProps} from './_types';
 
 const PlanMeeting = memo((props: tProps) => (
   <div className="bg-white rounded p-2">
-    <Helmet
-      canonical=""
-      title=""
-      meta={[
-        { name: 'description', content: '' },
-        { name: 'keywords', content: '' },
-        { property: 'og:title', content: '' },
-        { property: 'og:description', content: '' },
-      ]}
-    />
     <PlanMeetingComponent
       group={props.group}
       router={props.router}

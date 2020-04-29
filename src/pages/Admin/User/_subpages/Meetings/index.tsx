@@ -2,7 +2,6 @@ import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '~app/components';
 import {ErrorBoundary, GenericLoader} from '~app/containers';
 import {SearchFilter} from '~app/containers';
 import {getMeetingsByUserId} from '~app/redux';
@@ -24,16 +23,6 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
     const {meetingsByUserIdThunk} = this.props;
     return (
       <ErrorBoundary status={meetingsByUserIdThunk?.error?.status}>
-        <Helmet
-          canonical=""
-          title=""
-          meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
-          ]}
-        />
         <GenericLoader
           isLoading={meetingsByUserIdThunk.isLoading}
           render={() => (

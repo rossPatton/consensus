@@ -3,27 +3,11 @@ import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '~app/components';
-import {ErrorBoundary, GenericLoader} from '~app/containers';
 import {login, patchUser} from '~app/redux';
 
+import {initialState} from './_constants';
 import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
 import {ProfileComponent} from './Component';
-
-const initialState = {
-  avatarEmail: '',
-  bio: '',
-  city: '',
-  cityId: 0,
-  email: '',
-  name: '',
-  password: '',
-  privateMemberships: false,
-  privateRSVP: false,
-  region: '',
-  regionId: 0,
-  username: '',
-};
 
 class ProfileContainer extends PureComponent<tContainerProps, tState> {
   constructor(props: tContainerProps) {
@@ -97,30 +81,13 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     const {subsection} = match?.params;
 
     return (
-      <ErrorBoundary status={sessionThunk?.error?.status}>
-        <Helmet
-          canonical=""
-          title=""
-          meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
-          ]}
-        />
-        <GenericLoader
-          isLoading={sessionThunk.isLoading}
-          render={() => (
-            <ProfileComponent
-              {...this.state}
-              save={this.save}
-              session={sessionThunk.data}
-              subsection={subsection}
-              updateState={this.updateState}
-            />
-          )}
-        />
-      </ErrorBoundary>
+      <ProfileComponent
+        {...this.state}
+        save={this.save}
+        session={sessionThunk.data}
+        subsection={subsection}
+        updateState={this.updateState}
+      />
     );
   }
 }

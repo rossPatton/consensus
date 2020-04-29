@@ -1,5 +1,3 @@
-
-
 export type tState = {
   category: ts.category,
   groupsBySearch: ts.group[],

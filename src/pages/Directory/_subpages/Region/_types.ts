@@ -1,12 +1,6 @@
-
-
 type tProps = {
   match: ts.match & {params: ts.directoryParams},
 }
-
-export type tStore = {
-  region: ts.thunk<ts.region>,
-};
 
 export type tComponentProps = tProps & {
   citiesToRender: ts.city[],
@@ -14,7 +8,7 @@ export type tComponentProps = tProps & {
   region: ts.region,
 };
 
-export type tContainerProps = tStore & tProps & {
+export type tContainerProps = tProps & {
   getRegion: (params: ts.directoryParams) => ts.thunk<ts.region>,
-  isLoading: boolean,
+  regionThunk: ts.thunk<ts.region>,
 };

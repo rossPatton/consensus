@@ -12,7 +12,7 @@ export const MembersComponent = memo((props: {group: ts.group}) => (
         </h1>
       </div>
       <Users
-        count={1}
+        count={3}
         group={props.group}
         sessionRole="admin"
         type="pending"

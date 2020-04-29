@@ -25,7 +25,6 @@ module.exports = merge(common, {
       __CLIENT__: false,
       __SECRET__: JSON.stringify(secret),
       __SERVER__: true,
-      __URL__: JSON.stringify('https://consensus.local'),
     }),
   ],
 });

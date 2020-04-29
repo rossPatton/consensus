@@ -46,8 +46,6 @@ class GroupContainer extends PureComponent<tContainerProps> {
               let meta = [
                 { name: 'description', content: group.description },
                 { name: 'keywords', content: group.category },
-                { property: 'og:title', content: `Consensus: ${group.name}` },
-                { property: 'og:description', content: group.description },
               ];
               if (group.type === 'hidden') {
                 meta = [...meta, {

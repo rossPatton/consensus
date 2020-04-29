@@ -2,7 +2,6 @@ import React, {memo} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 
-import {Helmet} from '~app/components';
 import {ErrorBoundary, Template} from '~app/containers';
 
 import {tProps, tStore} from './_types';
@@ -11,16 +10,6 @@ import {SignupComponent} from './Component';
 const SignupContainer = memo((props: tProps) => (
   <Template>
     <ErrorBoundary status={props?.session?.error?.status}>
-      <Helmet
-        canonical=""
-        title=""
-        meta={[
-          { name: 'description', content: '' },
-          { name: 'keywords', content: '' },
-          { property: 'og:title', content: '' },
-          { property: 'og:description', content: '' },
-        ]}
-      />
       {props.session.isAuthenticated && <Redirect to="/admin/profile" />}
       {!props.session.isAuthenticated && (
         <SignupComponent

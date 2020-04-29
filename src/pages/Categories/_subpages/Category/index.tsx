@@ -24,18 +24,16 @@ class CategoryContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {groupsThunk} = this.props;
+    const {groupsThunk, match: {params}} = this.props;
 
     return (
       <ErrorBoundary status={groupsThunk?.error?.status}>
         <Helmet
-          canonical=""
-          title=""
+          canonical={`/categories/${params.category}`}
+          title={`Consensus: View ${params.category} Group`}
           meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
+            { name: 'description', content: `Search for groups listed under the ${params.category} category` },
+            { name: 'keywords', content: 'category,search,groups' },
           ]}
         />
         <GenericLoader

@@ -19,25 +19,16 @@ class DraftContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const { isLoading, location: {search}, rolesThunk, session} = this.props;
+    const { isLoading, location: {search}, rolesThunk} = this.props;
     const rolesStatus = rolesThunk?.error?.status;
     const draft: {[key: string]: unknown} = qs.parse(search);
-
-    if (!session.isAuthenticated) {
-      return <Redirect to="/login" />;
-    }
 
     return (
       <Template>
         <ErrorBoundary status={rolesStatus}>
           <Helmet
-            canonical=""
-            title=""
             meta={[
-              { name: 'description', content: '' },
-              { name: 'keywords', content: '' },
-              { property: 'og:title', content: '' },
-              { property: 'og:description', content: '' },
+              { name: 'robots', content: 'noindex' },
             ]}
           />
           <GenericLoader

@@ -7,13 +7,11 @@ import {categories} from '~app/constants';
 const CategoryList = memo(() => (
   <>
     <Helmet
-      canonical=""
-      title=""
+      canonical="/categories"
+      title={'Consensus: View All Categories'}
       meta={[
-        { name: 'description', content: '' },
-        { name: 'keywords', content: '' },
-        { property: 'og:title', content: '' },
-        { property: 'og:description', content: '' },
+        { name: 'description', content: 'Search for groups by category' },
+        { name: 'keywords', content: 'category,search,groups' },
       ]}
     />
     <ul className="flex flex-col d:flex-row flex-wrap">

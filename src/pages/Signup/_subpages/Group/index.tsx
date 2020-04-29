@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
+import {Helmet} from '~app/components';
 import {login, postGroup} from '~app/redux';
 
 import {tContainerProps, tState, tStateUnion} from './_types';
@@ -81,18 +82,28 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
       || !type;
 
     return (
-      <GroupSignupComponent
-        {...this.props}
-        {...this.state}
-        disabled={disabled}
-        onSubmit={this.onSubmit}
-        updateState={this.updateState}
-      />
+      <>
+        <Helmet
+          canonical="/signup/newGroup"
+          title="Start a new group on Consensus"
+          meta={[
+            { name: 'description', content: 'Fill our our signup form to start engaging with your membership today!' },
+            { name: 'keywords', content: 'group,signup' },
+          ]}
+        />
+        <GroupSignupComponent
+          {...this.props}
+          {...this.state}
+          disabled={disabled}
+          onSubmit={this.onSubmit}
+          updateState={this.updateState}
+        />
+      </>
     );
   }
 }
 
-const mapStateToProps = (store: {geo: ts.thunk<ts.geo>, cities: ts.thunk<ts.city[]>}) => ({
+const mapStateToProps = (store: {geo: ts.thunk<ts.geo>}) => ({
   geo: store.geo.data,
 });
 

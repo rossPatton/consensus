@@ -6,7 +6,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 
-import {Helmet} from '~app/components';
 import {ErrorBoundary} from '~app/containers';
 import {getMeetingsByGroupIdSuccess, patchEvent, postMeeting} from '~app/redux';
 import {parseTimeString} from '~app/utils';
@@ -128,22 +127,12 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
   }
 
   render() {
-    const {group, sessionThunk} = this.props;
+    const {sessionThunk} = this.props;
 
     return (
       <ErrorBoundary
         isSubPage
         status={sessionThunk?.error?.status}>
-        <Helmet
-          canonical={`/group/${group.handle}/planMeeting`}
-          title=""
-          meta={[
-            { name: 'description', content: `Plan your next meeting with ${group.name}` },
-            { name: 'keywords', content: 'plan,meeting' },
-            { property: 'og:title', content: `Consensus: Plan Meeting for ${group.name}` },
-            { property: 'og:description', content: `Plan your next meeting with ${group.name}` },
-          ]}
-        />
         {!sessionThunk.data.isAuthenticated && <Redirect to="" />}
         {sessionThunk.data.isAuthenticated && (
           <PlanMeetingComponent

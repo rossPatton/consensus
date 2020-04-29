@@ -1,7 +1,6 @@
 import React, {memo} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '~app/components';
 import {ErrorBoundary, GenericLoader} from '~app/containers';
 import {SearchFilter} from '~app/containers';
 import {getGroupsByUserId} from '~app/redux';
@@ -11,16 +10,6 @@ import {MembershipsComponent} from './Component';
 
 const MembershipsContainer = memo((props: tContainerProps) => (
   <ErrorBoundary status={props?.groupsByUserIdThunk?.error?.status}>
-    <Helmet
-      canonical=""
-      title=""
-      meta={[
-        { name: 'description', content: '' },
-        { name: 'keywords', content: '' },
-        { property: 'og:title', content: '' },
-        { property: 'og:description', content: '' },
-      ]}
-    />
     <GenericLoader
       isLoading={props.groupsByUserIdThunk.isLoading}
       render={() => (

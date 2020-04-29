@@ -14,13 +14,11 @@ const MembersContainer = memo((props: tContainerProps) => {
   return (
     <ErrorBoundary status={usersThunk?.error?.status}>
       <Helmet
-        canonical=""
-        title=""
+        canonical={`/group/${group.handle}/members`}
+        title={`Consensus Group: ${group.name} Memberships`}
         meta={[
-          { name: 'description', content: '' },
-          { name: 'keywords', content: '' },
-          { property: 'og:title', content: '' },
-          { property: 'og:description', content: '' },
+          { name: 'description', content: group.description },
+          { name: 'keywords', content: `group,${group.category},membership` },
         ]}
       />
       <MembersComponent

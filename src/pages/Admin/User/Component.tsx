@@ -1,5 +1,7 @@
-import React, {memo} from 'react';
+import React, {memo, useContext} from 'react';
 import {Link} from 'react-router-dom';
+
+import {MediaContext} from '~app/context/MatchMediaProvider/_context';
 
 import {Aside} from './_components';
 import {
@@ -12,6 +14,7 @@ import {
 import {tComponentProps} from './_types';
 
 export const UserAdminComponent = memo((props: tComponentProps) => {
+  const {isMobile} = useContext(MediaContext);
   const {params} = props.match;
   const {section, subsection} = params;
 
@@ -24,11 +27,11 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
   return (
     <>
       <div className="flex flex-col d:flex-row items-start">
-        {props.isMobile && (
+        {isMobile && (
           <div className="w-full text-center font-bold mb-2">
             {isAccount && (
               <span className="mr-2 text-gray-5">
-              Account
+                Account
               </span>
             )}
             {!isAccount && (
@@ -75,8 +78,6 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           </div>
         )}
         <Aside
-          isDesktop={props.isDesktop}
-          isMobile={props.isMobile}
           groupsByUserIdThunk={props.groupsByUserIdThunk}
           roles={props.roles}
           session={props.session}

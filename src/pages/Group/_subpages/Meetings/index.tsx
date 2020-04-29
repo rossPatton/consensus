@@ -27,13 +27,11 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
         isSubPage
         status={meetingsByGroupIdThunk?.error?.status}>
         <Helmet
-          canonical=""
-          title=""
+          canonical={`/group/${group.handle}`}
+          title={`Consensus Group: ${group.name} Meetings`}
           meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
+            { name: 'description', content: group.description },
+            { name: 'keywords', content: `group,${group.category},meetings` },
           ]}
         />
         <GenericLoader

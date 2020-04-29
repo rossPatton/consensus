@@ -56,7 +56,7 @@ export const META_TAGS: tMetaProps[] = [
   },
   // {
   //   property: 'og:image',
-  //   content: 'https://www.iodine.com/images/doc-for-social.png',
+  //   content: '',
   // },
   // {
   //   property: 'og:image:width',

@@ -2,8 +2,6 @@ import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '~app/components';
-import {ErrorBoundary} from '~app/containers';
 import {deleteAccount, logout} from '~app/redux';
 
 import {tContainerProps, tState, tStateUnion} from './_types';
@@ -45,23 +43,11 @@ class DeleteAccountContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     return (
-      <ErrorBoundary status={this.props?.sessionThunk?.error?.status}>
-        <Helmet
-          canonical=""
-          title=""
-          meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
-          ]}
-        />
-        <DeleteAccountComponent
-          {...this.state}
-          deleteAccount={this.deleteAccount}
-          updateState={this.updateState}
-        />
-      </ErrorBoundary>
+      <DeleteAccountComponent
+        {...this.state}
+        deleteAccount={this.deleteAccount}
+        updateState={this.updateState}
+      />
     );
   }
 }

@@ -1,11 +1,15 @@
 import _ from 'lodash';
-import React, {memo} from 'react';
+import React, {memo, useContext} from 'react';
+
+import {MediaContext} from '~app/context/MatchMediaProvider/_context';
 
 import {DesktopAside, MobileAside} from './_breakpoints';
 import {tProps} from './_types';
 
 const Aside = memo((props: tProps) => {
-  if (props.isDesktop) {
+  const {isDesktop} = useContext(MediaContext);
+
+  if (isDesktop) {
     return (
       <DesktopAside
         {...props}

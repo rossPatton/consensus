@@ -89,8 +89,6 @@ class VerifyAccountContainer extends PureComponent<tContainerProps, tState> {
             meta={[
               { name: 'description', content: description },
               { name: 'keywords', content: keywords },
-              { property: 'og:title', content: title },
-              { property: 'og:description', content: description },
             ]}
           />
           {session.data.isVerified && (

@@ -2,26 +2,20 @@ import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '~app/components';
-import {ErrorBoundary, GenericLoader} from '~app/containers';
 import {login, patchAccount} from '~app/redux';
 
 import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
 import {AccountComponent} from './Component';
 
 class AccountContainer extends PureComponent<tContainerProps, tState> {
-  constructor(props: tContainerProps) {
-    super(props);
-
-    this.state = {
-      currentPassword: '',
-      email: '',
-      isVerified: !!props?.sessionThunk?.data?.isVerified,
-      login: '',
-      newPassword: '',
-      privateEmail: !!props?.sessionThunk?.data?.privateEmail,
-    };
-  }
+  state = {
+    currentPassword: '',
+    email: '',
+    isVerified: !!this.props?.sessionThunk?.data?.isVerified,
+    login: '',
+    newPassword: '',
+    privateEmail: !!this.props?.sessionThunk?.data?.privateEmail,
+  };
 
   save = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -60,30 +54,13 @@ class AccountContainer extends PureComponent<tContainerProps, tState> {
     const {subsection} = match?.params;
 
     return (
-      <ErrorBoundary status={sessionThunk?.error?.status}>
-        <Helmet
-          canonical=""
-          title=""
-          meta={[
-            { name: 'description', content: '' },
-            { name: 'keywords', content: '' },
-            { property: 'og:title', content: '' },
-            { property: 'og:description', content: '' },
-          ]}
-        />
-        <GenericLoader
-          isLoading={sessionThunk.isLoading}
-          render={() => (
-            <AccountComponent
-              {...this.state}
-              save={this.save}
-              session={sessionThunk.data}
-              subsection={subsection}
-              updateState={this.updateState}
-            />
-          )}
-        />
-      </ErrorBoundary>
+      <AccountComponent
+        {...this.state}
+        save={this.save}
+        session={sessionThunk.data}
+        subsection={subsection}
+        updateState={this.updateState}
+      />
     );
   }
 }

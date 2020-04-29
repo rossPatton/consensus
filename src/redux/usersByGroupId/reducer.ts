@@ -15,11 +15,13 @@ export const usersByGroupIdReducer = (state = initialState, action: tActions) =>
   const failureReturn = {
     ...state,
     error: action.payload,
+    isLoading: false,
   };
 
   const successReturn = {
     ...state,
     data: action.payload,
+    isLoading: false,
   };
 
   const initReturn = {

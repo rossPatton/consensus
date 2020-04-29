@@ -42,8 +42,6 @@ class HomeContainer extends PureComponent<tContainerProps> {
           meta={[
             { name: 'description', content: description },
             { name: 'keywords', content: keywords },
-            { property: 'og:title', content: title },
-            { property: 'og:description', content: description },
           ]}
         />
         <HomeComponent

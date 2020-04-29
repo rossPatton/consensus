@@ -7,3 +7,7 @@ export const Meetings = loadable(() =>
 export const Members = loadable(() =>
   import(/* webpackChunkName: "Group Members" */'./Members'),
 );
+
+export const PlanMeeting = loadable(() =>
+  import(/* webpackChunkName: "Group PlanMeeting" */'./PlanMeeting'),
+);

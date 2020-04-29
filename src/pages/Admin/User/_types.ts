@@ -15,15 +15,11 @@ export type tProps = {
 };
 
 export type tComponentProps = tProps & {
-  isDesktop: boolean,
-  isMobile: boolean,
   roles: ts.roleMap[],
 };
 
 export type tContainerProps = tProps & {
   getGroupsByUserIdDispatch: (query: ts.groupsByUserIdQuery) => ts.thunkPayload<ts.group[]>,
-  getRolesDispatch: () => ts.thunkPayload<ts.roleMap[]>,
-  getRsvpsDispatch: () => ts.thunkPayload<ts.rsvp[]>,
   logoutDispatch: () => ts.thunkPayload<ts.isAuthenticated>,
   isLoading: boolean,
   rolesThunk: ts.thunk<ts.roleMap[]>,

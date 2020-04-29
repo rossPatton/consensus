@@ -3,6 +3,7 @@ import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
+import {Helmet} from '~app/components';
 import {login, postUser} from '~app/redux';
 
 import {tContainerProps, tKeyUnion, tPostUserQuery, tState} from './_types';
@@ -64,13 +65,23 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
     const errArr = _.flatten(Object.values(errors as string[]));
 
     return (
-      <UserSignupComponent
-        {...this.props}
-        {...this.state}
-        errArr={errArr}
-        register={this.register}
-        updateState={this.updateState}
-      />
+      <>
+        <Helmet
+          canonical="/signup/newUser"
+          title="Create a new Consensus account"
+          meta={[
+            { name: 'description', content: 'Fill our our signup form and start connecting with groups in your area today!' },
+            { name: 'keywords', content: 'user,signup' },
+          ]}
+        />
+        <UserSignupComponent
+          {...this.props}
+          {...this.state}
+          errArr={errArr}
+          register={this.register}
+          updateState={this.updateState}
+        />
+      </>
     );
   }
 }
