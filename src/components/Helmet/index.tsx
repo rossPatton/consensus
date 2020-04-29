@@ -19,10 +19,13 @@ const Helmet = memo((props: tProps) => {
     property: 'og:title',
     content: props.title,
   };
-  const ogDescriptionMeta = {
-    property: 'og:description',
-    content: _.find(meta, m => m.name === 'description').content,
-  };
+  const description = _.find(meta, m => m.name === 'description');
+  const ogDescriptionMeta = description
+    ? {
+      property: 'og:description',
+      content: description?.content,
+    }
+    : {};
 
   const links = [...LINK_TAGS, ...link, linkCanonical];
   const metas = [

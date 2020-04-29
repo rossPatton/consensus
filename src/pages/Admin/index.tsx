@@ -24,7 +24,7 @@ const AdminContainer = (props: tProps) => {
           isLoading={sessionThunk.isLoading}
           render={() => {
             const {type} = sessionThunk.data;
-            const isGroupAdmin = type === 'org';
+            const isGroupAdmin = type === 'group';
             const isUserAdmin = type === 'user';
 
             const renderWelcome = isGroupAdmin

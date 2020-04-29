@@ -3,27 +3,17 @@ import {connect} from 'react-redux';
 
 import {GenericLoader} from '~app/containers';
 import {getCities} from '~app/redux';
-
-import {tContainerProps, tState, tStore} from './_types';
+import {tContainerProps, tStore} from './_types';
 import {CitySearchComponent} from './Component';
 
 // use within an existing form, tie to it's updateState method
-export class CitySearchContainer extends PureComponent<tContainerProps, tState> {
+export class CitySearchContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     if (!props.citiesThunk.fetched) {
       props.getCitiesDispatch({region: props.geo.region});
     }
   }
-
-  state = {
-    showRegionField: false,
-  }
-
-  toggleRegionField = () =>
-    this.setState({
-      showRegionField: !this.state.showRegionField,
-    })
 
   updateState = async (state: {[key: string]: unknown}) => {
     if (state.region) {
@@ -44,8 +34,6 @@ export class CitySearchContainer extends PureComponent<tContainerProps, tState> 
             cities={this.props.citiesThunk.data}
             geo={this.props.geo}
             session={this.props.session}
-            showRegionField={this.state.showRegionField}
-            toggleRegionField={this.toggleRegionField}
             updateState={this.updateState}
           />
         )}
@@ -61,7 +49,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getCitiesDispatch: (query: any) => dispatch(getCities(query)),
+  getCitiesDispatch: (query: {region: string}) => dispatch(getCities(query)),
 });
 
 const CitySearch = connect(

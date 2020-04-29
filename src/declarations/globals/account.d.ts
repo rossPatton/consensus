@@ -75,7 +75,7 @@ namespace ts {
       isAuthenticated: boolean,
       isVerified: boolean,
       profile: T,
-      type: 'org' | 'user',
+      type: 'group' | 'user',
     }>;
 
   // pending => user wants to join the group, but isn't approved yet

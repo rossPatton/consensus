@@ -1,62 +1,123 @@
-import React, {memo} from 'react';
+import cx from 'classnames';
+import React, {memo, useState} from 'react';
 import {Link} from 'react-router-dom';
 
 import {Avatar, Search} from '~app/components';
-
 import {tComponentProps} from './_types';
 
-export const HeaderComponent = memo((props: tComponentProps) => (
-  <header className="flex bg-white shadow fixed t l r z-50">
-    <div className="contain m-auto flex items-center relative">
-      <div>
-        make nav
-      </div>
-      <div>
+export const HeaderComponent = memo((props: tComponentProps) => {
+  const [showMenu, toggleMenu] = useState(false);
+  const [showNav, toggleNav] = useState(false);
+
+  return (
+    <header className="flex bg-white shadow fixed t l r z-50">
+      <div className="contain m-auto flex items-center relative">
+        <div className="flex flex-col mr-2">
+          <button
+            className="border-0 outline-none"
+            onClick={() => toggleNav(!showNav)}>
+            <img
+              alt="Click for navigation"
+              src="/static/images/ham.svg"
+              width="30"
+            />
+          </button>
+          <ul
+            className={cx({
+              'bg-white border font-bold p-2 rounded shadow mt-4 absolute l min-w-1/4': true,
+              'hidden': !showNav,
+            })}>
+            <li>
+              <Search className='mb-2' />
+            </li>
+            <li className="mb-1">
+              <Link to="/categories">
+                Categories
+              </Link>
+            </li>
+            <li className="mb-1">
+              <Link to="/directory/us">
+                Directory
+              </Link>
+            </li>
+            <li className="mb-1">
+              <Link to="/search">
+                Search
+              </Link>
+            </li>
+            <li className="mb-1">
+              <Link to="/login">
+                Login
+              </Link>
+            </li>
+            <li>
+              <Link to="/signup">
+                Signup
+              </Link>
+            </li>
+          </ul>
+        </div>
         <Link to="/">
           <img
             alt="Consensus"
+            className='d:m-auto'
             src="/static/images/logo.svg"
             width="125"
           />
         </Link>
-      </div>
-      <div className="flex items-center absolute r text-right d:w-1/3">
-        <Search className="mr-2 hidden d:block d:w-full" />
         {!props.session.isAuthenticated && (
-          <Link
-            to="/login"
-            id="a11yLogin"
-            className="font-bold underline text-black">
-            Login/Signup
-          </Link>
+          <div className="absolute r text-right">
+            <Link
+              to="/login"
+              id="a11yLogin"
+              className="font-bold underline text-black">
+              Login/Signup
+            </Link>
+          </div>
         )}
         {props.session.isAuthenticated
           && (
-            <>
-              <Link
-                id="a11yAdmin"
-                to="/admin/meetings">
+            <div className="flex-1 flex-col text-right">
+              <button
+                className="border-0 outline-none"
+                onClick={() => toggleMenu(!showMenu)}>
                 <Avatar
-                  alt="Your Dashboard"
+                  alt="Your Avatar - click to open dashboard menu"
+                  className=""
                   hash={props.session.profile.avatarHash}
                   size="40"
-                  // @TODO need to re-standardize....
-                  type={props.session.type === 'org' ? 'group' : 'user'}
+                  type={props.session.type}
                 />
-              </Link>
-              {/* <form action="/auth/v1/logout">
-                <fieldset>
-                  <button
-                    id="a11yLogout"
-                    className="transition hover:bg-gray-3"
-                    onClick={props.logout}>
-                  Logout
-                  </button>
-                </fieldset>
-              </form> */}
-            </>
+              </button>
+              <ul
+                className={cx({
+                  'bg-white border font-bold p-2 rounded shadow text-right mt-2 absolute r': true,
+                  'hidden': !showMenu,
+                })}>
+                <li className="mb-1">
+                  <Link
+                    className="btn p-1 pl-2 pr-2 hover:bg-gray-2"
+                    id="a11yAdmin"
+                    to="/admin/meetings">
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <form action="/auth/v1/logout">
+                    <fieldset>
+                      <button
+                        id="a11yLogout"
+                        className="p-1 pl-2 pr-2 hover:bg-gray-2"
+                        onClick={props.logout}>
+                        Logout
+                      </button>
+                    </fieldset>
+                  </form>
+                </li>
+              </ul>
+            </div>
           )}
       </div>
-    </div>
-  </header>
-));
+    </header>
+  );
+});

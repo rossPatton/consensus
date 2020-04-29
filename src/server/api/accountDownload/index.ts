@@ -27,7 +27,7 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
   let roles: ts.roleMap[];
   let rsvps: ts.rsvp[];
   let meetings: ts.meeting[];
-  const type = account.groupId ? 'org' : 'user';
+  const type = account.groupId ? 'group' : 'user';
 
   if (type === 'user') {
     try {
@@ -67,10 +67,10 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
   if (type === 'user') {
     body.roles = roles;
     body.rsvps = rsvps;
-  } else if (type === 'org') {
+  } else if (type === 'group') {
     body.meetings = meetings;
   }
-  const filename = type === 'org'
+  const filename = type === 'group'
     ? profileToSend.name
     // @ts-ignore
     : profileToSend.username;

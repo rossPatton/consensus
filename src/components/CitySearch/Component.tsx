@@ -1,11 +1,13 @@
 import _ from 'lodash';
-import React, {memo} from 'react';
+import React, {memo, useState} from 'react';
+import cx from 'classnames';
 
 import stateNameToCodeMap from '~app/json/usa/stateNameToCodeMap.json';
-
 import {tComponentProps} from './_types';
 
 export const CitySearchComponent = memo((props: tComponentProps) => {
+  const [showRegionField, toggleRegionField] = useState(false);
+
   const onCityChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
     const city = _.find(props.cities, c => c.name === ev.currentTarget.value);
     if (city) {
@@ -32,38 +34,39 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
 
   return (
     <>
-      {props.showRegionField && (
-        <>
-          <h2 className="text-base mb-1">
-            Pick a different state
-          </h2>
-          <label htmlFor="stateSelect">
-            <select
-              name="type"
-              id="stateSelect"
-              className="mb-3 w-full"
-              value={props.region}
-              onBlur={onRegionChange}
-              onChange={onRegionChange}>
-              {Object.keys(stateNameToCodeMap).map(state => (
-                <option key={state} value={state}>
-                  {state}
-                </option>
-              ))}
-            </select>
-          </label>
-        </>
-      )}
+      <div
+        className={cx({
+          hidden: !showRegionField,
+        })}>
+        <h2 className="text-base mb-1">
+          Pick a different state
+        </h2>
+        <label htmlFor="stateSelect">
+          <select
+            name="type"
+            id="stateSelect"
+            className="mb-3 w-full"
+            value={props.region}
+            onBlur={onRegionChange}
+            onChange={onRegionChange}>
+            {Object.keys(stateNameToCodeMap).map(state => (
+              <option key={state} value={state}>
+                {state}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
       <h2 className="text-base">
         City in <span className="inline-block mr-2">
-          {(!props.showRegionField && props.geo.region) && props.geo.region}
-          {(props.showRegionField && props.region) && props.region}
+          {(!showRegionField && props.geo.region) && props.geo.region}
+          {(showRegionField && props.region) && props.region}
         </span>
-        {!props.showRegionField && (
+        {!showRegionField && (
           <button
             type="button"
             className="p-1"
-            onClick={props.toggleRegionField}>
+            onClick={() => toggleRegionField(!showRegionField)}>
             Not the right state?
           </button>
         )}

@@ -19,14 +19,12 @@ export type tContainerProps = tProps & {
   updateState: tUpdateState,
 };
 
-export type tState = {showRegionField: boolean};
 export type tKeyUnion = 'city' | 'cityId' | 'region';
 
-export type tComponentProps = tState & tProps & {
+export type tComponentProps =  tProps & {
   cities: ts.city[],
   // local update state. just updates the city and region inputs
   updateState: (state: Partial<tProps>) => void,
-  toggleRegionField: () => void,
 };
 
 export type tStore = {

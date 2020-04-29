@@ -34,7 +34,7 @@ export const getSession = async (
       login, // unique login for account
       privateEmail,
       profile, // user or org profile
-      type: groupId ? 'org' : 'user', // account type
+      type: groupId ? 'group' : 'user', // account type
     },
   };
 };

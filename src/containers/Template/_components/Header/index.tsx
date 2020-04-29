@@ -13,9 +13,10 @@ class HeaderContainer extends PureComponent<tContainerProps> {
     ev.preventDefault();
 
     // trigger logout immediately on client side while server works
-    logoutSuccess({isAuthenticated: false} as ts.session);
+    logoutSuccess({isAuthenticated: false});
 
     this.props.logoutDispatch()
+      // technically unnecessary, but just to be safe
       .then(() => window.location.reload())
       .catch(loglevel.error);
   }

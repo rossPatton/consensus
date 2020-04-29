@@ -77,7 +77,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    if (this.props.session.type === 'org') return null;
+    if (this.props.session.type === 'group') return null;
     const {isMobile, isDesktop} = this.context;
 
     return (

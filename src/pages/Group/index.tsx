@@ -59,7 +59,7 @@ class GroupContainer extends PureComponent<tContainerProps> {
               }) as ts.roleMap;
 
               let role = roleMap && roleMap.role;
-              if (session.type === 'org' && session.profile.id === group.id) {
+              if (session.type === 'group' && session.profile.id === group.id) {
                 role = 'admin';
               }
 
