@@ -29,6 +29,7 @@ const testMeeting = {
   date: '2020-05-02T10:47:34.393Z',
   endDate: '2021-02-12T02:01:06.513Z',
   isDraft: false,
+  isOnline: false,
   duration: 2,
   pathToFeaturedImage: 'http://lorempixel.com/640/480',
   publicRSVPS: 0,

@@ -8,7 +8,7 @@ import {Description, ExternalLink, Meetings, PlaceholderImage, RSVP} from '~app/
 
 import {tComponentProps} from '../../_types';
 
-const MobileEventPage = memo((props: tComponentProps) => {
+const MobileMeetingPage = memo((props: tComponentProps) => {
   const {meeting, meetingsByGroupId, group} = props;
   const isPastMeeting = dayJS(meeting.date).isBefore(dayJS());
 
@@ -104,4 +104,4 @@ const MobileEventPage = memo((props: tComponentProps) => {
   );
 });
 
-export default MobileEventPage;
+export default MobileMeetingPage;

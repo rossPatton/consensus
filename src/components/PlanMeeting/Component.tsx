@@ -9,16 +9,7 @@ import {tComponentProps} from './_types';
 
 export const PlanMeetingComponent = memo((props: tComponentProps) => {
   const {updateState} = props;
-  const onDurationChange = (ev: React.ChangeEvent<HTMLSelectElement>) =>
-    updateState(
-      'duration',
-      parseInt(ev.currentTarget.value, 10),
-    );
-
-  const disableSubmit = !props.title
-    || !props.date
-    || !props.duration
-    || !props.time;
+  const disableSubmit = !props.title || !props.date || !props.time;
 
   return (
     <div className="bg-white rounded p-2">
@@ -46,27 +37,53 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             rows={8}
             spellCheck
             className="mb-3 w-full"
-            placeholder="Meeting Description Here"
+            placeholder="Meeting Description Here. If meeting is online, past meeting details here as well."
             value={props.description}
             onChange={ev => updateState('description', ev.currentTarget.value)}
           />
-          <h3 className="mb-1">Where is your meeting happening?</h3>
-          <div className="flex flex-col d:flex-row mb-3">
-            <input
-              results={3}
-              spellCheck
-              className="w-full mb-1 d:mb-0 mr-2"
-              placeholder="The name or address of the place"
-              value={props.location}
-              onChange={ev => updateState('location', ev.currentTarget.value)}
-            />
-            <input
-              type="url"
-              className="w-full"
-              placeholder="https://example.com"
-              value={props.locationLink}
-              onChange={ev => updateState('locationLink', ev.currentTarget.value)}
-            />
+          <div className="mb-3">
+            <h3 className="mb-1">Where is your meeting happening?</h3>
+            <div
+              tabIndex={0}
+              role="button"
+              className="flex d:flex-row items-center text-sm mb-1"
+              onClick={() => props.updateState('isOnline', !props.isOnline)}
+              onKeyPress={() => props.updateState('isOnline', !props.isOnline)}>
+              <input
+                readOnly
+                type="checkbox"
+                className="mr-2"
+                autoComplete="nope"
+                checked={props.isOnline}
+              />
+              <span>
+                {props.isOnline && (
+                  'Meeting is online. Put meeting details in your description.'
+                )}
+                {!props.isOnline && (
+                  'Meeting is in person. Put location details below.'
+                )}
+              </span>
+            </div>
+            {!props.isOnline && (
+              <div className="flex flex-col d:flex-row">
+                <input
+                  results={3}
+                  spellCheck
+                  className="w-full mb-1 d:mb-0 mr-2"
+                  placeholder="Name of meeting place here"
+                  value={props.location}
+                  onChange={ev => updateState('location', ev.currentTarget.value)}
+                />
+                <input
+                  type="url"
+                  className="w-full"
+                  placeholder="Google Maps link or other preferred map service here"
+                  value={props.locationLink}
+                  onChange={ev => updateState('locationLink', ev.currentTarget.value)}
+                />
+              </div>
+            )}
           </div>
           <div className="flex flex-col d:flex-row mb-3">
             <div className="mb-3 d:mb-0 mr-2">
@@ -79,24 +96,24 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
                 placeholder="Meeting Date Here"
                 onChange={ev => updateState('date', ev.currentTarget.value)}
               />
+            </div>
+          </div>
+          <div className="flex flex-col d:flex-row mb-3">
+            <div className="mb-3 d:mb-0 mr-2">
+              <h3 className="mb-1">How long does it last?</h3>
               <input
                 type="time"
                 value={props.time}
-                placeholder="Meeting Time Here"
+                className="mr-2"
+                placeholder="Start Time Here"
                 onChange={ev => updateState('time', ev.currentTarget.value)}
               />
-            </div>
-            <div>
-              <h3 className="mb-1">How long is it?</h3>
-              <select
-                value={props.duration}
-                onBlur={onDurationChange}
-                onChange={onDurationChange}>
-                <option value="1">1 hour</option>
-                <option value="2">2 hours</option>
-                <option value="3">3 hours</option>
-                <option value="custom">Set an end time</option>
-              </select>
+              <input
+                type="time"
+                value={props.endTime}
+                placeholder="End Time Here"
+                onChange={ev => updateState('endTime', ev.currentTarget.value)}
+              />
             </div>
           </div>
           <div className="flex items-center">
@@ -116,9 +133,10 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
                 ev.preventDefault();
                 props.saveAsDraft();
               }}>
-              Save as Draft
+              {props.meetingThunk.isLoading && 'Saving...'}
+              {!props.meetingThunk.isLoading && 'Save as Draft'}
             </button>
-            {!isNaN(props.id) && (
+            {typeof props.id === 'number' && (
               <Link
                 to={`/draft/${props.id}?${objToQueryString(props)}`}
                 className="btn p-2 text-sm hover:bg-gray-3">

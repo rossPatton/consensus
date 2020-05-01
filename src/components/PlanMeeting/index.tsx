@@ -2,28 +2,29 @@ import dayJS from 'dayjs';
 import _ from 'lodash';
 import loglevel from 'loglevel';
 import qs from 'query-string';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 
 import {ErrorBoundary} from '~app/containers';
 import {getMeetingsByGroupIdSuccess, patchEvent, postMeeting} from '~app/redux';
-import {parseTimeString} from '~app/utils';
+import {parseTimeString, slugify} from '~app/utils';
 
 import {tContainerProps, tKeyUnion, tState, tStore, tValueUnion} from './_types';
 import {PlanMeetingComponent} from './Component';
 
 // @TODO this is a sub-page of a couple routes, should this be in /components???
-class PlanMeetingContainer extends Component<tContainerProps, tState> {
+class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
   state = {
     category: this.props.group.category,
     cityId: this.props.group.cityId,
     date: dayJS().toISOString(),
     description: '',
-    duration: 2,
-    id: null as number | null,
+    endTime: '21:00',
+    id: undefined as number | undefined,
     isCopy: false,
     isDraft: false,
+    isOnline: true,
     isPrivate: this.props.group.type !== 'public',
     location: '',
     locationLink: '',
@@ -32,7 +33,7 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     title: '',
   };
 
-  // we use query params to populate the form when editing an meeting
+  // we use query params to populate the form when editing or copying a meeting
   constructor(props: tContainerProps) {
     super(props);
     const {router: {search}} = props;
@@ -40,12 +41,14 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
 
     if (_.isEmpty(draft)) return;
 
+    const isOnline = draft.isOnline === 'true';
     const isPrivate = draft.isPrivate === 'true';
     const isCopy = draft.isCopy === 'true';
 
-    // if draft is a copy (to make new meeting), not an edit (of existing draft or meeting)
+    // if draft is a copy, not an edit (of existing draft or meeting)
     // then we change a few things here
     const state = {
+      ...this.state,
       category: draft.category as ts.category,
       cityId: typeof draft.cityId === 'string'
         ? parseInt(draft.cityId as string, 10)
@@ -55,14 +58,18 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
         ? dayJS().toISOString()
         : dayJS(draft.date as string).format('YYYY-MM-DD'),
       description: draft.description as string,
-      duration: isCopy ? 2 : parseInt(draft.duration as string, 10),
-      id: isCopy ? null : parseInt(draft.id as string, 10),
-      isCopy: isCopy,
+      endDate: isCopy
+        ? dayJS().toISOString()
+        : dayJS(draft.endDate as string).format('YYYY-MM-DD'),
+      id: isCopy ? undefined : parseInt(draft.id as string, 10),
+      isCopy,
       isDraft: true,
+      isOnline,
       isPrivate,
       location: draft.location as string,
       locationLink: draft.locationLink as string,
       groupName: this.props.group.name,
+      slug: slugify(draft.title as string),
       time: isCopy ? '19:00' : draft.time as string,
       title: draft.title as string,
     };
@@ -76,47 +83,48 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
     }, () => this.onSubmit(true));
 
   onSubmit = async (saveAsDraft: boolean = false) => {
-    const {duration, time, ...restOfEvent} = this.state;
+    const {date, endTime, id, isCopy, time, ...restOfMeeting} = this.state;
 
     const timeArr = parseTimeString(time);
-    const dur = typeof duration === 'string' ? parseInt(duration, 10) : duration;
-    const date = dayJS(this.state.date).hour(timeArr?.[0]).minute(timeArr[1]);
-    const endDate = dayJS(this.state.date).hour(timeArr?.[0]).minute(timeArr[1]);
-    endDate.hour(endDate.hour() + dur);
+    const endTimeArr = parseTimeString(endTime);
+    const startDate = dayJS(date).hour(timeArr?.[0]).minute(timeArr[1]);
+    const endDate = dayJS(date).hour(endTimeArr?.[0]).minute(endTimeArr[1]);
 
-    let newEvent: ts.meeting;
+    let newMeeting: ts.meeting;
     try {
       const {patchEventDispatch, postMeetingDispatch} = this.props;
 
       // if meeting has already been saved as a draft, we will have the id
       // patch in that case, else post new meeting (initial draft save, or submit)
-      const dispatch = this.state.id
+      const dispatch = typeof id === 'number'
         ? patchEventDispatch
         : postMeetingDispatch;
 
       const planMeeting = await dispatch({
-        ...restOfEvent,
+        ...restOfMeeting,
         // we submit drafts to the same table in the DB as well
         // we only want to save as draft when the user hits the save as draft button
         // we don't use state here, since we want to set this to false when publishing
         isDraft: saveAsDraft,
         // every date is stored in the db as an ISO string
-        date: date.toISOString(),
+        date: startDate.toISOString(),
         endDate: endDate.toISOString(),
         groupId: this.props.group.id as number,
+        slug: slugify(restOfMeeting.title),
       });
 
-      newEvent = planMeeting.payload;
+      newMeeting = planMeeting.payload;
     } catch (err) {
       return loglevel.error('failed to save meeting to db', err);
     }
 
     // update redux on client side on meeting upsert success
-    getMeetingsByGroupIdSuccess([newEvent, ...this.props.meetings]);
+    const {meetingsThunk} = this.props;
+    getMeetingsByGroupIdSuccess([newMeeting, ...meetingsThunk.data]);
 
     // this will cause the preview button to render
     this.setState({
-      id: newEvent.id,
+      id: newMeeting.id,
     });
   }
 
@@ -149,7 +157,8 @@ class PlanMeetingContainer extends Component<tContainerProps, tState> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  meetings: store.meetingsByGroupId.data,
+  meetingThunk: store.meeting,
+  meetingsThunk: store.meetingsByGroupId,
   sessionThunk: store.session,
 });
 

@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 
 import {tProps, tState} from './_types';
 
 // for use with meetings
-export default class RoleFilter extends Component<tProps, tState> {
+export default class RoleFilter extends PureComponent<tProps, tState> {
   state = {
     roleFilter: 'n/a' as ts.role,
   };

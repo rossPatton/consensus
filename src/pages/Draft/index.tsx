@@ -19,36 +19,33 @@ class DraftContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const { isLoading, location: {search}, rolesThunk} = this.props;
-    const rolesStatus = rolesThunk?.error?.status;
+    const { location: {search}, rolesThunk} = this.props;
     const draft: {[key: string]: unknown} = qs.parse(search);
 
     return (
       <Template>
-        <ErrorBoundary status={rolesStatus}>
+        <ErrorBoundary status={rolesThunk?.error?.status}>
           <Helmet
             meta={[
               { name: 'robots', content: 'noindex' },
             ]}
           />
           <GenericLoader
-            isLoading={isLoading}
+            isLoading={!rolesThunk.fetched}
             render={() => {
-              const userRoleMap = rolesThunk.fetched
-              && _.find(
+              const userRoleMap = _.find(
                 rolesThunk.data,
-                rm => rm.groupId === parseInt(draft.groupId as string, 10,
-                ),
+                rm => rm.groupId === parseInt(draft.groupId as string, 10),
               );
 
               const userIsAModOrAdmin = userRoleMap ?
                 userRoleMap.role === 'admin' || userRoleMap.role === 'facilitator'
                 : false;
 
-              if (!userIsAModOrAdmin) {
-                return <Redirect to="/login" />;
-              }
+              if (!userIsAModOrAdmin) return <Redirect to="/login" />;
 
+              // @TODO use same Component for both drafts and meetings
+              // just have the container be different
               return (
                 <DraftComponent
                   meeting={draft as ts.meeting}
@@ -63,7 +60,6 @@ class DraftContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.roles.isLoading,
   rolesThunk: store.roles,
   session: store.session.data,
 });

@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 
 import {fuzzFilterList} from '~app/utils';
 
 import {tProps, tState} from './_types';
 
-export default class SearchFilter extends Component<tProps, tState> {
+export default class SearchFilter extends PureComponent<tProps, tState> {
   static defaultProps = {
     searchKey: 'title',
   };

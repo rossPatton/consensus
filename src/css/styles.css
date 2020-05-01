@@ -114,7 +114,8 @@ select,
 textarea {
   letter-spacing: .02rem;
 }
-input,
+input[type="text"],
+input[type="search"],
 select {
   @apply transition;
   height: 3rem;

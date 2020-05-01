@@ -1,20 +1,20 @@
 import _ from 'lodash';
 import React, {memo} from 'react';
 
-import {DesktopEventPage, MobileEventPage} from './_breakpoints';
+import {DesktopMeetingPage, MobileMeetingPage} from './_breakpoints';
 import {tComponentProps} from './_types';
 
-export const EventComponent = memo((props: tComponentProps) => {
+export const MeetingComponent = memo((props: tComponentProps) => {
   if (props.isDesktop) {
     return (
-      <DesktopEventPage
+      <DesktopMeetingPage
         {...props}
       />
     );
   }
 
   return (
-    <MobileEventPage
+    <MobileMeetingPage
       {...props}
     />
   );

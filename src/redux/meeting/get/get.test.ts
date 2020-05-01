@@ -18,6 +18,7 @@ const testMeeting = {
   groupId: 1,
   cityId: 16624,
   groupName: 'Tech Workers Coalition NYC',
+  isOnline: false,
   isPrivate: false,
   description: 'Asperiores et perspiciatis fugit sint. Nihil dolore autem enim numquam dolores aliquam sed repudiandae. Eius dolorem nostrum quo aut culpa incidunt. Aut eum adipisci. Amet amet suscipit et. Voluptas animi distinctio adipisci. Nam voluptas similique quam esse magni quidem id. In aut nulla inventore facilis dicta ducimus molestias saepe. Autem voluptatibus mollitia quos ullam quidem ex consequuntur quia. Adipisci quod est incidunt quas repellendus rem voluptatem. Cumque iusto corporis velit nam nostrum commodi vel possimus velit. Quibusdam ea cumque dignissimos cumque magni voluptas ipsa natus sunt. Est qui officiis atque dolorem voluptatibus aut explicabo.',
   location: '717 Borer Oval',

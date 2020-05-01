@@ -43,16 +43,16 @@ meeting.post(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<Partial<ts.meeting>>(ctx, upsertSchema, query);
   const {id, isFormSubmit, ...meeting} = query;
 
-  let newEvent = [] as ts.meeting[];
+  let newMeeting = [] as ts.meeting[];
   try {
     if (id) {
-      newEvent = await knex('meetings')
+      newMeeting = await knex('meetings')
         .limit(1)
         .where({id})
         .update(meeting)
         .returning('*');
     } else {
-      newEvent = await knex('meetings')
+      newMeeting = await knex('meetings')
         .insert(meeting)
         .limit(1)
         .returning('*');
@@ -61,5 +61,5 @@ meeting.post(route, async (ctx: Koa.ParameterizedContext) => {
     ctx.throw(500, err);
   }
 
-  ctx.body = newEvent?.[0];
+  ctx.body = newMeeting?.[0];
 });

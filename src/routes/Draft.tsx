@@ -9,5 +9,5 @@ export const Draft = {
   exact: true,
   path: '/draft/:id',
   private: true,
-  redirect: '/login',
+  // redirect: '/login',
 };

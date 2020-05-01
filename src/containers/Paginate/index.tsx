@@ -1,10 +1,10 @@
 import qs from 'query-string';
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 
 import {tProps, tState} from './_types';
 
-class PaginateContainer extends Component<tProps, tState> {
+class PaginateContainer extends PureComponent<tProps, tState> {
   static defaultProps = {
     className: 'flex flex-row font-bold',
     count: 10,

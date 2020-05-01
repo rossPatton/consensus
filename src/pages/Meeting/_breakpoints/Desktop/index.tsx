@@ -8,7 +8,7 @@ import {Description, ExternalLink, Meetings, PlaceholderImage, RSVP} from '~app/
 
 import {tComponentProps} from '../../_types';
 
-const DesktopEventComponent = memo((props: tComponentProps) => {
+const DesktopMeetingComponent = memo((props: tComponentProps) => {
   const {meeting, meetingsByGroupId, group, rsvp = {} as ts.rsvp} = props;
   const isPastMeeting = dayJS(meeting.date).isBefore(dayJS());
 
@@ -54,22 +54,26 @@ const DesktopEventComponent = memo((props: tComponentProps) => {
           {!isPastMeeting && (
             <RSVP className="mb-3" meeting={meeting} />
           )}
-          <div
-            className={cx({
-              'font-bold flex items-center text-gray-5': true,
-              'mb-3': !meeting.attendees || meeting.attendees.length === 0,
-            })}>
-            <span className="rounded-circ p-1 bg-gray-3 mr-2" />
-            {meeting.locationLink && (
-              <ExternalLink
-                noFollow
-                className="no-underline"
-                to={meeting.locationLink}>
-                {meeting.location}
-              </ExternalLink>
+          {!meeting.isOnline
+            && meeting.location
+            && (
+              <div
+                className={cx({
+                  'font-bold flex items-center text-gray-5': true,
+                  'mb-3': !meeting.attendees || meeting.attendees.length === 0,
+                })}>
+                <span className="rounded-circ p-1 bg-gray-3 mr-2" />
+                {meeting.locationLink && (
+                  <ExternalLink
+                    noFollow
+                    className="no-underline"
+                    to={meeting.locationLink}>
+                    {meeting.location}
+                  </ExternalLink>
+                )}
+                {!meeting.locationLink && meeting.location}
+              </div>
             )}
-            {!meeting.locationLink && meeting.location}
-          </div>
           {meeting.attendees
             && meeting.attendees.length > 0 && (
             <div className="font-bold flex items-center mb-3 text-gray-5">
@@ -115,4 +119,4 @@ const DesktopEventComponent = memo((props: tComponentProps) => {
   );
 });
 
-export default DesktopEventComponent;
+export default DesktopMeetingComponent;

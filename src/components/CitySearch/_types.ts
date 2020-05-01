@@ -21,7 +21,7 @@ export type tContainerProps = tProps & {
 
 export type tKeyUnion = 'city' | 'cityId' | 'region';
 
-export type tComponentProps =  tProps & {
+export type tComponentProps = tProps & {
   cities: ts.city[],
   // local update state. just updates the city and region inputs
   updateState: (state: Partial<tProps>) => void,

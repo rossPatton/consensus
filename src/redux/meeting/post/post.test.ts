@@ -12,6 +12,7 @@ const testMeeting = {
   groupId: 1,
   cityId: 16624,
   groupName: 'Tech Workers Coalition NYC',
+  isOnline: false,
   isPrivate: false,
   description: '',
   location: '717 Borer Oval',

@@ -127,7 +127,7 @@ const EditProfile = memo((props: tComponentProps) => (
         <div
           tabIndex={0}
           role="button"
-          className="flex flex-col d:flex-row items-center text-sm mb-1"
+          className="flex d:flex-row items-center text-sm mb-1"
           onClick={() => props.updateState('privateRSVP', !props.privateRSVP)}
           onKeyPress={() => props.updateState('privateRSVP', !props.privateRSVP)}>
           <input

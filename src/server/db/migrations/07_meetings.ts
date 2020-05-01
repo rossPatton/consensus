@@ -36,6 +36,7 @@ exports.up = async (knex: Knex) => {
     // if public, the meeting is visible to anyone
     // value is based on group type
     table.boolean('isPrivate').defaultTo(false);
+    table.boolean('isOnline').defaultTo(true);
 
     // columns below are manually added by user when creating an meeting/meeting
     table.text('description', 'longtext').notNullable();
@@ -45,20 +46,15 @@ exports.up = async (knex: Knex) => {
     table.text('title').notNullable().unique();
     table.text('slug').notNullable().unique();
     table.timestamp('date').notNullable();
-    table.timestamp('endDate');
+    table.timestamp('endDate').notNullable();
 
     // if user saves meeting as draft instead of publishing right away
     table.boolean('isDraft').notNullable().defaultTo(true);
 
-    // stuff below here is to maintain parity with the meeting creation form/drafts
-    // it is not used when rendering meetings - but still needed
-    // default 2 hours meeting duration, used to calculate endDate along with time
-    table.integer('duration').defaultTo(2);
-
     // ref to where img lives on file server. only created if image is uploaded
     table.string('pathToFeaturedImage');
 
-    // time of day the meeting occurs. used to calculate endDate along with duration
+    // time of day the meeting occurs. used to calculate endDate
     table.string('time').notNullable().defaultTo('19:00');
     table.timestamps(true, true);
   });

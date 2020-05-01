@@ -3,6 +3,7 @@ import React, {memo, useState} from 'react';
 import {Link} from 'react-router-dom';
 
 import {Avatar, Search} from '~app/components';
+
 import {tComponentProps} from './_types';
 
 export const HeaderComponent = memo((props: tComponentProps) => {
@@ -28,7 +29,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
               'hidden': !showNav,
             })}>
             <li>
-              <Search className='mb-2' />
+              <Search className="mb-2" />
             </li>
             <li className="mb-1">
               <Link to="/categories">
@@ -60,7 +61,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
         <Link to="/">
           <img
             alt="Consensus"
-            className='d:m-auto'
+            className="d:m-auto"
             src="/static/images/logo.svg"
             width="125"
           />

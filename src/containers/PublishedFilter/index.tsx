@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 
 import {tProps, tState} from './_types';
 
 // for use with meetings, decisions, etc
-export default class PublishedFilter extends Component<tProps, tState> {
+export default class PublishedFilter extends PureComponent<tProps, tState> {
   state = {
     publishedFilter: 'upcoming' as ts.filterEnum,
   };

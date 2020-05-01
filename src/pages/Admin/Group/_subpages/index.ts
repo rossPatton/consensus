@@ -1,25 +1,25 @@
 import loadable from '@loadable/component';
 
 export const Account = loadable(() =>
-  import(/* webpackChunkName: "OrgAdmin Account" */'./Account'),
+  import(/* webpackChunkName: "GroupAdmin Account" */'./Account'),
 );
 
 export const DeleteGroup = loadable(() =>
-  import(/* webpackChunkName: "OrgAdmin DeleteGroup" */'./DeleteGroup'),
+  import(/* webpackChunkName: "GroupAdmin DeleteGroup" */'./DeleteGroup'),
 );
 
 export const Meetings = loadable(() =>
-  import(/* webpackChunkName: "OrgAdmin Meetings" */'./Meetings'),
+  import(/* webpackChunkName: "GroupAdmin Meetings" */'./Meetings'),
 );
 
 export const Members = loadable(() =>
-  import(/* webpackChunkName: "OrgAdmin Memberships" */'./Members'),
+  import(/* webpackChunkName: "GroupAdmin Memberships" */'./Members'),
 );
 
 export const PlanMeeting = loadable(() =>
-  import(/* webpackChunkName: "OrgAdmin PlanMeeting" */'./PlanMeeting'),
+  import(/* webpackChunkName: "GroupAdmin PlanMeeting" */'./PlanMeeting'),
 );
 
 export const Profile = loadable(() =>
-  import(/* webpackChunkName: "OrgAdmin Profile" */'./Profile'),
+  import(/* webpackChunkName: "GroupAdmin Profile" */'./Profile'),
 );

@@ -1,8 +1,9 @@
+import cx from 'classnames';
 import _ from 'lodash';
 import React, {memo, useState} from 'react';
-import cx from 'classnames';
 
 import stateNameToCodeMap from '~app/json/usa/stateNameToCodeMap.json';
+
 import {tComponentProps} from './_types';
 
 export const CitySearchComponent = memo((props: tComponentProps) => {

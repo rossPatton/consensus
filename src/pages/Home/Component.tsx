@@ -9,7 +9,7 @@ import {tProps} from './_types';
 export const HomeComponent = memo((props: tProps) => (
   <div className="text-center">
     <h1 className="mb-2">
-      Consensus is n meetings platform for activists and community groups.
+      Consensus is a meetings platform for activists.
     </h1>
     <Link
       className="btn p-2 hover:bg-gray-3 mb-4 font-bold no-underline"

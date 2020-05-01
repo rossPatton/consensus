@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import {GenericLoader} from '~app/containers';
 import {getCities} from '~app/redux';
+
 import {tContainerProps, tStore} from './_types';
 import {CitySearchComponent} from './Component';
 

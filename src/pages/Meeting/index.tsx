@@ -11,7 +11,7 @@ import {getGroup, getMeeting, getMeetingsByGroupId} from '~app/redux';
 import {typesafeIdOrSlug} from '~app/utils';
 
 import {tContainerProps, tStore} from './_types';
-import {EventComponent} from './Component';
+import {MeetingComponent} from './Component';
 
 class MeetingContainer extends PureComponent<tContainerProps> {
   static contextType = MediaContext;
@@ -112,7 +112,7 @@ class MeetingContainer extends PureComponent<tContainerProps> {
                       { name: 'keywords', content: meeting.category },
                     ]}
                   />
-                  <EventComponent
+                  <MeetingComponent
                     meeting={meeting}
                     meetingsByGroupId={meetingsByGroupId}
                     isDesktop={isDesktop}

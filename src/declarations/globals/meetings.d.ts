@@ -6,6 +6,7 @@ namespace ts {
     endDate: string,
     id: number,
     isDraft: boolean,
+    isOnline: boolean,
     isPrivate: boolean,
     location: string,
     locationLink: string,

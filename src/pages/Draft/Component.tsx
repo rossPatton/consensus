@@ -38,18 +38,22 @@ export const DraftComponent = memo((props: tComponentProps) => {
           <h1 className=" mb-2 capitalize">
             {meeting.title}
           </h1>
-          <div className="font-bold mb-2">
-            <div>
-              {meeting.locationLink && (
-                <ExternalLink
-                  noFollow
-                  to={meeting.locationLink}>
-                  {meeting.location}
-                </ExternalLink>
-              )}
-              {!meeting.locationLink && meeting.location}
-            </div>
-          </div>
+          {!meeting.isOnline
+            && meeting.location
+            && (
+              <div className='font-bold flex items-center text-gray-5'>
+                <span className="rounded-circ p-1 bg-gray-3 mr-2" />
+                {meeting.locationLink && (
+                  <ExternalLink
+                    noFollow
+                    className="no-underline"
+                    to={meeting.locationLink}>
+                    {meeting.location}
+                  </ExternalLink>
+                )}
+                {!meeting.locationLink && meeting.location}
+              </div>
+            )}
           {meeting.description && (
             <div className="text-base">
               {meeting.description.split('\n').map((p: string, i) => (
