@@ -9,7 +9,7 @@ const MobileAside = memo((props: tProps) => {
   const {session} = props;
 
   return (
-    <aside className="bg-white p-2 rounded order-2 w-full">
+    <aside className="border shadow bg-white p-2 rounded order-2 w-full">
       <ul className="mb-2" role="navigation">
         <li className="font-bold">
           Admin Actions

@@ -2,7 +2,7 @@ module.exports = {
   prefix: '',
   important: false,
   separator: ':',
-  // blacklisted plugins, ie, we strip these from the output
+  // blacklisted plugins
   corePlugins: {
     backgroundPosition: false,
     backgroundSize: false,
@@ -39,16 +39,16 @@ module.exports = {
         2: '#efefef',
         3: '#e2e8f0',
         4: '#687ea5',
-        5: '#2d3748',
+        5: '#4d5b73',
       },
       red: {
         1: '#ff9f9f',
         2: '#dc2849',
+        3: '#9e3501',
       },
       yellow: {
         1: '#fefcbf',
         2: '#ffc201',
-        3: '#db8546',
       },
       green: {
         1: '#aedfa5',

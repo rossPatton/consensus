@@ -26,7 +26,7 @@ export const Tab = memo((props: tProps) => {
     'd:mr-2': true,
     'd:ml-2': ['', 'members'].indexOf(subRoute) === -1,
     'text-base d:text-3 text-gray-5': isActive,
-    'no-underline text-gray-4': !isActive,
+    'no-underline text-gray-5': !isActive,
   });
 
   // dont render link if you're on the section page itself

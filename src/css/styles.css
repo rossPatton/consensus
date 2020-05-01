@@ -10,7 +10,7 @@ html {
   text-size-adjust: 100%;
 }
 body {
-  @apply bg-gray-1;
+  @apply bg-white;
   @apply mt-5;
   @apply pt-3;
   @apply font-sans;
@@ -238,4 +238,25 @@ small {
   100% {
     transform: rotate(360deg);
   }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -1%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animated {
+  animation-duration: .2s;
+  animation-fill-mode: both;
+}
+
+.fadeInDown {
+  animation-name: fadeInDown;
 }

@@ -47,7 +47,7 @@ const MobileMeetings = memo((props: tComponentProps) => (
             </div>
           )}
           <div className="pl-1">
-            <div className="flex mb-1 text-sm text-yellow-3 leading-none">
+            <div className="flex mb-1 text-sm text-red-3 leading-none">
               <time className="mr-1" dateTime={ev.date}>
                 {isPastMeeting
                   ? dayJS(ev.date).format('MMM DD YYYY | h:mmA')
@@ -69,7 +69,7 @@ const MobileMeetings = memo((props: tComponentProps) => (
               && (
                 <Link
                   to={`/group/${slugify(ev.groupName)}`}
-                  className="font-bold text-sm text-gray-4 no-underline">
+                  className="font-bold text-sm text-gray-5 no-underline">
                   {ev.groupName}
                 </Link>
               )}

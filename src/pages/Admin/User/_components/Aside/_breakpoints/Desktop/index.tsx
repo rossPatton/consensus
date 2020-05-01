@@ -11,7 +11,7 @@ const Aside = memo((props: tProps) => {
   const {profile} = props.session;
 
   return (
-    <aside className="order-1 min-w-1/3 bg-white rounded p-2 mr-2">
+    <aside className="border shadow order-1 min-w-1/3 bg-white rounded p-2 mr-2">
       <div className="flex flex-row items-center mb-2">
         <Avatar
           hash={props.session.profile.avatarHash}

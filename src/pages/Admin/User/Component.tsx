@@ -82,7 +82,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           roles={props.roles}
           session={props.session}
         />
-        <div className="order-1 d:order-2 min-w-full d:min-w-2/3 mb-2 d:mb-0">
+        <div className="border shadow order-1 d:order-2 min-w-full d:min-w-2/3 mb-2 d:mb-0">
           {/* user is new. ie, they havent put in a username yet */}
           {!props.session.profile.username
             && (

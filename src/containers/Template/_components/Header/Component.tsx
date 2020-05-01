@@ -13,7 +13,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
   return (
     <header className="flex bg-white shadow fixed t l r z-50">
       <div className="contain m-auto flex items-center relative">
-        <div className="flex flex-col mr-2">
+        <div className="flex flex-col mr-2 outline-none">
           <button
             className="border-0 outline-none"
             onClick={() => toggleNav(!showNav)}>
@@ -25,8 +25,9 @@ export const HeaderComponent = memo((props: tComponentProps) => {
           </button>
           <ul
             className={cx({
-              'bg-white border font-bold p-2 rounded shadow mt-4 absolute l min-w-1/4': true,
+              'bg-white border font-bold p-2 rounded shadow mt-4 absolute animated': true,
               'hidden': !showNav,
+              'fadeInDown': showNav,
             })}>
             <li>
               <Search className="mb-2" />
@@ -78,7 +79,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
         )}
         {props.session.isAuthenticated
           && (
-            <div className="flex-1 flex-col text-right">
+            <div className="flex-1 flex-col text-right outline-none">
               <button
                 className="border-0 outline-none"
                 onClick={() => toggleMenu(!showMenu)}>
@@ -92,8 +93,9 @@ export const HeaderComponent = memo((props: tComponentProps) => {
               </button>
               <ul
                 className={cx({
-                  'bg-white border font-bold p-2 rounded shadow text-right mt-2 absolute r': true,
+                  'bg-white border font-bold p-2 rounded shadow text-right mt-2 absolute r animated': true,
                   'hidden': !showMenu,
+                  'fadeInDown': showMenu,
                 })}>
                 <li className="mb-1">
                   <Link

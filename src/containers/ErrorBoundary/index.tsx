@@ -4,7 +4,6 @@ import React, {ErrorInfo, PureComponent} from 'react';
 import {ErrorPageComponent} from '~app/routes/ErrorPage';
 import {NoMatchComponent} from '~app/routes/NoMatch';
 import {UnAuthorizedComponent} from '~app/routes/UnAuthorized';
-
 import {tProps, tState} from './_types';
 
 export default class ErrorBoundary extends PureComponent<tProps, tState> {

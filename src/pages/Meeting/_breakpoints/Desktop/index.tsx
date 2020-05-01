@@ -41,7 +41,7 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
         </div>
         <div>
           <time
-            className="text-yellow-3 leading-none mb-1"
+            className="text-red-3 leading-none mb-1"
             dateTime={dayJS(meeting.date).format('YYYY-MM-DDThh:mm:ssTZD')}>
             {dayJS(meeting.date).format(`dddd, MMM DD ${isPastMeeting ? 'YYYY' : ''}`)} | {dayJS(meeting.date).format('h:mm')}-{dayJS(meeting.endDate).format('h:mmA')}
           </time>

@@ -7,7 +7,9 @@ import {getGroupsBySearch} from '~app/redux';
 
 import {tProps, tState} from './_types';
 
-// mini search bar located in the header, or maybe homepage
+/**
+ * @description Basic search field component. Used in Header
+ */
 class SearchContainer extends React.PureComponent<tProps, tState> {
   state = {
     key: 'name',
@@ -40,7 +42,7 @@ class SearchContainer extends React.PureComponent<tProps, tState> {
               className="p-1 pl-2 rounded w-full"
               name="headerSearch"
               onChange={this.onChange}
-              placeholder="Search for group by name"
+              placeholder="Search for group"
               type="search"
               value={this.state.value}
             />
