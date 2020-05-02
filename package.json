@@ -15,7 +15,7 @@
   "scripts": {
     "lint": "npx eslint --ext .jsx,.js,.tsx,.ts --config ./eslint.config.js --fix src/",
     "migrate": "node -r esm ./node_modules/.bin/knex migrate:latest",
-    "seed": "node -r esm ./node_modules/.bin/knex seed:run",
+    "seed": "babel-node node_modules/.bin/knex seed:run",
     "pretest": "npm run lint",
     "jest": "NODE_ENV=test jest -u --no-cache --coverage",
     "test": "tsc"

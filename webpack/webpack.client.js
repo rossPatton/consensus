@@ -52,7 +52,7 @@ module.exports = merge(common, {
     new CopyPlugin([{
       context: env.CWD,
       from: 'static',
-      to: 'static',
+      to: '',
     }]),
 
     // define client side only global variables

@@ -19,8 +19,6 @@ geo.get('/api/v1/geo', async (ctx: Koa.ParameterizedContext) => {
     // '103.212.227.126' => sydney australia
   // }
 
-  console.log('ip => ', ip);
-
   let lookup = null;
   try {
     lookup = await maxmind.open<CityResponse>(geolite2.paths.city);
@@ -29,7 +27,6 @@ geo.get('/api/v1/geo', async (ctx: Koa.ParameterizedContext) => {
   }
 
   const cityLookup = lookup.get(ip as string);
-  console.log('cityLookup => ', cityLookup);
   const country = cityLookup?.registered_country?.iso_code || '';
   if (country !== 'US') {
     ctx.redirect('/gdpr');

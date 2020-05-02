@@ -8,7 +8,6 @@ import {knex} from '../../db/connection';
 import {sendEmail, validateSchema} from '../../utils';
 import {emailSchema, tokenSchema} from './_schema';
 
-
 export const verifyAccountViaEmail = new Router();
 verifyAccountViaEmail.get('/email/v1/sendVerificationToken',
   async (ctx: Koa.ParameterizedContext) => {

@@ -2,6 +2,8 @@
 version: '3'
 services:
   prod:
+    build: .
+    image: consensusdocker/test
     container_name: prod
     command: "npx concurrently \"webpack --config webpack/\" \"npx pm2-dev pm2.config.js --no-daemon\""
     depends_on:

@@ -10,7 +10,7 @@ import { tProps } from './_types';
  */
 const Helmet = memo((props: tProps) => {
   const { link = [], meta = [], canonical = '' } = props;
-  const canonicalUrl = `https://www.consensus.com${canonical}`;
+  const canonicalUrl = `${__URL__}${canonical}`;
   const linkCanonical: tLinkProps = { rel: 'canonical', href: canonicalUrl };
   const metaCanonical: tMetaProps = { property: 'og:url', content: canonicalUrl };
 
