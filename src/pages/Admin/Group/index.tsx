@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import {MediaContext} from '~app/context/MatchMediaProvider/_context';
+
 import {Aside} from './_components';
 import {
   Account,

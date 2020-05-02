@@ -5,15 +5,15 @@ install:
 
 # runs debug mode locally
 debug:
-	docker-compose -f docker-compose.debug.yml up --remove-orphans
+	docker-compose -f docker-compose.yml -f docker-compose.debug.yml up --remove-orphans
 
 # runs development mode locally
 dev:
-	docker-compose -f docker-compose.yml up --remove-orphans
+	docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --remove-orphans
 
 # runs production mode locally
 prod:
-	docker-compose -f docker-compose.prod.yml up --remove-orphans
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --remove-orphans
 
 # build site for prod, and prepares an image for deployment
 build:

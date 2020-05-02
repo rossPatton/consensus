@@ -13,11 +13,13 @@ geo.get('/api/v1/geo', async (ctx: Koa.ParameterizedContext) => {
     || ctx.req.connection.remoteAddress;
 
   // if on dev, or failed prod lookup, default to a New York ip
-  if (__DEV__ || ip === '::1') {
+  // if (__DEV__ || ip === '::1') {
     ip = '67.245.145.102'; // default to NYC in dev mode
     // '65.49.22.66' indianapolis
     // '103.212.227.126' => sydney australia
-  }
+  // }
+
+  console.log('ip => ', ip);
 
   let lookup = null;
   try {
@@ -27,6 +29,7 @@ geo.get('/api/v1/geo', async (ctx: Koa.ParameterizedContext) => {
   }
 
   const cityLookup = lookup.get(ip as string);
+  console.log('cityLookup => ', cityLookup);
   const country = cityLookup?.registered_country?.iso_code || '';
   if (country !== 'US') {
     ctx.redirect('/gdpr');

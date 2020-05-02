@@ -15,5 +15,4 @@ if (env.DEBUG) {
 }
 
 loglevel.info(startupMsg);
-
 module.exports = [CLIENT, SERVER];

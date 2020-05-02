@@ -6,8 +6,8 @@
     "type": "image/png",
     "sizes": "152x152"
   }],
-  "name": "Consensus: Get Organized",
+  "name": "Consensus: When You Need To Get Organized",
   "short_name": "Consensus",
-  "start_url": "/?utm_source=homescreen",
+  "start_url": "/",
   "theme_color": "#990000"
 }

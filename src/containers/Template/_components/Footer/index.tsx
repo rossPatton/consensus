@@ -5,26 +5,19 @@ const Footer = memo(() => (
   <footer className="pt-4 pb-4 bg-gray-2">
     <div className="mb-3 contain m-auto">
       <ul>
-        <li>
+        <li className='mb-1'>
           <Link to="/login">
             Login
           </Link>
         </li>
-        <li>
+        <li className='mb-1'>
           <Link to="/signup">
             Sign up
           </Link>
         </li>
-      </ul>
-      <ul>
         <li>
           <Link to="/directory/us">
             Directory
-          </Link>
-        </li>
-        <li>
-          <Link to="/meeting/100">
-            Meetings
           </Link>
         </li>
       </ul>

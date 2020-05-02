@@ -1,22 +1,22 @@
 // default meta and link tags that then get merged with route specific ones
 export const LINK_TAGS: tLinkProps[] = [
-  { rel: 'manifest', href: '/static/manifest.json?v=asdf' },
+  { rel: 'manifest', href: '/static/manifest.json' },
   {
     rel: 'apple-touch-icon',
-    href: '/static/apple-touch-icon.png?v=asdfsf',
+    href: '/static/apple-touch-icon.png',
   },
   {
     rel: 'icon',
-    href: '/static/favicon.ico?v=asdfsad',
+    href: '/static/favicon.ico',
   },
   {
     rel: 'icon',
-    href: '/static/favicon-32x32.png?v=asd',
+    href: '/static/favicon-32x32.png',
     type: 'image/png',
   },
   {
     rel: 'icon',
-    href: '/static/favicon.ico?v=1asdfasdf',
+    href: '/static/favicon.ico',
     type: 'image/ico',
   },
 ];

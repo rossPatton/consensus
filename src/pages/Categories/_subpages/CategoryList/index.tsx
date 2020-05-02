@@ -6,7 +6,7 @@ const CategoryList = memo(() => (
   <>
     <Helmet
       canonical="/categories"
-      title='Consensus: View All Categories'
+      title="Consensus: View All Categories"
       meta={[
         { name: 'description', content: 'Select a category.' },
         { name: 'keywords', content: 'category,search,groups' },

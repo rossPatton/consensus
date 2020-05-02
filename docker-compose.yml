@@ -1,32 +1,5 @@
-# local development
 version: '3'
 services:
-  dev:
-    container_name: dev
-    command: "npx concurrently \"webpack --watch --config webpack/\" \"npx pm2-dev pm2.config.js --no-daemon\""
-    depends_on:
-      - db
-      - redis
-    env_file:
-      - .env
-    environment:
-      - DB=development
-      - DEBUG=false
-      - ENABLE_IPV6=true
-      - NETWORK_ACCESS=internal
-      - NODE_ENV=development
-      - VIRTUAL_HOST=consensus.local
-      - VIRTUAL_PORT=3001
-      - VIRTUAL_PROTO=https
-    expose:
-      - 3001
-      - 9229
-    image: node:12.3.0-alpine
-    working_dir: /app
-    volumes:
-      - .:/app
-      - node_modules:/app/node_modules
-
   db:
     container_name: db
     image: postgres:11.2-alpine
@@ -54,3 +27,6 @@ volumes:
     external: true
   node_modules:
     external: true
+
+# cache:
+#   image: redis:latest

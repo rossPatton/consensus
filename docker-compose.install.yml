@@ -1,4 +1,5 @@
-# used by both prod and dev. set env vars in .env to control build
+# just installs node_modules in the node_modules volume for development
+# we separate this out from docker-compose cause it's pretty annoying to do
 version: '2'
 services:
   base:
@@ -8,7 +9,7 @@ services:
       - node_modules:/app/node_modules
     working_dir: /app/
     env_file:
-      - .env
+      - docker.env
     # change these to production when doing a prod build
     environment:
       - DB=development
@@ -18,11 +19,6 @@ services:
     extends:
       service: base
     command: npm i --arch=x64 --platform=linux
-
-  build:
-    extends:
-      service: base
-    command: npm run build
 
 volumes:
   node_modules:

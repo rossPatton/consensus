@@ -37,7 +37,10 @@ export const FilterPanel = loadable(() =>
 );
 
 export const Helmet = loadable(() =>
-  import(/* webpackChunkName: "Helmet" */'./Helmet'),
+  import(
+    /* webpackMode: "eager" */
+    /* webpackChunkName: "Helmet" */
+    './Helmet'),
 );
 
 export const Groups = loadable(() =>
@@ -45,7 +48,10 @@ export const Groups = loadable(() =>
 );
 
 export const PasswordInput = loadable(() =>
-  import(/* webpackChunkName: "PasswordInput" */'./PasswordInput'),
+  import(
+    /* webpackMode: "eager" */
+    /* webpackChunkName: "PasswordInput" */
+    './PasswordInput'),
 );
 
 export const PlaceholderImage = loadable(() =>

@@ -24,7 +24,7 @@ export const setupMiddleware = (app: Koa) => {
   compressionMiddleware(app);
 
   // security stuff
-  rateLimiterMiddleware(app);
+  if (__PROD__) rateLimiterMiddleware(app);
   corsMiddleware(app);
   sslMiddleware(app);
   helmetMiddleware(app);

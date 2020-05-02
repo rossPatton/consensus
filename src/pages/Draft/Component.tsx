@@ -41,7 +41,7 @@ export const DraftComponent = memo((props: tComponentProps) => {
           {!meeting.isOnline
             && meeting.location
             && (
-              <div className='font-bold flex items-center text-gray-5'>
+              <div className="font-bold flex items-center text-gray-5">
                 <span className="rounded-circ p-1 bg-gray-3 mr-2" />
                 {meeting.locationLink && (
                   <ExternalLink

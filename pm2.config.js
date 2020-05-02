@@ -1,13 +1,13 @@
 const { DEBUG, NODE_ENV } = process.env;
 
 // enables cluster mode basically, up to max number of available cores
-let clusterMode = {};
-if (NODE_ENV === 'production') {
-  clusterMode = {
-    instances: 'max',
-    exec_mode: 'cluster'
-  };
-}
+// let clusterMode = {};
+// if (NODE_ENV === 'production') {
+//   clusterMode = {
+//     instances: 'max',
+//     exec_mode: 'cluster'
+//   };
+// }
 
 module.exports = {
   apps: [{
@@ -18,6 +18,6 @@ module.exports = {
     autorestart: NODE_ENV === 'production',
     watch: NODE_ENV === 'development',
     max_memory_restart: '1G',
-    ...clusterMode
+    // ...clusterMode
   }],
 };

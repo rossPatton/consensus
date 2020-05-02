@@ -2,6 +2,7 @@ import React, {memo} from 'react';
 
 import {categoryMap} from '~app/constants';
 import {Template} from '~app/containers';
+
 import {Category, CategoryList} from './_subpages';
 import {tProps} from './_types';
 
