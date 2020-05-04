@@ -27,6 +27,3 @@ volumes:
     external: true
   node_modules:
     external: true
-
-# cache:
-#   image: redis:latest

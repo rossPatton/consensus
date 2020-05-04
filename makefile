@@ -17,7 +17,7 @@ prod:
 
 # build site for prod, and prepares an image for deployment
 build:
-	docker-compose -f docker-compose.yml -f docker-compose.dev.yml build --no-cache --parallel
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml build --no-cache --parallel
 
 # setup external nginx network
 nginx:
@@ -25,7 +25,7 @@ nginx:
 
 # stops all active containers (as defined by docker-compose)
 reset:
-	docker-compose down
+	docker-compose down--remove-orphans
 
 # if installing on new machine, you need to create the shared networks and volumes first
 setup:

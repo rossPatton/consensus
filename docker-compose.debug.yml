@@ -2,12 +2,11 @@ version: '3'
 services:
   debug:
     container_name: debug
+    working_dir: /app
     command: "npx concurrently \"webpack --watch --config webpack/\" \"npx pm2-dev pm2.config.js --no-daemon\""
     depends_on:
       - db
       - redis
-    env_file:
-      - .env
     environment:
       - DB=development
       - DEBUG=true
@@ -20,9 +19,6 @@ services:
     expose:
       - 3001
       - 9229
-    image: node:12.3.0-alpine
-    # network_mode: host
-    working_dir: /app
     volumes:
       - .:/app
       - node_modules:/app/node_modules

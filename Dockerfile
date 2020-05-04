@@ -1,6 +1,8 @@
 # get node distro - should be consistent across environments
 FROM node:12.3.0-alpine
 
+USER root
+
 # increase max # of threads available to our nodejs process
 ENV UV_THREADPOOL_SIZE=64
 
@@ -9,7 +11,10 @@ ENV UV_THREADPOOL_SIZE=64
 COPY package.json package-lock.json app/
 
 # create home dir, where the app will be run
-WORKDIR /app
+# WORKDIR /app
+
+ARG NPMRC
+RUN echo "$NPMRC" > .npmrc
 
 # install our dependencies, for now we want to install ALL deps, including dev ones
 # put before COPY, any changes in the cwd will invalidate the cache for this layer
@@ -17,10 +22,10 @@ RUN npm ci --arch=x64 --platform=linux
 
 # below this point we don't need to worry about the cache
 # copy everything not in .dockerignore to /app
-COPY . $WORKDIR
+COPY . app/
 
 # Alpine Linux is a bare-bones distro, but curl is very useful when debugging so add it
-RUN apk add curl --no-cache
+RUN apk add curl=7.55.0-r2 --no-cache
 
 # make sure we're not running root
 USER node

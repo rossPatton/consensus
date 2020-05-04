@@ -1,24 +1,17 @@
 # just installs node_modules in the node_modules volume for development
 # we separate this out from docker-compose cause it's pretty annoying to do
-version: '2'
+version: '3'
 services:
-  base:
-    image: node:12.3.0-alpine
+  install:
+    command: npm i --arch=x64 --platform=linux --no-progress
+    working_dir: /app
     volumes:
-      - .:/app/
+      - .:/app
       - node_modules:/app/node_modules
-    working_dir: /app/
-    env_file:
-      - docker.env
     # change these to production when doing a prod build
     environment:
-      - DB=development
       - NODE_ENV=development
-
-  install:
-    extends:
-      service: base
-    command: npm i --arch=x64 --platform=linux
+      - MAXMIND_LICENSE_KEY=${MAXMIND_LICENSE_KEY}
 
 volumes:
   node_modules:

@@ -3,14 +3,13 @@ version: '3'
 services:
   prod:
     build: .
-    image: consensusdocker/test
+    image: consensusdocker:test
     container_name: prod
-    command: "npx concurrently \"webpack --config webpack/\" \"npx pm2-dev pm2.config.js --no-daemon\""
+    working_dir: /app
+    command: "webpack --config webpack && npx pm2-dev pm2.config.js --no-daemon"
     depends_on:
       - db
       - redis
-    env_file:
-      - .env
     environment:
       - DB=development
       - DEBUG=false
@@ -23,12 +22,11 @@ services:
     expose:
       - 3001
       - 9229
-    image: node:12.3.0-alpine
     restart: "always"
-    working_dir: /app
-    volumes:
-      - .:/app
-      - node_modules:/app/node_modules
+    # uncomment if running locally
+    # volumes:
+    #   - .:/app
+    #   - node_modules:/app/node_modules
 
   db:
     restart: "always"
@@ -36,8 +34,9 @@ services:
   redis:
     restart: "always"
 
-volumes:
-  db_data:
-    external: true
-  node_modules:
-    external: true
+# uncomment if running locally
+# volumes:
+#   db_data:
+#     external: true
+#   node_modules:
+#     external: true

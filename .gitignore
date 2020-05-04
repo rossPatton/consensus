@@ -6,4 +6,4 @@ volumes
 *.log
 *.rdb
 .env
-docker.env
+.npmrc
