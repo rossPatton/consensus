@@ -17,7 +17,7 @@
     "migrate": "node -r esm ./node_modules/.bin/knex migrate:latest",
     "seed": "babel-node node_modules/.bin/knex seed:run",
     "pretest": "npm run lint",
-    "prod": "npx pm2 start pm2.config.js --no-daemon",
+    "prod": "npx webpack --config webpack/; npx pm2 startOrReload pm2.config.js --no-daemon",
     "jest": "NODE_ENV=test jest -u --no-cache --coverage",
     "test": "tsc"
   },
