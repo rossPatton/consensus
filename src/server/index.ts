@@ -6,6 +6,7 @@ import 'regenerator-runtime/runtime';
 import './passport';
 
 import fs from 'fs-extra';
+import http from 'http';
 import https from 'https';
 import Koa from 'koa';
 import passport from 'koa-passport';
@@ -68,6 +69,10 @@ const opts = {
 };
 
 const httpsServer = https.createServer(opts, app.callback());
+const httpServer = http.createServer(app.callback());
+httpServer.listen(3000, '0.0.0.0' /* needs to be 0.0.0.0 for docker */, () => {
+  loglevel.info('✅ https app running on port 3000 ✅');
+});
 httpsServer.listen(3001, '0.0.0.0' /* needs to be 0.0.0.0 for docker */, () => {
   loglevel.info('✅ https app running on port 3001 ✅');
 });
