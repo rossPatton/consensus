@@ -20,8 +20,6 @@ const stats = {
 
 module.exports = {
   CWD,
-  // development or production, decouple from NODE_ENV so we can run any env against any db
-  // also will be useful if we setup a test or staging env
   DB,
   DEBUG: DEBUG === 'true',
   DEV: NODE_ENV === 'development',

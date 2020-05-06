@@ -15,12 +15,31 @@ services:
       - ENABLE_IPV6=true
       - NETWORK_ACCESS=internal
       - NODE_ENV=development
+      - DB_HOST=${DB_HOST}
+      - DB_DEV_PW=${DB_DEV_PW}
+      - DB_PROD_PW=${DB_PROD_PW}
+      - DB_TEST_PW=${DB_TEST_PW}
+      - MAXMIND_LICENSE_KEY=${MAXMIND_LICENSE_KEY}
+      - LOG_LEVEL=${LOG_LEVEL}
+      - PEPPER=${PEPPER}
       - VIRTUAL_HOST=consensus.local
       - VIRTUAL_PORT=3001
       - VIRTUAL_PROTO=https
     expose:
       - 3001
-      - 9229
     volumes:
       - .:/app
       - node_modules:/app/node_modules
+
+# connect our localhost to the nginx reverse proxy
+networks:
+  # backend:
+  default:
+    external:
+      name: nginx-proxy
+
+volumes:
+  db_data:
+    external: true
+  node_modules:
+    external: true

@@ -13,5 +13,5 @@ dumps
 .dockerignore
 Dockerfile
 docker-compose.yml
-.env
-.npmrc
+# .env
+# .npmrc

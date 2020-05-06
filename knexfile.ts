@@ -44,11 +44,16 @@ module.exports = {
     version: '11',
     connection: {
       host: DB_HOST,
-      user: 'consensusprod',
-      password: DB_PROD_PW,
-      // eventually this should be consensus_prod
+      user: 'consensusdev',
+      password: DB_DEV_PW,
       database: 'consensus_dev',
       // ssl: true,
+      // host: DB_HOST,
+      // user: 'consensusprod',
+      // password: DB_PROD_PW,
+      // // eventually this should be consensus_prod
+      // database: 'consensus_prod',
+      // // ssl: true,
     },
     migrations: {
       directory: migrations,
@@ -68,9 +73,14 @@ module.exports = {
     version: '11',
     connection: {
       host: DB_HOST,
-      user: 'consensustest',
-      password: DB_TEST_PW,
-      database: 'consensus_test',
+      user: 'consensusdev',
+      password: DB_DEV_PW,
+      database: 'consensus_dev',
+      // ssl: true,
+      // host: DB_HOST,
+      // user: 'consensustest',
+      // password: DB_TEST_PW,
+      // database: 'consensus_test',
       // ssl: true,
     },
     migrations: {
