@@ -13,7 +13,7 @@ WORKDIR /app
 # install our dependencies, for now we want to install ALL deps, including dev ones
 # put before COPY, any changes in the cwd will invalidate the cache for this layer
 ARG MAXMIND_LICENSE_KEY=1JH4fyzfbYAJPRze
-RUN npm ci --arch=x64 --platform=linux
+RUN npm ci --arch=x64 --platform=linux --progress=false
 
 # below this point we don't need to worry about the cache
 # copy everything not in .dockerignore to /app
@@ -21,8 +21,8 @@ COPY . $WORKDIR
 
 # Alpine Linux is a bare-bones distro, but curl is very useful when debugging so add it
 RUN apk add curl=7.64.0-r3 --no-cache
-RUN apk add --no-cache redis
-RUN apk add --no-cache screen
+# RUN apk add --no-cache redis
+# RUN apk add --no-cache screen
 
 # make sure we're not running root
 USER node
