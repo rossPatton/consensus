@@ -12,7 +12,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
   const disableSubmit = !props.title || !props.date || !props.time;
 
   return (
-    <div className="bg-white rounded p-2">
+    <div className="d:pb-2 d:pl-2 d:pr-2">
       {props.heading && (
         <h1 className="text-3 mb-2">
           {props.isDraft && 'Edit Meeting Draft'}

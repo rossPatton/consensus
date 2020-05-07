@@ -1,76 +1,73 @@
 import cx from 'classnames';
-import React from 'react';
+import React, {memo, useContext} from 'react';
 
 import {MediaContext} from '~app/context/MatchMediaProvider/_context';
 
 import {Tab} from './_components';
 import {tProps} from './_types';
 
-class GroupTabs extends React.PureComponent<tProps> {
-  static contextType = MediaContext;
+const GroupTabs = memo((props: tProps) => {
+  const context = useContext(MediaContext);
+  const { match, role } = props;
+  const isMod = role === 'admin' || role === 'facilitator';
+  const isAtLeastAMember = !!role;
 
-  render() {
-    const { match, role } = this.props;
-    const isMod = role === 'admin' || role === 'facilitator';
-    const isAtLeastAMember = !!role;
-
-    return (
-      <nav className="mb-1 d:mb-2 overflow-scroll">
-        <ul
-          className={cx({
-            'flex items-center whitespace-no-wrap': true,
-            'justify-evenly': isMod,
-          })}>
+  return (
+    <nav className="d:pl-2 d:pr-2 d:pt-2 mb-1 d:mb-2 overflow-scroll">
+      <ul
+        className={cx({
+          'flex items-center whitespace-no-wrap': true,
+          'justify-evenly': isMod,
+        })}>
+        <li>
+          <Tab
+            {...context}
+            match={match}
+            subRoute=""
+          />
+        </li>
+        {isAtLeastAMember && (
           <li>
             <Tab
-              {...this.context}
+              {...context}
               match={match}
-              subRoute=""
+              subRoute="members"
             />
           </li>
-          {isAtLeastAMember && (
+        )}
+        {isMod
+          && (
             <li>
               <Tab
-                {...this.context}
+                {...context}
                 match={match}
-                subRoute="members"
+                subRoute="pending"
               />
             </li>
           )}
-          {isMod
-            && (
-              <li>
-                <Tab
-                  {...this.context}
-                  match={match}
-                  subRoute="pending"
-                />
-              </li>
-            )}
-          {isMod
-            && (
-              <li>
-                <Tab
-                  {...this.context}
-                  match={match}
-                  subRoute="drafts"
-                />
-              </li>
-            )}
-          {isMod
-            && (
-              <li>
-                <Tab
-                  {...this.context}
-                  match={match}
-                  subRoute="planMeeting"
-                />
-              </li>
-            )}
-        </ul>
-      </nav>
-    );
-  }
-}
+        {isMod
+          && (
+            <li>
+              <Tab
+                {...context}
+                match={match}
+                subRoute="drafts"
+              />
+            </li>
+          )}
+        {isMod
+          && (
+            <li>
+              <Tab
+                {...context}
+                match={match}
+                subRoute="planMeeting"
+              />
+            </li>
+          )}
+      </ul>
+    </nav>
+  );
+});
 
 export default GroupTabs;

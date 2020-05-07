@@ -5,8 +5,10 @@ import {categories, roles} from '~app/constants';
 
 import {tProps} from './_types';
 
-// the component half of the search filter container
-// decoupled for ease of placement
+/**
+ * @description the component half of the search filter container. use together
+ *
+*/
 const FilterPanel = memo((props: tProps) => (
   <div
     className={cx({

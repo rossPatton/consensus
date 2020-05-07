@@ -3,6 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
+import {Emoji} from '~app/components';
 import {postRoleSuccess, postUserByGroupId} from '~app/redux';
 
 import {tProps, tStore} from './_types';
@@ -31,8 +32,11 @@ class JoinFormContainer extends React.PureComponent<tProps> {
     if (role) {
       return (
         <span className="text-white text-sm">
-          <span className="mr-1">✔</span>
-          <span className="capitalize">{role}</span>
+          <Emoji
+            label="Check mark emoji"
+            emoji="✅ "
+          />
+          <span className="capitalize font-bold">{role}</span>
         </span>
       );
     }

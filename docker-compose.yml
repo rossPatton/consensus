@@ -4,7 +4,7 @@ services:
     container_name: db
     image: postgres:11.2-alpine
     # networks:
-    #   - backend
+    #   - web
     ports:
       - "54320:5432"
     volumes:
@@ -15,7 +15,13 @@ services:
     # command: ["redis-server", "--bind", "redis", "--port", "6379"]
     image: redis:alpine
     # networks:
-    #   - backend
+    #   - web
     sysctls:
       # fixes warning when using redis with the barebones alpine image
       net.core.somaxconn: '511'
+
+# volumes:
+#   db_data:
+#     external: true
+#   node_modules:
+#     external: true

@@ -8,7 +8,7 @@ const CurrentProfile = memo((props: tComponentProps) => (
   <div className="relative">
     <Link
       className="text-sm leading-none font-bold absolute t r"
-      to={`/group/${props.session.profile.id}`}>
+      to={`/group/${props.session.profile.handle}`}>
       View Group
     </Link>
     <h1 className="text-3 mb-2 leading-none">

@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">38.1% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/42</span>
+                <span class='fraction'>16/40</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">35.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/39</span>
+                <span class='fraction'>13/37</span>
             </div>
         
             
@@ -231,22 +231,7 @@
 <a name='L173'></a><a href='#L173'>173</a>
 <a name='L174'></a><a href='#L174'>174</a>
 <a name='L175'></a><a href='#L175'>175</a>
-<a name='L176'></a><a href='#L176'>176</a>
-<a name='L177'></a><a href='#L177'>177</a>
-<a name='L178'></a><a href='#L178'>178</a>
-<a name='L179'></a><a href='#L179'>179</a>
-<a name='L180'></a><a href='#L180'>180</a>
-<a name='L181'></a><a href='#L181'>181</a>
-<a name='L182'></a><a href='#L182'>182</a>
-<a name='L183'></a><a href='#L183'>183</a>
-<a name='L184'></a><a href='#L184'>184</a>
-<a name='L185'></a><a href='#L185'>185</a>
-<a name='L186'></a><a href='#L186'>186</a>
-<a name='L187'></a><a href='#L187'>187</a>
-<a name='L188'></a><a href='#L188'>188</a>
-<a name='L189'></a><a href='#L189'>189</a>
-<a name='L190'></a><a href='#L190'>190</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L176'></a><a href='#L176'>176</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -362,24 +347,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -429,6 +400,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -474,16 +446,16 @@ class PlanMeetingContainer extends PureComponent&lt;tContainerProps, tState&gt; 
     super(props);
     const {router: {search}} = props;
     const draft = qs.parse(search);
-&nbsp;
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (_.isEmpty(draft)) return;
-&nbsp;
-    const isOnline = <span class="cstat-no" title="statement not covered" >draft.isOnline === 'true';</span>
-    const isPrivate = <span class="cstat-no" title="statement not covered" >draft.isPrivate === 'true';</span>
-    const isCopy = <span class="cstat-no" title="statement not covered" >draft.isCopy === 'true';</span>
+<span class="missing-if-branch" title="else path not taken" >E</span>
+    if (_.isEmpty(draft)) return;
+<span class="cstat-no" title="statement not covered" ></span>
+    const isOnline = d<span class="cstat-no" title="statement not covered" >raft.isOnline === 'true';</span>
+    const isPrivate<span class="cstat-no" title="statement not covered" > = draft.isPrivate === '</span>true';
+    const isCopy = draft.isCopy === 'true';
 &nbsp;
     // if draft is a copy, not an edit (of existing draft or meeting)
-    // then we change a few things here
-    const state = <span class="cstat-no" title="statement not covered" >{</span>
+    // then we cha<span class="cstat-no" title="statement not covered" >nge a few things here</span>
+    const state = {
       ...this.state,
       category: draft.category as ts.category,
       cityId: typeof draft.cityId === 'string'
@@ -509,34 +481,34 @@ class PlanMeetingContainer extends PureComponent&lt;tContainerProps, tState&gt; 
       time: isCopy ? '19:00' : draft.time as string,
       title: draft.title as string,
     };
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    this.state = state;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+    this.state = state;
   }
+<span class="fstat-no" title="function not covered" ></span>
+  sa<span class="cstat-no" title="statement not covered" >veAsDraft = () =&gt;</span>
+    this.setState({
+      i<span class="fstat-no" title="function not covered" >sD</span>raft<span class="cstat-no" title="statement not covered" >: true,</span>
+    }, () =&gt; this.onSubmit(true));
+<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
+  onSubmit = async (saveAsDraft: boolean = false) =&gt; {<span class="cstat-no" title="statement not covered" ></span>
+    const {date, endTime, id, isCopy, time, ...restOfMeeting} = this.state;
+<span class="cstat-no" title="statement not covered" ></span>
+    const timeArr = par<span class="cstat-no" title="statement not covered" >seTimeString(time);</span>
+    const endTimeArr =<span class="cstat-no" title="statement not covered" > parseTimeString(endTime);</span>
+    const startDate <span class="cstat-no" title="statement not covered" >= dayJS(date).hour(timeArr?.[0]).minute(timeArr[1]);</span>
+    const endDate = dayJS(date).hour(endTimeArr?.[0]).minute(endTimeArr[1]);
 &nbsp;
-  saveAsDraft = <span class="fstat-no" title="function not covered" >()</span> =&gt;
-<span class="cstat-no" title="statement not covered" >    this.setState({</span>
-      isDraft: true,
-    }, <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >this.onSubmit(true))</span>;
-&nbsp;
-  onSubmit = <span class="fstat-no" title="function not covered" >as</span>ync (saveAsDraft: boolean = <span class="branch-0 cbranch-no" title="branch not covered" >false)</span> =&gt; {
-    const {date, endTime, id, isCopy, time, ...restOfMeeting} = <span class="cstat-no" title="statement not covered" >this.state;</span>
-&nbsp;
-    const timeArr = <span class="cstat-no" title="statement not covered" >parseTimeString(time);</span>
-    const endTimeArr = <span class="cstat-no" title="statement not covered" >parseTimeString(endTime);</span>
-    const startDate = <span class="cstat-no" title="statement not covered" >dayJS(date).hour(timeArr?.[0]).minute(timeArr[1]);</span>
-    const endDate = <span class="cstat-no" title="statement not covered" >dayJS(date).hour(endTimeArr?.[0]).minute(endTimeArr[1]);</span>
-&nbsp;
-    let newMeeting: ts.meeting;
-<span class="cstat-no" title="statement not covered" >    try {</span>
-      const {patchEventDispatch, postMeetingDispatch} = <span class="cstat-no" title="statement not covered" >this.props;</span>
+<span class="cstat-no" title="statement not covered" >    let newMeeting: ts.meeting;</span>
+    try {<span class="cstat-no" title="statement not covered" ></span>
+      const {patchEventDispatch, postMeetingDispatch} = this.props;
 &nbsp;
       // if meeting has already been saved as a draft, we will have the id
-      // patch in that case, else post new meeting (initial draft save, or submit)
-      const dispatch = <span class="cstat-no" title="statement not covered" >typeof id === 'number'</span>
+      // patch in that <span class="cstat-no" title="statement not covered" >case, else post new meeting (initial draft save, or submit)</span>
+      const dispatch = typeof id === 'number'
         ? patchEventDispatch
         : postMeetingDispatch;
-&nbsp;
-<span class="cstat-no" title="statement not covered" >      console.log('saving =&gt; ', {</span>
+<span class="cstat-no" title="statement not covered" ></span>
+      const planMeeting = await dispatch({
         ...restOfMeeting,
         // we submit drafts to the same table in the DB as well
         // we only want to save as draft when the user hits the save as draft button
@@ -548,38 +520,24 @@ class PlanMeetingContainer extends PureComponent&lt;tContainerProps, tState&gt; 
         groupId: this.props.group.id as number,
         slug: slugify(restOfMeeting.title),
       });
-&nbsp;
-      const planMeeting = <span class="cstat-no" title="statement not covered" >await dispatch({</span>
-        ...restOfMeeting,
-        // we submit drafts to the same table in the DB as well
-        // we only want to save as draft when the user hits the save as draft button
-        // we don't use state here, since we want to set this to false when publishing
-        isDraft: saveAsDraft,
-        // every date is stored in the db as an ISO string
-        date: startDate.toISOString(),
-        endDate: endDate.toISOString(),
-        groupId: this.props.group.id as number,
-        slug: slugify(restOfMeeting.title),
-      });
-&nbsp;
-<span class="cstat-no" title="statement not covered" >      newMeeting = planMeeting.payload;</span>
-    } catch (err) {
-<span class="cstat-no" title="statement not covered" >      return loglevel.error('failed to save meeting to db', err);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+      newMeeting = planMeeting.payload;
+    } <span class="cstat-no" title="statement not covered" >catch (err) {</span>
+      return loglevel.error('failed to save meeting to db', err);
     }
 &nbsp;
-    // update redux on client side on meeting upsert success
-    const {meetingsThunk} = <span class="cstat-no" title="statement not covered" >this.props;</span>
-<span class="cstat-no" title="statement not covered" >    console.log('new meeting =&gt; ', newMeeting);</span>
-<span class="cstat-no" title="statement not covered" >    getMeetingsByGroupIdSuccess([newMeeting, ...meetingsThunk.data]);</span>
+    // update redux on clien<span class="cstat-no" title="statement not covered" >t side on m</span>eeting upsert success
+<span class="cstat-no" title="statement not covered" >    const {meetingsThunk} = this.props;</span>
+    getMeetingsByGroupIdSuccess([newMeeting, ...meetingsThunk.data]);
 &nbsp;
-    // this will cause the preview button to render
-<span class="cstat-no" title="statement not covered" >    this.setState({</span>
+<span class="cstat-no" title="statement not covered" >    // this will cause the preview button to render</span>
+    this.setState({
       id: newMeeting.id,
     });
   }
-&nbsp;
-  updateState = <span class="fstat-no" title="function not covered" >(s</span>tateKey: tKeyUnion, value: tValueUnion) =&gt; {
-<span class="cstat-no" title="statement not covered" >    this.setState({</span>
+<span class="fstat-no" title="function not covered" ></span>
+  up<span class="cstat-no" title="statement not covered" >dateState = (stateKey: tKeyUnion, value: tValueUnion) =&gt; {</span>
+    this.setState({
       [stateKey]: value,
     } as Pick&lt;tState, tKeyUnion&gt;);
   }
@@ -592,8 +550,8 @@ class PlanMeetingContainer extends PureComponent&lt;tContainerProps, tState&gt; 
         isSubPage
         status={sessionThunk?.error?.status}&gt;
         {!sessionThunk.data.isAuthenticated &amp;&amp; &lt;Redirect to="" /&gt;}
-        {sessionThunk.data.isAuthenticated &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >          &lt;PlanMeetingComponent</span>
+        {s<span class="branch-1 cbranch-no" title="branch not covered" >essionThunk.data.isAuthenticated &amp;&amp; (</span>
+          &lt;PlanMeetingComponent
             {...this.props}
             {...this.state}
             onSubmit={this.onSubmit}
@@ -612,9 +570,9 @@ const mapStateToProps = (store: tStore) =&gt; ({
   sessionThunk: store.session,
 });
 &nbsp;
-const mapDispatchToProps = (dispatch: Function) =&gt; ({
-  patchEventDispatch: <span class="fstat-no" title="function not covered" >(q</span>uery: ts.upsertMeetingQuery) =&gt; <span class="cstat-no" title="statement not covered" >dispatch(patchEvent(query)),</span>
-  postMeetingDispatch: <span class="fstat-no" title="function not covered" >(q</span>uery: ts.upsertMeetingQuery) =&gt; <span class="cstat-no" title="statement not covered" >dispatch(postMeeting(query)),</span>
+const mapDispatchToPro<span class="fstat-no" title="function not covered" >ps</span> = (dispatch: Function) =&gt; ({<span class="cstat-no" title="statement not covered" ></span>
+  patchEventDispatch: (<span class="fstat-no" title="function not covered" >qu</span>ery: ts.upsertMeetingQuery) =&gt; d<span class="cstat-no" title="statement not covered" >ispatch(patchEvent(query)),</span>
+  postMeetingDispatch: (query: ts.upsertMeetingQuery) =&gt; dispatch(postMeeting(query)),
 });
 &nbsp;
 const PlanMeeting = connect(
@@ -630,7 +588,7 @@ export default PlanMeeting;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Apr 30 2020 23:21:01 GMT-0400 (Eastern Daylight Time)
+                at Wed May 06 2020 23:29:30 GMT-0400 (Eastern Daylight Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

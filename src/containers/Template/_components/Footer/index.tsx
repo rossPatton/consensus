@@ -5,12 +5,12 @@ const Footer = memo(() => (
   <footer className="pt-4 pb-4 bg-gray-2">
     <div className="mb-3 contain m-auto">
       <ul>
-        <li className='mb-1'>
+        <li className="mb-1">
           <Link to="/login">
             Login
           </Link>
         </li>
-        <li className='mb-1'>
+        <li className="mb-1">
           <Link to="/signup">
             Sign up
           </Link>

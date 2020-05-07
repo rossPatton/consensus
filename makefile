@@ -31,7 +31,7 @@ reset:
 setup:
 	docker network inspect nginx-proxy >/dev/null || docker network create nginx-proxy;
 	docker network inspect db_data >/dev/null || docker volume create db_data;
-	docker network inspect node_modules >/dev/null || docker volume create node_modules
+	docker network inspect node_modules >/dev/null || docker volume create node_modules;
 
 # just an alias for make dev
 start:

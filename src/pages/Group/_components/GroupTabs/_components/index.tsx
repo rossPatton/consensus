@@ -18,15 +18,14 @@ export const Tab = memo((props: tProps) => {
   const { idOrSlug, section } = match.params;
   const route = `/${subRoute}`;
   const to = `/group/${idOrSlug}${subRoute ? route : ''}`;
-  // @ts-ignore
   const text = routeDisplayMap[subRoute];
   const isMeetings = subRoute === '' && typeof section === 'undefined';
   const isActive = isMeetings || section === subRoute;
   const className = cx({
-    'd:mr-2': true,
+    'd:mr-2 text-gray-5': true,
     'd:ml-2': ['', 'members'].indexOf(subRoute) === -1,
-    'text-base d:text-3 text-gray-5': isActive,
-    'no-underline text-gray-5': !isActive,
+    'text-base d:text-3': isActive,
+    'no-underline': !isActive,
   });
 
   // dont render link if you're on the section page itself

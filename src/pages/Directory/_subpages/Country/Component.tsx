@@ -11,7 +11,7 @@ export const CountryComponent = memo((props: tComponentProps) => (
       {props.country.name}
     </h1>
     <FilterPanel
-      className="flex flex-col d:flex-row items-center p-2 bg-white rounded mb-4 text-sm font-bold"
+      // className="flex flex-col d:flex-row items-center p-2 bg-white rounded mb-4 text-sm font-bold"
       onSearchChange={props.onChange}
     />
     <h2 className="mb-2 text-3">

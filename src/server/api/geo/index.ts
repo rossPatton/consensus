@@ -14,9 +14,9 @@ geo.get('/api/v1/geo', async (ctx: Koa.ParameterizedContext) => {
 
   // if on dev, or failed prod lookup, default to a New York ip
   // if (__DEV__ || ip === '::1') {
-    ip = '67.245.145.102'; // default to NYC in dev mode
-    // '65.49.22.66' indianapolis
-    // '103.212.227.126' => sydney australia
+  ip = '67.245.145.102'; // default to NYC in dev mode
+  // '65.49.22.66' indianapolis
+  // '103.212.227.126' => sydney australia
   // }
 
   let lookup = null;

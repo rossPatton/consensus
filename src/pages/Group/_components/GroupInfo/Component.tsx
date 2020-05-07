@@ -12,8 +12,8 @@ export const GroupInfoComponent = memo((props: tComponentProps) => {
   const {description = ''} = props.group;
 
   return (
-    <div className="bg-white rounded mb-3 d:mb-0 d:mr-2 flex-grow-0 min-w-full d:min-w-1/3">
-      <div className="bg-gray-5 rounded m-1 p-1 flex items-center justify-between">
+    <div className="rounded d:border d:shadow mb-3 d:mb-0 d:mr-2 flex-grow-0 min-w-full d:min-w-1/3">
+      <div className="bg-gray-5 font-semibold rounded d:m-1 p-1 flex items-center justify-between">
         {!role && (
           <small className="text-white">
             {group.type === 'public' && 'Public Group'}
@@ -26,7 +26,7 @@ export const GroupInfoComponent = memo((props: tComponentProps) => {
         <JoinForm role={role} />
         <LeaveForm group={group} role={role} />
       </div>
-      <div className="p-2">
+      <div className="pt-2 d:p-2">
         <div className="mb-1">
           <div className="flex items-center">
             <Avatar

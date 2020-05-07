@@ -34,19 +34,19 @@ services:
       - 3001
       - 3000
     # uncomment if running locally
-    volumes:
-      - .:/app
-      - node_modules:/app/node_modules
+    # volumes:
+    #   - .:/app
+    #   - node_modules:/app/node_modules
     restart: "always"
 
   db:
-    networks:
-      - web
+    # networks:
+    #   - web
     restart: "always"
 
   redis:
-    networks:
-      - web
+    # networks:
+    #   - web
     restart: "always"
 
 networks:

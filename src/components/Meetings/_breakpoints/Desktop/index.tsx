@@ -97,7 +97,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                         className="text-sm mr-2"
                         to={props.sessionRole === 'admin'
                           ? `/admin/planMeeting?${qs}`
-                          : `/group/${ev.groupName}/planMeeting?${qs}`}>
+                          : `/group/${slugify(ev.groupName)}/planMeeting?${qs}`}>
                         <Emoji
                           label="Hand with Pen Emoji"
                           emoji="✍️"
@@ -112,7 +112,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                           className="text-sm mr-2"
                           to={props.sessionRole === 'admin'
                             ? `/admin/planMeeting?${qsWithCopy}`
-                            : `/group/${ev.groupName}/planMeeting?${qsWithCopy}`}>
+                            : `/group/${slugify(ev.groupName)}/planMeeting?${qsWithCopy}`}>
                           <Emoji
                             label="Clipboard Emoji"
                             emoji="📋"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 
 import {PlanMeeting} from '~app/components';
 
@@ -6,7 +6,7 @@ import {GroupInfo, GroupTabs} from './_components';
 import {Meetings, Members} from './_subpages';
 import {tComponentProps} from './_types';
 
-export const GroupComponent = (props: tComponentProps) => (
+export const GroupComponent = memo((props: tComponentProps) => (
   <div className="flex flex-col d:flex-row items-start">
     <GroupInfo
       match={props.match}
@@ -14,7 +14,7 @@ export const GroupComponent = (props: tComponentProps) => (
       params={props.match.params}
       role={props.role}
     />
-    <div className="min-w-full d:min-w-2/3">
+    <div className="d:border d:shadow rounded d:w-2/3">
       <GroupTabs
         match={props.match}
         role={props.role}
@@ -57,4 +57,4 @@ export const GroupComponent = (props: tComponentProps) => (
       )}
     </div>
   </div>
-);
+));
