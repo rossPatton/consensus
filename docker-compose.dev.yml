@@ -1,7 +1,9 @@
+# for running dev mode locally
 version: '3'
 services:
   dev:
-    build: .
+    # uncomment to build a deployable image of the site in dev mode
+    # build: .
     image: consensusdocker/test
     container_name: dev
     working_dir: /app

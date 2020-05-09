@@ -1,12 +1,12 @@
+# for running the site in production mode locally as close to real prod as possible
 version: '3'
 services:
   prod:
-    build: .
     image: consensusdocker/test
     container_name: prod_local
     working_dir: /app
     # command here overrides CMD in Dockerfile. but Dockerfile requires CMD to be valid
-    command: "npm run prod"
+    command: 'npm run prod'
     depends_on:
       - db
       - redis
@@ -28,21 +28,11 @@ services:
       - VIRTUAL_PROTO=https
     expose:
       - 3001
-      - 3000
     volumes:
       - .:/app
       - node_modules:/app/node_modules
-    restart: "always"
 
-  db:
-    restart: "always"
-
-  redis:
-    restart: "always"
-
-# connect our localhost to the nginx reverse proxy
 networks:
-  # backend:
   default:
     external:
       name: nginx-proxy

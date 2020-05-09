@@ -73,7 +73,8 @@ const httpsServer = https.createServer(opts, app.callback());
 // httpServer.listen(3000, '0.0.0.0' /* needs to be 0.0.0.0 for docker */, () => {
 //   loglevel.info('✅ https app running on port 3000 ✅');
 // });
-httpsServer.listen(3001, '0.0.0.0' /* needs to be 0.0.0.0 for docker */, () => {
+/* needs to be 0.0.0.0 for docker */
+httpsServer.listen(3001, '0.0.0.0', () => {
   loglevel.info('✅ https app running on port 3001 ✅');
 });
 
@@ -81,6 +82,7 @@ httpsServer.on('uncaughtException', err => {
   loglevel.error(err.stack);
 });
 
+// @TODO add separate LOG_LEVEL env variable to decouple logging from NODE_ENV
 if (__DEBUG__) {
   loglevel.setDefaultLevel('trace');
 } else if (__DEV__) {

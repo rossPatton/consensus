@@ -34,6 +34,11 @@ const Helmet = memo((props: tProps) => {
     ogTitleMeta,
     ogDescriptionMeta,
     metaCanonical,
+    // @TODO remove this once we are ready to go live
+    {
+      name: 'robots',
+      content: 'noindex',
+    },
   ];
 
   return (
