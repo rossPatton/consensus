@@ -17,7 +17,7 @@ prod:
 
 # build site for prod, and prepares an image for deployment
 build:
-	docker-compose -f docker-compose.yml -f docker-compose.build.yml build --no-cache --parallel
+	docker-compose -f docker-compose.build.yml build --no-cache --parallel
 
 # setup external nginx network
 nginx:

@@ -18,20 +18,36 @@ services:
       - DEBUG=false
       - ENABLE_IPV6=true
       - NODE_ENV=development
-      - DB_HOST=${DB_HOST}
+      - DB_HOST=db
       - DB_DEV_PW=${DB_DEV_PW}
       - DB_PROD_PW=${DB_PROD_PW}
       - DB_TEST_PW=${DB_TEST_PW}
       - MAXMIND_LICENSE_KEY=${MAXMIND_LICENSE_KEY}
       - LOG_LEVEL=${LOG_LEVEL}
       - PEPPER=${PEPPER}
-    # honestly, not sure if this is still needed because of port, but leaving since this was the state of the config when the site was finally reachable
-    expose:
-      - 3001
     restart: "always"
 
   db:
+    container_name: db
+    image: postgres:11.2-alpine
+    ports:
+      - "54320:5432"
+    volumes:
+      - "db_data:/var/lib/postgresql/data:z"
     restart: "always"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=consensus_dev
+      - POSTGRES_PASSWORD=${DB_DEV_PW}
 
   redis:
+    container_name: redis
+    image: redis:alpine
     restart: "always"
+    sysctls:
+      # fixes warning when using redis with the barebones alpine image
+      net.core.somaxconn: '511'
+
+volumes:
+  db_data:
+    driver: local

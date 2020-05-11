@@ -3,25 +3,14 @@ services:
   db:
     container_name: db
     image: postgres:11.2-alpine
-    # networks:
-    #   - web
     ports:
       - "54320:5432"
     volumes:
-      - "db_data:/var/lib/postgresql/data"
+      - "db_data:/var/lib/postgresql/data:z"
 
   redis:
     container_name: redis
-    # command: ["redis-server", "--bind", "redis", "--port", "6379"]
     image: redis:alpine
-    # networks:
-    #   - web
     sysctls:
       # fixes warning when using redis with the barebones alpine image
       net.core.somaxconn: '511'
-
-# volumes:
-#   db_data:
-#     external: true
-#   node_modules:
-#     external: true

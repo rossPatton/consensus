@@ -8,6 +8,7 @@ const categories = [
 ];
 
 exports.up = async (knex: Knex) => {
+  await knex.raw('CREATE EXTENSION IF NOT EXISTS "pg_trgm"');
   await knex.schema.createTable('categories', table => {
     table
       .enum('type', categories.map(c => c.type))

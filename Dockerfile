@@ -3,7 +3,6 @@
 FROM node:12.3.0-alpine
 
 USER root
-ENV NODE_ENV=production
 ARG MAXMIND_LICENSE_KEY=1JH4fyzfbYAJPRze
 
 # copy package.json etc FIRST. any changes here invalidate cache for rest of file
@@ -37,4 +36,5 @@ ENV UV_THREADPOOL_SIZE=64
 EXPOSE 3001
 
 # run site in container
+ENV NODE_ENV=production
 CMD ["npm", "run", "prod"]
