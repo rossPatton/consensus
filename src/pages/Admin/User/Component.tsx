@@ -1,7 +1,7 @@
 import React, {memo, useContext} from 'react';
 import {Link} from 'react-router-dom';
 
-import {MediaContext} from '~app/context/MatchMediaProvider/_context';
+import {MediaContext} from '~app/context';
 
 import {Aside} from './_components';
 import {
@@ -82,7 +82,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           roles={props.roles}
           session={props.session}
         />
-        <div className="border shadow order-1 d:order-2 d:w-2/3 mb-2 d:mb-0">
+        <div className="border shadow order-1 d:order-2 w-full d:w-2/3 mb-2 d:mb-0">
           {/* user is new. ie, they havent put in a username yet */}
           {!props.session.profile.username
             && (

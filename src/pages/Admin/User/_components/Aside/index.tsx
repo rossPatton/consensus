@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, {memo, useContext} from 'react';
 
-import {MediaContext} from '~app/context/MatchMediaProvider/_context';
+import {MediaContext} from '~app/context';
 
 import {DesktopAside, MobileAside} from './_breakpoints';
 import {tProps} from './_types';

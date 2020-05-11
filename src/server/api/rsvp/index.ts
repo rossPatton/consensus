@@ -10,14 +10,13 @@ export const rsvp = new Router();
 const route = '/api/v1/rsvp';
 const table = 'users_meetings';
 
-
 // post new rsvp for the logged in user, by meetingId
 // this is an upsert basically, post if new, patch if not
 rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
   const query = ctx?.state?.locals?.data;
   await validateSchema(ctx, postSchema, query);
 
-  const {meetingId, type = 'private', value = 'no'} = query;
+  const {meetingId, type = 'private', value = ''} = query;
   const userId = ctx?.state?.user?.userId || 0;
 
   const newRsvp: ts.rsvp = {
@@ -47,7 +46,7 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
         .returning('*');
       ctx.body = update?.[0];
     } catch (err) {
-      return ctx.throw(400, err);
+      return ctx.throw(500, err);
     }
   } else {
     try {
@@ -56,7 +55,7 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
         .returning('*');
       ctx.body = insert?.[0];
     } catch (err) {
-      ctx.throw(400, err);
+      ctx.throw(500, err);
     }
   }
 });

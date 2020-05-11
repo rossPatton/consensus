@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {GenericLoader, Paginate, RoleFilter, SearchFilter} from '~app/containers';
-import {MediaContext} from '~app/context/MatchMediaProvider/_context';
+import {MediaContext} from '~app/context';
 import {deleteUserByGroupId, getUsersByGroupId, patchUserByGroupId} from '~app/redux';
 
 import {tContainerProps, tState} from './_types';

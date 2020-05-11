@@ -21,7 +21,7 @@ const Aside = memo((props: tProps) => {
         <div>
           <Link
             to="/admin/meetings"
-            className="no-underline">
+            className="font-bold no-underline">
             {session.isVerified && (
               <span
                 aria-label="Verified Account Checkbox"
@@ -32,7 +32,7 @@ const Aside = memo((props: tProps) => {
             )}
             @{profile.username}
           </Link>
-          <div className="text-sm text-gray-5">
+          <div className="font-semibold text-sm text-gray-5">
             <Link
               to="/admin/account"
               className="mr-1">
@@ -48,7 +48,7 @@ const Aside = memo((props: tProps) => {
         && groupsByUserIdThunk.data.length > 0
         && (
           <ul className="mb-3" role="navigation">
-            <li className="mb-1">
+            <li className="font-semibold mb-1">
               Your groups
             </li>
             {groupsByUserIdThunk.data.slice(0, 3).map((group, i) => {
@@ -87,7 +87,7 @@ const Aside = memo((props: tProps) => {
             </li>
           </ul>
         )}
-      <div className="mb-1">
+      <div className="font-semibold mb-1">
         Other actions
       </div>
       <div className="flex flex-row items-center">

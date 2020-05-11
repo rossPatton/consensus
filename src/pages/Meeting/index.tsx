@@ -6,7 +6,7 @@ import {Redirect} from 'react-router-dom';
 
 import {Helmet} from '~app/components';
 import {ErrorBoundary, GenericLoader, Template} from '~app/containers';
-import {MediaContext} from '~app/context/MatchMediaProvider/_context';
+import {MediaContext} from '~app/context';
 import {getGroup, getMeeting, getMeetingsByGroupId} from '~app/redux';
 import {typesafeIdOrSlug} from '~app/utils';
 

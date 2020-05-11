@@ -12,6 +12,10 @@ export const GenericLoader = loadable(() =>
   import(/* webpackChunkName: "GenericLoader" */'./GenericLoader'),
 );
 
+export const OutsideClick = loadable(() =>
+  import(/* webpackChunkName: "OutsideClick" */'./OutsideClick'),
+);
+
 export const Paginate = loadable(() =>
   import(/* webpackChunkName: "Paginate" */'./Paginate'),
 );

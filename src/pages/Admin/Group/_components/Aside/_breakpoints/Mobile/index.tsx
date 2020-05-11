@@ -11,7 +11,7 @@ const MobileAside = memo((props: tProps) => {
   return (
     <aside className="border shadow bg-white p-2 rounded order-2 w-full">
       <ul className="mb-2" role="navigation">
-        <li className="font-bold">
+        <li className="font-semibold mb-1">
           Admin Actions
         </li>
         <li className="flex items-center text-base p-1 mb-1 rounded hover:bg-gray-2">
@@ -54,7 +54,7 @@ const MobileAside = memo((props: tProps) => {
           )}
         </li>
       </ul>
-      <div className="font-bold">
+      <div className="font-semibold mb-1">
         Other actions
       </div>
       <div className="flex flex-col">

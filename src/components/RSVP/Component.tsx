@@ -21,9 +21,11 @@ export const RSVPComponent = (props: tComponentProps) => {
         'absolute t-hdr l r pt-2 pb-2 bg-gray-2': props.isMobile,
       })}>
       <fieldset>
-        <div className="flex items-center justify-center d:justify-start text-sm leading-none">
-          <legend className="mr-2">
-            RSVP {userRSVPsPrivately ? 'Privately' : 'Publicly'}
+        <div className="text-center d:text-left d:flex d:items-center text-sm leading-none">
+          <legend className="block font-semibold mb-1 mr-2 d:mb-0">
+            {rsvp.value
+              ? 'Change RSVP'
+              : `RSVP ${userRSVPsPrivately ? 'Privately' : 'Publicly'}`}
           </legend>
           <button
             value="yes"
@@ -31,9 +33,7 @@ export const RSVPComponent = (props: tComponentProps) => {
             onClick={ev => setRsvp({ev, meetingId})}
             className={cx({
               'p-2 pl-3 pr-3 mr-1 hover:bg-green-1': true,
-              'bg-white': props.isDesktop && rsvp.value === 'yes',
-              'bg-0': props.isDesktop && rsvp.value !== 'yes',
-              'bg-green-1': props.isMobile && rsvp.value === 'yes',
+              'bg-green-1': rsvp.value === 'yes',
             })}>
             Yes
           </button>
@@ -43,9 +43,7 @@ export const RSVPComponent = (props: tComponentProps) => {
             onClick={ev => setRsvp({ev, meetingId})}
             className={cx({
               'p-2 pl-3 pr-3 mr-1 hover:bg-red-1': true,
-              'bg-white': props.isDesktop && rsvp.value === 'no',
-              'bg-0': props.isDesktop && rsvp.value !== 'no',
-              'bg-red-1': props.isMobile && rsvp.value === 'no',
+              'bg-red-1': rsvp.value === 'no',
             })}>
             No
           </button>
@@ -55,9 +53,7 @@ export const RSVPComponent = (props: tComponentProps) => {
             onClick={ev => setRsvp({ev, meetingId})}
             className={cx({
               'p-2 pl-3 pr-3 mr-1 hover:bg-yellow-1': true,
-              'bg-white': props.isDesktop && rsvp.value === 'maybe',
-              'bg-0': props.isDesktop && rsvp.value !== 'maybe',
-              'bg-yellow-1': props.isMobile && rsvp.value === 'maybe',
+              'bg-yellow-1': rsvp.value === 'maybe',
             })}>
             Maybe
           </button>

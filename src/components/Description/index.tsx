@@ -1,9 +1,13 @@
 import React, {PureComponent} from 'react';
 
+import {MediaContext} from '~app/context';
+
 class Description extends PureComponent<
   {description?: string},
   {showAll: boolean}
 > {
+  static contextType = MediaContext;
+
   state = {
     showAll: false,
   };
@@ -16,6 +20,7 @@ class Description extends PureComponent<
   render() {
     const {description} = this.props;
     const {showAll} = this.state;
+    const {isMobile} = this.context;
     if (typeof description !== 'string' || description === '') {
       return null;
     }
@@ -27,7 +32,7 @@ class Description extends PureComponent<
             {description.split('\n')?.[0]}
           </p>
         )}
-        {showAll
+        {(showAll || isMobile)
           && description.split('\n').map((p, i) => (
             <p
               key={i}
@@ -35,11 +40,13 @@ class Description extends PureComponent<
               {p}
             </p>
           ))}
-        <button
-          className="mb-2 border-0 bg-0"
-          onClick={this.toggleDescription}>
-          {showAll ? 'Show less' : 'Show more'}
-        </button>
+        {!isMobile && (
+          <button
+            className="mb-2 border-0 bg-0"
+            onClick={this.toggleDescription}>
+            {showAll ? 'Show less' : 'Show more'}
+          </button>
+        )}
       </>
     );
   }

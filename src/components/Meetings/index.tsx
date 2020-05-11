@@ -3,7 +3,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Paginate} from '~app/containers';
-import {MediaContext} from '~app/context/MatchMediaProvider/_context';
+import {MediaContext} from '~app/context';
 import {deleteEvent} from '~app/redux';
 
 import {tContainerProps, tStore} from './_types';

@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 const MobileAside = memo(() => (
   <aside className="border shadow order-2 w-full bg-white rounded p-2">
-    <div className="mb-1">
+    <div className="font-semibold mb-1">
       Other actions
     </div>
     <div className="flex flex-col">

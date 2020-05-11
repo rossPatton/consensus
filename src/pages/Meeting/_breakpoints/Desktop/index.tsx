@@ -39,7 +39,7 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
             width={640}
           />
         </div>
-        <div>
+        <div className="min-w-2/3">
           <time
             className="text-red-3 leading-none mb-1"
             dateTime={dayJS(meeting.date).format('YYYY-MM-DDThh:mm:ssTZD')}>

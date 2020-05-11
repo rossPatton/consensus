@@ -4,7 +4,13 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {Description, ExternalLink, Meetings, PlaceholderImage, RSVP} from '~app/components';
+import {
+  Description,
+  ExternalLink,
+  Meetings,
+  PlaceholderImage,
+  RSVP,
+} from '~app/components';
 
 import {tComponentProps} from '../../_types';
 
@@ -22,7 +28,7 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
       {!isPastMeeting && (
         <RSVP meeting={meeting} />
       )}
-      <h1 className="mt-5 d:mt-0 capitalize block d:hidden text-2 font-normal">
+      <h1 className="mt-5 pt-3 d:mt-0 capitalize block d:hidden text-2 font-normal">
         {meeting.title}
       </h1>
       {group.name && (

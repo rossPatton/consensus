@@ -25,7 +25,7 @@ rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...query} = data;
   await validateSchema(ctx, upsertSchema, {...query, userId});
 
-  const {meetingId, type = 'private', value = 'no'} = query;
+  const {meetingId, type = 'private', value = ''} = query;
 
   const newRsvp: ts.rsvp = {
     meetingId: parseInt(meetingId, 10),
@@ -56,7 +56,7 @@ rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {userId} = ctx?.state.user;
   await validateSchema(ctx, upsertSchema, {...query, userId});
 
-  const {meetingId, type = 'private', value = 'no'} = query;
+  const {meetingId, type = 'private', value = ''} = query;
 
   const newRsvp: ts.rsvp = {
     meetingId: parseInt(meetingId, 10),

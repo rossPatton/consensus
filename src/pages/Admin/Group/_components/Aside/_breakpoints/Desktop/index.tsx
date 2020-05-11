@@ -19,7 +19,7 @@ const Aside = memo((props: tProps) => {
           type="group"
         />
         <div>
-          <h1 className="text-3">
+          <h1 className="font-bold text-3">
             <Link
               className="no-underline"
               to="/admin/meetings">
@@ -34,7 +34,7 @@ const Aside = memo((props: tProps) => {
               {props.session.profile.name}
             </Link>
           </h1>
-          <div>
+          <div className="font-semibold">
             <Link
               to="/admin/account"
               className="mr-1 text-sm">
@@ -92,7 +92,7 @@ const Aside = memo((props: tProps) => {
           )}
         </li>
       </ul>
-      <div className="font-bold">
+      <div className="font-semibold mb-1">
         Other actions
       </div>
       <div className="flex items-center">

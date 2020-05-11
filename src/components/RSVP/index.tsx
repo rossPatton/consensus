@@ -4,7 +4,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
-import {MediaContext} from '~app/context/MatchMediaProvider/_context';
+import {MediaContext} from '~app/context';
 import {patchRsvps, postRsvps} from '~app/redux';
 
 import {tContainerProps, tSetRsvpOpts, tState, tStore} from './_types';

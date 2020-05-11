@@ -17,7 +17,7 @@ services:
       - DB=development #eventually change to production
       - DEBUG=false
       - ENABLE_IPV6=true
-      - NODE_ENV=development
+      - NODE_ENV=production
       - DB_HOST=db
       - DB_DEV_PW=${DB_DEV_PW}
       - DB_PROD_PW=${DB_PROD_PW}

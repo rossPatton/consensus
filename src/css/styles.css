@@ -101,7 +101,6 @@ textarea {
   @apply leading-loose;
 }
 input,
-select,
 textarea {
   @apply border;
   @apply m-0;
@@ -125,6 +124,9 @@ input {
 }
 select {
   @apply bg-white;
+  @apply border;
+  @apply contain-sm;
+  @apply m-0;
   @apply rounded-lg;
   @apply whitespace-no-wrap;
   min-width: 8rem;

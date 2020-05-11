@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Breadcrumbs, Helmet} from '~app/components';
+import {Helmet} from '~app/components';
 import {ErrorBoundary, GenericLoader} from '~app/containers';
 import {getCountry} from '~app/redux';
 import {fuzzFilterList} from '~app/utils';
@@ -47,11 +47,6 @@ class CountryContainer extends PureComponent<tContainerProps, tState> {
         <GenericLoader
           isLoading={countryThunk.isLoading}
           render={() => {
-            const crumbs = [{
-              display: 'United States',
-              to: 'directory/us',
-            }];
-
             const {regions = []} = countryThunk.data;
             const {regionsBySearch} = this.state;
             const regionsToRender = regionsBySearch.length > 0
@@ -59,15 +54,12 @@ class CountryContainer extends PureComponent<tContainerProps, tState> {
               : regions;
 
             return (
-              <>
-                <Breadcrumbs crumbs={crumbs} />
-                <CountryComponent
-                  country={countryThunk.data}
-                  match={match}
-                  onChange={this.onChange}
-                  regionsToRender={regionsToRender}
-                />
-              </>
+              <CountryComponent
+                country={countryThunk.data}
+                match={match}
+                onChange={this.onChange}
+                regionsToRender={regionsToRender}
+              />
             );
           }}
         />
