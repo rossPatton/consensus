@@ -2,14 +2,11 @@
 version: '3'
 services:
   dev:
-    # uncomment to build a deployable image of the site in dev mode
-    # build: .
     image: consensusdocker/test
     container_name: dev
     working_dir: /app
     command: "npx concurrently \"webpack --watch --config webpack/\" \"npx pm2-dev pm2.config.js --no-daemon\""
     depends_on:
-      - db
       - redis
     environment:
       - DB=development
@@ -17,10 +14,11 @@ services:
       - ENABLE_IPV6=true
       - NETWORK_ACCESS=internal
       - NODE_ENV=development
+      - DB=${DB}
       - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PORT=${DB_PORT}
       - DB_DEV_PW=${DB_DEV_PW}
-      - DB_PROD_PW=${DB_PROD_PW}
-      - DB_TEST_PW=${DB_TEST_PW}
       - MAXMIND_LICENSE_KEY=${MAXMIND_LICENSE_KEY}
       - LOG_LEVEL=${LOG_LEVEL}
       - PEPPER=${PEPPER}
@@ -40,7 +38,5 @@ networks:
       name: nginx-proxy
 
 volumes:
-  db_data:
-    external: true
   node_modules:
     external: true

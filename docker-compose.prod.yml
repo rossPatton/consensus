@@ -15,11 +15,11 @@ services:
       - DEBUG=false
       - ENABLE_IPV6=true
       - NETWORK_ACCESS=internal
-      - NODE_ENV=production
+      - DB=${DB}
       - DB_HOST=${DB_HOST}
-      - DB_DEV_PW=${DB_DEV_PW}
+      - DB_USER=${DB_USER}
+      - DB_PORT=${DB_PORT}
       - DB_PROD_PW=${DB_PROD_PW}
-      - DB_TEST_PW=${DB_TEST_PW}
       - MAXMIND_LICENSE_KEY=${MAXMIND_LICENSE_KEY}
       - LOG_LEVEL=${LOG_LEVEL}
       - PEPPER=${PEPPER}

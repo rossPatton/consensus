@@ -1,6 +1,7 @@
 require('dotenv-safe').config();
 require('ts-node/register');
 
+const fs = require('fs');
 const path = require('path');
 const Knex = require('knex');
 // const pg = require('pg');
@@ -10,88 +11,59 @@ const CWD = process.cwd();
 const migrations = path.join(CWD, 'src', 'server', 'db', 'migrations');
 const seeds = path.join(CWD, 'src', 'server', 'db', 'seeds');
 
-const DB_HOST = process.env.DB_HOST as string || '127.0.0.1';
-const DB_DEV_PW = process.env.DB_DEV_PW as string || '';
-const DB_PROD_PW = process.env.DB_PROD_PW as string || '';
-const DB_TEST_PW = process.env.DB_TEST_PW as string || '';
+console.log(path.join(CWD, 'certs', 'postgres.crt'));
+
+const DB = process.env.DB as string;
+const DB_HOST = process.env.DB_HOST as string;
+const DB_USER = process.env.DB_USER as string;
+const DB_PORT = process.env.DB_PORT as string;
+const DB_DEV_PW = process.env.DB_DEV_PW as string;
+const DB_PROD_PW = process.env.DB_PROD_PW as string;
+
+const sharedConfig = {
+  client: 'pg',
+  debug: false,
+  version: '11',
+  migrations: {
+    directory: migrations,
+  },
+  pool: {
+    min: 1,
+    max: 10,
+  },
+  seeds: {
+    directory: seeds,
+  },
+};
 
 module.exports = {
   development: {
-    client: 'pg',
-    debug: false,
-    version: '11',
+    ...sharedConfig,
     connection: {
       host: DB_HOST,
-      user: 'consensusdev',
+      user: DB_USER,
       password: DB_DEV_PW,
-      database: 'consensus_dev',
-      // ssl: true,
-    },
-    migrations: {
-      directory: migrations,
-    },
-    pool: {
-      min: 1,
-      max: 10,
-    },
-    seeds: {
-      directory: seeds,
+      port: DB_PORT,
+      database: DB,
+      ssl: {
+        ca : fs.readFileSync(path.join(CWD, 'certs', 'postgres.crt')),
+        rejectUnauthorized: true,
+      }
     },
   },
   production: {
-    client: 'pg',
-    debug: false,
-    version: '11',
+    ...sharedConfig,
     connection: {
+      // @TODO connect to prod DB instead of dev one
       host: DB_HOST,
-      user: 'consensusdev',
+      user: DB_USER,
       password: DB_DEV_PW,
-      database: 'consensus_dev',
-      // ssl: true,
-      // host: DB_HOST,
-      // user: 'consensusprod',
-      // password: DB_PROD_PW,
-      // // eventually this should be consensus_prod
-      // database: 'consensus_prod',
-      // // ssl: true,
-    },
-    migrations: {
-      directory: migrations,
-    },
-    pool: {
-      min: 1,
-      max: 10,
-    },
-    seeds: {
-      directory: seeds,
-    },
-  },
-  // test should basically be a local copy of prod
-  debug: {
-    client: 'pg',
-    debug: true,
-    version: '11',
-    connection: {
-      host: DB_HOST,
-      user: 'consensusdev',
-      password: DB_DEV_PW,
-      database: 'consensus_dev',
-      // ssl: true,
-      // host: DB_HOST,
-      // user: 'consensustest',
-      // password: DB_TEST_PW,
-      // database: 'consensus_test',
-      // ssl: true,
-    },
-    migrations: {
-      directory: migrations,
-    },
-    pool: {
-      min: 1,
-      max: 10,
-    },
-    seeds: {
-      directory: seeds,
+      port: DB_PORT,
+      database: DB,
+      ssl: {
+        ca : fs.readFileSync(path.join(CWD, 'certs', 'postgres.crt')),
+        rejectUnauthorized: true,
+      },
     },
   },
 };
