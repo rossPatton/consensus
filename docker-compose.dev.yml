@@ -31,6 +31,13 @@ services:
       - .:/app
       - node_modules:/app/node_modules
 
+  redis:
+    container_name: redis
+    image: redis:alpine
+    sysctls:
+      # fixes warning when using redis with the barebones alpine image
+      net.core.somaxconn: '511'
+
 # connect our localhost to the nginx reverse proxy
 networks:
   default:

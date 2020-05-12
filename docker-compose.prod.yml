@@ -32,6 +32,14 @@ services:
       - .:/app
       - node_modules:/app/node_modules
 
+  redis:
+    container_name: redis
+    image: redis:alpine
+    restart: "always"
+    sysctls:
+      # fixes warning when using redis with the barebones alpine image
+      net.core.somaxconn: '511'
+
 networks:
   default:
     external:

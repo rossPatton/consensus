@@ -9,7 +9,6 @@ services:
     # command here overrides CMD in Dockerfile. but Dockerfile requires CMD to be valid
     command: "npm run prod"
     depends_on:
-      - db
       - redis
     ports:
       - "3001:3001"
@@ -27,19 +26,6 @@ services:
       - PEPPER=${PEPPER}
     restart: "always"
 
-  db:
-    container_name: db
-    image: postgres:11.2-alpine
-    ports:
-      - "54320:5432"
-    volumes:
-      - "db_data:/var/lib/postgresql/data:z"
-    restart: "always"
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=consensus_dev
-      - POSTGRES_PASSWORD=${DB_DEV_PW}
-
   redis:
     container_name: redis
     image: redis:alpine
@@ -47,7 +33,3 @@ services:
     sysctls:
       # fixes warning when using redis with the barebones alpine image
       net.core.somaxconn: '511'
-
-volumes:
-  db_data:
-    driver: local

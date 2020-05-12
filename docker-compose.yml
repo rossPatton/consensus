@@ -1,8 +1,0 @@
-version: '3'
-services:
-  redis:
-    container_name: redis
-    image: redis:alpine
-    sysctls:
-      # fixes warning when using redis with the barebones alpine image
-      net.core.somaxconn: '511'
