@@ -7,15 +7,15 @@ import { validateSchema } from '../../utils';
 import { schema } from './_schema';
 
 export const search = new Router();
-const route = '/api/v1/search';
-const table = 'groups';
 
 // searching is a little different from a standard group fetch
 // uses a postgres extension to do fuzzy matching
-search.get(route, async (ctx: Koa.ParameterizedContext) => {
+search.get('/api/v1/search', async (ctx: Koa.ParameterizedContext) => {
   const query = ctx?.state?.locals?.data;
   await validateSchema(ctx, schema, query);
 
+  // @TODO set groups as default, allow passing in custom table to query
+  const table = 'groups';
   let groupsLike: {rows: ts.group[]};
   try {
     // get all columns, for rows in group whose name is similar to search term

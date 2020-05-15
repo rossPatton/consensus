@@ -107,6 +107,8 @@ module.exports = {
       __PROD__: !!env.PROD,
       __NOINDEX__: JSON.stringify(env.NO_INDEX),
       __NODE_ENV__: JSON.stringify(env.NODE_ENV),
+      __SPACES_KEY__: JSON.stringify(env.SPACES_KEY),
+      __SPACES_SECRET__: JSON.stringify(env.SPACES_SECRET),
       __URL__: JSON.stringify(!!env.DEV
         ? 'https://consensus.local'
         : 'https://consens.us.org'),

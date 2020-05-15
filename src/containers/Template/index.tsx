@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import {ErrorBoundary, GenericLoader} from '~app/containers';
 import {getGeo, getRoles, getRsvps} from '~app/redux';
+import {agent} from '~app/utils';
 
 import {Footer, Header} from './_components';
 import {tProps, tStore} from './_types';
@@ -23,6 +24,12 @@ class Template extends PureComponent<tProps> {
     if (!props.rsvpsThunk.fetched) props.getRsvpsDispatch();
     if (!props.rolesThunk.fetched) props.getRolesDispatch();
   }
+
+  // componentDidMount() {
+  //   fetch(`${__URL__}/api/v1/spaces`, {agent, method: 'POST'})
+  //     .then(console.log)
+  //     .catch(console.error);
+  // }
 
   render() {
     const {children, geoThunk} = this.props;

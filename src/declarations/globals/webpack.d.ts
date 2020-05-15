@@ -24,7 +24,7 @@ declare let __HASH__: string;
 declare let __NODE_ENV__: 'development' | 'production';
 
 // make sure qa urls dont get indexed by google
-declare let __NOINDEX__;
+declare let __NOINDEX__: boolean;
 
 // NODE_ENV === production
 declare let __PROD__: boolean;
@@ -34,6 +34,10 @@ declare let __SECRET__: string;
 
 // code is running during a SSR
 declare let __SERVER__: boolean;
+
+// access key and secret needed to upload files to our digitalocean spaces bucket
+declare let __SPACES_KEY__: string
+declare let __SPACES_SECRET__: string
 
 // consensus.local or consens.us.org depending on environment
 declare let __URL__: string;

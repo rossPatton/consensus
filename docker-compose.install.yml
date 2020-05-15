@@ -3,7 +3,7 @@
 version: '3'
 services:
   install:
-    image: consensusdocker/node_modules
+    image: node:12.3.0-alpine
     command: npm i --arch=x64 --platform=linux --no-progress
     working_dir: /app
     volumes:

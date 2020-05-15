@@ -27,6 +27,7 @@
     "@koa/cors": "^2.2.3",
     "@loadable/component": "^5.11.0",
     "@loadable/server": "^5.11.0",
+    "aws-sdk": "^2.677.0",
     "bcryptjs": "^2.4.3",
     "classnames": "^2.2.6",
     "core-js": "^3.5.0",
@@ -216,7 +217,7 @@
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-dashboard": "^3.2.0",
     "webpack-dev-middleware": "^3.7.2",
-    "webpack-dev-server": "^3.9.0",
+    "webpack-dev-server": "^3.11.0",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-merge": "^4.2.2",
     "webpack-node-externals": "^1.7.2"

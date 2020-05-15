@@ -21,7 +21,7 @@ nginx:
 
 # stops all active containers (as defined by docker-compose)
 reset:
-	docker-compose down --remove-orphans
+	docker-compose -f docker-compose.dev.yml down --remove-orphans
 
 # if installing on new machine, you need to create the shared networks and volumes first
 setup:

@@ -4,7 +4,7 @@
 require('dotenv-safe').config();
 
 const CWD = process.cwd();
-const { DB, DEBUG, NODE_ENV, NO_INDEX } = process.env;
+const { DB, DEBUG, NODE_ENV, NO_INDEX, SPACES_KEY, SPACES_SECRET } = process.env;
 
 const stats = {
   all: false,
@@ -12,7 +12,6 @@ const stats = {
   maxModules: 0,
   errors: true,
   warnings: true,
-
   // our additional debug mode options
   errorDetails: DEBUG === 'true',
   moduleTrace: DEBUG === 'true',
@@ -24,7 +23,9 @@ module.exports = {
   DEBUG: DEBUG === 'true',
   DEV: NODE_ENV === 'development',
   NO_INDEX: NO_INDEX === 'true',
-  PROD: NODE_ENV === 'production',
   NODE_ENV,
+  PROD: NODE_ENV === 'production',
+  SPACES_KEY,
+  SPACES_SECRET,
   stats,
 };
