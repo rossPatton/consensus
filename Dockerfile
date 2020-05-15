@@ -25,12 +25,7 @@ USER node
 # make sure node is owned by non-root user, otherwise node app will exit with 1
 COPY --chown=node:node . .
 
-# increase max # of threads available to our nodejs process
-ENV UV_THREADPOOL_SIZE=64
-
 # expose ports to outside world
 EXPOSE 3001
 
-# run site in container
-ENV NODE_ENV=production
 CMD ["npm", "run", "prod"]

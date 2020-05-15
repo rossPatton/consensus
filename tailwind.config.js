@@ -308,8 +308,6 @@ module.exports = {
     translate: {},
     skew: {},
     transitionProperty: {
-      // none: 'none',
-      // all: 'all',
       default: 'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
     },
     transitionTimingFunction: {
@@ -319,7 +317,6 @@ module.exports = {
       'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
     },
     transitionDuration: {
-      // '75': '75ms',
       '150': '150ms',
       '300': '300ms',
     },

@@ -39,7 +39,7 @@ export const META_TAGS: tMetaProps[] = [
     name: 'viewport',
     content: 'width=device-width, initial-scale=1 minimum-scale=1',
   },
-  { name: 'application-name', content: 'Consensus.com' },
+  { name: 'application-name', content: 'consens.us.org' },
   // { name: 'msapplication-square70x70logo', content: 'small.jpg' },
   // { name: 'msapplication-square150x150logo', content: 'medium.jpg' },
   // { name: 'msapplication-square310x150logo', content: 'wide.jpg' },

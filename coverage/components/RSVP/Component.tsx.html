@@ -29,9 +29,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.29% </span>
+                <span class="strong">66.67% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>19/31</span>
+                <span class='fraction'>10/15</span>
             </div>
         
             
@@ -120,11 +120,7 @@
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -154,16 +150,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -176,11 +162,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -215,9 +207,11 @@ export const RSVPComponent = (props: tComponentProps) =&gt; {
         'absolute t-hdr l r pt-2 pb-2 bg-gray-2': props.isMobile,
       })}&gt;
       &lt;fieldset&gt;
-        &lt;div className="flex items-center justify-center d:justify-start text-sm leading-none"&gt;
-          &lt;legend className="mr-2"&gt;
-            RSVP {userRSVPsPrivately ? 'Privately' : <span class="branch-1 cbranch-no" title="branch not covered" >'Publicly'}</span>
+        &lt;div className="text-center d:text-left d:flex d:items-center text-sm leading-none"&gt;
+          &lt;legend className="block font-semibold mb-1 mr-2 d:mb-0"&gt;
+            {rsvp.value
+              ? 'Change RSVP'
+              : <span class="branch-1 cbranch-no" title="branch not covered" >`RSVP ${userRSVPsPrivately ? 'Privately' : 'Publicly'}`}</span>
           &lt;/legend&gt;
           &lt;button
             value="yes"
@@ -225,9 +219,7 @@ export const RSVPComponent = (props: tComponentProps) =&gt; {
             onClick={<span class="fstat-no" title="function not covered" >ev</span> =&gt; <span class="cstat-no" title="statement not covered" >setRsvp({ev, meetingId})}</span>
             className={cx({
               'p-2 pl-3 pr-3 mr-1 hover:bg-green-1': true,
-              'bg-white': props.isDesktop &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >rsvp.value === 'yes',</span>
-              'bg-0': props.isDesktop &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >rsvp.value !== 'yes',</span>
-              'bg-green-1': props.isMobile &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >rsvp.value === 'yes',</span>
+              'bg-green-1': rsvp.value === 'yes',
             })}&gt;
             Yes
           &lt;/button&gt;
@@ -237,9 +229,7 @@ export const RSVPComponent = (props: tComponentProps) =&gt; {
             onClick={<span class="fstat-no" title="function not covered" >ev</span> =&gt; <span class="cstat-no" title="statement not covered" >setRsvp({ev, meetingId})}</span>
             className={cx({
               'p-2 pl-3 pr-3 mr-1 hover:bg-red-1': true,
-              'bg-white': props.isDesktop &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >rsvp.value === 'no',</span>
-              'bg-0': props.isDesktop &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >rsvp.value !== 'no',</span>
-              'bg-red-1': props.isMobile &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >rsvp.value === 'no',</span>
+              'bg-red-1': rsvp.value === 'no',
             })}&gt;
             No
           &lt;/button&gt;
@@ -249,9 +239,7 @@ export const RSVPComponent = (props: tComponentProps) =&gt; {
             onClick={<span class="fstat-no" title="function not covered" >ev</span> =&gt; <span class="cstat-no" title="statement not covered" >setRsvp({ev, meetingId})}</span>
             className={cx({
               'p-2 pl-3 pr-3 mr-1 hover:bg-yellow-1': true,
-              'bg-white': props.isDesktop &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >rsvp.value === 'maybe',</span>
-              'bg-0': props.isDesktop &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >rsvp.value !== 'maybe',</span>
-              'bg-yellow-1': props.isMobile &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >rsvp.value === 'maybe',</span>
+              'bg-yellow-1': rsvp.value === 'maybe',
             })}&gt;
             Maybe
           &lt;/button&gt;
@@ -267,7 +255,7 @@ export const RSVPComponent = (props: tComponentProps) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed May 06 2020 23:29:30 GMT-0400 (Eastern Daylight Time)
+                at Thu May 14 2020 20:51:29 GMT-0400 (Eastern Daylight Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

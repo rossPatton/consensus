@@ -105,10 +105,11 @@ module.exports = {
       __DEBUG__: !!env.DEBUG,
       __DEV__: !!env.DEV,
       __PROD__: !!env.PROD,
+      __NOINDEX__: JSON.stringify(env.NO_INDEX),
       __NODE_ENV__: JSON.stringify(env.NODE_ENV),
       __URL__: JSON.stringify(!!env.DEV
         ? 'https://consensus.local'
-        : 'https://consensus.com'),
+        : 'https://consens.us.org'),
     }),
 
     // force webpack environment to be whatever we set NODE_ENV to, just to be safe
