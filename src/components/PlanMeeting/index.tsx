@@ -96,7 +96,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     ev.preventDefault();
 
     const regexExt = /[^\\]*\.(\w+)$/;
-    let featuredImage = `${this.props.group.id}:${uniqueHash}`;
+    let featuredImage = `g${this.props.group.id}:mFI:${uniqueHash}`;
     let ext = 'jpg';
 
     const body = new FormData();
@@ -104,7 +104,6 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     if (fileInput !== null) {
       const { files }: { files: FileList | null } = fileInput;
       if (files !== null) {
-        console.log('files[0] => ', files[0]);
         ext = files[0].name.match(regexExt)[1];
         featuredImage = `${featuredImage}.${ext}`;
         body.append('meetingFeaturedImage', files[0], featuredImage);

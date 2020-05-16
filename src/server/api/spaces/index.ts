@@ -11,7 +11,7 @@ import { validateSchema } from '../../utils';
 import { schema } from './_schema';
 
 // configure client for use with Spaces
-const spacesEndpoint: unknown = new AWS.Endpoint('nyc3.digitaloceanspaces.com/meetings');
+const spacesEndpoint: unknown = new AWS.Endpoint('nyc3.digitaloceanspaces.com/groups');
 const s3 = new AWS.S3({
   // typing here is weird. aws endpoint above returns a AWS.Endpoint, which is a string
   // but this causes errors, so

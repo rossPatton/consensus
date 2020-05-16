@@ -57,10 +57,10 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             {props.featuredImage && (
               <img
                 alt="Your uploaded image preview."
-                className="w-full"
+                className="rounded w-full"
                 height="175"
                 width="175"
-                src={`https://consensus.nyc3.digitaloceanspaces.com/meetings/${props.featuredImage}?v=${v1()}`}
+                src={`https://consensus.nyc3.digitaloceanspaces.com/groups/${props.featuredImage}?v=${v1()}`}
               />
             )}
           </div>
