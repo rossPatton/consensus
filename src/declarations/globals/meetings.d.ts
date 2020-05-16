@@ -4,6 +4,7 @@ namespace ts {
     date: string,
     description: string,
     endDate: string,
+    featuredImage?: string,
     id: number,
     isDraft: boolean,
     isOnline: boolean,

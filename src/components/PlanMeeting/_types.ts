@@ -3,6 +3,7 @@ import {ValuesType} from 'utility-types';
 
 export type tState = Partial<ts.meeting> & {
   endTime: string,
+  featuredImage?: string,
   isCopy: boolean,
   isOnline: boolean,
   time: string,
@@ -33,6 +34,8 @@ export type tContainerProps = {
 
 export type tComponentProps = tContainerProps & tState & {
   onSubmit: () => void,
+  removeImage: (ev: React.MouseEvent<HTMLButtonElement>) => void,
   saveAsDraft: () => void,
+  setImage: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   updateState: (stateKey: tKeyUnion, value: tValueUnion) => void,
 };

@@ -44,7 +44,7 @@ spaces.post(
       Body: file.buffer,
       Bucket: 'consensus',
       Key: file.originalname,
-      ACL: 'private',
+      ACL: 'public-read',
     };
 
     s3.putObject(uploadParams, (err: Error | null, data: AWS.S3.PutObjectOutput) => {
