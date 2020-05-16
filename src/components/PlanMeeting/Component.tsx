@@ -1,12 +1,11 @@
-import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
-import {v1} from 'uuid';
 
-import {Emoji} from '~app/components';
+import {FileUpload} from '~app/components';
 import {objToQueryString} from '~app/utils';
+
 import {tComponentProps} from './_types';
 
 export const PlanMeetingComponent = memo((props: tComponentProps) => {
@@ -34,62 +33,13 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             value={props.title}
             onChange={ev => updateState('title', ev.currentTarget.value)}
           />
-          <h3 className="text-base mb-1">
-            Featured Image
-          </h3>
-          <div
-            id="imagePreview"
-            className={cx({
-              "animated bg-gray-1 p-3 mb-3 flex flex-col": true,
-              'fadeInDown': props.featuredImage,
-              'hidden': !props.featuredImage,
-            })}>
-            <button
-              type="button"
-              onClick={props.removeImage}
-              className="mb-1 p-2">
-              <Emoji
-                label="Close Emoji"
-                emoji="✖️"
-              />
-              Remove Image
-            </button>
-            {props.featuredImage && (
-              <img
-                alt="Your uploaded image preview."
-                className="rounded w-full"
-                height="175"
-                width="175"
-                src={`https://consensus.nyc3.digitaloceanspaces.com/groups/${props.featuredImage}?v=${v1()}`}
-              />
-            )}
-          </div>
-          <label
-            htmlFor="fileUpload"
-            className={cx({
-              "fadeInDown bg-gray-1 border cursor-ptr flex flex-col items-center mb-3 p-3 rounded animated": true,
-              'fadeInDown': !props.featuredImage,
-              'hidden': props.featuredImage,
-            })}>
-            <input
-              id="fileUpload"
-              className={cx({
-                hidden: true,
-              })}
-              name="eventFeaturedImage"
-              type="file"
-              onChange={props.setImage}
-              accept="image/png, image/jpeg, image/gif"
-            />
-            <span className="btn flex items-center mb-1 p-1">
-              <Emoji
-                label="Picture (Camera) Emoji"
-                emoji="📷"
-              />
-              Upload Your Image
-            </span>
-            <small>We recommend a size of at least 760x428px</small>
-          </label>
+          <FileUpload
+            fieldKey="meetingFeaturedImage"
+            folder="groups"
+            info="We recommend a size of at least 760x428px"
+            prefix={`g${props.group.id}:mFI`}
+            title="Upload Featured Image"
+          />
           <h3 className="text-base mb-1">Tell Us About Your Meeting</h3>
           <textarea
             rows={8}

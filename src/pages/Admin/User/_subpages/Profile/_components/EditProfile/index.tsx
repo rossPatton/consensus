@@ -1,9 +1,8 @@
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
-import cx from 'classnames';
-import {v1} from 'uuid';
 
-import {CitySearch, Emoji, ExternalLink, PasswordInput} from '~app/components';
+import {CitySearch, FileUpload, PasswordInput} from '~app/components';
+
 import {tComponentProps} from '../../_types';
 
 const EditProfile = memo((props: tComponentProps) => (
@@ -16,79 +15,14 @@ const EditProfile = memo((props: tComponentProps) => (
         <h1 className="text-3 mb-2">Edit your profile</h1>
       </legend>
       <div className="mb-3">
+        <FileUpload
+          fieldKey="userAvatar"
+          folder="users"
+          info="We recommend a size of at least 60x60px"
+          prefix={`u${props.session.id}:uAv`}
+          title="Upload or Replace Avatar"
+        />
         <label className="w-full mb-3" htmlFor="username">
-          <label htmlFor="avatarEmail">
-            <h2 className="text-base mb-1 leading-none">
-              Connect your avatar
-            </h2>
-            <p className="text-base text-gray-5 mb-1">
-              We use <ExternalLink noFollow to="https://www.libravatar.org">Libravatar</ExternalLink> for avatars. To connect your avatar, enter your Libravatar email below. It does not have to be the same as your Consensus email. We do not store this. Any changes you make to your avatar on Libravatar will be automatically reflected here.
-            </p>
-            <input
-              autoComplete="nope"
-              className="p-2 mb-3 w-full"
-              onChange={ev => props.updateState('avatarEmail', ev.currentTarget.value)}
-              placeholder="your_email_here@example.com"
-              value={props.avatarEmail}
-              name="avatarEmail"
-            />
-          </label>
-          <h3 className="text-base mb-1">
-            Upload New Avatar
-          </h3>
-          <div
-            id="imagePreview"
-            className={cx({
-              "animated bg-gray-1 p-3 mb-3 flex flex-col": true,
-              'fadeInDown': props.userAvatar,
-              'hidden': !props.userAvatar,
-            })}>
-            <button
-              type="button"
-              onClick={props.removeAvatar}
-              className="mb-1 p-2">
-              <Emoji
-                label="Close Emoji"
-                emoji="✖️"
-              />
-              Remove Image
-            </button>
-            {props.userAvatar && (
-              <img
-                alt="Your uploaded image preview."
-                className="rounded w-full"
-                height="175"
-                width="175"
-                src={`https://consensus.nyc3.digitaloceanspaces.com/users/${props.userAvatar}?v=${v1()}`}
-              />
-            )}
-          </div>
-          <label
-            htmlFor="fileUpload"
-            className={cx({
-              "fadeInDown bg-gray-1 border cursor-ptr flex flex-col items-center mb-3 p-3 rounded animated": true,
-              'fadeInDown': !props.userAvatar,
-              'hidden': props.userAvatar,
-            })}>
-            <input
-              id="fileUpload"
-              className={cx({
-                hidden: true,
-              })}
-              name="eventFeaturedImage"
-              type="file"
-              onChange={props.setAvatar}
-              accept="image/png, image/jpeg, image/gif"
-            />
-            <span className="btn flex items-center mb-1 p-1">
-              <Emoji
-                label="Picture (Camera) Emoji"
-                emoji="📷"
-              />
-              Upload Your Image
-            </span>
-            <small>We recommend a size of at least 760x428px</small>
-          </label>
           <h2 className="text-base mb-1 leading-none">
             Username
           </h2>

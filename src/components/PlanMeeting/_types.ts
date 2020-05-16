@@ -34,8 +34,6 @@ export type tContainerProps = {
 
 export type tComponentProps = tContainerProps & tState & {
   onSubmit: () => void,
-  removeImage: (ev: React.MouseEvent<HTMLButtonElement>) => void,
   saveAsDraft: () => void,
-  setImage: (ev: React.ChangeEvent<HTMLInputElement>) => void,
   updateState: (stateKey: tKeyUnion, value: tValueUnion) => void,
 };

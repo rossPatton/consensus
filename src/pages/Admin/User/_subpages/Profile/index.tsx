@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {v4} from 'uuid';
 
 import {login, patchUser} from '~app/redux';
+
 import {initialState} from './_constants';
 import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
 import {ProfileComponent} from './Component';

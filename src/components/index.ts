@@ -24,6 +24,10 @@ export const Emoji = loadable(() =>
   import(/* webpackChunkName: "Emoji" */'./Emoji'),
 );
 
+export const FileUpload = loadable(() =>
+  import(/* webpackChunkName: "FileUpload" */'./FileUpload'),
+);
+
 export const Meetings = loadable(() =>
   import(/* webpackChunkName: "Meetings" */'./Meetings'),
 );

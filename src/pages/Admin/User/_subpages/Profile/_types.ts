@@ -1,7 +1,6 @@
 import {History} from 'history';
 
 export type tState = Partial<ts.user> & {
-  avatarEmail: string,
   city: string,
   cityId: number,
   password: string,

@@ -5,15 +5,13 @@ import qs from 'query-string';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import {v4} from 'uuid';
 
 import {ErrorBoundary} from '~app/containers';
 import {getMeetingsByGroupIdSuccess, patchEvent, postMeeting} from '~app/redux';
 import {parseTimeString, slugify} from '~app/utils';
+
 import {tContainerProps, tKeyUnion, tState, tStore, tValueUnion} from './_types';
 import {PlanMeetingComponent} from './Component';
-
-let uniqueHash = v4();
 
 class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
   state = {
@@ -37,7 +35,6 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
   // we use query params to populate the form when editing or copying a meeting
   constructor(props: tContainerProps) {
     super(props);
-    uniqueHash = v4();
 
     const {router: {search}} = props;
     const draft = qs.parse(search);
@@ -84,44 +81,6 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     this.setState({
       isDraft: true,
     }, () => this.onSubmit(true));
-
-  removeImage = (ev: React.MouseEvent<HTMLButtonElement>) => {
-    ev.preventDefault();
-    this.setState({
-      featuredImage: null,
-    });
-  }
-
-  setImage = async (ev: React.ChangeEvent<HTMLInputElement>) => {
-    ev.preventDefault();
-
-    const regexExt = /[^\\]*\.(\w+)$/;
-    let featuredImage = `g${this.props.group.id}:mFI:${uniqueHash}`;
-    let ext = 'jpg';
-
-    const body = new FormData();
-    const fileInput = document.getElementById('fileUpload') as HTMLInputElement;
-    if (fileInput !== null) {
-      const { files }: { files: FileList | null } = fileInput;
-      if (files !== null) {
-        ext = files[0].name.match(regexExt)[1];
-        featuredImage = `${featuredImage}.${ext}`;
-        body.append('meetingFeaturedImage', files[0], featuredImage);
-      }
-    }
-
-    // upload image to fileserver, resize, etc if we have one
-    // TODO this should go through redux probably
-    try {
-      await fetch('/api/v1/spaces', {method: 'post', body});
-      setTimeout(() =>
-        this.setState({
-          featuredImage,
-        }), 1000);
-    } catch (err) {
-      loglevel.error('failed to upload featured image');
-    }
-  }
 
   onSubmit = async (saveAsDraft: boolean = false) => {
     const {date, endTime, id, isCopy, time, ...restOfMeeting} = this.state;
@@ -188,9 +147,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
             {...this.props}
             {...this.state}
             onSubmit={this.onSubmit}
-            removeImage={this.removeImage}
             saveAsDraft={this.saveAsDraft}
-            setImage={this.setImage}
             updateState={this.updateState}
           />
         )}
