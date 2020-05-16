@@ -1,8 +1,10 @@
+import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
+import {Emoji} from '~app/components';
 import {objToQueryString} from '~app/utils';
 
 import {tComponentProps} from './_types';
@@ -32,6 +34,54 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             value={props.title}
             onChange={ev => updateState('title', ev.currentTarget.value)}
           />
+          <h3 className="mb-1">
+            Featured Image
+          </h3>
+          {/* {(props.imagePreview || props.pathToFeaturedImage) && (
+            <div className="bgGrey1 p3 mB3 fx fxdCol aiCtr" id="imagePreview">
+              <button
+                // @ts-ignore
+                onClick={ev => props.setImage(ev, true)}
+                className="bgWhite mB2 p2 pL3 pR3">
+                <span
+                  role="img"
+                  className="mR1"
+                  aria-label="X Emoji">
+                ✖️
+                </span>
+                Remove Image
+              </button>
+              <img
+                alt=""
+                className="row"
+                height="175"
+                width="175"
+                src={props.imagePreview || props.pathToFeaturedImage as string}
+              />
+            </div>
+          )} */}
+          <label
+            htmlFor="fileUpload"
+            className="bg-gray-1 border cursor-ptr flex flex-col items-center mb-3 p-3 rounded">
+            <input
+              id="fileUpload"
+              className={cx({
+                hidden: true,
+              })}
+              name="eventFeaturedImage"
+              type="file"
+              onChange={props.setImage}
+              accept="image/png, image/jpeg, image/gif"
+            />
+            <span className="btn flex items-center mb-1 p-1">
+              <Emoji
+                label="Picture (Camera) Emoji"
+                emoji="📷"
+              />
+              Upload Your Image
+            </span>
+            <small>We recommend a size of at least 760x428px</small>
+          </label>
           <h3 className="mb-1">Tell Us About Your Meeting</h3>
           <textarea
             rows={8}

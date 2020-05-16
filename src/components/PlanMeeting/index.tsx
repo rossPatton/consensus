@@ -82,6 +82,47 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
       isDraft: true,
     }, () => this.onSubmit(true));
 
+  setImage = async (ev: React.ChangeEvent<HTMLInputElement>) => {
+    ev.preventDefault();
+
+    const images = Array.from(ev.currentTarget.files);
+    console.log('images => ', images);
+    const featuredImage = images[0];
+    console.log('featuredImage => ', featuredImage);
+
+    const reader = new FileReader();
+    reader.readAsDataURL(featuredImage);
+    reader.onload = () => {
+      console.log('reader.result => ', reader.result);
+      // this.setState({
+      //   featuredImage,
+      //   imagePreview: reader.result as string,
+      // });
+    };
+
+    const body = new FormData();
+    const fileInput = document.getElementById('fileUpload') as HTMLInputElement;
+    if (fileInput !== null) {
+      const { files }: { files: FileList | null } = fileInput;
+      console.log('files => ', files);
+
+      if (files !== null) {
+        body.append('meetingFeaturedImage', files[0]);
+        // body.append('id', `${this.props.newEvent.id}`);
+      }
+    }
+
+    console.dir(body);
+
+    // upload featuredImage to fileserver, resize, etc if we have one
+    // TODO this should go through redux probably
+    try {
+      await fetch('/api/v1/spaces', {method: 'post', body});
+    } catch (err) {
+      loglevel.error('failed to upload featured image');
+    }
+  }
+
   onSubmit = async (saveAsDraft: boolean = false) => {
     const {date, endTime, id, isCopy, time, ...restOfMeeting} = this.state;
 
@@ -148,6 +189,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
             {...this.state}
             onSubmit={this.onSubmit}
             saveAsDraft={this.saveAsDraft}
+            setImage={this.setImage}
             updateState={this.updateState}
           />
         )}
