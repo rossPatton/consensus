@@ -7,6 +7,7 @@ export type tState = Partial<ts.user> & {
   password: string,
   region: string,
   regionId: number,
+  userAvatar: string | null,
 };
 export type tStore = {session: ts.thunk<ts.session>};
 export type tKeyUnion = keyof tState;
@@ -20,6 +21,8 @@ export type tContainerProps = {
 }
 
 export type tComponentProps = tState & {
+  removeAvatar: any,
+  setAvatar: any,
   save: (ev: React.FormEvent<HTMLFormElement>) => void,
   session: ts.session<ts.user>,
   subsection: string,

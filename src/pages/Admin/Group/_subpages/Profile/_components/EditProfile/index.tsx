@@ -1,10 +1,11 @@
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
+import cx from 'classnames';
+import {v1} from 'uuid';
 
-import {ExternalLink, PasswordInput} from '~app/components';
+import {Emoji, ExternalLink, PasswordInput} from '~app/components';
 import {categories} from '~app/constants';
-
 import {tComponentProps} from '../../_types';
 
 const EditProfile = memo((props: tComponentProps) => (
@@ -33,6 +34,62 @@ const EditProfile = memo((props: tComponentProps) => (
           value={props.avatarEmail}
           name="avatarEmail"
         />
+      </label>
+      <h3 className="text-base mb-1">
+        Upload New Group Logo
+      </h3>
+      <div
+        id="imagePreview"
+        className={cx({
+          "animated bg-gray-1 p-3 mb-3 flex flex-col": true,
+          'fadeInDown': props.groupAvatar,
+          'hidden': !props.groupAvatar,
+        })}>
+        <button
+          type="button"
+          onClick={props.removeAvatar}
+          className="mb-1 p-2">
+          <Emoji
+            label="Close Emoji"
+            emoji="✖️"
+          />
+          Remove Image
+        </button>
+        {props.groupAvatar && (
+          <img
+            alt="Your uploaded image preview."
+            className="rounded w-full"
+            height="175"
+            width="175"
+            src={`https://consensus.nyc3.digitaloceanspaces.com/groups/${props.groupAvatar}?v=${v1()}`}
+          />
+        )}
+      </div>
+      <label
+        htmlFor="fileUpload"
+        className={cx({
+          "fadeInDown bg-gray-1 border cursor-ptr flex flex-col items-center mb-3 p-3 rounded animated": true,
+          'fadeInDown': !props.groupAvatar,
+          'hidden': props.groupAvatar,
+        })}>
+        <input
+          id="fileUpload"
+          className={cx({
+            hidden: true,
+          })}
+          name="eventFeaturedImage"
+          type="file"
+          onChange={props.setAvatar}
+          accept="image/png, image/jpeg, image/gif"
+        />
+        <span className="btn flex items-center mb-1 p-1">
+          <Emoji
+            label="Picture (Camera) Emoji"
+            emoji="📷"
+          />
+          Upload Your Image
+        </span>
+        <small>We recommend a size of at least 760x428px</small>
       </label>
       <h2 className="text-base mb-1 leading-none">
         Change Category
