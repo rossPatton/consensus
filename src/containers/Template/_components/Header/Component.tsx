@@ -98,7 +98,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
                       <Avatar
                         alt="Your Avatar - click to open dashboard menu"
                         className=""
-                        hash={props.session.profile.avatarHash}
+                        hash={props.session.profile.avatar}
                         size="40"
                         type={props.session.type}
                       />

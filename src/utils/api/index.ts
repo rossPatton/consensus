@@ -4,10 +4,10 @@ import {agent, objToQueryString} from '..';
 import {tApiOpts} from './_types';
 
 export const api = async (opts: tApiOpts) => {
-  const {method = 'GET', path, query = {}} = opts;
+  const {body, method = 'GET', path, query = {}} = opts;
   const qs = objToQueryString(query);
 
-  const fetchOpts = {agent, method};
+  const fetchOpts = {agent, body, method};
   if (opts.credentials) {
     (fetchOpts as any).credentials = __DEV__ ? 'include' : 'same-origin';
   }

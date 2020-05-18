@@ -44,6 +44,10 @@ exports.up = async (knex: Knex) => {
     // and a new one must be generated
     table.timestamp('verificationExpires').defaultTo(null);
 
+    // when we save images to DO spaces, we use a uuid/v4 hash
+    // this is then prefixed client side with a string that denotes the img type
+    table.string('avatar').defaultTo(null);
+
     // if group account and admin iniates group deletion
     // deadline is set for 1 week, cron job will automatically clear out entries
     table.timestamp('deletionDeadline');

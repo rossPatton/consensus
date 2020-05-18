@@ -1,15 +1,15 @@
 import React, { memo } from 'react';
 import {Link} from 'react-router-dom';
+import cx from 'classnames';
 
 import { PasswordInput } from '~app/components';
-
 import { tComponentProps } from './_types';
 
 export const LoginComponent = memo((props: tComponentProps) => (
   <>
     <form
       method="POST"
-      className="mb-3"
+      className="mb-2"
       name="userLoginForm"
       autoComplete="off"
       action="/auth/v1/login"
@@ -43,6 +43,10 @@ export const LoginComponent = memo((props: tComponentProps) => (
           placeholder="your_very_secure_password_here"
           required
         />
+        <div
+          className={cx({
+            'mb-2': props.error,
+          })}>
         <button
           disabled={props.hasMounted && (!props.password || !props.username)}
           className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-2">
@@ -53,13 +57,14 @@ export const LoginComponent = memo((props: tComponentProps) => (
           className="btn p-2 pl-3 pr-3 hover:bg-gray-2">
           Forget your password?
         </Link>
+        </div>
+        {props.error && (
+          <div className='animated fadeInUp bg-red-2 font-bold p-2 rounded text-white'>
+            {props.error}
+          </div>
+        )}
       </fieldset>
     </form>
-    {props.error && (
-      <b>
-        {props.error}
-      </b>
-    )}
     <Link to="/signup">
       Or create a new account
     </Link>

@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 
 import {FilterPanel, Meetings} from '~app/components';
-
 import {tComponentProps} from './_types';
 
 export const MeetingsComponent = memo((props: tComponentProps) => (
@@ -15,6 +14,7 @@ export const MeetingsComponent = memo((props: tComponentProps) => (
           count={1}
           meetings={props.drafts}
           sessionRole="admin"
+          type="drafts"
         />
       </div>
     )}

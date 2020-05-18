@@ -44,6 +44,7 @@ export const meetingsByGroupIdReducer = (state = initialState, action: tActions)
     return {
       ...state,
       data: [...state.data].filter(ev => ev.id !== id),
+      isLoading: false,
     };
   }
 

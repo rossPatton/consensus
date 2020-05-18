@@ -14,7 +14,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     const group = props?.sessionThunk?.data?.profile as ts.group;
 
     const {
-      avatarHash,
+      avatar,
       city,
       cityId,
       country,

@@ -6,6 +6,7 @@ import { failure, init, success } from './actions';
 export const postMeeting = (query: ts.upsertMeetingQuery) => {
   return async function (dispatch: Function) {
     return api({
+      body: query,
       dispatch,
       failure,
       init,

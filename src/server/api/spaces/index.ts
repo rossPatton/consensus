@@ -6,7 +6,7 @@ import loglevel from 'loglevel';
 
 import { validateSchema } from '../../utils';
 import { groupsS3, uploadDefaults, usersS3 } from './_constants';
-import { schema } from './_schema';
+// import { schema } from './_schema';
 import { tFiles } from './_types';
 
 const upload = multer();
@@ -26,7 +26,8 @@ const fields = upload.fields([{
 
 spaces.post('/api/v1/spaces', fields, async (ctx: Koa.ParameterizedContext) => {
   const query = ctx?.state?.locals?.data;
-  await validateSchema(ctx, schema, query);
+  console.log('query => ', query);
+  // await validateSchema(ctx, schema, query);
 
   const req = ctx.req as multer.MulterIncomingMessage;
   const files = req.files as tFiles;
@@ -34,35 +35,47 @@ spaces.post('/api/v1/spaces', fields, async (ctx: Koa.ParameterizedContext) => {
 
   if (typeof files === 'undefined') return ctx.throw(400);
 
-  const spacesCB = (err: Error | null, data: AWS.S3.PutObjectOutput) => {
-    if (err) loglevel.error(err, err.stack);
-    console.log(data);
-    ctx.status = 200;
-    ctx.body = {ok: true};
-  };
-
+  let file = null;
+  let s3 = groupsS3;
   if (typeof files.meetingFeaturedImage !== 'undefined') {
-    const file = files.meetingFeaturedImage[0];
-    groupsS3.putObject({
-      ...uploadDefaults,
-      Body: file.buffer,
-      Key: file.originalname,
-    }, spacesCB);
-
+    file = files.meetingFeaturedImage[0];
   } else if (typeof files.groupAvatar !== 'undefined') {
-    const file = files.groupAvatar[0];
-    groupsS3.putObject({
-      ...uploadDefaults,
-      Body: file.buffer,
-      Key: file.originalname,
-    }, spacesCB);
-
+    file = files.groupAvatar[0];
   } else if (typeof files.userAvatar !== 'undefined') {
-    const file = files.userAvatar[0];
-    usersS3.putObject({
+    file = files.userAvatar[0];
+    s3 = usersS3;
+  }
+
+  // const spacesCB = (err: Error | null, data: AWS.S3.PutObjectOutput) => {
+  //   if (err) loglevel.error(err, err.stack);
+  //   console.log(data);
+  //   ctx.status = 200;
+  //   ctx.body = {ok: true};
+  // };
+
+  try {
+    await s3.putObject({
       ...uploadDefaults,
       Body: file.buffer,
       Key: file.originalname,
-    }, spacesCB);
+    }).promise();
+    ctx.status = 200;
+    ctx.body = {img: file.originalname};
+  } catch (err) {
+    ctx.throw(500, err)
   }
+
+  // s3Promise = usersS3.putObject({
+  //     ...uploadDefaults,
+  //     Body: file.buffer,
+  //     Key: file.originalname,
+  //   }, spacesCB).promise();
+
+  // s3Promise = groupsS3.putObject({
+  //   ...uploadDefaults,
+  //   Body: file.buffer,
+  //   Key: file.originalname,
+  // }, spacesCB).promise();
+
+  // await s3Promise;
 });

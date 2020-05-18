@@ -5,6 +5,7 @@ export type tProps = {
   folder?: 'groups' | 'users',
   // the unique identifier for the image
   hash?: string,
+  img?: string,
   // if we want to include additional info about uploading the image to the user, like size
   info?: string,
   // shorthand code that includes group or user id and image type
@@ -15,11 +16,12 @@ export type tProps = {
   width?: string,
 }
 
-export type tState = {
-  image: string | null,
-};
+export type tContainerProps = tProps & {
+  featuredImage: ts.thunk<string>,
+  postFeaturedImageDispatch: (query: ts.spacesQuery) => void,
+}
 
-export type tComponentProps = tProps & tState & {
+export type tComponentProps = tProps & {
   removeImage: (ev: React.MouseEvent<HTMLButtonElement>) => void,
   setImage: (ev: React.ChangeEvent<HTMLInputElement>) => void,
 };

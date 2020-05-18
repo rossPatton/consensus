@@ -22,7 +22,6 @@ const createUser = async () => {
 };
 
 const createTestUser = async () => ({
-  avatarHash: '0e55598077105311173b7624dd7619ca6afceecd9b2891638487b00f2c133ac5',
   bio: faker.lorem.paragraphs(),
   city: 'New York',
   cityId: 16624,

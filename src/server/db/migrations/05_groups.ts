@@ -76,7 +76,7 @@ exports.up = async (knex: Knex) => {
     // the auto-generated string for a libravatar avatar
     // it falls back to gravatar if lookup fails
     // we do NOT store the actual email we are given, just the generated hashed url
-    table.string('avatarHash').defaultTo(null);
+    table.string('avatar').defaultTo(null);
 
     // group external website and social media, if available
     table.string('website').defaultTo('');

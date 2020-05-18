@@ -29,6 +29,7 @@ const createTestUserAccount = async () => {
   const password = encrypt(saltedHash);
 
   return {
+    avatar: '',
     login: 'testAccount',
     password,
     privateEmail: faker.random.boolean(),
@@ -44,6 +45,7 @@ const createTestLongPassUserAccount = async () => {
   const password = encrypt(saltedHash);
 
   return {
+    avatar: '',
     login: 'testLongPassAccount',
     password,
     privateEmail: faker.random.boolean(),
@@ -57,6 +59,7 @@ const createTestGroupAccount = async () => {
   const password = encrypt(saltedHash);
 
   return {
+    avatar: '',
     login: 'twcNYC',
     groupId: 1,
     privateEmail: faker.random.boolean(),

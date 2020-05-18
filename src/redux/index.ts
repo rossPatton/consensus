@@ -7,6 +7,8 @@ export { getCities } from './cities';
 export { getCountry } from './country';
 export { getRegion } from './region';
 
+export { postFeaturedImage } from './featuredImage';
+
 // meeting(s) related actions.thunks
 export { getMeeting, patchEvent, postMeeting } from './meeting';
 export { getMeetingsByLocation } from './meetingsByLocation';

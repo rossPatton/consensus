@@ -51,6 +51,10 @@ export const Groups = loadable(() =>
   import(/* webpackChunkName: "Group" */'./Groups'),
 );
 
+export const MeetingFeaturedImage = loadable(() =>
+  import(/* webpackChunkName: "MeetingFeaturedImage" */'./MeetingFeaturedImage'),
+);
+
 export const PasswordInput = loadable(() =>
   import(
     /* webpackMode: "eager" */

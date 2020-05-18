@@ -106,7 +106,7 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
   if (!isValidPW) return ctx.throw(400, 'Password is not correct');
 
   if (typeof avatarEmail === 'string') {
-    updateQuery.avatarHash = sha256(avatarEmail);
+    updateQuery.avatar = sha256(avatarEmail);
   }
 
   let updatedUser = [] as ts.user[];

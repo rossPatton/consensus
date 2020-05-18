@@ -1,17 +1,18 @@
 import _ from 'lodash';
-import loglevel from 'loglevel';
 import React, { PureComponent } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import {v4} from 'uuid';
 
-import {tProps, tState} from './_types';
+import {tContainerProps} from './_types';
+import {postFeaturedImage} from '~app/redux';
+import {success as postFeaturedImageSuccess} from '~app/redux/featuredImage/post/actions'
 import {FileUploadComponent} from './Component';
 
 /**
  * @description A Component for uploading files to the consensus DO spaces account
  * must be used as part of a form with multi-part encoding
  */
-class FileUploadContainer extends PureComponent<tProps, tState> {
+class FileUploadContainer extends PureComponent<tContainerProps> {
   static defaultProps = {
     folder: 'groups' as 'groups' | 'users',
     hash: v4(),
@@ -21,15 +22,9 @@ class FileUploadContainer extends PureComponent<tProps, tState> {
     width: '60',
   };
 
-  state = {
-    image: null as string | null,
-  };
-
   removeImage = (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.preventDefault();
-    this.setState({
-      image: null,
-    });
+    postFeaturedImageSuccess({img: ''});
   }
 
   setImage = async (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,23 +45,16 @@ class FileUploadContainer extends PureComponent<tProps, tState> {
       }
     }
 
-    // upload image to fileserver, resize, etc if we have one
-    // TODO this should go through redux probably
-    try {
-      await fetch('/api/v1/spaces', {method: 'post', body});
-      console.log('image => ', image);
-      setTimeout(() => this.setState({image}), 1000);
-    } catch (err) {
-      loglevel.error(`failed to upload ${this.props.fieldKey}`);
-    }
+    return this.props.postFeaturedImageDispatch(body);
   }
 
   render() {
+    console.log('all file upload props => ', this.props);
     return (
       <FileUploadComponent
         fieldKey={this.props.fieldKey}
         folder={this.props.folder}
-        image={this.state.image}
+        img={this.props.img}
         info={this.props.info}
         title={this.props.title}
         removeImage={this.removeImage}
@@ -77,4 +65,12 @@ class FileUploadContainer extends PureComponent<tProps, tState> {
   }
 }
 
-export default FileUploadContainer;
+const mapStateToProps = (store: any) => ({
+  img: store.featuredImage.data?.img,
+});
+
+const mapDispatchToProps = (dispatch: Function) => ({
+  postFeaturedImageDispatch: (query: ts.spacesQuery) => dispatch(postFeaturedImage(query)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FileUploadContainer);

@@ -3,7 +3,7 @@ namespace ts {
 
   declare type group = Readonly<{
     allowNonVerified: boolean,
-    avatarHash?: string,
+    avatar?: string,
     category: ts.category,
     city: string,
     cityId: number,

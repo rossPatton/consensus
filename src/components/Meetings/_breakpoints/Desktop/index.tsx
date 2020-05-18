@@ -4,9 +4,8 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {Emoji, ExternalLink, PlaceholderImage} from '~app/components';
+import {Emoji, ExternalLink, MeetingFeaturedImage} from '~app/components';
 import {objToQueryString, slugify} from '~app/utils';
-
 import {tComponentProps} from './_types';
 
 const DesktopMeetings = memo((props: tComponentProps) => (
@@ -15,15 +14,15 @@ const DesktopMeetings = memo((props: tComponentProps) => (
       'flex flex-row text-left': props.horizontal,
       'justify-between': props.horizontal && props.meetings.length === 4,
     })}>
-    {props.meetings.map((ev, i) => {
-      const isPastMeeting = dayJS(ev.date).isBefore(dayJS());
-      const {id, ...evWithoutId} = ev;
-      const qs = objToQueryString(ev);
+    {props.meetings.map((meeting, i) => {
+      const isPastMeeting = dayJS(meeting.date).isBefore(dayJS());
+      const {id, ...evWithoutId} = meeting;
+      const qs = objToQueryString(meeting);
       const qsWithCopy = objToQueryString({...evWithoutId, isCopy: true});
 
       return (
         <li
-          key={ev.id}
+          key={meeting.id}
           className={cx({
             'mb-2': !props.horizontal,
             'd:mb-1 w-1/4 flex-grow-0': props.horizontal,
@@ -40,64 +39,63 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                 'd:mb-0 mr-2 bg-gray-2 max-w-1/3': !props.horizontal,
               })}>
               <Link
-                to={ev.isDraft
-                  ? `/draft/${ev.groupId}?${qs}`
-                  : `/meeting/${slugify(ev.title)}`}>
-                <PlaceholderImage
-                  height={240}
-                  seed={ev.id}
-                  width={480}
+                to={meeting.isDraft
+                  ? `/draft/${meeting.groupId}?${qs}`
+                  : `/meeting/${slugify(meeting.title)}`}>
+                <MeetingFeaturedImage
+                  img={meeting.img}
+                  seed={meeting.id}
                 />
               </Link>
             </div>
             <div>
               <div className="flex mb-1 text-sm text-red-3 font-bold leading-none">
-                <time className="mr-1" dateTime={ev.date}>
+                <time className="mr-1" dateTime={meeting.date}>
                   {isPastMeeting
-                    ? dayJS(ev.date).format('MMM DD YYYY | h:mmA')
-                    : dayJS(ev.date).format('MMM DD | h:mmA')}
+                    ? dayJS(meeting.date).format('MMM DD YYYY | h:mmA')
+                    : dayJS(meeting.date).format('MMM DD | h:mmA')}
                 </time>
                 {!props.horizontal && (
                   <span>
                     <span className="mr-1">@</span>
-                    {ev.locationLink && (
+                    {meeting.locationLink && (
                       <ExternalLink
                         noFollow
                         className="mr-1"
-                        to={ev.locationLink}>
-                        {ev.location}
+                        to={meeting.locationLink}>
+                        {meeting.location}
                       </ExternalLink>
                     )}
                   </span>
                 )}
-                {!ev.locationLink && ev.location}
+                {!meeting.locationLink && meeting.location}
               </div>
               <h3 className="capitalize mb-1">
-                {ev.isDraft && ev.title}
-                {!ev.isDraft
+                {meeting.isDraft && meeting.title}
+                {!meeting.isDraft
                   && (
-                    <Link to={`/meeting/${slugify(ev.title)}`}>
-                      {ev.title}
+                    <Link to={`/meeting/${slugify(meeting.title)}`}>
+                      {meeting.title}
                     </Link>
                   )}
               </h3>
               {props.showOrgName
                 && (
                   <Link
-                    to={`/group/${slugify(ev.groupName)}`}
+                    to={`/group/${slugify(meeting.groupName)}`}
                     className="font-bold text-sm text-gray-5 no-underline">
-                    {ev.groupName}
+                    {meeting.groupName}
                   </Link>
                 )}
               {props.isEditable
                 && (
                   <div className="flex items-center">
-                    {(!isPastMeeting || ev.isDraft) && (
+                    {(!isPastMeeting || meeting.isDraft) && (
                       <Link
                         className="text-sm mr-2"
                         to={props.sessionRole === 'admin'
                           ? `/admin/planMeeting?${qs}`
-                          : `/group/${slugify(ev.groupName)}/planMeeting?${qs}`}>
+                          : `/group/${slugify(meeting.groupName)}/planMeeting?${qs}`}>
                         <Emoji
                           label="Hand with Pen Emoji"
                           emoji="✍️"
@@ -106,13 +104,13 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                       </Link>
                     )}
                     {isPastMeeting
-                      && !ev.isDraft
+                      && !meeting.isDraft
                       && (
                         <Link
                           className="text-sm mr-2"
                           to={props.sessionRole === 'admin'
                             ? `/admin/planMeeting?${qsWithCopy}`
-                            : `/group/${slugify(ev.groupName)}/planMeeting?${qsWithCopy}`}>
+                            : `/group/${slugify(meeting.groupName)}/planMeeting?${qsWithCopy}`}>
                           <Emoji
                             label="Clipboard Emoji"
                             emoji="📋"
@@ -120,9 +118,9 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                           Copy
                         </Link>
                       )}
-                    {(!isPastMeeting || ev.isDraft) && (
+                    {(!isPastMeeting || meeting.isDraft) && (
                       <button
-                        onClick={e => props.deleteEvent(e, ev.id)}
+                        onClick={e => props.deleteEvent(e, meeting.id)}
                         className="border-0 bg-0 text-sm mr-2 underline">
                         <Emoji
                           label="Big X Emoji"
@@ -131,9 +129,9 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                         Delete
                       </button>
                     )}
-                    {ev.isDraft && (
+                    {meeting.isDraft && (
                       <Link
-                        to={`/draft/${ev.groupId}?${qs}`}
+                        to={`/draft/${meeting.groupId}?${qs}`}
                         className="text-sm">
                         <Emoji
                           label="Eye Emoji"

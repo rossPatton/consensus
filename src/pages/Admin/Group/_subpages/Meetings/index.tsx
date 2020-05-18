@@ -8,7 +8,6 @@ import {
   SearchFilter,
 } from '~app/containers';
 import {getMeetingsByGroupId} from '~app/redux';
-
 import {tContainerProps, tStore} from './_types';
 import {MeetingsComponent} from './Component';
 
@@ -51,6 +50,8 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
                     const drafts: ts.meeting[] = meetingsByGroupIdThunk.data.filter(ev => {
                       return ev.isDraft;
                     });
+
+                    console.log('drafts => ', drafts);
 
                     return (
                       <MeetingsComponent

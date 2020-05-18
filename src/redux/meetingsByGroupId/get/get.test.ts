@@ -31,7 +31,7 @@ const testMeeting = {
   isDraft: false,
   isOnline: false,
   duration: 2,
-  pathToFeaturedImage: 'http://lorempixel.com/640/480',
+  img: '',
   publicRSVPS: 0,
   privateRSVPS: 1,
   time: '19:00',

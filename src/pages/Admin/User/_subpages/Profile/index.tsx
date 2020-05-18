@@ -19,7 +19,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     uniqueHash = v4();
 
     const {
-      avatarHash,
+      avatar,
       created_at,
       updated_at,
       ...user

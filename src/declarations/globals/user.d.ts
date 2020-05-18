@@ -1,6 +1,6 @@
 namespace ts {
   declare type user = Readonly<{
-    avatarHash?: string,
+    avatar?: string,
     created_at?: Date,
     bio?: string,
     city?: string, // city.name

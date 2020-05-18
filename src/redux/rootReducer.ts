@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import { citiesReducer } from './cities/reducer';
 import { cityReducer } from './city/reducer';
 import { countryReducer } from './country/reducer';
+import { featuredImageReducer } from './featuredImage/reducer';
 import { geoReducer } from './geo/reducer';
 import { groupReducer } from './group/reducer';
 import { groupsReducer } from './groups/reducer';
@@ -23,6 +24,7 @@ export const rootReducer = combineReducers({
   city: cityReducer,
   cities: citiesReducer,
   country: countryReducer,
+  featuredImage: featuredImageReducer,
   meeting: meetingReducer,
   meetingsByLocation: meetingsByLocationReducer,
   meetingsByGroupId: meetingsByGroupIdReducer,

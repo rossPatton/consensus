@@ -20,7 +20,7 @@ const createGroup = async (groupId: number) => {
 
   return {
     allowNonVerified: group.type === 'public',
-    avatarHash: '310816ae8db99143324e54bb7b9b01f5cb98d37dde848e8a37292e1cde97c1b9',
+    avatar: '310816ae8db99143324e54bb7b9b01f5cb98d37dde848e8a37292e1cde97c1b9',
     category,
     city: group.city,
     cityId: 16624,

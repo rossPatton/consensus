@@ -76,7 +76,7 @@ export const UsersComponent = memo((props: tComponentProps) => {
                   hidden: props.isMobile && showControls,
                 })}>
                 <Avatar
-                  hash={user.avatarHash}
+                  hash={user.avatar}
                   size="66"
                   type="user"
                 />

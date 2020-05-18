@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {Paginate} from '~app/containers';
 import {MediaContext} from '~app/context';
 import {deleteEvent} from '~app/redux';
-
 import {tContainerProps, tStore} from './_types';
 import {MeetingsComponent} from './Component';
 
@@ -31,8 +30,8 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
     } = this.props;
 
     const {isMobile, isDesktop} = this.context;
-
     const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
+
     if (meetings.length === 0) {
       return (
         <h2 className="fs4 p-3 text-center">

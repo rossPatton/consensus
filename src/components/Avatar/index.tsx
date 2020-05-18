@@ -8,7 +8,7 @@ const Avatar = memo((props: tProps) => (
   <div
     className={cx({
       'mr-1': typeof props.className !== 'string',
-      'bg-white border p-3 rounded': !props.hash,
+      'bg-gray-2 border p-3 rounded': !props.hash,
       [props.className]: typeof props.className === 'string',
     })}>
     {props.hash && (

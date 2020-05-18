@@ -23,6 +23,13 @@ namespace ts {
     id: string | number,
   };
 
+  declare type spacesQuery = formSubmit & {
+    folder: string,
+    Body: FormData,
+    Bucket: string,
+    Key: string,
+  };
+
   declare type responseError = Readonly<{
     message: fetchResponse<Error> | string;
     status: 200 | 204 | 400 | 401 | 404 | 500;

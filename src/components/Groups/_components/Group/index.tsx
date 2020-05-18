@@ -32,7 +32,7 @@ const Group = memo((props: tProps) => {
         <div className="mr-1">
           <Avatar
             alt={`Avatar for ${props.group.name}`}
-            hash={props.group.avatarHash}
+            hash={props.group.avatar}
             size="60"
             type="group"
           />

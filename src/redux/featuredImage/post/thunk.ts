@@ -3,15 +3,14 @@ import { api } from '~app/utils';
 import { path } from '../_constants';
 import { failure, init, success } from './actions';
 
-export const patchEvent = (query: ts.upsertMeetingQuery) => {
+export const postFeaturedImage = (body: ts.spacesQuery) => {
   return async function (dispatch: Function) {
     return api({
-      body: query,
+      body,
       dispatch,
       failure,
       init,
-      method: 'PATCH',
-      query,
+      method: 'POST',
       path,
       success,
     });

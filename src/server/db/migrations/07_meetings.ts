@@ -51,8 +51,8 @@ exports.up = async (knex: Knex) => {
     // if user saves meeting as draft instead of publishing right away
     table.boolean('isDraft').notNullable().defaultTo(true);
 
-    // ref to where img lives on file server. only created if image is uploaded
-    table.string('pathToFeaturedImage');
+    // hash of featured image, if one has been uploaded
+    table.string('img');
 
     // time of day the meeting occurs. used to calculate endDate
     table.string('time').notNullable().defaultTo('19:00');

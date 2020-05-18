@@ -7,11 +7,10 @@ import {Link} from 'react-router-dom';
 import {
   Description,
   ExternalLink,
+  MeetingFeaturedImage,
   Meetings,
-  PlaceholderImage,
   RSVP,
 } from '~app/components';
-
 import {tComponentProps} from '../../_types';
 
 const MobileMeetingPage = memo((props: tComponentProps) => {
@@ -40,10 +39,9 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
       )}
       <div className="flex flex-col d:flex-row mb-4">
         <div className="min-w-1/3 d:mr-3 mb-2 d:mb-0">
-          <PlaceholderImage
-            height={420}
+          <MeetingFeaturedImage
+            img={meeting.img}
             seed={meeting.id}
-            width={640}
           />
         </div>
         <div className="flex flex-col">

@@ -28,7 +28,7 @@ export const eventKeys = [
 ];
 
 export const groupKeys = [
-  'avatarHash',
+  'avatar',
   'allowNonVerified',
   'category',
   'city',
@@ -50,7 +50,7 @@ export const groupKeys = [
 ];
 
 export const userKeys = [
-  'avatarHash',
+  'avatar',
   'bio',
   'city',
   'id',

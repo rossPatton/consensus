@@ -4,8 +4,13 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {Description, ExternalLink, Meetings, PlaceholderImage, RSVP} from '~app/components';
-
+import {
+  Description,
+  ExternalLink,
+  MeetingFeaturedImage,
+  Meetings,
+  RSVP,
+} from '~app/components';
 import {tComponentProps} from '../../_types';
 
 const DesktopMeetingComponent = memo((props: tComponentProps) => {
@@ -15,12 +20,12 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
   return (
     <>
       {!isPastMeeting && rsvp.value === 'yes' && (
-        <b className="block p-2 mb-3 rounded text-center bg-green-1 text-sm">
+        <b className="fadeInUp block p-2 mb-3 rounded text-center bg-green-1 text-sm">
           You&apos;re going to this meeting!
         </b>
       )}
       {isPastMeeting && (
-        <b className="block p-2 mb-3 rounded text-center bg-red-1 text-sm">
+        <b className="fadeInUp block p-2 mb-3 rounded text-center bg-red-1 text-sm">
           This meeting has already happened
         </b>
       )}
@@ -33,10 +38,9 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
       )}
       <div className="flex flex-row mb-4">
         <div className="min-w-1/3 mr-3">
-          <PlaceholderImage
-            height={420}
+          <MeetingFeaturedImage
+            img='33b4d3ac-4fd8-4aab-bd69-c6a41cff3ddb.jpeg'
             seed={meeting.id}
-            width={640}
           />
         </div>
         <div className="min-w-2/3">

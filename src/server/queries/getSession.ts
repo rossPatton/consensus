@@ -17,24 +17,22 @@ export const getSession = async (
     emails = await getEmailsByAccountId(ctx, account.id);
   }
 
-  // for roles, etc, we want id here to be from the account, not the profile
-  const {deletionDeadline, id, isVerified, login, groupId, privateEmail} = account;
-
   // we return things this way to match redux-thunk on the client
   return {
     error: null,
     isLoading: false,
     data: {
-      deletionDeadline,
+      avatar: account.avatar,
+      deletionDeadline: account.deletionDeadline,
       emails,
-      id, // account.id
+      id: account.id,
       isAuthenticated: ctx.isAuthenticated(),
       isNew: account.isNew,
-      isVerified, // has the account been verified yet
-      login, // unique login for account
-      privateEmail,
+      isVerified: account.isVerified, // has the account been verified yet
+      login: account.login, // unique login for account
+      privateEmail: account.privateEmail,
       profile, // user or org profile
-      type: groupId ? 'group' : 'user', // account type
+      type: account.groupId ? 'group' : 'user', // account type
     },
   };
 };

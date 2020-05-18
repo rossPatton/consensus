@@ -30,7 +30,7 @@ const testMeeting = {
   endDate: '2021-02-12T02:01:06.513Z',
   isDraft: false,
   duration: 2,
-  pathToFeaturedImage: 'http://lorempixel.com/640/480',
+  img: '',
   time: '19:00',
 };
 

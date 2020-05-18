@@ -14,7 +14,7 @@ const Aside = memo((props: tProps) => {
     <aside className="border shadow order-1 min-w-1/3 bg-white rounded p-2 mr-2">
       <div className="flex flex-row items-center mb-2">
         <Avatar
-          hash={props.session.profile.avatarHash}
+          hash={props.session.profile.avatar}
           size="60"
           type="user"
         />
@@ -62,7 +62,7 @@ const Aside = memo((props: tProps) => {
                     to={`/group/${group.handle}`}
                     className="rounded p-1 flex items-center no-underline hover:bg-gray-2 transition duration-150">
                     <Avatar
-                      hash={group.avatarHash}
+                      hash={group.avatar}
                       size="40"
                       type="group"
                     />

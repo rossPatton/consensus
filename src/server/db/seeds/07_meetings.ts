@@ -28,7 +28,6 @@ const createMeeting = async (groupId: number, isDraft: boolean = false) => {
       locationLink: faker.internet.url(),
       groupId,
       groupName: group.name,
-      pathToFeaturedImage: faker.image.imageUrl(),
       slug,
       title,
     };

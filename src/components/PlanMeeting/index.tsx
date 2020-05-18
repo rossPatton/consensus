@@ -62,6 +62,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
         ? dayJS().toISOString()
         : dayJS(draft.endDate as string).format('YYYY-MM-DD'),
       id: isCopy ? undefined : parseInt(draft.id as string, 10),
+      img: draft.img as string,
       isCopy,
       isDraft: true,
       isOnline,
@@ -83,6 +84,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     }, () => this.onSubmit(true));
 
   onSubmit = async (saveAsDraft: boolean = false) => {
+    const {img} = this.props;
     const {date, endTime, id, isCopy, time, ...restOfMeeting} = this.state;
 
     const timeArr = parseTimeString(time);
@@ -102,6 +104,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
 
       const planMeeting = await dispatch({
         ...restOfMeeting,
+        img,
         // we submit drafts to the same table in the DB as well
         // we only want to save as draft when the user hits the save as draft button
         // we don't use state here, since we want to set this to false when publishing
@@ -136,6 +139,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     const {sessionThunk} = this.props;
+    console.log('all props for plan meeting => ', this.props);
 
     return (
       <ErrorBoundary
@@ -157,6 +161,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
 }
 
 const mapStateToProps = (store: tStore) => ({
+  img: store.featuredImage.data?.img,
   meetingThunk: store.meeting,
   meetingsThunk: store.meetingsByGroupId,
   sessionThunk: store.session,

@@ -9,7 +9,6 @@ import {schema} from './_schema';
 
 export const auth = new Router();
 
-
 auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
   passport.authenticate('local', async (
     err: Error | null,

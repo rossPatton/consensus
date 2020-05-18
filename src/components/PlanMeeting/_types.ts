@@ -10,6 +10,7 @@ export type tState = Partial<ts.meeting> & {
 };
 
 export type tStore = {
+  featuredImage: ts.thunk<{img: string}>,
   meeting: ts.thunk<ts.meeting>,
   meetingsByGroupId: ts.thunk<ts.meeting[]>,
   session: ts.thunk<ts.session>,
@@ -20,6 +21,7 @@ export type tValueUnion = ValuesType<tState>;
 export type tMeetingTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export type tContainerProps = {
+  img: string | null,
   meetingThunk: ts.thunk<ts.meeting>,
   meetingsThunk: ts.thunk<ts.meeting[]>,
   heading?: string,
