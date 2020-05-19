@@ -19,6 +19,7 @@ const AdminContainer = (props: tProps) => {
           meta={[
             { name: 'robots', content: 'noindex' },
           ]}
+          title="Consensus: Dashboard"
         />
         <GenericLoader
           isLoading={sessionThunk.isLoading}

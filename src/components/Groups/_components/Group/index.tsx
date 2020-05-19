@@ -33,7 +33,6 @@ const Group = memo((props: tProps) => {
           <Avatar
             alt={`Avatar for ${props.group.name}`}
             hash={props.group.avatar}
-            size="60"
             type="groups"
           />
         </div>

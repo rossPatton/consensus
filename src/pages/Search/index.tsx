@@ -1,10 +1,8 @@
-import qs from 'query-string';
 import React, {memo} from 'react';
 import {connect} from 'react-redux';
 
 import {Groups, Helmet, SuperSearch} from '~app/components';
 import {ErrorBoundary, GenericLoader, Template} from '~app/containers';
-import {getGroupsBySearch} from '~app/redux';
 
 import {tProps, tStore} from './_types';
 
@@ -26,10 +24,17 @@ const SearchContainer = memo((props: tProps) => (
       <GenericLoader
         isLoading={props.groupsBySearch.isLoading}
         render={() => (
-          <Groups
-            showLocation
-            groups={props.groupsBySearch.data}
-          />
+          props.groupsBySearch.data.length > 0
+          ? (
+            <Groups
+              showLocation
+              groups={props.groupsBySearch.data}
+            />
+          ) : (
+            <div className="text-3 font-semibold">
+              No groups found! Try a more specific search?
+            </div>
+          )
         )}
       />
     </ErrorBoundary>
@@ -40,14 +45,7 @@ const mapStateToProps = (store: tStore) => ({
   groupsBySearch: store.groupsBySearch,
 });
 
-const mapDispatchToProps = (dispatch: Function) => ({
-  getSearchResults: (search: qs.ParsedQuery) => dispatch(getGroupsBySearch(search)),
-});
-
-const Search = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SearchContainer);
+const Search = connect(mapStateToProps)(SearchContainer);
 
 // page level components need to be default exports for code-splitting /shrug
 export default Search;

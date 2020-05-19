@@ -10,6 +10,7 @@ export const postSchema = Joi.object().keys({
   isFormSubmit: Joi.bool(),
   login: Joi.string().required(),
   password: Joi.string().required().min(12),
+  username: Joi.string(),
 });
 
 export const patchSchema = Joi.object().keys({

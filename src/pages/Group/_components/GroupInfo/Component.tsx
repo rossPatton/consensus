@@ -31,7 +31,6 @@ export const GroupInfoComponent = memo((props: tComponentProps) => {
           <div className="flex items-center">
             <Avatar
               hash={group.avatar}
-              size="60"
               type="groups"
             />
             <div>

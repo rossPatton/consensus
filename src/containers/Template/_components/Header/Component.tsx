@@ -97,9 +97,9 @@ export const HeaderComponent = memo((props: tComponentProps) => {
                       onClick={() => toggleMenu(!showMenu)}>
                       <Avatar
                         alt="Your Avatar - click to open dashboard menu"
-                        className=""
+                        className="rounded-circ"
                         hash={props.session.profile.avatar}
-                        size="40"
+                        size="sm"
                         type={`${props.session.type}s` as 'groups' | 'users'}
                       />
                     </button>

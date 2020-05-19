@@ -12,8 +12,9 @@ import {tProps, tState} from './_types';
  */
 class SearchContainer extends React.PureComponent<tProps, tState> {
   state = {
-    key: 'name',
+    key: 'name' as ts.searchKeyUnion,
     value: '',
+    redirect: false,
   };
 
   onChange = (ev: React.ChangeEvent<HTMLInputElement>) =>
@@ -23,7 +24,10 @@ class SearchContainer extends React.PureComponent<tProps, tState> {
 
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    this.props.getSearchResults(this.state)
+    this.props.getSearchResultsDispatch({
+      key: this.state.key,
+      value: this.state.value,
+    })
       .then(() => this.props.history.push('/search'))
       .catch(loglevel.error);
   }
@@ -53,9 +57,13 @@ class SearchContainer extends React.PureComponent<tProps, tState> {
   }
 }
 
-const mapDispatchToProps = (dispatch: Function) => ({
-  getSearchResults: (query: {value: string}) => dispatch(getGroupsBySearch(query)),
+const mapStateToProps = (store: {groupsBySearch: ts.thunk<ts.group[]>}) => ({
+  groupsBySearchThunk: store.groupsBySearch,
 });
 
-const Search = connect(null, mapDispatchToProps)(SearchContainer);
+const mapDispatchToProps = (dispatch: Function) => ({
+  getSearchResultsDispatch: (query: {value: string}) => dispatch(getGroupsBySearch(query)),
+});
+
+const Search = connect(mapStateToProps, mapDispatchToProps)(SearchContainer);
 export default withRouter(Search);

@@ -2,6 +2,6 @@ export type tProps = {
   alt?: string,
   className?: string,
   hash?: string,
-  size?: string, // number as string
+  size?: 'sm' | 'lg',
   type?: 'groups' | 'users',
 };

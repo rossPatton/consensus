@@ -30,6 +30,7 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
           required
           id="nameInput"
           name="name"
+          type="text"
           className="w-full"
           onChange={ev => props.updateState('name', ev.currentTarget.value)}
           placeholder="Your group name here"
@@ -48,6 +49,7 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
             required
             id="handleInput"
             name="handle"
+            type="text"
             className="w-full d:mr-2"
             autoComplete="off"
             onChange={ev =>
@@ -87,7 +89,7 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
         </select>
       </label>
       <h2 className="text-base">
-          Group Type
+        Group Type
       </h2>
       <label htmlFor="groupTypeSelect">
         <p className="text-base text-gray-5 mb-1">
@@ -133,6 +135,7 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
           required
           id="loginInput"
           name="login"
+          type="text"
           className="w-full"
           autoComplete="off"
           onChange={ev => props.updateState('login', ev.currentTarget.value)}

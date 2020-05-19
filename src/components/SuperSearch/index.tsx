@@ -44,7 +44,7 @@ class SuperSearchContainer extends React.PureComponent<any, any> {
         <fieldset>
           <div className="flex flex-col d:flex-row">
             <select
-              className="min-w-full d:min-w-0 mr-1"
+              className="min-w-full d:min-w-1/4 d:mr-1 mb-2 d:mb-0"
               onBlur={this.onFilterOptionChange}
               onChange={this.onFilterOptionChange}>
               {filterOptions.map(opt => (

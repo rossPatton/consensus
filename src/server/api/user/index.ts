@@ -46,11 +46,11 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...query}: tUserPostServerQuery = ctx?.state?.locals?.data;
   await validateSchema<tUserPostServerQuery>(ctx, postSchema, query);
 
-  // since we don't require any user info to signup, just insert a blank new row
+  // username is the only user info required to sign up. login/pw is the account table
   let userResult = [] as ts.user[];
   try {
     userResult = await knex('users')
-      .insert({})
+      .insert({username: query.username})
       .returning(userKeys);
   } catch (err) {
     return ctx.throw(500, err);
@@ -69,7 +69,7 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  // save account info, then login user (either by redirect or client side login)
+  // save account info. on client side, we then login the new user
   try {
     await knex('accounts')
       .limit(1)

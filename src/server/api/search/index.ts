@@ -30,10 +30,5 @@ search.get('/api/v1/search', async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  if (groupsLike.rows instanceof Array
-      && groupsLike.rows.length === 0) {
-    ctx.status = 204;
-  }
-
   ctx.body = groupsLike.rows.filter(group => group.type !== 'hidden');
 });

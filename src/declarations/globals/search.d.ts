@@ -1,12 +1,13 @@
 namespace ts {
-  // search query vs query strings
-  declare type searchParams = ts.paginateParams & Readonly<{
+  // search query via direct api call
+  declare type searchKeyUnion = 'name' | 'category' | 'city' | 'region';
+
+  // search programmatic api call
+  declare type searchQuery = ReadOnly<{
+    key: searchKeyUnion,
     value: string,
   }>;
 
-  // search query via direct api call
-  declare type searchQuery = ReadOnly<{
-    key: string, // key to search against
-    value: string, // value we're looking for
-  }>;
+  // search query with query strings in url
+  declare type searchParams = ts.paginateParams & searchQuery;
 }

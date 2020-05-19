@@ -111,13 +111,16 @@ button,
 input,
 select,
 textarea {
+  @apply font-semibold;
   letter-spacing: .02rem;
 }
+input[type="password"],
 input[type="text"],
 input[type="search"],
 select {
   @apply transition;
-  height: 3rem;
+  height: 3.6rem;
+  min-height: 3.6rem;
 }
 input {
   @apply rounded-0;
@@ -170,6 +173,17 @@ small {
 }
 .l {
   left: 0;
+}
+/* height needed here for when we display the gray bg fallback */
+.av-sz-sm {
+  height: 40px;
+  width: 40px;
+  max-width: 40px;
+}
+.av-sz-lg {
+  height: 60px;
+  width: 60px;
+  max-width: 60px;
 }
 .truncate {
   @apply whitespace-no-wrap;

@@ -17,6 +17,7 @@ export type tState = {
   hasMounted: boolean,
   login: string,
   password: string,
+  username: string,
 };
 
 export type tKeyUnion = keyof tState;

@@ -15,6 +15,7 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
     errors: {},
     login: '',
     password: '',
+    username: '',
   };
 
   componentDidMount() {

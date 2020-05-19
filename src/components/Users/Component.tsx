@@ -77,7 +77,6 @@ export const UsersComponent = memo((props: tComponentProps) => {
                 })}>
                 <Avatar
                   hash={user.avatar}
-                  size="66"
                   type="users"
                 />
                 <div>

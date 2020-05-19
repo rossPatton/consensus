@@ -17,21 +17,41 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
       <legend>
         <h2 className="mb-3">New User</h2>
       </legend>
-      <label htmlFor="usernameInput">
-        <h2 className="text-base mb-1">
-          Login
+      <label htmlFor="loginInput">
+        <h2 className="text-base mb-1 font-semibold">
+          <b>Private</b> Login
         </h2>
         <p className="mb-1">
-          A unique name that you&apos;ll use to login with. Keep secret!
+          A unique name or phrase that you&apos;ll only use to login with. No one else will see this. Can be changed at any time. Keep secret!
         </p>
         <input
           required
           id="loginInput"
           name="login"
+          type="text"
           autoComplete="off"
           placeholder="yourSecretNameForLoggingIn"
           value={props.login}
           onChange={ev => props.updateState('login', ev)}
+          className="p-2 mb-2 w-full"
+        />
+      </label>
+      <label htmlFor="usernameInput">
+        <h2 className="text-base mb-1 font-semibold">
+          <b>Public</b> Username
+        </h2>
+        <p className="mb-1">
+          A unique name that&apos;ll be what other users see when you use the site. This is public, and can be changed at any time!
+        </p>
+        <input
+          required
+          id="usernameInput"
+          name="username"
+          type="text"
+          autoComplete="off"
+          placeholder="myPublicInternetHandle"
+          value={props.username}
+          onChange={ev => props.updateState('username', ev)}
           className="p-2 mb-2 w-full"
         />
       </label>
