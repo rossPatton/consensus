@@ -2,7 +2,6 @@ import cx from 'classnames';
 import React, {memo} from 'react';
 
 import {tProps} from './_types';
-
 const avPrefix = 'https://consensus.nyc3.digitaloceanspaces.com';
 
 const Avatar = memo((props: tProps) => {

@@ -41,7 +41,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
               })}>
               <Link
                 to={meeting.isDraft
-                  ? `/draft/${meeting.groupId}?${qs}`
+                  ? `/draft/${meeting.id}`
                   : `/meeting/${slugify(meeting.title)}`}>
                 <MeetingFeaturedImage
                   img={meeting.img}
@@ -132,7 +132,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                     )}
                     {meeting.isDraft && (
                       <Link
-                        to={`/draft/${meeting.groupId}?${qs}`}
+                        to={`/draft/${meeting.id}`}
                         className="text-sm">
                         <Emoji
                           label="Eye Emoji"

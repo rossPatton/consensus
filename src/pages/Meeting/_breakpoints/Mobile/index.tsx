@@ -20,15 +20,24 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
 
   return (
     <>
-      {isPastMeeting && (
-        <b className="block p-2 mb-3 rounded text-center bg-red-1 text-sm">
-          This meeting already happened
+      {meeting.isDraft && (
+        <div className="fadeInUp w-full p-2 mb-3 text-center bg-yellow-2 font-bold text-sm">
+          This is a draft preview for your meeting.
+        </div>
+      )}
+      {!meeting.isDraft && isPastMeeting && (
+        <b className="fadeInUp block p-2 mb-3 rounded text-center bg-red-1 text-sm">
+          This meeting has already happened
         </b>
       )}
-      {!isPastMeeting && (
+      {!meeting.isDraft && !isPastMeeting && (
         <RSVP meeting={meeting} />
       )}
-      <h1 className="mt-5 pt-3 d:mt-0 capitalize block d:hidden text-2 font-normal">
+      <h1
+        className={cx({
+          "d:mt-0 capitalize block d:hidden text-2 font-normal": true,
+          "mt-5 pt-3 ": !meeting.isDraft && !isPastMeeting,
+        })}>
         {meeting.title}
       </h1>
       {group.name && (

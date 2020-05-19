@@ -6,16 +6,12 @@ import {Redirect} from 'react-router-dom';
 
 import {Helmet} from '~app/components';
 import {ErrorBoundary, GenericLoader, Template} from '~app/containers';
-import {MediaContext} from '~app/context';
 import {getGroup, getMeeting, getMeetingsByGroupId} from '~app/redux';
 import {typesafeIdOrSlug} from '~app/utils';
-
 import {tContainerProps, tStore} from './_types';
 import {MeetingComponent} from './Component';
 
 class MeetingContainer extends PureComponent<tContainerProps> {
-  static contextType = MediaContext;
-
   constructor(props: tContainerProps) {
     super(props);
     this.dispatch();
@@ -73,7 +69,6 @@ class MeetingContainer extends PureComponent<tContainerProps> {
       session,
     } = this.props;
 
-    const {isMobile, isDesktop} = this.context;
     const meetingStatus = meetingThunk?.error?.status;
 
     return (
@@ -115,8 +110,6 @@ class MeetingContainer extends PureComponent<tContainerProps> {
                   <MeetingComponent
                     meeting={meeting}
                     meetingsByGroupId={meetingsByGroupId}
-                    isDesktop={isDesktop}
-                    isMobile={isMobile}
                     group={groupThunk.data}
                     rsvp={rsvp}
                   />

@@ -17,8 +17,6 @@ export type tProps = {
 
 export type tComponentProps = tProps & {
   meeting: ts.meetingSingular,
-  isDesktop: boolean,
-  isMobile: boolean,
   group: ts.group,
   rsvp: ts.rsvp,
 };

@@ -1,13 +1,13 @@
 import loadable from '@loadable/component';
 
 const DraftComponent = loadable(() =>
-  import(/* webpackChunkName: "Draft" */'~app/pages/Draft'),
+  import(/* webpackChunkName: "Meeting Page Draft Route" */'~app/pages/Meeting'),
 );
 
 export const Draft = {
   component: DraftComponent,
   exact: true,
-  path: '/draft/:id',
+  path: '/draft/:idOrSlug',
   private: true,
-  // redirect: '/login',
+  redirect: '/login',
 };

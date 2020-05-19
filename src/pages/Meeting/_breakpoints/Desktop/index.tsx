@@ -20,27 +20,36 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
 
   return (
     <>
-      {!isPastMeeting && rsvp.value === 'yes' && (
-        <b className="fadeInUp block p-2 mb-3 rounded text-center bg-green-1 text-sm">
-          You&apos;re going to this meeting!
-        </b>
+      {meeting.isDraft && (
+        <div className="fadeInUp rounded w-full p-1 mb-2 text-center bg-yellow-2 font-bold text-sm">
+          This is a draft preview for your meeting.
+        </div>
       )}
-      {isPastMeeting && (
-        <b className="fadeInUp block p-2 mb-3 rounded text-center bg-red-1 text-sm">
-          This meeting has already happened
-        </b>
+      {!meeting.isDraft && (
+        <>
+          {!isPastMeeting && rsvp.value === 'yes' && (
+            <b className="fadeInUp block p-2 mb-3 rounded text-center bg-green-1 text-sm">
+              You&apos;re going to this meeting!
+            </b>
+          )}
+          {isPastMeeting && (
+            <b className="fadeInUp block p-2 mb-3 rounded text-center bg-red-1 text-sm">
+              This meeting has already happened
+            </b>
+          )}
+        </>
       )}
       {group.name && (
         <Link
           to={`/group/${group.handle}`}
-          className="inline-block no-underline leading-none mb-2 text-blue-1">
+          className="inline-block no-underline leading-none mb-2 text-blue-1 font-semibold">
           {group.name}
         </Link>
       )}
       <div className="flex flex-row mb-4">
         <div className="min-w-1/3 mr-3">
           <MeetingFeaturedImage
-            img="33b4d3ac-4fd8-4aab-bd69-c6a41cff3ddb.jpeg"
+            img={meeting.img}
             seed={meeting.id}
           />
         </div>
@@ -56,9 +65,11 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
           <h2 className="text-base capitalize mb-2">
             Hosted by <span className="text-blue-1">{meeting.groupName}</span>
           </h2>
-          {!isPastMeeting && (
-            <RSVP className="mb-3" meeting={meeting} />
-          )}
+          {!meeting.isDraft
+            && !isPastMeeting
+            && (
+              <RSVP className="mb-3" meeting={meeting} />
+            )}
           {!meeting.isOnline
             && meeting.location
             && (
@@ -79,7 +90,8 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
                 {!meeting.locationLink && meeting.location}
               </div>
             )}
-          {meeting.attendees
+          {!meeting.isDraft
+            && meeting.attendees
             && meeting.attendees.length > 0 && (
             <div className="font-bold flex items-center mb-3 text-gray-5">
               <span className="rounded-circ p-1 bg-gray-3 mr-2" />
@@ -109,17 +121,6 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
           />
         </aside>
       )}
-      {/* {meetingsByGroupId && meetingsByGroupId.length > 0 && (
-        <aside className=" w-full mb-4">
-          <h2 className="text-3 mb-2 leading-none">
-            More {group.category} meetings in {group.city}
-          </h2>
-          <Meetings
-            horizontal
-            meetings={[...meetingsByGroupId.reverse()]}
-          />
-        </aside>
-      )} */}
     </>
   );
 });

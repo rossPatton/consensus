@@ -21,23 +21,29 @@ const MobileMeetings = memo((props: tComponentProps) => (
         <li
           key={meeting.id}
           className="flex flex-row mb-2">
-          <div
-            className={cx({
-              'max-w-1/2': !props.isEditable && !meeting.isDraft,
-              'max-w-1/3': props.isEditable || meeting.isDraft,
-            })}>
-            {!meeting.isDraft && (
-              <Link
-                to={meeting.isDraft
-                  ? `/draft/${meeting.groupId}?${qs}`
-                  : `/meeting/${slugify(meeting.title)}`}>
-                <MeetingFeaturedImage
-                  img={meeting.img}
-                  seed={meeting.id}
-                />
-              </Link>
-            )}
-          </div>
+          {!meeting.isDraft && (
+            <Link
+              className={cx({
+                'max-w-1/2': !props.isEditable,
+                'max-w-1/3': props.isEditable,
+              })}
+              to={meeting.isDraft
+                ? `/draft/${meeting.id}`
+                : `/meeting/${slugify(meeting.title)}`}>
+              <MeetingFeaturedImage
+                img={meeting.img}
+                seed={meeting.id}
+              />
+            </Link>
+          )}
+          {meeting.isDraft && (
+            <div className='max-w-1/3'>
+              <MeetingFeaturedImage
+                img={meeting.img}
+                seed={meeting.id}
+              />
+            </div>
+          )}
           <div className="pl-1">
             <div className="flex mb-1 text-sm text-red-3 leading-none">
               <time className="mr-1" dateTime={meeting.date}>
@@ -108,7 +114,7 @@ const MobileMeetings = memo((props: tComponentProps) => (
                     </button>
                   )}
                   {meeting.isDraft && (
-                    <Link to={`/draft/${meeting.groupId}?${qs}`}>
+                    <Link to={`/draft/${meeting.id}`}>
                       <Emoji
                         label="Eye Emoji"
                         emoji="👁️"

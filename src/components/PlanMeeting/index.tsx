@@ -33,6 +33,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
   };
 
   // we use query params to populate the form when editing or copying a meeting
+  // @TODO maybe just use the id and fetch the draft from the DB?
   constructor(props: tContainerProps) {
     super(props);
 

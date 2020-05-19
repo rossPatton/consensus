@@ -4,7 +4,6 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {FileUpload} from '~app/components';
-import {objToQueryString} from '~app/utils';
 
 import {tComponentProps} from './_types';
 
@@ -16,8 +15,8 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
     <div className="d:pb-2 d:pl-2 d:pr-2">
       {props.heading && (
         <h2 className="text-3 mb-2">
-          {props.isDraft && 'Edit Meeting Draft'}
-          {props.isCopy && 'Copy Meeting'}
+          {props.isDraft && !props.isCopy && 'Edit Meeting Draft'}
+          {props.isDraft && props.isCopy && 'Copying Meeting'}
           {!props.isCopy && !props.isDraft && 'Plan Meeting'}
         </h2>
       )}
@@ -144,7 +143,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             </button>
             {typeof props.id === 'number' && (
               <Link
-                to={`/draft/${props.id}?${objToQueryString(props)}`}
+                to={`/draft/${props.id}`}
                 className="btn p-2 text-sm hover:bg-gray-3">
                 <span
                   role="img"
