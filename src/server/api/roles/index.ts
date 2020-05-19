@@ -13,8 +13,6 @@ roles.get(route, async (ctx: Koa.ParameterizedContext) => {
   const accountId: number = ctx?.state?.user?.id;
   await validateSchema(ctx, schema, {accountId});
 
-  console.log('accountId => ', accountId);
-
   const roles = await getRolesByAccountId(ctx, accountId);
 
   // sometimes there could be no error but nothing was found
