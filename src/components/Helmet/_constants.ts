@@ -19,6 +19,16 @@ export const LINK_TAGS: tLinkProps[] = [
     href: '/static/favicon.ico',
     type: 'image/ico',
   },
+  {
+    rel: 'preload',
+    href: '/static/fonts.css',
+    as: 'style',
+  },
+  {
+    rel: 'preload',
+    href: '/static/fonts/LabGrotesque-Medium.woff2',
+    as: 'style',
+  },
 ];
 
 export const META_TAGS: tMetaProps[] = [
@@ -39,7 +49,7 @@ export const META_TAGS: tMetaProps[] = [
     name: 'viewport',
     content: 'width=device-width, initial-scale=1 minimum-scale=1',
   },
-  { name: 'application-name', content: 'consens.us.org' },
+  { name: 'application-name', content: 'Consensus.com' },
   // { name: 'msapplication-square70x70logo', content: 'small.jpg' },
   // { name: 'msapplication-square150x150logo', content: 'medium.jpg' },
   // { name: 'msapplication-square310x150logo', content: 'wide.jpg' },

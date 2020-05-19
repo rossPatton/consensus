@@ -31,15 +31,15 @@ const sharedConfig = {
   },
   // setup a local only connection. or at least, have local mirror production more
   connection: {
-    host: 'host.docker.internal',
-    user: 'consensusdev',
-    password: 'paleface_metre_drafty_krakatoa_buddhism_padre_snark_feeler_air_slider',
-    // port: DB_PORT,
-    database: 'consensus_dev',
-    // ssl: {
-    //   ca : fs.readFileSync(path.join(CWD, 'certs', 'postgres.crt')),
-    //   rejectUnauthorized: true,
-    // }
+    host: DB_HOST,
+    user: DB_USER,
+    password: DB_PW,
+    port: DB_PORT,
+    database: DB,
+    ssl: {
+      ca : fs.readFileSync(path.join(CWD, 'certs', 'postgres.crt')),
+      rejectUnauthorized: true,
+    }
   },
 };
 

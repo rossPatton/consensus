@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 
 import {Categories, Meetings} from '~app/components';
 import {GenericLoader} from '~app/containers';
-
 import {tProps} from './_types';
 
 export const HomeComponent = memo((props: tProps) => (
