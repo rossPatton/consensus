@@ -14,15 +14,15 @@ const createRelation = async (id: number) => ({
 exports.seed = async (knex: Knex) => {
   const fakeRelations = [];
 
-  for await (const accountId of range(1, 99)) {
-    fakeRelations.push(await createRelation(accountId));
-  }
-
   // create test user facilitator account
-  fakeRelations.push(await createRelation(100));
+  fakeRelations.push(await createRelation(1));
 
   // create test org admin account
-  fakeRelations.push(await createRelation(101));
+  fakeRelations.push(await createRelation(2));
+
+  for await (const accountId of range(3, 100)) {
+    fakeRelations.push(await createRelation(accountId));
+  }
 
   await knex('accounts_emails').del();
   await knex('accounts_emails').insert(fakeRelations);

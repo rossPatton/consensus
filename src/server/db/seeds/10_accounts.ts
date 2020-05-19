@@ -32,22 +32,7 @@ const createTestUserAccount = async () => {
     login: 'testAccount',
     password,
     privateEmail: faker.random.boolean(),
-    userId: 100,
-  };
-};
-
-// TODO maybe thw-full in some more unusual characters etc just to test
-const createTestLongPassUserAccount = async () => {
-  const pw = '👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩👩‍❤️‍💋‍👩Morbi hendrerit, tortor et vehicula efficitur, metus lectus viverra felis. ';
-  const sha = sha384(pw);
-  const saltedHash = await bcrypt.hash(sha, salt);
-  const password = encrypt(saltedHash);
-
-  return {
-    login: 'testLongPassAccount',
-    password,
-    privateEmail: faker.random.boolean(),
-    userId: 101,
+    userId: 1,
   };
 };
 
@@ -67,13 +52,12 @@ const createTestGroupAccount = async () => {
 exports.seed = async (knex: Knex) => {
   const fakeAccounts = [];
 
-  for await (const i of range(1, 99)) {
-    fakeAccounts.push(await createUserAccount(i));
-  }
-
   fakeAccounts.push(await createTestUserAccount());
   fakeAccounts.push(await createTestGroupAccount());
-  fakeAccounts.push(await createTestLongPassUserAccount());
+
+  for await (const i of range(3, 100)) {
+    fakeAccounts.push(await createUserAccount(i));
+  }
 
   await knex('accounts').del();
   await knex('accounts').insert(fakeAccounts);

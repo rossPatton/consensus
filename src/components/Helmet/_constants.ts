@@ -22,12 +22,14 @@ export const LINK_TAGS: tLinkProps[] = [
   {
     rel: 'preload',
     href: '/static/fonts.css',
-    as: 'style',
+    as: 'font',
   },
   {
+    crossOrigin: 'anonymous',
     rel: 'preload',
     href: '/static/fonts/LabGrotesque-Medium.woff2',
-    as: 'style',
+    as: 'font',
+    type: "font/woff2",
   },
 ];
 

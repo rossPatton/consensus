@@ -7,34 +7,34 @@ const roles = ['member', 'pending', 'facilitator'];
 
 const createRelation = async (accountId: number, groupId: number) => {
   let role = roles[getRandomNum(0, roles.length - 1)];
-  if (accountId === 101) { // test group admin
-    role = 'admin';
-  } else if (accountId === 100) { // test user facilitator
+  if (accountId === 1) { // test user facilitator
     role = 'facilitator';
+  } else if (accountId === 2) { // test group admin
+    role = 'admin';
   }
 
   return {
     accountId,
     groupId,
     role,
-    userId: accountId === 101 ? null : accountId,
+    userId: accountId === 2 ? null : accountId,
   };
 };
 
 exports.seed = async (knex: Knex) => {
   const fakeRelations = [];
 
-  for await (const accountId of range(1, 99)) {
+  // create test user facilitator account
+  fakeRelations.push(await createRelation(1, 1));
+
+  // create test group admin account
+  fakeRelations.push(await createRelation(2, 1));
+
+  for await (const accountId of range(3, 100)) {
     for await (const groupId of range(1, 100)) {
       fakeRelations.push(await createRelation(accountId, groupId));
     }
   }
-
-  // create test user facilitator account
-  fakeRelations.push(await createRelation(100, 1));
-
-  // create test group admin account
-  fakeRelations.push(await createRelation(101, 1));
 
   await knex('accounts_roles').del();
   await knex('accounts_roles').insert(fakeRelations);
