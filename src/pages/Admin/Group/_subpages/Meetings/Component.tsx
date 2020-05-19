@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 
 import {FilterPanel, Meetings} from '~app/components';
+
 import {tComponentProps} from './_types';
 
 export const MeetingsComponent = memo((props: tComponentProps) => (

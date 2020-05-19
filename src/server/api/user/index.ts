@@ -4,19 +4,12 @@ import _ from 'lodash';
 
 import {userKeys} from '../_constants';
 import {knex} from '../../db/connection';
-import {
-  encrypt,
-  isValidPw,
-  saltedHash,
-  sha256,
-  validateSchema,
-} from '../../utils';
+import {encrypt, isValidPw, saltedHash, validateSchema} from '../../utils';
 import {getSchema, patchSchema, postSchema} from './_schema';
 import {tUserPostServerQuery} from './_types';
 
 export const user = new Router();
 const route = '/api/v1/user';
-
 const table = 'users';
 
 user.get(route, async (ctx: Koa.ParameterizedContext) => {
@@ -99,15 +92,11 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...query}: ts.userQuery = ctx?.state?.locals?.data;
   await validateSchema<ts.userQuery>(ctx, patchSchema, query);
 
-  const {avatarEmail, password, ...updateQuery} = query;
+  const {password, ...updateQuery} = query;
   const loggedInAccount = ctx?.state?.user;
 
   const isValidPW = await isValidPw(password, loggedInAccount.password);
   if (!isValidPW) return ctx.throw(400, 'Password is not correct');
-
-  if (typeof avatarEmail === 'string') {
-    updateQuery.avatar = sha256(avatarEmail);
-  }
 
   let updatedUser = [] as ts.user[];
   try {

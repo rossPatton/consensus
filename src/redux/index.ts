@@ -7,7 +7,7 @@ export { getCities } from './cities';
 export { getCountry } from './country';
 export { getRegion } from './region';
 
-export { postFeaturedImage } from './featuredImage';
+export { postUpload } from './uploads';
 
 // meeting(s) related actions.thunks
 export { getMeeting, patchEvent, postMeeting } from './meeting';
@@ -20,7 +20,7 @@ export {
 export { getMeetingsByUserId } from './meetingsByUserId';
 
 // group/group related actions/thunks
-export { getGroup, patchOrg, postGroup } from './group';
+export { getGroup, patchGroup, postGroup } from './group';
 export { getGroups } from './groups';
 export { deleteOrgByUserId, getGroupsByUserId } from './groupsByUserId';
 

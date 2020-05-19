@@ -1,6 +1,7 @@
 import React, {memo} from 'react';
 
 import {getRandomNum} from '~app/utils';
+
 import {tProps} from './_types';
 
 // the component half of the search filter container

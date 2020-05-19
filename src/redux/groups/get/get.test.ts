@@ -15,6 +15,7 @@ const mockStore = configureStore([thunk]);
 
 const testGroup = {
   allowNonVerified: true,
+  avatar: '',
   category: 'Union' as ts.category,
   city: 'New York',
   cityId: 1,

@@ -100,7 +100,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
                         className=""
                         hash={props.session.profile.avatar}
                         size="40"
-                        type={props.session.type}
+                        type={`${props.session.type}s` as 'groups' | 'users'}
                       />
                     </button>
                     <ul

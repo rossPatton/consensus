@@ -1,8 +1,9 @@
+import _ from 'lodash';
 import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {login, patchOrg} from '~app/redux';
+import {login, patchAccount, patchGroup} from '~app/redux';
 
 import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
 import {ProfileComponent} from './Component';
@@ -14,7 +15,6 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     const group = props?.sessionThunk?.data?.profile as ts.group;
 
     const {
-      avatar,
       city,
       cityId,
       country,
@@ -29,7 +29,6 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
 
     this.state = {
       ...editablePartOfGroup,
-      avatarEmail: '',
       password: '',
     };
   }
@@ -37,7 +36,10 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     try {
-      await this.props.patchOrgDispatch(this.state);
+      await this.props.patchGroupDispatch({
+        ...this.state,
+        avatar: this.props.avatar,
+      });
     } catch (err) {
       loglevel.error(err);
     }
@@ -86,13 +88,18 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (store: tStore) => ({
-  sessionThunk: store.session,
-});
+const mapStateToProps = (store: tStore) => {
+  const avatar = store.uploads?.data?.groupAvatar || '';
+  return {
+    avatar,
+    sessionThunk: store.session,
+  };
+};
 
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
-  patchOrgDispatch: (query: ts.groupQuery) => dispatch(patchOrg(query)),
+  patchAccountDispatch: (query: ts.accountQuery) => dispatch(patchAccount(query)),
+  patchGroupDispatch: (query: ts.groupQuery) => dispatch(patchGroup(query)),
 });
 
 const Profile = connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);

@@ -8,7 +8,7 @@ export const schema = Joi.object({
 
 export const patchSchema = schema.keys({
   allowNonVerified: Joi.bool(),
-  avatarEmail: Joi.string().email().optional().allow(null),
+  avatar: Joi.string().allow('').allow(null),
   category: Joi.string().allow('Political', 'Cooperative', 'Community', 'Union'),
   description: Joi.string(),
   facebook: Joi.string().uri(),

@@ -1,14 +1,13 @@
 import { tActions } from './_types';
 import { POST_FAILURE, POST_INIT, POST_SUCCESS } from './post/_types';
 
-export const initialState: ts.thunk<{img: string}> = {
+export const initialState: ts.thunk<ts.upload> = {
   error: null,
-  fetched: false,
   isLoading: false,
-  data: {img: ''},
+  data: {},
 };
 
-export const featuredImageReducer = (state = initialState, action: tActions) => {
+export const uploadsReducer = (state = initialState, action: tActions) => {
   const initReturn = {
     ...state,
     isLoading: true,
@@ -20,13 +19,6 @@ export const featuredImageReducer = (state = initialState, action: tActions) => 
     isLoading: false,
   };
 
-  const successReturn = {
-    ...state,
-    data: action.payload,
-    fetched: true,
-    isLoading: false,
-  };
-
   switch (action.type) {
   case POST_INIT:
     return initReturn;
@@ -34,8 +26,16 @@ export const featuredImageReducer = (state = initialState, action: tActions) => 
   case POST_FAILURE:
     return failureReturn;
 
-  case POST_SUCCESS:
-    return successReturn;
+  case POST_SUCCESS: {
+    return {
+      ...state,
+      isLoading: false,
+      data: {
+        ...state.data,
+        ...action.payload,
+      },
+    };
+  }
 
   default:
     return state;

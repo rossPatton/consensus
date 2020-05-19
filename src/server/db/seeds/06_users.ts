@@ -32,7 +32,7 @@ const createTestUser = async () => ({
   privateRSVP: false,
   region: 'New York',
   regionId: 37,
-  twitter: null as any,
+  twitter: '',
   username: 'testUsername',
   website: faker.internet.domainName(),
 });

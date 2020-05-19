@@ -2,11 +2,10 @@ import Koa from 'koa';
 import multer from 'koa-multer';
 import Router from 'koa-router';
 import _ from 'lodash';
-import loglevel from 'loglevel';
 
 import { validateSchema } from '../../utils';
 import { groupsS3, uploadDefaults, usersS3 } from './_constants';
-// import { schema } from './_schema';
+import { schema } from './_schema';
 import { tFiles } from './_types';
 
 const upload = multer();
@@ -24,15 +23,13 @@ const fields = upload.fields([{
   maxCount: 1,
 }]);
 
+// @TODO eventually, might want to have several endpoints for different types of files
 spaces.post('/api/v1/spaces', fields, async (ctx: Koa.ParameterizedContext) => {
   const query = ctx?.state?.locals?.data;
-  console.log('query => ', query);
-  // await validateSchema(ctx, schema, query);
+  await validateSchema(ctx, schema, query);
 
   const req = ctx.req as multer.MulterIncomingMessage;
   const files = req.files as tFiles;
-  console.log('ctx.files => ', files);
-
   if (typeof files === 'undefined') return ctx.throw(400);
 
   let file = null;
@@ -46,13 +43,6 @@ spaces.post('/api/v1/spaces', fields, async (ctx: Koa.ParameterizedContext) => {
     s3 = usersS3;
   }
 
-  // const spacesCB = (err: Error | null, data: AWS.S3.PutObjectOutput) => {
-  //   if (err) loglevel.error(err, err.stack);
-  //   console.log(data);
-  //   ctx.status = 200;
-  //   ctx.body = {ok: true};
-  // };
-
   try {
     await s3.putObject({
       ...uploadDefaults,
@@ -60,22 +50,8 @@ spaces.post('/api/v1/spaces', fields, async (ctx: Koa.ParameterizedContext) => {
       Key: file.originalname,
     }).promise();
     ctx.status = 200;
-    ctx.body = {img: file.originalname};
+    ctx.body = {[file.fieldname]: file.originalname};
   } catch (err) {
-    ctx.throw(500, err)
+    ctx.throw(500, err);
   }
-
-  // s3Promise = usersS3.putObject({
-  //     ...uploadDefaults,
-  //     Body: file.buffer,
-  //     Key: file.originalname,
-  //   }, spacesCB).promise();
-
-  // s3Promise = groupsS3.putObject({
-  //   ...uploadDefaults,
-  //   Body: file.buffer,
-  //   Key: file.originalname,
-  // }, spacesCB).promise();
-
-  // await s3Promise;
 });

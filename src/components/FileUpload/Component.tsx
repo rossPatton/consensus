@@ -33,12 +33,11 @@ export const FileUploadComponent = memo((props: tComponentProps) => (
       {props.img && (
         <img
           alt="Your uploaded file preview."
-          height={props.width}
           width={props.width}
           src={`${baseUrl}/${props.folder}/${props.img}${__DEV__ ? `?v=${v1()}` : ''}`}
           className={cx({
-            'rounded w-full': !props.fieldKey.includes('Avatar'),
-            'rounded-circ': props.fieldKey.includes('Avatar'),
+            rounded: true,
+            'w-full': !props.fieldKey.includes('Avatar'),
           })}
         />
       )}
@@ -46,7 +45,7 @@ export const FileUploadComponent = memo((props: tComponentProps) => (
     <label
       htmlFor="fileUpload"
       className={cx({
-        'fadeInDown bg-gray-1 border cursor-ptr flex flex-col items-center mb-3 p-3 rounded animated': true,
+        'fadeInDown bg-gray-1 border cursor-ptr flex flex-col items-center mb-3 p-3 animated': true,
         'fadeInDown': !props.img,
         'hidden': props.img,
       })}>

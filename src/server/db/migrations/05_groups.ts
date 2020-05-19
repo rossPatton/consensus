@@ -13,6 +13,10 @@ exports.up = async (knex: Knex) => {
   await knex.schema.createTable('groups', table => {
     table.increments().unsigned().primary();
 
+    // when we save images to DO spaces, we use a uuid/v4 hash
+    // this is then prefixed client side with a string that denotes the img type
+    table.string('avatar').defaultTo('');
+
     // user-input about what the group does
     table.text('description', 'longtext').defaultTo('').notNullable();
 
@@ -72,11 +76,6 @@ exports.up = async (knex: Knex) => {
     table.string('memberName').defaultTo('Member').notNullable();
     table.string('modName').defaultTo('Facilitator').notNullable();
     table.boolean('allowNonVerified').defaultTo(false).notNullable();
-
-    // the auto-generated string for a libravatar avatar
-    // it falls back to gravatar if lookup fails
-    // we do NOT store the actual email we are given, just the generated hashed url
-    table.string('avatar').defaultTo(null);
 
     // group external website and social media, if available
     table.string('website').defaultTo('');

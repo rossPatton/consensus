@@ -16,7 +16,7 @@ const Aside = memo((props: tProps) => {
         <Avatar
           hash={props.session.profile.avatar}
           size="60"
-          type="user"
+          type="users"
         />
         <div>
           <Link
@@ -64,7 +64,7 @@ const Aside = memo((props: tProps) => {
                     <Avatar
                       hash={group.avatar}
                       size="40"
-                      type="group"
+                      type="groups"
                     />
                     <div>
                       <div className="text-sm">

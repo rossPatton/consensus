@@ -1,5 +1,5 @@
 export const initialState = {
-  avatarEmail: '',
+  avatar: '',
   bio: '',
   city: '',
   cityId: 0,
@@ -10,6 +10,5 @@ export const initialState = {
   privateRSVP: false,
   region: '',
   regionId: 0,
-  userAvatar: null as string | null,
   username: '',
 };

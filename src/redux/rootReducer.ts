@@ -3,7 +3,6 @@ import { combineReducers } from 'redux';
 import { citiesReducer } from './cities/reducer';
 import { cityReducer } from './city/reducer';
 import { countryReducer } from './country/reducer';
-import { featuredImageReducer } from './featuredImage/reducer';
 import { geoReducer } from './geo/reducer';
 import { groupReducer } from './group/reducer';
 import { groupsReducer } from './groups/reducer';
@@ -17,6 +16,7 @@ import { regionReducer } from './region/reducer';
 import { rolesReducer } from './roles/reducer';
 import { rsvpsReducer } from './rsvps/reducer';
 import { sessionReducer } from './session/reducer';
+import { uploadsReducer } from './uploads/reducer';
 import { userReducer } from './user/reducer';
 import { usersByGroupIdReducer } from './usersByGroupId/reducer';
 
@@ -24,7 +24,6 @@ export const rootReducer = combineReducers({
   city: cityReducer,
   cities: citiesReducer,
   country: countryReducer,
-  featuredImage: featuredImageReducer,
   meeting: meetingReducer,
   meetingsByLocation: meetingsByLocationReducer,
   meetingsByGroupId: meetingsByGroupIdReducer,
@@ -38,6 +37,7 @@ export const rootReducer = combineReducers({
   roles: rolesReducer,
   rsvps: rsvpsReducer,
   session: sessionReducer,
+  uploads: uploadsReducer,
   user: userReducer,
   usersByGroupId: usersByGroupIdReducer,
 });

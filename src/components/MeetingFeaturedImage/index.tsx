@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 
-import {tProps} from './_types';
 import {PlaceholderImage} from '..';
+import {tProps} from './_types';
 
 const mfiPrefix = 'https://consensus.nyc3.digitaloceanspaces.com/groups';
 
@@ -19,13 +19,13 @@ const MeetingFeaturedImage = memo((props: tProps) => (
           src={`${mfiPrefix}/${props.img}`}
           width={props.width || '480'}
         />
-    ) : (
-      <PlaceholderImage
-        height={props.height || '240'}
-        seed={props.seed}
-        width={props.width || '480'}
-      />
-    )}
+      ) : (
+        <PlaceholderImage
+          height={props.height || '240'}
+          seed={props.seed}
+          width={props.width || '480'}
+        />
+      )}
   </>
 ));
 

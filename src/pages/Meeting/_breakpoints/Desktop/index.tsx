@@ -11,6 +11,7 @@ import {
   Meetings,
   RSVP,
 } from '~app/components';
+
 import {tComponentProps} from '../../_types';
 
 const DesktopMeetingComponent = memo((props: tComponentProps) => {
@@ -39,7 +40,7 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
       <div className="flex flex-row mb-4">
         <div className="min-w-1/3 mr-3">
           <MeetingFeaturedImage
-            img='33b4d3ac-4fd8-4aab-bd69-c6a41cff3ddb.jpeg'
+            img="33b4d3ac-4fd8-4aab-bd69-c6a41cff3ddb.jpeg"
             seed={meeting.id}
           />
         </div>

@@ -3,17 +3,16 @@ import {ValuesType} from 'utility-types';
 
 export type tState = Partial<ts.meeting> & {
   endTime: string,
-  featuredImage?: string,
   isCopy: boolean,
   isOnline: boolean,
   time: string,
 };
 
 export type tStore = {
-  featuredImage: ts.thunk<{img: string}>,
   meeting: ts.thunk<ts.meeting>,
   meetingsByGroupId: ts.thunk<ts.meeting[]>,
   session: ts.thunk<ts.session>,
+  uploads: ts.thunk<ts.upload>,
 };
 
 export type tKeyUnion = keyof tState;

@@ -3,11 +3,10 @@ import Router from 'koa-router';
 
 import {groupKeys} from '../_constants';
 import {knex} from '../../db/connection';
-import {encrypt, isValidPw, saltedHash, sha256, validateSchema} from '../../utils';
+import {encrypt, isValidPw, saltedHash, validateSchema} from '../../utils';
 import {patchSchema, postSchema, schema} from './_schema';
 
 export const group = new Router();
-
 const route = '/api/v1/group';
 const table = 'groups';
 
@@ -34,14 +33,10 @@ group.patch(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.groupQuery>(ctx, patchSchema, query);
 
   const loggedInAccount: ts.account = ctx?.state?.user || {};
-  const {avatarEmail, isFormSubmit, password, ...updateQuery} = query;
+  const {isFormSubmit, password, ...updateQuery} = query;
 
   const isValidPW = await isValidPw(password, loggedInAccount.password);
   if (!isValidPW) return ctx.throw(400, 'Password is not correct');
-
-  if (typeof avatarEmail === 'string') {
-    updateQuery.avatar = sha256(avatarEmail);
-  }
 
   let updatedGroup = [] as ts.group[];
   try {

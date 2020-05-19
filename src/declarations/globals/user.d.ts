@@ -1,6 +1,6 @@
 namespace ts {
   declare type user = Readonly<{
-    avatar?: string,
+    avatar: string,
     created_at?: Date,
     bio?: string,
     city?: string, // city.name
@@ -26,7 +26,6 @@ namespace ts {
 
   // getting/posting/deleting users by org membership
   declare type userQuery = Partial<ts.user> & ts.formSubmit & ts.baseQuery & Readonly<{
-    avatarEmail?: string,
     isNew?: boolean,
     password?: string,
   }>;

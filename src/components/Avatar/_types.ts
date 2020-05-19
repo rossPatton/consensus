@@ -3,5 +3,5 @@ export type tProps = {
   className?: string,
   hash?: string,
   size?: string, // number as string
-  type?: 'group' | 'user',
+  type?: 'groups' | 'users',
 };

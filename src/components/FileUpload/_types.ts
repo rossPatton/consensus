@@ -17,11 +17,15 @@ export type tProps = {
 }
 
 export type tContainerProps = tProps & {
-  featuredImage: ts.thunk<string>,
-  postFeaturedImageDispatch: (query: ts.spacesQuery) => void,
+  dispatch: Function,
+  postUploadDispatch: (query: ts.spacesQuery) => void,
 }
 
 export type tComponentProps = tProps & {
   removeImage: (ev: React.MouseEvent<HTMLButtonElement>) => void,
   setImage: (ev: React.ChangeEvent<HTMLInputElement>) => void,
+};
+
+export type tStore = {
+  uploads: ts.thunk<ts.upload>,
 };

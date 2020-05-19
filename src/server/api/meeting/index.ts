@@ -21,8 +21,6 @@ meeting.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const query = ctx?.state?.locals?.data;
   await validateSchema<Partial<ts.meeting>>(ctx, upsertSchema, query);
   const {id, isFormSubmit, ...patch} = query;
-  console.log('patch query => ', query);
-  console.log('patch body => ', ctx?.request?.body);
 
   let patchedMeeting = [] as ts.meeting[];
   try {
@@ -43,8 +41,6 @@ meeting.post(route, async (ctx: Koa.ParameterizedContext) => {
   const query = ctx?.state?.locals?.data;
   await validateSchema<Partial<ts.meeting>>(ctx, upsertSchema, query);
   const {id, isFormSubmit, ...meeting} = query;
-  console.log('post query => ', query);
-  console.log('post body => ', ctx?.request?.body);
 
   let newMeeting = [] as ts.meeting[];
   try {

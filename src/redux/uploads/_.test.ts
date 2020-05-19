@@ -1,5 +1,5 @@
 import * as types from './_types';
-import {initialState, featuredImageReducer as reducer} from './reducer';
+import {initialState, uploadsReducer as reducer} from './reducer';
 
 describe('redux/featuredImage/reducer', () => {
   it('should return initial state, even with a bunk action', () => {
@@ -9,7 +9,7 @@ describe('redux/featuredImage/reducer', () => {
 
   it('should handle POST_INIT', () => {
     expect(reducer(undefined, {
-      type: '@@featuredImage/POST_INIT',
+      type: '@@uploads/POST_INIT',
     })).toStrictEqual({
       ...initialState,
       isLoading: true,
@@ -18,7 +18,7 @@ describe('redux/featuredImage/reducer', () => {
 
   it('should handle POST_FAILURE', () => {
     expect(reducer(undefined, {
-      type: '@@featuredImage/POST_FAILURE',
+      type: '@@uploads/POST_FAILURE',
       payload: {
         message: 'Error!',
         status: 500,
@@ -34,8 +34,8 @@ describe('redux/featuredImage/reducer', () => {
 
   it('should handle POST_SUCCESS', () => {
     expect(reducer(undefined, {
-      type: '@@featuredImage/POST_SUCCESS',
-      payload: {img: ''},
+      type: '@@uploads/POST_SUCCESS',
+      payload: {test: ''},
     })).toStrictEqual({
       ...initialState,
       fetched: true,

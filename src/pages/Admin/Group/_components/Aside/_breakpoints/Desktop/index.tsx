@@ -16,7 +16,7 @@ const Aside = memo((props: tProps) => {
         <Avatar
           hash={session.profile.avatar}
           size="60"
-          type="group"
+          type="groups"
         />
         <div>
           <h1 className="font-bold text-3">

@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 
 import {Emoji, ExternalLink, MeetingFeaturedImage} from '~app/components';
 import {objToQueryString, slugify} from '~app/utils';
+
 import {tComponentProps} from './_types';
 
 const DesktopMeetings = memo((props: tComponentProps) => (

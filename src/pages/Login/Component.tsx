@@ -1,8 +1,9 @@
+import cx from 'classnames';
 import React, { memo } from 'react';
 import {Link} from 'react-router-dom';
-import cx from 'classnames';
 
 import { PasswordInput } from '~app/components';
+
 import { tComponentProps } from './_types';
 
 export const LoginComponent = memo((props: tComponentProps) => (
@@ -47,19 +48,19 @@ export const LoginComponent = memo((props: tComponentProps) => (
           className={cx({
             'mb-2': props.error,
           })}>
-        <button
-          disabled={props.hasMounted && (!props.password || !props.username)}
-          className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-2">
+          <button
+            disabled={props.hasMounted && (!props.password || !props.username)}
+            className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-2">
           Login
-        </button>
-        <Link
-          to="/password-reset"
-          className="btn p-2 pl-3 pr-3 hover:bg-gray-2">
+          </button>
+          <Link
+            to="/password-reset"
+            className="btn p-2 pl-3 pr-3 hover:bg-gray-2">
           Forget your password?
-        </Link>
+          </Link>
         </div>
         {props.error && (
-          <div className='animated fadeInUp bg-red-2 font-bold p-2 rounded text-white'>
+          <div className="animated fadeInUp bg-red-2 font-bold p-2 rounded text-white">
             {props.error}
           </div>
         )}

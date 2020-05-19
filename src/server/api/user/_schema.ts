@@ -13,7 +13,7 @@ export const postSchema = Joi.object().keys({
 });
 
 export const patchSchema = Joi.object().keys({
-  avatarEmail: Joi.string().email().optional(),
+  avatar: Joi.string().allow(null).allow('').optional(),
   bio: Joi.string(),
   city: Joi.string().allow(null).optional(),
   cityId: Joi.number().integer().optional(),

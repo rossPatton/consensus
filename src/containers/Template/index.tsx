@@ -24,12 +24,6 @@ class Template extends PureComponent<tProps> {
     if (!props.rolesThunk.fetched) props.getRolesDispatch();
   }
 
-  // componentDidMount() {
-  //   fetch(`${__URL__}/api/v1/spaces`, {agent, method: 'POST'})
-  //     .then(console.log)
-  //     .catch(console.error);
-  // }
-
   render() {
     const {children, geoThunk} = this.props;
     const geoStatus = geoThunk?.error?.status;

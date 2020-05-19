@@ -20,4 +20,8 @@ namespace ts {
     type: string,
     payload?: P,
   }>>;
+
+  declare type upload = Readonly<{
+    [key: string]: string,
+  }>;
 }

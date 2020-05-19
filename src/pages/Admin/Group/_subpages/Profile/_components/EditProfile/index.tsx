@@ -22,7 +22,7 @@ const EditProfile = memo((props: tComponentProps) => (
         fieldKey="groupAvatar"
         folder="groups"
         info="We recommend a size of at least 60x60px"
-        prefix={`g${props.session.id}:gAv`}
+        prefix={`g${props.session.profile.id}:gAv`}
         title="Upload New Group Logo"
       />
       <h2 className="text-base mb-1 leading-none">

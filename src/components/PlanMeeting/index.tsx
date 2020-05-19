@@ -139,7 +139,6 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     const {sessionThunk} = this.props;
-    console.log('all props for plan meeting => ', this.props);
 
     return (
       <ErrorBoundary
@@ -161,7 +160,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  img: store.featuredImage.data?.img,
+  img: store.uploads.data?.meetingFeaturedImage,
   meetingThunk: store.meeting,
   meetingsThunk: store.meetingsByGroupId,
   sessionThunk: store.session,

@@ -5,7 +5,7 @@ import Avatar from '.';
 
 describe('components/Avatar', () => {
   it('renders without crashing', () => {
-    render.create(<Avatar type="group" />);
+    render.create(<Avatar type="groups" />);
   });
 
   it('renders empty div when no props', () => {
@@ -18,7 +18,7 @@ describe('components/Avatar', () => {
     const component = render.create((
       <Avatar
         hash="notARealHash"
-        type="user"
+        type="users"
       />
     ));
     const tree = component.toJSON();
@@ -29,7 +29,7 @@ describe('components/Avatar', () => {
     const component = render.create((
       <Avatar
         hash="notARealHash"
-        type="group"
+        type="groups"
       />
     ));
     const tree = component.toJSON();

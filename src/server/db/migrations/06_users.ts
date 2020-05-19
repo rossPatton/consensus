@@ -4,6 +4,10 @@ exports.up = async (knex: Knex) => {
   await knex.schema.createTable('users', table => {
     table.increments().unsigned().primary();
 
+    // when we save images to DO spaces, we use a uuid/v4 hash
+    // this is then prefixed client side with a string that denotes the img type
+    table.string('avatar').defaultTo('');
+
     // additional optional info the user can choose to provide
     table.text('bio', 'longtext');
 

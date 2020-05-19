@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 
 import {Emoji, MeetingFeaturedImage} from '~app/components';
 import {objToQueryString, slugify} from '~app/utils';
+
 import {tComponentProps} from './_types';
 
 const MobileMeetings = memo((props: tComponentProps) => (

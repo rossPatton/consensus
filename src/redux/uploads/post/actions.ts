@@ -16,7 +16,7 @@ export const failure = (payload: ts.responseError): tFailureAction => ({
   payload,
 });
 
-export const success = (payload: {img: string}): tSuccessAction => ({
+export const success = (payload: ts.upload): tSuccessAction => ({
   type: POST_SUCCESS,
   payload,
 });

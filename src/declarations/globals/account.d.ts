@@ -4,7 +4,6 @@ namespace ts {
   // accounts are currently of 2 types. users, and organization admins
   // we consolidate that in the accounts table, along with shared rows
   declare type accountBase = ts.formSubmit & Readonly<{
-    avatar?: string,
     created_at?: string,
     deletionDeadline?: Dayjs,
     emails?: ts.email[],
@@ -48,7 +47,6 @@ namespace ts {
   }>;
 
   declare type accountQuery = Partial<tAccountBase> & Readonly<{
-    avatarEmail?: string,
     email?: string,
     currentPassword: string,
     newPassword?: string,

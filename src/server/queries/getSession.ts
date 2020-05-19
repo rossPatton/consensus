@@ -22,7 +22,6 @@ export const getSession = async (
     error: null,
     isLoading: false,
     data: {
-      avatar: account.avatar,
       deletionDeadline: account.deletionDeadline,
       emails,
       id: account.id,
