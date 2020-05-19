@@ -20,7 +20,7 @@ export const getMeetingByQuery = async (
 
   let attendeeData = {};
 
-  if (!meeting.isDraft) {
+  if (meeting && !meeting.isDraft) {
     const account = ctx?.state?.user || {};
 
     let rsvps = {} as ts.rsvp[];

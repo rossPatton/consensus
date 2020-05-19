@@ -8,6 +8,7 @@ const mockStore = configureStore([thunk]);
 
 const testMeeting = {
   attendees: [{id: 1}] as ts.user[],
+  host: '',
   publicRSVPS: 5,
   privateRSVPS: 6,
   rsvp: {

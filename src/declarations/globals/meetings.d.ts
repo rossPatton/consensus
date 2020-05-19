@@ -4,6 +4,7 @@ namespace ts {
     date: string,
     description: string,
     endDate: string,
+    host: string,
     id: number,
     img?: string,
     isDraft: boolean,

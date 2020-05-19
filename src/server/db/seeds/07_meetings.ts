@@ -22,6 +22,7 @@ const createMeeting = async (groupId: number, isDraft: boolean = false) => {
       // endDate === duration, since users can have custom durations this is a timestamp
       // we convert the 1hr, 2hr etc values to timestamps as well
       endDate: faker.date.future(),
+      host: faker.random.boolean() ? group.name : faker.company.companyName(),
       isDraft,
       isPrivate: group.type !== 'public',
       location: faker.address.streetAddress(),

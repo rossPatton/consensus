@@ -16,6 +16,7 @@ export const upsertSchema = baseSchema.keys({
   date: Joi.string().isoDate().required(),
   description: Joi.string().allow(''),
   endDate: Joi.string().isoDate(),
+  host: Joi.string(),
   id: Joi.number().integer().allow(null).optional(),
   img: Joi.string().allow('').allow(null).optional(),
   isDraft: Joi.bool().optional(),

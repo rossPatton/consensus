@@ -20,6 +20,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     date: dayJS().toISOString(),
     description: '',
     endTime: '21:00',
+    host: this.props.group.name,
     id: undefined as number | undefined,
     isCopy: false,
     isDraft: false,
@@ -62,6 +63,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
       endDate: isCopy
         ? dayJS().toISOString()
         : dayJS(draft.endDate as string).format('YYYY-MM-DD'),
+      host: draft.host as string,
       id: isCopy ? undefined : parseInt(draft.id as string, 10),
       img: draft.img as string,
       isCopy,

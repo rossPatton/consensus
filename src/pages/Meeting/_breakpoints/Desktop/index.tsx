@@ -62,9 +62,11 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
           <h1 className="mb-1 capitalize">
             {meeting.title}
           </h1>
-          <h2 className="text-base capitalize mb-2">
-            Hosted by <span className="text-blue-1">{meeting.groupName}</span>
-          </h2>
+          {meeting.host !== meeting.groupName && (
+            <h2 className="text-base capitalize mb-2">
+              Hosted by <span className="text-blue-1">{meeting.host}</span>
+            </h2>
+          )}
           {!meeting.isDraft
             && !isPastMeeting
             && (

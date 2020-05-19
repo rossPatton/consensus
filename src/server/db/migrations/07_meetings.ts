@@ -32,6 +32,9 @@ exports.up = async (knex: Knex) => {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
+    // meeting host could be different from group
+    table.string('host').notNullable();
+
     // if private, the meeting is not visible to non group members
     // if public, the meeting is visible to anyone
     // value is based on group type

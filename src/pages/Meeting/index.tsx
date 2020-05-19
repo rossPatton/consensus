@@ -8,6 +8,7 @@ import {Helmet} from '~app/components';
 import {ErrorBoundary, GenericLoader, Template} from '~app/containers';
 import {getGroup, getMeeting, getMeetingsByGroupId} from '~app/redux';
 import {typesafeIdOrSlug} from '~app/utils';
+
 import {tContainerProps, tStore} from './_types';
 import {MeetingComponent} from './Component';
 

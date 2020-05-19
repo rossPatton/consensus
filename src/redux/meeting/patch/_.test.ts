@@ -10,6 +10,7 @@ const testMeeting = {
   id: 12,
   category: 'Political' as ts.category,
   groupId: 1,
+  host: '',
   cityId: 16624,
   groupName: 'Tech Workers Coalition NYC',
   isPrivate: false,

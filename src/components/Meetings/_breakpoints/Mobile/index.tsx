@@ -37,7 +37,7 @@ const MobileMeetings = memo((props: tComponentProps) => (
             </Link>
           )}
           {meeting.isDraft && (
-            <div className='max-w-1/3'>
+            <div className="max-w-1/3">
               <MeetingFeaturedImage
                 img={meeting.img}
                 seed={meeting.id}

@@ -35,8 +35,8 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
       )}
       <h1
         className={cx({
-          "d:mt-0 capitalize block d:hidden text-2 font-normal": true,
-          "mt-5 pt-3 ": !meeting.isDraft && !isPastMeeting,
+          'd:mt-0 capitalize block d:hidden text-2 font-normal': true,
+          'mt-5 pt-3 ': !meeting.isDraft && !isPastMeeting,
         })}>
         {meeting.title}
       </h1>

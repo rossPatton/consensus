@@ -48,6 +48,13 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             value={props.description}
             onChange={ev => updateState('description', ev.currentTarget.value)}
           />
+          <h3 className="text-base mb-1">Meeting Host</h3>
+          <input
+            className="mb-3 w-full"
+            placeholder="Is your meeting being hosted by a different group or person?"
+            value={props.host}
+            onChange={ev => updateState('host', ev.currentTarget.value)}
+          />
           <div className="mb-3">
             <h3 className="text-base mb-1">Where is your meeting happening?</h3>
             <div
