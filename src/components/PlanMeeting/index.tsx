@@ -5,9 +5,10 @@ import qs from 'query-string';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
+import { Mutable } from 'utility-types';
 
 import {ErrorBoundary} from '~app/containers';
-import {getMeetingsByGroupIdSuccess, patchEvent, postMeeting} from '~app/redux';
+import {getMeetingsByGroupIdSuccess, patchMeeting, postMeeting} from '~app/redux';
 import {parseTimeString, slugify} from '~app/utils';
 
 import {tContainerProps, tKeyUnion, tState, tStore, tValueUnion} from './_types';
@@ -63,6 +64,8 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
       endDate: isCopy
         ? dayJS().toISOString()
         : dayJS(draft.endDate as string).format('YYYY-MM-DD'),
+      groupId: this.props.group.id,
+      groupName: this.props.group.name,
       host: draft.host as string,
       id: isCopy ? undefined : parseInt(draft.id as string, 10),
       img: draft.img as string,
@@ -72,7 +75,6 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
       isPrivate,
       location: draft.location as string,
       locationLink: draft.locationLink as string,
-      groupName: this.props.group.name,
       slug: slugify(draft.title as string),
       time: isCopy ? '19:00' : draft.time as string,
       title: draft.title as string,
@@ -97,15 +99,9 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
 
     let newMeeting: ts.meeting;
     try {
-      const {patchEventDispatch, postMeetingDispatch} = this.props;
+      const {patchMeetingDispatch, postMeetingDispatch} = this.props;
 
-      // if meeting has already been saved as a draft, we will have the id
-      // patch in that case, else post new meeting (initial draft save, or submit)
-      const dispatch = typeof id === 'number'
-        ? patchEventDispatch
-        : postMeetingDispatch;
-
-      const planMeeting = await dispatch({
+      const newOrUpdatedMeeting: Partial<Mutable<ts.meeting>> = {
         ...restOfMeeting,
         img,
         // we submit drafts to the same table in the DB as well
@@ -117,8 +113,17 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
         endDate: endDate.toISOString(),
         groupId: this.props.group.id as number,
         slug: slugify(restOfMeeting.title),
-      });
+      };
 
+      // if meeting has already been saved as a draft, we will have the id
+      // patch in that case, else post new meeting (initial draft save, or submit)
+      let dispatch = postMeetingDispatch;
+      if (typeof id === 'number') {
+        dispatch = patchMeetingDispatch;
+        newOrUpdatedMeeting.id = id;
+      }
+
+      const planMeeting = await dispatch(newOrUpdatedMeeting);
       newMeeting = planMeeting.payload;
     } catch (err) {
       return loglevel.error('failed to save meeting to db', err);
@@ -128,10 +133,12 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     const {meetingsThunk} = this.props;
     getMeetingsByGroupIdSuccess([newMeeting, ...meetingsThunk.data]);
 
-    // this will cause the preview button to render
-    this.setState({
-      id: newMeeting.id,
-    });
+    // this will cause the preview button to render if first time submit
+    if (typeof newMeeting.id === 'number') {
+      this.setState({
+        id: newMeeting.id,
+      });
+    }
   }
 
   updateState = (stateKey: tKeyUnion, value: tValueUnion) => {
@@ -170,7 +177,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  patchEventDispatch: (query: ts.upsertMeetingQuery) => dispatch(patchEvent(query)),
+  patchMeetingDispatch: (query: ts.upsertMeetingQuery) => dispatch(patchMeeting(query)),
   postMeetingDispatch: (query: ts.upsertMeetingQuery) => dispatch(postMeeting(query)),
 });
 

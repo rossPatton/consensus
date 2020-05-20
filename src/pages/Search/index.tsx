@@ -25,16 +25,16 @@ const SearchContainer = memo((props: tProps) => (
         isLoading={props.groupsBySearch.isLoading}
         render={() => (
           props.groupsBySearch.data.length > 0
-          ? (
-            <Groups
-              showLocation
-              groups={props.groupsBySearch.data}
-            />
-          ) : (
-            <div className="text-3 font-semibold">
+            ? (
+              <Groups
+                showLocation
+                groups={props.groupsBySearch.data}
+              />
+            ) : (
+              <div className="text-3 font-semibold">
               No groups found! Try a more specific search?
-            </div>
-          )
+              </div>
+            )
         )}
       />
     </ErrorBoundary>

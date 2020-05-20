@@ -10,7 +10,7 @@ export { getRegion } from './region';
 export { postUpload } from './uploads';
 
 // meeting(s) related actions.thunks
-export { getMeeting, patchEvent, postMeeting } from './meeting';
+export { getMeeting, patchMeeting, postMeeting } from './meeting';
 export { getMeetingsByLocation } from './meetingsByLocation';
 export {
   deleteEvent,

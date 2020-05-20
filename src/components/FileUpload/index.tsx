@@ -16,7 +16,6 @@ import {FileUploadComponent} from './Component';
 class FileUploadContainer extends React.Component<tContainerProps> {
   static defaultProps = {
     folder: 'groups' as 'groups' | 'users',
-    hash: v4(),
     img: '',
     info: 'We recommend a size of at least 760x428px',
     prefix: '',
@@ -36,7 +35,7 @@ class FileUploadContainer extends React.Component<tContainerProps> {
     ev.preventDefault();
 
     const regexExt = /[^\\]*\.(\w+)$/;
-    let image = `${this.props.prefix}:${this.props.hash}`;
+    let image = `${this.props.prefix}:${v4()}`;
     let ext = 'jpg';
 
     const body = new FormData();
@@ -70,7 +69,10 @@ class FileUploadContainer extends React.Component<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore, props: tProps) => {
-  const img = store.uploads.data[props.fieldKey as string];
+  let {img} = props;
+  if (!img) {
+    img = store.uploads.data[props.fieldKey as string];
+  }
   return { img };
 };
 

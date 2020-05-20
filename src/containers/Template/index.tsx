@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import {ErrorBoundary, GenericLoader} from '~app/containers';
 import {getGeo, getRoles, getRsvps} from '~app/redux';
+
 import {Footer, Header} from './_components';
 import {tProps, tStore} from './_types';
 

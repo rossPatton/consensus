@@ -29,7 +29,7 @@ export const LINK_TAGS: tLinkProps[] = [
     rel: 'preload',
     href: '/static/fonts/LabGrotesque-Medium.woff2',
     as: 'font',
-    type: "font/woff2",
+    type: 'font/woff2',
   },
 ];
 

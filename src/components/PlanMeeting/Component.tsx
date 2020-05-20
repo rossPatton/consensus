@@ -35,6 +35,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
           <FileUpload
             fieldKey="meetingFeaturedImage"
             folder="groups"
+            img={props.img}
             info="We recommend a size of at least 760x428px"
             prefix={`g${props.group.id}:mFI`}
             title="Upload Featured Image"
@@ -136,7 +137,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
                 ev.preventDefault();
                 props.onSubmit();
               }}>
-              Publish
+              {typeof props.id === 'number' ? 'Update' : 'Publish'}
             </button>
             <button
               className="p-2 mr-1 hover:bg-gray-3"
