@@ -68,7 +68,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
       groupName: this.props.group.name,
       host: draft.host as string,
       id: isCopy ? undefined : parseInt(draft.id as string, 10),
-      img: draft.img as string,
+      img: draft.img === 'null' ? null : draft.img as string | null,
       isCopy,
       isDraft: true,
       isOnline,
