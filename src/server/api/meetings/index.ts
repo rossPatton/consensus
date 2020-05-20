@@ -12,7 +12,6 @@ import {filterMeetings} from './_utils';
 
 export const meetings = new Router();
 const route = '/api/v1/meetings';
-
 const table = 'meetings';
 
 // get multiple meetings at a time

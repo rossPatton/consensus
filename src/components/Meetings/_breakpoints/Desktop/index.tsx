@@ -41,8 +41,8 @@ const DesktopMeetings = memo((props: tComponentProps) => (
               })}>
               <Link
                 to={meeting.isDraft
-                  ? `/draft/${meeting.id}`
-                  : `/meeting/${slugify(meeting.title)}`}>
+                  ? `/draft/${meeting.id}/${meeting.slug}`
+                  : `/meeting/${meeting.id}/${meeting.slug}`}>
                 <MeetingFeaturedImage
                   img={meeting.img}
                   seed={meeting.id}
@@ -75,7 +75,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                 {meeting.isDraft && meeting.title}
                 {!meeting.isDraft
                   && (
-                    <Link to={`/meeting/${slugify(meeting.title)}`}>
+                    <Link to={`/meeting/${meeting.id}/${meeting.slug}`}>
                       {meeting.title}
                     </Link>
                   )}

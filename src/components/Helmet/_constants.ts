@@ -20,17 +20,21 @@ export const LINK_TAGS: tLinkProps[] = [
     type: 'image/ico',
   },
   {
-    rel: 'preload',
-    href: '/static/fonts.css',
-    as: 'font',
+    rel: 'preconnect',
+    href: 'https://consensus.nyc3.digitaloceanspaces.com',
   },
-  {
-    crossOrigin: 'anonymous',
-    rel: 'preload',
-    href: '/static/fonts/LabGrotesque-Medium.woff2',
-    as: 'font',
-    type: 'font/woff2',
-  },
+  // {
+  //   rel: 'preload',
+  //   href: '/static/fonts.css',
+  //   as: 'style',
+  // },
+  // {
+  //   crossOrigin: '',
+  //   rel: 'preload',
+  //   href: '/static/fonts/LabGrotesque-Medium.woff2',
+  //   as: 'font',
+  //   type: 'font/woff2',
+  // },
 ];
 
 export const META_TAGS: tMetaProps[] = [

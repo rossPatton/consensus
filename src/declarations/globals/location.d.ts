@@ -17,7 +17,8 @@ namespace ts {
   }>;
 
   declare type meetingParams = Readonly<{
-    idOrSlug: string,
+    id: string,
+    slug: string,
   }>;
 
   // if possible, we try to get the user's location

@@ -28,8 +28,8 @@ const MobileMeetings = memo((props: tComponentProps) => (
                 'max-w-1/3': props.isEditable,
               })}
               to={meeting.isDraft
-                ? `/draft/${meeting.id}`
-                : `/meeting/${slugify(meeting.title)}`}>
+                ? `/draft/${meeting.id}/${meeting.slug}`
+                : `/meeting/${meeting.id}/${meeting.slug}}`}>
               <MeetingFeaturedImage
                 img={meeting.img}
                 seed={meeting.id}
@@ -58,7 +58,7 @@ const MobileMeetings = memo((props: tComponentProps) => (
                 && (
                   <Link
                     className="no-underline"
-                    to={`/meeting/${slugify(meeting.title)}`}>
+                    to={`/meeting/${meeting.id}/${meeting.slug}`}>
                     {meeting.title}
                   </Link>
                 )}

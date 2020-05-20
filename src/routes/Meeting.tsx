@@ -7,5 +7,5 @@ const MeetingComponent = loadable(() =>
 export const Meeting = {
   component: MeetingComponent,
   exact: true,
-  path: '/meeting/:idOrSlug',
+  path: '/meeting/:id/:slug',
 };

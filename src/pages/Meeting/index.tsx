@@ -26,17 +26,15 @@ class MeetingContainer extends PureComponent<tContainerProps> {
 
   dispatch = async () => {
     const {getMeetingDispatch, match} = this.props;
-    const slugOrId = typesafeIdOrSlug(match?.params?.idOrSlug);
+    const id = typesafeIdOrSlug(match?.params?.id);
 
     let res = null;
-    try {
-      if (typeof slugOrId === 'string') {
-        res = await getMeetingDispatch({slug: slugOrId});
-      } else {
-        res = await getMeetingDispatch({id: slugOrId});
+    if (typeof id === 'number') {
+      try {
+        res = await getMeetingDispatch({id});
+      } catch (err) {
+        loglevel.error(err);
       }
-    } catch (err) {
-      loglevel.error(err);
     }
 
     if (res && res.payload && res.payload.groupId) {

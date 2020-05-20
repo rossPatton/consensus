@@ -13,7 +13,7 @@ export type tComponentProps = tProps & {
 
 export type tContainerProps = tProps & {
   getGroupDispatch: (query: ts.groupQuery) => ts.thunkPayload<ts.group>,
-  isLoading: boolean,
+  getMeetingsByGroupDispatch: (query: ts.getMeetingQuery) => ts.thunkPayload<ts.meeting[]>,
   groupThunk: ts.thunk<ts.group>,
   rolesThunk: ts.thunk<ts.roleMap[]>,
   rsvpsThunk: ts.thunk<ts.rsvp[]>,

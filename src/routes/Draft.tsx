@@ -7,7 +7,7 @@ const DraftComponent = loadable(() =>
 export const Draft = {
   component: DraftComponent,
   exact: true,
-  path: '/draft/:idOrSlug',
+  path: '/draft/:id/:slug',
   private: true,
   redirect: '/login',
 };

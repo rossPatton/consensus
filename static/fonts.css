@@ -1,9 +1,7 @@
 @font-face {
   font-display: swap;
   font-family: 'Lab';
-  src: url('./fonts/LabGrotesque-Medium.eot?#iefix') format('embedded-opentype'),
-    url('./fonts/LabGrotesque-Medium.woff2') format('woff2'),
-    url('./fonts/LabGrotesque-Medium.woff') format('woff');
+  src: url('./fonts/LabGrotesque-Medium.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
 }

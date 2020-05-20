@@ -7,6 +7,5 @@ const GroupComponent = loadable(() =>
 export const Group = {
   component: GroupComponent,
   exact: true,
-  // eslint-disable-next-line
   path: '/group/:idOrSlug/:section?',
 };

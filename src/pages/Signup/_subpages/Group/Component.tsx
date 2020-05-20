@@ -24,7 +24,7 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
       </h2>
       <label htmlFor="nameInput" className="mb-3">
         <p className="text-base text-gray-5 mb-1">
-          What&apos;s your group&apos;s name? Think carefully, you won&apos;t be able to change this!
+          What&apos;s your group&apos;s name? Think carefully, you won&apos;t be able to change this! Must be unique.
         </p>
         <input
           required
@@ -32,42 +32,23 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
           name="name"
           type="text"
           className="w-full"
-          onChange={ev => props.updateState('name', ev.currentTarget.value)}
+          onChange={ev => {
+            props.updateState('name', ev.currentTarget.value);
+            props.updateState('handle', slugify(ev.currentTarget.value));
+          }}
           placeholder="Your group name here"
           value={props.name}
         />
       </label>
       <h2 className="text-base">
-        Group Handle
+        Group URL Preview
       </h2>
-      <label htmlFor="handleInput" className="mb-3">
-        <p className="text-gray-5 mb-1">
-          What will your group&apos;s url be? Only lowercase letters, numbers, and dashes(-) allowed. Think carefully, you won&apos;t be able to change this!
-        </p>
-        <div className="flex flex-col d:flex-row">
-          <input
-            required
-            id="handleInput"
-            name="handle"
-            type="text"
-            className="w-full d:mr-2"
-            autoComplete="off"
-            onChange={ev =>
-              props.updateState('handle', slugify(ev.currentTarget.value))
-            }
-            placeholder="your-easily-shareable-group-url"
-            value={props.handle}
-          />
-          <button
-            type="button"
-            className="p-2 hover:bg-gray-3"
-            onClick={() => {
-              props.updateState('handle', slugify(props.name));
-            }}>
-            Make URL from group name
-          </button>
-        </div>
-      </label>
+      <p className="text-base text-gray-5 mb-1">
+        Your group&apos;s url is generated based on your group name. Here&apos;s a preview.
+      </p>
+      <div className="font-semibold bg-gray-1 border inline-block mb-3 p-1 rounded">
+        {`https://consens.us.org/group/${props.handle}`}
+      </div>
       <h2 className="text-base">
         Group Category
       </h2>

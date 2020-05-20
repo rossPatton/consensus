@@ -5,7 +5,7 @@ import {Redirect} from 'react-router';
 
 import {Helmet} from '~app/components';
 import {ErrorBoundary, GenericLoader, Template} from '~app/containers';
-import {getGroup} from '~app/redux';
+import {getGroup, getMeetingsByGroupId} from '~app/redux';
 import {typesafeIdOrSlug} from '~app/utils';
 
 import {tContainerProps, tStore} from './_types';
@@ -17,29 +17,46 @@ class GroupContainer extends PureComponent<tContainerProps> {
     this.dispatch();
   }
 
+  componentDidUpdate(nextProps: tContainerProps) {
+    const routeChanged = nextProps.match.url !== this.props.match.url;
+    if (!routeChanged) return;
+    this.dispatch();
+  }
+
   dispatch = async () => {
     const {getGroupDispatch, match} = this.props;
     const slugOrId = typesafeIdOrSlug(match?.params?.idOrSlug);
 
+    let res;
     try {
       if (typeof slugOrId === 'string') {
-        await getGroupDispatch({handle: slugOrId});
+        res = await getGroupDispatch({handle: slugOrId});
       } else {
-        await getGroupDispatch({id: slugOrId});
+        res = await getGroupDispatch({id: slugOrId});
       }
     } catch (err) {
       loglevel.error(err);
     }
+
+    // @TODO ideally this would go in the Meetings container, but the levels of
+    // memoization was preventing necessary re-renders. doing it here fixes it
+    if (res.payload) {
+      await this.props.getMeetingsByGroupDispatch({
+        groupId: res.payload.id,
+        showPast: false,
+        limit: -1,
+      });
+    }
   }
 
   render() {
-    const {isLoading, location, match, groupThunk, rolesThunk, session} = this.props;
+    const {location, match, groupThunk, rolesThunk, session} = this.props;
 
     return (
       <Template>
         <ErrorBoundary status={groupThunk?.error?.status}>
           <GenericLoader
-            isLoading={isLoading}
+            isLoading={groupThunk.isLoading}
             render={() => {
               const {groupThunk: {data: group}} = this.props;
 
@@ -79,7 +96,6 @@ class GroupContainer extends PureComponent<tContainerProps> {
                       location={location}
                       match={match}
                       group={group}
-                      // unsure why this errors but should be ok?
                       role={role as ts.role}
                       session={this.props.session}
                     />
@@ -94,7 +110,6 @@ class GroupContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.group.isLoading,
   groupThunk: store.group,
   rolesThunk: store.roles,
   rsvpsThunk: store.rsvps,
@@ -104,6 +119,8 @@ const mapStateToProps = (store: tStore) => ({
 
 const mapDispatchToProps = (dispatch: Function) => ({
   getGroupDispatch: (query: ts.groupQuery) => dispatch(getGroup(query)),
+  getMeetingsByGroupDispatch:
+    (query: ts.getMeetingQuery) => dispatch(getMeetingsByGroupId(query)),
 });
 
 const Group = connect(

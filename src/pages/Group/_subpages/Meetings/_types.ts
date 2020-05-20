@@ -12,8 +12,6 @@ export type tComponentProps = ts.searchFilterProps & tProps & {
 };
 
 export type tContainerProps = tProps & {
-  getMeetingsByGroupIdDispatch:
-    (query: ts.getMeetingQuery) => ts.thunkPayload<ts.meeting[]>,
   meetingsByGroupIdThunk: ts.thunk<ts.meeting[]>,
   match: ts.match & {params: ts.groupRouteParams},
   session: ts.session,
