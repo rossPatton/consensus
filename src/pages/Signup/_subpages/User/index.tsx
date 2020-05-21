@@ -62,8 +62,15 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
   }
 
   render() {
-    const { errors } = this.state;
+    const { errors, login, password, username } = this.state;
     const errArr = _.flatten(Object.values(errors as string[]));
+
+    const disabled = !login
+      || login.length < 3
+      || !password
+      || password.length < 12
+      || !username
+      || username.length < 3;
 
     return (
       <>
@@ -78,6 +85,7 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
         <UserSignupComponent
           {...this.props}
           {...this.state}
+          disabled={disabled}
           errArr={errArr}
           register={this.register}
           updateState={this.updateState}

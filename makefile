@@ -16,8 +16,8 @@ build:
 	docker-compose -f docker-compose.build.yml build --no-cache --parallel
 
 # setup external nginx network
-nginx:
-	docker-compose -f ./nginx/docker-compose.yml up --remove-orphans
+nginxProxy:
+	docker-compose -f ./nginx/docker-compose.yml up -d --remove-orphans
 
 # stops all active containers (as defined by docker-compose)
 reset:

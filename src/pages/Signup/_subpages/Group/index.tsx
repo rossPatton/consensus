@@ -15,6 +15,7 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
       category: 'Political',
       city: '',
       cityId: 0,
+      email: '',
       handle: '',
       hasMounted: false,
       login: '',
@@ -36,7 +37,7 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
 
   onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {showRegionField, ...newGroup} = this.state;
+    const {hasMounted, showRegionField, ...newGroup} = this.state;
     await this.props.postGroupDispatch(newGroup);
     await this.props.loginDispatch({
       username: newGroup.login,
@@ -60,6 +61,7 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
       category,
       city,
       cityId,
+      email,
       handle,
       login,
       name,
@@ -72,7 +74,9 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
     const disabled = !category
       || !city
       || !cityId
+      || !email
       || !handle
+      || handle.length < 3
       || !login
       || !name
       || !password

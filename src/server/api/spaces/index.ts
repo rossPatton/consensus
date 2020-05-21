@@ -48,7 +48,12 @@ spaces.post('/api/v1/spaces', fields, async (ctx: Koa.ParameterizedContext) => {
       ...uploadDefaults,
       Body: file.buffer,
       Key: file.originalname,
+      Metadata: {
+        // 15552000 === 6 months
+        'Cache-Control': 'max-age=15552000',
+      },
     }).promise();
+
     ctx.status = 200;
     ctx.body = {[file.fieldname]: file.originalname};
   } catch (err) {

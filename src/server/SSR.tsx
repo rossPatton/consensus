@@ -7,6 +7,7 @@ import { renderToNodeStream } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 
+import {spacesUrl} from '~app/constants';
 import { AppShell } from '~app/containers';
 import styles from '~app/css/styles.css';
 
@@ -25,7 +26,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   const local = __DEV__ ? "'self' 127.0.0.1:* 0.0.0.0:*" : "'self'";
   // webpack debug mode seems to use eval(?) so disable the CSP in debug mode
   // i think this is mostly fine, considering the CSP runs for every other case
-  const CSP = !__DEBUG__ ? `<meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="base-uri 'none'; connect-src ${local}; default-src 'none'; block-all-mixed-content; font-src ${local}; form-action ${local}; img-src ${local} https://consensus.nyc3.digitaloceanspaces.com https://*.libravatar.org https://i.picsum.photos https://picsum.photos; manifest-src ${local}; object-src 'none'; script-src ${local} ajax.googleapis.com 'nonce-${nonce}'; style-src ${local} 'nonce-${nonce}'">` : '';
+  const CSP = !__DEBUG__ ? `<meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="base-uri 'none'; connect-src ${local}; default-src 'none'; block-all-mixed-content; font-src ${local}; form-action ${local}; img-src ${local} ${spacesUrl} https://i.picsum.photos https://picsum.photos; manifest-src ${local}; object-src 'none'; script-src ${local} ajax.googleapis.com 'nonce-${nonce}'; style-src ${local} 'nonce-${nonce}'">` : '';
 
   ctx.res.write(`<!DOCTYPE html><html lang="en"><head>${CSP}<title>Consensus - when you need to get organized.</title><style type="text/css" nonce="${nonce}">${styles}</style></head><body><div id="appRoot">`);
 

@@ -56,13 +56,13 @@ group.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {isFormSubmit, ...group} = ctx?.state?.locals?.data;
   await validateSchema<ts.groupQuery>(ctx, postSchema, group);
 
-  const {login, password, ...groupToInsert} = group;
+  const {email, login, password, ...groupToInsert} = group;
 
   // create the group first =>
   let newGroupReturning = [] as ts.group[];
   try {
     newGroupReturning = await knex(table)
-      .insert({isNew: true, ...groupToInsert})
+      .insert(groupToInsert)
       .returning('*');
   } catch (err) {
     return ctx.throw(500, err);
@@ -78,11 +78,23 @@ group.post(route, async (ctx: Koa.ParameterizedContext) => {
   const newGroup = newGroupReturning?.[0];
 
   // then the cooresponding account for login
+  let newAccount: ts.account;
   try {
-    await knex('accounts').insert({
+    newAccount = await knex('accounts').insert({
       login: group.login,
       groupId: newGroup.id,
       password: encrypt(hashedPW),
+    });
+  } catch (err) {
+    return ctx.throw(500, err);
+  }
+
+  // then set email
+  try {
+    await knex('accounts_emails').insert({
+      accountId: newAccount.id,
+      email,
+      isPrimary: true,
     });
   } catch (err) {
     return ctx.throw(500, err);

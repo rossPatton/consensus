@@ -49,6 +49,23 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
       <div className="font-semibold bg-gray-1 border inline-block mb-3 p-1 rounded">
         {`https://consens.us.org/group/${props.handle}`}
       </div>
+      <h2 className="text-base mb-1 leading-none">
+        Group Email address
+      </h2>
+      <label className="w-full mb-2" htmlFor="emailInput">
+        <p className="text-base text-gray-5 mb-1">
+          Used for account verification.
+        </p>
+        <input
+          id="emailInput"
+          onChange={ev => props.updateState('email', ev.currentTarget.value)}
+          className="p-2 w-full"
+          autoComplete="off"
+          placeholder="yourGroupEmail@example.com"
+          value={props.email}
+          name="email"
+        />
+      </label>
       <h2 className="text-base">
         Group Category
       </h2>
@@ -103,15 +120,16 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
       <CitySearch
         {...props}
         label="All groups on Consensus are currently local, city-based organizations."
+        showRemoveButton={false}
         updateState={props.updateState}
       />
-      <h2 className="text-base mb-1">
-        Group Login
+      <h2 className="text-base mb-1 font-semibold">
+        <b>Private</b> Group Login
       </h2>
+      <p className="mb-1">
+        A unique name or phrase that you&apos;ll only use to login with. No one else will see this. Can be changed at any time. Keep secret!
+      </p>
       <label htmlFor="loginInput" className="mb-3">
-        <p className="mb-1">
-          A unique name that you&apos;ll use to login with. Keep secret!
-        </p>
         <input
           required
           id="loginInput"

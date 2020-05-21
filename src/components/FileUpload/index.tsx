@@ -9,6 +9,8 @@ import {success as postUploadSuccess} from '~app/redux/uploads/post/actions';
 import {tContainerProps, tProps, tStore} from './_types';
 import {FileUploadComponent} from './Component';
 
+// @TODO tie this to updateState like CitySearch
+
 /**
  * @description A Component for uploading files to the consensus DO spaces account
  * must be used as part of a form with multi-part encoding

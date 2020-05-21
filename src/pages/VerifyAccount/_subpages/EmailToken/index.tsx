@@ -10,7 +10,7 @@ const EmailFormComponent = memo((props: tProps) => (
     onSubmit={props.sendVerificationToken}>
     <fieldset>
       <legend>
-        <h1 className="mb-2">Verify your Account</h1>
+        <h1 className="mb-2">Verify your Email</h1>
       </legend>
       <label htmlFor="emailInput">
         <input

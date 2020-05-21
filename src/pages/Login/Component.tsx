@@ -10,7 +10,7 @@ export const LoginComponent = memo((props: tComponentProps) => (
   <>
     <form
       method="POST"
-      className="mb-2"
+      className="mb-3"
       name="userLoginForm"
       autoComplete="off"
       action="/auth/v1/login"
@@ -56,7 +56,7 @@ export const LoginComponent = memo((props: tComponentProps) => (
           <Link
             to="/password-reset"
             className="btn p-2 pl-3 pr-3 hover:bg-gray-2">
-          Forget your password?
+            Forget your password?
           </Link>
         </div>
         {props.error && (
@@ -66,7 +66,7 @@ export const LoginComponent = memo((props: tComponentProps) => (
         )}
       </fieldset>
     </form>
-    <Link to="/signup">
+    <Link className="font-bold" to="/signup">
       Or create a new account
     </Link>
   </>

@@ -42,7 +42,7 @@ const GroupAdminContainer = memo((props: tProps) => {
       )}
       {!session.isVerified && (
         <div className="bg-yellow-2 rounded p-2 mb-3 text-center font-bold text-sm">
-          Your group will not be listed and some features will be locked until you verify your email. Click <Link to="/admin/account/edit">here</Link> to add or verify your email.
+          Your group will not be listed and some features will be locked until you verify your email. Click <Link to="/verify-account">here</Link> to verify your email.
         </div>
       )}
       <div className="flex flex-col d:flex-row items-start">

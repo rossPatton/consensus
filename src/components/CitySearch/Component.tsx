@@ -60,15 +60,29 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
       </div>
       <h2 className="text-base">
         City in <span className="inline-block mr-2">
-          {(!showRegionField && props.geo.region) && props.geo.region}
-          {(showRegionField && props.region) && props.region}
+          {props.region || props.geo.region}
         </span>
         {!showRegionField && (
           <button
             type="button"
-            className="p-1"
+            className="p-1 mr-1"
             onClick={() => toggleRegionField(!showRegionField)}>
             Not the right state?
+          </button>
+        )}
+        {props.showRemoveButton && (
+          <button
+            type="button"
+            className="p-1"
+            onClick={() => {
+              return props.updateState({
+                city: '',
+                cityId: 0,
+                region: '',
+                regionId: 0,
+              });
+            }}>
+            Reset City Search
           </button>
         )}
       </h2>
@@ -77,7 +91,11 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
           {props.label}
         </p>
       )}
-      <div className="mb-3">
+      <div
+        className={cx({
+          hidden: showRegionField,
+          'mb-3': true,
+        })}>
         {props.cityId === 0 && (
           <label htmlFor="citySelect">
             <select

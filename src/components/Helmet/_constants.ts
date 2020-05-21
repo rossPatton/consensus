@@ -1,3 +1,5 @@
+import {spacesUrl} from '~app/constants';
+
 // default meta and link tags that then get merged with route specific ones
 export const LINK_TAGS: tLinkProps[] = [
   { rel: 'manifest', href: '/static/manifest.json' },
@@ -21,7 +23,7 @@ export const LINK_TAGS: tLinkProps[] = [
   },
   {
     rel: 'preconnect',
-    href: 'https://consensus.nyc3.digitaloceanspaces.com',
+    href: spacesUrl,
   },
   // {
   //   rel: 'preload',
@@ -54,6 +56,10 @@ export const META_TAGS: tMetaProps[] = [
   {
     name: 'viewport',
     content: 'width=device-width, initial-scale=1 minimum-scale=1',
+  },
+  {
+    name: 'theme-color',
+    content: '#fff',
   },
   { name: 'application-name', content: 'Consensus.com' },
   // { name: 'msapplication-square70x70logo', content: 'small.jpg' },
@@ -96,6 +102,6 @@ export const META_TAGS: tMetaProps[] = [
   // },
   // {
   //   property: 'twitter:creator',
-  //   content: '@iodine',
+  //   content: '@consensus',
   // },
 ];

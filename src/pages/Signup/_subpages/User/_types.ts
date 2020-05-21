@@ -28,6 +28,7 @@ export type tContainerProps = {
 };
 
 export type tComponentProps = tContainerProps & tState & {
+  disabled: boolean,
   errArr: string[],
   register: (ev: React.FormEvent<HTMLFormElement>) => void,
   updateState: (key: tKeyUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,

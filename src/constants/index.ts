@@ -13,3 +13,5 @@ export const categoryMap: ts.categoryMap = {
 };
 
 export const roles: ts.role[] = ['member', 'facilitator'];
+
+export const spacesUrl = 'https://consensus.nyc3.digitaloceanspaces.com';

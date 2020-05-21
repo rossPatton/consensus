@@ -1,9 +1,9 @@
 import React, {memo} from 'react';
 
+import {spacesUrl} from '~app/constants';
+
 import {PlaceholderImage} from '..';
 import {tProps} from './_types';
-
-const mfiPrefix = 'https://consensus.nyc3.digitaloceanspaces.com/groups';
 
 /**
  * @description renders the featured image for meeting lists and pages
@@ -16,7 +16,7 @@ const MeetingFeaturedImage = memo((props: tProps) => (
           alt={props.alt || ''}
           className="rounded w-full"
           height={props.height || '240'}
-          src={`${mfiPrefix}/${props.img}`}
+          src={`${spacesUrl}/groups/${props.img}`}
           width={props.width || '480'}
         />
       ) : (

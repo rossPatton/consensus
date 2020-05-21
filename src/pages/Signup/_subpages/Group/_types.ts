@@ -4,6 +4,7 @@ export type tState = {
   category: ts.category,
   city: string,
   cityId: number,
+  email: string,
   handle: string,
   hasMounted: boolean,
   login: string,

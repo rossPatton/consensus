@@ -25,22 +25,24 @@ class Description extends PureComponent<
       return null;
     }
 
+    const descArr = description.split('\n');
+
     return (
       <>
         {!showAll && (
           <p className="mb-1">
-            {description.split('\n')?.[0]}
+            {descArr?.[0]}
           </p>
         )}
         {(showAll || isMobile)
-          && description.split('\n').map((p, i) => (
+          && descArr.map((p, i) => (
             <p
               key={i}
               className="mb-1">
               {p}
             </p>
           ))}
-        {!isMobile && (
+        {(descArr.length > 1 && !isMobile) && (
           <button
             className="mb-2 border-0 bg-0"
             onClick={this.toggleDescription}>

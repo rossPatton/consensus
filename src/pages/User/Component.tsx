@@ -6,35 +6,35 @@ import {tComponentProps} from './_types';
 
 export const UserComponent = memo(({groups, user}: tComponentProps) => (
   <>
-    <h1 className="mb-2 fs2 capitalize">
+    <h1 className="mb-2 capitalize">
       @{user.username}
     </h1>
     {user.name && (
-      <>
+      <div className="mb-2">
         <h2 className="text-3 mb-1">
           Real Name
         </h2>
         <p>{user.name}</p>
-      </>
+      </div>
     )}
     {user.emails
       && !user.privateEmail
       && (
-        <>
+        <div className="mb-2">
           <h3>Email</h3>
           <p>{user.emails?.[0]}</p>
-        </>
+        </div>
       )}
     {user.website && (
-      <>
+      <div className="mb-2">
         <h3 className="mb-1">
           Personal Website
         </h3>
         <p>{user.website}</p>
-      </>
+      </div>
     )}
     {user.bio && (
-      <div className="w-full">
+      <div className="w-full mb-2">
         <h3>Bio</h3>
         {user.bio && user.bio.split('\n').map((p, i) => (
           <p key={i} className="text-gray-5">{p}</p>
@@ -45,7 +45,7 @@ export const UserComponent = memo(({groups, user}: tComponentProps) => (
       && groups.length > 0
       && (
         <div className="w-full">
-          <h3 className="mb-2">Memberships</h3>
+          <h3 >Memberships</h3>
           <Groups groups={groups} />
         </div>
       )}

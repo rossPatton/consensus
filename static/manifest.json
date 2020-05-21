@@ -2,12 +2,16 @@
   "display": "standalone",
   "gcm_sender_id": "482941778795",
   "icons": [{
-    "src": "apple-touch-icon.png",
+    "src": "/static/android-chrome-192x192.png",
     "type": "image/png",
-    "sizes": "152x152"
+    "sizes": "192x192"
+  }, {
+    "src": "/static/android-chrome-512x512.png",
+    "type": "image/png",
+    "sizes": "512x512"
   }],
   "name": "Consensus: When You Need To Get Organized",
   "short_name": "Consensus",
   "start_url": "/",
-  "theme_color": "#990000"
+  "theme_color": "#efefef"
 }

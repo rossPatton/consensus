@@ -66,7 +66,7 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
       />
       <div className="flex mb-3">
         <button
-          disabled={props.hasMounted && (!props.password || !props.login)}
+          disabled={props.hasMounted && props.disabled}
           className="hover:bg-gray-3 p-2 pl-3 pr-3 mr-1">
           Sign up!
         </button>

@@ -1,12 +1,13 @@
 import cx from 'classnames';
 import React, {memo} from 'react';
 
+import {spacesUrl} from '~app/constants';
+
 import {tProps} from './_types';
-const avPrefix = 'https://consensus.nyc3.digitaloceanspaces.com';
 
 const Avatar = memo((props: tProps) => {
   const {className, hash, size = 'lg'} = props;
-  const src = `${avPrefix}/${props.type || 'groups'}/${hash || null}`;
+  const src = `${spacesUrl}/${props.type || 'groups'}/${hash || null}`;
 
   return (
     <div

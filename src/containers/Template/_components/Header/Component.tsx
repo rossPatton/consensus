@@ -80,8 +80,14 @@ export const HeaderComponent = memo((props: tComponentProps) => {
             <Link
               to="/login"
               id="a11yLogin"
+              className="font-bold underline text-black mr-1">
+              Login
+            </Link>
+            <Link
+              to="/signup"
+              id="a11ySignup"
               className="font-bold underline text-black">
-              Login/Signup
+              Signup
             </Link>
           </div>
         )}

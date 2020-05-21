@@ -3,10 +3,9 @@ import React, {memo} from 'react';
 import {v1} from 'uuid';
 
 import {Emoji} from '~app/components';
+import {spacesUrl} from '~app/constants';
 
 import {tComponentProps} from './_types';
-
-const baseUrl = 'https://consensus.nyc3.digitaloceanspaces.com';
 
 export const FileUploadComponent = memo((props: tComponentProps) => (
   <>
@@ -34,7 +33,7 @@ export const FileUploadComponent = memo((props: tComponentProps) => (
         <img
           alt="Your uploaded file preview."
           width={props.width}
-          src={`${baseUrl}/${props.folder}/${props.img}${__DEV__ ? `?v=${v1()}` : ''}`}
+          src={`${spacesUrl}/${props.folder}/${props.img}${__DEV__ ? `?v=${v1()}` : ''}`}
           className={cx({
             rounded: true,
             'w-full': !props.fieldKey.includes('Avatar'),
