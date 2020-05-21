@@ -38,7 +38,6 @@ describe('redux/user/reducer', () => {
       payload: {} as ts.user,
     })).toStrictEqual({
       ...initialState,
-      fetched: true,
       data: {},
     });
   });
@@ -74,7 +73,6 @@ describe('redux/user/reducer', () => {
       payload: {} as ts.user,
     })).toStrictEqual({
       ...initialState,
-      fetched: true,
       data: {},
     });
   });
@@ -110,7 +108,6 @@ describe('redux/user/reducer', () => {
       payload: {} as ts.user,
     })).toStrictEqual({
       ...initialState,
-      fetched: true,
       data: {},
     });
   });
@@ -146,7 +143,6 @@ describe('redux/user/reducer', () => {
       payload: {} as ts.user,
     })).toStrictEqual({
       ...initialState,
-      fetched: true,
       data: {},
     });
   });

@@ -16,10 +16,9 @@ const testGroup = {
 describe('PlanMeeting component', () => {
   it('renders without crashing', () => {
     const store = mockStore({
-      meetingsByGroupId: {
-        data: [{}],
-      },
+      meetingsByGroupId: {data: [{}]},
       session: {data: {isAuthenticated: false}},
+      uploads: {data: {meetingFeaturedImage: ''}},
     });
 
     render.create((

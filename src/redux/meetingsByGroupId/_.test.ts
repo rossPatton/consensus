@@ -73,7 +73,6 @@ describe('redux/meetingsByGroupId/reducer', () => {
       payload: [{}] as ts.meeting[],
     })).toStrictEqual({
       ...initialState,
-      fetched: true,
       data: [{}],
     });
   });

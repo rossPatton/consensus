@@ -2,32 +2,32 @@
 
 exports[`components/Avatar renders empty div when no props 1`] = `
 <div
-  className="mr-1 bg-white border p-3 rounded"
+  className="rounded overflow-hidden av-sz-lg bg-gray-2 mr-1"
 />
 `;
 
 exports[`components/Avatar renders group image tag when hash prop provided 1`] = `
 <div
-  className="mr-1"
+  className="rounded overflow-hidden av-sz-lg mr-1"
 >
   <img
     alt="User or Group Avatar"
-    height="96"
-    src="https://seccdn.libravatar.org/avatar/notARealHash?default=identicon&size=undefined"
-    width="96"
+    height="60"
+    src="https://consensus.nyc3.digitaloceanspaces.com/groups/notARealHash"
+    width="60"
   />
 </div>
 `;
 
 exports[`components/Avatar renders user image tag when hash prop provided 1`] = `
 <div
-  className="mr-1"
+  className="rounded overflow-hidden av-sz-lg mr-1"
 >
   <img
     alt="User or Group Avatar"
-    height="96"
-    src="https://seccdn.libravatar.org/avatar/notARealHash?default=mm&size=undefined"
-    width="96"
+    height="60"
+    src="https://consensus.nyc3.digitaloceanspaces.com/users/notARealHash"
+    width="60"
   />
 </div>
 `;

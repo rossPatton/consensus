@@ -1,7 +1,7 @@
 import * as types from './_types';
 import {initialState, uploadsReducer as reducer} from './reducer';
 
-describe('redux/featuredImage/reducer', () => {
+describe('redux/uploads/reducer', () => {
   it('should return initial state, even with a bunk action', () => {
     expect(reducer(undefined, {} as types.tActions))
       .toStrictEqual(initialState);
@@ -38,8 +38,7 @@ describe('redux/featuredImage/reducer', () => {
       payload: {test: ''},
     })).toStrictEqual({
       ...initialState,
-      fetched: true,
-      data: {},
+      data: {test: ''},
     });
   });
 });
