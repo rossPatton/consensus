@@ -27,6 +27,9 @@ exports.up = async (knex: Knex) => {
     // if user puts their email in, we can verify that they're a real person
     table.boolean('isVerified').defaultTo(false);
 
+    // email associated with account
+    table.string('email').notNullable().unique();
+
     // if set to true, email addresses aren't visible to other users or groups
     table.boolean('privateEmail').notNullable().defaultTo(true);
 

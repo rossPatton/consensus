@@ -14,8 +14,15 @@ const createUserAccount = async (i: number) => {
   const sha = sha384(faker.internet.password());
   const saltedHash = await bcrypt.hash(sha, salt);
   const password = encrypt(saltedHash);
+  let email  = faker.internet.email(
+    faker.name.firstName(),
+    faker.name.lastName(),
+    'gmail.com',
+  );
 
   return {
+    email,
+    isVerified: false,
     login: faker.internet.userName(),
     password,
     privateEmail: faker.random.boolean(),
@@ -29,6 +36,8 @@ const createTestUserAccount = async () => {
   const password = encrypt(saltedHash);
 
   return {
+    email: 'ross_patton@pm.me',
+    isVerified: false,
     login: 'testAccount',
     password,
     privateEmail: faker.random.boolean(),
@@ -42,6 +51,8 @@ const createTestGroupAccount = async () => {
   const password = encrypt(saltedHash);
 
   return {
+    email: 'rosspatton@protonmail.com',
+    isVerified: false,
     login: 'twcNYC',
     groupId: 1,
     privateEmail: faker.random.boolean(),
