@@ -14,7 +14,7 @@ const createUserAccount = async (i: number) => {
   const sha = sha384(faker.internet.password());
   const saltedHash = await bcrypt.hash(sha, salt);
   const password = encrypt(saltedHash);
-  let email  = faker.internet.email(
+  const email = faker.internet.email(
     faker.name.firstName(),
     faker.name.lastName(),
     'gmail.com',

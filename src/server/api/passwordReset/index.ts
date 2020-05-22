@@ -14,33 +14,13 @@ passwordResetViaEmail.get('/email/v1/emailResetToken',
     const query: {email: string} = ctx?.state?.locals?.data;
     await validateSchema<{email: string}>(ctx, emailSchema, query);
 
-    let accountEmailRel: ts.email;
-    try {
-      accountEmailRel = await knex('accounts_emails')
-        .limit(1)
-        .where(query)
-        .first();
-    } catch (err) {
-      ctx.throw(500, err);
-    }
-
-    // update query returns 0 or 1 status codes
-    if (!accountEmailRel) {
-      ctx.status = 204;
-      ctx.body = {
-        error: 'No account found for that email address. Are you sure you typed it correctly?',
-        ok: false,
-      };
-      return;
-    }
-
     const oneHourFromNow = dayjs().add(1, 'hour');
     const token = crypto.randomBytes(48).toString('hex');
     let account: ts.account | number;
     try {
       account = await knex('accounts')
         .limit(1)
-        .where({id: accountEmailRel.accountId})
+        .where(query)
         .update({
           passwordResetToken: token,
           passwordResetExpires: oneHourFromNow,
@@ -52,14 +32,14 @@ passwordResetViaEmail.get('/email/v1/emailResetToken',
     // update query returns 0 or 1.
     // maybe user entered a valid query, but for another account?
     if (!account || account === 0) {
-      return ctx.throw(400, 'Something went wrong! Try again?');
+      return ctx.throw(500, 'Something went wrong! Try again?');
     }
 
     const resp = await sendEmail({
       from: `Consensus <noreply@${__MAIL_DOMAIN__}>`,
       to: query.email,
       subject: 'Reset Your Password ',
-      text: `Enter the following authentication code in order to reset your password. This token is only valid for 1 day. Code: ${token}`,
+      text: `Enter the following authentication code in order to reset your password. This token is only valid for 1 hour. Code: ${token}`,
       html: `
       Enter the following authentication code in order to reset your password. This token is only valid for 1 day.
       <br /><br />
@@ -89,12 +69,7 @@ passwordResetViaEmail.patch('/email/v1/resetPasswordByEmail',
     }
 
     if (!account) {
-      ctx.status = 204;
-      ctx.body = {
-        error: 'No account found that matches that token. Are you sure you typed it correctly?',
-        ok: false,
-      };
-      return;
+      return ctx.throw(500, 'No account found that matches that token. Are you sure you typed it correctly?');
     }
 
     const hasTokenExpired = dayjs().isAfter(account.passwordResetExpires);

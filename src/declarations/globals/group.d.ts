@@ -11,8 +11,9 @@ namespace ts {
     countryId: number,
     created_at?: Date,
     description: string,
-    // lives in accounts_emails table
-    emails?: string[],
+    // lives in accounts table,
+    // but we merge into group when rendering user pages
+    email?: string,
     facebook?: string,
     id: number,
     memberName: string,

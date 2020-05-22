@@ -20,7 +20,7 @@ const CurrentAccount = memo((props: tComponentProps) => (
     </h2>
     <h2 className="text-base leading-none">
       Email address: <span className="text-gray-5">
-        {props?.session?.emails?.[0]?.email || 'N/A'}
+        {props?.session?.email}
       </span>
     </h2>
     {!props.session.isVerified

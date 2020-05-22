@@ -5,9 +5,9 @@ namespace ts {
     bio?: string,
     city?: string, // city.name
     cityId?: number, // city.id
-    // lives in accounts_emails table,
+    // lives in accounts table,
     // but we merge into user when rendering user pages
-    emails?: string[],
+    email: string,
     facebook: string,
     id: number,
     name: string,

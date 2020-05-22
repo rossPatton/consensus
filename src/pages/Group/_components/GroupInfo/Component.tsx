@@ -99,7 +99,7 @@ export const GroupInfoComponent = memo((props: tComponentProps) => {
               </ExternalLink>
             </div>
           )}
-          {group.emails && (
+          {/* {group.showEmail && (
             <div>
               <img
                 alt="Email Us!"
@@ -107,7 +107,7 @@ export const GroupInfoComponent = memo((props: tComponentProps) => {
                 width="25"
               />
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

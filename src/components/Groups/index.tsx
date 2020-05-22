@@ -3,7 +3,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {Paginate} from '~app/containers';
-import {deleteOrgByUserId} from '~app/redux';
+import {deleteGroupByUserId, deleteRoleSuccess} from '~app/redux';
 
 import {tContainerProps, tState} from './_types';
 import {GroupsComponent} from './Component';
@@ -39,7 +39,8 @@ class GroupsContainer extends PureComponent<tContainerProps, tState> {
   leaveOrg = (ev: React.MouseEvent<HTMLButtonElement>, groupId: number) => {
     ev.preventDefault();
     if (groupId) {
-      this.props.deleteOrgByUserIdDispatch({groupId});
+      this.props.deleteGroupByUserIdDispatch({groupId});
+      this.props.dispatch(deleteRoleSuccess({groupId}));
     }
   }
 
@@ -103,8 +104,9 @@ const mapStateToProps = (store: {roles: ts.thunk<ts.roleMap[]>}) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  deleteOrgByUserIdDispatch: (query: ts.deleteUserByGroupIdQuery) =>
-    dispatch(deleteOrgByUserId(query)),
+  dispatch,
+  deleteGroupByUserIdDispatch: (query: ts.deleteUserByGroupIdQuery) =>
+    dispatch(deleteGroupByUserId(query)),
 });
 
 const Group = connect(

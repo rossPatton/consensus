@@ -20,26 +20,22 @@ const CurrentAccount = memo((props: tComponentProps) => (
         ************
       </span>
     </h2>
-    {props.session.emails
-      && props.session.emails.length > 0
-      && (
-        <h2 className="text-base mb-3 leading-none">
-          Email: <span className="text-gray-5 mr-1">
-            {props.session.emails?.[0].email}
-          </span>
-          {!props.session.isVerified && (
-            <Link to="/verify-email">
-              Verify your email
-            </Link>
-          )}
-          {props.session.isVerified && (
-            <Emoji
-              label="Verified Email Checkbox"
-              emoji="✅"
-            />
-          )}
-        </h2>
+    <h2 className="text-base mb-3 leading-none">
+      Email: <span className="text-gray-5 mr-1">
+        {props.session.email}
+      </span>
+      {!props.session.isVerified && (
+        <Link to="/verify-email">
+          Verify email
+        </Link>
       )}
+      {props.session.isVerified && (
+        <Emoji
+          label="Verified Email Checkbox"
+          emoji="✅"
+        />
+      )}
+    </h2>
     <Link
       to="/admin/account/edit"
       className="btn p-2 pl-3 pr-3 hover:bg-gray-3 transition">

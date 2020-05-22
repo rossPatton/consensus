@@ -1,6 +1,6 @@
 import Koa from 'koa';
 
-import {getEmailsByAccountId, getProfileByAccountId} from '.';
+import {getProfileByAccountId} from '.';
 
 // use login info to return session for client
 // ideally only happens once per visit, on login. but if user refreshes, we do again
@@ -12,18 +12,13 @@ export const getSession = async (
   // group and users, use account info to fetch the right one
   const profile = await getProfileByAccountId(ctx, account);
 
-  let emails = [] as ts.email[];
-  if (account.id) {
-    emails = await getEmailsByAccountId(ctx, account.id);
-  }
-
   // we return things this way to match redux-thunk on the client
   return {
     error: null,
     isLoading: false,
     data: {
       deletionDeadline: account.deletionDeadline,
-      emails,
+      email: account.email,
       id: account.id,
       isAuthenticated: ctx.isAuthenticated(),
       isNew: account.isNew,

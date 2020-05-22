@@ -1,5 +1,4 @@
 export {getAccountRoleRelByGroupId} from './getAccountRoleRelByGroupId';
-export {getEmailsByAccountId} from './getEmailsByAccountId';
 export {getMeetingByQuery} from './getMeetingByQuery';
 export {getGroupById} from './getGroupById';
 export {getProfileByAccountId} from './getProfileByAccountId';

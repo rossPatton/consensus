@@ -77,24 +77,13 @@ group.post(route, async (ctx: Koa.ParameterizedContext) => {
 
   const newGroup = newGroupReturning?.[0];
 
-  // then the cooresponding account for login
-  let newAccount: ts.account;
+  // then save the cooresponding account info for login
   try {
-    newAccount = await knex('accounts').insert({
+    await knex('accounts').insert({
+      email,
       login: group.login,
       groupId: newGroup.id,
       password: encrypt(hashedPW),
-    });
-  } catch (err) {
-    return ctx.throw(500, err);
-  }
-
-  // then set email
-  try {
-    await knex('accounts_emails').insert({
-      accountId: newAccount.id,
-      email,
-      isPrimary: true,
     });
   } catch (err) {
     return ctx.throw(500, err);

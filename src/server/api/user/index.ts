@@ -25,19 +25,12 @@ user.get(route, async (ctx: Koa.ParameterizedContext) => {
   const account: ts.account = await knex('accounts')
     .limit(1)
     .where({userId: query.id})
-    .select(['id'])
+    .select(['email', 'id'])
     .first();
-
-  let emails = [] as {email: string}[];
-  if (!account.privateEmail) {
-    emails = await knex('accounts_emails')
-      .where({id: account.id})
-      .select(['email']);
-  }
 
   ctx.body = {
     ...user,
-    emails: emails.map(obj => obj.email),
+    email: account.email,
   };
 });
 

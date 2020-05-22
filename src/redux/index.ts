@@ -22,7 +22,7 @@ export { getMeetingsByUserId } from './meetingsByUserId';
 // group/group related actions/thunks
 export { getGroup, patchGroup, postGroup } from './group';
 export { getGroups } from './groups';
-export { deleteOrgByUserId, getGroupsByUserId } from './groupsByUserId';
+export { deleteGroupByUserId, getGroupsByUserId } from './groupsByUserId';
 
 // session related actions/thunks
 export { login, logout, logoutSuccess, patchSessionSuccess } from './session';

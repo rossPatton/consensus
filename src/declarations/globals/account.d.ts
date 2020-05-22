@@ -6,7 +6,7 @@ namespace ts {
   declare type accountBase = ts.formSubmit & Readonly<{
     created_at?: string,
     deletionDeadline?: Dayjs,
-    emails?: ts.email[],
+    email: string,
     id: number,
     isNew: boolean,
     isVerified: boolean,

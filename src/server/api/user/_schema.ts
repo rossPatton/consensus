@@ -21,7 +21,7 @@ export const patchSchema = Joi.object().keys({
   country: Joi.string().allow(null).optional(),
   countryId: Joi.number().integer().optional(),
   // lives in a separate table
-  email: Joi.string().email(),
+  // email: Joi.string().email(),
   facebook: Joi.string(),
   id: Joi.number().integer().required(),
   language: Joi.string().alphanum().max(2),

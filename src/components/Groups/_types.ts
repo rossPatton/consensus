@@ -18,7 +18,8 @@ export type tComponentProps = tProps & {
 };
 
 export type tContainerProps = tProps & {
-  deleteOrgByUserIdDispatch: (query: ts.deleteUserByGroupIdQuery) => ts.thunkPayload<ts.group>,
+  deleteGroupByUserIdDispatch: (query: ts.deleteUserByGroupIdQuery) => ts.thunkPayload<ts.group>,
+  dispatch: Function,
 };
 
 export type tState = {

@@ -15,15 +15,6 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
   const profile = await getProfileByAccountId(ctx, account);
   await validateSchema<Mutable<ts.idQuery>>(ctx, schema, {id: account.id});
 
-  let emails: string[];
-  try {
-    emails = await knex('accounts_emails')
-      .where({accountId: account.id})
-      .select(['email', 'isPrimary']);
-  } catch (err) {
-    return ctx.throw(500, err);
-  }
-
   let roles: ts.roleMap[];
   let rsvps: ts.rsvp[];
   let meetings: ts.meeting[];
@@ -58,11 +49,11 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
   const body: {[key: string]: unknown} = {
     account: {
       created_at: account.created_at,
+      email: account.email,
       login: account.login,
       profile: profileToSend,
       updated_at: account.updated_at,
     },
-    emails,
   };
   if (type === 'user') {
     body.roles = roles;

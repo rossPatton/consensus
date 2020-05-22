@@ -49,7 +49,6 @@ account.delete(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 // TODO implement a POST route here as an upsert for non-js environments
-// @ts-ignore
 account.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const query: Mutable<ts.accountQuery> = ctx?.state?.locals?.data || {};
   await validateSchema<Mutable<ts.accountQuery>>(ctx, patchSchema, query);
@@ -60,6 +59,7 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
   const updateQuery: {[key: string]: unknown} = {
     deletionDeadline: query.deletionDeadline,
+    email: query.email,
     login: query.login,
     privateEmail: query.privateEmail,
   };
@@ -75,6 +75,11 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
     updateQuery.password = encrypt(safePW);
   }
 
+  // if user or group changes their email, reset verification
+  if (updateQuery.email !== loggedInAccount.email) {
+    updateQuery.isVerified = false;
+  }
+
   let updatedAccount: ts.account[] = [];
   if (!_.isEmpty(updateQuery)) {
     try {
@@ -88,28 +93,6 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
     }
   }
 
-  let updatedEmail = [] as ts.email[];
-  if (query.email) {
-    try {
-      updatedEmail = await knex('accounts_emails')
-        .limit(1)
-        .where({id: loggedInAccount.id})
-        .update({email: query.email})
-        .returning('email');
-    } catch (err) {
-      return ctx.throw(500, err);
-    }
-  }
-
   if (query.isFormSubmit) return;
-
-  let body: ts.account = updatedAccount?.[0];
-  if (updatedEmail) {
-    body = {
-      ...body,
-      emails: updatedEmail,
-    };
-  }
-
-  ctx.body = body;
+  ctx.body = updatedAccount?.[0];
 });

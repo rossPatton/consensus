@@ -14,21 +14,11 @@ verifyEmail.get('/email/v1/sendVerificationToken',
     const query: {email: string} = ctx?.state?.locals?.data;
     await validateSchema<{email: string}>(ctx, emailSchema, query);
 
-    const accountEmailRel = await knex('accounts_emails')
-      .limit(1)
-      .where(query)
-      .first();
-
-    // update query returns 0 or 1 status codes
-    if (!accountEmailRel) {
-      return ctx.throw(400, 'No account found for that email address. Are you sure you typed it correctly?');
-    }
-
     const oneHourFromNow = dayjs().add(1, 'hour');
     const token = crypto.randomBytes(48).toString('hex');
     const account = await knex('accounts')
       .limit(1)
-      .where({id: accountEmailRel.accountId})
+      .where(query)
       .update({
         verificationToken: token,
         verificationExpires: oneHourFromNow,
@@ -36,14 +26,14 @@ verifyEmail.get('/email/v1/sendVerificationToken',
 
     // update query returns 0 or 1
     if (!account || account === 0) {
-      return ctx.throw(400, 'Something went wrong! Try again?');
+      return ctx.throw(500, 'Something went wrong! Try again?');
     }
 
     const resp = await sendEmail({
       from: `Consensus <noreply@${__MAIL_DOMAIN__}>`,
       to: query.email,
       subject: 'Verify Your Email',
-      text: `Enter the following authentication code in order to verify your email. This token is only valid for 1 day. ${token}`,
+      text: `Enter the following authentication code in order to verify your email. This token is only valid for 1 hour. ${token}`,
       html: `
         Enter the following authentication code in order to verify your email. This token is only valid for 1 day.
         <br /><br />
@@ -72,13 +62,10 @@ verifyEmail.patch('/email/v1/verifyEmail',
       ctx.throw(400, err);
     }
 
+    // update query returns 0 or 1.
+    // maybe user entered a valid query, but for another account?
     if (!account) {
-      ctx.status = 204;
-      ctx.body = {
-        error: 'No account found that matches that token. Are you sure you typed it correctly?',
-        ok: false,
-      };
-      return;
+      return ctx.throw(500, 'No account found that matches that token. Are you sure you typed it correctly?');
     }
 
     const hasTokenExpired = dayjs().isAfter(account.verificationExpires);
@@ -98,7 +85,7 @@ verifyEmail.patch('/email/v1/verifyEmail',
         })
         .returning('isVerified');
     } catch (err) {
-      ctx.throw(400, err);
+      ctx.throw(500, err);
     }
 
     ctx.body = updatedAccount?.[0];
