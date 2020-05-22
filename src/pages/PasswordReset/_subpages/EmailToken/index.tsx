@@ -10,7 +10,7 @@ const EmailTokenComponent = memo((props: tProps) => (
     onSubmit={props.sendPasswordResetEmail}>
     <fieldset>
       <legend>
-        <h1 className=" mb-2">Password Reset</h1>
+        <h1 className="mb-2">Password Reset</h1>
       </legend>
       <label htmlFor="emailInput">
         <input
@@ -28,12 +28,12 @@ const EmailTokenComponent = memo((props: tProps) => (
       <div className="flex flex-col d:flex-row items-center">
         <button
           disabled={props.hasMounted && !props.email}
-          className="p-2 pl-3 pr-3 mr-2">
+          className="hover:bg-gray-1 p-2 pl-3 pr-3 mr-2">
           Send Reset Code
         </button>
         <Link
           to="/password-reset/enterCode"
-          className="btn p-2 pl-3 pr-3">
+          className="hover:bg-gray-1 btn p-2 pl-3 pr-3">
           Already have a code?
         </Link>
       </div>

@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {categories, spacesUrl} from '~app/constants';
+import {categories} from '~app/constants';
 
 const Categories = memo(() => (
   <ul className="flex flex-row flex-wrap justify-center leading-none">
@@ -13,7 +13,7 @@ const Categories = memo(() => (
           <Link to={`/categories/${cat.slug}`}>
             <img
               alt=""
-              src={`${spacesUrl}/static/${cat.slug}.svg`}
+              src={`/static/images/${cat.slug}.svg`}
               width="480"
             />
           </Link>

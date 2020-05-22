@@ -25,7 +25,7 @@ import { search } from './search';
 import { spaces } from './spaces';
 import { user } from './user';
 import { usersByGroupId } from './usersByGroupId';
-import { verifyAccountViaEmail } from './verifyAccount';
+import { verifyEmail } from './verifyEmail';
 
 export const setupApi = (app: Koa) => {
   app.use(account.routes());
@@ -53,7 +53,7 @@ export const setupApi = (app: Koa) => {
   app.use(spaces.routes());
   app.use(user.routes());
   app.use(usersByGroupId.routes());
-  app.use(verifyAccountViaEmail.routes());
+  app.use(verifyEmail.routes());
 
   const opts = Object.freeze({
     methodNotAllowed: () => Boom.methodNotAllowed(),
@@ -85,5 +85,5 @@ export const setupApi = (app: Koa) => {
   app.use(spaces.allowedMethods(opts));
   app.use(user.allowedMethods(opts));
   app.use(usersByGroupId.allowedMethods(opts));
-  app.use(verifyAccountViaEmail.allowedMethods(opts));
+  app.use(verifyEmail.allowedMethods(opts));
 };

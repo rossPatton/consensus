@@ -8,7 +8,6 @@ import {knex} from '../../db/connection';
 import {encrypt, saltedHash, sendEmail, validateSchema} from '../../utils';
 import {emailSchema, tokenSchema} from './_schema';
 
-
 export const passwordResetViaEmail = new Router();
 passwordResetViaEmail.get('/email/v1/emailResetToken',
   async (ctx: Koa.ParameterizedContext) => {
@@ -56,11 +55,11 @@ passwordResetViaEmail.get('/email/v1/emailResetToken',
       return ctx.throw(400, 'Something went wrong! Try again?');
     }
 
-    const email = await sendEmail({
-      from: '"Fred Foo 👻" <foo@example.com>', // sender address
-      to: 'ross_patton@protonmail.com', // list of receivers
-      subject: 'Password Reset', // Subject line
-      text: 'Hello world?', // plain text body
+    const resp = await sendEmail({
+      from: `Consensus <noreply@${__MAIL_DOMAIN__}>`,
+      to: query.email,
+      subject: 'Reset Your Password ',
+      text: `Enter the following authentication code in order to reset your password. This token is only valid for 1 day. Code: ${token}`,
       html: `
       Enter the following authentication code in order to reset your password. This token is only valid for 1 day.
       <br /><br />
@@ -70,10 +69,7 @@ passwordResetViaEmail.get('/email/v1/emailResetToken',
     `,
     });
 
-    ctx.body = {
-      message: email.messageId,
-      ok: true,
-    };
+    ctx.body = resp;
   });
 
 passwordResetViaEmail.patch('/email/v1/resetPasswordByEmail',

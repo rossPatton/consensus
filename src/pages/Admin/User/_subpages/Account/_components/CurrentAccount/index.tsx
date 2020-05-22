@@ -1,6 +1,8 @@
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
+import {Emoji} from '~app/components';
+
 import {tComponentProps} from '../../_types';
 
 const CurrentAccount = memo((props: tComponentProps) => (
@@ -22,12 +24,20 @@ const CurrentAccount = memo((props: tComponentProps) => (
       && props.session.emails.length > 0
       && (
         <h2 className="text-base mb-3 leading-none">
-          Email: <span className="text-gray-5 mr-2">
+          Email: <span className="text-gray-5 mr-1">
             {props.session.emails?.[0].email}
           </span>
-          <Link to="/verify-account">
-            Verify your acount with this email
-          </Link>
+          {!props.session.isVerified && (
+            <Link to="/verify-email">
+              Verify your email
+            </Link>
+          )}
+          {props.session.isVerified && (
+            <Emoji
+              label="Verified Email Checkbox"
+              emoji="✅"
+            />
+          )}
         </h2>
       )}
     <Link

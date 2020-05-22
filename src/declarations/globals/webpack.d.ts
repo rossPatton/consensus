@@ -20,6 +20,18 @@ declare let __DEV__: boolean;
 // build specific hash for cache, other stuff
 declare let __HASH__: string;
 
+// our mail server domain
+declare let __MAIL_DOMAIN__: string;
+
+// api key for mailgun
+declare let __MAIL_KEY__: string;
+
+// mailgun from field
+declare let __MAIL_URL__: string;
+
+// sandbox FROM mail address
+declare let __MAIL_SANDBOX__: string;
+
 // node environment
 declare let __NODE_ENV__: 'development' | 'production';
 

@@ -20,16 +20,8 @@ const Aside = memo((props: tProps) => {
         <div>
           <h1 className="font-bold text-3">
             <Link
-              className="no-underline"
+              className="no-underline mr-1"
               to="/admin/meetings">
-              {session.isVerified && (
-                <span
-                  aria-label="Verified Account Checkbox"
-                  className="inline-block mr-1"
-                  role="img">
-                  ✅
-                </span>
-              )}
               {props.session.profile.name}
             </Link>
           </h1>

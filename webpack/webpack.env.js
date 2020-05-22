@@ -4,7 +4,18 @@
 require('dotenv-safe').config();
 
 const CWD = process.cwd();
-const { DB, DEBUG, NODE_ENV, NO_INDEX, SPACES_KEY, SPACES_SECRET } = process.env;
+const {
+  DB,
+  DEBUG,
+  MAIL_DOMAIN,
+  MAIL_KEY,
+  MAIL_SANDBOX,
+  MAIL_URL,
+  NODE_ENV,
+  NO_INDEX,
+  SPACES_KEY,
+  SPACES_SECRET,
+} = process.env;
 
 const stats = {
   all: false,
@@ -23,6 +34,10 @@ module.exports = {
   DEBUG: DEBUG === 'true',
   DEV: NODE_ENV === 'development',
   NO_INDEX: NO_INDEX === 'true',
+  MAIL_DOMAIN,
+  MAIL_KEY,
+  MAIL_SANDBOX,
+  MAIL_URL,
   NODE_ENV,
   PROD: NODE_ENV === 'production',
   SPACES_KEY,

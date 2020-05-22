@@ -11,7 +11,7 @@ import {canonical, description, keywords, title} from './_constants';
 import {EmailTokenComponent, VerifyTokenComponent} from './_subpages';
 import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 
-class VerifyAccountContainer extends PureComponent<tContainerProps, tState> {
+class VerifyEmailContainer extends PureComponent<tContainerProps, tState> {
   state = {
     email: '',
     hasMounted: false,
@@ -66,7 +66,7 @@ class VerifyAccountContainer extends PureComponent<tContainerProps, tState> {
       path: '/email/v1/sendVerificationToken',
       query: {email: this.state.email},
     })
-      .then(() => this.props.history.push('/verify-account/enterCode'))
+      .then(() => this.props.history.push('/verify-email/enterCode'))
       .catch(loglevel.error);
   }
 
@@ -124,9 +124,9 @@ const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
 });
 
-const VerifyAccount = connect(
+const VerifyEmail = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(VerifyAccountContainer);
+)(VerifyEmailContainer);
 
-export default VerifyAccount;
+export default VerifyEmail;

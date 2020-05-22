@@ -14,13 +14,19 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
       width: len > 0 ? `${len * 3.125}%` : '0%',
     };
 
+  const showSubtitle = !props.newPassword && !props.hideRequiredMessage;
+
   return (
     <>
       <label htmlFor={`${props.id}`}>
-        <h3 className="mb-1 text-base font-bold leading-none">
+        <h3
+          className={cx({
+            'text-base font-bold leading-none': true,
+            'mb-1': !showSubtitle,
+          })}>
           {props.title || 'Password'}
         </h3>
-        {(!props.newPassword && !props.hideRequiredMessage) && (
+        {showSubtitle && (
           <p className="mb-1">
             Required to make any changes to your account or profile.
           </p>

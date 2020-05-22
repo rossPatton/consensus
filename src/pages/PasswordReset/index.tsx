@@ -28,9 +28,9 @@ class PasswordResetContainer extends PureComponent<tContainerProps, tState> {
     });
   }
 
-  resetPasswordByEmail = (ev: React.FormEvent<HTMLFormElement>) => {
+  resetPasswordByEmail = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    api({
+    await api({
       method: 'PATCH',
       path: '/email/v1/resetPasswordByEmail',
       query: {
@@ -38,27 +38,14 @@ class PasswordResetContainer extends PureComponent<tContainerProps, tState> {
         password: this.state.password,
         token: this.state.token,
       },
-    })
-      .then(() => {
-        return this.props.loginDispatch({
-          password: this.state.password,
-          username: this.state.login,
-        });
-      })
-      .then(res => {
-        if (res.type === '@@auth/v1/LOGIN_SUCCESS') {
-          this.setState({
-            email: '',
-            login: '',
-            password: '',
-            token: '',
-            passwordUpdated: true,
-          });
-        }
+    });
 
-        return null;
-      })
-      .catch(loglevel.error);
+    await this.props.loginDispatch({
+      password: this.state.password,
+      username: this.state.login,
+    });
+
+    this.props.history.push('/admin/account');
   }
 
   sendPasswordResetEmail = (ev: React.FormEvent<HTMLFormElement>) => {

@@ -28,7 +28,7 @@ export const LINK_TAGS: tLinkProps[] = [
   // {
   //   rel: 'preload',
   //   href: '/static/fonts.css',
-  //   as: 'style',
+  //   as: 'font',
   // },
   // {
   //   crossOrigin: '',

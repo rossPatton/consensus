@@ -7,7 +7,7 @@ import {Avatar} from '~app/components';
 import {tProps} from '../../_types';
 
 const Aside = memo((props: tProps) => {
-  const {session, groupsByUserIdThunk} = props;
+  const {groupsByUserIdThunk} = props;
   const {profile} = props.session;
 
   return (
@@ -20,15 +20,7 @@ const Aside = memo((props: tProps) => {
         <div>
           <Link
             to="/admin/meetings"
-            className="font-bold no-underline">
-            {session.isVerified && (
-              <span
-                aria-label="Verified Account Checkbox"
-                className="inline-block mr-1"
-                role="img">
-                ✅
-              </span>
-            )}
+            className="font-bold no-underline mr-1">
             @{profile.username}
           </Link>
           <div className="font-semibold text-sm text-gray-5">

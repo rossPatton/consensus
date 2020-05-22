@@ -18,7 +18,7 @@ const ResetPasswordComponent = memo((props: tProps) => (
         </h2>
       </legend>
       <label htmlFor="tokenInput">
-        <h2 className="text-base mb-1 leading-none">
+        <h2 className="text-base font-bold mb-1 leading-none">
           Token
         </h2>
         <input
@@ -33,7 +33,7 @@ const ResetPasswordComponent = memo((props: tProps) => (
         />
       </label>
       <label htmlFor="usernameInput">
-        <h2 className="text-base mb-1 leading-none">
+        <h2 className="text-base font-bold mb-1 leading-none">
           Login
         </h2>
         <input
@@ -60,12 +60,12 @@ const ResetPasswordComponent = memo((props: tProps) => (
       <div className="flex flex-col d:flex-row items-center">
         <button
           disabled={props.hasMounted && (!props.login || !props.password)}
-          className="p-2 pl-3 pr-3 mr-2">
+          className="hover:bg-gray-1 p-2 pl-3 pr-3 mr-2">
           Reset Password
         </button>
         <Link
           to="/password-reset"
-          className="btn p-2 pl-3 pr-3">
+          className="hover:bg-gray-1 btn p-2 pl-3 pr-3">
           Didn&apos;t get a code?
         </Link>
       </div>

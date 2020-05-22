@@ -8,8 +8,8 @@ import {knex} from '../../db/connection';
 import {sendEmail, validateSchema} from '../../utils';
 import {emailSchema, tokenSchema} from './_schema';
 
-export const verifyAccountViaEmail = new Router();
-verifyAccountViaEmail.get('/email/v1/sendVerificationToken',
+export const verifyEmail = new Router();
+verifyEmail.get('/email/v1/sendVerificationToken',
   async (ctx: Koa.ParameterizedContext) => {
     const query: {email: string} = ctx?.state?.locals?.data;
     await validateSchema<{email: string}>(ctx, emailSchema, query);
@@ -21,12 +21,7 @@ verifyAccountViaEmail.get('/email/v1/sendVerificationToken',
 
     // update query returns 0 or 1 status codes
     if (!accountEmailRel) {
-      ctx.status = 204;
-      ctx.body = {
-        error: 'No account found for that email address. Are you sure you typed it correctly?',
-        ok: false,
-      };
-      return;
+      return ctx.throw(400, 'No account found for that email address. Are you sure you typed it correctly?');
     }
 
     const oneHourFromNow = dayjs().add(1, 'hour');
@@ -44,27 +39,24 @@ verifyAccountViaEmail.get('/email/v1/sendVerificationToken',
       return ctx.throw(400, 'Something went wrong! Try again?');
     }
 
-    const email = await sendEmail({
-      from: '"Fred Foo 👻" <foo@example.com>', // sender address
-      to: 'ross_patton@protonmail.com', // list of receivers
-      subject: 'Verify your account', // Subject line
-      text: 'Are you real?', // plain text body
+    const resp = await sendEmail({
+      from: `Consensus <noreply@${__MAIL_DOMAIN__}>`,
+      to: query.email,
+      subject: 'Verify Your Email',
+      text: `Enter the following authentication code in order to verify your email. This token is only valid for 1 day. ${token}`,
       html: `
-        Enter the following authentication code in order to validate your account. This token is only valid for 1 day.
+        Enter the following authentication code in order to verify your email. This token is only valid for 1 day.
         <br /><br />
-        Link: https://consensus.local/verify-account/enterCode
+        Link: https://consensus.local/verify-email/enterCode
         <br />
         Code: ${token}
       `,
     });
 
-    ctx.body = {
-      message: email.messageId,
-      ok: true,
-    };
+    ctx.body = resp;
   });
 
-verifyAccountViaEmail.patch('/email/v1/verifyEmail',
+verifyEmail.patch('/email/v1/verifyEmail',
   async (ctx: Koa.ParameterizedContext) => {
     const query = ctx?.state?.locals?.data;
     await validateSchema(ctx, tokenSchema, query);

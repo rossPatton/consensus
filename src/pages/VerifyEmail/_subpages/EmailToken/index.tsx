@@ -32,7 +32,7 @@ const EmailFormComponent = memo((props: tProps) => (
           Send Verification Code
         </button>
         <Link
-          to="/verify-account/enterCode"
+          to="/verify-email/enterCode"
           className="btn p-2 pl-3 pr-3 hover:bg-gray-2">
           Already have a code?
         </Link>
