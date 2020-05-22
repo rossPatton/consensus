@@ -32,6 +32,7 @@ const EditProfile = memo((props: tComponentProps) => (
           <input
             id="username"
             className="p-2 w-full"
+            minLength={3}
             onChange={ev => props.updateState('username', ev.currentTarget.value)}
             placeholder="Update your username here"
             value={props.username}

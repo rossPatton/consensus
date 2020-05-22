@@ -3,18 +3,18 @@ import {Link} from 'react-router-dom';
 
 import { PasswordInput } from '~app/components';
 
-import { tProps } from './_types';
+import { tComponentProps } from '../../_types';
 
-const ResetPasswordComponent = memo((props: tProps) => (
+const ResetLoginComponent = memo((props: tComponentProps) => (
   <form
-    name="passwordResetForm"
-    action="/email/v1/resetPasswordByEmail"
-    onSubmit={props.resetPasswordByEmail}>
+    name="resetLoginForm"
+    action="/email/v1/resetLoginByEmail"
+    onSubmit={props.resetLoginByEmail}>
     <fieldset>
       <legend>
-        <h1 className="black fs2 mb-2">Enter new password</h1>
+        <h1 className="black fs2 mb-2">Enter new login</h1>
         <h2 className="text-sm mb-4 leading-none">
-          Enter the code sent to your email, along with your login credentials
+          Enter the code sent to your email, along with your password and new login.
         </h2>
       </legend>
       <label htmlFor="tokenInput">
@@ -34,7 +34,7 @@ const ResetPasswordComponent = memo((props: tProps) => (
       </label>
       <label htmlFor="usernameInput">
         <h2 className="text-base font-bold mb-1 leading-none">
-          Login
+          New Login
         </h2>
         <input
           required
@@ -42,7 +42,7 @@ const ResetPasswordComponent = memo((props: tProps) => (
           minLength={3}
           name="username" // for non-js submit and passportjs
           id="usernameInput"
-          placeholder="Enter the secret login for your account"
+          placeholder="Enter a new secret login for your account"
           className="p-2 w-full mb-2"
           value={props.login}
           onChange={ev => props.updateState('login', ev)}
@@ -51,9 +51,8 @@ const ResetPasswordComponent = memo((props: tProps) => (
       </label>
       <PasswordInput
         required
-        newPassword
         id="pwInput"
-        title="New password"
+        title="Current password"
         password={props.password}
         placeholder="Example: correct_horse_battery_staple"
         onChange={ev => props.updateState('password', ev)}
@@ -62,10 +61,10 @@ const ResetPasswordComponent = memo((props: tProps) => (
         <button
           disabled={props.hasMounted && (!props.login || !props.password)}
           className="hover:bg-gray-1 p-2 pl-3 pr-3 mr-2">
-          Reset Password
+          Reset Login
         </button>
         <Link
-          to="/password-reset"
+          to="/login-reset"
           className="hover:bg-gray-1 btn p-2 pl-3 pr-3">
           Didn&apos;t get a code?
         </Link>
@@ -74,4 +73,4 @@ const ResetPasswordComponent = memo((props: tProps) => (
   </form>
 ));
 
-export default ResetPasswordComponent;
+export default ResetLoginComponent;

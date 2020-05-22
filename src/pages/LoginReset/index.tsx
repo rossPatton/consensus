@@ -8,10 +8,10 @@ import {login} from '~app/redux';
 import {api} from '~app/utils';
 
 import {canonical, description, keywords, title} from './_constants';
-import {EmailTokenComponent, ResetPasswordComponent} from './_subpages';
+import {EmailTokenComponent, ResetLoginComponent} from './_subpages';
 import {tContainerProps, tState, tStateUnion, tStore} from './_types';
 
-class PasswordResetContainer extends PureComponent<tContainerProps, tState> {
+class LoginResetContainer extends PureComponent<tContainerProps, tState> {
   state = {
     email: '',
     hasMounted: false,
@@ -28,34 +28,46 @@ class PasswordResetContainer extends PureComponent<tContainerProps, tState> {
     });
   }
 
-  resetPasswordByEmail = async (ev: React.FormEvent<HTMLFormElement>) => {
+  resetLoginByEmail = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    await api({
-      method: 'PATCH',
-      path: '/email/v1/resetPasswordByEmail',
-      query: {
-        login: this.state.login,
-        password: this.state.password,
-        token: this.state.token,
-      },
-    });
+    try {
+      await api({
+        method: 'PATCH',
+        path: '/email/v1/resetLoginByEmail',
+        query: {
+          login: this.state.login,
+          password: this.state.password,
+          token: this.state.token,
+        },
+      });
+    } catch (err) {
+      return loglevel.error(err);
+    }
 
-    await this.props.loginDispatch({
-      password: this.state.password,
-      username: this.state.login,
-    });
+    try {
+      await this.props.loginDispatch({
+        password: this.state.password,
+        username: this.state.login,
+      });
+    } catch (err) {
+      return loglevel.error(err);
+    }
 
     this.props.history.push('/admin/account');
   }
 
-  sendPasswordResetEmail = (ev: React.FormEvent<HTMLFormElement>) => {
+  sendLoginResetEmail = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    api({
-      path: '/email/v1/emailPasswordResetToken',
-      query: {email: this.state.email},
-    })
-      .then(() => this.props.history.push('/password-reset/enterCode'))
-      .catch(loglevel.error);
+    try {
+      await api({
+        path: '/email/v1/emailLoginResetToken',
+        query: {email: this.state.email},
+      });
+    } catch (err) {
+      return loglevel.error(err);
+    }
+
+    this.props.history.push('/login-reset/enterCode');
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
@@ -81,20 +93,22 @@ class PasswordResetContainer extends PureComponent<tContainerProps, tState> {
           />
           {this.state.passwordUpdated && (
             <div className="w-full p-2 mb-2 text-center bg-green-1 font-bold text-sm">
-            Your password has been updated!
+              Your password has been updated!
             </div>
           )}
           {enterCode && (
-            <ResetPasswordComponent
+            <ResetLoginComponent
               {...this.state}
-              resetPasswordByEmail={this.resetPasswordByEmail}
+              resetLoginByEmail={this.resetLoginByEmail}
+              sendLoginResetEmail={this.sendLoginResetEmail}
               updateState={this.updateState}
             />
           )}
           {!enterCode && (
             <EmailTokenComponent
               {...this.state}
-              sendPasswordResetEmail={this.sendPasswordResetEmail}
+              resetLoginByEmail={this.resetLoginByEmail}
+              sendLoginResetEmail={this.sendLoginResetEmail}
               updateState={this.updateState}
             />
           )}
@@ -112,9 +126,9 @@ const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
 });
 
-const PasswordReset = connect(
+const LoginReset = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(PasswordResetContainer);
+)(LoginResetContainer);
 
-export default PasswordReset;
+export default LoginReset;

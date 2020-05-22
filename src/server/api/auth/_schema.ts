@@ -8,6 +8,8 @@ export const schema = Joi.object({
   isVerified: Joi.bool(),
   isNew: Joi.bool(),
   login: Joi.string().required(),
+  loginResetExpires: Joi.date().timestamp().allow(null),
+  loginResetToken: Joi.string().alphanum().length(96).allow(null),
   password: Joi.string().min(12).max(4096).required(),
   passwordResetExpires: Joi.date().timestamp().allow(null),
   passwordResetToken: Joi.string().alphanum().length(96).allow(null),

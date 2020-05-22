@@ -27,6 +27,7 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
         <input
           required
           id="loginInput"
+          minLength={3}
           name="login"
           type="text"
           autoComplete="off"
@@ -46,6 +47,7 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
         <input
           required
           id="usernameInput"
+          minLength={3}
           name="username"
           type="text"
           autoComplete="off"

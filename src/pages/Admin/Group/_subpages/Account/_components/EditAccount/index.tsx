@@ -25,6 +25,7 @@ const EditAccount = memo((props: tComponentProps) => (
             </p>
             <input
               id="login"
+              minLength={3}
               autoComplete="off"
               onChange={ev => props.updateState('login', ev)}
               className="p-2 mb-2 w-full"

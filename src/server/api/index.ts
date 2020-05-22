@@ -11,6 +11,7 @@ import { geo } from './geo';
 import { group } from './group';
 import { groups } from './groups';
 import { groupsByUserId } from './groupsByUserId';
+import { loginResetViaEmail } from './loginReset';
 import { meeting } from './meeting';
 import { meetings } from './meetings';
 import { meetingsByLocation } from './meetingsByLocation';
@@ -39,10 +40,10 @@ export const setupApi = (app: Koa) => {
   app.use(meetingsByLocation.routes());
   app.use(meetingsByUserId.routes());
   app.use(geo.routes());
-  // app.use(group.middleware());
   app.use(group.routes());
   app.use(groups.routes());
   app.use(groupsByUserId.routes());
+  app.use(loginResetViaEmail.routes());
   app.use(passwordResetViaEmail.routes());
   app.use(region.routes());
   app.use(reportUri.routes());
@@ -75,6 +76,7 @@ export const setupApi = (app: Koa) => {
   app.use(group.allowedMethods(opts));
   app.use(group.allowedMethods(opts));
   app.use(groupsByUserId.allowedMethods(opts));
+  app.use(loginResetViaEmail.allowedMethods(opts));
   app.use(passwordResetViaEmail.allowedMethods(opts));
   app.use(region.allowedMethods(opts));
   app.use(reportUri.allowedMethods(opts));

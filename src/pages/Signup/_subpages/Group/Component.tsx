@@ -133,6 +133,7 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
         <input
           required
           id="loginInput"
+          minLength={3}
           name="login"
           type="text"
           className="w-full"

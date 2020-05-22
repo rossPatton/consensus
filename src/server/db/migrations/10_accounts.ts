@@ -33,6 +33,12 @@ exports.up = async (knex: Knex) => {
     // if set to true, email addresses aren't visible to other users or groups
     table.boolean('privateEmail').notNullable().defaultTo(true);
 
+    // temporary string used for resetting account login
+    // once login is reset, token is set back to ''
+    table.string('loginResetToken').defaultTo(null);
+    // if user does not reset their login in time, the token is invalidated
+    table.timestamp('loginResetExpires').defaultTo(null);
+
     // temporary string used for resetting account password
     // once password is reset, token is set back to ''
     table.string('passwordResetToken').defaultTo(null);

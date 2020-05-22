@@ -39,6 +39,7 @@ const VerifyTokenComponent = memo((props: tProps) => (
         <input
           required
           autoComplete="login"
+          minLength={3}
           name="login" // for non-js submit and passportjs
           id="loginInput"
           placeholder="Enter the secret login for your account"

@@ -9,7 +9,7 @@ import {encrypt, saltedHash, sendEmail, validateSchema} from '../../utils';
 import {emailSchema, tokenSchema} from './_schema';
 
 export const passwordResetViaEmail = new Router();
-passwordResetViaEmail.get('/email/v1/emailResetToken',
+passwordResetViaEmail.get('/email/v1/emailPasswordResetToken',
   async (ctx: Koa.ParameterizedContext) => {
     const query: {email: string} = ctx?.state?.locals?.data;
     await validateSchema<{email: string}>(ctx, emailSchema, query);
@@ -41,7 +41,7 @@ passwordResetViaEmail.get('/email/v1/emailResetToken',
       subject: 'Reset Your Password ',
       text: `Enter the following authentication code in order to reset your password. This token is only valid for 1 hour. Code: ${token}`,
       html: `
-      Enter the following authentication code in order to reset your password. This token is only valid for 1 day.
+      Enter the following authentication code in order to reset your password. This token is only valid for 1 hour.
       <br /><br />
       Link: https://consensus.local/password-reset/enterCode
       <br />

@@ -6,6 +6,7 @@ import {ErrorPage} from './ErrorPage';
 import {Group} from './Group';
 import {Home} from './Home';
 import {Login} from './Login';
+import {LoginReset} from './LoginReset';
 import {Meeting} from './Meeting';
 import {NoMatch} from './NoMatch';
 import {PasswordReset} from './PasswordReset';
@@ -21,10 +22,11 @@ export const routes = [
   Directory,
   Draft,
   ErrorPage,
-  Meeting,
+  Group,
   Home,
   Login,
-  Group,
+  LoginReset,
+  Meeting,
   PasswordReset,
   Search,
   Signup,

@@ -1,16 +1,16 @@
 import React, { memo } from 'react';
 import {Link} from 'react-router-dom';
 
-import {tProps} from './_types';
+import { tComponentProps } from '../../_types';
 
-const EmailTokenComponent = memo((props: tProps) => (
+const EmailTokenComponent = memo((props: tComponentProps) => (
   <form
     name="emailTokenForm"
-    action="/email/v1/emailPasswordResetToken"
-    onSubmit={props.sendPasswordResetEmail}>
+    action="/email/v1/emailLoginResetToken"
+    onSubmit={props.sendLoginResetEmail}>
     <fieldset>
       <legend>
-        <h1 className="mb-2">Password Reset</h1>
+        <h1 className="mb-2">Login Reset</h1>
       </legend>
       <label htmlFor="emailInput">
         <input
@@ -32,7 +32,7 @@ const EmailTokenComponent = memo((props: tProps) => (
           Send Reset Code
         </button>
         <Link
-          to="/password-reset/enterCode"
+          to="/login-reset/enterCode"
           className="hover:bg-gray-1 btn p-2 pl-3 pr-3">
           Already have a code?
         </Link>

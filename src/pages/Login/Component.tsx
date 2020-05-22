@@ -28,6 +28,7 @@ export const LoginComponent = memo((props: tComponentProps) => (
           <input
             required
             autoComplete="login"
+            minLength={3}
             name="username" // for non-js submit and passportjs
             id="loginInput"
             placeholder="yourSecretLogin"
@@ -51,12 +52,17 @@ export const LoginComponent = memo((props: tComponentProps) => (
           <button
             disabled={props.hasMounted && (!props.password || !props.username)}
             className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-2">
-          Login
+            Login
           </button>
           <Link
             to="/password-reset"
-            className="btn p-2 pl-3 pr-3 hover:bg-gray-2">
+            className="btn p-2 pl-3 pr-3 mr-2 hover:bg-gray-2">
             Forget your password?
+          </Link>
+          <Link
+            to="/login-reset"
+            className="btn p-2 pl-3 pr-3 hover:bg-gray-2">
+            Forget your login?
           </Link>
         </div>
         {props.error && (
