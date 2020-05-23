@@ -14,7 +14,7 @@ const MeetingFeaturedImage = memo((props: tProps) => (
       ? (
         <img
           alt={props.alt || ''}
-          className="rounded w-full"
+          className="rounded w-full mFI"
           height={props.height || '240'}
           src={`${spacesUrl}/groups/${props.img}`}
           width={props.width || '480'}

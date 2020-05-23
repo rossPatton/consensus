@@ -18,7 +18,7 @@ const PlaceholderImage = memo((props: tProps) => {
     <img
       alt="placeholder"
       height={props.height}
-      className="bg-white rounded w-full"
+      className="bg-white rounded w-full mFI"
       src={`${prefix}/${index}/${props.width}/${props.height}`}
       width={props.width}
     />

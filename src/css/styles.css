@@ -292,3 +292,10 @@ small {
 .fadeInUp {
   animation-name: fadeInUp;
 }
+
+.mFI:before {
+  @apply bg-gray-2;
+  @apply block;
+  content: '';
+  padding-top: calc(100% * 4 / 9);
+}
