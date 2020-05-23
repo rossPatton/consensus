@@ -57,6 +57,25 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
           className="p-2 mb-2 w-full"
         />
       </label>
+      <label htmlFor="emailInput">
+        <h2 className="text-base font-bold">
+          Email
+        </h2>
+        <p className="text-base text-gray-5 mb-1">
+          Used for account verification and meeting reminders.
+        </p>
+        <input
+          required
+          id="emailInput"
+          name="email"
+          type="email"
+          autoComplete="off"
+          placeholder="yourEmail@exampe.com"
+          value={props.email}
+          onChange={ev => props.updateState('email', ev)}
+          className="p-2 mb-2 w-full"
+        />
+      </label>
       <PasswordInput
         required
         newPassword

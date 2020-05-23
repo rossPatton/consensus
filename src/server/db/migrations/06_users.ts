@@ -16,7 +16,7 @@ exports.up = async (knex: Knex) => {
     table.string('name');
 
     // default name for displaying
-    table.string('username').notNullable().defaultTo('');
+    table.string('username').notNullable().defaultTo('').unique();
 
     // contact info (useful if in leadership), ideally eventually useful for 2 factor
     table.string('phone').unique();

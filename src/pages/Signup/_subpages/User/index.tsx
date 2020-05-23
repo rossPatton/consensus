@@ -12,6 +12,7 @@ import {UserSignupComponent} from './Component';
 export class UserSignupContainer extends PureComponent<tContainerProps, tState> {
   state = {
     hasMounted: false,
+    email: '',
     errors: {},
     login: '',
     password: '',
@@ -62,10 +63,11 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
   }
 
   render() {
-    const { errors, login, password, username } = this.state;
+    const { email, errors, login, password, username } = this.state;
     const errArr = _.flatten(Object.values(errors as string[]));
 
-    const disabled = !login
+    const disabled = !email
+      || !login
       || login.length < 3
       || !password
       || password.length < 12
@@ -100,7 +102,4 @@ const mapDispatchToProps = (dispatch: Function) => ({
   postUserDispatch: (user: tPostUserQuery) => dispatch(postUser(user)),
 });
 
-export const UserSignup = connect(
-  null,
-  mapDispatchToProps,
-)(UserSignupContainer);
+export const UserSignup = connect(null, mapDispatchToProps)(UserSignupContainer);

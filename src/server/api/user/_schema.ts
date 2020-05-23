@@ -7,6 +7,7 @@ export const getSchema = Joi.object().keys({
 
 // post new user, ie user signup form
 export const postSchema = Joi.object().keys({
+  email: Joi.string().email(),
   isFormSubmit: Joi.bool(),
   login: Joi.string().required().min(3),
   password: Joi.string().required().min(12),

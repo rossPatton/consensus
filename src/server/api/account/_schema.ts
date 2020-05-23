@@ -4,7 +4,7 @@ const baseSchema = Joi.object({isFormSubmit: Joi.bool()});
 
 export const patchSchema = baseSchema.keys({
   deletionDeadline: Joi.date().allow(null).optional(),
-  email: Joi.string().email().optional(),
+  email: Joi.string().email(),
   isNew: Joi.bool().optional(),
   login: Joi.string().optional(),
   // current password required to make any account changes

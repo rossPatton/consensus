@@ -68,6 +68,7 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
       .limit(1)
       .insert({
         login,
+        email: query.email,
         isNew: true,
         password: encrypt(hashedPW),
         userId: userResult?.[0].id,

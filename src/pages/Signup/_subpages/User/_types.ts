@@ -13,6 +13,7 @@ export type tPostUserQuery = {
 };
 
 export type tState = {
+  email: string,
   errors: tErrorObject,
   hasMounted: boolean,
   login: string,
