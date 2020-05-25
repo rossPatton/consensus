@@ -17,7 +17,7 @@ const EditAccount = memo((props: tComponentProps) => (
       </legend>
       <div className="mb-3">
         <label htmlFor="newLogin">
-          <h2 className="text-base leading-none">
+          <h2 className="text-base font-bold leading-none">
             Change login
           </h2>
           <p className="text-gray-5 mb-1">
@@ -33,7 +33,7 @@ const EditAccount = memo((props: tComponentProps) => (
           />
         </label>
         <label className="w-full mb-1" htmlFor="newEmail">
-          <h2 className="text-base leading-none">
+          <h2 className="text-base font-bold leading-none">
             Change email address
           </h2>
           <p className="text-base text-gray-5 mb-1">
@@ -57,7 +57,7 @@ const EditAccount = memo((props: tComponentProps) => (
           <input
             readOnly
             type="checkbox"
-            className="mr-2"
+            className="mr-1"
             autoComplete="nope"
             checked={props.privateEmail}
           />

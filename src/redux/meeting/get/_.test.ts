@@ -7,10 +7,9 @@ import {failure, init, success} from './actions';
 const mockStore = configureStore([thunk]);
 
 const testMeeting = {
-  attendees: [{id: 1}] as ts.user[],
+  attendees: 1,
   host: '',
-  publicRSVPS: 5,
-  privateRSVPS: 6,
+  publicRSVPS: [{}] as ts.user[],
   rsvp: {
     userId: 1,
   },

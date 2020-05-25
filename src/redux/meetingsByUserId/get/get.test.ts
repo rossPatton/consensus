@@ -14,6 +14,7 @@ import {failure, init, success} from './actions';
 const mockStore = configureStore([thunk]);
 
 const testMeeting = {
+  attendees: 8,
   id: 12,
   category: 'Political' as ts.category,
   groupId: 1,
@@ -33,8 +34,7 @@ const testMeeting = {
   isDraft: false,
   duration: 2,
   img: '',
-  publicRSVPS: 0,
-  privateRSVPS: 1,
+  publicRSVPS: [{}] as ts.user[],
   time: '19:00',
 };
 

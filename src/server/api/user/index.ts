@@ -43,7 +43,7 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
   let userResult = [] as ts.user[];
   try {
     userResult = await knex('users')
-      .insert({username: query.username})
+      .insert({avatar: '1', username: query.username})
       .returning(userKeys);
   } catch (err) {
     return ctx.throw(500, err);

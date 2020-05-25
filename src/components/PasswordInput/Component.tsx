@@ -49,8 +49,15 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
           />
           <button
             type="button"
-            className="hover:bg-gray-3 transition p-2 pl-3 pr-3"
+            className="flex flex-row items-center justify-center hover:bg-gray-3 transition p-2 pl-3 pr-3"
             onClick={props.togglePWVisibility}>
+            <img
+              alt=""
+              className="mr-1/2"
+              height="12"
+              src="/images/eye.svg"
+              width="18"
+            />
             {props.showPW ? 'Hide' : 'Reveal'} Password
           </button>
         </div>

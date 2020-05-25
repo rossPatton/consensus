@@ -6,15 +6,11 @@ export const zipMeetingsWithAttendees = async (meetings: ts.meeting[], rels: ts.
     meetings.map(async ev => {
       const publicRSVPS = [...rels].filter(
         rel => rel.meetingId === ev.id && rel.type === 'public',
-      ).length;
-      const privateRSVPS = [...rels].filter(
-        rel => rel.meetingId === ev.id && rel.type === 'private',
-      ).length;
+      );
 
       return {
         ...ev,
         publicRSVPS,
-        privateRSVPS,
       };
     }),
   );

@@ -3,11 +3,14 @@ import faker from 'faker';
 import Knex from 'knex';
 import {range} from 'lodash';
 
+import {getRandomNum} from '../../../utils/getRandomNum';
+
 const createUser = async () => {
   // user selects city from dropdown with additional info (postcode,etc)
   const city = faker.random.boolean() ? 'New York' : '';
 
   return {
+    avatar: getRandomNum(1, 7),
     bio: faker.lorem.paragraphs(),
     city,
     facebook: faker.random.boolean ? '' : null as any,
@@ -22,6 +25,7 @@ const createUser = async () => {
 };
 
 const createTestUser = async () => ({
+  avatar: '1',
   bio: faker.lorem.paragraphs(),
   city: 'New York',
   cityId: 16624,

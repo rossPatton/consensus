@@ -67,7 +67,7 @@ export const GroupInfoComponent = memo((props: tComponentProps) => {
                 to={group.facebook}>
                 <img
                   alt="Our Facebook"
-                  src="/static/images/fb.svg"
+                  src="/images/fb.svg"
                   width="25"
                 />
               </ExternalLink>
@@ -80,7 +80,7 @@ export const GroupInfoComponent = memo((props: tComponentProps) => {
                 to={group.twitter}>
                 <img
                   alt="Our Twitter"
-                  src="/static/images/twitter.svg"
+                  src="/images/twitter.svg"
                   width="25"
                 />
               </ExternalLink>
@@ -93,7 +93,7 @@ export const GroupInfoComponent = memo((props: tComponentProps) => {
                 to={group.website}>
                 <img
                   alt="Our Website"
-                  src="/static/images/website.svg"
+                  src="/images/website.svg"
                   width="25"
                 />
               </ExternalLink>
@@ -103,7 +103,7 @@ export const GroupInfoComponent = memo((props: tComponentProps) => {
             <div>
               <img
                 alt="Email Us!"
-                src="/static/images/email.svg"
+                src="/images/email.svg"
                 width="25"
               />
             </div>

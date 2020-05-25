@@ -1,7 +1,10 @@
 @font-face {
   font-display: swap;
-  font-family: 'Lab';
-  src: url('./fonts/LabGrotesque-Medium.woff2') format('woff2');
-  font-weight: 300;
+  font-family: 'Founders';
+  src: url('../fonts/founders-grotesk-text-web-medium.eot');
+  src: url('../fonts/founders-grotesk-text-web-medium.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/founders-grotesk-text-web-medium.woff2') format('woff2'),
+       url('../fonts/founders-grotesk-text-web-medium.woff') format('woff');
+  font-weight: 400;
   font-style: normal;
 }

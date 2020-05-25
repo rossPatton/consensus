@@ -1,3 +1,5 @@
+var baseSans = ["Helvetica Neue", 'HelveticaNeue', 'Helvetica', 'system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Arial', "Noto Sans", 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"];
+
 module.exports = {
   prefix: '',
   important: false,
@@ -65,7 +67,8 @@ module.exports = {
     },
     spacing: {
       '0': '0',
-      '1': '0.5rem',
+      '1/2': '.25rem',
+      '1': '.5rem',
       '2': '1rem',
       '3': '2rem',
       '4': '3rem',
@@ -117,8 +120,8 @@ module.exports = {
       default: '1',
     },
     fontFamily: {
-      lab: ['Lab', 'Helvetica Neue', 'HelveticaNeue', 'Helvetica', 'Arial', 'system-ui', 'sans-serif'],
-      sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Roboto', "Helvetica Neue", 'Arial', "Noto Sans", 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"]
+      founders: ['Founders', ...baseSans],
+      sans: baseSans,
     },
     // numbers => header sizes basically
     // base default size everywhere

@@ -43,14 +43,19 @@ header {
 ul {
   @apply list-none;
 }
+h1 {
+  @apply leading-none;
+  letter-spacing: -.01rem;
+}
+.wf-active h1 {
+  @apply font-founders;
+}
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  @apply leading-tight;
-  @apply font-lab;
   margin-block-end: 0;
   margin-block-start: 0;
 }

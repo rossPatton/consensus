@@ -2,23 +2,23 @@ import {spacesUrl} from '~app/constants';
 
 // default meta and link tags that then get merged with route specific ones
 export const LINK_TAGS: tLinkProps[] = [
-  { rel: 'manifest', href: '/static/manifest.json' },
+  { rel: 'manifest', href: '/manifest.json' },
   {
     rel: 'apple-touch-icon',
-    href: '/static/apple-touch-icon.png',
+    href: '/apple-touch-icon.png',
   },
   {
     rel: 'icon',
-    href: '/static/favicon.ico',
+    href: '/favicon.ico',
   },
   {
     rel: 'icon',
-    href: '/static/favicon-32x32.png',
+    href: '/favicon-32x32.png',
     type: 'image/png',
   },
   {
     rel: 'icon',
-    href: '/static/favicon.ico',
+    href: '/favicon.ico',
     type: 'image/ico',
   },
   {

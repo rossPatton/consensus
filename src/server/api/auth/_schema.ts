@@ -3,7 +3,7 @@ import Joi from '@hapi/joi';
 export const schema = Joi.object({
   avatar: Joi.string().allow(null).empty('').optional(),
   deletionDeadline: Joi.date().timestamp().allow(null),
-  email: Joi.string().email().required(),
+  email: Joi.string().email(),
   id: Joi.number().integer().required(),
   isVerified: Joi.bool(),
   isNew: Joi.bool(),

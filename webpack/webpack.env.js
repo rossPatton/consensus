@@ -5,14 +5,14 @@ require('dotenv-safe').config();
 
 const CWD = process.cwd();
 const {
-  DB,
-  DEBUG,
+  DB = 'development',
+  DEBUG = 'false',
   MAIL_DOMAIN,
   MAIL_KEY,
   MAIL_SANDBOX,
   MAIL_URL,
-  NODE_ENV,
-  NO_INDEX,
+  NODE_ENV = 'development',
+  NO_INDEX = 'true',
   SPACES_KEY,
   SPACES_SECRET,
 } = process.env;

@@ -46,7 +46,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   htmlStream.pipe(ctx.res, {end: false});
   htmlStream.on('end', () => {
     // eslint-disable-next-line
-    const fontConfig = `WebFontConfig={custom:{families:["Lab"],urls:["/static/fonts.css"]}};window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())}`;
+    const fontConfig = `WebFontConfig={custom:{families:["Founders"],urls:["/fonts.css"]}};window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())}`;
 
     ctx.res.write(`</div><div id="portalRoot"></div>
       <script type="text/javascript" nonce="${nonce}">${fontConfig}</script>

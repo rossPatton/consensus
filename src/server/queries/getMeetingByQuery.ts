@@ -45,17 +45,12 @@ export const getMeetingByQuery = async (
       .filter(rel => rel.type === 'private' && rel.value === 'yes');
 
     // if on an meeting page, we render a list of public attendees below the description
-    const unsafeUsers: ts.user[] =
+    const publicUsers: ts.user[] =
       await getUsersByIds(ctx, publicRSVPS.map(rsvp => rsvp.userId));
 
-    // "unsafe" because we want to check user privacy settings first
-    // if this value is set, it should never be a problem. but lets double check anyway
-    const attendees = unsafeUsers.filter(user => !user.privateRSVP);
-
     attendeeData = {
-      attendees,
-      publicRSVPS: publicRSVPS.length,
-      privateRSVPS: privateRSVPS.length,
+      attendees: publicRSVPS.length + privateRSVPS.length,
+      publicRSVPS: publicUsers,
       rsvp,
     };
   }

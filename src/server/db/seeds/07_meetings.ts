@@ -13,6 +13,7 @@ const createMeeting = async (groupId: number, isDraft: boolean = false) => {
   return meetingsPerOrg.map(() => {
     const title = faker.lorem.words(5);
     const slug = slugify(title);
+    const isOnline = faker.random.boolean();
 
     return {
       category: group.category,
@@ -24,9 +25,11 @@ const createMeeting = async (groupId: number, isDraft: boolean = false) => {
       endDate: faker.date.future(),
       host: faker.random.boolean() ? group.name : faker.company.companyName(),
       isDraft,
+      isOnline: isOnline,
       isPrivate: group.type !== 'public',
-      location: faker.address.streetAddress(),
-      locationLink: faker.internet.url(),
+      location: isOnline ? '' : faker.address.streetAddress(),
+      locationLink: isOnline ? '' : faker.internet.url(),
+      locationType: isOnline ? 'online' : 'offline',
       groupId,
       groupName: group.name,
       slug,

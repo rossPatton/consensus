@@ -20,7 +20,7 @@ const createGroup = async (groupId: number) => {
 
   return {
     allowNonVerified: group.type === 'public',
-    avatar: '',
+    avatar: groupId === 1 ? '2' : getRandomNum(1, 7),
     category,
     city: group.city,
     cityId: 16624,

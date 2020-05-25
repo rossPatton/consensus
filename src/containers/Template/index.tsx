@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {ErrorBoundary, GenericLoader} from '~app/containers';
+import {ErrorBoundary} from '~app/containers';
 import {getGeo, getRoles, getRsvps} from '~app/redux';
 
 import {Footer, Header} from './_components';
@@ -33,10 +33,11 @@ class Template extends PureComponent<tProps> {
         <Header />
         <ErrorBoundary status={geoStatus}>
           <main className="contain m-auto min-h-halfscreen pb-5">
-            <GenericLoader
+            {children}
+            {/* <GenericLoader
               isLoading={geoThunk.isLoading}
               render={() => children}
-            />
+            /> */}
           </main>
         </ErrorBoundary>
         <Footer />

@@ -7,6 +7,7 @@ import {failure, init, success} from './actions';
 const mockStore = configureStore([thunk]);
 
 const testMeeting = {
+  attendees: 2,
   id: 12,
   category: 'Political' as ts.category,
   groupId: 1,
@@ -25,8 +26,7 @@ const testMeeting = {
   endDate: '2021-02-12T02:01:06.513Z',
   isDraft: false,
   duration: 2,
-  publicRSVPS: 0,
-  privateRSVPS: 1,
+  publicRSVPS: [{}] as ts.user[],
   time: '19:00',
 };
 

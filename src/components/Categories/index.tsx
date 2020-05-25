@@ -13,7 +13,7 @@ const Categories = memo(() => (
           <Link to={`/categories/${cat.slug}`}>
             <img
               alt=""
-              src={`/static/images/${cat.slug}.svg`}
+              src={`/images/${cat.slug}.svg`}
               width="480"
             />
           </Link>

@@ -1,4 +1,3 @@
-import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {memo} from 'react';
@@ -55,8 +54,15 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
         </div>
         <div className="min-w-2/3">
           <time
-            className="text-red-3 leading-none mb-1"
+            className="flex items-center text-red-3 leading-none mb-1"
             dateTime={dayJS(meeting.date).format('YYYY-MM-DDThh:mm:ssTZD')}>
+            <img
+              alt=""
+              height="22"
+              className="mr-1"
+              src="/images/calendar.svg"
+              width="16"
+            />
             {dayJS(meeting.date).format(`dddd, MMM DD ${isPastMeeting ? 'YYYY' : ''}`)} | {dayJS(meeting.date).format('h:mm')}-{dayJS(meeting.endDate).format('h:mmA')}
           </time>
           <h1 className="mb-1 capitalize">
@@ -70,39 +76,59 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
           {!meeting.isDraft
             && !isPastMeeting
             && (
-              <RSVP className="mb-3" meeting={meeting} />
+              <RSVP className="mb-2" meeting={meeting} />
             )}
-          {!meeting.isOnline
-            && meeting.location
-            && (
-              <div
-                className={cx({
-                  'font-bold flex items-center text-gray-5': true,
-                  'mb-3': !meeting.attendees || meeting.attendees.length === 0,
-                })}>
-                <span className="rounded-circ p-1 bg-gray-3 mr-2" />
-                {meeting.locationLink && (
-                  <ExternalLink
-                    noFollow
-                    className="no-underline"
-                    to={meeting.locationLink}>
-                    {meeting.location}
-                  </ExternalLink>
-                )}
-                {!meeting.locationLink && meeting.location}
-              </div>
+          <ul className="mb-2 font-semibold">
+            {meeting.isOnline && (
+              <li className="flex items-center mb-1 text-gray-5">
+                <img
+                  alt=""
+                  height="10"
+                  className="mr-1"
+                  src="/images/online.svg"
+                  width="16"
+                /> Online Meeting
+              </li>
             )}
-          {!meeting.isDraft
-            && meeting.attendees
-            && meeting.attendees.length > 0 && (
-            <div className="font-bold flex items-center mb-3 text-gray-5">
-              <span className="rounded-circ p-1 bg-gray-3 mr-2" />
-              {meeting.attendees.length} Going
-            </div>
-          )}
+            {!meeting.isOnline
+              && meeting.location
+              && (
+                <li className="font-semibold flex items-center text-gray-5 mb-1">
+                  <img
+                    alt=""
+                    height="22"
+                    className="mr-1"
+                    src="/images/location.svg"
+                    width="16"
+                  />
+                  {meeting.locationLink && (
+                    <ExternalLink
+                      noFollow
+                      className="no-underline"
+                      to={meeting.locationLink}>
+                      {meeting.location}
+                    </ExternalLink>
+                  )}
+                  {!meeting.locationLink && meeting.location}
+                </li>
+              )}
+            {!meeting.isDraft
+              && meeting.attendees > 0 && (
+              <li className="font-semibold flex items-center mb-3 text-gray-5">
+                <img
+                  alt=""
+                  height="22"
+                  className="mr-1"
+                  src="/images/people.svg"
+                  width="16"
+                />
+                {meeting.attendees} Going
+              </li>
+            )}
+          </ul>
           {meeting.description && (
             <>
-              <h2 className="text-3">
+              <h2 className="text-3 font-semibold">
                 Meeting Description
               </h2>
               <Description

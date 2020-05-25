@@ -54,53 +54,86 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
             seed={meeting.id}
           />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col mb-3">
           <time
             className="font-bold leading-none text-gray-5"
             dateTime={dayJS(meeting.date).format('YYYY-MM-DDThh:mm:ssTZD')}>
             <div className="flex items-center mb-2">
-              <span className="rounded-circ p-1 bg-gray-3 mr-2" />
+              <img
+                alt=""
+                height="22"
+                className="mr-1"
+                src="/images/calendar.svg"
+                width="16"
+              />
               {dayJS(meeting.date).format('dddd, MMM DD')}
             </div>
             <div className="flex items-center mb-2">
-              <span className="rounded-circ p-1 bg-gray-3 mr-2" />
+              <img
+                alt=""
+                height="22"
+                className="mr-1"
+                src="/images/clock.svg"
+                width="16"
+              />
               {dayJS(meeting.date).format('h:mm')}-{dayJS(meeting.endDate).format('h:mmA')}
             </div>
           </time>
-          <div
-            className={cx({
-              'font-bold flex items-center text-gray-5 mb-2': true,
-              'mb-3': !meeting.attendees || meeting.attendees.length === 0,
-            })}>
-            <span className="rounded-circ p-1 bg-gray-3 mr-2" />
-            {meeting.locationLink && (
-              <ExternalLink
-                noFollow
-                className="no-underline"
-                to={meeting.locationLink}>
-                {meeting.location}
-              </ExternalLink>
-            )}
-            {!meeting.locationLink && meeting.location}
-          </div>
-          {meeting.attendees
-            && meeting.attendees.length > 0 && (
-            <div className="flex items-center mb-3">
-              <span className="rounded-circ p-1 bg-gray-3 mr-2" />
-              {meeting.attendees.length} Going
+          {meeting.isOnline && (
+            <div className="leading-none font-bold flex items-center mb-2 text-gray-5">
+              <img
+                alt=""
+                height="10"
+                className="mr-1"
+                src="/images/online.svg"
+                width="16"
+              /> Online Meeting
             </div>
           )}
-          {meeting.description && (
-            <>
-              <h2 className="text-3">
-                Meeting Description
-              </h2>
-              <Description
-                description={meeting.description}
+          {!meeting.isOnline && (
+            <div className="leading-none font-bold flex items-center text-gray-5 mb-2">
+              <img
+                alt=""
+                height="22"
+                className="mr-1"
+                src="/images/location.svg"
+                width="16"
               />
-            </>
+              {meeting.locationLink && (
+                <ExternalLink
+                  noFollow
+                  className="no-underline"
+                  to={meeting.locationLink}>
+                  {meeting.location}
+                </ExternalLink>
+              )}
+              {!meeting.locationLink && meeting.location}
+            </div>
+          )}
+          {meeting.attendees
+            && meeting.attendees > 0 && (
+            <div className="leading-none font-bold flex items-center">
+              <img
+                alt=""
+                height="22"
+                className="mr-1"
+                src="/images/people.svg"
+                width="16"
+              />
+              {meeting.attendees} Going
+            </div>
           )}
         </div>
+        {meeting.description && (
+          <>
+            <h2 className="text-3 font-semibold">
+              Meeting Description
+            </h2>
+            <Description
+              description={meeting.description}
+            />
+          </>
+        )}
       </div>
       {meetingsByGroupId && meetingsByGroupId.length > 0 && (
         <aside className="mb-4">

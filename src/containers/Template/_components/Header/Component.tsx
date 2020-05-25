@@ -24,7 +24,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
                   onClick={() => toggleNav(!showNav)}>
                   <img
                     alt="Click for navigation"
-                    src="/static/images/ham.svg"
+                    src="/images/ham.svg"
                     width="30"
                   />
                 </button>
@@ -71,7 +71,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
           <img
             alt="Consensus"
             className="d:m-auto"
-            src="/static/images/logo.svg"
+            src="/images/logo.svg"
             width="125"
           />
         </Link>

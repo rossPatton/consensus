@@ -62,7 +62,7 @@ group.post(route, async (ctx: Koa.ParameterizedContext) => {
   let newGroupReturning = [] as ts.group[];
   try {
     newGroupReturning = await knex(table)
-      .insert(groupToInsert)
+      .insert({avatar: '2', ...groupToInsert})
       .returning('*');
   } catch (err) {
     return ctx.throw(500, err);

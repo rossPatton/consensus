@@ -19,7 +19,8 @@
     "pretest": "npm run lint",
     "prod": "npx webpack --config webpack/ && npx pm2 startOrReload pm2.config.js --no-daemon",
     "jest": "NODE_ENV=test jest -u --no-cache --coverage",
-    "test": "tsc"
+    "test": "tsc",
+    "webpack": "npx webpack --config webpack/"
   },
   "dependencies": {
     "@hapi/boom": "^7.4.11",
