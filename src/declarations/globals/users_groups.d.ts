@@ -1,4 +1,14 @@
 namespace ts {
+  declare type userInvite = {
+    groupId: number,
+    userId: number,
+    type: 'member' | 'mod',
+  };
+
+  declare type inviteQuery = Partial<userInvite> & {
+    username?: string,
+  };
+
   // get all members of an org by id
   declare type usersByGroupIdQuery = ts.baseQuery & {
     allowNonVerified?: boolean,

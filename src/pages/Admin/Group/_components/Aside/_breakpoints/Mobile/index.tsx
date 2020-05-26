@@ -60,18 +60,31 @@ const MobileAside = memo((props: tProps) => (
         action="/api/v1/download">
         <fieldset>
           <button className="w-full text-sm p-2 hover:bg-gray-3">
-            <legend className="w-full">
-              Download your data
+            <legend className="w-full whitespace-no-wrap flex justify-center items-center">
+              <img
+                alt=""
+                height="20"
+                className="mr-1"
+                src="/images/download.svg"
+                width="20"
+              /> Download data
             </legend>
           </button>
         </fieldset>
       </form>
       <Link
         to="/admin/deleteGroup"
-        className="btn w-full text-sm p-2 hover:bg-gray-3">
+        className="btn w-full text-sm p-2 whitespace-no-wrap flex justify-center items-center hover:bg-gray-3">
+        <img
+          alt=""
+          height="20"
+          className="mr-1"
+          src="/images/delete.svg"
+          width="20"
+        />
         {props.session.deletionDeadline
-          ? 'Cancel group deletion'
-          : 'Delete your Group'}
+          ? 'Cancel Deletion'
+          : 'Delete Group'}
       </Link>
     </div>
   </aside>

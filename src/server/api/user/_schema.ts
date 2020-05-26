@@ -2,7 +2,8 @@ import Joi from '@hapi/joi';
 
 // get user by id
 export const getSchema = Joi.object().keys({
-  id: Joi.number().integer().required(),
+  id: Joi.number().integer().optional(),
+  username: Joi.string().required().min(3).optional(),
 });
 
 // post new user, ie user signup form

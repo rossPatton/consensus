@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import {userKeys} from '../_constants';
 import {knex} from '../../db/connection';
+import {getUserByQuery} from '../../queries';
 import {encrypt, isValidPw, saltedHash, validateSchema} from '../../utils';
 import {getSchema, patchSchema, postSchema} from './_schema';
 import {tUserPostServerQuery} from './_types';
@@ -13,15 +14,10 @@ const route = '/api/v1/user';
 const table = 'users';
 
 user.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.idQuery = ctx?.state?.locals?.data;
-  await validateSchema<ts.idQuery>(ctx, getSchema, query);
+  const query: ts.userQuery = ctx?.state?.locals?.data;
+  await validateSchema<ts.userQuery>(ctx, getSchema, query);
 
-  const user: ts.user = await knex('users')
-    .limit(1)
-    .select(userKeys)
-    .where({id: query.id})
-    .first();
-
+  const user = await getUserByQuery(ctx, query);
   const account: ts.account = await knex('accounts')
     .limit(1)
     .where({userId: query.id})

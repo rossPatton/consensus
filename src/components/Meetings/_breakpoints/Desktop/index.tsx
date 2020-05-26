@@ -90,7 +90,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                 )}
               {props.isEditable
                 && (
-                  <div className="flex items-center">
+                  <div className="flex items-center font-semibold">
                     {(!isPastMeeting || meeting.isDraft) && (
                       <Link
                         className="text-sm mr-2"

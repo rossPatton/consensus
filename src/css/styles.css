@@ -45,7 +45,7 @@ ul {
 }
 h1 {
   @apply leading-none;
-  letter-spacing: -.01rem;
+  /* letter-spacing: -.01rem; */
 }
 .wf-active h1 {
   @apply font-founders;
@@ -82,7 +82,7 @@ input[type="submit"] {
   @apply border;
   @apply duration-150;
   @apply font-semibold;
-  @apply inline-block;
+  /* @apply inline-block; */
   @apply leading-none;
   @apply rounded;
   @apply text-center;

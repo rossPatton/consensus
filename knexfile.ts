@@ -33,9 +33,8 @@ const sharedConfig = {
   connection: {
     host: 'host.docker.internal',// DB_HOST,
     user: 'consensusdev',// DB_USER,
-    password: 'paleface_metre_drafty_krakatoa_buddhism_padre_snark_feeler_air_slider',
-    // DB_PW,
-    // port:  DB_PORT,
+    password: 'paleface_metre_drafty_krakatoa_buddhism_padre_snark_feeler_air_slider',// DB_PW,
+    // port: DB_PORT,
     database: 'consensus_dev',// DB,
     // ssl: {
     //   ca : fs.readFileSync(path.join(CWD, 'certs', 'postgres.crt')),

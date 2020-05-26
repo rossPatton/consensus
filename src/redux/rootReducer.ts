@@ -8,6 +8,7 @@ import { groupReducer } from './group/reducer';
 import { groupsReducer } from './groups/reducer';
 import { groupsBySearchReducer } from './groupsBySearch/reducer';
 import { groupsByUserIdReducer } from './groupsByUserId/reducer';
+import { invitesReducer } from './invites/reducer';
 import { meetingReducer } from './meeting/reducer';
 import { meetingsByGroupIdReducer } from './meetingsByGroupId/reducer';
 import { meetingsByLocationReducer } from './meetingsByLocation/reducer';
@@ -21,18 +22,19 @@ import { userReducer } from './user/reducer';
 import { usersByGroupIdReducer } from './usersByGroupId/reducer';
 
 export const rootReducer = combineReducers({
-  city: cityReducer,
   cities: citiesReducer,
+  city: cityReducer,
   country: countryReducer,
-  meeting: meetingReducer,
-  meetingsByLocation: meetingsByLocationReducer,
-  meetingsByGroupId: meetingsByGroupIdReducer,
-  meetingsByUserId: meetingsByUserIdReducer,
   geo: geoReducer,
   group: groupReducer,
   groups: groupsReducer,
   groupsBySearch: groupsBySearchReducer,
   groupsByUserId: groupsByUserIdReducer,
+  invites: invitesReducer,
+  meeting: meetingReducer,
+  meetingsByGroupId: meetingsByGroupIdReducer,
+  meetingsByLocation: meetingsByLocationReducer,
+  meetingsByUserId: meetingsByUserIdReducer,
   region: regionReducer,
   roles: rolesReducer,
   rsvps: rsvpsReducer,

@@ -11,6 +11,7 @@ import {Aside} from './_components';
 import {
   Account,
   DeleteGroup,
+  InviteMember,
   Meetings,
   Members,
   PlanMeeting,
@@ -24,6 +25,7 @@ const GroupAdminContainer = memo((props: tProps) => {
   const {section} = match.params;
   const isAccount = section === 'account';
   const isDelete = section === 'deleteGroup';
+  const isInvite = section === 'invite';
   const isMeetings = section === 'meetings';
   const isProfile = section === 'profile';
   const isMembers = section === 'memberships';
@@ -48,6 +50,7 @@ const GroupAdminContainer = memo((props: tProps) => {
       <div className="flex flex-col d:flex-row items-start">
         <Aside
           isDesktop={isDesktop}
+          isInvite={isInvite}
           isMobile={isMobile}
           session={session}
           isMeetings={isMeetings}
@@ -57,6 +60,7 @@ const GroupAdminContainer = memo((props: tProps) => {
         <div className="order-1 d:order-2 d:w-2/3 mb-2 d:mb-0">
           {isAccount && <Account match={match} />}
           {isDelete && <DeleteGroup />}
+          {isInvite && <InviteMember />}
           {isMeetings && <Meetings match={match} />}
           {isProfile && <Profile match={match} />}
           {isMembers && (

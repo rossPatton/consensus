@@ -8,6 +8,10 @@ export const DeleteGroup = loadable(() =>
   import(/* webpackChunkName: "GroupAdmin DeleteGroup" */'./DeleteGroup'),
 );
 
+export const InviteMember = loadable(() =>
+  import(/* webpackChunkName: "GroupAdmin InviteMember" */'./InviteMember'),
+);
+
 export const Meetings = loadable(() =>
   import(/* webpackChunkName: "GroupAdmin Meetings" */'./Meetings'),
 );

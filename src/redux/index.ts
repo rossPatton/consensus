@@ -29,6 +29,7 @@ export { login, logout, logoutSuccess, patchSessionSuccess } from './session';
 
 // user related actions/thunks
 export { deleteUser, getUser, patchUser, postUser } from './user';
+export {deleteInvite, getInvites, patchInvites, postInvite } from './invites';
 export {
   deleteUserByGroupId,
   getUsersByGroupId,

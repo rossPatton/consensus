@@ -27,6 +27,7 @@ namespace ts {
       section: 'account'
         | 'deleteAccount'
         | 'deleteGroup'
+        | 'invite'
         | 'meetings'
         | 'memberships'
         | 'planMeeting'
@@ -75,6 +76,23 @@ namespace ts {
       isVerified: boolean,
       profile: T,
       type: 'group' | 'user',
+    }>;
+
+  declare type groupSession = Partial<tAccountBase>
+    & Readonly<{
+      deletionDeadline?: string,
+      isAuthenticated: boolean,
+      isVerified: boolean,
+      profile: ts.group,
+      type: 'group',
+    }>;
+
+  declare type userSession = Partial<tAccountBase>
+    & Readonly<{
+      isAuthenticated: boolean,
+      isVerified: boolean,
+      profile: ts.user,
+      type: 'user',
     }>;
 
   // pending => user wants to join the group, but isn't approved yet
