@@ -117,7 +117,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
                       })}>
                       <li className="mb-1">
                         <Link
-                          className="btn p-1 pl-2 pr-2 hover:bg-gray-2"
+                          className="btn inline-block p-1 pl-2 pr-2 hover:bg-gray-2"
                           id="a11yAdmin"
                           to="/admin/meetings">
                           Dashboard

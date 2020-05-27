@@ -40,19 +40,47 @@ invites.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  const ids = userInvites.map(invite => invite.userId);
 
-  // we need more user info to render client side
-  const users = await knex('users').whereIn('id', ids);
+  let mappedInvites = userInvites;
+  // if group, we want to render info about the users we are inviting
+  if (query.groupId) {
+    const ids = userInvites.map(invite => invite.userId);
 
-  // zip the user info into the userInvites array
-  const mappedInvites = userInvites.map(userInvite => {
-    const user = _.find(users, u => u.id === userInvite.userId);
-    return {
-      ...userInvite,
-      user,
-    };
-  });
+    let users = [] as ts.user[];
+    try {
+      users = await knex('users').whereIn('id', ids);
+    } catch (err) {
+      ctx.throw(500, err);
+    }
+
+    // zip the user info into the userInvites array
+    mappedInvites = userInvites.map(userInvite => {
+      const user = _.find(users, u => u.id === userInvite.userId);
+      return {
+        ...userInvite,
+        user,
+      };
+    });
+  // if user, we want to render info about the groups that are doing the inviting
+  } else if (query.userId) {
+    const ids = userInvites.map(invite => invite.groupId);
+
+    let groups = [] as ts.user[];
+    try {
+      groups = await knex('groups').whereIn('id', ids);
+    } catch (err) {
+      ctx.throw(500, err);
+    }
+
+    // zip the user info into the userInvites array
+    mappedInvites = userInvites.map(userInvite => {
+      const group = _.find(groups, g => g.id === userInvite.groupId);
+      return {
+        ...userInvite,
+        group,
+      };
+    });
+  }
 
   ctx.body = mappedInvites;
 });

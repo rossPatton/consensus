@@ -1,5 +1,6 @@
 namespace ts {
   declare type userInvite = {
+    group?: ts.group,
     groupId: number,
     userId: number,
     type: 'member' | 'mod',

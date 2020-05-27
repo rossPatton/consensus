@@ -7,6 +7,7 @@ import {Aside} from './_components';
 import {
   Account,
   DeleteAccount,
+  Invitations,
   Meetings,
   Memberships,
   Profile,
@@ -20,6 +21,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
 
   const isAccount = section === 'account';
   const isDeleteAccount = section === 'deleteAccount';
+  const isInvite = section === 'invite';
   const isMeetings = section === 'meetings';
   const isProfile = section === 'profile';
   const isMemberships = section === 'memberships';
@@ -79,6 +81,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
         )}
         <Aside
           groupsByUserIdThunk={props.groupsByUserIdThunk}
+          isInvite={isInvite}
           roles={props.roles}
           session={props.session}
         />
@@ -99,6 +102,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
                 />
               )}
             {isDeleteAccount && <DeleteAccount />}
+            {isInvite && <Invitations />}
             {isMeetings && <Meetings />}
             {isProfile
               && (

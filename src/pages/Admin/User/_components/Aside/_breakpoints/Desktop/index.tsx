@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
@@ -35,6 +36,24 @@ const Aside = memo((props: tProps) => {
           </div>
         </div>
       </div>
+      <ul className="mb-2 font-semibold" role="navigation">
+        <li className="font-bold">
+          Your Actions
+        </li>
+        <li className="flex items-center text-base p-1 mb-1 rounded hover:bg-gray-2">
+          <div className="bg-white border rounded-circ mr-2 p-2" />
+          {props.isInvite && 'Your pending invitations'}
+          {!props.isInvite && (
+            <Link
+              to="/admin/invite"
+              className={cx({
+                curDisable: !props.session.isVerified,
+              })}>
+              Your pending invitations
+            </Link>
+          )}
+        </li>
+      </ul>
       {!groupsByUserIdThunk.isLoading
         && groupsByUserIdThunk.data.length > 0
         && (
