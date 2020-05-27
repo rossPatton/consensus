@@ -13,17 +13,17 @@ export const filterMeetings = async (
   const isAuthenticated = ctx.isAuthenticated();
 
   return Promise.all(
-    meetings.map(ev => {
-      if (ev.isDraft) {
+    meetings.map(meeting => {
+      if (meeting.isDraft) {
         // if draft, and user is not logged in, hide
         if (!isAuthenticated) return null;
         // user is logged in, but user is not a member, hide
         if (role === null) return null;
         // only facilitators and the org admin should see drafts
-        if (ev.isDraft && role === 'member') return null;
+        if (meeting.isDraft && role === 'member') return null;
       }
 
-      return ev;
+      return meeting;
     })
       .filter(notNull),
   );

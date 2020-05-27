@@ -13,7 +13,7 @@ import {failure, init, success} from './actions';
 
 const mockStore = configureStore([thunk]);
 
-describe('redux/usersByGroupId/get', () => {
+describe('redux/invites/get', () => {
   it('creates correct GET_INIT action', () => {
     const expectedActionPayload: tInitAction[] = [{
       type: GET_INIT,
@@ -31,13 +31,20 @@ describe('redux/usersByGroupId/get', () => {
       username: 'testUser',
     } as ts.user;
 
+    const testUserInvite = {
+      userId: 1,
+      groupId: 1,
+      type: 'mod' as 'member' | 'mod',
+      user: testUser,
+    };
+
     const expectedActionPayload: tSuccessAction[] = [{
       type: GET_SUCCESS,
-      payload: [testUser],
+      payload: [testUserInvite],
     }];
 
     const store = mockStore({});
-    store.dispatch(success([testUser]));
+    store.dispatch(success([testUserInvite]));
     expect(store.getActions()).toStrictEqual(expectedActionPayload);
   });
 

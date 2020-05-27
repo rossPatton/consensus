@@ -13,7 +13,7 @@ import {failure, init, success} from './actions';
 
 const mockStore = configureStore([thunk]);
 
-describe('redux/usersByGroupId/patch', () => {
+describe('redux/invites/patch', () => {
   it('creates correct PATCH_INIT action', () => {
     const expectedActionPayload: tInitAction[] = [{
       type: PATCH_INIT,

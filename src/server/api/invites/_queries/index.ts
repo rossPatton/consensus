@@ -1,1 +1,0 @@
-export {getUsersByGroupId} from './getUsersByGroupId';

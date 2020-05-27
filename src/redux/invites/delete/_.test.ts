@@ -13,7 +13,7 @@ import {failure, init, success} from './actions';
 
 const mockStore = configureStore([thunk]);
 
-describe('redux/usersByGroupId/delete', () => {
+describe('redux/invites/delete', () => {
   it('creates correct DELETE_INIT action', () => {
     const expectedActionPayload: tInitAction[] = [{
       type: DELETE_INIT,
@@ -25,13 +25,25 @@ describe('redux/usersByGroupId/delete', () => {
   });
 
   it('creates correct DELETE_SUCCESS action', () => {
+    const testUser = {
+      id: 1,
+      bio: '',
+      username: 'testUser',
+    } as ts.user;
+    const testUserInvite = {
+      userId: 1,
+      groupId: 1,
+      type: 'mod' as 'member' | 'mod',
+      user: testUser,
+    };
+
     const expectedActionPayload: tSuccessAction[] = [{
       type: DELETE_SUCCESS,
-      payload: {userId: 1},
+      payload: testUserInvite,
     }];
 
     const store = mockStore({});
-    store.dispatch(success({userId: 1}));
+    store.dispatch(success(testUserInvite));
     expect(store.getActions()).toStrictEqual(expectedActionPayload);
   });
 

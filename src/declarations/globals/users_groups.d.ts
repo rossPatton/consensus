@@ -3,6 +3,7 @@ namespace ts {
     groupId: number,
     userId: number,
     type: 'member' | 'mod',
+    user?: ts.user,
   };
 
   declare type inviteQuery = Partial<userInvite> & {

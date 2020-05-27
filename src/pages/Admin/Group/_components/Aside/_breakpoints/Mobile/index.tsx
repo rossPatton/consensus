@@ -13,6 +13,19 @@ const MobileAside = memo((props: tProps) => (
       </li>
       <li className="flex items-center text-base p-1 mb-1 rounded hover:bg-gray-2">
         <div className="bg-white border rounded-circ mr-2 p-2" />
+        {props.isInvite && 'Invite Members'}
+        {!props.isInvite && (
+          <Link
+            to="/admin/invite"
+            className={cx({
+              curDisable: !props.session.isVerified,
+            })}>
+            Invite Members
+          </Link>
+        )}
+      </li>
+      <li className="flex items-center text-base p-1 mb-1 rounded hover:bg-gray-2">
+        <div className="bg-white border rounded-circ mr-2 p-2" />
         {props.isMeetings && 'Edit Meetings & Drafts'}
         {!props.isMeetings && (
           <Link

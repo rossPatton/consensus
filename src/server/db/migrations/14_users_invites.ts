@@ -4,6 +4,8 @@ exports.up = async (knex: Knex) => {
   await knex.schema.createTable('users_invites', table => {
     table.increments('id').unsigned().primary();
 
+    table.unique(['userId', 'groupId']);
+
     table.integer('userId')
       .notNullable()
       .references('users.id')
@@ -12,6 +14,7 @@ exports.up = async (knex: Knex) => {
 
     table.integer('groupId')
       .notNullable()
+      .references('groups.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 

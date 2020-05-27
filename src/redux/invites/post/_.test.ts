@@ -13,7 +13,7 @@ import {failure, init, success} from './actions';
 
 const mockStore = configureStore([thunk]);
 
-describe('redux/usersByGroupId/post', () => {
+describe('redux/invites/post', () => {
   it('creates correct POST_INIT action', () => {
     const expectedActionPayload: tInitAction[] = [{
       type: POST_INIT,
@@ -31,13 +31,20 @@ describe('redux/usersByGroupId/post', () => {
       username: 'testUser',
     } as ts.user;
 
+    const testUserInvite = {
+      userId: 1,
+      groupId: 1,
+      type: 'mod' as 'member' | 'mod',
+      user: testUser,
+    };
+
     const expectedActionPayload: tSuccessAction[] = [{
       type: POST_SUCCESS,
-      payload: testUser,
+      payload: testUserInvite,
     }];
 
     const store = mockStore({});
-    store.dispatch(success(testUser));
+    store.dispatch(success(testUserInvite));
     expect(store.getActions()).toStrictEqual(expectedActionPayload);
   });
 

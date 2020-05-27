@@ -43,21 +43,19 @@ const Aside = memo((props: tProps) => {
         <li className="font-bold">
           Admin Actions
         </li>
-        {props.session.profile.type === 'hidden' && (
-          <li className="flex items-center text-base p-1 mb-1 rounded hover:bg-gray-2">
-            <div className="bg-white border rounded-circ mr-2 p-2" />
-            {props.isInvite && 'Invite Members'}
-            {!props.isInvite && (
-              <Link
-                to="/admin/invite"
-                className={cx({
-                  curDisable: !props.session.isVerified,
-                })}>
-                Invite Members
-              </Link>
-            )}
-          </li>
-        )}
+        <li className="flex items-center text-base p-1 mb-1 rounded hover:bg-gray-2">
+          <div className="bg-white border rounded-circ mr-2 p-2" />
+          {props.isInvite && 'Invite Members'}
+          {!props.isInvite && (
+            <Link
+              to="/admin/invite"
+              className={cx({
+                curDisable: !props.session.isVerified,
+              })}>
+              Invite Members
+            </Link>
+          )}
+        </li>
         <li className="flex items-center text-base p-1 mb-1 rounded hover:bg-gray-2">
           <div className="bg-white border rounded-circ mr-2 p-2" />
           {props.isMeetings && 'Edit Meetings & Drafts'}

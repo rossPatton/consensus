@@ -41,5 +41,5 @@ meetingsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  ctx.body = await zipMeetingsWithAttendees(meetings, userRSVPs);
+  ctx.body = await zipMeetingsWithAttendees(ctx, meetings, userRSVPs);
 });

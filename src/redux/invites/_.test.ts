@@ -1,7 +1,7 @@
 import * as types from './_types';
-import {initialState, usersByGroupIdReducer as reducer} from './reducer';
+import {initialState, invitesReducer as reducer} from './reducer';
 
-describe('redux/usersByGroupId/reducer', () => {
+describe('redux/invites/reducer', () => {
   it('should return initial state, even with a bunk action', () => {
     expect(reducer(undefined, {} as types.tActions))
       .toStrictEqual(initialState);
@@ -9,7 +9,7 @@ describe('redux/usersByGroupId/reducer', () => {
 
   it('should handle DELETE_INIT', () => {
     expect(reducer(undefined, {
-      type: '@@usersByGroupId/DELETE_INIT',
+      type: '@@invites/DELETE_INIT',
     })).toStrictEqual({
       ...initialState,
       isLoading: true,
@@ -18,7 +18,7 @@ describe('redux/usersByGroupId/reducer', () => {
 
   it('should handle DELETE_FAILURE', () => {
     expect(reducer(undefined, {
-      type: '@@usersByGroupId/DELETE_FAILURE',
+      type: '@@invites/DELETE_FAILURE',
       payload: {
         message: 'Error!',
         status: 500,
@@ -34,7 +34,7 @@ describe('redux/usersByGroupId/reducer', () => {
 
   it('should handle DELETE_SUCCESS', () => {
     expect(reducer(undefined, {
-      type: '@@usersByGroupId/DELETE_SUCCESS',
+      type: '@@invites/DELETE_SUCCESS',
       payload: {userId: 1},
     })).toStrictEqual({
       ...initialState,
@@ -44,7 +44,7 @@ describe('redux/usersByGroupId/reducer', () => {
 
   it('should handle GET_INIT', () => {
     expect(reducer(undefined, {
-      type: '@@usersByGroupId/GET_INIT',
+      type: '@@invites/GET_INIT',
     })).toStrictEqual({
       ...initialState,
       isLoading: true,
@@ -53,7 +53,7 @@ describe('redux/usersByGroupId/reducer', () => {
 
   it('should handle GET_FAILURE', () => {
     expect(reducer(undefined, {
-      type: '@@usersByGroupId/GET_FAILURE',
+      type: '@@invites/GET_FAILURE',
       payload: {
         message: 'Error!',
         status: 500,
@@ -69,8 +69,8 @@ describe('redux/usersByGroupId/reducer', () => {
 
   it('should handle GET_SUCCESS', () => {
     expect(reducer(undefined, {
-      type: '@@usersByGroupId/GET_SUCCESS',
-      payload: [{}] as ts.user[],
+      type: '@@invites/GET_SUCCESS',
+      payload: [{}] as ts.userInvite[],
     })).toStrictEqual({
       ...initialState,
       fetched: true,
@@ -80,7 +80,7 @@ describe('redux/usersByGroupId/reducer', () => {
 
   it('should handle PATCH_INIT', () => {
     expect(reducer(undefined, {
-      type: '@@usersByGroupId/PATCH_INIT',
+      type: '@@invites/PATCH_INIT',
     })).toStrictEqual({
       ...initialState,
       isLoading: true,
@@ -89,7 +89,7 @@ describe('redux/usersByGroupId/reducer', () => {
 
   it('should handle PATCH_FAILURE', () => {
     expect(reducer(undefined, {
-      type: '@@usersByGroupId/PATCH_FAILURE',
+      type: '@@invites/PATCH_FAILURE',
       payload: {
         message: 'Error!',
         status: 500,
@@ -105,7 +105,7 @@ describe('redux/usersByGroupId/reducer', () => {
 
   it('should handle PATCH_SUCCESS', () => {
     expect(reducer(undefined, {
-      type: '@@usersByGroupId/PATCH_SUCCESS',
+      type: '@@invites/PATCH_SUCCESS',
       payload: {} as ts.roleRel,
     })).toStrictEqual({
       ...initialState,
@@ -115,7 +115,7 @@ describe('redux/usersByGroupId/reducer', () => {
 
   it('should handle POST_INIT', () => {
     expect(reducer(undefined, {
-      type: '@@usersByGroupId/POST_INIT',
+      type: '@@invites/POST_INIT',
     })).toStrictEqual({
       ...initialState,
       isLoading: true,
@@ -124,7 +124,7 @@ describe('redux/usersByGroupId/reducer', () => {
 
   it('should handle POST_FAILURE', () => {
     expect(reducer(undefined, {
-      type: '@@usersByGroupId/POST_FAILURE',
+      type: '@@invites/POST_FAILURE',
       payload: {
         message: 'Error!',
         status: 500,
@@ -140,8 +140,8 @@ describe('redux/usersByGroupId/reducer', () => {
 
   it('should handle POST_SUCCESS', () => {
     expect(reducer(undefined, {
-      type: '@@usersByGroupId/POST_SUCCESS',
-      payload: {} as ts.user,
+      type: '@@invites/POST_SUCCESS',
+      payload: {} as ts.userInvite,
     })).toStrictEqual({
       ...initialState,
       data: [{}],

@@ -1,4 +1,4 @@
-export const DELETE_INIT = '@@usersBinvitesyGroupId/DELETE_INIT';
+export const DELETE_INIT = '@@invites/DELETE_INIT';
 export const DELETE_FAILURE = '@@invites/DELETE_FAILURE';
 export const DELETE_SUCCESS = '@@invites/DELETE_SUCCESS';
 export type tInitAction = ts.action<typeof DELETE_INIT>;

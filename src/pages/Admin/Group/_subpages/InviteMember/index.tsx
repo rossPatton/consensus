@@ -1,20 +1,23 @@
-// import dayJS from 'dayjs';
 import _ from 'lodash';
-// import loglevel from 'loglevel';
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {postInvite} from '~app/redux';
-import {tContainerProps, tState, tStateUnion} from './_types';
+import {deleteInvite, getInvites, postInvite} from '~app/redux';
+
+import {Store, tContainerProps, tState, tStateUnion} from './_types';
 import {InviteMemberComponent} from './Component';
 
-class InviteMemberContainer extends PureComponent<tContainerProps, tState> {
+class InviteMemberContainer extends Component<tContainerProps, tState> {
   constructor(props: tContainerProps) {
     super(props);
+
     this.state = {
       hasMounted: false,
       username: '',
     };
+
+    if (props.invitesThunk.fetched) return;
+    props.getInvitesDispatch({groupId: props.session?.profile?.id});
   }
 
   componentDidMount() {
@@ -23,7 +26,17 @@ class InviteMemberContainer extends PureComponent<tContainerProps, tState> {
     });
   }
 
-  submit = async () => {
+  deleteInvite = async (
+    ev: React.MouseEvent<HTMLButtonElement>,
+    invite: ts.userInvite,
+  ) => {
+    ev.preventDefault();
+    const {user, ...inviteQuery} = invite;
+    await this.props.deleteInviteDispatch(inviteQuery);
+  }
+
+  submit = async (ev: React.FormEvent<HTMLFormElement | HTMLButtonElement>) => {
+    ev.preventDefault();
     const {username} = this.state;
     const groupId = this.props.session?.profile?.id;
 
@@ -34,7 +47,7 @@ class InviteMemberContainer extends PureComponent<tContainerProps, tState> {
 
     this.setState({
       username: '',
-    })
+    });
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
@@ -47,19 +60,23 @@ class InviteMemberContainer extends PureComponent<tContainerProps, tState> {
     return (
       <InviteMemberComponent
         {...this.state}
+        {...this.props}
+        deleteInvite={this.deleteInvite}
         submit={this.submit}
-        session={this.props.session}
         updateState={this.updateState}
       />
     );
   }
 }
 
-const mapStateToProps = (store: {session: ts.thunk<ts.session>}) => ({
+const mapStateToProps = (store: Store) => ({
+  invitesThunk: store.invites,
   session: store.session.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
+  deleteInviteDispatch: (query: ts.inviteQuery) => dispatch(deleteInvite(query)),
+  getInvitesDispatch: (query: ts.inviteQuery) => dispatch(getInvites(query)),
   postInviteDispatch: (query: ts.inviteQuery) => dispatch(postInvite(query)),
 });
 

@@ -1,18 +1,15 @@
 import Joi from '@hapi/joi';
 
-const baseSchema = Joi.object().keys({
+export const getSchema = Joi.object().keys({
+  groupId: Joi.number().integer().greater(0).optional(),
+  id: Joi.number().integer().optional(),
   isFormSubmit: Joi.bool(),
-});
-
-export const getSchema = baseSchema.keys({
-  noPending: Joi.bool(),
-  groupId: Joi.number().integer(),
+  userId: Joi.number().integer().greater(0).optional(),
+  type: Joi.string().valid('member', 'mod').optional(),
 });
 
 export const postSchema = getSchema.keys({
-  allowNonVerified: Joi.bool(),
-  userId: Joi.number().integer(),
-  role: Joi.string().alphanum(),
+  username: Joi.string().optional(),
 });
 
 export const deleteSchema = postSchema;

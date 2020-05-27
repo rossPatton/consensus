@@ -32,19 +32,13 @@ meetings.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(401);
   }
 
-  // basically, if a member of the group or public group, but no meetings scheduled
-  if (!meetings) {
-    ctx.status = 204;
-    ctx.body = [];
-  }
-
   // all user rsvps
   const userRSVPs = await getRSVPsByUserId(ctx, userId);
   // zip rsvps up with meetings, split by public vs private rsvps
-  const eventsWithRSVPCount = await zipMeetingsWithAttendees(meetings, userRSVPs);
+  const meetingsWithRSVPCount = await zipMeetingsWithAttendees(ctx, meetings, userRSVPs);
 
   // return zipped meetings, filtered based on user login status, role, etc
-  const body = await filterMeetings(ctx, eventsWithRSVPCount, role);
+  const body = await filterMeetings(ctx, meetingsWithRSVPCount, role);
   ctx.body = body;
 });
 
