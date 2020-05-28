@@ -32,9 +32,10 @@ describe('redux/invites/post', () => {
     } as ts.user;
 
     const testUserInvite = {
+      id: 1,
       userId: 1,
       groupId: 1,
-      type: 'mod' as 'member' | 'mod',
+      type: 'mod' as 'member' | 'facilitator',
       user: testUser,
     };
 

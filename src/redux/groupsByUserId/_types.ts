@@ -8,10 +8,18 @@ import {
   tInitAction as tGetInitAction,
   tSuccessAction as tGetSuccessAction,
 } from './get/_types';
+import {
+  tFailureAction as tPostFailureAction,
+  tInitAction as tPostInitAction,
+  tSuccessAction as tPostSuccessAction,
+} from './post/_types';
 
 export type tActions = tDeleteInitAction
   | tDeleteFailureAction
   | tDeleteSuccessAction
   | tGetInitAction
   | tGetFailureAction
-  | tGetSuccessAction;
+  | tGetSuccessAction
+  | tPostInitAction
+  | tPostFailureAction
+  | tPostSuccessAction;

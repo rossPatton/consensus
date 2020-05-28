@@ -9,21 +9,25 @@ import {postRoleSuccess, postUserByGroupId} from '~app/redux';
 import {tProps, tStore} from './_types';
 
 class JoinFormContainer extends React.PureComponent<tProps> {
-  onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+  onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
     const {dispatch, group, session} = this.props;
     const role = group.type === 'public' ? 'member' : 'pending';
     const userId = session.profile.id;
 
-    this.props.postNewUserByGroupIdDispatch({
-      allowNonVerified: group.allowNonVerified,
-      groupId: group.id,
-      role,
-      userId,
-    })
-      .then(() => dispatch(postRoleSuccess({groupId: group.id, role})))
-      .catch(loglevel.error);
+    try {
+      await this.props.postNewUserByGroupIdDispatch({
+        allowNonVerified: group.allowNonVerified,
+        groupId: group.id,
+        role,
+        userId,
+      });
+    } catch (err) {
+      loglevel.error(err);
+    }
+
+    dispatch(postRoleSuccess({groupId: group.id, role}));
   }
 
   render() {

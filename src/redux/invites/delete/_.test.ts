@@ -31,9 +31,10 @@ describe('redux/invites/delete', () => {
       username: 'testUser',
     } as ts.user;
     const testUserInvite = {
+      id: 1,
       userId: 1,
       groupId: 1,
-      type: 'mod' as 'member' | 'mod',
+      type: 'faciltator' as 'member' | 'facilitator',
       user: testUser,
     };
 

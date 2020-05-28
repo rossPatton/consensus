@@ -22,14 +22,19 @@ export { getMeetingsByUserId } from './meetingsByUserId';
 // group/group related actions/thunks
 export { getGroup, patchGroup, postGroup } from './group';
 export { getGroups } from './groups';
-export { deleteGroupByUserId, getGroupsByUserId } from './groupsByUserId';
+export {
+  deleteGroupByUserId,
+  getGroupsByUserId,
+  postGroupByUserId,
+  postGroupByUserIdSuccess,
+} from './groupsByUserId';
 
 // session related actions/thunks
 export { login, logout, logoutSuccess, patchSessionSuccess } from './session';
 
 // user related actions/thunks
 export { deleteUser, getUser, patchUser, postUser } from './user';
-export {deleteInvite, getInvites, patchInvites, postInvite } from './invites';
+export {deleteInvite, getInvites, postInvite } from './invites';
 export {
   deleteUserByGroupId,
   getUsersByGroupId,

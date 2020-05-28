@@ -16,7 +16,7 @@ export const failure = (payload: ts.responseError): tFailureAction => ({
   payload,
 });
 
-export const success = (payload: {userId: number}): tSuccessAction => ({
+export const success = (payload: ts.userInvite): tSuccessAction => ({
   type: DELETE_SUCCESS,
   payload,
 });

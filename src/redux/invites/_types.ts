@@ -9,11 +9,6 @@ import {
   tSuccessAction as tGetSuccessAction,
 } from './get/_types';
 import {
-  tFailureAction as tPatchFailureAction,
-  tInitAction as tPatchInitAction,
-  tSuccessAction as tPatchSuccessAction,
-} from './patch/_types';
-import {
   tFailureAction as tPostFailureAction,
   tInitAction as tPostInitAction,
   tSuccessAction as tPostSuccessAction,
@@ -25,9 +20,6 @@ export type tActions = tDeleteInitAction
   | tGetInitAction
   | tGetFailureAction
   | tGetSuccessAction
-  | tPatchInitAction
-  | tPatchFailureAction
-  | tPatchSuccessAction
   | tPostInitAction
   | tPostFailureAction
   | tPostSuccessAction;

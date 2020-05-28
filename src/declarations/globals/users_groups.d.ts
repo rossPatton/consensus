@@ -2,8 +2,9 @@ namespace ts {
   declare type userInvite = {
     group?: ts.group,
     groupId: number,
+    id: number,
     userId: number,
-    type: 'member' | 'mod',
+    type: 'member' | 'facilitator',
     user?: ts.user,
   };
 

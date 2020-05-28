@@ -75,7 +75,7 @@ exports.up = async (knex: Knex) => {
 
     table.string('memberName').defaultTo('Member').notNullable();
     table.string('modName').defaultTo('Facilitator').notNullable();
-    table.boolean('allowNonVerified').defaultTo(false).notNullable();
+    table.boolean('allowNonVerified').defaultTo(true).notNullable();
 
     // group external website and social media, if available
     table.string('website').defaultTo('');

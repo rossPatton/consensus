@@ -18,7 +18,7 @@ exports.up = async (knex: Knex) => {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
 
-    table.enum('type', ['member', 'mod']).defaultTo('member');
+    table.enum('type', ['member', 'facilitator']).defaultTo('member');
   });
 };
 

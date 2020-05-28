@@ -2,9 +2,9 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 import {
-  DELETE_FAILURE,
-  DELETE_INIT,
-  DELETE_SUCCESS,
+  POST_FAILURE,
+  POST_INIT,
+  POST_SUCCESS,
   tFailureAction,
   tInitAction,
   tSuccessAction,
@@ -13,10 +13,29 @@ import {failure, init, success} from './actions';
 
 const mockStore = configureStore([thunk]);
 
+const testGroup = {
+  allowNonVerified: true,
+  avatar: '',
+  category: 'Union' as ts.category,
+  city: 'New York',
+  cityId: 1,
+  country: 'United States',
+  countryId: 1,
+  description: '',
+  id: 1,
+  memberName: 'member',
+  modName: 'facilitator',
+  name: 'Tech Workers Coalition Chapter',
+  region: 'New York',
+  regionId: 1,
+  handle: 'tech-workers-coalition-chapter',
+  type: 'private' as ts.privacyEnum,
+};
+
 describe('redux/groupsByUserId/get', () => {
-  it('creates correct DELETE_INIT action', () => {
+  it('creates correct POST_INIT action', () => {
     const expectedActionPayload: tInitAction[] = [{
-      type: DELETE_INIT,
+      type: POST_INIT,
     }];
 
     const store = mockStore({});
@@ -24,24 +43,24 @@ describe('redux/groupsByUserId/get', () => {
     expect(store.getActions()).toStrictEqual(expectedActionPayload);
   });
 
-  it('creates correct DELETE_SUCCESS action', () => {
+  it('creates correct POST_SUCCESS action', () => {
     const expectedActionPayload: tSuccessAction[] = [{
-      type: DELETE_SUCCESS,
-      payload: {ok: true, groupId: 1},
+      type: POST_SUCCESS,
+      payload: testGroup,
     }];
 
     const store = mockStore({});
-    store.dispatch(success({ok: true, groupId: 1}));
+    store.dispatch(success(testGroup));
     expect(store.getActions()).toStrictEqual(expectedActionPayload);
   });
 
-  it('creates correct DELETE_FAILURE action', () => {
+  it('creates correct POST_FAILURE action', () => {
     const expectedActionPayload: tFailureAction[] = [{
       payload: {
         message: 'Oh no! An Error occurred',
         status: 500,
       },
-      type: DELETE_FAILURE,
+      type: POST_FAILURE,
     }];
 
     const store = mockStore({});

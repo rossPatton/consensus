@@ -1,7 +1,6 @@
 import {tActions} from './_types';
 import {DELETE_FAILURE, DELETE_INIT, DELETE_SUCCESS} from './delete/_types';
 import {GET_FAILURE, GET_INIT, GET_SUCCESS} from './get/_types';
-import {PATCH_FAILURE, PATCH_INIT, PATCH_SUCCESS} from './patch/_types';
 import {POST_FAILURE, POST_INIT, POST_SUCCESS} from './post/_types';
 
 export const initialState: ts.thunk<ts.userInvite[]> = {
@@ -34,16 +33,12 @@ export const invitesReducer = (state = initialState, action: tActions) => {
     return initReturn;
   case GET_INIT:
     return initReturn;
-  case PATCH_INIT:
-    return initReturn;
   case POST_INIT:
     return initReturn;
 
   case DELETE_FAILURE:
     return failureReturn;
   case GET_FAILURE:
-    return failureReturn;
-  case PATCH_FAILURE:
     return failureReturn;
   case POST_FAILURE:
     return failureReturn;
@@ -65,33 +60,14 @@ export const invitesReducer = (state = initialState, action: tActions) => {
   }
 
   case DELETE_SUCCESS: {
-    const {userId}: {userId: unknown} = action.payload;
+    const {id}: {id: unknown} = action.payload;
     const data = state.data.filter(userInvite => {
-      return userInvite.userId !== parseInt(userId as string, 10);
+      return userInvite.id !== parseInt(id as string, 10);
     });
 
     return {
       ...state,
       data,
-      isLoading: false,
-    };
-  }
-
-  case PATCH_SUCCESS: {
-    const {userId} = action.payload;
-
-    return {
-      ...state,
-      data: [...state.data].map(user => {
-        if (user.userId === userId) {
-          return {
-            ...user,
-            role: action.payload.role,
-          };
-        }
-
-        return user;
-      }),
       isLoading: false,
     };
   }

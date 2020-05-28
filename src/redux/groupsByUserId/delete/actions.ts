@@ -16,7 +16,7 @@ export const failure = (payload: ts.responseError): tFailureAction => ({
   payload,
 });
 
-export const success = (payload: {ok: true, groupId: number}): tSuccessAction => ({
+export const success = (payload: {groupId: number}): tSuccessAction => ({
   type: DELETE_SUCCESS,
   payload,
 });

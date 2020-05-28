@@ -1,6 +1,7 @@
 import { tActions } from './_types';
 import { DELETE_FAILURE, DELETE_INIT, DELETE_SUCCESS } from './delete/_types';
 import { GET_FAILURE, GET_INIT, GET_SUCCESS } from './get/_types';
+import { POST_FAILURE, POST_INIT, POST_SUCCESS } from './post/_types';
 
 export const initialState: ts.thunk<ts.group[]> = {
   error: null,
@@ -33,10 +34,14 @@ export const groupsByUserIdReducer = (state = initialState, action: tActions) =>
     return initReturn;
   case GET_INIT:
     return initReturn;
+  case POST_INIT:
+    return initReturn;
 
   case DELETE_FAILURE:
     return failureReturn;
   case GET_FAILURE:
+    return failureReturn;
+  case POST_FAILURE:
     return failureReturn;
 
   case GET_SUCCESS:
@@ -48,6 +53,16 @@ export const groupsByUserIdReducer = (state = initialState, action: tActions) =>
     return {
       ...state,
       data: state.data.filter(group => group.id !== groupId),
+      isLoading: false,
+    };
+  }
+
+  case POST_SUCCESS: {
+    const newGroup = action.payload;
+
+    return {
+      ...state,
+      data: [...state.data, newGroup],
       isLoading: false,
     };
   }

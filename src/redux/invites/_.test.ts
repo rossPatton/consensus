@@ -35,7 +35,11 @@ describe('redux/invites/reducer', () => {
   it('should handle DELETE_SUCCESS', () => {
     expect(reducer(undefined, {
       type: '@@invites/DELETE_SUCCESS',
-      payload: {userId: 1},
+      payload: {
+        id: 1,
+        groupId: 1,
+        userId: 1,
+      } as ts.userInvite,
     })).toStrictEqual({
       ...initialState,
       data: [],
@@ -75,41 +79,6 @@ describe('redux/invites/reducer', () => {
       ...initialState,
       fetched: true,
       data: [{}],
-    });
-  });
-
-  it('should handle PATCH_INIT', () => {
-    expect(reducer(undefined, {
-      type: '@@invites/PATCH_INIT',
-    })).toStrictEqual({
-      ...initialState,
-      isLoading: true,
-    });
-  });
-
-  it('should handle PATCH_FAILURE', () => {
-    expect(reducer(undefined, {
-      type: '@@invites/PATCH_FAILURE',
-      payload: {
-        message: 'Error!',
-        status: 500,
-      },
-    })).toStrictEqual({
-      ...initialState,
-      error: {
-        message: 'Error!',
-        status: 500,
-      },
-    });
-  });
-
-  it('should handle PATCH_SUCCESS', () => {
-    expect(reducer(undefined, {
-      type: '@@invites/PATCH_SUCCESS',
-      payload: {} as ts.roleRel,
-    })).toStrictEqual({
-      ...initialState,
-      data: [],
     });
   });
 
