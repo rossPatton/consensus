@@ -105,6 +105,8 @@ module.exports = {
       __DEBUG__: !!env.DEBUG,
       __DEV__: !!env.DEV,
       __PROD__: !!env.PROD,
+      __HCAPTCHA_KEY__: JSON.stringify(env.HCAPTCHA_KEY),
+      __HCAPTCHA_SECRET__: JSON.stringify(env.HCAPTCHA_SECRET),
       __MAIL_DOMAIN__: JSON.stringify(env.MAIL_DOMAIN),
       __MAIL_KEY__: JSON.stringify(env.MAIL_KEY),
       __MAIL_SANDBOX__: JSON.stringify(env.MAIL_SANDBOX),
@@ -114,7 +116,7 @@ module.exports = {
       __SPACES_KEY__: JSON.stringify(env.SPACES_KEY),
       __SPACES_SECRET__: JSON.stringify(env.SPACES_SECRET),
       __URL__: JSON.stringify(!!env.DEV
-        ? 'https://consensus.local'
+        ? 'https://local.consens.us.org'
         : 'https://consens.us.org'),
     }),
 

@@ -5,24 +5,15 @@ import {PasswordInputComponent} from './Component';
 
 class PasswordInput extends PureComponent<tProps, tState> {
   static defaultProps = {
+    errors: {},
+    name: 'password',
     password: '',
   };
-
-  state = {
-    showPW: false,
-  };
-
-  togglePWVisibility = () =>
-    this.setState({
-      showPW: !this.state.showPW,
-    });
 
   render() {
     return (
       <PasswordInputComponent
         {...this.props}
-        {...this.state}
-        togglePWVisibility={this.togglePWVisibility}
       />
     );
   }

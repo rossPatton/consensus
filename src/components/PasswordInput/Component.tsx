@@ -1,18 +1,23 @@
 import cx from 'classnames';
-import React, { memo } from 'react';
+import React, { memo, useContext, useState } from 'react';
 
-import {tComponentProps} from './_types';
+import {MediaContext} from '~app/context';
 
-export const PasswordInputComponent = memo((props: tComponentProps) => {
+import {tProps} from './_types';
+
+export const PasswordInputComponent = memo((props: tProps) => {
+  const {isDesktop} = useContext(MediaContext);
+  const [showPW, togglePWVisibility] = useState(false);
+
   const len = props.password.length;
-  const {errors = {}, name = 'password'} = props;
-  const hasError = errors.password && errors.password.length > 0;
-  const inlineStyle = len === 0
-    ? {}
-    : {
+
+  let inlineStyle = {};
+  if (len > 0) {
+    inlineStyle = {
       height: '5px',
       width: len > 0 ? `${len * 3.125}%` : '0%',
     };
+  }
 
   const showSubtitle = !props.newPassword && !props.hideRequiredMessage;
 
@@ -31,34 +36,39 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
             Required to make any changes to your account or profile.
           </p>
         )}
-        <div className="flex flex-col d:flex-row mb-2">
+        <div className="flex flex-row mb-2">
           <input
             id={props.id}
-            name={name}
+            name={props.name}
             maxLength={4096}
             autoComplete={props.newPassword ? 'new-password' : 'on'}
             required={props.required}
             placeholder={props.placeholder}
             value={props.password}
             onChange={props.onChange}
-            type={props.showPW ? 'text' : 'password'}
+            type={showPW ? 'text' : 'password'}
             className={cx({
-              'p-2 w-full mb-1 d:mb-0 mr-2': true,
-              'border-red-1': hasError,
+              'p-2 w-full mr-1 d:mr-2': true,
+              'border-red-1': props.errors.password
+                && props.errors.password.length > 0,
             })}
           />
           <button
             type="button"
             className="flex flex-row items-center justify-center hover:bg-gray-3 transition p-2 pl-3 pr-3"
-            onClick={props.togglePWVisibility}>
+            onClick={() => togglePWVisibility(!showPW)}>
             <img
-              alt=""
+              alt={!isDesktop ? `${showPW ? 'Hide' : 'Reveal'} Password` : ''}
               className="mr-1/2"
               height="12"
               src="/images/eye.svg"
               width="18"
             />
-            {props.showPW ? 'Hide' : 'Reveal'} Password
+            {isDesktop && (
+              <>
+                {showPW ? 'Hide' : 'Reveal'} Password
+              </>
+            )}
           </button>
         </div>
       </label>

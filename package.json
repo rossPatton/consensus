@@ -25,6 +25,7 @@
   "dependencies": {
     "@hapi/boom": "^7.4.11",
     "@hapi/joi": "^17.1.0",
+    "@hcaptcha/react-hcaptcha": "^0.1.9",
     "@koa/cors": "^2.2.3",
     "@loadable/component": "^5.11.0",
     "@loadable/server": "^5.11.0",
@@ -40,6 +41,7 @@
     "fs-extra": "^8.1.0",
     "fxa-common-password-list": "0.0.3",
     "geolite2": "^3.0.0",
+    "hcaptcha": "0.0.1",
     "history": "^4.10.1",
     "isomorphic-fetch": "^2.2.1",
     "knex": "^0.19.5",
@@ -116,6 +118,7 @@
     "@types/geolite2": "^2.0.0",
     "@types/hapi__boom": "^7.4.1",
     "@types/hapi__joi": "^16.0.9",
+    "@types/hcaptcha__react-hcaptcha": "^0.1.0",
     "@types/isomorphic-fetch": "0.0.35",
     "@types/jest": "^25.2.1",
     "@types/joi": "^14.3.4",

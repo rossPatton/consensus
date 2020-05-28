@@ -17,6 +17,9 @@ declare let __DEBUG__: boolean;
 // NODE_ENV === development
 declare let __DEV__: boolean;
 
+declare let __HCAPTCHA_KEY__: string;
+declare let __HCAPTCHA_SECRET__: string;
+
 // build specific hash for cache, other stuff
 declare let __HASH__: string;
 
@@ -52,4 +55,4 @@ declare let __SPACES_KEY__: string
 declare let __SPACES_SECRET__: string
 
 // consensus.local or consens.us.org depending on environment
-declare let __URL__: string;
+declare let __URL__: 'https://local.consens.us.org' | 'https://consens.us.org';

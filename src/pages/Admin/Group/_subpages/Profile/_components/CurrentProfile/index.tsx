@@ -83,7 +83,7 @@ const CurrentProfile = memo((props: tComponentProps) => (
     )}
     <Link
       to="/admin/profile/edit"
-      className="btn p-2 pl-3 pr-3 hover:bg-gray-3">
+      className="btn inline-block p-2 pl-3 pr-3 hover:bg-gray-3">
       Edit profile
     </Link>
   </div>

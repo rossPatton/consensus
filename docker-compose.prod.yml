@@ -22,7 +22,7 @@ services:
       - NETWORK_ACCESS=internal
       - NO_INDEX=true
       - PEPPER=${PEPPER}
-      - VIRTUAL_HOST=consensus.local
+      - VIRTUAL_HOST=local.consens.us.org
       - VIRTUAL_PORT=3001
       - VIRTUAL_PROTO=https
     expose:

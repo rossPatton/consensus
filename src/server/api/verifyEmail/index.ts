@@ -37,7 +37,7 @@ verifyEmail.get('/email/v1/sendVerificationToken',
       html: `
         Enter the following authentication code in order to verify your email. This token is only valid for 1 hour.
         <br /><br />
-        Link: https://consensus.local/verify-email/enterCode
+        Link: ${__URL__}/verify-email/enterCode
         <br />
         Code: ${token}
       `,

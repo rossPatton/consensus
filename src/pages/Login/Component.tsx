@@ -1,4 +1,4 @@
-import cx from 'classnames';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import React, { memo } from 'react';
 import {Link} from 'react-router-dom';
 
@@ -14,7 +14,8 @@ export const LoginComponent = memo((props: tComponentProps) => (
       name="userLoginForm"
       autoComplete="off"
       action="/auth/v1/login"
-      onSubmit={props.login}>
+      onSubmit={props.login}
+    >
       <fieldset>
         <legend>
           <h1 className="mb-2">
@@ -45,28 +46,38 @@ export const LoginComponent = memo((props: tComponentProps) => (
           placeholder="your_very_secure_password_here"
           required
         />
-        <div
-          className={cx({
-            'mb-2': props.error,
-          })}>
+        <div className="mb-2">
+          <HCaptcha
+            sitekey={__HCAPTCHA_KEY__}
+            onVerify={props.handleVerificationSuccess}
+          />
+        </div>
+        <button
+          disabled={props.hasMounted
+            && (!props.password || !props.username || !props.token)}
+          className="p-2 pl-3 pr-3 d:mr-2 hover:bg-gray-2 mb-2">
+          Login
+        </button>
+        {/* <div className='flex flex-col d:flex-row'>
           <button
-            disabled={props.hasMounted && (!props.password || !props.username)}
-            className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-2">
+            disabled={props.hasMounted
+              && (!props.password || !props.username || !props.isVerified)}
+            className="p-2 pl-3 pr-3 d:mr-2 hover:bg-gray-2 mb-2">
             Login
           </button>
           <Link
             to="/password-reset"
-            className="btn p-2 pl-3 pr-3 mr-2 hover:bg-gray-2">
-            Forget your password?
+            className="btn p-2 pl-3 pr-3 d:mr-2 hover:bg-gray-2 mb-2">
+            Reset Password
           </Link>
           <Link
             to="/login-reset"
-            className="btn p-2 pl-3 pr-3 hover:bg-gray-2">
-            Forget your login?
+            className="btn p-2 pl-3 pr-3 hover:bg-gray-2 mb-2">
+            Reset Login
           </Link>
-        </div>
+        </div>*/}
         {props.error && (
-          <div className="animated fadeInUp bg-red-2 font-bold p-2 rounded text-white">
+          <div className="animated fadeInUp bg-red-2 font-bold p-2 rounded text-white mb-2">
             {props.error}
           </div>
         )}

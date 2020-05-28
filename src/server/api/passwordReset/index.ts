@@ -43,7 +43,7 @@ passwordResetViaEmail.get('/email/v1/emailPasswordResetToken',
       html: `
       Enter the following authentication code in order to reset your password. This token is only valid for 1 hour.
       <br /><br />
-      Link: https://consensus.local/password-reset/enterCode
+      Link: ${__URL__}/password-reset/enterCode
       <br />
       Code: ${token}
     `,

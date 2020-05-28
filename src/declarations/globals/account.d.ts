@@ -60,6 +60,7 @@ namespace ts {
     // but we call the login 'username' here, or else passport doesnt work
     username: string,
     password: string,
+    token: string,
   }>;
 
   // when logging out we return this value

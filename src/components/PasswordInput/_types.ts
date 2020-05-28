@@ -14,11 +14,6 @@ export type tProps = {
   title?: string,
 };
 
-export interface tComponentProps extends tProps {
-  showPW: boolean,
-  togglePWVisibility: () => void,
-}
-
 export type tState = {
   showPW: boolean,
 };

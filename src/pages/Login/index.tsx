@@ -15,6 +15,7 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
   state = {
     hasMounted: false,
     password: '',
+    token: '',
     username: '', // actually login in the DB, but passportjs expects 'username'
   };
 
@@ -25,10 +26,16 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
     });
   }
 
+  handleVerificationSuccess = (token: string) => {
+    this.setState({
+      token,
+    });
+  }
+
   login = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const {username, password} = this.state;
-    return this.props.loginDispatch({username, password});
+    const {username, password, token} = this.state;
+    return this.props.loginDispatch({username, password, token});
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
@@ -64,6 +71,7 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
                     {...this.state}
                     // if theres a login error, it'll show up here
                     error={error}
+                    handleVerificationSuccess={this.handleVerificationSuccess}
                     login={this.login}
                     updateState={this.updateState}
                   />

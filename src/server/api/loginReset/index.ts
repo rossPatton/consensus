@@ -43,7 +43,7 @@ loginResetViaEmail.get('/email/v1/emailLoginResetToken',
       html: `
       Enter the following authentication code in order to reset your login. This token is only valid for 1 hour.
       <br /><br />
-      Link: https://consensus.local/login-reset/enterCode
+      Link: ${__URL__}/login-reset/enterCode
       <br />
       Code: ${token}
     `,

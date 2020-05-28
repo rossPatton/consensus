@@ -8,7 +8,7 @@ const Categories = memo(() => (
     {categories.map((cat, i) => (
       <li
         key={i}
-        className="w-1/2 d:w-1/4 p-1 mb-1">
+        className="w-full d:w-1/4 mb-1 text-3">
         <div className="w-full block d:mr-1 d:mr-0 mb-1 d:mb-2">
           <Link to={`/categories/${cat.slug}`}>
             <img

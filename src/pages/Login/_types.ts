@@ -1,6 +1,7 @@
 export type tState = {
   hasMounted: boolean,
   password: string,
+  token: string,
   username: string,
 };
 
@@ -16,6 +17,7 @@ export type tContainerProps = tStore & {
 
 export type tComponentProps = tState & {
   error: string | ts.fetchResponse<Error>,
+  handleVerificationSuccess: (token: string) => void,
   login: (ev: React.FormEvent<HTMLFormElement>) => void,
   updateState: (stateKey: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 }

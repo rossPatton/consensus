@@ -7,6 +7,8 @@ const CWD = process.cwd();
 const {
   DB = 'development',
   DEBUG = 'false',
+  HCAPTCHA_KEY,
+  HCAPTCHA_SECRET,
   MAIL_DOMAIN,
   MAIL_KEY,
   MAIL_SANDBOX,
@@ -33,6 +35,8 @@ module.exports = {
   DB,
   DEBUG: DEBUG === 'true',
   DEV: NODE_ENV === 'development',
+  HCAPTCHA_KEY,
+  HCAPTCHA_SECRET,
   NO_INDEX: NO_INDEX === 'true',
   MAIL_DOMAIN,
   MAIL_KEY,

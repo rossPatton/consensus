@@ -1,1 +1,41 @@
-<svg width="273" height="146" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><rect id="a" x="0" y="0" width="273" height="146" rx="8"/></defs><g fill="none" fill-rule="evenodd"><mask id="b" fill="#fff"><use xlink:href="#a"/></mask><use fill="#C6DACC" xlink:href="#a"/><path d="M124.75 85c-30.92 2.68-44.24 8.5-39.97 17.46 4.27 8.96 20.5 16.8 48.7 23.54 42.9-5.95 60.94-12.79 54.12-20.5-6.83-7.71-27.77-14.55-62.85-20.5z" fill="#1F441D" mask="url(#b)"/><path fill="#F8F4E9" mask="url(#b)" d="M99 51.71L128.8 112 175 88.1 141.2 30z"/><path d="M165.87 28.05C160.9 53 157.06 64.9 154.4 63.75c-4.01-1.74 2.2-13.85.45-14.36-1.76-.52-5.65 15.87-10.7 15.52-5.05-.34 3.65-16.16 2.4-16.88-1.24-.72-11.72 19.12-15.77 16.78-4.04-2.35 10.15-19.22 7.71-21.46-2.44-2.23-11.79 17.7-15.86 14.26-4.08-3.44 13.36-25.76 13.36-25.76-1.03-.6-9.14 3.93-12.08 3.16-1.16-.3-1.47-1.33-.13-3.65 4.7-8.2 24.92-15.92 34.08-10.61 6.11 3.54 8.78 5.97 8.02 7.3z" fill="#C47A42" mask="url(#b)"/></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="360px" height="261px" viewBox="0 0 360 261" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>Political 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="360" height="260"></rect>
+        <rect id="path-3" x="0" y="0" width="360" height="260"></rect>
+        <rect id="path-5" x="0" y="0" width="360" height="260"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Political-2">
+            <g id="Politcal-Orgs" transform="translate(0.000000, 0.432837)">
+                <g id="Rectangle-3-Copy-8" fill="#C6DACC" fill-rule="nonzero">
+                    <rect id="path-1" x="0" y="0" width="360" height="260"></rect>
+                </g>
+                <g id="Path-14-Copy-Clipped">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="path-1"></g>
+                    <path d="M162.494113,217.567163 C117.729808,221.419075 98.4406256,229.793179 104.626565,242.689473 C110.812505,255.585768 134.311651,266.878332 175.124003,276.567163 C237.229586,267.998219 263.343982,258.164886 253.467189,247.067163 C243.590397,235.969441 213.266038,226.136108 162.494113,217.567163 Z" id="Path-14-Copy" fill="#1F441D" fill-rule="nonzero" mask="url(#mask-2)" transform="translate(179.500000, 247.067163) rotate(-6.000000) translate(-179.500000, -247.067163) "></path>
+                </g>
+                <g id="Path-17-Copy-Clipped">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <g id="path-1"></g>
+                    <polygon id="Path-17-Copy" fill="#F8F4E9" fill-rule="nonzero" mask="url(#mask-4)" points="124 44.5616527 167.91306 132.785785 236 97.8144137 186.184495 12.7857845"></polygon>
+                </g>
+                <g id="Path-5-Copy-19-Clipped">
+                    <mask id="mask-6" fill="white">
+                        <use xlink:href="#path-5"></use>
+                    </mask>
+                    <g id="path-1"></g>
+                    <path d="M215.881005,11.9962653 C211.246423,52.8207908 207.044638,72.4400834 203.275649,70.8541432 C197.622166,68.4752329 206.552118,45.0960561 203.43795,43.2655408 C200.323781,41.4350255 194.486626,75.2743418 187.533194,74.7804292 C180.579763,74.2865165 195.948448,40.7222465 191.922292,41.3007675 C187.896137,41.8792884 174.561976,76.8165018 168.735562,73.3917231 C162.909149,69.9669443 184.962957,37.2100541 180.309103,34.4745086 C175.65525,31.738963 162.874223,67.9466885 156.869512,62.9199054 C150.864802,57.8931224 178.001462,19.740166 175.939211,18.5279701 C174.460317,17.6586731 163.432474,23.4089913 159.313656,22.2981765 C157.688967,21.8600097 157.139287,20.3542852 158.674729,16.9536188 C164.102734,4.9317808 190.80189,-6.42798256 203.998464,1.32899376 C212.796181,6.5003113 216.757028,10.0560685 215.881005,11.9962653 Z" id="Path-5-Copy-19" fill="#C47A42" fill-rule="nonzero" mask="url(#mask-6)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
