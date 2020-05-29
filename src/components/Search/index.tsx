@@ -11,10 +11,13 @@ import {tProps, tState} from './_types';
  * @description Basic search field component. Used in Header
  */
 class SearchContainer extends React.PureComponent<tProps, tState> {
+  static defaultProps = {
+    placeholder: 'Search for groups',
+  };
+
   state = {
     key: 'name' as ts.searchKeyUnion,
     value: '',
-    redirect: false,
   };
 
   onChange = (ev: React.ChangeEvent<HTMLInputElement>) =>
@@ -35,18 +38,23 @@ class SearchContainer extends React.PureComponent<tProps, tState> {
   render() {
     return (
       <form
-        className={this.props.className || 'mr-2'}
         name="search"
         autoComplete="off"
         onSubmit={this.onSubmit}
         action="/api/v1/search">
         <fieldset>
-          <label htmlFor="headerSearch">
+          <label className="flex flex-row items-center relative" htmlFor="search">
+            <img
+              alt=""
+              className="absolute ml-1 opacity-5"
+              src="/images/search.svg"
+              width="20"
+            />
             <input
-              className="p-1 pl-2 rounded w-full"
-              name="headerSearch"
+              className={this.props.className || 'p-1 pl-3 rounded w-full'}
+              name="search"
               onChange={this.onChange}
-              placeholder="Search for group"
+              placeholder={this.props.placeholder}
               type="search"
               value={this.state.value}
             />

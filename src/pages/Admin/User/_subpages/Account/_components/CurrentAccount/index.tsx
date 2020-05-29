@@ -7,7 +7,7 @@ import {tComponentProps} from '../../_types';
 
 const CurrentAccount = memo((props: tComponentProps) => (
   <>
-    <h2 className="text-3 mb-2 leading-none font-bold">
+    <h2 className="mb-2 leading-none font-semibold">
       Your account details
     </h2>
     <h3 className="text-base mb-2 leading-none font-bold">

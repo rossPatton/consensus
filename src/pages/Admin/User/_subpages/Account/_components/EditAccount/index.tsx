@@ -13,7 +13,9 @@ const EditAccount = memo((props: tComponentProps) => (
     onSubmit={props.save}>
     <fieldset>
       <legend>
-        <h1 className="text-2 mb-2">Edit your account</h1>
+        <h2 className="font-semibold mb-2">
+          Edit your account
+        </h2>
       </legend>
       <div className="mb-3">
         <label htmlFor="newLogin">

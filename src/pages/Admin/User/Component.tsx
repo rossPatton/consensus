@@ -11,6 +11,7 @@ import {
   Meetings,
   Memberships,
   Profile,
+  RSVPs,
 } from './_subpages';
 import {tComponentProps} from './_types';
 
@@ -23,6 +24,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
   const isDeleteAccount = section === 'deleteAccount';
   const isInvite = section === 'invite';
   const isMeetings = section === 'meetings';
+  const isRSVPs = section === 'rsvps';
   const isProfile = section === 'profile';
   const isMemberships = section === 'memberships';
 
@@ -57,10 +59,22 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
             )}
             {isMeetings && (
               <span className="mr-2 text-gray-5">
-                RSVPs
+                Meetings
               </span>
             )}
             {!isMeetings && (
+              <Link
+                className="mr-2"
+                to="/admin/meetings">
+                Meetings
+              </Link>
+            )}
+            {isRSVPs && (
+              <span className="mr-2 text-gray-5">
+                RSVPs
+              </span>
+            )}
+            {!isRSVPs && (
               <Link
                 className="mr-2"
                 to="/admin/meetings">
@@ -82,6 +96,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
         <Aside
           groupsByUserIdThunk={props.groupsByUserIdThunk}
           isInvite={isInvite}
+          isRSVPs={isRSVPs}
           roles={props.roles}
           session={props.session}
         />
@@ -104,6 +119,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
             {isDeleteAccount && <DeleteAccount />}
             {isInvite && <Invitations />}
             {isMeetings && <Meetings />}
+            {isRSVPs && <RSVPs />}
             {isProfile
               && (
                 <Profile

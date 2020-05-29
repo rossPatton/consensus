@@ -4,12 +4,12 @@ import {FilterPanel, Meetings} from '~app/components';
 
 import {tComponentProps} from './_types';
 
-export const MeetingsComponent = memo((props: tComponentProps) => (
+export const RSVPsComponent = memo((props: tComponentProps) => (
   <>
     <ul className="flex flex-col d:flex-row items-center mb-2" role="navigation">
       <li>
         <h2 className="font-semibold">
-          Upcoming meetings near you
+          Your RSVPs
         </h2>
       </li>
     </ul>
@@ -24,6 +24,7 @@ export const MeetingsComponent = memo((props: tComponentProps) => (
     <Meetings
       meetings={props.meetings}
       showOrgName
+      type="rsvps"
     />
   </>
 ));

@@ -9,7 +9,9 @@ import {tContainerProps, tStore} from './_types';
 import {MembershipsComponent} from './Component';
 
 const MembershipsContainer = memo((props: tContainerProps) => (
-  <ErrorBoundary status={props?.groupsByUserIdThunk?.error?.status}>
+  <ErrorBoundary
+    isSubPage
+    status={props?.groupsByUserIdThunk?.error?.status}>
     <GenericLoader
       isLoading={props.groupsByUserIdThunk.isLoading}
       render={() => (

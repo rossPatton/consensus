@@ -31,7 +31,8 @@ namespace ts {
         | 'meetings'
         | 'memberships'
         | 'planMeeting'
-        | 'profile',
+        | 'profile'
+        | 'rsvps',
       subsection?: string,
     }
   }
@@ -60,7 +61,7 @@ namespace ts {
     // but we call the login 'username' here, or else passport doesnt work
     username: string,
     password: string,
-    token: string,
+    token?: string,
   }>;
 
   // when logging out we return this value

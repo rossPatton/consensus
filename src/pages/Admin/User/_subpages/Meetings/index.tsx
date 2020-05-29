@@ -1,10 +1,9 @@
-import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import {ErrorBoundary, GenericLoader} from '~app/containers';
 import {SearchFilter} from '~app/containers';
-import {getMeetingsByUserId} from '~app/redux';
+import {getMeetingsByLocation} from '~app/redux';
 
 import {tContainerProps, tStore} from './_types';
 import {MeetingsComponent} from './Component';
@@ -12,22 +11,39 @@ import {MeetingsComponent} from './Component';
 class MeetingsContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    const userId = props?.sessionThunk?.data?.profile?.id;
-    if (userId) {
-      props.getMeetingsByUserIdDispatch({userId})
-        .catch(loglevel.error);
-    }
+    this._getMeetingsNearMe();
+  }
+
+  componentDidUpdate(nextProps: tContainerProps) {
+    const geoFetched = nextProps.geoThunk.fetched !== this.props.geoThunk.fetched;
+    if (!geoFetched) return;
+    this._getMeetingsNearMe();
+  }
+
+  _getMeetingsNearMe = async () => {
+    const {meetingsByLocationThunk, geoThunk} = this.props;
+
+    if (!geoThunk.fetched) return;
+    if (meetingsByLocationThunk.fetched) return;
+    if (meetingsByLocationThunk.error) return;
+
+    return this.props.getMeetingsByLocationDispatch({
+      city: geoThunk.data.city,
+      regionCode: geoThunk.data.regionCode,
+    });
   }
 
   render() {
-    const {meetingsByUserIdThunk} = this.props;
+    const {geoThunk, meetingsByLocationThunk} = this.props;
     return (
-      <ErrorBoundary status={meetingsByUserIdThunk?.error?.status}>
+      <ErrorBoundary
+        isSubPage
+        status={meetingsByLocationThunk?.error?.status}>
         <GenericLoader
-          isLoading={meetingsByUserIdThunk.isLoading}
+          isLoading={geoThunk.isLoading || meetingsByLocationThunk.isLoading}
           render={() => (
             <SearchFilter
-              items={meetingsByUserIdThunk.data}
+              items={meetingsByLocationThunk.data}
               render={searchProps => (
                 <MeetingsComponent
                   meetings={searchProps.items as ts.meeting[]}
@@ -44,13 +60,14 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  meetingsByUserIdThunk: store.meetingsByUserId,
+  meetingsByLocationThunk: store.meetingsByLocation,
+  geoThunk: store.geo,
   sessionThunk: store.session,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getMeetingsByUserIdDispatch: (query: {userId: number}) =>
-    dispatch(getMeetingsByUserId(query)),
+  getMeetingsByLocationDispatch: (query: ts.meetingsByLocationQuery) =>
+    dispatch(getMeetingsByLocation(query)),
 });
 
 const Meetings = connect(

@@ -18,7 +18,7 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
         <h1 className="mb-3">New User</h1>
       </legend>
       <label htmlFor="loginInput">
-        <h2 className="text-base mb-1 font-semibold">
+        <h2 className="text-base font-semibold">
           <b>Private</b> Login
         </h2>
         <p className="mb-1">
@@ -38,7 +38,7 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
         />
       </label>
       <label htmlFor="usernameInput">
-        <h2 className="text-base mb-1 font-semibold">
+        <h2 className="text-base font-semibold">
           <b>Public</b> Username
         </h2>
         <p className="mb-1">

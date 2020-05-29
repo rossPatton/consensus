@@ -7,7 +7,9 @@ import {tComponentProps} from './_types';
 
 export const InvitationsComponent = memo((props: tComponentProps) => (
   <>
-    <h3 className="font-bold">Active Invitations</h3>
+    <h2 className="font-semibold">
+      Active Invitations
+    </h2>
     <p
       className={cx({
         'mb-3': props.invitesThunk.data.length > 0,

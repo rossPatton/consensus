@@ -12,7 +12,9 @@ const EditProfile = memo((props: tComponentProps) => (
     onSubmit={props.save}>
     <fieldset>
       <legend>
-        <h1 className="text-3 mb-2">Edit your profile</h1>
+        <h2 className="font-semibold mb-2">
+          Edit your profile
+        </h2>
       </legend>
       <div className="mb-3">
         <FileUpload
@@ -23,9 +25,9 @@ const EditProfile = memo((props: tComponentProps) => (
           title="Upload or Replace Avatar"
         />
         <label className="w-full mb-3" htmlFor="username">
-          <h2 className="text-base mb-1 leading-none">
+          <h3 className="text-base mb-1 leading-none">
             Username
-          </h2>
+          </h3>
           <p className="text-base text-gray-5 mb-1">
             This is your display name on the site. Must be unique. You must fill this out in order to join groups or RSVP to meetings. You may change it at any time.
           </p>
@@ -45,9 +47,9 @@ const EditProfile = memo((props: tComponentProps) => (
           label="What city do you live in? This will help us suggest relevant meetings and groups for you."
         />
         <label className="w-full mb-3" htmlFor="bio">
-          <h2 className="text-base mb-1 leading-none">
+          <h3 className="text-base mb-1 leading-none">
             Bio
-          </h2>
+          </h3>
           <p className="text-base text-gray-5 mb-1">
             Some space to describe yourself, what you do, what you&apos;re interested in, etc.
           </p>
@@ -62,9 +64,9 @@ const EditProfile = memo((props: tComponentProps) => (
           />
         </label>
         <label className="w-full mb-3" htmlFor="name">
-          <h2 className="text-base mb-1 leading-none">
+          <h3 className="text-base mb-1 leading-none">
             Real Name
-          </h2>
+          </h3>
           <p className="text-base text-gray-5 mb-1">
             Your legal name. Optional! Leave blank to remain anonymous.
           </p>
@@ -78,9 +80,9 @@ const EditProfile = memo((props: tComponentProps) => (
           />
         </label>
         <label className="block mb-3" htmlFor="website">
-          <h2 className="text-base mb-1 leading-none">
+          <h3 className="text-base mb-1 leading-none">
             Personal Website
-          </h2>
+          </h3>
           <input
             onChange={ev => props.updateState('website', ev.currentTarget.value)}
             className="p-2 w-full"
@@ -90,9 +92,9 @@ const EditProfile = memo((props: tComponentProps) => (
           />
         </label>
         <label className="block mb-3" htmlFor="facebook">
-          <h2 className="text-base mb-1 leading-none">
+          <h3 className="text-base mb-1 leading-none">
             Facebook
-          </h2>
+          </h3>
           <input
             className="p-2 w-full"
             name="facebook"
@@ -102,9 +104,9 @@ const EditProfile = memo((props: tComponentProps) => (
           />
         </label>
         <label className="block mb-3" htmlFor="twitter">
-          <h2 className="text-base mb-1 leading-none">
+          <h3 className="text-base mb-1 leading-none">
             Twitter
-          </h2>
+          </h3>
           <input
             className="p-2 w-full"
             name="twitter"
@@ -113,9 +115,9 @@ const EditProfile = memo((props: tComponentProps) => (
             value={props.twitter}
           />
         </label>
-        <h2 className="text-base mb-1 leading-none">
+        <h3 className="text-base mb-1 leading-none">
           Other privacy settings
-        </h2>
+        </h3>
         <div
           tabIndex={0}
           role="button"

@@ -4,35 +4,12 @@ import {connect} from 'react-redux';
 
 import {Helmet} from '~app/components';
 import {Template} from '~app/containers';
-import {getMeetingsByLocation} from '~app/redux';
 
 import {canonical, description, keywords, title} from './_constants';
-import {tContainerProps, tStore} from './_types';
+import {tProps, tStore} from './_types';
 import {HomeComponent} from './Component';
 
-class HomeContainer extends PureComponent<tContainerProps> {
-  constructor(props: tContainerProps) {
-    super(props);
-    this._getMeetingsByLocation();
-  }
-
-  componentDidUpdate() {
-    this._getMeetingsByLocation();
-  }
-
-  _getMeetingsByLocation = () => {
-    const {meetingsByLocationThunk, geoThunk} = this.props;
-
-    if (!geoThunk.fetched) return;
-    if (meetingsByLocationThunk.fetched) return;
-    if (meetingsByLocationThunk.error) return;
-
-    this.props.getMeetingsByLocationDispatch({
-      city: geoThunk.data.city,
-      regionCode: geoThunk.data.regionCode,
-    });
-  }
-
+class HomeContainer extends PureComponent<tProps> {
   render() {
     return (
       <Template>
@@ -45,7 +22,6 @@ class HomeContainer extends PureComponent<tContainerProps> {
           ]}
         />
         <HomeComponent
-          meetingsByLocationThunk={this.props.meetingsByLocationThunk}
           geoThunk={this.props.geoThunk}
           session={this.props.session}
         />
@@ -55,18 +31,9 @@ class HomeContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  meetingsByLocationThunk: store.meetingsByLocation,
   geoThunk: store.geo,
   session: store.session.data,
 });
 
-const mapDispatchToProps = (dispatch: Function) => ({
-  getMeetingsByLocationDispatch: (query: ts.meetingsByLocationQuery) =>
-    dispatch(getMeetingsByLocation(query)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(HomeContainer);
+export default connect(mapStateToProps)(HomeContainer);
 

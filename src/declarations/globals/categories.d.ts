@@ -8,14 +8,16 @@ namespace ts {
     | 'Cooperative'
     | 'Political'
     | 'Union'
-    | ''; // entering a category isn't required, just heavily encouraged
+    | ''; // used to show all categories in filters, etc
 
   declare type categoryMap = Readonly<{
     [key: string]: ts.category,
   }>;
 
   declare type categoryObj = Readonly<{
-    display: ts.category,
+    align: string,
+    description: string,
+    display: string,
     slug: categorySlug,
   }>;
 

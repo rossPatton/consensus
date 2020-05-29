@@ -19,7 +19,7 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
       <legend>
         <h1 className="mb-3">New Group</h1>
       </legend>
-      <h2 className="text-base">
+      <h2 className="font-semibold text-base">
         Group Name
       </h2>
       <label htmlFor="nameInput" className="mb-3">
@@ -40,7 +40,7 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
           value={props.name}
         />
       </label>
-      <h2 className="text-base">
+      <h2 className="font-semibold text-base">
         Group URL Preview
       </h2>
       <p className="text-base text-gray-5 mb-1">
@@ -49,7 +49,7 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
       <div className="font-semibold bg-gray-1 border inline-block mb-3 p-1 rounded">
         {`https://consens.us.org/group/${props.handle}`}
       </div>
-      <h2 className="text-base mb-1 leading-none">
+      <h2 className="font-semibold text-base mb-1 leading-none">
         Group Email address
       </h2>
       <label className="w-full mb-2" htmlFor="emailInput">
@@ -66,7 +66,7 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
           name="email"
         />
       </label>
-      <h2 className="text-base">
+      <h2 className="font-semibold text-base">
         Group Category
       </h2>
       <label htmlFor="categoryInput" className="mb-3">
@@ -86,7 +86,7 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
           ))}
         </select>
       </label>
-      <h2 className="text-base">
+      <h2 className="font-semibold text-base">
         Group Type
       </h2>
       <label htmlFor="groupTypeSelect">

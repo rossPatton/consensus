@@ -38,7 +38,20 @@ const Aside = memo((props: tProps) => {
       </div>
       <ul className="mb-2 font-semibold" role="navigation">
         <li className="font-bold">
-          Your Actions
+          Actions
+        </li>
+        <li className="flex items-center text-base p-1 mb-1 rounded hover:bg-gray-2">
+          <div className="bg-white border rounded-circ mr-2 p-2" />
+          {props.isRSVPs && 'Your rsvps'}
+          {!props.isRSVPs && (
+            <Link
+              to="/admin/rsvps"
+              className={cx({
+                curDisable: !props.session.isVerified,
+              })}>
+              Your rsvps
+            </Link>
+          )}
         </li>
         <li className="flex items-center text-base p-1 mb-1 rounded hover:bg-gray-2">
           <div className="bg-white border rounded-circ mr-2 p-2" />

@@ -14,6 +14,11 @@ export type tProps = {
   title?: string,
 };
 
+export type tComponentProps = tProps & ts.mediaContext & {
+  showPW: boolean,
+  togglePWVisibility: (showPW: boolean) => void,
+};
+
 export type tState = {
   showPW: boolean,
 };

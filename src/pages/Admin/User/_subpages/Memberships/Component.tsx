@@ -8,9 +8,9 @@ import {tComponentProps} from './_types';
 
 export const MembershipsComponent = memo((props: tComponentProps) => (
   <>
-    <h1 className="text-3 mb-2">
+    <h2 className="font-semibold">
       Manage Groups
-    </h1>
+    </h2>
     <FilterPanel
       className="flex flex-col d:flex-row items-center mb-2 text-sm font-bold"
       onSearchChange={props.onSearchChange}

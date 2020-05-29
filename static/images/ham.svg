@@ -1,15 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="26px" height="18px" viewBox="0 0 26 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Group 3</title>
-    <g id="May-23" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="01_HP-Mobile" transform="translate(-20.000000, -30.000000)" fill="#000000">
-            <g id="Group-3" transform="translate(20.000000, 30.000000)">
-                <g id="Group">
-                    <rect id="Rectangle" x="0" y="0" width="26" height="2"></rect>
-                    <rect id="Rectangle-Copy" x="0" y="8" width="26" height="2"></rect>
-                    <rect id="Rectangle-Copy-2" x="0" y="16" width="26" height="2"></rect>
-                </g>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg width="26" height="18" xmlns="http://www.w3.org/2000/svg"><g fill="#000" fill-rule="evenodd"><path d="M0 0h26v2H0zM0 8h26v2H0zM0 16h26v2H0z"/></g></svg>

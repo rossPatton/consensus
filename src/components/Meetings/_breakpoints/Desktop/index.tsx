@@ -50,27 +50,42 @@ const DesktopMeetings = memo((props: tComponentProps) => (
               </Link>
             </div>
             <div>
-              <div className="flex mb-1 text-sm text-red-3 font-bold leading-none">
-                <time className="mr-1" dateTime={meeting.date}>
-                  {isPastMeeting
-                    ? dayJS(meeting.date).format('MMM DD YYYY | h:mmA')
-                    : dayJS(meeting.date).format('MMM DD | h:mmA')}
-                </time>
-                {!props.horizontal && (
-                  <span>
-                    <span className="mr-1">@</span>
-                    {meeting.locationLink && (
-                      <ExternalLink
-                        noFollow
-                        className="mr-1"
-                        to={meeting.locationLink}>
-                        {meeting.location}
-                      </ExternalLink>
+              {meeting.isOnline && (
+                <li className="flex items-center mb-1 text-gray-5">
+                  <img
+                    alt=""
+                    height="10"
+                    className="mr-1"
+                    src="/images/online.svg"
+                    width="16"
+                  /> Online Meeting
+                </li>
+              )}
+              {!meeting.isOnline
+                && meeting.location
+                && (
+                  <div className="flex mb-1 text-sm text-red-3 font-bold leading-none">
+                    <time className="mr-1" dateTime={meeting.date}>
+                      {isPastMeeting
+                        ? dayJS(meeting.date).format('MMM DD YYYY | h:mmA')
+                        : dayJS(meeting.date).format('MMM DD | h:mmA')}
+                    </time>
+                    {!props.horizontal && (
+                      <span>
+                        <span className="mr-1">@</span>
+                        {meeting.locationLink && (
+                          <ExternalLink
+                            noFollow
+                            className="mr-1"
+                            to={meeting.locationLink}>
+                            {meeting.location}
+                          </ExternalLink>
+                        )}
+                      </span>
                     )}
-                  </span>
+                    {!meeting.locationLink && meeting.location}
+                  </div>
                 )}
-                {!meeting.locationLink && meeting.location}
-              </div>
               <h3 className="capitalize mb-1">
                 {meeting.isDraft && meeting.title}
                 {!meeting.isDraft

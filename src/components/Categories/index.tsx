@@ -1,26 +1,49 @@
+import cx from 'classnames';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {categories} from '~app/constants';
 
 const Categories = memo(() => (
-  <ul className="flex flex-row flex-wrap justify-center leading-none">
+  <ul className="d:pl-5 d:pr-5 font-semibold text-left">
     {categories.map((cat, i) => (
       <li
         key={i}
-        className="w-full d:w-1/4 mb-1 text-3">
-        <div className="w-full block d:mr-1 d:mr-0 mb-1 d:mb-2">
-          <Link to={`/categories/${cat.slug}`}>
+        className="w-full d:pl-5 d:pr-5 mb-3 d:mb-4">
+        <div
+          className={cx({
+            'flex': true,
+            'justify-end': cat.align === 'right',
+          })}>
+          <h2 className="text-2 d:text-1 w-1/2 d:max-w-1/2 mb-2">
+            <Link to={`/categories/${cat.slug}`}>
+              {cat.display}
+            </Link>
+          </h2>
+        </div>
+        <div
+          className={cx({
+            'flex flex-row': true,
+            'flex-row-reverse': cat.align === 'right',
+          })}>
+          <Link
+            to={`/categories/${cat.slug}`}
+            className={cx({
+              'w-full d:min-w-1/2': true,
+              'mr-3': cat.align === 'left',
+              'ml-3': cat.align === 'right',
+            })}>
             <img
               alt=""
-              src={`/images/${cat.slug}.svg`}
+              className="w-full rounded-lg"
+              src={`/images/${cat.slug}_sm.svg`}
               width="480"
             />
           </Link>
+          <p className="hidden d:block text-2 text-gray-5 leading-loose">
+            {cat.description}
+          </p>
         </div>
-        <Link to={`/categories/${cat.slug}`}>
-          {cat.display}
-        </Link>
       </li>
     ))}
   </ul>

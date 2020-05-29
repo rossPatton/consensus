@@ -11,11 +11,17 @@ import {UserAdminComponent} from './Component';
 class UserAdminContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
-    const userId = props?.session?.profile?.id;
+    const user = props?.session?.profile;
+    const userId = user?.profile?.id;
     if (userId) {
       props.getGroupsByUserIdDispatch({userId})
         .catch(loglevel.error);
     }
+
+    // if (user.cityId) {
+    //   props.getMeetingsDispatch({city: user.cityId})
+    //     .catch(loglevel.error);
+    // }
   }
 
   render() {

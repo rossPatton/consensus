@@ -126,6 +126,7 @@ select {
   @apply transition;
   height: 3.6rem;
   min-height: 3.6rem;
+  min-width: 16rem;
 }
 input {
   @apply rounded-0;

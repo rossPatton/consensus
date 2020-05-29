@@ -18,8 +18,10 @@ class CategoryContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     const { match: {params} } = props;
+
+    const category = categoryMap[params.category] as any;
     props.getGroups({
-      category: categoryMap[params.category],
+      category,
     });
   }
 
@@ -53,7 +55,10 @@ class CategoryContainer extends PureComponent<tContainerProps> {
                           onSearchChange={searchProps.onSearchChange}
                           placeholder="Filter groups by name"
                         />
-                        <Groups groups={groupsToRender} />
+                        <Groups
+                          groups={groupsToRender}
+                          showLocation
+                        />
                       </>
                     )}
                   />

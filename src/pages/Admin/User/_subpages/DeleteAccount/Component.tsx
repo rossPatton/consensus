@@ -11,9 +11,9 @@ export const DeleteAccountComponent = memo((props: tComponentProps) => (
     onSubmit={props.deleteAccount}>
     <fieldset>
       <legend>
-        <h1 className="text-2">
+        <h2 className="font-semibold">
           Delete your account
-        </h1>
+        </h2>
       </legend>
       <h2 className="text-3 mb-3 text-gray-5">
         Enter your login credentials to trigger the account deletion process. If you do this, your account will be <b>permanently</b> deleted!

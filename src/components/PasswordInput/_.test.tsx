@@ -9,6 +9,7 @@ describe('PasswordInput component', () => {
       <PasswordInput
         id="test"
         onChange={() => {}}
+        password="testpassword"
       />
     ));
   });
