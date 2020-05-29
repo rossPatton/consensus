@@ -321,6 +321,7 @@ module.exports = {
     skew: {},
     transitionProperty: {
       default: 'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
+      all: 'all',
     },
     transitionTimingFunction: {
       linear: 'linear',

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {PureComponent} from 'react';
+import React, {memo} from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet} from '~app/components';
@@ -9,26 +9,22 @@ import {canonical, description, keywords, title} from './_constants';
 import {tProps, tStore} from './_types';
 import {HomeComponent} from './Component';
 
-class HomeContainer extends PureComponent<tProps> {
-  render() {
-    return (
-      <Template>
-        <Helmet
-          canonical={canonical}
-          title={title}
-          meta={[
-            { name: 'description', content: description },
-            { name: 'keywords', content: keywords },
-          ]}
-        />
-        <HomeComponent
-          geoThunk={this.props.geoThunk}
-          session={this.props.session}
-        />
-      </Template>
-    );
-  }
-}
+const HomeContainer = memo((props: tProps) => (
+  <Template>
+    <Helmet
+      canonical={canonical}
+      title={title}
+      meta={[
+        { name: 'description', content: description },
+        { name: 'keywords', content: keywords },
+      ]}
+    />
+    <HomeComponent
+      geoThunk={props.geoThunk}
+      session={props.session}
+    />
+  </Template>
+));
 
 const mapStateToProps = (store: tStore) => ({
   geoThunk: store.geo,

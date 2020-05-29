@@ -28,6 +28,10 @@ export const FileUpload = loadable(() =>
   import(/* webpackChunkName: "FileUpload" */'./FileUpload'),
 );
 
+export const Form = loadable(() =>
+  import(/* webpackChunkName: "Form" */'./Form'),
+);
+
 export const Meetings = loadable(() =>
   import(/* webpackChunkName: "Meetings" */'./Meetings'),
 );

@@ -22,7 +22,7 @@ const StrengthMeter = memo((props: {password: string}) => {
             {(len >= 24 && len < 32) && 'Strong'}
             {(len >= 32) && 'Very Strong'}
           </span>
-          <div className="bg-white w-full contain-sm border rounded-lg p-1">
+          <div className="bg-white w-full border rounded-lg p-1">
             <span
               style={inlineStyle}
               className={cx({

@@ -27,7 +27,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   const hcaptcha = 'https://*.hcaptcha.com https://hcaptcha.com';
   // webpack debug mode seems to use eval(?) so disable the CSP in debug mode
   // i think this is mostly fine, considering the CSP runs for every other case
-  const CSP = !__DEBUG__ ? `<meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="base-uri 'none'; connect-src https://cdn.ravenjs.com ${hcaptcha} ${local}; default-src 'none'; block-all-mixed-content; font-src ${local}; form-action ${local}; frame-src ${hcaptcha}; img-src ${local} ${spacesUrl} https://i.picsum.photos https://picsum.photos; manifest-src ${local}; object-src 'none'; script-src ${local} ${hcaptcha} ajax.googleapis.com 'nonce-${nonce}'; style-src ${hcaptcha} ${local} 'nonce-${nonce}'">` : '';
+  const CSP = !__DEBUG__ ? `<meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="base-uri 'none'; connect-src ${hcaptcha} ${local}; default-src 'none'; block-all-mixed-content; font-src ${local}; form-action ${local}; frame-src ${hcaptcha}; img-src ${local} ${spacesUrl} https://i.picsum.photos https://picsum.photos; manifest-src ${local}; object-src 'none'; script-src https://cdn.ravenjs.com ${local} ${hcaptcha}; style-src ${hcaptcha} ${local} 'nonce-${nonce}'">` : '';
 
   ctx.res.write(`<!DOCTYPE html><html lang="en"><head>${CSP}<title>Consensus - when you need to get organized.</title><style type="text/css" nonce="${nonce}">${styles}</style></head><body><div id="appRoot">`);
 
@@ -46,14 +46,9 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   const htmlStream = renderToNodeStream(jsx);
   htmlStream.pipe(ctx.res, {end: false});
   htmlStream.on('end', () => {
-    // eslint-disable-next-line
-    const fontConfig = `WebFontConfig={custom:{families:["Founders"],urls:["/fonts.css"]}};window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())}`;
-
     ctx.res.write(`</div><div id="portalRoot"></div>
-      <script type="text/javascript" nonce="${nonce}">${fontConfig}</script>
       <script defer src="/vendor.bundle.js"></script>
       <script defer src="/main.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" integrity="sha384-pvXSwSU09c+q9mPyY++ygUHWIYRoaxgnJ/JC5wcOzMb/NVVu+IDniiB9qWp3ZNWM" crossorigin="anonymous"></script>
       </body></html>`);
     ctx.res.end();
   });

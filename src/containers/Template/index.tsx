@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
@@ -25,14 +26,18 @@ class Template extends PureComponent<tProps> {
   }
 
   render() {
-    const {children, geoThunk} = this.props;
+    const {children, className, geoThunk} = this.props;
     const geoStatus = geoThunk?.error?.status;
 
     return (
       <>
         <Header />
         <ErrorBoundary status={geoStatus}>
-          <main className="contain m-auto min-h-halfscreen pb-5">
+          <main
+            className={cx({
+              'contain m-auto min-h-halfscreen pt-4 pb-5': typeof className !== 'string',
+              [className]: typeof className === 'string',
+            })}>
             {children}
           </main>
         </ErrorBoundary>

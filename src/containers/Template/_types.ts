@@ -1,4 +1,5 @@
 export type tProps = {
+  className?: string,
   geoThunk: ts.thunk<ts.geo>,
   getGeoDispatch: () => ts.payload<ts.geo>,
   getRolesDispatch: () => ts.thunkPayload<ts.roleMap>,

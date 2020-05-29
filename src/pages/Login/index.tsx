@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 
 import {Helmet} from '~app/components';
-import {ErrorBoundary, GenericLoader, Template} from '~app/containers';
+import {ErrorBoundary, Template} from '~app/containers';
 import {login} from '~app/redux';
 
 import {canonical, description, keywords, title} from './_constants';
@@ -13,29 +13,21 @@ import {LoginComponent} from './Component';
 
 class LoginContainer extends PureComponent<tContainerProps, tState> {
   state = {
-    hasMounted: false,
+    error: '',
     password: '',
-    token: '',
-    username: '', // actually login in the DB, but passportjs expects 'username'
+    // actually login in the DB, but passportjs expects 'username'
+    username: '',
   };
 
-  componentDidMount() {
-    // we do this so we only disable form submit when js is available
-    this.setState({
-      hasMounted: true,
-    });
-  }
-
-  handleVerificationSuccess = (token: string) => {
-    this.setState({
-      token,
-    });
-  }
-
-  login = async (ev: React.FormEvent<HTMLFormElement>) => {
-    ev.preventDefault();
-    const {username, password, token} = this.state;
-    return this.props.loginDispatch({username, password, token});
+  onSubmit = async (token: string) => {
+    const {username, password} = this.state;
+    try {
+      this.props.loginDispatch({username, password, token});
+    } catch (error) {
+      this.setState({
+        error,
+      });
+    }
   }
 
   updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
@@ -49,7 +41,7 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
     const error = session?.error?.message;
 
     return (
-      <Template>
+      <Template className="bg-community m-auto min-h-halfscreen pb-5 pt-4">
         <ErrorBoundary status={session?.error?.status}>
           <Helmet
             canonical={canonical}
@@ -59,26 +51,18 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
               { name: 'keywords', content: keywords },
             ]}
           />
-          <GenericLoader
-            isLoading={session.isLoading}
-            render={() => (
-              <>
-                {session.data.isAuthenticated && (
-                  <Redirect to="/admin/meetings" />
-                )}
-                {!session.data.isAuthenticated && (
-                  <LoginComponent
-                    {...this.state}
-                    // if theres a login error, it'll show up here
-                    error={error}
-                    handleVerificationSuccess={this.handleVerificationSuccess}
-                    login={this.login}
-                    updateState={this.updateState}
-                  />
-                )}
-              </>
-            )}
-          />
+          {session.data.isAuthenticated && (
+            <Redirect to="/admin/meetings" />
+          )}
+          {!session.data.isAuthenticated && (
+            <LoginComponent
+              {...this.state}
+              // if theres a login error, it'll show up here
+              error={error}
+              onSubmit={this.onSubmit}
+              updateState={this.updateState}
+            />
+          )}
         </ErrorBoundary>
       </Template>
     );

@@ -22,7 +22,7 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
             Required to make any changes to your account or profile.
           </p>
         )}
-        <div className="flex flex-row items-center mb-2 relative contain-sm">
+        <div className="flex flex-row items-center mb-2 relative">
           <input
             id={props.id}
             name={props.name}
@@ -41,7 +41,7 @@ export const PasswordInputComponent = memo((props: tComponentProps) => {
           />
           <button
             type="button"
-            className="bg-0 absolute t b r p-2 border-0"
+            className="bg-gray-1 rounded-0 absolute t b r p-2"
             onClick={() => props.togglePWVisibility(!props.showPW)}>
             {!props.showPW && (
               <img

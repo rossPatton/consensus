@@ -12,7 +12,7 @@ const Categories = memo((props: tProps) => {
 
   return (
     <Template>
-      <h1 className="mb-2">
+      <h1 className="text-center mb-2">
         {renderCategory
           ? `${categoryMap[params.category]} Groups`
           : 'Categories'}

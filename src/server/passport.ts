@@ -37,7 +37,7 @@ passport.use(new LocalStrategy(opts, async (login, pw, done) => {
 
   if (!account) {
     return done({
-      message: 'No account found that matches your login',
+      message: 'Incorrect login',
       type: 'login',
     }, false);
   }

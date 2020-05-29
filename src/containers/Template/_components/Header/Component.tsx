@@ -59,7 +59,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
                     </li>
                     <li className="mb-1">
                       <Link to="/categories">
-                        Browse by Group Type
+                        Browse by Group
                       </Link>
                     </li>
                   </ul>
@@ -71,11 +71,24 @@ export const HeaderComponent = memo((props: tComponentProps) => {
         <Link to="/">
           <img
             alt="Consensus"
-            className="d:m-auto"
+            className="mr-3"
+            height="18"
             src="/images/logo.svg"
             width="125"
           />
         </Link>
+        <ul className="hidden d:flex flex-row font-semibold">
+          <li className="mr-2">
+            <Link to="/directory/us">
+              Browse by City
+            </Link>
+          </li>
+          <li>
+            <Link to="/categories">
+              Browse by Group
+            </Link>
+          </li>
+        </ul>
         {!props.session.isAuthenticated && (
           <div className="flex-1 flex-col text-right outline-none">
             <OutsideClick
