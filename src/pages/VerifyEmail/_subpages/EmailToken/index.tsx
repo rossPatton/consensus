@@ -6,7 +6,6 @@ import { tProps } from './_types';
 const EmailFormComponent = memo((props: tProps) => (
   <form
     name="emailVerificationTokenForm"
-    action="/auth/v1/sendVerificationToken"
     onSubmit={props.sendVerificationToken}>
     <fieldset>
       <legend>

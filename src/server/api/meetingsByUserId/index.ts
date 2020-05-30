@@ -14,7 +14,7 @@ export const meetingsByUserId = new Router();
 const route = '/api/v1/meetingsByUserId';
 
 meetingsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tMeetingsByUserServerQuery = ctx?.state?.locals?.data;
+  const {query}: {query: tMeetingsByUserServerQuery} = ctx;
   await validateSchema(ctx, schema, query);
 
   const userRSVPs = await getRSVPsByUserId(ctx, query.userId);

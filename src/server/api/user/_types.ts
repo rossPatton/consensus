@@ -1,5 +1,5 @@
 // everything gets turned into strings
-export type tUserPostServerQuery = ts.formSubmit & {
+export type tUserPostServerQuery = {
   email: string,
   login: string,
   username: string,

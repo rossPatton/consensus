@@ -69,7 +69,7 @@ class PasswordResetContainer extends PureComponent<tContainerProps, tState> {
     const enterCode = this.props?.match?.params?.section;
 
     return (
-      <Template>
+      <Template className="bg-community m-auto min-h-halfscreen pb-5 pt-4">
         <ErrorBoundary status={this.props?.session?.error?.status}>
           <Helmet
             canonical={canonical}
@@ -81,23 +81,25 @@ class PasswordResetContainer extends PureComponent<tContainerProps, tState> {
           />
           {this.state.passwordUpdated && (
             <div className="w-full p-2 mb-2 text-center bg-green-1 font-bold text-sm">
-            Your password has been updated!
+              Your password has been updated!
             </div>
           )}
-          {enterCode && (
-            <ResetPasswordComponent
-              {...this.state}
-              resetPasswordByEmail={this.resetPasswordByEmail}
-              updateState={this.updateState}
-            />
-          )}
-          {!enterCode && (
-            <EmailTokenComponent
-              {...this.state}
-              sendPasswordResetEmail={this.sendPasswordResetEmail}
-              updateState={this.updateState}
-            />
-          )}
+          <div className="bg-white rounded shadow m-auto contain-sm mb-3 p-2 d:p-3">
+            {enterCode && (
+              <ResetPasswordComponent
+                {...this.state}
+                resetPasswordByEmail={this.resetPasswordByEmail}
+                updateState={this.updateState}
+              />
+            )}
+            {!enterCode && (
+              <EmailTokenComponent
+                {...this.state}
+                sendPasswordResetEmail={this.sendPasswordResetEmail}
+                updateState={this.updateState}
+              />
+            )}
+          </div>
         </ErrorBoundary>
       </Template>
     );

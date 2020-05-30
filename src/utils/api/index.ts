@@ -4,17 +4,20 @@ import {agent, objToQueryString} from '..';
 import {tApiOpts} from './_types';
 
 export const api = async (opts: tApiOpts) => {
-  const {body, method = 'GET', path, query = {}} = opts;
-  const qs = objToQueryString(query);
+  const {body, method = 'GET', path, query} = opts;
 
-  const fetchOpts = {agent, body, method};
+  const fetchOpts = {agent, method} as {[key: string]: any};
   if (opts.credentials) {
-    (fetchOpts as any).credentials = __DEV__ ? 'include' : 'same-origin';
+    fetchOpts.credentials = 'same-origin';
+  }
+  if (body) {
+    fetchOpts.body = body;
   }
 
   // not all api endpoints require query params
   let endpoint = path;
-  if (qs) {
+  if (query) {
+    const qs = objToQueryString(query);
     endpoint = `${path}?${qs}`;
   }
 

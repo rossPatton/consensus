@@ -39,7 +39,7 @@ const Group = memo((props: tProps) => {
         <div>
           {role && (
             <small className="leading-none">
-              You are {role === 'pending' ? role : `a ${role}`}
+              You are <b>{role === 'pending' ? role : `a ${role}`}</b>
             </small>
           )}
           <h3>

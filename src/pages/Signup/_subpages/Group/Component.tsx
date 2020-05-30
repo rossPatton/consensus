@@ -10,10 +10,8 @@ import {tComponentProps} from './_types';
 
 export const GroupSignupComponent = memo((props: tComponentProps) => (
   <form
-    method="POST"
     name="orgSignupForm"
     autoComplete="off"
-    action="/api/v1/group"
     onSubmit={props.onSubmit}>
     <fieldset>
       <legend>

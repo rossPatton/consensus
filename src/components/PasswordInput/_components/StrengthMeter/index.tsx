@@ -26,7 +26,7 @@ const StrengthMeter = memo((props: {password: string}) => {
             <span
               style={inlineStyle}
               className={cx({
-                'rounded-lg block transition': true,
+                'rounded-lg block transition-all': true,
                 'bg-red-1': len < 12,
                 'bg-yellow-2': len >= 12 && len < 24,
                 'bg-green-1': len >= 24 && len < 32,

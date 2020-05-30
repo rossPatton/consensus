@@ -7,7 +7,6 @@ import {tComponentProps} from '../../_types';
 
 const EditProfile = memo((props: tComponentProps) => (
   <form
-    action="/api/v1/user"
     autoComplete="off"
     onSubmit={props.save}>
     <fieldset>

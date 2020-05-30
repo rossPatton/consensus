@@ -18,7 +18,7 @@ const table = 'accounts_roles';
 // not for signing up new users, but for getting users that are members of an org
 // or joining an group, or updating member roles within an org
 usersByGroupId.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.usersByGroupIdQuery = ctx?.state?.locals?.data;
+  const {query}: {query: ts.usersByGroupIdQuery} = ctx;
   await validateSchema<ts.usersByGroupIdQuery>(ctx, getSchema, query);
   const users = await getUsersByGroupId(ctx, query);
   ctx.body = users;
@@ -27,7 +27,7 @@ usersByGroupId.get(route, async (ctx: Koa.ParameterizedContext) => {
 // joining an group. uses session data since we don't want people to be able to
 // add others to an group, only the logged-in user should be able to do that
 usersByGroupId.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tUserByOrgQuery = ctx?.state?.locals?.data;
+  const {query}: {query: tUserByOrgQuery} = ctx;
   await validateSchema<tUserByOrgQuery>(ctx, postSchema, query);
   const {allowNonVerified, groupId, role, userId} = query;
 
@@ -70,7 +70,7 @@ usersByGroupId.post(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 usersByGroupId.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.patchUserRoleQuery = ctx?.state?.locals?.data;
+  const {query}: {query: ts.patchUserRoleQuery} = ctx;
   const {groupId, role, userId} = query;
   await validateSchema<ts.patchUserRoleQuery>(ctx, patchSchema, {groupId, role, userId});
 
@@ -89,8 +89,7 @@ usersByGroupId.patch(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 usersByGroupId.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tUserByOrgQuery = ctx?.state?.locals?.data;
-
+  const {query}: {query: tUserByOrgQuery} = ctx;
   await validateSchema<tUserByOrgQuery>(ctx, deleteSchema, query);
 
   try {

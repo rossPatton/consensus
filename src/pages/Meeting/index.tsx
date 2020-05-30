@@ -140,7 +140,7 @@ const mapDispatchToProps = (dispatch: Function) => ({
   getMeetingsByGroupIdDispatch: (query: ts.getMeetingQuery) =>
     dispatch(getMeetingsByGroupId(query)),
 
-  getGroupByIdDispatch: (query: ts.groupQuery) => dispatch(getGroup(query)),
+  getGroupByIdDispatch: (query: ts.getGroupQuery) => dispatch(getGroup(query)),
 });
 
 const Meeting = connect(mapStateToProps, mapDispatchToProps)(MeetingContainer);

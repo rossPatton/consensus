@@ -11,15 +11,15 @@ const route = '/api/v1/meeting';
 export const meeting = new Router();
 
 meeting.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.getMeetingQuery = ctx?.state?.locals?.data;
+  const {query}: {query: ts.getMeetingQuery} = ctx;
   await validateSchema<ts.getMeetingQuery>(ctx, getSchema, query);
   ctx.body = await getMeetingByQuery(ctx, query);
 });
 
 meeting.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = ctx?.state?.locals?.data;
+  const {query} = ctx;
   await validateSchema<Partial<ts.meeting>>(ctx, upsertSchema, query);
-  const {id, isFormSubmit, ...patch} = query;
+  const {id, ...patch} = query;
 
   let patchedMeeting = [] as ts.meeting[];
   try {
@@ -35,26 +35,17 @@ meeting.patch(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = patchedMeeting?.[0];
 });
 
-// @TODO implement upsert, ie make it work for both patch and post
 meeting.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = ctx?.state?.locals?.data;
+  const {query}: {query: Partial<ts.meeting>} = ctx;
   await validateSchema<Partial<ts.meeting>>(ctx, upsertSchema, query);
-  const {id, isFormSubmit, ...meeting} = query;
+  const {id, ...meeting} = query;
 
   let newMeeting = [] as ts.meeting[];
   try {
-    if (id) {
-      newMeeting = await knex('meetings')
-        .limit(1)
-        .where({id})
-        .update(meeting)
-        .returning('*');
-    } else {
-      newMeeting = await knex('meetings')
-        .insert(meeting)
-        .limit(1)
-        .returning('*');
-    }
+    newMeeting = await knex('meetings')
+      .insert(meeting)
+      .limit(1)
+      .returning('*');
   } catch (err) {
     ctx.throw(500, err);
   }

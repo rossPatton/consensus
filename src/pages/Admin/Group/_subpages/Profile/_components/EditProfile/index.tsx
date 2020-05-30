@@ -14,9 +14,9 @@ const EditProfile = memo((props: tComponentProps) => (
     onSubmit={props.onSubmit}>
     <fieldset>
       <legend>
-        <h1 className="text-3 mb-2 leading-none">
+        <h2 className="text-3 mb-2 leading-none">
           Edit your Profile
-        </h1>
+        </h2>
       </legend>
       <FileUpload
         fieldKey="groupAvatar"
@@ -25,9 +25,9 @@ const EditProfile = memo((props: tComponentProps) => (
         prefix={`g${props.session.profile.id}:gAv`}
         title="Upload New Group Logo"
       />
-      <h2 className="text-base mb-1 leading-none">
+      <h3 className="text-base mb-1 leading-none">
         Change Category
-      </h2>
+      </h3>
       <select
         className="mb-2 w-full"
         defaultValue={props.category}
@@ -39,9 +39,9 @@ const EditProfile = memo((props: tComponentProps) => (
           </option>
         ))}
       </select>
-      <h2 className="text-base mb-1 leading-none">
+      <h3 className="text-base mb-1 leading-none">
         Change Group Type
-      </h2>
+      </h3>
       <select
         className="w-full"
         value={props.type}
@@ -61,9 +61,9 @@ const EditProfile = memo((props: tComponentProps) => (
         This option only affects future membership approvals
       </small>
       <label className="w-full mb-2" htmlFor="memberName">
-        <h2 className="text-base mb-1 leading-none">
+        <h3 className="text-base mb-1 leading-none">
           Change Membership Title
-        </h2>
+        </h3>
         <input
           onChange={ev => props.updateState('memberName', ev)}
           className="p-2 w-full"
@@ -73,9 +73,9 @@ const EditProfile = memo((props: tComponentProps) => (
         />
       </label>
       <label className="w-full mb-2" htmlFor="modName">
-        <h2 className="text-base mb-1 leading-none">
+        <h3 className="text-base mb-1 leading-none">
           Change Moderator Title
-        </h2>
+        </h3>
         <input
           onChange={ev => props.updateState('modName', ev)}
           className="p-2 w-full"
@@ -84,9 +84,9 @@ const EditProfile = memo((props: tComponentProps) => (
           name="modName"
         />
       </label>
-      <h2 className="text-base mb-1 leading-none">
+      <h3 className="text-base mb-1 leading-none">
         Change Description
-      </h2>
+      </h3>
       <textarea
         rows={6}
         spellCheck
@@ -96,9 +96,9 @@ const EditProfile = memo((props: tComponentProps) => (
         onChange={ev => props.updateState('description', ev)}
       />
       <label className="block mb-2" htmlFor="website">
-        <h2 className="text-base mb-1 leading-none">
+        <h3 className="text-base mb-1 leading-none">
           Personal Website
-        </h2>
+        </h3>
         <input
           onChange={ev => props.updateState('website', ev)}
           className="p-2 w-full"
@@ -108,9 +108,9 @@ const EditProfile = memo((props: tComponentProps) => (
         />
       </label>
       <label className="block mb-2" htmlFor="facebook">
-        <h2 className="text-base mb-1 leading-none">
+        <h3 className="text-base mb-1 leading-none">
           Facebook
-        </h2>
+        </h3>
         <input
           className="p-2 w-full"
           name="facebook"
@@ -120,9 +120,9 @@ const EditProfile = memo((props: tComponentProps) => (
         />
       </label>
       <label className="block mb-2" htmlFor="twitter">
-        <h2 className="text-base mb-1 leading-none">
+        <h3 className="text-base mb-1 leading-none">
           Twitter
-        </h2>
+        </h3>
         <input
           className="p-2 w-full"
           name="twitter"
@@ -131,31 +131,6 @@ const EditProfile = memo((props: tComponentProps) => (
           value={props.twitter}
         />
       </label>
-      <h2 className="text-base mb-1 leading-none">
-        Should the group be restricted to verified members only?
-      </h2>
-      <div
-        tabIndex={0}
-        role="button"
-        className="flex items-center text-sm p-1 mb-3 border radius hover:bg-gray-2 contain-sm"
-        onClick={ev => props.updateState('allowNonVerified', ev)}
-        onKeyPress={ev => props.updateState('allowNonVerified', ev)}>
-        <input
-          readOnly
-          type="checkbox"
-          className="mr-1"
-          autoComplete="nope"
-          checked={!props.allowNonVerified}
-        />
-        <span>
-          {props.allowNonVerified && (
-            'Anyone can join this group, regardless of verification status.'
-          )}
-          {!props.allowNonVerified && (
-            'Membership is limited to only verified accounts.'
-          )}
-        </span>
-      </div>
       <PasswordInput
         id="pwInput"
         title="Current Password"

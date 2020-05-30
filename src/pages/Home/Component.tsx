@@ -12,7 +12,7 @@ export const HomeComponent = memo((props: tProps) => {
         <h1 className="text-2 d:text-1 mb-2 text-gray-5 leading-tight d:max-w-1/2">
           Consensus is an independent meetings platform for leftist activists and local community groups.
         </h1>
-        <div className="w-1/3">
+        <div className="d:w-1/3">
           <Search
             className="w-full pl-3"
             placeholder={`Search groups ${city ? `in ${city}` : ''}`}

@@ -1,6 +1,5 @@
 import dayJS from 'dayjs';
 import _ from 'lodash';
-import loglevel from 'loglevel';
 import qs from 'query-string';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
@@ -21,6 +20,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     date: dayJS().toISOString(),
     description: '',
     endTime: '21:00',
+    error: '',
     host: this.props.group.name,
     id: undefined as number | undefined,
     isCopy: false,
@@ -90,7 +90,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
 
   onSubmit = async (saveAsDraft: boolean = false) => {
     const {img} = this.props;
-    const {date, endTime, id, isCopy, time, ...restOfMeeting} = this.state;
+    const {date, endTime, error, id, isCopy, time, ...restOfMeeting} = this.state;
 
     const timeArr = parseTimeString(time);
     const endTimeArr = parseTimeString(endTime);
@@ -125,8 +125,10 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
 
       const planMeeting = await dispatch(newOrUpdatedMeeting);
       newMeeting = planMeeting.payload;
-    } catch (err) {
-      return loglevel.error('failed to save meeting to db', err);
+    } catch (error) {
+      this.setState({
+        error,
+      });
     }
 
     // update redux on client side on meeting upsert success
@@ -137,6 +139,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     if (typeof newMeeting.id === 'number') {
       this.setState({
         id: newMeeting.id,
+        slug: newMeeting.slug,
       });
     }
   }

@@ -14,7 +14,6 @@ export const RSVPComponent = (props: tComponentProps) => {
   return (
     <form
       method={method}
-      action="/api/v1/rsvps"
       onSubmit={ev => setRsvp({ev, meetingId})}
       className={cx({
         [props.className]: typeof props.className === 'string',

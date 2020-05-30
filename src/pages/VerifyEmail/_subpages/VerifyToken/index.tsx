@@ -8,7 +8,6 @@ import { tProps } from './_types';
 const VerifyTokenComponent = memo((props: tProps) => (
   <form
     name="verifyEmailForm"
-    action="/email/v1/verifyEmail"
     onSubmit={props.verifyToken}>
     <fieldset>
       <legend>

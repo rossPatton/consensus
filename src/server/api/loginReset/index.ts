@@ -11,7 +11,7 @@ import {emailSchema, tokenSchema} from './_schema';
 export const loginResetViaEmail = new Router();
 loginResetViaEmail.get('/email/v1/emailLoginResetToken',
   async (ctx: Koa.ParameterizedContext) => {
-    const query: {email: string} = ctx?.state?.locals?.data;
+    const {query}: {query: {email: string}} = ctx.query;
     await validateSchema<{email: string}>(ctx, emailSchema, query);
 
     const oneHourFromNow = dayjs().add(1, 'hour');
@@ -54,7 +54,7 @@ loginResetViaEmail.get('/email/v1/emailLoginResetToken',
 
 loginResetViaEmail.patch('/email/v1/resetLoginByEmail',
   async (ctx: Koa.ParameterizedContext) => {
-    const query = ctx?.state?.locals?.data;
+    const {query} = ctx;
     await validateSchema(ctx, tokenSchema, query);
 
     let account: ts.account;

@@ -91,7 +91,7 @@ const Aside = memo((props: tProps) => {
                     />
                     <div>
                       <div className="text-sm font-semibold">
-                        You are a {role}
+                        You are a <b>{role}</b>
                       </div>
                       <h2 className="text-base text-gray-5 leading-none">
                         {group.name}

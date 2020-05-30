@@ -16,7 +16,7 @@ const table = 'meetings';
 
 // get multiple meetings at a time
 meetings.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: tMeetingsServerQuery = ctx?.state?.locals?.data;
+  const {query}: {query: tMeetingsServerQuery} = ctx;
   await validateSchema<tMeetingsServerQuery>(ctx, getSchema, query);
 
   // all meetings by generic query
@@ -43,7 +43,7 @@ meetings.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 meetings.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.idQuery = ctx?.state?.locals?.data;
+  const {query}: {query: ts.idQuery} = ctx;
   await validateSchema<ts.idQuery>(ctx, deleteSchema, query);
 
   try {

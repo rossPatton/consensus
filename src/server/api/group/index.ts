@@ -11,7 +11,7 @@ const route = '/api/v1/group';
 const table = 'groups';
 
 group.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.getGroupQuery = ctx?.state?.locals?.data;
+  const {query}: {query: ts.getGroupQuery} = ctx;
   await validateSchema<ts.getGroupQuery>(ctx, schema, query);
 
   let group = {} as ts.group;
@@ -29,11 +29,11 @@ group.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 group.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = ctx?.state?.locals?.data;
-  await validateSchema<ts.groupQuery>(ctx, patchSchema, query);
+  const {query}: {query: ts.groupUpsertQuery} = ctx;
+  await validateSchema<ts.groupUpsertQuery>(ctx, patchSchema, query);
 
   const loggedInAccount: ts.account = ctx?.state?.user || {};
-  const {isFormSubmit, password, ...updateQuery} = query;
+  const {password, ...updateQuery} = query;
 
   const isValidPW = await isValidPw(password, loggedInAccount.password);
   if (!isValidPW) return ctx.throw(400, 'Password is not correct');
@@ -53,10 +53,10 @@ group.patch(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 group.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const {isFormSubmit, ...group} = ctx?.state?.locals?.data;
-  await validateSchema<ts.groupQuery>(ctx, postSchema, group);
+  const {query}: {query: ts.groupUpsertQuery} = ctx;
+  await validateSchema<ts.groupUpsertQuery>(ctx, postSchema, query);
 
-  const {email, login, password, ...groupToInsert} = group;
+  const {email, login, password, ...groupToInsert} = query;
 
   // create the group first =>
   let newGroupReturning = [] as ts.group[];
@@ -70,7 +70,7 @@ group.post(route, async (ctx: Koa.ParameterizedContext) => {
 
   let hashedPW = null;
   try {
-    hashedPW = await saltedHash(group.password);
+    hashedPW = await saltedHash(query.password);
   } catch (err) {
     return ctx.throw(500, err);
   }
@@ -81,7 +81,7 @@ group.post(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     await knex('accounts').insert({
       email,
-      login: group.login,
+      login: query.login,
       groupId: newGroup.id,
       password: encrypt(hashedPW),
     });

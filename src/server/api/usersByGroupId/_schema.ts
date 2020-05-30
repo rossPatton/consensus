@@ -1,10 +1,6 @@
 import Joi from '@hapi/joi';
 
-const baseSchema = Joi.object().keys({
-  isFormSubmit: Joi.bool(),
-});
-
-export const getSchema = baseSchema.keys({
+export const getSchema = Joi.object({
   noPending: Joi.bool(),
   groupId: Joi.number().integer(),
 });

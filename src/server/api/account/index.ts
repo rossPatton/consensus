@@ -13,7 +13,7 @@ const route = '/api/v1/account';
 const table = 'accounts';
 
 account.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: Mutable<ts.accountQuery> = ctx?.state?.locals?.data || {};
+  const {query}: {query: Mutable<ts.accountQuery>} = ctx;
   const account: ts.account = ctx?.state?.user || {};
   await validateSchema<Mutable<ts.accountQuery>>(ctx, deleteSchema, {
     ...query,
@@ -50,7 +50,7 @@ account.delete(route, async (ctx: Koa.ParameterizedContext) => {
 
 // TODO implement a POST route here as an upsert for non-js environments
 account.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: Mutable<ts.accountQuery> = ctx?.state?.locals?.data || {};
+  const {query}: {query: Mutable<ts.accountQuery>} = ctx;
   await validateSchema<Mutable<ts.accountQuery>>(ctx, patchSchema, query);
 
   const loggedInAccount: ts.account = ctx?.state?.user || {};
@@ -93,6 +93,5 @@ account.patch(route, async (ctx: Koa.ParameterizedContext) => {
     }
   }
 
-  if (query.isFormSubmit) return;
   ctx.body = updatedAccount?.[0];
 });

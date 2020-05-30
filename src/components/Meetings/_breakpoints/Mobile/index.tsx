@@ -67,7 +67,7 @@ const MobileMeetings = memo((props: tComponentProps) => (
               && (
                 <Link
                   to={`/group/${slugify(meeting.groupName)}`}
-                  className="font-bold text-sm text-gray-5 no-underline">
+                  className="font-bold text-sm text-gray-5 no-underline leading-none">
                   {meeting.groupName}
                 </Link>
               )}

@@ -118,7 +118,7 @@ const mapStateToProps = (store: tStore) => ({
 
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getGroupDispatch: (query: ts.groupQuery) => dispatch(getGroup(query)),
+  getGroupDispatch: (query: ts.getGroupQuery) => dispatch(getGroup(query)),
   getMeetingsByGroupDispatch:
     (query: ts.getMeetingQuery) => dispatch(getMeetingsByGroupId(query)),
 });

@@ -11,7 +11,7 @@ export const search = new Router();
 // searching is a little different from a standard group fetch
 // uses a postgres extension to do fuzzy matching
 search.get('/api/v1/search', async (ctx: Koa.ParameterizedContext) => {
-  const query = ctx?.state?.locals?.data;
+  const {query} = ctx;
   await validateSchema(ctx, schema, query);
 
   // @TODO set groups as default, allow passing in custom table to query

@@ -7,7 +7,6 @@ import {tComponentProps} from '../../_types';
 
 const EditAccount = memo((props: tComponentProps) => (
   <form
-    action="/api/v1/user"
     autoComplete="off"
     className="relative"
     onSubmit={props.save}>

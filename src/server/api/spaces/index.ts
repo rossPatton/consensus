@@ -25,7 +25,7 @@ const fields = upload.fields([{
 
 // @TODO eventually, might want to have several endpoints for different types of files
 spaces.post('/api/v1/spaces', fields, async (ctx: Koa.ParameterizedContext) => {
-  const query = ctx?.state?.locals?.data;
+  const {query} = ctx;
   await validateSchema(ctx, schema, query);
 
   const req = ctx.req as multer.MulterIncomingMessage;

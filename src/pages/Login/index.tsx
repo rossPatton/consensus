@@ -19,10 +19,10 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
     username: '',
   };
 
-  onSubmit = async (token: string) => {
+  onSubmit = async () => {
     const {username, password} = this.state;
     try {
-      this.props.loginDispatch({username, password, token});
+      this.props.loginDispatch({username, password});
     } catch (error) {
       this.setState({
         error,

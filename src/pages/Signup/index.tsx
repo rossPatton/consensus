@@ -8,7 +8,7 @@ import {tProps, tStore} from './_types';
 import {SignupComponent} from './Component';
 
 const SignupContainer = memo((props: tProps) => (
-  <Template>
+  <Template className="bg-community m-auto min-h-halfscreen pb-5 pt-4">
     <ErrorBoundary status={props?.session?.error?.status}>
       {props.session.isAuthenticated && <Redirect to="/admin/profile" />}
       {!props.session.isAuthenticated && (

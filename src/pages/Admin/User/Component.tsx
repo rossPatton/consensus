@@ -18,7 +18,7 @@ import {tComponentProps} from './_types';
 export const UserAdminComponent = memo((props: tComponentProps) => {
   const {isMobile} = useContext(MediaContext);
   const {params} = props.match;
-  const {section, subsection} = params;
+  const {section} = params;
 
   const isAccount = section === 'account';
   const isDeleteAccount = section === 'deleteAccount';
@@ -101,13 +101,6 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           session={props.session}
         />
         <div className="border shadow order-1 d:order-2 w-full d:w-2/3 mb-2 d:mb-0">
-          {/* user is new. ie, they havent put in a username yet */}
-          {!props.session.profile.username
-            && (
-              <div className="p-2 mb-2 rounded border border-w-2 border-dashed w-full">
-                Welcome to Consensus. You&apos;ll need to pick a username before you can join groups or RSVP to meetings. You can change it at anytime. {(isProfile && !subsection) && 'Click "Edit Profile" below to get started'} {!isProfile && <>Click <Link to="/admin/profile/edit">here</Link> to get started.</>}
-              </div>
-            )}
           <div className="bg-white rounded p-2 w-full">
             {isAccount
               && (

@@ -24,9 +24,7 @@ class LeaveFormContainer extends React.PureComponent<tProps> {
     if (this.props.role === 'pending') return null;
 
     return (
-      <form
-        onSubmit={this.onSubmit}
-        action="/api/v1/usersByOrg">
+      <form onSubmit={this.onSubmit}>
         <fieldset>
           <legend>
             <button className="text-black text-sm p-1">

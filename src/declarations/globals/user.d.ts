@@ -25,7 +25,7 @@ namespace ts {
   }>;
 
   // getting/posting/deleting users by org membership
-  declare type userQuery = Partial<ts.user> & ts.formSubmit & ts.baseQuery & Readonly<{
+  declare type userQuery = Partial<ts.user> & ts.baseQuery & Readonly<{
     isNew?: boolean,
     password?: string,
   }>;

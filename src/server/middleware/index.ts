@@ -10,7 +10,6 @@ import { faviconMiddleware } from './favicon';
 import { featurePolicyMiddleware } from './featurePolicy';
 import { helmetMiddleware } from './helmet';
 import { loggerMiddleware } from './logger';
-import { normalizeFormMiddleware } from './normalizeForm';
 import { rateLimiterMiddleware } from './rateLimiter';
 import { redirectTrailingSlashMiddleware } from './redirectTrailingSlash';
 import { referrerPolicyMiddleware } from './referrerPolicy';
@@ -42,7 +41,6 @@ export const setupMiddleware = (app: Koa) => {
   // then the misc stuff
   faviconMiddleware(app);
   loggerMiddleware(app);
-  normalizeFormMiddleware(app);
   redirectTrailingSlashMiddleware(app);
   staticFileMiddleware(app);
 };

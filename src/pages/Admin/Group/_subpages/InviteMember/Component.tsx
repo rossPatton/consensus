@@ -10,7 +10,6 @@ export const InviteMemberComponent = memo((props: tComponentProps) => (
     <form
       autoComplete="off"
       className="rounded d:border d:shadow d:p-2 mb-3"
-      action="/api/v1/invites"
       onSubmit={props.submit}>
       <fieldset>
         <legend>

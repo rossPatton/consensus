@@ -23,7 +23,7 @@ export type tContainerProps = {
   geo: ts.geo,
   location: Location,
   loginDispatch: (query: ts.loginQuery) => ts.thunkPayload<ts.roleMap>,
-  postGroupDispatch: (query: ts.groupQuery) => ts.thunkPayload<ts.group>,
+  postGroupDispatch: (query: ts.groupUpsertQuery) => ts.thunkPayload<ts.group>,
 };
 
 export type tComponentProps = tState & {

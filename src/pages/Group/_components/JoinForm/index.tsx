@@ -66,8 +66,7 @@ class JoinFormContainer extends React.PureComponent<tProps> {
     return (
       <form
         method="POST"
-        onSubmit={this.onSubmit}
-        action="/api/v1/usersByOrg">
+        onSubmit={this.onSubmit}>
         <fieldset>
           <legend>
             <button className="btn p-1 text-sm">

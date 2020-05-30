@@ -7,7 +7,6 @@ class FormContainer extends PureComponent<tProps, tState> {
   static defaultProps = {
     autoComplete: 'off',
     className: '',
-    method: 'POST',
   };
 
   state = {
@@ -35,6 +34,7 @@ class FormContainer extends PureComponent<tProps, tState> {
 
   render() {
     let {error} = this.props;
+    const {legend} = this.props;
 
     // strip out status code if included
     if (typeof error === 'string' && error.includes(':')) {
@@ -43,18 +43,22 @@ class FormContainer extends PureComponent<tProps, tState> {
 
     return (
       <form
-        method={this.props.method}
+        method="post"
+        encType={this.props.encType}
         className={this.props.className}
         name={this.props.name}
         autoComplete={this.props.autoComplete}
-        action={this.props.action}
         onSubmit={this.onSubmit}
       >
         <fieldset>
           <legend>
-            <h1 className="mb-2">
-              {this.props.legend}
-            </h1>
+            {typeof legend === 'string'
+              ? (
+                <h1 className="mb-2">
+                  {legend}
+                </h1>
+              )
+              : legend}
           </legend>
           {this.props.renderFields(this.state)}
           {this.props.captcha && (

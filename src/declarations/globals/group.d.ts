@@ -29,7 +29,10 @@ namespace ts {
   }>;
 
   // if posting/patching most values are up for grabs
-  declare type groupQuery = Partial<ts.group> & ts.formSubmit;
+  declare type groupUpsertQuery = Partial<ts.group> & {
+    login?: string, // if posting (new group)
+    password: string,
+  };
 
   // if getting, add db delimiters
   declare type getGroupQuery = Partial<ts.group> & ts.baseQuery;

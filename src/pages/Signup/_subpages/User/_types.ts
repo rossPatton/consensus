@@ -8,17 +8,14 @@ export type tErrorObject = {
 };
 
 export type tPostUserQuery = {
-  login: string,
-  password: string,
-};
-
-export type tState = {
   email: string,
-  errors: tErrorObject,
-  hasMounted: boolean,
   login: string,
   password: string,
   username: string,
+};
+
+export type tState = tPostUserQuery & {
+  error: string,
 };
 
 export type tKeyUnion = keyof tState;
@@ -29,8 +26,6 @@ export type tContainerProps = {
 };
 
 export type tComponentProps = tContainerProps & tState & {
-  disabled: boolean,
-  errArr: string[],
-  register: (ev: React.FormEvent<HTMLFormElement>) => void,
+  register: () => void,
   updateState: (key: tKeyUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 };

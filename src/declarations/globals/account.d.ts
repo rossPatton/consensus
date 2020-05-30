@@ -1,9 +1,7 @@
 namespace ts {
-  // declare type match = import('react-router').match;
-
   // accounts are currently of 2 types. users, and organization admins
   // we consolidate that in the accounts table, along with shared rows
-  declare type accountBase = ts.formSubmit & Readonly<{
+  declare type accountBase = Readonly<{
     created_at?: string,
     deletionDeadline?: Dayjs,
     email: string,

@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {memo} from 'react';
@@ -65,7 +66,11 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
             />
             {dayJS(meeting.date).format(`dddd, MMM DD ${isPastMeeting ? 'YYYY' : ''}`)} | {dayJS(meeting.date).format('h:mm')}-{dayJS(meeting.endDate).format('h:mmA')}
           </time>
-          <h1 className="mb-1 capitalize">
+          <h1
+            className={cx({
+              'mb-1 capitalize': true,
+              'mb-2': meeting.isDraft,
+            })}>
             {meeting.title}
           </h1>
           {meeting.host !== meeting.groupName && (

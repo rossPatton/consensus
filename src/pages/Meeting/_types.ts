@@ -26,7 +26,7 @@ export type tContainerProps = tProps & {
   meetingThunk: ts.thunk<ts.meetingSingular>,
   getMeetingDispatch: (query: ts.getMeetingQuery) => ts.thunkPayload<ts.meetingSingular>,
   getMeetingsByGroupIdDispatch: (query: ts.getMeetingQuery) => ts.thunkPayload<ts.meeting[]>,
-  getGroupByIdDispatch: (query: ts.groupQuery) => ts.thunkPayload<ts.group>,
+  getGroupByIdDispatch: (query: ts.getGroupQuery) => ts.thunkPayload<ts.group>,
   location: H.Location,
   match: ts.match & { params: ts.meetingParams },
   groupThunk: ts.thunk<ts.group>,

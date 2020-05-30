@@ -113,7 +113,7 @@ const mapStateToProps = (store: {geo: ts.thunk<ts.geo>}) => ({
 
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
-  postGroupDispatch: (group: ts.groupQuery) => dispatch(postGroup(group)),
+  postGroupDispatch: (group: ts.groupUpsertQuery) => dispatch(postGroup(group)),
 });
 
 export const GroupSignup = connect(

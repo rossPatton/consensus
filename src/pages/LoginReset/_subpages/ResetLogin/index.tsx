@@ -8,7 +8,6 @@ import { tComponentProps } from '../../_types';
 const ResetLoginComponent = memo((props: tComponentProps) => (
   <form
     name="resetLoginForm"
-    action="/email/v1/resetLoginByEmail"
     onSubmit={props.resetLoginByEmail}>
     <fieldset>
       <legend>

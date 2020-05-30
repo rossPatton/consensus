@@ -1,10 +1,6 @@
 import Joi from '@hapi/joi';
 
-const baseSchema = Joi.object().keys({
-  isFormSubmit: Joi.bool(),
-});
-
-export const getSchema = baseSchema.keys({
+export const getSchema = Joi.object({
   date: Joi.date().timestamp(),
   exclude: Joi.number().integer(),
   isDraft: Joi.bool(),
@@ -15,11 +11,11 @@ export const getSchema = baseSchema.keys({
   showPast: Joi.string().alphanum(),
 });
 
-export const deleteSchema = baseSchema.keys({
+export const deleteSchema = Joi.object({
   id: Joi.number().integer().required(),
 });
 
-export const upsertSchema = baseSchema.keys({
+export const upsertSchema = Joi.object({
   category: Joi.string().valid('Community', 'Cooperative', 'Political', 'Union'),
   cityId: Joi.number().integer().required(),
   date: Joi.string().isoDate().required(),

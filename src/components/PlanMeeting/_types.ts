@@ -3,6 +3,7 @@ import {ValuesType} from 'utility-types';
 
 export type tState = Partial<ts.meeting> & {
   endTime: string,
+  error?: string | ts.fetchResponse<Error>,
   isCopy: boolean,
   isOnline: boolean,
   time: string,

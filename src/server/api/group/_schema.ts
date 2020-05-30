@@ -3,7 +3,6 @@ import Joi from '@hapi/joi';
 export const schema = Joi.object({
   handle: Joi.string(),
   id: Joi.number().integer(),
-  isFormSubmit: Joi.bool(),
 });
 
 export const patchSchema = schema.keys({

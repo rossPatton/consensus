@@ -11,11 +11,9 @@ export const LoginComponent = memo((props: tComponentProps) => (
     <Form
       captcha
       error={props.error}
-      method="POST"
       className="bg-white rounded shadow m-auto contain-sm mb-3 p-2 d:p-3"
       legend="Login to your account"
       name="userLoginForm"
-      action="/auth/v1/login"
       onSubmit={props.onSubmit}
       renderFields={() => (
         <>

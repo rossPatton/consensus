@@ -10,7 +10,7 @@ export const region = new Router();
 const route = '/api/v1/region';
 
 region.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.directoryParams = ctx?.state?.locals?.data || {};
+  const {query}: {query: ts.directoryParams} = ctx;
   await validateSchema<ts.directoryParams>(ctx, schema, query);
 
   // @TODO reimplment once there are more countries

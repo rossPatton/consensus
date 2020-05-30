@@ -3,7 +3,7 @@ import { api } from '~app/utils';
 import { path } from '../_constants';
 import { failure, success } from './actions';
 
-export const getGroup = (query: ts.groupQuery) => {
+export const getGroup = (query: ts.getGroupQuery) => {
   return async function (dispatch: Function) {
     return api({
       dispatch,

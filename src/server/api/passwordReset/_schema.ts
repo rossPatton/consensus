@@ -5,8 +5,7 @@ export const emailSchema = Joi.object({
 });
 
 export const tokenSchema = Joi.object({
-  isFormSubmit: Joi.bool(),
-  login: Joi.string().required().min(3),
+  login: Joi.string().required().min(3).max(4096),
   password: Joi.string().min(12).max(4096).required(),
   token: Joi.string().hex().required(),
 });

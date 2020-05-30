@@ -11,7 +11,7 @@ export const meetingsByLocation = new Router();
 const route = '/api/v1/meetingsByLocation';
 
 meetingsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.meetingsByLocationQuery = ctx?.state?.locals?.data;
+  const {query}: {query: ts.meetingsByLocationQuery} = ctx;
   await validateSchema<ts.meetingsByLocationQuery>(ctx, schema, query);
 
   // @TODO this should be querying against postcodes, eventually

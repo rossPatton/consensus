@@ -13,7 +13,7 @@ const route = '/api/v1/invites';
 const table = 'users_invites';
 
 invites.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.inviteQuery = ctx?.state?.locals?.data;
+  const {query}: {query: ts.inviteQuery} = ctx;
   await validateSchema<ts.inviteQuery>(ctx, deleteSchema, query);
 
   try {
@@ -30,7 +30,7 @@ invites.delete(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 invites.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.inviteQuery = ctx?.state?.locals?.data;
+  const {query}: {query: ts.inviteQuery} = ctx;
   await validateSchema<ts.inviteQuery>(ctx, getSchema, query);
 
   let userInvites = [];
@@ -86,7 +86,7 @@ invites.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 invites.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.inviteQuery = ctx?.state?.locals?.data;
+  const {query}: {query: ts.inviteQuery} = ctx;
   await validateSchema<ts.inviteQuery>(ctx, postSchema, query);
 
   const user = await getUserByQuery(ctx, {username: query.username});
@@ -109,22 +109,3 @@ invites.post(route, async (ctx: Koa.ParameterizedContext) => {
     user,
   };
 });
-
-// usersByGroupId.patch(route, async (ctx: Koa.ParameterizedContext) => {
-//   const query: ts.patchUserRoleQuery = ctx?.state?.locals?.data;
-//   const {groupId, role, userId} = query;
-//   await validateSchema<ts.patchUserRoleQuery>(ctx, patchSchema, {groupId, role, userId});
-
-//   let updatedAccountRoleRel = [] as ts.roleRel[];
-//   try {
-//     updatedAccountRoleRel = await knex(table)
-//       .limit(1)
-//       .where({groupId, userId})
-//       .update({role})
-//       .returning(['groupId', 'role', 'userId']);
-//   } catch (err) {
-//     return ctx.throw(500, err);
-//   }
-
-//   ctx.body = updatedAccountRoleRel?.[0];
-// });

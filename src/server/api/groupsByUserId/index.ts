@@ -13,7 +13,7 @@ const table = 'accounts_roles';
 export const groupsByUserId = new Router();
 
 groupsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.groupsByUserIdQuery = ctx?.state?.locals?.data;
+  const {query}: {query: ts.groupsByUserIdQuery} = ctx;
   await validateSchema<ts.groupsByUserIdQuery>(ctx, getSchema, query);
 
   const userGroupRels = await getRoleMapsByUserId(ctx, query);
@@ -35,7 +35,7 @@ groupsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
 // group can remove users, via the usersByOrg api, but in both cases
 // we check against the session instead of allowing the client to pass in any id
 groupsByUserId.delete(route, async (ctx: Koa.ParameterizedContext) => {
-  const {groupId}: ts.deleteUserByGroupIdQuery = ctx?.state?.locals?.data;
+  const {groupId}: ts.deleteUserByGroupIdQuery = ctx.query;
   const userId = ctx?.state?.user?.id;
   const query = {groupId, userId};
 

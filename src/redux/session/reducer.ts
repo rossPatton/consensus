@@ -7,7 +7,9 @@ export const initialState: ts.thunk<ts.session> = {
   error: null,
   fetched: false,
   isLoading: false,
-  data: { isAuthenticated: false } as ts.session,
+  data: {
+    isAuthenticated: false,
+  } as ts.session,
 };
 
 export const sessionReducer = (state = initialState, action: tActions) => {

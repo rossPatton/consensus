@@ -11,67 +11,67 @@ const CurrentProfile = memo((props: tComponentProps) => (
       to={`/group/${props.session.profile.handle}`}>
       View Group
     </Link>
-    <h1 className="text-3 mb-2 leading-none">
+    <h2 className="text-3 mb-2 leading-none">
       Group Profile
-    </h1>
-    <h2 className="text-base mb-2 leading-none">
-      Name: <span className="text-gray-5">
+    </h2>
+    <h3 className="text-base mb-2 leading-none">
+      <span className="font-semibold">Name:</span> <span className="text-gray-5">
         {props.session.profile.name}
       </span>
-    </h2>
-    <h2 className="text-base mb-2 leading-none">
-      URL: <span className="text-gray-5">
+    </h3>
+    <h3 className="text-base mb-2 leading-none">
+      <span className="font-semibold">URL:</span> <span className="text-gray-5">
         {props.handle}
       </span>
-    </h2>
-    <h2 className="text-base mb-2 leading-none">
-      Group Type: <span className="text-gray-5 capitalize">
+    </h3>
+    <h3 className="text-base mb-2 leading-none">
+      <span className="font-semibold">Group Type:</span> <span className="text-gray-5 capitalize">
         {props.type}
       </span> and <span className="text-gray-5">{props.allowNonVerified
         ? 'any user can join'
         : 'only verified users can join'}</span>
-    </h2>
-    <h2 className="text-base mb-2 leading-none">
-      Category: <span className="text-gray-5">
+    </h3>
+    <h3 className="text-base mb-2 leading-none">
+      <span className="font-semibold">Category:</span> <span className="text-gray-5">
         {props.category}
       </span>
-    </h2>
-    <h2 className="text-base mb-2 leading-none">
-      Member title: <span className="text-gray-5">
+    </h3>
+    <h3 className="text-base mb-2 leading-none">
+      <span className="font-semibold">Member title:</span> <span className="text-gray-5">
         {props.memberName}
       </span>
-    </h2>
-    <h2 className="text-base mb-2 leading-none">
-      Moderator title: <span className="text-gray-5">
+    </h3>
+    <h3 className="text-base mb-2 leading-none">
+      <span className="font-semibold">Moderator title:</span> <span className="text-gray-5">
         {props.modName}
       </span>
-    </h2>
+    </h3>
     {props.website && (
-      <h2 className="text-base mb-2 leading-none">
-        Group Website <span className="text-gray-5">
+      <h3 className="text-base mb-2 leading-none">
+        <span className="font-semibold">Group Website</span> <span className="text-gray-5">
           {props.website}
         </span>
-      </h2>
+      </h3>
     )}
     {props.facebook && (
-      <h2 className="text-base mb-2 leading-none">
-        Facebook <span className="text-gray-5">
+      <h3 className="text-base mb-2 leading-none">
+        <span className="font-semibold">Facebook</span> <span className="text-gray-5">
           {props.facebook}
         </span>
-      </h2>
+      </h3>
     )}
     {props.twitter && (
-      <h2 className="text-base mb-2 leading-none">
-        Twitter <span className="text-gray-5">
+      <h3 className="text-base mb-2 leading-none">
+        <span className="font-semibold">Twitter</span> <span className="text-gray-5">
           {props.twitter}
         </span>
-      </h2>
+      </h3>
     )}
     {props.description && (
       <div className="mb-3">
-        <h2 className="text-base mb-1 leading-none">
-          Description:
-        </h2>
+        <h3 className="text-base mb-1 leading-none">
+          <span className="font-semibold">Description:</span>
+        </h3>
         {props.description.split('\n').map((p, i) => (
           <p
             key={i}

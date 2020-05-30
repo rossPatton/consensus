@@ -46,8 +46,8 @@ exports.up = async (knex: Knex) => {
     table.text('location').defaultTo('Location To Be Determined');
     table.text('locationLink');
     table.enum('locationType', ['online', 'offline']).defaultTo('online');
-    table.text('title').notNullable().unique();
-    table.text('slug').notNullable().unique();
+    table.text('title').notNullable();
+    table.text('slug').notNullable();
     table.timestamp('date').notNullable();
     table.timestamp('endDate').notNullable();
 

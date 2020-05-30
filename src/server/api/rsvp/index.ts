@@ -13,7 +13,7 @@ const table = 'users_meetings';
 // post new rsvp for the logged in user, by meetingId
 // this is an upsert basically, post if new, patch if not
 rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = ctx?.state?.locals?.data;
+  const {query} = ctx;
   await validateSchema(ctx, postSchema, query);
 
   const {meetingId, type = 'private', value = ''} = query;

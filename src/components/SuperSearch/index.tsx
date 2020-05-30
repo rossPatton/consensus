@@ -39,12 +39,11 @@ class SuperSearchContainer extends React.PureComponent<any, any> {
         className="mb-3"
         name="superSearch"
         autoComplete="off"
-        onSubmit={this.onSubmit}
-        action="/api/v1/search">
+        onSubmit={this.onSubmit}>
         <fieldset>
           <div className="flex flex-col d:flex-row">
             <select
-              className="min-w-full d:min-w-1/4 d:mr-1 mb-2 d:mb-0"
+              className="w-full d:max-w-1/4 d:mr-1 mb-2 d:mb-0"
               onBlur={this.onFilterOptionChange}
               onChange={this.onFilterOptionChange}>
               {filterOptions.map(opt => (

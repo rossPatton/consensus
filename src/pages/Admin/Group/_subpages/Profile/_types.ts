@@ -14,7 +14,7 @@ export type tContainerProps = {
   loginDispatch: (query: ts.loginQuery) => ts.thunkPayload,
   match: ts.adminSectionParams,
   patchAccountDispatch: (query: ts.accountQuery) => ts.thunkPayload<ts.account>,
-  patchGroupDispatch: (query: ts.groupQuery) => ts.thunkPayload<ts.group>,
+  patchGroupDispatch: (query: ts.groupUpsertQuery) => ts.thunkPayload<ts.group>,
   sessionThunk: ts.thunk<ts.session>,
 };
 

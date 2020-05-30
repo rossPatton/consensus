@@ -11,8 +11,8 @@ export const groups = new Router();
 const route = '/api/v1/groups';
 
 groups.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query = ctx?.state?.locals?.data;
-  await validateSchema(ctx, schema, query);
+  const {query}: {query: ts.getGroupQuery} = ctx;
+  await validateSchema<ts.getGroupQuery>(ctx, schema, query);
 
   let group: ts.group[] = [];
   try {

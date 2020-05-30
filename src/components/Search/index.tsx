@@ -40,8 +40,7 @@ class SearchContainer extends React.PureComponent<tProps, tState> {
       <form
         name="search"
         autoComplete="off"
-        onSubmit={this.onSubmit}
-        action="/api/v1/search">
+        onSubmit={this.onSubmit}>
         <fieldset>
           <label className="flex flex-row items-center relative" htmlFor="search">
             <img

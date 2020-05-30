@@ -8,7 +8,6 @@ export const DeleteGroupComponent = memo((props: tComponentProps) => (
   <form
     autoComplete="off"
     className="rounded d:border d:shadow d:p-2"
-    action="/api/v1/account"
     onSubmit={props.deleteGroup}>
     <fieldset>
       <legend>

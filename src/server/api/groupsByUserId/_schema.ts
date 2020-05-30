@@ -1,7 +1,7 @@
 import Joi from '@hapi/joi';
 
 // get group by userId
-export const getSchema = Joi.object().keys({
+export const getSchema = Joi.object({
   noPending: Joi.bool(),
   userId: Joi.number().integer().required(),
 });

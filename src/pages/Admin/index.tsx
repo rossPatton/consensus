@@ -28,17 +28,8 @@ const AdminContainer = (props: tProps) => {
             const isGroupAdmin = type === 'group';
             const isUserAdmin = type === 'user';
 
-            const renderWelcome = isGroupAdmin
-              ? props.sessionThunk.data.isVerified
-              : true;
-
             return (
               <>
-                {renderWelcome && (
-                  <div className="mb-2 text-center">
-                    Welcome back to your {isGroupAdmin ? 'group' : 'user'} dashboard {sessionThunk.data.profile.name}
-                  </div>
-                )}
                 {isGroupAdmin
                   && (
                     <GroupAdmin

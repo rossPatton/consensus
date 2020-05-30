@@ -81,7 +81,7 @@ class VerifyEmailContainer extends PureComponent<tContainerProps, tState> {
     const enterCode = match?.params?.section;
 
     return (
-      <Template>
+      <Template className="bg-community m-auto min-h-halfscreen pb-5 pt-4">
         <ErrorBoundary status={session?.error?.status}>
           <Helmet
             canonical={canonical}
@@ -93,23 +93,25 @@ class VerifyEmailContainer extends PureComponent<tContainerProps, tState> {
           />
           {session.data.isVerified && (
             <div className="w-full p-2 mb-2 text-center bg-green-1 font-bold text-sm">
-            You&apos;re verified!
+              You&apos;re verified!
             </div>
           )}
-          {enterCode && (
-            <VerifyTokenComponent
-              {...this.state}
-              verifyToken={this.verifyToken}
-              updateState={this.updateState}
-            />
-          )}
-          {!enterCode && (
-            <EmailTokenComponent
-              {...this.state}
-              sendVerificationToken={this.sendVerificationToken}
-              updateState={this.updateState}
-            />
-          )}
+          <div className="bg-white rounded shadow m-auto contain-sm mb-3 p-2 d:p-3">
+            {enterCode && (
+              <VerifyTokenComponent
+                {...this.state}
+                verifyToken={this.verifyToken}
+                updateState={this.updateState}
+              />
+            )}
+            {!enterCode && (
+              <EmailTokenComponent
+                {...this.state}
+                sendVerificationToken={this.sendVerificationToken}
+                updateState={this.updateState}
+              />
+            )}
+          </div>
         </ErrorBoundary>
       </Template>
     );

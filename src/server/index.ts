@@ -6,7 +6,6 @@ import 'regenerator-runtime/runtime';
 import './passport';
 
 import fs from 'fs-extra';
-// import http from 'http';
 import https from 'https';
 import Koa from 'koa';
 import passport from 'koa-passport';
@@ -51,7 +50,7 @@ setupApi(app);
 
 // render the page
 app.use(async ctx => {
-  ctx.status = 200; // TODO gotta be a better way to do this
+  ctx.status = 200;
   ctx.body = SSR(app, ctx);
 });
 

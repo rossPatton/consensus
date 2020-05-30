@@ -1,3 +1,4 @@
+import commonPasswordList from 'fxa-common-password-list';
 import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
@@ -14,7 +15,7 @@ const route = '/api/v1/user';
 const table = 'users';
 
 user.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const query: ts.userQuery = ctx?.state?.locals?.data;
+  const {query}: {query: ts.userQuery} = ctx;
   await validateSchema<ts.userQuery>(ctx, getSchema, query);
 
   const user = await getUserByQuery(ctx, query);
@@ -32,8 +33,14 @@ user.get(route, async (ctx: Koa.ParameterizedContext) => {
 
 // user signup form basically
 user.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const {isFormSubmit, ...query}: tUserPostServerQuery = ctx?.state?.locals?.data;
+  const {query}: {query: tUserPostServerQuery} = ctx;
   await validateSchema<tUserPostServerQuery>(ctx, postSchema, query);
+
+  // @TODO check on account patch as well. maybe separate out into util
+  if (commonPasswordList.test(query.password)
+    || query.password === 'correct_horse_battery_staple') {
+    ctx.throw(400, 'Please use a less common password');
+  }
 
   // username is the only user info required to sign up. login/pw is the account table
   let userResult = [] as ts.user[];
@@ -73,13 +80,11 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  if (isFormSubmit) return ctx.redirect('/login');
   ctx.body = userResult?.[0];
 });
 
-// TODO no-js forms only do GET/POST - implement upsert
 user.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const {isFormSubmit, ...query}: ts.userQuery = ctx?.state?.locals?.data;
+  const {query}: {query: ts.userQuery} = ctx;
   await validateSchema<ts.userQuery>(ctx, patchSchema, query);
 
   const {password, ...updateQuery} = query;
@@ -99,6 +104,5 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  if (isFormSubmit) return;
   ctx.body = updatedUser?.[0];
 });

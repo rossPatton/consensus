@@ -20,9 +20,8 @@ rsvps.get(route, async (ctx: Koa.ParameterizedContext) => {
 });
 
 rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
-  const {data} = ctx?.state?.locals;
+  const {query} = ctx;
   const {userId} = ctx?.state?.user;
-  const {isFormSubmit, ...query} = data;
   await validateSchema(ctx, upsertSchema, {...query, userId});
 
   const {meetingId, type = 'private', value = ''} = query;
@@ -51,8 +50,7 @@ rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
 // this is an upsert, basically.
 // if user doesnt have js enabled, all patches are posts by default
 rsvps.post(route, async (ctx: Koa.ParameterizedContext) => {
-  const {data} = ctx?.state?.locals;
-  const {isFormSubmit, ...query} = data;
+  const {query} = ctx;
   const {userId} = ctx?.state.user;
   await validateSchema(ctx, upsertSchema, {...query, userId});
 

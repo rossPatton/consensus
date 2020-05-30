@@ -99,7 +99,7 @@ const mapStateToProps = (store: tStore) => {
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
   patchAccountDispatch: (query: ts.accountQuery) => dispatch(patchAccount(query)),
-  patchGroupDispatch: (query: ts.groupQuery) => dispatch(patchGroup(query)),
+  patchGroupDispatch: (query: ts.groupUpsertQuery) => dispatch(patchGroup(query)),
 });
 
 const Profile = connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
