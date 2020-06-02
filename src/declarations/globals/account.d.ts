@@ -54,12 +54,8 @@ namespace ts {
 
   // subset of user/org needed for login/authentication
   declare type loginQuery = Readonly<{
-    // passportjs is a black box, and near impossible to debug
-    // so we decouple email/username from the login credentials
-    // but we call the login 'username' here, or else passport doesnt work
-    username: string,
-    password: string,
-    token?: string,
+    email: string,
+    token: string,
   }>;
 
   // when logging out we return this value

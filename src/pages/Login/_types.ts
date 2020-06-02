@@ -1,7 +1,11 @@
+import {History} from 'history';
+
 export type tState = {
+  email: string,
+  emailSent: boolean,
   error: string | ts.fetchResponse<Error>,
-  password: string,
-  username: string,
+  token: string,
+  type: 'user' | 'group',
 };
 
 export type tKeyUnion = keyof tState;
@@ -11,6 +15,7 @@ export type tStore = {
 };
 
 export type tContainerProps = tStore & {
+  history: History,
   loginDispatch: (query: ts.loginQuery) => ts.thunkPayload<ts.roleMap>,
 }
 

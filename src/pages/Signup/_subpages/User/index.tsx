@@ -7,7 +7,7 @@ import {api} from '~app/utils';
 
 import {EmailTokenComponent} from './_components/EmailToken';
 import {UserSignupComponent} from './_components/UserSignup';
-import {tContainerProps, tKeyUnion, tPostUserQuery, tState} from './_types';
+import {tContainerProps, tKeyUnion, tState} from './_types';
 
 export class UserSignupContainer extends PureComponent<tContainerProps, tState> {
   state = {
@@ -98,7 +98,7 @@ const mapStateToProps = (store: any) => ({
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
   postAccountDispatch: (query: {email: string}) => dispatch(postAccount(query)),
-  postUserDispatch: (query: tPostUserQuery) => dispatch(postUser(query)),
+  postUserDispatch: (query: ts.userQuery) => dispatch(postUser(query)),
 });
 
 export const UserSignup = connect(

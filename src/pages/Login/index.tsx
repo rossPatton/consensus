@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
+import cx from 'classnames';
 
 import {ErrorBoundary, Template} from '~app/containers';
 import {login} from '~app/redux';
@@ -16,6 +17,7 @@ export class LoginContainer extends PureComponent<tContainerProps, tState> {
     emailSent: false,
     error: '',
     token: '',
+    type: 'user' as 'user' | 'group',
   };
 
   sendToken = async () => {
@@ -37,6 +39,11 @@ export class LoginContainer extends PureComponent<tContainerProps, tState> {
       emailSent: true,
     });
   }
+
+  setType = (type: 'user' | 'group') =>
+    this.setState({
+      type,
+    });
 
   verifyAndLogin = async () => {
     const { email, token } = this.state;
@@ -60,10 +67,35 @@ export class LoginContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const {emailSent} = this.state;
+    const {emailSent, type} = this.state;
+
     return (
       <Template className="bg-community m-auto min-h-halfscreen pb-5 pt-4">
         <ErrorBoundary status={this.props?.session?.error?.status}>
+          <ul className='contain-sm flex m-auto'>
+            <li>
+              <button
+                onClick={() => this.setType('user')}
+                className={cx({
+                  'p-2 bg-white border-0 rounded-0 rounded-tl rounded-tr mr-1': true,
+                  'bg-gray-3': type === 'group',
+                  'pointer-events-none': type === 'user',
+                })}>
+                User
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => this.setType('group')}
+                className={cx({
+                  'p-2 bg-white border-0 rounded-0 rounded-tl rounded-tr': true,
+                  'bg-gray-3': type === 'user',
+                  'pointer-events-none': type === 'group',
+                })}>
+                Group
+              </button>
+            </li>
+          </ul>
           <div className="bg-white rounded shadow m-auto contain-sm mb-3 p-2 d:p-3">
             {!emailSent && (
               <EmailTokenComponent
@@ -86,17 +118,9 @@ export class LoginContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (store: any) => ({
-  account: store.account,
-});
-
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
 });
 
-const Login = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(LoginContainer);
-
+const Login = connect(null, mapDispatchToProps)(LoginContainer);
 export default Login;

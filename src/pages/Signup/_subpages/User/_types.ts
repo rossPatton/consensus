@@ -9,15 +9,12 @@ export type tErrorObject = {
   password?: string[],
 };
 
-export type tPostUserQuery = {
+export type tState = {
   email: string,
   emailSent: boolean,
-  username: string,
-};
-
-export type tState = tPostUserQuery & {
   error: string,
   token: string,
+  username: string,
 };
 
 export type tKeyUnion = keyof tState;
@@ -26,7 +23,7 @@ export type tContainerProps = {
   history: History,
   loginDispatch: (query: ts.loginQuery) => ts.thunkPayload<ts.session>,
   postAccountDispatch: (query: {email: string}) => ts.thunkPayload<ts.account>,
-  postUserDispatch: (query: tPostUserQuery) => ts.thunkPayload<ts.session>,
+  postUserDispatch: (query: ts.userQuery) => ts.thunkPayload<ts.session>,
 };
 
 export type tComponentProps = tContainerProps & tState & {
