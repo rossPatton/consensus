@@ -6,12 +6,11 @@ export const schema = Joi.object({
 });
 
 export const patchSchema = schema.keys({
-  allowNonVerified: Joi.bool(),
   avatar: Joi.string().allow('').allow(null),
   category: Joi.string().allow('Political', 'Cooperative', 'Community', 'Union'),
   description: Joi.string(),
   facebook: Joi.string().uri(),
-  isNew: Joi.bool().optional(),
+  showOnboarding: Joi.bool().optional(),
   memberName: Joi.string(),
   modName: Joi.string(),
   password: Joi.string().min(12).max(4096).required(),
@@ -27,7 +26,7 @@ export const postSchema = schema.keys({
   cityId: Joi.number().integer().required(),
   email: Joi.string().email().required(),
   handle: Joi.string().regex(/[a-z0-9-]/).required(),
-  // isNew: Joi.bool().required(),
+  // showOnboarding: Joi.bool().required(),
   login: Joi.string().required(),
   name: Joi.string().required(),
   password: Joi.string().min(12).max(4096).required(),

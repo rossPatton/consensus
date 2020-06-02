@@ -20,6 +20,9 @@ exports.up = async (knex: Knex) => {
     // user-input about what the group does
     table.text('description', 'longtext').defaultTo('').notNullable();
 
+    table.string('email').notNullable().unique();
+    table.boolean('showOnboarding').notNullable().defaultTo(true);
+
     // name of the group
     table.string('name').notNullable().unique();
 
@@ -41,6 +44,9 @@ exports.up = async (knex: Knex) => {
       .references('countries.name')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
+
+    // if group is scheduled for deletion
+    table.timestamp('deletionDeadline').defaultTo(null);
 
     table.string('city').notNullable();
     table.string('region').notNullable();

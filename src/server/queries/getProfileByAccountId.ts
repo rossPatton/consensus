@@ -7,23 +7,24 @@ import {knex} from '../db/connection';
 export const getProfileByAccountId = async (
   ctx: Koa.ParameterizedContext,
   account: ts.account): Promise<ts.group | ts.user> => {
-  const {groupId, userId} = account;
+  const {id} = account;
+  const {type} = ctx.session;
 
   let profile: ts.group | ts.user;
-  if (groupId) {
+  if (type === 'group') {
     try {
       profile = await knex('groups')
         .limit(1)
-        .where({id: groupId})
+        .where({id})
         .first();
     } catch (err) {
       ctx.throw(500, err);
     }
-  } else if (userId) {
+  } else if (type === 'user') {
     try {
       profile = await knex('users')
         .limit(1)
-        .where({id: userId})
+        .where({id})
         .first();
     } catch (err) {
       ctx.throw(500, err);

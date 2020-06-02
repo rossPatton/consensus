@@ -11,6 +11,9 @@ exports.up = async (knex: Knex) => {
     // additional optional info the user can choose to provide
     table.text('bio', 'longtext');
 
+    table.string('email').notNullable().unique();
+    table.boolean('showOnboarding').notNullable().defaultTo(true);
+
     // user's real name, optional value
     // visible on profile and attendee list for meetings
     table.string('name');

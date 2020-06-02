@@ -8,7 +8,7 @@ export const getUsersByGroupId = async (
   ctx: Koa.ParameterizedContext,
   groupId: number,
 ): Promise<ts.user[]> => {
-  const rolesStream = knex('accounts_roles').where({groupId}).stream();
+  const rolesStream = knex('users_roles').where({groupId}).stream();
   const roleMaps: ts.roleRel[] = [];
   try {
     for await (const chunk of rolesStream) {

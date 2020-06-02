@@ -6,7 +6,7 @@ namespace ts {
     deletionDeadline?: Dayjs,
     email: string,
     id: number,
-    isNew: boolean,
+    showOnboarding: boolean,
     isVerified: boolean,
     login: string, // unique login value separate from username or email
     groupId?: number,

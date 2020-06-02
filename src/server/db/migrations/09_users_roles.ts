@@ -1,15 +1,8 @@
 import Knex from 'knex';
 
 exports.up = async (knex: Knex) => {
-  await knex.schema.createTable('accounts_roles', table => {
+  await knex.schema.createTable('users_roles', table => {
     table.increments('id').unsigned().primary();
-
-    // account id of current session
-    table.integer('accountId')
-      .notNullable()
-      .references('accounts.id')
-      .onUpdate('CASCADE')
-      .onDelete('CASCADE');
 
     // org where the user has the role
     table.integer('groupId')
@@ -25,7 +18,7 @@ exports.up = async (knex: Knex) => {
       .onDelete('CASCADE');
 
     // create unique composite key. a user can only have 1 role per org
-    table.unique(['groupId', 'accountId', 'userId']);
+    table.unique(['groupId', 'userId']);
 
     // relation the account has to the org
     // 'admin' || 'member' || pending || 'facilitator'
@@ -38,5 +31,5 @@ exports.up = async (knex: Knex) => {
 };
 
 exports.down = async (knex: Knex) => {
-  await knex.schema.dropTable('accounts_roles');
+  await knex.schema.dropTable('users_roles');
 };

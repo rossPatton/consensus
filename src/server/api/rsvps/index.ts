@@ -13,9 +13,9 @@ const table = 'users_meetings';
 
 // get all rsvps for the logged in user, by meetingId
 rsvps.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const {userId} = ctx?.state?.user;
-  await validateSchema(ctx, getSchema, {userId});
-  const rsvps = await getRSVPsByUserId(ctx, userId);
+  const {id} = ctx?.state?.user;
+  await validateSchema(ctx, getSchema, {userId: id});
+  const rsvps = await getRSVPsByUserId(ctx, id);
   ctx.body = rsvps;
 });
 

@@ -22,7 +22,7 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   if (type === 'user') {
     try {
-      roles = await knex('accounts_roles')
+      roles = await knex('users_roles')
         .where({accountId: account.id})
         .select('role');
     } catch (err) {

@@ -161,8 +161,9 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
             </button>
             {typeof props.id === 'number' && (
               <Link
+                target="_blank"
                 to={`/draft/${props.id}/${props.slug}`}
-                className="btn p-2 text-sm hover:bg-gray-3">
+                className="btn p-2 hover:bg-gray-3">
                 <span
                   role="img"
                   aria-label="Eye Emoji">

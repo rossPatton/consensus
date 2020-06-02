@@ -1,5 +1,7 @@
 import HCaptcha from '@hcaptcha/react-hcaptcha';
-import React, { PureComponent } from 'react';
+import cx from 'classnames';
+import loglevel from 'loglevel';
+import React, { ErrorInfo, PureComponent } from 'react';
 
 import { tProps, tState } from './_types';
 
@@ -7,12 +9,21 @@ class FormContainer extends PureComponent<tProps, tState> {
   static defaultProps = {
     autoComplete: 'off',
     className: '',
+    includeCaptcha: false,
   };
 
   state = {
+    error: '',
     hasMounted: false,
-    token: '',
+    captcha: '',
   };
+
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    this.setState({
+      error: error.message,
+    }, () => loglevel.error(error, info));
+    // TODO log to separate service, but only show user 500 page
+  }
 
   componentDidMount() {
     // we do this so we only disable default form submit when js is available
@@ -21,25 +32,28 @@ class FormContainer extends PureComponent<tProps, tState> {
     });
   }
 
-  handleVerificationSuccess = (token: string) => {
+  handleVerificationSuccess = (captcha: string) => {
     this.setState({
-      token,
+      captcha,
     });
   }
 
   onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    this.props.onSubmit(this.state.token);
+    this.props.onSubmit(this.state.captcha);
   }
 
   render() {
-    let {error} = this.props;
-    const {legend} = this.props;
+    const {error: errorProp, includeCaptcha, legend} = this.props;
+    const {captcha, error: errorState, hasMounted} = this.state;
+    let error = errorProp || errorState;
 
     // strip out status code if included
     if (typeof error === 'string' && error.includes(':')) {
       error = error.split(':')[1];
     }
+
+    const validError = typeof error === 'string' && !!error;
 
     return (
       <form
@@ -60,17 +74,22 @@ class FormContainer extends PureComponent<tProps, tState> {
               )
               : legend}
           </legend>
-          {this.props.renderFields(this.state)}
-          {this.props.captcha && (
-            <div className="mb-2">
-              <HCaptcha
-                sitekey={__HCAPTCHA_KEY__}
-                onVerify={this.handleVerificationSuccess}
-              />
-            </div>
-          )}
-          {this.props.renderSubmit(this.state)}
-          {error && (
+          {this.props.renderFields({captcha, hasMounted})}
+          <div
+            className={cx({
+              'mb-2': includeCaptcha || validError,
+            })}>
+            {includeCaptcha && (
+              <div className="mb-2">
+                <HCaptcha
+                  sitekey={__HCAPTCHA_KEY__}
+                  onVerify={this.handleVerificationSuccess}
+                />
+              </div>
+            )}
+            {this.props.renderSubmit({captcha, hasMounted})}
+          </div>
+          {validError && (
             <div className="rounded text-3 bg-red-2 p-2 text-white font-semibold w-full">
               {error}
             </div>

@@ -18,7 +18,6 @@ class JoinFormContainer extends React.PureComponent<tProps> {
 
     try {
       await this.props.postNewUserByGroupIdDispatch({
-        allowNonVerified: group.allowNonVerified,
         groupId: group.id,
         role,
         userId,
@@ -52,14 +51,6 @@ class JoinFormContainer extends React.PureComponent<tProps> {
           className="btn p-1 text-sm">
           Join this Group
         </Link>
-      );
-    }
-
-    if (!session.isVerified && !group.allowNonVerified) {
-      return (
-        <span className="text-sm p-1 white">
-          Verify your account to join
-        </span>
       );
     }
 

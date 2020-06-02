@@ -27,9 +27,7 @@ const CurrentProfile = memo((props: tComponentProps) => (
     <h3 className="text-base mb-2 leading-none">
       <span className="font-semibold">Group Type:</span> <span className="text-gray-5 capitalize">
         {props.type}
-      </span> and <span className="text-gray-5">{props.allowNonVerified
-        ? 'any user can join'
-        : 'only verified users can join'}</span>
+      </span>
     </h3>
     <h3 className="text-base mb-2 leading-none">
       <span className="font-semibold">Category:</span> <span className="text-gray-5">

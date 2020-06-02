@@ -5,7 +5,5 @@ export const emailSchema = Joi.object({
 });
 
 export const tokenSchema = Joi.object({
-  login: Joi.string().required(),
-  password: Joi.string().min(12).max(4096).required(),
   token: Joi.string().hex().required(),
 });

@@ -18,6 +18,7 @@ namespace ts {
     region?: string,
     regionId?: number,
     role?: ts.role,
+    showOnboarding?: boolean,
     updated_at?: Date,
     username: string,
     twitter: string,
@@ -25,8 +26,5 @@ namespace ts {
   }>;
 
   // getting/posting/deleting users by org membership
-  declare type userQuery = Partial<ts.user> & ts.baseQuery & Readonly<{
-    isNew?: boolean,
-    password?: string,
-  }>;
+  declare type userQuery = Partial<ts.user> & ts.baseQuery;
 }

@@ -1,4 +1,3 @@
-require('dotenv-safe').config();
 import faker from 'faker';
 import Knex from 'knex';
 import _ from 'lodash';
@@ -17,22 +16,27 @@ const createGroup = async (groupId: number) => {
   const category = groupId === 0
     ? 'Political'
     : categories[getRandomNum(0, categories.length - 1)].type;
+  const email = faker.internet.email(
+    faker.name.firstName(),
+    faker.name.lastName(),
+    'gmail.com',
+  );
 
   return {
-    allowNonVerified: group.type === 'public',
-    avatar: groupId === 1 ? '2' : getRandomNum(1, 7),
+    avatar: groupId === 0 ? '2' : getRandomNum(1, 7),
     category,
     city: group.city,
     cityId: 16624,
     description: faker.lorem.paragraphs(),
-    facebook: 'https://facebook.com',
+    email: groupId === 0 ? 'rosspatton@protonmail.com' : email,
+    facebook: 'https://facebook.com/nonsense',
     handle: group.handle,
     memberName: 'Member',
     modName: 'Facilitator',
     name: group.name,
     region: group.region,
     regionId: group.regionId,
-    twitter: 'https://twitter.com',
+    twitter: 'https://twitter.com/nonsense',
     type: group.type,
     website: group.website || faker.internet.domainName(),
   };

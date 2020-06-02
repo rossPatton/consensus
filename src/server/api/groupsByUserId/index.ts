@@ -8,7 +8,7 @@ import {getRoleMapsByUserId} from './_queries';
 import {deleteSchema, getSchema} from './_schema';
 
 const route = '/api/v1/groupsByUserId';
-const table = 'accounts_roles';
+const table = 'users_roles';
 
 export const groupsByUserId = new Router();
 

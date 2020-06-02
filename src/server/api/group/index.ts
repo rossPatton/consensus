@@ -3,7 +3,7 @@ import Router from 'koa-router';
 
 import {groupKeys} from '../_constants';
 import {knex} from '../../db/connection';
-import {encrypt, isValidPw, saltedHash, validateSchema} from '../../utils';
+import {validateSchema} from '../../utils';
 import {patchSchema, postSchema, schema} from './_schema';
 
 export const group = new Router();
@@ -32,18 +32,12 @@ group.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: ts.groupUpsertQuery} = ctx;
   await validateSchema<ts.groupUpsertQuery>(ctx, patchSchema, query);
 
-  const loggedInAccount: ts.account = ctx?.state?.user || {};
-  const {password, ...updateQuery} = query;
-
-  const isValidPW = await isValidPw(password, loggedInAccount.password);
-  if (!isValidPW) return ctx.throw(400, 'Password is not correct');
-
   let updatedGroup = [] as ts.group[];
   try {
     updatedGroup = await knex(table)
       .limit(1)
-      .where({id: updateQuery.id})
-      .update(updateQuery)
+      .where({id: query.id})
+      .update(query)
       .returning(groupKeys);
   } catch (err) {
     return ctx.throw(500, err);
@@ -56,38 +50,16 @@ group.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: ts.groupUpsertQuery} = ctx;
   await validateSchema<ts.groupUpsertQuery>(ctx, postSchema, query);
 
-  const {email, login, password, ...groupToInsert} = query;
-
   // create the group first =>
   let newGroupReturning = [] as ts.group[];
   try {
     newGroupReturning = await knex(table)
-      .insert({avatar: '2', ...groupToInsert})
+      .insert({avatar: '2', ...query})
       .returning('*');
   } catch (err) {
     return ctx.throw(500, err);
   }
 
-  let hashedPW = null;
-  try {
-    hashedPW = await saltedHash(query.password);
-  } catch (err) {
-    return ctx.throw(500, err);
-  }
-
   const newGroup = newGroupReturning?.[0];
-
-  // then save the cooresponding account info for login
-  try {
-    await knex('accounts').insert({
-      email,
-      login: query.login,
-      groupId: newGroup.id,
-      password: encrypt(hashedPW),
-    });
-  } catch (err) {
-    return ctx.throw(500, err);
-  }
-
   ctx.body = newGroup;
 });

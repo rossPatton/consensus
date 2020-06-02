@@ -12,7 +12,11 @@ export const initStoreForSSR = async (ctx: Koa.ParameterizedContext) => {
   // get user/org account. this object is determined by our serialization strategy
   const account = passportSession?.passport?.user || {};
   // take all that and build our session
-  const session = await getSession(ctx, account);
+  let store = {};
+  if (account.id) {
+    const session = await getSession(ctx, account);
+    store = {session};
+  }
   // generate initial state for Redux store, with defaults + session if applicable
-  return initStore({session});
+  return initStore(store);
 };

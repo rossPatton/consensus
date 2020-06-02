@@ -1,81 +1,102 @@
 import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router';
 
-import {Helmet} from '~app/components';
 import {ErrorBoundary, Template} from '~app/containers';
 import {login} from '~app/redux';
+import {api} from '~app/utils';
 
-import {canonical, description, keywords, title} from './_constants';
-import {tContainerProps, tState, tStateUnion, tStore} from './_types';
-import {LoginComponent} from './Component';
+import {EmailTokenComponent} from './_components/EmailToken';
+import {VerifyAndLoginComponent} from './_components/VerifyAndLogin';
+import {tContainerProps, tKeyUnion, tState} from './_types';
 
-class LoginContainer extends PureComponent<tContainerProps, tState> {
+export class LoginContainer extends PureComponent<tContainerProps, tState> {
   state = {
+    email: '',
+    emailSent: false,
     error: '',
-    password: '',
-    // actually login in the DB, but passportjs expects 'username'
-    username: '',
+    token: '',
   };
 
-  onSubmit = async () => {
-    const {username, password} = this.state;
+  sendToken = async () => {
     try {
-      this.props.loginDispatch({username, password});
+      await api({
+        path: '/email/v1/sendVerificationToken',
+        query: {
+          email: this.state.email,
+          type: 'user',
+        },
+      });
     } catch (error) {
-      this.setState({
-        error,
+      return this.setState({
+        error: error.message,
       });
     }
+
+    this.setState({
+      emailSent: true,
+    });
   }
 
-  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
+  verifyAndLogin = async () => {
+    const { email, token } = this.state;
+
+    // and log them in on success
+    try {
+      await this.props.loginDispatch({ email, token });
+    } catch (error) {
+      this.setState({
+        error: error.message,
+      });
+    }
+
+    this.props.history.push('/admin/meetings');
+  }
+
+  updateState = (stateKey: tKeyUnion, ev: React.ChangeEvent<any>) => {
     this.setState({
       [stateKey]: ev.currentTarget.value,
-    } as Pick<tState, tStateUnion>);
+    } as Pick<tState, tKeyUnion>);
   }
 
   render() {
-    const {session} = this.props;
-    const error = session?.error?.message;
-
+    const {emailSent} = this.state;
     return (
       <Template className="bg-community m-auto min-h-halfscreen pb-5 pt-4">
-        <ErrorBoundary status={session?.error?.status}>
-          <Helmet
-            canonical={canonical}
-            title={title}
-            meta={[
-              { name: 'description', content: description },
-              { name: 'keywords', content: keywords },
-            ]}
-          />
-          {session.data.isAuthenticated && (
-            <Redirect to="/admin/meetings" />
-          )}
-          {!session.data.isAuthenticated && (
-            <LoginComponent
-              {...this.state}
-              // if theres a login error, it'll show up here
-              error={error}
-              onSubmit={this.onSubmit}
-              updateState={this.updateState}
-            />
-          )}
+        <ErrorBoundary status={this.props?.session?.error?.status}>
+          <div className="bg-white rounded shadow m-auto contain-sm mb-3 p-2 d:p-3">
+            {!emailSent && (
+              <EmailTokenComponent
+                {...this.state}
+                sendToken={this.sendToken}
+                updateState={this.updateState}
+              />
+            )}
+            {emailSent && (
+              <VerifyAndLoginComponent
+                {...this.state}
+                verifyAndLogin={this.verifyAndLogin}
+                updateState={this.updateState}
+              />
+            )}
+          </div>
         </ErrorBoundary>
       </Template>
     );
   }
 }
 
-const mapStateToProps = (store: tStore) => ({
-  session: store.session,
+const mapStateToProps = (store: any) => ({
+  account: store.account,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
 });
 
-const Login = connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+const Login = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LoginContainer);
+
 export default Login;

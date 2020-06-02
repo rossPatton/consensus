@@ -11,7 +11,7 @@ export const getRolesByGroupId = async (
 ): Promise<ts.roleRel[]> => {
   const {groupId, noPending} = query;
   try {
-    const roles = knex('accounts_roles');
+    const roles = knex('users_roles');
 
     if (noPending === 'true') {
       roles.andWhereNot({role: 'pending'});

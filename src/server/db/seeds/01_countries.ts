@@ -1,4 +1,3 @@
-require('dotenv-safe').config();
 import Knex from 'knex';
 
 exports.seed = async (knex: Knex) => {

@@ -51,7 +51,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
             </div>
             <div>
               {meeting.isOnline && (
-                <li className="flex items-center mb-1 text-red-3 text-sm font-bold">
+                <div className="flex items-center mb-1 text-red-3 text-sm font-bold">
                   <img
                     alt=""
                     height="10"
@@ -64,7 +64,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                       ? dayJS(meeting.date).format('MMM DD YYYY | h:mmA')
                       : dayJS(meeting.date).format('MMM DD | h:mmA')}
                   </time>
-                </li>
+                </div>
               )}
               {!meeting.isOnline
                 && meeting.location

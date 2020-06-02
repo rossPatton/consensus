@@ -25,14 +25,18 @@ class SearchContainer extends React.PureComponent<tProps, tState> {
       value: ev.currentTarget.value,
     })
 
-  onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+  onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    this.props.getSearchResultsDispatch({
-      key: this.state.key,
-      value: this.state.value,
-    })
-      .then(() => this.props.history.push('/search'))
-      .catch(loglevel.error);
+    try {
+      await this.props.getSearchResultsDispatch({
+        key: this.state.key,
+        value: this.state.value,
+      });
+    } catch (error) {
+      loglevel.error(error);
+    }
+
+    return this.props.history.push('/search');
   }
 
   render() {

@@ -10,7 +10,7 @@ export const getRoleMapsByUserId = async (
   const {noPending, userId} = query;
 
   try {
-    const userGroupRels = knex('accounts_roles');
+    const userGroupRels = knex('users_roles');
     if (noPending) userGroupRels.whereNot({role: 'pending'});
     return userGroupRels.where({userId}).orderBy('updated_at', 'asc');
   } catch (err) {

@@ -1,4 +1,3 @@
-require('dotenv-safe').config();
 import faker from 'faker';
 import Knex from 'knex';
 import {range} from 'lodash';
@@ -8,11 +7,17 @@ import {getRandomNum} from '../../../utils/getRandomNum';
 const createUser = async () => {
   // user selects city from dropdown with additional info (postcode,etc)
   const city = faker.random.boolean() ? 'New York' : '';
+  const email = faker.internet.email(
+    faker.name.firstName(),
+    faker.name.lastName(),
+    'gmail.com',
+  );
 
   return {
     avatar: getRandomNum(1, 7),
     bio: faker.lorem.paragraphs(),
     city,
+    email,
     facebook: faker.random.boolean ? '' : null as any,
     name: `${faker.name.firstName()} ${faker.name.lastName()}`,
     phone: faker.phone.phoneNumber(),
@@ -29,6 +34,7 @@ const createTestUser = async () => ({
   bio: faker.lorem.paragraphs(),
   city: 'New York',
   cityId: 16624,
+  email: 'ross_patton@pm.me',
   facebook: '',
   name: 'Test User',
   phone: faker.phone.phoneNumber(),

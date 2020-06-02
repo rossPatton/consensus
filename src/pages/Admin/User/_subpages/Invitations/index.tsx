@@ -38,7 +38,6 @@ class InvitationsContainer extends Component<tContainerProps, tState> {
     let newUser;
     try {
       newUser = await this.props.postNewUserByGroupIdDispatch({
-        allowNonVerified: invite.group.allowNonVerified,
         groupId: invite.groupId,
         userId: id,
         role: invite.type,

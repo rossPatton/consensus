@@ -1,16 +1,13 @@
 export const accountKeys = [
-  'deletionDeadline',
+  'email',
   'id',
-  'isNew',
-  'isVerified',
-  'privateEmail',
+  'showOnboarding',
   'userId',
   'groupId',
 ];
 
 export const groupKeys = [
   'avatar',
-  'allowNonVerified',
   'category',
   'city',
   'cityId',

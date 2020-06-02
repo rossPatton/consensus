@@ -11,10 +11,10 @@ import {tUserByOrgQuery} from './_types';
 
 export const usersByGroupId = new Router();
 const route = '/api/v1/usersByGroupId';
-const table = 'accounts_roles';
+const table = 'users_roles';
 
 
-// api for interacting with the accounts_roles table
+// api for interacting with the users_roles table
 // not for signing up new users, but for getting users that are members of an org
 // or joining an group, or updating member roles within an org
 usersByGroupId.get(route, async (ctx: Koa.ParameterizedContext) => {
@@ -24,41 +24,30 @@ usersByGroupId.get(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = users;
 });
 
-// joining an group. uses session data since we don't want people to be able to
-// add others to an group, only the logged-in user should be able to do that
+// joining an group
 usersByGroupId.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: tUserByOrgQuery} = ctx;
   await validateSchema<tUserByOrgQuery>(ctx, postSchema, query);
-  const {allowNonVerified, groupId, role, userId} = query;
-
-  const {id: accountId, isVerified}: ts.account = await knex('accounts')
-    .limit(1)
-    .where({userId})
-    .first()
-    .select('id');
-
-  if (!allowNonVerified && !isVerified) {
-    return ctx.throw(400, 'Verify your account before joining this group');
-  }
+  const {groupId, role, userId} = query;
 
   const userByGroupIdRel = await knex(table)
     .limit(1)
-    .where({accountId, groupId, userId, role})
+    .where({groupId, userId, role})
     .first();
 
   if (userByGroupIdRel) {
     try {
       await knex(table)
         .where({id: userByGroupIdRel.id})
-        .update({accountId, groupId, userId, role});
+        .update({groupId, userId, role});
     } catch (err) {
-      return ctx.throw(400, err);
+      return ctx.throw(500, err);
     }
   } else {
     try {
-      await knex(table).insert({accountId, groupId, userId, role});
+      await knex(table).insert({groupId, userId, role});
     } catch (err) {
-      return ctx.throw(400, err);
+      return ctx.throw(500, err);
     }
   }
 

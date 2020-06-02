@@ -1,4 +1,3 @@
-require('dotenv-safe').config();
 import Knex from 'knex';
 import {range} from 'lodash';
 
@@ -14,7 +13,6 @@ const createRelation = async (accountId: number, groupId: number) => {
   }
 
   return {
-    accountId,
     groupId,
     role,
     userId: accountId === 2 ? null : accountId,
@@ -36,6 +34,6 @@ exports.seed = async (knex: Knex) => {
     }
   }
 
-  await knex('accounts_roles').del();
-  await knex('accounts_roles').insert(fakeRelations);
+  await knex('users_roles').del();
+  await knex('users_roles').insert(fakeRelations);
 };

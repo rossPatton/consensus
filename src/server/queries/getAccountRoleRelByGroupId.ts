@@ -12,7 +12,7 @@ export const getAccountRoleRelByGroupId = async (
   let accountRoleRel: ts.roleRel;
   if (account.id) {
     try {
-      accountRoleRel = await knex('accounts_roles')
+      accountRoleRel = await knex('users_roles')
         .limit(1)
         .where({accountId: account.id, groupId})
         .first();

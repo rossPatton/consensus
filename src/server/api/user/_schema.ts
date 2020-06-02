@@ -9,8 +9,6 @@ export const getSchema = Joi.object({
 // post new user, ie user signup form
 export const postSchema = Joi.object({
   email: Joi.string().email(),
-  login: Joi.string().required().min(3),
-  password: Joi.string().required().min(12),
   username: Joi.string().required().min(3),
 });
 
@@ -25,7 +23,6 @@ export const patchSchema = Joi.object({
   id: Joi.number().integer().required(),
   language: Joi.string().alphanum().max(2),
   name: Joi.string(),
-  password: Joi.string().min(12).max(4096).required(),
   phone: Joi.string(),
   privateEmail: Joi.bool(),
   privateMemberships: Joi.bool(),

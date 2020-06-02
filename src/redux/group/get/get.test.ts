@@ -14,7 +14,6 @@ import {failure, init, success} from './actions';
 const mockStore = configureStore([thunk]);
 
 const testGroup = {
-  allowNonVerified: true,
   avatar: '',
   category: 'Union' as ts.category,
   city: 'New York',

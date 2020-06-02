@@ -1,5 +1,5 @@
 // account related thunks
-export { deleteAccount, patchAccount } from './account';
+export { deleteAccount, patchAccount, postAccount } from './account';
 
 // directory related thunks
 export { getCity } from './city';

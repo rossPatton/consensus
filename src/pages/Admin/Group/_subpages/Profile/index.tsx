@@ -61,10 +61,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   updateState = (stateKey: tKeyUnion, ev: React.ChangeEvent<any>) => {
     if (!stateKey) return;
 
-    let {value} = ev.currentTarget;
-    if (stateKey === 'allowNonVerified') {
-      value = !this.state[stateKey];
-    }
+    const {value} = ev.currentTarget;
 
     this.setState({
       [stateKey]: value,

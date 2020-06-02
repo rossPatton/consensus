@@ -5,8 +5,8 @@ import {Mutable} from 'utility-types';
 
 import {accountKeys} from '../_constants';
 import {knex} from '../../db/connection';
-import {encrypt, isValidPw, saltedHash, validateSchema} from '../../utils';
-import {deleteSchema, patchSchema} from './_schema';
+import {validateSchema} from '../../utils';
+import {deleteSchema, patchSchema, postSchema} from './_schema';
 
 export const account = new Router();
 const route = '/api/v1/account';
@@ -20,9 +20,6 @@ account.delete(route, async (ctx: Koa.ParameterizedContext) => {
     id: account.id,
     userId: account.userId,
   });
-
-  const isValidPW = await isValidPw(query.currentPassword, account.password);
-  if (!isValidPW) return ctx.throw(400, 'Password is not correct');
 
   // delete account and user references. leave rsvps, etc
   // group deletions go through a different process
@@ -48,50 +45,44 @@ account.delete(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = {ok: true};
 });
 
-// TODO implement a POST route here as an upsert for non-js environments
 account.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: Mutable<ts.accountQuery>} = ctx;
   await validateSchema<Mutable<ts.accountQuery>>(ctx, patchSchema, query);
 
   const loggedInAccount: ts.account = ctx?.state?.user || {};
-  const isValidPW = await isValidPw(query.currentPassword, loggedInAccount.password);
-  if (!isValidPW) return ctx.throw(400, 'Password is not correct');
+  if (!loggedInAccount) return ctx.throw(401);
 
-  const updateQuery: {[key: string]: unknown} = {
-    deletionDeadline: query.deletionDeadline,
-    email: query.email,
-    login: query.login,
-    privateEmail: query.privateEmail,
-  };
-
-  // handle nulls for deletionDeadline
-  if (updateQuery.deletionDeadline === 'null') {
-    updateQuery.deletionDeadline = null;
-  }
-
-  // if changing password, salt/hash and encrypt first before updating
-  if (query.newPassword) {
-    const safePW = await saltedHash(query.newPassword);
-    updateQuery.password = encrypt(safePW);
-  }
-
-  // if user or group changes their email, reset verification
-  if (updateQuery.email !== loggedInAccount.email) {
-    updateQuery.isVerified = false;
-  }
-
-  let updatedAccount: ts.account[] = [];
-  if (!_.isEmpty(updateQuery)) {
-    try {
-      updatedAccount = await knex(table)
-        .limit(1)
-        .where({id: loggedInAccount.id})
-        .update(updateQuery)
-        .returning(accountKeys);
-    } catch (err) {
-      return ctx.throw(500, err);
-    }
+  let updatedAccount = [] as ts.account[];
+  try {
+    updatedAccount = await knex(table)
+      .limit(1)
+      .where({id: loggedInAccount.id})
+      .update(query)
+      .returning(accountKeys);
+  } catch (err) {
+    return ctx.throw(500, err);
   }
 
   ctx.body = updatedAccount?.[0];
+});
+
+account.post(route, async (ctx: Koa.ParameterizedContext) => {
+  const {query}: {query: Mutable<ts.accountQuery>} = ctx;
+  await validateSchema<Mutable<ts.accountQuery>>(ctx, postSchema, query);
+
+  let newAccount = [] as ts.account[];
+  try {
+    newAccount = await knex(table)
+      .limit(1)
+      .insert(query)
+      .returning(accountKeys);
+  } catch (err) {
+    if (err.constraint === 'accounts_email_unique') {
+      return ctx.throw(500, 'Emails must be unique.');
+    }
+
+    return ctx.throw(500, err);
+  }
+
+  ctx.body = newAccount?.[0];
 });

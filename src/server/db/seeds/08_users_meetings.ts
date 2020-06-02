@@ -1,4 +1,3 @@
-require('dotenv-safe').config();
 import Knex from 'knex';
 import {range} from 'lodash';
 

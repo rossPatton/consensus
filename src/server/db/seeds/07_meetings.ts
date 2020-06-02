@@ -1,4 +1,3 @@
-require('dotenv-safe').config();
 import faker from 'faker';
 import Knex from 'knex';
 import {flatten, range} from 'lodash';

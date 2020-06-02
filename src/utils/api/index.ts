@@ -23,7 +23,7 @@ export const api = async (opts: tApiOpts) => {
 
   if (opts.init) opts.dispatch(opts.init());
 
-  let status = 200 as ts.statusUnion;
+  let status: ts.statusUnion;
   return fetch(endpoint, fetchOpts)
     .then((resp: ts.fetchResponse) => {
       status = resp.status as ts.statusUnion;
@@ -38,20 +38,17 @@ export const api = async (opts: tApiOpts) => {
       if (opts.dispatch) return opts.dispatch(opts.success(json));
       return json;
     })
-    .catch(async (err: ts.fetchResponse<Error>) => {
-      if (err.text) {
-        const message = await err.text();
-        if (opts.dispatch) {
-          return opts.dispatch(opts.failure({message, status}));
-        }
-
-        return loglevel.error({message, status});
+    .catch(async (err: ts.fetchResponse<Error> | string) => {
+      let message = err as string;
+      if (typeof err !== 'string' && err.text) {
+        message = await err.text();
       }
 
       if (opts.dispatch) {
-        return opts.dispatch(opts.failure({message: err, status}));
+        opts.dispatch(opts.failure({message: err, status}));
       }
 
       loglevel.error({message: err, status});
+      throw Error(message);
     });
 };

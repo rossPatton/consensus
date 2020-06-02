@@ -14,7 +14,6 @@ namespace ts {
 
   // get all members of an org by id
   declare type usersByGroupIdQuery = ts.baseQuery & {
-    allowNonVerified?: boolean,
     noPending?: 'true' | 'false',
     groupId: string | number,
     userId?: string | number,

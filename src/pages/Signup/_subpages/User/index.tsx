@@ -2,34 +2,64 @@ import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {Helmet} from '~app/components';
-import {login, postUser} from '~app/redux';
+import {login, postAccount, postUser} from '~app/redux';
+import {api} from '~app/utils';
 
+import {EmailTokenComponent} from './_components/EmailToken';
+import {UserSignupComponent} from './_components/UserSignup';
 import {tContainerProps, tKeyUnion, tPostUserQuery, tState} from './_types';
-import {UserSignupComponent} from './Component';
 
 export class UserSignupContainer extends PureComponent<tContainerProps, tState> {
   state = {
     email: '',
+    emailSent: false,
     error: '',
-    login: '',
-    password: '',
     username: '',
+    token: '',
   };
 
-  register = async () => {
-    const { email, login, password, username } = this.state;
-
-    // add user to db, and log them in on success
+  sendToken = async () => {
     try {
-      await this.props.postUserDispatch({ email, login, password, username });
+      await api({
+        path: '/email/v1/sendVerificationToken',
+        query: {
+          email: this.state.email,
+          type: 'user',
+        },
+      });
     } catch (error) {
-      this.setState({
-        error,
+      return this.setState({
+        error: error.message,
       });
     }
 
-    // return this.props.loginDispatch({username: login, password});
+    this.setState({
+      emailSent: true,
+    });
+  }
+
+  verifyAndRegister = async () => {
+    const { email, token, username } = this.state;
+
+    // add user to db
+    try {
+      await this.props.postUserDispatch({ email, username });
+    } catch (error) {
+      return this.setState({
+        error: error.message,
+      });
+    }
+
+    // and log them in on success
+    try {
+      await this.props.loginDispatch({ email, token });
+    } catch (error) {
+      this.setState({
+        error: error.message,
+      });
+    }
+
+    this.props.history.push('/admin/meetings');
   }
 
   updateState = (stateKey: tKeyUnion, ev: React.ChangeEvent<any>) => {
@@ -39,30 +69,39 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
   }
 
   render() {
+    const {emailSent} = this.state;
     return (
       <>
-        <Helmet
-          canonical="/signup/newUser"
-          title="Create a new Consensus account"
-          meta={[
-            { name: 'description', content: 'Fill our our signup form and start connecting with groups in your area today!' },
-            { name: 'keywords', content: 'user,signup' },
-          ]}
-        />
-        <UserSignupComponent
-          {...this.props}
-          {...this.state}
-          register={this.register}
-          updateState={this.updateState}
-        />
+        {!emailSent && (
+          <EmailTokenComponent
+            {...this.state}
+            sendToken={this.sendToken}
+            updateState={this.updateState}
+          />
+        )}
+        {emailSent && (
+          <UserSignupComponent
+            {...this.state}
+            verifyAndRegister={this.verifyAndRegister}
+            updateState={this.updateState}
+          />
+        )}
       </>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch: Function) => ({
-  loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
-  postUserDispatch: (user: tPostUserQuery) => dispatch(postUser(user)),
+const mapStateToProps = (store: any) => ({
+  account: store.account,
 });
 
-export const UserSignup = connect(null, mapDispatchToProps)(UserSignupContainer);
+const mapDispatchToProps = (dispatch: Function) => ({
+  loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
+  postAccountDispatch: (query: {email: string}) => dispatch(postAccount(query)),
+  postUserDispatch: (query: tPostUserQuery) => dispatch(postUser(query)),
+});
+
+export const UserSignup = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(UserSignupContainer);

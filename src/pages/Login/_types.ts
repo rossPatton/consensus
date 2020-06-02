@@ -4,7 +4,7 @@ export type tState = {
   username: string,
 };
 
-export type tStateUnion = keyof tState;
+export type tKeyUnion = keyof tState;
 
 export type tStore = {
   session: ts.thunk<ts.session>,
@@ -17,5 +17,5 @@ export type tContainerProps = tStore & {
 export type tComponentProps = tState & {
   error: string | ts.fetchResponse<Error>,
   onSubmit: (token: string) => void,
-  updateState: (stateKey: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
+  updateState: (stateKey: tKeyUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 }

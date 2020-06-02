@@ -29,6 +29,8 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
           id="nameInput"
           name="name"
           type="text"
+          minLength={3}
+          maxLength={4096}
           className="w-full"
           onChange={ev => {
             props.updateState('name', ev.currentTarget.value);
@@ -110,7 +112,6 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
         </select>
       </label>
       <div className="text-sm mb-3">
-        {/* @TODO maybe have a mixed option here? */}
         {props.type === 'public' && 'Anyone can join, with no vetting process. Meetings are public, visible to anyone.'}
         {props.type === 'private' && 'Anyone can join, but members must be approved by a mod or admin first. Meetings are visible only to members.'}
         {props.type === 'hidden' && 'Like private, but members must be invited by the group admin or co-organizer. Group does not show in internal search results, and is hidden from search engines.'}
@@ -132,6 +133,7 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
           required
           id="loginInput"
           minLength={3}
+          maxLength={4096}
           name="login"
           type="text"
           className="w-full"

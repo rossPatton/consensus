@@ -2,7 +2,6 @@ namespace ts {
   declare type privacyEnum = 'public' | 'private' | 'hidden';
 
   declare type group = Readonly<{
-    allowNonVerified: boolean,
     avatar: string,
     category: ts.category,
     city: string,
@@ -11,28 +10,24 @@ namespace ts {
     countryId: number,
     created_at?: Date,
     description: string,
-    // lives in accounts table,
-    // but we merge into group when rendering user pages
-    email?: string,
+    email: string,
     facebook?: string,
+    handle: string,
     id: number,
     memberName: string,
     modName: string,
     name: string,
     region: string,
     regionId: number,
-    handle: string,
-    updated_at?: Date,
-    type: ts.privacyEnum,
+    showOnboarding: boolean,
     twitter?: string,
+    type: ts.privacyEnum,
+    updated_at?: Date,
     website?: string,
   }>;
 
   // if posting/patching most values are up for grabs
-  declare type groupUpsertQuery = Partial<ts.group> & {
-    login?: string, // if posting (new group)
-    password: string,
-  };
+  declare type groupUpsertQuery = Partial<ts.group>;
 
   // if getting, add db delimiters
   declare type getGroupQuery = Partial<ts.group> & ts.baseQuery;
