@@ -14,7 +14,6 @@ verifyEmail.get('/email/v1/sendVerificationToken',
 
     const secret = speakeasy.generateSecret({length: 20});
 
-    ctx.session.type = query.type;
     if (typeof ctx.session.hotpCounter === 'number') {
       ctx.session.hotpCounter += 1;
     } else {
@@ -27,6 +26,7 @@ verifyEmail.get('/email/v1/sendVerificationToken',
       encoding: 'base32',
     });
     ctx.session.hotpSecret = secret.base32;
+    console.log('token => ', token);
 
     const resp = await sendEmail({
       from: `Consensus <noreply@${__MAIL_DOMAIN__}>`,

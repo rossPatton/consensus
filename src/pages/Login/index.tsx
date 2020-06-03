@@ -46,11 +46,11 @@ export class LoginContainer extends PureComponent<tContainerProps, tState> {
     });
 
   verifyAndLogin = async () => {
-    const { email, token } = this.state;
+    const { email, token, type } = this.state;
 
     // and log them in on success
     try {
-      await this.props.loginDispatch({ email, token });
+      await this.props.loginDispatch({ email, token, type });
     } catch (error) {
       this.setState({
         error: error.message,

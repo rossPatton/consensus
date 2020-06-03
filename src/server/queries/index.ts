@@ -1,7 +1,6 @@
 export {getAccountRoleRelByGroupId} from './getAccountRoleRelByGroupId';
 export {getMeetingByQuery} from './getMeetingByQuery';
 export {getGroupById} from './getGroupById';
-export {getProfileByAccountId} from './getProfileByAccountId';
 export {getRSVPByMeetingId} from './getRSVPByMeetingId';
 export {getRSVPsByUserId} from './getRSVPsByUserId';
 export {getSession} from './getSession';

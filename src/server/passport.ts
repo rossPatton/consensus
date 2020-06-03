@@ -18,27 +18,29 @@ passport.serializeUser(async (accountWithType: ts.account, done) => {
 });
 
 passport.deserializeUser(async (accountWithType: ts.account, done) => {
-  if (accountWithType.type === 'user') {
-    try {
-      const user: ts.user = await knex('users')
-        .limit(1)
-        .where({id: accountWithType.id})
-        .first();
-      return done(null, user);
-    } catch (err) {
-      return done(err, null);
-    }
-  } else if (accountWithType.type === 'group') {
-    try {
-      const group: ts.group = await knex('groups')
-        .limit(1)
-        .where({id: accountWithType.id})
-        .first();
-      return done(null, group);
-    } catch (err) {
-      return done(err, null);
-    }
-  }
+  console.log('deserialize accountWithType => ', accountWithType);
+  return done(null, accountWithType);
+  // if (accountWithType.type === 'user') {
+  //   try {
+  //     const user: ts.user = await knex('users')
+  //       .limit(1)
+  //       .where({id: accountWithType.id})
+  //       .first();
+  //     return done(null, user);
+  //   } catch (err) {
+  //     return done(err, null);
+  //   }
+  // } else if (accountWithType.type === 'group') {
+  //   try {
+  //     const group: ts.group = await knex('groups')
+  //       .limit(1)
+  //       .where({id: accountWithType.id})
+  //       .first();
+  //     return done(null, group);
+  //   } catch (err) {
+  //     return done(err, null);
+  //   }
+  // }
 });
 
 // we don't use the default username/pw approach
@@ -50,10 +52,12 @@ passport.use(new LocalStrategy(opts, async (
   u: any, p: any,
   done: tDone) => {
   const {query} = req.ctx;
-  const {type} = req.ctx.session;
+  console.log('passport query => ', query);
+  // set when user initiates login or signup
+  const {hotpCounter, hotpSecret} = req.ctx.session;
 
   let account: ts.account;
-  if (type === 'user') {
+  if (query.type === 'user') {
     try {
       account = await knex('users')
         .limit(1)
@@ -62,7 +66,8 @@ passport.use(new LocalStrategy(opts, async (
     } catch (err) {
       return done(err, false);
     }
-  } else if (type === 'group') {
+  } else if (query.type === 'group') {
+    console.log('searching for group account by => ', query.email)
     try {
       account = await knex('groups')
         .limit(1)
@@ -73,6 +78,8 @@ passport.use(new LocalStrategy(opts, async (
     }
   }
 
+  console.log('account => ', account);
+
   if (!account) {
     return done({
       message: 'Account not found. Did you enter your email correctly?',
@@ -81,13 +88,13 @@ passport.use(new LocalStrategy(opts, async (
   }
 
   const tokenValidates = speakeasy.hotp.verify({
-    counter: req.ctx.session.hotpCounter,
-    secret: req.ctx.session.hotpSecret,
+    counter: hotpCounter,
+    secret: hotpSecret,
     encoding: 'base32',
     token: query.token,
   });
 
-  const accountWithType = {...account, type};
+  const accountWithType = {...account, type: query.type};
 
   // if passwords match, return the user
   // instead of checking password here, just validate the token instead

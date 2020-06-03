@@ -10,7 +10,7 @@ export const EmailTokenComponent = memo((props: tProps) => (
     includeCaptcha
     className="animated fadeInUp"
     error={props.error}
-    legend="Login with email"
+    legend={`Login with your ${props.type} email`}
     name="emailVerificationForm"
     onSubmit={props.sendToken}
     renderFields={() => (
