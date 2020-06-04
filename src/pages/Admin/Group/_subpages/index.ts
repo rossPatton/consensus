@@ -1,9 +1,5 @@
 import loadable from '@loadable/component';
 
-export const Account = loadable(() =>
-  import(/* webpackChunkName: "GroupAdmin Account" */'./Account'),
-);
-
 export const DeleteGroup = loadable(() =>
   import(/* webpackChunkName: "GroupAdmin DeleteGroup" */'./DeleteGroup'),
 );

@@ -245,7 +245,32 @@
 <a name='L187'></a><a href='#L187'>187</a>
 <a name='L188'></a><a href='#L188'>188</a>
 <a name='L189'></a><a href='#L189'>189</a>
-<a name='L190'></a><a href='#L190'>190</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L190'></a><a href='#L190'>190</a>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a>
+<a name='L193'></a><a href='#L193'>193</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -264,28 +289,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -377,12 +380,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -436,7 +442,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import dayJS from 'dayjs';
 import _ from 'lodash';
-import loglevel from 'loglevel';
 import qs from 'query-string';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
@@ -457,6 +462,7 @@ class PlanMeetingContainer extends PureComponent&lt;tContainerProps, tState&gt; 
     date: dayJS().toISOString(),
     description: '',
     endTime: '21:00',
+    error: '',
     host: this.props.group.name,
     id: undefined as number | undefined,
     isCopy: false,
@@ -526,7 +532,7 @@ class PlanMeetingContainer extends PureComponent&lt;tContainerProps, tState&gt; 
 &nbsp;
   onSubmit = <span class="fstat-no" title="function not covered" >as</span>ync (saveAsDraft: boolean = <span class="branch-0 cbranch-no" title="branch not covered" >false)</span> =&gt; {
     const {img} = <span class="cstat-no" title="statement not covered" >this.props;</span>
-    const {date, endTime, id, isCopy, time, ...restOfMeeting} = <span class="cstat-no" title="statement not covered" >this.state;</span>
+    const {date, endTime, error, id, isCopy, time, ...restOfMeeting} = <span class="cstat-no" title="statement not covered" >this.state;</span>
 &nbsp;
     const timeArr = <span class="cstat-no" title="statement not covered" >parseTimeString(time);</span>
     const endTimeArr = <span class="cstat-no" title="statement not covered" >parseTimeString(endTime);</span>
@@ -561,8 +567,10 @@ class PlanMeetingContainer extends PureComponent&lt;tContainerProps, tState&gt; 
 &nbsp;
       const planMeeting = <span class="cstat-no" title="statement not covered" >await dispatch(newOrUpdatedMeeting);</span>
 <span class="cstat-no" title="statement not covered" >      newMeeting = planMeeting.payload;</span>
-    } catch (err) {
-<span class="cstat-no" title="statement not covered" >      return loglevel.error('failed to save meeting to db', err);</span>
+    } catch (error) {
+<span class="cstat-no" title="statement not covered" >      this.setState({</span>
+        error,
+      });
     }
 &nbsp;
     // update redux on client side on meeting upsert success
@@ -573,6 +581,7 @@ class PlanMeetingContainer extends PureComponent&lt;tContainerProps, tState&gt; 
 <span class="cstat-no" title="statement not covered" >    if (typeof newMeeting.id === 'number') {</span>
 <span class="cstat-no" title="statement not covered" >      this.setState({</span>
         id: newMeeting.id,
+        slug: newMeeting.slug,
       });
     }
   }
@@ -630,7 +639,7 @@ export default PlanMeeting;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu May 21 2020 16:49:33 GMT-0400 (Eastern Daylight Time)
+                at Thu Jun 04 2020 01:02:50 GMT-0400 (Eastern Daylight Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

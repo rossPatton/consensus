@@ -9,8 +9,6 @@ import {getSession} from './queries';
 export const initStoreForSSR = async (ctx: Koa.ParameterizedContext) => {
   const session = await getSession(ctx);
 
-  console.log('ssr session => ', session);
-
   // take all that and build our session
   let store = {};
   if (session?.data?.isAuthenticated) {

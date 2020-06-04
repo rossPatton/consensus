@@ -43,13 +43,11 @@ export const sessionReducer = (state = initialState, action: tActions) => {
   case PATCH_FAILURE:
     return failureReturn;
 
-  case LOGIN_SUCCESS: {
-    console.log('session payload > ', action);
+  case LOGIN_SUCCESS:
     return {
       ...successReturn,
       fetched: true,
     };
-  }
   case LOGOUT_SUCCESS:
     return {
       ...successReturn,

@@ -21,7 +21,6 @@ passport.deserializeUser(async (
   obj: {id: number, sessionType: 'user' | 'group'},
   done,
 ) => {
-  console.log('deserialize obj => ', obj);
   let account: ts.user | ts.group;
   if (obj.sessionType === 'user') {
     try {
@@ -42,8 +41,6 @@ passport.deserializeUser(async (
       return done(err, null);
     }
   }
-
-  // console.log('deserialize account => ', account);
 
   return done(null, account);
 });
@@ -73,7 +70,6 @@ passport.use(new LocalStrategy(opts, async (
       return done(err, false);
     }
   } else if (query.sessionType === 'group') {
-    console.log('searching for group account by => ', query.email);
     try {
       account = await pg('groups')
         .limit(1)

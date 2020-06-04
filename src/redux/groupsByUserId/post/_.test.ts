@@ -1,6 +1,8 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
+import {testGroup1} from '~app/constants/jest';
+
 import {
   POST_FAILURE,
   POST_INIT,
@@ -12,24 +14,6 @@ import {
 import {failure, init, success} from './actions';
 
 const mockStore = configureStore([thunk]);
-
-const testGroup = {
-  avatar: '',
-  category: 'Union' as ts.category,
-  city: 'New York',
-  cityId: 1,
-  country: 'United States',
-  countryId: 1,
-  description: '',
-  id: 1,
-  memberName: 'member',
-  modName: 'facilitator',
-  name: 'Tech Workers Coalition Chapter',
-  region: 'New York',
-  regionId: 1,
-  handle: 'tech-workers-coalition-chapter',
-  type: 'private' as ts.privacyEnum,
-};
 
 describe('redux/groupsByUserId/get', () => {
   it('creates correct POST_INIT action', () => {
@@ -45,11 +29,11 @@ describe('redux/groupsByUserId/get', () => {
   it('creates correct POST_SUCCESS action', () => {
     const expectedActionPayload: tSuccessAction[] = [{
       type: POST_SUCCESS,
-      payload: testGroup,
+      payload: testGroup1,
     }];
 
     const store = mockStore({});
-    store.dispatch(success(testGroup));
+    store.dispatch(success(testGroup1));
     expect(store.getActions()).toStrictEqual(expectedActionPayload);
   });
 

@@ -4,25 +4,26 @@ namespace ts {
     created_at?: Date,
     city?: string, // city.name
     cityId?: number, // city.id
-    // lives in accounts table,
-    // but we merge into user when rendering user pages
+    country: string,
+    countryId: number,
     email: string,
-    facebook: string,
+    facebook?: string,
     id: number,
     region?: string,
     regionId?: number,
     sessionType: 'group' | 'user',
     showOnboarding?: boolean,
     updated_at?: Date,
-    twitter: string,
-    website: string,
+    twitter?: string,
+    website?: string,
   }>;
+
+  declare type sessionType = 'group' | 'user';
 
   declare type adminSectionParams = ts.match & {
     params: {
       page?: string,
-      section: 'account'
-        | 'deleteAccount'
+      section: 'deleteAccount'
         | 'deleteGroup'
         | 'invite'
         | 'meetings'

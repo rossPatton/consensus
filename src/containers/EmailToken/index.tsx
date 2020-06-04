@@ -44,7 +44,6 @@ export class EmailTokenContainer extends PureComponent<tContainerProps, tState> 
 
   render() {
     const {email, emailSent} = this.state;
-    console.log('email token state => ', this.state);
     return (
       <>
         {!emailSent && (

@@ -59,13 +59,6 @@ export const MeetingFeaturedImage = loadable(() =>
   import(/* webpackChunkName: "MeetingFeaturedImage" */'./MeetingFeaturedImage'),
 );
 
-export const PasswordInput = loadable(() =>
-  import(
-    /* webpackMode: "eager" */
-    /* webpackChunkName: "PasswordInput" */
-    './PasswordInput'),
-);
-
 export const PlaceholderImage = loadable(() =>
   import(/* webpackChunkName: "PlaceholderImage" */'./PlaceholderImage'),
 );

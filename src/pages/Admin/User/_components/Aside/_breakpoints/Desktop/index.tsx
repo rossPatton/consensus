@@ -25,11 +25,6 @@ const Aside = memo((props: tProps) => {
             @{profile.username}
           </Link>
           <div className="font-semibold text-sm text-gray-5">
-            <Link
-              to="/admin/account"
-              className="mr-1">
-              Account
-            </Link>
             <Link to="/admin/profile">
               Profile
             </Link>

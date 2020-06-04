@@ -9,7 +9,6 @@ import {MediaContext} from '~app/context';
 
 import {Aside} from './_components';
 import {
-  Account,
   DeleteGroup,
   InviteMember,
   Meetings,
@@ -23,7 +22,6 @@ const GroupAdminContainer = memo((props: tProps) => {
   const {isDesktop, isMobile} = useContext(MediaContext);
   const {match, session} = props;
   const {section} = match.params;
-  const isAccount = section === 'account';
   const isDelete = section === 'deleteGroup';
   const isInvite = section === 'invite';
   const isMeetings = section === 'meetings';
@@ -58,7 +56,6 @@ const GroupAdminContainer = memo((props: tProps) => {
           isMembers={isMembers}
         />
         <div className="order-1 d:order-2 w-full d:w-2/3 mb-2 d:mb-0">
-          {isAccount && <Account match={match} />}
           {isDelete && <DeleteGroup />}
           {isInvite && <InviteMember />}
           {isMeetings && <Meetings match={match} />}

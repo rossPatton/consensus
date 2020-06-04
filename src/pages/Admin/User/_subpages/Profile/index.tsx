@@ -29,10 +29,9 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     }
   }
 
-  save = async (ev: React.FormEvent<HTMLFormElement>) => {
-    ev.preventDefault();
-    const {loginDispatch, patchUserDispatch, sessionThunk} = this.props;
-    const {login, profile} = sessionThunk.data;
+  save = async () => {
+    const {patchUserDispatch, sessionThunk} = this.props;
+    const {profile} = sessionThunk.data;
 
     if (profile.id) {
       try {
@@ -46,15 +45,16 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       }
     }
 
+    // TODO just use action, no thunk needed
     // update current session to reflect new settings
-    try {
-      await loginDispatch({
-        username: login,
-        password: this.state.password,
-      });
-    } catch (err) {
-      loglevel.error(err);
-    }
+    // try {
+    //   await loginDispatch({
+    //     username: login,
+    //     password: this.state.password,
+    //   });
+    // } catch (err) {
+    //   loglevel.error(err);
+    // }
 
     this.props.history.push('/admin/profile');
   }

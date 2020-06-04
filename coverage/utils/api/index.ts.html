@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.33% </span>
+                <span class="strong">73.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>19/30</span>
+                <span class='fraction'>22/30</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">36.36% </span>
+                <span class="strong">52.38% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/22</span>
+                <span class='fraction'>11/21</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.67% </span>
+                <span class="strong">77.78% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/27</span>
+                <span class='fraction'>21/27</span>
             </div>
         
             
@@ -117,9 +117,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -128,40 +130,38 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import loglevel from 'loglevel';
@@ -170,23 +170,26 @@ import {agent, objToQueryString} from '..';
 import {tApiOpts} from './_types';
 &nbsp;
 export const api = async (opts: tApiOpts) =&gt; {
-  const {body, method = 'GET', path, query = <span class="branch-0 cbranch-no" title="branch not covered" >{}}</span> = opts;
-  const qs = objToQueryString(query);
+  const {body, method = 'GET', path, query} = opts;
 &nbsp;
-  const fetchOpts = {agent, body, method};
+  const fetchOpts = {agent, method} as {[key: string]: any};
   <span class="missing-if-branch" title="if path not taken" >I</span>if (opts.credentials) {
-<span class="cstat-no" title="statement not covered" >    (fetchOpts as any).credentials = __DEV__ ? 'include' : 'same-origin';</span>
+<span class="cstat-no" title="statement not covered" >    fetchOpts.credentials = 'same-origin';</span>
+  }
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (body) {
+<span class="cstat-no" title="statement not covered" >    fetchOpts.body = body;</span>
   }
 &nbsp;
   // not all api endpoints require query params
   let endpoint = path;
-  <span class="missing-if-branch" title="else path not taken" >E</span>if (qs) {
+  <span class="missing-if-branch" title="else path not taken" >E</span>if (query) {
+    const qs = objToQueryString(query);
     endpoint = `${path}?${qs}`;
   }
 &nbsp;
   <span class="missing-if-branch" title="else path not taken" >E</span>if (opts.init) opts.dispatch(opts.init());
 &nbsp;
-  let status = 200 as ts.statusUnion;
+  let status: ts.statusUnion;
   return fetch(endpoint, fetchOpts)
     .then((resp: ts.fetchResponse) =&gt; {
       status = resp.status as ts.statusUnion;
@@ -201,21 +204,18 @@ export const api = async (opts: tApiOpts) =&gt; {
 <span class="cstat-no" title="statement not covered" >      if (opts.dispatch) <span class="cstat-no" title="statement not covered" >return opts.dispatch(opts.success(json));</span></span>
 <span class="cstat-no" title="statement not covered" >      return json;</span>
     })
-    .catch(async (err: ts.fetchResponse&lt;Error&gt;) =&gt; {
-      <span class="missing-if-branch" title="if path not taken" >I</span>if (err.text) {
-        const message = <span class="cstat-no" title="statement not covered" >await err.text();</span>
-<span class="cstat-no" title="statement not covered" >        if (opts.dispatch) {</span>
-<span class="cstat-no" title="statement not covered" >          return opts.dispatch(opts.failure({message, status}));</span>
-        }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >        return loglevel.error({message, status});</span>
+    .catch(async (err: ts.fetchResponse&lt;Error&gt; | string) =&gt; {
+      let message = err as string;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof err !== 'string' &amp;&amp; err.text) {
+<span class="cstat-no" title="statement not covered" >        message = await err.text();</span>
       }
 &nbsp;
       <span class="missing-if-branch" title="else path not taken" >E</span>if (opts.dispatch) {
-        return opts.dispatch(opts.failure({message: err, status}));
+        opts.dispatch(opts.failure({message: err, status}));
       }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      loglevel.error({message: err, status});</span>
+      loglevel.error({message: err, status});
+      throw Error(message);
     });
 };
 &nbsp;</pre></td></tr></table></pre>
@@ -225,7 +225,7 @@ export const api = async (opts: tApiOpts) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu May 21 2020 16:49:33 GMT-0400 (Eastern Daylight Time)
+                at Thu Jun 04 2020 01:02:50 GMT-0400 (Eastern Daylight Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

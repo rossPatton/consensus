@@ -2,103 +2,163 @@
 
 exports[`renders as expected 1`] = `
 <ul
-  className="flex flex-row flex-wrap justify-center leading-none"
+  className="d:pl-5 d:pr-5 font-semibold text-left"
 >
   <li
-    className="w-1/2 d:w-1/4 p-1 mb-1"
+    className="w-full d:pl-5 d:pr-5 mb-3 d:mb-4"
   >
     <div
-      className="w-full block d:mr-1 d:mr-0 mb-1 d:mb-2"
+      className="flex"
+    >
+      <h2
+        className="text-2 d:text-1 w-1/2 d:max-w-1/2 mb-2"
+      >
+        <a
+          href="/categories/community"
+          onClick={[Function]}
+        >
+          Community
+        </a>
+      </h2>
+    </div>
+    <div
+      className="flex flex-row"
     >
       <a
+        className="w-full d:min-w-1/2 mr-3"
         href="/categories/community"
         onClick={[Function]}
       >
         <img
           alt=""
-          src="https://consensus.nyc3.digitaloceanspaces.com/static/community.svg"
+          className="w-full rounded-lg"
+          src="/images/community_sm.svg"
           width="480"
         />
       </a>
+      <p
+        className="hidden d:block text-2 text-gray-5 leading-loose"
+      >
+        Your local neighborhood group. From your church, to community centers, any kind of miscellaneous group can be found here.
+      </p>
     </div>
-    <a
-      href="/categories/community"
-      onClick={[Function]}
-    >
-      Community
-    </a>
   </li>
   <li
-    className="w-1/2 d:w-1/4 p-1 mb-1"
+    className="w-full d:pl-5 d:pr-5 mb-3 d:mb-4"
   >
     <div
-      className="w-full block d:mr-1 d:mr-0 mb-1 d:mb-2"
+      className="flex justify-end"
+    >
+      <h2
+        className="text-2 d:text-1 w-1/2 d:max-w-1/2 mb-2"
+      >
+        <a
+          href="/categories/cooperative"
+          onClick={[Function]}
+        >
+          Cooperative
+        </a>
+      </h2>
+    </div>
+    <div
+      className="flex flex-row flex-row-reverse"
     >
       <a
+        className="w-full d:min-w-1/2 ml-3"
         href="/categories/cooperative"
         onClick={[Function]}
       >
         <img
           alt=""
-          src="https://consensus.nyc3.digitaloceanspaces.com/static/cooperative.svg"
+          className="w-full rounded-lg"
+          src="/images/cooperative_sm.svg"
           width="480"
         />
       </a>
+      <p
+        className="hidden d:block text-2 text-gray-5 leading-loose"
+      >
+        For your local worker-owned or membership-based cooperative. Come to consensus, on Consensus.
+      </p>
     </div>
-    <a
-      href="/categories/cooperative"
-      onClick={[Function]}
-    >
-      Cooperative
-    </a>
   </li>
   <li
-    className="w-1/2 d:w-1/4 p-1 mb-1"
+    className="w-full d:pl-5 d:pr-5 mb-3 d:mb-4"
   >
     <div
-      className="w-full block d:mr-1 d:mr-0 mb-1 d:mb-2"
+      className="flex"
+    >
+      <h2
+        className="text-2 d:text-1 w-1/2 d:max-w-1/2 mb-2"
+      >
+        <a
+          href="/categories/union"
+          onClick={[Function]}
+        >
+          Unions and Labor
+        </a>
+      </h2>
+    </div>
+    <div
+      className="flex flex-row"
     >
       <a
+        className="w-full d:min-w-1/2 mr-3"
         href="/categories/union"
         onClick={[Function]}
       >
         <img
           alt=""
-          src="https://consensus.nyc3.digitaloceanspaces.com/static/union.svg"
+          className="w-full rounded-lg"
+          src="/images/union_sm.svg"
           width="480"
         />
       </a>
+      <p
+        className="hidden d:block text-2 text-gray-5 leading-loose"
+      >
+        Find your local union, worker's center or other labor-affilitated group. Never miss another union meeting!
+      </p>
     </div>
-    <a
-      href="/categories/union"
-      onClick={[Function]}
-    >
-      Union
-    </a>
   </li>
   <li
-    className="w-1/2 d:w-1/4 p-1 mb-1"
+    className="w-full d:pl-5 d:pr-5 mb-3 d:mb-4"
   >
     <div
-      className="w-full block d:mr-1 d:mr-0 mb-1 d:mb-2"
+      className="flex justify-end"
+    >
+      <h2
+        className="text-2 d:text-1 w-1/2 d:max-w-1/2 mb-2"
+      >
+        <a
+          href="/categories/political"
+          onClick={[Function]}
+        >
+          Political
+        </a>
+      </h2>
+    </div>
+    <div
+      className="flex flex-row flex-row-reverse"
     >
       <a
+        className="w-full d:min-w-1/2 ml-3"
         href="/categories/political"
         onClick={[Function]}
       >
         <img
           alt=""
-          src="https://consensus.nyc3.digitaloceanspaces.com/static/political.svg"
+          className="w-full rounded-lg"
+          src="/images/political_sm.svg"
           width="480"
         />
       </a>
+      <p
+        className="hidden d:block text-2 text-gray-5 leading-loose"
+      >
+        From anarchist collectives to the Democratic Socialists of America or Tech Worker's Coalition, get involved with your local political group today.
+      </p>
     </div>
-    <a
-      href="/categories/political"
-      onClick={[Function]}
-    >
-      Political
-    </a>
   </li>
 </ul>
 `;

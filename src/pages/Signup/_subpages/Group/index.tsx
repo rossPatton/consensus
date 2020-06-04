@@ -24,7 +24,6 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
 
   verifyAndRegister = async () => {
     const {showRegionField, token, ...newGroup} = this.state;
-    console.log('group register state => ', this.state);
 
     try {
       await this.props.postGroupDispatch({
@@ -73,8 +72,6 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
       type,
     } = this.state;
 
-    console.log('group state => ', this.state);
-
     const disabled = !category
       || !city
       || !cityId
@@ -84,8 +81,6 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
       || !region
       || !regionId
       || !type;
-
-    console.log('disabled => ', disabled);
 
     return (
       <>

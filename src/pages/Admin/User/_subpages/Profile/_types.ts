@@ -3,10 +3,11 @@ import {History} from 'history';
 export type tState = Partial<ts.user> & {
   city: string,
   cityId: number,
-  password: string,
   region: string,
   regionId: number,
+  error: string,
 };
+
 export type tKeyUnion = keyof tState;
 
 export type tStore = {
@@ -24,7 +25,7 @@ export type tContainerProps = {
 }
 
 export type tComponentProps = tState & {
-  save: (ev: React.FormEvent<HTMLFormElement>) => void,
+  save: () => void,
   session: ts.session<ts.user>,
   subsection: string,
   updateState: (

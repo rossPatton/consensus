@@ -1,52 +1,32 @@
-import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {deleteAccount, logout} from '~app/redux';
+import {deleteUser, logout} from '~app/redux';
 
-import {tContainerProps, tState, tStateUnion} from './_types';
+import {tContainerProps} from './_types';
 import {DeleteAccountComponent} from './Component';
 
-class DeleteAccountContainer extends PureComponent<tContainerProps, tState> {
-  constructor(props: tContainerProps) {
-    super(props);
+class DeleteAccountContainer extends PureComponent<tContainerProps> {
+  state = {
+    error: '',
+  };
 
-    this.state = {
-      hasMounted: false,
-      currentPassword: '',
-    };
-  }
-
-  componentDidMount() {
-    this.setState({
-      hasMounted: true,
-    });
-  }
-
-  deleteAccount = (ev: React.FormEvent<HTMLFormElement>) => {
-    ev.preventDefault();
-    const {currentPassword} = this.state;
-    this.props
-      .deleteAccountDispatch({currentPassword})
-      .then(this.props.logoutDispatch)
-      .catch(loglevel.error);
-    // this.props.logoutDispatch()
-    //   .then(() => this.props.deleteAccountDispatch({login, currentPassword}))
-    //   .catch(loglevel.error);
-  }
-
-  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
-    this.setState({
-      [stateKey]: ev.currentTarget.value,
-    } as Pick<tState, tStateUnion>);
+  deleteUser = async () => {
+    try {
+      await this.props
+        .deleteUserDispatch({id: this.props.sessionThunk.data.id});
+    } catch (error) {
+      return this.setState({
+        error: error.message,
+      });
+    }
   }
 
   render() {
     return (
       <DeleteAccountComponent
-        {...this.state}
-        deleteAccount={this.deleteAccount}
-        updateState={this.updateState}
+        deleteUser={this.deleteUser}
+        error={this.state.error}
       />
     );
   }
@@ -57,7 +37,7 @@ const mapStateToProps = (store: {session: ts.thunk<ts.session>}) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  deleteAccountDispatch: (query: ts.accountQuery) => dispatch(deleteAccount(query)),
+  deleteUserDispatch: (query: ts.idQuery) => dispatch(deleteUser(query)),
   logoutDispatch: () => dispatch(logout()),
 });
 

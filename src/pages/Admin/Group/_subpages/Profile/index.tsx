@@ -1,9 +1,8 @@
 import _ from 'lodash';
-import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {login, patchAccount, patchGroup} from '~app/redux';
+import {login, patchGroup} from '~app/redux';
 
 import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
 import {ProfileComponent} from './Component';
@@ -29,33 +28,37 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
 
     this.state = {
       ...editablePartOfGroup,
-      password: '',
+      error: '',
     };
   }
 
-  onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
-    ev.preventDefault();
+  onSubmit = async (token: string) => {
     try {
       await this.props.patchGroupDispatch({
         ...this.state,
         avatar: this.props.avatar,
       });
-    } catch (err) {
-      loglevel.error(err);
+    } catch (error) {
+      return this.setState({
+        error: error.message,
+      });
     }
 
     // update session by 'logging in' again, with the new account info
     try {
       await this.props.loginDispatch({
-        username: this.props.sessionThunk.data.login,
-        password: this.state.password,
+        email: this.props.sessionThunk.data.login,
+        sessionType: 'group',
+        token,
       });
-    } catch (err) {
-      loglevel.error(err);
+    } catch (error) {
+      return this.setState({
+        error: error.message,
+      });
     }
 
     // reset on submit
-    this.setState({password: ''});
+    // this.setState({});
   }
 
   updateState = (stateKey: tKeyUnion, ev: React.ChangeEvent<any>) => {
@@ -95,7 +98,6 @@ const mapStateToProps = (store: tStore) => {
 
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
-  patchAccountDispatch: (query: ts.accountQuery) => dispatch(patchAccount(query)),
   patchGroupDispatch: (query: ts.groupUpsertQuery) => dispatch(patchGroup(query)),
 });
 

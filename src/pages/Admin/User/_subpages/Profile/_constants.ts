@@ -4,11 +4,13 @@ export const initialState = {
   city: '',
   cityId: 0,
   email: '',
+  error: '',
   name: '',
   password: '',
   privateMemberships: false,
   privateRSVP: false,
   region: '',
   regionId: 0,
+  sessionType: 'user' as ts.sessionType,
   username: '',
 };

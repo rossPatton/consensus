@@ -25,8 +25,8 @@ verifyEmail.get('/email/v1/sendVerificationToken',
       secret: secret.base32,
       encoding: 'base32',
     });
+
     ctx.session.hotpSecret = secret.base32;
-    console.log('token => ', token);
 
     const resp = await sendEmail({
       from: `Consensus <noreply@${__MAIL_DOMAIN__}>`,

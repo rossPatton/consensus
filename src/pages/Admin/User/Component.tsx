@@ -5,7 +5,6 @@ import {MediaContext} from '~app/context';
 
 import {Aside} from './_components';
 import {
-  Account,
   DeleteAccount,
   Invitations,
   Meetings,
@@ -20,7 +19,6 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
   const {params} = props.match;
   const {section} = params;
 
-  const isAccount = section === 'account';
   const isDeleteAccount = section === 'deleteAccount';
   const isInvite = section === 'invite';
   const isMeetings = section === 'meetings';
@@ -33,18 +31,6 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
       <div className="flex flex-col d:flex-row items-start">
         {isMobile && (
           <div className="w-full text-center font-bold mb-2">
-            {isAccount && (
-              <span className="mr-2 text-gray-5">
-                Account
-              </span>
-            )}
-            {!isAccount && (
-              <Link
-                to="/admin/account"
-                className="mr-2">
-                Account
-              </Link>
-            )}
             {isProfile && (
               <span className="mr-2 text-gray-5">
                 Profile
@@ -102,13 +88,6 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
         />
         <div className="border shadow order-1 d:order-2 w-full d:w-2/3 mb-2 d:mb-0">
           <div className="bg-white rounded p-2 w-full">
-            {isAccount
-              && (
-                <Account
-                  history={props.history}
-                  match={props.match}
-                />
-              )}
             {isDeleteAccount && <DeleteAccount />}
             {isInvite && <Invitations />}
             {isMeetings && <Meetings />}

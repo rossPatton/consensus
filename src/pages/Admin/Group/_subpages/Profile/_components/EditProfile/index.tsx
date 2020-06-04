@@ -2,145 +2,151 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {FileUpload, PasswordInput} from '~app/components';
+import {FileUpload, Form} from '~app/components';
 import {categories} from '~app/constants';
 
 import {tComponentProps} from '../../_types';
 
 const EditProfile = memo((props: tComponentProps) => (
-  <form
-    id="form"
+  <Form
     className="w-full"
-    onSubmit={props.onSubmit}>
-    <fieldset>
-      <legend>
-        <h2 className="text-3 mb-2 leading-none">
-          Edit your Profile
-        </h2>
-      </legend>
-      <FileUpload
-        fieldKey="groupAvatar"
-        folder="groups"
-        info="We recommend a size of at least 60x60px"
-        prefix={`g${props.session.profile.id}:gAv`}
-        title="Upload New Group Logo"
-      />
-      <h3 className="text-base mb-1 leading-none">
-        Change Category
-      </h3>
-      <select
-        className="mb-2 w-full"
-        defaultValue={props.category}
-        onBlur={ev => props.updateState('category', ev)}
-        onChange={ev => props.updateState('category', ev)}>
-        {categories.map(({display}) => (
-          <option key={display} value={display}>
-            {display}
+    error={props.error}
+    name="editProfile"
+    legend={(<h2 className="text-3 mb-2 leading-none">Edit your Profile</h2>)}
+    onSubmit={props.onSubmit}
+    renderFields={() => (
+      <>
+        <label className="w-full mb-2" htmlFor="memberName">
+          <h3 className="text-base mb-1 leading-none">
+            Change Email
+          </h3>
+          <input
+            onChange={ev => props.updateState('email', ev)}
+            className="p-2 w-full"
+            placeholder={`Currently ${props.session.email}`}
+            value={props.email}
+            name="email"
+          />
+        </label>
+        <FileUpload
+          fieldKey="groupAvatar"
+          folder="groups"
+          info="We recommend a size of at least 60x60px"
+          prefix={`g${props.session.profile.id}:gAv`}
+          title="Upload New Group Logo"
+        />
+        <h3 className="text-base mb-1 leading-none">
+          Change Category
+        </h3>
+        <select
+          className="mb-2 w-full"
+          defaultValue={props.category}
+          onBlur={ev => props.updateState('category', ev)}
+          onChange={ev => props.updateState('category', ev)}>
+          {categories.map(({display}) => (
+            <option key={display} value={display}>
+              {display}
+            </option>
+          ))}
+        </select>
+        <h3 className="text-base mb-1 leading-none">
+          Change Group Type
+        </h3>
+        <select
+          className="w-full"
+          value={props.type}
+          onBlur={ev => props.updateState('type', ev)}
+          onChange={ev => props.updateState('type', ev)}>
+          <option value="public">
+            Public
           </option>
-        ))}
-      </select>
-      <h3 className="text-base mb-1 leading-none">
-        Change Group Type
-      </h3>
-      <select
-        className="w-full"
-        value={props.type}
-        onBlur={ev => props.updateState('type', ev)}
-        onChange={ev => props.updateState('type', ev)}>
-        <option value="public">
-          Public
-        </option>
-        <option value="private">
-          Private
-        </option>
-        <option value="hidden">
-          Hidden
-        </option>
-      </select>
-      <small className="block mb-2 text-gray-5">
-        This option only affects future membership approvals
-      </small>
-      <label className="w-full mb-2" htmlFor="memberName">
+          <option value="private">
+            Private
+          </option>
+          <option value="hidden">
+            Hidden
+          </option>
+        </select>
+        <small className="block mb-2 text-gray-5">
+          This option only affects future membership approvals
+        </small>
+        <label className="w-full mb-2" htmlFor="memberName">
+          <h3 className="text-base mb-1 leading-none">
+            Change Membership Title
+          </h3>
+          <input
+            onChange={ev => props.updateState('memberName', ev)}
+            className="p-2 w-full"
+            placeholder="What are your members called?"
+            value={props.memberName}
+            name="memberName"
+          />
+        </label>
+        <label className="w-full mb-2" htmlFor="modName">
+          <h3 className="text-base mb-1 leading-none">
+            Change Moderator Title
+          </h3>
+          <input
+            onChange={ev => props.updateState('modName', ev)}
+            className="p-2 w-full"
+            placeholder="What should moderators be called?"
+            value={props.modName}
+            name="modName"
+          />
+        </label>
         <h3 className="text-base mb-1 leading-none">
-          Change Membership Title
+          Change Description
         </h3>
-        <input
-          onChange={ev => props.updateState('memberName', ev)}
-          className="p-2 w-full"
-          placeholder="What are your members called?"
-          value={props.memberName}
-          name="memberName"
+        <textarea
+          rows={6}
+          spellCheck
+          className="mb-2 w-full text-base"
+          placeholder="Group Description Here"
+          value={props.description}
+          onChange={ev => props.updateState('description', ev)}
         />
-      </label>
-      <label className="w-full mb-2" htmlFor="modName">
-        <h3 className="text-base mb-1 leading-none">
-          Change Moderator Title
-        </h3>
-        <input
-          onChange={ev => props.updateState('modName', ev)}
-          className="p-2 w-full"
-          placeholder="What should moderators be called?"
-          value={props.modName}
-          name="modName"
-        />
-      </label>
-      <h3 className="text-base mb-1 leading-none">
-        Change Description
-      </h3>
-      <textarea
-        rows={6}
-        spellCheck
-        className="mb-2 w-full text-base"
-        placeholder="Group Description Here"
-        value={props.description}
-        onChange={ev => props.updateState('description', ev)}
-      />
-      <label className="block mb-2" htmlFor="website">
-        <h3 className="text-base mb-1 leading-none">
-          Personal Website
-        </h3>
-        <input
-          onChange={ev => props.updateState('website', ev)}
-          className="p-2 w-full"
-          placeholder="Update your website here"
-          value={props.website}
-          name="website"
-        />
-      </label>
-      <label className="block mb-2" htmlFor="facebook">
-        <h3 className="text-base mb-1 leading-none">
-          Facebook
-        </h3>
-        <input
-          className="p-2 w-full"
-          name="facebook"
-          onChange={ev => props.updateState('facebook', ev)}
-          placeholder="Link your facebook profile here"
-          value={props.facebook}
-        />
-      </label>
-      <label className="block mb-2" htmlFor="twitter">
-        <h3 className="text-base mb-1 leading-none">
-          Twitter
-        </h3>
-        <input
-          className="p-2 w-full"
-          name="twitter"
-          onChange={ev => props.updateState('twitter', ev)}
-          placeholder="Link your twitter here"
-          value={props.twitter}
-        />
-      </label>
-      <PasswordInput
-        id="pwInput"
-        title="Current Password"
-        password={props.password}
-        placeholder="Your current password"
-        onChange={ev => props.updateState('password', ev)}
-      />
+        <label className="block mb-2" htmlFor="website">
+          <h3 className="text-base mb-1 leading-none">
+            Personal Website
+          </h3>
+          <input
+            onChange={ev => props.updateState('website', ev)}
+            className="p-2 w-full"
+            placeholder="Update your website here"
+            value={props.website}
+            name="website"
+          />
+        </label>
+        <label className="block mb-2" htmlFor="facebook">
+          <h3 className="text-base mb-1 leading-none">
+            Facebook
+          </h3>
+          <input
+            className="p-2 w-full"
+            name="facebook"
+            onChange={ev => props.updateState('facebook', ev)}
+            placeholder="Link your facebook profile here"
+            value={props.facebook}
+          />
+        </label>
+        <label className="block mb-2" htmlFor="twitter">
+          <h3 className="text-base mb-1 leading-none">
+            Twitter
+          </h3>
+          <input
+            className="p-2 w-full"
+            name="twitter"
+            onChange={ev => props.updateState('twitter', ev)}
+            placeholder="Link your twitter here"
+            value={props.twitter}
+          />
+        </label>
+      </>
+    )}
+    renderSubmit={formProps => (
       <div className="flex flex-col d:flex-row items-center">
         <button
-          disabled={!props.password}
+          disabled={!formProps.hasMounted || !formProps.captcha}
           className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-3 transition">
           Save Changes
         </button>
@@ -150,8 +156,8 @@ const EditProfile = memo((props: tComponentProps) => (
           Go back
         </Link>
       </div>
-    </fieldset>
-  </form>
+    )}
+  />
 ));
 
 export default EditProfile;

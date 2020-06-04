@@ -7,10 +7,10 @@ import {tComponentProps} from './_types';
 
 export const EmailTokenComponent = memo((props: tComponentProps) => (
   <Form
-    includeCaptcha={false}
+    includeCaptcha
     className="animated fadeInUp"
     error={props.error}
-    legend={props.legend || (<h2 className="text-base font-semibold mb-1">
+    legend={props.includeLegend || (<h2 className="text-base font-semibold mb-1">
       Let&apos;s start by verifying your email. This is all you&apos;ll need to sign in!
     </h2>)}
     name="emailVerificationForm"

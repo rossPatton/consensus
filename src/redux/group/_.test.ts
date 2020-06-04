@@ -7,14 +7,14 @@ describe('redux/group/reducer', () => {
       .toStrictEqual(initialState);
   });
 
-  // it('should handle GET_INIT', () => {
-  //   expect(reducer(undefined, {
-  //     type: '@@group/GET_INIT',
-  //   })).toStrictEqual({
-  //     ...initialState,
-  //     isLoading: true,
-  //   });
-  // });
+  it('should handle GET_INIT', () => {
+    expect(reducer(undefined, {
+      type: '@@group/GET_INIT',
+    })).toStrictEqual({
+      ...initialState,
+      isLoading: true,
+    });
+  });
 
   it('should handle GET_FAILURE', () => {
     expect(reducer(undefined, {

@@ -17,6 +17,20 @@ const table = 'users';
 const errorMessage = 'Failed to insert user into database. Your email and username must be unique, and the token must match the one sent to you.';
 
 user.get(route, async (ctx: Koa.ParameterizedContext) => {
+  const {query}: {query: ts.idQuery} = ctx;
+  await validateSchema<ts.idQuery>(ctx, getSchema, query);
+  try {
+    await pg(table)
+      .limit(1)
+      .where({id: query.id})
+      .del();
+  } catch (err) {
+    return ctx.throw(500, err);
+  }
+  ctx.body = {id: query.id};
+});
+
+user.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: ts.userQuery} = ctx;
   await validateSchema<ts.userQuery>(ctx, getSchema, query);
   const user = await getUserByQuery(ctx, query);

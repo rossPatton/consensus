@@ -1,9 +1,5 @@
 import loadable from '@loadable/component';
 
-export const Account = loadable(() =>
-  import(/* webpackChunkName: "UserAdmin Account" */'./Account'),
-);
-
 export const DeleteAccount = loadable(() =>
   import(/* webpackChunkName: "UserAdmin DeleteAccount" */'./DeleteAccount'),
 );
