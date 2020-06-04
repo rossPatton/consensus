@@ -2,7 +2,6 @@ require('dotenv-safe').config();
 require('ts-node/register');
 const fs = require('fs');
 const path = require('path');
-const Knex = require('knex');
 
 const CWD = process.cwd();
 const migrations = path.join(CWD, 'src', 'server', 'db', 'migrations');

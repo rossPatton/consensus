@@ -2,44 +2,22 @@ import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {login, postAccount, postUser} from '~app/redux';
-import {api} from '~app/utils';
+import {Helmet} from '~app/components';
+import {login, postUser} from '~app/redux';
 
-import {EmailTokenComponent} from './_components/EmailToken';
-import {UserSignupComponent} from './_components/UserSignup';
 import {tContainerProps, tKeyUnion, tState} from './_types';
+import {UserSignupComponent} from './Component';
 
 export class UserSignupContainer extends PureComponent<tContainerProps, tState> {
   state = {
-    email: '',
-    emailSent: false,
     error: '',
     username: '',
     token: '',
   };
 
-  sendToken = async () => {
-    try {
-      await api({
-        path: '/email/v1/sendVerificationToken',
-        query: {
-          email: this.state.email,
-          type: 'user',
-        },
-      });
-    } catch (error) {
-      return this.setState({
-        error: error.message,
-      });
-    }
-
-    this.setState({
-      emailSent: true,
-    });
-  }
-
   verifyAndRegister = async () => {
-    const { email, token, username } = this.state;
+    const { token, username } = this.state;
+    const { email } = this.props;
 
     // add user to db
     try {
@@ -52,7 +30,11 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
 
     // and log them in on success
     try {
-      await this.props.loginDispatch({ email, token });
+      await this.props.loginDispatch({
+        email,
+        sessionType: 'user',
+        token,
+      });
     } catch (error) {
       this.setState({
         error: error.message,
@@ -69,39 +51,29 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
   }
 
   render() {
-    const {emailSent} = this.state;
     return (
       <>
-        {!emailSent && (
-          <EmailTokenComponent
-            {...this.state}
-            sendToken={this.sendToken}
-            updateState={this.updateState}
-          />
-        )}
-        {emailSent && (
-          <UserSignupComponent
-            {...this.state}
-            verifyAndRegister={this.verifyAndRegister}
-            updateState={this.updateState}
-          />
-        )}
+        <Helmet
+          canonical="/signup/newUser"
+          title="Start a new group on Consensus"
+          meta={[
+            { name: 'description', content: 'Fill our our signup form to start finding meetings in your neighborhood today!' },
+            { name: 'keywords', content: 'user,signup' },
+          ]}
+        />
+        <UserSignupComponent
+          {...this.state}
+          verifyAndRegister={this.verifyAndRegister}
+          updateState={this.updateState}
+        />
       </>
     );
   }
 }
 
-const mapStateToProps = (store: any) => ({
-  account: store.account,
-});
-
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
-  postAccountDispatch: (query: {email: string}) => dispatch(postAccount(query)),
   postUserDispatch: (query: ts.userQuery) => dispatch(postUser(query)),
 });
 
-export const UserSignup = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(UserSignupContainer);
+export const UserSignup = connect(null, mapDispatchToProps)(UserSignupContainer);

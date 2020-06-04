@@ -1,6 +1,7 @@
-import knex from 'knex';
 import Koa from 'koa';
 import Router from 'koa-router';
+
+import { pg } from '~app/server/db/connection';
 
 import { validateSchema } from '../../utils';
 import { schema } from './_schema';
@@ -15,9 +16,10 @@ roles.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let roles = [] as ts.roleMap[];
   try {
-    roles = await knex('users_roles')
+    roles = await pg('users_roles')
       .where({userId: id})
       .select('groupId', 'role');
+    console.log('roles => ', roles);
   } catch (err) {
     return ctx.throw(500, err);
   }

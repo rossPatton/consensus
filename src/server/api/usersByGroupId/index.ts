@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 
-import {knex} from '~app/server/db/connection';
+import {pg} from '~app/server/db/connection';
 import {getSession} from '~app/server/queries';
 import {validateSchema} from '~app/server/utils';
 
@@ -30,14 +30,14 @@ usersByGroupId.post(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<tUserByOrgQuery>(ctx, postSchema, query);
   const {groupId, role, userId} = query;
 
-  const userByGroupIdRel = await knex(table)
+  const userByGroupIdRel = await pg(table)
     .limit(1)
     .where({groupId, userId, role})
     .first();
 
   if (userByGroupIdRel) {
     try {
-      await knex(table)
+      await pg(table)
         .where({id: userByGroupIdRel.id})
         .update({groupId, userId, role});
     } catch (err) {
@@ -45,7 +45,7 @@ usersByGroupId.post(route, async (ctx: Koa.ParameterizedContext) => {
     }
   } else {
     try {
-      await knex(table).insert({groupId, userId, role});
+      await pg(table).insert({groupId, userId, role});
     } catch (err) {
       return ctx.throw(500, err);
     }
@@ -62,7 +62,7 @@ usersByGroupId.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
   let updatedAccountRoleRel = [] as ts.roleRel[];
   try {
-    updatedAccountRoleRel = await knex(table)
+    updatedAccountRoleRel = await pg(table)
       .limit(1)
       .where({groupId, userId})
       .update({role})
@@ -79,7 +79,7 @@ usersByGroupId.delete(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<tUserByOrgQuery>(ctx, deleteSchema, query);
 
   try {
-    await knex(table)
+    await pg(table)
       .limit(1)
       .where({groupId: query.groupId, userId: query.userId})
       .first()

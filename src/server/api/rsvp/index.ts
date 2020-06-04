@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 
-import { knex } from '~app/server/db/connection';
+import { pg } from '~app/server/db/connection';
 import { validateSchema } from '~app/server/utils';
 
 import { postSchema } from './_schema';
@@ -28,7 +28,7 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
 
   let currentRSVPStatus = {} as ts.rsvp;
   try {
-    currentRSVPStatus = await knex(table)
+    currentRSVPStatus = await pg(table)
       .limit(1)
       .where({meetingId, userId})
       .first();
@@ -40,7 +40,7 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
   // update existing meeting or insert new users_meetings relation
   if (currentRSVPStatus) {
     try {
-      const update: ts.rsvp[] = await knex(table)
+      const update: ts.rsvp[] = await pg(table)
         .where({id: currentRSVPStatus.id})
         .update(newRsvp)
         .returning('*');
@@ -50,7 +50,7 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
     }
   } else {
     try {
-      const insert: ts.rsvp[] = await knex(table)
+      const insert: ts.rsvp[] = await pg(table)
         .insert(newRsvp)
         .returning('*');
       ctx.body = insert?.[0];

@@ -1,6 +1,6 @@
 import Koa from 'koa';
 
-import {knex} from '../db/connection';
+import {pg} from '../db/connection';
 
 // use login info to return session for client
 // ideally only happens once per visit, on login. but if user refreshes, we do again
@@ -12,7 +12,7 @@ export const getAccountRoleRelByGroupId = async (
   let accountRoleRel: ts.roleRel;
   if (account.id) {
     try {
-      accountRoleRel = await knex('users_roles')
+      accountRoleRel = await pg('users_roles')
         .limit(1)
         .where({accountId: account.id, groupId})
         .first();

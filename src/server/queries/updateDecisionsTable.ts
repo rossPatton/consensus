@@ -1,7 +1,7 @@
 // import Koa from 'koa';
 // import _ from 'lodash';
 
-// import { knex } from '../db/connection';
+// import { pg } from '~app/server/db/connection';
 
 // export const updateDecisionsTable = async (
 //   ctx: Koa.ParameterizedContext,
@@ -11,7 +11,7 @@
 //   // get data in main decision column
 //   let decisionGetQuery: tDecision;
 //   try {
-//     decisionGetQuery = await knex('decisions')
+//     decisionGetQuery = await pg('decisions')
 //       .limit(1)
 //       .first()
 //       .where({id: userDecision.decisionId});
@@ -27,7 +27,7 @@
 //   // update data in main decision column for later use
 //   let decisionUpdateQuery: tDecision;
 //   try {
-//     decisionUpdateQuery = await knex('decisions')
+//     decisionUpdateQuery = await pg('decisions')
 //       .where({id: userDecision.decisionId})
 //       .update('results', resultsAfterVote);
 //   } catch (err) {

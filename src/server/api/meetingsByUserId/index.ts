@@ -3,7 +3,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {knex} from '../../db/connection';
+import {pg} from '../../db/connection';
 import {getRSVPsByUserId} from '../../queries';
 import {validateSchema, zipMeetingsWithAttendees} from '../../utils';
 import {schema} from './_schema';
@@ -32,7 +32,7 @@ meetingsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
   // only return future meetings where the user rsvped
   let meetings: ts.meeting[] = [];
   try {
-    meetings = await knex('meetings')
+    meetings = await pg('meetings')
       .whereIn('id', mappedIds)
       .andWhere('date', '>=', dayJS().toISOString())
       .andWhere({isDraft: false})

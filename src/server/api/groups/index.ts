@@ -3,7 +3,7 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import {groupKeys} from '../_constants';
-import {knex} from '../../db/connection';
+import {pg} from '../../db/connection';
 import {validateSchema} from '../../utils';
 import {schema} from './_schema';
 
@@ -16,7 +16,7 @@ groups.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let group: ts.group[] = [];
   try {
-    group = await knex('groups')
+    group = await pg('groups')
       .where(query)
       .andWhereNot({type: 'hidden'})
       .select(groupKeys);

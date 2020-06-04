@@ -1,14 +1,14 @@
 import Koa from 'koa';
 import _ from 'lodash';
 
-import {knex} from '../db/connection';
+import {pg} from '../db/connection';
 
 // TODO this query should be simplfied if at all possible
 export const getUsersByGroupId = async (
   ctx: Koa.ParameterizedContext,
   groupId: number,
 ): Promise<ts.user[]> => {
-  const rolesStream = knex('users_roles').where({groupId}).stream();
+  const rolesStream = pg('users_roles').where({groupId}).stream();
   const roleMaps: ts.roleRel[] = [];
   try {
     for await (const chunk of rolesStream) {
@@ -26,7 +26,7 @@ export const getUsersByGroupId = async (
   }
 
   // use the returned ids to query users table
-  const usersStream = knex('users').whereIn('id', userIds).stream();
+  const usersStream = pg('users').whereIn('id', userIds).stream();
   const users: ts.user[] = [];
   try {
     for await (const chunk of usersStream) {

@@ -2,7 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 
 import {groupKeys} from '../_constants';
-import {knex} from '../../db/connection';
+import {pg} from '../../db/connection';
 import {validateSchema} from '../../utils';
 import {getRoleMapsByUserId} from './_queries';
 import {deleteSchema, getSchema} from './_schema';
@@ -21,7 +21,7 @@ groupsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let group = [] as ts.group[];
   try {
-    group = await knex('groups')
+    group = await pg('groups')
       .whereIn('id', mappedIds)
       .select(groupKeys);
   } catch (err) {
@@ -42,7 +42,7 @@ groupsByUserId.delete(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.deleteUserByGroupIdQuery>(ctx, deleteSchema, query);
 
   try {
-    await knex(table)
+    await pg(table)
       .limit(1)
       .where(query)
       .first()

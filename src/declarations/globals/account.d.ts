@@ -1,22 +1,21 @@
 namespace ts {
-  // accounts are currently of 2 types. users, and organization admins
-  // we consolidate that in the accounts table, along with shared rows
-  declare type accountBase = Readonly<{
-    created_at?: string,
-    deletionDeadline?: Dayjs,
+  declare type baseAccount = Readonly<{
+    avatar: string,
+    created_at?: Date,
+    city?: string, // city.name
+    cityId?: number, // city.id
+    // lives in accounts table,
+    // but we merge into user when rendering user pages
     email: string,
+    facebook: string,
     id: number,
-    showOnboarding: boolean,
-    isVerified: boolean,
-    login: string, // unique login value separate from username or email
-    groupId?: number,
-    passwordResetToken?: string,
-    passwordResetExpires?: string,
-    privateEmail: boolean,
-    updated_at?: string,
-    userId?: number,
-    verificationToken?: string,
-    verificationExpires?: string,
+    region?: string,
+    regionId?: number,
+    sessionType: 'group' | 'user',
+    showOnboarding?: boolean,
+    updated_at?: Date,
+    twitter: string,
+    website: string,
   }>;
 
   declare type adminSectionParams = ts.match & {
@@ -35,26 +34,10 @@ namespace ts {
     }
   }
 
-  declare type email = {
-    accountId: number,
-    email: string,
-    isPrimary: string,
-  }
-
-  // password is never sent to the client
-  declare type account = tAccountBase & Readonly<{
-    password: string,
-  }>;
-
-  declare type accountQuery = Partial<tAccountBase> & Readonly<{
-    email?: string,
-    currentPassword: string,
-    newPassword?: string,
-  }>;
-
   // subset of user/org needed for login/authentication
   declare type loginQuery = Readonly<{
     email: string,
+    sessionType: string,
     token: string,
   }>;
 
@@ -68,8 +51,6 @@ namespace ts {
   declare type session<T = ts.user | ts.group> = Partial<tAccountBase>
     & Readonly<{
       deletionDeadline?: string,
-      isAuthenticated: boolean,
-      isVerified: boolean,
       profile: T,
       type: 'group' | 'user',
     }>;

@@ -1,6 +1,6 @@
 import Koa from 'koa';
 
-import { knex } from '../db/connection';
+import { pg } from '~app/server/db/connection';
 
 export const getUserByQuery = async (
   ctx: Koa.ParameterizedContext,
@@ -8,7 +8,7 @@ export const getUserByQuery = async (
 
   let user: ts.user;
   try {
-    user = await knex('users').limit(1).where(query).first();
+    user = await pg('users').limit(1).where(query).first();
   } catch (err) {
     return ctx.throw(500, err);
   }

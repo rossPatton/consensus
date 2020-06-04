@@ -2,10 +2,11 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
+import {pg} from '~app/server/db/connection';
+import {getUserByQuery} from '~app/server/queries';
+import {validateSchema} from '~app/server/utils';
+
 import {userKeys} from '../_constants';
-import {knex} from '../../db/connection';
-import {getUserByQuery} from '../../queries';
-import {validateSchema} from '../../utils';
 import {getSchema, patchSchema, postSchema} from './_schema';
 import {tUserPostServerQuery} from './_types';
 
@@ -31,7 +32,7 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
   let updatedUser = [] as ts.user[];
   try {
-    updatedUser = await knex(table)
+    updatedUser = await pg(table)
       .limit(1)
       .where({id: query.id})
       .update(query)
@@ -51,7 +52,7 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
   // username is the only user info required to sign up. login/pw is the account table
   let userResult = [] as ts.user[];
   try {
-    userResult = await knex('users')
+    userResult = await pg('users')
       .insert({avatar: '1', ...query})
       .returning(userKeys);
   } catch (err) {
@@ -61,30 +62,6 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
   if (!userResult || userResult.length === 0) {
     ctx.throw(500, errorMessage);
   }
-
-  // const {login, password} = query;
-  // const pwInput = password;
-  // let hashedPW: string = '';
-  // try {
-  //   hashedPW = await saltedHash(pwInput);
-  // } catch (err) {
-  //   return ctx.throw(500, err);
-  // }
-
-  // save account info. on client side, we then login the new user
-  // try {
-  //   await knex('accounts')
-  //     .limit(1)
-  //     .insert({
-  //       login,
-  //       email: query.email,
-  //       showOnboarding: true,
-  //       password: encrypt(hashedPW),
-  //       userId: userResult?.[0].id,
-  //     });
-  // } catch (err) {
-  //   return ctx.throw(500, err);
-  // }
 
   ctx.body = userResult?.[0];
 });

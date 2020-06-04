@@ -1,28 +1,13 @@
 namespace ts {
-  declare type user = Readonly<{
-    avatar: string,
-    created_at?: Date,
+  declare type user = ts.baseAccount & Readonly<{
     bio?: string,
-    city?: string, // city.name
-    cityId?: number, // city.id
-    // lives in accounts table,
-    // but we merge into user when rendering user pages
-    email: string,
-    facebook: string,
-    id: number,
     name: string,
     phone: string,
     privateEmail: boolean,
     privateMemberships: boolean,
     privateRSVP: boolean,
-    region?: string,
-    regionId?: number,
     role?: ts.role,
-    showOnboarding?: boolean,
-    updated_at?: Date,
     username: string,
-    twitter: string,
-    website: string,
   }>;
 
   // getting/posting/deleting users by org membership

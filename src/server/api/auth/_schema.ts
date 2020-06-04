@@ -1,23 +1,43 @@
 import Joi from '@hapi/joi';
 
-export const schema = Joi.object({
-  avatar: Joi.string().allow(null).empty('').optional(),
-  deletionDeadline: Joi.date().timestamp().allow(null),
-  email: Joi.string().email(),
+const baseSchema = Joi.object({
+  avatar: Joi.string().allow(null).allow('').optional(),
+  city: Joi.string().allow(null).optional(),
+  cityId: Joi.number().integer().optional(),
+  country: Joi.string().allow(null).optional(),
+  countryId: Joi.number().integer().optional(),
+  email: Joi.string().email().required(),
+  facebook: Joi.string().allow('').optional(),
   id: Joi.number().integer().required(),
-  isVerified: Joi.bool(),
-  showOnboarding: Joi.bool(),
-  login: Joi.string().required(),
-  loginResetExpires: Joi.date().timestamp().allow(null),
-  loginResetToken: Joi.string().alphanum().length(96).allow(null),
-  password: Joi.string().min(12).max(4096).required(),
-  passwordResetExpires: Joi.date().timestamp().allow(null),
-  passwordResetToken: Joi.string().alphanum().length(96).allow(null),
-  privateEmail: Joi.bool(),
-  groupId: Joi.number().integer().allow(null),
-  userId: Joi.number().integer().allow(null),
-  verificationExpires: Joi.date().timestamp().allow(null),
-  verificationToken: Joi.string().alphanum().length(96).allow(null),
+  region: Joi.string().allow(null).optional(),
+  regionId: Joi.number().integer().optional(),
+  showOnboarding: Joi.bool().optional(),
+  sessionType: Joi.string().allow('user', 'group').required(),
+  token: Joi.string(),
+  twitter: Joi.string().allow('').optional(),
+  website: Joi.string().allow('').optional(),
   created_at: Joi.date().timestamp(),
   updated_at: Joi.date().timestamp(),
+});
+
+export const userSchema = baseSchema.keys({
+  bio: Joi.string(),
+  language: Joi.string().alphanum().max(2),
+  name: Joi.string(),
+  phone: Joi.string(),
+  privateEmail: Joi.bool(),
+  privateMemberships: Joi.bool(),
+  privateRSVP: Joi.bool(),
+  username: Joi.string().required().min(3),
+});
+
+export const groupSchema = baseSchema.keys({
+  category: Joi.string().allow('Political', 'Cooperative', 'Community', 'Union'),
+  deletionDeadline: Joi.string().isoDate().allow(null).optional(),
+  description: Joi.string().allow('').optional(),
+  handle: Joi.string(),
+  memberName: Joi.string(),
+  modName: Joi.string(),
+  name: Joi.string(),
+  type: Joi.string().allow('public', 'private', 'hidden'),
 });

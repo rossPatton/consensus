@@ -2,7 +2,8 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import { knex } from '../../db/connection';
+import { pg } from '~app/server/db/connection';
+
 import { validateSchema } from '../../utils';
 import { schema } from './_schema';
 
@@ -20,7 +21,7 @@ search.get('/api/v1/search', async (ctx: Koa.ParameterizedContext) => {
   try {
     // get all columns, for rows in group whose name is similar to search term
     // then sort desc by that similarity/sml (closest first)
-    groupsLike = await knex.raw(`
+    groupsLike = await pg.raw(`
       SELECT *, similarity(${query.key}, '${query.value}') AS sml
       FROM ${table}
       WHERE ${query.key} % '${query.value}'

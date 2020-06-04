@@ -1,6 +1,6 @@
 import Koa from 'koa';
 
-import {knex} from '../db/connection';
+import {pg} from '../db/connection';
 
 export const getRSVPByMeetingId = async (
   ctx: Koa.ParameterizedContext,
@@ -10,7 +10,7 @@ export const getRSVPByMeetingId = async (
 
   let userEventRel: ts.rsvp;
   try {
-    userEventRel = await knex('users_meetings')
+    userEventRel = await pg('users_meetings')
       .limit(1)
       .where({userId, meetingId})
       .first();

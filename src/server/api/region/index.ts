@@ -2,7 +2,8 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import { knex } from '../../db/connection';
+import { pg } from '~app/server/db/connection';
+
 import { validateSchema } from '../../utils';
 import { schema } from './_schema';
 
@@ -16,7 +17,7 @@ region.get(route, async (ctx: Koa.ParameterizedContext) => {
   // @TODO reimplment once there are more countries
   // let country = {} as ts.country;
   // try {
-  //   country = await knex('countries')
+  //   country = await pg('countries')
   //     .limit(1)
   //     .where({code: countryCode})
   //     .first();
@@ -26,7 +27,7 @@ region.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let region = {} as ts.region;
   try {
-    region = await knex('regions')
+    region = await pg('regions')
       .limit(1)
       .where({
         countryId: 1,
@@ -39,7 +40,7 @@ region.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let cities = [] as ts.city[];
   try {
-    cities = await knex('cities')
+    cities = await pg('cities')
       .where({
         countryId: 1,
         regionId: region.id,

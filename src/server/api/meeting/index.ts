@@ -2,7 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {knex} from '../../db/connection';
+import {pg} from '../../db/connection';
 import {getMeetingByQuery} from '../../queries';
 import {validateSchema} from '../../utils';
 import {getSchema, upsertSchema} from './_schema';
@@ -23,7 +23,7 @@ meeting.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
   let patchedMeeting = [] as ts.meeting[];
   try {
-    patchedMeeting = await knex('meetings')
+    patchedMeeting = await pg('meetings')
       .limit(1)
       .where({id})
       .update(patch)
@@ -42,7 +42,7 @@ meeting.post(route, async (ctx: Koa.ParameterizedContext) => {
 
   let newMeeting = [] as ts.meeting[];
   try {
-    newMeeting = await knex('meetings')
+    newMeeting = await pg('meetings')
       .insert(meeting)
       .limit(1)
       .returning('*');

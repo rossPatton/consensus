@@ -2,8 +2,9 @@ import dayJS from 'dayjs';
 import Koa from 'koa';
 import _ from 'lodash';
 
+import {pg} from '~app/server/db/connection';
+
 import {tMeetingsServerQuery} from '../_types';
-import {knex} from '../../../db/connection';
 
 // use login info to return session for client
 // ideally only happens once per visit, on login. but if user refreshes, we do again
@@ -22,7 +23,7 @@ export const getMeetingsByQuery = async (
 
   try {
     // by default, we only return upcoming meetings
-    const meetings = knex('meetings');
+    const meetings = pg('meetings');
 
     // if we're excluding meetings, do it up front
     if (excludeId) meetings.whereNot({id: excludeId});

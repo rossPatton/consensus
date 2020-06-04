@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import _ from 'lodash';
 
-import {knex} from '../../../db/connection';
+import {pg} from '~app/server/db/connection';
 
 // use login info to return session for client
 // ideally only happens once per visit, on login. but if user refreshes, we do again
@@ -11,7 +11,7 @@ export const getRolesByGroupId = async (
 ): Promise<ts.roleRel[]> => {
   const {groupId, noPending} = query;
   try {
-    const roles = knex('users_roles');
+    const roles = pg('users_roles');
 
     if (noPending === 'true') {
       roles.andWhereNot({role: 'pending'});

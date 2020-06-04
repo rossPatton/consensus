@@ -2,9 +2,10 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import {Mutable} from 'utility-types';
 
-import {knex} from '~app/server/db/connection';
+import {pg} from '~app/server/db/connection';
 import {getSession} from '~app/server/queries';
 import {validateSchema} from '~app/server/utils';
+
 import {schema} from './_schema';
 
 export const accountDownload = new Router();
@@ -20,14 +21,14 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   if (account?.data?.type === 'user') {
     try {
-      roles = await knex('users_roles')
-        .where({accountId: account.id})
+      roles = await pg('users_roles')
+        .where({userId: account.id})
         .select('role');
     } catch (err) {
       return ctx.throw(500, err);
     }
     try {
-      rsvps = await knex('users_meetings')
+      rsvps = await pg('users_meetings')
         .where({userId: account.id})
         .select(['type', 'value']);
     } catch (err) {
@@ -35,7 +36,7 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
     }
   } else if (account?.data?.type === 'group') {
     try {
-      meetings = await knex('meetings')
+      meetings = await pg('meetings')
         .where({groupId: account.id})
         .select('*');
     } catch (err) {

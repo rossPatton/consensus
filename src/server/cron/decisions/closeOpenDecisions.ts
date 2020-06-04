@@ -3,12 +3,12 @@
 // import _ from 'lodash';
 // import loglevel from 'loglevel';
 
-// import {knex} from '../../db/connection';
+// import {pg} from '../../db/connection';
 
 // const closeDecisionsQuery = async (now: dayJS.Dayjs) => {
 //   let decisionsClosed: tDecision[];
 //   try {
-//     decisionsClosed = await knex('decisions')
+//     decisionsClosed = await pg('decisions')
 //       .where({isClosed: false, isDraft: false})
 //       .where('deadline', '<=', now)
 //       .update({isClosed: true})

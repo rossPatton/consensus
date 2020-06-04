@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import _ from 'lodash';
 
-import {knex} from '../../../db/connection';
+import {pg} from '~app/server/db/connection';
 
 export const getRoleMapsByUserId = async (
   ctx: Koa.ParameterizedContext,
@@ -10,7 +10,7 @@ export const getRoleMapsByUserId = async (
   const {noPending, userId} = query;
 
   try {
-    const userGroupRels = knex('users_roles');
+    const userGroupRels = pg('users_roles');
     if (noPending) userGroupRels.whereNot({role: 'pending'});
     return userGroupRels.where({userId}).orderBy('updated_at', 'asc');
   } catch (err) {

@@ -3,19 +3,21 @@ import React, {memo} from 'react';
 
 import {Form} from '~app/components';
 
-import {tProps} from './_types';
+import {tComponentProps} from './_types';
 
-export const UserSignupComponent = memo((props: tProps) => (
+export const UserSignupComponent = memo((props: tComponentProps) => (
   <Form
     className="animated fadeInUp"
     error={props.error}
-    legend="Verify your email and sign up!"
+    legend={(<h2 className="text-base font-semibold mb-2">
+      Verify your email and sign up!
+    </h2>)}
     name="userSignupForm"
     onSubmit={props.verifyAndRegister}
     renderFields={() => (
       <>
         <label htmlFor="tokenInput">
-          <h2 className="text-base font-bold mb-1 leading-none">
+          <h2 className="text-base font-semibold">
             Token
           </h2>
           <p>

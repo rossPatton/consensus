@@ -1,7 +1,6 @@
 import Boom from '@hapi/boom';
 import Koa from 'koa';
 
-import { account } from './account';
 import { accountDownload } from './accountDownload';
 import { auth } from './auth';
 import { cities } from './cities';
@@ -28,7 +27,6 @@ import { usersByGroupId } from './usersByGroupId';
 import { verifyEmail } from './verifyEmail';
 
 export const setupApi = (app: Koa) => {
-  app.use(account.routes());
   app.use(accountDownload.routes());
   app.use(auth.routes());
   app.use(city.routes());
@@ -60,7 +58,6 @@ export const setupApi = (app: Koa) => {
     throw: true,
   });
 
-  app.use(account.allowedMethods(opts));
   app.use(accountDownload.allowedMethods(opts));
   app.use(auth.allowedMethods(opts));
   app.use(cities.allowedMethods(opts));

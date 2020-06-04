@@ -3,7 +3,7 @@ import passport from 'koa-passport';
 import { IStrategyOptionsWithRequest, Strategy as LocalStrategy } from 'passport-local';
 import speakeasy from 'speakeasy';
 
-import {knex} from './db/connection';
+import {pg} from './db/connection';
 
 const opts = {
   usernameField: 'email',
@@ -13,34 +13,39 @@ const opts = {
 
 type tDone = (error: any, user?: any, options?: IStrategyOptionsWithRequest) => void;
 
-passport.serializeUser(async (accountWithType: ts.account, done) => {
+passport.serializeUser(async (accountWithType: ts.user | ts.group, done) => {
   return done(null, accountWithType);
 });
 
-passport.deserializeUser(async (accountWithType: ts.account, done) => {
-  console.log('deserialize accountWithType => ', accountWithType);
-  return done(null, accountWithType);
-  // if (accountWithType.type === 'user') {
-  //   try {
-  //     const user: ts.user = await knex('users')
-  //       .limit(1)
-  //       .where({id: accountWithType.id})
-  //       .first();
-  //     return done(null, user);
-  //   } catch (err) {
-  //     return done(err, null);
-  //   }
-  // } else if (accountWithType.type === 'group') {
-  //   try {
-  //     const group: ts.group = await knex('groups')
-  //       .limit(1)
-  //       .where({id: accountWithType.id})
-  //       .first();
-  //     return done(null, group);
-  //   } catch (err) {
-  //     return done(err, null);
-  //   }
-  // }
+passport.deserializeUser(async (
+  obj: {id: number, sessionType: 'user' | 'group'},
+  done,
+) => {
+  console.log('deserialize obj => ', obj);
+  let account: ts.user | ts.group;
+  if (obj.sessionType === 'user') {
+    try {
+      account = await pg('users')
+        .limit(1)
+        .where({id: obj.id})
+        .first();
+    } catch (err) {
+      return done(err, null);
+    }
+  } else if (obj.sessionType === 'group') {
+    try {
+      account = await pg('groups')
+        .limit(1)
+        .where({id: obj.id})
+        .first();
+    } catch (err) {
+      return done(err, null);
+    }
+  }
+
+  // console.log('deserialize account => ', account);
+
+  return done(null, account);
 });
 
 // we don't use the default username/pw approach
@@ -48,28 +53,29 @@ passport.deserializeUser(async (accountWithType: ts.account, done) => {
 // @ts-ignore fix type here later
 passport.use(new LocalStrategy(opts, async (
   req: Koa.Request,
-  // @ts-ignore
+
+  // @ts-ignore we don't use these, we just access ctx instead
   u: any, p: any,
+
   done: tDone) => {
   const {query} = req.ctx;
-  console.log('passport query => ', query);
-  // set when user initiates login or signup
+  // set when token is generated
   const {hotpCounter, hotpSecret} = req.ctx.session;
 
-  let account: ts.account;
-  if (query.type === 'user') {
+  let account: ts.user | ts.group;
+  if (query.sessionType === 'user') {
     try {
-      account = await knex('users')
+      account = await pg('users')
         .limit(1)
         .where({email: query.email})
         .first();
     } catch (err) {
       return done(err, false);
     }
-  } else if (query.type === 'group') {
-    console.log('searching for group account by => ', query.email)
+  } else if (query.sessionType === 'group') {
+    console.log('searching for group account by => ', query.email);
     try {
-      account = await knex('groups')
+      account = await pg('groups')
         .limit(1)
         .where({email: query.email})
         .first();
@@ -77,8 +83,6 @@ passport.use(new LocalStrategy(opts, async (
       return done(err, false);
     }
   }
-
-  console.log('account => ', account);
 
   if (!account) {
     return done({
@@ -94,7 +98,10 @@ passport.use(new LocalStrategy(opts, async (
     token: query.token,
   });
 
-  const accountWithType = {...account, type: query.type};
+  const accountWithType = {
+    ...account, sessionType:
+    query.sessionType,
+  };
 
   // if passwords match, return the user
   // instead of checking password here, just validate the token instead

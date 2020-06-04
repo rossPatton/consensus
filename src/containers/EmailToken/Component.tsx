@@ -3,19 +3,20 @@ import React, {memo} from 'react';
 
 import {Form} from '~app/components';
 
-import {tProps} from './_types';
+import {tComponentProps} from './_types';
 
-export const EmailTokenComponent = memo((props: tProps) => (
+export const EmailTokenComponent = memo((props: tComponentProps) => (
   <Form
-    includeCaptcha
+    includeCaptcha={false}
     className="animated fadeInUp"
     error={props.error}
-    legend="Let&apos;s start by verifying your email."
+    legend={props.legend || (<h2 className="text-base font-semibold mb-1">
+      Let&apos;s start by verifying your email. This is all you&apos;ll need to sign in!
+    </h2>)}
     name="emailVerificationForm"
     onSubmit={props.sendToken}
     renderFields={() => (
       <>
-        <p>This is all you&apos;ll need to sign in!</p>
         <label htmlFor="emailInput">
           <input
             required
@@ -31,12 +32,17 @@ export const EmailTokenComponent = memo((props: tProps) => (
         </label>
       </>
     )}
-    renderSubmit={(formProps: any) => (
-      <button
-        disabled={!formProps.hasMounted || !props.email || !formProps.captcha}
-        className="hover:bg-gray-3 p-2 pl-3 pr-3 mr-1">
-        Email Signup Token
-      </button>
-    )}
+    renderSubmit={(formProps: any) => {
+      const disabled = !formProps.hasMounted || !props.email;
+      // disabled = !formProps.captcha;
+
+      return (
+        <button
+          disabled={disabled}
+          className="hover:bg-gray-3 p-2 pl-3 pr-3 mr-1">
+          {props.actionLabel}
+        </button>
+      );
+    }}
   />
 ));

@@ -2,7 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {knex} from '../../db/connection';
+import {pg} from '../../db/connection';
 import {getAccountRoleRelByGroupId, getGroupById, getRSVPsByUserId} from '../../queries';
 import {validateSchema, zipMeetingsWithAttendees} from '../../utils';
 import {getMeetingsByQuery} from './_queries';
@@ -47,7 +47,7 @@ meetings.delete(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.idQuery>(ctx, deleteSchema, query);
 
   try {
-    await knex(table).limit(1).where({id: query.id}).del();
+    await pg(table).limit(1).where({id: query.id}).del();
   } catch (err) {
     return ctx.throw(500, err);
   }

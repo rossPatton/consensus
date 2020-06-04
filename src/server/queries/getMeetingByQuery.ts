@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import _ from 'lodash';
 
-import {knex} from '../db/connection';
+import {pg} from '../db/connection';
 import {getUsersByIds} from './getUsersByIds';
 
 export const getMeetingByQuery = async (
@@ -10,7 +10,7 @@ export const getMeetingByQuery = async (
 ): Promise<ts.meetingSingular> => {
   let meeting: ts.meetingSingular;
   try {
-    meeting = await knex('meetings')
+    meeting = await pg('meetings')
       .limit(1)
       .where(query)
       .first();
@@ -25,7 +25,7 @@ export const getMeetingByQuery = async (
 
     let rsvps = {} as ts.rsvp[];
     try {
-      rsvps = await knex('users_meetings')
+      rsvps = await pg('users_meetings')
         .where({
           meetingId: meeting.id,
         });

@@ -4,6 +4,10 @@ export const AppShell = loadable(() =>
   import(/* webpackChunkName: "AppShell" */'./AppShell'),
 );
 
+export const EmailToken = loadable(() =>
+  import(/* webpackChunkName: "EmailToken" */'./EmailToken'),
+);
+
 export const ErrorBoundary = loadable(() =>
   import(/* webpackChunkName: "ErrorBoundary" */'./ErrorBoundary'),
 );

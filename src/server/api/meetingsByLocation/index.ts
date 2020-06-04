@@ -3,7 +3,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {knex} from '../../db/connection';
+import {pg} from '../../db/connection';
 import {validateSchema} from '../../utils';
 import {schema} from './_schema';
 
@@ -17,7 +17,7 @@ meetingsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
   // @TODO this should be querying against postcodes, eventually
   let cityRel = {} as ts.city;
   try {
-    cityRel = await knex('cities')
+    cityRel = await pg('cities')
       .first()
       .where({name: query.city, regionCode: query.regionCode})
       .limit(1);
@@ -27,7 +27,7 @@ meetingsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let meetings = [] as ts.meeting[];
   try {
-    meetings = await knex('meetings')
+    meetings = await pg('meetings')
       .where({cityId: cityRel.id})
       .where('date', '>=', dayJS().toISOString())
       .where({isDraft: false, isPrivate: false})

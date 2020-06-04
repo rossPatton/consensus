@@ -1,7 +1,8 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 
-import { knex } from '../../db/connection';
+import { pg } from '~app/server/db/connection';
+
 import { validateSchema } from '../../utils';
 import { schema } from './_schema';
 
@@ -15,7 +16,7 @@ cities.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let allCities = [] as ts.city[];
   try {
-    allCities = await knex('cities').where({
+    allCities = await pg('cities').where({
       ...query,
       countryId: 1,
     });

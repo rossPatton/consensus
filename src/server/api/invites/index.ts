@@ -2,7 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {knex} from '~app/server/db/connection';
+import {pg} from '~app/server/db/connection';
 import {getUserByQuery} from '~app/server/queries';
 import {validateSchema} from '~app/server/utils';
 
@@ -17,7 +17,7 @@ invites.delete(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.inviteQuery>(ctx, deleteSchema, query);
 
   try {
-    await knex(table)
+    await pg(table)
       .limit(1)
       .where({groupId: query.groupId, userId: query.userId})
       .first()
@@ -35,7 +35,7 @@ invites.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let userInvites = [];
   try {
-    userInvites = await knex(table).where(query);
+    userInvites = await pg(table).where(query);
   } catch (err) {
     return ctx.throw(500, err);
   }
@@ -48,7 +48,7 @@ invites.get(route, async (ctx: Koa.ParameterizedContext) => {
 
     let users = [] as ts.user[];
     try {
-      users = await knex('users').whereIn('id', ids);
+      users = await pg('users').whereIn('id', ids);
     } catch (err) {
       ctx.throw(500, err);
     }
@@ -67,7 +67,7 @@ invites.get(route, async (ctx: Koa.ParameterizedContext) => {
 
     let groups = [] as ts.user[];
     try {
-      groups = await knex('groups').whereIn('id', ids);
+      groups = await pg('groups').whereIn('id', ids);
     } catch (err) {
       ctx.throw(500, err);
     }
@@ -92,7 +92,7 @@ invites.post(route, async (ctx: Koa.ParameterizedContext) => {
   const user = await getUserByQuery(ctx, {username: query.username});
   let newInviteReturning = {} as ts.userInvite[];
   try {
-    newInviteReturning = await knex(table)
+    newInviteReturning = await pg(table)
       .insert({
         groupId: query.groupId,
         userId: user.id,

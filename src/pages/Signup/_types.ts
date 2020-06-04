@@ -5,6 +5,7 @@ export type tProps = {
   location: Location,
   match: ts.match & { params: { type: 'newUser' | 'newGroup', } },
   session: ts.session,
+  sessionType: 'group' | 'user',
 };
 
 export type tStore = {

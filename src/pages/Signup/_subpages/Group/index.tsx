@@ -8,41 +8,46 @@ import {tContainerProps, tState, tStateUnion} from './_types';
 import {GroupSignupComponent} from './Component';
 
 export class GroupSignupContainer extends PureComponent<tContainerProps, tState> {
-  constructor(props: tContainerProps) {
-    super(props);
+  state = {
+    category: 'Political' as ts.category,
+    city: '',
+    cityId: 0,
+    error: '',
+    handle: '',
+    name: '',
+    region: '',
+    regionId: 0,
+    showRegionField: false,
+    token: '',
+    type: 'public' as ts.privacyEnum,
+  };
 
-    this.state = {
-      category: 'Political',
-      city: '',
-      cityId: 0,
-      email: '',
-      handle: '',
-      hasMounted: false,
-      login: '',
-      name: '',
-      password: '',
-      region: '',
-      regionId: 0,
-      showRegionField: false,
-      type: 'public' as ts.privacyEnum,
-    };
-  }
+  verifyAndRegister = async () => {
+    const {showRegionField, token, ...newGroup} = this.state;
+    console.log('group register state => ', this.state);
 
-  componentDidMount() {
-    // we do this so we only disable form submit when js is available
-    this.setState({
-      hasMounted: true,
-    });
-  }
+    try {
+      await this.props.postGroupDispatch({
+        ...newGroup,
+        email: this.props.email,
+      });
+    } catch (error) {
+      return this.setState({
+        error: error.message,
+      });
+    }
 
-  onSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
-    ev.preventDefault();
-    const {hasMounted, showRegionField, ...newGroup} = this.state;
-    await this.props.postGroupDispatch(newGroup);
-    await this.props.loginDispatch({
-      username: newGroup.login,
-      password: newGroup.password,
-    });
+    try {
+      await this.props.loginDispatch({
+        email: this.props.email,
+        sessionType: 'group',
+        token,
+      });
+    } catch (error) {
+      this.setState({
+        error: error.message,
+      });
+    }
   }
 
   updateState = (stateKey: tStateUnion, value: string | number | object | boolean) => {
@@ -61,29 +66,26 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
       category,
       city,
       cityId,
-      email,
       handle,
-      login,
       name,
-      password,
       region,
       regionId,
       type,
     } = this.state;
 
+    console.log('group state => ', this.state);
+
     const disabled = !category
       || !city
       || !cityId
-      || !email
       || !handle
       || handle.length < 3
-      || !login
       || !name
-      || !password
-      || password.length < 12
       || !region
       || !regionId
       || !type;
+
+    console.log('disabled => ', disabled);
 
     return (
       <>
@@ -99,7 +101,7 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
           {...this.props}
           {...this.state}
           disabled={disabled}
-          onSubmit={this.onSubmit}
+          verifyAndRegister={this.verifyAndRegister}
           updateState={this.updateState}
         />
       </>

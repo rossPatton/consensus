@@ -1,11 +1,9 @@
 import {History} from 'history';
 
 export type tState = {
-  email: string,
-  emailSent: boolean,
   error: string | ts.fetchResponse<Error>,
+  sessionType: 'user' | 'group',
   token: string,
-  type: 'user' | 'group',
 };
 
 export type tKeyUnion = keyof tState;
@@ -17,10 +15,11 @@ export type tStore = {
 export type tContainerProps = tStore & {
   history: History,
   loginDispatch: (query: ts.loginQuery) => ts.thunkPayload<ts.roleMap>,
-}
+};
 
 export type tComponentProps = tState & {
+  email: string,
   error: string | ts.fetchResponse<Error>,
-  onSubmit: (token: string) => void,
+  verifyAndLogin: (email: string) => void,
   updateState: (stateKey: tKeyUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
-}
+};

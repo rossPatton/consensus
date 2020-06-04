@@ -1,7 +1,7 @@
 import Koa from 'koa';
 
 import {groupKeys} from '../api/_constants';
-import {knex} from '../db/connection';
+import {pg} from '../db/connection';
 
 export const getGroupById = async (
   ctx: Koa.ParameterizedContext,
@@ -9,7 +9,7 @@ export const getGroupById = async (
 
   let group = {} as ts.group;
   try {
-    group = await knex('groups')
+    group = await pg('groups')
       .limit(1)
       .where({id})
       .first()

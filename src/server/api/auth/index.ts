@@ -5,17 +5,21 @@ import _ from 'lodash';
 
 import {getSession} from '../../queries';
 import {validateSchema} from '../../utils';
-import {schema} from './_schema';
+import {groupSchema, userSchema} from './_schema';
 
 export const auth = new Router();
 
 auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
   passport.authenticate('local', async (
     err: Error | null,
-    account: ts.account) => {
+    account: ts.user | ts.group) => {
     if (err) ctx.throw(400, err);
     if (!account) ctx.throw(400, 'Account not found');
-    // await validateSchema<ts.account>(ctx, schema, account);
+    if (account.sessionType === 'user') {
+      await validateSchema<ts.user | ts.group>(ctx, userSchema, account);
+    } else if (account.sessionType === 'group') {
+      await validateSchema<ts.user | ts.group>(ctx, groupSchema, account);
+    }
     await ctx.login(account);
     const session = await getSession(ctx);
     ctx.body = session.data;

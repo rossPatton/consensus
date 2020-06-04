@@ -2,8 +2,9 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
+import { pg } from '~app/server/db/connection';
+
 import { deSlugify } from '../../../utils';
-import { knex } from '../../db/connection';
 import { validateSchema } from '../../utils';
 import { schema } from './_schema';
 
@@ -18,7 +19,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let region = {} as ts.region;
   try {
-    region = await knex('regions')
+    region = await pg('regions')
       .limit(1)
       .where({
         countryId: 1,
@@ -32,7 +33,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
   const cityName = deSlugify(citySlug);
   let city = {} as ts.city;
   try {
-    city = await knex('cities')
+    city = await pg('cities')
       .limit(1)
       .where({
         countryId: 1,
@@ -48,7 +49,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
   // let postcodes = [] as {code: string}[];
   // if (city.id) {
   //   try {
-  //     postcodes = await knex('postcodes').where({city: city.id}).select('code');
+  //     postcodes = await pg('postcodes').where({city: city.id}).select('code');
   //   } catch (err) {
   //     return ctx.throw(500, err);
   //   }
@@ -56,7 +57,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let groups = [] as ts.group[];
   try {
-    groups = await knex('groups')
+    groups = await pg('groups')
       .where({
         cityId: city.id,
         countryId: 1,

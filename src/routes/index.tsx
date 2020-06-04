@@ -6,15 +6,12 @@ import {ErrorPage} from './ErrorPage';
 import {Group} from './Group';
 import {Home} from './Home';
 import {Login} from './Login';
-import {LoginReset} from './LoginReset';
 import {Meeting} from './Meeting';
 import {NoMatch} from './NoMatch';
-import {PasswordReset} from './PasswordReset';
 import {Search} from './Search';
 import {Signup} from './Signup';
 import {UnAuthorized} from './UnAuthorized';
 import {User} from './User';
-import {VerifyEmail} from './VerifyEmail';
 
 export const routes = [
   Admin,
@@ -25,14 +22,11 @@ export const routes = [
   Group,
   Home,
   Login,
-  LoginReset,
   Meeting,
-  PasswordReset,
   Search,
   Signup,
   UnAuthorized,
   User,
-  VerifyEmail,
   // NoMatch === our 404 page, or fallback page
   // any match that we can't find, 404, or else we can manually redirect to /404
   NoMatch,

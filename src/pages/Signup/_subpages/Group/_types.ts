@@ -4,15 +4,13 @@ export type tState = {
   category: ts.category,
   city: string,
   cityId: number,
-  email: string,
+  error: string,
   handle: string,
-  hasMounted: boolean,
-  login: string,
   name: string,
-  password: string,
   region: string
   regionId: number,
   showRegionField: boolean,
+  token: string,
   type: ts.privacyEnum,
 };
 
@@ -20,6 +18,7 @@ export type tStateUnion = keyof tState;
 export type tMeetingTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export type tContainerProps = {
+  email: string,
   geo: ts.geo,
   location: Location,
   loginDispatch: (query: ts.loginQuery) => ts.thunkPayload<ts.roleMap>,
@@ -29,6 +28,6 @@ export type tContainerProps = {
 export type tComponentProps = tState & {
   disabled: boolean,
   geo: ts.geo,
-  onSubmit: (ev: React.FormEvent<HTMLFormElement>) => void,
+  verifyAndRegister: () => void,
   updateState: (stateKey: tStateUnion, value: string | number | object | boolean) => void,
 };

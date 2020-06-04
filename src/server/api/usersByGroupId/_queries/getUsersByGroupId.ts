@@ -1,8 +1,9 @@
 import Koa from 'koa';
 import _ from 'lodash';
 
+import {pg} from '~app/server/db/connection';
+
 import {userKeys} from '../../_constants';
-import {knex} from '../../../db/connection';
 import {getRolesByGroupId} from './getRolesByGroupId';
 
 export const getUsersByGroupId = async (
@@ -19,7 +20,7 @@ export const getUsersByGroupId = async (
   }
 
   // use the returned ids to query users table
-  const usersStream = knex('users')
+  const usersStream = pg('users')
     .whereIn('id', userIds)
     .select(userKeys)
     .stream();

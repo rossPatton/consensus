@@ -1,6 +1,6 @@
 import Koa from 'koa';
 
-import {knex} from '../db/connection';
+import {pg} from '../db/connection';
 
 // use login info to return session for client
 // ideally only happens once per visit, on login. but if user refreshes, we do again
@@ -9,7 +9,7 @@ export const getRSVPsByUserId = async (
   userId: string | number = 0): Promise<ts.rsvp[]> => {
   let rsvps: ts.rsvp[] = [];
   try {
-    rsvps = await knex('users_meetings')
+    rsvps = await pg('users_meetings')
       .where({
         userId,
         value: 'yes',

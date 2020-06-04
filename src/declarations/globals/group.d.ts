@@ -1,29 +1,14 @@
 namespace ts {
   declare type privacyEnum = 'public' | 'private' | 'hidden';
 
-  declare type group = Readonly<{
-    avatar: string,
+  declare type group = ts.baseAccount & Readonly<{
     category: ts.category,
-    city: string,
-    cityId: number,
-    country: string,
-    countryId: number,
-    created_at?: Date,
     description: string,
-    email: string,
-    facebook?: string,
     handle: string,
-    id: number,
     memberName: string,
     modName: string,
     name: string,
-    region: string,
-    regionId: number,
-    showOnboarding: boolean,
-    twitter?: string,
     type: ts.privacyEnum,
-    updated_at?: Date,
-    website?: string,
   }>;
 
   // if posting/patching most values are up for grabs

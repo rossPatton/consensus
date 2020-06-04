@@ -55,4 +55,4 @@ declare let __SPACES_KEY__: string
 declare let __SPACES_SECRET__: string
 
 // consensus.local or consens.us.org depending on environment
-declare let __URL__: 'https://local.consens.us.org' | 'https://consens.us.org';
+declare let __URL__: 'https://consensus.local' | 'https://consens.us.org';

@@ -116,7 +116,7 @@ module.exports = {
       __SPACES_KEY__: JSON.stringify(env.SPACES_KEY),
       __SPACES_SECRET__: JSON.stringify(env.SPACES_SECRET),
       __URL__: JSON.stringify(!!env.DEV
-        ? 'https://local.consens.us.org'
+        ? 'https://consensus.local'
         : 'https://consens.us.org'),
     }),
 

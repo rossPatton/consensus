@@ -2,7 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 
 import {groupKeys} from '../_constants';
-import {knex} from '../../db/connection';
+import {pg} from '../../db/connection';
 import {validateSchema} from '../../utils';
 import {patchSchema, postSchema, schema} from './_schema';
 
@@ -16,7 +16,7 @@ group.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let group = {} as ts.group;
   try {
-    group = await knex(table)
+    group = await pg(table)
       .limit(1)
       .where(query)
       .first()
@@ -34,7 +34,7 @@ group.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
   let updatedGroup = [] as ts.group[];
   try {
-    updatedGroup = await knex(table)
+    updatedGroup = await pg(table)
       .limit(1)
       .where({id: query.id})
       .update(query)
@@ -53,7 +53,7 @@ group.post(route, async (ctx: Koa.ParameterizedContext) => {
   // create the group first =>
   let newGroupReturning = [] as ts.group[];
   try {
-    newGroupReturning = await knex(table)
+    newGroupReturning = await pg(table)
       .insert({avatar: '2', ...query})
       .returning('*');
   } catch (err) {

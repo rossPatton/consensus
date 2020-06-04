@@ -9,7 +9,7 @@ import {sendEmail} from '../../utils';
 export const verifyEmail = new Router();
 verifyEmail.get('/email/v1/sendVerificationToken',
   async (ctx: Koa.ParameterizedContext) => {
-    const {query}: {query: {email: string, type: 'user' | 'group'}} = ctx;
+    const {query}: {query: {email: string}} = ctx;
     // await validateSchema<{email: string}>(ctx, emailSchema, query);
 
     const secret = speakeasy.generateSecret({length: 20});

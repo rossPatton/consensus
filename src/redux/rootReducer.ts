@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 
-import { accountReducer } from './account/reducer';
 import { citiesReducer } from './cities/reducer';
 import { cityReducer } from './city/reducer';
 import { countryReducer } from './country/reducer';
@@ -23,7 +22,6 @@ import { userReducer } from './user/reducer';
 import { usersByGroupIdReducer } from './usersByGroupId/reducer';
 
 export const rootReducer = combineReducers({
-  account: accountReducer,
   cities: citiesReducer,
   city: cityReducer,
   country: countryReducer,
