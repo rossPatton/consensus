@@ -2,7 +2,6 @@ namespace ts {
   declare type user = ts.baseAccount & Readonly<{
     bio?: string,
     name: string,
-    phone: string,
     privateEmail: boolean,
     privateMemberships: boolean,
     privateRSVP: boolean,

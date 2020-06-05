@@ -1,8 +1,10 @@
 export {encrypt, decrypt} from './crypto';
 export {exportObjToJson} from './exportObjToJson';
-export {isValidPw} from './isValidPw';
+export {qr} from './qr';
 export {saltedHash} from './saltedHash';
 export {sendEmail} from './sendEmail';
 export {sha256, sha384} from './sha';
+export {hotp} from './hotp';
+export {hotpTokenValidates, totpTokenValidates} from './tokenValidates';
 export {validateSchema} from './validateSchema';
 export {zipMeetingsWithAttendees} from './zipMeetingsWithAttendees';

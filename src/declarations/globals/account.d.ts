@@ -13,7 +13,9 @@ namespace ts {
     regionId?: number,
     sessionType: 'group' | 'user',
     showOnboarding?: boolean,
+    otpSecret?: string,
     updated_at?: Date,
+    token?: string,
     twitter?: string,
     website?: string,
   }>;
@@ -30,7 +32,8 @@ namespace ts {
         | 'memberships'
         | 'planMeeting'
         | 'profile'
-        | 'rsvps',
+        | 'rsvps'
+        | 'security',
       subsection?: string,
     }
   }

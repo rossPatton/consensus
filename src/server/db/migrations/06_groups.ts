@@ -87,6 +87,9 @@ exports.up = async (knex: Knex) => {
     table.string('facebook').defaultTo('');
     table.string('twitter').defaultTo('');
 
+    // necessary to enable 2FA on an account
+    table.string('otpSecret').defaultTo('');
+
     table.timestamps(true, true);
   });
 };

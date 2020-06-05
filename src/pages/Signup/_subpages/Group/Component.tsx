@@ -128,7 +128,7 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
         </div>
       </>
     )}
-    renderSubmit={(formProps: any) => (
+    renderSubmit={formProps => (
       <>
         <button
           disabled={!formProps.hasMounted || !props.token || props.disabled}

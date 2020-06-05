@@ -34,7 +34,6 @@ export const userKeys = [
   'id',
   'language',
   'name',
-  'phone',
   'privateMemberships',
   'privateRSVP',
   'username',

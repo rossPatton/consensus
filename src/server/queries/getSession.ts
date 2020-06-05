@@ -1,5 +1,7 @@
 import Koa from 'koa';
 
+import {qr} from '~app/server/utils';
+
 // use login info to return session for client
 // ideally only happens once per visit, on login. but if user refreshes, we do again
 export const getSession = async (
@@ -8,6 +10,8 @@ export const getSession = async (
   const passportSession = await ctx.redis.get(ctx?.session?._sessCtx?.externalKey);
   const profile = ctx.session._sessCtx?.session?.passport?.user || passportSession;
 
+  const qrcode = await qr(ctx);
+
   // we return things this way to match redux-thunk on the client
   return {
     error: null,
@@ -15,6 +19,7 @@ export const getSession = async (
     data: {
       isAuthenticated: ctx.isAuthenticated(),
       profile, // user or group profile
+      qr: qrcode,
       type: profile?.sessionType || 'user',
     },
   };

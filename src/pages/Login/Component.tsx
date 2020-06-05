@@ -36,7 +36,7 @@ export const LoginComponent = memo((props: tComponentProps) => (
         </label>
       </>
     )}
-    renderSubmit={(formProps: any) => (
+    renderSubmit={formProps => (
       <button
         disabled={!formProps.hasMounted || !props.token}
         className="hover:bg-gray-3 p-2 pl-3 pr-3 mr-1">

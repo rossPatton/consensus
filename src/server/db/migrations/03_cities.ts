@@ -18,6 +18,7 @@ exports.up = async (knex: Knex) => {
       .onUpdate('CASCADE')
       .onDelete('CASCADE')
       .defaultTo(1);
+
     table.string('country')
       .notNullable()
       .references('countries.name')

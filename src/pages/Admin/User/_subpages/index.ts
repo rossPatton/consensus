@@ -23,3 +23,7 @@ export const Profile = loadable(() =>
 export const RSVPs = loadable(() =>
   import(/* webpackChunkName: "UserAdmin RSVPs" */'./RSVPs'),
 );
+
+export const Security = loadable(() =>
+  import(/* webpackChunkName: "UserAdmin Security" */'./Security'),
+);

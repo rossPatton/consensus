@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import {pg} from '~app/server/db/connection';
 import {getUserByQuery} from '~app/server/queries';
-import {validateSchema} from '~app/server/utils';
+import {totpTokenValidates, validateSchema} from '~app/server/utils';
 
 import {userKeys} from '../_constants';
 import {getSchema, patchSchema, postSchema} from './_schema';
@@ -42,14 +42,25 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.userQuery>(ctx, patchSchema, query);
 
   const loggedInAccount = ctx?.state?.user;
-  if (!loggedInAccount) return ctx.throw(400, 'Must be logged in');
+  if (!loggedInAccount) return ctx.throw(401, 'Must be logged in');
+
+  const {token, ...userQuery} = query;
+
+  if (token) {
+    const validates = totpTokenValidates({
+      token,
+      secret: query.otpSecret,
+    });
+
+    if (!validates) return ctx.throw(401, 'Token incorrect');
+  }
 
   let updatedUser = [] as ts.user[];
   try {
     updatedUser = await pg(table)
       .limit(1)
       .where({id: query.id})
-      .update(query)
+      .update(userQuery)
       .returning(userKeys);
   } catch (err) {
     return ctx.throw(500, err);

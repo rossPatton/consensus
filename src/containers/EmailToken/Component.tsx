@@ -32,9 +32,8 @@ export const EmailTokenComponent = memo((props: tComponentProps) => (
         </label>
       </>
     )}
-    renderSubmit={(formProps: any) => {
-      const disabled = !formProps.hasMounted || !props.email;
-      // disabled = !formProps.captcha;
+    renderSubmit={formProps => {
+      const disabled = !formProps.hasMounted || !props.email || !formProps.captcha;
 
       return (
         <button

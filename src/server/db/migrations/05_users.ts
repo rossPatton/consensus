@@ -21,9 +21,6 @@ exports.up = async (knex: Knex) => {
     // default name for displaying
     table.string('username').notNullable().defaultTo('').unique();
 
-    // contact info (useful if in leadership), ideally eventually useful for 2 factor
-    table.string('phone').unique();
-
     table.string('city');
     table.string('region');
 
@@ -64,6 +61,9 @@ exports.up = async (knex: Knex) => {
     table.string('website').defaultTo('');
     table.string('facebook').defaultTo('');
     table.string('twitter').defaultTo('');
+
+    // necessary to enable 2FA on an account
+    table.string('otpSecret').defaultTo('');
 
     table.timestamps(true, true);
   });

@@ -1,7 +1,8 @@
 import Koa from 'koa';
 import passport from 'koa-passport';
 import { IStrategyOptionsWithRequest, Strategy as LocalStrategy } from 'passport-local';
-import speakeasy from 'speakeasy';
+
+import {hotpTokenValidates} from '~app/server/utils';
 
 import {pg} from './db/connection';
 
@@ -50,14 +51,10 @@ passport.deserializeUser(async (
 // @ts-ignore fix type here later
 passport.use(new LocalStrategy(opts, async (
   req: Koa.Request,
-
   // @ts-ignore we don't use these, we just access ctx instead
   u: any, p: any,
-
   done: tDone) => {
   const {query} = req.ctx;
-  // set when token is generated
-  const {hotpCounter, hotpSecret} = req.ctx.session;
 
   let account: ts.user | ts.group;
   if (query.sessionType === 'user') {
@@ -87,12 +84,7 @@ passport.use(new LocalStrategy(opts, async (
     }, false);
   }
 
-  const tokenValidates = speakeasy.hotp.verify({
-    counter: hotpCounter,
-    secret: hotpSecret,
-    encoding: 'base32',
-    token: query.token,
-  });
+  const tokenValidates = hotpTokenValidates(req.ctx, query.token);
 
   const accountWithType = {
     ...account, sessionType:

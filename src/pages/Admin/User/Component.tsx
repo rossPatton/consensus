@@ -11,6 +11,7 @@ import {
   Memberships,
   Profile,
   RSVPs,
+  Security,
 } from './_subpages';
 import {tComponentProps} from './_types';
 
@@ -25,6 +26,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
   const isRSVPs = section === 'rsvps';
   const isProfile = section === 'profile';
   const isMemberships = section === 'memberships';
+  const isSecurity = section === 'security';
 
   return (
     <>
@@ -92,6 +94,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
             {isInvite && <Invitations />}
             {isMeetings && <Meetings />}
             {isRSVPs && <RSVPs />}
+            {isSecurity && <Security />}
             {isProfile
               && (
                 <Profile

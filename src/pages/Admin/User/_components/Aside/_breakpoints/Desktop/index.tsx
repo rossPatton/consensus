@@ -25,8 +25,11 @@ const Aside = memo((props: tProps) => {
             @{profile.username}
           </Link>
           <div className="font-semibold text-sm text-gray-5">
-            <Link to="/admin/profile">
+            <Link className="mr-1" to="/admin/profile">
               Profile
+            </Link>
+            <Link to="/admin/security">
+              Security
             </Link>
           </div>
         </div>
@@ -35,8 +38,7 @@ const Aside = memo((props: tProps) => {
         <li className="font-bold">
           Actions
         </li>
-        <li className="flex items-center text-base p-1 mb-1 rounded hover:bg-gray-2">
-          <div className="bg-white border rounded-circ mr-2 p-2" />
+        <li className="flex items-center text-base p-1 mb-1/2 rounded hover:bg-gray-2">
           {props.isRSVPs && 'Your rsvps'}
           {!props.isRSVPs && (
             <Link
@@ -48,8 +50,7 @@ const Aside = memo((props: tProps) => {
             </Link>
           )}
         </li>
-        <li className="flex items-center text-base p-1 mb-1 rounded hover:bg-gray-2">
-          <div className="bg-white border rounded-circ mr-2 p-2" />
+        <li className="flex items-center text-base p-1 rounded hover:bg-gray-2">
           {props.isInvite && 'Your pending invitations'}
           {!props.isInvite && (
             <Link

@@ -16,6 +16,7 @@ const createGroup = async (groupId: number) => {
   const category = groupId === 0
     ? 'Political'
     : categories[getRandomNum(0, categories.length - 1)].type;
+
   const email = faker.internet.email(
     faker.name.firstName(),
     faker.name.lastName(),
@@ -29,14 +30,14 @@ const createGroup = async (groupId: number) => {
     cityId: 16624,
     description: faker.lorem.paragraphs(),
     email: groupId === 0 ? 'rosspatton@protonmail.com' : email,
-    facebook: 'https://facebook.com/nonsense',
+    facebook: '',
     handle: group.handle,
     memberName: 'Member',
     modName: 'Facilitator',
     name: group.name,
     region: group.region,
     regionId: group.regionId,
-    twitter: 'https://twitter.com/nonsense',
+    twitter: '',
     type: group.type,
     website: group.website || faker.internet.domainName(),
   };
