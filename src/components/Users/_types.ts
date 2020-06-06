@@ -13,7 +13,12 @@ export type tProps = {
   group: ts.group,
   sessionRole?: ts.role, // to distinguish from user roles, and to shut up eslint
   type?: string,
-}
+};
+
+export type tStore = {
+  isLoading: boolean,
+  usersByGroupId: ts.user[],
+};
 
 export type tContainerProps = tProps & {
   deleteUserByGroupIdDispatch: (query: ts.deleteUserByGroupIdQuery) =>

@@ -60,10 +60,11 @@ export const FileUploadComponent = memo((props: tComponentProps) => (
       />
       <span className="btn flex items-center mb-1 p-1">
         <Emoji
+          className="mr-1"
           label="Picture (Camera) Emoji"
           emoji="📷"
         />
-        Upload Your Image
+        Upload your image
       </span>
       {props.info && (
         <small>{props.info}</small>

@@ -56,6 +56,7 @@ namespace ts {
     & Readonly<{
       deletionDeadline?: string,
       profile: T,
+      requireOtp?: boolean,
       type: 'group' | 'user',
     }>;
 

@@ -18,13 +18,14 @@ export const LoginComponent = memo((props: tComponentProps) => (
       <>
         <label htmlFor="tokenInput">
           <h2 className="text-base font-semibold">
-            Token
+            Code
           </h2>
           <p>
-            Copy/paste or type the token that was sent to your email to complete the form.
+            Copy/paste or type the 6 digit code that was sent to your email to complete the form.
           </p>
           <input
             required
+            pattern="^[0-9]{1,6}$"
             autoComplete="off"
             name="token" // for non-js submit and passportjs
             id="tokenInput"

@@ -23,6 +23,7 @@ export const InvitationsComponent = memo((props: tComponentProps) => (
             className="flex items-center border-0 bg-0 mr-2"
             onClick={ev => props.deleteInvite(ev, invite)}>
             <Emoji
+              className="mr-1"
               label="Big Red X Emoji"
               emoji="❌"
             />
@@ -32,6 +33,7 @@ export const InvitationsComponent = memo((props: tComponentProps) => (
             className="flex items-center border-0 bg-0 mr-2"
             onClick={ev => props.acceptInvite(ev, invite)}>
             <Emoji
+              className="mr-1"
               label="Accept Invitation Checkbox"
               emoji="✅"
             />

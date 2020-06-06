@@ -35,7 +35,6 @@ describe('redux/session/reducer', () => {
   it('should handle LOGIN_SUCCESS', () => {
     const testSession = {
       isAuthenticated: true,
-      isVerified: true,
       profile: {} as ts.user,
       type: 'user',
     } as ts.session;
@@ -45,7 +44,6 @@ describe('redux/session/reducer', () => {
       payload: testSession,
     })).toStrictEqual({
       ...initialState,
-      fetched: true,
       data: testSession,
     });
   });

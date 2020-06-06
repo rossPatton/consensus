@@ -3,6 +3,7 @@
 exports[`renders as expected 1`] = `
 <small
   aria-label="testing butt emoji"
+  className=""
   role="img"
 >
   🍑

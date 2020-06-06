@@ -1,9 +1,10 @@
 import _ from 'lodash';
 import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
 
-import {api} from '~app/utils';
+import {sendToken} from '~app/redux';
 
-import {tContainerProps, tKeyUnion, tState} from './_types';
+import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
 import {EmailTokenComponent} from './Component';
 
 export class EmailTokenContainer extends PureComponent<tContainerProps, tState> {
@@ -19,11 +20,8 @@ export class EmailTokenContainer extends PureComponent<tContainerProps, tState> 
 
   sendToken = async () => {
     try {
-      await api({
-        path: '/email/v1/sendVerificationToken',
-        query: {
-          email: this.state.email,
-        },
+      await this.props.sendTokenDispatch({
+        email: this.state.email,
       });
     } catch (error) {
       return this.setState({
@@ -61,4 +59,15 @@ export class EmailTokenContainer extends PureComponent<tContainerProps, tState> 
   }
 }
 
-export default EmailTokenContainer;
+const mapStateToProps = (store: tStore) => ({
+  tokensThunk: store.tokens,
+});
+
+const mapDispatchToProps = (dispatch: Function) => ({
+  sendTokenDispatch: (query: any) => dispatch(sendToken(query)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(EmailTokenContainer);

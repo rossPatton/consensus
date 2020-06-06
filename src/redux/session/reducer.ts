@@ -5,7 +5,6 @@ import { PATCH_FAILURE, PATCH_SUCCESS } from './patch/_types';
 
 export const initialState: ts.thunk<ts.session> = {
   error: null,
-  fetched: false,
   isLoading: false,
   data: {
     isAuthenticated: false,
@@ -44,10 +43,7 @@ export const sessionReducer = (state = initialState, action: tActions) => {
     return failureReturn;
 
   case LOGIN_SUCCESS:
-    return {
-      ...successReturn,
-      fetched: true,
-    };
+    return action.payload;
   case LOGOUT_SUCCESS:
     return {
       ...successReturn,

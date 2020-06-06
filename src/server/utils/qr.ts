@@ -15,10 +15,11 @@ export const qr = async (ctx: Koa.ParameterizedContext) => {
     encoding: 'base32',
   });
 
-  // @eslint-ignore-next-line
+  /* eslint-disable */
   const qrcode = await new Promise((resolve, reject) =>
     toDataURL(otpAuthUrl, (e, u) => (e ? reject(e) : resolve(u))),
   );
+  /* eslint-enable */
 
   const qr = {
     qrcode,

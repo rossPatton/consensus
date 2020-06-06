@@ -22,9 +22,9 @@ import { rsvp } from './rsvp';
 import { rsvps } from './rsvps';
 import { search } from './search';
 import { spaces } from './spaces';
+import { tokenSend, tokenValidate } from './token';
 import { user } from './user';
 import { usersByGroupId } from './usersByGroupId';
-import { verifyEmail } from './verifyEmail';
 
 export const setupApi = (app: Koa) => {
   app.use(accountDownload.routes());
@@ -50,7 +50,8 @@ export const setupApi = (app: Koa) => {
   app.use(spaces.routes());
   app.use(user.routes());
   app.use(usersByGroupId.routes());
-  app.use(verifyEmail.routes());
+  app.use(tokenSend.routes());
+  app.use(tokenValidate.routes());
 
   const opts = Object.freeze({
     methodNotAllowed: () => Boom.methodNotAllowed(),
@@ -81,5 +82,6 @@ export const setupApi = (app: Koa) => {
   app.use(spaces.allowedMethods(opts));
   app.use(user.allowedMethods(opts));
   app.use(usersByGroupId.allowedMethods(opts));
-  app.use(verifyEmail.allowedMethods(opts));
+  app.use(tokenSend.allowedMethods(opts));
+  app.use(tokenValidate.allowedMethods(opts));
 };

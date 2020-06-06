@@ -13,6 +13,8 @@ import {Signup} from './Signup';
 import {UnAuthorized} from './UnAuthorized';
 import {User} from './User';
 
+console.log('Home => ', Home);
+
 export const routes = [
   Admin,
   Categories,

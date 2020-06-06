@@ -15,6 +15,7 @@ export const getSession = async (
   // we return things this way to match redux-thunk on the client
   return {
     error: null,
+    fetched: true,
     isLoading: false,
     data: {
       isAuthenticated: ctx.isAuthenticated(),

@@ -17,6 +17,7 @@ import { regionReducer } from './region/reducer';
 import { rolesReducer } from './roles/reducer';
 import { rsvpsReducer } from './rsvps/reducer';
 import { sessionReducer } from './session/reducer';
+import { tokenReducer } from './tokens/reducer';
 import { uploadsReducer } from './uploads/reducer';
 import { userReducer } from './user/reducer';
 import { usersByGroupIdReducer } from './usersByGroupId/reducer';
@@ -39,6 +40,7 @@ export const rootReducer = combineReducers({
   roles: rolesReducer,
   rsvps: rsvpsReducer,
   session: sessionReducer,
+  tokens: tokenReducer,
   uploads: uploadsReducer,
   user: userReducer,
   usersByGroupId: usersByGroupIdReducer,

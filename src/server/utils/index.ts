@@ -5,6 +5,6 @@ export {saltedHash} from './saltedHash';
 export {sendEmail} from './sendEmail';
 export {sha256, sha384} from './sha';
 export {hotp} from './hotp';
-export {hotpTokenValidates, totpTokenValidates} from './tokenValidates';
+export {hotpTokenValidates, totpTokenValidates} from './validateToken';
 export {validateSchema} from './validateSchema';
 export {zipMeetingsWithAttendees} from './zipMeetingsWithAttendees';

@@ -27,11 +27,20 @@ export {
 } from './groupsByUserId';
 
 // session related actions/thunks
-export { login, logout, logoutSuccess, patchSessionSuccess } from './session';
+export {
+  login,
+  loginSuccess,
+  logout,
+  logoutSuccess,
+  patchSessionSuccess,
+} from './session';
+
+// email login tokens and 2FA tokens
+export { sendToken, validateToken } from './tokens';
 
 // user related actions/thunks
 export { deleteUser, getUser, patchUser, postUser } from './user';
-export {deleteInvite, getInvites, postInvite } from './invites';
+export { deleteInvite, getInvites, postInvite } from './invites';
 export {
   deleteUserByGroupId,
   getUsersByGroupId,

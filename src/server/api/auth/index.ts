@@ -20,9 +20,26 @@ auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
     } else if (account.sessionType === 'group') {
       await validateSchema<ts.user | ts.group>(ctx, groupSchema, account);
     }
+
+    // if (!!account.otpSecret && !ctx.session.otpValid) {
+    //   ctx.body = {
+    //     error: null,
+    //     fetched: false,
+    //     isLoading: false,
+    //     data: {
+    //       isAuthenticated: false,
+    //       requireOtp: true,
+    //     },
+    //   };
+    //   ctx.session.temp_user = account;
+
+    // } else {
     await ctx.login(account);
     const session = await getSession(ctx);
-    ctx.body = session.data;
+    // ctx.session.otpValid = false;
+    // ctx.session.temp_user = {};
+    ctx.body = session;
+    // }
   })(ctx, next));
 
 // logout just clears the session basically, doesnt matter how you logged in
@@ -30,6 +47,10 @@ auth.get('/auth/v1/logout', async (ctx: Koa.ParameterizedContext, next) =>
   passport.authenticate('local', () => {
     const isAuthenticated = ctx.isAuthenticated();
     if (!isAuthenticated) return ctx.throw(400, 'You are not logged in');
+
+    ctx.session.otpValid = false;
+    ctx.session.temp_user = {};
+
     ctx.logout();
     ctx.body = {isAuthenticated: false};
   })(ctx, next));

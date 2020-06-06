@@ -3,8 +3,8 @@ import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {EmailToken} from '~app/containers';
-import {ErrorBoundary, Template} from '~app/containers';
+// import {ValidateToken} from '~app/components';
+import {EmailToken, ErrorBoundary, Template} from '~app/containers';
 import {login} from '~app/redux';
 
 import {tContainerProps, tKeyUnion, tState} from './_types';
@@ -15,6 +15,7 @@ export class LoginContainer extends PureComponent<tContainerProps, tState> {
     email: '',
     emailSent: false,
     error: '',
+    // requireOtp: false,
     token: '',
     sessionType: 'user' as 'user' | 'group',
   };
@@ -24,22 +25,31 @@ export class LoginContainer extends PureComponent<tContainerProps, tState> {
       sessionType,
     });
 
-  verifyAndLogin = async (email: string) => {
+  login = async (email: string) => {
     const { token, sessionType } = this.state;
 
     // and log them in on success
+    let account: ts.session;
     try {
-      await this.props.loginDispatch({
+      account = await this.props.loginDispatch({
         email,
         token,
         sessionType,
       });
     } catch (error) {
-      this.setState({
+      return this.setState({
         error: error.message,
       });
     }
 
+    return account;
+  }
+
+  // if user logs in with no OTP enabled, just log them in
+  // otherwise, it kicks them to the 2FA screen
+  // if that code is correct, then log them in
+  verifyAndLogin = async (email: string) => {
+    await this.login(email);
     this.props.history.push('/admin/meetings');
   }
 
@@ -82,7 +92,16 @@ export class LoginContainer extends PureComponent<tContainerProps, tState> {
           <div className="bg-white rounded shadow m-auto contain-sm mb-3 p-2 d:p-3">
             <h1 className="mb-1 capitalize">
               {this.state.sessionType} Login
+              {/* {requireOtp
+                ? `Enter your 2FA code.`
+                : `${this.state.sessionType} Login`} */}
             </h1>
+            {/* {requireOtp && (
+              <ValidateToken
+                history={this.props.history}
+              />
+            )} */}
+            {/* {!requireOtp && ( */}
             <EmailToken
               actionLabel="Email Login Token"
               renderOnSend={(email: string) => (
@@ -94,6 +113,7 @@ export class LoginContainer extends PureComponent<tContainerProps, tState> {
                 />
               )}
             />
+            {/* )} */}
           </div>
         </ErrorBoundary>
       </Template>
@@ -101,9 +121,13 @@ export class LoginContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
+const mapStateToProps = (store: {session: ts.session}) => ({
+  session: store.session.data,
+});
+
 const mapDispatchToProps = (dispatch: Function) => ({
   loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
 });
 
-const Login = connect(null, mapDispatchToProps)(LoginContainer);
+const Login = connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
 export default Login;

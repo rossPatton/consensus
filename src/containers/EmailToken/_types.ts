@@ -6,6 +6,10 @@ export type tState = {
 
 export type tKeyUnion = keyof tState;
 
+export type tStore = {
+  tokens: ts.thunk<boolean>,
+}
+
 type tProps = {
   actionLabel: string,
   includeLegend?: boolean,
@@ -19,4 +23,5 @@ export type tComponentProps = tProps & tState & {
 
 export type tContainerProps = tProps & {
   renderOnSend: (email: string) => React.ReactNode,
+  sendTokenDispatch: Function,
 };
