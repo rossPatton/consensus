@@ -12,11 +12,9 @@ export const DeleteAccountComponent = memo((props: tComponentProps) => (
     legend={(<h2 className="font-semibold">Delete your account</h2>)}
     onSubmit={props.deleteUser}
     renderFields={() => (
-      <>
-        <h2 className="text-3 mb-3 text-gray-5">
-          Are you sure you want to delete your account?
-        </h2>
-      </>
+      <h2 className="text-3 mb-3 text-gray-5">
+        Are you sure you want to delete your account?
+      </h2>
     )}
     renderSubmit={formProps => (
       <button

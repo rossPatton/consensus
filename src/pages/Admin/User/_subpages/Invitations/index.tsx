@@ -4,7 +4,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import {ErrorBoundary, GenericLoader} from '~app/containers';
-import {deleteInvite, getInvites, postGroupByUserIdSuccess, postUserByGroupId} from '~app/redux';
+import {
+  deleteInvite,
+  getInvites,
+  postGroupByUserIdSuccess,
+  postRoleSuccess,
+  postUserByGroupId,
+} from '~app/redux';
 
 import {Store, tContainerProps, tState} from './_types';
 import {InvitationsComponent} from './Component';
@@ -52,6 +58,11 @@ class InvitationsContainer extends Component<tContainerProps, tState> {
       await this.props.deleteInviteDispatch(inviteQuery);
       // add new group to list of user's groups
       await this.props.dispatch(postGroupByUserIdSuccess({...invite.group}));
+      // add role to list of user roles
+      await this.props.dispatch(postRoleSuccess({
+        groupId: invite.groupId,
+        role: invite.type,
+      }));
     }
   }
 

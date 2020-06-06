@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import {getSession} from '../../queries';
 import {validateSchema} from '../../utils';
-import {groupSchema, userSchema} from './_schema';
+import {groupSchema, userSchema} from '../_schemas';
 
 export const auth = new Router();
 

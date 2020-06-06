@@ -17,7 +17,7 @@ export {
 export { getMeetingsByUserId } from './meetingsByUserId';
 
 // group/group related actions/thunks
-export { getGroup, patchGroup, postGroup } from './group';
+export { deleteGroup, getGroup, patchGroup, postGroup } from './group';
 export { getGroups } from './groups';
 export {
   deleteGroupByUserId,

@@ -3,7 +3,7 @@ export type tState = {
 };
 
 export type tContainerProps = {
-  patchGroupDispatch: (query: ts.groupUpsertQuery) => ts.thunkPayload<ts.session>,
+  deleteGroupDispatch: () => ts.thunkPayload<ts.session>,
   session: ts.session,
 };
 

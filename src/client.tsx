@@ -32,14 +32,22 @@ delete window.__PRELOADED_STATE__;
 // Create Redux store with initial state
 const store = initStore(preloadedState);
 
-// mount app on the client
-ReactDOM.hydrate(
+const rootNode = document.getElementById('appRoot');
+const App = (
   <Provider store={store as any}>
     <BrowserRouter>
       <ScrollToTop>
         <AppShell />
       </ScrollToTop>
     </BrowserRouter>
-  </Provider>,
-  document.getElementById('appRoot'),
+  </Provider>
 );
+
+// mount app on the client
+// loadableReady(() => {
+if (rootNode.hasChildNodes()) {
+  ReactDOM.hydrate(App, rootNode);
+} else {
+  ReactDOM.render(App, rootNode);
+}
+// });

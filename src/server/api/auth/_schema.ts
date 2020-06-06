@@ -3,15 +3,15 @@ import Joi from '@hapi/joi';
 const baseSchema = Joi.object({
   avatar: Joi.string().allow(null).allow('').optional(),
   city: Joi.string().allow(null).optional(),
-  cityId: Joi.number().integer().optional(),
+  cityId: Joi.number().integer().allow(null).optional(),
   country: Joi.string().allow(null).optional(),
-  countryId: Joi.number().integer().optional(),
+  countryId: Joi.number().integer().allow(null).optional(),
   email: Joi.string().email().required(),
   facebook: Joi.string().allow('').optional(),
   id: Joi.number().integer().required(),
   otpSecret: Joi.string().allow('').optional(),
   region: Joi.string().allow(null).optional(),
-  regionId: Joi.number().integer().optional(),
+  regionId: Joi.number().integer().allow(null).optional(),
   showOnboarding: Joi.bool().optional(),
   sessionType: Joi.string().allow('user', 'group').required(),
   token: Joi.string().length(6),
@@ -22,7 +22,7 @@ const baseSchema = Joi.object({
 });
 
 export const userSchema = baseSchema.keys({
-  bio: Joi.string(),
+  bio: Joi.string().allow(null),
   language: Joi.string().alphanum().max(2),
   name: Joi.string(),
   privateEmail: Joi.bool(),

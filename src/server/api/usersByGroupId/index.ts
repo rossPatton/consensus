@@ -13,7 +13,6 @@ export const usersByGroupId = new Router();
 const route = '/api/v1/usersByGroupId';
 const table = 'users_roles';
 
-
 // api for interacting with the users_roles table
 // not for signing up new users, but for getting users that are members of an org
 // or joining an group, or updating member roles within an org

@@ -50,7 +50,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   const htmlStream = renderToNodeStream(jsx);
   htmlStream.pipe(ctx.res, {end: false});
   htmlStream.on('end', () => {
-    ctx.res.write(`</div><div id="portalRoot"></div>
+    ctx.res.write(`</div>
       <script nonce="${nonce}">
       window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState()).replace(
     /</g,

@@ -96,7 +96,7 @@ const EditProfile = memo((props: tComponentProps) => (
             <input
               onChange={ev => props.updateState('website', ev.currentTarget.value)}
               className="p-2 w-full"
-              placeholder="Update your website here"
+              placeholder="Link your website here"
               value={props.website}
               name="website"
             />
@@ -131,13 +131,13 @@ const EditProfile = memo((props: tComponentProps) => (
           <div
             tabIndex={0}
             role="button"
-            className="flex d:flex-row items-center text-sm mb-1"
+            className="flex items-center text-sm font-semibold mb-1"
             onClick={() => props.updateState('privateRSVP', !props.privateRSVP)}
             onKeyPress={() => props.updateState('privateRSVP', !props.privateRSVP)}>
             <input
               readOnly
               type="checkbox"
-              className="mr-2"
+              className="mr-1 w-auto"
               autoComplete="nope"
               checked={props.privateRSVP}
             />
@@ -146,14 +146,14 @@ const EditProfile = memo((props: tComponentProps) => (
                 'Only you can see your RSVPS.'
               )}
               {!props.privateRSVP && (
-                'RSVPs will be shown publicly on meetings you have RSVPd to.'
+                'RSVPs will be shown publicly on meetings you have RSVPed to.'
               )}
             </span>
           </div>
           <div
             tabIndex={0}
             role="button"
-            className="flex flex-col d:flex-row items-center text-sm mb-3"
+            className="flex items-center font-semibold text-sm mb-3"
             onClick={() =>
               props.updateState('privateMemberships', !props.privateMemberships)}
             onKeyPress={() =>
@@ -161,7 +161,7 @@ const EditProfile = memo((props: tComponentProps) => (
             <input
               readOnly
               type="checkbox"
-              className="mr-2"
+              className="mr-1 w-auto"
               autoComplete="nope"
               checked={props.privateMemberships}
             />

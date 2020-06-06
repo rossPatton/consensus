@@ -97,7 +97,7 @@ const Aside = memo((props: tProps) => {
       <div className="flex items-center">
         <form
           className="w-full mr-1"
-          action="/api/v1/download">
+          action="/api/v1/download?">
           <fieldset>
             <button className="w-full text-sm p-2 hover:bg-gray-3">
               <legend className="w-full whitespace-no-wrap flex justify-center items-center">
@@ -121,9 +121,7 @@ const Aside = memo((props: tProps) => {
             className="mr-1"
             src="/images/delete.svg"
             width="20"
-          /> {session.deletionDeadline
-            ? 'Cancel Deletion'
-            : 'Delete Group'}
+          /> Delete Group
         </Link>
       </div>
     </aside>

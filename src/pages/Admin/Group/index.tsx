@@ -1,9 +1,6 @@
-import cx from 'classnames';
-import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {memo, useContext} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 
 import {MediaContext} from '~app/context';
 
@@ -31,7 +28,7 @@ const GroupAdminContainer = memo((props: tProps) => {
 
   return (
     <>
-      {session.deletionDeadline && (
+      {/* {session.deletionDeadline && (
         <div
           className={cx({
             'w-full p-2 text-center bg-yellow-1 font-bold text-sm': true,
@@ -39,12 +36,7 @@ const GroupAdminContainer = memo((props: tProps) => {
           })}>
           Your group will be deleted on {dayJS(session.deletionDeadline).format('MMM DD')}
         </div>
-      )}
-      {!session.isVerified && (
-        <div className="bg-yellow-2 rounded p-2 mb-3 text-center font-bold text-sm">
-          Your group will not be listed and some features will be locked until you verify your email. Click <Link to="/verify-email">here</Link> to verify your email.
-        </div>
-      )}
+      )} */}
       <div className="flex flex-col d:flex-row items-start">
         <Aside
           isDesktop={isDesktop}

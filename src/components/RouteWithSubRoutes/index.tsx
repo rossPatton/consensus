@@ -10,8 +10,6 @@ const RouteWithSubRoutes = (props: tProps) => (
   <Route
     path={props.path}
     render={(route: RouteComponentProps<any>) => {
-      console.log('route props => ', props);
-      console.log('component => ', props.component);
       const { component: Component } = props;
 
       // pass the sub-routes down to keep nesting

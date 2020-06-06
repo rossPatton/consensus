@@ -14,7 +14,7 @@ export const getAccountRoleRelByGroupId = async (
     try {
       accountRoleRel = await pg('users_roles')
         .limit(1)
-        .where({accountId: account.id, groupId})
+        .where({id: account.id, groupId})
         .first();
     } catch (err) {
       return ctx.throw(400, err);

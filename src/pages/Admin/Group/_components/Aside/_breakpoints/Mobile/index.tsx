@@ -95,9 +95,7 @@ const MobileAside = memo((props: tProps) => (
           src="/images/delete.svg"
           width="20"
         />
-        {props.session.deletionDeadline
-          ? 'Cancel Deletion'
-          : 'Delete Group'}
+        Delete Group
       </Link>
     </div>
   </aside>

@@ -3,10 +3,11 @@ import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-// import {ValidateToken} from '~app/components';
+import {Helmet /* ValidateToken*/} from '~app/components';
 import {EmailToken, ErrorBoundary, Template} from '~app/containers';
 import {login} from '~app/redux';
 
+import {canonical, description, keywords, title} from './_constants';
 import {tContainerProps, tKeyUnion, tState} from './_types';
 import {LoginComponent} from './Component';
 
@@ -65,6 +66,14 @@ export class LoginContainer extends PureComponent<tContainerProps, tState> {
     return (
       <Template className="bg-community m-auto min-h-halfscreen pb-5 pt-4">
         <ErrorBoundary status={this.props?.session?.error?.status}>
+          <Helmet
+            canonical={canonical}
+            title={title}
+            meta={[
+              { name: 'description', content: description },
+              { name: 'keywords', content: keywords },
+            ]}
+          />
           <ul className="contain-sm flex m-auto">
             <li>
               <button

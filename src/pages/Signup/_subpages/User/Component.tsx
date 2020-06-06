@@ -21,7 +21,7 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
             Token
           </h2>
           <p>
-            Copy/paste or type the token that was sent to your email to complete the form.
+            Copy/paste or type the token that was sent to your email to finish logging in.
           </p>
           <input
             required

@@ -28,9 +28,9 @@ const Aside = memo((props: tProps) => {
             <Link className="mr-1" to="/admin/profile">
               Profile
             </Link>
-            <Link to="/admin/security">
+            {/* <Link to="/admin/security">
               Security
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
@@ -112,7 +112,7 @@ const Aside = memo((props: tProps) => {
       <div className="flex flex-row items-center">
         <form
           className="w-full mr-1"
-          action="/api/v1/download">
+          action="/api/v1/download?">
           <fieldset>
             <button className="w-full text-sm p-2 hover:bg-gray-3">
               <legend className="w-full whitespace-no-wrap flex justify-center items-center">

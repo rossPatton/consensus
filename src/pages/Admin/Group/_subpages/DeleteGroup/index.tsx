@@ -1,9 +1,8 @@
-import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {patchGroup} from '~app/redux';
+import {deleteGroup} from '~app/redux';
 
 import {tContainerProps, tState} from './_types';
 import {DeleteGroupComponent} from './Component';
@@ -14,15 +13,15 @@ class DeleteGroupContainer extends PureComponent<tContainerProps, tState> {
   };
 
   deleteGroup = async () => {
-    const {session} = this.props;
+    // const {session} = this.props;
 
-    const oneWeekFromNow = dayJS().add(1, 'week').toISOString();
-    const query = session.deletionDeadline
-      ? {deletionDeadline: null}
-      : {deletionDeadline: oneWeekFromNow};
+    // const oneWeekFromNow = dayJS().add(1, 'week').toISOString();
+    // const query = session.deletionDeadline
+    //   ? {deletionDeadline: null}
+    //   : {deletionDeadline: oneWeekFromNow};
 
     try {
-      await this.props.patchGroupDispatch(query);
+      await this.props.deleteGroupDispatch();
     } catch (error) {
       return this.setState({
         error: error.message,
@@ -46,7 +45,7 @@ const mapStateToProps = (store: {session: ts.thunk<ts.session>}) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  patchGroupDispatch: (query: ts.groupUpsertQuery) => dispatch(patchGroup(query)),
+  deleteGroupDispatch: () => dispatch(deleteGroup()),
 });
 
 const DeleteGroup = connect(

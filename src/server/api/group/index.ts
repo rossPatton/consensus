@@ -10,6 +10,24 @@ export const group = new Router();
 const route = '/api/v1/group';
 const table = 'groups';
 
+group.delete(route, async (ctx: Koa.ParameterizedContext) => {
+  const loggedInAccount = ctx?.state?.user;
+  if (!loggedInAccount) return ctx.throw(401, 'Must be logged in');
+
+  try {
+    await pg(table)
+      .limit(1)
+      .where({id: loggedInAccount.id})
+      .first()
+      .del();
+  } catch (err) {
+    return ctx.throw(500, err);
+  }
+
+  ctx.logout();
+  ctx.body = {ok: true};
+});
+
 group.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: ts.getGroupQuery} = ctx;
   await validateSchema<ts.getGroupQuery>(ctx, schema, query);

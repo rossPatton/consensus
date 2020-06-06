@@ -112,7 +112,7 @@ const EditProfile = memo((props: tComponentProps) => (
           <input
             onChange={ev => props.updateState('website', ev)}
             className="p-2 w-full"
-            placeholder="Update your website here"
+            placeholder="Link your website here"
             value={props.website}
             name="website"
           />
@@ -146,7 +146,7 @@ const EditProfile = memo((props: tComponentProps) => (
     renderSubmit={formProps => (
       <div className="flex flex-col d:flex-row items-center">
         <button
-          disabled={!formProps.hasMounted || !formProps.captcha}
+          disabled={!formProps.hasMounted}
           className="p-2 pl-3 pr-3 mr-2 hover:bg-gray-3 transition">
           Save Changes
         </button>
