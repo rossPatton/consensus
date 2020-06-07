@@ -38,7 +38,7 @@ export const meetingsByGroupIdReducer = (state = initialState, action: tActions)
     return failureReturn;
 
   case DELETE_SUCCESS: {
-    const {id} = action.payload;
+    const {id} = action?.payload;
     return {
       ...state,
       data: [...state.data].filter(ev => ev.id !== id),

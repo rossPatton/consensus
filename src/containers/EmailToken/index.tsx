@@ -48,7 +48,7 @@ export class EmailTokenContainer extends PureComponent<tContainerProps, tState> 
           <EmailTokenComponent
             {...this.state}
             actionLabel={this.props.actionLabel}
-            includeLegend={this.props.includeLegend}
+            legend={this.props.legend}
             sendToken={this.sendToken}
             updateState={this.updateState}
           />

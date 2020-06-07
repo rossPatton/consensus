@@ -8,12 +8,12 @@ export type tKeyUnion = keyof tState;
 
 export type tStore = {
   tokens: ts.thunk<boolean>,
-}
+};
 
 type tProps = {
   actionLabel: string,
-  includeLegend?: boolean,
-}
+  legend?: React.ReactNode,
+};
 
 export type tComponentProps = tProps & tState & {
   actionLabel: string,

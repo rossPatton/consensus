@@ -1,5 +1,6 @@
 import React, {memo} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 import {Groups, Helmet, SuperSearch} from '~app/components';
 import {ErrorBoundary, GenericLoader, Template} from '~app/containers';
@@ -32,7 +33,7 @@ const SearchContainer = memo((props: tProps) => (
               />
             ) : (
               <div className="text-3 font-semibold">
-              No groups found! Try a more specific search?
+              No groups found! Try a more specific search, or <Link to="/signup/group">Start a new Group</Link>
               </div>
             )
         )}

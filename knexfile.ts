@@ -38,7 +38,7 @@ const sharedConfig = {
     ssl: {
       ca : fs.readFileSync(path.join(CWD, 'certs', 'postgres.crt')),
       rejectUnauthorized: true,
-    },
+    }
   },
 };
 

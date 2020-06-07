@@ -115,7 +115,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
                     })}>
                     <li className="mb-1">
                       <Link
-                        to="/login"
+                        to="/login/user"
                         id="a11yLogin"
                         className="btn inline-block p-1 pl-2 pr-2 hover:bg-gray-2">
                         Login
@@ -123,7 +123,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
                     </li>
                     <li>
                       <Link
-                        to="/signup"
+                        to="/signup/user"
                         id="a11ySignup"
                         className="btn inline-block p-1 pl-2 pr-2 hover:bg-gray-2">
                         Signup

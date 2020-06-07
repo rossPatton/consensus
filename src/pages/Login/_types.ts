@@ -3,7 +3,6 @@ import {History} from 'history';
 export type tState = {
   error: string | ts.fetchResponse<Error>,
   // requireOtp: boolean,
-  sessionType: 'user' | 'group',
   token: string,
 };
 
@@ -16,6 +15,7 @@ export type tStore = {
 export type tContainerProps = tStore & {
   history: History,
   loginDispatch: (query: ts.loginQuery) => ts.thunkPayload<ts.session>,
+  match: ts.match & { params: { type: 'user' | 'group', } },
 };
 
 export type tComponentProps = tState & {

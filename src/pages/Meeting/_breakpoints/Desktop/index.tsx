@@ -68,8 +68,9 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
           </time>
           <h1
             className={cx({
-              'mb-1 capitalize': true,
-              'mb-2': meeting.isDraft,
+              'capitalize': true,
+              'mb-1': meeting.host !== meeting.groupName,
+              'mb-2': meeting.host === meeting.groupName,
             })}>
             {meeting.title}
           </h1>

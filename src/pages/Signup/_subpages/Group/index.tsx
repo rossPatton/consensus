@@ -87,7 +87,7 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
     return (
       <>
         <Helmet
-          canonical="/signup/newGroup"
+          canonical="/signup/group"
           title="Start a new group on Consensus"
           meta={[
             { name: 'description', content: 'Fill our our signup form to start engaging with your membership today!' },

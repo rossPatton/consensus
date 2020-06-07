@@ -10,7 +10,7 @@ export const LoginComponent = memo((props: tComponentProps) => (
     className="animated fadeInUp"
     error={props.error}
     legend={(<h2 className="text-base font-semibold mb-2">
-      Verify your email to sign in.
+      Verify to sign in.
     </h2>)}
     name="userSignupForm"
     onSubmit={() => props.verifyAndLogin(props.email)}

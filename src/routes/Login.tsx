@@ -6,5 +6,5 @@ const LoginComponent = loadable(() =>
 
 export const Login = {
   component: LoginComponent,
-  path: '/login',
+  path: '/login/:type?',
 };

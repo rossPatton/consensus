@@ -9,7 +9,7 @@ import {tProps} from './_types';
 
 export const SignupComponent = memo((props: tProps) => (
   <>
-    <div className="bg-white rounded shadow m-auto contain-sm mb-3 p-2 d:p-3">
+    <div className="bg-white rounded-tr rounded-bl rounded-br shadow m-auto contain-sm mb-3 p-2 d:p-3">
       <h1 className="mb-1">
         Create a new {props.sessionType} account
       </h1>

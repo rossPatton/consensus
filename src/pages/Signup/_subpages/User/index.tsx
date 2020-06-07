@@ -54,7 +54,7 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
     return (
       <>
         <Helmet
-          canonical="/signup/newUser"
+          canonical="/signup/user"
           title="Start a new group on Consensus"
           meta={[
             { name: 'description', content: 'Fill our our signup form to start finding meetings in your neighborhood today!' },

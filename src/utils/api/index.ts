@@ -8,7 +8,8 @@ export const api = async (opts: tApiOpts) => {
 
   const fetchOpts = {agent, method} as {[key: string]: any};
   if (opts.credentials) {
-    (fetchOpts as any).credentials = __DEV__ ? 'include' : 'same-origin';
+    //__DEV__ ? 'include' :
+    fetchOpts.credentials = 'same-origin';
   }
   if (body) {
     fetchOpts.body = body;
