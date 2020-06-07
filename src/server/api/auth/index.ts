@@ -3,9 +3,9 @@ import passport from 'koa-passport';
 import Router from 'koa-router';
 import _ from 'lodash';
 
+import {groupSchema, userSchema} from '../_schemas';
 import {getSession} from '../../queries';
 import {validateSchema} from '../../utils';
-import {groupSchema, userSchema} from '../_schemas';
 
 export const auth = new Router();
 

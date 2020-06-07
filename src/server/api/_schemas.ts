@@ -8,7 +8,7 @@ export const baseAccountSchema = Joi.object({
   countryId: Joi.number().integer().allow(null).optional(),
   email: Joi.string().email().optional(),
   facebook: Joi.string().domain().optional().allow(''),
-  id: Joi.number().integer().required(),
+  id: Joi.number().integer().optional(),
   name: Joi.string().optional().allow('').allow(null),
   otpSecret: Joi.string().length(32).allow(null).allow('').optional(),
   region: Joi.string().allow(null).optional(),
@@ -30,7 +30,7 @@ export const userSchema = baseAccountSchema.keys({
   username: Joi.string().min(3).optional(),
 });
 
-export const groupSchema = Joi.object({
+export const groupSchema = baseAccountSchema.keys({
   category: Joi.string().allow('Political', 'Cooperative', 'Community', 'Union'),
   description: Joi.string(),
   // deletionDeadline: Joi.string().isoDate().allow(null).allow('').optional(),

@@ -1,34 +1,12 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
+import {testMeeting2} from '~app/constants/jest';
+
 import {PATCH_FAILURE, PATCH_INIT, PATCH_SUCCESS} from './_types';
 import {failure, init, success} from './actions';
 
 const mockStore = configureStore([thunk]);
-
-const testMeeting = {
-  attendees: 1,
-  id: 12,
-  category: 'Political' as ts.category,
-  groupId: 1,
-  host: '',
-  cityId: 16624,
-  groupName: 'Tech Workers Coalition NYC',
-  isPrivate: false,
-  description: '',
-  location: '717 Borer Oval',
-  locationLink: 'http://sam.info',
-  locationType: 'online',
-  title: 'aut occaecati iusto nostrum ut',
-  slug: 'aut-occaecati-iusto-nostrum-ut',
-  date: '2020-05-02T10:47:34.393Z',
-  endDate: '2021-02-12T02:01:06.513Z',
-  isDraft: false,
-  isOnline: false,
-  duration: 2,
-  publicRSVPS: [{}] as ts.user[],
-  time: '19:00',
-};
 
 describe('redux/meeting/patch', () => {
   it('creates correct PATCH_INIT action', () => {
@@ -45,7 +23,7 @@ describe('redux/meeting/patch', () => {
 
   it('creates correct PATCH_SUCCESS action', () => {
     const updatedMeeting = {
-      ...testMeeting,
+      ...testMeeting2,
       title: 'Test title',
     };
 
@@ -54,7 +32,7 @@ describe('redux/meeting/patch', () => {
       payload: updatedMeeting,
     }];
 
-    const store = mockStore({meeting: testMeeting});
+    const store = mockStore({meeting: testMeeting2});
     store.dispatch(success(updatedMeeting));
     expect(store.getActions()).toStrictEqual(expectedActionPayload);
   });

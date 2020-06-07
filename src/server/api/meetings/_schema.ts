@@ -32,5 +32,16 @@ export const upsertSchema = Joi.object({
   groupId: Joi.number().integer().required(),
   groupName: Joi.string().required(),
   slug: Joi.string(),
+  tag: Joi.string().valid(
+    'Meeting',
+    'March',
+    'Rally',
+    'Direct Action',
+    'Protest',
+    'Strike',
+    'Picket',
+    'Vote',
+    'Election',
+  ),
   title: Joi.string().required(),
 });

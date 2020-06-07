@@ -5,25 +5,29 @@ import {connect} from 'react-redux';
 
 import {logout, logoutSuccess} from '~app/redux';
 
-import {tContainerProps} from './_types';
+import {tContainerProps, tStore} from './_types';
 import {HeaderComponent} from './Component';
 
 class HeaderContainer extends PureComponent<tContainerProps> {
-  logout = (ev: React.MouseEvent<HTMLButtonElement>) => {
+  logout = async (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.preventDefault();
 
     // trigger logout immediately on client side while server works
     logoutSuccess({isAuthenticated: false});
 
-    this.props.logoutDispatch()
-      // technically unnecessary, but just to be safe
-      .then(() => window.location.reload())
-      .catch(loglevel.error);
+    try {
+      await this.props.logoutDispatch();
+    } catch (err) {
+      loglevel.error(err);
+    }
+
+    window.location.reload();
   }
 
   render() {
     return (
       <HeaderComponent
+        geo={this.props.geo}
         logout={this.logout}
         session={this.props.session}
       />
@@ -31,7 +35,8 @@ class HeaderContainer extends PureComponent<tContainerProps> {
   }
 }
 
-const mapStateToProps = (store: {session: ts.thunk<ts.session>}) => ({
+const mapStateToProps = (store: tStore) => ({
+  geo: store.geo.data,
   session: store.session.data,
 });
 

@@ -21,6 +21,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     description: '',
     endTime: '21:00',
     error: '',
+    groupName: this.props.group.name,
     host: this.props.group.name,
     id: undefined as number | undefined,
     isCopy: false,
@@ -29,7 +30,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     isPrivate: this.props.group.type !== 'public',
     location: '',
     locationLink: '',
-    groupName: this.props.group.name,
+    tag: 'meeting' as ts.meetingTypes,
     time: '19:00',
     title: '',
   };
@@ -76,6 +77,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
       location: draft.location as string,
       locationLink: draft.locationLink as string,
       slug: slugify(draft.title as string),
+      tag: draft.meetingType as ts.meetingTypes,
       time: isCopy ? '19:00' : draft.time as string,
       title: draft.title as string,
     };

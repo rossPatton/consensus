@@ -15,13 +15,15 @@ const createMeeting = async (groupId: number, isDraft: boolean = false) => {
     const isOnline = faker.random.boolean();
 
     return {
+      // endDate === duration, since users can have custom durations this is a timestamp
+      // we convert the 1hr, 2hr etc values to timestamps as well
       category: group.category,
       cityId: group.cityId,
       date: faker.random.boolean() ? faker.date.future() : faker.date.past(),
       description: faker.lorem.paragraphs(),
-      // endDate === duration, since users can have custom durations this is a timestamp
-      // we convert the 1hr, 2hr etc values to timestamps as well
       endDate: faker.date.future(),
+      groupId,
+      groupName: group.name,
       host: faker.random.boolean() ? group.name : faker.company.companyName(),
       isDraft,
       isOnline: isOnline,
@@ -29,9 +31,8 @@ const createMeeting = async (groupId: number, isDraft: boolean = false) => {
       location: isOnline ? '' : faker.address.streetAddress(),
       locationLink: isOnline ? '' : faker.internet.url(),
       locationType: isOnline ? 'online' : 'offline',
-      groupId,
-      groupName: group.name,
       slug,
+      tag: 'Meeting',
       title,
     };
   });

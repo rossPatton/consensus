@@ -1,38 +1,12 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
+import {testMeeting1} from '~app/constants/jest';
+
 import {GET_FAILURE, GET_INIT, GET_SUCCESS} from './_types';
 import {failure, init, success} from './actions';
 
 const mockStore = configureStore([thunk]);
-
-const testMeeting = {
-  attendees: 1,
-  host: '',
-  publicRSVPS: [{}] as ts.user[],
-  rsvp: {
-    userId: 1,
-  },
-  id: 12,
-  category: 'Political' as ts.category,
-  groupId: 1,
-  cityId: 16624,
-  groupName: 'Tech Workers Coalition NYC',
-  isOnline: false,
-  isPrivate: false,
-  description: 'Asperiores et perspiciatis fugit sint. Nihil dolore autem enim numquam dolores aliquam sed repudiandae. Eius dolorem nostrum quo aut culpa incidunt. Aut eum adipisci. Amet amet suscipit et. Voluptas animi distinctio adipisci. Nam voluptas similique quam esse magni quidem id. In aut nulla inventore facilis dicta ducimus molestias saepe. Autem voluptatibus mollitia quos ullam quidem ex consequuntur quia. Adipisci quod est incidunt quas repellendus rem voluptatem. Cumque iusto corporis velit nam nostrum commodi vel possimus velit. Quibusdam ea cumque dignissimos cumque magni voluptas ipsa natus sunt. Est qui officiis atque dolorem voluptatibus aut explicabo.',
-  location: '717 Borer Oval',
-  locationLink: 'http://sam.info',
-  locationType: 'online',
-  title: 'aut occaecati iusto nostrum ut',
-  slug: 'aut-occaecati-iusto-nostrum-ut',
-  date: '2020-05-02T10:47:34.393Z',
-  endDate: '2021-02-12T02:01:06.513Z',
-  isDraft: false,
-  duration: 2,
-  img: '',
-  time: '19:00',
-};
 
 describe('redux/meeting/get', () => {
   it('creates correct GET_INIT action', () => {
@@ -50,11 +24,11 @@ describe('redux/meeting/get', () => {
   it('creates correct GET_SUCCESS action', () => {
     const expectedActionPayload = [{
       type: GET_SUCCESS,
-      payload: testMeeting,
+      payload: testMeeting1,
     }];
 
     const store = mockStore({});
-    store.dispatch(success(testMeeting));
+    store.dispatch(success(testMeeting1));
     expect(store.getActions()).toStrictEqual(expectedActionPayload);
   });
 

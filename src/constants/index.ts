@@ -32,6 +32,18 @@ export const categoryMap: ts.categoryMap = {
   'political': 'Political',
 };
 
+export const meetingTypes = [
+  'Meeting',
+  'March',
+  'Rally',
+  'Direct Action',
+  'Protest',
+  'Strike',
+  'Picket',
+  'Vote',
+  'Election',
+];
+
 export const roles: ts.role[] = ['member', 'facilitator'];
 
 export const spacesUrl = 'https://consensus.nyc3.digitaloceanspaces.com';

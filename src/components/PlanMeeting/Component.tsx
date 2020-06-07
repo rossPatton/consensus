@@ -3,19 +3,20 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
-import {FileUpload, Form} from '~app/components';
+import {Emoji, FileUpload, Form} from '~app/components';
+import {meetingTypes} from '~app/constants';
 
 import {tComponentProps} from './_types';
 
 export const PlanMeetingComponent = memo((props: tComponentProps) => {
   const {updateState} = props;
   const disableSubmit = !props.title || !props.date || !props.time;
-  let legend = 'Plan Meeting';
+  let legend = 'Plan Event';
   if (props.isDraft && props.isCopy) {
-    legend = 'Copying Meeting';
+    legend = 'Copying Event';
   }
   if (props.isDraft && !props.isCopy) {
-    legend = 'Edit Meeting Draft';
+    legend = 'Edit Event Draft';
   }
 
   return (
@@ -23,17 +24,17 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
       <Form
         encType="multipart/form-data"
         error={props.error}
-        name="planMeetingForm"
+        name="planEventForm"
         onSubmit={props.onSubmit}
         legend={props.heading && (
           <h2 className="text-3 font-bold">{legend}</h2>
         )}
         renderFields={() => (
           <>
-            <h3 className="text-base mb-1">Meeting Title</h3>
+            <h3 className="text-base mb-1">Event Title</h3>
             <input
               className="mb-3 w-full"
-              placeholder="Your Meeting Title Here"
+              placeholder="Your Event Title Here"
               value={props.title}
               onChange={ev => updateState('title', ev.currentTarget.value)}
             />
@@ -45,16 +46,34 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
               prefix={`g${props.group.id}:mFI`}
               title="Upload Featured Image"
             />
-            <h3 className="text-base mb-1">Tell Us About Your Meeting</h3>
+            <h3 className="text-base mb-1">
+              What type of Event is it?
+            </h3>
+            <label htmlFor="typeSelect">
+              <select
+                name="type"
+                id="typeSelect"
+                className="mb-3 w-full"
+                value={props.tag}
+                onBlur={ev => updateState('tag', ev.currentTarget.value)}
+                onChange={ev => updateState('tag', ev.currentTarget.value)}>
+                {meetingTypes.map(type => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <h3 className="text-base mb-1">Tell Us About Your Event</h3>
             <textarea
               rows={8}
               spellCheck
               className="mb-3 w-full"
-              placeholder="Meeting Description Here. If meeting is online, past meeting details here as well."
+              placeholder="Event Description Here. If meeting is online, past meeting details here as well."
               value={props.description}
               onChange={ev => updateState('description', ev.currentTarget.value)}
             />
-            <h3 className="text-base mb-1">Meeting Host</h3>
+            <h3 className="text-base mb-1">Event Host</h3>
             <input
               className="mb-3 w-full"
               placeholder="Is your meeting being hosted by a different group or person?"
@@ -78,10 +97,10 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
                 />
                 <span className="w-full">
                   {props.isOnline && (
-                    'Meeting is online. Put meeting details in your description.'
+                    'Event is online. Put meeting details in your description.'
                   )}
                   {!props.isOnline && (
-                    'Meeting is in person. Put location details below.'
+                    'Event is in person. Put location details below.'
                   )}
                 </span>
               </div>
@@ -113,7 +132,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
                   min={dayJS().toISOString()}
                   className="w-full"
                   value={dayJS(props.date).format('YYYY-MM-DD')}
-                  placeholder="Meeting Date Here"
+                  placeholder="Event Date Here"
                   onChange={ev => updateState('date', ev.currentTarget.value)}
                 />
               </div>
@@ -139,40 +158,44 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
           </>
         )}
         renderSubmit={() => (
-          <div className="mb-3 d:mb-0 flex items-center">
-            <button
-              className="p-2 mr-1 hover:bg-gray-3"
-              disabled={disableSubmit}
-              onClick={ev => {
-                ev.preventDefault();
-                props.onSubmit();
-              }}>
-              {(props.isDraft && typeof props.id !== 'string') ? 'Publish' : 'Update'}
-            </button>
-            <button
-              className="p-2 mr-1 hover:bg-gray-3"
-              disabled={disableSubmit}
-              onClick={ev => {
-                ev.preventDefault();
-                props.saveAsDraft();
-              }}>
-              {props.meetingThunk.isLoading && 'Saving...'}
-              {!props.meetingThunk.isLoading && 'Save as Draft'}
-            </button>
-            {typeof props.id === 'number' && (
-              <Link
-                target="_blank"
-                to={`/draft/${props.id}/${props.slug}`}
-                className="btn p-2 hover:bg-gray-3">
-                <span
-                  role="img"
-                  aria-label="Eye Emoji">
-                  👁️
-                </span>
-                Preview
-              </Link>
-            )}
-          </div>
+          <>
+            {props.meetingThunk.isLoading
+              ? 'Saving...'
+              : (
+                <div className="mb-3 d:mb-0 flex items-center">
+                  <button
+                    className="p-2 mr-1 hover:bg-gray-3"
+                    disabled={disableSubmit}
+                    onClick={ev => {
+                      ev.preventDefault();
+                      props.onSubmit();
+                    }}>
+                    {(props.isDraft && typeof props.id !== 'string') ? 'Publish' : 'Update'}
+                  </button>
+                  <button
+                    className="p-2 mr-1 hover:bg-gray-3"
+                    disabled={disableSubmit}
+                    onClick={ev => {
+                      ev.preventDefault();
+                      props.saveAsDraft();
+                    }}>
+                  Save as Draft
+                  </button>
+                  {typeof props.id === 'number' && (
+                    <Link
+                      to={`/draft/${props.id}/${props.slug}`}
+                      className="btn p-2 hover:bg-gray-3">
+                      <Emoji
+                        className="mr-1"
+                        emoji="👁️"
+                        label="Eye Emoji"
+                      />
+                    Preview
+                    </Link>
+                  )}
+                </div>
+              )}
+          </>
         )}
       />
     </div>

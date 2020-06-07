@@ -58,7 +58,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                     className="mr-1"
                     src="/images/online.svg"
                     width="16"
-                  /> Online Meeting <span className="ml-1 mr-1">@</span>
+                  /> Online <span className="ml-1 mr-1">@</span>
                   <time dateTime={meeting.date}>
                     {isPastMeeting
                       ? dayJS(meeting.date).format('MMM DD YYYY | h:mmA')
@@ -110,7 +110,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                 )}
               {props.isEditable
                 && (
-                  <div className="flex items-center font-semibold">
+                  <div className="flex items-center font-semibold leading-none">
                     {(!isPastMeeting || meeting.isDraft) && (
                       <Link
                         className="text-sm mr-2"

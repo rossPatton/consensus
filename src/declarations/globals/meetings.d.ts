@@ -5,6 +5,8 @@ namespace ts {
     date: string,
     description: string,
     endDate: string,
+    groupId: number,
+    groupName: string,
     host: string,
     id: number,
     img?: string,
@@ -13,10 +15,9 @@ namespace ts {
     isPrivate: boolean,
     location: string,
     locationLink: string,
-    groupId: number,
-    groupName: string,
     publicRSVPS?: ts.user[],
     slug: string,
+    tag: meetingTypes,
     title: string,
   }>;
 
@@ -39,4 +40,14 @@ namespace ts {
     city: string,
     regionCode: string,
   }>;
+
+  declare type meetingTypes = 'Meeting'
+    | 'March'
+    | 'Rally'
+    | 'Direct Action'
+    | 'Protest'
+    | 'Strike'
+    | 'Picket'
+    | 'Vote'
+    | 'Election';
 }

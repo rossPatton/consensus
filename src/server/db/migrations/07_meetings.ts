@@ -1,6 +1,17 @@
 import Knex from 'knex';
 
 const categories = ['Community', 'Cooperative', 'Union', 'Political'];
+const meetingTypes = [
+  'Meeting',
+  'March',
+  'Rally',
+  'Direct Action',
+  'Protest',
+  'Strike',
+  'Picket',
+  'Vote',
+  'Election',
+];
 
 exports.up = async (knex: Knex) => {
   await knex.schema.createTable('meetings', table => {
@@ -43,9 +54,15 @@ exports.up = async (knex: Knex) => {
 
     // columns below are manually added by user when creating an meeting/meeting
     table.text('description', 'longtext').notNullable();
+
     table.text('location').defaultTo('Location To Be Determined');
     table.text('locationLink');
     table.enum('locationType', ['online', 'offline']).defaultTo('online');
+
+    table
+      .enum('tag', meetingTypes)
+      .defaultTo('meeting');
+
     table.text('title').notNullable();
     table.text('slug').notNullable();
     table.timestamp('date').notNullable();

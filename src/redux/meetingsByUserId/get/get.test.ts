@@ -1,6 +1,8 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
+import {testMeeting1} from '~app/constants/jest';
+
 import {
   GET_FAILURE,
   GET_INIT,
@@ -12,31 +14,6 @@ import {
 import {failure, init, success} from './actions';
 
 const mockStore = configureStore([thunk]);
-
-const testMeeting = {
-  attendees: 8,
-  id: 12,
-  category: 'Political' as ts.category,
-  groupId: 1,
-  host: '',
-  cityId: 16624,
-  groupName: 'Tech Workers Coalition NYC',
-  isOnline: false,
-  isPrivate: false,
-  description: '',
-  location: '717 Borer Oval',
-  locationLink: 'http://sam.info',
-  locationType: 'online',
-  title: 'aut occaecati iusto nostrum ut',
-  slug: 'aut-occaecati-iusto-nostrum-ut',
-  date: '2020-05-02T10:47:34.393Z',
-  endDate: '2021-02-12T02:01:06.513Z',
-  isDraft: false,
-  duration: 2,
-  img: '',
-  publicRSVPS: [{}] as ts.user[],
-  time: '19:00',
-};
 
 describe('redux/meetingsByUserId/get', () => {
   it('creates correct GET_INIT action', () => {
@@ -52,11 +29,11 @@ describe('redux/meetingsByUserId/get', () => {
   it('creates correct GET_SUCCESS action', () => {
     const expectedActionPayload: tSuccessAction[] = [{
       type: GET_SUCCESS,
-      payload: [testMeeting],
+      payload: [testMeeting1],
     }];
 
     const store = mockStore({});
-    store.dispatch(success([testMeeting]));
+    store.dispatch(success([testMeeting1]));
     expect(store.getActions()).toStrictEqual(expectedActionPayload);
   });
 

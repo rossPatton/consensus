@@ -73,7 +73,7 @@ const MobileMeetings = memo((props: tComponentProps) => (
               )}
             {props.isEditable
               && (
-                <div className="flex text-sm">
+                <div className="flex text-sm leading-none">
                   {(!isPastMeeting || meeting.isDraft) && (
                     <Link
                       className="mr-1 d:mr-2"

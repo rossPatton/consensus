@@ -16,7 +16,6 @@ tokenSend.get('/api/v1/sendToken', async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<{email: string}>(ctx, emailSchema, query);
 
   const token = hotp(ctx);
-  console.log('token => ', token)
   const resp = await sendEmail({
     from: `Consensus <noreply@${__MAIL_DOMAIN__}>`,
     to: query.email,

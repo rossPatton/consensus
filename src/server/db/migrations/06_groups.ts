@@ -48,11 +48,17 @@ exports.up = async (knex: Knex) => {
     // if group is scheduled for deletion
     table.timestamp('deletionDeadline').defaultTo(null);
 
-    table.string('city').notNullable();
-    table.string('region').notNullable();
+    table.string('city')
+      .defaultTo('Brooklyn')
+      .notNullable();
+
+    table.string('region')
+      .defaultTo('New York')
+      .notNullable();
 
     // for ease of lookup later if need be
     table.integer('cityId')
+      .defaultTo(15928)
       .notNullable()
       .references('cities.id')
       .onUpdate('CASCADE')
@@ -67,6 +73,7 @@ exports.up = async (knex: Knex) => {
 
     table.integer('regionId')
       .notNullable()
+      .defaultTo(37)
       .references('regions.id')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');

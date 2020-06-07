@@ -79,6 +79,15 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
               {dayJS(meeting.date).format('h:mm')}-{dayJS(meeting.endDate).format('h:mmA')}
             </div>
           </time>
+          <div className="flex items-center mb-2 text-gray-5">
+            <img
+              alt=""
+              height="14"
+              className="mr-1"
+              src="/images/tag.svg"
+              width="14"
+            /> {meeting.tag}
+          </div>
           {meeting.isOnline && (
             <div className="leading-none font-bold flex items-center mb-2 text-gray-5">
               <img
@@ -87,7 +96,7 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
                 className="mr-1"
                 src="/images/online.svg"
                 width="16"
-              /> Online Meeting
+              /> Online
             </div>
           )}
           {!meeting.isOnline && (

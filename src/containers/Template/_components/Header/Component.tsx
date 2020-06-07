@@ -12,6 +12,8 @@ export const HeaderComponent = memo((props: tComponentProps) => {
   const {isMobile} = useContext(MediaContext);
   const [showMenu, toggleMenu] = useState(false);
   const [showNav, toggleNav] = useState(false);
+  const {handle, regionCode} = props.geo;
+  const city = handle ? `/${regionCode}/${handle}` : '';
 
   return (
     <header className="flex bg-white shadow fixed t l r z-50">
@@ -53,7 +55,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
                       />
                     </li>
                     <li className="mb-1">
-                      <Link to="/directory/us">
+                      <Link to={'/directory/us'}>
                         Browse by City
                       </Link>
                     </li>
@@ -79,7 +81,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
         </Link>
         <ul className="hidden d:flex flex-row font-semibold">
           <li className="mr-2">
-            <Link to="/directory/us">
+            <Link to={`/directory/us${city}`}>
               Browse by City
             </Link>
           </li>
@@ -124,7 +126,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
                         to="/signup"
                         id="a11ySignup"
                         className="btn inline-block p-1 pl-2 pr-2 hover:bg-gray-2">
-                      Signup
+                        Signup
                       </Link>
                     </li>
                   </ul>

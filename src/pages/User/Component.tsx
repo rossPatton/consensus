@@ -17,13 +17,6 @@ export const UserComponent = memo(({groups, user}: tComponentProps) => (
         <p>{user.name}</p>
       </div>
     )}
-    {!user.privateEmail
-      && (
-        <div className="mb-2">
-          <h3>Email</h3>
-          <p>{user.email}</p>
-        </div>
-      )}
     {user.website && (
       <div className="mb-2">
         <h3 className="mb-1">

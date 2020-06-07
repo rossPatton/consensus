@@ -84,6 +84,15 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
               <RSVP className="mb-2" meeting={meeting} />
             )}
           <ul className="mb-2 font-semibold">
+            <li className="flex items-center mb-1 text-gray-5">
+              <img
+                alt=""
+                height="14"
+                className="mr-1"
+                src="/images/tag.svg"
+                width="14"
+              /> {meeting.tag}
+            </li>
             {meeting.isOnline && (
               <li className="flex items-center mb-1 text-gray-5">
                 <img
@@ -92,7 +101,7 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
                   className="mr-1"
                   src="/images/online.svg"
                   width="16"
-                /> Online Meeting
+                /> Online
               </li>
             )}
             {!meeting.isOnline

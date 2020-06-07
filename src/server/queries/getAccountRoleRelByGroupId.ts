@@ -17,7 +17,7 @@ export const getAccountRoleRelByGroupId = async (
         .where({id: account.id, groupId})
         .first();
     } catch (err) {
-      return ctx.throw(400, err);
+      return ctx.throw(500, err);
     }
   }
 
