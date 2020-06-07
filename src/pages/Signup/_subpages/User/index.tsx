@@ -62,6 +62,7 @@ export class UserSignupContainer extends PureComponent<tContainerProps, tState> 
           ]}
         />
         <UserSignupComponent
+          {...this.props}
           {...this.state}
           verifyAndRegister={this.verifyAndRegister}
           updateState={this.updateState}

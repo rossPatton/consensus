@@ -8,8 +8,10 @@ import {Home} from './Home';
 import {Login} from './Login';
 import {Meeting} from './Meeting';
 import {NoMatch} from './NoMatch';
+import {Privacy} from './Privacy';
 import {Search} from './Search';
 import {Signup} from './Signup';
+import {Terms} from './Terms';
 import {UnAuthorized} from './UnAuthorized';
 import {User} from './User';
 
@@ -23,8 +25,10 @@ export const routes = [
   Home,
   Login,
   Meeting,
+  Privacy,
   Search,
   Signup,
+  Terms,
   UnAuthorized,
   User,
   // NoMatch === our 404 page, or fallback page

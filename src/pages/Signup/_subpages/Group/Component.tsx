@@ -126,6 +126,26 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
         <div className="font-semibold bg-gray-1 border inline-block mb-3 p-1 rounded">
           {`https://consens.us.org/group/${props.handle}`}
         </div>
+        <div
+          tabIndex={0}
+          role="button"
+          className="flex items-center font-semibold text-sm mb-3"
+          onClick={() => props.toggleTerms(!props.termsAccepted)}
+          onKeyPress={() => props.toggleTerms(!props.termsAccepted)}>
+          <label htmlFor="terms">
+            <input
+              readOnly
+              name="terms"
+              type="checkbox"
+              className="mr-1 w-auto"
+              autoComplete="nope"
+              checked={props.termsAccepted}
+            />
+          </label>
+          <span>
+            I have read and agree to the <Link to="/terms-and-conditions">Terms and Conditions</Link> and <Link to="/privacy-policy">Privacy Policy</Link>
+          </span>
+        </div>
       </>
     )}
     renderSubmit={formProps => (

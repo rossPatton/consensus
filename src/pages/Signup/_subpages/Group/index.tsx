@@ -61,6 +61,7 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
   }
 
   render() {
+    const {termsAccepted} = this.props;
     const {
       category,
       city,
@@ -80,7 +81,8 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
       || !name
       || !region
       || !regionId
-      || !type;
+      || !type
+      || !termsAccepted;
 
     return (
       <>

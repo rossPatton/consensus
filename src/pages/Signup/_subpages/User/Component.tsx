@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, {memo} from 'react';
+import {Link} from 'react-router-dom';
 
 import {Form} from '~app/components';
 
@@ -55,14 +56,41 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
             className="p-2 mb-2 w-full"
           />
         </label>
+        <div
+          tabIndex={0}
+          role="button"
+          className="flex items-center font-semibold text-sm mb-3 cur-ptr"
+          onClick={() => props.toggleTerms(!props.termsAccepted)}
+          onKeyPress={() => props.toggleTerms(!props.termsAccepted)}>
+          <label htmlFor="terms">
+            <input
+              readOnly
+              name="terms"
+              type="checkbox"
+              className="mr-1 w-auto"
+              autoComplete="nope"
+              checked={props.termsAccepted}
+            />
+          </label>
+          <span>
+            I have read and agree to the <Link to="/terms-and-conditions">Terms and Conditions</Link> and <Link to="/privacy-policy">Privacy Policy</Link>
+          </span>
+        </div>
       </>
     )}
-    renderSubmit={formProps => (
-      <button
-        disabled={!formProps.hasMounted || !props.token || !props.username}
-        className="hover:bg-gray-3 p-2 pl-3 pr-3 mr-1">
-        Sign up!
-      </button>
-    )}
+    renderSubmit={formProps => {
+      const disabled = !formProps.hasMounted
+        || !props.token
+        || !props.termsAccepted
+        || !props.username;
+
+      return (
+        <button
+          disabled={disabled}
+          className="hover:bg-gray-3 p-2 pl-3 pr-3 mr-1">
+          Sign up!
+        </button>
+      );
+    }}
   />
 ));

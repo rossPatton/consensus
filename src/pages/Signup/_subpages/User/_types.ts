@@ -12,14 +12,19 @@ export type tState = {
 
 export type tKeyUnion = keyof tState;
 
-export type tContainerProps = {
+type tProps = {
+  termsAccepted: boolean,
+  toggleTerms: (termsAccepted: boolean) => void,
+};
+
+export type tContainerProps = tProps & {
   email: string,
   history: History,
   loginDispatch: (query: ts.loginQuery) => ts.thunkPayload<ts.session>,
   postUserDispatch: (query: ts.userQuery) => ts.thunkPayload<ts.session>,
 };
 
-export type tComponentProps = tState & {
+export type tComponentProps = tProps & tState & {
   verifyAndRegister: () => void,
   updateState: (key: tKeyUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
 };

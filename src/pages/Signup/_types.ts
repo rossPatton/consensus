@@ -6,6 +6,8 @@ export type tProps = {
   match: ts.match & { params: { type: 'newUser' | 'newGroup', } },
   session: ts.session,
   sessionType: 'group' | 'user',
+  termsAccepted: boolean,
+  toggleTerms: (termsAccepted: boolean) => void,
 };
 
 export type tStore = {

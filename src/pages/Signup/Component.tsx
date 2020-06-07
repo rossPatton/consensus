@@ -21,12 +21,16 @@ export const SignupComponent = memo((props: tProps) => (
               <UserSignup
                 email={email}
                 history={props.history}
+                termsAccepted={props.termsAccepted}
+                toggleTerms={props.toggleTerms}
               />
             )}
             {props.sessionType === 'group' && (
               <GroupSignup
                 email={email}
                 location={props.location}
+                termsAccepted={props.termsAccepted}
+                toggleTerms={props.toggleTerms}
               />
             )}
           </>

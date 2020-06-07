@@ -3,7 +3,8 @@ import {Link} from 'react-router-dom';
 
 const Footer = memo(() => (
   <footer className="pt-4 pb-4 bg-gray-2">
-    <div className="mb-3 contain m-auto">
+    <div className="contain font-semibold m-auto">
+      <b>© Consensus 2020</b>
       <ul>
         <li className="mb-1">
           <Link to="/login">
@@ -15,24 +16,20 @@ const Footer = memo(() => (
             Sign up
           </Link>
         </li>
-        <li>
+        <li className="mb-1">
           <Link to="/directory/us">
             Directory
           </Link>
         </li>
-      </ul>
-    </div>
-    <div className="contain m-auto">
-      <b>© Consensus 2019</b>
-      <ul className="fx">
-        <li className="mr-3">
-          Terms of Service
-        </li>
-        <li className="mr-3">
-          Privacy Policy
+        <li className="mb-1">
+          <Link to="/terms-and-conditions">
+            Terms and Conditions
+          </Link>
         </li>
         <li>
-          Cookie Policy
+          <Link to="/privacy-policy">
+            Privacy Policy
+          </Link>
         </li>
       </ul>
     </div>

@@ -12,6 +12,7 @@ import {SignupComponent} from './Component';
 
 const SignupContainer = memo((props: tProps) => {
   const [sessionType, setType] = useState('user' as 'user' | 'group');
+  const [termsAccepted, toggleTerms] = useState(false);
 
   return (
     <Template className="bg-community m-auto min-h-halfscreen pb-5 pt-4">
@@ -57,6 +58,8 @@ const SignupContainer = memo((props: tProps) => {
               match={props.match}
               session={props.session}
               sessionType={sessionType}
+              termsAccepted={termsAccepted}
+              toggleTerms={toggleTerms}
             />
           </>
         )}
