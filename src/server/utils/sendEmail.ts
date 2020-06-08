@@ -1,5 +1,5 @@
-import mailgun, {messages} from 'mailgun-js';
 import Koa from 'koa';
+import mailgun, {messages} from 'mailgun-js';
 
 const mg = mailgun({
   apiKey: __MAIL_KEY__,
@@ -9,7 +9,7 @@ const mg = mailgun({
 export const sendEmail = async (
   ctx: Koa.ParameterizedContext,
   data: messages.SendData,
-  ) => {
+) => {
   const asyncFunc = async () => mg.messages().send(data);
 
   let res = null;

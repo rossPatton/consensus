@@ -22,7 +22,6 @@ rsvps.get(route, async (ctx: Koa.ParameterizedContext) => {
 rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {query} = ctx;
   const {id} = ctx?.state?.user;
-  console.log('user => ', ctx?.state?.user);
   await validateSchema(ctx, upsertSchema, query);
 
   const {meetingId, type = 'private', value = ''} = query;

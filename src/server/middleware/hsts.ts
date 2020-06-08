@@ -8,7 +8,7 @@ export const hstsMiddleware = async (app: Koa) =>
     maxAge: 31536000,
     // must be enabled to be approved
     includeSubDomains: true,
-    preload: true
-}));
+    preload: true,
+  }));
 
 
