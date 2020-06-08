@@ -21,15 +21,16 @@ rsvps.get(route, async (ctx: Koa.ParameterizedContext) => {
 
 rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {query} = ctx;
-  const {userId} = ctx?.state?.user;
-  await validateSchema(ctx, upsertSchema, {...query, userId});
+  const {id} = ctx?.state?.user;
+  console.log('user => ', ctx?.state?.user);
+  await validateSchema(ctx, upsertSchema, query);
 
   const {meetingId, type = 'private', value = ''} = query;
 
   const newRsvp: ts.rsvp = {
     meetingId: parseInt(meetingId, 10),
     type,
-    userId,
+    userId: id,
     value: value !== '' ? value : null,
   };
 
@@ -37,7 +38,7 @@ rsvps.patch(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     rsvpUpdate = await pg(table)
       .first()
-      .where({meetingId, userId})
+      .where({meetingId, userId: id})
       .update(newRsvp)
       .returning('*');
   } catch (err) {

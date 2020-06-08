@@ -25,18 +25,13 @@ export const LINK_TAGS: tLinkProps[] = [
     rel: 'preconnect',
     href: spacesUrl,
   },
-  // {
-  //   rel: 'preload',
-  //   href: '/static/fonts.css',
-  //   as: 'font',
-  // },
-  // {
-  //   crossOrigin: '',
-  //   rel: 'preload',
-  //   href: '/static/fonts/LabGrotesque-Medium.woff2',
-  //   as: 'font',
-  //   type: 'font/woff2',
-  // },
+  {
+    crossOrigin: '',
+    rel: 'preload',
+    href: '/fonts/founders-grotesk-text-web-medium.woff2',
+    as: 'font',
+    type: 'font/woff2',
+  },
 ];
 
 export const META_TAGS: tMetaProps[] = [

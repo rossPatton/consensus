@@ -9,6 +9,7 @@ import { errorHandlerMiddleware } from './errorHandler';
 import { faviconMiddleware } from './favicon';
 import { featurePolicyMiddleware } from './featurePolicy';
 import { helmetMiddleware } from './helmet';
+import { hstsMiddleware } from './hsts';
 import { loggerMiddleware } from './logger';
 import { rateLimiterMiddleware } from './rateLimiter';
 import { redirectTrailingSlashMiddleware } from './redirectTrailingSlash';
@@ -30,6 +31,7 @@ export const setupMiddleware = (app: Koa) => {
   referrerPolicyMiddleware(app);
   featurePolicyMiddleware(app);
   contentSecurityPolicyMiddleware(app);
+  hstsMiddleware(app);
 
   // any error handlers go here
   errorHandlerMiddleware(app);
