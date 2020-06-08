@@ -8,8 +8,7 @@ export const api = async (opts: tApiOpts) => {
 
   const fetchOpts = {agent, method} as {[key: string]: any};
   if (opts.credentials) {
-    // __DEV__ ? 'include' :
-    fetchOpts.credentials = 'same-origin';
+    fetchOpts.credentials = __DEV__ ? 'include' : 'same-origin';
   }
   if (body) {
     fetchOpts.body = body;
@@ -29,10 +28,6 @@ export const api = async (opts: tApiOpts) => {
     .then((resp: ts.fetchResponse) => {
       status = resp.status as ts.statusUnion;
       if (!resp.ok) throw resp;
-      if (status === 204) {
-        throw Error('204: Nothing found');
-      }
-
       return resp.json(); // we only get here if there is no error
     })
     .then(json => {

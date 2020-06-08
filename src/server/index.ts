@@ -68,16 +68,12 @@ const opts = {
 };
 
 const httpsServer = https.createServer(opts, app.callback());
-// const httpServer = http.createServer(app.callback());
-// httpServer.listen(3000, '0.0.0.0' /* needs to be 0.0.0.0 for docker */, () => {
-//   loglevel.info('✅ https app running on port 3000 ✅');
-// });
 /* needs to be 0.0.0.0 for docker */
 httpsServer.listen(3001, '0.0.0.0', () => {
   loglevel.info('✅ https app running on port 3001 ✅');
 });
 
-httpsServer.on('uncaughtException', err => {
+httpsServer.on('uncaughtException', (err: Error) => {
   loglevel.error(err.stack);
 });
 

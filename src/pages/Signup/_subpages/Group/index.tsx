@@ -10,13 +10,13 @@ import {GroupSignupComponent} from './Component';
 export class GroupSignupContainer extends PureComponent<tContainerProps, tState> {
   state = {
     category: 'Political' as ts.category,
-    city: '',
-    cityId: 0,
+    city: 'Brooklyn',
+    cityId: 15928,
     error: '',
     handle: '',
     name: '',
-    region: '',
-    regionId: 0,
+    region: 'New York',
+    regionId: 37,
     showRegionField: false,
     token: '',
     type: 'public' as ts.privacyEnum,

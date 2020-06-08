@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 // might be a somewhat common scenario given the lengths we're going to hide pages
 // if user lands somewhere private, or they're just not logged in, render this page
 const UnAuthorized = memo((props: {geo: ts.geo}) => (
-  <div className="contain m-auto min-h-halfscreen mb-5 text-center">
+  <div className="contain m-auto min-h-halfscreen pt-4 mb-5 text-center">
     {props.geo.countryCode === 'US' && (
       <h1 className="mb-1">
         You don&apos;t have permission to view this page.

@@ -59,7 +59,6 @@ export class LoginContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     const { type = 'user' } = this.props?.match?.params;
-    console.log('all props for login page => ', this.props);
 
     return (
       <Template className="bg-community m-auto min-h-halfscreen pb-5 pt-4">

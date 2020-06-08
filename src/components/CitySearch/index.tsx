@@ -8,7 +8,7 @@ import {tContainerProps, tStore} from './_types';
 import {CitySearchComponent} from './Component';
 
 // use within an existing form, tie to it's updateState method
-export class CitySearchContainer extends PureComponent<tContainerProps> {
+class CitySearchContainer extends PureComponent<tContainerProps> {
   static defaultProps = {
     showRemoveButton: true,
   };

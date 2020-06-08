@@ -1,4 +1,3 @@
-import loglevel from 'loglevel';
 import mailgun, {messages} from 'mailgun-js';
 import Koa from 'koa';
 

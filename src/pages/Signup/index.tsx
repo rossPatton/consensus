@@ -13,7 +13,6 @@ import {SignupComponent} from './Component';
 const SignupContainer = memo((props: tProps) => {
   const [termsAccepted, toggleTerms] = useState(false);
   const { type = 'user' } = props?.match?.params;
-  console.log('sign up props => ', props);
 
   return (
     <Template className="bg-community m-auto min-h-halfscreen pb-5 pt-4">

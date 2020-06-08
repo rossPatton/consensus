@@ -24,10 +24,6 @@ country.get(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  if (!country || (country instanceof Array && country.length === 0)) {
-    ctx.status = 204;
-  }
-
   let regions: ts.region[];
   try {
     regions = await pg('regions')
@@ -35,11 +31,6 @@ country.get(route, async (ctx: Koa.ParameterizedContext) => {
       .orderBy('name', 'asc');
   } catch (err) {
     return ctx.throw(500, err);
-  }
-
-  if (!regions ||
-    (regions instanceof Array && regions.length === 0)) {
-    ctx.status = 204;
   }
 
   ctx.body = {

@@ -11,7 +11,7 @@ reportUri.post('/report-violation', async (ctx: Koa.ParameterizedContext) => {
     loglevel.info('CSP Violation: No data received!');
   }
 
-  ctx.status = 204;
+  ctx.status = 400;
   ctx.body = `CSP Violation: ${ctx.request.body}`;
   ctx.app.emit('error', 'CSP Violation', ctx.request.body);
 });
