@@ -32,7 +32,7 @@ const SignupContainer = memo((props: tProps) => {
             <ul className="contain-sm flex m-auto">
               <li>
                 <Link
-                  to="user"
+                  to="/signup/user"
                   className={cx({
                     'block p-1 pl-2 pr-2 rounded-tl rounded-tr mr-1': true,
                     'bg-gray-3': type === 'group',
@@ -43,7 +43,7 @@ const SignupContainer = memo((props: tProps) => {
               </li>
               <li>
                 <Link
-                  to="group"
+                  to="/signup/group"
                   className={cx({
                     'block p-1 pl-2 pr-2 rounded-tl rounded-tr': true,
                     'bg-gray-3': type === 'user',

@@ -75,7 +75,7 @@ export class LoginContainer extends PureComponent<tContainerProps, tState> {
           <ul className="contain-sm flex m-auto">
             <li>
               <Link
-                to="user"
+                to="/login/user"
                 className={cx({
                   'block p-1 pl-2 pr-2 rounded-tl rounded-tr mr-1': true,
                   'bg-gray-3': type === 'group',
@@ -86,7 +86,7 @@ export class LoginContainer extends PureComponent<tContainerProps, tState> {
             </li>
             <li>
               <Link
-                to="group"
+                to="/login/group"
                 className={cx({
                   'block p-1 pl-2 pr-2 rounded-tl rounded-tr': true,
                   'bg-gray-3': type === 'user',
