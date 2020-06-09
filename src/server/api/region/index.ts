@@ -14,44 +14,35 @@ region.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: ts.directoryParams} = ctx;
   await validateSchema<ts.directoryParams>(ctx, schema, query);
 
-  // @TODO reimplment once there are more countries
-  // let country = {} as ts.country;
-  // try {
-  //   country = await pg('countries')
-  //     .limit(1)
-  //     .where({code: countryCode})
-  //     .first();
-  // } catch (err) {
-  //   return ctx.throw(500, err);
-  // }
-
   let region = {} as ts.region;
   try {
-    region = await pg('regions')
+    await pg.transaction(async trx => pg('regions')
+      .transacting(trx)
       .limit(1)
       .where({
         countryId: 1,
         code: query.regionCode,
       })
-      .first();
-  } catch (err) {
-    return ctx.throw(500, err);
-  }
-
-  let cities = [] as ts.city[];
-  try {
-    cities = await pg('cities')
-      .where({
-        countryId: 1,
-        regionId: region.id,
+      .first()
+      .then(regionResp => {
+        region = regionResp;
+        return pg('cities')
+          .transacting(trx)
+          .where({
+            countryId: 1,
+            regionId: regionResp.id,
+          })
+          .orderBy('name', 'asc');
       })
-      .orderBy('name', 'asc');
+      .then(cities => {
+        ctx.body = {
+          ...region,
+          cities: _.uniqBy(cities, city => city.name),
+        };
+      })
+    );
   } catch (err) {
     return ctx.throw(500, err);
   }
 
-  ctx.body = {
-    ...region,
-    cities: _.uniqBy(cities, city => city.name),
-  };
 });

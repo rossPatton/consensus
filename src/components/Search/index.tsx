@@ -46,7 +46,9 @@ class SearchContainer extends React.PureComponent<tProps, tState> {
         autoComplete="off"
         onSubmit={this.onSubmit}>
         <fieldset>
-          <label className="flex flex-row items-center relative" htmlFor="search">
+          <label
+            className="flex flex-row items-center relative"
+            htmlFor="search-input">
             <img
               alt=""
               className="absolute ml-1 opacity-5"
@@ -54,8 +56,9 @@ class SearchContainer extends React.PureComponent<tProps, tState> {
               width="20"
             />
             <input
+              id="search-input"
               className={this.props.className || 'p-1 pl-3 rounded w-full'}
-              name="search"
+              name="search-input"
               onChange={this.onChange}
               placeholder={this.props.placeholder}
               type="search"

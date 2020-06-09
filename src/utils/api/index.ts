@@ -1,5 +1,3 @@
-import loglevel from 'loglevel';
-
 import {agent, objToQueryString} from '..';
 import {tApiOpts} from './_types';
 
@@ -20,6 +18,8 @@ export const api = async (opts: tApiOpts) => {
     const qs = objToQueryString(query);
     endpoint = `${path}?${qs}`;
   }
+
+  console.log('all api call opts => ', fetchOpts);
 
   if (opts.init) opts.dispatch(opts.init());
 
@@ -44,7 +44,6 @@ export const api = async (opts: tApiOpts) => {
         opts.dispatch(opts.failure({message: err, status}));
       }
 
-      loglevel.error({message: err, status});
       throw Error(message);
     });
 };

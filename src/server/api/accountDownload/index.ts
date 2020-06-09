@@ -14,42 +14,41 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
   const session = ctx?.state?.user;
   await validateSchema<Mutable<ts.idQuery>>(ctx, schema, {id: session?.id});
 
-  let roles: ts.roleMap[];
-  let rsvps: ts.rsvp[];
-  let meetings: ts.meeting[];
-
   const body: {[key: string]: unknown} = {account: session};
+  let filename = session.name;
   if (typeof session.username === 'string') {
-    try {
-      roles = await pg('users_roles')
-        .where({userId: session.id})
-        .select('role');
-    } catch (err) {
-      return ctx.throw(500, err);
-    }
-    try {
-      rsvps = await pg('users_meetings')
-        .where({userId: session.id})
-        .select(['type', 'value']);
-    } catch (err) {
-      return ctx.throw(500, err);
-    }
 
-    body.roles = roles;
-    body.rsvps = rsvps;
+    filename = session.username;
+
+    try {
+      await pg.transaction(async trx => {
+        const roles = await pg('users_roles')
+          .transacting(trx)
+          .where({userId: session.id})
+          .select('role');
+
+        const rsvps = await pg('users_meetings')
+          .transacting(trx)
+          .where({userId: session.id})
+          .select(['type', 'value']);
+
+        body.roles = roles;
+        body.rsvps = rsvps;
+      });
+    } catch (err) {
+      return ctx.throw(500, err);
+    }
   } else {
     try {
-      meetings = await pg('meetings')
+      const meetings = await pg('meetings')
         .where({groupId: session.id})
         .select('*');
+
+      body.meetings = meetings;
     } catch (err) {
       return ctx.throw(500, err);
     }
-
-    body.meetings = meetings;
   }
-
-  const filename = session.name || session.username;
 
   ctx.res.setHeader('Content-Type', 'application/json');
   ctx.res.setHeader(

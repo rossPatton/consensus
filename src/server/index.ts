@@ -15,7 +15,7 @@ import loglevel from 'loglevel';
 import uuidv4 from 'uuid/v4';
 
 import { setupApi } from './api';
-import { setupMiddleware } from './middleware';
+import { setupMiddleware, staticFileMiddleware } from './middleware';
 import { SSR } from './SSR';
 
 const app = new Koa();
@@ -27,6 +27,8 @@ const store = redisStore({
   host: 'redis',
   port: 6379,
 });
+
+staticFileMiddleware(app);
 
 app.use(session({
   key: 'consensus:sess',
@@ -40,6 +42,8 @@ app.context.state = {nonce: uuidv4()};
 
 // session login MUST go before middleware/api
 app.use(passport.initialize());
+// potential improvement here - pull out api calls that rely on the session
+// and put all the others before passport here. to reduce deserialization calls
 app.use(passport.session());
 
 // setup all middleware in correct order

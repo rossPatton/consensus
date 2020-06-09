@@ -16,25 +16,26 @@ country.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let country = {} as ts.country;
   try {
-    country = await pg('countries')
+    await pg.transaction(async trx => pg('countries')
+      .transacting(trx)
       .limit(1)
-      .where({code: query.countryCode})
-      .first();
+      .where({countryId: 1})
+      .first()
+      .then(countryResp => {
+        country = countryResp;
+        return pg('regions')
+          .transacting(trx)
+          .where({countryId: 1})
+          .orderBy('name', 'asc');
+      })
+      .then(regions => {
+        ctx.body = {
+          ...country,
+          regions: _.uniqBy(regions, region => region.name),
+        };
+      })
+    );
   } catch (err) {
     return ctx.throw(500, err);
   }
-
-  let regions: ts.region[];
-  try {
-    regions = await pg('regions')
-      .where({countryId: country.id})
-      .orderBy('name', 'asc');
-  } catch (err) {
-    return ctx.throw(500, err);
-  }
-
-  ctx.body = {
-    ...country,
-    regions: _.uniqBy(regions, region => region.name),
-  };
 });

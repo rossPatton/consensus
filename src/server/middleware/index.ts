@@ -16,7 +16,10 @@ import { redirectTrailingSlashMiddleware } from './redirectTrailingSlash';
 import { referrerPolicyMiddleware } from './referrerPolicy';
 import { responseTimeHeaderMiddleware } from './responseTimeHeader';
 import { sslMiddleware } from './ssl';
-import { staticFileMiddleware } from './static';
+
+// to avoid blasting passport deserialize on every request (including static files)
+// we pull this out and up, so it goes before passport. this resolves the issue
+export { staticFileMiddleware } from './static';
 
 // middleware order is important
 export const setupMiddleware = (app: Koa) => {
@@ -44,5 +47,4 @@ export const setupMiddleware = (app: Koa) => {
   faviconMiddleware(app);
   loggerMiddleware(app);
   redirectTrailingSlashMiddleware(app);
-  staticFileMiddleware(app);
 };

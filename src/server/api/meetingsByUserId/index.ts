@@ -10,7 +10,6 @@ import {schema} from './_schema';
 import {tMeetingsByUserServerQuery} from './_types';
 
 export const meetingsByUserId = new Router();
-
 const route = '/api/v1/meetingsByUserId';
 
 meetingsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {

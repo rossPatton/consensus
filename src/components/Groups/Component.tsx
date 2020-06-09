@@ -10,7 +10,7 @@ export const GroupsComponent = memo((props: tComponentProps) => (
     {props.groups.length > 0
       && props.pendingOrgs.length > 0
       && (
-        <li className="font-bold mb-2 pb-2 border-b-1">
+        <li className="font-semibold mb-2">
           Current group memberships
         </li>
       )}
@@ -24,7 +24,7 @@ export const GroupsComponent = memo((props: tComponentProps) => (
     ))}
     {props.pendingOrgs.length > 0 && (
       <>
-        <li className="font-bold mb-2 pb-2 border-b-1">
+        <li className="font-semibold mb-2">
           Pending group memberships
         </li>
         {props.pendingOrgs.map((pendingOrg, i) => (

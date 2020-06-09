@@ -14,8 +14,8 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
     this._getMeetingsNearMe();
   }
 
-  componentDidUpdate(nextProps: tContainerProps) {
-    const geoFetched = nextProps.geoThunk.fetched !== this.props.geoThunk.fetched;
+  async componentDidUpdate(nextProps: tContainerProps) {
+    const geoFetched = nextProps.geoThunk.fetched;
     if (!geoFetched) return;
     this._getMeetingsNearMe();
   }

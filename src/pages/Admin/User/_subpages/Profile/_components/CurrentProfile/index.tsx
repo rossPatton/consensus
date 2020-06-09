@@ -10,7 +10,7 @@ const CurrentProfile = memo((props: tComponentProps) => (
     </h2>
     <Link
       className="text-sm leading-none font-bold absolute t r"
-      to={`/user/${props.session.id}`}>
+      to={`/user/${props.session.profile.id}`}>
       View your public profile
     </Link>
     <h3 className="text-base mb-2 leading-none">

@@ -22,8 +22,8 @@ const sharedConfig = {
     directory: migrations,
   },
   pool: {
-    min: 10,
-    max: 100,
+    min: 1,
+    max: 47,
   },
   seeds: {
     directory: seeds,

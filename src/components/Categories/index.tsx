@@ -34,7 +34,7 @@ const Categories = memo(() => (
               'ml-3': cat.align === 'right',
             })}>
             <img
-              alt=""
+              alt={`View ${cat.display} groups`}
               className="w-full rounded-lg"
               src={`/images/${cat.slug}_sm.svg`}
               width="480"

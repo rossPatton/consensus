@@ -15,16 +15,24 @@ meetingsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.meetingsByLocationQuery>(ctx, schema, query);
 
   // @TODO this should be querying against postcodes, eventually
+  const getNodesTimingTag = `getCity ${Math.random()}`;
+  console.time(getNodesTimingTag);
   let cityRel = {} as ts.city;
   try {
     cityRel = await pg('cities')
       .first()
-      .where({name: query.city, regionCode: query.regionCode})
+      .where({
+        name: query.city,
+        regionCode: query.regionCode,
+      })
       .limit(1);
   } catch (err) {
     return ctx.throw(500, err);
   }
+  console.timeEnd(getNodesTimingTag);
 
+  const getNodesTimingTag2 = `getMeetingsByLocation ${Math.random()}`;
+  console.time(getNodesTimingTag2);
   let meetings = [] as ts.meeting[];
   try {
     meetings = await pg('meetings')
@@ -36,6 +44,7 @@ meetingsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
   } catch (err) {
     return ctx.throw(500, err);
   }
+  console.timeEnd(getNodesTimingTag2);
 
   ctx.body = meetings;
 });

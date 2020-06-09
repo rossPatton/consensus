@@ -18,10 +18,9 @@ passport.serializeUser(async (accountWithType: ts.user | ts.group, done) => {
   return done(null, accountWithType);
 });
 
-passport.deserializeUser(async (
-  obj: {id: number, sessionType: 'user' | 'group'},
-  done,
-) => {
+passport.deserializeUser(async (obj: ts.user | ts.group,done) => {
+  if (obj.id) return done(null, obj);
+
   let account: ts.user | ts.group;
   if (obj.sessionType === 'user') {
     try {
@@ -87,8 +86,8 @@ passport.use(new LocalStrategy(opts, async (
   const tokenValidates = hotpTokenValidates(req.ctx, query.token);
 
   const accountWithType = {
-    ...account, sessionType:
-    query.sessionType,
+    ...account,
+    sessionType: query.sessionType,
   };
 
   // if passwords match, return the user

@@ -34,8 +34,11 @@ auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
     //   ctx.session.temp_user = account;
 
     // } else {
+    const getNodesTimingTag = `login and get session ${Math.random()}`;
+    console.time(getNodesTimingTag);
     await ctx.login(account);
     const session = await getSession(ctx);
+    console.timeEnd(getNodesTimingTag);
     // ctx.session.otpValid = false;
     // ctx.session.temp_user = {};
     ctx.body = session;

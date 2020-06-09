@@ -15,7 +15,7 @@ import {tProps, tStore} from './_types';
 class Template extends PureComponent<tProps> {
   constructor(props: tProps) {
     super(props);
-    if (!props.geoThunk.fetched) {
+    if (__PROD__ && !props.geoThunk.fetched) {
       props.getGeoDispatch();
     }
 

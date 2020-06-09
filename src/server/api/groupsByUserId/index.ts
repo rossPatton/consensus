@@ -1,34 +1,41 @@
 import Koa from 'koa';
 import Router from 'koa-router';
+import _ from 'lodash';
 
 import {groupKeys} from '../_constants';
 import {pg} from '../../db/connection';
 import {validateSchema} from '../../utils';
-import {getRoleMapsByUserId} from './_queries';
 import {deleteSchema, getSchema} from './_schema';
 
 const route = '/api/v1/groupsByUserId';
 const table = 'users_roles';
-
 export const groupsByUserId = new Router();
 
 groupsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: ts.groupsByUserIdQuery} = ctx;
   await validateSchema<ts.groupsByUserIdQuery>(ctx, getSchema, query);
+  const {noPending, userId} = query;
 
-  const userGroupRels = await getRoleMapsByUserId(ctx, query);
-  const mappedIds = userGroupRels.map(idSet => idSet.groupId);
-
-  let group = [] as ts.group[];
   try {
-    group = await pg('groups')
-      .whereIn('id', mappedIds)
-      .select(groupKeys);
+    await pg.transaction(async trx => {
+      const userGroupRelsTrx = pg('users_roles').transacting(trx);
+      if (noPending) userGroupRelsTrx.whereNot({role: 'pending'});
+      userGroupRelsTrx.where({userId}).orderBy('updated_at', 'asc');
+
+      const userGroupRels = await userGroupRelsTrx;
+      const mappedIds = await Promise.all(
+        _.uniq(userGroupRels.map(idSet => idSet.groupId))
+      );
+      const groups = await pg('groups')
+        .transacting(trx)
+        .whereIn('id', mappedIds)
+        .select(groupKeys);
+
+      ctx.body = groups;
+    });
   } catch (err) {
     return ctx.throw(500, err);
   }
-
-  ctx.body = group;
 });
 
 // we use accountId here because only a user can choose to leave an org
@@ -42,11 +49,15 @@ groupsByUserId.delete(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.deleteUserByGroupIdQuery>(ctx, deleteSchema, query);
 
   try {
-    await pg(table)
+    await pg.transaction(async trx => pg(table)
+      .transacting(trx)
       .limit(1)
       .where(query)
       .first()
-      .del();
+      .del()
+      .then(trx.commit)
+      .catch(trx.rollback)
+    );
   } catch (err) {
     return ctx.throw(500, err);
   }
