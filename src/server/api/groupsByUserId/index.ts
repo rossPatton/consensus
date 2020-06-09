@@ -24,7 +24,7 @@ groupsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
 
       const userGroupRels = await userGroupRelsTrx;
       const mappedIds = await Promise.all(
-        _.uniq(userGroupRels.map(idSet => idSet.groupId))
+        _.uniq(userGroupRels.map(idSet => idSet.groupId)),
       );
       const groups = await pg('groups')
         .transacting(trx)
@@ -56,7 +56,7 @@ groupsByUserId.delete(route, async (ctx: Koa.ParameterizedContext) => {
       .first()
       .del()
       .then(trx.commit)
-      .catch(trx.rollback)
+      .catch(trx.rollback),
     );
   } catch (err) {
     return ctx.throw(500, err);

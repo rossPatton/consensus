@@ -3,8 +3,7 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import {pg} from '~app/server/db/connection';
-import {getUserByQuery} from '~app/server/queries';
-import {totpTokenValidates, validateSchema} from '~app/server/utils';
+import {validateSchema} from '~app/server/utils';
 
 import {userKeys} from '../_constants';
 import {getSchema, patchSchema, postSchema} from './_schema';
@@ -21,24 +20,35 @@ user.delete(route, async (ctx: Koa.ParameterizedContext) => {
   if (!loggedInAccount) return ctx.throw(401, 'Must be logged in');
 
   try {
-    await pg(table)
-      .limit(1)
-      .where({id: loggedInAccount.id})
-      .first()
-      .del();
+    await pg.transaction(async trx => {
+      await pg(table)
+        .transacting(trx)
+        .limit(1)
+        .where({id: loggedInAccount.id})
+        .first()
+        .del()
+        .then(trx.commit)
+        .catch(trx.rollback);
+    });
   } catch (err) {
     return ctx.throw(500, err);
   }
 
-  ctx.logout();
+  await ctx.logout();
   ctx.body = {ok: true};
 });
 
 user.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: ts.userQuery} = ctx;
   await validateSchema<ts.userQuery>(ctx, getSchema, query);
-  const user = await getUserByQuery(ctx, query);
-  ctx.body = user;
+
+  await pg.transaction(async trx => {
+    ctx.body = pg('users')
+      .transacting(trx)
+      .limit(1)
+      .where(query)
+      .first();
+  });
 });
 
 user.patch(route, async (ctx: Koa.ParameterizedContext) => {
@@ -50,27 +60,31 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
   const {sessionType, token, ...userQuery} = query;
 
-  if (token) {
-    const validates = totpTokenValidates({
-      token,
-      secret: query.otpSecret,
-    });
+  // if (token) {
+  //   const validates = totpTokenValidates({
+  //     token,
+  //     secret: query.otpSecret,
+  //   });
 
-    if (!validates) return ctx.throw(401, 'Token incorrect');
-  }
+  //   if (!validates) return ctx.throw(401, 'Token incorrect');
+  // }
 
-  let updatedUser = [] as ts.user[];
   try {
-    updatedUser = await pg(table)
-      .limit(1)
-      .where({id: query.id})
-      .update(userQuery)
-      .returning(userKeys);
+    await pg.transaction(async trx => {
+      const updatedUser = await pg(table)
+        .transacting(trx)
+        .limit(1)
+        .where({id: query.id})
+        .update(userQuery)
+        .returning(userKeys)
+        .then(trx.commit)
+        .catch(trx.rollback);
+
+      ctx.body = updatedUser?.[0];
+    });
   } catch (err) {
     return ctx.throw(500, err);
   }
-
-  ctx.body = updatedUser?.[0];
 });
 
 // user signup form basically
@@ -78,19 +92,18 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: tUserPostServerQuery} = ctx;
   await validateSchema<tUserPostServerQuery>(ctx, postSchema, query);
 
-  // username is the only user info required to sign up. login/pw is the account table
-  let userResult = [] as ts.user[];
   try {
-    userResult = await pg('users')
-      .insert({avatar: '1', ...query})
-      .returning(userKeys);
+    await pg.transaction(async trx => {
+      const userResult = await pg('users')
+        .transacting(trx)
+        .insert({avatar: '1', ...query})
+        .returning(userKeys)
+        .then(trx.commit)
+        .catch(trx.rollback);
+
+      ctx.body = userResult?.[0];
+    });
   } catch (err) {
     return ctx.throw(500, errorMessage);
   }
-
-  if (!userResult || userResult.length === 0) {
-    ctx.throw(500, errorMessage);
-  }
-
-  ctx.body = userResult?.[0];
 });

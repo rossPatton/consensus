@@ -14,37 +14,25 @@ meetingsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: ts.meetingsByLocationQuery} = ctx;
   await validateSchema<ts.meetingsByLocationQuery>(ctx, schema, query);
 
-  // @TODO this should be querying against postcodes, eventually
-  const getNodesTimingTag = `getCity ${Math.random()}`;
-  console.time(getNodesTimingTag);
-  let cityRel = {} as ts.city;
   try {
-    cityRel = await pg('cities')
-      .first()
-      .where({
-        name: query.city,
-        regionCode: query.regionCode,
-      })
-      .limit(1);
+    await pg.transaction(async trx => {
+      const cityRel = await pg('cities')
+        .transacting(trx)
+        .first()
+        .where(query)
+        .limit(1);
+
+      const meetings = await pg('meetings')
+        .transacting(trx)
+        .where({cityId: cityRel.id})
+        .where('date', '>=', dayJS().toISOString())
+        .where({isDraft: false, isPrivate: false})
+        .orderBy('date', 'asc')
+        .limit(100);
+
+      ctx.body = meetings;
+    });
   } catch (err) {
     return ctx.throw(500, err);
   }
-  console.timeEnd(getNodesTimingTag);
-
-  const getNodesTimingTag2 = `getMeetingsByLocation ${Math.random()}`;
-  console.time(getNodesTimingTag2);
-  let meetings = [] as ts.meeting[];
-  try {
-    meetings = await pg('meetings')
-      .where({cityId: cityRel.id})
-      .where('date', '>=', dayJS().toISOString())
-      .where({isDraft: false, isPrivate: false})
-      .orderBy('date', 'asc')
-      .limit(100);
-  } catch (err) {
-    return ctx.throw(500, err);
-  }
-  console.timeEnd(getNodesTimingTag2);
-
-  ctx.body = meetings;
 });

@@ -37,8 +37,9 @@ namespace ts {
   }>;
 
   declare type meetingsByLocationQuery = Readonly<{
-    city: string,
-    regionCode: string,
+    city?: string,
+    id?: number,
+    regionCode?: string,
   }>;
 
   declare type meetingTypes = 'Meeting'

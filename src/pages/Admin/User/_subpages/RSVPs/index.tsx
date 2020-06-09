@@ -1,4 +1,3 @@
-import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
@@ -14,8 +13,7 @@ class RSVPsContainer extends PureComponent<tContainerProps> {
     super(props);
     const userId = props?.sessionThunk?.data?.profile?.id;
     if (userId) {
-      props.getMeetingsByUserIdDispatch({userId})
-        .catch(loglevel.error);
+      props.getMeetingsByUserIdDispatch({userId});
     }
   }
 

@@ -1,3 +1,5 @@
+import loglevel from 'loglevel';
+
 import {agent, objToQueryString} from '..';
 import {tApiOpts} from './_types';
 
@@ -19,8 +21,6 @@ export const api = async (opts: tApiOpts) => {
     endpoint = `${path}?${qs}`;
   }
 
-  console.log('all api call opts => ', fetchOpts);
-
   if (opts.init) opts.dispatch(opts.init());
 
   let status: ts.statusUnion;
@@ -41,9 +41,9 @@ export const api = async (opts: tApiOpts) => {
       }
 
       if (opts.dispatch) {
-        opts.dispatch(opts.failure({message: err, status}));
+        return opts.dispatch(opts.failure({message: err, status}));
       }
 
-      throw Error(message);
+      loglevel.error(message);
     });
 };

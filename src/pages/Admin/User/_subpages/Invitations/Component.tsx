@@ -1,5 +1,6 @@
 import cx from 'classnames';
 import React, {memo} from 'react';
+import {Link} from 'react-router-dom';
 
 import {Emoji} from '~app/components';
 
@@ -40,7 +41,7 @@ export const InvitationsComponent = memo((props: tComponentProps) => (
             Accept
           </button>
           <h3 className="text-base">
-            <span className="font-semibold">{invite?.group?.name}</span> invites you to join as a <span className="font-semibold">{invite.type}</span>
+            <Link to={`/group/${invite?.group?.handle}`} className="font-semibold">{invite?.group?.name}</Link> invites you to join as a <span className="font-semibold">{invite.type}</span>
           </h3>
         </li>
       ))}

@@ -2,13 +2,12 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
+import {validateSchema} from '~app/server/utils';
+
 import {pg} from '../../db/connection';
-import {getAccountRoleRelByGroupId, getGroupById, getRSVPsByUserId} from '../../queries';
-import {validateSchema, zipMeetingsWithAttendees} from '../../utils';
 import {getMeetingsByQuery} from './_queries';
 import {deleteSchema, getSchema} from './_schema';
 import {tMeetingsServerQuery} from './_types';
-import {filterMeetings} from './_utils';
 
 export const meetings = new Router();
 const route = '/api/v1/meetings';
@@ -19,27 +18,29 @@ meetings.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: tMeetingsServerQuery} = ctx;
   await validateSchema<tMeetingsServerQuery>(ctx, getSchema, query);
 
-  // all meetings by generic query
-  const meetings = await getMeetingsByQuery(ctx, query);
+  try {
+    const account = ctx?.state?.user;
 
-  // user role for this particular org
-  const {role, userId} = await getAccountRoleRelByGroupId(ctx, query.groupId);
-  const group = await getGroupById(ctx, query.groupId);
+    await pg.transaction(async trx => {
+      let role = 'n/a' as ts.role;
+      if (account?.id) {
+        const accountRoleRel: ts.roleMap = await pg('users_roles')
+          .transacting(trx)
+          .limit(1)
+          .where({
+            userId: account.id,
+            groupId: query.groupId,
+          })
+          .first();
 
-  // if fetching meetings for a private org and the user is not a member
-  if (!role && group.type !== 'public') {
-    ctx.redirect('/401');
-    return ctx.throw(401);
+        role = accountRoleRel?.role;
+      }
+
+      ctx.body = await getMeetingsByQuery(trx, ctx, {...query, role});
+    });
+  } catch (err) {
+    ctx.throw(500, err);
   }
-
-  // all user rsvps
-  const userRSVPs = await getRSVPsByUserId(ctx, userId);
-  // zip rsvps up with meetings, split by public vs private rsvps
-  const meetingsWithRSVPCount = await zipMeetingsWithAttendees(ctx, meetings, userRSVPs);
-
-  // return zipped meetings, filtered based on user login status, role, etc
-  const body = await filterMeetings(ctx, meetingsWithRSVPCount, role);
-  ctx.body = body;
 });
 
 meetings.delete(route, async (ctx: Koa.ParameterizedContext) => {
@@ -47,7 +48,14 @@ meetings.delete(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.idQuery>(ctx, deleteSchema, query);
 
   try {
-    await pg(table).limit(1).where({id: query.id}).del();
+    await pg.transaction(async trx => pg(table)
+      .transacting(trx)
+      .limit(1)
+      .where({id: query.id})
+      .del()
+      .then(trx.commit)
+      .catch(trx.rollback),
+    );
   } catch (err) {
     return ctx.throw(500, err);
   }

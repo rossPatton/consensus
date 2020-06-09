@@ -39,7 +39,8 @@ region.get(route, async (ctx: Koa.ParameterizedContext) => {
           ...region,
           cities: _.uniqBy(cities, city => city.name),
         };
-      })
+        return null;
+      }),
     );
   } catch (err) {
     return ctx.throw(500, err);

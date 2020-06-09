@@ -54,56 +54,58 @@ class GroupContainer extends PureComponent<tContainerProps> {
 
     return (
       <Template>
-        <ErrorBoundary status={groupThunk?.error?.status}>
-          <GenericLoader
-            isLoading={groupThunk.isLoading}
-            render={() => {
-              const {groupThunk: {data: group}} = this.props;
+        <GenericLoader
+          isLoading={groupThunk.isLoading}
+          render={() => {
+            const {groupThunk: {data: group}} = this.props;
 
-              let meta = [
-                { name: 'description', content: group.description },
-                { name: 'keywords', content: group.category },
-              ];
-              if (group.type === 'hidden') {
-                meta = [...meta, {
-                  name: 'robots',
-                  content: 'noindex',
-                }];
+            let meta = [
+              { name: 'description', content: group.description },
+              { name: 'keywords', content: group.category },
+            ];
+            if (group.type === 'hidden') {
+              meta = [...meta, {
+                name: 'robots',
+                content: 'noindex',
+              }];
+            }
+
+            const roleMap = rolesThunk.data.find(roleMap => {
+              return roleMap.groupId === group.id;
+            }) as ts.roleMap;
+
+            let role = roleMap && roleMap.role;
+            if (session.type === 'group' && session.profile.id === group.id) {
+              role = 'admin';
+            }
+
+            let status = 200 as ts.statusUnion;
+            if (group.type === 'hidden') {
+              if (!role && session.isAuthenticated) {
+                status = 401;
+              } else if (!role) {
+                return <Redirect to="/login" />;
               }
+            }
 
-              const roleMap = rolesThunk.data.find(roleMap => {
-                return roleMap.groupId === group.id;
-              }) as ts.roleMap;
-
-              let role = roleMap && roleMap.role;
-              if (session.type === 'group' && session.profile.id === group.id) {
-                role = 'admin';
-              }
-
-              const isHidden = group.type === 'hidden' && !role;
-
-              return isHidden
-                ? (
-                  <Redirect to="/login" />
-                ) : (
-                  <>
-                    <Helmet
-                      canonical={`group/${group.handle}`}
-                      title={`Consensus: ${group.name}`}
-                      meta={meta}
-                    />
-                    <GroupComponent
-                      location={location}
-                      match={match}
-                      group={group}
-                      role={role as ts.role}
-                      session={this.props.session}
-                    />
-                  </>
-                );
-            }}
-          />
-        </ErrorBoundary>
+            return (
+              <ErrorBoundary status={status}>
+                <Helmet
+                  canonical={`group/${group.handle}`}
+                  title={`Consensus: ${group.name}`}
+                  meta={meta}
+                />
+                <GroupComponent
+                  location={location}
+                  match={match}
+                  group={group}
+                  role={role as ts.role}
+                  session={this.props.session}
+                />
+              </ErrorBoundary>
+            );
+          }}
+        />
       </Template>
     );
   }

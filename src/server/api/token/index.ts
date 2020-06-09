@@ -20,9 +20,9 @@ tokenSend.get('/api/v1/sendToken', async (ctx: Koa.ParameterizedContext) => {
     from: `Consensus <noreply@${__MAIL_DOMAIN__}>`,
     to: query.email,
     subject: 'Verify Your Email',
-    text: `Enter the following authentication code in order to verify your email. This token is only valid for 10 minutes. ${token}`,
+    text: `Enter the following authentication code in order to verify your email. ${token}`,
     html: `
-      <h2>Enter the following authentication code in order to verify your email. This token is only valid for 10 minutes <b>${token}</b></h2>
+      <h2>Enter the following authentication code in order to verify your email. <b>${token}</b></h2>
     `,
   });
 

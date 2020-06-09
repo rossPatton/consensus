@@ -42,10 +42,14 @@ meeting.post(route, async (ctx: Koa.ParameterizedContext) => {
 
   let newMeeting = [] as ts.meeting[];
   try {
-    newMeeting = await pg('meetings')
+    newMeeting = await pg.transaction(async trx => pg('meetings')
+      .transacting(trx)
       .insert(meeting)
       .limit(1)
-      .returning('*');
+      .returning('*')
+      .then(trx.commit)
+      .catch(trx.rollback),
+    );
   } catch (err) {
     ctx.throw(500, err);
   }

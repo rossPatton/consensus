@@ -20,18 +20,11 @@ class InvitationsContainer extends Component<tContainerProps, tState> {
     super(props);
 
     this.state = {
-      hasMounted: false,
       username: '',
     };
 
     props.getInvitesDispatch({
       userId: props.session?.profile?.id,
-    });
-  }
-
-  componentDidMount() {
-    this.setState({
-      hasMounted: true,
     });
   }
 

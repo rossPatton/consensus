@@ -14,23 +14,24 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
     this._getMeetingsNearMe();
   }
 
-  async componentDidUpdate(nextProps: tContainerProps) {
-    const geoFetched = nextProps.geoThunk.fetched;
-    if (!geoFetched) return;
-    this._getMeetingsNearMe();
-  }
-
   _getMeetingsNearMe = async () => {
-    const {meetingsByLocationThunk, geoThunk} = this.props;
+    const {meetingsByLocationThunk, geoThunk, sessionThunk} = this.props;
 
-    if (!geoThunk.fetched) return;
     if (meetingsByLocationThunk.fetched) return;
     if (meetingsByLocationThunk.error) return;
 
-    return this.props.getMeetingsByLocationDispatch({
-      city: geoThunk.data.city,
-      regionCode: geoThunk.data.regionCode,
-    });
+    if (sessionThunk?.data?.profile?.cityId) {
+      return this.props.getMeetingsByLocationDispatch({
+        id: sessionThunk?.data?.profile?.cityId,
+      });
+    } else if (geoThunk.fetched) {
+      return this.props.getMeetingsByLocationDispatch({
+        city: geoThunk.data.city,
+        regionCode: geoThunk.data.regionCode,
+      });
+    }
+
+
   }
 
   render() {

@@ -8,5 +8,6 @@ export type tMeetingsServerQuery = {
   limit: string
   offset: string
   groupId: string
+  role: ts.role,
   showPast: 'true' | 'false',
 };

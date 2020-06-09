@@ -18,7 +18,7 @@ passport.serializeUser(async (accountWithType: ts.user | ts.group, done) => {
   return done(null, accountWithType);
 });
 
-passport.deserializeUser(async (obj: ts.user | ts.group,done) => {
+passport.deserializeUser(async (obj: ts.user | ts.group, done) => {
   if (obj.id) return done(null, obj);
 
   let account: ts.user | ts.group;
