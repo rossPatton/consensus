@@ -38,7 +38,7 @@ const sharedConfig = {
   },
 };
 
-if (process.env.__PROD__) {
+if (process.env.NODE_ENV === 'production') {
   // @ts-ignore
   sharedConfig.connection.ssl = {
     ca : fs.readFileSync(path.join(CWD, 'certs', 'postgres.crt')),
