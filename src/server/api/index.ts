@@ -26,6 +26,9 @@ import { tokenSend, tokenValidate } from './token';
 import { user } from './user';
 import { usersByGroupId } from './usersByGroupId';
 
+import PQueue from 'p-queue';
+export const queue = new PQueue();
+
 export const setupApi = (app: Koa) => {
   app.use(accountDownload.routes());
   app.use(auth.routes());

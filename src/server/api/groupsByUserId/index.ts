@@ -2,9 +2,10 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
+import {queue} from '..';
 import {groupKeys} from '../_constants';
-import {pg} from '../../db/connection';
-import {validateSchema} from '../../utils';
+import {pg} from '~app/server/db/connection';
+import {validateSchema} from '~app/server/utils';
 import {deleteSchema, getSchema} from './_schema';
 
 const route = '/api/v1/groupsByUserId';

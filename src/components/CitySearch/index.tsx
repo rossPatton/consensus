@@ -16,7 +16,11 @@ class CitySearchContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
     super(props);
     if (!props.citiesThunk.fetched) {
-      props.getCitiesDispatch({region: props.geo.region});
+      if (props.session?.profile?.region) {
+        props.getCitiesDispatch({region: props.session?.profile?.region});
+      } else {
+        props.getCitiesDispatch({region: props.geo.region});
+      }
     }
   }
 

@@ -3,6 +3,7 @@ import passport from 'koa-passport';
 import Router from 'koa-router';
 import _ from 'lodash';
 
+import {queue} from '..';
 import {groupSchema, userSchema} from '../_schemas';
 import {getSession} from '../../queries';
 import {validateSchema} from '../../utils';
@@ -35,7 +36,7 @@ auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
 
     // } else {
     await ctx.login(account);
-    const session = await getSession(ctx);
+    const session = await queue.add(() => getSession(ctx));
     // ctx.session.otpValid = false;
     // ctx.session.temp_user = {};
     ctx.body = session;

@@ -2,6 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
+import { queue } from '..';
 import { pg } from '~app/server/db/connection';
 import { validateSchema } from '~app/server/utils';
 import { deSlugify } from '~app/utils';
@@ -19,7 +20,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
   const cityName = deSlugify(citySlug);
 
   try {
-    await pg.transaction(async trx => {
+    await queue.add(() => pg.transaction(async trx => {
       const region = await pg('regions')
         .transacting(trx)
         .limit(1)
@@ -53,7 +54,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
         ...city,
         groups: _.uniqBy(groups, group => group.name),
       };
-    });
+    }));
   } catch (err) {
     return ctx.throw(500, err);
   }
