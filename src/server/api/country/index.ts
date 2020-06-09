@@ -19,7 +19,7 @@ country.get(route, async (ctx: Koa.ParameterizedContext) => {
     await pg.transaction(async trx => pg('countries')
       .transacting(trx)
       .limit(1)
-      .where({countryId: 1})
+      .where({id: 1})
       .first()
       .then(countryResp => {
         country = countryResp;
