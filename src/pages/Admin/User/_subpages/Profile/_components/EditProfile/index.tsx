@@ -137,11 +137,11 @@ const EditProfile = memo((props: tComponentProps) => (
             <input
               readOnly
               type="checkbox"
-              className="mr-1 w-auto"
+              className="flex-1 mr-1 w-auto"
               autoComplete="nope"
               checked={props.privateRSVP}
             />
-            <span>
+            <span className="w-full">
               {props.privateRSVP && (
                 'Only you can see your RSVPS.'
               )}
@@ -161,11 +161,11 @@ const EditProfile = memo((props: tComponentProps) => (
             <input
               readOnly
               type="checkbox"
-              className="mr-1 w-auto"
+              className="flex-1 mr-1 w-auto"
               autoComplete="nope"
               checked={props.privateMemberships}
             />
-            <span>
+            <span className="w-full">
               {props.privateMemberships && (
                 'Memberships are kept private.'
               )}

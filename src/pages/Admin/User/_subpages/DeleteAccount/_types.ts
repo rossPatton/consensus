@@ -3,7 +3,7 @@ export type tState = {
 };
 
 export type tContainerProps = {
-  deleteUserDispatch: (query: ts.idQuery) => ts.thunkPayload<ts.roleMap>,
+  deleteUserDispatch: () => ts.thunkPayload<{ok: true}>,
   logoutDispatch: () => ts.thunkPayload<any>,
   sessionThunk: ts.thunk<ts.session>,
 };

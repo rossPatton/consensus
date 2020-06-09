@@ -30,7 +30,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     isPrivate: this.props.group.type !== 'public',
     location: '',
     locationLink: '',
-    tag: 'meeting' as ts.meetingTypes,
+    tag: 'Meeting' as ts.meetingTypes,
     time: '19:00',
     title: '',
   };

@@ -1,5 +1,6 @@
 import Boom from '@hapi/boom';
 import Koa from 'koa';
+import PQueue from 'p-queue';
 
 import { accountDownload } from './accountDownload';
 import { auth } from './auth';
@@ -25,8 +26,6 @@ import { spaces } from './spaces';
 import { tokenSend, tokenValidate } from './token';
 import { user } from './user';
 import { usersByGroupId } from './usersByGroupId';
-
-import PQueue from 'p-queue';
 export const queue = new PQueue();
 
 export const setupApi = (app: Koa) => {

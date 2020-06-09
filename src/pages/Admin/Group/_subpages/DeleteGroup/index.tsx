@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {deleteGroup} from '~app/redux';
+import {deleteGroup, logout} from '~app/redux';
 
 import {tContainerProps, tState} from './_types';
 import {DeleteGroupComponent} from './Component';
@@ -22,6 +22,8 @@ class DeleteGroupContainer extends PureComponent<tContainerProps, tState> {
 
     try {
       await this.props.deleteGroupDispatch();
+      await this.props.logoutDispatch();
+      window.location.reload();
     } catch (error) {
       return this.setState({
         error: error.message,
@@ -46,6 +48,7 @@ const mapStateToProps = (store: {session: ts.thunk<ts.session>}) => ({
 
 const mapDispatchToProps = (dispatch: Function) => ({
   deleteGroupDispatch: () => dispatch(deleteGroup()),
+  logoutDispatch: () => dispatch(logout()),
 });
 
 const DeleteGroup = connect(

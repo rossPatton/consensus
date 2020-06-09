@@ -2,9 +2,10 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
+import {pg} from '~app/server/db/connection';
 import {validateSchema} from '~app/server/utils';
 
-import {pg} from '../../db/connection';
+import {queue} from '..';
 import {getMeetingsByQuery} from './_queries';
 import {deleteSchema, getSchema} from './_schema';
 import {tMeetingsServerQuery} from './_types';
@@ -20,8 +21,7 @@ meetings.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   try {
     const account = ctx?.state?.user;
-
-    await pg.transaction(async trx => {
+    await queue.add(() => pg.transaction(async trx => {
       let role = 'n/a' as ts.role;
       if (account?.id) {
         const accountRoleRel: ts.roleMap = await pg('users_roles')
@@ -37,7 +37,7 @@ meetings.get(route, async (ctx: Koa.ParameterizedContext) => {
       }
 
       ctx.body = await getMeetingsByQuery(trx, ctx, {...query, role});
-    });
+    }));
   } catch (err) {
     ctx.throw(500, err);
   }
@@ -48,18 +48,20 @@ meetings.delete(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.idQuery>(ctx, deleteSchema, query);
 
   try {
-    await pg.transaction(async trx => pg(table)
+    await queue.add(() => pg.transaction(async trx => pg(table)
       .transacting(trx)
       .limit(1)
       .where({id: query.id})
       .del()
       .then(trx.commit)
       .catch(trx.rollback),
-    );
+    ));
+
+    // we use the id on the client to filter out the now deleted meeting
+    ctx.body = {id: parseInt(query.id as string, 10)};
   } catch (err) {
     return ctx.throw(500, err);
   }
 
-  // we use the id on the client to filter out the now deleted meeting
-  ctx.body = {id: parseInt(query.id as string, 10)};
+
 });

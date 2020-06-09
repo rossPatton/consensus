@@ -2,10 +2,11 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import {queue} from '..';
-import {groupKeys} from '../_constants';
 import {pg} from '~app/server/db/connection';
 import {validateSchema} from '~app/server/utils';
+
+import {queue} from '..';
+import {groupKeys} from '../_constants';
 import {deleteSchema, getSchema} from './_schema';
 
 const route = '/api/v1/groupsByUserId';
@@ -18,7 +19,7 @@ groupsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {noPending, userId} = query;
 
   try {
-    await pg.transaction(async trx => {
+    await queue.add(() => pg.transaction(async trx => {
       const userGroupRelsTrx = pg('users_roles').transacting(trx);
       if (noPending) userGroupRelsTrx.whereNot({role: 'pending'});
       userGroupRelsTrx.where({userId}).orderBy('updated_at', 'asc');
@@ -33,7 +34,7 @@ groupsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
         .select(groupKeys);
 
       ctx.body = groups;
-    });
+    }));
   } catch (err) {
     return ctx.throw(500, err);
   }

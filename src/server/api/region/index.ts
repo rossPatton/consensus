@@ -3,8 +3,10 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import { pg } from '~app/server/db/connection';
+import { getCitiesQuery } from '~app/server/queries';
+import { validateSchema } from '~app/server/utils';
 
-import { validateSchema } from '../../utils';
+import { queue } from '..';
 import { schema } from './_schema';
 
 export const region = new Router();
@@ -14,34 +16,31 @@ region.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: ts.directoryParams} = ctx;
   await validateSchema<ts.directoryParams>(ctx, schema, query);
 
-  let region = {} as ts.region;
   try {
-    await pg.transaction(async trx => pg('regions')
-      .transacting(trx)
-      .limit(1)
-      .where({
-        countryId: 1,
-        code: query.regionCode,
-      })
-      .first()
-      .then(regionResp => {
-        region = regionResp;
-        return pg('cities')
-          .transacting(trx)
-          .where({
-            countryId: 1,
-            regionId: regionResp.id,
-          })
-          .orderBy('name', 'asc');
-      })
-      .then(cities => {
-        ctx.body = {
-          ...region,
-          cities: _.uniqBy(cities, city => city.name),
-        };
-        return null;
-      }),
-    );
+    await queue.add(() => pg.transaction(async trx => {
+      const region = await pg('regions')
+        .transacting(trx)
+        .limit(1)
+        .where({
+          countryId: 1,
+          code: query.regionCode,
+        })
+        .first();
+
+      const citiesResp = await pg('cities')
+        .transacting(trx)
+        .where({
+          countryId: 1,
+          regionId: region.id,
+        })
+        .orderBy('name', 'asc');
+
+      const cities = await Promise.all(_.uniqBy(citiesResp, city => city.name));
+      ctx.body = {
+        ...region,
+        cities,
+      };
+    }));
   } catch (err) {
     return ctx.throw(500, err);
   }

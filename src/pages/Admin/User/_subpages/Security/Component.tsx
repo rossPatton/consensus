@@ -23,11 +23,11 @@ export const SecurityComponent = memo((props: tComponentProps) => (
             <input
               readOnly
               type="checkbox"
-              className="mr-1 w-auto"
+              className="flex-1 mr-1 w-auto"
               autoComplete="nope"
               checked={props.disableOtp}
             />
-            <span>
+            <span className="w-full">
               {props.disableOtp && (
                 'Two factor authentication is on.'
               )}

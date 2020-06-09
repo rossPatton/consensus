@@ -34,7 +34,6 @@ user.delete(route, async (ctx: Koa.ParameterizedContext) => {
     return ctx.throw(500, err);
   }
 
-  await ctx.logout();
   ctx.body = {ok: true};
 });
 

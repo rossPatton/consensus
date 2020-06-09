@@ -2,11 +2,11 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
 
-import { queue } from '..';
 import { pg } from '~app/server/db/connection';
 import { validateSchema } from '~app/server/utils';
 import { deSlugify } from '~app/utils';
 
+import { queue } from '..';
 import { schema } from './_schema';
 
 export const city = new Router();

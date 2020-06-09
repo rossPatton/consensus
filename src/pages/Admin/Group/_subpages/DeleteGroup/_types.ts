@@ -4,6 +4,7 @@ export type tState = {
 
 export type tContainerProps = {
   deleteGroupDispatch: () => ts.thunkPayload<ts.session>,
+  logoutDispatch: () => ts.thunkPayload<any>,
   session: ts.session,
 };
 

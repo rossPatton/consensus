@@ -67,12 +67,12 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
               readOnly
               name="terms"
               type="checkbox"
-              className="mr-1 w-auto"
+              className="flex-1 mr-1 w-auto"
               autoComplete="nope"
               checked={props.termsAccepted}
             />
           </label>
-          <span>
+          <span className="w-full">
             I have read and agree to the <Link to="/terms-and-conditions">Terms and Conditions</Link> and <Link to="/privacy-policy">Privacy Policy</Link>
           </span>
         </div>

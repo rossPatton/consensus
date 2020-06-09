@@ -45,6 +45,7 @@ export const UsersComponent = memo((props: tComponentProps) => {
                     className="border-0 bg-0 mr-2"
                     onClick={ev => props.removeUser(ev, user.id)}>
                     <Emoji
+                      className="mr-1"
                       label="Big Red X Emoji"
                       emoji="❌"
                     />

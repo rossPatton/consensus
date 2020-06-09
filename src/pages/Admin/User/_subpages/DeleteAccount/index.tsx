@@ -13,8 +13,9 @@ class DeleteAccountContainer extends PureComponent<tContainerProps> {
 
   deleteUser = async () => {
     try {
-      await this.props
-        .deleteUserDispatch({id: this.props.sessionThunk.data.id});
+      await this.props.deleteUserDispatch();
+      await this.props.logoutDispatch();
+      window.location.reload();
     } catch (error) {
       return this.setState({
         error: error.message,
@@ -37,7 +38,7 @@ const mapStateToProps = (store: {session: ts.thunk<ts.session>}) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  deleteUserDispatch: (query: ts.idQuery) => dispatch(deleteUser(query)),
+  deleteUserDispatch: () => dispatch(deleteUser()),
   logoutDispatch: () => dispatch(logout()),
 });
 
