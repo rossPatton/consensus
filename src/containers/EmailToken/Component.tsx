@@ -16,21 +16,22 @@ export const EmailTokenComponent = memo((props: tComponentProps) => (
     name="emailVerificationForm"
     onSubmit={props.sendToken}
     renderFields={() => (
-      <>
-        <label htmlFor="emailInput">
-          <input
-            required
-            autoComplete="email"
-            name="email" // for non-js submit and passportjs
-            id="emailInput"
-            placeholder="your_email@example.com"
-            className="p-2 w-full mb-2"
-            value={props.email}
-            onChange={ev => props.updateState('email', ev)}
-            type="email"
-          />
-        </label>
-      </>
+      <label htmlFor="emailInput">
+        <span className="viz-hidden">
+          Enter email
+        </span>
+        <input
+          required
+          autoComplete="email"
+          name="email" // for non-js submit and passportjs
+          id="emailInput"
+          placeholder="your_email@example.com"
+          className="p-2 w-full mb-2"
+          value={props.email}
+          onChange={ev => props.updateState('email', ev)}
+          type="email"
+        />
+      </label>
     )}
     renderSubmit={formProps => {
       const disabled = !formProps.hasMounted || !props.email || !formProps.captcha;

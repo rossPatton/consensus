@@ -1,17 +1,14 @@
-import geolite2 from 'geolite2';
 import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
-import maxmind, { CityResponse } from 'maxmind';
 
 import stateCodeToNameMap from '~app/json/usa/stateCodeToNameMap.json';
 import {lowerCase, slugify} from '~app/utils';
 
-import { queue } from '..';
+import { lookup } from '..';
 
 export const geo = new Router();
 geo.get('/api/v1/geo', async (ctx: Koa.ParameterizedContext) => {
-  const lookup = await queue.add(() => maxmind.open<CityResponse>(geolite2.paths.city));
   let ip = ctx.req.headers['x-forwarded-for'] || ctx.req.connection.remoteAddress;
 
   // if on dev, or failed prod lookup, default to a New York ip

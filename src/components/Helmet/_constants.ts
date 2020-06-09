@@ -26,8 +26,12 @@ export const LINK_TAGS: tLinkProps[] = [
     href: spacesUrl,
   },
   {
-    crossOrigin: '',
-    rel: 'preload',
+    rel: 'preconnect',
+    href: 'https://hcaptcha.com',
+  },
+  {
+    // crossOrigin: '',
+    rel: 'prefetch',
     href: '/fonts/founders-grotesk-text-web-medium.woff2',
     as: 'font',
     type: 'font/woff2',

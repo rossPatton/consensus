@@ -8,6 +8,7 @@ import './passport';
 import fs from 'fs-extra';
 import https from 'https';
 import Koa from 'koa';
+import cacheControl from 'koa-ctx-cache-control';
 import passport from 'koa-passport';
 import redisStore from 'koa-redis';
 import session from 'koa-session';
@@ -28,6 +29,8 @@ const store = redisStore({
   port: 6379,
 });
 
+// adds Cache-Control header
+cacheControl(app);
 staticFileMiddleware(app);
 
 app.use(session({

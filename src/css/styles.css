@@ -340,3 +340,28 @@ small {
   background-image: url('/images/community.svg');
   background-size: cover;
 }
+
+.viz-hidden {
+  @apply absolute;
+  @apply border-0;
+  @apply p-0;
+  @apply overflow-hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  width: 1px;
+}
+
+.viz-hidden:focus {
+  @apply bg-white;
+  @apply font-bold;
+  @apply text-black;
+  @apply h-auto;
+  @apply overflow-visible;
+  @apply p-1;
+  @apply w-auto;
+  clip: auto;
+  margin: 0 10px;
+  outline: rgb(94, 158, 215) auto 5px;
+  position: static;
+}

@@ -50,7 +50,7 @@ class SearchContainer extends React.PureComponent<tProps, tState> {
             className="flex flex-row items-center relative"
             htmlFor="search-input">
             <img
-              alt=""
+              alt={this.props.placeholder}
               className="absolute ml-1 opacity-5"
               src="/images/search.svg"
               width="20"

@@ -1,5 +1,8 @@
 import Boom from '@hapi/boom';
+import fs from 'fs';
+import geolite2 from 'geolite2';
 import Koa from 'koa';
+import { CityResponse, Reader } from 'maxmind';
 import PQueue from 'p-queue';
 
 import { accountDownload } from './accountDownload';
@@ -26,6 +29,10 @@ import { spaces } from './spaces';
 import { tokenSend, tokenValidate } from './token';
 import { user } from './user';
 import { usersByGroupId } from './usersByGroupId';
+
+const buffer = fs.readFileSync(geolite2.paths.city);
+export const lookup = new Reader<CityResponse>(buffer);
+
 export const queue = new PQueue();
 
 export const setupApi = (app: Koa) => {

@@ -18,8 +18,7 @@ export type tContainerProps = tStore & {
   match: ts.match & { params: { type: 'user' | 'group', } },
 };
 
-export type tComponentProps = tState & {
-  email: string,
+export type tComponentProps = ts.tokenProps & tState & {
   error: string | ts.fetchResponse<Error>,
   verifyAndLogin: (email: string) => void,
   updateState: (stateKey: tKeyUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,

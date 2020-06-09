@@ -19,10 +19,10 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
       <>
         <label htmlFor="tokenInput">
           <h2 className="text-base font-semibold">
-            Token
+            Verification Code
           </h2>
           <p>
-            Copy/paste or type the token that was sent to your email to finish logging in.
+            Copy/paste or type the 6 digit code that was sent to your email to finish logging in.
           </p>
           <input
             required
@@ -36,7 +36,7 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
           />
         </label>
         <p className="font-sm">
-          Didn&apos; get a token? Click <button className="border-0 p-0" type="button" onClick={() => props.sendToken(props.email)}>here</button> to send again.
+          Didn&apos;t get a code? Click <button className="border-0 p-0" type="button" onClick={() => props.sendToken(props.email)}>here</button> to send again.
         </p>
         <label htmlFor="usernameInput">
           <h2 className="text-base font-semibold">

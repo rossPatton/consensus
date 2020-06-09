@@ -1,3 +1,4 @@
+console.log('is postcss config called at all');
 module.exports = {
   plugins: [
     require('postcss-import'),
@@ -6,5 +7,8 @@ module.exports = {
     require('postcss-preset-env')({ stage: 1 }),
     require('postcss-unique-selectors')(),
     require('postcss-warn-cleaner')(),
+    require('cssnano')({
+      preset: 'default',
+    }),
   ],
 };
