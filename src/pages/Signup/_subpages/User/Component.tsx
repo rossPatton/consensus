@@ -35,6 +35,9 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
             onChange={ev => props.updateState('token', ev)}
           />
         </label>
+        <p className="font-sm">
+          Didn&apos; get a token? Click <button className="border-0 p-0" type="button" onClick={() => props.sendToken(props.email)}>here</button> to send again.
+        </p>
         <label htmlFor="usernameInput">
           <h2 className="text-base font-semibold">
             Username

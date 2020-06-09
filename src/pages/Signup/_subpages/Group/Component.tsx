@@ -38,6 +38,9 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
             onChange={ev => props.updateState('token', ev.currentTarget.value)}
           />
         </label>
+        <p className="font-sm">
+          Didn&apos; get a token? Click <button className="border-0 p-0" type="button" onClick={() => props.sendToken(props.email)}>here</button> to send again.
+        </p>
         <h2 className="font-semibold text-base">
           Group Name
         </h2>

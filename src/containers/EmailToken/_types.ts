@@ -22,6 +22,6 @@ export type tComponentProps = tProps & tState & {
 };
 
 export type tContainerProps = tProps & {
-  renderOnSend: (email: string) => React.ReactNode,
+  renderOnSend: (props: ts.tokenProps) => React.ReactNode,
   sendTokenDispatch: Function,
 };

@@ -18,10 +18,10 @@ export class EmailTokenContainer extends PureComponent<tContainerProps, tState> 
     emailSent: false,
   };
 
-  sendToken = async () => {
+  sendToken = async (email?: string) => {
     try {
       await this.props.sendTokenDispatch({
-        email: this.state.email,
+        email: this.state.email || email,
       });
     } catch (error) {
       return this.setState({
@@ -53,7 +53,10 @@ export class EmailTokenContainer extends PureComponent<tContainerProps, tState> 
             updateState={this.updateState}
           />
         )}
-        {emailSent && this.props.renderOnSend(email)}
+        {emailSent && this.props.renderOnSend({
+          email,
+          sendToken: this.sendToken,
+        })}
       </>
     );
   }

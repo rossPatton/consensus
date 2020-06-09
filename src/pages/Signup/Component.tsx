@@ -15,12 +15,13 @@ export const SignupComponent = memo((props: tProps) => (
       </h1>
       <EmailToken
         actionLabel="Email Signup Token"
-        renderOnSend={(email: string) => (
+        renderOnSend={({email, sendToken}) => (
           <>
             {props.sessionType === 'user' && (
               <UserSignup
                 email={email}
                 history={props.history}
+                sendToken={sendToken}
                 termsAccepted={props.termsAccepted}
                 toggleTerms={props.toggleTerms}
               />
@@ -29,6 +30,7 @@ export const SignupComponent = memo((props: tProps) => (
               <GroupSignup
                 email={email}
                 location={props.location}
+                sendToken={sendToken}
                 termsAccepted={props.termsAccepted}
                 toggleTerms={props.toggleTerms}
               />

@@ -17,12 +17,14 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema(ctx, postSchema, query);
 
   const {meetingId, type = 'private', value = ''} = query;
-  const userId = ctx?.state?.user?.userId || 0;
+
+  const loggedInAccount = ctx?.state?.user;
+  if (!loggedInAccount) return ctx.throw(401, 'Must be logged in');
 
   const newRsvp: ts.rsvp = {
     meetingId,
     type,
-    userId,
+    userId: loggedInAccount.id,
     value,
   };
 
@@ -30,7 +32,7 @@ rsvp.post(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     currentRSVPStatus = await pg(table)
       .limit(1)
-      .where({meetingId, userId})
+      .where({meetingId, userId: loggedInAccount.id})
       .first();
   } catch (err) {
     return ctx.throw(500, err);

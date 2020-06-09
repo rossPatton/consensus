@@ -113,10 +113,11 @@ export class LoginContainer extends PureComponent<tContainerProps, tState> {
               legend={(<h2 className="text-base font-semibold mb-1">
                 Enter your email to get your login code.
               </h2>)}
-              renderOnSend={(email: string) => (
+              renderOnSend={({email, sendToken}) => (
                 <LoginComponent
                   {...this.state}
                   email={email}
+                  sendToken={sendToken}
                   verifyAndLogin={this.verifyAndLogin}
                   updateState={this.updateState}
                 />

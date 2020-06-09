@@ -20,4 +20,9 @@ namespace ts {
     onFilterOptionChange?: selectChange,
     onSearchChange: inputChange,
   }>;
+
+  declare type tokenProps = Readonly<{
+    email: string,
+    sendToken: (email?: string) => void,
+  }>;
 }

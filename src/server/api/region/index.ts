@@ -3,7 +3,6 @@ import Router from 'koa-router';
 import _ from 'lodash';
 
 import { pg } from '~app/server/db/connection';
-import { getCitiesQuery } from '~app/server/queries';
 import { validateSchema } from '~app/server/utils';
 
 import { queue } from '..';

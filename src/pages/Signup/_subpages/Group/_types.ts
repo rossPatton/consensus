@@ -17,14 +17,13 @@ export type tState = {
 export type tStateUnion = keyof tState;
 export type tMeetingTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
-type tProps = {
+type tProps = ts.tokenProps & {
   geo: ts.geo,
   termsAccepted: boolean,
   toggleTerms: (termsAccepted: boolean) => void,
 };
 
 export type tContainerProps = tProps & {
-  email: string,
   location: Location,
   loginDispatch: (query: ts.loginQuery) => ts.thunkPayload<ts.roleMap>,
   postGroupDispatch: (query: ts.groupUpsertQuery) => ts.thunkPayload<ts.group>,

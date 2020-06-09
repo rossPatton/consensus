@@ -12,13 +12,12 @@ export type tState = {
 
 export type tKeyUnion = keyof tState;
 
-type tProps = {
+type tProps = ts.tokenProps & {
   termsAccepted: boolean,
   toggleTerms: (termsAccepted: boolean) => void,
 };
 
 export type tContainerProps = tProps & {
-  email: string,
   history: History,
   loginDispatch: (query: ts.loginQuery) => ts.thunkPayload<ts.session>,
   postUserDispatch: (query: ts.userQuery) => ts.thunkPayload<ts.session>,
