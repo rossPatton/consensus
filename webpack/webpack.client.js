@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const merge = require('webpack-merge');
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const DashboardPlugin = require('webpack-dashboard/plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyPlugin = require('copy-webpack-plugin');
@@ -42,6 +43,7 @@ module.exports = merge(common, {
   },
 
   plugins: [
+    // new CleanWebpackPlugin(),
     // new BundleAnalyzerPlugin(),
     // new webpack.HotModuleReplacementPlugin(),
 

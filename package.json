@@ -17,7 +17,8 @@
     "migrate": "node -r esm ./node_modules/.bin/knex migrate:latest",
     "seed": "node -r esm ./node_modules/.bin/knex seed:run",
     "pretest": "npm run lint",
-    "prod": "NODE_ENV=production npx webpack --config webpack/ && npx pm2 startOrReload pm2.config.js --no-daemon",
+    "dev": "NODE_ENV=development npx webpack --config webpack/; npx concurrently \"webpack --watch --config webpack/\" \"npx pm2-dev pm2.config.js --no-daemon\"",
+    "prod": "NODE_ENV=production npx webpack --config webpack/; npx pm2 startOrReload pm2.config.js --no-daemon",
     "jest": "NODE_ENV=test jest -u --no-cache --coverage",
     "test": "tsc",
     "webpack": "npx webpack --config webpack/"
@@ -181,7 +182,7 @@
     "babel-plugin-module-resolver": "^3.2.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "case-sensitive-paths-webpack-plugin": "^2.2.0",
-    "clean-webpack-plugin": "^0.1.19",
+    "clean-webpack-plugin": "^3.0.0",
     "concurrently": "^5.2.0",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.0",

@@ -5,7 +5,7 @@ services:
     image: consensusdocker/qa
     container_name: dev
     working_dir: /app
-    command: "npx concurrently \"webpack --watch --config webpack/\" \"npx pm2-dev pm2.config.js --no-daemon\""
+    command: "npm run dev"
     depends_on:
       - redis
     environment:

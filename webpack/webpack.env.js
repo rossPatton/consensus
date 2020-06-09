@@ -5,7 +5,7 @@ require('dotenv-safe').config();
 
 const CWD = process.cwd();
 const {
-  DB = 'development',
+  DB,
   DEBUG = 'false',
   HCAPTCHA_KEY,
   HCAPTCHA_SECRET,
@@ -13,7 +13,7 @@ const {
   MAIL_KEY,
   MAIL_SANDBOX,
   MAIL_URL,
-  NODE_ENV = 'development',
+  NODE_ENV = 'production',
   NO_INDEX = 'true',
   SPACES_KEY,
   SPACES_SECRET,
