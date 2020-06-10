@@ -37,11 +37,11 @@ group.get(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.getGroupQuery>(ctx, schema, query);
 
   try {
-    const group = pg(table)
+    const group = await pg(table)
       .limit(1)
       .where(query)
       .first()
-      .select(groupKeys);
+      .returning(groupKeys);
 
     ctx.body = group;
   } catch (err) {

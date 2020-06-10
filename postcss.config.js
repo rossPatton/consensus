@@ -1,4 +1,3 @@
-console.log('is postcss config called at all');
 module.exports = {
   plugins: [
     require('postcss-import'),

@@ -95,16 +95,16 @@ module.exports = {
     new CompressionPlugin({
       filename: '[path].gz[query]',
       algorithm: 'gzip',
-      test: /\.js$|\.ts$|\.tsx$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.7
+      test: /\.js$|\.ts$|\.tsx$|\.css$|\.html$|\.png$|\.ico$|\.svg$|\.json$/,
+      // threshold: 5120, //10240,
+      // minRatio: 0.7
     }),
 
     new BrotliPlugin({
       asset: '[path].br[query]',
-      test: /\.js$|\.ts$|\.tsx$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.7
+      test: /\.js$|\.ts$|\.tsx$|\.css$|\.html$|\.png$|\.ico$|\.svg$|\.json$/,
+      // threshold: 5120,
+      // minRatio: 0.7
     }),
 
     // does what the name implies

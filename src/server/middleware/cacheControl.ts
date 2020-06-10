@@ -1,11 +1,11 @@
 import Koa from 'koa';
+import cacheControl from 'koa-cache-control';
 
 export const cacheControlMiddleware = async (app: Koa) => {
-
-  // set Cache-Control time, dont cache during development
-  app.use(async (ctx, next) => {
-    const timeToCache = __PROD__ ? 15552000 : false;
-    ctx.cacheControl(timeToCache);
-    await next();
-  });
+  // 30 days vs 5 seconds
+  const timeToCache = __PROD__ ? 2592000 : 5;
+  app.use(cacheControl({
+    maxAge: timeToCache,
+    staleWhileRevalidate: 86400,
+  }));
 };

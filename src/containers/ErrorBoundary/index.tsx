@@ -31,7 +31,9 @@ export default class ErrorBoundary extends PureComponent<tProps, tState> {
 
     if (isSubPage && status === 500) {
       return (
-        <>Something went wrong loading this section. Try refreshing?</>
+        <div className="p-2">
+          Something went wrong loading this section. Try refreshing?
+        </div>
       );
     }
 

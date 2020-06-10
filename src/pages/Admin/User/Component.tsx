@@ -98,7 +98,6 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
             {isProfile
               && (
                 <Profile
-                  history={props.history}
                   match={props.match}
                 />
               )}
