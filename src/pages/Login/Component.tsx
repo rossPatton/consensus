@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import _ from 'lodash';
 import React, {memo} from 'react';
 
@@ -35,17 +36,23 @@ export const LoginComponent = memo((props: tComponentProps) => (
             onChange={ev => props.updateState('token', ev)}
           />
         </label>
-        <p className="font-sm">
-          Didn&apos;t get a code? Click <button className="border-0 p-0" type="button" onClick={() => props.sendToken(props.email)}>here</button> to send again.
+        <p className="font-sm flex items-baseline">
+          Didn&apos;t get a code? Click <button className="border-0 ml-1/2 mr-1/2 p-0 underline" type="button" onClick={() => props.sendToken(props.email)}>here</button> to send again.
         </p>
       </>
     )}
-    renderSubmit={formProps => (
-      <button
-        disabled={!formProps.hasMounted || !props.token}
-        className="hover:bg-gray-3 p-2 pl-3 pr-3 mr-1">
-        Login
-      </button>
-    )}
+    renderSubmit={formProps => {
+      const disabled = !formProps.hasMounted || !props.token;
+      return (
+        <button
+          disabled={disabled}
+          className={cx({
+            'p-2 pl-3 pr-3': true,
+            'bg-green-1 hover:bg-green-2': !disabled,
+          })}>
+          Login
+        </button>
+      );
+    }}
   />
 ));

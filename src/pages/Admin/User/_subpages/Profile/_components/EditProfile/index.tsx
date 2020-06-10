@@ -96,9 +96,11 @@ const EditProfile = memo((props: tComponentProps) => (
             <input
               onChange={ev => props.updateState('website', ev.currentTarget.value)}
               className="p-2 w-full"
+              maxLength={4096}
               placeholder="Link your website here"
               value={props.website}
               name="website"
+              type="url"
             />
           </label>
           <label className="block mb-3" htmlFor="facebook">
@@ -108,9 +110,11 @@ const EditProfile = memo((props: tComponentProps) => (
             <input
               className="p-2 w-full"
               name="facebook"
+              maxLength={4096}
               onChange={ev => props.updateState('facebook', ev.currentTarget.value)}
               placeholder="Link your facebook profile here"
               value={props.facebook}
+              type="url"
             />
           </label>
           <label className="block mb-3" htmlFor="twitter">
@@ -120,9 +124,11 @@ const EditProfile = memo((props: tComponentProps) => (
             <input
               className="p-2 w-full"
               name="twitter"
+              maxLength={4096}
               onChange={ev => props.updateState('twitter', ev.currentTarget.value)}
               placeholder="Link your twitter here"
               value={props.twitter}
+              type="url"
             />
           </label>
           <h3 className="text-base mb-1 leading-none">

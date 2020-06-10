@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import _ from 'lodash';
 import React, {memo} from 'react';
 
@@ -25,6 +26,7 @@ export const EmailTokenComponent = memo((props: tComponentProps) => (
           autoComplete="email"
           name="email" // for non-js submit and passportjs
           id="emailInput"
+          maxLength={4096}
           placeholder="your_email@example.com"
           className="p-2 w-full mb-2"
           value={props.email}
@@ -37,11 +39,22 @@ export const EmailTokenComponent = memo((props: tComponentProps) => (
       const disabled = !formProps.hasMounted || !props.email || !formProps.captcha;
 
       return (
-        <button
-          disabled={disabled}
-          className="hover:bg-gray-3 p-2 pl-3 pr-3 mr-1">
-          {props.actionLabel}
-        </button>
+        <>
+          <button
+            disabled={disabled}
+            className={cx({
+              'p-2 pl-3 pr-3 mb-1': true,
+              'bg-green-1 hover:bg-green-2': !disabled,
+            })}>
+            {props.actionLabel}
+          </button>
+          {props.tokensThunk.isLoading
+            && (
+              <div className="font-semibold">
+                Sending email. Please wait.
+              </div>
+            )}
+        </>
       );
     }}
   />

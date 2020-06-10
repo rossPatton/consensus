@@ -5,7 +5,6 @@ import _ from 'lodash';
 import {pg} from '~app/server/db/connection';
 import {validateSchema} from '~app/server/utils';
 
-import {queue} from '..';
 import {deleteSchema, getSchema, postSchema} from './_schema';
 
 export const invites = new Router();
@@ -19,7 +18,7 @@ invites.delete(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.inviteQuery>(ctx, deleteSchema, query);
 
   try {
-    await queue.add(() => pg.transaction(async trx => pg(table)
+    await pg.transaction(async trx => pg(table)
       .transacting(trx)
       .limit(1)
       .where({groupId: query.groupId, userId: query.userId})
@@ -27,7 +26,7 @@ invites.delete(route, async (ctx: Koa.ParameterizedContext) => {
       .del()
       .then(trx.commit)
       .catch(trx.rollback),
-    ));
+    );
 
     // we return the query back for redux. to remove it from the list
     ctx.body = query;
@@ -41,7 +40,7 @@ invites.get(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.inviteQuery>(ctx, getSchema, query);
 
   try {
-    await queue.add(() => pg.transaction(async trx => {
+    await pg.transaction(async trx => {
       const userInvites = await pg(table).transacting(trx).where(query);
       let mappedInvites = userInvites;
       // if group, we want to render info about the users we are inviting
@@ -73,7 +72,7 @@ invites.get(route, async (ctx: Koa.ParameterizedContext) => {
       }
 
       ctx.body = mappedInvites;
-    }));
+    });
   } catch (err) {
     return ctx.throw(500, err);
   }
@@ -84,14 +83,14 @@ invites.post(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.inviteQuery>(ctx, postSchema, query);
 
   try {
-    await queue.add(() => pg.transaction(async trx => {
+    await pg.transaction(async trx => {
       const user = await pg('users')
         .transacting(trx)
         .limit(1)
         .where(query)
         .first();
 
-      const newInviteReturning = await pg(table)
+      await pg(table)
         .transacting(trx)
         .insert({
           groupId: query.groupId,
@@ -100,14 +99,16 @@ invites.post(route, async (ctx: Koa.ParameterizedContext) => {
         })
         .limit(1)
         .returning('*')
+        .then(newInvite => {
+          ctx.body = {
+            ...newInvite?.[0],
+            user,
+          };
+          return null;
+        })
         .then(trx.commit)
         .catch(trx.rollback);
-
-      ctx.body = {
-        ...newInviteReturning?.[0],
-        user,
-      };
-    }));
+    });
   } catch (err) {
     ctx.throw(500, err);
   }

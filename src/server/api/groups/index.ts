@@ -5,7 +5,6 @@ import _ from 'lodash';
 import {pg} from '~app/server/db/connection';
 import {validateSchema} from '~app/server/utils';
 
-import {queue} from '..';
 import {groupKeys} from '../_constants';
 import {groupSchema} from '../_schemas';
 
@@ -17,11 +16,10 @@ groups.get(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.getGroupQuery>(ctx, groupSchema, query);
 
   try {
-    const groups: ts.group[] = await queue.add(() => pg('groups')
+    const groups: ts.group[] = await pg('groups')
       .where(query)
       .andWhereNot({type: 'hidden'})
-      .select(groupKeys),
-    );
+      .select(groupKeys);
 
     ctx.body = groups;
   } catch (err) {

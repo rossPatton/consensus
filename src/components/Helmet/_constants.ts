@@ -30,9 +30,9 @@ export const LINK_TAGS: tLinkProps[] = [
     href: 'https://hcaptcha.com',
   },
   {
-    // crossOrigin: '',
-    rel: 'prefetch',
-    href: '/fonts/founders-grotesk-text-web-medium.woff2',
+    crossOrigin: 'anonymous',
+    rel: 'preload',
+    href: '/fonts/founders-grotesk-text-web-medium-subset.woff2',
     as: 'font',
     type: 'font/woff2',
   },

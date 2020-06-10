@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {login, patchGroup} from '~app/redux';
+import {patchGroup} from '~app/redux';
 
 import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
 import {ProfileComponent} from './Component';
@@ -32,7 +32,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     };
   }
 
-  onSubmit = async (token: string) => {
+  onSubmit = async () => {
     try {
       await this.props.patchGroupDispatch({
         ...this.state,
@@ -44,21 +44,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       });
     }
 
-    // update session by 'logging in' again, with the new account info
-    try {
-      await this.props.loginDispatch({
-        email: this.props.sessionThunk.data.login,
-        sessionType: 'group',
-        token,
-      });
-    } catch (error) {
-      return this.setState({
-        error: error.message,
-      });
-    }
-
-    // reset on submit
-    // this.setState({});
+    window.location.reload();
   }
 
   updateState = (stateKey: tKeyUnion, ev: React.ChangeEvent<any>) => {
@@ -97,7 +83,7 @@ const mapStateToProps = (store: tStore) => {
 };
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
+  dispatch,
   patchGroupDispatch: (query: ts.groupUpsertQuery) => dispatch(patchGroup(query)),
 });
 

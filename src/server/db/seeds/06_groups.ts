@@ -30,16 +30,16 @@ const createGroup = async (groupId: number) => {
     cityId: 16624,
     description: faker.lorem.paragraphs(),
     email: groupId === 0 ? 'rosspatton@protonmail.com' : email,
-    facebook: '',
+    facebook: `https://${faker.internet.domainName()}`,
     handle: group.handle,
     memberName: 'Member',
     modName: 'Facilitator',
     name: group.name,
     region: group.region,
     regionId: group.regionId,
-    twitter: '',
+    twitter: `https://${faker.internet.domainName()}`,
     type: group.type,
-    website: group.website || faker.internet.domainName(),
+    website: group.website || `https://${faker.internet.domainName()}`,
   };
 };
 

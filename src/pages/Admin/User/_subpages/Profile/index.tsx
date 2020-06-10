@@ -3,7 +3,7 @@ import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {login, patchUser} from '~app/redux';
+import {patchUser} from '~app/redux';
 
 import {initialState} from './_constants';
 import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
@@ -45,18 +45,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       }
     }
 
-    // TODO just use action, no thunk needed
-    // update current session to reflect new settings
-    // try {
-    //   await loginDispatch({
-    //     username: login,
-    //     password: this.state.password,
-    //   });
-    // } catch (err) {
-    //   loglevel.error(err);
-    // }
-
-    this.props.history.push('/admin/profile');
+    window.location.reload();
   }
 
   updateState = (key: tKeyUnion, value: string | number | object | boolean) => {
@@ -102,7 +91,7 @@ const mapStateToProps = (store: tStore) => {
 };
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  loginDispatch: (query: ts.loginQuery) => dispatch(login(query)),
+  dispatch,
   patchUserDispatch: (user: Partial<ts.user>) => dispatch(patchUser(user)),
 });
 

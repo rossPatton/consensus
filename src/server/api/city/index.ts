@@ -6,7 +6,6 @@ import { pg } from '~app/server/db/connection';
 import { validateSchema } from '~app/server/utils';
 import { deSlugify } from '~app/utils';
 
-import { queue } from '..';
 import { schema } from './_schema';
 
 export const city = new Router();
@@ -20,7 +19,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
   const cityName = deSlugify(citySlug);
 
   try {
-    await queue.add(() => pg.transaction(async trx => {
+    await pg.transaction(async trx => {
       const region = await pg('regions')
         .transacting(trx)
         .limit(1)
@@ -54,7 +53,7 @@ city.get(route, async (ctx: Koa.ParameterizedContext) => {
         ...city,
         groups: _.uniqBy(groups, group => group.name),
       };
-    }));
+    });
   } catch (err) {
     return ctx.throw(500, err);
   }

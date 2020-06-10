@@ -1,10 +1,9 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 
-import { getCitiesQuery } from '~app/server/queries';
+import { pg } from '~app/server/db/connection';
 import { validateSchema } from '~app/server/utils';
 
-import { queue } from '..';
 import { schema } from './_schema';
 
 export const cities = new Router();
@@ -15,7 +14,9 @@ cities.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: {region: string}} = ctx;
   await validateSchema<{region: string}>(ctx, schema, query);
   try {
-    ctx.body = await queue.add(() => getCitiesQuery(query.region));
+    ctx.body = await pg('cities')
+      .where({region: query.region})
+      .orderBy('name', 'asc');
   } catch (err) {
     return ctx.throw(500, err);
   }

@@ -5,8 +5,9 @@ import { tProps } from './_types';
 const ExternalLink = memo((props: tProps) => (
   <a
     href={props.to}
+    target="_blank"
     className={props.className || ''}
-    rel={`noopener noreferrer ${props.noFollow ? 'nofollow' : ''}`}>
+    rel="noopener noreferrer nofollow">
     {props.children}
   </a>
 ));

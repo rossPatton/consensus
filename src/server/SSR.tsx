@@ -31,7 +31,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
 
   // webpack debug mode seems to use eval(?) so disable the CSP in debug mode
   // i think this is mostly fine, considering the CSP runs for every other case
-  const CSP = !__DEBUG__ ? `<meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="base-uri 'none'; connect-src ${local}; default-src 'self'; block-all-mixed-content; font-src ${local}; form-action ${local}; frame-src ${hcaptcha}; img-src ${imgSrc}; manifest-src ${local}; object-src 'none'; prefetch-src ${local}; script-src ${local} ${hcaptcha} 'nonce-${nonce}'; style-src ${hcaptcha} ${local} 'nonce-${nonce}'">` : '';
+  const CSP = !__DEBUG__ ? `<meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="base-uri 'none'; connect-src ${local}; default-src 'self'; block-all-mixed-content; font-src ${local}; form-action ${local}; frame-src ${hcaptcha}; img-src ${imgSrc}; manifest-src ${local}; object-src 'none'; script-src ${local} ${hcaptcha} 'nonce-${nonce}'; style-src ${hcaptcha} ${local} 'nonce-${nonce}'">` : '';
 
   ctx.res.write(`<!DOCTYPE html><html lang="en"><head>${CSP}<title>Consensus - when you need to get organized.</title><style nonce="${nonce}">${styles}</style></head><body><div id="appRoot">`);
 

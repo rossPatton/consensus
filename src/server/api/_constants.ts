@@ -1,39 +1,34 @@
 export const accountKeys = [
-  'email',
-  'id',
-  'showOnboarding',
-  'userId',
-  'groupId',
-];
-
-export const groupKeys = [
   'avatar',
-  'category',
   'city',
   'cityId',
   'country',
   'countryId',
-  'description',
+  'email',
   'facebook',
-  'handle',
   'id',
-  'memberName',
-  'modName',
   'name',
   'region',
   'regionId',
+  'showOnboarding',
   'twitter',
-  'type',
   'website',
 ];
 
+export const groupKeys = [
+  ...accountKeys,
+  'category',
+  'description',
+  'handle',
+  'memberName',
+  'modName',
+  'type',
+];
+
 export const userKeys = [
-  'avatar',
+  ...accountKeys,
   'bio',
-  'city',
-  'id',
   'language',
-  'name',
   'privateMemberships',
   'privateRSVP',
   'username',

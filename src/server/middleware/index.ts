@@ -10,6 +10,7 @@ import { faviconMiddleware } from './favicon';
 import { featurePolicyMiddleware } from './featurePolicy';
 import { helmetMiddleware } from './helmet';
 import { hstsMiddleware } from './hsts';
+import { htmlMinifierMiddleware } from './htmlMinifier';
 import { loggerMiddleware } from './logger';
 import { rateLimiterMiddleware } from './rateLimiter';
 import { redirectTrailingSlashMiddleware } from './redirectTrailingSlash';
@@ -25,6 +26,7 @@ export { staticFileMiddleware } from './static';
 export const setupMiddleware = (app: Koa) => {
   bodyParserMiddleware(app);
   compressionMiddleware(app);
+  htmlMinifierMiddleware(app);
 
   // security stuff
   if (__PROD__) {

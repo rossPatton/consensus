@@ -54,7 +54,7 @@ export const sessionReducer = (state = initialState, action: tActions) => {
       ...state,
       data: {
         ...state.data,
-        ...action.payload,
+        profile: action?.payload?.payload,
       },
     };
   }

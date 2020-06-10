@@ -58,8 +58,8 @@ module.exports = {
         2: '#ffc201',
       },
       green: {
-        1: '#aedfa5',
-        2: '#0f0',
+        1: '#c2f5b9',
+        2: '#a8f7a8',
       },
       blue: {
         1: '#0b3dff',

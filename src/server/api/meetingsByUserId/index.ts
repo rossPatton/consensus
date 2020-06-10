@@ -7,7 +7,6 @@ import {pg} from '~app/server/db/connection';
 import {getRSVPsByUserId} from '~app/server/queries';
 import {validateSchema} from '~app/server/utils';
 
-import {queue} from '..';
 import {schema} from './_schema';
 import {tMeetingsByUserServerQuery} from './_types';
 
@@ -19,7 +18,7 @@ meetingsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema(ctx, schema, query);
 
   try {
-    await queue.add(() => pg.transaction(async trx => {
+    await pg.transaction(async trx => {
       const userRSVPs = await getRSVPsByUserId(trx, ctx, query.userId);
       const mappedIds = await Promise.all(_.uniq(
         userRSVPs.map(async idSet => idSet.meetingId),
@@ -33,7 +32,7 @@ meetingsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
         .orderBy('date', 'asc');
 
       ctx.body = meetings;
-    }));
+    });
   } catch (err) {
     return ctx.throw(500, err);
   }

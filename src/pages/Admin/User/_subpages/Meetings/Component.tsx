@@ -9,7 +9,7 @@ export const MeetingsComponent = memo((props: tComponentProps) => (
     <ul className="flex flex-col d:flex-row items-center mb-2" role="navigation">
       <li>
         <h2 className="font-semibold">
-          Upcoming meetings near you
+          Upcoming meetings near {props.location}
         </h2>
       </li>
     </ul>

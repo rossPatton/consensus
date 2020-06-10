@@ -34,6 +34,13 @@ const CurrentProfile = memo((props: tComponentProps) => (
         {props.category}
       </span>
     </h3>
+    {props.city && (
+      <h3 className="text-base mb-2 pb-1 leading-none">
+        <span className="font-semibold">Based in:</span> <span className="text-gray-5">
+          {props.city}, {props.region}
+        </span>
+      </h3>
+    )}
     <h3 className="text-base mb-2 leading-none">
       <span className="font-semibold">Member title:</span> <span className="text-gray-5">
         {props.memberName}

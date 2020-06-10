@@ -1,10 +1,10 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 
-import {queue} from '..';
+import {pg} from '~app/server/db/connection';
+import {validateSchema} from '~app/server/utils';
+
 import {groupKeys} from '../_constants';
-import {pg} from '../../db/connection';
-import {validateSchema} from '../../utils';
 import {patchSchema, postSchema, schema} from './_schema';
 
 export const group = new Router();
@@ -16,7 +16,7 @@ group.delete(route, async (ctx: Koa.ParameterizedContext) => {
   if (!loggedInAccount) return ctx.throw(401, 'Must be logged in');
 
   try {
-    await queue.add(() => pg.transaction(async trx => pg(table)
+    await pg.transaction(async trx => pg(table)
       .transacting(trx)
       .limit(1)
       .where({id: loggedInAccount.id})
@@ -24,12 +24,12 @@ group.delete(route, async (ctx: Koa.ParameterizedContext) => {
       .del()
       .then(trx.commit)
       .catch(trx.rollback),
-    ));
+    );
+
+    ctx.body = {ok: true};
   } catch (err) {
     return ctx.throw(500, err);
   }
-
-  ctx.body = {ok: true};
 });
 
 group.get(route, async (ctx: Koa.ParameterizedContext) => {
@@ -37,12 +37,11 @@ group.get(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.getGroupQuery>(ctx, schema, query);
 
   try {
-    const group = await queue.add(() => pg(table)
+    const group = pg(table)
       .limit(1)
       .where(query)
       .first()
-      .select(groupKeys),
-    );
+      .select(groupKeys);
 
     ctx.body = group;
   } catch (err) {
@@ -54,19 +53,24 @@ group.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: ts.groupUpsertQuery} = ctx;
   await validateSchema<ts.groupUpsertQuery>(ctx, patchSchema, query);
 
-  try {
-    const updatedGroup: ts.group[] = await queue.add(() =>
-      pg.transaction(async trx => pg(table)
-        .transacting(trx)
-        .limit(1)
-        .where({id: query.id})
-        .update(query)
-        .returning(groupKeys)
-        .then(trx.commit)
-        .catch(trx.rollback),
-      ));
+  const loggedInAccount = ctx?.state?.user;
+  if (!loggedInAccount) return ctx.throw(401, 'Must be logged in');
 
-    ctx.body = updatedGroup?.[0];
+  try {
+    await pg.transaction(async trx => pg(table)
+      .transacting(trx)
+      .limit(1)
+      .where({id: loggedInAccount.id})
+      .update(query)
+      .returning('*')
+      .then((updatedGroup: ts.group[]) => {
+        ctx.login(updatedGroup?.[0]);
+        ctx.body = updatedGroup?.[0];
+        return null;
+      })
+      .then(trx.commit)
+      .catch(trx.rollback),
+    );
   } catch (err) {
     return ctx.throw(500, err);
   }
@@ -77,16 +81,17 @@ group.post(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.groupUpsertQuery>(ctx, postSchema, query);
 
   try {
-    const newGroup: ts.group[] = await queue.add(() =>
-      pg.transaction(async trx => pg(table)
-        .transacting(trx)
-        .insert({avatar: '2', ...query})
-        .returning(groupKeys)
-        .then(trx.commit)
-        .catch(trx.rollback),
-      ));
-
-    ctx.body = newGroup?.[0];
+    await pg.transaction(async trx => pg(table)
+      .transacting(trx)
+      .insert({avatar: '2', ...query})
+      .returning(groupKeys)
+      .then(newGroup => {
+        ctx.body = newGroup?.[0];
+        return null;
+      })
+      .then(trx.commit)
+      .catch(trx.rollback),
+    );
   } catch (err) {
     return ctx.throw(500, err);
   }

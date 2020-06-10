@@ -4,7 +4,6 @@ import _ from 'lodash';
 
 import { pg } from '~app/server/db/connection';
 
-import { queue } from '..';
 import { validateSchema } from '../../utils';
 import { schema } from './_schema';
 
@@ -17,7 +16,7 @@ country.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   let country = {} as ts.country;
   try {
-    await queue.add(() => pg.transaction(async trx => pg('countries')
+    await pg.transaction(async trx => pg('countries')
       .transacting(trx)
       .limit(1)
       .where({id: 1})
@@ -36,7 +35,7 @@ country.get(route, async (ctx: Koa.ParameterizedContext) => {
         };
         return null;
       }),
-    ));
+    );
   } catch (err) {
     return ctx.throw(500, err);
   }

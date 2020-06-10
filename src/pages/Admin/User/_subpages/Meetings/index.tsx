@@ -30,12 +30,19 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
         regionCode: geoThunk.data.regionCode,
       });
     }
-
-
   }
 
   render() {
-    const {geoThunk, meetingsByLocationThunk} = this.props;
+    const {geoThunk, meetingsByLocationThunk, sessionThunk} = this.props;
+    const {profile} = sessionThunk?.data;
+
+    let location = 'you';
+    if (profile.cityId) {
+      location = `${profile.city}, ${profile.region}`;
+    } else if (geoThunk.fetched) {
+      location = `${geoThunk.data.city}, ${geoThunk.data.region}`;
+    }
+
     return (
       <ErrorBoundary
         isSubPage
@@ -47,6 +54,7 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
               items={meetingsByLocationThunk.data}
               render={searchProps => (
                 <MeetingsComponent
+                  location={location}
                   meetings={searchProps.items as ts.meeting[]}
                   onFilterOptionChange={searchProps.onFilterOptionChange}
                   onSearchChange={searchProps.onSearchChange}

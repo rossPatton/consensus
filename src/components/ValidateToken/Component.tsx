@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import _ from 'lodash';
 import React, {memo} from 'react';
 
@@ -34,12 +35,19 @@ export const ValidateTokenComponent = memo((props: tComponentProps) => (
         </label>
       </>
     )}
-    renderSubmit={formProps => (
-      <button
-        disabled={!formProps.hasMounted || !props.token}
-        className="hover:bg-gray-3 p-2 pl-3 pr-3 mr-1">
-        Verify and Login
-      </button>
-    )}
+    renderSubmit={formProps => {
+      const disabled = !formProps.hasMounted || !props.token;
+
+      return (
+        <button
+          disabled={disabled}
+          className={cx({
+            'p-2 pl-3 pr-3': true,
+            'bg-green-1 hover:bg-green-2': !disabled,
+          })}>
+          Verify and Login
+        </button>
+      );
+    }}
   />
 ));

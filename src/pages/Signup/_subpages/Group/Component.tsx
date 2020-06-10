@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
@@ -38,8 +39,8 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
             onChange={ev => props.updateState('token', ev.currentTarget.value)}
           />
         </label>
-        <p className="font-sm">
-          Didn&apos;t get a code? Click <button className="border-0 p-0" type="button" onClick={() => props.sendToken(props.email)}>here</button> to send again.
+        <p className="font-sm flex items-baseline">
+          Didn&apos;t get a code? Click <button className="border-0 ml-1/2 mr-1/2 p-0 underline" type="button" onClick={() => props.sendToken(props.email)}>here</button> to send again.
         </p>
         <h2 className="font-semibold text-base">
           Group Name
@@ -155,7 +156,10 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
       <>
         <button
           disabled={!formProps.hasMounted || !props.token || props.disabled}
-          className="p-2 pl-3 pr-3 hover:bg-gray-3 mr-1">
+          className={cx({
+            'p-2 pl-3 pr-3 mr-1': true,
+            'bg-green-1 hover:bg-green-2': !formProps.hasMounted || !props.token,
+          })}>
           Create Group!
         </button>
         <Link

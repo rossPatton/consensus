@@ -18,13 +18,15 @@ const createUser = async () => {
     bio: faker.lorem.paragraphs(),
     city,
     email,
-    facebook: faker.random.boolean ? '' : null as any,
+    facebook: faker.random.boolean
+      ? `https://${faker.internet.domainName()}`
+      : null as any,
     name: `${faker.name.firstName()} ${faker.name.lastName()}`,
     privateMemberships: faker.random.boolean(),
     privateRSVP: false,
-    twitter: '',
+    twitter: `https://${faker.internet.domainName()}`,
     username: faker.internet.userName(),
-    website: faker.internet.domainName(),
+    website: `https://${faker.internet.domainName()}`,
   };
 };
 
@@ -42,7 +44,7 @@ const createTestUser = async () => ({
   regionId: 37,
   twitter: '',
   username: 'testUsername',
-  website: faker.internet.domainName(),
+  website: '',
 });
 
 exports.seed = async (knex: Knex) => {

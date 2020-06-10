@@ -23,9 +23,11 @@ const EditProfile = memo((props: tComponentProps) => (
           <input
             onChange={ev => props.updateState('email', ev)}
             className="p-2 w-full"
+            maxLength={4096}
             placeholder={`Currently ${props.session.email}`}
             value={props.email}
             name="email"
+            type="email"
           />
         </label>
         <FileUpload
@@ -77,6 +79,7 @@ const EditProfile = memo((props: tComponentProps) => (
           <input
             onChange={ev => props.updateState('memberName', ev)}
             className="p-2 w-full"
+            maxLength={90}
             placeholder="What are your members called?"
             value={props.memberName}
             name="memberName"
@@ -89,6 +92,7 @@ const EditProfile = memo((props: tComponentProps) => (
           <input
             onChange={ev => props.updateState('modName', ev)}
             className="p-2 w-full"
+            maxLength={90}
             placeholder="What should moderators be called?"
             value={props.modName}
             name="modName"
@@ -100,6 +104,7 @@ const EditProfile = memo((props: tComponentProps) => (
         <textarea
           rows={6}
           spellCheck
+          maxLength={4096}
           className="mb-2 w-full text-base"
           placeholder="Group Description Here"
           value={props.description}
@@ -112,9 +117,12 @@ const EditProfile = memo((props: tComponentProps) => (
           <input
             onChange={ev => props.updateState('website', ev)}
             className="p-2 w-full"
+            maxLength={4096}
+            pattern="https://.*"
             placeholder="Link your website here"
             value={props.website}
             name="website"
+            type="url"
           />
         </label>
         <label className="block mb-2" htmlFor="facebook">
@@ -124,9 +132,12 @@ const EditProfile = memo((props: tComponentProps) => (
           <input
             className="p-2 w-full"
             name="facebook"
+            maxLength={4096}
+            pattern="https://.*"
             onChange={ev => props.updateState('facebook', ev)}
             placeholder="Link your facebook profile here"
             value={props.facebook}
+            type="url"
           />
         </label>
         <label className="block mb-2" htmlFor="twitter">
@@ -136,9 +147,12 @@ const EditProfile = memo((props: tComponentProps) => (
           <input
             className="p-2 w-full"
             name="twitter"
+            maxLength={4096}
+            pattern="https://.*"
             onChange={ev => props.updateState('twitter', ev)}
             placeholder="Link your twitter here"
             value={props.twitter}
+            type="url"
           />
         </label>
       </>

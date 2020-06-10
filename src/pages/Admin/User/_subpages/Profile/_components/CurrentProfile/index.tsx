@@ -63,7 +63,7 @@ const CurrentProfile = memo((props: tComponentProps) => (
     {props.city && (
       <h3 className="text-base mb-2 pb-1 leading-none">
         <span className="font-semibold">City:</span> <span className="text-gray-5">
-          {props.city}
+          {props.city}, {props.region}
         </span>
       </h3>
     )}

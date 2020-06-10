@@ -5,7 +5,6 @@ import _ from 'lodash';
 import {pg} from '~app/server/db/connection';
 import {validateSchema} from '~app/server/utils';
 
-import {queue} from '..';
 import {groupKeys} from '../_constants';
 import {deleteSchema, getSchema} from './_schema';
 
@@ -19,7 +18,7 @@ groupsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {noPending, userId} = query;
 
   try {
-    await queue.add(() => pg.transaction(async trx => {
+    await pg.transaction(async trx => {
       const userGroupRelsTrx = pg('users_roles').transacting(trx);
       if (noPending) userGroupRelsTrx.whereNot({role: 'pending'});
       userGroupRelsTrx.where({userId}).orderBy('updated_at', 'asc');
@@ -34,7 +33,7 @@ groupsByUserId.get(route, async (ctx: Koa.ParameterizedContext) => {
         .select(groupKeys);
 
       ctx.body = groups;
-    }));
+    });
   } catch (err) {
     return ctx.throw(500, err);
   }
@@ -60,10 +59,13 @@ groupsByUserId.delete(route, async (ctx: Koa.ParameterizedContext) => {
       .then(trx.commit)
       .catch(trx.rollback),
     );
+
+    // groupId is needed on client to update redux state
+    ctx.body = {
+      ok: true,
+      groupId: parseInt(groupId, 10),
+    };
   } catch (err) {
     return ctx.throw(500, err);
   }
-
-  // groupId is needed on client to update redux state
-  ctx.body = {ok: true, groupId: parseInt(groupId, 10)};
 });

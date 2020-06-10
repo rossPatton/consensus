@@ -9,7 +9,7 @@ export type tStore = {
 
 export type tContainerProps = {
   avatar?: string,
-  loginDispatch: (query: ts.loginQuery) => ts.thunkPayload,
+  dispatch: Function,
   match: ts.adminSectionParams,
   patchGroupDispatch: (query: ts.groupUpsertQuery) => ts.thunkPayload<ts.group>,
   sessionThunk: ts.thunk<ts.session>,

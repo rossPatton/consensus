@@ -21,8 +21,8 @@ exports.up = async (knex: Knex) => {
     // default name for displaying
     table.string('username').notNullable().defaultTo('').unique();
 
-    table.string('city');
-    table.string('region');
+    table.string('city').defaultTo('');
+    table.string('region').defaultTo('');
 
     table.string('country')
       .defaultTo('United States')

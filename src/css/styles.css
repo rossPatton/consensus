@@ -4,8 +4,8 @@
 @font-face {
   font-display: swap;
   font-family: 'Founders';
-  src: url('/fonts/founders-grotesk-text-web-medium.woff2') format('woff2'),
-    url('/fonts/founders-grotesk-text-web-medium.woff') format('woff');
+  src: url('/fonts/founders-grotesk-text-web-medium-subset.woff2') format('woff2'),
+    url('/fonts/founders-grotesk-text-web-medium-subset.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
@@ -72,11 +72,8 @@ ul {
   @apply list-none;
 }
 h1 {
-  @apply leading-none;
-  /* letter-spacing: -.01rem; */
-}
-.wf-loaded h1 {
   @apply font-founders;
+  @apply leading-none;
 }
 h1,
 h2,

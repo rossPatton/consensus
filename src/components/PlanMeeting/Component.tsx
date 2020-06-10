@@ -179,7 +179,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
                       ev.preventDefault();
                       props.saveAsDraft();
                     }}>
-                  Save as Draft
+                    Save as Draft
                   </button>
                   {typeof props.id === 'number' && (
                     <Link
@@ -190,7 +190,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
                         emoji="👁️"
                         label="Eye Emoji"
                       />
-                    Preview
+                      Preview
                     </Link>
                   )}
                 </div>

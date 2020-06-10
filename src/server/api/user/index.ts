@@ -30,11 +30,11 @@ user.delete(route, async (ctx: Koa.ParameterizedContext) => {
         .then(trx.commit)
         .catch(trx.rollback);
     });
+
+    ctx.body = {ok: true};
   } catch (err) {
     return ctx.throw(500, err);
   }
-
-  ctx.body = {ok: true};
 });
 
 user.get(route, async (ctx: Koa.ParameterizedContext) => {
@@ -59,27 +59,21 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
   const {sessionType, token, ...userQuery} = query;
 
-  // if (token) {
-  //   const validates = totpTokenValidates({
-  //     token,
-  //     secret: query.otpSecret,
-  //   });
-
-  //   if (!validates) return ctx.throw(401, 'Token incorrect');
-  // }
-
   try {
     await pg.transaction(async trx => {
-      const updatedUser = await pg(table)
+      await pg(table)
         .transacting(trx)
         .limit(1)
-        .where({id: query.id})
+        .where({id: loggedInAccount.id})
         .update(userQuery)
-        .returning(userKeys)
+        .returning('*')
+        .then(updatedUser => {
+          ctx.login(updatedUser?.[0]);
+          ctx.body = updatedUser?.[0];
+          return null;
+        })
         .then(trx.commit)
         .catch(trx.rollback);
-
-      ctx.body = updatedUser?.[0];
     });
   } catch (err) {
     return ctx.throw(500, err);
@@ -93,14 +87,16 @@ user.post(route, async (ctx: Koa.ParameterizedContext) => {
 
   try {
     await pg.transaction(async trx => {
-      const userResult = await pg('users')
+      await pg('users')
         .transacting(trx)
         .insert({avatar: '1', ...query})
         .returning(userKeys)
+        .then(newUser => {
+          ctx.body = newUser?.[0];
+          return null;
+        })
         .then(trx.commit)
         .catch(trx.rollback);
-
-      ctx.body = userResult?.[0];
     });
   } catch (err) {
     return ctx.throw(500, errorMessage);

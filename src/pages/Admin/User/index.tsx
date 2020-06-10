@@ -37,7 +37,9 @@ class UserAdminContainer extends PureComponent<tContainerProps> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.roles.isLoading || store.rsvps.isLoading,
+  isLoading: store.roles.isLoading
+    || store.rsvps.isLoading
+    || store.session.isLoading,
   groupsByUserIdThunk: store.groupsByUserId,
   rolesThunk: store.roles,
   rsvpsThunk: store.rsvps,

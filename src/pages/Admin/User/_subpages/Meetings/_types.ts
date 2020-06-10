@@ -5,6 +5,7 @@ export type tStore = {
 };
 
 export type tComponentProps = {
+  location: string,
   meetings: ts.meeting[],
   onFilterOptionChange: ts.selectChange,
   onSearchChange: ts.inputChange,

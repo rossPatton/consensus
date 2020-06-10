@@ -6,7 +6,6 @@ import {pg} from '~app/server/db/connection';
 import {getMeetingByQuery} from '~app/server/queries';
 import {validateSchema} from '~app/server/utils';
 
-import {queue} from '..';
 import {getSchema, upsertSchema} from './_schema';
 
 const route = '/api/v1/meeting';
@@ -24,19 +23,20 @@ meeting.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {id, ...patch} = query;
 
   try {
-    const meeting: ts.meeting[] = await queue.add(() =>
-      pg.transaction(async trx => pg('meetings')
+    await pg.transaction(async trx =>
+      pg('meetings')
         .transacting(trx)
         .limit(1)
         .where({id})
         .update(patch)
         .returning('*')
+        .then(meeting => {
+          ctx.body = meeting?.[0];
+          return null;
+        })
         .then(trx.commit)
         .catch(trx.rollback),
-      ),
     );
-
-    ctx.body = meeting?.[0];
   } catch (err) {
     ctx.throw(500, err);
   }
@@ -48,18 +48,19 @@ meeting.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {id, ...meeting} = query;
 
   try {
-    const newMeeting: ts.meeting[] = await queue.add(() =>
-      pg.transaction(async trx => pg('meetings')
+    await pg.transaction(async trx =>
+      pg('meetings')
         .transacting(trx)
         .insert(meeting)
         .limit(1)
         .returning('*')
+        .then(newMeeting => {
+          ctx.body = newMeeting?.[0];
+          return null;
+        })
         .then(trx.commit)
         .catch(trx.rollback),
-      ),
     );
-
-    ctx.body = newMeeting?.[0];
   } catch (err) {
     ctx.throw(500, err);
   }

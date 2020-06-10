@@ -6,7 +6,6 @@ import _ from 'lodash';
 import {pg} from '~app/server/db/connection';
 import {validateSchema} from '~app/server/utils';
 
-import {queue} from '..';
 import {schema} from './_schema';
 
 export const meetingsByLocation = new Router();
@@ -17,7 +16,7 @@ meetingsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.meetingsByLocationQuery>(ctx, schema, query);
 
   try {
-    await queue.add(() => pg.transaction(async trx => {
+    await pg.transaction(async trx => {
       const cityRel = await pg('cities')
         .transacting(trx)
         .first()
@@ -33,7 +32,7 @@ meetingsByLocation.get(route, async (ctx: Koa.ParameterizedContext) => {
         .limit(100);
 
       ctx.body = meetings;
-    }));
+    });
   } catch (err) {
     return ctx.throw(500, err);
   }
