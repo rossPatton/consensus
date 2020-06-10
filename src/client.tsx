@@ -15,13 +15,17 @@ import { ScrollToTop } from './components';
 import { AppShell } from './containers';
 import { initStore } from './redux/store';
 
-const font = new FontFaceObserver('Founders', {weight: 400});
-font.load()
-  .then(() => {
-    document.documentElement.className += ' wf-loaded';
-    return null;
-  })
-  .catch(loglevel.error);
+if (sessionStorage.fontsLoaded) {
+  document.documentElement.className += ' wf-loaded';
+} else {
+  const font = new FontFaceObserver('Founders', {weight: 400});
+  font.load()
+    .then(() => {
+      document.documentElement.className += ' wf-loaded';
+      return null;
+    })
+    .catch(loglevel.error);
+}
 
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__;
