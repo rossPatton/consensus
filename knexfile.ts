@@ -8,11 +8,11 @@ const migrations = path.join(CWD, 'src', 'server', 'db', 'migrations');
 const seeds = path.join(CWD, 'src', 'server', 'db', 'seeds');
 
 // values below are determined by docker config
-const DB = process.env.DB_LOCAL as string;
-const DB_HOST = process.env.DB_LOCAL_HOST as string;
-const DB_USER = process.env.DB_LOCAL_USER as string;
-const DB_PORT = process.env.DB_LOCAL_PORT as string;
-const DB_PW = process.env.DB_LOCAL_PW as string;
+const DB = process.env.DB as string;
+const DB_HOST = process.env.DB_HOST as string;
+const DB_USER = process.env.DB_USER as string;
+const DB_PORT = process.env.DB_PORT as string;
+const DB_PW = process.env.DB_PW as string;
 
 const sharedConfig = {
   client: 'pg',
