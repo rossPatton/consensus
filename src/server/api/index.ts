@@ -24,6 +24,7 @@ import { roles } from './roles';
 import { rsvp } from './rsvp';
 import { rsvps } from './rsvps';
 import { search } from './search';
+import { sendEmail } from './sendEmail';
 import { spaces } from './spaces';
 import { tokenSend, tokenValidate } from './token';
 import { user } from './user';
@@ -53,6 +54,7 @@ export const setupApi = (app: Koa) => {
   app.use(rsvp.routes());
   app.use(rsvps.routes());
   app.use(search.routes());
+  app.use(sendEmail.routes());
   app.use(spaces.routes());
   app.use(user.routes());
   app.use(usersByGroupId.routes());
@@ -85,6 +87,7 @@ export const setupApi = (app: Koa) => {
   app.use(rsvp.allowedMethods(opts));
   app.use(rsvps.allowedMethods(opts));
   app.use(search.allowedMethods(opts));
+  app.use(sendEmail.allowedMethods(opts));
   app.use(spaces.allowedMethods(opts));
   app.use(user.allowedMethods(opts));
   app.use(usersByGroupId.allowedMethods(opts));

@@ -1,4 +1,5 @@
 {
+  "background_color": "#fff",
   "display": "standalone",
   "gcm_sender_id": "482941778795",
   "icons": [{

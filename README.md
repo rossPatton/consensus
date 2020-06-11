@@ -28,4 +28,7 @@ Steps for deployment:
  - `sudo docker-compose -f docker-compose.yml up --remove-orphans --force-recreate -d`: Restart docker container with latest docker image
 
 Steps for setting up new DO droplet:
- -
+ - Setup UFW to limit ssh to verified accounts only. See https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04 or https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04
+ - Setup nginx as a reverse proxy. See https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04#step-5-%E2%80%93-setting-up-server-blocks-(recommended) as a starting point. Our nginx prof config is located in nginx/prod.conf
+ - Setup certbot if using with a domain name/floating ip. When the floating ip is pointed at the server, we want it to use the domain name, not the DO ip.
+

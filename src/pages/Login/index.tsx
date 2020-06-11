@@ -12,7 +12,7 @@ import {canonical, description, keywords, title} from './_constants';
 import {tContainerProps, tKeyUnion, tState} from './_types';
 import {LoginComponent} from './Component';
 
-export class LoginContainer extends PureComponent<tContainerProps, tState> {
+class LoginContainer extends PureComponent<tContainerProps, tState> {
   state = {
     email: '',
     emailSent: false,

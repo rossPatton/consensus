@@ -7,6 +7,7 @@ export const staticFileMiddleware = async(app: Koa) => {
     brotli: true,
     // defer: true,
     gzip: true,
-    maxAge: 15552000,
+    // bafflingly, this is ms, not seconds
+    maxAge: 3369600000,
   }));
 };

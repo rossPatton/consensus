@@ -22,6 +22,11 @@ const Footer = memo(() => (
           </Link>
         </li>
         <li className="mb-1">
+          <Link to="/contact">
+            Contact
+          </Link>
+        </li>
+        <li className="mb-1">
           <Link to="/terms-and-conditions">
             Terms and Conditions
           </Link>

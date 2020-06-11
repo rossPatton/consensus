@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import React, {memo} from 'react';
 
 import {categoryMap} from '~app/constants';
@@ -12,7 +13,11 @@ const Categories = memo((props: tProps) => {
 
   return (
     <Template>
-      <h1 className="text-center mb-2">
+      <h1
+        className={cx({
+          'mb-2': true,
+          'text-center': renderCategory,
+        })}>
         {renderCategory
           ? `${categoryMap[params.category]} Groups`
           : 'Categories'}
