@@ -326,8 +326,7 @@ small {
   animation-name: fadeInUp;
 }
 
-.mFI:before {
-  @apply bg-gray-2;
+.placeholder:before {
   @apply block;
   content: '';
   padding-top: calc(100% * 4 / 9);

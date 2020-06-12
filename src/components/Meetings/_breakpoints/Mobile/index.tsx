@@ -24,8 +24,8 @@ const MobileMeetings = memo((props: tComponentProps) => (
           {!meeting.isDraft && (
             <Link
               className={cx({
-                'max-w-1/2': !props.isEditable,
-                'max-w-1/3': props.isEditable,
+                'max-w-1/2 min-w-1/2': !props.isEditable,
+                'max-w-1/3 min-w-1/3': props.isEditable,
               })}
               to={meeting.isDraft
                 ? `/draft/${meeting.id}/${meeting.slug}`

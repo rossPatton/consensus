@@ -65,6 +65,10 @@ module.exports = {
       blue: {
         1: '#0b3dff',
       },
+      peach: '#f8d0bd',
+      sky: '#b5c4ce',
+      forest: '#385e34',
+      cherry: '#db500f',
     },
     spacing: {
       '0': '0',

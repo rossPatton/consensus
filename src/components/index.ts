@@ -59,10 +59,6 @@ export const MeetingFeaturedImage = loadable(() =>
   import(/* webpackChunkName: "MeetingFeaturedImage" */'./MeetingFeaturedImage'),
 );
 
-export const PlaceholderImage = loadable(() =>
-  import(/* webpackChunkName: "PlaceholderImage" */'./PlaceholderImage'),
-);
-
 export const PlanMeeting = loadable(() =>
   import(/* webpackChunkName: "PlanMeeting" */'./PlanMeeting'),
 );

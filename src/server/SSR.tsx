@@ -27,7 +27,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
     ? "'self' 127.0.0.1:* 0.0.0.0:* https://consensus.local"
     : "'self'";
   const hcaptcha = 'https://*.hcaptcha.com https://hcaptcha.com';
-  const imgSrc = `${local} ${spacesUrl} https://i.picsum.photos https://picsum.photos data:`;
+  const imgSrc = `${local} ${spacesUrl}`;
 
   // webpack debug mode seems to use eval(?) so disable the CSP in debug mode
   // i think this is mostly fine, considering the CSP runs for every other case

@@ -36,8 +36,8 @@ const DesktopMeetings = memo((props: tComponentProps) => (
             })}>
             <div
               className={cx({
-                'mb-2': true,
-                'd:mb-0 mr-2 bg-gray-2 max-w-1/3': !props.horizontal,
+                'mr-2 max-w-1/3 min-w-1/3': !props.horizontal,
+                'mb-2': props.horizontal,
               })}>
               <Link
                 to={meeting.isDraft
