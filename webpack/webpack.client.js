@@ -44,9 +44,9 @@ module.exports = merge(common, {
 
   plugins: [
     // new CleanWebpackPlugin(),
-    // new BundleAnalyzerPlugin({
-    //   analyzerMode: 'static',
-    // }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+    }),
     // new webpack.HotModuleReplacementPlugin(),
 
     // dashboard to keep us updated on bundle rebuilding times, etc. client only

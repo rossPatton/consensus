@@ -2,8 +2,10 @@ require('dotenv-safe').config();
 require('ts-node/register');
 const fs = require('fs');
 const path = require('path');
-const pg = require('pg');
-pg.defaults.ssl = true;
+
+// uncomment before deploying
+// const pg = require('pg');
+// pg.defaults.ssl = true;
 
 const CWD = process.cwd();
 const migrations = path.join(CWD, 'src', 'server', 'db', 'migrations');

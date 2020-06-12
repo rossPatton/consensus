@@ -11,6 +11,7 @@ module.exports = {
     clear: false,
     fill: false,
     float: false,
+    gap: false,
     gridAutoFlow: false,
     gridColumn: false,
     gridColumnStart: false,
@@ -213,7 +214,7 @@ module.exports = {
       '40': '40',
       '50': '50',
     },
-    gap: theme => theme('spacing'),
+    // gap: theme => theme('spacing'),
     // gridTemplateColumns: {
     //   none: 'none',
     //   '1': 'repeat(1, minmax(0, 1fr))',
