@@ -26,6 +26,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   const local = __DEV__
     ? "'self' 127.0.0.1:* 0.0.0.0:* https://consensus.local"
     : "'self'";
+
   const hcaptcha = 'https://*.hcaptcha.com https://hcaptcha.com';
   const imgSrc = `${local} ${spacesUrl}`;
 
@@ -49,6 +50,9 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
     </Provider>,
   );
 
+  const vendor = `/vendor.bundle.js?v=${__CACHE_BUST__}`;
+  const main = `/main.js?v=${__CACHE_BUST__}`;
+
   const htmlStream = renderToNodeStream(jsx);
   htmlStream.pipe(ctx.res, {end: false});
   htmlStream.on('end', () => {
@@ -59,9 +63,10 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
     '\\u003c',
   )}
     </script>
-      <script defer src="/vendor.bundle.js"></script>
-      <script defer src="/main.js"></script>
+      <script defer src="${vendor}"></script>
+      <script src="${main}"></script>
       </body></html>`);
+
     ctx.res.end();
   });
 };

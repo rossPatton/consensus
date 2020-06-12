@@ -1,11 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const merge = require('webpack-merge');
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const DashboardPlugin = require('webpack-dashboard/plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
+
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const devServer = require('./webpack.devServer');
 const common = require('./webpack.common.js');
@@ -42,15 +43,16 @@ module.exports = merge(common, {
     },
   },
 
+  // new CleanWebpackPlugin(),
+  // new webpack.HotModuleReplacementPlugin(),
+
   plugins: [
-    // new CleanWebpackPlugin(),
+    // dashboard to keep us updated on bundle rebuilding times, etc. client only
+    // new DashboardPlugin({ port: 3002 }),
+
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
     }),
-    // new webpack.HotModuleReplacementPlugin(),
-
-    // dashboard to keep us updated on bundle rebuilding times, etc. client only
-    // new DashboardPlugin({ port: 3002 }),
 
     // copy static content over to dist dir. stuff like favicons, certs, images, etc
     new CopyPlugin([{

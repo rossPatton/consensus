@@ -31,6 +31,20 @@ module.exports = {
     extensions: ['.js', '.ts', '.tsx', '.json', '.css'],
   },
 
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true
+        }
+      },
+    },
+  },
+
   module: {
     rules: [
       {

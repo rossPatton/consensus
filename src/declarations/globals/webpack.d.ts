@@ -8,6 +8,8 @@ declare module '*.svg' {
   export default content;
 }
 
+declare let __CACHE_BUST__: string;
+
 // is on client (web browser)
 declare let __CLIENT__: boolean;
 

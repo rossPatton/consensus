@@ -3,7 +3,6 @@ require('ts-node/register');
 const fs = require('fs');
 const path = require('path');
 
-// uncomment before deploying
 // const pg = require('pg');
 // pg.defaults.ssl = true;
 
@@ -32,29 +31,25 @@ const sharedConfig = {
   seeds: {
     directory: seeds,
   },
-};
-
-const connection = {
-  host: DB_HOST,
-  user: DB_USER,
-  password: DB_PW,
-  port: DB_PORT,
-  database: DB,
+  connection: {
+    host: DB_HOST,
+    user: DB_USER,
+    password: DB_PW,
+    port: DB_PORT, //parseInt(DB_PORT, 10),
+    database: DB,
+    // comment out if using local database
+    ssl: {
+      ca : fs.readFileSync(path.join(CWD, 'certs', 'postgres.crt')),
+      rejectUnauthorized: true,
+    }
+  },
 };
 
 module.exports = {
   development: {
     ...sharedConfig,
-    connection,
   },
   production: {
     ...sharedConfig,
-    connection: {
-      ...connection,
-      ssl: {
-        ca : fs.readFileSync(path.join(CWD, 'certs', 'postgres.crt')),
-        rejectUnauthorized: true,
-      },
-    }
   },
 };

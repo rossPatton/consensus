@@ -16,6 +16,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
   const city = handle ? `/${regionCode}/${handle}` : '';
 
   return (
+    <>
     <header className="flex bg-white shadow fixed t l r z-50">
       <div className="contain m-auto flex items-center relative">
         {isMobile && (
@@ -187,5 +188,7 @@ export const HeaderComponent = memo((props: tComponentProps) => {
           )}
       </div>
     </header>
+    <noscript>Your browser does not support JavaScript!</noscript>
+    </>
   );
 });

@@ -11,11 +11,11 @@ services:
     environment:
       - DEBUG=false
       - NODE_ENV=development
-      - DB=${DB_LOCAL}
-      - DB_HOST=${DB_LOCAL_HOST}
-      - DB_USER=${DB_LOCAL_USER}
-      - DB_PORT=${DB_LOCAL_PORT}
-      - DB_PW=${DB_LOCAL_PW}
+      - DB=${DB_DEV}
+      - DB_HOST=${DB_PUBLIC_HOST}
+      - DB_USER=${DB_DEV_USER}
+      - DB_PORT=${DB_PORT}
+      - DB_PW=${DB_DEV_PW}
       - LOG_LEVEL=${LOG_LEVEL}
       - ENABLE_IPV6=true
       - NETWORK_ACCESS=internal
