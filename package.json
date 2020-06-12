@@ -18,7 +18,8 @@
     "seed": "node -r esm ./node_modules/.bin/knex seed:run",
     "pretest": "npm run lint",
     "dev": "NODE_ENV=development npx webpack --config webpack/; npx concurrently \"webpack --watch --config webpack/\" \"npx pm2-dev pm2.config.js --no-daemon\"",
-    "prod": "NODE_ENV=production npx webpack --config webpack/; npx pm2 startOrReload pm2.config.js --no-daemon",
+    "build": "NODE_ENV=production npx webpack --config webpack/",
+    "prod": "NODE_ENV=production npx pm2 startOrReload pm2.config.js --no-daemon",
     "jest": "NODE_ENV=test jest -u --no-cache --coverage",
     "test": "tsc",
     "webpack": "npx webpack --config webpack/"

@@ -16,7 +16,7 @@ const Categories = memo((props: tProps) => {
       <h1
         className={cx({
           'mb-2': true,
-          'text-center': renderCategory,
+          'text-center': !renderCategory,
         })}>
         {renderCategory
           ? `${categoryMap[params.category]} Groups`

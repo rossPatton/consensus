@@ -2,7 +2,7 @@
 version: '3'
 services:
   prod:
-    image: consensusdocker/qa
+    image: consensusdocker/prod
     container_name: prod_local
     working_dir: /app
     # command here overrides CMD in Dockerfile. but Dockerfile requires CMD to be valid

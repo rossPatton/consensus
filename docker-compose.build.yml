@@ -3,11 +3,10 @@ services:
   prod:
     # comment out when running an image on the host
     build: .
-    # change to prod when ready to actually deploy to prod
-    image: consensusdocker/qa
-    container_name: qa
+    image: consensusdocker/prod
+    container_name: prod
     working_dir: /app
-    command: "npm run prod"
+    command: "npm run build"
     depends_on:
       - redis
     ports:
