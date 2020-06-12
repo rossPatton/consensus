@@ -2,6 +2,8 @@ require('dotenv-safe').config();
 require('ts-node/register');
 const fs = require('fs');
 const path = require('path');
+const pg = require('pg');
+pg.defaults.ssl = true;
 
 const CWD = process.cwd();
 const migrations = path.join(CWD, 'src', 'server', 'db', 'migrations');
@@ -28,29 +30,29 @@ const sharedConfig = {
   seeds: {
     directory: seeds,
   },
-  // setup a local only connection. or at least, have local mirror production more
-  connection: {
-    host: DB_HOST,
-    user: DB_USER,
-    password: DB_PW,
-    port: DB_PORT,
-    database: DB,
-  },
 };
 
-if (process.env.NODE_ENV === 'production') {
-  // @ts-ignore
-  sharedConfig.connection.ssl = {
-    ca : fs.readFileSync(path.join(CWD, 'certs', 'postgres.crt')),
-    rejectUnauthorized: true,
-  };
-}
+const connection = {
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PW,
+  port: DB_PORT,
+  database: DB,
+};
 
 module.exports = {
   development: {
     ...sharedConfig,
+    connection,
   },
   production: {
     ...sharedConfig,
+    connection: {
+      ...connection,
+      ssl: {
+        ca : fs.readFileSync(path.join(CWD, 'certs', 'postgres.crt')),
+        rejectUnauthorized: true,
+      },
+    }
   },
 };
