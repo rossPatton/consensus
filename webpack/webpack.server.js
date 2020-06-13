@@ -2,6 +2,7 @@ const path = require('path');
 const crypto = require('crypto');
 const merge = require('webpack-merge');
 const nodeExternals = require('webpack-node-externals');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
 const env = require('./webpack.env');
@@ -21,6 +22,17 @@ module.exports = merge(common, {
   },
   entry: {
     server: './src/server/index.ts',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          'postcss-loader',
+        ],
+      },
+    ]
   },
   plugins: [
     // server only global variables

@@ -1,8 +1,8 @@
-import React, {memo} from 'react';
 import cx from 'classnames';
+import React, {memo} from 'react';
 
-import {getRandomNum} from '~app/utils';
 import {spacesUrl} from '~app/constants';
+import {getRandomNum} from '~app/utils';
 
 import {tProps} from './_types';
 
@@ -34,8 +34,8 @@ const MeetingFeaturedImage = memo((props: tProps) => {
             })}
           />
         )}
-      </>
-    );
+    </>
+  );
 });
 
 export default MeetingFeaturedImage;

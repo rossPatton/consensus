@@ -2,7 +2,10 @@ import {spacesUrl} from '~app/constants';
 
 // default meta and link tags that then get merged with route specific ones
 export const LINK_TAGS: tLinkProps[] = [
-  { rel: 'manifest', href: '/manifest.json' },
+  {
+    rel: 'manifest',
+    href: '/manifest.json',
+  },
   {
     rel: 'apple-touch-icon',
     href: '/apple-touch-icon.png',
@@ -28,6 +31,11 @@ export const LINK_TAGS: tLinkProps[] = [
   {
     rel: 'preconnect',
     href: 'https://hcaptcha.com',
+  },
+  {
+    rel: 'preload',
+    href: '/style.css',
+    as: 'style',
   },
   {
     crossOrigin: 'anonymous',

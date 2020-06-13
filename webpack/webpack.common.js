@@ -87,13 +87,6 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.css$/,
-        use: [
-          { loader: 'css-loader', options: { importLoaders: 1 } },
-          'postcss-loader',
-        ],
-      },
     ],
   },
 
@@ -110,15 +103,11 @@ module.exports = {
       filename: '[path].gz[query]',
       algorithm: 'gzip',
       test: /\.js$|\.ts$|\.tsx$|\.css$|\.html$|\.png$|\.ico$|\.svg$|\.json$/,
-      // threshold: 5120, //10240,
-      // minRatio: 0.7
     }),
 
     new BrotliPlugin({
       asset: '[path].br[query]',
       test: /\.js$|\.ts$|\.tsx$|\.css$|\.html$|\.png$|\.ico$|\.svg$|\.json$/,
-      // threshold: 5120,
-      // minRatio: 0.7
     }),
 
     // does what the name implies

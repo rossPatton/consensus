@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const merge = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
@@ -19,6 +20,19 @@ module.exports = merge(common, {
     // 'webpack/hot/dev-server',
     './src/client.tsx',
   ],
+
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          'postcss-loader',
+        ],
+      },
+    ]
+  },
 
   output: {
     chunkFilename: '[name].bundle.js',
@@ -45,10 +59,13 @@ module.exports = merge(common, {
 
   // new CleanWebpackPlugin(),
   // new webpack.HotModuleReplacementPlugin(),
+  // dashboard to keep us updated on bundle rebuilding times, etc. client only
+  // new DashboardPlugin({ port: 3002 }),
 
   plugins: [
-    // dashboard to keep us updated on bundle rebuilding times, etc. client only
-    // new DashboardPlugin({ port: 3002 }),
+    new MiniCssExtractPlugin({
+      filename: 'style.css'
+    }),
 
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',

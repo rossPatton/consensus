@@ -6,6 +6,7 @@ import React from 'react';
 import { renderToNodeStream } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 import {spacesUrl} from '~app/constants';
 import { AppShell } from '~app/containers';
@@ -17,10 +18,18 @@ import { initStoreForSSR } from './initStoreForSSR';
 const statsFile = path.resolve('./dist/loadable-stats.json');
 
 export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
+  const cookies = new Cookies(ctx.req.headers.cookie);
   const nonce = app?.context?.state?.nonce || '';
+
   // need to be set for server streaming, if not set, then koa will crap out
   ctx.respond = false;
   ctx.type = 'text/html';
+
+  const useCssLink = cookies.get('cssPreloaded');
+  let css = `<style nonce="${nonce}">${styles}</style>`;
+  if (useCssLink) {
+    css = '<link rel="stylesheet" href="/style.css" />';
+  }
 
   // set stricter whitelist for prod
   const local = __DEV__
@@ -34,7 +43,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   // i think this is mostly fine, considering the CSP runs for every other case
   const CSP = !__DEBUG__ ? `<meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="base-uri 'none'; connect-src ${local}; default-src 'self'; block-all-mixed-content; font-src ${local}; form-action ${local}; frame-src ${hcaptcha}; img-src ${imgSrc}; manifest-src ${local}; object-src 'none'; script-src ${local} ${hcaptcha} 'nonce-${nonce}'; style-src ${hcaptcha} ${local} 'nonce-${nonce}'">` : '';
 
-  ctx.res.write(`<!DOCTYPE html><html lang="en"><head>${CSP}<title>Consensus - when you need to get organized.</title><style nonce="${nonce}">${styles}</style></head><body><div id="appRoot">`);
+  ctx.res.write(`<!DOCTYPE html><html lang="en"><head>${CSP}<title>Consensus - when you need to get organized.</title>${css}</head><body><div id="appRoot">`);
 
   const initRouterContext = {};
   const store = await initStoreForSSR(ctx);
