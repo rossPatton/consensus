@@ -28,7 +28,7 @@ class Description extends PureComponent<
     const descArr = description.split('\n');
 
     return (
-      <>
+      <div className='break-words'>
         {!showAll && (
           <p className="mb-1">
             {descArr?.[0]}
@@ -49,7 +49,7 @@ class Description extends PureComponent<
             {showAll ? 'Show less' : 'Show more'}
           </button>
         )}
-      </>
+      </div>
     );
   }
 }

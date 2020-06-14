@@ -14,17 +14,7 @@ export const getSession = async (
     || passportSession;
 
   const qrcode = ctx.isAuthenticated() ? await qr(ctx) : {};
-
   const type = profile?.sessionType || 'user';
-  if (type === 'user') {
-    profile.bio = profile.bio
-      ? decodeURIComponent(profile.bio)
-      : '';
-  } else if (type === 'group') {
-    profile.description = profile.description
-      ? decodeURIComponent(profile.description)
-      : '';
-  }
 
   // we return things this way to match redux-thunk on the client
   return {

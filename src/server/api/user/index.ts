@@ -59,7 +59,11 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const loggedInAccount = ctx?.state?.user;
   if (!loggedInAccount) return ctx.throw(401, 'Must be logged in');
 
-  const {sessionType, token, ...userQuery} = query;
+  const {sessionType, token, ...updateQuery} = query;
+
+  if (updateQuery.bio) {
+    updateQuery.bio = decodeURIComponent(updateQuery.bio);
+  }
 
   try {
     await pg.transaction(async trx => {
@@ -67,7 +71,7 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
         .transacting(trx)
         .limit(1)
         .where({id: loggedInAccount.id})
-        .update(userQuery)
+        .update(updateQuery)
         .returning('*')
         .then(updatedUser => {
           ctx.login({...updatedUser?.[0], sessionType: 'user'});

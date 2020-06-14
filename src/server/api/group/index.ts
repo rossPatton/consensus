@@ -58,6 +58,10 @@ group.patch(route, async (ctx: Koa.ParameterizedContext) => {
 
   const {sessionType, ...updateQuery} = query;
 
+  if (updateQuery.description) {
+    updateQuery.description = decodeURIComponent(updateQuery.description);
+  }
+
   try {
     await pg.transaction(async trx => pg(table)
       .transacting(trx)
