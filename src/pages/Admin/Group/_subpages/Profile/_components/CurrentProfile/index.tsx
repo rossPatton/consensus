@@ -3,6 +3,7 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {Description} from '~app/components';
+
 import {tComponentProps} from '../../_types';
 
 const CurrentProfile = memo((props: tComponentProps) => (

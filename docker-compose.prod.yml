@@ -6,7 +6,7 @@ services:
     container_name: prod_local
     working_dir: /app
     # command here overrides CMD in Dockerfile. but Dockerfile requires CMD to be valid
-    command: 'npm run prod_local'
+    command: 'npm run prod'
     depends_on:
       - redis
     environment:

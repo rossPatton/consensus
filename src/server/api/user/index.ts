@@ -43,10 +43,10 @@ user.get(route, async (ctx: Koa.ParameterizedContext) => {
 
   await pg.transaction(async trx => {
     const user = await pg('users')
-    .transacting(trx)
-    .limit(1)
-    .where(query)
-    .first();
+      .transacting(trx)
+      .limit(1)
+      .where(query)
+      .first();
 
     ctx.body = user;
   });

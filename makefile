@@ -5,10 +5,12 @@ install:
 
 # runs development mode locally
 dev:
+	npm run build_dev;
 	docker-compose -f docker-compose.dev.yml up --remove-orphans
 
 # runs production mode locally
 prod:
+	npm run build;
 	docker-compose -f docker-compose.prod.yml up --remove-orphans
 
 # build site for prod, and prepares an image for deployment

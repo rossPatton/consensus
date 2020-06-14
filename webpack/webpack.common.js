@@ -5,8 +5,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ForceCaseSensitivityPlugin = require('case-sensitive-paths-webpack-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
-const BrotliPlugin = require('brotli-webpack-plugin');
 const webpack = require('webpack');
 
 const env = require('./webpack.env');
@@ -99,17 +97,6 @@ module.exports = {
   plugins: [
     // needed for server side loadable to work
     new LoadablePlugin(),
-
-    new CompressionPlugin({
-      filename: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: /\.js$|\.ts$|\.tsx$|\.css$|\.html$|\.png$|\.ico$|\.svg$|\.json$/,
-    }),
-
-    new BrotliPlugin({
-      asset: '[path].br[query]',
-      test: /\.js$|\.ts$|\.tsx$|\.css$|\.html$|\.png$|\.ico$|\.svg$|\.json$/,
-    }),
 
     // does what the name implies
     new webpack.optimize.AggressiveMergingPlugin(),

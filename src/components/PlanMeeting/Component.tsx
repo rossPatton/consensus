@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {memo} from 'react';
@@ -27,7 +28,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
         name="planEventForm"
         onSubmit={props.onSubmit}
         legend={props.heading && (
-          <h2 className="text-3 font-bold">{legend}</h2>
+          <h2 className="text-3 mb-1">{legend}</h2>
         )}
         renderFields={() => (
           <>
@@ -69,7 +70,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
               rows={8}
               spellCheck
               className="mb-3 w-full"
-              placeholder="Event Description Here. If meeting is online, past meeting details here as well."
+              placeholder="Event Description Here. If meeting is online, put video conferencing details here as well."
               value={props.description}
               onChange={ev => updateState('description', ev.currentTarget.value)}
             />
@@ -158,19 +159,22 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
           </>
         )}
         renderSubmit={() => (
-          <>
+          <div className="mb-3 d:mb-0 flex items-center">
             {props.meetingThunk.isLoading
               ? 'Saving...'
               : (
-                <div className="mb-3 d:mb-0 flex items-center">
+                <>
                   <button
-                    className="p-2 mr-1 hover:bg-gray-3"
+                    className={cx({
+                      'p-2 mr-1': true,
+                      'bg-green-1 hover:bg-green-2': !disableSubmit,
+                    })}
                     disabled={disableSubmit}
                     onClick={ev => {
                       ev.preventDefault();
                       props.onSubmit();
                     }}>
-                    {(props.isDraft && typeof props.id !== 'string') ? 'Publish' : 'Update'}
+                    {!props.id ? 'Publish' : 'Update'}
                   </button>
                   <button
                     className="p-2 mr-1 hover:bg-gray-3"
@@ -193,9 +197,9 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
                       Preview
                     </Link>
                   )}
-                </div>
+                </>
               )}
-          </>
+          </div>
         )}
       />
     </div>

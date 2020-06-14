@@ -6,6 +6,8 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const {GenerateSW} = require('workbox-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const BrotliPlugin = require('brotli-webpack-plugin');
 const webpack = require('webpack');
 
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -14,6 +16,21 @@ const webpack = require('webpack');
 const devServer = require('./webpack.devServer');
 const common = require('./webpack.common.js');
 const env = require('./webpack.env');
+
+let compressionPlugins = [];
+if (env.NODE_ENV === 'production') {
+  compressionPlugins = [
+    new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.ts$|\.tsx$|\.css$|\.html$|\.png$|\.ico$|\.svg$|\.json$/,
+    }),
+    new BrotliPlugin({
+      asset: '[path].br[query]',
+      test: /\.js$|\.ts$|\.tsx$|\.css$|\.html$|\.png$|\.ico$|\.svg$|\.json$/,
+    })
+  ];
+}
 
 module.exports = merge(common, {
   target: 'web',
@@ -66,13 +83,12 @@ module.exports = merge(common, {
   // new BundleAnalyzerPlugin({
   //   analyzerMode: 'static',
   // }),
+  // new HtmlWebpackPlugin(),
 
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'style.css'
     }),
-
-    // new HtmlWebpackPlugin(),
 
     // copy static content over to dist dir. stuff like favicons, certs, images, etc
     new CopyPlugin([{
@@ -86,6 +102,8 @@ module.exports = merge(common, {
       __CLIENT__: true,
       __SERVER__: false,
     }),
+
+    ...compressionPlugins,
 
     // new GenerateSW({
     //   cleanupOutdatedCaches: true,

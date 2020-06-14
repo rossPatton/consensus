@@ -28,7 +28,7 @@ class Description extends PureComponent<
     const descArr = description.split('\n');
 
     return (
-      <div className='break-words'>
+      <div className="break-words">
         {!showAll && (
           <p className="mb-1">
             {descArr?.[0]}
