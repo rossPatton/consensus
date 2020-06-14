@@ -1,4 +1,3 @@
-export {getCitiesQuery} from './getCities';
 export {getMeetingByQuery} from './getMeetingByQuery';
 export {getRSVPByMeetingId} from './getRSVPByMeetingId';
 export {getRSVPsByUserId} from './getRSVPsByUserId';

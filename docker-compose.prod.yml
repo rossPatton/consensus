@@ -6,16 +6,16 @@ services:
     container_name: prod_local
     working_dir: /app
     # command here overrides CMD in Dockerfile. but Dockerfile requires CMD to be valid
-    command: 'npm run prod'
+    command: 'npm run prod_local'
     depends_on:
       - redis
     environment:
       - DEBUG=false
       - NODE_ENV=production
       - DB=${DB_PROD}
-      - DB_HOST=${DB_POOL_PUBLIC_HOST}
+      - DB_HOST=${DB_PUBLIC_HOST}
       - DB_USER=${DB_PROD_USER}
-      - DB_PORT=${DB_POOL_PORT}
+      - DB_PORT=${DB_PORT}
       - DB_PW=${DB_PROD_PW}
       - LOG_LEVEL=${LOG_LEVEL}
       - ENABLE_IPV6=true

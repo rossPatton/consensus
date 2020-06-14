@@ -34,6 +34,7 @@ accountDownload.get(route, async (ctx: Koa.ParameterizedContext) => {
 
         body.roles = roles;
         body.rsvps = rsvps;
+        return null;
       });
     } catch (err) {
       return ctx.throw(500, err);

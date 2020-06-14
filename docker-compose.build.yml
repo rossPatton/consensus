@@ -15,9 +15,9 @@ services:
       - DEBUG=true
       - NODE_ENV=production
       - DB=${DB_PROD}
-      - DB_HOST=${DB_POOL_PRIVATE_HOST}
+      - DB_HOST=${DB_PRIVATE_HOST}
       - DB_USER=${DB_PROD_USER}
-      - DB_PORT=${DB_POOL_PORT}
+      - DB_PORT=${DB_PORT}
       - DB_PW=${DB_PROD_PW}
       - LOG_LEVEL=${LOG_LEVEL}
       - NO_INDEX=true

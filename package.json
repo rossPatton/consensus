@@ -18,8 +18,10 @@
     "seed": "node -r esm ./node_modules/.bin/knex seed:run",
     "pretest": "npm run lint",
     "dev": "NODE_ENV=development npx webpack --config webpack/; npx concurrently \"webpack --watch --config webpack/\" \"npx pm2-dev pm2.config.js --no-daemon\"",
+    "build_dev": "NODE_ENV=development npx webpack --config webpack/",
     "build": "NODE_ENV=production npx webpack --config webpack/",
     "prod": "NODE_ENV=production npx pm2 startOrReload pm2.config.js --no-daemon",
+    "prod_local": "NODE_ENV=production npx webpack --config webpack/; NODE_ENV=production npx pm2 startOrReload pm2.config.js --no-daemon",
     "jest": "NODE_ENV=test jest -u --no-cache --coverage",
     "test": "tsc",
     "webpack": "npx webpack --config webpack/"
@@ -69,7 +71,6 @@
     "loglevel": "^1.6.6",
     "mailgun-js": "^0.22.0",
     "maxmind": "^4.1.1",
-    "memoizee": "^0.4.14",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "pg": "^8.2.1",
@@ -82,7 +83,6 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet-async": "^1.0.4",
-    "react-i18next": "^10.13.2",
     "react-redux": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "redis": "^2.8.0",
@@ -97,7 +97,8 @@
     "universal-cookie": "^4.0.3",
     "uuid": "^3.3.3",
     "webpack": "^4.41.3",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "workbox-webpack-plugin": "^5.1.3"
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",
@@ -153,7 +154,6 @@
     "@types/loadable__server": "^5.9.1",
     "@types/lodash": "^4.14.149",
     "@types/loglevel": "^1.6.3",
-    "@types/memoizee": "^0.4.4",
     "@types/mkdirp": "^0.5.2",
     "@types/node-fetch": "^2.5.4",
     "@types/nodemailer": "^6.4.0",

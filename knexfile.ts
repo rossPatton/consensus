@@ -2,9 +2,9 @@ require('dotenv-safe').config();
 require('ts-node/register');
 const fs = require('fs');
 const path = require('path');
+const pg = require('pg');
 
-// const pg = require('pg');
-// pg.defaults.ssl = true;
+pg.defaults.ssl = true;
 
 const CWD = process.cwd();
 const migrations = path.join(CWD, 'src', 'server', 'db', 'migrations');
@@ -25,17 +25,18 @@ const sharedConfig = {
     directory: migrations,
   },
   pool: {
-    min: 1,
+    min: 0,
     max: 47,
   },
   seeds: {
     directory: seeds,
   },
   connection: {
+    connectTimeout: 10000,
     host: DB_HOST,
     user: DB_USER,
     password: DB_PW,
-    port: DB_PORT, //parseInt(DB_PORT, 10),
+    port: DB_PORT,
     database: DB,
     // comment out if using local database
     ssl: {

@@ -51,14 +51,19 @@ class CategoryContainer extends PureComponent<tContainerProps> {
                     items={searchProps.items}
                     render={(groupsToRender: ts.group[]) => (
                       <>
+                        {console.log('groupsToRender => ', groupsToRender)}
                         <FilterPanel
                           onSearchChange={searchProps.onSearchChange}
                           placeholder="Filter groups by name"
                         />
-                        <Groups
-                          groups={groupsToRender}
-                          showLocation
-                        />
+                        {groupsToRender.length > 0
+                          ? (
+                            <Groups
+                              groups={groupsToRender}
+                              showLocation
+                            />
+                          )
+                          : 'No groups found for this category'}
                       </>
                     )}
                   />

@@ -14,9 +14,10 @@ cities.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: {region: string}} = ctx;
   await validateSchema<{region: string}>(ctx, schema, query);
   try {
-    ctx.body = await pg('cities')
+    const cities = await pg('cities')
       .where({region: query.region})
       .orderBy('name', 'asc');
+    ctx.body = cities;
   } catch (err) {
     return ctx.throw(500, err);
   }

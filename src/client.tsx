@@ -21,6 +21,10 @@ if (!cookies.get('cssPreloaded')) {
   cookies.set('cssPreloaded', true);
 }
 
+if (!cookies.get('fontsPreloaded')) {
+  cookies.set('fontsPreloaded', true);
+}
+
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__;
 
@@ -42,10 +46,8 @@ const App = (
 );
 
 // mount app on the client
-// loadableReady(() => {
 if (rootNode.hasChildNodes()) {
   ReactDOM.hydrate(App, rootNode);
 } else {
   ReactDOM.render(App, rootNode);
 }
-// });

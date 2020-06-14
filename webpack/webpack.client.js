@@ -4,6 +4,7 @@ const merge = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+// const {GenerateSW} = require('workbox-webpack-plugin');
 const webpack = require('webpack');
 
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -61,14 +62,13 @@ module.exports = merge(common, {
   // new webpack.HotModuleReplacementPlugin(),
   // dashboard to keep us updated on bundle rebuilding times, etc. client only
   // new DashboardPlugin({ port: 3002 }),
+  // new BundleAnalyzerPlugin({
+  //   analyzerMode: 'static',
+  // }),
 
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'style.css'
-    }),
-
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
     }),
 
     // copy static content over to dist dir. stuff like favicons, certs, images, etc
@@ -83,5 +83,14 @@ module.exports = merge(common, {
       __CLIENT__: true,
       __SERVER__: false,
     }),
+
+    // new GenerateSW({
+    //   cleanupOutdatedCaches: true,
+    //   clientsClaim: true,
+    //   // globDirectory: './dist/',
+    //   // globPatterns: ['**/*.{br}'],
+    //   skipWaiting: true,
+    //   swDest: 'sw.js',
+    // }),
   ],
 });

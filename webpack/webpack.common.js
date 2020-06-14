@@ -8,6 +8,7 @@ const ForceCaseSensitivityPlugin = require('case-sensitive-paths-webpack-plugin'
 const CompressionPlugin = require('compression-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
 const webpack = require('webpack');
+
 const env = require('./webpack.env');
 
 const srcPath = (subdir) => path.join(env.CWD, 'src', subdir);

@@ -188,7 +188,6 @@ export const HeaderComponent = memo((props: tComponentProps) => {
           )}
         </div>
       </header>
-      <noscript>Your browser does not support JavaScript!</noscript>
     </>
   );
 });

@@ -32,18 +32,6 @@ export const LINK_TAGS: tLinkProps[] = [
     rel: 'preconnect',
     href: 'https://hcaptcha.com',
   },
-  {
-    rel: 'preload',
-    href: '/style.css',
-    as: 'style',
-  },
-  {
-    crossOrigin: 'anonymous',
-    rel: 'preload',
-    href: '/fonts/founders-grotesk-text-web-medium-subset.woff2',
-    as: 'font',
-    type: 'font/woff2',
-  },
 ];
 
 export const META_TAGS: tMetaProps[] = [
