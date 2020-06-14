@@ -40,6 +40,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
         await patchUserDispatch({
           ...this.state,
           avatar: this.props.avatar,
+          bio: encodeURIComponent(this.state.bio),
           id: profile.id,
         });
       } catch (err) {

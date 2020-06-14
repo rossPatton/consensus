@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
+import {Description} from '~app/components';
 import {tComponentProps} from '../../_types';
 
 const CurrentProfile = memo((props: tComponentProps) => (
@@ -74,16 +75,9 @@ const CurrentProfile = memo((props: tComponentProps) => (
     )}
     {props.description && (
       <div className="mb-3">
-        <h3 className="text-base mb-1 leading-none">
-          <span className="font-semibold">Description:</span>
-        </h3>
-        {props.description.split('\n').map((p, i) => (
-          <p
-            key={i}
-            className="mb-1">
-            {p}
-          </p>
-        ))}
+        <Description
+          description={props.description}
+        />
       </div>
     )}
     <Link

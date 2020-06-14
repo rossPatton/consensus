@@ -9,7 +9,7 @@ export const UserComponent = memo(({groups, user}: tComponentProps) => (
     <h1 className="mb-2 capitalize">
       @{user.username}
     </h1>
-    {user.name && (
+    {(user.name && user.name !== 'null') && (
       <div className="mb-2">
         <h2 className="text-3 mb-1">
           Real Name
@@ -25,7 +25,7 @@ export const UserComponent = memo(({groups, user}: tComponentProps) => (
         <p>{user.website}</p>
       </div>
     )}
-    {user.bio && (
+    {(user.bio && user.bio !== 'null') && (
       <div className="w-full mb-2">
         <h3>Bio</h3>
         {user.bio && user.bio.split('\n').map((p, i) => (

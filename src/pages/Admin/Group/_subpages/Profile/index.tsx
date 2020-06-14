@@ -38,6 +38,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       await this.props.patchGroupDispatch({
         ...this.state,
         avatar: this.props.avatar,
+        description: encodeURIComponent(this.state.description),
       });
     } catch (error) {
       return this.setState({

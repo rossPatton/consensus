@@ -42,11 +42,13 @@ user.get(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<ts.userQuery>(ctx, getSchema, query);
 
   await pg.transaction(async trx => {
-    ctx.body = pg('users')
-      .transacting(trx)
-      .limit(1)
-      .where(query)
-      .first();
+    const user = await pg('users')
+    .transacting(trx)
+    .limit(1)
+    .where(query)
+    .first();
+
+    ctx.body = user;
   });
 });
 
