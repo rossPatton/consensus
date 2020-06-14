@@ -11,6 +11,8 @@ import {CitySearchComponent} from './Component';
 // use within an existing form, tie to it's updateState method
 class CitySearchContainer extends PureComponent<tContainerProps> {
   static defaultProps = {
+    city: 'New York',
+    region: 'New York',
     showRemoveButton: true,
   };
 

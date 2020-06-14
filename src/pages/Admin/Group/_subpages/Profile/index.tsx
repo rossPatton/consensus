@@ -19,6 +19,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       country,
       countryId,
       created_at,
+      deletionDeadline,
       name,
       region,
       regionId,

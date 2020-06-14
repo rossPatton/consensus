@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
@@ -68,8 +69,8 @@ const EditProfile = memo((props: tComponentProps) => (
               rows={6}
               onChange={ev => props.updateState('bio', ev.currentTarget.value)}
               className="p-2 w-full"
-              placeholder={props.bio}
-              value={props.bio}
+              placeholder=""
+              value={props.bio || ''}
               name="bio"
             />
           </label>
@@ -97,6 +98,7 @@ const EditProfile = memo((props: tComponentProps) => (
               onChange={ev => props.updateState('website', ev.currentTarget.value)}
               className="p-2 w-full"
               maxLength={4096}
+              pattern="https://.*"
               placeholder="Link your website here"
               value={props.website}
               name="website"
@@ -111,6 +113,7 @@ const EditProfile = memo((props: tComponentProps) => (
               className="p-2 w-full"
               name="facebook"
               maxLength={4096}
+              pattern="https://facebook.com/.*"
               onChange={ev => props.updateState('facebook', ev.currentTarget.value)}
               placeholder="Link your facebook profile here"
               value={props.facebook}
@@ -125,6 +128,7 @@ const EditProfile = memo((props: tComponentProps) => (
               className="p-2 w-full"
               name="twitter"
               maxLength={4096}
+              pattern="https://twitter.com/.*"
               onChange={ev => props.updateState('twitter', ev.currentTarget.value)}
               placeholder="Link your twitter here"
               value={props.twitter}
@@ -187,12 +191,15 @@ const EditProfile = memo((props: tComponentProps) => (
       <div className="flex flex-col d:flex-row items-center">
         <button
           disabled={!formProps.hasMounted}
-          className="p-2 pl-3 pr-3 mr-1 hover:bg-gray-3">
+          className={cx({
+            'p-2 pl-3 pr-3 mb-1 d:mb-0 d:mr-1 w-full d:w-auto': true,
+            'bg-green-1 hover:bg-green-2': formProps.hasMounted,
+          })}>
           Save Changes
         </button>
         <Link
           to="/admin/profile"
-          className="btn p-2 pl-3 pr-3 hover:bg-gray-3">
+          className="btn p-2 pl-3 pr-3 hover:bg-gray-3 transition w-full d:w-auto">
           Go back
         </Link>
       </div>

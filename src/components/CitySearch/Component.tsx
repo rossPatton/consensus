@@ -33,23 +33,33 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
     }
   };
 
+  const renderRegionSelect = showRegionField || !props.region;
+
   return (
     <>
       <div
         className={cx({
-          hidden: !showRegionField,
+          hidden: !renderRegionSelect,
         })}>
         <h2 className="text-base mb-1">
-          Pick a different state
+          Where are you located?
         </h2>
+        {props.label && (
+          <p className="mb-1">
+            {props.label}
+          </p>
+        )}
         <label htmlFor="stateSelect">
           <select
             name="type"
             id="stateSelect"
             className="mb-3 w-full"
-            value={props.region}
+            value={props.region || ''}
             onBlur={onRegionChange}
             onChange={onRegionChange}>
+            <option value="">
+              State Select
+            </option>
             {Object.keys(stateNameToCodeMap).map(state => (
               <option key={state} value={state}>
                 {state}
@@ -58,51 +68,48 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
           </select>
         </label>
       </div>
-      <h2 className="text-base">
-        City in <span className="inline-block mr-2">
-          {props.region}
-        </span>
-        {!showRegionField && (
-          <button
-            type="button"
-            className="p-1 mr-1"
-            onClick={() => toggleRegionField(!showRegionField)}>
-            Not the right state?
-          </button>
-        )}
-        {props.showRemoveButton && (
-          <button
-            type="button"
-            className="p-1"
-            onClick={() => {
-              return props.updateState({
-                city: '',
-                cityId: 0,
-                region: '',
-                regionId: 0,
-              });
-            }}>
-            Reset City Search
-          </button>
-        )}
-      </h2>
-      {props.label && (
-        <p className="mb-1">
-          {props.label}
-        </p>
+      {props.region && (
+        <h2 className="text-base mb-2">
+          City in <span className="inline-block mr-2">
+            {props.region}
+          </span>
+          {!renderRegionSelect && (
+            <button
+              type="button"
+              className="p-1 mr-1"
+              onClick={() => toggleRegionField(!showRegionField)}>
+              Not the right state?
+            </button>
+          )}
+          {props.showRemoveButton && (
+            <button
+              type="button"
+              className="p-1"
+              onClick={() => {
+                return props.updateState({
+                  city: '',
+                  cityId: 0,
+                  region: '',
+                  regionId: 0,
+                });
+              }}>
+              Reset City Search
+            </button>
+          )}
+        </h2>
       )}
       <div
         className={cx({
-          hidden: showRegionField,
+          hidden: renderRegionSelect,
           'mb-3': true,
         })}>
-        {props.cityId === 0 && (
+        {(!props.cityId || props.cityId === 0) && (
           <label htmlFor="citySelect">
             <select
               name="type"
               id="citySelect"
               className="w-full"
-              value={props.city}
+              value={props.city || ''}
               onBlur={onCityChange}
               onChange={onCityChange}>
               {props.cities.map((city: ts.city) => (

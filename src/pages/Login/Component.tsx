@@ -31,12 +31,12 @@ export const LoginComponent = memo((props: tComponentProps) => (
             name="token" // for non-js submit and passportjs
             id="tokenInput"
             placeholder="Enter the token you received via email"
-            className="p-2 w-full mb-2"
+            className="p-2 w-full mb-1/2"
             value={props.token}
             onChange={ev => props.updateState('token', ev)}
           />
         </label>
-        <p className="font-sm flex items-baseline">
+        <p className="font-sm flex items-baseline mb-2">
           Didn&apos;t get a code? Click <button className="border-0 ml-1/2 mr-1/2 p-0 underline" type="button" onClick={() => props.sendToken(props.email)}>here</button> to send again.
         </p>
       </>

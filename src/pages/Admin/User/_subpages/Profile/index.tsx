@@ -23,6 +23,8 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
       this.state = {
         ...initialState,
         ...user,
+        bio: user.bio === 'null' ? '' : user.bio,
+        name: user.name === 'null' ? '' : user.name,
       };
     } else {
       this.state = initialState;

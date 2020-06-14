@@ -68,7 +68,7 @@ user.patch(route, async (ctx: Koa.ParameterizedContext) => {
         .update(userQuery)
         .returning('*')
         .then(updatedUser => {
-          ctx.login(updatedUser?.[0]);
+          ctx.login({...updatedUser?.[0], sessionType: 'user'});
           ctx.body = updatedUser?.[0];
           return null;
         })

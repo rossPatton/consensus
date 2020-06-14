@@ -56,15 +56,17 @@ group.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const loggedInAccount = ctx?.state?.user;
   if (!loggedInAccount) return ctx.throw(401, 'Must be logged in');
 
+  const {sessionType, ...updateQuery} = query;
+
   try {
     await pg.transaction(async trx => pg(table)
       .transacting(trx)
       .limit(1)
       .where({id: loggedInAccount.id})
-      .update(query)
+      .update(updateQuery)
       .returning('*')
       .then((updatedGroup: ts.group[]) => {
-        ctx.login(updatedGroup?.[0]);
+        ctx.login({...updatedGroup?.[0], sessionType: 'group'});
         ctx.body = updatedGroup?.[0];
         return null;
       })
