@@ -13,6 +13,7 @@ prod:
 
 # build site for prod, and prepares an image for deployment
 build:
+	npm run build;
 	docker-compose -f docker-compose.build.yml build --no-cache --parallel
 
 # setup external nginx network

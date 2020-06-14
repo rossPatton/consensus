@@ -56,7 +56,7 @@ export const META_TAGS: tMetaProps[] = [
     name: 'theme-color',
     content: '#fff',
   },
-  { name: 'application-name', content: 'Consensus.com' },
+  { name: 'application-name', content: 'consens.us.org' },
   // { name: 'msapplication-square70x70logo', content: 'small.jpg' },
   // { name: 'msapplication-square150x150logo', content: 'medium.jpg' },
   // { name: 'msapplication-square310x150logo', content: 'wide.jpg' },
@@ -69,34 +69,10 @@ export const META_TAGS: tMetaProps[] = [
   },
   {
     property: 'og:site_name',
-    content: 'Consensus',
+    content: 'Consens.us',
   },
-  // {
-  //   property: 'og:image',
-  //   content: '',
-  // },
-  // {
-  //   property: 'og:image:width',
-  //   content: '1200',
-  // },
-  // {
-  //   property: 'og:image:height',
-  //   content: '1200',
-  // },
   {
     property: 'og:type',
     content: 'website',
   },
-  // {
-  //   property: 'twitter:card',
-  //   content: 'summary',
-  // },
-  // {
-  //   property: 'twitter:site',
-  //   content: '@iodine',
-  // },
-  // {
-  //   property: 'twitter:creator',
-  //   content: '@consensus',
-  // },
 ];

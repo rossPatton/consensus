@@ -26,7 +26,7 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
       });
     } else if (geoThunk.fetched) {
       return this.props.getMeetingsByLocationDispatch({
-        city: geoThunk.data.city,
+        name: geoThunk.data.city,
         regionCode: geoThunk.data.regionCode,
       });
     }

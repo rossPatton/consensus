@@ -20,7 +20,7 @@ services:
       - LOG_LEVEL=${LOG_LEVEL}
       - ENABLE_IPV6=true
       - NETWORK_ACCESS=internal
-      - NO_INDEX=true
+      - NO_INDEX=false
       - PEPPER=${PEPPER}
       - VIRTUAL_HOST=consensus.local
       - VIRTUAL_PORT=3001

@@ -14,7 +14,7 @@ const {
   MAIL_SANDBOX,
   MAIL_URL,
   NODE_ENV = 'production',
-  NO_INDEX = 'true',
+  NO_INDEX = 'false',
   SPACES_KEY,
   SPACES_SECRET,
 } = process.env;

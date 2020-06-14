@@ -4,8 +4,6 @@ const fs = require('fs');
 const path = require('path');
 const pg = require('pg');
 
-pg.defaults.ssl = true;
-
 const CWD = process.cwd();
 const migrations = path.join(CWD, 'src', 'server', 'db', 'migrations');
 const seeds = path.join(CWD, 'src', 'server', 'db', 'seeds');
@@ -38,13 +36,17 @@ const sharedConfig = {
     password: DB_PW,
     port: DB_PORT,
     database: DB,
-    // comment out if using local database
-    ssl: {
-      ca : fs.readFileSync(path.join(CWD, 'certs', 'postgres.crt')),
-      rejectUnauthorized: true,
-    }
   },
 };
+
+if (process.env.NODE_ENV === 'production') {
+  pg.defaults.ssl = true;
+  // @ts-ignore
+  sharedConfig.connection.ssl = {
+    ca : fs.readFileSync(path.join(CWD, 'certs', 'postgres.crt')),
+    rejectUnauthorized: true,
+  };
+}
 
 module.exports = {
   development: {
