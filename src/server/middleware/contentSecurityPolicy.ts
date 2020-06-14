@@ -16,6 +16,7 @@ export const contentSecurityPolicyMiddleware = async (app: Koa) => {
         reportUri: '/report-violation',
         sandbox: [
           'allow-forms',
+          'allow-popups', // external links
           'allow-same-origin',
           'allow-scripts',
         ],
