@@ -23,9 +23,9 @@ country.get(route, async (ctx: Koa.ParameterizedContext) => {
         .first();
 
       const regions = await pg('regions')
-          .transacting(trx)
-          .where({countryId: 1})
-          .orderBy('name', 'asc');
+        .transacting(trx)
+        .where({countryId: 1})
+        .orderBy('name', 'asc');
 
       const body = {
         ...country,

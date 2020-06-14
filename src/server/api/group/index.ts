@@ -83,7 +83,11 @@ group.post(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     await pg.transaction(async trx => pg(table)
       .transacting(trx)
-      .insert({avatar: '2', ...query})
+      .insert({
+        avatar: '2',
+        description: '',
+        ...query,
+      })
       .returning(groupKeys)
       .then(newGroup => {
         ctx.body = newGroup?.[0];

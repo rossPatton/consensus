@@ -60,7 +60,7 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
       </div>
       <h2 className="text-base">
         City in <span className="inline-block mr-2">
-          {props.region || props.geo.region}
+          {props.region}
         </span>
         {!showRegionField && (
           <button

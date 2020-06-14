@@ -7,17 +7,9 @@ export const schema = Joi.object({
   id: Joi.number().integer(),
 });
 
-export const patchSchema = groupSchema;
-
-export const postSchema = schema.keys({
-  category:
-    Joi.string().allow('Political', 'Cooperative', 'Community', 'Union').required(),
-  city: Joi.string().required(),
-  cityId: Joi.number().integer().required(),
-  email: Joi.string().email().required(),
-  handle: Joi.string().regex(/[a-z0-9-]/).required(),
-  name: Joi.string().required(),
-  region: Joi.string().required(),
-  regionId: Joi.number().integer().required(),
-  type: Joi.string().allow('public', 'private', 'hidden').required(),
+export const patchSchema = groupSchema.keys({
+  memberName: Joi.string(),
+  modName: Joi.string(),
 });
+
+export const postSchema = groupSchema;

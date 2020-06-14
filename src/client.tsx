@@ -7,6 +7,7 @@ import '~app/css/styles.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import loglevel from 'loglevel';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
@@ -18,11 +19,11 @@ import { initStore } from './redux/store';
 const cookies = new Cookies();
 
 if (!cookies.get('cssPreloaded')) {
-  cookies.set('cssPreloaded', true);
+  cookies.set('cssPreloaded', true, {sameSite: true, secure: true});
 }
 
 if (!cookies.get('fontsPreloaded')) {
-  cookies.set('fontsPreloaded', true);
+  cookies.set('fontsPreloaded', true, {sameSite: true, secure: true});
 }
 
 // Grab the state from a global variable injected into the server-generated HTML
@@ -51,3 +52,15 @@ if (rootNode.hasChildNodes()) {
 } else {
   ReactDOM.render(App, rootNode);
 }
+
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', () => {
+//     navigator.serviceWorker.register('/sw.js')
+//     .then(registration => {
+//       if (__DEV__) loglevel.log('SW registered: ', registration);
+//     })
+//     .catch(registrationError => {
+//       if (__DEV__) loglevel.error('SW registration failed: ', registrationError);
+//     });
+//   });
+// }

@@ -15,6 +15,5 @@ export const initStoreForSSR = async (ctx: Koa.ParameterizedContext) => {
   }
 
   // generate initial state for Redux store, with defaults + session if applicable
-  const storeStart = initStore(store);
-  return storeStart;
+  return initStore(store);
 };

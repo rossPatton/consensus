@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
@@ -15,12 +16,16 @@ class CitySearchContainer extends PureComponent<tContainerProps> {
 
   constructor(props: tContainerProps) {
     super(props);
-    let {region} = props.session?.profile;
+    let region = _.get(props, 'session.profile.region', null);
+    /* eslint-disable */
     if (typeof region !== 'string' || region === '') {
       region = props.geo.region;
+    } else if (typeof region !== 'string' || region === '') {
+      region = 'New York';
     }
+    /* eslint-enabled */
 
-    if (region && !props.citiesThunk.fetched) {
+    if (region) {
       props.getCitiesDispatch({ region });
     }
   }

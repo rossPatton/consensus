@@ -36,10 +36,10 @@ export const userSchema = baseAccountSchema.keys({
 
 export const groupSchema = baseAccountSchema.keys({
   category: Joi.string().allow('Political', 'Cooperative', 'Community', 'Union'),
-  description: Joi.string(),
+  description: Joi.string().allow('').optional(),
   deletionDeadline: Joi.string().isoDate().allow(null).allow('').optional(),
   handle: Joi.string(),
-  memberName: Joi.string(),
-  modName: Joi.string(),
+  memberName: Joi.string().allow('').optional(),
+  modName: Joi.string().allow('').optional(),
   type: Joi.string().allow('public', 'private', 'hidden'),
 });

@@ -69,22 +69,10 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   const stringifiedState = JSON.stringify(store.getState())
     .replace(/</g, '\\u003c');
 
-  // if ('serviceWorker' in navigator) {
-  //   window.addEventListener('load', () => {
-  //     navigator.serviceWorker.register('/sw.js')
-  //     .then(registration => {
-  //       ${__DEV__ ? "console.log('SW registered: ', registration)" : ''};
-  //     })
-  //     .catch(registrationError => {
-  //       ${__DEV__ ? "console.log('SW registration failed: ', registrationError)" : ''}
-  //     });
-  //   });
-  // }
-
   const htmlStream = renderToNodeStream(jsx);
   htmlStream.pipe(ctx.res, {end: false});
   htmlStream.on('end', () => {
-    ctx.res.write(`</div><script nonce="${nonce}">window.__PRELOADED_STATE__ = ${stringifiedState}</script><script defer src="${vendor}"></script><script src="${main}"></script><script nonce="${nonce}"></script></body></html>`);
+    ctx.res.write(`</div><script nonce="${nonce}">window.__PRELOADED_STATE__ = ${stringifiedState}</script><script defer src="${vendor}"></script><script src="${main}"></script></body></html>`);
 
     ctx.res.end();
   });

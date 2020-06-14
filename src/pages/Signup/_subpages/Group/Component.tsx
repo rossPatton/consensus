@@ -34,12 +34,12 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
             name="token" // for non-js submit and passportjs
             id="tokenInput"
             placeholder="Enter the token you received via email"
-            className="p-2 w-full mb-2"
+            className="p-2 w-full mb-1/2"
             value={props.token}
             onChange={ev => props.updateState('token', ev.currentTarget.value)}
           />
         </label>
-        <p className="font-sm flex items-baseline">
+        <p className="font-sm flex items-baseline mb-2">
           Didn&apos;t get a code? Click <button className="border-0 ml-1/2 mr-1/2 p-0 underline" type="button" onClick={() => props.sendToken(props.email)}>here</button> to send again.
         </p>
         <h2 className="font-semibold text-base">
@@ -78,8 +78,8 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
             defaultValue={props.category}
             onBlur={ev => props.updateState('category', ev.currentTarget.value)}
             onChange={ev => props.updateState('category', ev.currentTarget.value)}>
-            {categories.map(({display}) => (
-              <option key={display} value={display}>
+            {categories.map(({display, slug}) => (
+              <option key={display} value={_.capitalize(slug)}>
                 {display}
               </option>
             ))}
@@ -152,22 +152,25 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
         </div>
       </>
     )}
-    renderSubmit={formProps => (
-      <>
-        <button
-          disabled={!formProps.hasMounted || !props.token || props.disabled}
-          className={cx({
-            'p-2 pl-3 pr-3 mr-1': true,
-            'bg-green-1 hover:bg-green-2': !formProps.hasMounted || !props.token,
-          })}>
-          Create Group!
-        </button>
-        <Link
-          to="/signup"
-          className="btn hover:bg-gray-3 p-2 pl-3 pr-3">
-          Or go back
-        </Link>
-      </>
-    )}
+    renderSubmit={formProps => {
+      const disabled = !formProps.hasMounted || !props.token || props.disabled;
+      return (
+        <>
+          <button
+            disabled={disabled}
+            className={cx({
+              'p-2 pl-3 pr-3 mr-1': true,
+              'bg-green-1 hover:bg-green-2': !disabled,
+            })}>
+            Create Group!
+          </button>
+          <Link
+            to="/signup"
+            className="btn hover:bg-gray-3 p-2 pl-3 pr-3">
+            Or go back
+          </Link>
+        </>
+      );
+    }}
   />
 ));

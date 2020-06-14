@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import _ from 'lodash';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
@@ -30,12 +31,12 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
             name="token" // for non-js submit and passportjs
             id="tokenInput"
             placeholder="Enter the token you received via email"
-            className="p-2 w-full mb-2"
+            className="p-2 w-full mb-1/2"
             value={props.token}
             onChange={ev => props.updateState('token', ev)}
           />
         </label>
-        <p className="font-sm flex items-baseline">
+        <p className="font-sm flex items-baseline mb-2">
           Didn&apos;t get a code? Click <button className="border-0 ml-1/2 mr-1/2 p-0 underline" type="button" onClick={() => props.sendToken(props.email)}>here</button> to send again.
         </p>
         <label htmlFor="usernameInput">
@@ -88,11 +89,21 @@ export const UserSignupComponent = memo((props: tComponentProps) => (
         || !props.username;
 
       return (
-        <button
-          disabled={disabled}
-          className="hover:bg-gray-3 p-2 pl-3 pr-3 mr-1">
-          Sign up!
-        </button>
+        <>
+          <button
+            disabled={disabled}
+            className={cx({
+              'p-2 pl-3 pr-3 mr-1': true,
+              'bg-green-1 hover:bg-green-2': !disabled,
+            })}>
+            Sign Up!
+          </button>
+          <Link
+            to="/signup"
+            className="btn hover:bg-gray-3 p-2 pl-3 pr-3">
+            Or go back
+          </Link>
+        </>
       );
     }}
   />

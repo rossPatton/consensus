@@ -1,10 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 const merge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-// const {GenerateSW} = require('workbox-webpack-plugin');
+const {GenerateSW} = require('workbox-webpack-plugin');
 const webpack = require('webpack');
 
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -70,6 +71,8 @@ module.exports = merge(common, {
     new MiniCssExtractPlugin({
       filename: 'style.css'
     }),
+
+    // new HtmlWebpackPlugin(),
 
     // copy static content over to dist dir. stuff like favicons, certs, images, etc
     new CopyPlugin([{
