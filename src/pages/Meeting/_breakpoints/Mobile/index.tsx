@@ -121,7 +121,7 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
           )}
           {meeting.attendees
             && meeting.attendees > 0 && (
-            <div className="leading-none font-semibold flex items-center">
+            <div className="leading-none font-semibold flex items-center text-gray-5">
               <img
                 alt=""
                 height="22"
