@@ -89,7 +89,7 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
             /> {meeting.tag}
           </div>
           {meeting.isOnline && (
-            <div className="leading-none font-bold flex items-center mb-2 text-gray-5">
+            <div className="leading-none font-semibold flex items-center mb-2 text-gray-5">
               <img
                 alt=""
                 height="10"
