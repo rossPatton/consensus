@@ -19,11 +19,11 @@ import { initStore } from './redux/store';
 const cookies = new Cookies();
 
 if (!cookies.get('cssPreloaded')) {
-  cookies.set('cssPreloaded', true, {sameSite: true, secure: true});
+  cookies.set('cssPreloaded', true, {sameSite: 'strict', secure: true});
 }
 
 if (!cookies.get('fontsPreloaded')) {
-  cookies.set('fontsPreloaded', true, {sameSite: true, secure: true});
+  cookies.set('fontsPreloaded', true, {sameSite: 'strict', secure: true});
 }
 
 // Grab the state from a global variable injected into the server-generated HTML
