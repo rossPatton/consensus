@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const {GenerateSW} = require('workbox-webpack-plugin');
+const {GenerateSW, InjectManifest} = require('workbox-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
 const webpack = require('webpack');
@@ -30,6 +30,25 @@ if (env.NODE_ENV === 'production') {
       test: /\.js$|\.ts$|\.tsx$|\.css$|\.html$|\.png$|\.ico$|\.svg$|\.json$/,
     })
   ];
+}
+
+let precacheList = [
+  /\.html$/,
+  /\.css$/,
+  /\.png$/,
+  /\.ico$/,
+  /\.svg$/,
+  /\.json$/,
+  /\.webp$/,
+  /\.jpe?g$/,
+  /\.json$/,
+  /\.woff$/,
+  /\.woff2$/,
+];
+if (env.NODE_ENV === 'production') {
+  precacheList = [...precacheList, /\.br$/];
+} else {
+  precacheList = [...precacheList, /\.js$/];
 }
 
 module.exports = merge(common, {
@@ -86,6 +105,8 @@ module.exports = merge(common, {
   // new HtmlWebpackPlugin(),
 
   plugins: [
+    // new HtmlWebpackPlugin({filename: 'app-shell.html'}),
+
     new MiniCssExtractPlugin({
       filename: 'style.css'
     }),
@@ -105,13 +126,17 @@ module.exports = merge(common, {
 
     ...compressionPlugins,
 
-    // new GenerateSW({
-    //   cleanupOutdatedCaches: true,
-    //   clientsClaim: true,
-    //   // globDirectory: './dist/',
-    //   // globPatterns: ['**/*.{br}'],
-    //   skipWaiting: true,
-    //   swDest: 'sw.js',
-    // }),
+    new GenerateSW({
+      cleanupOutdatedCaches: true,
+      clientsClaim: true,
+      include: precacheList,
+      // navigateFallback: '/app-shell.html',
+      skipWaiting: true,
+      swDest: 'sw.js',
+      // swSrc: `${env.CWD}/static/sw-template.js`,
+      // templatedUrls: {
+      //   '/app-shell': new Date().toString(),
+      // },
+    }),
   ],
 });

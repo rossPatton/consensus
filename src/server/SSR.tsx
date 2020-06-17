@@ -20,7 +20,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   ctx.respond = false;
   ctx.type = 'text/html';
 
-  const useCssLink = cookies.get('cssPreloaded');
+  const useCssLink = cookies.get('cssPreloaded') === 'true';
   let css = `<style nonce="${nonce}">${styles}</style>`;
   if (useCssLink) {
     css = '<link rel="stylesheet" href="/style.css" />';
@@ -45,7 +45,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
     ? ''
     : '<link rel="prefetch" href="/style.css" as="style">';
 
-  const preloadFonts = cookies.get('fontsPreloaded')
+  const preloadFonts = cookies.get('fontsPreloaded') === 'true'
     ? ''
     : '<link crossOrigin="anonymous" rel="preload" href="/fonts/founders-grotesk-text-web-medium-subset.woff2" as="font" type="font/woff2">';
 

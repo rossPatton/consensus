@@ -7,14 +7,15 @@ import '~app/css/styles.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import loglevel from 'loglevel';
+import loglevel from 'loglevel';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-import { ScrollToTop } from './components';
-import { AppShell } from './containers';
-import { initStore } from './redux/store';
+import { ScrollToTop } from '~app/components';
+import { AppShell } from '~app/containers';
+import { initStore } from '~app/redux/store';
+import { isPrivateMode } from '~app/utils';
 
 const cookies = new Cookies();
 
@@ -53,14 +54,20 @@ if (rootNode.hasChildNodes()) {
   ReactDOM.render(App, rootNode);
 }
 
-// if ('serviceWorker' in navigator) {
-//   window.addEventListener('load', () => {
-//     navigator.serviceWorker.register('/sw.js')
-//     .then(registration => {
-//       if (__DEV__) loglevel.log('SW registered: ', registration);
-//     })
-//     .catch(registrationError => {
-//       if (__DEV__) loglevel.error('SW registration failed: ', registrationError);
-//     });
-//   });
-// }
+isPrivateMode().then(isPrivateMode => {
+  // check is necessary for cases where the user has modified their browser
+  // security settings to disallow persistent cookies/storage
+  if (isPrivateMode) return;
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        if (__DEV__) loglevel.log('SW registered: ', registration);
+      })
+      .catch(registrationError => {
+        if (__DEV__) loglevel.error('SW registration failed: ', registrationError);
+      });
+    });
+  }
+});

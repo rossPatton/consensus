@@ -9,5 +9,5 @@ import HomeComponent from '~app/pages/Home';
 export const Home = {
   component: HomeComponent,
   exact: true,
-  path: '/',
+  path: ['/', '/app-shell'],
 };

@@ -3,7 +3,9 @@ import fs from 'fs';
 import geolite2 from 'geolite2';
 import Koa from 'koa';
 import { CityResponse, Reader } from 'maxmind';
+import Router from 'koa-router';
 
+import {SSR} from '~app/server/SSR';
 import { accountDownload } from './accountDownload';
 import { auth } from './auth';
 import { cities } from './cities';
@@ -34,6 +36,14 @@ const buffer = fs.readFileSync(geolite2.paths.city);
 export const lookup = new Reader<CityResponse>(buffer);
 
 export const setupApi = (app: Koa) => {
+  const router = new Router();
+  router.get('/app-shell', async ctx => {
+    ctx.status = 200;
+    ctx.body = SSR(app, ctx);
+  });
+
+  app.use(router.routes());
+
   app.use(accountDownload.routes());
   app.use(auth.routes());
   app.use(city.routes());
@@ -66,6 +76,8 @@ export const setupApi = (app: Koa) => {
     notImplemented: () => Boom.notImplemented(),
     throw: true,
   });
+
+  app.use(router.allowedMethods(opts));
 
   app.use(accountDownload.allowedMethods(opts));
   app.use(auth.allowedMethods(opts));
