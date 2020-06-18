@@ -5,9 +5,9 @@ import 'isomorphic-fetch';
 import 'regenerator-runtime/runtime';
 import '~app/css/styles.css';
 
+import loglevel from 'loglevel';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import loglevel from 'loglevel';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
@@ -54,20 +54,19 @@ if (rootNode.hasChildNodes()) {
   ReactDOM.render(App, rootNode);
 }
 
-isPrivateMode().then(isPrivateMode => {
+(async () => {
+  const browserIsPrivate = await isPrivateMode();
   // check is necessary for cases where the user has modified their browser
   // security settings to disallow persistent cookies/storage
-  if (isPrivateMode) return;
+  if (browserIsPrivate) return;
 
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-      .then(registration => {
-        if (__DEV__) loglevel.log('SW registered: ', registration);
-      })
-      .catch(registrationError => {
-        if (__DEV__) loglevel.error('SW registration failed: ', registrationError);
-      });
+    window.addEventListener('load', async () => {
+      try {
+        await navigator.serviceWorker.register('/sw.js');
+      } catch (err) {
+        loglevel.error(err);
+      }
     });
   }
-});
+})();

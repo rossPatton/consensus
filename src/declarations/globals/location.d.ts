@@ -11,7 +11,7 @@ namespace ts {
   declare type route = Readonly<{
     component: React.ReactComponentElement, // React.ReactNode ideally
     exact?: boolean,
-    path: string,
+    path: string | string[],
     private?: boolean,
     redirect?: string,
   }>;

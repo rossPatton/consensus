@@ -17,6 +17,17 @@ const devServer = require('./webpack.devServer');
 const common = require('./webpack.common.js');
 const env = require('./webpack.env');
 
+// set stricter whitelist for prod
+const local = env.NODE_ENV === 'development'
+  ? "'self' 127.0.0.1:* 0.0.0.0:* https://consensus.local"
+  : "'self'";
+
+const hcaptcha = 'https://*.hcaptcha.com https://hcaptcha.com';
+const imgSrc = `${local} https://consensus.nyc3.digitaloceanspaces.com`;
+const url = !!env.DEV
+  ? 'https://consensus.local/api/v1'
+  : 'https://consens.us.org/api/v1';
+
 let compressionPlugins = [];
 if (env.NODE_ENV === 'production') {
   compressionPlugins = [
@@ -111,19 +122,26 @@ module.exports = merge(common, {
 
     new HtmlWebpackPlugin({
       filename: 'app-shell.html',
-      scriptLoading: 'defer',
       title: "Consens.us - for when you need to get organized.",
-      templateContent: ({htmlWebpackPlugin}) => `
-        <html>
-          <head>
-            ${htmlWebpackPlugin.tags.headTags}
-          </head>
-          <body>
-            <div id="appRoot"></div>
-            ${htmlWebpackPlugin.tags.bodyTags}
-          </body>
-        </html>
-      `,
+      templateContent: ({htmlWebpackPlugin}) => {
+        return `
+          <!DOCTYPE html>
+            <html lang="en">
+            <head>
+              <meta http-equiv="Content-Security-Policy" content="base-uri 'none'; connect-src ${local}; default-src 'self'; block-all-mixed-content; font-src ${local}; form-action ${local}; frame-src ${hcaptcha}; img-src ${imgSrc}; manifest-src ${local}; object-src 'none'; script-src ${local} ${hcaptcha}; style-src ${hcaptcha} ${local}; worker-src ${local}">
+              <title>Consensus - when you need to get organized.</title>
+              <link rel="stylesheet" href="/style.css" />
+              <link rel="icon" href="/favicon.ico">
+              <link rel="icon" href="/favicon-32x32.png" type="image/png">
+            </head>
+            <body>
+              <div id="appRoot"></div>
+              <script defer src="${htmlWebpackPlugin.files.js[0]}"></script>
+              <script defer src="${htmlWebpackPlugin.files.js[1]}"></script>
+            </body>
+          </html>
+        `;
+      },
     }),
 
     new MiniCssExtractPlugin({
@@ -149,9 +167,14 @@ module.exports = merge(common, {
       cleanupOutdatedCaches: true,
       clientsClaim: true,
       include: precacheList,
-      navigateFallback: '/app-shell',
+      navigateFallback: '/app-shell.html',
       skipWaiting: true,
       swDest: 'sw.js',
+      runtimeCaching: [{
+        urlPattern: new RegExp(url),
+        handler: 'StaleWhileRevalidate'
+      }],
+
       // swSrc: `${env.CWD}/static/sw-template.js`,
       // templatedUrls: {
       //   '/app-shell': new Date().toString(),

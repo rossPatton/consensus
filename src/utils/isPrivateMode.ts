@@ -1,3 +1,6 @@
+/* TODO: refactor to meet eslint standards */
+/* eslint-disable */
+
 /**
  * Lightweight script to detect whether the browser is running in Private mode.
  *
