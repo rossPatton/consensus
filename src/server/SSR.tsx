@@ -11,6 +11,15 @@ import { AppShell } from '~app/containers';
 import styles from '~app/css/styles.css';
 
 import { initStoreForSSR } from './initStoreForSSR';
+import webpackManifest from '../../dist/webpack-manifest.json';
+
+// set stricter whitelist for prod
+const local = __DEV__
+? "'self' 127.0.0.1:* 0.0.0.0:* https://consensus.local"
+: "'self'";
+
+const hcaptcha = 'https://*.hcaptcha.com https://hcaptcha.com';
+const imgSrc = `${local} ${spacesUrl}`;
 
 export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   const cookies = new Cookies(ctx.req.headers.cookie);
@@ -25,14 +34,6 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   if (useCssLink) {
     css = '<link rel="stylesheet" href="/style.css" />';
   }
-
-  // set stricter whitelist for prod
-  const local = __DEV__
-    ? "'self' 127.0.0.1:* 0.0.0.0:* https://consensus.local"
-    : "'self'";
-
-  const hcaptcha = 'https://*.hcaptcha.com https://hcaptcha.com';
-  const imgSrc = `${local} ${spacesUrl}`;
 
   // webpack debug mode seems to use eval(?) so disable the CSP in debug mode
   // i think this is mostly fine, considering the CSP runs for every other case
@@ -64,8 +65,8 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
     </Provider>
   );
 
-  const vendor = `/vendor.bundle.js?v=${__CACHE_BUST__}`;
-  const main = `/main.js?v=${__CACHE_BUST__}`;
+  const vendor = webpackManifest['vendor.js'];
+  const main = webpackManifest['main.js'];
   const stringifiedState = JSON.stringify(store.getState())
     .replace(/</g, '\\u003c');
 

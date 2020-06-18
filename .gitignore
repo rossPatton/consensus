@@ -7,3 +7,4 @@ volumes
 *.rdb
 .env
 .npmrc
+stats.json

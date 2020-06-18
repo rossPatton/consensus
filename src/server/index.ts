@@ -55,7 +55,7 @@ setupApi(app);
 // render the page
 app.use(async ctx => {
   ctx.status = 200;
-  ctx.body = SSR(app, ctx);
+  ctx.body = await SSR(app, ctx);
 });
 
 const CWD = process.cwd();

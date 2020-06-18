@@ -4,14 +4,14 @@ const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// const DashboardPlugin = require('webpack-dashboard/plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const {GenerateSW, InjectManifest} = require('workbox-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
 const webpack = require('webpack');
-
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const devServer = require('./webpack.devServer');
 const common = require('./webpack.common.js');
@@ -33,6 +33,7 @@ if (env.NODE_ENV === 'production') {
 }
 
 let precacheList = [
+  'app-shell.html',
   /\.html$/,
   /\.css$/,
   /\.png$/,
@@ -73,8 +74,8 @@ module.exports = merge(common, {
   },
 
   output: {
-    chunkFilename: '[name].bundle.js',
-    filename: 'main.js',
+    chunkFilename: '[name][chunkhash].js',
+    filename: 'main[chunkhash].js',
     path: path.join(env.CWD, 'dist'),
     publicPath: '/', // serve chunks from root path
     crossOriginLoading: env.DEV ? 'anonymous' : false,
@@ -102,10 +103,28 @@ module.exports = merge(common, {
   // new BundleAnalyzerPlugin({
   //   analyzerMode: 'static',
   // }),
-  // new HtmlWebpackPlugin(),
 
   plugins: [
-    // new HtmlWebpackPlugin({filename: 'app-shell.html'}),
+    new ManifestPlugin({
+      fileName: 'webpack-manifest.json',
+    }),
+
+    new HtmlWebpackPlugin({
+      filename: 'app-shell.html',
+      scriptLoading: 'defer',
+      title: "Consens.us - for when you need to get organized.",
+      templateContent: ({htmlWebpackPlugin}) => `
+        <html>
+          <head>
+            ${htmlWebpackPlugin.tags.headTags}
+          </head>
+          <body>
+            <div id="appRoot"></div>
+            ${htmlWebpackPlugin.tags.bodyTags}
+          </body>
+        </html>
+      `,
+    }),
 
     new MiniCssExtractPlugin({
       filename: 'style.css'
@@ -130,7 +149,7 @@ module.exports = merge(common, {
       cleanupOutdatedCaches: true,
       clientsClaim: true,
       include: precacheList,
-      // navigateFallback: '/app-shell.html',
+      navigateFallback: '/app-shell',
       skipWaiting: true,
       swDest: 'sw.js',
       // swSrc: `${env.CWD}/static/sw-template.js`,

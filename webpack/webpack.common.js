@@ -95,9 +95,6 @@ module.exports = {
   },
 
   plugins: [
-    // needed for server side loadable to work
-    new LoadablePlugin(),
-
     // does what the name implies
     new webpack.optimize.AggressiveMergingPlugin(),
 
