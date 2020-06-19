@@ -13,6 +13,16 @@ import styles from '~app/css/styles.css';
 import webpackManifest from '../../dist/webpack-manifest.json';
 import { initStoreForSSR } from './initStoreForSSR';
 
+type manifestType = typeof webpackManifest;
+let workBoxHref = '';
+if (webpackManifest) {
+  Object.keys(webpackManifest).map(fileKey => {
+    if (fileKey.indexOf('workbox') !== -1) {
+      workBoxHref = webpackManifest[fileKey as keyof manifestType];
+    }
+  });
+}
+
 // set stricter whitelist for prod
 const local = __DEV__
   ? "'self' 127.0.0.1:* 0.0.0.0:* https://consensus.local"
@@ -50,10 +60,18 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
     ? ''
     : '<link crossOrigin="anonymous" rel="preload" href="/fonts/founders-grotesk-text-web-medium-subset.woff2" as="font" type="font/woff2">';
 
-  ctx.res.write(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" />${CSP}<title>Consensus - when you need to get organized.</title>${preloadFonts}${css}${prefetchCSS}</head><body><div id="appRoot">`);
+  const prefetchWorkbox = (cookies.get('workboxPreloaded') !== 'true' && workBoxHref)
+    ? `<link rel="preload" href=${workBoxHref} as="script">`
+    : '';
+
+  const vendor = webpackManifest['vendor.js'];
+  const main = webpackManifest['main.js'];
+  const prefetchVendor = `<link rel="preload" href=${vendor} as="script">`;
+  const prefetchMain = `<link rel="preload" href=${main} as="script">`;
+
+  ctx.res.write(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" />${CSP}<title>Consensus - when you need to get organized.</title>${css}${prefetchWorkbox}${preloadFonts}${prefetchVendor}${prefetchMain}${prefetchCSS}</head><body><div id="appRoot">`);
 
   const store = await initStoreForSSR(ctx);
-
   const jsx = (
     <Provider store={store as any}>
       <StaticRouter
@@ -64,8 +82,6 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
     </Provider>
   );
 
-  const vendor = webpackManifest['vendor.js'];
-  const main = webpackManifest['main.js'];
   const stringifiedState = JSON.stringify(store.getState())
     .replace(/</g, '\\u003c');
 

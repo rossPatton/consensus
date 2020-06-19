@@ -1,18 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders as expected 1`] = `
-Array [
+<div
+  className="break-words"
+>
   <p
     className="mb-1"
   >
     testing rendering description. test. testing.
-  </p>,
-  <p
-    className="mb-1"
-  >
-    testing rendering description. test. testing.
-  </p>,
-]
+  </p>
+</div>
 `;
 
 exports[`renders null when bad description passed in 1`] = `null`;

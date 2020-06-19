@@ -27,6 +27,10 @@ if (!cookies.get('fontsPreloaded')) {
   cookies.set('fontsPreloaded', true, {sameSite: 'strict', secure: true});
 }
 
+if (!cookies.get('workboxPreloaded')) {
+  cookies.set('workboxPreloaded', true, {sameSite: 'strict', secure: true});
+}
+
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__;
 

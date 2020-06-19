@@ -30,7 +30,7 @@ exports[`renders as expected 1`] = `
         onClick={[Function]}
       >
         <img
-          alt=""
+          alt="View Community groups"
           className="w-full rounded-lg"
           src="/images/community_sm.svg"
           width="480"
@@ -69,7 +69,7 @@ exports[`renders as expected 1`] = `
         onClick={[Function]}
       >
         <img
-          alt=""
+          alt="View Cooperative groups"
           className="w-full rounded-lg"
           src="/images/cooperative_sm.svg"
           width="480"
@@ -108,7 +108,7 @@ exports[`renders as expected 1`] = `
         onClick={[Function]}
       >
         <img
-          alt=""
+          alt="View Unions and Labor groups"
           className="w-full rounded-lg"
           src="/images/union_sm.svg"
           width="480"
@@ -147,7 +147,7 @@ exports[`renders as expected 1`] = `
         onClick={[Function]}
       >
         <img
-          alt=""
+          alt="View Political groups"
           className="w-full rounded-lg"
           src="/images/political_sm.svg"
           width="480"
