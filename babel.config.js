@@ -1,11 +1,11 @@
 /* eslint-disable */
-const baseBabelConfig = {
+const baseBabelEnvConfig = {
   corejs: '3',
   // enable more aggressive transformations
   loose: true,
   targets: { 'browsers': 'last 2 versions' },
-  // only pull in polyfills that are needed by our targets
-  useBuiltIns: 'entry',
+  // only pull in polyfills that we actually use
+  useBuiltIns: 'usage',
 };
 
 const plugins = [
@@ -27,8 +27,9 @@ const plugins = [
 module.exports = {
   env: {
     development: {
+      sourceType: "unambiguous",
       presets: [
-        ['@babel/env', baseBabelConfig],
+        ['@babel/env', baseBabelEnvConfig],
         '@babel/react',
         ['@babel/typescript', {
           allExtensions: true,
@@ -38,8 +39,9 @@ module.exports = {
       plugins,
     },
     production: {
+      sourceType: "unambiguous",
       presets: [
-        ['@babel/env', baseBabelConfig],
+        ['@babel/env', baseBabelEnvConfig],
         '@babel/react',
         ['@babel/typescript', {
           allExtensions: true,

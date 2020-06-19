@@ -66,8 +66,6 @@ if (env.NODE_ENV === 'production') {
 module.exports = merge(common, {
   target: 'web',
   entry: [
-    // 'webpack-dev-server/client?http://0.0.0.0:8080',
-    // 'webpack/hot/dev-server',
     './src/client.tsx',
   ],
 
@@ -116,12 +114,17 @@ module.exports = merge(common, {
   // }),
 
   plugins: [
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+    }),
+
     new ManifestPlugin({
       fileName: 'webpack-manifest.json',
     }),
 
     new HtmlWebpackPlugin({
       filename: 'app-shell.html',
+      scriptLoading: 'defer',
       title: "Consens.us - for when you need to get organized.",
       templateContent: ({htmlWebpackPlugin}) => {
         return `
@@ -136,8 +139,6 @@ module.exports = merge(common, {
             </head>
             <body>
               <div id="appRoot"></div>
-              <script defer src="${htmlWebpackPlugin.files.js[0]}"></script>
-              <script defer src="${htmlWebpackPlugin.files.js[1]}"></script>
             </body>
           </html>
         `;
@@ -173,12 +174,10 @@ module.exports = merge(common, {
       runtimeCaching: [{
         urlPattern: new RegExp(url),
         handler: 'StaleWhileRevalidate'
+      }, {
+        urlPattern: new RegExp('https://hcaptcha.com'),
+        handler: 'StaleWhileRevalidate'
       }],
-
-      // swSrc: `${env.CWD}/static/sw-template.js`,
-      // templatedUrls: {
-      //   '/app-shell': new Date().toString(),
-      // },
     }),
   ],
 });

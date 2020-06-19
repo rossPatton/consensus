@@ -61,7 +61,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
     : '<link crossOrigin="anonymous" rel="preload" href="/fonts/founders-grotesk-text-web-medium-subset.woff2" as="font" type="font/woff2">';
 
   const prefetchWorkbox = (cookies.get('workboxPreloaded') !== 'true' && workBoxHref)
-    ? `<link rel="preload" href=${workBoxHref} as="script">`
+    ? `<link rel="prefetch" href=${workBoxHref} as="script">`
     : '';
 
   const vendor = webpackManifest['vendor.js'];

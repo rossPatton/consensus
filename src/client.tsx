@@ -1,8 +1,5 @@
-// this is the main entrypoint for the app
-require('es6-promise').polyfill();
-import 'core-js/stable';
+// main entry point for app
 import 'isomorphic-fetch';
-import 'regenerator-runtime/runtime';
 import '~app/css/styles.css';
 
 import loglevel from 'loglevel';
