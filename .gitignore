@@ -8,3 +8,4 @@ volumes
 .env
 .npmrc
 stats.json
+coverage
