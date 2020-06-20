@@ -168,7 +168,7 @@ module.exports = merge(common, {
       cleanupOutdatedCaches: true,
       clientsClaim: true,
       include: precacheList,
-      navigateFallback: '/app-shell.html',
+      // navigateFallback: '/app-shell.html',
       skipWaiting: true,
       swDest: 'sw.js',
       runtimeCaching: [{
