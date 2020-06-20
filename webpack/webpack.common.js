@@ -25,8 +25,8 @@ module.exports = {
     alias: {
       // 'react-dom': '@hot-loader/react-dom',
       '~app': srcPath(''),
-      'react': 'preact/compat',
-      'react-dom': 'preact/compat',
+      // 'react': 'preact/compat',
+      // 'react-dom': 'preact/compat',
     },
     modules: ['./node_modules', './src'],
     extensions: ['.js', '.ts', '.tsx', '.json', '.css'],

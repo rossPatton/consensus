@@ -174,10 +174,12 @@ module.exports = merge(common, {
       runtimeCaching: [{
         urlPattern: new RegExp(url),
         handler: 'StaleWhileRevalidate'
-      }, {
-        urlPattern: new RegExp('https://hcaptcha.com'),
+      },
+      {
+        urlPattern: new RegExp('https://assets.hcaptcha.com'),
         handler: 'StaleWhileRevalidate'
-      }],
+      }
+    ],
     }),
   ],
 });
