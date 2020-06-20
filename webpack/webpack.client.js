@@ -44,7 +44,7 @@ if (env.NODE_ENV === 'production') {
 }
 
 let precacheList = [
-  'app-shell.html',
+  '/app-shell.html',
   /\.html$/,
   /\.css$/,
   /\.png$/,
@@ -133,7 +133,6 @@ module.exports = merge(common, {
             <head>
               <meta http-equiv="Content-Security-Policy" content="base-uri 'none'; connect-src ${local}; default-src 'self'; block-all-mixed-content; font-src ${local}; form-action ${local}; frame-src ${hcaptcha}; img-src ${imgSrc}; manifest-src ${local}; object-src 'none'; script-src ${local} ${hcaptcha}; style-src ${hcaptcha} ${local}; worker-src ${local}">
               <title>Consensus - when you need to get organized.</title>
-              <link rel="stylesheet" href="/style.css" />
               <link rel="icon" href="/favicon.ico">
               <link rel="icon" href="/favicon-32x32.png" type="image/png">
             </head>
@@ -168,7 +167,7 @@ module.exports = merge(common, {
       cleanupOutdatedCaches: true,
       clientsClaim: true,
       include: precacheList,
-      // navigateFallback: '/app-shell.html',
+      navigateFallback: '/app-shell.html',
       skipWaiting: true,
       swDest: 'sw.js',
       runtimeCaching: [{

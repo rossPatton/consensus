@@ -13,6 +13,6 @@
   }],
   "name": "Consensus: When You Need To Get Organized",
   "short_name": "Consensus",
-  "start_url": "/app-shell.html",
+  "start_url": "/app-shell",
   "theme_color": "#efefef"
 }
