@@ -14,6 +14,8 @@ import session from 'koa-session';
 import loglevel from 'loglevel';
 import uuidv4 from 'uuid/v4';
 
+import {getSession} from '~app/server/queries';
+
 import { setupApi } from './api';
 import { setupMiddleware, staticFileMiddleware } from './middleware';
 import { SSR } from './SSR';
@@ -55,6 +57,8 @@ setupApi(app);
 // render the page
 app.use(async ctx => {
   ctx.status = 200;
+  const session = await getSession(ctx);
+  console.log('do we have a session ? ', session);
   ctx.body = await SSR(app, ctx);
 });
 

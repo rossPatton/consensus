@@ -4,7 +4,7 @@ namespace ts {
   declare type group = ts.baseAccount & Readonly<{
     category: ts.category,
     description: string,
-    deletionDeadline: string,
+    deletionDeadline?: string,
     handle: string,
     memberName: string,
     modName: string,

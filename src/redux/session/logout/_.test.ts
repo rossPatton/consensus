@@ -27,7 +27,6 @@ describe('redux/session/login', () => {
   it('creates correct LOGOUT_SUCCESS action', () => {
     const testSession = {
       isAuthenticated: true,
-      isVerified: true,
       profile: {} as ts.user,
       type: 'user',
     } as ts.session;

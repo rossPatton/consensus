@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {patchGroup} from '~app/redux';
+import {patchGroup, patchSessionSuccess} from '~app/redux';
 
 import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
 import {ProfileComponent} from './Component';
@@ -34,19 +34,29 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   }
 
   onSubmit = async () => {
+    const {dispatch, patchGroupDispatch, sessionThunk} = this.props;
+    const {isAuthenticated, qr, type} = sessionThunk.data;
+
     try {
-      await this.props.patchGroupDispatch({
+      const group = await patchGroupDispatch({
         ...this.state,
         avatar: this.props.avatar,
         description: encodeURIComponent(this.state.description),
       });
+
+      dispatch(patchSessionSuccess({
+        isAuthenticated,
+        profile: group.payload,
+        qr,
+        type,
+      }));
+
+      return this.props.history.push('/admin/profile');
     } catch (error) {
       return this.setState({
         error: error.message,
       });
     }
-
-    window.location.reload();
   }
 
   updateState = (stateKey: tKeyUnion, ev: React.ChangeEvent<any>) => {

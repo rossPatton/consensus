@@ -21,6 +21,8 @@ auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
       await validateSchema<ts.user | ts.group>(ctx, groupSchema, account);
     }
 
+    console.log('auth/v1/login account => ', account);
+
     // if (!!account.otpSecret && !ctx.session.otpValid) {
     //   ctx.body = {
     //     error: null,
@@ -42,7 +44,6 @@ auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
     // }
   })(ctx, next));
 
-// logout just clears the session basically, doesnt matter how you logged in
 auth.get('/auth/v1/logout', async (ctx: Koa.ParameterizedContext, next) =>
   passport.authenticate('local', () => {
     const isAuthenticated = ctx.isAuthenticated();

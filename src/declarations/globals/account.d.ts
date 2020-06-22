@@ -50,31 +50,16 @@ namespace ts {
     isAuthenticated: boolean,
   }>;
 
-  // ts.session is like ts.user, but with auth data and everything is optional
-  // since a user might not be logged in
-  declare type session<T = ts.user | ts.group> = Partial<tAccountBase>
-    & Readonly<{
-      deletionDeadline?: string,
-      profile: T,
-      requireOtp?: boolean,
-      type: 'group' | 'user',
-    }>;
+  declare type qr = {
+    qrcode: string;
+    secret: string;
+  };
 
-  declare type groupSession = Partial<tAccountBase>
+  declare type session<T = ts.user | ts.group> = ts.isAuthenticated
     & Readonly<{
-      deletionDeadline?: string,
-      isAuthenticated: boolean,
-      isVerified: boolean,
-      profile: ts.group,
-      type: 'group',
-    }>;
-
-  declare type userSession = Partial<tAccountBase>
-    & Readonly<{
-      isAuthenticated: boolean,
-      isVerified: boolean,
-      profile: ts.user,
-      type: 'user',
+      profile: T extends ts.user ? ts.user : ts.group,
+      qr: qr,
+      type: ts.sessionType, // T extends ts.user ? 'user' : 'group'
     }>;
 
   // pending => user wants to join the group, but isn't approved yet

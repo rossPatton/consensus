@@ -24,5 +24,4 @@ export type tContainerProps = tProps & {
   isLoading: boolean,
   rolesThunk: ts.thunk<ts.roleMap[]>,
   rsvpsThunk: ts.thunk<ts.rsvp[]>,
-  session: ts.session,
 };

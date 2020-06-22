@@ -25,7 +25,6 @@ describe('redux/session/patch', () => {
   it('creates correct PATCH_SUCCESS action', () => {
     const testSession = {
       isAuthenticated: true,
-      isVerified: true,
       profile: {} as ts.user,
       type: 'user',
     } as ts.session;

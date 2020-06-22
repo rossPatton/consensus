@@ -82,6 +82,8 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
     </Provider>
   );
 
+  console.log('store => ', store.getState());
+
   const stringifiedState = JSON.stringify(store.getState())
     .replace(/</g, '\\u003c');
 

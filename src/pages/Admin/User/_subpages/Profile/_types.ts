@@ -1,3 +1,5 @@
+import {History} from 'history';
+
 export type tState = Partial<ts.user> & {
   city: string,
   cityId: number,
@@ -9,13 +11,14 @@ export type tState = Partial<ts.user> & {
 export type tKeyUnion = keyof tState;
 
 export type tStore = {
-  session: ts.thunk<ts.session>,
+  session: ts.thunk<ts.session<ts.user>>,
   uploads: ts.thunk<ts.upload>,
 };
 
 export type tContainerProps = {
   avatar?: string,
   dispatch: Function,
+  history: History,
   match: ts.adminSectionParams,
   patchUserDispatch: (user: ts.userQuery) => ts.thunkPayload<ts.user>,
   sessionThunk: ts.thunk<ts.session<ts.user>>,

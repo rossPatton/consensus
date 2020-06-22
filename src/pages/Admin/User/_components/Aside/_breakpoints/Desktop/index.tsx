@@ -41,11 +41,7 @@ const Aside = memo((props: tProps) => {
         <li className="flex items-center text-base p-1 mb-1/2 rounded hover:bg-gray-2">
           {props.isRSVPs && 'Your rsvps'}
           {!props.isRSVPs && (
-            <Link
-              to="/admin/rsvps"
-              className={cx({
-                curDisable: !props.session.isVerified,
-              })}>
+            <Link to="/admin/rsvps">
               Your rsvps
             </Link>
           )}
@@ -53,11 +49,7 @@ const Aside = memo((props: tProps) => {
         <li className="flex items-center text-base p-1 rounded hover:bg-gray-2">
           {props.isInvite && 'Your pending invitations'}
           {!props.isInvite && (
-            <Link
-              to="/admin/invite"
-              className={cx({
-                curDisable: !props.session.isVerified,
-              })}>
+            <Link to="/admin/invite">
               Your pending invitations
             </Link>
           )}

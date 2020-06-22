@@ -8,6 +8,9 @@ export const initialState: ts.thunk<ts.session> = {
   isLoading: false,
   data: {
     isAuthenticated: false,
+    profile: {},
+    qr: {},
+    type: null,
   } as ts.session,
 };
 
@@ -42,21 +45,18 @@ export const sessionReducer = (state = initialState, action: tActions) => {
   case PATCH_FAILURE:
     return failureReturn;
 
-  case LOGIN_SUCCESS:
-    return action.payload;
+  case LOGIN_SUCCESS: {
+    console.log('action login success => ', action);
+    console.log('successReturn => ');
+    return successReturn;
+  }
+
   case LOGOUT_SUCCESS:
-    return {
-      ...successReturn,
-      fetched: false,
-    };
+    return successReturn;
+
   case PATCH_SUCCESS: {
-    return {
-      ...state,
-      data: {
-        ...state.data,
-        profile: action?.payload?.payload,
-      },
-    };
+    console.log('action patch success => ', action);
+    return successReturn;
   }
 
   default:

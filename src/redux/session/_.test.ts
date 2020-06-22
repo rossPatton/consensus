@@ -76,7 +76,8 @@ describe('redux/session/reducer', () => {
   it('should handle LOGOUT_SUCCESS', () => {
     const testSession = {
       isAuthenticated: false,
-    } as ts.isAuthenticated;
+      profile: {},
+    } as ts.session;
 
     expect(reducer(undefined, {
       type: '@@session/LOGOUT_SUCCESS',
@@ -106,7 +107,6 @@ describe('redux/session/reducer', () => {
   it('should handle PATCH_SUCCESS', () => {
     const testSession = {
       isAuthenticated: true,
-      isVerified: true,
       profile: {} as ts.user,
       type: 'user',
     } as ts.session;

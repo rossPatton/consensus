@@ -3,7 +3,7 @@ import loglevel from 'loglevel';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {patchUser} from '~app/redux';
+import {patchSessionSuccess, patchUser} from '~app/redux';
 
 import {initialState} from './_constants';
 import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
@@ -32,23 +32,32 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   }
 
   save = async () => {
-    const {patchUserDispatch, sessionThunk} = this.props;
-    const {profile} = sessionThunk.data;
+    const {dispatch, patchUserDispatch, sessionThunk} = this.props;
+    const {isAuthenticated, profile, qr, type} = sessionThunk.data;
 
     if (profile.id) {
       try {
-        await patchUserDispatch({
+        const user = await patchUserDispatch({
           ...this.state,
           avatar: this.props.avatar,
           bio: encodeURIComponent(this.state.bio),
           id: profile.id,
         });
+
+        dispatch(patchSessionSuccess({
+          isAuthenticated,
+          profile: user.payload,
+          qr,
+          type,
+        }));
+
+        return this.props.history.push('/admin/profile');
       } catch (err) {
         return loglevel.error(err);
       }
     }
 
-    window.location.reload();
+    // window.location.reload();
   }
 
   updateState = (key: tKeyUnion, value: string | number | object | boolean) => {

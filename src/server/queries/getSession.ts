@@ -13,13 +13,12 @@ export const getSession = async (
     || ctx.session._sessCtx?.session?.passport?.user
     || passportSession;
 
-  const qrcode = ctx.isAuthenticated() ? await qr(ctx) : {};
+  const qrcode = ctx.isAuthenticated() ? await qr(ctx) : {} as ts.qr;
   const type = profile?.sessionType || 'user';
 
   // we return things this way to match redux-thunk on the client
   return {
     error: null,
-    fetched: true,
     isLoading: false,
     data: {
       isAuthenticated: ctx.isAuthenticated(),

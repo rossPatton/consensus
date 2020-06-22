@@ -19,6 +19,7 @@ passport.serializeUser(async (accountWithType: ts.user | ts.group, done) => {
 });
 
 passport.deserializeUser(async (obj: ts.user | ts.group, done) => {
+  console.log('deserialize user => ', obj);
   if (obj.id) return done(null, obj);
 
   let account: ts.user | ts.group;
@@ -54,6 +55,7 @@ passport.use(new LocalStrategy(opts, async (
   u: any, p: any,
   done: tDone) => {
   const {query} = req.ctx;
+  console.log('passport query => ', query);
 
   let account: ts.user | ts.group;
   if (query.sessionType === 'user') {

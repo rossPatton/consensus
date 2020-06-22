@@ -32,7 +32,6 @@ const GroupAdminContainer = memo((props: tProps) => {
         <div
           className={cx({
             'w-full p-2 text-center bg-yellow-1 font-bold text-sm': true,
-            'mb-2': session.isVerified,
           })}>
           Your group will be deleted on {dayJS(session.deletionDeadline).format('MMM DD')}
         </div>
@@ -51,7 +50,12 @@ const GroupAdminContainer = memo((props: tProps) => {
           {isDelete && <DeleteGroup />}
           {isInvite && <InviteMember />}
           {isMeetings && <Meetings match={match} />}
-          {isProfile && <Profile match={match} />}
+          {isProfile && (
+            <Profile
+              history={props.history}
+              match={match}
+            />
+          )}
           {isMembers && (
             <Members
               group={session.profile as ts.group}

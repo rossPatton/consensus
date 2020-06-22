@@ -16,7 +16,7 @@ export const qr = async (ctx: Koa.ParameterizedContext) => {
   });
 
   /* eslint-disable */
-  const qrcode = await new Promise((resolve, reject) =>
+  const qrcode: string = await new Promise((resolve, reject) =>
     toDataURL(otpAuthUrl, (e, u) => (e ? reject(e) : resolve(u))),
   );
   /* eslint-enable */

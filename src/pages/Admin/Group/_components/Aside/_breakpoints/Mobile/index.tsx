@@ -15,11 +15,7 @@ const MobileAside = memo((props: tProps) => (
         <div className="bg-white border rounded-circ mr-2 p-2" />
         {props.isInvite && 'Invite Members'}
         {!props.isInvite && (
-          <Link
-            to="/admin/invite"
-            className={cx({
-              curDisable: !props.session.isVerified,
-            })}>
+          <Link to="/admin/invite">
             Invite Members
           </Link>
         )}
@@ -28,11 +24,7 @@ const MobileAside = memo((props: tProps) => (
         <div className="bg-white border rounded-circ mr-2 p-2" />
         {props.isMeetings && 'Edit Meetings & Drafts'}
         {!props.isMeetings && (
-          <Link
-            to="/admin/meetings"
-            className={cx({
-              curDisable: !props.session.isVerified,
-            })}>
+          <Link to="/admin/meetings">
             Edit Meetings & Drafts
           </Link>
         )}
@@ -41,11 +33,7 @@ const MobileAside = memo((props: tProps) => (
         <div className="bg-white border rounded-circ mr-2 p-2" />
         {props.isMembers && 'Manage Members & Approvals'}
         {!props.isMembers && (
-          <Link
-            to="/admin/memberships"
-            className={cx({
-              curDisable: !props.session.isVerified,
-            })}>
+          <Link to="/admin/memberships">
             Manage Members & Approvals
           </Link>
         )}
@@ -54,11 +42,7 @@ const MobileAside = memo((props: tProps) => (
         <div className="bg-white border rounded-circ mr-2 p-2" />
         {props.isMeetingForm && 'Plan Meeting'}
         {!props.isMeetingForm && (
-          <Link
-            to="/admin/planMeeting"
-            className={cx({
-              curDisable: !props.session.isVerified,
-            })}>
+          <Link to="/admin/planMeeting">
             Plan Meeting
           </Link>
         )}
