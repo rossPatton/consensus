@@ -12,6 +12,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
 const webpack = require('webpack');
+const OfflinePlugin = require('offline-plugin');
 
 const devServer = require('./webpack.devServer');
 const common = require('./webpack.common.js');
@@ -139,7 +140,7 @@ module.exports = merge(common, {
             </head>
             <body>
               <div id="appRoot"></div>
-              <script></script>
+              <noscript>Consens.us requires Javascript to be enabled.</noscript>
             </body>
           </html>
         `;
@@ -163,23 +164,10 @@ module.exports = merge(common, {
       __SERVER__: false,
     }),
 
-    new GenerateSW({
-      cleanupOutdatedCaches: true,
-      clientsClaim: true,
-      include: precacheList,
-      navigateFallback: '/app-shell.html',
-      skipWaiting: true,
-      swDest: 'sw.js',
-      runtimeCaching: [{
-        urlPattern: new RegExp(url),
-        handler: 'StaleWhileRevalidate'
-      },
-      {
-        urlPattern: new RegExp('https://assets.hcaptcha.com'),
-        handler: 'NetworkFirst'
-      }],
-    }),
-
     ...compressionPlugins,
+
+    new OfflinePlugin({
+      appShell: '/app-shell.html',
+    }),
   ],
 });
