@@ -3,12 +3,12 @@ import 'isomorphic-fetch';
 import '~app/css/styles.css';
 
 import loglevel from 'loglevel';
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 
 import { ScrollToTop } from '~app/components';
 import { AppShell } from '~app/containers';

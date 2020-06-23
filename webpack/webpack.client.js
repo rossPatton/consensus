@@ -7,7 +7,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const DashboardPlugin = require('webpack-dashboard/plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const {GenerateSW, InjectManifest} = require('workbox-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
