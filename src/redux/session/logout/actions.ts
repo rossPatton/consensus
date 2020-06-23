@@ -16,7 +16,7 @@ export const failure = (payload: ts.responseError): tFailureAction => ({
   payload,
 });
 
-export const success = (payload: ts.session): tSuccessAction => ({
+export const success = (payload: ts.isAuthenticated): tSuccessAction => ({
   type: LOGOUT_SUCCESS,
   payload,
 });

@@ -17,9 +17,6 @@ const devServer = require('./webpack.devServer');
 const common = require('./webpack.common.js');
 const env = require('./webpack.env');
 
-// const srcPath = () => path.join(env.CWD, 'src');
-// const {initStore} = require(`${srcPath()}/redux/store`);
-
 // set stricter whitelist for prod
 const local = env.NODE_ENV === 'development'
   ? "'self' 127.0.0.1:* 0.0.0.0:* https://consensus.local"
@@ -117,9 +114,9 @@ module.exports = merge(common, {
   // }),
 
   plugins: [
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-    }),
+    // new BundleAnalyzerPlugin({
+    //   analyzerMode: 'static',
+    // }),
 
     new ManifestPlugin({
       fileName: 'webpack-manifest.json',
@@ -166,22 +163,22 @@ module.exports = merge(common, {
       __SERVER__: false,
     }),
 
-    // new GenerateSW({
-    //   cleanupOutdatedCaches: true,
-    //   clientsClaim: true,
-    //   include: precacheList,
-    //   navigateFallback: '/app-shell.html',
-    //   skipWaiting: true,
-    //   swDest: 'sw.js',
-    //   runtimeCaching: [{
-    //     urlPattern: new RegExp(url),
-    //     handler: 'StaleWhileRevalidate'
-    //   },
-    //   {
-    //     urlPattern: new RegExp('https://assets.hcaptcha.com'),
-    //     handler: 'StaleWhileRevalidate'
-    //   }],
-    // }),
+    new GenerateSW({
+      cleanupOutdatedCaches: true,
+      clientsClaim: true,
+      include: precacheList,
+      navigateFallback: '/app-shell.html',
+      skipWaiting: true,
+      swDest: 'sw.js',
+      runtimeCaching: [{
+        urlPattern: new RegExp(url),
+        handler: 'StaleWhileRevalidate'
+      },
+      {
+        urlPattern: new RegExp('https://assets.hcaptcha.com'),
+        handler: 'NetworkFirst'
+      }],
+    }),
 
     ...compressionPlugins,
   ],

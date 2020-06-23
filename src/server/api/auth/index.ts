@@ -21,8 +21,6 @@ auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
       await validateSchema<ts.user | ts.group>(ctx, groupSchema, account);
     }
 
-    console.log('auth/v1/login account => ', account);
-
     // if (!!account.otpSecret && !ctx.session.otpValid) {
     //   ctx.body = {
     //     error: null,
@@ -47,11 +45,13 @@ auth.post('/auth/v1/login', async (ctx: Koa.ParameterizedContext, next) =>
 auth.get('/auth/v1/logout', async (ctx: Koa.ParameterizedContext, next) =>
   passport.authenticate('local', () => {
     const isAuthenticated = ctx.isAuthenticated();
-    if (!isAuthenticated) return ctx.throw(400, 'You are not logged in');
 
     // ctx.session.otpValid = false;
     // ctx.session.temp_user = {};
 
-    ctx.logout();
+    if (isAuthenticated) {
+      ctx.logout();
+    }
+
     ctx.body = {isAuthenticated: false};
   })(ctx, next));

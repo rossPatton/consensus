@@ -23,61 +23,61 @@ const CurrentProfile = memo((props: tComponentProps) => (
     </h3>
     <h3 className="text-base mb-2 leading-none">
       <span className="font-semibold">URL:</span> <span className="text-gray-5">
-        {props.handle}
+        {props.session.profile.handle}
       </span>
     </h3>
     <h3 className="text-base mb-2 leading-none">
       <span className="font-semibold">Group Type:</span> <span className="text-gray-5 capitalize">
-        {props.type}
+        {props.session.profile.type}
       </span>
     </h3>
     <h3 className="text-base mb-2 leading-none">
       <span className="font-semibold">Category:</span> <span className="text-gray-5">
-        {props.category}
+        {props.session.profile.category}
       </span>
     </h3>
-    {props.city && (
+    {props.session.profile.city && (
       <h3 className="text-base mb-2 pb-1 leading-none">
         <span className="font-semibold">Based in:</span> <span className="text-gray-5">
-          {props.city}, {props.region}
+          {props.session.profile.city}, {props.session.profile.region}
         </span>
       </h3>
     )}
     <h3 className="text-base mb-2 leading-none">
       <span className="font-semibold">Member title:</span> <span className="text-gray-5">
-        {props.memberName}
+        {props.session.profile.memberName}
       </span>
     </h3>
     <h3 className="text-base mb-2 leading-none">
       <span className="font-semibold">Moderator title:</span> <span className="text-gray-5">
-        {props.modName}
+        {props.session.profile.modName}
       </span>
     </h3>
-    {props.website && (
+    {props.session.profile.website && (
       <h3 className="text-base mb-2 leading-none">
         <span className="font-semibold">Group Website</span> <span className="text-gray-5">
-          {props.website}
+          {props.session.profile.website}
         </span>
       </h3>
     )}
-    {props.facebook && (
+    {props.session.profile.facebook && (
       <h3 className="text-base mb-2 leading-none">
         <span className="font-semibold">Facebook</span> <span className="text-gray-5">
-          {props.facebook}
+          {props.session.profile.facebook}
         </span>
       </h3>
     )}
-    {props.twitter && (
+    {props.session.profile.twitter && (
       <h3 className="text-base mb-2 leading-none">
         <span className="font-semibold">Twitter</span> <span className="text-gray-5">
-          {props.twitter}
+          {props.session.profile.twitter}
         </span>
       </h3>
     )}
-    {props.description && (
+    {props.session.profile.description && (
       <div className="mb-3">
         <Description
-          description={props.description}
+          description={props.session.profile.description}
         />
       </div>
     )}

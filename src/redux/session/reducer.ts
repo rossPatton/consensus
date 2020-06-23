@@ -46,18 +46,15 @@ export const sessionReducer = (state = initialState, action: tActions) => {
     return failureReturn;
 
   case LOGIN_SUCCESS: {
-    console.log('action login success => ', action);
-    console.log('successReturn => ');
-    return successReturn;
+    // we return a thunk on the server for cases where user reloads
+    return action.payload;
   }
 
   case LOGOUT_SUCCESS:
     return successReturn;
 
-  case PATCH_SUCCESS: {
-    console.log('action patch success => ', action);
+  case PATCH_SUCCESS:
     return successReturn;
-  }
 
   default:
     return state;

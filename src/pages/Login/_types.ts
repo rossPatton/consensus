@@ -12,10 +12,11 @@ export type tStore = {
   session: ts.thunk<ts.session>,
 };
 
-export type tContainerProps = tStore & {
+export type tContainerProps = {
   history: History,
   loginDispatch: (query: ts.loginQuery) => ts.thunkPayload<ts.session>,
   match: ts.match & { params: { type: 'user' | 'group', } },
+  sessionThunk: ts.thunk<ts.session>,
 };
 
 export type tComponentProps = ts.tokenProps & tState & {

@@ -1,7 +1,8 @@
 import Koa from 'koa';
 import _ from 'lodash';
 
-import {initStore} from '../redux/store';
+import {initStore} from '~app/redux/store';
+
 import {getSession} from './queries';
 
 // in order to sync our server/client sessions, we have to initalize here

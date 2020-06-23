@@ -91,6 +91,6 @@ export const Users = loadable(() =>
   import(/* webpackChunkName: "Users" */'./Users'),
 );
 
-export const ValidateToken = loadable(() =>
-  import(/* webpackChunkName: "ValidateToken" */'./ValidateToken'),
-);
+// export const ValidateToken = loadable(() =>
+//   import(/* webpackChunkName: "ValidateToken" */'./ValidateToken'),
+// );

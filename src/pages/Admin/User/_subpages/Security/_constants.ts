@@ -1,6 +1,6 @@
-export const initialState = {
-  error: '',
-  privateMemberships: false,
-  privateRSVP: false,
-  token: '',
-};
+// export const initialState = {
+//   error: '',
+//   privateMemberships: false,
+//   privateRSVP: false,
+//   token: '',
+// };

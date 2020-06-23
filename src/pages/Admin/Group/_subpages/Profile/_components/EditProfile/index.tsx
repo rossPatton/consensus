@@ -25,7 +25,7 @@ const EditProfile = memo((props: tComponentProps) => (
             onChange={ev => props.updateState('email', ev)}
             className="p-2 w-full"
             maxLength={4096}
-            placeholder={`Currently ${props.session.email}`}
+            placeholder={`Currently ${props.session.profile.email}`}
             value={props.email}
             name="email"
             type="email"

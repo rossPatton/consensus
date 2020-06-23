@@ -27,7 +27,7 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
     const { type: sessionType = 'user' } = this.props?.match?.params;
 
     // and log them in on success
-    let account: ts.session;
+    let account: ts.payload<ts.session>;
     try {
       account = await this.props.loginDispatch({
         email,
@@ -58,11 +58,12 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const { type = 'user' } = this.props?.match?.params;
+    const { match, sessionThunk } = this.props;
+    const { type = 'user' } = match.params;
 
     return (
       <Template className="bg-community m-auto min-h-halfscreen pb-5 pt-4">
-        <ErrorBoundary status={this.props?.session?.error?.status}>
+        <ErrorBoundary status={sessionThunk?.error?.status}>
           <Helmet
             canonical={canonical}
             title={title}
@@ -131,8 +132,8 @@ class LoginContainer extends PureComponent<tContainerProps, tState> {
   }
 }
 
-const mapStateToProps = (store: {session: ts.session}) => ({
-  session: store.session.data,
+const mapStateToProps = (store: {session: ts.thunk<ts.session>}) => ({
+  sessionThunk: store.session,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

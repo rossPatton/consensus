@@ -5,9 +5,9 @@ import {Link} from 'react-router-dom';
 import {EmailToken} from '~app/containers';
 
 import {GroupSignup, UserSignup} from './_subpages';
-import {tProps} from './_types';
+import {tComponentProps} from './_types';
 
-export const SignupComponent = memo((props: tProps) => (
+export const SignupComponent = memo((props: tComponentProps) => (
   <>
     <div className="bg-white rounded-tr rounded-bl rounded-br shadow m-auto contain-sm mb-3 p-2 d:p-3">
       <h1 className="mb-1">

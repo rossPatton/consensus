@@ -15,23 +15,30 @@ const CurrentProfile = memo((props: tComponentProps) => (
     </Link>
     <h3 className="text-base mb-2 leading-none">
       <span className="font-semibold">Username:</span> @<span className="text-gray-5">
-        {props.username}
+        {props.session.profile.username}
       </span>
     </h3>
-    {props.name && (
+    {props.session.profile.name && (
       <h3 className="text-base mb-2 leading-none">
         <span className="font-semibold">Real Name:</span> <span className="text-gray-5">
-          {props.name}
+          {props.session.profile.name}
         </span>
       </h3>
     )}
-    {props.bio && (
+    {props.session.profile.email && (
+      <h3 className="text-base mb-2 leading-none">
+        <span className="font-semibold">Email:</span> <span className="text-gray-5">
+          {props.session.profile.email}
+        </span>
+      </h3>
+    )}
+    {props.session.profile.bio && (
       <>
         <h3 className="text-base mb-1 leading-none">
           <span className="font-semibold">Bio:</span>
         </h3>
         <div className="mb-2">
-          {props.bio.split('\n').map((p, i) => (
+          {props.session.profile.bio.split('\n').map((p, i) => (
             <p className="mb-1" key={i}>
               {p}
             </p>
@@ -39,31 +46,31 @@ const CurrentProfile = memo((props: tComponentProps) => (
         </div>
       </>
     )}
-    {props.website && (
+    {props.session.profile.website && (
       <h3 className="text-base mb-2 leading-none">
         <span className="font-semibold">Personal Website:</span> <span className="text-gray-5">
-          {props.website}
+          {props.session.profile.website}
         </span>
       </h3>
     )}
-    {props.facebook && (
+    {props.session.profile.facebook && (
       <h3 className="text-base mb-2 leading-none">
         <span className="font-semibold">Facebook:</span> <span className="text-gray-5">
-          {props.facebook}
+          {props.session.profile.facebook}
         </span>
       </h3>
     )}
-    {props.twitter && (
+    {props.session.profile.twitter && (
       <h3 className="text-base mb-2 leading-none">
         <span className="font-semibold">Twitter:</span> <span className="text-gray-5">
-          {props.twitter}
+          {props.session.profile.twitter}
         </span>
       </h3>
     )}
-    {props.city && (
+    {props.session.profile.city && (
       <h3 className="text-base mb-2 pb-1 leading-none">
         <span className="font-semibold">City:</span> <span className="text-gray-5">
-          {props.city}, {props.region}
+          {props.session.profile.city}, {props.session.profile.region}
         </span>
       </h3>
     )}
@@ -72,12 +79,12 @@ const CurrentProfile = memo((props: tComponentProps) => (
     </h3>
     <div>
       Your RSVPs are <span className="text-gray-5">
-        <b>{props.privateRSVP ? 'private' : 'public'}</b>
+        <b>{props.session.profile.privateRSVP ? 'private' : 'public'}</b>
       </span>
     </div>
     <div className="mb-3">
       Your Memberships are <span className="text-gray-5">
-        <b>{props.privateMemberships ? 'private' : 'public'}</b>
+        <b>{props.session.profile.privateMemberships ? 'private' : 'public'}</b>
       </span>
     </div>
     <Link

@@ -17,7 +17,9 @@ type manifestType = typeof webpackManifest;
 let workBoxHref = '';
 if (webpackManifest) {
   Object.keys(webpackManifest).map(fileKey => {
-    if (fileKey.indexOf('workbox') !== -1) {
+    if (fileKey.indexOf('workbox') !== -1
+      && fileKey.indexOf('.br') === -1
+      && fileKey.indexOf('.gz') === -1) {
       workBoxHref = webpackManifest[fileKey as keyof manifestType];
     }
   });
@@ -60,8 +62,8 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
     ? ''
     : '<link crossOrigin="anonymous" rel="preload" href="/fonts/founders-grotesk-text-web-medium-subset.woff2" as="font" type="font/woff2">';
 
-  const prefetchWorkbox = (cookies.get('workboxPreloaded') !== 'true' && workBoxHref)
-    ? `<link rel="prefetch" href=${workBoxHref} as="script">`
+  const prefetchWorkbox = workBoxHref
+    ? `<link rel="preload" href=${workBoxHref} as="script">`
     : '';
 
   const vendor = webpackManifest['vendor.js'];
@@ -71,7 +73,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
 
   ctx.res.write(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" />${CSP}<title>Consensus - when you need to get organized.</title>${css}${prefetchWorkbox}${preloadFonts}${prefetchVendor}${prefetchMain}${prefetchCSS}</head><body><div id="appRoot">`);
 
-  const store = await initStoreForSSR(ctx);
+  const {store} = await initStoreForSSR(ctx);
   const jsx = (
     <Provider store={store as any}>
       <StaticRouter
@@ -81,8 +83,6 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
       </StaticRouter>
     </Provider>
   );
-
-  console.log('store => ', store.getState());
 
   const stringifiedState = JSON.stringify(store.getState())
     .replace(/</g, '\\u003c');

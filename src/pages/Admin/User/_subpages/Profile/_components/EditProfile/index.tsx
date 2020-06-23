@@ -20,9 +20,9 @@ const EditProfile = memo((props: tComponentProps) => (
             Change Email
           </h3>
           <input
-            onChange={ev => props.updateState('email', ev)}
+            onChange={ev => props.updateState('email', ev.currentTarget.value)}
             className="p-2 w-full"
-            placeholder={`Currently ${props.session.email}`}
+            placeholder={`Currently ${props.session.profile.email}`}
             value={props.email}
             name="email"
           />
@@ -32,7 +32,7 @@ const EditProfile = memo((props: tComponentProps) => (
             fieldKey="userAvatar"
             folder="users"
             info="We recommend a size of at least 60x60px"
-            prefix={`u${props.session.id}:uAv`}
+            prefix={`u${props.session.profile.id}:uAv`}
             title="Upload or Replace Avatar"
           />
           <label className="w-full mb-3" htmlFor="username">

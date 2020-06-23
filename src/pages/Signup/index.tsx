@@ -7,12 +7,13 @@ import {Helmet} from '~app/components';
 import {ErrorBoundary, Template} from '~app/containers';
 
 import {canonical, description, keywords, title} from './_constants';
-import {tProps, tStore} from './_types';
+import {tContainerProps, tStore} from './_types';
 import {SignupComponent} from './Component';
 
-const SignupContainer = memo((props: tProps) => {
+const SignupContainer = memo((props: tContainerProps) => {
   const [termsAccepted, toggleTerms] = useState(false);
-  const { type = 'user' } = props?.match?.params;
+  const { match, sessionThunk } = props;
+  const { type = 'user' } = match.params;
 
   return (
     <Template className="bg-community m-auto min-h-halfscreen pb-5 pt-4">
@@ -24,9 +25,9 @@ const SignupContainer = memo((props: tProps) => {
           { name: 'keywords', content: keywords },
         ]}
       />
-      <ErrorBoundary status={props?.session?.error?.status}>
-        {props.session.isAuthenticated && <Redirect to="/admin/profile" />}
-        {!props.session.isAuthenticated && (
+      <ErrorBoundary status={sessionThunk.error?.status}>
+        {sessionThunk.data.isAuthenticated && <Redirect to="/admin/profile" />}
+        {!sessionThunk.data.isAuthenticated && (
           <>
             <ul className="contain-sm flex m-auto">
               <li>
@@ -56,7 +57,6 @@ const SignupContainer = memo((props: tProps) => {
               history={props.history}
               location={props.location}
               match={props.match}
-              session={props.session}
               sessionType={type}
               termsAccepted={termsAccepted}
               toggleTerms={toggleTerms}
@@ -68,6 +68,9 @@ const SignupContainer = memo((props: tProps) => {
   );
 });
 
-const mapStateToProps = (store: tStore) => ({session: store.session.data});
+const mapStateToProps = (store: tStore) => ({
+  sessionThunk: store.session,
+});
+
 const Signup = connect(mapStateToProps)(SignupContainer);
 export default Signup;

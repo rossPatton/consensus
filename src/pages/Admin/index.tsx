@@ -33,6 +33,7 @@ const AdminContainer = (props: tProps) => {
                 {isGroupAdmin
                   && (
                     <GroupAdmin
+                      history={props.history}
                       location={props.location}
                       match={match}
                     />

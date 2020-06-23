@@ -24,10 +24,6 @@ if (!cookies.get('fontsPreloaded')) {
   cookies.set('fontsPreloaded', true, {sameSite: 'strict', secure: true});
 }
 
-if (!cookies.get('workboxPreloaded')) {
-  cookies.set('workboxPreloaded', true, {sameSite: 'strict', secure: true});
-}
-
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__;
 
@@ -35,7 +31,7 @@ const preloadedState = window.__PRELOADED_STATE__;
 delete window.__PRELOADED_STATE__;
 
 // Create Redux store with initial state
-const store = initStore(preloadedState);
+const {store} = initStore(preloadedState);
 
 const rootNode = document.getElementById('appRoot');
 const App = (

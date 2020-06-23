@@ -37,15 +37,12 @@ describe('redux/session/reducer', () => {
       isAuthenticated: true,
       profile: {} as ts.user,
       type: 'user',
-    } as ts.session;
+    } as ts.session<ts.user>;
 
     expect(reducer(undefined, {
       type: '@@session/LOGIN_SUCCESS',
       payload: testSession,
-    })).toStrictEqual({
-      ...initialState,
-      data: testSession,
-    });
+    })).toStrictEqual(testSession);
   });
 
   it('should handle LOGOUT_INIT', () => {

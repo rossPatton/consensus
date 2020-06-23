@@ -13,5 +13,6 @@ export type tComponentProps = tProps & {
 };
 
 export type tContainerProps = tProps & {
+  dispatch: Function,
   logoutDispatch: () => ts.thunkPayload,
 };
