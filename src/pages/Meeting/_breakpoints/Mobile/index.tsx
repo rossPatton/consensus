@@ -5,6 +5,7 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {
+  AddToCalendar,
   Description,
   ExternalLink,
   MeetingFeaturedImage,
@@ -17,6 +18,11 @@ import {tComponentProps} from '../../_types';
 const MobileMeetingPage = memo((props: tComponentProps) => {
   const {meeting, meetingsByGroupId, group} = props;
   const isPastMeeting = dayJS(meeting.date).isBefore(dayJS());
+  // maybe we should just like, include the duration in the DB?
+  // instead of re-constructing here
+  const startDate = dayJS(meeting.date);
+  const endDate = dayJS(meeting.endDate);
+  const duration = `${endDate.diff(startDate, 'hour')}`;
 
   return (
     <>
@@ -54,6 +60,17 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
             seed={meeting.id}
           />
         </div>
+        <AddToCalendar
+          // @ts-ignore
+          event={{
+            description: meeting.description,
+            duration,
+            endDatetime: endDate.format('YYYYMMDDTHHmmss'),
+            location: meeting.isOnline ? undefined : meeting.location,
+            startDatetime: startDate.format('YYYYMMDDTHHmmss'),
+            title: meeting.title,
+          }}
+        />
         <div className="flex flex-col mb-3">
           <time
             className="font-semibold leading-none text-gray-5"
@@ -63,19 +80,12 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
                 alt=""
                 height="22"
                 className="mr-1"
-                src="/images/calendar.svg"
-                width="16"
-              />
-              {dayJS(meeting.date).format('dddd, MMM DD')}
-            </div>
-            <div className="flex items-center mb-2">
-              <img
-                alt=""
-                height="22"
-                className="mr-1"
                 src="/images/clock.svg"
                 width="16"
               />
+              <div className="mr-1">
+                {dayJS(meeting.date).format('dddd, MMM DD')}
+              </div>
               {dayJS(meeting.date).format('h:mm')}-{dayJS(meeting.endDate).format('h:mmA')}
             </div>
           </time>
@@ -119,19 +129,20 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
               {!meeting.locationLink && meeting.location}
             </div>
           )}
-          {meeting.attendees
-            && meeting.attendees > 0 && (
-            <div className="leading-none font-semibold flex items-center text-gray-5">
-              <img
-                alt=""
-                height="22"
-                className="mr-1"
-                src="/images/people.svg"
-                width="16"
-              />
-              {meeting.attendees} Going
-            </div>
-          )}
+          {typeof meeting.attendees === 'number'
+            && meeting.attendees > 0
+            && (
+              <div className="leading-none font-semibold flex items-center text-gray-5">
+                <img
+                  alt=""
+                  height="22"
+                  className="mr-1"
+                  src="/images/people.svg"
+                  width="16"
+                />
+                {meeting.attendees} Going
+              </div>
+            )}
         </div>
         {meeting.description && (
           <>

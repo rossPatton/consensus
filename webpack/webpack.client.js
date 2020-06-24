@@ -109,14 +109,11 @@ module.exports = merge(common, {
   // new webpack.HotModuleReplacementPlugin(),
   // dashboard to keep us updated on bundle rebuilding times, etc. client only
   // new DashboardPlugin({ port: 3002 }),
-  // new BundleAnalyzerPlugin({
-  //   analyzerMode: 'static',
-  // }),
 
   plugins: [
-    // new BundleAnalyzerPlugin({
-    //   analyzerMode: 'static',
-    // }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+    }),
 
     new ManifestPlugin({
       fileName: 'webpack-manifest.json',
@@ -139,6 +136,7 @@ module.exports = merge(common, {
             </head>
             <body>
               <div id="appRoot"></div>
+              <div id="portal"></div>
               <noscript>Consens.us requires Javascript to be enabled.</noscript>
             </body>
           </html>

@@ -82,6 +82,7 @@
     "qrcode": "^1.4.4",
     "query-string": "^6.10.1",
     "react": "^16.13.1",
+    "react-add-to-calendar-hoc": "^1.0.9",
     "react-dom": "^16.13.1",
     "react-helmet-async": "^1.0.4",
     "react-redux": "^5.1.2",

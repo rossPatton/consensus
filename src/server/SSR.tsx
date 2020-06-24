@@ -74,7 +74,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   const htmlStream = renderToNodeStream(jsx);
   htmlStream.pipe(ctx.res, {end: false});
   htmlStream.on('end', () => {
-    ctx.res.write(`</div><noscript>Consens.us requires Javascript to be enabled.</noscript><script nonce="${nonce}">window.__PRELOADED_STATE__ = ${stringifiedState}</script><script defer src="${vendor}"></script><script src="${main}"></script></body></html>`);
+    ctx.res.write(`</div><div id="portal"></div><noscript>Consens.us requires Javascript to be enabled.</noscript><script nonce="${nonce}">window.__PRELOADED_STATE__ = ${stringifiedState}</script><script defer src="${vendor}"></script><script src="${main}"></script></body></html>`);
 
     ctx.res.end();
   });

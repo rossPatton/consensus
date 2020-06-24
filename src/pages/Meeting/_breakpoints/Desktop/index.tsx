@@ -5,6 +5,7 @@ import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {
+  AddToCalendar,
   Description,
   ExternalLink,
   MeetingFeaturedImage,
@@ -17,6 +18,12 @@ import {tComponentProps} from '../../_types';
 const DesktopMeetingComponent = memo((props: tComponentProps) => {
   const {meeting, meetingsByGroupId, group, rsvp = {} as ts.rsvp} = props;
   const isPastMeeting = dayJS(meeting.date).isBefore(dayJS());
+
+  // maybe we should just like, include the duration in the DB?
+  // instead of re-constructing here
+  const startDate = dayJS(meeting.date);
+  const endDate = dayJS(meeting.endDate);
+  const duration = `${endDate.diff(startDate, 'hour')}`;
 
   return (
     <>
@@ -52,18 +59,23 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
             img={meeting.img}
             seed={meeting.id}
           />
+          <AddToCalendar
+            // @ts-ignore
+            className="mt-1"
+            event={{
+              description: meeting.description,
+              duration,
+              endDatetime: endDate.format('YYYYMMDDTHHmmss'),
+              location: meeting.isOnline ? undefined : meeting.location,
+              startDatetime: startDate.format('YYYYMMDDTHHmmss'),
+              title: meeting.title,
+            }}
+          />
         </div>
         <div className="min-w-2/3">
           <time
             className="flex items-center text-red-3 leading-none mb-1"
             dateTime={dayJS(meeting.date).format('YYYY-MM-DDThh:mm:ssTZD')}>
-            <img
-              alt=""
-              height="22"
-              className="mr-1"
-              src="/images/calendar.svg"
-              width="16"
-            />
             {dayJS(meeting.date).format(`dddd, MMM DD ${isPastMeeting ? 'YYYY' : ''}`)} | {dayJS(meeting.date).format('h:mm')}-{dayJS(meeting.endDate).format('h:mmA')}
           </time>
           <h1

@@ -1,5 +1,9 @@
 import loadable from '@loadable/component';
 
+export const AddToCalendar = loadable(() =>
+  import(/* webpackChunkName: "AddToCalendar" */'./AddToCalendar'),
+);
+
 export const Avatar = loadable(() =>
   import(/* webpackChunkName: "Avatar" */'./Avatar'),
 );
