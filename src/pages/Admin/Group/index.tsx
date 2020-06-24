@@ -46,7 +46,7 @@ const GroupAdminContainer = memo((props: tProps) => {
           isMeetingForm={isMeetingForm}
           isMembers={isMembers}
         />
-        <div className="order-1 d:order-2 w-full d:w-2/3 mb-2 d:mb-0">
+        <div className="order-1 d:order-2 w-full d:w-8/12 mb-2 d:mb-0">
           {isDelete && <DeleteGroup />}
           {isInvite && <InviteMember />}
           {isMeetings && <Meetings match={match} />}

@@ -18,7 +18,7 @@ const Group = memo((props: tProps) => {
         relative: true,
         'mb-2': props.asList,
         'w-full mb-2 d:mb-3': !props.asList,
-        'd:w-1/4': !props.asList && props.groups.length > 3,
+        'd:w-3/12': !props.asList && props.groups.length > 3,
       })}>
       <div
         role="button"

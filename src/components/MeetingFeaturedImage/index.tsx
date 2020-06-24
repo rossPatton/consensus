@@ -18,7 +18,7 @@ const MeetingFeaturedImage = memo((props: tProps) => {
         ? (
           <img
             alt={props.alt || ''}
-            className="w-full mFI"
+            className="w-full mFI mb-1"
             height={props.height || '240'}
             src={`${spacesUrl}/groups/${props.img}`}
             width={props.width || '480'}
@@ -26,7 +26,7 @@ const MeetingFeaturedImage = memo((props: tProps) => {
         ) : (
           <div
             className={cx({
-              'rounded placeholder': true,
+              'rounded placeholder mb-1': true,
               'bg-peach': color === 0,
               'bg-forest': color === 1,
               'bg-sky': color === 2,

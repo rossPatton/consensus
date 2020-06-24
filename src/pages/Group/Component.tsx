@@ -14,7 +14,7 @@ export const GroupComponent = memo((props: tComponentProps) => (
       params={props.match.params}
       role={props.role}
     />
-    <div className="d:border d:shadow rounded d:min-w-2/3">
+    <div className="d:border d:shadow rounded d:min-w-8/12">
       <GroupTabs
         match={props.match}
         role={props.role}

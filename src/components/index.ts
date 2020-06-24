@@ -87,6 +87,10 @@ export const Search = loadable(() =>
   import(/* webpackChunkName: "Search" */'./Search'),
 );
 
+export const Share = loadable(() =>
+  import(/* webpackChunkName: "Share" */'./Share'),
+);
+
 export const SuperSearch = loadable(() =>
   import(/* webpackChunkName: "SuperSearch" */'./SuperSearch'),
 );

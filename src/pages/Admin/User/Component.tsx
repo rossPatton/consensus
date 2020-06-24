@@ -88,7 +88,7 @@ export const UserAdminComponent = memo((props: tComponentProps) => {
           roles={props.roles}
           session={props.session}
         />
-        <div className="border shadow order-1 d:order-2 w-full d:w-2/3 mb-2 d:mb-0">
+        <div className="border shadow order-1 d:order-2 w-full d:w-8/12 mb-2 d:mb-0">
           <div className="bg-white rounded p-2 w-full">
             {isDeleteAccount && <DeleteAccount />}
             {isInvite && <Invitations />}

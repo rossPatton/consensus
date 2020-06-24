@@ -12,7 +12,7 @@ export const GroupInfoComponent = memo((props: tComponentProps) => {
   const {description = ''} = props.group;
 
   return (
-    <div className="rounded d:border d:shadow mb-3 d:mb-0 d:mr-2 flex-grow-0 min-w-full d:min-w-1/3">
+    <div className="rounded d:border d:shadow mb-3 d:mb-0 d:mr-2 flex-grow-0 min-w-full d:min-w-4/12">
       <div className="bg-gray-5 font-semibold rounded d:m-1 p-1 flex items-center justify-between">
         {!role && (
           <small className="text-white">

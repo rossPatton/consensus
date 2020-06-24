@@ -55,11 +55,11 @@
 //               {props?.session?.qr?.secret}
 //             </p>
 //             <label className="w-full mb-3" htmlFor="token">
-//               <h3 className="text-base mb-1/2">
+//               <h3 className="text-base mb-6/12">
 //                 Enter code to verify 2FA
 //               </h3>
 //               <input
-//                 className="w-auto p-1/2"
+//                 className="w-auto p-6/12"
 //                 onChange={ev => props.updateState('token', ev.currentTarget.value)}
 //                 value={props.token}
 //                 name="token"

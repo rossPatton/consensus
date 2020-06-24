@@ -11,6 +11,7 @@ import {
   MeetingFeaturedImage,
   Meetings,
   RSVP,
+  Share,
 } from '~app/components';
 
 import {tComponentProps} from '../../_types';
@@ -54,23 +55,27 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
         </Link>
       )}
       <div className="flex flex-col d:flex-row mb-4">
-        <div className="min-w-1/3 d:mr-3 mb-2 d:mb-0">
+        <div className="min-w-4/12 d:mr-3">
           <MeetingFeaturedImage
             img={meeting.img}
             seed={meeting.id}
           />
         </div>
-        <AddToCalendar
-          // @ts-ignore
-          event={{
-            description: meeting.description,
-            duration,
-            endDatetime: endDate.format('YYYYMMDDTHHmmss'),
-            location: meeting.isOnline ? undefined : meeting.location,
-            startDatetime: startDate.format('YYYYMMDDTHHmmss'),
-            title: meeting.title,
-          }}
-        />
+        <div className="flex flex-row items-center">
+          <AddToCalendar
+            // @ts-ignore
+            className="mr-1"
+            event={{
+              description: meeting.description,
+              duration,
+              endDatetime: endDate.format('YYYYMMDDTHHmmss'),
+              location: meeting.isOnline ? undefined : meeting.location,
+              startDatetime: startDate.format('YYYYMMDDTHHmmss'),
+              title: meeting.title,
+            }}
+          />
+          <Share />
+        </div>
         <div className="flex flex-col mb-3">
           <time
             className="font-semibold leading-none text-gray-5"

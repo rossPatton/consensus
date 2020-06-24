@@ -22,7 +22,7 @@ export const RegionComponent = memo((props: tComponentProps) => (
       {props.citiesToRender.map((city, i) => (
         <li
           key={i}
-          className="flex-grow-0 d:w-1/3 mb-2">
+          className="flex-grow-0 d:w-4/12 mb-2">
           <Link
             to={`${props.match.url}/${slugify(city.name)}`}
             className="text-gray-5 font-bold no-underline">

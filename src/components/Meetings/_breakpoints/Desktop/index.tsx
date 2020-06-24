@@ -26,7 +26,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
           key={meeting.id}
           className={cx({
             'mb-2': !props.horizontal,
-            'd:mb-1 w-1/4 flex-grow-0': props.horizontal,
+            'd:mb-1 w-3/12 flex-grow-0': props.horizontal,
             'mr-2': props.horizontal && i !== props.meetings.length - 1,
           })}>
           <div
@@ -36,7 +36,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
             })}>
             <div
               className={cx({
-                'mr-2 max-w-1/3 min-w-1/3': !props.horizontal,
+                'mr-2 max-w-4/12 min-w-4/12': !props.horizontal,
                 'mb-2': props.horizontal,
               })}>
               <Link

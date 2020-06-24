@@ -214,6 +214,7 @@ module.exports = {
     'react/no-multi-comp': ERROR,
     'react/prop-types': OFF, // needs to be off because we use typescript
     'react/self-closing-comp': ERROR,
+    'react/no-children-prop': OFF,
     'react-hooks/rules-of-hooks': ERROR,
     'react-hooks/exhaustive-deps': WARN,
     'require-atomic-updates': OFF,

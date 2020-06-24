@@ -11,7 +11,7 @@ exports[`renders as expected 1`] = `
       className="flex"
     >
       <h2
-        className="text-2 d:text-1 w-1/2 d:max-w-1/2 mb-2"
+        className="text-2 d:text-1 w-6/12 d:max-w-6/12 mb-2"
       >
         <a
           href="/categories/community"
@@ -25,7 +25,7 @@ exports[`renders as expected 1`] = `
       className="flex flex-row"
     >
       <a
-        className="w-full d:min-w-1/2 mr-3"
+        className="w-full d:min-w-6/12 mr-3"
         href="/categories/community"
         onClick={[Function]}
       >
@@ -50,7 +50,7 @@ exports[`renders as expected 1`] = `
       className="flex justify-end"
     >
       <h2
-        className="text-2 d:text-1 w-1/2 d:max-w-1/2 mb-2"
+        className="text-2 d:text-1 w-6/12 d:max-w-6/12 mb-2"
       >
         <a
           href="/categories/cooperative"
@@ -64,7 +64,7 @@ exports[`renders as expected 1`] = `
       className="flex flex-row flex-row-reverse"
     >
       <a
-        className="w-full d:min-w-1/2 ml-3"
+        className="w-full d:min-w-6/12 ml-3"
         href="/categories/cooperative"
         onClick={[Function]}
       >
@@ -89,7 +89,7 @@ exports[`renders as expected 1`] = `
       className="flex"
     >
       <h2
-        className="text-2 d:text-1 w-1/2 d:max-w-1/2 mb-2"
+        className="text-2 d:text-1 w-6/12 d:max-w-6/12 mb-2"
       >
         <a
           href="/categories/union"
@@ -103,7 +103,7 @@ exports[`renders as expected 1`] = `
       className="flex flex-row"
     >
       <a
-        className="w-full d:min-w-1/2 mr-3"
+        className="w-full d:min-w-6/12 mr-3"
         href="/categories/union"
         onClick={[Function]}
       >
@@ -128,7 +128,7 @@ exports[`renders as expected 1`] = `
       className="flex justify-end"
     >
       <h2
-        className="text-2 d:text-1 w-1/2 d:max-w-1/2 mb-2"
+        className="text-2 d:text-1 w-6/12 d:max-w-6/12 mb-2"
       >
         <a
           href="/categories/political"
@@ -142,7 +142,7 @@ exports[`renders as expected 1`] = `
       className="flex flex-row flex-row-reverse"
     >
       <a
-        className="w-full d:min-w-1/2 ml-3"
+        className="w-full d:min-w-6/12 ml-3"
         href="/categories/political"
         onClick={[Function]}
       >

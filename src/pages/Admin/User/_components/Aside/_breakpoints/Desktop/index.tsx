@@ -11,7 +11,7 @@ const Aside = memo((props: tProps) => {
   const {profile} = props.session;
 
   return (
-    <aside className="border shadow order-1 min-w-1/3 bg-white rounded p-2 mr-2">
+    <aside className="border shadow order-1 min-w-4/12 bg-white rounded p-2 mr-2">
       <div className="flex flex-row items-center mb-2">
         <Avatar
           hash={props.session.profile.avatar}
@@ -37,7 +37,7 @@ const Aside = memo((props: tProps) => {
         <li className="font-bold">
           Actions
         </li>
-        <li className="flex items-center text-base p-1 mb-1/2 rounded hover:bg-gray-2">
+        <li className="flex items-center text-base p-1 mb-6/12 rounded hover:bg-gray-2">
           {props.isRSVPs && 'Your rsvps'}
           {!props.isRSVPs && (
             <Link to="/admin/rsvps">

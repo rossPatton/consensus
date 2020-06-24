@@ -9,10 +9,10 @@ export const HomeComponent = memo((props: tProps) => {
   return (
     <>
       <div className="flex flex-col items-center mb-3 text-center">
-        <h1 className="text-2 d:text-1 mb-2 text-gray-5 leading-tight d:max-w-1/2">
+        <h1 className="text-2 d:text-1 mb-2 text-gray-5 leading-tight d:max-w-6/12">
           Consensus is an independent meetings platform for leftist activists and local community groups.
         </h1>
-        <div className="d:w-1/3">
+        <div className="d:w-4/12">
           <Search
             className="w-full pl-3"
             placeholder={`Search groups ${city ? `in ${city}` : ''}`}

@@ -11,6 +11,7 @@ import {
   MeetingFeaturedImage,
   Meetings,
   RSVP,
+  Share,
 } from '~app/components';
 
 import {tComponentProps} from '../../_types';
@@ -54,25 +55,28 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
         </Link>
       )}
       <div className="flex flex-row mb-4">
-        <div className="min-w-1/3 mr-3">
+        <div className="min-w-5/12 mr-3">
           <MeetingFeaturedImage
             img={meeting.img}
             seed={meeting.id}
           />
-          <AddToCalendar
-            // @ts-ignore
-            className="mt-1"
-            event={{
-              description: meeting.description,
-              duration,
-              endDatetime: endDate.format('YYYYMMDDTHHmmss'),
-              location: meeting.isOnline ? undefined : meeting.location,
-              startDatetime: startDate.format('YYYYMMDDTHHmmss'),
-              title: meeting.title,
-            }}
-          />
+          <div className="flex items-center">
+            <AddToCalendar
+              // @ts-ignore
+              className="mr-1"
+              event={{
+                description: meeting.description,
+                duration,
+                endDatetime: endDate.format('YYYYMMDDTHHmmss'),
+                location: meeting.isOnline ? undefined : meeting.location,
+                startDatetime: startDate.format('YYYYMMDDTHHmmss'),
+                title: meeting.title,
+              }}
+            />
+            <Share />
+          </div>
         </div>
-        <div className="min-w-2/3">
+        <div className="min-w-7/12">
           <time
             className="flex items-center text-red-3 leading-none mb-1"
             dateTime={dayJS(meeting.date).format('YYYY-MM-DDThh:mm:ssTZD')}>
