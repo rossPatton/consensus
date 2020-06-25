@@ -37,7 +37,7 @@ const Aside = memo((props: tProps) => {
         <li className="font-bold">
           Actions
         </li>
-        <li className="flex items-center text-base p-1 mb-6/12 rounded hover:bg-gray-2">
+        <li className="flex items-center text-base p-1 mb-1/2 rounded hover:bg-gray-2">
           {props.isRSVPs && 'Your rsvps'}
           {!props.isRSVPs && (
             <Link to="/admin/rsvps">

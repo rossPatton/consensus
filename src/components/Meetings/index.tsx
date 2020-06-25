@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {Paginate} from '~app/containers';
 import {MediaContext} from '~app/context';
-import {deleteEvent} from '~app/redux';
+import {deleteMeeting} from '~app/redux';
 
 import {tContainerProps, tStore} from './_types';
 import {MeetingsComponent} from './Component';
@@ -15,9 +15,9 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
     count: 4,
   };
 
-  deleteEvent = (ev: React.MouseEvent, id: number) => {
+  deleteMeeting = (ev: React.MouseEvent, id: number) => {
     ev.preventDefault();
-    this.props.deleteEventDispatch({id});
+    this.props.deleteMeetingDispatch({id});
   }
 
   render() {
@@ -25,7 +25,8 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
       count,
       meetings = [],
       sessionRole,
-      showOrgName,
+      showGroupName,
+      showPast,
       showRSVPs,
       type = 'meetings',
     } = this.props;
@@ -36,7 +37,7 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
     if (meetings.length === 0) {
       return (
         <h2 className="fs4 p-3 text-center">
-          No {type === 'meetings' && 'upcoming meetings!'} {type === 'drafts' && 'drafts'} {type === 'rsvps' && 'upcoming RSVPs!'}
+          No {type === 'meetings' && 'meetings!'} {type === 'drafts' && 'drafts'} {type === 'rsvps' && 'RSVPs!'}
         </h2>
       );
     }
@@ -47,14 +48,15 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
         items={meetings}
         render={(meetingsToRender: ts.meeting[]) => (
           <MeetingsComponent
-            deleteEvent={this.deleteEvent}
+            deleteMeeting={this.deleteMeeting}
             meetings={meetingsToRender}
             horizontal={this.props.horizontal}
             isEditable={isEditable}
             isMobile={isMobile}
             isDesktop={isDesktop}
             sessionRole={sessionRole}
-            showOrgName={showOrgName}
+            showGroupName={showGroupName}
+            showPast={showPast}
             showRSVPs={showRSVPs}
           />
         )}
@@ -68,7 +70,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  deleteEventDispatch: (query: ts.idQuery) => dispatch(deleteEvent(query)),
+  deleteMeetingDispatch: (query: ts.idQuery) => dispatch(deleteMeeting(query)),
 });
 
 const Meetings = connect(mapStateToProps, mapDispatchToProps)(MeetingsContainer);

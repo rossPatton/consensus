@@ -57,24 +57,27 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
       <div className="flex flex-row mb-4">
         <div className="min-w-5/12 mr-3">
           <MeetingFeaturedImage
+            className="mb-1"
             img={meeting.img}
             seed={meeting.id}
           />
-          <div className="flex items-center">
-            <AddToCalendar
-              // @ts-ignore
-              className="mr-1"
-              event={{
-                description: meeting.description,
-                duration,
-                endDatetime: endDate.format('YYYYMMDDTHHmmss'),
-                location: meeting.isOnline ? undefined : meeting.location,
-                startDatetime: startDate.format('YYYYMMDDTHHmmss'),
-                title: meeting.title,
-              }}
-            />
-            <Share />
-          </div>
+          {!isPastMeeting && (
+            <div className="flex items-center">
+              <AddToCalendar
+                // @ts-ignore
+                className="mr-1"
+                event={{
+                  description: meeting.description,
+                  duration,
+                  endDatetime: endDate.format('YYYYMMDDTHHmmss'),
+                  location: meeting.isOnline ? undefined : meeting.location,
+                  startDatetime: startDate.format('YYYYMMDDTHHmmss'),
+                  title: meeting.title,
+                }}
+              />
+              <Share />
+            </div>
+          )}
         </div>
         <div className="min-w-7/12">
           <time
@@ -174,10 +177,12 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
           <h2 className="text-3 mb-2 leading-none">
             More meetings by {group.name}
           </h2>
-          <Meetings
-            horizontal
-            meetings={meetingsByGroupId}
-          />
+          <div className="p-2 bg-peach-1 rounded">
+            <Meetings
+              horizontal
+              meetings={meetingsByGroupId}
+            />
+          </div>
         </aside>
       )}
     </>

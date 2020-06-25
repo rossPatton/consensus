@@ -8,7 +8,7 @@ const Description = memo((props: {description?: string}) => {
     return null;
   }
 
-  const descArr = description.split('\n');
+  const descArr = description.split('\n').filter(p => !!p);
 
   return (
     <div className="break-words">

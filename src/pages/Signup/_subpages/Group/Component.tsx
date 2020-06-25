@@ -34,13 +34,13 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
             name="token" // for non-js submit and passportjs
             id="tokenInput"
             placeholder="Enter the token you received via email"
-            className="p-2 w-full mb-6/12"
+            className="p-2 w-full mb-1/2"
             value={props.token}
             onChange={ev => props.updateState('token', ev.currentTarget.value)}
           />
         </label>
         <p className="font-sm flex items-baseline mb-2">
-          Didn&apos;t get a code? Click <button className="border-0 ml-6/12 mr-6/12 p-0 underline" type="button" onClick={() => props.sendToken(props.email)}>here</button> to send again.
+          Didn&apos;t get a code? Click <button className="border-0 ml-1/2 mr-1/2 p-0 underline" type="button" onClick={() => props.sendToken(props.email)}>here</button> to send again.
         </p>
         <h2 className="font-semibold text-base">
           Group Name

@@ -5,7 +5,7 @@ module.exports = {
   important: false,
   separator: ':',
   purge: {
-    enabled: process.env.NODE_ENV === 'production',
+    enabled: false, // process.env.NODE_ENV === 'production',
     content: ['./src/**/*.tsx'],
   },
   // blacklisted plugins
@@ -72,7 +72,10 @@ module.exports = {
       blue: {
         1: '#0b3dff',
       },
-      peach: '#f8d0bd',
+      peach: {
+        1: '#fbf1ed',
+        2: '#f8d0bd',
+      },
       sky: '#b5c4ce',
       forest: '#385e34',
       cherry: '#db500f',

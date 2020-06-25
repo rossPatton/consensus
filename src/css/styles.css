@@ -330,7 +330,7 @@ small {
 .placeholder:before {
   @apply block;
   content: '';
-  padding-top: calc(100% * 4 / 9);
+  padding-top: calc(100% * 5 / 9);
 }
 
 .bg-community {
@@ -361,4 +361,9 @@ small {
   margin: 0 10px;
   outline: rgb(94, 158, 215) auto 5px;
   position: static;
+}
+
+.mFI {
+  @apply overflow-hidden;
+  max-height: 150px;
 }

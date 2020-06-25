@@ -1,10 +1,15 @@
 export type tStore = {
   geo: ts.thunk<ts.geo>,
-  session: ts.thunk<ts.session>,
+  meetings: ts.thunk<ts.meeting[]>,
 };
 
 export type tProps = {
   geoThunk: ts.thunk<ts.geo>,
-  session: ts.session,
+  meetings: ts.meeting[],
 };
+
+export type tContainerProps = tProps & {
+  getMeetingsDispatch: (query: ts.getMeetingQuery) => ts.thunkPayload<ts.meeting[]>,
+};
+
 

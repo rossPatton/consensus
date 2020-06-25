@@ -10,6 +10,7 @@ import { groupsBySearchReducer } from './groupsBySearch/reducer';
 import { groupsByUserIdReducer } from './groupsByUserId/reducer';
 import { invitesReducer } from './invites/reducer';
 import { meetingReducer } from './meeting/reducer';
+import { meetingsReducer } from './meetings/reducer';
 import { meetingsByGroupIdReducer } from './meetingsByGroupId/reducer';
 import { meetingsByLocationReducer } from './meetingsByLocation/reducer';
 import { meetingsByUserIdReducer } from './meetingsByUserId/reducer';
@@ -33,6 +34,7 @@ export const rootReducer = combineReducers({
   groupsByUserId: groupsByUserIdReducer,
   invites: invitesReducer,
   meeting: meetingReducer,
+  meetings: meetingsReducer,
   meetingsByGroupId: meetingsByGroupIdReducer,
   meetingsByLocation: meetingsByLocationReducer,
   meetingsByUserId: meetingsByUserIdReducer,

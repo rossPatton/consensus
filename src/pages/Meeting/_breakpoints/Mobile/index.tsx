@@ -57,25 +57,28 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
       <div className="flex flex-col d:flex-row mb-4">
         <div className="min-w-4/12 d:mr-3">
           <MeetingFeaturedImage
+            className="mb-1"
             img={meeting.img}
             seed={meeting.id}
           />
         </div>
-        <div className="flex flex-row items-center">
-          <AddToCalendar
-            // @ts-ignore
-            className="mr-1"
-            event={{
-              description: meeting.description,
-              duration,
-              endDatetime: endDate.format('YYYYMMDDTHHmmss'),
-              location: meeting.isOnline ? undefined : meeting.location,
-              startDatetime: startDate.format('YYYYMMDDTHHmmss'),
-              title: meeting.title,
-            }}
-          />
-          <Share />
-        </div>
+        {!isPastMeeting && (
+          <div className="flex flex-row items-center">
+            <AddToCalendar
+              // @ts-ignore
+              className="mr-1"
+              event={{
+                description: meeting.description,
+                duration,
+                endDatetime: endDate.format('YYYYMMDDTHHmmss'),
+                location: meeting.isOnline ? undefined : meeting.location,
+                startDatetime: startDate.format('YYYYMMDDTHHmmss'),
+                title: meeting.title,
+              }}
+            />
+            <Share />
+          </div>
+        )}
         <div className="flex flex-col mb-3">
           <time
             className="font-semibold leading-none text-gray-5"
@@ -165,11 +168,13 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
           <h2 className="text-3 mb-2 leading-none">
             More Upcoming Meetings
           </h2>
-          <Meetings
-            horizontal
-            showOrgName
-            meetings={meetingsByGroupId}
-          />
+          <div className="p-2 bg-peach-1 rounded">
+            <Meetings
+              horizontal
+              showGroupName
+              meetings={meetingsByGroupId}
+            />
+          </div>
         </aside>
       )}
     </>

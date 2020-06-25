@@ -15,7 +15,11 @@ const Categories = memo(() => (
             'flex': true,
             'justify-end': cat.align === 'right',
           })}>
-          <h2 className="text-2 d:text-1 w-6/12 d:max-w-6/12 mb-2">
+          <h2
+            className={cx({
+              'text-2 d:text-1 mb-2 d:max-w-6/12': true,
+              'w-6/12': cat.align === 'right',
+            })}>
             <Link to={`/categories/${cat.slug}`}>
               {cat.display}
             </Link>

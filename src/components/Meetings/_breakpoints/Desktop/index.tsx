@@ -1,38 +1,66 @@
 import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
-import React, {memo} from 'react';
+import pluralize from 'pluralize';
+import React, {FunctionComponent, memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {Emoji, ExternalLink, MeetingFeaturedImage} from '~app/components';
 import {objToQueryString, slugify} from '~app/utils';
 
-import {tComponentProps} from './_types';
+import {tProps} from './_types';
 
-const DesktopMeetings = memo((props: tComponentProps) => (
+const DesktopMeetings: FunctionComponent<tProps> = memo(props => (
   <ul
     className={cx({
+      'animated fadeInUp': true,
       'flex flex-row text-left': props.horizontal,
-      'justify-between': props.horizontal && props.meetings.length === 4,
+      'justify-center': props.horizontal && props.meetingsToRender.length > 1,
+      'justify-between': props.horizontal && props.meetingsToRender.length === 4,
     })}>
-    {props.meetings.map((meeting, i) => {
-      const isPastMeeting = dayJS(meeting.date).isBefore(dayJS());
+    {props.renderPastAsFallback
+      && props.pastMeetingsCount > 0
+      && (
+        <li className="font-semibold mb-2">
+          Past Meetings
+        </li>
+      )}
+    {props.showPast
+      && !props.renderPastAsFallback
+      && props.pastMeetingsCount > 0
+      && (
+        <li className="font-semibold mb-2">
+          <button
+            className="border-0 text-sm"
+            onClick={() => props.togglePast(!props.renderPast)}>
+            {props.renderPast
+              ? `Show Upcoming ${pluralize('Meeting', props.upcomingMeetingsCount)} (${props.upcomingMeetingsCount})`
+              : `Show Past ${pluralize('Meeting', props.pastMeetingsCount)} (${props.pastMeetingsCount})`}
+          </button>
+        </li>
+      )}
+    {props.meetingsToRender.map((meeting, i) => {
       const {id, ...evWithoutId} = meeting;
       const qs = objToQueryString(meeting);
       const qsWithCopy = objToQueryString({...evWithoutId, isCopy: true});
+
+      const date = props.renderPast
+        ? dayJS(meeting.date).format('MMM DD YYYY | h:mmA')
+        : dayJS(meeting.date).format('MMM DD | h:mmA');
 
       return (
         <li
           key={meeting.id}
           className={cx({
             'mb-2': !props.horizontal,
-            'd:mb-1 w-3/12 flex-grow-0': props.horizontal,
-            'mr-2': props.horizontal && i !== props.meetings.length - 1,
+            'w-3/12 flex-grow-0 bg-white p-1': props.horizontal,
+            'mr-2': props.horizontal && i !== props.meetingsToRender.length - 1,
+            'opacity-5': props.renderPast || props.renderPastAsFallback,
           })}>
           <div
             className={cx({
               'flex flex-row items-center': !props.horizontal,
-              'p-2 hover:bg-gray-3 rounded': props.isEditable,
+              'p-2 hover:bg-gray-1 rounded': props.isEditable,
             })}>
             <div
               className={cx({
@@ -44,6 +72,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                   ? `/draft/${meeting.id}/${meeting.slug}`
                   : `/meeting/${meeting.id}/${meeting.slug}`}>
                 <MeetingFeaturedImage
+                  className="mFI"
                   img={meeting.img}
                   seed={meeting.id}
                 />
@@ -60,9 +89,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                     width="16"
                   /> Online <span className="ml-1 mr-1">@</span>
                   <time dateTime={meeting.date}>
-                    {isPastMeeting
-                      ? dayJS(meeting.date).format('MMM DD YYYY | h:mmA')
-                      : dayJS(meeting.date).format('MMM DD | h:mmA')}
+                    {date}
                   </time>
                 </div>
               )}
@@ -71,9 +98,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                 && (
                   <div className="flex mb-1 text-sm text-red-3 font-bold leading-none">
                     <time className="mr-1" dateTime={meeting.date}>
-                      {isPastMeeting
-                        ? dayJS(meeting.date).format('MMM DD YYYY | h:mmA')
-                        : dayJS(meeting.date).format('MMM DD | h:mmA')}
+                      {date}
                     </time>
                     {!props.horizontal && (
                       <span>
@@ -91,7 +116,7 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                     {!meeting.locationLink && meeting.location}
                   </div>
                 )}
-              <h3 className="capitalize mb-1">
+              <h3 className="capitalize mb-2 leading-tight">
                 {meeting.isDraft && meeting.title}
                 {!meeting.isDraft
                   && (
@@ -100,32 +125,30 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                     </Link>
                   )}
               </h3>
-              {props.showOrgName
+              {props.showGroupName
                 && (
                   <Link
                     to={`/group/${slugify(meeting.groupName)}`}
-                    className="font-bold text-sm text-gray-5 no-underline">
+                    className="font-bold text-sm text-blue-1 no-underline">
                     {meeting.groupName}
                   </Link>
                 )}
-              {props.isEditable
+              {!props.renderPast
+                && props.isEditable
                 && (
                   <div className="flex items-center font-semibold leading-none">
-                    {(!isPastMeeting || meeting.isDraft) && (
-                      <Link
-                        className="text-sm mr-2"
-                        to={props.sessionRole === 'admin'
-                          ? `/admin/planMeeting?${qs}`
-                          : `/group/${slugify(meeting.groupName)}/planMeeting?${qs}`}>
-                        <Emoji
-                          label="Hand with Pen Emoji"
-                          emoji="✍️"
-                        />
-                        Edit
-                      </Link>
-                    )}
-                    {isPastMeeting
-                      && !meeting.isDraft
+                    <Link
+                      className="text-sm mr-2"
+                      to={props.sessionRole === 'admin'
+                        ? `/admin/planMeeting?${qs}`
+                        : `/group/${slugify(meeting.groupName)}/planMeeting?${qs}`}>
+                      <Emoji
+                        label="Hand with Pen Emoji"
+                        emoji="✍️"
+                      />
+                      Edit
+                    </Link>
+                    {!meeting.isDraft
                       && (
                         <Link
                           className="text-sm mr-2"
@@ -139,17 +162,15 @@ const DesktopMeetings = memo((props: tComponentProps) => (
                           Copy
                         </Link>
                       )}
-                    {(!isPastMeeting || meeting.isDraft) && (
-                      <button
-                        onClick={e => props.deleteEvent(e, meeting.id)}
-                        className="border-0 bg-0 text-sm mr-2 underline">
-                        <Emoji
-                          label="Big X Emoji"
-                          emoji="✖️"
-                        />
-                        Delete
-                      </button>
-                    )}
+                    <button
+                      onClick={e => props.deleteMeeting(e, meeting.id)}
+                      className="border-0 bg-0 text-sm mr-2 underline">
+                      <Emoji
+                        label="Big X Emoji"
+                        emoji="✖️"
+                      />
+                      Delete
+                    </button>
                     {meeting.isDraft && (
                       <Link
                         to={`/draft/${meeting.id}`}

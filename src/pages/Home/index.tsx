@@ -1,35 +1,55 @@
 import _ from 'lodash';
-import React, {memo} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet} from '~app/components';
 import {Template} from '~app/containers';
+import {getMeetings} from '~app/redux';
 
 import {canonical, description, keywords, title} from './_constants';
-import {tProps, tStore} from './_types';
+import {tContainerProps, tStore} from './_types';
 import {HomeComponent} from './Component';
 
-const HomeContainer = memo((props: tProps) => (
-  <Template>
-    <Helmet
-      canonical={canonical}
-      title={title}
-      meta={[
-        { name: 'description', content: description },
-        { name: 'keywords', content: keywords },
-      ]}
-    />
-    <HomeComponent
-      geoThunk={props.geoThunk}
-      session={props.session}
-    />
-  </Template>
-));
+class HomeContainer extends React.PureComponent<tContainerProps> {
+  constructor(props: tContainerProps) {
+    super(props);
+    this._getMeetings();
+  }
+
+  _getMeetings = async () => {
+    return this.props.getMeetingsDispatch({
+      limit: 4,
+    });
+  }
+
+  render() {
+    return (
+      <Template>
+        <Helmet
+          canonical={canonical}
+          title={title}
+          meta={[
+            { name: 'description', content: description },
+            { name: 'keywords', content: keywords },
+          ]}
+        />
+        <HomeComponent
+          geoThunk={this.props.geoThunk}
+          meetings={this.props.meetings}
+        />
+      </Template>
+    );
+  }
+}
 
 const mapStateToProps = (store: tStore) => ({
   geoThunk: store.geo,
-  session: store.session.data,
+  meetings: store.meetings.data,
 });
 
-export default connect(mapStateToProps)(HomeContainer);
+const mapDispatchToProps = (dispatch: Function) => ({
+  getMeetingsDispatch: (query: ts.getMeetingQuery) => dispatch(getMeetings(query)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
 

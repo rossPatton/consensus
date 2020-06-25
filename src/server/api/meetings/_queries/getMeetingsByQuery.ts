@@ -47,7 +47,7 @@ export const getMeetingsByQuery = async (
 
     if (dontFetchDrafts) meetings.where('isDraft', false);
 
-    meetings.where({groupId}).orderBy('date', 'asc');
+    if (groupId) meetings.where({groupId}).orderBy('date', 'asc');
 
     const parsedLimit = limitStr ? parseInt(limitStr, 10) : 3;
     const parsedOffset = offsetStr ? parseInt(offsetStr, 10) : 0;

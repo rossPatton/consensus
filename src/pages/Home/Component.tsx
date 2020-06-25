@@ -1,11 +1,12 @@
 import React, {memo} from 'react';
 
-import {Categories, Search} from '~app/components';
+import {Categories, Meetings, Search} from '~app/components';
 
 import {tProps} from './_types';
 
 export const HomeComponent = memo((props: tProps) => {
   const {city} = props.geoThunk.data;
+
   return (
     <>
       <div className="flex flex-col items-center mb-3 text-center">
@@ -19,26 +20,23 @@ export const HomeComponent = memo((props: tProps) => {
           />
         </div>
       </div>
+      {props.meetings
+        && props.meetings.length > 0
+        && (
+          <>
+            <h2 className="text-3 mb-2 text-center">
+              Upcoming Meetings
+            </h2>
+            <div className="mb-4 p-2 bg-gray-1 rounded">
+              <Meetings
+                horizontal
+                showGroupName
+                meetings={props.meetings}
+              />
+            </div>
+          </>
+        )}
       <Categories />
     </>
   );
 });
-
-// @TODO re-implement once we have enough activity to justify it
-/* <GenericLoader
-      showLoader={false}
-      isLoading={props.meetingsByLocationThunk.isLoading}
-      render={() => props.meetingsByLocationThunk.data.length > 0
-        && (
-          <div className="mb-4">
-            <h2 className="text-3 mb-2">
-              Upcoming Meetings in {props.geoThunk.data.city || props.session.profile.cityId}
-            </h2>
-            <Meetings
-              horizontal
-              showOrgName
-              meetings={props.meetingsByLocationThunk.data.slice(0, 4)}
-            />
-          </div>
-        )}
-    /> */

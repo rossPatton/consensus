@@ -5,7 +5,8 @@ type tProps = {
   horizontal?: boolean,
   // just because eslint complains about using role with non-ARIA strings
   sessionRole?: ts.role,
-  showOrgName?: boolean,
+  showGroupName?: boolean,
+  showPast?: boolean,
   showRSVPs?: boolean,
 };
 
@@ -14,7 +15,7 @@ export type tStore = {
 };
 
 export type tContainerProps = tProps & {
-  deleteEventDispatch: (query: ts.idQuery) => ts.thunkPayload,
+  deleteMeetingDispatch: (query: ts.idQuery) => ts.thunkPayload,
   session: ts.session,
   // realistically just 3 options:
   // admin 'drafts' vs plain 'meetings' vs user meeting 'rsvps'
@@ -22,7 +23,7 @@ export type tContainerProps = tProps & {
 };
 
 export type tComponentProps = ts.mediaContext & tProps & {
-  deleteEvent: (ev: React.MouseEvent, id: number) => void,
+  deleteMeeting: (ev: React.MouseEvent, id: number) => void,
   // if user is an admin, they can edit meetings
   isEditable?: boolean,
 };

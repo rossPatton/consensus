@@ -43,7 +43,7 @@ class GroupContainer extends PureComponent<tContainerProps> {
     if (res.payload) {
       await this.props.getMeetingsByGroupDispatch({
         groupId: res.payload.id,
-        showPast: false,
+        showPast: true,
         limit: -1,
       });
     }

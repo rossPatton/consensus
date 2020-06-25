@@ -19,10 +19,10 @@ meetings.get(route, async (ctx: Koa.ParameterizedContext) => {
   await validateSchema<tMeetingsServerQuery>(ctx, getSchema, query);
 
   try {
-    const account = ctx?.state?.user;
+    const account = ctx?.state?.user || {};
     await pg.transaction(async trx => {
       let role = 'n/a' as ts.role;
-      if (account?.id) {
+      if (account.id && account.sessionType === 'user') {
         const accountRoleRel: ts.roleMap = await pg('users_roles')
           .transacting(trx)
           .limit(1)
@@ -35,7 +35,8 @@ meetings.get(route, async (ctx: Koa.ParameterizedContext) => {
         role = accountRoleRel?.role;
       }
 
-      ctx.body = await getMeetingsByQuery(trx, ctx, {...query, role});
+      const meetings = await getMeetingsByQuery(trx, ctx, {...query, role});
+      ctx.body = meetings;
     });
   } catch (err) {
     ctx.throw(500, err);

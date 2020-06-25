@@ -6,10 +6,10 @@ import {tProps} from './_types';
 
 export const Tab = memo((props: tProps) => {
   const routeDisplayMap = {
-    '': props.isDesktop ? 'Upcoming Meetings' : 'Meetings',
+    '': 'Meetings',
     planMeeting: props.isDesktop ? 'Plan Meeting' : 'Plan',
     drafts: props.isDesktop ? 'Meeting Drafts' : 'Drafts',
-    meetings: props.isDesktop ? 'Upcoming Meetings' : 'Meetings',
+    meetings: 'Meetings',
     pending: props.isDesktop ? 'Pending Approvals' : 'Pending',
     members: props.isDesktop ? 'Current Members' : 'Members',
   };

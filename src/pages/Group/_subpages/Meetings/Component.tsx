@@ -20,6 +20,7 @@ export const MeetingsComponent = memo((props: tComponentProps) => (
             placeholder="Filter meetings by title"
           />
           <Meetings
+            showPast
             showRSVPs
             meetings={props.meetings}
             sessionRole={props.role}

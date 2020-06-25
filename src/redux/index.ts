@@ -8,9 +8,10 @@ export { postUpload } from './uploads';
 
 // meeting(s) related actions.thunks
 export { getMeeting, patchMeeting, postMeeting } from './meeting';
+export { getMeetings } from './meetings';
 export { getMeetingsByLocation } from './meetingsByLocation';
 export {
-  deleteEvent,
+  deleteMeeting,
   getMeetingsByGroupId,
   getMeetingsByGroupIdSuccess,
 } from './meetingsByGroupId';

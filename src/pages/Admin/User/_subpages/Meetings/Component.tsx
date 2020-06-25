@@ -23,7 +23,7 @@ export const MeetingsComponent = memo((props: tComponentProps) => (
     />
     <Meetings
       meetings={props.meetings}
-      showOrgName
+      showGroupName
     />
   </>
 ));
