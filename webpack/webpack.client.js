@@ -111,9 +111,9 @@ module.exports = merge(common, {
   // new DashboardPlugin({ port: 3002 }),
 
   plugins: [
-    // new BundleAnalyzerPlugin({
-    //   analyzerMode: 'static',
-    // }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+    }),
 
     new ManifestPlugin({
       fileName: 'webpack-manifest.json',

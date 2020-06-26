@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const merge = require('webpack-merge');
 const nodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WaitPlugin = require('./Wait');
 const webpack = require('webpack');
 
 const env = require('./webpack.env');
@@ -35,6 +36,8 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
+    new WaitPlugin('./dist/webpack-manifest.json'),
+
     // server only global variables
     new webpack.DefinePlugin({
       __CLIENT__: false,

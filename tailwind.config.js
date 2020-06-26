@@ -5,7 +5,7 @@ module.exports = {
   important: false,
   separator: ':',
   purge: {
-    enabled: false, // process.env.NODE_ENV === 'production',
+    enabled: process.env.NODE_ENV === 'production',
     content: ['./src/**/*.tsx'],
   },
   // blacklisted plugins
