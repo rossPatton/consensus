@@ -11,7 +11,7 @@ exports[`renders as expected 1`] = `
       className="flex"
     >
       <h2
-        className="text-2 d:text-1 w-6/12 d:max-w-6/12 mb-2"
+        className="text-2 d:text-1 mb-2 d:max-w-6/12"
       >
         <a
           href="/categories/community"
@@ -50,7 +50,7 @@ exports[`renders as expected 1`] = `
       className="flex justify-end"
     >
       <h2
-        className="text-2 d:text-1 w-6/12 d:max-w-6/12 mb-2"
+        className="text-2 d:text-1 mb-2 d:max-w-6/12 w-6/12"
       >
         <a
           href="/categories/cooperative"
@@ -89,7 +89,7 @@ exports[`renders as expected 1`] = `
       className="flex"
     >
       <h2
-        className="text-2 d:text-1 w-6/12 d:max-w-6/12 mb-2"
+        className="text-2 d:text-1 mb-2 d:max-w-6/12"
       >
         <a
           href="/categories/union"
@@ -128,7 +128,7 @@ exports[`renders as expected 1`] = `
       className="flex justify-end"
     >
       <h2
-        className="text-2 d:text-1 w-6/12 d:max-w-6/12 mb-2"
+        className="text-2 d:text-1 mb-2 d:max-w-6/12 w-6/12"
       >
         <a
           href="/categories/political"

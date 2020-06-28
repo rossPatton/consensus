@@ -38,13 +38,15 @@ class CityContainer extends PureComponent<tContainerProps, tState> {
     });
   }
 
-  onSearch = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  onSearch = async (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
+    const groupsBySearch = await fuzzFilterList({
+      input: this.props.cityThunk.data.groups,
+      search: ev.currentTarget.value,
+    });
+
     this.setState({
-      groupsBySearch: fuzzFilterList({
-        input: this.props.cityThunk.data.groups,
-        search: ev.currentTarget.value,
-      }),
+      groupsBySearch,
     });
   }
 

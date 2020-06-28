@@ -19,15 +19,17 @@ class RegionContainer extends PureComponent<tContainerProps> {
     citiesBySearch: [] as ts.city[],
   };
 
-  onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  onChange = async (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
     const {cities = []} = this.props.regionThunk.data;
 
+    const citiesBySearch = await fuzzFilterList({
+      input: cities,
+      search: ev.currentTarget.value,
+    });
+
     this.setState({
-      citiesBySearch: fuzzFilterList({
-        input: cities,
-        search: ev.currentTarget.value,
-      }),
+      citiesBySearch,
     });
   }
 

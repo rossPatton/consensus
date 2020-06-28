@@ -6,7 +6,7 @@ module.exports = {
     __CLIENT__: true,
     __SERVER__: false,
     __DB__: 'test',
-    __DEBUG__: false,
+    __DEBUG__: true,
     __DEV__: false,
     __PROD__: false,
     __NODE_ENV__: 'test',
@@ -17,5 +17,5 @@ module.exports = {
   setupFiles: [
     '<rootDir>/jest.mocks.js',
   ],
-  // verbose: false,
+  verbose: true,
 };

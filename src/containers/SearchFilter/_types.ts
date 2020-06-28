@@ -4,7 +4,7 @@ export type tState = {
 };
 
 export type tProps = {
-  filterBy?: {key: string, value: string} | null,
+  prefilter?: {key: string, value: string} | null,
   items: object[],
   searchKey?: string,
   render: (props: ts.searchFilterProps) => React.ReactNode,

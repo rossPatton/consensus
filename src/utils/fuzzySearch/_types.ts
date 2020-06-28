@@ -5,7 +5,7 @@ export type tObjWithScore = {
 
 export type tOpts = {
   // if dealing with a big list, we might want to filter it first by some criteria
-  filterBy?: {key: string, value: string},
+  prefilter?: {key: string, value: string},
   input?: any[],
   key?: string,
   search?: string,

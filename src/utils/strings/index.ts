@@ -15,7 +15,7 @@ export const upperCase = (s: string): string => {
  * Tech Worker's Coalition(NYC) => tech-workers-coalition-nyc
  */
 export const slugify = (string: string): string => {
-  if (typeof string !== 'string') return string;
+  if (typeof string !== 'string') return '';
 
   return string
     .replace(/\s+|\/+|,+/gm, '-') // spaces and / => -
@@ -30,7 +30,7 @@ export const slugify = (string: string): string => {
  * new-york-city => New York City
 */
 export const deSlugify = (string: string): string => {
-  if (typeof string !== 'string') return string;
+  if (typeof string !== 'string') return '';
 
   return string
     .replace(/-+/gm, ' ')

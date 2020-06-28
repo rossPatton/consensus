@@ -111,7 +111,7 @@ module.exports = merge(common, {
   // new DashboardPlugin({ port: 3002 }),
 
   plugins: [
-    new BundleAnalyzerPlugin({
+    !!env.PROD && new BundleAnalyzerPlugin({
       analyzerMode: 'static',
     }),
 

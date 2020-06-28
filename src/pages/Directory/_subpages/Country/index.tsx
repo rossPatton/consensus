@@ -19,15 +19,17 @@ class CountryContainer extends PureComponent<tContainerProps, tState> {
     regionsBySearch: [] as ts.region[],
   };
 
-  onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  onChange = async (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
     const {regions = []} = this.props.countryThunk.data;
 
+    const regionsBySearch = await fuzzFilterList({
+      input: regions,
+      search: ev.currentTarget.value,
+    });
+
     this.setState({
-      regionsBySearch: fuzzFilterList({
-        input: regions,
-        search: ev.currentTarget.value,
-      }),
+      regionsBySearch,
     });
   }
 

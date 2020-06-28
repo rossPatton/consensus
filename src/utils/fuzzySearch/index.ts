@@ -1,10 +1,12 @@
 import {lowerCase} from '..';
 import {tObjWithScore, tOpts} from './_types';
 
+// @TODO if this was tokenized it would be more useful
+// currently matches entire string against search value, instead of search value against tokens
+
 // return numeric score based on fuzzy match strength
 // If `pattern` matches `string`, wrap each matching character
-export const fuzzyScore = function(search: string = '', string: string = '') {
-  let patternIdx = 0;
+export const fuzzyScore = async (search: string = '', string: string = '') => {
   const result = [];
   const len = string.length;
   let totalScore = 0;
@@ -20,6 +22,7 @@ export const fuzzyScore = function(search: string = '', string: string = '') {
   // For each character in the string, either add it to the result
   // or wrap in template if it's the next string in the pattern
   let idx = 0;
+  let patternIdx = 0;
   for (idx; idx < len; idx++) {
     ch = string[idx];
     if (compareString[idx] === pattern[patternIdx]) {
@@ -35,38 +38,47 @@ export const fuzzyScore = function(search: string = '', string: string = '') {
     result[result.length] = ch;
   }
 
-  // return rendered string if we have a match for every char
-  if (patternIdx === pattern.length) return totalScore;
-  return 0;
+  return totalScore;
 };
 
 // takes an array of objects, returns a sorted and filtered array
 // defaults to fuzzy matching against a 'name' key
 // but can filter by any key, as long as the value is a string
-export const fuzzFilterList = (opts: tOpts) => {
+export const fuzzFilterList = async (opts: tOpts) => {
+  let {input = []} = opts;
   const {
-    filterBy = null,
-    input = [],
+    prefilter = null,
     key = 'name',
     search = '',
   } = opts;
 
-  if (filterBy) {
-    input.filter(item => item[filterBy.key] === filterBy.value);
+  // remove a set from the list before fuzzy matching
+  if (prefilter) {
+    input = input.filter(item => item[prefilter.key] !== prefilter.value);
   }
 
-  return input
-    .map(obj => {
-      const score = fuzzyScore(search, obj[key]);
-      return {
-        ...obj,
-        score,
-      };
-    })
-    .filter((obj: tObjWithScore) => obj.score > 0)
-    .sort((a: tObjWithScore, b: tObjWithScore) => {
-      if (a.score > b.score) return -1;
-      if (a.score < b.score) return 1;
-      return 0;
-    });
+  const scores = await Promise.all(input.map(async obj => {
+    const tokens = [obj[key], ...obj[key].split(' ')] as string[];
+    let score = 0;
+    await Promise.all(tokens.map(async token => {
+      const tokenScore = await fuzzyScore(search, token);
+      if (tokenScore > score) score = tokenScore;
+    }));
+
+    return { ...obj, score };
+  }));
+
+  const scoresAboveZero = await Promise.all(
+    scores.filter((obj: tObjWithScore) => obj.score > 0)
+  );
+
+  const rankedScores = await Promise.all(scoresAboveZero.sort((
+    a: tObjWithScore,
+    b: tObjWithScore) => {
+    if (a.score > b.score) return -1;
+    if (a.score < b.score) return 1;
+    return 0;
+  }))
+
+  return rankedScores;
 };

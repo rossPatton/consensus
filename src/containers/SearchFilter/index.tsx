@@ -26,12 +26,12 @@ export default class SearchFilter extends PureComponent<tProps, tState> {
     this.setState({searchKey});
   }
 
-  filterItems = () => {
+  filterItems = async () => {
     const {search} = this.state;
     if (!search) return this.props.items;
 
     return fuzzFilterList({
-      filterBy: this.props.filterBy,
+      prefilter: this.props.prefilter,
       input: this.props.items || [],
       key: this.state.searchKey,
       search,
