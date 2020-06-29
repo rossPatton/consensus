@@ -32,6 +32,10 @@ export const RoleFilter = loadable(() =>
   import(/* webpackChunkName: "RoleFilter" */'./RoleFilter'),
 );
 
+export const ScrollToTop = loadable(() =>
+  import(/* webpackChunkName: "ScrollToTop" */'./ScrollToTop'),
+);
+
 export const SearchFilter = loadable(() =>
   import(/* webpackChunkName: "SearchFilter" */'./SearchFilter'),
 );

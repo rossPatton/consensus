@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders as expected 1`] = `
+exports[`components/Description renders as expected 1`] = `
 <div
   className="break-words"
 >
@@ -12,6 +12,6 @@ exports[`renders as expected 1`] = `
 </div>
 `;
 
-exports[`renders null when bad description passed in 1`] = `null`;
+exports[`components/Description renders null when bad description passed in 1`] = `null`;
 
-exports[`renders null when no description prop passed in 1`] = `null`;
+exports[`components/Description renders null when no description prop passed in 1`] = `null`;

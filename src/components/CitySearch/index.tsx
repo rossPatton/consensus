@@ -18,18 +18,17 @@ class CitySearchContainer extends PureComponent<tContainerProps> {
 
   constructor(props: tContainerProps) {
     super(props);
-    let region = _.get(props, 'session.profile.region', null);
-    /* eslint-disable */
-    if (typeof region !== 'string' || region === '') {
-      region = props.geo.region;
-    } else if (typeof region !== 'string' || region === '') {
-      region = 'New York';
-    }
-    /* eslint-enabled */
+    let region = 'New York';
+    const sessionRegion = _.get(props, 'session.profile.region', '');
+    const geoRegion = _.get(props, 'geo.region', '');
 
-    if (region) {
-      props.getCitiesDispatch({ region });
+    if (sessionRegion !== '') {
+      region = sessionRegion;
+    } else if (geoRegion !== '') {
+      region = geoRegion;
     }
+
+    props.getCitiesDispatch({ region });
   }
 
   updateState = async (state: {[key: string]: unknown}) => {

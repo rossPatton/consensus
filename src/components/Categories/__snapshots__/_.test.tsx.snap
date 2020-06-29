@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders as expected 1`] = `
+exports[`components/Categories renders as expected 1`] = `
 <ul
   className="d:pl-5 d:pr-5 font-semibold text-left"
 >

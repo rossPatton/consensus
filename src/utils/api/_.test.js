@@ -1,4 +1,4 @@
-// import fetchMock from "jest-fetch-mock";
+/* eslint-disable */
 import {api} from '.';
 
 describe('utils/api', () => {
@@ -22,7 +22,6 @@ describe('utils/api', () => {
       .finally(final => {
         expect(onResponse).toHaveBeenCalled();
         expect(onError).not.toHaveBeenCalled();
-        console.log('onResponse.mock.calls => ', onResponse.mock.calls);
         expect(onResponse.mock.calls[0][0]).toEqual({ id: 1 });
       });
   });
@@ -38,7 +37,6 @@ describe('utils/api', () => {
       .finally(final => {
         expect(onResponse).toHaveBeenCalled();
         expect(onError).not.toHaveBeenCalled();
-        console.log('onResponse.mock.calls => ', onResponse.mock.calls);
         expect(onResponse.mock.calls[0][0]).toEqual({ id: 1 });
       });
   });
@@ -59,7 +57,6 @@ describe('utils/api', () => {
       .finally(final => {
         expect(onResponse).toHaveBeenCalled();
         expect(onError).not.toHaveBeenCalled();
-        console.log('onResponse.mock.calls => ', onResponse.mock.calls);
         expect(onResponse.mock.calls[0][0]).toEqual({ id: 1, newUser: true });
       });
   });
@@ -72,7 +69,7 @@ describe('utils/api', () => {
       path: '/api/v1/user',
       query: {
         limit: 1,
-      }
+      },
     })
       .then(resp => {
         expect(resp).toEqual('error!');
@@ -90,13 +87,11 @@ describe('utils/api', () => {
       path: '/api/v1/user',
       query: {
         limit: 1,
-      }
+      },
     })
       .then(resp => {
-        console.log('error obj resp => ', typeof resp, resp)
         expect(resp).toEqual('error');
-      })
-      .finally(final => console.log('final err obj => ', final));
+      });
   });
 
   it('test api w/ redux dispatch functions', async () => {
@@ -116,17 +111,15 @@ describe('utils/api', () => {
       path: '/api/v1/user',
       query: {
         limit: 1,
-      }
+      },
     })
-    .then(onResponse)
-    .catch(onError)
-    .finally(final => {
-      console.log('')
-      expect(onResponse).toHaveBeenCalled();
-      expect(onError).not.toHaveBeenCalled();
-      console.log('onResponse.mock.calls => ', onResponse.mock.calls);
-      expect(onResponse.mock.calls[0][0]).toEqual({ id: 5 });
-    });
+      .then(onResponse)
+      .catch(onError)
+      .finally(final => {
+        expect(onResponse).toHaveBeenCalled();
+        expect(onError).not.toHaveBeenCalled();
+        expect(onResponse.mock.calls[0][0]).toEqual({ id: 5 });
+      });
   });
 
   it('should throw if resp not ok', async () => {
@@ -136,10 +129,10 @@ describe('utils/api', () => {
       path: '/api/v1/user',
       query: {
         limit: 1,
-      }
+      },
     })
-    .then(resp => {
-      expect(resp).toEqual({ok: false});
-    })
+      .then(resp => {
+        expect(resp).toEqual({ok: false});
+      });
   });
 });

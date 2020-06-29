@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Form renders 1`] = `
+<form
+  autoComplete="off"
+  className=""
+  encType="multipart/form-data"
+  method="post"
+  name="planEventForm"
+  onSubmit={[Function]}
+>
+  <fieldset>
+    <legend>
+      <h2
+        className="text-3 mb-1"
+      >
+        Legend here
+      </h2>
+    </legend>
+    <div
+      className="mb-2"
+    />
+    <div
+      className="rounded text-3 bg-red-2 p-2 text-white font-semibold w-full"
+    >
+      Something is wrong
+    </div>
+  </fieldset>
+</form>
+`;
+
+exports[`components/Form renders with server error 1`] = `
+<form
+  autoComplete="off"
+  className=""
+  encType="multipart/form-data"
+  method="post"
+  name="planEventForm"
+  onSubmit={[Function]}
+>
+  <fieldset>
+    <legend>
+      <h2
+        className="text-3 mb-1"
+      >
+        Legend here
+      </h2>
+    </legend>
+    <div
+      className="mb-2"
+    />
+    <div
+      className="rounded text-3 bg-red-2 p-2 text-white font-semibold w-full"
+    >
+      Bad Request
+    </div>
+  </fieldset>
+</form>
+`;

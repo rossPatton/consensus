@@ -10,8 +10,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-import { ScrollToTop } from '~app/components';
-import { AppShell } from '~app/containers';
+import { AppShell, ScrollToTop } from '~app/containers';
 import { initStore } from '~app/redux/store';
 import { isPrivateMode } from '~app/utils';
 

@@ -1,6 +1,8 @@
 import loglevel from 'loglevel';
 
-import {agent, objToQueryString} from '..';
+import {agent} from '~app/constants/agent';
+
+import {objToQueryString} from '..';
 import {tApiOpts} from './_types';
 
 export const api = async (opts: tApiOpts) => {
@@ -18,7 +20,6 @@ export const api = async (opts: tApiOpts) => {
   let endpoint = path;
   if (query) {
     const qs = objToQueryString(query);
-    console.log('qs => ', qs);
     endpoint = `${path}?${qs}`;
   }
 

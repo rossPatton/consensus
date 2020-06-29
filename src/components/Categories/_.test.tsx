@@ -4,12 +4,10 @@ import render from 'react-test-renderer';
 
 import Categories from '.';
 
-it('renders without crashing', () => {
-  render.create(<Router><Categories /></Router>);
-});
-
-it('renders as expected', () => {
-  const component = render.create(<Router><Categories /></Router>);
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+describe('components/Categories', () => {
+  it('renders as expected', () => {
+    const component = render.create(<Router><Categories /></Router>);
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

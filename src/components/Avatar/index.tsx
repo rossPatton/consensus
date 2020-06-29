@@ -14,7 +14,7 @@ const Avatar = memo((props: tProps) => {
     if (hash.length === 1) {
       src = `/images/av/${hash}.svg`;
     } else {
-      src = `${spacesUrl}/${type}/${hash || null}`;
+      src = `${spacesUrl}/${type}/${hash}`;
     }
   }
 

@@ -79,10 +79,6 @@ export const RSVP = loadable(() =>
   import(/* webpackChunkName: "RSVP" */'./RSVP'),
 );
 
-export const ScrollToTop = loadable(() =>
-  import(/* webpackChunkName: "ScrollToTop" */'./ScrollToTop'),
-);
-
 export const Search = loadable(() =>
   import(/* webpackChunkName: "Search" */'./Search'),
 );

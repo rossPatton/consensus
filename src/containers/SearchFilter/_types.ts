@@ -1,4 +1,5 @@
 export type tState = {
+  items: object[],
   search: string,
   searchKey: string,
 };

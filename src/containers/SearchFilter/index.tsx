@@ -10,6 +10,7 @@ export default class SearchFilter extends PureComponent<tProps, tState> {
   };
 
   state = {
+    items: [{}],
     search: '',
     searchKey: this.props.searchKey,
   };
@@ -17,30 +18,34 @@ export default class SearchFilter extends PureComponent<tProps, tState> {
   onSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     ev.preventDefault();
     const search = ev.currentTarget.value;
-    this.setState({search});
+    this.setState({search}, this.filterItems);
   }
 
   onFilterOptionChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
     ev.preventDefault();
     const searchKey = ev.currentTarget.value;
-    this.setState({searchKey});
+    this.setState({searchKey}, this.filterItems);
   }
 
   filterItems = async () => {
     const {search} = this.state;
     if (!search) return this.props.items;
 
-    return fuzzFilterList({
+    const items = await fuzzFilterList({
       prefilter: this.props.prefilter,
       input: this.props.items || [],
       key: this.state.searchKey,
       search,
     });
+
+    this.setState({
+      items,
+    });
   }
 
   render() {
     return this.props.render({
-      items: this.filterItems(),
+      items: this.state.items,
       onFilterOptionChange: this.onFilterOptionChange,
       onSearchChange: this.onSearchChange,
     });

@@ -52,7 +52,7 @@ describe('utils/fuzzySearch', () => {
       search: 'tech',
     });
     expect(filteredList).toStrictEqual([
-      {score: 26, title: "tech", isPrivate: 'false'},
+      {score: 26, title: 'tech', isPrivate: 'false'},
       {score: 26, title: "tech worker's coalition", isPrivate: 'false'},
       {score: 26, title: 'technologists against AI', isPrivate: 'false'},
       {score: 11, title: 'tectonic plates', isPrivate: 'false'},

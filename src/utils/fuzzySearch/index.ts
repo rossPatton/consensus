@@ -66,16 +66,14 @@ export const fuzzFilterList = async (opts: tOpts) => {
   }));
 
   const scoresAboveZero = await Promise.all(
-    scores.filter((obj: tObjWithScore) => obj.score > 0)
+    scores.filter((obj: tObjWithScore) => obj.score > 0),
   );
 
-  const rankedScores = await Promise.all(scoresAboveZero.sort((
+  return await Promise.all(scoresAboveZero.sort((
     a: tObjWithScore,
     b: tObjWithScore) => {
     if (a.score > b.score) return -1;
     if (a.score < b.score) return 1;
     return 0;
-  }))
-
-  return rankedScores;
+  }));
 };

@@ -1,4 +1,3 @@
-export { agent } from './agent';
 export { api } from './api';
 export { deSlugify, slugify, lowerCase, upperCase } from './strings';
 export { fuzzyScore, fuzzFilterList } from './fuzzySearch';

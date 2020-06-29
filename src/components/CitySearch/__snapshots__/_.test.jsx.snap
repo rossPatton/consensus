@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/CitySearch renders with blank session region 1`] = `null`;
+
+exports[`components/CitySearch renders with custom label 1`] = `null`;
+
+exports[`components/CitySearch renders with null session region 1`] = `null`;
+
+exports[`components/CitySearch renders with remove button 1`] = `null`;
+
+exports[`components/CitySearch renders without crashing 1`] = `null`;

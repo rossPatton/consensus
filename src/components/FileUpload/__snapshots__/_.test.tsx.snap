@@ -1,0 +1,187 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/FileUpload component removeImage 1`] = `
+Array [
+  <h3
+    className="text-base mb-1"
+  />,
+  <div
+    className="animated bg-gray-1 p-3 mb-3 flex flex-col items-center hidden"
+    id="imagePreview"
+  >
+    <button
+      className="mb-2 p-2"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      type="button"
+    >
+      Remove Image
+    </button>
+  </div>,
+  <label
+    className="fadeInDown bg-gray-1 border cursor-ptr flex flex-col items-center mb-3 p-3 animated fadeInDown"
+    htmlFor="fileUpload"
+  >
+    <input
+      accept="image/png, image/jpeg, image/gif"
+      className="hidden"
+      id="fileUpload"
+      name="eventFeaturedImage"
+      onChange={[MockFunction]}
+      type="file"
+    />
+    <span
+      className="btn flex items-center mb-1 p-1"
+    >
+      Upload your image
+    </span>
+  </label>,
+]
+`;
+
+exports[`components/FileUpload component renders 1`] = `
+Array [
+  <h3
+    className="text-base mb-1"
+  />,
+  <div
+    className="animated bg-gray-1 p-3 mb-3 flex flex-col items-center hidden"
+    id="imagePreview"
+  >
+    <button
+      className="mb-2 p-2"
+      onClick={[MockFunction]}
+      type="button"
+    >
+      Remove Image
+    </button>
+  </div>,
+  <label
+    className="fadeInDown bg-gray-1 border cursor-ptr flex flex-col items-center mb-3 p-3 animated fadeInDown"
+    htmlFor="fileUpload"
+  >
+    <input
+      accept="image/png, image/jpeg, image/gif"
+      className="hidden"
+      id="fileUpload"
+      name="eventFeaturedImage"
+      onChange={[MockFunction]}
+      type="file"
+    />
+    <span
+      className="btn flex items-center mb-1 p-1"
+    >
+      Upload your image
+    </span>
+  </label>,
+]
+`;
+
+exports[`components/FileUpload container renders 1`] = `
+Array [
+  <h3
+    className="text-base mb-1"
+  >
+    Upload Image
+  </h3>,
+  <div
+    className="animated bg-gray-1 p-3 mb-3 flex flex-col items-center fadeInDown"
+    id="imagePreview"
+  >
+    <button
+      className="mb-2 p-2"
+      onClick={[Function]}
+      type="button"
+    >
+      Remove Image
+    </button>
+    <img
+      alt="Your uploaded file preview."
+      className="rounded"
+      src="https://consensus.nyc3.digitaloceanspaces.com/groups/hashorsomething"
+      width="60"
+    />
+  </div>,
+  <label
+    className="fadeInDown bg-gray-1 border cursor-ptr flex flex-col items-center mb-3 p-3 animated hidden"
+    htmlFor="fileUpload"
+  >
+    <input
+      accept="image/png, image/jpeg, image/gif"
+      className="hidden"
+      id="fileUpload"
+      name="eventFeaturedImage"
+      onChange={[Function]}
+      type="file"
+    />
+    <span
+      className="btn flex items-center mb-1 p-1"
+    >
+      Upload your image
+    </span>
+    <small>
+      We recommend a size of at least 760x428px
+    </small>
+  </label>,
+]
+`;
+
+exports[`components/FileUpload container renders with cust img hash 1`] = `
+Array [
+  <h3
+    className="text-base mb-1"
+  >
+    Upload Image
+  </h3>,
+  <div
+    className="animated bg-gray-1 p-3 mb-3 flex flex-col items-center fadeInDown"
+    id="imagePreview"
+  >
+    <button
+      className="mb-2 p-2"
+      onClick={[Function]}
+      type="button"
+    >
+      Remove Image
+    </button>
+    <img
+      alt="Your uploaded file preview."
+      className="rounded"
+      src="https://consensus.nyc3.digitaloceanspaces.com/groups/customHash"
+      width="60"
+    />
+  </div>,
+  <label
+    className="fadeInDown bg-gray-1 border cursor-ptr flex flex-col items-center mb-3 p-3 animated hidden"
+    htmlFor="fileUpload"
+  >
+    <input
+      accept="image/png, image/jpeg, image/gif"
+      className="hidden"
+      id="fileUpload"
+      name="eventFeaturedImage"
+      onChange={[Function]}
+      type="file"
+    />
+    <span
+      className="btn flex items-center mb-1 p-1"
+    >
+      Upload your image
+    </span>
+    <small>
+      We recommend a size of at least 760x428px
+    </small>
+  </label>,
+]
+`;

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/ScrollToTop render children 1`] = `"test"`;
+
+exports[`containers/ScrollToTop renders null 1`] = `null`;
+
+exports[`containers/ScrollToTop updates on pathname change 1`] = `null`;

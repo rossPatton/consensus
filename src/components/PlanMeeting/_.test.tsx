@@ -13,7 +13,7 @@ const testGroup = {
   type: 'public',
 } as ts.group;
 
-describe('PlanMeeting component', () => {
+describe('components/PlanMeeting', () => {
   it('renders without crashing', () => {
     const store = mockStore({
       meetingsByGroupId: {data: [{}]},

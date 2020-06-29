@@ -6,7 +6,7 @@ import configureStore from 'redux-mock-store';
 const mockStore = configureStore();
 import Groups from '.';
 
-describe('Groups component', () => {
+describe('components/Groups', () => {
   it('renders without crashing', () => {
     const store = mockStore({
       roles: [{groupId: 100, role: 'facilitator'}],

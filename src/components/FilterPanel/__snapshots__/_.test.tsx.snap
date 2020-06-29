@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/FilterPanel renders 1`] = `
+<div
+  className="flex flex-col d:flex-row mb-2 d:mb-3"
+>
+  <label
+    className="w-full"
+    htmlFor="searchFilter"
+  >
+    <input
+      className="w-full"
+      id="searchFilter"
+      onChange={[MockFunction]}
+      placeholder="Filter all results"
+      spellCheck={true}
+      type="search"
+    />
+  </label>
+</div>
+`;
+
+exports[`components/FilterPanel renders with custom props 1`] = `
+<div
+  className="test flex flex-col d:flex-row"
+>
+  <label
+    className="w-full"
+    htmlFor="searchFilter"
+  >
+    <input
+      className="w-full"
+      id="searchFilter"
+      onChange={[MockFunction]}
+      placeholder="filter options here"
+      spellCheck={true}
+      type="search"
+    />
+  </label>
+</div>
+`;

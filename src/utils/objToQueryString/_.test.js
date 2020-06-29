@@ -42,31 +42,26 @@ describe('utils/objToQueryString', () => {
 
   it('should handle empty strings', () => {
     const shouldBeQueryString = objToQueryString({key: ''});
-    console.log('empty => ', shouldBeQueryString);
     expect(shouldBeQueryString).toEqual('key=');
   });
 
   it('should handle undefined', () => {
     const shouldBeEmptyString = objToQueryString({key: undefined});
-    console.log('undefined => ', shouldBeEmptyString);
     expect(shouldBeEmptyString).toEqual('');
   });
 
   it('should handle multiple undefineds', () => {
     const shouldBeEmptyString = objToQueryString({key: undefined, key2: undefined});
-    console.log('undefined => ', shouldBeEmptyString);
     expect(shouldBeEmptyString).toEqual('');
   });
 
   it('should handle nulls', () => {
     const shouldBeQueryString = objToQueryString({key: null});
-    console.log('null => ', shouldBeQueryString);
     expect(shouldBeQueryString).toEqual('key=null');
   });
 
   it('should handle nested objects', () => {
     const shouldBeQueryString = objToQueryString({obj: {key: 'test'}});
-    console.log('null => ', shouldBeQueryString);
     expect(shouldBeQueryString).toEqual('obj=key=test');
   });
 });

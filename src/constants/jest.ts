@@ -72,3 +72,22 @@ export const testMeeting2 = {
   time: '19:00',
   title: 'aut occaecati iusto nostrum ut',
 };
+
+export const testGeo = {
+  city: 'New York',
+  countryCode: 'us',
+  handle: 'new-york',
+  region: 'New York',
+  regionCode: 'ny',
+  postcode: 10002,
+};
+
+export const testNYC = {
+  id: 1,
+  name: 'New York',
+  country: 'United States',
+  countryId: 1,
+  region: 'New York',
+  regionId: 37,
+  regionCode: 'ny',
+};
