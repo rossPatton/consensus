@@ -1,9 +1,6 @@
 import {lowerCase} from '..';
 import {tObjWithScore, tOpts} from './_types';
 
-// @TODO if this was tokenized it would be more useful
-// currently matches entire string against search value, instead of search value against tokens
-
 // return numeric score based on fuzzy match strength
 // If `pattern` matches `string`, wrap each matching character
 export const fuzzyScore = async (search: string = '', string: string = '') => {

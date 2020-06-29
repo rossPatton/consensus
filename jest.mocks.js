@@ -1,8 +1,9 @@
 import jest from 'jest-mock';
 import fetch from 'jest-fetch-mock';
 
-global.fetch = fetch;
+fetch.enableMocks();
 
+// Object.defineProperty(global, 'fetch', fetch);
 Object.defineProperty(global, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation(query => ({

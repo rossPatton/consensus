@@ -46,5 +46,6 @@ export const api = async (opts: tApiOpts) => {
       }
 
       loglevel.error(message);
+      return message;
     });
 };

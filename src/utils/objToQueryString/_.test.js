@@ -1,7 +1,5 @@
 import {objToQueryString} from '.';
 
-process.env.__DEBUG__ = true;
-
 describe('utils/objToQueryString', () => {
   it('should convert simple object to query string', () => {
     const shouldBeQueryString = objToQueryString({
