@@ -36,7 +36,7 @@ class GroupsContainer extends PureComponent<tContainerProps, tState> {
     });
   }
 
-  leaveOrg = (ev: React.MouseEvent<HTMLButtonElement>, groupId: number) => {
+  leaveGroup = (ev: React.MouseEvent<HTMLButtonElement>, groupId: number) => {
     ev.preventDefault();
     if (groupId) {
       this.props.deleteGroupByUserIdDispatch({groupId});
@@ -70,9 +70,9 @@ class GroupsContainer extends PureComponent<tContainerProps, tState> {
 
     // if we're rendering groups based on relation to the user, then we want to
     // be able to potentially split by user role, pending or not pending
-    let pendingOrgs = [] as ts.group[];
+    let pendingGroups = [] as ts.group[];
     if (showPending) {
-      pendingOrgs = this.filterNonPending();
+      pendingGroups = this.filterNonPending();
     }
 
     return (
@@ -84,9 +84,9 @@ class GroupsContainer extends PureComponent<tContainerProps, tState> {
             {...this.state}
             asList={asList}
             isEditable={isEditable}
-            leaveOrg={this.leaveOrg}
+            leaveGroup={this.leaveGroup}
             groups={groupsToRender}
-            pendingOrgs={pendingOrgs}
+            pendingGroups={pendingGroups}
             roles={roles}
             setHover={this.setHover}
             showCategory={showCategory}

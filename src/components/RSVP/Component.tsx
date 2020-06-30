@@ -5,10 +5,10 @@ import React from 'react';
 import {tComponentProps} from './_types';
 
 export const RSVPComponent = (props: tComponentProps) => {
-  const {meeting, rsvp = {} as ts.rsvp, session, setRsvp} = props;
+  const {meeting, rsvp, session, setRsvp} = props;
   const {id: meetingId} = meeting;
   const {profile = {}} = session;
-  const {privateRSVP: userRSVPsPrivately = true} = profile as ts.user;
+  const {privateRSVP: userRSVPsPrivately} = profile as ts.user;
   const method = typeof rsvp === 'undefined' ? 'POST' : 'PATCH';
 
   return (
@@ -22,7 +22,7 @@ export const RSVPComponent = (props: tComponentProps) => {
       <fieldset>
         <div className="text-center d:text-left d:flex d:items-center text-sm leading-none">
           <legend className="block font-semibold mb-1 mr-2 d:mb-0">
-            {rsvp.value
+            {rsvp?.value
               ? 'Change RSVP'
               : `RSVP ${userRSVPsPrivately ? 'Privately' : 'Publicly'}`}
           </legend>
@@ -32,7 +32,7 @@ export const RSVPComponent = (props: tComponentProps) => {
             onClick={ev => setRsvp({ev, meetingId})}
             className={cx({
               'p-2 pl-3 pr-3 mr-1 hover:bg-green-1': true,
-              'bg-green-1': rsvp.value === 'yes',
+              'bg-green-1': rsvp?.value === 'yes',
             })}>
             Yes
           </button>
@@ -42,7 +42,7 @@ export const RSVPComponent = (props: tComponentProps) => {
             onClick={ev => setRsvp({ev, meetingId})}
             className={cx({
               'p-2 pl-3 pr-3 mr-1 hover:bg-red-1': true,
-              'bg-red-1': rsvp.value === 'no',
+              'bg-red-1': rsvp?.value === 'no',
             })}>
             No
           </button>
@@ -52,7 +52,7 @@ export const RSVPComponent = (props: tComponentProps) => {
             onClick={ev => setRsvp({ev, meetingId})}
             className={cx({
               'p-2 pl-3 pr-3 mr-1 hover:bg-yellow-1': true,
-              'bg-yellow-1': rsvp.value === 'maybe',
+              'bg-yellow-1': rsvp?.value === 'maybe',
             })}>
             Maybe
           </button>

@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component/Meetings/breakpoint/Desktop renders desktop meetings 1`] = `
+<ul
+  className="animated fadeInUp"
+>
+  <li
+    className="font-semibold mb-2"
+  >
+    Past Meetings
+  </li>
+  <li
+    className="mb-2 opacity-5"
+  >
+    <div
+      className="flex flex-row items-center"
+    >
+      <div
+        className="mr-2 max-w-4/12 min-w-4/12"
+      >
+        <a
+          href="/meeting/12/aut-occaecati-iusto-nostrum-ut"
+          onClick={[Function]}
+        />
+      </div>
+      <div>
+        <div
+          className="flex mb-1 text-sm text-red-3 font-bold leading-none"
+        >
+          <time
+            className="mr-1"
+            dateTime="2020-05-02T10:47:34.393Z"
+          >
+            May 02 2020 | 6:47AM
+          </time>
+          <span>
+            <span
+              className="mr-1"
+            >
+              @
+            </span>
+          </span>
+        </div>
+        <h3
+          className="capitalize mb-2 leading-tight"
+        >
+          <a
+            href="/meeting/12/aut-occaecati-iusto-nostrum-ut"
+            onClick={[Function]}
+          >
+            aut occaecati iusto nostrum ut
+          </a>
+        </h3>
+      </div>
+    </div>
+  </li>
+  <li
+    className="mb-2 opacity-5"
+  >
+    <div
+      className="flex flex-row items-center"
+    >
+      <div
+        className="mr-2 max-w-4/12 min-w-4/12"
+      >
+        <a
+          href="/meeting/12/aut-occaecati-iusto-nostrum-ut"
+          onClick={[Function]}
+        />
+      </div>
+      <div>
+        <div
+          className="flex mb-1 text-sm text-red-3 font-bold leading-none"
+        >
+          <time
+            className="mr-1"
+            dateTime="2021-05-02T10:47:34.393Z"
+          >
+            May 02 2021 | 6:47AM
+          </time>
+          <span>
+            <span
+              className="mr-1"
+            >
+              @
+            </span>
+          </span>
+        </div>
+        <h3
+          className="capitalize mb-2 leading-tight"
+        >
+          <a
+            href="/meeting/12/aut-occaecati-iusto-nostrum-ut"
+            onClick={[Function]}
+          >
+            aut occaecati iusto nostrum ut
+          </a>
+        </h3>
+      </div>
+    </div>
+  </li>
+</ul>
+`;

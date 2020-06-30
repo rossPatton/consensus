@@ -4,32 +4,24 @@ import render from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import {testGeo, testNYC} from '~app/constants/jest';
+import {testGeo, testGroup1, testNYC, testUserSession} from '~app/constants/jest';
 
 import CitySearch from '.';
+import {CitySearchComponent} from './Component';
 
 const mockStore = configureStore([thunk]);
 const defaultStore = {
   cities: {
-    error: null,
+    error: null as Error | null,
     isLoading: false,
     data: [testNYC],
   },
   geo: {
-    error: null,
+    error: null as Error | null,
     isLoading: false,
     data: testGeo,
   },
-  session: {
-    error: null,
-    isLoading: false,
-    data: {
-      isAuthenticated: false,
-      profile: {
-        region: 'New York',
-      },
-    },
-  },
+  session: testUserSession,
 };
 
 describe('components/CitySearch', () => {
@@ -45,11 +37,65 @@ describe('components/CitySearch', () => {
         <CitySearch
           city="New York"
           cityId={16625}
-          getCitiesDispatch={jest.fn()}
+          // getCitiesDispatch={jest.fn()}
           region="New York"
           regionId={37}
+          updateState={jest.fn()}
         />
       </Provider>
+    ));
+    expect(component).toMatchSnapshot();
+  });
+
+  it('renders component without crashing', () => {
+    const component = render.create((
+      <CitySearchComponent
+        city="New York"
+        cityId={16625}
+        cities={[{
+          country: 'United States',
+          countryId: 1,
+          groups: [testGroup1],
+          name: 'New York',
+          id: 16625,
+          postcodes: [10002],
+          region: 'New York',
+          regionId: 37,
+        }]}
+        geo={testGeo}
+        region="New York"
+        regionId={37}
+        // @ts-ignore
+        session={defaultStore.session}
+        showRemoveButton
+        updateState={jest.fn()}
+      />
+    ));
+    expect(component).toMatchSnapshot();
+  });
+
+  it('renders component with blank city and region', () => {
+    const component = render.create((
+      <CitySearchComponent
+        city=""
+        cityId={0}
+        cities={[{
+          country: 'United States',
+          countryId: 1,
+          groups: [testGroup1],
+          name: 'New York',
+          id: 16625,
+          postcodes: [10002],
+          region: 'New York',
+          regionId: 37,
+        }]}
+        geo={testGeo}
+        region=""
+        regionId={0}
+        // @ts-ignore
+        session={defaultStore.session}
+        updateState={jest.fn()}
+      />
     ));
     expect(component).toMatchSnapshot();
   });
@@ -60,10 +106,10 @@ describe('components/CitySearch', () => {
         <CitySearch
           city="New York"
           cityId={16625}
-          getCitiesDispatch={jest.fn()}
           label="Testing custom label"
           region="New York"
           regionId={37}
+          updateState={jest.fn()}
         />
       </Provider>
     ));
@@ -76,10 +122,10 @@ describe('components/CitySearch', () => {
         <CitySearch
           city="New York"
           cityId={16625}
-          getCitiesDispatch={jest.fn()}
           region="New York"
           regionId={37}
           showRemoveButton
+          updateState={jest.fn()}
         />
       </Provider>
     ));
@@ -90,7 +136,7 @@ describe('components/CitySearch', () => {
     const customStore = {
       ...store,
       session: {
-        error: null,
+        error: null as Error | null,
         isLoading: false,
         data: {
           isAuthenticated: false,
@@ -101,14 +147,14 @@ describe('components/CitySearch', () => {
       },
     };
     const component = render.create((
-      <Provider store={store}>
+      <Provider store={customStore}>
         <CitySearch
           city="New York"
           cityId={16625}
-          getCitiesDispatch={jest.fn()}
           region="New York"
           regionId={37}
           showRemoveButton
+          updateState={jest.fn()}
         />
       </Provider>
     ));
@@ -119,25 +165,25 @@ describe('components/CitySearch', () => {
     const customStore = {
       ...store,
       session: {
-        error: null,
+        error: null as Error | null,
         isLoading: false,
         data: {
           isAuthenticated: false,
           profile: {
-            region: null,
+            region: null as string | null,
           },
         },
       },
     };
     const component = render.create((
-      <Provider store={store}>
+      <Provider store={customStore}>
         <CitySearch
           city="New York"
           cityId={16625}
-          getCitiesDispatch={jest.fn()}
           region="New York"
           regionId={37}
           showRemoveButton
+          updateState={jest.fn()}
         />
       </Provider>
     ));

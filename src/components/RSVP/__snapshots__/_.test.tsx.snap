@@ -1,0 +1,311 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/RSVP component click rsvp buttons 1`] = `
+<form
+  className=""
+  method="POST"
+  onSubmit={[Function]}
+>
+  <fieldset>
+    <div
+      className="text-center d:text-left d:flex d:items-center text-sm leading-none"
+    >
+      <legend
+        className="block font-semibold mb-1 mr-2 d:mb-0"
+      >
+        RSVP Publicly
+      </legend>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-green-1"
+        onClick={[Function]}
+        type="button"
+        value="yes"
+      >
+        Yes
+      </button>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-red-1"
+        onClick={[Function]}
+        type="button"
+        value="no"
+      >
+        No
+      </button>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-yellow-1"
+        onClick={[Function]}
+        type="button"
+        value="maybe"
+      >
+        Maybe
+      </button>
+    </div>
+  </fieldset>
+</form>
+`;
+
+exports[`components/RSVP component onSubmit 1`] = `
+<form
+  className=""
+  method="POST"
+  onSubmit={[Function]}
+>
+  <fieldset>
+    <div
+      className="text-center d:text-left d:flex d:items-center text-sm leading-none"
+    >
+      <legend
+        className="block font-semibold mb-1 mr-2 d:mb-0"
+      >
+        RSVP Publicly
+      </legend>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-green-1"
+        onClick={[Function]}
+        type="button"
+        value="yes"
+      >
+        Yes
+      </button>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-red-1"
+        onClick={[Function]}
+        type="button"
+        value="no"
+      >
+        No
+      </button>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-yellow-1"
+        onClick={[Function]}
+        type="button"
+        value="maybe"
+      >
+        Maybe
+      </button>
+    </div>
+  </fieldset>
+</form>
+`;
+
+exports[`components/RSVP component renders 1`] = `
+<form
+  className=""
+  method="POST"
+  onSubmit={[Function]}
+>
+  <fieldset>
+    <div
+      className="text-center d:text-left d:flex d:items-center text-sm leading-none"
+    >
+      <legend
+        className="block font-semibold mb-1 mr-2 d:mb-0"
+      >
+        RSVP Publicly
+      </legend>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-green-1"
+        onClick={[Function]}
+        type="submit"
+        value="yes"
+      >
+        Yes
+      </button>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-red-1"
+        onClick={[Function]}
+        type="submit"
+        value="no"
+      >
+        No
+      </button>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-yellow-1"
+        onClick={[Function]}
+        type="submit"
+        value="maybe"
+      >
+        Maybe
+      </button>
+    </div>
+  </fieldset>
+</form>
+`;
+
+exports[`components/RSVP component renders with maybe rsvp 1`] = `
+<form
+  className=""
+  method="PATCH"
+  onSubmit={[Function]}
+>
+  <fieldset>
+    <div
+      className="text-center d:text-left d:flex d:items-center text-sm leading-none"
+    >
+      <legend
+        className="block font-semibold mb-1 mr-2 d:mb-0"
+      >
+        Change RSVP
+      </legend>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-green-1"
+        onClick={[Function]}
+        type="submit"
+        value="yes"
+      >
+        Yes
+      </button>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-red-1"
+        onClick={[Function]}
+        type="submit"
+        value="no"
+      >
+        No
+      </button>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-yellow-1 bg-yellow-1"
+        onClick={[Function]}
+        type="submit"
+        value="maybe"
+      >
+        Maybe
+      </button>
+    </div>
+  </fieldset>
+</form>
+`;
+
+exports[`components/RSVP component renders with rsvp 1`] = `
+<form
+  className=""
+  method="PATCH"
+  onSubmit={[Function]}
+>
+  <fieldset>
+    <div
+      className="text-center d:text-left d:flex d:items-center text-sm leading-none"
+    >
+      <legend
+        className="block font-semibold mb-1 mr-2 d:mb-0"
+      >
+        Change RSVP
+      </legend>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-green-1 bg-green-1"
+        onClick={[Function]}
+        type="submit"
+        value="yes"
+      >
+        Yes
+      </button>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-red-1"
+        onClick={[Function]}
+        type="submit"
+        value="no"
+      >
+        No
+      </button>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-yellow-1"
+        onClick={[Function]}
+        type="submit"
+        value="maybe"
+      >
+        Maybe
+      </button>
+    </div>
+  </fieldset>
+</form>
+`;
+
+exports[`components/RSVP renders desktop without crashing 1`] = `
+<form
+  className=""
+  method="PATCH"
+  onSubmit={[Function]}
+>
+  <fieldset>
+    <div
+      className="text-center d:text-left d:flex d:items-center text-sm leading-none"
+    >
+      <legend
+        className="block font-semibold mb-1 mr-2 d:mb-0"
+      >
+        Change RSVP
+      </legend>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-green-1 bg-green-1"
+        onClick={[Function]}
+        type="button"
+        value="yes"
+      >
+        Yes
+      </button>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-red-1"
+        onClick={[Function]}
+        type="button"
+        value="no"
+      >
+        No
+      </button>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-yellow-1"
+        onClick={[Function]}
+        type="button"
+        value="maybe"
+      >
+        Maybe
+      </button>
+    </div>
+  </fieldset>
+</form>
+`;
+
+exports[`components/RSVP renders mobile without crashing 1`] = `
+<form
+  className=""
+  method="PATCH"
+  onSubmit={[Function]}
+>
+  <fieldset>
+    <div
+      className="text-center d:text-left d:flex d:items-center text-sm leading-none"
+    >
+      <legend
+        className="block font-semibold mb-1 mr-2 d:mb-0"
+      >
+        Change RSVP
+      </legend>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-green-1 bg-green-1"
+        onClick={[Function]}
+        type="button"
+        value="yes"
+      >
+        Yes
+      </button>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-red-1"
+        onClick={[Function]}
+        type="button"
+        value="no"
+      >
+        No
+      </button>
+      <button
+        className="p-2 pl-3 pr-3 mr-1 hover:bg-yellow-1"
+        onClick={[Function]}
+        type="button"
+        value="maybe"
+      >
+        Maybe
+      </button>
+    </div>
+  </fieldset>
+</form>
+`;
+
+exports[`components/RSVP renders null if group type 1`] = `null`;

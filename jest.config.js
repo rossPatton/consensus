@@ -10,6 +10,7 @@ module.exports = {
     __DEV__: false,
     __PROD__: false,
     __NODE_ENV__: 'test',
+    __HCAPTCHA_KEY__: 'test',
   },
   moduleNameMapper: {
     '^~app/(.*)$': '<rootDir>/src/$1',

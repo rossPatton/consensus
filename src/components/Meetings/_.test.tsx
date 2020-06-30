@@ -3,37 +3,74 @@ import { Provider } from 'react-redux';
 import render from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 
+import {testMeeting1, testMeeting2} from '~app/constants/jest';
 import MatchMediaProvider from '~app/context/MatchMediaProvider';
 
-const mockStore = configureStore();
 import Meetings from '.';
+import {MeetingsComponent} from './Component';
 
-describe('Meetings component', () => {
-  it('renders mobile without crashing', () => {
+const mockStore = configureStore();
+
+describe('components/Meetings', () => {
+  it('renders mobile container without crashing', () => {
     const store = mockStore({
       session: {isAuthenticated: false},
     });
 
-    render.create((
+    const component = render.create((
       <Provider store={store}>
         <MatchMediaProvider isMobile>
-          <Meetings meetings={[]} />
+          <Meetings meetings={[testMeeting1, testMeeting2]} />
         </MatchMediaProvider>
       </Provider>
     ));
+
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
   });
 
-  it('renders desktop without crashing', () => {
+  it('desktop container with empty meetings array', () => {
     const store = mockStore({
       session: {isAuthenticated: false},
     });
 
-    render.create((
+    const component = render.create((
       <Provider store={store}>
         <MatchMediaProvider isDesktop>
           <Meetings meetings={[]} />
         </MatchMediaProvider>
       </Provider>
     ));
+
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders desktop component without crashing', () => {
+    const component = render.create((
+      <MeetingsComponent
+        isDesktop
+        deleteMeeting={jest.fn()}
+        isMobile={false}
+        meetings={[testMeeting1]}
+      />
+    ));
+
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders mobile component without crashing', () => {
+    const component = render.create((
+      <MeetingsComponent
+        isMobile
+        deleteMeeting={jest.fn()}
+        isDesktop={false}
+        meetings={[]}
+      />
+    ));
+
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });

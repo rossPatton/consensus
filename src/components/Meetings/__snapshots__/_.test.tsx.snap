@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Meetings desktop container with empty meetings array 1`] = `
+<h2
+  className="fs4 p-3 text-center"
+>
+  No 
+  meetings!
+   
+   
+</h2>
+`;
+
+exports[`components/Meetings renders desktop component without crashing 1`] = `null`;
+
+exports[`components/Meetings renders mobile component without crashing 1`] = `null`;
+
+exports[`components/Meetings renders mobile container without crashing 1`] = `null`;

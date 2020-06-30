@@ -20,10 +20,184 @@ exports[`components/FilterPanel renders 1`] = `
 </div>
 `;
 
-exports[`components/FilterPanel renders with custom props 1`] = `
+exports[`components/FilterPanel renders with categories 1`] = `
 <div
   className="test flex flex-col d:flex-row"
 >
+  <select
+    className="w-full d:w-3/12 mb-1 d:mb-0 d:mr-2"
+  >
+    <option
+      value="test"
+    >
+      Display
+    </option>
+  </select>
+  <select
+    className="w-full d:w-3/12 mb-1 d:mb-0 d:mr-2"
+    onBlur={[MockFunction]}
+    onChange={[MockFunction]}
+  >
+    <option
+      value=""
+    >
+      Show all
+    </option>
+    <option
+      value="Community"
+    >
+      Community
+    </option>
+    <option
+      value="Cooperative"
+    >
+      Cooperative
+    </option>
+    <option
+      value="Unions and Labor"
+    >
+      Unions and Labor
+    </option>
+    <option
+      value="Political"
+    >
+      Political
+    </option>
+  </select>
+  <label
+    className="w-full"
+    htmlFor="searchFilter"
+  >
+    <input
+      className="w-full"
+      id="searchFilter"
+      onChange={[MockFunction]}
+      placeholder="filter options here"
+      spellCheck={true}
+      type="search"
+    />
+  </label>
+</div>
+`;
+
+exports[`components/FilterPanel renders with published filter 1`] = `
+<div
+  className="test flex flex-col d:flex-row"
+>
+  <select
+    className="w-full d:w-3/12 mb-1 d:mb-0 d:mr-2"
+  >
+    <option
+      value="test"
+    >
+      Display
+    </option>
+  </select>
+  <select
+    className="w-full d:w-3/12 mb-1 d:mb-0 d:mr-2"
+    onBlur={[MockFunction]}
+    onChange={[MockFunction]}
+  >
+    <option
+      value="n/a"
+    >
+      Filter meetings
+    </option>
+    <option
+      value="n/a"
+    >
+      Show all meetings
+    </option>
+    <option
+      value="upcoming"
+    >
+      Upcoming
+    </option>
+    <option
+      value="past"
+    >
+      Past
+    </option>
+  </select>
+  <label
+    className="w-full"
+    htmlFor="searchFilter"
+  >
+    <input
+      className="w-full"
+      id="searchFilter"
+      onChange={[MockFunction]}
+      placeholder="filter options here"
+      spellCheck={true}
+      type="search"
+    />
+  </label>
+</div>
+`;
+
+exports[`components/FilterPanel renders with roles filter 1`] = `
+<div
+  className="test flex flex-col d:flex-row"
+>
+  <select
+    className="w-full d:w-3/12 mb-1 d:mb-0 d:mr-2"
+  >
+    <option
+      value="test"
+    >
+      Display
+    </option>
+  </select>
+  <select
+    className="w-full d:w-3/12 mb-1 d:mb-0 d:mr-2"
+    onBlur={[MockFunction]}
+    onChange={[MockFunction]}
+  >
+    <option
+      value="n/a"
+    >
+      Show all
+    </option>
+    <option
+      value="member"
+    >
+      dude
+    </option>
+    <option
+      value="facilitator"
+    >
+      other dude
+    </option>
+  </select>
+  <label
+    className="w-full"
+    htmlFor="searchFilter"
+  >
+    <input
+      className="w-full"
+      id="searchFilter"
+      onChange={[MockFunction]}
+      placeholder="filter options here"
+      spellCheck={true}
+      type="search"
+    />
+  </label>
+</div>
+`;
+
+exports[`components/FilterPanel renders with standard props 1`] = `
+<div
+  className="test flex flex-col d:flex-row"
+>
+  <select
+    className="w-full d:w-3/12 mb-1 d:mb-0 d:mr-2"
+  >
+    <option
+      value="test"
+    >
+      Display
+    </option>
+  </select>
   <label
     className="w-full"
     htmlFor="searchFilter"

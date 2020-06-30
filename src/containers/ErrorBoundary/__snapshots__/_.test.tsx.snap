@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/ErrorBoundary renders 200 1`] = `""`;
+
+exports[`containers/ErrorBoundary renders 204 1`] = `null`;
+
+exports[`containers/ErrorBoundary renders 400 1`] = `""`;
+
+exports[`containers/ErrorBoundary renders 401 1`] = `null`;
+
+exports[`containers/ErrorBoundary renders 500 1`] = `null`;
+
+exports[`containers/ErrorBoundary renders subpage 1`] = `
+<div
+  className="p-2"
+>
+  Something went wrong loading this section. Try refreshing?
+</div>
+`;

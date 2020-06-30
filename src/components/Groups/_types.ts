@@ -12,8 +12,8 @@ export type tProps = {
 };
 
 export type tComponentProps = tProps & {
-  leaveOrg: (ev: React.MouseEvent<HTMLButtonElement>, groupId: number) => void,
-  pendingOrgs: ts.group[],
+  leaveGroup: (ev: React.MouseEvent<HTMLButtonElement>, groupId: number) => void,
+  pendingGroups: ts.group[],
   setHover: (hoverIndex: number | null, groupType?: ts.role) => void,
 };
 

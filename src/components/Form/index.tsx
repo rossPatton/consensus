@@ -80,7 +80,7 @@ class FormContainer extends PureComponent<tProps, tState> {
               'mb-2': includeCaptcha || validError,
             })}>
             {includeCaptcha && (
-              <div className="mb-2">
+              <div id="hcaptcha-wrapper" className="mb-2">
                 <HCaptcha
                   sitekey={__HCAPTCHA_KEY__}
                   onVerify={this.handleVerificationSuccess}

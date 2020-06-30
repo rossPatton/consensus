@@ -19,10 +19,7 @@ class UsersContainer extends React.PureComponent<tContainerProps, tState> {
   constructor (props: tContainerProps) {
     super(props);
     const groupId = props.group.id;
-
-    if (groupId) {
-      props.getUsersByGroupIdDispatch({groupId, noPending: 'false'});
-    }
+    props.getUsersByGroupIdDispatch({groupId, noPending: 'false'});
   }
 
   removeUser = (ev: React.MouseEvent<HTMLButtonElement>, userId: number) => {

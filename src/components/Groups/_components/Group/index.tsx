@@ -83,7 +83,7 @@ const Group = memo((props: tProps) => {
           && (
             <button
               className="absolute r mr-2 p-2"
-              onClick={ev => props.leaveOrg(ev, props.group.id)}>
+              onClick={ev => props.leaveGroup(ev, props.group.id)}>
               {props.groupType === 'pending'
                 ? 'Cancel Membership Request'
                 : 'Leave Group'}

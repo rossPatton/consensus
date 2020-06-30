@@ -23,7 +23,7 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
   render() {
     const {
       count,
-      meetings = [],
+      meetings,
       sessionRole,
       showGroupName,
       showPast,
@@ -34,7 +34,7 @@ class MeetingsContainer extends PureComponent<tContainerProps> {
     const {isMobile, isDesktop} = this.context;
     const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
 
-    if (meetings.length === 0) {
+    if (!meetings || meetings.length === 0) {
       return (
         <h2 className="fs4 p-3 text-center">
           No {type === 'meetings' && 'meetings!'} {type === 'drafts' && 'drafts'} {type === 'rsvps' && 'RSVPs!'}

@@ -3,7 +3,7 @@ import React from 'react';
 import { tProps } from './_types';
 
 const GenericLoader = (props: tProps) => {
-  const {isLoading = true, showLoader = true} = props;
+  const {isLoading, showLoader = true} = props;
 
   if (isLoading) {
     if (showLoader) {

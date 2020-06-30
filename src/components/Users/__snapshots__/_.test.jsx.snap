@@ -1,0 +1,216 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Users renders component 1`] = `
+<ul>
+  <li
+    className="bg-white hover:bg-gray-2 rounded flex items-center mb-1 p-1 relative"
+  >
+    <div
+      className="flex d:absolute r d:mr-2 p-1 d:p-0"
+    >
+      <button
+        className="border-0 bg-0 mr-2"
+        onClick={[Function]}
+      >
+        Remove
+      </button>
+      <select
+        onChange={[Function]}
+      >
+        <option>
+          Change role
+        </option>
+        <option
+          value="member"
+        >
+          member
+        </option>
+        <option
+          value="facilitator"
+        >
+          facilitator
+        </option>
+      </select>
+    </div>
+    <div
+      className="flex items-center"
+    >
+      <div>
+        <div
+          className="text-sm flex items-center text-sm leading-none"
+        >
+          <b
+            className="mr-2"
+          >
+            facilitator
+          </b>
+        </div>
+        <h3>
+          <a
+            href="/user/1"
+            onClick={[Function]}
+          >
+            @
+          </a>
+        </h3>
+      </div>
+    </div>
+  </li>
+  <li
+    className="bg-white hover:bg-gray-2 rounded flex items-center mb-1 p-1 relative"
+  >
+    <div
+      className="flex d:absolute r d:mr-2 p-1 d:p-0"
+    >
+      <button
+        className="border-0 bg-0 mr-2"
+        onClick={[Function]}
+      >
+        Remove
+      </button>
+      <select
+        onChange={[Function]}
+      >
+        <option>
+          Change role
+        </option>
+        <option
+          value="member"
+        >
+          member
+        </option>
+        <option
+          value="facilitator"
+        >
+          facilitator
+        </option>
+      </select>
+    </div>
+    <div
+      className="flex items-center"
+    >
+      <div>
+        <div
+          className="text-sm flex items-center text-sm leading-none"
+        >
+          <b
+            className="mr-2"
+          >
+            facilitator
+          </b>
+        </div>
+        <h3>
+          <a
+            href="/user/1"
+            onClick={[Function]}
+          >
+            @
+          </a>
+        </h3>
+      </div>
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`components/Users renders component alternative props 1`] = `
+<ul>
+  <li
+    className="bg-white hover:bg-gray-2 rounded flex items-center mb-1 p-1 relative"
+  >
+    <button
+      className="absolute r p-1 mr-1"
+      onClick={[Function]}
+    >
+      Edit
+    </button>
+    <div
+      className="flex items-center"
+    >
+      <div>
+        <div
+          className="text-sm flex items-center text-sm leading-none"
+        >
+          <b
+            className="mr-2"
+          >
+            facilitator
+          </b>
+        </div>
+        <h3>
+          <a
+            href="/user/1"
+            onClick={[Function]}
+          >
+            @
+          </a>
+        </h3>
+      </div>
+    </div>
+  </li>
+  <li
+    className="bg-white hover:bg-gray-2 rounded flex items-center mb-1 p-1 relative"
+  >
+    <button
+      className="absolute r p-1 mr-1"
+      onClick={[Function]}
+    >
+      Show
+    </button>
+    <div
+      className="flex d:absolute r d:mr-2 p-1 d:p-0"
+    >
+      <button
+        className="border-0 bg-0 mr-2"
+        onClick={[Function]}
+      >
+        Remove
+      </button>
+      <select
+        onChange={[Function]}
+      >
+        <option>
+          Change role
+        </option>
+        <option
+          value="member"
+        >
+          member
+        </option>
+        <option
+          value="facilitator"
+        >
+          facilitator
+        </option>
+      </select>
+    </div>
+    <div
+      className="flex items-center hidden"
+    >
+      <div>
+        <div
+          className="text-sm flex items-center text-sm leading-none"
+        >
+          <b
+            className="mr-2"
+          >
+            facilitator
+          </b>
+        </div>
+        <h3>
+          <a
+            href="/user/1"
+            onClick={[Function]}
+          >
+            @
+          </a>
+        </h3>
+      </div>
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`components/Users renders container 1`] = `"No users found that meet this criteria."`;
+
+exports[`components/Users renders container alternative props 1`] = `null`;

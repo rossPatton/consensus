@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/PlanMeeting container renders 1`] = `null`;
+
+exports[`components/PlanMeeting renders component as draft 1`] = `
+<div
+  className="d:pb-2 d:pl-2 d:pr-2"
+/>
+`;
+
+exports[`components/PlanMeeting renders component as draft and copy 1`] = `
+<div
+  className="d:pb-2 d:pl-2 d:pr-2"
+/>
+`;
+
+exports[`components/PlanMeeting renders component loading state 1`] = `
+<div
+  className="d:pb-2 d:pl-2 d:pr-2"
+/>
+`;
+
+exports[`components/PlanMeeting renders component without crashing 1`] = `
+<div
+  className="d:pb-2 d:pl-2 d:pr-2"
+/>
+`;

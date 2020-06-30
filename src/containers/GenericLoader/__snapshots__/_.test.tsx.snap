@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/GenericLoader dont render load screen, just null 1`] = `null`;
+
+exports[`containers/GenericLoader renders empty div 1`] = `<div />`;
+
+exports[`containers/GenericLoader renders loader 1`] = `
+<div
+  className="p-3 w-full flex justify-center"
+>
+  <div
+    className="loading"
+  >
+    <div />
+    <div />
+    <div />
+    <div />
+  </div>
+</div>
+`;

@@ -18,11 +18,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
     const {rsvps} = props;
     const rsvp = _.find(rsvps, rsvp => rsvp.meetingId === this.props.meeting.id);
 
-    // only purpose for this state, is to update the UI right away
-    const hasRSVPed = !!rsvp && rsvp.value !== null;
-
     this.state = {
-      hasRSVPed,
       hasMounted: false,
       rsvp,
     };
@@ -47,8 +43,6 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
 
     const method = typeof rsvp === 'undefined' ? 'POST' : 'PATCH';
     const dispatch = method === 'PATCH' ? patchRsvpDispatch : postRsvpDispatch;
-    const hasRSVPed = !this.state.hasRSVPed;
-    this.setState({hasRSVPed});
 
     let {value} = opts.ev.currentTarget;
     if (method === 'PATCH') {
@@ -85,7 +79,6 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
         className={this.props.className}
         meeting={this.props.meeting}
         hasMounted={this.state.hasMounted}
-        hasRSVPed={this.state.hasRSVPed}
         isDesktop={isDesktop}
         isMobile={isMobile}
         rsvp={this.state.rsvp}
@@ -97,7 +90,6 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
 }
 
 const mapStateToProps = (store: tStore) => ({
-  isLoading: store.rsvps.isLoading,
   rsvps: store.rsvps.data,
   session: store.session.data,
 });
