@@ -3,6 +3,7 @@ import pluralize from 'pluralize';
 import React, { FunctionComponent, memo } from 'react';
 
 import {ExternalLink, Form} from '~app/components';
+
 import {tComponentProps} from './_types';
 
 export const AnnouncerComponent: FunctionComponent<tComponentProps> = memo(props => (
@@ -58,7 +59,7 @@ export const AnnouncerComponent: FunctionComponent<tComponentProps> = memo(props
               Meeting announcement or updates here
             </h2>
             <p className="mb-2">
-              Markdown is supported. Learn more about markdown <ExternalLink to="https://www.markdownguide.org/basic-syntax/">here</ExternalLink>.
+              Markdown is supported. <ExternalLink to="https://www.markdownguide.org/basic-syntax/">Learn more about markdown</ExternalLink>.
             </p>
           </>
         )}

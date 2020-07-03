@@ -56,7 +56,7 @@ describe('components/Users', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders component', () => {
+  it('renders empty component', () => {
     const component = render.create((
       <MemoryRouter>
         <UsersComponent
@@ -80,7 +80,7 @@ describe('components/Users', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders component alternative props', () => {
+  it('renders empty component alternative props', () => {
     const component = render.create((
       <MemoryRouter>
         <UsersComponent
@@ -89,6 +89,30 @@ describe('components/Users', () => {
           isDesktop={false}
           isMobile
           items={[]}
+          onRoleFilterChange={jest.fn()}
+          onSearchChange={jest.fn()}
+          removeUser={jest.fn()}
+          showMobileControls={1}
+          toggleMobileControls={jest.fn()}
+          type="members"
+          users={[testUser1, testUser1]}
+        />
+      </MemoryRouter>
+    ));
+
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders component with users', () => {
+    const component = render.create((
+      <MemoryRouter>
+        <UsersComponent
+          group={testGroup1}
+          isEditable
+          isDesktop={false}
+          isMobile
+          items={[testUser1, testUser1, testUser1]}
           onRoleFilterChange={jest.fn()}
           onSearchChange={jest.fn()}
           removeUser={jest.fn()}

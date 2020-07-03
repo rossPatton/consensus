@@ -161,9 +161,6 @@ describe('components/Groups', () => {
 
     const tree = component.toJSON();
 
-    // const div = component.root.findByType('div');
-    // console.log('div => ', div);
-    // console.log('props => ', div.props)
     expect(tree).toMatchSnapshot();
   });
 });

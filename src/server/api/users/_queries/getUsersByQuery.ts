@@ -9,8 +9,6 @@ export const getUsersByQuery = async (
   ctx: Koa.ParameterizedContext,
   query: any,
 ): Promise<ts.user[]> => {
-  console.log('get users query => ', query);
-
   const {
     exclude: excludeId,
     ids: idsStr,
@@ -18,8 +16,6 @@ export const getUsersByQuery = async (
     offset: offsetStr,
     ...restOfQuery
   } = query;
-
-  console.log('query.ids => ', typeof query.ids, query.ids instanceof Array, query.ids);
 
   try {
     const users = pg('users').where(restOfQuery);
@@ -30,7 +26,6 @@ export const getUsersByQuery = async (
     // if selecting a specific list of users
     if (idsStr) {
       const idsAsArray = idsStr.split(',');
-      console.log('idsAsArray => ', idsAsArray);
       users.whereIn('id', idsAsArray);
     }
 
@@ -40,7 +35,7 @@ export const getUsersByQuery = async (
     if (parsedOffset > 0) users.offset(parsedOffset);
 
     return users.select(userKeys);
-  } catch(err) {
+  } catch (err) {
     return ctx.throw(500, err);
   }
 };

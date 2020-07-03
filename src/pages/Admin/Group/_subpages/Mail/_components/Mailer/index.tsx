@@ -33,12 +33,14 @@ class MailerContainer extends PureComponent<tContainerProps, tState> {
         path: '/api/v1/sendEmail',
         query: {
           content,
+          data: group,
           from: group.name,
+          html: content,
           recipientVariables: JSON.stringify(recipientVariables),
           subject,
-          to,
           text: content,
-          html: content,
+          to,
+          type: 'group',
         },
       });
     } catch (error) {

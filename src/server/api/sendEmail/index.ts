@@ -14,18 +14,14 @@ export const sendEmail = new Router();
 // general email sender using contact form
 sendEmail.get('/api/v1/sendEmail', async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: tQuery} = ctx;
-  console.log('query => ', query);
-  console.log('query.recipientVariables => ', typeof query.recipientVariables, query.recipientVariables);
   await validateSchema<tQuery>(ctx, emailSchema, query);
 
   const markdown = marked(query.content);
   const html = sanitize(markdown);
-  console.log('html => ', html);
   const text = sanitize(html, {
     allowedTags: [],
     allowedAttributes: {},
   });
-  console.log('text => ', text);
 
   const messageOpts = {
     from: `${query.from || 'Consensus'} <noreply@${__MAIL_DOMAIN__}>`,

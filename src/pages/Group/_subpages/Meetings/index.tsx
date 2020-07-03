@@ -10,7 +10,6 @@ import {tContainerProps, tStore} from './_types';
 import {MeetingsComponent} from './Component';
 
 const MeetingsContainer = memo((props: tContainerProps) => {
-  console.log('all props for meetings subpage => ', props);
   const {meetingsByGroupIdThunk, match, group, role, session} = props;
 
   return (

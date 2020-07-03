@@ -30,7 +30,7 @@ export const MailerComponent: FunctionComponent<tComponentProps> = memo(props =>
               Write your email
             </h2>
             <p className="mb-2">
-              Markdown is supported. Learn more about markdown <ExternalLink to="https://www.markdownguide.org/basic-syntax/">here</ExternalLink>.
+              Markdown is supported. <ExternalLink to="https://www.markdownguide.org/basic-syntax/">Learn more about markdown</ExternalLink>.
             </p>
           </>
         )}

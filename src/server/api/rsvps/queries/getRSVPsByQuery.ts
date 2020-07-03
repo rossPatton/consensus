@@ -7,16 +7,20 @@ import {pg} from '~app/server/db/connection';
 export const getRSVPsByQuery = async (
   ctx: Koa.ParameterizedContext,
   query: any): Promise<ts.rsvp[]> => {
-  console.log('getRSVPsByQuery query => ', query);
 
-  let rsvps = [] as ts.rsvp[];
+  let rsvps = pg('users_meetings');
   try {
-    rsvps = await pg('users_meetings').where(query);
+    if (query.value === 'yesmaybe') {
+      const {value, ...where} = query;
+      rsvps = rsvps.where(where)
+        .andWhereNot({value: 'no'});
+    } else {
+      rsvps = rsvps.where(query);
+    }
+
   } catch (err) {
     return ctx.throw(500, err);
   }
-
-  console.log('rsvps => ', rsvps);
 
   return rsvps;
 };

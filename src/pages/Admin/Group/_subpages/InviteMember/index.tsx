@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {deleteInvite, getInvites, postInvite} from '~app/redux';
 
-import {Store, tContainerProps, tState, tKeyUnion} from './_types';
+import {Store, tContainerProps, tKeyUnion, tState} from './_types';
 import {InviteMemberComponent} from './Component';
 
 class InviteMemberContainer extends Component<tContainerProps, tState> {

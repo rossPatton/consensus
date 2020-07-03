@@ -96,7 +96,6 @@ class UsersContainer extends React.PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    console.log('all user container props => ', this.props);
     const {
       count = 10,
       sessionRole,
