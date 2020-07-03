@@ -8,6 +8,10 @@ export const InviteMember = loadable(() =>
   import(/* webpackChunkName: "GroupAdmin InviteMember" */'./InviteMember'),
 );
 
+export const Mail = loadable(() =>
+  import(/* webpackChunkName: "GroupAdmin Mail" */'./Mail'),
+);
+
 export const Meetings = loadable(() =>
   import(/* webpackChunkName: "GroupAdmin Meetings" */'./Meetings'),
 );

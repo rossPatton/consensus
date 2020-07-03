@@ -27,8 +27,19 @@ class ContactContainer extends PureComponent<any, tState> {
     try {
       await api({
         path: '/api/v1/sendEmail',
-        query: {content, email, subject},
+        query: {
+          content,
+          from: email,
+          subject,
+          to: 'hello@consens.us.org',
+          text: `The following feedback was provided by: ${email}. ${content}`,
+          html: `
+            <h2>The following feedback was provided by: <b>${email}</b></h2>
+            <br /><br />${content}
+          `,
+        },
       });
+
       this.setState({
         emailSent: true,
       });

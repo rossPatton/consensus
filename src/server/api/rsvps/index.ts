@@ -5,7 +5,7 @@ import { pg } from '~app/server/db/connection';
 import { validateSchema } from '~app/server/utils';
 
 import { upsertSchema } from './_schema';
-import { getRSVPsByUserId } from './queries';
+import { getRSVPsByQuery } from './queries';
 
 export const rsvps = new Router();
 const route = '/api/v1/rsvps';
@@ -14,9 +14,9 @@ const unauthorized = 'Must be logged in';
 
 // get all rsvps for the logged in user, by meetingId
 rsvps.get(route, async (ctx: Koa.ParameterizedContext) => {
-  const loggedInAccount = ctx?.state?.user;
-  if (!loggedInAccount) return ctx.throw(401, unauthorized);
-  const rsvps = await getRSVPsByUserId(ctx, loggedInAccount.id);
+  // const loggedInAccount = ctx?.state?.user;
+  // if (!loggedInAccount) return ctx.throw(401, unauthorized);
+  const rsvps = await getRSVPsByQuery(ctx, ctx.query);
   ctx.body = rsvps;
 });
 

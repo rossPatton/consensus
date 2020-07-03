@@ -14,7 +14,7 @@ export type tState = {
   type: ts.privacyEnum,
 };
 
-export type tStateUnion = keyof tState;
+export type tKeyUnion = keyof tState;
 export type tMeetingTypes = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 type tProps = ts.tokenProps & {
@@ -32,5 +32,5 @@ export type tContainerProps = tProps & {
 export type tComponentProps = tProps & tState & {
   disabled: boolean,
   verifyAndRegister: () => void,
-  updateState: (stateKey: tStateUnion, value: string | number | object | boolean) => void,
+  updateState: (stateKey: tKeyUnion, value: string | number | object | boolean) => void,
 };

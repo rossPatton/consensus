@@ -13,9 +13,9 @@ export const usersByGroupId = new Router();
 const route = '/api/v1/usersByGroupId';
 const table = 'users_roles';
 
-// api for interacting with the users_roles table
-// not for signing up new users, but for getting users that are members of an org
-// or joining an group, or updating member roles within an org
+/*
+  @description get list of users that belong to a group, zipped with their roles
+*/
 usersByGroupId.get(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: ts.usersByGroupIdQuery} = ctx;
   await validateSchema<ts.usersByGroupIdQuery>(ctx, getSchema, query);
@@ -23,7 +23,9 @@ usersByGroupId.get(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = users;
 });
 
-// joining an group
+/*
+  @description for when a user joins a group
+*/
 usersByGroupId.post(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: tUserByOrgQuery} = ctx;
   await validateSchema<tUserByOrgQuery>(ctx, postSchema, query);
@@ -54,6 +56,9 @@ usersByGroupId.post(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = session?.data?.profile;
 });
 
+/*
+  @description for when a user's role is changed by an admin
+*/
 usersByGroupId.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: ts.patchUserRoleQuery} = ctx;
   const {groupId, role, userId} = query;
@@ -73,6 +78,9 @@ usersByGroupId.patch(route, async (ctx: Koa.ParameterizedContext) => {
   ctx.body = updatedAccountRoleRel?.[0];
 });
 
+/*
+  @description for when a user leaves or is removed from a group
+*/
 usersByGroupId.delete(route, async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: tUserByOrgQuery} = ctx;
   await validateSchema<tUserByOrgQuery>(ctx, deleteSchema, query);

@@ -28,6 +28,7 @@ namespace ts {
       section: 'deleteAccount'
         | 'deleteGroup'
         | 'invite'
+        | 'mail'
         | 'meetings'
         | 'memberships'
         | 'planMeeting'

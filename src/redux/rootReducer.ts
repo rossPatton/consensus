@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 
+import { checkedReducer } from './checked/reducer';
 import { citiesReducer } from './cities/reducer';
 import { cityReducer } from './city/reducer';
 import { countryReducer } from './country/reducer';
@@ -21,11 +22,13 @@ import { sessionReducer } from './session/reducer';
 import { tokenReducer } from './tokens/reducer';
 import { uploadsReducer } from './uploads/reducer';
 import { userReducer } from './user/reducer';
+import { usersReducer } from './users/reducer';
 import { usersByGroupIdReducer } from './usersByGroupId/reducer';
 
 export const rootReducer = combineReducers({
   cities: citiesReducer,
   city: cityReducer,
+  checked: checkedReducer,
   country: countryReducer,
   geo: geoReducer,
   group: groupReducer,
@@ -45,5 +48,6 @@ export const rootReducer = combineReducers({
   tokens: tokenReducer,
   uploads: uploadsReducer,
   user: userReducer,
+  users: usersReducer,
   usersByGroupId: usersByGroupIdReducer,
 });

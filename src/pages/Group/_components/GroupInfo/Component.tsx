@@ -35,8 +35,10 @@ export const GroupInfoComponent = memo((props: tComponentProps) => {
             />
             <div>
               <div className="flex items-center text-sm">
-                <span className="capitalize mr-1">
-                  {props.group.category}
+                <span className="mr-1">
+                  <span className="capitalize">
+                    {props.group.category}
+                  </span> based in {props.group.city}
                 </span>
                 {props.members.length > 0
                   && `${props.members.length} ${pluralize(props.group.memberName, props.members.length)}`}

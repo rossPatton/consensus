@@ -3,7 +3,7 @@ export type tState = {
   username: string,
 };
 
-export type tStateUnion = keyof tState;
+export type tKeyUnion = keyof tState;
 
 type tProps = {
   invitesThunk: ts.thunk<ts.userInvite[]>,
@@ -18,7 +18,7 @@ export type tContainerProps = tProps & {
 
 export type tComponentProps = tProps & tState & {
   deleteInvite: (ev: React.MouseEvent<HTMLButtonElement>, invite: ts.userInvite) => void,
-  updateState: (key: tStateUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
+  updateState: (key: tKeyUnion, ev: React.ChangeEvent<HTMLInputElement>) => void,
   submit: (ev: React.FormEvent<HTMLFormElement | HTMLButtonElement>) => void,
 };
 

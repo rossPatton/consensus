@@ -28,9 +28,9 @@ const url = !!env.DEV
   ? 'https://consensus.local/api/v1'
   : 'https://consens.us.org/api/v1';
 
-let compressionPlugins = [];
+let prodPlugins = [];
 if (env.NODE_ENV === 'production') {
-  compressionPlugins = [
+  prodPlugins = [
     new CompressionPlugin({
       filename: '[path].gz[query]',
       algorithm: 'gzip',
@@ -39,9 +39,13 @@ if (env.NODE_ENV === 'production') {
     new BrotliPlugin({
       asset: '[path].br[query]',
       test: /\.js$|\.ts$|\.tsx$|\.css$|\.html$|\.png$|\.ico$|\.svg$|\.json$/,
-    })
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+    }),
   ];
 }
+
 
 let precacheList = [
   '/app-shell.html',
@@ -111,10 +115,6 @@ module.exports = merge(common, {
   // new DashboardPlugin({ port: 3002 }),
 
   plugins: [
-    !!env.PROD && new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-    }),
-
     new ManifestPlugin({
       fileName: 'webpack-manifest.json',
     }),
@@ -161,7 +161,7 @@ module.exports = merge(common, {
       __SERVER__: false,
     }),
 
-    ...compressionPlugins,
+    ...prodPlugins,
 
     new OfflinePlugin({
       appShell: '/app-shell.html',

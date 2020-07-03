@@ -1,5 +1,9 @@
 export type tQuery = {
-  email: string,
   content: string,
-  subject: string
+  from: string,
+  html: string,
+  recipientVariables: {[key: string]: {id: number}},
+  subject: string,
+  text: string,
+  to: string,
 };

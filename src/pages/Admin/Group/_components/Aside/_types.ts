@@ -1,6 +1,7 @@
 export type tProps = {
   isDesktop: boolean,
   isInvite: boolean,
+  isMail: boolean,
   isMobile: boolean,
   isMeetings: boolean,
   isMembers: boolean,

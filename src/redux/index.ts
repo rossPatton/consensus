@@ -4,6 +4,8 @@ export { getCities } from './cities';
 export { getCountry } from './country';
 export { getRegion } from './region';
 
+export { checkFailure, checkSuccess } from './checked';
+
 export { postUpload } from './uploads';
 
 // meeting(s) related actions.thunks
@@ -41,6 +43,7 @@ export { sendToken, validateToken } from './tokens';
 
 // user related actions/thunks
 export { deleteUser, getUser, patchUser, postUser } from './user';
+export { getUsers } from './users';
 export { deleteInvite, getInvites, postInvite } from './invites';
 export {
   deleteUserByGroupId,

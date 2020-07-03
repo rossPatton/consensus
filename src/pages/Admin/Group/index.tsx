@@ -8,6 +8,7 @@ import {Aside} from './_components';
 import {
   DeleteGroup,
   InviteMember,
+  Mail,
   Meetings,
   Members,
   PlanMeeting,
@@ -21,6 +22,7 @@ const GroupAdminContainer = memo((props: tProps) => {
   const {section} = match.params;
   const isDelete = section === 'deleteGroup';
   const isInvite = section === 'invite';
+  const isMail = section === 'mail';
   const isMeetings = section === 'meetings';
   const isProfile = section === 'profile';
   const isMembers = section === 'memberships';
@@ -42,6 +44,7 @@ const GroupAdminContainer = memo((props: tProps) => {
           isInvite={isInvite}
           isMobile={isMobile}
           session={session}
+          isMail={isMail}
           isMeetings={isMeetings}
           isMeetingForm={isMeetingForm}
           isMembers={isMembers}
@@ -55,6 +58,9 @@ const GroupAdminContainer = memo((props: tProps) => {
               history={props.history}
               match={match}
             />
+          )}
+          {isMail && (
+            <Mail />
           )}
           {isMembers && (
             <Members

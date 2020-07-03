@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {deleteInvite, getInvites, postInvite} from '~app/redux';
 
-import {Store, tContainerProps, tState, tStateUnion} from './_types';
+import {Store, tContainerProps, tState, tKeyUnion} from './_types';
 import {InviteMemberComponent} from './Component';
 
 class InviteMemberContainer extends Component<tContainerProps, tState> {
@@ -50,10 +50,10 @@ class InviteMemberContainer extends Component<tContainerProps, tState> {
     });
   }
 
-  updateState = (stateKey: tStateUnion, ev: React.ChangeEvent<any>) => {
+  updateState = (stateKey: tKeyUnion, ev: React.ChangeEvent<any>) => {
     this.setState({
       [stateKey]: ev.currentTarget.value,
-    } as Pick<tState, tStateUnion>);
+    } as Pick<tState, tKeyUnion>);
   }
 
   render() {

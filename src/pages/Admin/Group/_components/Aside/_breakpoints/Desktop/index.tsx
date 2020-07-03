@@ -64,6 +64,15 @@ const Aside = memo((props: tProps) => {
             </Link>
           )}
         </li>
+        <li className="flex items-center text-base p-1 mb-1 rounded hover:bg-gray-2">
+          <div className="bg-white border rounded-circ mr-2 p-2" />
+          {props.isMail && 'Email Members & Announcements'}
+          {!props.isMail && (
+            <Link to="/admin/mail">
+              Email Members & Announcements
+            </Link>
+          )}
+        </li>
         <li className="flex items-center text-base p-1 rounded hover:bg-gray-2">
           <div className="bg-white border rounded-circ mr-2 p-2" />
           {props.isMeetingForm && 'Plan Meeting'}

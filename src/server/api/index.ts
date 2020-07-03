@@ -28,6 +28,7 @@ import { sendEmail } from './sendEmail';
 import { spaces } from './spaces';
 import { tokenSend, tokenValidate } from './token';
 import { user } from './user';
+import { users } from './users';
 import { usersByGroupId } from './usersByGroupId';
 
 const buffer = fs.readFileSync(geolite2.paths.city);
@@ -57,6 +58,7 @@ export const setupApi = (app: Koa) => {
   app.use(sendEmail.routes());
   app.use(spaces.routes());
   app.use(user.routes());
+  app.use(users.routes());
   app.use(usersByGroupId.routes());
   app.use(tokenSend.routes());
   app.use(tokenValidate.routes());
@@ -90,6 +92,7 @@ export const setupApi = (app: Koa) => {
   app.use(sendEmail.allowedMethods(opts));
   app.use(spaces.allowedMethods(opts));
   app.use(user.allowedMethods(opts));
+  app.use(users.allowedMethods(opts));
   app.use(usersByGroupId.allowedMethods(opts));
   app.use(tokenSend.allowedMethods(opts));
   app.use(tokenValidate.allowedMethods(opts));

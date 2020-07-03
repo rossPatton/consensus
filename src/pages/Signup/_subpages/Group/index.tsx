@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Helmet} from '~app/components';
 import {login, postGroup} from '~app/redux';
 
-import {tContainerProps, tState, tStateUnion} from './_types';
+import {tContainerProps, tKeyUnion, tState} from './_types';
 import {GroupSignupComponent} from './Component';
 
 export class GroupSignupContainer extends PureComponent<tContainerProps, tState> {
@@ -49,7 +49,7 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
     }
   }
 
-  updateState = (stateKey: tStateUnion, value: string | number | object | boolean) => {
+  updateState = (stateKey: tKeyUnion, value: string | number | object | boolean) => {
     // if making multiple changes at once, don't update at end
     if (typeof value === 'object') {
       return this.setState(value);
@@ -57,7 +57,7 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
 
     this.setState({
       [stateKey]: value,
-    } as Pick<tState, tStateUnion>);
+    } as Pick<tState, tKeyUnion>);
   }
 
   render() {

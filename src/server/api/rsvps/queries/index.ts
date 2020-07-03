@@ -1,1 +1,1 @@
-export {getRSVPsByUserId} from './getRSVPsByUserId';
+export {getRSVPsByQuery} from './getRSVPsByQuery';

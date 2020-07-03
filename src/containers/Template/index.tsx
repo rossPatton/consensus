@@ -21,7 +21,8 @@ class Template extends PureComponent<tProps> {
 
     if (!props.session.isAuthenticated) return;
     if (props.session.type === 'group') return;
-    if (!props.rsvpsThunk.fetched) props.getRsvpsDispatch();
+    const userId = props.session.profile.id;
+    if (!props.rsvpsThunk.fetched) props.getRsvpsDispatch({userId});
     if (!props.rolesThunk.fetched) props.getRolesDispatch();
   }
 
@@ -57,7 +58,7 @@ const mapStateToProps = (store: tStore) => ({
 const mapDispatchToProps = (dispatch: Function) => ({
   getGeoDispatch: () => dispatch(getGeo()),
   getRolesDispatch: () => dispatch(getRoles()),
-  getRsvpsDispatch: () => dispatch(getRsvps()),
+  getRsvpsDispatch: (query: any) => dispatch(getRsvps(query)),
 });
 
 export default connect(

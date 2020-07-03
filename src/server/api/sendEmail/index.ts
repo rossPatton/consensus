@@ -1,6 +1,8 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 import _ from 'lodash';
+import marked from 'marked';
+import sanitize from 'sanitize-html';
 
 import {sendEmail as mgEmailer, validateSchema} from '~app/server/utils';
 
@@ -12,18 +14,31 @@ export const sendEmail = new Router();
 // general email sender using contact form
 sendEmail.get('/api/v1/sendEmail', async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: tQuery} = ctx;
+  console.log('query => ', query);
+  console.log('query.recipientVariables => ', typeof query.recipientVariables, query.recipientVariables);
   await validateSchema<tQuery>(ctx, emailSchema, query);
 
-  const resp = await mgEmailer(ctx, {
-    from: `Consensus <noreply@${__MAIL_DOMAIN__}>`,
-    to: 'hello@consens.us.org',
-    subject: query.subject,
-    text: `The following feedback was provided by: ${query.email}. ${query.content}`,
-    html: `
-      <h2>The following feedback was provided by: <b>${query.email}</b></h2>
-      <br /><br />${query.content}
-    `,
+  const markdown = marked(query.content);
+  const html = sanitize(markdown);
+  console.log('html => ', html);
+  const text = sanitize(html, {
+    allowedTags: [],
+    allowedAttributes: {},
   });
+  console.log('text => ', text);
 
-  ctx.body = resp;
+  const messageOpts = {
+    from: `${query.from || 'Consensus'} <noreply@${__MAIL_DOMAIN__}>`,
+    to: query.to,
+    'recipient-variables': undefined as any,
+    subject: query.subject,
+    text,
+    html,
+  };
+  if (query.recipientVariables) {
+    messageOpts['recipient-variables'] = query.recipientVariables;
+  }
+
+  const response = await mgEmailer(ctx, messageOpts);
+  ctx.body = response;
 });

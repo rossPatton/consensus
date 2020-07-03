@@ -10,7 +10,7 @@ export default class SearchFilter extends PureComponent<tProps, tState> {
   };
 
   state = {
-    items: [{}],
+    items: [] as object[],
     search: '',
     searchKey: this.props.searchKey,
   };
@@ -44,8 +44,12 @@ export default class SearchFilter extends PureComponent<tProps, tState> {
   }
 
   render() {
+    const items = this.state.search === ''
+      ? this.props.items
+      : this.state.items;
+
     return this.props.render({
-      items: this.state.items,
+      items,
       onFilterOptionChange: this.onFilterOptionChange,
       onSearchChange: this.onSearchChange,
     });
