@@ -2,11 +2,12 @@ import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import pluralize from 'pluralize';
+import querystring from 'qs';
 import React, {FunctionComponent, memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {Emoji, ExternalLink, MeetingFeaturedImage} from '~app/components';
-import {objToQueryString, slugify} from '~app/utils';
+import {slugify} from '~app/utils';
 
 import {tProps} from './_types';
 
@@ -41,8 +42,8 @@ const DesktopMeetings: FunctionComponent<tProps> = memo(props => (
       )}
     {props.meetingsToRender.map((meeting, i) => {
       const {id, ...evWithoutId} = meeting;
-      const qs = objToQueryString(meeting);
-      const qsWithCopy = objToQueryString({...evWithoutId, isCopy: true});
+      const qs = querystring.stringify(meeting);
+      const qsWithCopy = querystring.stringify({...evWithoutId, isCopy: true});
 
       const date = props.renderPast
         ? dayJS(meeting.date).format('MMM DD YYYY | h:mmA')

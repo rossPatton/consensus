@@ -8,9 +8,12 @@ import {tComponentProps} from './_types';
 
 export const MailerComponent: FunctionComponent<tComponentProps> = memo(props => (
   <div className="rounded d:border d:shadow d:p-2 mb-2">
-    <h2 className="text-3 mb-1 font-bold">
+    <h2 className="text-3 font-bold">
       Email {pluralize(props.group.memberName, 2)}
     </h2>
+    <p>
+      Emails are sent using a template that includes a link to your group, along with your group name and description.
+    </p>
     <Users
       isSelectable
       className="mb-2"

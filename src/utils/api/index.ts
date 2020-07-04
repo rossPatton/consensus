@@ -1,8 +1,8 @@
 import loglevel from 'loglevel';
+import qs from 'qs';
 
 import {agent} from '~app/constants/agent';
 
-import {objToQueryString} from '..';
 import {tApiOpts} from './_types';
 
 export const api = async (opts: tApiOpts) => {
@@ -19,8 +19,8 @@ export const api = async (opts: tApiOpts) => {
   // not all api endpoints require query params
   let endpoint = path;
   if (query) {
-    const qs = objToQueryString(query);
-    endpoint = `${path}?${qs}`;
+    const queryString = qs.stringify(query, {arrayFormat: 'comma', indices: false});
+    endpoint = `${path}?${queryString}`;
   }
 
   if (opts.init) opts.dispatch(opts.init());

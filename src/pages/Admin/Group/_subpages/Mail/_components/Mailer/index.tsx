@@ -38,9 +38,9 @@ class MailerContainer extends PureComponent<tContainerProps, tState> {
           html: content,
           recipientVariables: JSON.stringify(recipientVariables),
           subject,
+          template: 'group',
           text: content,
           to,
-          type: 'group',
         },
       });
     } catch (error) {

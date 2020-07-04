@@ -62,14 +62,12 @@ class AnnouncerContainer extends PureComponent<tContainerProps, tState> {
         path: '/api/v1/sendEmail',
         query: {
           content,
-          data: meeting,
+          data: JSON.stringify(meeting),
           from: this.props.group.name,
-          html: content,
           recipientVariables: JSON.stringify(recipientVariables),
           subject,
-          text: content,
+          template: 'announcement',
           to,
-          type: 'announcement',
         },
       });
     } catch (error) {

@@ -1,4 +1,4 @@
-import qs from 'query-string';
+import qs from 'qs';
 import React, {PureComponent} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 

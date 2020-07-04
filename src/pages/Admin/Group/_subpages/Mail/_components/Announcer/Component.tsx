@@ -8,9 +8,12 @@ import {tComponentProps} from './_types';
 
 export const AnnouncerComponent: FunctionComponent<tComponentProps> = memo(props => (
   <div className="rounded d:border d:shadow d:p-2">
-    <h2 className="text-3 mb-1 font-bold">
+    <h2 className="text-3 font-bold">
       Announce Meeting
     </h2>
+    <p>
+      Announcement emails are sent using a template that includes a link to your meeting, along with the meeting title and description.
+    </p>
     <select
       className="mb-2"
       value={props.meetingIndex}

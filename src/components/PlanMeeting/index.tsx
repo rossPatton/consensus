@@ -1,6 +1,6 @@
 import dayJS from 'dayjs';
 import _ from 'lodash';
-import qs from 'query-string';
+import qs from 'qs';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
