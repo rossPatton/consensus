@@ -19,7 +19,7 @@ const EditProfile = memo((props: tComponentProps) => (
       <>
         <label className="w-full mb-2" htmlFor="memberName">
           <h3 className="text-base mb-1 leading-none">
-            Change Email
+            Email
           </h3>
           <input
             onChange={ev => props.updateState('email', ev)}
@@ -39,7 +39,7 @@ const EditProfile = memo((props: tComponentProps) => (
           title="Upload New Group Logo"
         />
         <h3 className="text-base mb-1 leading-none">
-          Change Category
+          Category
         </h3>
         <select
           className="mb-2 w-full"
@@ -53,7 +53,7 @@ const EditProfile = memo((props: tComponentProps) => (
           ))}
         </select>
         <h3 className="text-base mb-1 leading-none">
-          Change Group Type
+          Group Type
         </h3>
         <select
           className="w-full"
@@ -75,7 +75,7 @@ const EditProfile = memo((props: tComponentProps) => (
         </small>
         <label className="w-full mb-2" htmlFor="memberName">
           <h3 className="text-base mb-1 leading-none">
-            Change Membership Title
+            Membership Title
           </h3>
           <input
             onChange={ev => props.updateState('memberName', ev)}
@@ -88,7 +88,7 @@ const EditProfile = memo((props: tComponentProps) => (
         </label>
         <label className="w-full mb-2" htmlFor="modName">
           <h3 className="text-base mb-1 leading-none">
-            Change Moderator Title
+            Moderator Title
           </h3>
           <input
             onChange={ev => props.updateState('modName', ev)}
@@ -100,7 +100,7 @@ const EditProfile = memo((props: tComponentProps) => (
           />
         </label>
         <h3 className="text-base mb-1 leading-none">
-          Change Description
+          Description
         </h3>
         <textarea
           rows={6}

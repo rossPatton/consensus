@@ -14,7 +14,7 @@ export type tKeyUnion = keyof tState;
 
 export type tComponentProps = tState & tProps & {
   meetings: ts.meeting[],
-  sendEmail: () => void,
+  sendEmail: (isTest?: boolean) => void,
   updateState: (key: tKeyUnion, value: string | number) => void,
 };
 

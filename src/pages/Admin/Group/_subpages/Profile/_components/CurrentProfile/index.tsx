@@ -76,6 +76,9 @@ const CurrentProfile = memo((props: tComponentProps) => (
     )}
     {props.session.profile.description && (
       <div className="mb-3">
+        <h3 className="text-base mb-1 leading-none">
+          Description
+        </h3>
         <Description
           description={props.session.profile.description}
         />

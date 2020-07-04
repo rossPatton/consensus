@@ -51,9 +51,10 @@ class MeetingContainer extends PureComponent<tContainerProps> {
 
     return this.props.getMeetingsByGroupIdDispatch({
       exclude: res.payload.id,
+      groupId: res.payload.groupId,
       isDraft: false,
       limit: 4,
-      groupId: res.payload.groupId,
+      showPast: false,
     });
   }
 

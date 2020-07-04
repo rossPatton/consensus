@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import pluralize from 'pluralize';
 import React, { FunctionComponent, memo } from 'react';
+import cx from 'classnames';
 
 import {ExternalLink, Form, Users} from '~app/components';
 
@@ -26,7 +27,7 @@ export const MailerComponent: FunctionComponent<tComponentProps> = memo(props =>
         error={props.error}
         className="animated fadeInUp"
         name="groupMailerForm"
-        onSubmit={props.sendEmail}
+        onSubmit={() => props.sendEmail()}
         legend={(
           <>
             <h2 className="text-3 font-bold">
@@ -64,15 +65,33 @@ export const MailerComponent: FunctionComponent<tComponentProps> = memo(props =>
             />
           </>
         )}
-        renderSubmit={() => (
-          <div>
-            <button
-              className="p-2 pl-3 pr-3 hover:bg-gray-1"
-              onClick={props.sendEmail}>
-              Send Email
-            </button>
-          </div>
-        )}
+        renderSubmit={formProps => {
+          const isDisabled = !formProps.hasMounted
+            || !props.content
+            || !props.subject;
+
+          return (
+            <div>
+              <button
+                disabled={isDisabled}
+                className={cx({
+                  'p-2 pl-3 pr-3 mb-1 d:mb-0 d:mr-1 w-full d:w-auto': true,
+                  'bg-green-1 hover:bg-green-2': formProps.hasMounted,
+                })}>
+                Send Email
+              </button>
+              <button
+                disabled={isDisabled}
+                className='p-2 pl-3 pr-3 mb-1 d:mb-0 d:mr-1 w-full d:w-auto hover:bg-gray-1'
+                onClick={ev => {
+                  ev.preventDefault();
+                  props.sendEmail(true);
+                }}>
+                Send Test Email
+              </button>
+            </div>
+          );
+        }}
       />
     )}
   </div>

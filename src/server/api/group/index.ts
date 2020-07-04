@@ -1,5 +1,7 @@
 import Koa from 'koa';
 import Router from 'koa-router';
+import marked from 'marked';
+import sanitize from 'sanitize-html';
 
 import {pg} from '~app/server/db/connection';
 import {validateSchema} from '~app/server/utils';
@@ -59,7 +61,16 @@ group.patch(route, async (ctx: Koa.ParameterizedContext) => {
   const {sessionType, ...updateQuery} = query;
 
   if (updateQuery.description) {
-    updateQuery.description = decodeURIComponent(updateQuery.description);
+    const decoded = decodeURIComponent(updateQuery.description);
+    const markdown = marked(decoded);
+    const html = sanitize(markdown, {
+      allowedTags: [ 'b', 'i', 'em', 'strong', 'a' ],
+      allowedAttributes: {
+        'a': [ 'href' ],
+      },
+    });
+
+    updateQuery.description = html;
   }
 
   try {

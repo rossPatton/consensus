@@ -13,17 +13,19 @@ class MailerContainer extends PureComponent<tContainerProps, tState> {
     subject: '',
   };
 
-  sendEmail = async () => {
+  sendEmail = async (isTest = false) => {
     const {checked, group, usersByGroupIdThunk} = this.props;
     const {content, subject} = this.state;
-    const selectedUsers = usersByGroupIdThunk.data.filter(user => checked[user.id]);
 
-    const to = selectedUsers
-      .map(user => user.email)
-      .join(', ');
+    let users = usersByGroupIdThunk.data.filter(user => checked[user.id]);
+    if (isTest) {
+      users = [{email: group.email, id: group.id}] as ts.user[];
+    }
+
+    const to = users.map(u => u.email).join(', ');
 
     const recipientVariables = {};
-    for (const user of selectedUsers) {
+    for (const user of users) {
       // @ts-ignore
       recipientVariables[user.email] = {id: user.id};
     }
@@ -33,13 +35,11 @@ class MailerContainer extends PureComponent<tContainerProps, tState> {
         path: '/api/v1/sendEmail',
         query: {
           content,
-          data: group,
+          data: JSON.stringify(group),
           from: group.name,
-          html: content,
           recipientVariables: JSON.stringify(recipientVariables),
           subject,
           template: 'group',
-          text: content,
           to,
         },
       });

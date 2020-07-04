@@ -1,4 +1,5 @@
 import React, {memo, useState} from 'react';
+import parse from 'html-react-parser';
 
 const Description = memo((props: {description?: string}) => {
   const [showAll, toggleShowAll] = useState(false);
@@ -8,7 +9,10 @@ const Description = memo((props: {description?: string}) => {
     return null;
   }
 
-  const descArr = description.split('\n').filter(p => !!p);
+  const descArr = description
+    .split('\n')
+    .filter(p => !!p)
+    .map(p => parse(p));
 
   return (
     <div className="break-words">

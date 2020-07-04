@@ -32,16 +32,21 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   }
 
   save = async () => {
-    const {dispatch, patchUserDispatch, sessionThunk} = this.props;
+    const {avatar, dispatch, patchUserDispatch, sessionThunk} = this.props;
     const {isAuthenticated, profile, qr, type} = sessionThunk.data;
+    const {error, ...stateToUse} = this.state;
+
+    let avatarToUse = avatar;
+    if (!avatarToUse) {
+      avatarToUse = profile.avatar;
+    }
 
     if (profile.id) {
       try {
         const user = await patchUserDispatch({
-          ...this.state,
-          avatar: this.props.avatar,
+          ...stateToUse,
+          avatar: avatarToUse,
           bio: encodeURIComponent(this.state.bio),
-          id: profile.id,
         });
 
         dispatch(patchSessionSuccess({

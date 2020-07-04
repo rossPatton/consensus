@@ -12,7 +12,7 @@ type tProps = {
 };
 
 export type tComponentProps = tState & tProps & {
-  sendEmail: () => void,
+  sendEmail: (isTest?: boolean) => void,
   updateState: (key: tKeyUnion, value: string) => void,
 };
 

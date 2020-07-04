@@ -14,6 +14,7 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
     const group = props?.sessionThunk?.data?.profile as ts.group;
 
     const {
+      avatar,
       city,
       cityId,
       country,
@@ -34,13 +35,19 @@ class ProfileContainer extends PureComponent<tContainerProps, tState> {
   }
 
   onSubmit = async () => {
-    const {dispatch, patchGroupDispatch, sessionThunk} = this.props;
-    const {isAuthenticated, qr, type} = sessionThunk.data;
+    const {avatar, dispatch, patchGroupDispatch, sessionThunk} = this.props;
+    const {isAuthenticated, profile, qr, type} = sessionThunk.data;
+    const {error, ...stateToUse} = this.state;
+
+    let avatarToUse = avatar;
+    if (!avatarToUse) {
+      avatarToUse = profile.avatar;
+    }
 
     try {
       const group = await patchGroupDispatch({
-        ...this.state,
-        avatar: this.props.avatar,
+        ...stateToUse,
+        avatar: avatarToUse,
         description: encodeURIComponent(this.state.description),
       });
 

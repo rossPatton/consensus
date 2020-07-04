@@ -28,25 +28,33 @@ class AnnouncerContainer extends PureComponent<tContainerProps, tState> {
     });
   }
 
-  sendEmail = async () => {
-    const {meetingsByGroupIdThunk, usersByGroupId} = this.props;
+  sendEmail = async (isTest = false) => {
+    const {group, meetingsByGroupIdThunk, usersByGroupId} = this.props;
     const {cohort, content, meetingIndex, subject} = this.state;
 
     const {data: meetings} = meetingsByGroupIdThunk;
     const meeting = meetings[meetingIndex];
 
-    let users = await Promise.all(usersByGroupId.map(user => user));
+    let users = [] as ts.user[];
 
-    // announce by rsvp status
-    if (cohort === 'yes' || cohort === 'maybe' || cohort === 'yesmaybe') {
-      const rsvps = await this.props.getRsvpsDispatch({
-        meetingId: meeting.id,
-        value: cohort,
-      });
+      // send test email to admin email
+    if (isTest) {
+      users = [{email: group.email, id: group.id}] as ts.user[];
+    } else {
+        // announce to all group members
+      if (cohort === 'all') {
+        users = await Promise.all(usersByGroupId.map(user => user));
+        // announce by rsvp status
+      } else if (cohort === 'yes' || cohort === 'maybe' || cohort === 'yesmaybe') {
+        const rsvps = await this.props.getRsvpsDispatch({
+          meetingId: meeting.id,
+          value: cohort,
+        });
 
-      const ids = await Promise.all(rsvps.payload.map(rsvp => rsvp.userId));
-      const usersByRsvp = await this.props.getUsersDispatch({ids});
-      users = await Promise.all(usersByRsvp.payload.map(user => user));
+        const ids = await Promise.all(rsvps.payload.map(rsvp => rsvp.userId));
+        const usersByRsvp = await this.props.getUsersDispatch({ids});
+        users = await Promise.all(usersByRsvp.payload.map(user => user));
+      }
     }
 
     const to = users.map(user => user.email).join(', ');
@@ -63,7 +71,7 @@ class AnnouncerContainer extends PureComponent<tContainerProps, tState> {
         query: {
           content,
           data: JSON.stringify(meeting),
-          from: this.props.group.name,
+          from: group.name,
           recipientVariables: JSON.stringify(recipientVariables),
           subject,
           template: 'announcement',
