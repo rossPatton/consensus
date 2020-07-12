@@ -13,7 +13,7 @@ export const AnnouncerComponent: FunctionComponent<tComponentProps> = memo(props
       Announce Meeting
     </h2>
     <p>
-      Announcement emails are sent using a template that includes a link to your meeting, along with the meeting title and description.
+      Announcement emails are sent using a template that includes a link to your meeting, along with the meeting title and description. Good for announcing a newly created meeting, or sending a reminder.
     </p>
     <select
       className="mb-2"

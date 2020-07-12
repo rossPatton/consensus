@@ -4,6 +4,7 @@ import { checkedReducer } from './checked/reducer';
 import { citiesReducer } from './cities/reducer';
 import { cityReducer } from './city/reducer';
 import { countryReducer } from './country/reducer';
+import { emailsReducer } from './emails/reducer';
 import { geoReducer } from './geo/reducer';
 import { groupReducer } from './group/reducer';
 import { groupsReducer } from './groups/reducer';
@@ -30,6 +31,7 @@ export const rootReducer = combineReducers({
   city: cityReducer,
   checked: checkedReducer,
   country: countryReducer,
+  emails: emailsReducer,
   geo: geoReducer,
   group: groupReducer,
   groups: groupsReducer,

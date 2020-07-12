@@ -19,6 +19,8 @@ export type tComponentProps = tState & tProps & {
 };
 
 export type tContainerProps = tProps & {
+  emailsThunk: ts.thunk<any>,
+  postEmailDispatch: (query: any) => ts.thunkPayload,
   getRsvpsDispatch: (query: any) => ts.thunkPayload<ts.rsvp[]>,
   meetingsByGroupIdThunk: ts.thunk<ts.meeting[]>,
   getMeetingsByGroupIdDispatch: (query: ts.getMeetingQuery) => ts.thunkPayload<ts.meeting[]>,
@@ -27,6 +29,7 @@ export type tContainerProps = tProps & {
 };
 
 export type tStore = {
+  emails: ts.thunk<any>,
   meetingsByGroupId: ts.thunk<ts.meeting[]>,
   usersByGroupId: ts.thunk<ts.user[]>,
 };

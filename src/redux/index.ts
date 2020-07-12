@@ -6,6 +6,7 @@ export { getRegion } from './region';
 
 export { checkFailure, checkSuccess } from './checked';
 
+export { postEmail } from './emails';
 export { postUpload } from './uploads';
 
 // meeting(s) related actions.thunks

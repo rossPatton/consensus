@@ -1,6 +1,6 @@
 import {spacesUrl} from '~app/constants';
 
-export const group = (content: string, group: ts.group): string => {
+export const group = async (content: string, group: ts.group) => {
   const parsedAv = parseInt(group.avatar, 10);
   const isDefaultAv = !isNaN(parsedAv);
   const avatar = isDefaultAv

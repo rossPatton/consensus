@@ -2,7 +2,7 @@ import dayJS from 'dayjs';
 
 import {spacesUrl} from '~app/constants';
 
-export const announcement = (content: string, meeting: ts.meeting): string => {
+export const announcement = async (content: string, meeting: ts.meeting) => {
   const isPastMeeting = dayJS(meeting.date).isBefore(dayJS());
   const date = dayJS(meeting.date);
 

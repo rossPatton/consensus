@@ -17,10 +17,13 @@ export type tComponentProps = tState & tProps & {
 };
 
 export type tContainerProps = tProps & {
+  emails: any,
+  postEmailDispatch: (query: any) => Promise<ts.thunkPayload>,
   usersByGroupIdThunk: ts.thunk<ts.user[]>,
 };
 
 export type tStore = {
   checked: {[key: number]: boolean},
+  emails: object,
   usersByGroupId: ts.thunk<ts.user[]>,
 };

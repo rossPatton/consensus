@@ -1,7 +1,8 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {api} from '~app/utils';
+import {GenericLoader} from '~app/containers';
+import {postEmail} from '~app/redux';
 
 import {tContainerProps, tKeyUnion, tState, tStore} from './_types';
 import {MailerComponent} from './Component';
@@ -31,17 +32,19 @@ class MailerContainer extends PureComponent<tContainerProps, tState> {
     }
 
     try {
-      await api({
-        path: '/api/v1/sendEmail',
-        query: {
-          content,
-          data: JSON.stringify(group),
-          from: group.name,
-          recipientVariables: JSON.stringify(recipientVariables),
-          subject,
-          template: 'group',
-          to,
-        },
+      await this.props.postEmailDispatch({
+        content,
+        data: JSON.stringify(group),
+        from: group.name,
+        recipientVariables: JSON.stringify(recipientVariables),
+        subject,
+        template: 'group',
+        to,
+      });
+      this.setState({
+        content: '',
+        error: '',
+        subject: '',
       });
     } catch (error) {
       return this.setState({
@@ -57,12 +60,17 @@ class MailerContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     return (
-      <MailerComponent
-        {...this.state}
-        checked={this.props.checked}
-        group={this.props.group}
-        sendEmail={this.sendEmail}
-        updateState={this.updateState}
+      <GenericLoader
+        isLoading={this.props.emails.isLoading}
+        render={() => (
+          <MailerComponent
+            {...this.state}
+            checked={this.props.checked}
+            group={this.props.group}
+            sendEmail={this.sendEmail}
+            updateState={this.updateState}
+          />
+        )}
       />
     );
   }
@@ -70,8 +78,14 @@ class MailerContainer extends PureComponent<tContainerProps, tState> {
 
 const mapStateToProps = (store: tStore) => ({
   checked: store.checked,
+  emails: store.emails,
   usersByGroupIdThunk: store.usersByGroupId,
 });
 
-const Mailer = connect(mapStateToProps)(MailerContainer);
+const mapDispatchToProps = (dispatch: Function) => ({
+  postEmailDispatch: (query: any) => dispatch(postEmail(query)),
+});
+
+
+const Mailer = connect(mapStateToProps, mapDispatchToProps)(MailerContainer);
 export default Mailer;

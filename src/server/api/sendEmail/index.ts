@@ -13,7 +13,7 @@ import {tQuery} from './_types';
 export const sendEmail = new Router();
 
 // general email sender using contact form
-sendEmail.get('/api/v1/sendEmail', async (ctx: Koa.ParameterizedContext) => {
+sendEmail.post('/api/v1/sendEmail', async (ctx: Koa.ParameterizedContext) => {
   const {query}: {query: tQuery} = ctx;
   await validateSchema<tQuery>(ctx, emailSchema, query);
 
@@ -29,8 +29,8 @@ sendEmail.get('/api/v1/sendEmail', async (ctx: Koa.ParameterizedContext) => {
   if (query.template) {
     const data = JSON.parse(query.data);
     const template = templates[query.template];
-    html = template(html, data);
-    text = template(text, data);
+    html = await template(html, data);
+    text = await template(text, data);
   }
 
   const messageOpts = {

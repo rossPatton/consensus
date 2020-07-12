@@ -2,8 +2,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
 import { ErrorBoundary, GenericLoader } from '~app/containers';
-import { getMeetingsByGroupId, getRsvps, getUsers } from '~app/redux';
-import { api } from '~app/utils';
+import { getMeetingsByGroupId, getRsvps, getUsers, postEmail } from '~app/redux';
 
 import { tContainerProps, tKeyUnion, tState, tStore } from './_types';
 import {AnnouncerComponent} from './Component';
@@ -66,7 +65,7 @@ class AnnouncerContainer extends PureComponent<tContainerProps, tState> {
     }
 
     try {
-      await api({
+      await this.props.postEmailDispatch({
         path: '/api/v1/sendEmail',
         query: {
           content,
@@ -89,12 +88,14 @@ class AnnouncerContainer extends PureComponent<tContainerProps, tState> {
     this.setState({[key]: value} as Pick<tState, tKeyUnion>);
 
   render() {
-    const {group, meetingsByGroupIdThunk} = this.props;
+    const {emailsThunk, group, meetingsByGroupIdThunk} = this.props;
+
+    // you are working on the loading functionality for the emailer form
 
     return (
       <ErrorBoundary status={meetingsByGroupIdThunk?.error?.status}>
         <GenericLoader
-          isLoading={meetingsByGroupIdThunk.isLoading}
+          isLoading={emailsThunk.isLoading || meetingsByGroupIdThunk.isLoading}
           render={() => (
             <AnnouncerComponent
               {...this.state}
@@ -111,11 +112,13 @@ class AnnouncerContainer extends PureComponent<tContainerProps, tState> {
 }
 
 const mapStateToProps = (store: tStore) => ({
+  emailsThunk: store.emails,
   meetingsByGroupIdThunk: store.meetingsByGroupId,
   usersByGroupId: store.usersByGroupId.data,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
+  postEmailDispatch: (query: any) => dispatch(postEmail(query)),
   getUsersDispatch: (query: any) => dispatch(getUsers(query)),
   getRsvpsDispatch: (query: any) => dispatch(getRsvps(query)),
   getMeetingsByGroupIdDispatch: (query: ts.getMeetingQuery) =>
