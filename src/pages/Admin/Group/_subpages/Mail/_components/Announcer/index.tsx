@@ -37,11 +37,11 @@ class AnnouncerContainer extends PureComponent<tContainerProps, tState> {
 
     let users = [] as ts.user[];
 
-      // send test email to admin email
+    // send test email to admin email
     if (isTest) {
       users = [{email: group.email, id: group.id}] as ts.user[];
     } else {
-        // announce to all group members
+      // announce to all group members
       if (cohort === 'all') {
         users = await Promise.all(usersByGroupId.map(user => user));
         // announce by rsvp status

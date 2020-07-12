@@ -1,9 +1,20 @@
-// import {spacesUrl} from '~app/constants';
+import {spacesUrl} from '~app/constants';
 
 export const group = (content: string, group: ts.group): string => {
+  const parsedAv = parseInt(group.avatar, 10);
+  const isDefaultAv = !isNaN(parsedAv);
+  const avatar = isDefaultAv
+    ? ''
+    : `<img
+      alt=""
+      src="${spacesUrl}/groups/${group.avatar}"
+      style="margin-right: 8px;"
+      width="50"
+    />`;
+
   return `
     <div>
-      <div>
+      <div style="margin-bottom: 24px;">
         ${content}
       </div>
       <div style="
@@ -11,7 +22,8 @@ export const group = (content: string, group: ts.group): string => {
         border: 1px solid #efefef;
         border-radius: 8px;
         background: #f6f6f6;">
-        <h1 style="line-height: 1.2;">
+        <h1 style="display: flex;align-items: center;line-height: 1.2;">
+          ${avatar}
           <a
             style="color: #000;"
             href="https://consens.us.org/group/${group.handle}">

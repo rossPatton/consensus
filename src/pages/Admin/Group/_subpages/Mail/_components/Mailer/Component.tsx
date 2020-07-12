@@ -1,7 +1,7 @@
+import cx from 'classnames';
 import _ from 'lodash';
 import pluralize from 'pluralize';
 import React, { FunctionComponent, memo } from 'react';
-import cx from 'classnames';
 
 import {ExternalLink, Form, Users} from '~app/components';
 
@@ -82,7 +82,7 @@ export const MailerComponent: FunctionComponent<tComponentProps> = memo(props =>
               </button>
               <button
                 disabled={isDisabled}
-                className='p-2 pl-3 pr-3 mb-1 d:mb-0 d:mr-1 w-full d:w-auto hover:bg-gray-1'
+                className="p-2 pl-3 pr-3 mb-1 d:mb-0 d:mr-1 w-full d:w-auto hover:bg-gray-1"
                 onClick={ev => {
                   ev.preventDefault();
                   props.sendEmail(true);

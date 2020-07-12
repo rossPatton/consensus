@@ -64,9 +64,9 @@ group.patch(route, async (ctx: Koa.ParameterizedContext) => {
     const decoded = decodeURIComponent(updateQuery.description);
     const markdown = marked(decoded);
     const html = sanitize(markdown, {
-      allowedTags: [ 'b', 'i', 'em', 'strong', 'a' ],
+      allowedTags: ['b', 'i', 'em', 'strong', 'a'],
       allowedAttributes: {
-        'a': [ 'href' ],
+        'a': ['href'],
       },
     });
 

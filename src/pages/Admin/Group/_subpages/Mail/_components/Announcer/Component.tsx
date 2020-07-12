@@ -1,7 +1,7 @@
+import cx from 'classnames';
 import _ from 'lodash';
 import pluralize from 'pluralize';
 import React, { FunctionComponent, memo } from 'react';
-import cx from 'classnames';
 
 import {ExternalLink, Form} from '~app/components';
 
@@ -20,37 +20,44 @@ export const AnnouncerComponent: FunctionComponent<tComponentProps> = memo(props
       value={props.meetingIndex}
       onBlur={ev => props.updateState('meetingIndex', ev.currentTarget.value)}
       onChange={ev => props.updateState('meetingIndex', ev.currentTarget.value)}>
+      <option value="0">
+        Select meeting to announce
+      </option>
       {props.meetings.map((meeting, i) => (
-        <option key={meeting.id} value={i}>
+        <option key={meeting.id} value={i + 1}>
           {meeting.title}
         </option>
       ))}
     </select>
-    <h2 className="text-3 mb-1 font-bold">
-      To who?
-    </h2>
-    <select
-      className="mb-2"
-      name="cohort"
-      value={props.cohort}
-      onBlur={ev => props.updateState('cohort', ev.currentTarget.value)}
-      onChange={ev => props.updateState('cohort', ev.currentTarget.value)}>
-      <option value="">
-        Select user subset for meeting announcement
-      </option>
-      <option value="yes">
-        Anyone who RSVPed &apos;yes&apos;
-      </option>
-      <option value="maybe">
-        Anyone who RSVPed &apos;maybe&apos;
-      </option>
-      <option value="yesmaybe">
-        Anyone who RSVPed &apos;yes&apos; OR &apos;maybe&apos;
-      </option>
-      <option value="all">
-        All {pluralize(props.group.memberName, 2)} and {pluralize(props.group.modName, 2)}
-      </option>
-    </select>
+    {props.meetingIndex !== 0 && (
+      <>
+        <h2 className="text-3 mb-1 font-bold">
+          To who?
+        </h2>
+        <select
+          className="mb-2"
+          name="cohort"
+          value={props.cohort}
+          onBlur={ev => props.updateState('cohort', ev.currentTarget.value)}
+          onChange={ev => props.updateState('cohort', ev.currentTarget.value)}>
+          <option value="">
+            Select user subset for meeting announcement
+          </option>
+          <option value="yes">
+            Anyone who RSVPed &apos;yes&apos;
+          </option>
+          <option value="maybe">
+            Anyone who RSVPed &apos;maybe&apos;
+          </option>
+          <option value="yesmaybe">
+            Anyone who RSVPed &apos;yes&apos; OR &apos;maybe&apos;
+          </option>
+          <option value="all">
+            All {pluralize(props.group.memberName, 2)} and {pluralize(props.group.modName, 2)}
+          </option>
+        </select>
+      </>
+    )}
     {props.cohort && (
       <Form
         error={props.error}
@@ -110,7 +117,7 @@ export const AnnouncerComponent: FunctionComponent<tComponentProps> = memo(props
               </button>
               <button
                 disabled={isDisabled}
-                className='p-2 pl-3 pr-3 mb-1 d:mb-0 d:mr-1 w-full d:w-auto hover:bg-gray-1'
+                className="p-2 pl-3 pr-3 mb-1 d:mb-0 d:mr-1 w-full d:w-auto hover:bg-gray-1"
                 onClick={ev => {
                   ev.preventDefault();
                   props.sendEmail(true);
