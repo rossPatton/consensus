@@ -77,7 +77,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
       location: draft.location as string,
       locationLink: draft.locationLink as string,
       slug: slugify(draft.title as string),
-      tag: draft.meetingType as ts.meetingTypes,
+      tag: draft.tag as ts.meetingTypes,
       time: isCopy ? '19:00' : draft.time as string,
       title: draft.title as string,
     };
@@ -120,7 +120,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
       // if meeting has already been saved as a draft, we will have the id
       // patch in that case, else post new meeting (initial draft save, or submit)
       let dispatch = postMeetingDispatch;
-      if (typeof id === 'number') {
+      if (typeof id === 'number' && !isNaN(id)) {
         dispatch = patchMeetingDispatch;
         newOrUpdatedMeeting.id = id;
       }
