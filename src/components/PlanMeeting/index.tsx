@@ -41,7 +41,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     super(props);
 
     const {router: {search}} = props;
-    const draft = qs.parse(search);
+    const draft = qs.parse(search.replace('?', ''));
 
     if (_.isEmpty(draft)) return;
 
