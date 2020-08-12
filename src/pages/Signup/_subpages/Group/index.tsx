@@ -23,7 +23,7 @@ export class GroupSignupContainer extends PureComponent<tContainerProps, tState>
   };
 
   verifyAndRegister = async () => {
-    const {showRegionField, token, ...newGroup} = this.state;
+    const {error, showRegionField, token, ...newGroup} = this.state;
 
     try {
       await this.props.postGroupDispatch({
