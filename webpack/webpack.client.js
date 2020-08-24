@@ -43,6 +43,9 @@ if (env.NODE_ENV === 'production') {
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
     }),
+    new OfflinePlugin({
+      appShell: '/app-shell.html',
+    }),
   ];
 }
 
@@ -162,9 +165,5 @@ module.exports = merge(common, {
     }),
 
     ...prodPlugins,
-
-    new OfflinePlugin({
-      appShell: '/app-shell.html',
-    }),
   ],
 });

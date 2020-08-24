@@ -18,9 +18,8 @@ export const slugify = (string: string): string => {
   if (typeof string !== 'string') return '';
 
   return string
-    .replace(/\s+|\/+|,+/gm, '-') // spaces and / => -
+    .replace(/\s+|\/+|,+|-+|\?+/gm, '-') // spaces, ? marks, double -, and / => -
     .replace(/('|\(|\)|\.|<|>)+|#+|'+/gm, '') // '#' and () and ' and <> => ''
-    .replace(/-+/gm, '-') // repeating '-'s
     .toLowerCase()
     .trim();
 };
