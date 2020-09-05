@@ -3,11 +3,12 @@ import Joi from '@hapi/joi';
 export const getSchema = Joi.object({
   date: Joi.date().timestamp(),
   exclude: Joi.number().integer(),
+  groupId: Joi.number().integer(),
   isDraft: Joi.bool(),
   isPrivate: Joi.bool(),
   limit: Joi.number().integer(),
   offset: Joi.number().integer(),
-  groupId: Joi.number().integer(),
+  role: Joi.string().valid('pending', 'member', 'facilitator', 'admin', 'n/a'),
   showPast: Joi.string().alphanum(),
 });
 

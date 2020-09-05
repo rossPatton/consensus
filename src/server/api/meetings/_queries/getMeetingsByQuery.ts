@@ -7,8 +7,13 @@ import {pg} from '~app/server/db/connection';
 
 import {tMeetingsServerQuery} from '../_types';
 
-// use login info to return session for client
-// ideally only happens once per visit, on login. but if user refreshes, we do again
+/**
+ * @description generic meetings api query,
+ * gets any number of meetings according to query object values
+ * @param trx current postgres transaction
+ * @param ctx koa context object
+ * @param query the query object, with keys needed to fetch data from the db
+ */
 export const getMeetingsByQuery = async (
   trx: Knex.Transaction,
   ctx: Koa.ParameterizedContext,

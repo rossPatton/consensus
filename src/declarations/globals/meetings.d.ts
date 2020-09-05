@@ -33,6 +33,7 @@ namespace ts {
   declare type getMeetingQuery = Partial<ts.meetingSingular> & ts.baseQuery & Readonly<{
     isDraft?: boolean,
     isPrivate?: boolean,
+    role?: ts.role,
     showPast?: boolean,
   }>;
 

@@ -19,6 +19,7 @@ class HomeContainer extends React.PureComponent<tContainerProps> {
   _getMeetings = async () => {
     return this.props.getMeetingsDispatch({
       limit: 4,
+      role: 'n/a',
     });
   }
 
