@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import {Paginate} from '~app/containers';
@@ -9,7 +9,7 @@ import {deleteMeeting} from '~app/redux';
 import {tContainerProps, tStore} from './_types';
 import {MeetingsComponent} from './Component';
 
-class MeetingsContainer extends PureComponent<tContainerProps> {
+class MeetingsContainer extends Component<tContainerProps> {
   static contextType = MediaContext;
   static defaultProps = {
     count: 4,

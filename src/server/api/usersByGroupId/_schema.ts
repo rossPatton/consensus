@@ -7,7 +7,7 @@ export const getSchema = Joi.object({
 
 export const postSchema = getSchema.keys({
   userId: Joi.number().integer(),
-  role: Joi.string().alphanum(),
+  role: Joi.string().valid('pending', 'member', 'facilitator', 'admin', 'n/a'),
 });
 
 export const deleteSchema = postSchema;
