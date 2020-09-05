@@ -22,7 +22,7 @@ export const Tab = memo((props: tProps) => {
   const isMeetings = subRoute === '' && typeof section === 'undefined';
   const isActive = isMeetings || section === subRoute;
   const className = cx({
-    'd:mr-2 text-gray-5': true,
+    'mr-2 text-gray-5': true,
     'd:ml-2': ['', 'members'].indexOf(subRoute) === -1,
     'text-base d:text-3': isActive,
     'no-underline': !isActive,

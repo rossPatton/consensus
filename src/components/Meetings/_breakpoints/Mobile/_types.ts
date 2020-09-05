@@ -7,7 +7,7 @@ export type tProps = {
   renderPastAsFallback: boolean,
   sessionRole?: ts.role,
   showGroupName?: boolean,
-  showPast?: boolean,
+  showPastToggle?: boolean,
   showRSVPs?: boolean,
   togglePast: (renderPast: boolean) => void,
   upcomingMeetingsCount: number,

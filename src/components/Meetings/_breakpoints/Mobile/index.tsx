@@ -14,19 +14,23 @@ import {tProps} from './_types';
 const MobileMeetings: FunctionComponent<tProps> = memo(props => (
   <ul className="text-left animated fadeInUp">
     {props.renderPastAsFallback
-      && props.pastMeetingsCount > 0
       && (
         <li className="font-semibold mb-2">
           Past Meetings
         </li>
       )}
-    {props.showPast
+    {props.showPastToggle
       && !props.renderPastAsFallback
       && props.pastMeetingsCount > 0
       && (
-        <li className="font-semibold mb-2">
+        <li className="flex items-center font-semibold mb-2">
+          <div className="mr-2">
+            Showing {!props.renderPast
+              ? `Upcoming ${pluralize('Meeting', props.upcomingMeetingsCount)}`
+              : `Past ${pluralize('Meeting', props.pastMeetingsCount)}`}
+          </div>
           <button
-            className="border-0 text-sm"
+            className="bg-gray-1 hover:bg-gray-3 p-1 text-sm"
             onClick={() => props.togglePast(!props.renderPast)}>
             {props.renderPast
               ? `Show Upcoming ${pluralize('Meeting', props.upcomingMeetingsCount)} (${props.upcomingMeetingsCount})`

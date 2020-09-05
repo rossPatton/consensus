@@ -21,7 +21,7 @@ meetings.get(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     const account = ctx?.state?.user || {};
     await pg.transaction(async trx => {
-      let role = query.role;
+      let {role} = query;
       if (!role && (account.id && account.sessionType === 'user')) {
         const accountRoleRel: ts.roleMap = await pg('users_roles')
           .transacting(trx)

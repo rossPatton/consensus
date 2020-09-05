@@ -16,7 +16,7 @@ const GroupTabs = memo((props: tProps) => {
     <nav className="d:pl-2 d:pr-2 d:pt-2 mb-1 d:mb-2 overflow-scroll">
       <ul
         className={cx({
-          'flex items-center whitespace-no-wrap': true,
+          'flex items-baseline whitespace-no-wrap': true,
           'justify-evenly': isMod,
         })}>
         <li>

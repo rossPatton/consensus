@@ -52,7 +52,10 @@ describe('components/Meetings', () => {
         isDesktop
         deleteMeeting={jest.fn()}
         isMobile={false}
-        meetings={[testMeeting1]}
+        meetingsToRender={[testMeeting1]}
+        pastMeetings={[]}
+        upcomingMeetings={[]}
+        togglePast={jest.fn()}
       />
     ));
 
@@ -66,7 +69,10 @@ describe('components/Meetings', () => {
         isMobile
         deleteMeeting={jest.fn()}
         isDesktop={false}
-        meetings={[]}
+        meetingsToRender={[]}
+        pastMeetings={[]}
+        upcomingMeetings={[]}
+        togglePast={jest.fn()}
       />
     ));
 

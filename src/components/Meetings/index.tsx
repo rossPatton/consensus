@@ -1,3 +1,4 @@
+import dayJS from 'dayjs';
 import _ from 'lodash';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
@@ -9,10 +10,14 @@ import {deleteMeeting} from '~app/redux';
 import {tContainerProps, tStore} from './_types';
 import {MeetingsComponent} from './Component';
 
-class MeetingsContainer extends Component<tContainerProps> {
+class MeetingsContainer extends Component<tContainerProps, {renderPast: boolean}> {
   static contextType = MediaContext;
   static defaultProps = {
     count: 4,
+  };
+
+  state = {
+    renderPast: false,
   };
 
   deleteMeeting = (ev: React.MouseEvent, id: number) => {
@@ -20,19 +25,21 @@ class MeetingsContainer extends Component<tContainerProps> {
     this.props.deleteMeetingDispatch({id});
   }
 
+  togglePast = async (renderPast = false) =>
+    this.setState({
+      renderPast,
+    });
+
   render() {
     const {
       count,
       meetings,
       sessionRole,
       showGroupName,
-      showPast,
+      showPastToggle,
       showRSVPs,
       type = 'meetings',
     } = this.props;
-
-    const {isMobile, isDesktop} = this.context;
-    const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
 
     if (!meetings || meetings.length === 0) {
       return (
@@ -42,22 +49,42 @@ class MeetingsContainer extends Component<tContainerProps> {
       );
     }
 
+    const {renderPast} = this.state;
+    const {isMobile, isDesktop} = this.context;
+    const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
+
+    const now = dayJS();
+    const pastMeetings = meetings.filter(m => dayJS(m.date).isBefore(now));
+    const upcomingMeetings = meetings.filter(m => !dayJS(m.date).isBefore(now));
+
+    // default to showing past meeting if we have meetings, but none are upcoming
+    let meetingsToPaginate = renderPast ? pastMeetings : upcomingMeetings;
+    const renderPastAsFallback = pastMeetings.length > 0 && upcomingMeetings.length === 0;
+    if (renderPastAsFallback) {
+      meetingsToPaginate = pastMeetings;
+    }
+
     return (
       <Paginate
         count={count}
-        items={meetings}
+        items={meetingsToPaginate}
         render={(meetingsToRender: ts.meeting[]) => (
           <MeetingsComponent
             deleteMeeting={this.deleteMeeting}
-            meetings={meetingsToRender}
+            meetingsToRender={meetingsToRender}
             horizontal={this.props.horizontal}
             isEditable={isEditable}
             isMobile={isMobile}
             isDesktop={isDesktop}
+            pastMeetings={pastMeetings}
+            renderPast={renderPast}
+            renderPastAsFallback={renderPastAsFallback}
             sessionRole={sessionRole}
             showGroupName={showGroupName}
-            showPast={showPast}
+            showPastToggle={showPastToggle}
             showRSVPs={showRSVPs}
+            togglePast={this.togglePast}
+            upcomingMeetings={upcomingMeetings}
           />
         )}
       />

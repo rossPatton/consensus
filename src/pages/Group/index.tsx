@@ -38,8 +38,6 @@ class GroupContainer extends PureComponent<tContainerProps> {
       loglevel.error(err);
     }
 
-    // @TODO ideally this would go in the Meetings container, but the levels of
-    // memoization was preventing necessary re-renders. doing it here fixes it
     if (res.payload) {
       await this.props.getMeetingsByGroupDispatch({
         groupId: res.payload.id,
@@ -117,7 +115,6 @@ const mapStateToProps = (store: tStore) => ({
   rsvpsThunk: store.rsvps,
   session: store.session.data,
 });
-
 
 const mapDispatchToProps = (dispatch: Function) => ({
   getGroupDispatch: (query: ts.getGroupQuery) => dispatch(getGroup(query)),

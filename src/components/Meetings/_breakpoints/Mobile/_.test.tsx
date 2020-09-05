@@ -16,7 +16,7 @@ describe('component/Meetings/breakpoint/Mobile', () => {
           pastMeetingsCount={1}
           renderPast
           renderPastAsFallback
-          showPast
+          showPastToggle
           togglePast={jest.fn()}
           upcomingMeetingsCount={1}
         />
