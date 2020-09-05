@@ -19,8 +19,8 @@ tokenSend.get('/api/v1/sendToken', async (ctx: Koa.ParameterizedContext) => {
   const resp = await sendEmail(ctx, {
     from: `Consensus <noreply@${__MAIL_DOMAIN__}>`,
     to: query.email,
-    subject: 'Verify Your Email',
-    text: `Enter the following authentication code in order to verify your email. ${token}`,
+    subject: `Consensus Login Code - ${token}`,
+    text: `Enter the following authentication code in order to login. ${token}`,
     html: `
       <h2>Enter the following authentication code in order to verify your email. <b>${token}</b></h2>
     `,
