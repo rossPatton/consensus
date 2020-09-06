@@ -5,7 +5,9 @@ type tProps = {
   role: ts.role,
 };
 
-export type tComponentProps = ts.searchFilterProps & tProps & {
+export type tComponentProps = ts.searchFilterProps
+  & ts.publishedFilterProps
+  & tProps & {
   meetings: ts.meeting[],
   hideMeetings: boolean,
   type: ts.groupRouteParams['section'];

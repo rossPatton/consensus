@@ -43,17 +43,21 @@ const FilterPanel = memo((props: tProps) => (
         ))}
       </select>
     )}
+    {/*
+      @TODO this is misleadingly named -> should be past/future filter
+      published should mean isDraft or not
+    */}
     {props.onPublishedFilterChange && (
       <select
         className="w-full d:w-3/12 mb-1 d:mb-0 d:mr-2"
         defaultValue={props.publishedFilter}
         onBlur={props.onPublishedFilterChange}
         onChange={props.onPublishedFilterChange}>
-        <option value="n/a">
+        <option value="upcoming">
           Filter meetings
         </option>
         {[
-          {display: 'Show all meetings', value: 'n/a'},
+          {display: 'Show all', value: 'n/a'},
           {display: 'Upcoming', value: 'upcoming'},
           {display: 'Past', value: 'past'},
         ].map(({display, value}) => (

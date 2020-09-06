@@ -2,6 +2,7 @@ type tProps = {
   count?: number,
   // render alternative version
   horizontal?: boolean,
+  publishedFilter?: ts.filterEnum,
   // just because eslint complains about using role with non-ARIA strings
   sessionRole?: ts.role,
   showGroupName?: boolean,
@@ -28,9 +29,7 @@ export type tComponentProps = ts.mediaContext & tProps & {
   isEditable?: boolean,
   meetingsToRender: ts.meeting[],
   pastMeetings?: ts.meeting[],
-  renderPast?: boolean,
   renderPastAsFallback?: boolean,
-  togglePast: (renderPast: boolean) => void,
   upcomingMeetings?: ts.meeting[],
 };
 

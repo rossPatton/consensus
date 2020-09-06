@@ -24,13 +24,16 @@ const Aside = memo((props: tProps) => {
               {session.profile.name}
             </Link>
           </h1>
-          <div className="font-semibold">
-            <Link
-              to="/admin/profile"
-              className="text-sm">
-              Profile
-            </Link>
-          </div>
+          <Link
+            to="/admin/profile"
+            className="text-sm mr-1 font-semibold">
+            Profile
+          </Link>
+          <Link
+            className="text-sm leading-none font-semibold"
+            to={`/group/${session.profile.handle}`}>
+            View Group
+          </Link>
         </div>
       </div>
       <ul className="mb-2 font-semibold" role="navigation">

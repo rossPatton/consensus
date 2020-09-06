@@ -55,7 +55,6 @@ describe('components/Meetings', () => {
         meetingsToRender={[testMeeting1]}
         pastMeetings={[]}
         upcomingMeetings={[]}
-        togglePast={jest.fn()}
       />
     ));
 
@@ -72,7 +71,6 @@ describe('components/Meetings', () => {
         meetingsToRender={[]}
         pastMeetings={[]}
         upcomingMeetings={[]}
-        togglePast={jest.fn()}
       />
     ));
 

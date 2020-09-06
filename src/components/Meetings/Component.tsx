@@ -12,14 +12,9 @@ export const MeetingsComponent: FunctionComponent<tComponentProps> = memo(props 
         horizontal={props.horizontal}
         isEditable={props.isEditable}
         meetingsToRender={props.meetingsToRender}
-        pastMeetingsCount={props.pastMeetings.length}
-        upcomingMeetingsCount={props.upcomingMeetings.length}
-        renderPast={props.renderPast}
+        publishedFilter={props.publishedFilter}
         renderPastAsFallback={props.renderPastAsFallback}
-        // whether to allow toggling of past meeting at all
-        showPastToggle={props.showPastToggle}
         showGroupName={props.showGroupName}
-        togglePast={props.togglePast}
       />
     );
   }
@@ -29,14 +24,9 @@ export const MeetingsComponent: FunctionComponent<tComponentProps> = memo(props 
       deleteMeeting={props.deleteMeeting}
       isEditable={props.isEditable}
       meetingsToRender={props.meetingsToRender}
-      pastMeetingsCount={props.pastMeetings.length}
-      upcomingMeetingsCount={props.upcomingMeetings.length}
-      renderPast={props.renderPast}
+      publishedFilter={props.publishedFilter}
       renderPastAsFallback={props.renderPastAsFallback}
-      // whether to allow toggling of past meeting at all
-      showPastToggle={props.showPastToggle}
       showGroupName={props.showGroupName}
-      togglePast={props.togglePast}
     />
   );
 });

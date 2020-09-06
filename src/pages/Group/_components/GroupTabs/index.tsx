@@ -1,4 +1,3 @@
-import cx from 'classnames';
 import React, {memo, useContext} from 'react';
 
 import {MediaContext} from '~app/context';
@@ -14,11 +13,7 @@ const GroupTabs = memo((props: tProps) => {
 
   return (
     <nav className="d:pl-2 d:pr-2 d:pt-2 mb-1 d:mb-2 overflow-scroll">
-      <ul
-        className={cx({
-          'flex items-baseline whitespace-no-wrap': true,
-          'justify-evenly': isMod,
-        })}>
+      <ul className="flex items-baseline whitespace-no-wrap">
         <li>
           <Tab
             {...context}

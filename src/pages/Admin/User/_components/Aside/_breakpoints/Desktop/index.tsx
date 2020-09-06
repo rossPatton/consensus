@@ -24,8 +24,15 @@ const Aside = memo((props: tProps) => {
             @{profile.username}
           </Link>
           <div className="font-semibold text-sm text-gray-5">
-            <Link className="mr-1" to="/admin/profile">
-              Profile
+            <Link
+              className="mr-1"
+              to="/admin/profile">
+              Edit Profile
+            </Link>
+            <Link
+              className="text-sm leading-none font-bold absolute t r"
+              to={`/user/${props.session.profile.id}`}>
+              View profile
             </Link>
             {/* <Link to="/admin/security">
               Security

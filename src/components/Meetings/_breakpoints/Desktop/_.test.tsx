@@ -13,12 +13,36 @@ describe('component/Meetings/breakpoint/Desktop', () => {
         <DesktopMeetings
           deleteMeeting={jest.fn()}
           meetingsToRender={[testMeeting1, testMeeting2]}
-          pastMeetingsCount={1}
-          renderPast
+        />
+      </MemoryRouter>
+    ));
+
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders past desktop meetings', () => {
+    const component = render.create((
+      <MemoryRouter>
+        <DesktopMeetings
+          deleteMeeting={jest.fn()}
+          meetingsToRender={[testMeeting1, testMeeting2]}
+          publishedFilter="past"
+        />
+      </MemoryRouter>
+    ));
+
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders past as fallback desktop meetings', () => {
+    const component = render.create((
+      <MemoryRouter>
+        <DesktopMeetings
+          deleteMeeting={jest.fn()}
+          meetingsToRender={[testMeeting1, testMeeting2]}
           renderPastAsFallback
-          showPastToggle
-          togglePast={jest.fn()}
-          upcomingMeetingsCount={1}
         />
       </MemoryRouter>
     ));

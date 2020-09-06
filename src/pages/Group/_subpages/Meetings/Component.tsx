@@ -17,11 +17,13 @@ export const MeetingsComponent = memo((props: tComponentProps) => (
         <>
           <FilterPanel
             onSearchChange={props.onSearchChange}
+            onPublishedFilterChange={props.onPublishedFilterChange}
             placeholder="Filter meetings by title"
+            publishedFilter={props.publishedFilter}
           />
           <Meetings
-            showPastToggle
             showRSVPs
+            publishedFilter={props.publishedFilter}
             meetings={props.meetings}
             sessionRole={props.role}
             type={props.type}

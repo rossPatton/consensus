@@ -10,14 +10,10 @@ import {deleteMeeting} from '~app/redux';
 import {tContainerProps, tStore} from './_types';
 import {MeetingsComponent} from './Component';
 
-class MeetingsContainer extends Component<tContainerProps, {renderPast: boolean}> {
+class MeetingsContainer extends Component<tContainerProps> {
   static contextType = MediaContext;
   static defaultProps = {
     count: 4,
-  };
-
-  state = {
-    renderPast: false,
   };
 
   deleteMeeting = (ev: React.MouseEvent, id: number) => {
@@ -25,18 +21,13 @@ class MeetingsContainer extends Component<tContainerProps, {renderPast: boolean}
     this.props.deleteMeetingDispatch({id});
   }
 
-  togglePast = async (renderPast = false) =>
-    this.setState({
-      renderPast,
-    });
-
   render() {
     const {
       count,
       meetings,
+      publishedFilter,
       sessionRole,
       showGroupName,
-      showPastToggle,
       showRSVPs,
       type = 'meetings',
     } = this.props;
@@ -49,16 +40,16 @@ class MeetingsContainer extends Component<tContainerProps, {renderPast: boolean}
       );
     }
 
-    const {renderPast} = this.state;
     const {isMobile, isDesktop} = this.context;
     const isEditable = sessionRole === 'admin' || sessionRole === 'facilitator';
 
+    // by default, we render all upcoming meetings only
     const now = dayJS();
     const pastMeetings = meetings.filter(m => dayJS(m.date).isBefore(now));
     const upcomingMeetings = meetings.filter(m => !dayJS(m.date).isBefore(now));
 
-    // default to showing past meeting if we have meetings, but none are upcoming
-    let meetingsToPaginate = renderPast ? pastMeetings : upcomingMeetings;
+    // but if we only have previous meetings, we render those by default instead
+    let meetingsToPaginate = meetings;
     const renderPastAsFallback = pastMeetings.length > 0 && upcomingMeetings.length === 0;
     if (renderPastAsFallback) {
       meetingsToPaginate = pastMeetings;
@@ -71,19 +62,17 @@ class MeetingsContainer extends Component<tContainerProps, {renderPast: boolean}
         render={(meetingsToRender: ts.meeting[]) => (
           <MeetingsComponent
             deleteMeeting={this.deleteMeeting}
-            meetingsToRender={meetingsToRender}
             horizontal={this.props.horizontal}
+            isDesktop={isDesktop}
             isEditable={isEditable}
             isMobile={isMobile}
-            isDesktop={isDesktop}
+            meetingsToRender={meetingsToRender}
             pastMeetings={pastMeetings}
-            renderPast={renderPast}
+            publishedFilter={publishedFilter}
             renderPastAsFallback={renderPastAsFallback}
             sessionRole={sessionRole}
             showGroupName={showGroupName}
-            showPastToggle={showPastToggle}
             showRSVPs={showRSVPs}
-            togglePast={this.togglePast}
             upcomingMeetings={upcomingMeetings}
           />
         )}

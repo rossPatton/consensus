@@ -59,6 +59,7 @@ const MobileAside = memo((props: tProps) => (
             <legend className="w-full whitespace-no-wrap flex justify-center items-center">
               <img
                 alt=""
+                role="presentation"
                 height="20"
                 className="mr-1"
                 src="/images/download.svg"
@@ -73,6 +74,7 @@ const MobileAside = memo((props: tProps) => (
         className="btn w-full text-sm p-2 whitespace-no-wrap flex justify-center items-center hover:bg-gray-3">
         <img
           alt=""
+          role="presentation"
           height="20"
           className="mr-1"
           src="/images/delete.svg"

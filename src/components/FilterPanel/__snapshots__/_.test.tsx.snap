@@ -99,14 +99,14 @@ exports[`components/FilterPanel renders with published filter 1`] = `
     onChange={[MockFunction]}
   >
     <option
-      value="n/a"
+      value="upcoming"
     >
       Filter meetings
     </option>
     <option
       value="n/a"
     >
-      Show all meetings
+      Show all
     </option>
     <option
       value="upcoming"

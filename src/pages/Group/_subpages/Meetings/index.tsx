@@ -3,7 +3,7 @@ import React, {memo} from 'react';
 import {connect} from 'react-redux';
 
 import {Helmet} from '~app/components';
-import {ErrorBoundary, GenericLoader, SearchFilter} from '~app/containers';
+import {ErrorBoundary, GenericLoader, PublishedFilter, SearchFilter} from '~app/containers';
 import {getMeetingsByGroupId} from '~app/redux';
 
 import {tContainerProps, tStore} from './_types';
@@ -42,16 +42,22 @@ const MeetingsContainer = memo((props: tContainerProps) => {
             && (!userIsLoggedIn || !userIsAMemberOfGroup);
 
           return (
-            <SearchFilter
+            <PublishedFilter
               items={meetingsToRender}
-              render={searchProps => (
-                <MeetingsComponent
-                  {...searchProps}
-                  meetings={searchProps.items}
-                  hideMeetings={hideMeetings}
-                  group={group}
-                  role={role}
-                  type={type}
+              render={publishedProps => (
+                <SearchFilter
+                  items={publishedProps.items}
+                  render={searchProps => (
+                    <MeetingsComponent
+                      {...searchProps}
+                      {...publishedProps}
+                      meetings={searchProps.items}
+                      hideMeetings={hideMeetings}
+                      group={group}
+                      role={role}
+                      type={type}
+                    />
+                  )}
                 />
               )}
             />

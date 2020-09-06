@@ -3,15 +3,11 @@ export type tProps = {
   horizontal?: boolean,
   isEditable?: boolean,
   meetingsToRender: ts.meeting[],
-  pastMeetingsCount: number,
-  renderPast: boolean,
-  renderPastAsFallback: boolean,
+  publishedFilter?: ts.filterEnum,
+  renderPastAsFallback?: boolean,
   sessionRole?: ts.role,
   showGroupName?: boolean,
-  showPastToggle: boolean,
   showRSVPs?: boolean,
-  togglePast: (renderPast: boolean) => void,
-  upcomingMeetingsCount: number,
 };
 
 

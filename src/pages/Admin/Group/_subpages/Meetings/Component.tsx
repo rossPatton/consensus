@@ -32,6 +32,7 @@ export const MeetingsComponent = memo((props: tComponentProps) => (
       />
       <Meetings
         meetings={props.meetings}
+        publishedFilter={props.publishedFilter}
         sessionRole="admin"
       />
     </div>
