@@ -11,21 +11,23 @@ export const upperCase = (s: string): string => {
 };
 
 /**
- * spaces => dashes. url unfriendly characters removed (().')
+ * @description anything not a letter or number - convert to dashes.
  * Tech Worker's Coalition(NYC) => tech-workers-coalition-nyc
  */
 export const slugify = (string: string): string => {
   if (typeof string !== 'string') return '';
 
   return string
-    .replace(/\s+|\/+|,+|-+|\?+/gm, '-') // spaces, ? marks, double -, and / => -
-    .replace(/('|\(|\)|\.|<|>)+|#+|'+/gm, '') // '#' and () and ' and <> => ''
+    // remove everything but letters, numbers and spaces
+    .replace(/[^a-zA-Z\d\s]/gm, '')
+    // then convert spaces to dashes
+    .replace(/\s+/gm, '-')
     .toLowerCase()
     .trim();
 };
 
 /**
- * takes slugified output, returns human friendly string
+ * @description takes slugified output, returns human friendly string
  * new-york-city => New York City
 */
 export const deSlugify = (string: string): string => {
