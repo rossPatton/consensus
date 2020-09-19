@@ -130,7 +130,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
                 <h3 className="text-base mb-1">When&apos;s the meeting?</h3>
                 <input
                   type="date"
-                  min={dayJS().toISOString()}
+                  min={dayJS().format('YYYY-MM-DD')}
                   className="w-full"
                   value={dayJS(props.date).format('YYYY-MM-DD')}
                   placeholder="Event Date Here"
