@@ -93,7 +93,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
                   readOnly
                   type="checkbox"
                   className="flex-1 mr-1 w-auto"
-                  autoComplete="nope"
+                  autoComplete="off"
                   checked={props.isOnline}
                 />
                 <span className="w-full">

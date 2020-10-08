@@ -57,7 +57,7 @@ export const UsersComponent = memo((props: tComponentProps) => {
                         readOnly
                         type="checkbox"
                         className="flex-1 w-auto"
-                        autoComplete="nope"
+                        autoComplete="off"
                         checked={!!props.checked[user.id]}
                       />
                     </div>

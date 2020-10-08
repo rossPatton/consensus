@@ -148,7 +148,7 @@ const EditProfile = memo((props: tComponentProps) => (
               readOnly
               type="checkbox"
               className="flex-1 mr-1 w-auto"
-              autoComplete="nope"
+              autoComplete="off"
               checked={props.privateRSVP}
             />
             <span className="w-full">
@@ -172,7 +172,7 @@ const EditProfile = memo((props: tComponentProps) => (
               readOnly
               type="checkbox"
               className="flex-1 mr-1 w-auto"
-              autoComplete="nope"
+              autoComplete="off"
               checked={props.privateMemberships}
             />
             <span className="w-full">

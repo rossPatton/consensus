@@ -142,7 +142,7 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
               name="terms"
               type="checkbox"
               className="flex-1 mr-1 w-auto"
-              autoComplete="nope"
+              autoComplete="off"
               checked={props.termsAccepted}
             />
           </label>

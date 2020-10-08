@@ -1,6 +1,7 @@
 import loadable from '@loadable/component';
 
 export const AddToCalendar = loadable(() =>
+  // @ts-ignore
   import(/* webpackChunkName: "AddToCalendar" */'./AddToCalendar'),
 );
 
