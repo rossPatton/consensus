@@ -118,7 +118,7 @@ export const GroupSignupComponent = memo((props: tComponentProps) => (
         <CitySearch
           {...props}
           label="All groups on Consensus are currently local, city-based organizations."
-          showRemoveButton={false}
+          showResetButton={false}
           updateState={props.updateState}
         />
         <h2 className="font-semibold text-base">

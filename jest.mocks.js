@@ -1,5 +1,9 @@
-import jest from 'jest-mock';
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import fetch from 'jest-fetch-mock';
+import jest from 'jest-mock';
+
+configure({ adapter: new Adapter() });
 
 fetch.enableMocks();
 

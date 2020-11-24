@@ -76,13 +76,15 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
           {!renderRegionSelect && (
             <button
               type="button"
+              id="testRegionButton"
               className="p-1 mr-1"
               onClick={() => toggleRegionField(!showRegionField)}>
               Not the right state?
             </button>
           )}
-          {props.showRemoveButton && (
+          {props.showResetButton && (
             <button
+              id="testResetButton"
               type="button"
               className="p-1"
               onClick={() => {
@@ -125,6 +127,7 @@ export const CitySearchComponent = memo((props: tComponentProps) => {
             <b>{props.city}</b>, <span className="inline-block mr-3">{props.region}</span>
             <button
               type="button"
+              id="testResetCity"
               className="p-1"
               onClick={() => {
                 props.updateState({

@@ -10,7 +10,7 @@ type tProps = {
   region: string,
   regionId: number,
   session: ts.session,
-  showRemoveButton?: boolean,
+  showResetButton?: boolean,
 };
 
 export type tContainerProps = tProps & {

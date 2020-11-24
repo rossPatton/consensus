@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/AddToCalendar/Portal renders without crashing 1`] = `
+<aside
+  className="animated fadeInUp b fixed flex flex-col items-center l p-4 r t-hdr"
+>
+  <div
+    className="relative bg-white border font-semibold p-3 rounded z-10"
+  >
+    <button
+      className="border-0"
+      onClick={[Function]}
+    />
+    <div
+      className="font-bold text-3 mb-1"
+    >
+      Add this meeting to your calendar
+    </div>
+    <ul>
+      <li
+        className="mb-1 text-blue-1"
+      >
+        test
+      </li>
+    </ul>
+  </div>
+  <div
+    className="absolute b bg-gray-1 l opacity-5 r t"
+    onClick={[Function]}
+    onKeyPress={[Function]}
+    role="button"
+    tabIndex={0}
+  />
+</aside>
+`;

@@ -13,18 +13,18 @@ class CitySearchContainer extends PureComponent<tContainerProps> {
   static defaultProps = {
     city: 'New York',
     region: 'New York',
-    showRemoveButton: true,
+    showResetButton: true,
   };
 
   constructor(props: tContainerProps) {
     super(props);
     let region = 'New York';
-    const sessionRegion = _.get(props, 'session.profile.region', '');
-    const geoRegion = _.get(props, 'geo.region', '');
+    const sessionRegion = _.get(props, 'session.profile.region', null);
+    const geoRegion = _.get(props, 'geo.region', null);
 
-    if (sessionRegion !== '') {
+    if (typeof sessionRegion === 'string' && sessionRegion !== '') {
       region = sessionRegion;
-    } else if (geoRegion !== '') {
+    } else if (typeof geoRegion === 'string' && geoRegion !== '') {
       region = geoRegion;
     }
 

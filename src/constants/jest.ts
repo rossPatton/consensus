@@ -100,6 +100,15 @@ export const testGeo = {
   postcode: 10002,
 };
 
+export const testGeoEmpty = {
+  city: '',
+  countryCode: 'us',
+  handle: '',
+  region: '',
+  regionCode: '',
+  postcode: 0,
+};
+
 export const testNYC = {
   id: 1,
   name: 'New York',

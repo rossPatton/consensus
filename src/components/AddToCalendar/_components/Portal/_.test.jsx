@@ -16,12 +16,14 @@ describe('components/AddToCalendar/Portal', () => {
   });
 
   it('renders without crashing', () => {
-    render.create((
+    const component = render.create((
       <AddToCalendarPortal
         children={['test']}
         isOpen
         onRequestClose={() => {}}
       />
     ));
+
+    expect(component.toJSON()).toMatchSnapshot()
   });
 });
