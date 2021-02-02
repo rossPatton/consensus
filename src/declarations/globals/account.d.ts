@@ -69,7 +69,7 @@ namespace ts {
   // admin => can do all the above plus manage the group
   // n/a => inputs cant have null values, so we use this sometimes
   // null => often happens if we're trying to tie roles to users, and there's no match
-  declare type role = 'pending' | 'member' | 'facilitator' | 'admin' | 'n/a' | null;
+  declare type role = '' | 'pending' | 'member' | 'facilitator' | 'admin' | 'n/a' | null;
 
   declare type roleMap = Readonly<{
     groupId: number,

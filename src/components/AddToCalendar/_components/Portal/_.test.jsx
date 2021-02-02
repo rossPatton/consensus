@@ -24,6 +24,6 @@ describe('components/AddToCalendar/Portal', () => {
       />
     ));
 
-    expect(component.toJSON()).toMatchSnapshot()
+    expect(component.toJSON()).toMatchSnapshot();
   });
 });

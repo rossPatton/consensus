@@ -17,7 +17,7 @@ import {
 import {tComponentProps} from '../../_types';
 
 const DesktopMeetingComponent = memo((props: tComponentProps) => {
-  const {meeting, meetingsByGroupId, group, rsvp = {} as ts.rsvp} = props;
+  const {meeting, meetingsByGroupId, group, role, rsvp = {} as ts.rsvp} = props;
   const isPastMeeting = dayJS(meeting.date).isBefore(dayJS());
 
   // maybe we should just like, include the duration in the DB?
@@ -35,10 +35,24 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
       )}
       {!meeting.isDraft && (
         <>
-          {!isPastMeeting && rsvp.value === 'yes' && (
-            <b className="fadeInUp block p-2 mb-3 rounded text-center bg-green-1 text-sm">
-              You&apos;re going to this meeting!
-            </b>
+          {!isPastMeeting
+            && (rsvp.value === 'yes' || role === 'admin') && (
+            <div className="fadeInUp p-2 mb-3 rounded text-center bg-green-1 text-sm">
+              <b className="block mb-1">
+                {role !== 'admin' && "You're going to this meeting!"}
+                {role === 'admin' && "This is your group's meeting"}
+              </b>
+              {meeting.isOnline
+                && meeting.locationLink
+                && (
+                  <ExternalLink
+                    noFollow
+                    className=""
+                    to={meeting.locationLink}>
+                    {meeting.locationLink}
+                  </ExternalLink>
+                )}
+            </div>
           )}
           {isPastMeeting && (
             <b className="fadeInUp block p-2 mb-3 rounded text-center bg-red-1 text-sm">
@@ -121,7 +135,7 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
                   className="mr-1"
                   src="/images/online.svg"
                   width="16"
-                /> Online
+                /> Online {rsvp.value !== 'yes' && role !== 'admin' && '- RSVP for meeting link'}
               </li>
             )}
             {!meeting.isOnline

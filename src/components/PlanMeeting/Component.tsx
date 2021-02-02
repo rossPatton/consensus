@@ -98,32 +98,42 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
                 />
                 <span className="w-full">
                   {props.isOnline && (
-                    'Event is online. Put meeting details in your description.'
+                    'My event is online. Put meeting link below.'
                   )}
                   {!props.isOnline && (
                     'Event is in person. Put location details below.'
                   )}
                 </span>
               </div>
-              {!props.isOnline && (
-                <div className="flex flex-col d:flex-row">
+              <div className="flex flex-col d:flex-row">
+                {props.isOnline && (
                   <input
-                    results={3}
-                    spellCheck
-                    className="w-full mb-1 d:mb-0 mr-2"
-                    placeholder="Name of meeting place here"
-                    value={props.location}
-                    onChange={ev => updateState('location', ev.currentTarget.value)}
-                  />
-                  <input
-                    type="url"
                     className="w-full"
-                    placeholder="Google Maps link or other preferred map service here"
-                    value={props.locationLink}
+                    placeholder="Online meeting link here"
                     onChange={ev => updateState('locationLink', ev.currentTarget.value)}
+                    value={props.locationLink}
                   />
-                </div>
-              )}
+                )}
+                {!props.isOnline && (
+                  <>
+                    <input
+                      results={3}
+                      spellCheck
+                      className="w-full mb-1 d:mb-0 mr-2"
+                      placeholder="Name of meeting place here"
+                      value={props.location}
+                      onChange={ev => updateState('location', ev.currentTarget.value)}
+                    />
+                    <input
+                      type="url"
+                      className="w-full"
+                      placeholder="Google Maps or other map service link here"
+                      value={props.locationLink}
+                      onChange={ev => updateState('locationLink', ev.currentTarget.value)}
+                    />
+                  </>
+                )}
+              </div>
             </div>
             <div className="flex flex-col d:flex-row mb-2">
               <div className="mb-1 d:mb-0 d:mr-2">
@@ -165,6 +175,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
               : (
                 <>
                   <button
+                    id="testPublish"
                     className={cx({
                       'p-2 mr-1': true,
                       'bg-green-1 hover:bg-green-2': !disableSubmit,
@@ -177,6 +188,7 @@ export const PlanMeetingComponent = memo((props: tComponentProps) => {
                     {!props.id ? 'Publish' : 'Update'}
                   </button>
                   <button
+                    id="testSaveAsDraft"
                     className="p-2 mr-1 hover:bg-gray-3"
                     disabled={disableSubmit}
                     onClick={ev => {

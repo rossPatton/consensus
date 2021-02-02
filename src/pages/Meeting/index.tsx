@@ -70,6 +70,16 @@ class MeetingContainer extends PureComponent<tContainerProps> {
     } = this.props;
 
     const meetingStatus = meetingThunk?.error?.status;
+    const {groupThunk: {data: group}} = this.props;
+
+    const roleMap = rolesThunk.data.find(roleMap => {
+      return roleMap.groupId === group.id;
+    }) as ts.roleMap;
+
+    let role = roleMap && roleMap.role;
+    if (session.type === 'group' && session.profile.id === group.id) {
+      role = 'admin';
+    }
 
     return (
       <Template>
@@ -111,6 +121,7 @@ class MeetingContainer extends PureComponent<tContainerProps> {
                     meeting={meeting}
                     meetingsByGroupId={meetingsByGroupId}
                     group={groupThunk.data}
+                    role={role}
                     rsvp={rsvp}
                   />
                 </>

@@ -20,6 +20,12 @@ exports[`components/PlanMeeting renders component loading state 1`] = `
 />
 `;
 
+exports[`components/PlanMeeting renders component with custom heading and disabled submit 1`] = `
+<div
+  className="d:pb-2 d:pl-2 d:pr-2"
+/>
+`;
+
 exports[`components/PlanMeeting renders component without crashing 1`] = `
 <div
   className="d:pb-2 d:pl-2 d:pr-2"

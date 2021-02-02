@@ -26,6 +26,7 @@ const defaultStore = {
 
 describe('components/CitySearch', () => {
   let store = mockStore({});
+  const US = 'United States';
 
   beforeEach(() => {
     store = mockStore(defaultStore);
@@ -49,10 +50,10 @@ describe('components/CitySearch', () => {
   it('snapshot (different props)', () => {
     const component = create((
       <CitySearch
-        city="New York"
-        cityId={16625}
-        region="New York"
-        regionId={37}
+        city="Newark"
+        cityId={15268}
+        region="New Jersey"
+        regionId={35}
         // @ts-ignore
         store={store}
         updateState={jest.fn()}
@@ -157,7 +158,7 @@ describe('components/CitySearch', () => {
         city="New York"
         cityId={16625}
         cities={[{
-          country: 'United States',
+          country: US,
           countryId: 1,
           groups: [testGroup1],
           name: 'New York',
@@ -173,8 +174,8 @@ describe('components/CitySearch', () => {
         session={defaultStore.session}
         showResetButton
         updateState={jest.fn()}
-      />
-    )
+      />,
+    );
     const state = component.find('#stateSelect');
     expect(state.prop('value')).toBe('New York');
 
@@ -188,7 +189,7 @@ describe('components/CitySearch', () => {
         city=""
         cityId={0}
         cities={[{
-          country: 'United States',
+          country: US,
           countryId: 1,
           groups: [testGroup1],
           name: 'New York',
@@ -215,7 +216,7 @@ describe('components/CitySearch', () => {
         city=""
         cityId={0}
         cities={[{
-          country: 'United States',
+          country: US,
           countryId: 1,
           groups: [testGroup1],
           name: 'New York',
@@ -245,7 +246,7 @@ describe('components/CitySearch', () => {
         city=""
         cityId={0}
         cities={[{
-          country: 'United States',
+          country: US,
           countryId: 1,
           groups: [testGroup1],
           name: 'New York',
@@ -267,19 +268,19 @@ describe('components/CitySearch', () => {
 
     const CitySelect = component.find('#citySelect');
     CitySelect.simulate('change', {
-      currentTarget: { value: "New York"}
+      currentTarget: { value: 'New York'},
     });
 
     expect(updateState).toBeCalledTimes(1);
     expect(updateState).toBeCalledWith({
-      "city": "New York",
-      "cityId": 16625,
-      "region": "New York",
-      "regionId": 37,
+      'city': 'New York',
+      'cityId': 16625,
+      'region': 'New York',
+      'regionId': 37,
     });
 
     CitySelect.simulate('change', {
-      currentTarget: { value: "Nonsense City Name"}
+      currentTarget: { value: 'Nonsense City Name'},
     });
 
     expect(updateState).toBeCalledTimes(1);
@@ -293,7 +294,7 @@ describe('components/CitySearch', () => {
     expect(updateState).toBeCalledWith({
       city: '',
       cityId: 0,
-    })
+    });
   });
 
   it('test onRegionChange interaction', () => {
@@ -304,7 +305,7 @@ describe('components/CitySearch', () => {
         city="New York"
         cityId={0}
         cities={[{
-          country: 'United States',
+          country: US,
           countryId: 1,
           groups: [testGroup1],
           name: 'New York',
@@ -326,19 +327,19 @@ describe('components/CitySearch', () => {
 
     const RegionSelect = component.find('#stateSelect');
     RegionSelect.simulate('change', {
-      currentTarget: { value: "New Jersey"}
+      currentTarget: { value: 'New Jersey'},
     });
 
     expect(updateState).toBeCalledTimes(1);
     expect(updateState).toBeCalledWith({
       city: '',
       cityId: 0,
-      region: "New Jersey",
+      region: 'New Jersey',
       regionId: 0,
     });
 
     RegionSelect.simulate('change', {
-      currentTarget: { value: "New York"}
+      currentTarget: { value: 'New York'},
     });
 
     expect(updateState).toBeCalledTimes(1);

@@ -17,13 +17,21 @@ import {
 import {tComponentProps} from '../../_types';
 
 const MobileMeetingPage = memo((props: tComponentProps) => {
-  const {meeting, meetingsByGroupId, group} = props;
+  const {meeting, meetingsByGroupId, group, role, rsvp} = props;
   const isPastMeeting = dayJS(meeting.date).isBefore(dayJS());
   // maybe we should just like, include the duration in the DB?
   // instead of re-constructing here
   const startDate = dayJS(meeting.date);
   const endDate = dayJS(meeting.endDate);
   const duration = `${endDate.diff(startDate, 'hour')}`;
+
+  // if meeting is online and the user has RSVP'd, then show the zoom/etc link
+  // also used to conditionally adjust margins, since this pushes content down a bit
+  const renderOnlineLink = meeting.isOnline
+    && meeting.locationLink
+    && (rsvp.value === 'yes' || role === 'admin');
+
+  const isUpcomingMeeting = !meeting.isDraft && !isPastMeeting;
 
   return (
     <>
@@ -37,13 +45,26 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
           This meeting has already happened
         </b>
       )}
-      {!meeting.isDraft && !isPastMeeting && (
-        <RSVP meeting={meeting} />
+      {isUpcomingMeeting && (
+        <>
+          <RSVP meeting={meeting} />
+          {renderOnlineLink && (
+            <div className="mt-5 p-2 rounded text-center bg-green-1 text-sm">
+              <ExternalLink
+                noFollow
+                className=""
+                to={meeting.locationLink}>
+                {meeting.locationLink}
+              </ExternalLink>
+            </div>
+          )}
+        </>
       )}
       <h1
         className={cx({
           'd:mt-0 capitalize block d:hidden text-2 font-normal': true,
-          'mt-5 pt-3 ': !meeting.isDraft && !isPastMeeting,
+          'pt-3 ': isUpcomingMeeting,
+          'mt-5': !renderOnlineLink && isUpcomingMeeting,
         })}>
         {meeting.title}
       </h1>

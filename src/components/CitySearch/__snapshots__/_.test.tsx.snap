@@ -22590,8 +22590,8 @@ ReactTestInstance {
           "error": null,
           "isLoading": false,
         },
-        "city": "New York",
-        "cityId": 16625,
+        "city": "Newark",
+        "cityId": 15268,
         "geo": Object {
           "city": "New York",
           "countryCode": "us",
@@ -22601,8 +22601,8 @@ ReactTestInstance {
           "regionCode": "ny",
         },
         "getCitiesDispatch": [Function],
-        "region": "New York",
-        "regionId": 37,
+        "region": "New Jersey",
+        "regionId": 35,
         "session": Object {
           "isAuthenticated": false,
           "profile": Object {
@@ -22660,8 +22660,8 @@ ReactTestInstance {
           "error": null,
           "isLoading": false,
         },
-        "city": "New York",
-        "cityId": 16625,
+        "city": "Newark",
+        "cityId": 15268,
         "geo": Object {
           "city": "New York",
           "countryCode": "us",
@@ -22671,8 +22671,8 @@ ReactTestInstance {
           "regionCode": "ny",
         },
         "getCitiesDispatch": [Function],
-        "region": "New York",
-        "regionId": 37,
+        "region": "New Jersey",
+        "regionId": 35,
         "session": Object {
           "isAuthenticated": false,
           "profile": Object {
@@ -22735,8 +22735,8 @@ ReactTestInstance {
             "error": null,
             "isLoading": false,
           },
-          "city": "New York",
-          "cityId": 16625,
+          "city": "Newark",
+          "cityId": 15268,
           "geo": Object {
             "city": "New York",
             "countryCode": "us",
@@ -22746,8 +22746,8 @@ ReactTestInstance {
             "regionCode": "ny",
           },
           "getCitiesDispatch": [Function],
-          "region": "New York",
-          "regionId": 37,
+          "region": "New Jersey",
+          "regionId": 35,
           "session": Object {
             "isAuthenticated": false,
             "profile": Object {
@@ -22869,8 +22869,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -22880,8 +22880,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -22939,8 +22939,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -22950,8 +22950,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -23014,8 +23014,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -23025,8 +23025,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -23154,8 +23154,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -23165,8 +23165,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -23224,8 +23224,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -23235,8 +23235,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -23299,8 +23299,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -23310,8 +23310,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -23454,8 +23454,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -23465,8 +23465,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -23524,8 +23524,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -23535,8 +23535,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -23599,8 +23599,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -23610,8 +23610,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -23739,8 +23739,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -23750,8 +23750,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -23809,8 +23809,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -23820,8 +23820,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -23884,8 +23884,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -23895,8 +23895,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -24090,8 +24090,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -24101,8 +24101,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -24160,8 +24160,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -24171,8 +24171,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -24235,8 +24235,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -24246,8 +24246,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -24375,8 +24375,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -24386,8 +24386,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -24445,8 +24445,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -24456,8 +24456,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -24520,8 +24520,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -24531,8 +24531,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -24675,8 +24675,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -24686,8 +24686,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -24745,8 +24745,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -24756,8 +24756,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -24820,8 +24820,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -24831,8 +24831,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -24960,8 +24960,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -24971,8 +24971,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -25030,8 +25030,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -25041,8 +25041,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -25105,8 +25105,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -25116,8 +25116,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -25310,8 +25310,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -25321,8 +25321,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -25380,8 +25380,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -25391,8 +25391,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -25455,8 +25455,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -25466,8 +25466,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -25595,8 +25595,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -25606,8 +25606,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -25665,8 +25665,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -25676,8 +25676,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -25740,8 +25740,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -25751,8 +25751,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -25895,8 +25895,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -25906,8 +25906,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -25965,8 +25965,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -25976,8 +25976,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -26040,8 +26040,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -26051,8 +26051,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -26180,8 +26180,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -26191,8 +26191,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -26250,8 +26250,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -26261,8 +26261,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -26325,8 +26325,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -26336,8 +26336,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -26531,8 +26531,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -26542,8 +26542,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -26601,8 +26601,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -26612,8 +26612,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -26676,8 +26676,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -26687,8 +26687,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -26816,8 +26816,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -26827,8 +26827,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -26886,8 +26886,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -26897,8 +26897,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -26961,8 +26961,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -26972,8 +26972,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -27116,8 +27116,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -27127,8 +27127,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -27186,8 +27186,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -27197,8 +27197,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -27261,8 +27261,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -27272,8 +27272,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -27401,8 +27401,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -27412,8 +27412,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -27471,8 +27471,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -27482,8 +27482,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -27546,8 +27546,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -27557,8 +27557,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -27768,8 +27768,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -27779,8 +27779,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -27838,8 +27838,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -27849,8 +27849,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -27913,8 +27913,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -27924,8 +27924,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -28053,8 +28053,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -28064,8 +28064,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -28123,8 +28123,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -28134,8 +28134,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -28198,8 +28198,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -28209,8 +28209,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -28353,8 +28353,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -28364,8 +28364,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -28423,8 +28423,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -28434,8 +28434,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -28498,8 +28498,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -28509,8 +28509,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -28638,8 +28638,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -28649,8 +28649,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -28708,8 +28708,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -28719,8 +28719,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -28783,8 +28783,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -28794,8 +28794,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -28989,8 +28989,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -29000,8 +29000,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -29059,8 +29059,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -29070,8 +29070,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -29134,8 +29134,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -29145,8 +29145,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -29274,8 +29274,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -29285,8 +29285,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -29344,8 +29344,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -29355,8 +29355,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -29419,8 +29419,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -29430,8 +29430,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -29574,8 +29574,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -29585,8 +29585,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -29644,8 +29644,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -29655,8 +29655,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -29719,8 +29719,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -29730,8 +29730,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -29859,8 +29859,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -29870,8 +29870,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -29929,8 +29929,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -29940,8 +29940,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -30004,8 +30004,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -30015,8 +30015,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -30209,8 +30209,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -30220,8 +30220,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -30279,8 +30279,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -30290,8 +30290,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -30354,8 +30354,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -30365,8 +30365,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -30494,8 +30494,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -30505,8 +30505,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -30564,8 +30564,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -30575,8 +30575,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -30639,8 +30639,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -30650,8 +30650,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -30794,8 +30794,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -30805,8 +30805,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -30864,8 +30864,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -30875,8 +30875,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -30939,8 +30939,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -30950,8 +30950,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -31079,8 +31079,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -31090,8 +31090,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -31149,8 +31149,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -31160,8 +31160,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -31224,8 +31224,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -31235,8 +31235,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -31430,8 +31430,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -31441,8 +31441,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -31500,8 +31500,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -31511,8 +31511,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -31575,8 +31575,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -31586,8 +31586,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -31715,8 +31715,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -31726,8 +31726,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -31785,8 +31785,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -31796,8 +31796,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -31860,8 +31860,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -31871,8 +31871,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -32015,8 +32015,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -32026,8 +32026,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -32085,8 +32085,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -32096,8 +32096,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -32160,8 +32160,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -32171,8 +32171,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -32300,8 +32300,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -32311,8 +32311,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -32370,8 +32370,8 @@ ReactTestInstance {
                   "error": null,
                   "isLoading": false,
                 },
-                "city": "New York",
-                "cityId": 16625,
+                "city": "Newark",
+                "cityId": 15268,
                 "geo": Object {
                   "city": "New York",
                   "countryCode": "us",
@@ -32381,8 +32381,8 @@ ReactTestInstance {
                   "regionCode": "ny",
                 },
                 "getCitiesDispatch": [Function],
-                "region": "New York",
-                "regionId": 37,
+                "region": "New Jersey",
+                "regionId": 35,
                 "session": Object {
                   "isAuthenticated": false,
                   "profile": Object {
@@ -32445,8 +32445,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -32456,8 +32456,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -32610,10 +32610,10 @@ ReactTestInstance {
       },
     },
     "memoizedProps": Object {
-      "city": "New York",
-      "cityId": 16625,
-      "region": "New York",
-      "regionId": 37,
+      "city": "Newark",
+      "cityId": 15268,
+      "region": "New Jersey",
+      "regionId": 35,
       "store": Object {
         "clearActions": [Function],
         "dispatch": [Function],
@@ -32628,10 +32628,10 @@ ReactTestInstance {
     "mode": 0,
     "nextEffect": null,
     "pendingProps": Object {
-      "city": "New York",
-      "cityId": 16625,
-      "region": "New York",
-      "regionId": 37,
+      "city": "Newark",
+      "cityId": 15268,
+      "region": "New Jersey",
+      "regionId": 35,
       "store": Object {
         "clearActions": [Function],
         "dispatch": [Function],
@@ -32720,10 +32720,10 @@ ReactTestInstance {
             "next": [Circular],
             "payload": Object {
               "element": <Connect(CitySearchContainer)
-                city="New York"
-                cityId={16625}
-                region="New York"
-                regionId={37}
+                city="Newark"
+                cityId={15268}
+                region="New Jersey"
+                regionId={35}
                 store={
                   Object {
                     "clearActions": [Function],
@@ -32810,8 +32810,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -32821,8 +32821,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -32880,8 +32880,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -32891,8 +32891,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -32955,8 +32955,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -32966,8 +32966,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -33095,8 +33095,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -33106,8 +33106,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -33165,8 +33165,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -33176,8 +33176,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -33240,8 +33240,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -33251,8 +33251,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -33395,8 +33395,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -33406,8 +33406,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -33465,8 +33465,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -33476,8 +33476,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -33540,8 +33540,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -33551,8 +33551,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -33680,8 +33680,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -33691,8 +33691,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -33750,8 +33750,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -33761,8 +33761,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -33825,8 +33825,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -33836,8 +33836,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -34031,8 +34031,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -34042,8 +34042,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -34101,8 +34101,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -34112,8 +34112,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -34176,8 +34176,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -34187,8 +34187,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -34316,8 +34316,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -34327,8 +34327,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -34386,8 +34386,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -34397,8 +34397,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -34461,8 +34461,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -34472,8 +34472,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -34616,8 +34616,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -34627,8 +34627,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -34686,8 +34686,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -34697,8 +34697,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -34761,8 +34761,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -34772,8 +34772,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -34901,8 +34901,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -34912,8 +34912,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -34971,8 +34971,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -34982,8 +34982,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -35046,8 +35046,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -35057,8 +35057,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -35251,8 +35251,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -35262,8 +35262,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -35321,8 +35321,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -35332,8 +35332,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -35396,8 +35396,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -35407,8 +35407,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -35536,8 +35536,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -35547,8 +35547,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -35606,8 +35606,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -35617,8 +35617,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -35681,8 +35681,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -35692,8 +35692,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -35836,8 +35836,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -35847,8 +35847,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -35906,8 +35906,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -35917,8 +35917,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -35981,8 +35981,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -35992,8 +35992,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -36121,8 +36121,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -36132,8 +36132,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -36191,8 +36191,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -36202,8 +36202,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -36266,8 +36266,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -36277,8 +36277,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -36472,8 +36472,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -36483,8 +36483,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -36542,8 +36542,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -36553,8 +36553,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -36617,8 +36617,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -36628,8 +36628,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -36757,8 +36757,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -36768,8 +36768,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -36827,8 +36827,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -36838,8 +36838,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -36902,8 +36902,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -36913,8 +36913,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -37057,8 +37057,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -37068,8 +37068,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -37127,8 +37127,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -37138,8 +37138,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -37202,8 +37202,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -37213,8 +37213,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -37342,8 +37342,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -37353,8 +37353,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -37412,8 +37412,8 @@ ReactTestInstance {
                     "error": null,
                     "isLoading": false,
                   },
-                  "city": "New York",
-                  "cityId": 16625,
+                  "city": "Newark",
+                  "cityId": 15268,
                   "geo": Object {
                     "city": "New York",
                     "countryCode": "us",
@@ -37423,8 +37423,8 @@ ReactTestInstance {
                     "regionCode": "ny",
                   },
                   "getCitiesDispatch": [Function],
-                  "region": "New York",
-                  "regionId": 37,
+                  "region": "New Jersey",
+                  "regionId": 35,
                   "session": Object {
                     "isAuthenticated": false,
                     "profile": Object {
@@ -37487,8 +37487,8 @@ ReactTestInstance {
                       "error": null,
                       "isLoading": false,
                     },
-                    "city": "New York",
-                    "cityId": 16625,
+                    "city": "Newark",
+                    "cityId": 15268,
                     "geo": Object {
                       "city": "New York",
                       "countryCode": "us",
@@ -37498,8 +37498,8 @@ ReactTestInstance {
                       "regionCode": "ny",
                     },
                     "getCitiesDispatch": [Function],
-                    "region": "New York",
-                    "regionId": 37,
+                    "region": "New Jersey",
+                    "regionId": 35,
                     "session": Object {
                       "isAuthenticated": false,
                       "profile": Object {
@@ -37657,10 +37657,10 @@ ReactTestInstance {
       "memoizedProps": null,
       "memoizedState": Object {
         "element": <Connect(CitySearchContainer)
-          city="New York"
-          cityId={16625}
-          region="New York"
-          regionId={37}
+          city="Newark"
+          cityId={15268}
+          region="New Jersey"
+          regionId={35}
           store={
             Object {
               "clearActions": [Function],
@@ -37717,10 +37717,10 @@ ReactTestInstance {
         "baseQueue": null,
         "baseState": Object {
           "element": <Connect(CitySearchContainer)
-            city="New York"
-            cityId={16625}
-            region="New York"
-            regionId={37}
+            city="Newark"
+            cityId={15268}
+            region="New Jersey"
+            regionId={35}
             store={
               Object {
                 "clearActions": [Function],
@@ -37759,10 +37759,10 @@ ReactTestInstance {
       },
       "notifyNestedSubs": [Function],
       "props": Object {
-        "city": "New York",
-        "cityId": 16625,
-        "region": "New York",
-        "regionId": 37,
+        "city": "Newark",
+        "cityId": 15268,
+        "region": "New Jersey",
+        "regionId": 35,
         "store": Object {
           "clearActions": [Function],
           "dispatch": [Function],
@@ -37794,8 +37794,8 @@ ReactTestInstance {
             "error": null,
             "isLoading": false,
           },
-          "city": "New York",
-          "cityId": 16625,
+          "city": "Newark",
+          "cityId": 15268,
           "geo": Object {
             "city": "New York",
             "countryCode": "us",
@@ -37805,8 +37805,8 @@ ReactTestInstance {
             "regionCode": "ny",
           },
           "getCitiesDispatch": [Function],
-          "region": "New York",
-          "regionId": 37,
+          "region": "New Jersey",
+          "regionId": 35,
           "session": Object {
             "isAuthenticated": false,
             "profile": Object {

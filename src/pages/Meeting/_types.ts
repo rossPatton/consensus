@@ -18,6 +18,7 @@ export type tProps = {
 export type tComponentProps = tProps & {
   meeting: ts.meetingSingular,
   group: ts.group,
+  role: ts.role,
   rsvp: ts.rsvp,
 };
 
