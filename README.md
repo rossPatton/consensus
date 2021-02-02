@@ -1,7 +1,9 @@
 # Consensus
 Consens.us is currently a free meetings platform for the left. The hope is to grow into a centralized meetup/loomio/whatever replacement, a central home for your union, working group, collective, cooperative, or whatever.
 
-It is developed by @rossPatton in his spare time for free. I would very much like to make this a viable job for myself, so that I can work on this full time and potentially grow into a cooperative. To that end I'm interested in any funding help or support you can give!
+I work on this in my spare time for free. I'd very much like to make this a viable job for myself, so that I can work on this part or even full time and potentially grow this into a cooperatively run business.
+
+To that end I'm interested in any funding help or support you can give!
 
 # First Time
 Run 3 commands in order to get the dev server running:
