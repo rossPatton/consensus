@@ -1,3 +1,6 @@
+include .env
+export
+
 # install dependencies. npm install, basically
 # useful for local development to decouple build/run steps
 install:
@@ -35,3 +38,15 @@ setup:
 # just an alias for make dev
 start:
 	docker-compose up --remove-orphans
+
+# you will need to manually enter the password here for the sudo commands
+deployBlue:
+	make build;
+	docker push consensusdocker/prod;
+	ssh -t consensus@${DO_BLUE} "sudo docker pull consensusdocker/prod && sudo docker-compose -f docker-compose.yml up --remove-orphans --force-recreate -d";
+
+# you will need to manually enter the password here for the sudo commands
+deployGreen:
+	make build;
+	docker push consensusdocker/prod;
+	ssh -t consensus@${DO_GREEN} "sudo docker pull consensusdocker/prod && sudo docker-compose -f docker-compose.yml up --remove-orphans --force-recreate -d";
