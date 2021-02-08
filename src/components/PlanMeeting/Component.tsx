@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
-import React, {memo} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 
 import {Emoji, FileUpload, Form} from '~app/components';
@@ -216,4 +216,4 @@ export const PlanMeetingComponent = (props: tComponentProps) => {
       />
     </div>
   );
-});
+};
