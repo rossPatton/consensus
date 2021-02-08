@@ -39,7 +39,10 @@ setup:
 start:
 	docker-compose up --remove-orphans
 
-# you will need to manually enter the password here for the sudo commands
+# we use blue/green deployment, so we alternate between blue and green as prod
+# so check DO before deploying to either server, make sure you have the right one
+# you will need to manually enter the password for each server on deploy
+
 deployBlue:
 	make build;
 	docker push consensusdocker/prod;

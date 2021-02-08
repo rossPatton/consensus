@@ -9,7 +9,7 @@ import {meetingTypes} from '~app/constants';
 
 import {tComponentProps} from './_types';
 
-export const PlanMeetingComponent = memo((props: tComponentProps) => {
+export const PlanMeetingComponent = (props: tComponentProps) => {
   const {updateState} = props;
   const disableSubmit = !props.title || !props.date || !props.time;
   let legend = 'Plan Event';

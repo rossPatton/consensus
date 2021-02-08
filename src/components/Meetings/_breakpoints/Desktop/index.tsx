@@ -133,7 +133,6 @@ const DesktopMeetings: FunctionComponent<tProps> = memo(props => {
                 {props.isEditable
                   && (
                     <div className="flex items-center font-semibold leading-none">
-                      {/* {!isPastMeeting && ( */}
                       <Link
                         className="text-sm mr-2 no-underline"
                         to={props.sessionRole === 'admin'
@@ -142,10 +141,8 @@ const DesktopMeetings: FunctionComponent<tProps> = memo(props => {
                         <Emoji
                           label="Hand with Pen Emoji"
                           emoji="✍️"
-                        />
-                          Edit
+                        /> Edit
                       </Link>
-                      {/* )} */}
                       {!meeting.isDraft
                         && (
                           <Link
@@ -156,8 +153,7 @@ const DesktopMeetings: FunctionComponent<tProps> = memo(props => {
                             <Emoji
                               label="Clipboard Emoji"
                               emoji="📋"
-                            />
-                            Copy
+                            /> Copy
                           </Link>
                         )}
                       {!isPastMeeting && (
@@ -167,8 +163,7 @@ const DesktopMeetings: FunctionComponent<tProps> = memo(props => {
                           <Emoji
                             label="Big X Emoji"
                             emoji="✖️"
-                          />
-                          Delete
+                          /> Delete
                         </button>
                       )}
                       {meeting.isDraft && (
