@@ -53,3 +53,28 @@ deployGreen:
 	make build;
 	docker push consensusdocker/prod;
 	ssh -t consensus@${DO_GREEN} "sudo docker pull consensusdocker/prod && sudo docker-compose -f docker-compose.yml up --remove-orphans --force-recreate -d";
+
+# migrations that alter or extend existing tables won't work unless DB is bootstrapped
+# bootstrap === base table structure necessary to allow further changes
+# extremely verbose, but knex-migrate doesn't support typescript, and bare knex
+# doesn't support any way to run migrations up to a certain point
+# but this is a one and done thing, will rarely ever be needed
+bootstrap:
+	DB_HOST=${DB_MIGRATION_HOST} DB_PORT=${DB_LOCAL_PORT} DB_PW=${DB_LOCAL_PW} DB_USER=${DB_LOCAL_USER} DB=${DB_LOCAL} node -r esm ./node_modules/.bin/knex migrate:up 00_categories.ts;
+	DB_HOST=${DB_MIGRATION_HOST} DB_PORT=${DB_LOCAL_PORT} DB_PW=${DB_LOCAL_PW} DB_USER=${DB_LOCAL_USER} DB=${DB_LOCAL} node -r esm ./node_modules/.bin/knex migrate:up 01_countries.ts;
+	DB_HOST=${DB_MIGRATION_HOST} DB_PORT=${DB_LOCAL_PORT} DB_PW=${DB_LOCAL_PW} DB_USER=${DB_LOCAL_USER} DB=${DB_LOCAL} node -r esm ./node_modules/.bin/knex migrate:up 02_regions.ts;
+	DB_HOST=${DB_MIGRATION_HOST} DB_PORT=${DB_LOCAL_PORT} DB_PW=${DB_LOCAL_PW} DB_USER=${DB_LOCAL_USER} DB=${DB_LOCAL} node -r esm ./node_modules/.bin/knex migrate:up 03_cities.ts;
+	DB_HOST=${DB_MIGRATION_HOST} DB_PORT=${DB_LOCAL_PORT} DB_PW=${DB_LOCAL_PW} DB_USER=${DB_LOCAL_USER} DB=${DB_LOCAL} node -r esm ./node_modules/.bin/knex migrate:up 04_postcodes.ts;
+	DB_HOST=${DB_MIGRATION_HOST} DB_PORT=${DB_LOCAL_PORT} DB_PW=${DB_LOCAL_PW} DB_USER=${DB_LOCAL_USER} DB=${DB_LOCAL} node -r esm ./node_modules/.bin/knex migrate:up 05_users.ts;
+	DB_HOST=${DB_MIGRATION_HOST} DB_PORT=${DB_LOCAL_PORT} DB_PW=${DB_LOCAL_PW} DB_USER=${DB_LOCAL_USER} DB=${DB_LOCAL} node -r esm ./node_modules/.bin/knex migrate:up 06_groups.ts;
+	DB_HOST=${DB_MIGRATION_HOST} DB_PORT=${DB_LOCAL_PORT} DB_PW=${DB_LOCAL_PW} DB_USER=${DB_LOCAL_USER} DB=${DB_LOCAL} node -r esm ./node_modules/.bin/knex migrate:up 07_meetings.ts;
+	DB_HOST=${DB_MIGRATION_HOST} DB_PORT=${DB_LOCAL_PORT} DB_PW=${DB_LOCAL_PW} DB_USER=${DB_LOCAL_USER} DB=${DB_LOCAL} node -r esm ./node_modules/.bin/knex migrate:up 08_users_meetings.ts;
+	DB_HOST=${DB_MIGRATION_HOST} DB_PORT=${DB_LOCAL_PORT} DB_PW=${DB_LOCAL_PW} DB_USER=${DB_LOCAL_USER} DB=${DB_LOCAL} node -r esm ./node_modules/.bin/knex migrate:up 09_users_roles.ts;
+	DB_HOST=${DB_MIGRATION_HOST} DB_PORT=${DB_LOCAL_PORT} DB_PW=${DB_LOCAL_PW} DB_USER=${DB_LOCAL_USER} DB=${DB_LOCAL} node -r esm ./node_modules/.bin/knex migrate:up 10_users_invites.ts;
+
+# runs latest migrations
+migrate:
+	DB_HOST=${DB_MIGRATION_HOST} DB_PORT=${DB_LOCAL_PORT} DB_PW=${DB_LOCAL_PW} DB_USER=${DB_LOCAL_USER} DB=${DB_LOCAL} node -r esm ./node_modules/.bin/knex migrate:latest;
+
+seed:
+	DB_HOST=${DB_MIGRATION_HOST} DB_PORT=${DB_LOCAL_PORT} DB_PW=${DB_LOCAL_PW} DB_USER=${DB_LOCAL_USER} DB=${DB_LOCAL} node -r esm ./node_modules/.bin/knex seed:run;

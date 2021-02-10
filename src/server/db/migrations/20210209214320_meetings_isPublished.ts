@@ -11,3 +11,4 @@ export const down = async (knex: Knex) => {
     t.dropColumn('isPublished');
   });
 };
+
