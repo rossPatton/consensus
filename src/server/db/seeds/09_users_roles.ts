@@ -19,7 +19,7 @@ const createRelation = async (accountId: number, groupId: number) => {
   };
 };
 
-exports.seed = async (knex: Knex) => {
+export const seed = async (knex: Knex) => {
   const fakeRelations = [];
 
   // create test user facilitator account

@@ -14,7 +14,7 @@ const createUserMeetingRelation = async (u: number, e: number) => {
   };
 };
 
-exports.seed = async (knex: Knex) => {
+export const seed = async (knex: Knex) => {
   const fakeUserEventRelations = [];
 
   for await (const i of range(1, 24)) {

@@ -7,7 +7,7 @@ const categories = [
   { type: 'Political', slug: 'political' },
 ];
 
-exports.up = async (knex: Knex) => {
+export const up = async (knex: Knex) => {
   await knex.raw('CREATE EXTENSION IF NOT EXISTS "pg_trgm"');
   await knex.schema.createTable('categories', table => {
     table
@@ -23,6 +23,6 @@ exports.up = async (knex: Knex) => {
   });
 };
 
-exports.down = async (knex: Knex) => {
+export const down = async (knex: Knex) => {
   await knex.schema.dropTable('categories');
 };

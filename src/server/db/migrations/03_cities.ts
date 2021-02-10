@@ -1,6 +1,6 @@
 import Knex from 'knex';
 
-exports.up = async (knex: Knex) => {
+export const up = async (knex: Knex) => {
   // each column in the directory table cooresponds to a directory
   // ie, the url /us should give a directory of all the states in the us
   // the url /us/ny should give a directory of all cities in ny
@@ -43,6 +43,6 @@ exports.up = async (knex: Knex) => {
   });
 };
 
-exports.down = async (knex: Knex) => {
+export const down = async (knex: Knex) => {
   await knex.schema.dropTable('cities');
 };

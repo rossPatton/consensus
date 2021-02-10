@@ -8,7 +8,9 @@ const CWD = process.cwd();
 const migrations = path.join(CWD, 'src', 'server', 'db', 'migrations');
 const seeds = path.join(CWD, 'src', 'server', 'db', 'seeds');
 
-// values below are determined by docker config
+// for DEV/PROD values below are determined by docker config
+// for migrating/seeding a local DB, change below values to *_LOCAL
+// also, check notes in .env file, you might need to change the host
 const DB = process.env.DB as string;
 const DB_HOST = process.env.DB_HOST as string;
 const DB_USER = process.env.DB_USER as string;

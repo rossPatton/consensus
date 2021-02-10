@@ -9,7 +9,7 @@ const createCategories = () => ([
   // { type: 'Working Group' },
 ]);
 
-exports.seed = async (knex: Knex) => {
+export const seed = async (knex: Knex) => {
   await knex('categories').del();
   await knex('categories').insert(createCategories());
 };

@@ -1,6 +1,6 @@
 import Knex from 'knex';
 
-exports.up = async (knex: Knex) => {
+export const up= async (knex: Knex) => {
   await knex.schema.createTable('users_meetings', table => {
     table.increments('id').unsigned().primary();
 
@@ -26,6 +26,6 @@ exports.up = async (knex: Knex) => {
   });
 };
 
-exports.down = async (knex: Knex) => {
+export const down = async (knex: Knex) => {
   await knex.schema.dropTable('users_meetings');
 };

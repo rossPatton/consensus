@@ -6,7 +6,7 @@ const createUserInviteRelation = async (groupId: number, userId: number) => ({
   userId,
 });
 
-exports.seed = async (knex: Knex) => {
+export const seed = async (knex: Knex) => {
   const fakeInvites = [];
 
   for await (const g of range(2, 10)) {

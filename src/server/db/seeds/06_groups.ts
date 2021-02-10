@@ -43,7 +43,7 @@ const createGroup = async (groupId: number) => {
   };
 };
 
-exports.seed = async (knex: Knex) => {
+export const seed = async (knex: Knex) => {
   const fakeGroups = [];
 
   for await (const groupId of _.range(groups.length)) {

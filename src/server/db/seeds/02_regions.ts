@@ -8,7 +8,7 @@ const createRegion = async (key: string, value: string) => ({
   name: key,
 });
 
-exports.seed = async (knex: Knex) => {
+export const seed = async (knex: Knex) => {
   const regions = await Promise.all(
     Object.entries(stateMap).map(
       ([k, v]) => createRegion(k, v),

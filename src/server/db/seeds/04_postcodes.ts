@@ -10,7 +10,7 @@ const createCodes = async (row: any, i: number) =>
     code,
   }));
 
-exports.seed = async (knex: Knex) => {
+export const seed = async (knex: Knex) => {
   // split processed cities file into chunks
   // postgres can't handle inserting everything at once
   // use a value here that is a whole integer

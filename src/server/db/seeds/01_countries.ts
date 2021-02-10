@@ -1,6 +1,6 @@
 import Knex from 'knex';
 
-exports.seed = async (knex: Knex) => {
+export const seed = async (knex: Knex) => {
   // only country supported atm
   const createUSA = async () => ({
     code: 'us',

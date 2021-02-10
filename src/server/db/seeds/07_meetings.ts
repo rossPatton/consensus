@@ -38,7 +38,7 @@ const createMeeting = async (groupId: number, isDraft: boolean = false) => {
   });
 };
 
-exports.seed = async (knex: Knex) => {
+export const seed = async (knex: Knex) => {
   const fakeMeetings = [];
 
   for await (const groupId of range(1, 100)) {

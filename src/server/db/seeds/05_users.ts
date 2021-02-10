@@ -47,7 +47,7 @@ const createTestUser = async () => ({
   website: '',
 });
 
-exports.seed = async (knex: Knex) => {
+export const seed = async (knex: Knex) => {
   const fakeUsers = [];
 
   // testUser === user info for admin account

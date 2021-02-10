@@ -1,6 +1,6 @@
 import Knex from 'knex';
 
-exports.up = async (knex: Knex) => {
+export const up= async (knex: Knex) => {
   // a region === a state, or a province, or some other way of parsing geographical
   // information that is smaller than a country but larger than a city
   await knex.schema.createTable('countries', table => {
@@ -15,6 +15,6 @@ exports.up = async (knex: Knex) => {
   });
 };
 
-exports.down = async (knex: Knex) => {
+export const down = async (knex: Knex) => {
   await knex.schema.dropTable('countries');
 };
