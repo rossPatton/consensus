@@ -1,6 +1,11 @@
 var baseSans = ["Helvetica Neue", 'HelveticaNeue', 'Helvetica', 'system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Arial', "Noto Sans", 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"];
 
 module.exports = {
+  // handle deprecations, shouldn't affect anything but quiets warnings
+  future: {
+    purgeLayersByDefault: true,
+    removeDeprecatedGapUtilities: true,
+  },
   prefix: '',
   important: false,
   separator: ':',
