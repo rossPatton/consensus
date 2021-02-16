@@ -21,16 +21,21 @@ Then run the server locally:
 
 You're good to go!
 
+# Database changes
+See server/db/README.md
+
 # Deployment
 Currently, deployment happens very manually on our remote Digital Ocean host. The host currently contains slightly modified copies of our local docker-compose setup. We pull down the latest build from our dockerhub repo, and then we run that using docker-compose.
 
-Steps for deployment:
- - `make build`: Builds docker image
- - `docker push consensusdocker/repo`: Pushes docker image to remote repo
- - `ssh consensus@ip`: ssh into DO droplet where deployment will happen
- - `docker pull consensusdocker/repo`: pull down latest docker deployment into droplet
- - `sudo docker-compose -f docker-compose.yml up --remove-orphans --force-recreate -d`: Restart docker container with latest docker image
+We ostensibly use blue/green deployment, but due to a cert issue, green is currently prod and blue is staging. We could set it up to alternate, but it appears to work fine as is. There is the potential for site downtime during deployment without alternating, but caching usually covers it.
 
+Steps for deployment:
+  - Run `make build` to build docker image and push it to our docker repo
+  - Run the deploy script for the server you want to deploy to (either `make deployBlue` or `make deployGreen`)
+  - Keep an eye on the script, you will need to enter the appropriate password for the DO server
+  - Deploy is done! Assuming you put in the right password, the script should pull down the latest image from our docker repo and restart the container
+
+@TODO - this really should just be a makefile script
 Steps for setting up new DO droplet:
  - Setup UFW to limit ssh to verified accounts only. See https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04 or https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04
  - Setup nginx as a reverse proxy. See https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04#step-5-%E2%80%93-setting-up-server-blocks-(recommended) as a starting point. Our nginx prof config is located in nginx/prod.conf

@@ -16,10 +16,11 @@ prod:
 	npm run build;
 	docker-compose -f docker-compose.prod.yml up --remove-orphans
 
-# build site for prod, and prepares an image for deployment
+# build site for prod, prepares an image for deployment
 build:
 	npm run build;
-	docker-compose -f docker-compose.build.yml build --no-cache --parallel
+	docker-compose -f docker-compose.build.yml build --no-cache --parallel;
+	docker push consensusdocker/prod;
 
 # setup external nginx network
 nginxProxy:
@@ -42,16 +43,11 @@ start:
 # we use blue/green deployment, so we alternate between blue and green as prod
 # so check DO before deploying to either server, make sure you have the right one
 # you will need to manually enter the password for each server on deploy
-
+# run make build first
 deployBlue:
-	make build;
-	docker push consensusdocker/prod;
 	ssh -t consensus@${DO_BLUE} "sudo docker pull consensusdocker/prod && sudo docker-compose -f docker-compose.yml up --remove-orphans --force-recreate -d";
 
-# you will need to manually enter the password here for the sudo commands
 deployGreen:
-	make build;
-	docker push consensusdocker/prod;
 	ssh -t consensus@${DO_GREEN} "sudo docker pull consensusdocker/prod && sudo docker-compose -f docker-compose.yml up --remove-orphans --force-recreate -d";
 
 # migrations that alter or extend existing tables won't work unless DB is bootstrapped
