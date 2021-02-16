@@ -2,6 +2,7 @@ namespace ts {
   declare type meeting = Readonly<{
     attendees?: number,
     category: ts.category,
+    created_at?: Date,
     date: string,
     description: string,
     endDate: string,
@@ -13,12 +14,14 @@ namespace ts {
     isDraft: boolean,
     isOnline: boolean,
     isPrivate: boolean,
+    isPublished: boolean,
     location: string,
     locationLink: string,
     publicRSVPS?: ts.user[],
     slug: string,
     tag: meetingTypes,
     title: string,
+    updated_at?: Date,
   }>;
 
   // if looking at a single meeting page, we pull in a few extra things

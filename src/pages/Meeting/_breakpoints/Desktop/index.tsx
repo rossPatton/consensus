@@ -30,7 +30,7 @@ const DesktopMeetingComponent = memo((props: tComponentProps) => {
     <>
       {meeting.isDraft && (
         <div className="fadeInUp rounded w-full p-1 mb-2 text-center bg-yellow-2 font-bold text-sm">
-          This is a draft preview for your meeting.
+          This is a draft preview of your meeting.
         </div>
       )}
       {!meeting.isDraft && (

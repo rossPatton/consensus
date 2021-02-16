@@ -49,7 +49,7 @@ meeting.post(route, async (ctx: Koa.ParameterizedContext) => {
   try {
     await pg.transaction(async trx => pg('meetings')
       .transacting(trx)
-      .insert(meeting)
+      .insert({...meeting, isPublished: true})
       .limit(1)
       .returning('*')
       .then(newMeeting => {

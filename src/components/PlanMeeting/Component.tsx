@@ -2,15 +2,15 @@ import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import {Emoji, FileUpload, Form} from '~app/components';
-import {meetingTypes} from '~app/constants';
+import { Emoji, FileUpload, Form } from '~app/components';
+import { meetingTypes } from '~app/constants';
 
-import {tComponentProps} from './_types';
+import { tComponentProps } from './_types';
 
 export const PlanMeetingComponent = (props: tComponentProps) => {
-  const {updateState} = props;
+  const { updateState } = props;
   const disableSubmit = !props.title || !props.date || !props.time;
   let legend = 'Plan Event';
   if (props.isDraft && props.isCopy) {
@@ -98,7 +98,7 @@ export const PlanMeetingComponent = (props: tComponentProps) => {
                 />
                 <span className="w-full">
                   {props.isOnline && (
-                    'My event is online. Put meeting link below.'
+                    'My event is online. Put meeting link below. Users who RSVP will see it.'
                   )}
                   {!props.isOnline && (
                     'Event is in person. Put location details below.'
@@ -170,6 +170,10 @@ export const PlanMeetingComponent = (props: tComponentProps) => {
         )}
         renderSubmit={() => (
           <div className="mb-3 d:mb-0 flex items-center">
+            {/*
+              we only use the meetingThunk here. rest is from the form
+              mainly because we fetch events when copying (we want id blank when copying, because we're making a new event)
+            */}
             {props.meetingThunk.isLoading
               ? 'Saving...'
               : (
@@ -185,30 +189,33 @@ export const PlanMeetingComponent = (props: tComponentProps) => {
                       ev.preventDefault();
                       props.onSubmit();
                     }}>
-                    {!props.id ? 'Publish' : 'Update'}
+                    {props.isPublished ? 'Update' : 'Publish'}
                   </button>
-                  <button
-                    id="testSaveAsDraft"
-                    className="p-2 mr-1 hover:bg-gray-3"
-                    disabled={disableSubmit}
-                    onClick={ev => {
-                      ev.preventDefault();
-                      props.saveAsDraft();
-                    }}>
-                    Save as Draft
-                  </button>
-                  {typeof props.id === 'number' && (
-                    <Link
-                      to={`/draft/${props.id}/${props.slug}`}
-                      className="btn p-2 hover:bg-gray-3">
-                      <Emoji
-                        className="mr-1"
-                        emoji="👁️"
-                        label="Eye Emoji"
-                      />
-                      Preview
-                    </Link>
+                  {!props.isPublished && (
+                    <button
+                      id="testSaveAsDraft"
+                      className="p-2 mr-1 hover:bg-gray-3"
+                      disabled={disableSubmit}
+                      onClick={ev => {
+                        ev.preventDefault();
+                        props.saveAsDraft();
+                      }}>
+                      {/* if first time editing this event or not, basically */}
+                      {!props.isDraft ? 'Save as Draft' : 'Save Changes'}
+                    </button>
                   )}
+                  <Link
+                    to={props.isDraft
+                      ? `/draft/${props.id}/${props.slug}`
+                      : `/meeting/${props.id}/${props.slug}`}
+                    className="btn p-2 hover:bg-gray-3 no-underline">
+                    <Emoji
+                      emoji="👁️"
+                      label="Eye Emoji"
+                    /> <span className="underline">
+                      {!props.isDraft ? 'View Meeting' : 'Preview'}
+                    </span>
+                  </Link>
                 </>
               )}
           </div>

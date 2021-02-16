@@ -29,6 +29,7 @@ export type tProps = {
 
 export type tContainerProps = tProps & {
   meetingsThunk: ts.thunk<ts.meeting[]>,
+  getMeetingDispatch: (query: ts.getMeetingQuery) => ts.thunkPayload<ts.meetingSingular>,
   patchMeetingDispatch:
     (query: ts.upsertMeetingQuery) => ts.thunkPayload<ts.meetingSingular>,
   postMeetingDispatch:

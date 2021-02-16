@@ -34,9 +34,9 @@ const DesktopMeetings: FunctionComponent<tProps> = memo(props => {
           </li>
         )}
       {props.meetingsToRender.map((meeting, i) => {
-        const {id, ...evWithoutId} = meeting;
-        const qs = querystring.stringify(meeting);
-        const qsWithCopy = querystring.stringify({...evWithoutId, isCopy: true});
+        const {id} = meeting;
+        const qs = querystring.stringify({id});
+        const qsWithCopy = querystring.stringify({id, isCopy: true});
 
         // meetings can be render as all upcoming, all past, or a mix
         const isPastMeeting = dayJS(meeting.date).isBefore(now);

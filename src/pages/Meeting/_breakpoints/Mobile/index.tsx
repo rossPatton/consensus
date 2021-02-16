@@ -37,7 +37,7 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
     <>
       {meeting.isDraft && (
         <div className="fadeInUp w-full p-2 mb-3 text-center bg-yellow-2 font-bold text-sm">
-          This is a draft preview for your meeting.
+          This is a draft preview of your meeting.
         </div>
       )}
       {!meeting.isDraft && isPastMeeting && (

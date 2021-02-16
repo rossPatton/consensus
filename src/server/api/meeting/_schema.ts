@@ -20,6 +20,7 @@ export const upsertSchema = Joi.object({
   isDraft: Joi.bool().optional(),
   isOnline: Joi.bool().optional(),
   isPrivate: Joi.bool().required(),
+  isPublished: Joi.bool().optional(),
   location: Joi.string().allow(''),
   locationLink: Joi.string().allow(''),
   slug: Joi.string().regex(/^[a-zA-Z0-9-]+$/),

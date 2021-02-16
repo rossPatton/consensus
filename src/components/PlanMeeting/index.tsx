@@ -1,17 +1,18 @@
 import dayJS from 'dayjs';
 import _ from 'lodash';
+import loglevel from 'loglevel';
 import qs from 'qs';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { Mutable } from 'utility-types';
 
-import {ErrorBoundary} from '~app/containers';
-import {getMeetingsByGroupIdSuccess, patchMeeting, postMeeting} from '~app/redux';
-import {parseTimeString, slugify} from '~app/utils';
+import { ErrorBoundary } from '~app/containers';
+import { getMeeting, getMeetingsByGroupIdSuccess, patchMeeting, postMeeting } from '~app/redux';
+import { parseTimeString, slugify } from '~app/utils';
 
-import {tContainerProps, tKeyUnion, tState, tStore, tValueUnion} from './_types';
-import {PlanMeetingComponent} from './Component';
+import { tContainerProps, tKeyUnion, tState, tStore, tValueUnion } from './_types';
+import { PlanMeetingComponent } from './Component';
 
 class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
   state = {
@@ -28,6 +29,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     isDraft: false,
     isOnline: true,
     isPrivate: this.props.group.type !== 'public',
+    isPublished: false,
     location: '',
     locationLink: '',
     tag: 'Meeting' as ts.meetingTypes,
@@ -35,55 +37,25 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     title: '',
   };
 
-  // we use query params to populate the form when editing or copying a meeting
-  // @TODO maybe just use the id and fetch the draft from the DB?
-  // @TODO or just temporarily store client-side? this is real messy
-  constructor(props: tContainerProps) {
-    super(props);
-
-    const {router: {search}} = props;
+  async componentDidMount() {
+    const { router: { search } } = this.props;
     const draft = qs.parse(search.replace('?', ''));
 
-    if (_.isEmpty(draft)) return;
-
-    const isOnline = draft.isOnline === 'true';
-    const isPrivate = draft.isPrivate === 'true';
-    const isCopy = draft.isCopy === 'true';
-
-    // if draft is a copy, not an edit (of existing draft or meeting)
-    // then we change a few things here
-    const state = {
-      ...this.state,
-      category: draft.category as ts.category,
-      cityId: typeof draft.cityId === 'string'
-        ? parseInt(draft.cityId as string, 10)
-        : null,
-      // convert UTC date with tz to local format for html5 date/time picker
-      date: isCopy
-        ? dayJS().toISOString()
-        : dayJS(draft.date as string).format('YYYY-MM-DD'),
-      description: draft.description === 'null' ? '' : draft.description as string,
-      endDate: isCopy
-        ? dayJS().toISOString()
-        : dayJS(draft.endDate as string).format('YYYY-MM-DD'),
-      groupId: this.props.group.id,
-      groupName: this.props.group.name,
-      host: draft.host as string,
-      id: isCopy ? undefined : parseInt(draft.id as string, 10),
-      img: draft.img === 'null' ? '' : draft.img as string | null,
-      isCopy,
-      isDraft: true,
-      isOnline,
-      isPrivate,
-      location: draft.location as string,
-      locationLink: draft.locationLink as string,
-      slug: slugify(draft.title as string),
-      tag: draft.tag as ts.meetingTypes,
-      time: isCopy ? '19:00' : draft.time as string,
-      title: draft.title as string,
-    };
-
-    this.state = state;
+    if (typeof draft.id === 'string') {
+      try {
+        const res = await this.props.getMeetingDispatch({ id: parseInt(draft.id, 10) });
+        const { created_at, updated_at, ...payload } = res.payload;
+        if (draft.isCopy) {
+          // remove all the post publish stuff from the copied event
+          const { attendees, id, isPublished, publicRSVPS, rsvp, ...initialState } = payload;
+          this.setState({ ...initialState, isCopy: true });
+        } else {
+          this.setState({ ...payload });
+        }
+      } catch (err) {
+        loglevel.error(err);
+      }
+    }
   }
 
   saveAsDraft = () =>
@@ -92,8 +64,8 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     }, () => this.onSubmit(true));
 
   onSubmit = async (saveAsDraft: boolean = false) => {
-    const {img} = this.props;
-    const {date, endTime, error, id, isCopy, time, ...restOfMeeting} = this.state;
+    const { img } = this.props;
+    const { date, endTime, error, id, isCopy, time, ...restOfMeeting } = this.state;
 
     const timeArr = parseTimeString(time);
     const endTimeArr = parseTimeString(endTime);
@@ -102,15 +74,16 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
 
     let newMeeting: ts.meeting;
     try {
-      const {patchMeetingDispatch, postMeetingDispatch} = this.props;
+      const { patchMeetingDispatch, postMeetingDispatch } = this.props;
 
       const newOrUpdatedMeeting: Partial<Mutable<ts.meeting>> = {
         ...restOfMeeting,
         img,
-        // we submit drafts to the same table in the DB as well
-        // we only want to save as draft when the user hits the save as draft button
-        // we don't use state here, since we want to set this to false when publishing
+        // we submit drafts to the same table in the DB
+        // only save as draft when the user hits the save as draft button
         isDraft: saveAsDraft,
+        // if clicking publish, saveAsDraft === false, so set isPublished to true
+        isPublished: !saveAsDraft,
         // every date is stored in the db as an ISO string
         date: startDate.toISOString(),
         endDate: endDate.toISOString(),
@@ -120,6 +93,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
 
       // if meeting has already been saved as a draft, we will have the id
       // patch in that case, else post new meeting (initial draft save, or submit)
+      // you can also copy previous meeetings, so patch, but wipe id so new one can be set
       let dispatch = postMeetingDispatch;
       if (typeof id === 'number' && !isNaN(id)) {
         dispatch = patchMeetingDispatch;
@@ -135,16 +109,17 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     }
 
     // update redux on client side on meeting upsert success
-    const {meetingsThunk} = this.props;
+    const { meetingsThunk } = this.props;
     getMeetingsByGroupIdSuccess([newMeeting, ...meetingsThunk.data]);
 
     // this will cause the preview button to render if first time submit
-    if (typeof newMeeting.id === 'number') {
-      this.setState({
-        id: newMeeting.id,
-        slug: newMeeting.slug,
-      });
-    }
+    this.setState({
+      id: newMeeting.id,
+      // to make sure the form submit area renders the correct text
+      isDraft: saveAsDraft,
+      isPublished: !saveAsDraft,
+      slug: newMeeting.slug,
+    });
   }
 
   updateState = (stateKey: tKeyUnion, value: tValueUnion) => {
@@ -154,7 +129,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
   }
 
   render() {
-    const {sessionThunk} = this.props;
+    const { meetingThunk, sessionThunk } = this.props;
 
     return (
       <ErrorBoundary
@@ -164,6 +139,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
         {sessionThunk.data.isAuthenticated && (
           <PlanMeetingComponent
             {...this.props}
+            {...meetingThunk.data}
             {...this.state}
             onSubmit={this.onSubmit}
             saveAsDraft={this.saveAsDraft}
@@ -183,6 +159,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
+  getMeetingDispatch: (query: ts.getMeetingQuery) => dispatch(getMeeting(query)),
   patchMeetingDispatch: (query: ts.upsertMeetingQuery) => dispatch(patchMeeting(query)),
   postMeetingDispatch: (query: ts.upsertMeetingQuery) => dispatch(postMeeting(query)),
 });

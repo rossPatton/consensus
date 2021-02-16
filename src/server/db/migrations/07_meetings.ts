@@ -57,7 +57,6 @@ export const up = async (knex: Knex) => {
 
     table.text('location').defaultTo('Location To Be Determined');
     table.text('locationLink');
-    table.enum('locationType', ['online', 'offline']).defaultTo('online');
 
     table
       .enum('tag', meetingTypes)

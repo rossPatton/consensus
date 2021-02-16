@@ -31,7 +31,6 @@ const createMeeting = async (groupId: number, isDraft: boolean = false) => {
       isPrivate: group.type !== 'public',
       location: isOnline ? '' : faker.address.streetAddress(),
       locationLink: isOnline ? '' : faker.internet.url(),
-      locationType: isOnline ? 'online' : 'offline',
       slug,
       tag: 'Meeting',
       title,
