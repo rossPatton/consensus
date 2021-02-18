@@ -1,8 +1,8 @@
 import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
-import React, {memo} from 'react';
-import {Link} from 'react-router-dom';
+import React, { memo } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   AddToCalendar,
@@ -13,53 +13,66 @@ import {
   RSVP,
   Share,
 } from '~app/components';
+import { slugify } from '~app/utils';
 
-import {tComponentProps} from '../../_types';
+import { tComponentProps } from '../../_types';
 
 const DesktopMeetingComponent = memo((props: tComponentProps) => {
-  const {meeting, meetingsByGroupId, group, role, rsvp = {} as ts.rsvp} = props;
+  const { meeting, meetingsByGroupId, group, role, rsvp = {} as ts.rsvp } = props;
   const isPastMeeting = dayJS(meeting.date).isBefore(dayJS());
+  const isUpcomingMeeting = !meeting.isDraft && !isPastMeeting;
 
-  // maybe we should just like, include the duration in the DB?
+  // maybe we should just include the duration in the DB?
   // instead of re-constructing here
   const startDate = dayJS(meeting.date);
   const endDate = dayJS(meeting.endDate);
   const duration = `${endDate.diff(startDate, 'hour')}`;
 
+  const isAdmin = (role === 'admin' || role === 'facilitator');
+  const hasRSVPed = (rsvp && rsvp.value === 'yes');
+
+  // if meeting is online and the user has RSVP'd, then show the zoom/etc link
+  // also used to conditionally adjust margins, since this pushes content down a bit
+  let hasOnlineLink = meeting.isOnline && !!meeting.locationLink;
+  if (hasRSVPed || role === 'admin') {
+    hasOnlineLink = true;
+  }
+
+  const renderUpcomingLink = isUpcomingMeeting && hasOnlineLink;
+  const renderGreenBox = isAdmin || hasOnlineLink || hasRSVPed;
+
   return (
     <>
       {meeting.isDraft && (
-        <div className="fadeInUp rounded w-full p-1 mb-2 text-center bg-yellow-2 font-bold text-sm">
+        <b className="fadeInUp rounded w-full p-1 mb-2 text-center bg-yellow-2 block text-sm">
           This is a draft preview of your meeting.
-        </div>
+        </b>
       )}
-      {!meeting.isDraft && (
-        <>
-          {!isPastMeeting
-            && (rsvp.value === 'yes' || role === 'admin') && (
-            <div className="fadeInUp p-2 mb-3 rounded text-center bg-green-1 text-sm">
-              <b className="block mb-1">
-                {role !== 'admin' && "You're going to this meeting!"}
-                {role === 'admin' && "This is your group's meeting"}
-              </b>
-              {meeting.isOnline
-                && meeting.locationLink
-                && (
-                  <ExternalLink
-                    noFollow
-                    className=""
-                    to={meeting.locationLink}>
-                    {meeting.locationLink}
-                  </ExternalLink>
-                )}
-            </div>
+      {!meeting.isDraft && isPastMeeting && (
+        <b className="fadeInUp block p-2 mb-3 rounded text-center bg-red-1 text-sm">
+          This meeting has already happened
+        </b>
+      )}
+      {renderGreenBox && (
+        <div className="fadeInUp p-2 mb-3 rounded text-center bg-green-1 text-sm">
+          {isAdmin && (
+            <Link
+              className="font-bold block mb-1"
+              to={`/group/${slugify(meeting.groupName)}/planMeeting?id=${meeting.id}`}>
+              Edit this meeting
+            </Link>
           )}
-          {isPastMeeting && (
-            <b className="fadeInUp block p-2 mb-3 rounded text-center bg-red-1 text-sm">
-              This meeting has already happened
-            </b>
+          {renderUpcomingLink && (
+            <>
+              Your Meeting Link: <ExternalLink
+                noFollow
+                className=""
+                to={meeting.locationLink}>
+                {meeting.locationLink}
+              </ExternalLink>
+            </>
           )}
-        </>
+        </div>
       )}
       {group.name && (
         <Link

@@ -71,6 +71,11 @@ bootstrap:
 # runs latest migrations
 migrate:
 	DB_HOST=${DB_MIGRATION_HOST} DB_PORT=${DB_LOCAL_PORT} DB_PW=${DB_LOCAL_PW} DB_USER=${DB_LOCAL_USER} DB=${DB_LOCAL} node -r esm ./node_modules/.bin/knex migrate:latest;
-
 seed:
 	DB_HOST=${DB_MIGRATION_HOST} DB_PORT=${DB_LOCAL_PORT} DB_PW=${DB_LOCAL_PW} DB_USER=${DB_LOCAL_USER} DB=${DB_LOCAL} node -r esm ./node_modules/.bin/knex seed:run;
+
+# for connecting as a public user, vs the app connecting via private network
+db_prod:
+	psql ${DB_PROD_PUBLIC_CONNECTION_STRING};
+db_dev:
+	psql ${DB_DEV_PUBLIC_CONNECTION_STRING};

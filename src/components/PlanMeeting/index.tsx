@@ -41,20 +41,39 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
     const { router: { search } } = this.props;
     const draft = qs.parse(search.replace('?', ''));
 
-    if (typeof draft.id === 'string') {
-      try {
-        const res = await this.props.getMeetingDispatch({ id: parseInt(draft.id, 10) });
-        const { created_at, updated_at, ...payload } = res.payload;
-        if (draft.isCopy) {
-          // remove all the post publish stuff from the copied event
-          const { attendees, id, isPublished, publicRSVPS, rsvp, ...initialState } = payload;
-          this.setState({ ...initialState, isCopy: true });
-        } else {
-          this.setState({ ...payload });
-        }
-      } catch (err) {
-        loglevel.error(err);
+    if (typeof draft.id !== 'string') return;
+
+    try {
+      const res = await this.props.getMeetingDispatch({
+        id: parseInt(draft.id, 10),
+      });
+
+      // remove all the post publish stuff from the event, if editing or copying
+      const {
+        attendees,
+        created_at,
+        id,
+        publicRSVPS,
+        rsvp,
+        updated_at,
+        ...payload
+      } = res.payload;
+
+      const isCopy = typeof draft.isCopy === 'string';
+
+      // default to DB if live meeting or draft, but if we're copying, set to false
+      let { isPublished } = payload;
+      if (isCopy) {
+        isPublished = false;
       }
+
+      this.setState({
+        ...payload,
+        isPublished,
+        isCopy,
+      });
+    } catch (err) {
+      loglevel.error(err);
     }
   }
 
@@ -65,7 +84,15 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
 
   onSubmit = async (saveAsDraft: boolean = false) => {
     const { img } = this.props;
-    const { date, endTime, error, id, isCopy, time, ...restOfMeeting } = this.state;
+    const {
+      date,
+      endTime,
+      error,
+      id,
+      isCopy,
+      time,
+      ...restOfMeeting
+    } = this.state;
 
     const timeArr = parseTimeString(time);
     const endTimeArr = parseTimeString(endTime);

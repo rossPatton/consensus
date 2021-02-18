@@ -1,8 +1,8 @@
 import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
-import React, {memo} from 'react';
-import {Link} from 'react-router-dom';
+import React, { memo } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   AddToCalendar,
@@ -13,25 +13,33 @@ import {
   RSVP,
   Share,
 } from '~app/components';
+import { slugify } from '~app/utils';
 
-import {tComponentProps} from '../../_types';
+import { tComponentProps } from '../../_types';
 
 const MobileMeetingPage = memo((props: tComponentProps) => {
-  const {meeting, meetingsByGroupId, group, role, rsvp} = props;
+  const { meeting, meetingsByGroupId, group, role, rsvp = {} as ts.rsvp } = props;
   const isPastMeeting = dayJS(meeting.date).isBefore(dayJS());
+  const isUpcomingMeeting = !meeting.isDraft && !isPastMeeting;
+
   // maybe we should just like, include the duration in the DB?
   // instead of re-constructing here
   const startDate = dayJS(meeting.date);
   const endDate = dayJS(meeting.endDate);
   const duration = `${endDate.diff(startDate, 'hour')}`;
 
+  const isAdmin = (role === 'admin' || role === 'facilitator');
+  const hasRSVPed = (rsvp && rsvp.value === 'yes');
+
   // if meeting is online and the user has RSVP'd, then show the zoom/etc link
   // also used to conditionally adjust margins, since this pushes content down a bit
-  const renderOnlineLink = meeting.isOnline
-    && meeting.locationLink
-    && (rsvp.value === 'yes' || role === 'admin');
+  let hasOnlineLink = meeting.isOnline && !!meeting.locationLink;
+  if (hasRSVPed || role === 'admin') {
+    hasOnlineLink = true;
+  }
 
-  const isUpcomingMeeting = !meeting.isDraft && !isPastMeeting;
+  const renderUpcomingLink = isUpcomingMeeting && hasOnlineLink;
+  const renderGreenBox = isAdmin || renderUpcomingLink || hasRSVPed;
 
   return (
     <>
@@ -45,26 +53,38 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
           This meeting has already happened
         </b>
       )}
-      {isUpcomingMeeting && (
-        <>
-          <RSVP meeting={meeting} />
-          {renderOnlineLink && (
-            <div className="mt-5 p-2 rounded text-center bg-green-1 text-sm">
-              <ExternalLink
+      <RSVP meeting={meeting} />
+      {renderGreenBox && (
+        <div className={cx({
+          'mt-5': role !== 'admin',
+          'p-2 rounded text-center bg-green-1 text-sm': true,
+        })}>
+          {(role === 'admin' || role === 'facilitator') && (
+            <Link
+              className={cx({
+                'block font-bold': true,
+                'mb-1': renderUpcomingLink,
+              })}
+              to={`/group/${slugify(meeting.groupName)}/planMeeting?id=${meeting.id}`}>
+              Edit this meeting
+            </Link>
+          )}
+          {renderUpcomingLink && (
+            <>
+              Your Meeting Link: <ExternalLink
                 noFollow
-                className=""
                 to={meeting.locationLink}>
                 {meeting.locationLink}
               </ExternalLink>
-            </div>
+            </>
           )}
-        </>
+        </div>
       )}
       <h1
         className={cx({
           'd:mt-0 capitalize block d:hidden text-2 font-normal': true,
           'pt-3 ': isUpcomingMeeting,
-          'mt-5': !renderOnlineLink && isUpcomingMeeting,
+          'mt-5': !renderGreenBox,
         })}>
         {meeting.title}
       </h1>
@@ -184,20 +204,22 @@ const MobileMeetingPage = memo((props: tComponentProps) => {
           </>
         )}
       </div>
-      {meetingsByGroupId && meetingsByGroupId.length > 0 && (
-        <aside className="mb-4">
-          <h2 className="text-3 mb-2 leading-none">
-            More Upcoming Meetings
-          </h2>
-          <div className="p-2 bg-peach-1 rounded">
-            <Meetings
-              horizontal
-              showGroupName
-              meetings={meetingsByGroupId}
-            />
-          </div>
-        </aside>
-      )}
+      {
+        meetingsByGroupId && meetingsByGroupId.length > 0 && (
+          <aside className="mb-4">
+            <h2 className="text-3 mb-2 leading-none">
+              More Upcoming Meetings
+            </h2>
+            <div className="p-2 bg-peach-1 rounded">
+              <Meetings
+                horizontal
+                showGroupName
+                meetings={meetingsByGroupId}
+              />
+            </div>
+          </aside>
+        )
+      }
     </>
   );
 });
