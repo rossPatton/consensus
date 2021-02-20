@@ -4,7 +4,7 @@ const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const DashboardPlugin = require('webpack-dashboard/plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
@@ -29,7 +29,7 @@ const url = !!env.DEV
   : 'https://consens.us.org/api/v1';
 
 let prodPlugins = [];
-if (env.NODE_ENV === 'production') {
+if (env.PROD) {
   prodPlugins = [
     new CompressionPlugin({
       filename: '[path].gz[query]',
@@ -49,7 +49,6 @@ if (env.NODE_ENV === 'production') {
   ];
 }
 
-
 let precacheList = [
   '/app-shell.html',
   /\.html$/,
@@ -64,7 +63,7 @@ let precacheList = [
   /\.woff$/,
   /\.woff2$/,
 ];
-if (env.NODE_ENV === 'production') {
+if (env.PROD) {
   precacheList = [...precacheList, /\.br$/];
 } else {
   precacheList = [...precacheList, /\.js$/];
@@ -112,12 +111,19 @@ module.exports = merge(common, {
     },
   },
 
-  // new CleanWebpackPlugin(),
   // new webpack.HotModuleReplacementPlugin(),
   // dashboard to keep us updated on bundle rebuilding times, etc. client only
   // new DashboardPlugin({ port: 3002 }),
 
   plugins: [
+    new CleanWebpackPlugin({
+      cleanAfterEveryBuildPatterns: ['!server.js'],
+      cleanStaleWebpackAssets: true,
+      dry: false,
+      protectWebpackAssets: true,
+      verbose: true,
+    }),
+
     new ManifestPlugin({
       fileName: 'webpack-manifest.json',
     }),

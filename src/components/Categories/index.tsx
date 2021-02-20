@@ -1,8 +1,8 @@
 import cx from 'classnames';
-import React, {memo} from 'react';
-import {Link} from 'react-router-dom';
+import React, { memo } from 'react';
+import { Link } from 'react-router-dom';
 
-import {categories} from '~app/constants';
+import { categories } from '~app/constants';
 
 const Categories = memo(() => (
   <ul className="d:pl-5 d:pr-5 font-semibold text-left">
@@ -41,6 +41,7 @@ const Categories = memo(() => (
               alt={`View ${cat.display} groups`}
               className="w-full rounded-lg"
               src={`/images/${cat.slug}_sm.svg`}
+              height="256"
               width="480"
             />
           </Link>
