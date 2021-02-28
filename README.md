@@ -1,5 +1,5 @@
 # Consensus
-Consens.us is currently a free meetings platform for the left. The hope is to grow into a centralized meetup/loomio/whatever replacement, a central home for your union, working group, collective, cooperative, church, or whatever.
+Consens.us is currently a free meetings platform. Future features will include the ability to vote or hold elections, discussion boards, and email management. The hope is to grow into a centralized meetup/loomio/whatever replacement, a central home for your union, working group, collective, cooperative, church, or whatever.
 
 I work on this in my spare time for free. I'd very much like to at least break even on hosting though, so I'm interested in any funding help or support you can give!
 
