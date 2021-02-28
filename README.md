@@ -25,7 +25,7 @@ See server/db/README.md
 # Deployment
 Currently, deployment happens very manually on our remote Digital Ocean host. The host currently contains slightly modified copies of our local docker-compose setup. We pull down the latest build from our dockerhub repo, and then we run that using docker-compose.
 
-We ostensibly use blue/green deployment, but due to a cert issue, green is currently prod and blue is staging. We could set it up to alternate, but it appears to work fine as is. There is the potential for site downtime during deployment without alternating, but caching usually covers it.
+We ostensibly use blue/green deployment, but in practice green is prod and blue is staging. We could set it up to alternate, but it appears to work fine as is.
 
 Steps for deployment:
   - Run `make build` to build docker image and push it to our docker repo
