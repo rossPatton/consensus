@@ -5,17 +5,17 @@ I work on this in my spare time for free. I'd very much like to at least break e
 
 # First Time
 Run 3 commands in order to get the dev server running:
-- npm i
-- make setup
-- make install (if node_modules volume isn't populated)
+- `npm i`
+- `make setup`
+- `make install` (if node_modules volume isn't populated)
 
 Init the nginx proxy so that you can access consensus.local locally
 This network should be run in detached mode and will automatically restart. Once up, you never need to worry about it again, unless you prune the container.
-- cd /nginx
-- docker-compose up -d
+- `cd /nginx`
+- `docker-compose up -d`
 
 Then run the server locally:
-- make dev (or make prod for production mode)
+- `make dev` (or `make prod` for production mode)
 
 You're good to go!
 
