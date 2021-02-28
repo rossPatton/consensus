@@ -33,7 +33,8 @@ Steps for deployment:
   - Keep an eye on the script, you will need to enter the appropriate password for the DO server
   - Deploy is done! Assuming you put in the right password, the script should pull down the latest image from our docker repo and restart the container
 
-@TODO - this really should just be a makefile script
+@TODO - below should just be a makefile script probably
+
 Steps for setting up new DO droplet:
  - Setup UFW to limit ssh to verified accounts only. See https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04 or https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04
  - Setup nginx as a reverse proxy. See https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04#step-5-%E2%80%93-setting-up-server-blocks-(recommended) as a starting point. Our nginx prof config is located in nginx/prod.conf
