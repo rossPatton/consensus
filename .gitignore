@@ -9,3 +9,4 @@ volumes
 .npmrc
 stats.json
 coverage
+certs
