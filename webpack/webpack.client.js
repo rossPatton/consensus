@@ -31,6 +31,13 @@ const url = !!env.DEV
 let prodPlugins = [];
 if (env.PROD) {
   prodPlugins = [
+    // new CleanWebpackPlugin({
+    //   cleanAfterEveryBuildPatterns: ['!server.js'],
+    //   cleanStaleWebpackAssets: true,
+    //   dry: false,
+    //   protectWebpackAssets: true,
+    //   verbose: true,
+    // }),
     new CompressionPlugin({
       filename: '[path].gz[query]',
       algorithm: 'gzip',
@@ -116,14 +123,6 @@ module.exports = merge(common, {
   // new DashboardPlugin({ port: 3002 }),
 
   plugins: [
-    new CleanWebpackPlugin({
-      cleanAfterEveryBuildPatterns: ['!server.js'],
-      cleanStaleWebpackAssets: true,
-      dry: false,
-      protectWebpackAssets: true,
-      verbose: true,
-    }),
-
     new ManifestPlugin({
       fileName: 'webpack-manifest.json',
     }),

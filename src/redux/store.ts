@@ -1,12 +1,12 @@
-import {applyMiddleware, createStore, Store} from 'redux';
-import {composeWithDevTools} from 'redux-devtools-extension';
-import {Persistor, persistReducer, persistStore} from 'redux-persist';
+import { applyMiddleware, createStore, Store } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { Persistor, persistReducer, persistStore } from 'redux-persist';
 import expireReducer from 'redux-persist-expire';
 import createCompressor from 'redux-persist-transform-compress';
 import storage from 'redux-persist/lib/storage';
 
-import {middleware} from './_middleware';
-import {rootReducer} from './rootReducer';
+import { middleware } from './_middleware';
+import { rootReducer } from './rootReducer';
 
 const composeEnhancers = composeWithDevTools({
   trace: __DEV__,
