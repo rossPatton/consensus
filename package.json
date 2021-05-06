@@ -102,7 +102,7 @@
     "redux-persist-transform-compress": "^4.2.0",
     "redux-thunk": "^2.3.0",
     "regenerator-runtime": "^0.13.3",
-    "sanitize-html": "^1.27.0",
+    "sanitize-html": "^2.3.2",
     "speakeasy": "^2.0.0",
     "ts-node": "^9.0.0",
     "universal-cookie": "^4.0.3",
