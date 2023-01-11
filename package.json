@@ -50,7 +50,7 @@
     "history": "^4.10.1",
     "html-react-parser": "^0.13.0",
     "isomorphic-fetch": "^3.0.0",
-    "knex": "^0.21.17",
+    "knex": "^2.4.0",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-cache-control": "^2.0.0",
