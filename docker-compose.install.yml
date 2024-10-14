@@ -1,6 +1,5 @@
 # just installs node_modules in the node_modules volume for development
 # we separate this out from docker-compose cause it's pretty annoying to do
-version: '3'
 services:
   install:
     image: node:12.3.0-alpine

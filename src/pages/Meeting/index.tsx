@@ -1,16 +1,16 @@
 import _ from 'lodash';
 import loglevel from 'loglevel';
-import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
-import {Helmet} from '~app/components';
-import {ErrorBoundary, GenericLoader, Template} from '~app/containers';
-import {getGroup, getMeeting, getMeetingsByGroupId} from '~app/redux';
-import {typesafeIdOrSlug} from '~app/utils';
+import { Helmet } from '~app/components';
+import { ErrorBoundary, GenericLoader, Template } from '~app/containers';
+import { getGroup, getMeeting, getMeetingsByGroupId } from '~app/redux';
+import { typesafeIdOrSlug } from '~app/utils';
 
-import {tContainerProps, tStore} from './_types';
-import {MeetingComponent} from './Component';
+import { tContainerProps, tStore } from './_types';
+import { MeetingComponent } from './Component';
 
 class MeetingContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
@@ -25,13 +25,13 @@ class MeetingContainer extends PureComponent<tContainerProps> {
   }
 
   dispatch = async () => {
-    const {getMeetingDispatch, match} = this.props;
+    const { getMeetingDispatch, match } = this.props;
     const id = typesafeIdOrSlug(match?.params?.id);
 
     let res = null;
     if (typeof id === 'number') {
       try {
-        res = await getMeetingDispatch({id});
+        res = await getMeetingDispatch({ id });
       } catch (err) {
         loglevel.error(err);
       }
@@ -47,7 +47,7 @@ class MeetingContainer extends PureComponent<tContainerProps> {
   }
 
   getRestOfMeetingsByGroupId = async (res: ts.payload<ts.meetingSingular>) => {
-    await this.props.getGroupByIdDispatch({id: res.payload.groupId});
+    await this.props.getGroupByIdDispatch({ id: res.payload.groupId });
 
     return this.props.getMeetingsByGroupIdDispatch({
       exclude: res.payload.id,
@@ -70,7 +70,7 @@ class MeetingContainer extends PureComponent<tContainerProps> {
     } = this.props;
 
     const meetingStatus = meetingThunk?.error?.status;
-    const {groupThunk: {data: group}} = this.props;
+    const { groupThunk: { data: group } } = this.props;
 
     const roleMap = rolesThunk.data.find(roleMap => {
       return roleMap.groupId === group.id;
@@ -98,7 +98,7 @@ class MeetingContainer extends PureComponent<tContainerProps> {
                 );
 
                 if (!session.isAuthenticated || !userRoleMap) {
-                  return <Redirect to="/login" />;
+                  return <Navigate to="/login" />;
                 }
               }
 

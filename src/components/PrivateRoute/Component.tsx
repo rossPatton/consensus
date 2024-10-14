@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
+import { Navigate, Route, RouteComponentProps } from 'react-router-dom';
 
 import { tProps } from './_types';
 
@@ -19,7 +19,7 @@ export const PrivateRouteComponent = (ownProps: tProps) => (
       }
 
       return (
-        <Redirect to={ownProps.redirect || '/login'} />
+        <Navigate to={ownProps.redirect || '/login'} />
       );
     }}
   />

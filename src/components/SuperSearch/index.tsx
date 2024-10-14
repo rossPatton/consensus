@@ -1,14 +1,14 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import {getGroupsBySearch} from '~app/redux';
+import { getGroupsBySearch } from '~app/redux';
+import { withRouter } from '~app/utils';
 
 const filterOptions = [
-  {display: 'Group name', key: 'name'},
-  {display: 'Category', key: 'category'},
-  {display: 'City', key: 'city'},
-  {display: 'State', key: 'region'},
+  { display: 'Group name', key: 'name' },
+  { display: 'Category', key: 'category' },
+  { display: 'City', key: 'city' },
+  { display: 'State', key: 'region' },
 ];
 
 // filter-panel like search on the search page, with additional features

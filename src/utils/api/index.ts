@@ -1,14 +1,17 @@
 import loglevel from 'loglevel';
 import qs from 'qs';
 
-import {agent} from '~app/constants/agent';
+// import {agent} from '~app/constants/agent';
 
-import {tApiOpts} from './_types';
+import { tApiOpts } from './_types';
 
 export const api = async (opts: tApiOpts) => {
-  const {body, method = 'GET', path, query} = opts;
+  const { body, method = 'GET', path, query } = opts;
 
-  const fetchOpts = {agent, method} as {[key: string]: any};
+  const fetchOpts = {
+    // agent,
+    method,
+  } as { [key: string]: any };
   if (opts.credentials) {
     fetchOpts.credentials = __DEV__ ? 'include' : 'same-origin';
   }
@@ -19,7 +22,7 @@ export const api = async (opts: tApiOpts) => {
   // not all api endpoints require query params
   let endpoint = path;
   if (query) {
-    const queryString = qs.stringify(query, {arrayFormat: 'comma', indices: false});
+    const queryString = qs.stringify(query, { arrayFormat: 'comma', indices: false });
     endpoint = `${path}?${queryString}`;
   }
 
@@ -43,7 +46,7 @@ export const api = async (opts: tApiOpts) => {
       }
 
       if (opts.dispatch) {
-        return opts.dispatch(opts.failure({message: err, status}));
+        return opts.dispatch(opts.failure({ message: err, status }));
       }
 
       loglevel.error(message);

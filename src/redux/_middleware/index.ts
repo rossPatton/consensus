@@ -1,6 +1,6 @@
 import reduxImmutableStateVariant from 'redux-immutable-state-invariant';
 import createMemoizeMiddleware from 'redux-memoize';
-import thunk, {ThunkMiddleware} from 'redux-thunk';
+import { thunk, ThunkMiddleware } from 'redux-thunk';
 
 import { crashReporter } from './crashReporter';
 import { logger } from './logger';
@@ -10,7 +10,7 @@ const requiredMiddleware = [
   crashReporter,
   logger,
   // ttl here is the default, can override thunk by thunk
-  createMemoizeMiddleware({ttl: 50}),
+  createMemoizeMiddleware({ ttl: 50 }),
 ];
 
 // some middleware we only want to include in development

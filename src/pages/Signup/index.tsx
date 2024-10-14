@@ -1,14 +1,14 @@
 import cx from 'classnames';
-import React, {memo, useState} from 'react';
-import {connect} from 'react-redux';
-import {Link, Redirect} from 'react-router-dom';
+import React, { memo, useState } from 'react';
+import { connect } from 'react-redux';
+import { Link, Navigate } from 'react-router-dom';
 
-import {Helmet} from '~app/components';
-import {ErrorBoundary, Template} from '~app/containers';
+import { Helmet } from '~app/components';
+import { ErrorBoundary, Template } from '~app/containers';
 
-import {canonical, description, keywords, title} from './_constants';
-import {tContainerProps, tStore} from './_types';
-import {SignupComponent} from './Component';
+import { canonical, description, keywords, title } from './_constants';
+import { tContainerProps, tStore } from './_types';
+import { SignupComponent } from './Component';
 
 const SignupContainer = memo((props: tContainerProps) => {
   const [termsAccepted, toggleTerms] = useState(false);
@@ -26,7 +26,7 @@ const SignupContainer = memo((props: tContainerProps) => {
         ]}
       />
       <ErrorBoundary status={sessionThunk.error?.status}>
-        {sessionThunk.data.isAuthenticated && <Redirect to="/admin/profile" />}
+        {sessionThunk.data.isAuthenticated && <Navigate to="/admin/profile" />}
         {!sessionThunk.data.isAuthenticated && (
           <>
             <ul className="contain-sm flex m-auto">

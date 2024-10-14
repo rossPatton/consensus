@@ -1,7 +1,7 @@
-import {PureComponent} from 'react';
-import { withRouter } from 'react-router-dom';
+import { PureComponent } from 'react';
 
-import {tProps} from './_types';
+import { withRouter } from '~app/utils';
+import { tProps } from './_types';
 
 class ScrollToTopComponent extends PureComponent<tProps> {
   componentDidUpdate(prevProps: tProps) {

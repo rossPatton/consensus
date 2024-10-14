@@ -1,15 +1,15 @@
 import loglevel from 'loglevel';
-import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
-import {Redirect} from 'react-router';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { Navigate } from 'react-router';
 
-import {Helmet} from '~app/components';
-import {ErrorBoundary, GenericLoader, Template} from '~app/containers';
-import {getGroup, getMeetingsByGroupId} from '~app/redux';
-import {typesafeIdOrSlug} from '~app/utils';
+import { Helmet } from '~app/components';
+import { ErrorBoundary, GenericLoader, Template } from '~app/containers';
+import { getGroup, getMeetingsByGroupId } from '~app/redux';
+import { typesafeIdOrSlug } from '~app/utils';
 
-import {tContainerProps, tStore} from './_types';
-import {GroupComponent} from './Component';
+import { tContainerProps, tStore } from './_types';
+import { GroupComponent } from './Component';
 
 class GroupContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
@@ -24,15 +24,15 @@ class GroupContainer extends PureComponent<tContainerProps> {
   }
 
   dispatch = async () => {
-    const {getGroupDispatch, match} = this.props;
+    const { getGroupDispatch, match } = this.props;
     const slugOrId = typesafeIdOrSlug(match?.params?.idOrSlug);
 
     let res;
     try {
       if (typeof slugOrId === 'string') {
-        res = await getGroupDispatch({handle: slugOrId});
+        res = await getGroupDispatch({ handle: slugOrId });
       } else {
-        res = await getGroupDispatch({id: slugOrId});
+        res = await getGroupDispatch({ id: slugOrId });
       }
     } catch (err) {
       loglevel.error(err);
@@ -48,14 +48,14 @@ class GroupContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {location, match, groupThunk, rolesThunk, session} = this.props;
+    const { location, match, groupThunk, rolesThunk, session } = this.props;
 
     return (
       <Template>
         <GenericLoader
           isLoading={groupThunk.isLoading}
           render={() => {
-            const {groupThunk: {data: group}} = this.props;
+            const { groupThunk: { data: group } } = this.props;
 
             let meta = [
               { name: 'description', content: group.description },
@@ -82,7 +82,7 @@ class GroupContainer extends PureComponent<tContainerProps> {
               if (!role && session.isAuthenticated) {
                 status = 401;
               } else if (!role) {
-                return <Redirect to="/login" />;
+                return <Navigate to="/login" />;
               }
             }
 

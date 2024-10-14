@@ -1,5 +1,4 @@
 # for running dev mode locally
-version: '3'
 services:
   dev:
     image: consensusdocker/qa

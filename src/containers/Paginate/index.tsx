@@ -1,8 +1,9 @@
 import qs from 'qs';
-import React, {PureComponent} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 
-import {tProps, tState} from './_types';
+import { withRouter } from '~app/utils';
+import { tProps, tState } from './_types';
 
 class PaginateContainer extends PureComponent<tProps, tState> {
   static defaultProps = {
@@ -15,7 +16,7 @@ class PaginateContainer extends PureComponent<tProps, tState> {
   constructor(props: tProps) {
     super(props);
 
-    const {location: {search}} = props;
+    const { location: { search } } = props;
     const query = qs.parse(search);
 
     // using the qs makes it so pagination works with and without js
@@ -25,8 +26,8 @@ class PaginateContainer extends PureComponent<tProps, tState> {
   }
 
   getSliceOfItems = (items: object[]) => {
-    const {count} = this.props;
-    const {page} = this.state;
+    const { count } = this.props;
+    const { page } = this.state;
 
     const newArray = [...items];
     const end = page * count;
@@ -43,12 +44,12 @@ class PaginateContainer extends PureComponent<tProps, tState> {
     });
 
   render() {
-    const {page} = this.state;
+    const { page } = this.state;
     const {
       className,
       count,
       items = [],
-      location: {pathname, search},
+      location: { pathname, search },
       placement,
     } = this.props;
 

@@ -1,4 +1,3 @@
-version: '3'
 services:
   prod:
     # comment out when running an image on the host

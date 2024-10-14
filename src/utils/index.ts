@@ -8,3 +8,4 @@ export { isUndefined, notUndefined } from './undefineds';
 export { isValidEmail } from './isValidEmail';
 export { parseTimeString } from './parseTimeString';
 export { typesafeIdOrSlug } from './typesafeIdOrSlug';
+export { withRouter } from './withRouter';

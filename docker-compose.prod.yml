@@ -1,5 +1,4 @@
 # for running the site in production mode locally as close to real prod as possible
-version: '3'
 services:
   prod:
     image: consensusdocker/prod

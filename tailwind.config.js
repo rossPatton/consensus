@@ -1,6 +1,8 @@
 var baseSans = ["Helvetica Neue", 'HelveticaNeue', 'Helvetica', 'system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Arial', "Noto Sans", 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"];
 
 module.exports = {
+  mode: "jit",
+  content: ['./src/**/*.tsx'],
   // handle deprecations, shouldn't affect anything but quiets warnings
   future: {
     purgeLayersByDefault: true,
@@ -9,10 +11,6 @@ module.exports = {
   prefix: '',
   important: false,
   separator: ':',
-  purge: {
-    enabled: process.env.NODE_ENV === 'production',
-    content: ['./src/**/*.tsx'],
-  },
   // blacklisted plugins
   corePlugins: {
     backgroundPosition: false,
@@ -158,7 +156,7 @@ module.exports = {
       semibold: '500',
       bold: '700',
     },
-    inset: { },
+    inset: {},
     letterSpacing: {
       none: '0',
     },

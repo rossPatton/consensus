@@ -1,21 +1,21 @@
 import _ from 'lodash';
 import loglevel from 'loglevel';
-import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 
-import {MediaContext} from '~app/context';
-import {patchRsvps, postRsvps} from '~app/redux';
+import { MediaContext } from '~app/context';
+import { patchRsvps, postRsvps } from '~app/redux';
+import { withRouter } from '~app/utils';
 
-import {tContainerProps, tSetRsvpOpts, tState, tStore} from './_types';
-import {RSVPComponent} from './Component';
+import { tContainerProps, tSetRsvpOpts, tState, tStore } from './_types';
+import { RSVPComponent } from './Component';
 
 class RSVPContainer extends PureComponent<tContainerProps, tState> {
   static contextType = MediaContext;
 
   constructor(props: tContainerProps) {
     super(props);
-    const {rsvps} = props;
+    const { rsvps } = props;
     const rsvp = _.find(rsvps, rsvp => rsvp.meetingId === this.props.meeting.id);
 
     this.state = {
@@ -34,17 +34,17 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
   setRsvp = async (opts: tSetRsvpOpts) => {
     opts.ev.preventDefault();
 
-    const {rsvp} = this.state;
-    const {history, patchRsvpDispatch, postRsvpDispatch, session} = this.props;
-    const {profile = {}} = session;
-    const {privateRSVP: userRSVPsPrivately = true} = profile as ts.user;
+    const { rsvp } = this.state;
+    const { history, patchRsvpDispatch, postRsvpDispatch, session } = this.props;
+    const { profile = {} } = session;
+    const { privateRSVP: userRSVPsPrivately = true } = profile as ts.user;
 
     if (!session.isAuthenticated) return history.push('/login');
 
     const method = typeof rsvp === 'undefined' ? 'POST' : 'PATCH';
     const dispatch = method === 'PATCH' ? patchRsvpDispatch : postRsvpDispatch;
 
-    let {value} = opts.ev.currentTarget;
+    let { value } = opts.ev.currentTarget;
     if (method === 'PATCH') {
       // if changing rsvp, use new value.
       // else if removing rsvp (clicking same option twice), set to null
@@ -72,7 +72,7 @@ class RSVPContainer extends PureComponent<tContainerProps, tState> {
 
   render() {
     if (this.props.session.type === 'group') return null;
-    const {isMobile, isDesktop} = this.context;
+    const { isMobile, isDesktop } = this.context;
 
     return (
       <RSVPComponent

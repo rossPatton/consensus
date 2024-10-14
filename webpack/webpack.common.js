@@ -91,16 +91,15 @@ module.exports = {
   },
 
   optimization: {
+    chunkIds: 'total-size',
     minimize: !!env.PROD,
     minimizer: [new TerserPlugin()],
+    moduleIds: 'size',
   },
 
   plugins: [
     // does what the name implies
     new webpack.optimize.AggressiveMergingPlugin(),
-
-    // keeps hashes consistent between compilations
-    // new webpack.optimize.OccurrenceOrderPlugin(),
 
     // protects us from case mismatch import errors
     new ForceCaseSensitivityPlugin(),

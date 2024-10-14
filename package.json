@@ -73,7 +73,7 @@
     "loglevel": "~1.9.2",
     "mailgun-js": "^0.6.7",
     "marked": "^14.1.2",
-    "offline-plugin": "^0.0.1",
+    "offline-plugin": "~5.0.7",
     "passport": "^0.7.0",
     "passport-local": "~1.0.0",
     "pg": "~8.13.0",

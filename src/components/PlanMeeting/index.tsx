@@ -4,7 +4,7 @@ import loglevel from 'loglevel';
 import qs from 'qs';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
+import { Navigate } from 'react-router';
 import { Mutable } from 'utility-types';
 
 import { ErrorBoundary } from '~app/containers';
@@ -162,7 +162,7 @@ class PlanMeetingContainer extends PureComponent<tContainerProps, tState> {
       <ErrorBoundary
         isSubPage
         status={sessionThunk?.error?.status}>
-        {!sessionThunk.data.isAuthenticated && <Redirect to="" />}
+        {!sessionThunk.data.isAuthenticated && <Navigate to="" />}
         {sessionThunk.data.isAuthenticated && (
           <PlanMeetingComponent
             {...this.props}

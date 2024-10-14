@@ -1,11 +1,10 @@
 import loglevel from 'loglevel';
 import React from 'react';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import {getGroupsBySearch} from '~app/redux';
-
-import {tProps, tState} from './_types';
+import { getGroupsBySearch } from '~app/redux';
+import { withRouter } from '~app/utils';
+import { tProps, tState } from './_types';
 
 /**
  * @description Basic search field component. Used in Header
@@ -71,12 +70,12 @@ class SearchContainer extends React.PureComponent<tProps, tState> {
   }
 }
 
-const mapStateToProps = (store: {groupsBySearch: ts.thunk<ts.group[]>}) => ({
+const mapStateToProps = (store: { groupsBySearch: ts.thunk<ts.group[]> }) => ({
   groupsBySearchThunk: store.groupsBySearch,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getSearchResultsDispatch: (query: {value: string}) => dispatch(getGroupsBySearch(query)),
+  getSearchResultsDispatch: (query: { value: string }) => dispatch(getGroupsBySearch(query)),
 });
 
 const Search = connect(mapStateToProps, mapDispatchToProps)(SearchContainer);
