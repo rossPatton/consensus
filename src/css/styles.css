@@ -29,7 +29,7 @@
       --color-scheme-text-color: white;
   }
 } */
-
+/* 
 html {
   -moz-osx-font-smoothing: grayscale;
   -ms-text-size-adjust: 100%;
@@ -110,14 +110,16 @@ input[type="submit"] {
   @apply duration-150;
   @apply font-semibold;
   /* @apply inline-block; */
-  @apply leading-none;
-  @apply rounded;
-  @apply text-center;
-  @apply transition;
-  @apply whitespace-no-wrap;
-  vertical-align: middle;
+@apply leading-none;
+@apply rounded;
+@apply text-center;
+@apply transition;
+@apply whitespace-no-wrap;
+vertical-align: middle;
 }
-button {
+
+*/
+/* button {
   @apply btn;
 }
 button,
@@ -175,51 +177,64 @@ i {
   font-style: normal;
   font-variant: normal;
   /* speak: none; */
-  text-transform: none;
+text-transform: none;
 }
+
 [disabled] {
   @apply opacity-5;
   @apply pointer-events-none;
   @apply cursor-disabled;
 }
+
 .contain {
   max-width: 1400px;
   width: 90%;
 }
+
 .contain-sm {
   max-width: 760px;
   width: 90%;
 }
+
 small {
   @apply text-sm;
 }
+
 .t {
   top: 0;
 }
+
 .t-hdr {
   top: 64px;
 }
+
 .r {
   right: 0;
 }
+
 .b {
   bottom: 0;
 }
+
 .l {
   left: 0;
 }
+
 /* height needed here for when we display the gray bg fallback */
 .av-sz-sm {
   height: 40px;
   width: 40px;
   max-width: 40px;
 }
+
 .av-sz-lg {
   height: 60px;
   width: 60px;
   max-width: 60px;
 }
-.truncate {
+
+*/
+/* .truncate {
   @apply whitespace-no-wrap;
   @apply overflow-hidden;
   text-overflow: ellipsis;
@@ -366,4 +381,4 @@ small {
 .mFI {
   @apply overflow-hidden;
   max-height: 150px;
-}
+} */

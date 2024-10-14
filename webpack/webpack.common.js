@@ -50,17 +50,17 @@ module.exports = {
     rules: [
       {
         exclude: /node_modules/,
-        loaders: ['babel-loader'],
+        use: ['babel-loader'],
         test: /\.(js|ts|tsx)$/,
       },
       {
-        loaders: ['file-loader'],
+        use: ['file-loader'],
         test: /\.(png|jpg|gif|woff|woff2|eot|ttf)$/,
       },
       {
         exclude: /node_modules/,
         test: /\.mmdb$/,
-        loaders: ['ignore-loader'],
+        use: ['ignore-loader'],
       },
       {
         test: /\.(svg)$/,
@@ -101,7 +101,7 @@ module.exports = {
     new webpack.optimize.AggressiveMergingPlugin(),
 
     // keeps hashes consistent between compilations
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    // new webpack.optimize.OccurrenceOrderPlugin(),
 
     // protects us from case mismatch import errors
     new ForceCaseSensitivityPlugin(),

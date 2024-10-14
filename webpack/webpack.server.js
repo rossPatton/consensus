@@ -1,6 +1,6 @@
 const path = require('path');
 const crypto = require('crypto');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const nodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WaitPlugin = require('./Wait');

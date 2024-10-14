@@ -2,7 +2,7 @@
 const baseBabelEnvConfig = {
   corejs: '3',
   // enable more aggressive transformations
-  loose: true,
+  // loose: true,
   targets: { 'browsers': 'last 2 versions' },
   // only pull in polyfills that we actually use
   useBuiltIns: 'usage',

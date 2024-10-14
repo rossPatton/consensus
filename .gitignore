@@ -10,3 +10,4 @@ volumes
 stats.json
 coverage
 certs
+.DS_Store

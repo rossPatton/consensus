@@ -22,7 +22,7 @@ const {
 const stats = {
   all: false,
   modules: false,
-  maxModules: 0,
+  // maxModules: 0,
   errors: true,
   warnings: true,
   // our additional debug mode options

@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = require('path');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const DashboardPlugin = require('webpack-dashboard/plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
 const webpack = require('webpack');
@@ -123,7 +123,7 @@ module.exports = merge(common, {
   // new DashboardPlugin({ port: 3002 }),
 
   plugins: [
-    new ManifestPlugin({
+    new WebpackManifestPlugin({
       fileName: 'webpack-manifest.json',
     }),
 
@@ -132,7 +132,7 @@ module.exports = merge(common, {
       scriptLoading: 'defer',
       title: "Consens.us - for when you need to get organized.",
       // ideally this should be an app shell pattern not an empty page
-      templateContent: ({htmlWebpackPlugin}) => {
+      templateContent: ({ htmlWebpackPlugin }) => {
         return `
           <!DOCTYPE html>
             <html lang="en">
@@ -157,11 +157,13 @@ module.exports = merge(common, {
     }),
 
     // copy static content over to dist dir. stuff like favicons, certs, images, etc
-    new CopyPlugin([{
-      context: env.CWD,
-      from: 'static',
-      to: '',
-    }]),
+    new CopyPlugin({
+      patterns: [{
+        context: env.CWD,
+        from: 'static',
+        to: '',
+      }],
+    }),
 
     // define client side only global variables
     new webpack.DefinePlugin({
