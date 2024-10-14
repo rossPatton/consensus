@@ -1,8 +1,8 @@
 import Boom from '@hapi/boom';
 import fs from 'fs';
-import geolite2 from 'geolite2';
+import geolite2 from 'geolite2-redist';
 import Koa from 'koa';
-import { CityResponse, Reader } from 'maxmind';
+// import { CityResponse, Reader } from 'maxmind';
 
 import { accountDownload } from './accountDownload';
 import { auth } from './auth';

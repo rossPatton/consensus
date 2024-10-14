@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore, Store } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+// import { composeWithDevTools } from 'redux-devtools-extension';
 import { Persistor, persistReducer, persistStore } from 'redux-persist';
 import expireReducer from 'redux-persist-expire';
 import createCompressor from 'redux-persist-transform-compress';
@@ -8,10 +8,10 @@ import storage from 'redux-persist/lib/storage';
 import { middleware } from './_middleware';
 import { rootReducer } from './rootReducer';
 
-const composeEnhancers = composeWithDevTools({
-  trace: __DEV__,
-  traceLimit: 25,
-});
+// const composeEnhancers = composeWithDevTools({
+//   trace: __DEV__,
+//   traceLimit: 25,
+// });
 
 const compressor = createCompressor();
 const persistConfig = {
@@ -47,18 +47,20 @@ export const initStore = (initialState?: object): tStoreReturn => {
       // @ts-ignore
       initialState,
       // 3rd param === middleware/dev tools extension
-      composeEnhancers(
-        applyMiddleware(...middleware),
-      ),
+      applyMiddleware(...middleware),
+      // composeEnhancers(
+      //   applyMiddleware(...middleware),
+      // ),
     );
   } else {
     store = createStore(
       // 1st param === all reducers (using combinedReducer)
       persistedReducer,
       // 2nd param === middleware/dev tools extension
-      composeEnhancers(
-        applyMiddleware(...middleware),
-      ),
+      applyMiddleware(...middleware),
+      // composeEnhancers(
+      //   applyMiddleware(...middleware),
+      // ),
     );
   }
 

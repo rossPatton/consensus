@@ -3,14 +3,13 @@ const fs = require('fs');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+// const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ForceCaseSensitivityPlugin = require('case-sensitive-paths-webpack-plugin');
 const webpack = require('webpack');
 
 const env = require('./webpack.env');
 
 const srcPath = (subdir) => path.join(env.CWD, 'src', subdir);
-const devPlugins = env.DEV ? [new FriendlyErrorsWebpackPlugin()] : [];
 
 process.traceDeprecation = env.DEV;
 
@@ -136,9 +135,5 @@ module.exports = {
       flattening: true,
       paths: true,
     }),
-
-    // fun plugins here
-    // better error reporting
-    ...devPlugins,
   ],
 };
