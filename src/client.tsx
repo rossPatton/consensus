@@ -5,7 +5,7 @@ import '~app/css/styles.css';
 import loglevel from 'loglevel';
 import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
@@ -17,11 +17,11 @@ import { isPrivateMode } from '~app/utils';
 const cookies = new Cookies();
 
 if (!cookies.get('cssPreloaded')) {
-  cookies.set('cssPreloaded', true, {sameSite: 'strict', secure: true});
+  cookies.set('cssPreloaded', true, { sameSite: 'strict', secure: true });
 }
 
 if (!cookies.get('fontsPreloaded')) {
-  cookies.set('fontsPreloaded', true, {sameSite: 'strict', secure: true});
+  cookies.set('fontsPreloaded', true, { sameSite: 'strict', secure: true });
 }
 
 // Grab the state from a global variable injected into the server-generated HTML
@@ -31,7 +31,7 @@ const preloadedState = window.__PRELOADED_STATE__;
 delete window.__PRELOADED_STATE__;
 
 // Create Redux store with initial state
-const {store} = initStore(preloadedState);
+const { store } = initStore(preloadedState);
 
 const rootNode = document.getElementById('appRoot');
 const App = (
@@ -46,9 +46,11 @@ const App = (
 
 // mount app on the client
 if (rootNode.hasChildNodes()) {
-  ReactDOM.hydrate(App, rootNode);
+  const root = createRoot(rootNode);
+  root.render(App);
 } else {
-  ReactDOM.render(App, rootNode);
+  const root = hydrateRoot(rootNode);
+  root.render(App);
 }
 
 (async () => {

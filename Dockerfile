@@ -1,8 +1,5 @@
 # get node distro - should be consistent across environments
-FROM node:12.3.0-alpine
-
-# TODO use secrets or something. also, change this before going live
-ARG MAXMIND_LICENSE_KEY=1JH4fyzfbYAJPRze
+FROM node:lts-alpine
 
 # copy package.json etc FIRST. any changes here invalidate cache for rest of file
 # see https://docs.semaphoreci.com/article/81-docker-layer-caching

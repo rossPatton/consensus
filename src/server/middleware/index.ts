@@ -35,10 +35,10 @@ export const setupMiddleware = (app: Koa) => {
 
   corsMiddleware(app);
   sslMiddleware(app);
-  helmetMiddleware(app);
+  // helmetMiddleware(app);
   referrerPolicyMiddleware(app);
-  featurePolicyMiddleware(app);
-  contentSecurityPolicyMiddleware(app);
+  // featurePolicyMiddleware(app);
+  // contentSecurityPolicyMiddleware(app);
   hstsMiddleware(app);
 
   // any error handlers go here

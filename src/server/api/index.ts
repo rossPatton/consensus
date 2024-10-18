@@ -1,8 +1,11 @@
 import Boom from '@hapi/boom';
-import fs from 'fs';
-import geolite2 from 'geolite2-redist';
+// import fs from 'fs';
+// import geolite2, { GeoIpDbName } from 'geolite2-redist';
 import Koa from 'koa';
-// import { CityResponse, Reader } from 'maxmind';
+// import maxmind, {
+// CountryResponse,
+// Reader, 
+// } from 'maxmind';
 
 import { accountDownload } from './accountDownload';
 import { auth } from './auth';
@@ -31,8 +34,28 @@ import { user } from './user';
 import { users } from './users';
 import { usersByGroupId } from './usersByGroupId';
 
-const buffer = fs.readFileSync(geolite2.paths.city);
-export const lookup = new Reader<CityResponse>(buffer);
+// const buffer = fs.readFileSync(geolite2.paths.city);
+// export const lookup = new Reader<CityResponse>(buffer);
+// export let lookup = {};
+// import('geolite2-redist').then((geolite2) => {
+//   return geolite2.open(
+//     GeoIpDbName.Country,                 // database name
+//     async (dbPath) => maxmind.open(dbPath) // function that builds a useful db reader
+//   )
+// }).then(async (reader) => {
+//   lookup = reader;
+// lookup = await geolite2.open(
+//   GeoIpDbName.Country, // Use the enum instead of a string!
+//   (path: string) => maxmind.open<CountryResponse>(path)
+// );
+// });
+
+// export const lookup = (async () => {
+//   return await geolite2.open(
+//     GeoIpDbName.Country, // Use the enum instead of a string!
+//     (path: string) => maxmind.open<CountryResponse>(path)
+//   );
+// })();
 
 export const setupApi = (app: Koa) => {
   app.use(accountDownload.routes());

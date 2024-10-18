@@ -12,7 +12,7 @@ import passport from 'koa-passport';
 import redisStore from 'koa-redis';
 import session from 'koa-session';
 import loglevel from 'loglevel';
-import uuidv4 from 'uuid/v4';
+import { v4 } from 'uuid';
 
 import { setupApi } from './api';
 import { setupMiddleware, staticFileMiddleware } from './middleware';
@@ -38,7 +38,7 @@ app.use(session({
 
 // make it easy to access redis anywhere
 app.context.redis = store;
-app.context.state = {nonce: uuidv4()};
+app.context.state = { nonce: v4() };
 
 // session login MUST go before middleware/api
 app.use(passport.initialize());
@@ -59,12 +59,12 @@ app.use(async ctx => {
 });
 
 const CWD = process.cwd();
-let key = `${CWD}/nginx/certs/consensus.local.key`;
-let cert = `${CWD}/nginx/certs/consensus.local.crt`;
-if (__PROD__) {
-  key = `${CWD}/nginx/certs/consensus.local.key`;
-  cert = `${CWD}/nginx/certs/consensus.local.crt`;
-}
+let key = `${CWD}/caddy/certs/consensus.local+1-key.pem`;
+let cert = `${CWD}/caddy/certs/consensus.local+1.pem`;
+// if (__PROD__) {
+//   key = `${CWD}/nginx/certs/consensus.local.key`;
+//   cert = `${CWD}/nginx/certs/consensus.local.crt`;
+// }
 
 const opts = {
   key: fs.readFileSync(key),
@@ -73,9 +73,13 @@ const opts = {
 
 const httpsServer = https.createServer(opts, app.callback());
 /* needs to be 0.0.0.0 for docker */
-httpsServer.listen(3001, '0.0.0.0', () => {
-  loglevel.info('✅ https app running on port 3001 ✅');
-});
+httpsServer.listen(
+  3001,
+  '0.0.0.0',
+  () => {
+    loglevel.info('✅ https app running on port 3001 ✅');
+  }
+);
 
 httpsServer.on('uncaughtException', (err: Error) => {
   loglevel.error(err.stack);

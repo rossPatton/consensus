@@ -1,0 +1,30 @@
+# for local development
+
+# old, just for testing our joinfreeworld->freeworld redirect
+# app.joinfreeworld.local {
+#   log stdout
+#   tls /root/certs/joinfreeworld.local+1.pem /root/certs/joinfreeworld.local+1-key.pem
+
+#   proxy / http://app:1234 {
+#     transparent
+#   }
+# }
+
+consensus.local {
+  log stdout
+  tls /root/certs/consensus.local+1.pem /root/certs/consensus.local+1-key.pem
+
+  proxy / http://app:3001 {
+    transparent
+  }
+}
+
+# server
+# api.freeworld.local {
+#   log stdout
+#   tls /root/certs/freeworld.local+1.pem /root/certs/freeworld.local+1-key.pem
+
+#   proxy /api/v1 http://app:3001 {
+#     transparent
+#   }
+# }

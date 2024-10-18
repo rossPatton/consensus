@@ -1,6 +1,28 @@
 include .env
 export
 
+# these have to live since git won't exist inside of the docker container
+COMMIT := $(shell git rev-parse --short HEAD)
+BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+
+# this needs to be here since we want the top-level pkg ver, not the server pkg
+# do to our file structure, we can't import outside the ts project root
+VER := $(shell npm pkg get version)
+
+# prepare image for deployment or local development
+# use like: make build env=dev ver=12345 platform=linux/arm64/v8,linux/amd64
+# we've been using the git commit hash for ver, this is good enough for qa
+# but we should move to using tagged releases for production
+# the push part of the multi-platform build is a bit slow
+# if you just need an updated local dev image, you can drop the amd platform here
+# for reference and easier rollbacks, we tag by version
+# for auto-deployment via DigitalOcean, we use latest
+build:
+	docker buildx build --build-arg NPM_TOKEN=$(NPM_TOKEN) --build-arg=COMMIT=$(COMMIT) --build-arg=BRANCH=$(BRANCH) --build-arg=$(VER) --push -t registry.digitalocean.com/freeworld/$(env)_api:$(ver) -t registry.digitalocean.com/freeworld/$(env)_api:latest --platform linux/amd64 .
+
+build_dev:
+	docker buildx build --build-arg --build-arg=COMMIT=$(COMMIT) --build-arg=BRANCH=$(BRANCH) --build-arg=$(VER) --push -t registry.digitalocean.com/consensuscontainers/dev:latest --platform linux/arm64/v8 .
+
 # install dependencies. npm install, basically
 # useful for local development to decouple build/run steps
 install:
@@ -17,10 +39,10 @@ prod:
 	docker-compose -f docker-compose.prod.yml up --remove-orphans
 
 # build site for prod, prepares an image for deployment
-build:
-	npm run build;
-	docker-compose -f docker-compose.build.yml build --no-cache --parallel;
-	docker push consensusdocker/prod;
+# build:
+# 	npm run build;
+# 	docker-compose -f docker-compose.build.yml build --no-cache --parallel;
+# 	docker push consensusdocker/dev;
 
 # setup external nginx network
 nginxProxy:
@@ -79,3 +101,16 @@ db_prod:
 	psql ${DB_PROD_PUBLIC_CONNECTION_STRING};
 db_dev:
 	psql ${DB_DEV_PUBLIC_CONNECTION_STRING};
+
+
+# if first time running on new machine, you need to create the shared volumes and local certs
+# we'll use the volume to cache node_modules so we don't need to run a full install every build
+# the certs allow us to run local development at https://app.freeworld.local, to mirror prod
+# https://github.com/FiloSottile/mkcert for more info
+init:
+	mkcert --install;
+	mkcert consensus.local *.consensus.local;
+	mkdir -p ./caddy/certs;
+	mv ./consensus.local+1.pem ./caddy/certs;
+	mv ./consensus.local+1-key.pem ./caddy/certs;
+	echo "Add the following to your /etc/hosts file: 127.0.0.1 consensus.local";

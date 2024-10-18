@@ -1,14 +1,15 @@
 # for running dev mode locally
 services:
   dev:
-    image: consensusdocker/qa
+    image: registry.digitalocean.com/consensuscontainers/dev
     container_name: dev
     working_dir: /app
     command: "npm run dev"
     depends_on:
+      - caddy
       - redis
     environment:
-      - DEBUG=false
+      - DEBUG=true
       - NODE_ENV=development
       - DB_HOST=${DB_LOCAL_HOST}
       - DB_PORT=${DB_LOCAL_PORT}
@@ -17,17 +18,19 @@ services:
       - DB=${DB_LOCAL}
       - LOG_LEVEL=${LOG_LEVEL}
       - ENABLE_IPV6=true
-      - NETWORK_ACCESS=internal
+      # - NETWORK_ACCESS=internal
       - NO_INDEX=true
       - PEPPER=${PEPPER}
-      - VIRTUAL_HOST=consensus.local
-      - VIRTUAL_PORT=3001
-      - VIRTUAL_PROTO=https
-    expose:
-      - 3001
+      # - VIRTUAL_HOST=consensus.local
+      # - VIRTUAL_PORT=3001
+      # - VIRTUAL_PROTO=https
+    # expose:
+    #   - 3001
+    ports:
+      - "3001:3001"
     volumes:
       - .:/app
-      - node_modules:/app/node_modules
+      # - node_modules:/app/node_modules
 
   redis:
     container_name: consensus_redis
@@ -36,12 +39,20 @@ services:
       # fixes warning when using redis with the barebones alpine image
       net.core.somaxconn: '511'
 
-# connect our localhost to the nginx reverse proxy
-networks:
-  default:
-    external:
-      name: nginx-proxy
+  caddy:
+    image: "abiosoft/caddy:latest"
+    volumes:
+      - ./caddy/certs:/root/certs # to sync mkcert certificates to Caddy
+      - ./caddy/Caddyfile:/etc/Caddyfile # to mount custom Caddyfile
+    ports:
+      - "443:2015"
 
-volumes:
-  node_modules:
-    external: true
+# connect our localhost to the nginx reverse proxy
+# networks:
+#   default:
+#     name: nginx-proxy
+#     external: true
+
+# volumes:
+#   node_modules:
+#     external: true
