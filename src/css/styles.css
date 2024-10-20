@@ -1,7 +1,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/utilities';
-/* 
-@font-face {
+
+/* @font-face {
   font-display: swap;
   font-family: 'Founders';
   src: url('/fonts/founders-grotesk-text-web-medium-subset.woff2') format('woff2'),
@@ -18,18 +18,18 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-      --color-scheme-background: white;
-      --color-scheme-text-color: black;
+    --color-scheme-background: white;
+    --color-scheme-text-color: black;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-      --color-scheme-background: #333;
-      --color-scheme-text-color: white;
+    --color-scheme-background: #333;
+    --color-scheme-text-color: white;
   }
 } */
-/* 
+
 html {
   -moz-osx-font-smoothing: grayscale;
   -ms-text-size-adjust: 100%;
@@ -38,6 +38,7 @@ html {
   text-rendering: optimizeSpeed;
   text-size-adjust: 100%;
 }
+
 body {
   background: var(--color-scheme-background);
   color: var(--color-scheme-text-color);
@@ -45,17 +46,21 @@ body {
   @apply font-sans;
   letter-spacing: .03rem;
 }
+
 a {
   text-decoration: underline;
 }
+
 p {
   @apply mb-1;
   @apply text-gray-5;
   line-height: 1.6rem;
 }
+
 span {
   @apply inline-block;
 }
+
 aside,
 footer,
 header,
@@ -66,16 +71,20 @@ select,
 time {
   display: block;
 }
+
 header {
   height: 64px;
 }
+
 ul {
   @apply list-none;
 }
+
 h1 {
   @apply font-founders;
   @apply leading-none;
 }
+
 h1,
 h2,
 h3,
@@ -86,60 +95,70 @@ h6 {
   margin-block-end: 0;
   margin-block-start: 0;
 }
+
 h1 {
   @apply text-1;
 }
+
 h2 {
   @apply text-2;
 }
+
 h3 {
   @apply text-3;
 }
+
 h4,
 h5,
 h6 {
   @apply text-base;
 }
+
 select,
 input[type="submit"] {
   @apply cursor-ptr;
 }
+
 .btn {
   @apply bg-white;
-  @apply border;
+  /* @apply border; */
   @apply duration-150;
   @apply font-semibold;
-  /* @apply inline-block; */
-/* @apply leading-none;
-@apply rounded;
-@apply text-center;
-@apply transition;
-@apply whitespace-no-wrap;
-vertical-align: middle;
-} */
+  @apply leading-none;
+  /* @apply rounded; */
+  @apply text-center;
+  /* @apply transition; */
+  /* @apply whitespace-no-wrap; */
+  vertical-align: middle;
+}
 
-/* button {
+button {
   @apply btn;
 }
+
 button,
 textarea {
   @apply appearance-none;
 }
+
 i,
 option,
 select {
   @apply leading-none;
 }
+
 textarea {
   @apply leading-loose;
 }
+
 input,
 textarea {
-  @apply border;
+  /* @apply border; */
   @apply m-0;
   @apply contain-sm;
   @apply p-2;
 }
+
 button,
 input,
 select,
@@ -147,39 +166,44 @@ textarea {
   @apply font-semibold;
   letter-spacing: .02rem;
 }
+
 input[type="password"],
 input[type="text"],
 input[type="search"],
 select {
-  @apply transition;
+  /* @apply transition; */
   height: 3.6rem;
   min-height: 3.6rem;
   min-width: 16rem;
 }
+
 input {
   @apply rounded-0;
 }
+
 select {
   @apply bg-white;
-  @apply border;
+  /* @apply border; */
   @apply contain-sm;
   @apply m-0;
   @apply rounded-lg;
-  @apply whitespace-no-wrap;
+  /* @apply whitespace-no-wrap; */
   min-width: 8rem;
   text-indent: .5rem;
 }
+
 select:hover {
   @apply bg-gray-3;
 }
+
 i {
   font-style: normal;
   font-variant: normal;
   /* speak: none; */
-/* text-transform: none;
-} */
+  text-transform: none;
+}
 
-/* [disabled] {
+[disabled] {
   @apply opacity-5;
   @apply pointer-events-none;
   @apply cursor-disabled;
@@ -193,9 +217,9 @@ i {
 .contain-sm {
   max-width: 760px;
   width: 90%;
-} */
+}
 
-/* small {
+small {
   @apply text-sm;
 }
 
@@ -220,7 +244,7 @@ i {
 }
 
 /* height needed here for when we display the gray bg fallback */
-/* .av-sz-sm {
+.av-sz-sm {
   height: 40px;
   width: 40px;
   max-width: 40px;
@@ -230,25 +254,28 @@ i {
   height: 60px;
   width: 60px;
   max-width: 60px;
-} */
+}
 
-/* .truncate {
-  @apply whitespace-no-wrap;
+.truncate {
+  /* @apply whitespace-no-wrap; */
   @apply overflow-hidden;
   text-overflow: ellipsis;
 }
+
 .lineClamp {
   @apply overflow-hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+
 .loading {
   @apply relative;
   @apply inline-block;
   width: 80px;
   height: 80px;
 }
+
 .loading div {
   @apply absolute;
   @apply block;
@@ -261,43 +288,54 @@ i {
   margin: 8px;
   width: 64px;
 }
+
 .loading div:nth-child(1) {
   animation-delay: -0.45s;
 }
+
 .loading div:nth-child(2) {
   animation-delay: -0.3s;
 }
+
 .loading div:nth-child(3) {
   animation-delay: -0.15s;
 }
+
 @-moz-keyframes loading-ring {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
+
 @-webkit-keyframes loading-ring {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
+
 @-o-keyframes loading-ring {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
+
 @keyframes loading-ring {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -347,7 +385,7 @@ i {
 }
 
 .bg-community {
-  background-image: url('/images/community.svg');
+  /* background-image: url('/images/community.svg'); */
   background-size: cover;
 }
 
@@ -379,4 +417,4 @@ i {
 .mFI {
   @apply overflow-hidden;
   max-height: 150px;
-} */
+}

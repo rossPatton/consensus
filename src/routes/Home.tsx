@@ -7,5 +7,5 @@ const HomeComponent = loadable(() =>
 export const Home = {
   component: HomeComponent,
   exact: true,
-  path: ['/', '/app-shell'],
+  path: "/",//['/', '/app-shell'],
 };

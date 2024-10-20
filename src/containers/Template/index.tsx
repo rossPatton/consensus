@@ -1,13 +1,13 @@
 import cx from 'classnames';
 import _ from 'lodash';
-import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 
-import {ErrorBoundary} from '~app/containers';
-import {getGeo, getRoles, getRsvps} from '~app/redux';
+import { ErrorBoundary } from '~app/containers';
+import { getGeo, getRoles, getRsvps } from '~app/redux';
 
-import {Footer, Header} from './_components';
-import {tProps, tStore} from './_types';
+import { Footer, Header } from './_components';
+import { tProps, tStore } from './_types';
 
 /**
  * @description wrapper container that contains the repeated visual components + handles fetching some data we only want to fetch once
@@ -22,12 +22,12 @@ class Template extends PureComponent<tProps> {
     if (!props.session.isAuthenticated) return;
     if (props.session.type === 'group') return;
     const userId = props.session.profile.id;
-    if (!props.rsvpsThunk.fetched) props.getRsvpsDispatch({userId});
+    if (!props.rsvpsThunk.fetched) props.getRsvpsDispatch({ userId });
     if (!props.rolesThunk.fetched) props.getRolesDispatch();
   }
 
   render() {
-    const {children, className, geoThunk} = this.props;
+    const { children, className, geoThunk } = this.props;
     const geoStatus = geoThunk?.error?.status;
 
     return (

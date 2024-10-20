@@ -33,7 +33,6 @@ delete window.__PRELOADED_STATE__;
 // Create Redux store with initial state
 const { store } = initStore(preloadedState);
 
-const rootNode = document.getElementById('appRoot');
 const App = (
   <Provider store={store as any}>
     <BrowserRouter>
@@ -45,12 +44,12 @@ const App = (
 );
 
 // mount app on the client
+const rootNode = document.getElementById('appRoot');
 if (rootNode.hasChildNodes()) {
   const root = createRoot(rootNode);
   root.render(App);
 } else {
-  const root = hydrateRoot(rootNode);
-  root.render(App);
+  hydrateRoot(rootNode, App);
 }
 
 (async () => {

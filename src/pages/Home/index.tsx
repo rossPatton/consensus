@@ -1,14 +1,14 @@
 import _ from 'lodash';
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {Helmet} from '~app/components';
-import {Template} from '~app/containers';
-import {getMeetings} from '~app/redux';
+import { Helmet } from '~app/components';
+import { Template } from '~app/containers';
+import { getMeetings } from '~app/redux';
 
-import {canonical, description, keywords, title} from './_constants';
-import {tContainerProps, tStore} from './_types';
-import {HomeComponent} from './Component';
+import { canonical, description, keywords, title } from './_constants';
+import { tContainerProps, tStore } from './_types';
+import { HomeComponent } from './Component';
 
 class HomeContainer extends React.PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {

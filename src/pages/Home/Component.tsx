@@ -1,11 +1,13 @@
-import React, {memo} from 'react';
+import React, { memo } from 'react';
 
-import {Categories, Meetings, Search} from '~app/components';
+import { Categories, Meetings, Search } from '~app/components';
 
-import {tProps} from './_types';
+import { tProps } from './_types';
 
 export const HomeComponent = memo((props: tProps) => {
-  const {city} = props.geoThunk.data;
+  console.log("🚀 ~ HomeComponent ~ props:", props)
+  const { city } = props.geoThunk.data;
+  console.log("🚀 ~ HomeComponent ~ city:", city)
 
   return (
     <>

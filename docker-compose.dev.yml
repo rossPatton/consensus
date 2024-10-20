@@ -6,8 +6,10 @@ services:
     working_dir: /app
     command: "npm run dev"
     depends_on:
-      - caddy
+      # - caddy
       - redis
+    env_file:
+      - .env
     environment:
       - DEBUG=true
       - NODE_ENV=development
@@ -25,7 +27,7 @@ services:
       # - VIRTUAL_PORT=3001
       # - VIRTUAL_PROTO=https
     # expose:
-    #   - 3001
+      # - 3001
     ports:
       - "3001:3001"
     volumes:
@@ -39,19 +41,19 @@ services:
       # fixes warning when using redis with the barebones alpine image
       net.core.somaxconn: '511'
 
-  caddy:
-    image: "abiosoft/caddy:latest"
-    volumes:
-      - ./caddy/certs:/root/certs # to sync mkcert certificates to Caddy
-      - ./caddy/Caddyfile:/etc/Caddyfile # to mount custom Caddyfile
-    ports:
-      - "443:2015"
+  # caddy:
+  #   image: "abiosoft/caddy:latest"
+  #   volumes:
+  #     - ./caddy/certs:/root/certs # to sync mkcert certificates to Caddy
+  #     - ./caddy/Caddyfile:/etc/Caddyfile # to mount custom Caddyfile
+  #   ports:
+  #     - "443:2015"
 
 # connect our localhost to the nginx reverse proxy
-# networks:
-#   default:
-#     name: nginx-proxy
-#     external: true
+networks:
+  default:
+    name: nginx-proxy
+    external: true
 
 # volumes:
 #   node_modules:

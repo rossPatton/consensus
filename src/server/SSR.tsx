@@ -63,26 +63,48 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   ctx.res.write(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><title>Consensus - when you need to get organized.</title>${css}${preloadFonts}${prefetchVendor}${prefetchMain}${prefetchCSS}</head><body><div id="appRoot">`);
 
   const { store } = await initStoreForSSR(ctx);
+  const stringifiedState = JSON.stringify(store.getState())
+    .replace(/</g, '\\u003c');
+
   const jsx = (
     <Provider store={store as any}>
       <StaticRouter location={ctx.request.url}>
-        <AppShell />
+        <html lang="en">
+          <head><meta charSet="UTF-8" />
+            <title>Consensus - when you need to get organized.</title>
+            {css}{preloadFonts}{prefetchVendor}{prefetchMain}{prefetchCSS}
+          </head>
+          <body>
+            <div id="appRoot">
+              <AppShell />
+            </div>
+            <div id="portal"></div>
+            <script nonce={nonce}>
+              window.__PRELOADED_STATE__ = {stringifiedState}
+            </script>
+          </body>
+        </html>
       </StaticRouter>
     </Provider>
   );
 
-  const stringifiedState = JSON.stringify(store.getState())
-    .replace(/</g, '\\u003c');
+  // const htmlStream = renderToNodeStream(jsx);
+  // htmlStream.pipe(ctx.res, {end: false });
+  // htmlStream.on('end', () => {
+  //   ctx.res.write(`</div><div id="portal"></div><noscript>Consens.us requires Javascript to be enabled.</noscript><script nonce="${nonce}">window.__PRELOADED_STATE__ = ${stringifiedState}</script><script defer src="${vendor}"></script><script src="${main}"></script></body></html >`);
 
-  const htmlStream = renderToNodeStream(jsx);
-  htmlStream.pipe(ctx.res, { end: false });
-  htmlStream.on('end', () => {
-    ctx.res.write(`</div><div id="portal"></div><noscript>Consens.us requires Javascript to be enabled.</noscript><script nonce="${nonce}">window.__PRELOADED_STATE__ = ${stringifiedState}</script><script defer src="${vendor}"></script><script src="${main}"></script></body></html>`);
+  //   ctx.res.end();
+  // });
 
-    ctx.res.end();
+  const { pipe } = renderToPipeableStream(jsx, {
+    bootstrapScripts: [main, vendor],
+    onShellReady() {
+      ctx.res.setHeader('content-type', 'text/html');
+      pipe(ctx.res);
+    }
   });
 
-  // ctx.res.write(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><title>Consensus - when you need to get organized.</title>${css}${preloadFonts}${prefetchVendor}${prefetchMain}${prefetchCSS}</head><body><div id="appRoot">test<div id="portal"></div><noscript>Consens.us requires Javascript to be enabled.</noscript><script nonce="${nonce}">window.__PRELOADED_STATE__ = ${stringifiedState}</script><script defer src="${vendor}"></script><script src="${main}"></script></body></html>`);
+  // ctx.res.write(`< !DOCTYPE html > <html lang="en"><head><meta charset="UTF-8" /><title>Consensus - when you need to get organized.</title>${css}${preloadFonts}${prefetchVendor}${prefetchMain}${prefetchCSS}</head><body><div id="appRoot">test<div id="portal"></div><noscript>Consens.us requires Javascript to be enabled.</noscript><script nonce="${nonce}">window.__PRELOADED_STATE__ = ${stringifiedState}</script><script defer src="${vendor}"></script><script src="${main}"></script></body></html>`);
 
   // const { pipe } = renderToPipeableStream(jsx, {
   //   onShellReady() {
@@ -96,7 +118,7 @@ export const SSR = async (app: Koa, ctx: Koa.ParameterizedContext) => {
   //   pipe(response);
   // }
   // pipe.on('end', () => {
-  //   ctx.res.write(`</div><div id="portal"></div><noscript>Consens.us requires Javascript to be enabled.</noscript><script nonce="${nonce}">window.__PRELOADED_STATE__ = ${stringifiedState}</script><script defer src="${vendor}"></script><script src="${main}"></script></body></html>`);
+  //   ctx.res.write(`</div ><div id="portal"></div><noscript>Consens.us requires Javascript to be enabled.</noscript><script nonce="${nonce}">window.__PRELOADED_STATE__ = ${stringifiedState}</script><script defer src="${vendor}"></script><script src="${main}"></script></body ></html > `);
 
   //   ctx.res.end();
   // });
