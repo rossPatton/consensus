@@ -1,14 +1,15 @@
 import cx from 'classnames';
-import React, {memo} from 'react';
+import React, { memo } from 'react';
+import { useParams } from 'react-router-dom';
 
-import {categoryMap} from '~app/constants';
-import {Template} from '~app/containers';
+import { categoryMap } from '~app/constants';
+import { Template } from '~app/containers';
 
-import {Category, CategoryList} from './_subpages';
-import {tProps} from './_types';
+import { Category, CategoryList } from './_subpages';
+import { tProps } from './_types';
 
 const Categories = memo((props: tProps) => {
-  const {match: {params}} = props;
+  const params = useParams();
   const renderCategory = !!params.category;
 
   return (

@@ -11,7 +11,7 @@ const AppShell = () => (
     <MatchMediaProvider>
       <Routes>
         {routes.map((route: ts.route, i) => {
-          console.log("🚀 ~ {routes.map ~ route:", route)
+          // console.log("🚀 ~ {routes.map ~ route:", route)
           const { path, component: Component } = route;
 
           return (

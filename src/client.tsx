@@ -5,7 +5,7 @@ import '~app/css/styles.css';
 import loglevel from 'loglevel';
 import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 import React from 'react';
-import { createRoot, hydrateRoot } from 'react-dom/client';
+import { hydrateRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
@@ -45,12 +45,13 @@ const App = (
 
 // mount app on the client
 const rootNode = document.getElementById('appRoot');
-if (rootNode.hasChildNodes()) {
-  const root = createRoot(rootNode);
-  root.render(App);
-} else {
-  hydrateRoot(rootNode, App);
-}
+hydrateRoot(rootNode, App);
+// if (rootNode.hasChildNodes()) {
+//   const root = createRoot(rootNode);
+//   root.render(App);
+// } else {
+//   hydrateRoot(rootNode, App);
+// }
 
 (async () => {
   const browserIsPrivate = await isPrivateMode();

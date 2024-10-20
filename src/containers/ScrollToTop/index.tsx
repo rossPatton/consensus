@@ -5,6 +5,8 @@ import { tProps } from './_types';
 
 class ScrollToTopComponent extends PureComponent<tProps> {
   componentDidUpdate(prevProps: tProps) {
+    console.log("🚀 ~ componentDidUpdate ~ props:", this.props)
+    console.log("🚀 ~ componentDidUpdate ~ prevProps:", prevProps)
     if (
       this.props.location.pathname !== prevProps.location.pathname
     ) {

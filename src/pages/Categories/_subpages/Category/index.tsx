@@ -13,11 +13,13 @@ import {
 import { getGroups } from '~app/redux';
 
 import { tContainerProps, tStore } from './_types';
+import { withRouter } from '~app/utils';
 
 class CategoryContainer extends PureComponent<tContainerProps> {
   constructor(props: tContainerProps) {
+    console.log("🚀 ~ CategoryContainer ~ constructor ~ props:", props)
     super(props);
-    const { match: {params} } = props;
+    const { params } = props;
 
     const category = categoryMap[params.category] as any;
     props.getGroups({
@@ -26,7 +28,7 @@ class CategoryContainer extends PureComponent<tContainerProps> {
   }
 
   render() {
-    const {groupsThunk, match: {params}} = this.props;
+    const { groupsThunk, params } = this.props;
 
     return (
       <ErrorBoundary status={groupsThunk?.error?.status}>
@@ -81,7 +83,7 @@ const mapStateToProps = (store: tStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  getGroups: (query: {category: ts.category}) => dispatch(getGroups(query)),
+  getGroups: (query: { category: ts.category }) => dispatch(getGroups(query)),
 });
 
 const Category = connect(
@@ -89,4 +91,4 @@ const Category = connect(
   mapDispatchToProps,
 )(CategoryContainer);
 
-export default Category;
+export default withRouter(Category);

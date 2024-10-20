@@ -1,4 +1,5 @@
 export type tProps = {
+  children: React.ReactNode,
   className?: string,
   geoThunk: ts.thunk<ts.geo>,
   getGeoDispatch: () => ts.payload<ts.geo>,
