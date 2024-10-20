@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator zod {
+  provider           = "zod-prisma-types"
+  createPartialTypes = "true"
+  useTypeAssertions  = "true"
+}
+
+model categories {
+  id       Int        @id @default(autoincrement())
+  display  String     @default("") @db.VarChar(255)
+  slug     String     @unique(map: "categories_slug_idx") @default("") @db.VarChar(255)
+  uuid     String     @unique(map: "categories_uuid_idx") @db.Uuid
+  created  DateTime   @default(now()) @db.Timestamp(6)
+  updated  DateTime   @default(now()) @db.Timestamp(6)
+  groups   groups[]
+  meetings meetings[]
+}
+
+model decisions {
+  id      Int      @id @default(autoincrement())
+  created DateTime @default(now()) @db.Timestamp(6)
+  updated DateTime @default(now()) @db.Timestamp(6)
+}
+
+model groups {
+  id          Int        @id @default(autoincrement())
+  category    String     @default(dbgenerated("'0192ab79-9d15-7217-9d8b-0899a54094fa'::uuid")) @db.Uuid
+  description String     @default("") @db.VarChar(1000)
+  memberName  String     @default("") @db.VarChar(255)
+  modName     String     @default("") @db.VarChar(255)
+  privacyType String     @default("private") @db.VarChar(255)
+  created     DateTime   @default(now()) @db.Timestamp(6)
+  updated     DateTime   @default(now()) @db.Timestamp(6)
+  uuid        String?    @unique(map: "groups_uuid_idx") @db.Uuid
+  name        String     @default("") @db.VarChar(255)
+  categories  categories @relation(fields: [category], references: [uuid])
+  meetings    meetings[]
+}
+
+model meetings {
+  id           Int            @id @default(autoincrement())
+  created      DateTime       @default(now()) @db.Timestamp(6)
+  updated      DateTime       @default(now()) @db.Timestamp(6)
+  category     String         @default(dbgenerated("'0192ab79-9d15-7217-9d8b-0899a54094fa'::uuid")) @db.Uuid
+  description  String         @default("") @db.VarChar(1000)
+  title        String         @default("") @db.VarChar(255)
+  group        String         @db.Uuid
+  type         meeting_types  @default(Meeting)
+  location     String         @default("") @db.VarChar(255)
+  locationLink String         @default("") @db.VarChar(255)
+  status       meeting_status @default(Draft)
+  slug         String         @default("") @db.VarChar(255)
+  datetime     DateTime       @db.Timestamp(6)
+  host         String         @db.Uuid
+  duration     Int            @db.SmallInt
+  uuid         String         @unique(map: "meetings_uuid_idx") @db.Uuid
+  categories   categories     @relation(fields: [category], references: [uuid])
+  groups       groups         @relation(fields: [group], references: [uuid])
+  users        users          @relation(fields: [host], references: [uuid])
+  rsvps        rsvps[]
+}
+
+model rsvps {
+  id       Int         @id @default(autoincrement())
+  uuid     String      @unique(map: "rsvps_uuid_idx") @db.Uuid
+  user     String      @db.Uuid
+  meeting  String      @db.Uuid
+  value    rsvp_status @default(Yes)
+  type     rsvp_type   @default(private)
+  created  DateTime    @default(now()) @db.Timestamp(6)
+  updated  DateTime    @default(now()) @db.Timestamp(6)
+  meetings meetings    @relation(fields: [meeting], references: [uuid])
+  users    users       @relation(fields: [user], references: [uuid])
+}
+
+model users {
+  id       Int        @id @default(autoincrement())
+  type     String     @default("") @db.VarChar(255)
+  uuid     String     @unique(map: "users_uuid_idx") @db.Uuid
+  created  DateTime   @default(now()) @db.Timestamp(6)
+  updated  DateTime   @default(now()) @db.Timestamp(6)
+  meetings meetings[]
+  rsvps    rsvps[]
+}
+
+enum meeting_status {
+  Draft
+  Public
+  Private
+  Deleted
+}
+
+enum meeting_types {
+  Meeting
+  March
+  Rally
+  Direct_Action @map("Direct Action")
+  Protest
+  Strike
+  Picket
+  Vote
+  Election
+}
+
+enum rsvp_status {
+  Yes
+  No
+  Maybe
+}
+
+enum rsvp_type {
+  public
+  private
+}
