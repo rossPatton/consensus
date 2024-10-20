@@ -1,6 +1,16 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Categories, Search } from "~/components";
 
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Consensus" },
+    {
+      name: "description",
+      content: "For when you need to get organized",
+    },
+  ];
+};
+
 export default function Index() {
   return (
     <>
@@ -36,13 +46,3 @@ export default function Index() {
     </>
   );
 }
-
-export const meta: MetaFunction = () => {
-  return [
-    { title: "Consensus" },
-    {
-      name: "description",
-      content: "For when you need to get organized",
-    },
-  ];
-};
