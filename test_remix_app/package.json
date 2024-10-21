@@ -9,7 +9,19 @@
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc",
-    "seed": "npx tsx ./prisma/seed/seed.ts"
+    "seed": "npx tsx ./prisma/seed/seed.ts",
+    "migrate": "prisma migrate deploy",
+    "postmigrate": "npx @snaplet/seed sync",
+    "db:generate": "prisma generate",
+    "db:pull": "prisma db pull",
+    "db:seed": "prisma db seed",
+    "db:seed_init": "npx @snaplet/seed init prisma/seed",
+    "db:seed_sync": "npx @snaplet/seed sync",
+    "db:migration_apply": "npx prisma migrate dev",
+    "db:migration_deploy": "prisma migrate deploy",
+    "db:migration_new": "prisma migrate dev --create-only",
+    "db:migration_resolve": "prisma migrate resolve --applied",
+    "db:migration_status": "prisma migrate status"
   },
   "dependencies": {
     "@prisma/client": "^5.21.1",
@@ -51,7 +63,7 @@
     "node": ">=20.0.0"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed/seed.ts"
+    "seed": "tsx prisma/seed/seed.ts"
   },
   "@snaplet/seed": {
     "config": "prisma/seed/seed.config.ts"

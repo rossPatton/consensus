@@ -222,6 +222,20 @@
           "maxLength": null
         },
         {
+          "id": "public.categories.description",
+          "name": "description",
+          "columnName": "description",
+          "type": "varchar",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": true,
+          "isId": false,
+          "maxLength": 1000
+        },
+        {
           "name": "groups",
           "type": "groups",
           "isRequired": false,

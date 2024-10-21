@@ -1,7 +1,7 @@
 import { Categories } from "@prisma/client";
+import { Link, useLoaderData } from "@remix-run/react";
 import cx from "classnames";
 import type { MetaFunction } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
 import { db } from "~/utils/db.server";
 
 const CategoriesPage = () => {
@@ -48,9 +48,9 @@ const CategoriesPage = () => {
                 width="480"
               />
             </Link>
-            {/* <p className="hidden d:block text-2 text-gray-5 leading-loose">
+            <p className="hidden d:block text-2 text-gray-5 leading-loose">
               {cat.description}
-            </p> */}
+            </p>
           </div>
         </li>
       ))}
