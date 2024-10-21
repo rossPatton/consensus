@@ -17,47 +17,47 @@ async function main() {
     {
       "display": "Community",
       "slug": "community",
-      "uuid": v7(),
       "description": 'Your local neighborhood group. From your church, to community centers, any kind of miscellaneous group can be found here.',
+      uuid: v7(),
     },
     {
       "display": "Cooperative",
       "slug": "coop",
-      "uuid": v7(),
       "description": 'For your local worker-owned or membership-based cooperative. Come to consensus, on Consensus.',
+      uuid: v7(),
     },
     {
       "display": "Unions & Labor",
       "slug": "union",
-      "uuid": v7(),
       "description": "Find your local union, worker's center or other labor-affilitated group. Never miss another union meeting!",
+      uuid: v7(),
     },
     {
       "display": "Political",
       "slug": "pol",
-      "uuid": v7(),
       "description": "From anarchist collectives to the Democratic Socialists of America or Tech Worker's Coalition, get involved with your local political group today.",
+      uuid: v7(),
     },
   ];
+
+  const store = await seed.categories(categories);
+  console.log("🚀 ~ main ~ cats:", store)
 
   const testGroups = [
     {
-      "category": categories.find((c) => c.slug === "community")?.uuid,
+      "category": categories.find((cat) => cat.slug === "community")!.uuid!,
       "description": 'Your local neighborhood test group.',
       "name": "Test Community",
       "slug": "test_community",
-      "uuid": v7(),
     },
     {
-      "category": categories.find((c) => c.slug === "community")?.uuid,
+      "category": categories.find((cat) => cat.slug === "coop")!.uuid!,
       "description": 'Your local neighborhood test cooperative.',
       "name": "Test Cooperative",
       "slug": "test_cooperative",
-      "uuid": v7(),
     },
   ];
 
-  await seed.categories(categories);
   await seed.groups(testGroups);
 
   console.log("Database seeded successfully!");

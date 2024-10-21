@@ -17,7 +17,7 @@ model Categories {
   id          Int        @id @default(autoincrement())
   display     String     @default("") @db.VarChar(255)
   slug        String     @unique(map: "categories_slug_idx") @default("") @db.VarChar(255)
-  uuid        String     @unique(map: "categories_uuid_idx") @db.Uuid
+  uuid        String     @unique(map: "categories_uuid_idx") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created     DateTime   @default(now()) @db.Timestamp(6)
   updated     DateTime   @default(now()) @db.Timestamp(6)
   description String     @default("") @db.VarChar(1000)
@@ -31,20 +31,21 @@ model Decisions {
   id      Int      @id @default(autoincrement())
   created DateTime @default(now()) @db.Timestamp(6)
   updated DateTime @default(now()) @db.Timestamp(6)
+  uuid    String   @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 
   @@map("decisions")
 }
 
 model Groups {
   id          Int        @id @default(autoincrement())
-  category    String     @default(dbgenerated("'0192ab79-9d15-7217-9d8b-0899a54094fa'::uuid")) @db.Uuid
+  category    String     @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   description String     @default("") @db.VarChar(1000)
   memberName  String     @default("member") @db.VarChar(255)
   modName     String     @default("facilitator") @db.VarChar(255)
   privacyType String     @default("private") @db.VarChar(255)
   created     DateTime   @default(now()) @db.Timestamp(6)
   updated     DateTime   @default(now()) @db.Timestamp(6)
-  uuid        String?    @unique(map: "groups_uuid_idx") @db.Uuid
+  uuid        String     @unique(map: "groups_uuid_idx") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name        String     @default("") @db.VarChar(255)
   slug        String     @default("") @db.VarChar(255)
   categories  Categories @relation(fields: [category], references: [uuid])
@@ -57,7 +58,7 @@ model Meetings {
   id           Int            @id @default(autoincrement())
   created      DateTime       @default(now()) @db.Timestamp(6)
   updated      DateTime       @default(now()) @db.Timestamp(6)
-  category     String         @default(dbgenerated("'0192ab79-9d15-7217-9d8b-0899a54094fa'::uuid")) @db.Uuid
+  category     String         @db.Uuid
   description  String         @default("") @db.VarChar(1000)
   title        String         @default("") @db.VarChar(255)
   group        String         @db.Uuid
@@ -69,7 +70,7 @@ model Meetings {
   datetime     DateTime       @db.Timestamp(6)
   host         String         @db.Uuid
   duration     Int            @db.SmallInt
-  uuid         String         @unique(map: "meetings_uuid_idx") @db.Uuid
+  uuid         String         @unique(map: "meetings_uuid_idx") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   categories   Categories     @relation(fields: [category], references: [uuid])
   groups       Groups         @relation(fields: [group], references: [uuid])
   users        Users          @relation(fields: [host], references: [uuid])
@@ -80,7 +81,7 @@ model Meetings {
 
 model RSVPS {
   id       Int         @id @default(autoincrement())
-  uuid     String      @unique(map: "rsvps_uuid_idx") @db.Uuid
+  uuid     String      @unique(map: "rsvps_uuid_idx") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user     String      @db.Uuid
   meeting  String      @db.Uuid
   value    rsvp_status @default(Yes)
@@ -96,7 +97,7 @@ model RSVPS {
 model Users {
   id       Int        @id @default(autoincrement())
   type     String     @default("") @db.VarChar(255)
-  uuid     String     @unique(map: "users_uuid_idx") @db.Uuid
+  uuid     String     @unique(map: "users_uuid_idx") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created  DateTime   @default(now()) @db.Timestamp(6)
   updated  DateTime   @default(now()) @db.Timestamp(6)
   meetings Meetings[]

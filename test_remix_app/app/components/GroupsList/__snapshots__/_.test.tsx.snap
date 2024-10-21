@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Groups group component onClick 1`] = `null`;
+
+exports[`components/Groups renders container 1`] = `null`;
+
+exports[`components/Groups renders container with no groups 1`] = `null`;
+
+exports[`components/Groups renders editable group component with location 1`] = `null`;
+
+exports[`components/Groups renders editable pending group component as list 1`] = `null`;
+
+exports[`components/Groups renders groups component 1`] = `
+<ul
+  className="flex flex-wrap"
+>
+  <li
+    className="font-semibold mb-2"
+  >
+    Current group memberships
+  </li>
+  <li
+    className="font-semibold mb-2"
+  >
+    Pending group memberships
+  </li>
+</ul>
+`;
+
+exports[`components/Groups renders individual group component with type 1`] = `null`;
+
+exports[`components/Groups renders individual pending group component with category 1`] = `null`;

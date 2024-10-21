@@ -1,0 +1,18 @@
+export type tProps = {
+  asList?: boolean,
+  count?: number,
+  groupType?: ts.role,
+  hoverIndex?: number,
+  index?: number,
+  isEditable?: boolean,
+  leaveGroup: (ev: React.MouseEvent<HTMLButtonElement>, groupId: number) => void,
+  group: ts.group,
+  groups: ts.group[],
+  pendingGroups: ts.group[],
+  roles: ts.roleMap[],
+  setHover: (hoverIndex: number | null, groupType?: ts.role) => void,
+  showCategory?: boolean,
+  showLocation?: boolean,
+  showType?: boolean,
+  showPending?: boolean,
+};
