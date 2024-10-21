@@ -13,24 +13,29 @@ generator zod {
   useTypeAssertions  = "true"
 }
 
-model categories {
-  id       Int        @id @default(autoincrement())
-  display  String     @default("") @db.VarChar(255)
-  slug     String     @unique(map: "categories_slug_idx") @default("") @db.VarChar(255)
-  uuid     String     @unique(map: "categories_uuid_idx") @db.Uuid
-  created  DateTime   @default(now()) @db.Timestamp(6)
-  updated  DateTime   @default(now()) @db.Timestamp(6)
-  groups   groups[]
-  meetings meetings[]
+model Categories {
+  id          Int        @id @default(autoincrement())
+  description String     @default("") @db.VarChar(1000)
+  display     String     @default("") @db.VarChar(255)
+  slug        String     @unique(map: "categories_slug_idx") @default("") @db.VarChar(255)
+  uuid        String     @unique(map: "categories_uuid_idx") @db.Uuid
+  created     DateTime   @default(now()) @db.Timestamp(6)
+  updated     DateTime   @default(now()) @db.Timestamp(6)
+  groups      Groups[]
+  meetings    Meetings[]
+
+  @@map("categories")
 }
 
-model decisions {
+model Decisions {
   id      Int      @id @default(autoincrement())
   created DateTime @default(now()) @db.Timestamp(6)
   updated DateTime @default(now()) @db.Timestamp(6)
+
+  @@map("decisions")
 }
 
-model groups {
+model Groups {
   id          Int        @id @default(autoincrement())
   category    String     @default(dbgenerated("'0192ab79-9d15-7217-9d8b-0899a54094fa'::uuid")) @db.Uuid
   description String     @default("") @db.VarChar(1000)
@@ -41,11 +46,13 @@ model groups {
   updated     DateTime   @default(now()) @db.Timestamp(6)
   uuid        String?    @unique(map: "groups_uuid_idx") @db.Uuid
   name        String     @default("") @db.VarChar(255)
-  categories  categories @relation(fields: [category], references: [uuid])
-  meetings    meetings[]
+  categories  Categories @relation(fields: [category], references: [uuid])
+  meetings    Meetings[]
+
+  @@map("groups")
 }
 
-model meetings {
+model Meetings {
   id           Int            @id @default(autoincrement())
   created      DateTime       @default(now()) @db.Timestamp(6)
   updated      DateTime       @default(now()) @db.Timestamp(6)
@@ -62,13 +69,15 @@ model meetings {
   host         String         @db.Uuid
   duration     Int            @db.SmallInt
   uuid         String         @unique(map: "meetings_uuid_idx") @db.Uuid
-  categories   categories     @relation(fields: [category], references: [uuid])
-  groups       groups         @relation(fields: [group], references: [uuid])
-  users        users          @relation(fields: [host], references: [uuid])
-  rsvps        rsvps[]
+  categories   Categories     @relation(fields: [category], references: [uuid])
+  groups       Groups         @relation(fields: [group], references: [uuid])
+  users        Users          @relation(fields: [host], references: [uuid])
+  rsvps        RSVPS[]
+
+  @@map("meetings")
 }
 
-model rsvps {
+model RSVPS {
   id       Int         @id @default(autoincrement())
   uuid     String      @unique(map: "rsvps_uuid_idx") @db.Uuid
   user     String      @db.Uuid
@@ -77,18 +86,22 @@ model rsvps {
   type     rsvp_type   @default(private)
   created  DateTime    @default(now()) @db.Timestamp(6)
   updated  DateTime    @default(now()) @db.Timestamp(6)
-  meetings meetings    @relation(fields: [meeting], references: [uuid])
-  users    users       @relation(fields: [user], references: [uuid])
+  meetings Meetings    @relation(fields: [meeting], references: [uuid])
+  users    Users       @relation(fields: [user], references: [uuid])
+
+  @@map("rsvps")
 }
 
-model users {
+model Users {
   id       Int        @id @default(autoincrement())
   type     String     @default("") @db.VarChar(255)
   uuid     String     @unique(map: "users_uuid_idx") @db.Uuid
   created  DateTime   @default(now()) @db.Timestamp(6)
   updated  DateTime   @default(now()) @db.Timestamp(6)
-  meetings meetings[]
-  rsvps    rsvps[]
+  meetings Meetings[]
+  rsvps    RSVPS[]
+
+  @@map("users")
 }
 
 enum meeting_status {

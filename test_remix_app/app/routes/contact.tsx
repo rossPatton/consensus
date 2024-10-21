@@ -6,7 +6,7 @@ export default CategoriesPage;
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Consensus: View All Categories" },
+    { title: "Consensus: View all categories" },
     { name: 'description', content: 'Select a category.' },
     { name: 'keywords', content: 'category,search,groups' }
   ];
