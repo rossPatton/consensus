@@ -16,7 +16,7 @@ export const CategoriesScalarFieldEnumSchema = z.enum(['id','display','slug','uu
 
 export const DecisionsScalarFieldEnumSchema = z.enum(['id','created','updated']);
 
-export const GroupsScalarFieldEnumSchema = z.enum(['id','category','description','memberName','modName','privacyType','created','updated','uuid','name']);
+export const GroupsScalarFieldEnumSchema = z.enum(['id','category','description','memberName','modName','privacyType','created','updated','uuid','name','slug']);
 
 export const MeetingsScalarFieldEnumSchema = z.enum(['id','created','updated','category','description','title','group','type','location','locationLink','status','slug','datetime','host','duration','uuid']);
 
@@ -100,7 +100,7 @@ export type DecisionsPartial = z.infer<typeof DecisionsPartialSchema>
 
 export const GroupsSchema = z.object({
   id: z.number().int(),
-  category: z.string(),
+  category: z.string().nullable(),
   description: z.string(),
   memberName: z.string(),
   modName: z.string(),
@@ -109,6 +109,7 @@ export const GroupsSchema = z.object({
   updated: z.coerce.date(),
   uuid: z.string().nullable(),
   name: z.string(),
+  slug: z.string(),
 })
 
 export type Groups = z.infer<typeof GroupsSchema>
@@ -283,6 +284,7 @@ export const GroupsSelectSchema: z.ZodType<Prisma.GroupsSelect> = z.object({
   updated: z.boolean().optional(),
   uuid: z.boolean().optional(),
   name: z.boolean().optional(),
+  slug: z.boolean().optional(),
   categories: z.union([z.boolean(),z.lazy(() => CategoriesArgsSchema)]).optional(),
   meetings: z.union([z.boolean(),z.lazy(() => MeetingsFindManyArgsSchema)]).optional(),
   _count: z.union([z.boolean(),z.lazy(() => GroupsCountOutputTypeArgsSchema)]).optional(),
@@ -551,7 +553,7 @@ export const GroupsWhereInputSchema: z.ZodType<Prisma.GroupsWhereInput> = z.obje
   OR: z.lazy(() => GroupsWhereInputSchema).array().optional(),
   NOT: z.union([ z.lazy(() => GroupsWhereInputSchema),z.lazy(() => GroupsWhereInputSchema).array() ]).optional(),
   id: z.union([ z.lazy(() => IntFilterSchema),z.number() ]).optional(),
-  category: z.union([ z.lazy(() => UuidFilterSchema),z.string() ]).optional(),
+  category: z.union([ z.lazy(() => UuidNullableFilterSchema),z.string() ]).optional().nullable(),
   description: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   memberName: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   modName: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
@@ -560,13 +562,14 @@ export const GroupsWhereInputSchema: z.ZodType<Prisma.GroupsWhereInput> = z.obje
   updated: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   uuid: z.union([ z.lazy(() => UuidNullableFilterSchema),z.string() ]).optional().nullable(),
   name: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
-  categories: z.union([ z.lazy(() => CategoriesRelationFilterSchema),z.lazy(() => CategoriesWhereInputSchema) ]).optional(),
+  slug: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  categories: z.union([ z.lazy(() => CategoriesNullableRelationFilterSchema),z.lazy(() => CategoriesWhereInputSchema) ]).optional().nullable(),
   meetings: z.lazy(() => MeetingsListRelationFilterSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsWhereInput>;
 
 export const GroupsOrderByWithRelationInputSchema: z.ZodType<Prisma.GroupsOrderByWithRelationInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional(),
-  category: z.lazy(() => SortOrderSchema).optional(),
+  category: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   description: z.lazy(() => SortOrderSchema).optional(),
   memberName: z.lazy(() => SortOrderSchema).optional(),
   modName: z.lazy(() => SortOrderSchema).optional(),
@@ -575,6 +578,7 @@ export const GroupsOrderByWithRelationInputSchema: z.ZodType<Prisma.GroupsOrderB
   updated: z.lazy(() => SortOrderSchema).optional(),
   uuid: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   name: z.lazy(() => SortOrderSchema).optional(),
+  slug: z.lazy(() => SortOrderSchema).optional(),
   categories: z.lazy(() => CategoriesOrderByWithRelationInputSchema).optional(),
   meetings: z.lazy(() => MeetingsOrderByRelationAggregateInputSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsOrderByWithRelationInput>;
@@ -597,7 +601,7 @@ export const GroupsWhereUniqueInputSchema: z.ZodType<Prisma.GroupsWhereUniqueInp
   AND: z.union([ z.lazy(() => GroupsWhereInputSchema),z.lazy(() => GroupsWhereInputSchema).array() ]).optional(),
   OR: z.lazy(() => GroupsWhereInputSchema).array().optional(),
   NOT: z.union([ z.lazy(() => GroupsWhereInputSchema),z.lazy(() => GroupsWhereInputSchema).array() ]).optional(),
-  category: z.union([ z.lazy(() => UuidFilterSchema),z.string() ]).optional(),
+  category: z.union([ z.lazy(() => UuidNullableFilterSchema),z.string() ]).optional().nullable(),
   description: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   memberName: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   modName: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
@@ -605,13 +609,14 @@ export const GroupsWhereUniqueInputSchema: z.ZodType<Prisma.GroupsWhereUniqueInp
   created: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   updated: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   name: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
-  categories: z.union([ z.lazy(() => CategoriesRelationFilterSchema),z.lazy(() => CategoriesWhereInputSchema) ]).optional(),
+  slug: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  categories: z.union([ z.lazy(() => CategoriesNullableRelationFilterSchema),z.lazy(() => CategoriesWhereInputSchema) ]).optional().nullable(),
   meetings: z.lazy(() => MeetingsListRelationFilterSchema).optional()
 }).strict()) as z.ZodType<Prisma.GroupsWhereUniqueInput>;
 
 export const GroupsOrderByWithAggregationInputSchema: z.ZodType<Prisma.GroupsOrderByWithAggregationInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional(),
-  category: z.lazy(() => SortOrderSchema).optional(),
+  category: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   description: z.lazy(() => SortOrderSchema).optional(),
   memberName: z.lazy(() => SortOrderSchema).optional(),
   modName: z.lazy(() => SortOrderSchema).optional(),
@@ -620,6 +625,7 @@ export const GroupsOrderByWithAggregationInputSchema: z.ZodType<Prisma.GroupsOrd
   updated: z.lazy(() => SortOrderSchema).optional(),
   uuid: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   name: z.lazy(() => SortOrderSchema).optional(),
+  slug: z.lazy(() => SortOrderSchema).optional(),
   _count: z.lazy(() => GroupsCountOrderByAggregateInputSchema).optional(),
   _avg: z.lazy(() => GroupsAvgOrderByAggregateInputSchema).optional(),
   _max: z.lazy(() => GroupsMaxOrderByAggregateInputSchema).optional(),
@@ -632,7 +638,7 @@ export const GroupsScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma.Groups
   OR: z.lazy(() => GroupsScalarWhereWithAggregatesInputSchema).array().optional(),
   NOT: z.union([ z.lazy(() => GroupsScalarWhereWithAggregatesInputSchema),z.lazy(() => GroupsScalarWhereWithAggregatesInputSchema).array() ]).optional(),
   id: z.union([ z.lazy(() => IntWithAggregatesFilterSchema),z.number() ]).optional(),
-  category: z.union([ z.lazy(() => UuidWithAggregatesFilterSchema),z.string() ]).optional(),
+  category: z.union([ z.lazy(() => UuidNullableWithAggregatesFilterSchema),z.string() ]).optional().nullable(),
   description: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   memberName: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   modName: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
@@ -641,6 +647,7 @@ export const GroupsScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma.Groups
   updated: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
   uuid: z.union([ z.lazy(() => UuidNullableWithAggregatesFilterSchema),z.string() ]).optional().nullable(),
   name: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  slug: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
 }).strict() as z.ZodType<Prisma.GroupsScalarWhereWithAggregatesInput>;
 
 export const MeetingsWhereInputSchema: z.ZodType<Prisma.MeetingsWhereInput> = z.object({
@@ -1058,13 +1065,14 @@ export const GroupsCreateInputSchema: z.ZodType<Prisma.GroupsCreateInput> = z.ob
   updated: z.coerce.date().optional(),
   uuid: z.string().optional().nullable(),
   name: z.string().optional(),
+  slug: z.string().optional(),
   categories: z.lazy(() => CategoriesCreateNestedOneWithoutGroupsInputSchema).optional(),
   meetings: z.lazy(() => MeetingsCreateNestedManyWithoutGroupsInputSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsCreateInput>;
 
 export const GroupsUncheckedCreateInputSchema: z.ZodType<Prisma.GroupsUncheckedCreateInput> = z.object({
   id: z.number().int().optional(),
-  category: z.string().optional(),
+  category: z.string().optional().nullable(),
   description: z.string().optional(),
   memberName: z.string().optional(),
   modName: z.string().optional(),
@@ -1073,6 +1081,7 @@ export const GroupsUncheckedCreateInputSchema: z.ZodType<Prisma.GroupsUncheckedC
   updated: z.coerce.date().optional(),
   uuid: z.string().optional().nullable(),
   name: z.string().optional(),
+  slug: z.string().optional(),
   meetings: z.lazy(() => MeetingsUncheckedCreateNestedManyWithoutGroupsInputSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsUncheckedCreateInput>;
 
@@ -1085,13 +1094,14 @@ export const GroupsUpdateInputSchema: z.ZodType<Prisma.GroupsUpdateInput> = z.ob
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   uuid: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  categories: z.lazy(() => CategoriesUpdateOneRequiredWithoutGroupsNestedInputSchema).optional(),
+  slug: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  categories: z.lazy(() => CategoriesUpdateOneWithoutGroupsNestedInputSchema).optional(),
   meetings: z.lazy(() => MeetingsUpdateManyWithoutGroupsNestedInputSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsUpdateInput>;
 
 export const GroupsUncheckedUpdateInputSchema: z.ZodType<Prisma.GroupsUncheckedUpdateInput> = z.object({
   id: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
-  category: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  category: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   memberName: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   modName: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -1100,12 +1110,13 @@ export const GroupsUncheckedUpdateInputSchema: z.ZodType<Prisma.GroupsUncheckedU
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   uuid: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  slug: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   meetings: z.lazy(() => MeetingsUncheckedUpdateManyWithoutGroupsNestedInputSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsUncheckedUpdateInput>;
 
 export const GroupsCreateManyInputSchema: z.ZodType<Prisma.GroupsCreateManyInput> = z.object({
   id: z.number().int().optional(),
-  category: z.string().optional(),
+  category: z.string().optional().nullable(),
   description: z.string().optional(),
   memberName: z.string().optional(),
   modName: z.string().optional(),
@@ -1113,7 +1124,8 @@ export const GroupsCreateManyInputSchema: z.ZodType<Prisma.GroupsCreateManyInput
   created: z.coerce.date().optional(),
   updated: z.coerce.date().optional(),
   uuid: z.string().optional().nullable(),
-  name: z.string().optional()
+  name: z.string().optional(),
+  slug: z.string().optional()
 }).strict() as z.ZodType<Prisma.GroupsCreateManyInput>;
 
 export const GroupsUpdateManyMutationInputSchema: z.ZodType<Prisma.GroupsUpdateManyMutationInput> = z.object({
@@ -1125,11 +1137,12 @@ export const GroupsUpdateManyMutationInputSchema: z.ZodType<Prisma.GroupsUpdateM
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   uuid: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  slug: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict() as z.ZodType<Prisma.GroupsUpdateManyMutationInput>;
 
 export const GroupsUncheckedUpdateManyInputSchema: z.ZodType<Prisma.GroupsUncheckedUpdateManyInput> = z.object({
   id: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
-  category: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  category: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   memberName: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   modName: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -1138,6 +1151,7 @@ export const GroupsUncheckedUpdateManyInputSchema: z.ZodType<Prisma.GroupsUnchec
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   uuid: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  slug: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict() as z.ZodType<Prisma.GroupsUncheckedUpdateManyInput>;
 
 export const MeetingsCreateInputSchema: z.ZodType<Prisma.MeetingsCreateInput> = z.object({
@@ -1612,10 +1626,10 @@ export const UuidNullableFilterSchema: z.ZodType<Prisma.UuidNullableFilter> = z.
   not: z.union([ z.string(),z.lazy(() => NestedUuidNullableFilterSchema) ]).optional().nullable(),
 }).strict() as z.ZodType<Prisma.UuidNullableFilter>;
 
-export const CategoriesRelationFilterSchema: z.ZodType<Prisma.CategoriesRelationFilter> = z.object({
-  is: z.lazy(() => CategoriesWhereInputSchema).optional(),
-  isNot: z.lazy(() => CategoriesWhereInputSchema).optional()
-}).strict() as z.ZodType<Prisma.CategoriesRelationFilter>;
+export const CategoriesNullableRelationFilterSchema: z.ZodType<Prisma.CategoriesNullableRelationFilter> = z.object({
+  is: z.lazy(() => CategoriesWhereInputSchema).optional().nullable(),
+  isNot: z.lazy(() => CategoriesWhereInputSchema).optional().nullable()
+}).strict() as z.ZodType<Prisma.CategoriesNullableRelationFilter>;
 
 export const SortOrderInputSchema: z.ZodType<Prisma.SortOrderInput> = z.object({
   sort: z.lazy(() => SortOrderSchema),
@@ -1632,7 +1646,8 @@ export const GroupsCountOrderByAggregateInputSchema: z.ZodType<Prisma.GroupsCoun
   created: z.lazy(() => SortOrderSchema).optional(),
   updated: z.lazy(() => SortOrderSchema).optional(),
   uuid: z.lazy(() => SortOrderSchema).optional(),
-  name: z.lazy(() => SortOrderSchema).optional()
+  name: z.lazy(() => SortOrderSchema).optional(),
+  slug: z.lazy(() => SortOrderSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsCountOrderByAggregateInput>;
 
 export const GroupsAvgOrderByAggregateInputSchema: z.ZodType<Prisma.GroupsAvgOrderByAggregateInput> = z.object({
@@ -1649,7 +1664,8 @@ export const GroupsMaxOrderByAggregateInputSchema: z.ZodType<Prisma.GroupsMaxOrd
   created: z.lazy(() => SortOrderSchema).optional(),
   updated: z.lazy(() => SortOrderSchema).optional(),
   uuid: z.lazy(() => SortOrderSchema).optional(),
-  name: z.lazy(() => SortOrderSchema).optional()
+  name: z.lazy(() => SortOrderSchema).optional(),
+  slug: z.lazy(() => SortOrderSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsMaxOrderByAggregateInput>;
 
 export const GroupsMinOrderByAggregateInputSchema: z.ZodType<Prisma.GroupsMinOrderByAggregateInput> = z.object({
@@ -1662,7 +1678,8 @@ export const GroupsMinOrderByAggregateInputSchema: z.ZodType<Prisma.GroupsMinOrd
   created: z.lazy(() => SortOrderSchema).optional(),
   updated: z.lazy(() => SortOrderSchema).optional(),
   uuid: z.lazy(() => SortOrderSchema).optional(),
-  name: z.lazy(() => SortOrderSchema).optional()
+  name: z.lazy(() => SortOrderSchema).optional(),
+  slug: z.lazy(() => SortOrderSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsMinOrderByAggregateInput>;
 
 export const GroupsSumOrderByAggregateInputSchema: z.ZodType<Prisma.GroupsSumOrderByAggregateInput> = z.object({
@@ -1697,6 +1714,11 @@ export const Enummeeting_statusFilterSchema: z.ZodType<Prisma.Enummeeting_status
   notIn: z.lazy(() => meeting_statusSchema).array().optional(),
   not: z.union([ z.lazy(() => meeting_statusSchema),z.lazy(() => NestedEnummeeting_statusFilterSchema) ]).optional(),
 }).strict() as z.ZodType<Prisma.Enummeeting_statusFilter>;
+
+export const CategoriesRelationFilterSchema: z.ZodType<Prisma.CategoriesRelationFilter> = z.object({
+  is: z.lazy(() => CategoriesWhereInputSchema).optional(),
+  isNot: z.lazy(() => CategoriesWhereInputSchema).optional()
+}).strict() as z.ZodType<Prisma.CategoriesRelationFilter>;
 
 export const GroupsRelationFilterSchema: z.ZodType<Prisma.GroupsRelationFilter> = z.object({
   is: z.lazy(() => GroupsWhereInputSchema).optional(),
@@ -2041,13 +2063,15 @@ export const NullableStringFieldUpdateOperationsInputSchema: z.ZodType<Prisma.Nu
   set: z.string().optional().nullable()
 }).strict() as z.ZodType<Prisma.NullableStringFieldUpdateOperationsInput>;
 
-export const CategoriesUpdateOneRequiredWithoutGroupsNestedInputSchema: z.ZodType<Prisma.CategoriesUpdateOneRequiredWithoutGroupsNestedInput> = z.object({
+export const CategoriesUpdateOneWithoutGroupsNestedInputSchema: z.ZodType<Prisma.CategoriesUpdateOneWithoutGroupsNestedInput> = z.object({
   create: z.union([ z.lazy(() => CategoriesCreateWithoutGroupsInputSchema),z.lazy(() => CategoriesUncheckedCreateWithoutGroupsInputSchema) ]).optional(),
   connectOrCreate: z.lazy(() => CategoriesCreateOrConnectWithoutGroupsInputSchema).optional(),
   upsert: z.lazy(() => CategoriesUpsertWithoutGroupsInputSchema).optional(),
+  disconnect: z.union([ z.boolean(),z.lazy(() => CategoriesWhereInputSchema) ]).optional(),
+  delete: z.union([ z.boolean(),z.lazy(() => CategoriesWhereInputSchema) ]).optional(),
   connect: z.lazy(() => CategoriesWhereUniqueInputSchema).optional(),
   update: z.union([ z.lazy(() => CategoriesUpdateToOneWithWhereWithoutGroupsInputSchema),z.lazy(() => CategoriesUpdateWithoutGroupsInputSchema),z.lazy(() => CategoriesUncheckedUpdateWithoutGroupsInputSchema) ]).optional(),
-}).strict() as z.ZodType<Prisma.CategoriesUpdateOneRequiredWithoutGroupsNestedInput>;
+}).strict() as z.ZodType<Prisma.CategoriesUpdateOneWithoutGroupsNestedInput>;
 
 export const MeetingsUpdateManyWithoutGroupsNestedInputSchema: z.ZodType<Prisma.MeetingsUpdateManyWithoutGroupsNestedInput> = z.object({
   create: z.union([ z.lazy(() => MeetingsCreateWithoutGroupsInputSchema),z.lazy(() => MeetingsCreateWithoutGroupsInputSchema).array(),z.lazy(() => MeetingsUncheckedCreateWithoutGroupsInputSchema),z.lazy(() => MeetingsUncheckedCreateWithoutGroupsInputSchema).array() ]).optional(),
@@ -2535,6 +2559,7 @@ export const GroupsCreateWithoutCategoriesInputSchema: z.ZodType<Prisma.GroupsCr
   updated: z.coerce.date().optional(),
   uuid: z.string().optional().nullable(),
   name: z.string().optional(),
+  slug: z.string().optional(),
   meetings: z.lazy(() => MeetingsCreateNestedManyWithoutGroupsInputSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsCreateWithoutCategoriesInput>;
 
@@ -2548,6 +2573,7 @@ export const GroupsUncheckedCreateWithoutCategoriesInputSchema: z.ZodType<Prisma
   updated: z.coerce.date().optional(),
   uuid: z.string().optional().nullable(),
   name: z.string().optional(),
+  slug: z.string().optional(),
   meetings: z.lazy(() => MeetingsUncheckedCreateNestedManyWithoutGroupsInputSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsUncheckedCreateWithoutCategoriesInput>;
 
@@ -2629,7 +2655,7 @@ export const GroupsScalarWhereInputSchema: z.ZodType<Prisma.GroupsScalarWhereInp
   OR: z.lazy(() => GroupsScalarWhereInputSchema).array().optional(),
   NOT: z.union([ z.lazy(() => GroupsScalarWhereInputSchema),z.lazy(() => GroupsScalarWhereInputSchema).array() ]).optional(),
   id: z.union([ z.lazy(() => IntFilterSchema),z.number() ]).optional(),
-  category: z.union([ z.lazy(() => UuidFilterSchema),z.string() ]).optional(),
+  category: z.union([ z.lazy(() => UuidNullableFilterSchema),z.string() ]).optional().nullable(),
   description: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   memberName: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   modName: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
@@ -2638,6 +2664,7 @@ export const GroupsScalarWhereInputSchema: z.ZodType<Prisma.GroupsScalarWhereInp
   updated: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   uuid: z.union([ z.lazy(() => UuidNullableFilterSchema),z.string() ]).optional().nullable(),
   name: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  slug: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
 }).strict() as z.ZodType<Prisma.GroupsScalarWhereInput>;
 
 export const MeetingsUpsertWithWhereUniqueWithoutCategoriesInputSchema: z.ZodType<Prisma.MeetingsUpsertWithWhereUniqueWithoutCategoriesInput> = z.object({
@@ -2834,12 +2861,13 @@ export const GroupsCreateWithoutMeetingsInputSchema: z.ZodType<Prisma.GroupsCrea
   updated: z.coerce.date().optional(),
   uuid: z.string().optional().nullable(),
   name: z.string().optional(),
+  slug: z.string().optional(),
   categories: z.lazy(() => CategoriesCreateNestedOneWithoutGroupsInputSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsCreateWithoutMeetingsInput>;
 
 export const GroupsUncheckedCreateWithoutMeetingsInputSchema: z.ZodType<Prisma.GroupsUncheckedCreateWithoutMeetingsInput> = z.object({
   id: z.number().int().optional(),
-  category: z.string().optional(),
+  category: z.string().optional().nullable(),
   description: z.string().optional(),
   memberName: z.string().optional(),
   modName: z.string().optional(),
@@ -2847,7 +2875,8 @@ export const GroupsUncheckedCreateWithoutMeetingsInputSchema: z.ZodType<Prisma.G
   created: z.coerce.date().optional(),
   updated: z.coerce.date().optional(),
   uuid: z.string().optional().nullable(),
-  name: z.string().optional()
+  name: z.string().optional(),
+  slug: z.string().optional()
 }).strict() as z.ZodType<Prisma.GroupsUncheckedCreateWithoutMeetingsInput>;
 
 export const GroupsCreateOrConnectWithoutMeetingsInputSchema: z.ZodType<Prisma.GroupsCreateOrConnectWithoutMeetingsInput> = z.object({
@@ -2958,12 +2987,13 @@ export const GroupsUpdateWithoutMeetingsInputSchema: z.ZodType<Prisma.GroupsUpda
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   uuid: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  categories: z.lazy(() => CategoriesUpdateOneRequiredWithoutGroupsNestedInputSchema).optional()
+  slug: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  categories: z.lazy(() => CategoriesUpdateOneWithoutGroupsNestedInputSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsUpdateWithoutMeetingsInput>;
 
 export const GroupsUncheckedUpdateWithoutMeetingsInputSchema: z.ZodType<Prisma.GroupsUncheckedUpdateWithoutMeetingsInput> = z.object({
   id: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
-  category: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  category: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   memberName: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   modName: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -2972,6 +3002,7 @@ export const GroupsUncheckedUpdateWithoutMeetingsInputSchema: z.ZodType<Prisma.G
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   uuid: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  slug: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict() as z.ZodType<Prisma.GroupsUncheckedUpdateWithoutMeetingsInput>;
 
 export const UsersUpsertWithoutMeetingsInputSchema: z.ZodType<Prisma.UsersUpsertWithoutMeetingsInput> = z.object({
@@ -3289,7 +3320,8 @@ export const GroupsCreateManyCategoriesInputSchema: z.ZodType<Prisma.GroupsCreat
   created: z.coerce.date().optional(),
   updated: z.coerce.date().optional(),
   uuid: z.string().optional().nullable(),
-  name: z.string().optional()
+  name: z.string().optional(),
+  slug: z.string().optional()
 }).strict() as z.ZodType<Prisma.GroupsCreateManyCategoriesInput>;
 
 export const MeetingsCreateManyCategoriesInputSchema: z.ZodType<Prisma.MeetingsCreateManyCategoriesInput> = z.object({
@@ -3319,6 +3351,7 @@ export const GroupsUpdateWithoutCategoriesInputSchema: z.ZodType<Prisma.GroupsUp
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   uuid: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  slug: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   meetings: z.lazy(() => MeetingsUpdateManyWithoutGroupsNestedInputSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsUpdateWithoutCategoriesInput>;
 
@@ -3332,6 +3365,7 @@ export const GroupsUncheckedUpdateWithoutCategoriesInputSchema: z.ZodType<Prisma
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   uuid: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  slug: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   meetings: z.lazy(() => MeetingsUncheckedUpdateManyWithoutGroupsNestedInputSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsUncheckedUpdateWithoutCategoriesInput>;
 
@@ -3345,6 +3379,7 @@ export const GroupsUncheckedUpdateManyWithoutCategoriesInputSchema: z.ZodType<Pr
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   uuid: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  slug: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict() as z.ZodType<Prisma.GroupsUncheckedUpdateManyWithoutCategoriesInput>;
 
 export const MeetingsUpdateWithoutCategoriesInputSchema: z.ZodType<Prisma.MeetingsUpdateWithoutCategoriesInput> = z.object({
@@ -4088,7 +4123,7 @@ export const DecisionsDeleteManyArgsSchema: z.ZodType<Prisma.DecisionsDeleteMany
 export const GroupsCreateArgsSchema: z.ZodType<Prisma.GroupsCreateArgs> = z.object({
   select: GroupsSelectSchema.optional(),
   include: GroupsIncludeSchema.optional(),
-  data: z.union([ GroupsCreateInputSchema,GroupsUncheckedCreateInputSchema ]),
+  data: z.union([ GroupsCreateInputSchema,GroupsUncheckedCreateInputSchema ]).optional(),
 }).strict() as z.ZodType<Prisma.GroupsCreateArgs>;
 
 export const GroupsUpsertArgsSchema: z.ZodType<Prisma.GroupsUpsertArgs> = z.object({

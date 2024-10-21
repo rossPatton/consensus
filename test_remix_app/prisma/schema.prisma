@@ -4,8 +4,8 @@ generator client {
 
 generator zod {
   provider           = "zod-prisma-types"
-  useTypeAssertions  = "true"
   createPartialTypes = "true"
+  useTypeAssertions  = "true"
 }
 
 datasource db {
@@ -39,13 +39,14 @@ model Groups {
   id          Int        @id @default(autoincrement())
   category    String     @default(dbgenerated("'0192ab79-9d15-7217-9d8b-0899a54094fa'::uuid")) @db.Uuid
   description String     @default("") @db.VarChar(1000)
-  memberName  String     @default("") @db.VarChar(255)
-  modName     String     @default("") @db.VarChar(255)
+  memberName  String     @default("member") @db.VarChar(255)
+  modName     String     @default("facilitator") @db.VarChar(255)
   privacyType String     @default("private") @db.VarChar(255)
   created     DateTime   @default(now()) @db.Timestamp(6)
   updated     DateTime   @default(now()) @db.Timestamp(6)
   uuid        String?    @unique(map: "groups_uuid_idx") @db.Uuid
   name        String     @default("") @db.VarChar(255)
+  slug        String     @default("") @db.VarChar(255)
   categories  Categories @relation(fields: [category], references: [uuid])
   meetings    Meetings[]
 
