@@ -1,6 +1,9 @@
 // import loadable from '@loadable/component';
 export { Avatar } from "./Avatar";
 export { CategoriesList } from "./CategoriesList/CategoriesList";
+export { Description } from "./Description";
+export { Emoji } from "./Emoji";
+export { ExternalLink } from "./ExternalLink";
 export { Footer } from "./Footer/Footer";
 export { GroupsComponent as GroupsList } from "./GroupsList/Component";
 export { Header } from "./Header/Header";
