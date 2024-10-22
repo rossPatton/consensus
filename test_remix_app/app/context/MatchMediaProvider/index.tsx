@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { debounce } from 'lodash-es';
 import React from 'react';
 
 import { DESKTOP, MOBILE } from './_constants';
@@ -10,7 +10,7 @@ import { tState } from './_types';
  * This is used to render components adaptively when responsive design starts to
  * get overly complicated, or to make it easier to split up component types
  */
-class MatchMediaProvider extends React.PureComponent<Partial<tState>, tState> {
+export class MatchMediaProvider extends React.PureComponent<Partial<tState>, tState> {
   static defaultProps = {
     isMobile: true,
     isDesktop: false,
@@ -25,7 +25,7 @@ class MatchMediaProvider extends React.PureComponent<Partial<tState>, tState> {
     super(props);
 
     if (__CLIENT__) {
-      const {isMobile, isDesktop} = this._runMediaQuery();
+      const { isMobile, isDesktop } = this._runMediaQuery();
 
       this.state = {
         isMobile,
@@ -48,7 +48,7 @@ class MatchMediaProvider extends React.PureComponent<Partial<tState>, tState> {
     isDesktop: window.matchMedia(DESKTOP).matches,
   });
 
-  _onResize = _.debounce(() => {
+  _onResize = debounce(() => {
     this.setState(this._runMediaQuery());
   }, 20);
 

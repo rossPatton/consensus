@@ -1,13 +1,12 @@
 import cx from 'classnames';
-import _ from 'lodash';
-import { memo } from 'react';
+import { find } from 'lodash-es';
 import { Link } from 'react-router-dom';
 
 import { Avatar } from '~/components';
 import { tProps } from './_types';
 
-const Group = memo((props: tProps) => {
-  const roleMap = _.find(props.roles, r => r.groupId === props.group.id) || {};
+export const Group = (props: tProps) => {
+  const roleMap = find(props.roles, r => r.groupId === props.group.id) || {};
   const { role } = roleMap;
 
   return (
@@ -91,6 +90,4 @@ const Group = memo((props: tProps) => {
       </div>
     </li>
   );
-});
-
-export default Group;
+};
