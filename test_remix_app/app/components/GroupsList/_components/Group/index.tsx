@@ -12,8 +12,7 @@ export const Group = (props: tProps) => {
   return (
     <li
       key={props.index}
-      className={cx({
-        relative: true,
+      className={cx('relative', {
         'mb-2': props.asList,
         'w-full mb-2 d:mb-3': !props.asList,
         'd:w-3/12': !props.asList && props.groups.length > 3,
@@ -21,8 +20,7 @@ export const Group = (props: tProps) => {
       <div
         role="button"
         tabIndex={0}
-        className={cx({
-          'flex items-center p-1': true,
+        className={cx('flex items-center p-1', {
           'hover:bg-gray-3': props.isEditable,
         })}
         onMouseEnter={() => props.setHover(props?.index!, role)}
@@ -41,13 +39,12 @@ export const Group = (props: tProps) => {
             </small>
           )}
           <h3>
-            <Link to={`/group/${props.group.handle}`}>
+            <Link to={`/group/${props.group.uuid}`}>
               {props.group.name}
             </Link>
           </h3>
           <div
-            className={cx({
-              'text-sm text-gray-5 font-bold': true,
+            className={cx('text-sm text-gray-5 font-bold', {
               'flex items-center': props.asList,
             })}>
             {props.showType && (
@@ -66,8 +63,7 @@ export const Group = (props: tProps) => {
             )}
             {props.showLocation && (
               <span
-                className={cx({
-                  'mr-2': true,
+                className={cx('mr-2', {
                   'mb-1': !props.asList,
                 })}>
                 Based in {props.group.city}

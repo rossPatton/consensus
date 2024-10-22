@@ -1,7 +1,12 @@
+import { Categories } from "@prisma/client";
 import type { MetaFunction } from "@remix-run/node";
-import { Categories, Search } from "~/components";
+import { useLoaderData } from "@remix-run/react";
+import { CategoriesList, Search } from "~/components";
+import { db } from "~/utils/db.server";
 
 export default function Index() {
+  const { categories } = useLoaderData<LoaderData>();
+
   return (
     <>
       <div className="flex flex-col items-center mb-3 text-center">
@@ -32,10 +37,23 @@ export default function Index() {
           </>
         )
       } */}
-      <Categories />
+      <CategoriesList categories={categories} />
     </>
   );
 }
+
+// Define a type for the data returned by the loader
+type LoaderData = {
+  categories: Categories[];
+};
+
+export const loader = async () => {
+  const data = {
+    categories: await db.categories.findMany(),
+  };
+
+  return data;
+};
 
 export const meta: MetaFunction = () => {
   return [

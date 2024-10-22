@@ -1,6 +1,5 @@
 import { Categories, Groups, Meetings } from "@prisma/client";
-import { Link, Outlet, useLoaderData } from "@remix-run/react";
-import cx from "classnames";
+import { useLoaderData } from "@remix-run/react";
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { GroupsList } from "~/components";
 import { db } from "~/utils/db.server";
@@ -13,18 +12,14 @@ export default function CategoryPage() {
     <>
       <h1>{category.display}</h1>
       <p>{category.description}</p>
-      {groups.length > 0
-        ? (
-          <GroupsList
-            groups={groups}
-            pendingGroups={groups}
-            showLocation={false}
-            leaveGroup={() => { }}
-            setHover={() => { }}
-            roles={[{ groupId: 1, role: 'pending' }]}
-          />
-        )
-        : 'No groups found for this category'}
+      <GroupsList
+        groups={groups}
+        pendingGroups={groups}
+        showLocation={false}
+        leaveGroup={() => { }}
+        setHover={() => { }}
+        roles={[{ groupId: 1, role: 'pending' }]}
+      />
       {/* <SearchFilter
         items={groupsThunk.data}
         searchKey="name"

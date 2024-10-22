@@ -1,7 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Categories } from "~/components";
 
-const CategoriesPage = () => <Categories />;
+const CategoriesPage = () => null;
 export default CategoriesPage;
 
 export const meta: MetaFunction = () => {
