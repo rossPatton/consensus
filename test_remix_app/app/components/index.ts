@@ -4,6 +4,7 @@ export { CategoriesList } from "./CategoriesList/CategoriesList";
 export { Description } from "./Description";
 export { Emoji } from "./Emoji";
 export { ExternalLink } from "./ExternalLink";
+export { FileUploadComponent as FileUpload } from "./FileUpload/Component";
 export { Footer } from "./Footer/Footer";
 export { GroupsComponent as GroupsList } from "./GroupsList/Component";
 export { Header } from "./Header/Header";

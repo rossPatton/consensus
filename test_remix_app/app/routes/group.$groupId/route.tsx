@@ -1,11 +1,11 @@
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+import { Groups } from "@prisma/client";
+import { useLoaderData } from "@remix-run/react";
 import cx from 'classnames';
 import { useContext } from 'react';
 import { MediaContext } from '~/context';
-import { GroupInfo } from "./_components";
-import { useLoaderData } from "@remix-run/react";
+import { GroupInfo, GroupTabs } from "./_components";
 import { db } from "~/utils/db.server";
-import { Groups } from "@prisma/client";
 
 export default function GroupPage() {
   const { group } = useLoaderData<LoaderData>();
@@ -23,10 +23,11 @@ export default function GroupPage() {
       // role={props.role}
       />
       <div className="d:border d:shadow rounded w-full d:min-w-8/12">
-        {/* <GroupTabs
-          match={props.match}
-          role={props.role}
+        <GroupTabs
+        // match={props.match}
+        // role={props.role}
         />
+        {/*}
         {typeof props.match.params.section === 'undefined' && (
           <Meetings
             match={props.match}

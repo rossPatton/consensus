@@ -37,19 +37,29 @@ model Decisions {
 }
 
 model Groups {
-  id          Int        @id @default(autoincrement())
-  category    String     @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  description String     @default("") @db.VarChar(1000)
-  memberName  String     @default("member") @db.VarChar(255)
-  modName     String     @default("facilitator") @db.VarChar(255)
-  privacyType String     @default("private") @db.VarChar(255)
-  created     DateTime   @default(now()) @db.Timestamp(6)
-  updated     DateTime   @default(now()) @db.Timestamp(6)
-  uuid        String     @unique(map: "groups_uuid_idx") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name        String     @default("") @db.VarChar(255)
-  slug        String     @default("") @db.VarChar(255)
-  categories  Categories @relation(fields: [category], references: [uuid])
-  meetings    Meetings[]
+  id           Int               @id @default(autoincrement())
+  category     String            @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  description  String            @default("") @db.VarChar(1000)
+  memberName   String            @default("member") @db.VarChar(255)
+  modName      String            @default("facilitator") @db.VarChar(255)
+  privacyType  String            @default("private") @db.VarChar(255)
+  created      DateTime          @default(now()) @db.Timestamp(6)
+  updated      DateTime          @default(now()) @db.Timestamp(6)
+  uuid         String            @unique(map: "groups_uuid_idx") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String            @default("") @db.VarChar(255)
+  slug         String            @default("") @db.VarChar(255)
+  bluesky      String            @default("") @db.VarChar(255)
+  facebook     String            @default("") @db.VarChar(255)
+  instagram    String            @default("") @db.VarChar(255)
+  mastodon     String            @default("") @db.VarChar(255)
+  medium       String            @default("") @db.VarChar(255)
+  substack     String            @default("") @db.VarChar(255)
+  tumblr       String            @default("") @db.VarChar(255)
+  twitter      String            @default("") @db.VarChar(255)
+  website      String            @default("") @db.VarChar(255)
+  categories   Categories        @relation(fields: [category], references: [uuid])
+  meetings     Meetings[]
+  users_groups UserMemberships[]
 
   @@map("groups")
 }
@@ -95,15 +105,31 @@ model RSVPS {
 }
 
 model Users {
-  id       Int        @id @default(autoincrement())
-  type     String     @default("") @db.VarChar(255)
-  uuid     String     @unique(map: "users_uuid_idx") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created  DateTime   @default(now()) @db.Timestamp(6)
-  updated  DateTime   @default(now()) @db.Timestamp(6)
-  meetings Meetings[]
-  rsvps    RSVPS[]
+  id           Int               @id @default(autoincrement())
+  type         String            @default("") @db.VarChar(255)
+  uuid         String            @unique(map: "users_uuid_idx") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created      DateTime          @default(now()) @db.Timestamp(6)
+  updated      DateTime          @default(now()) @db.Timestamp(6)
+  meetings     Meetings[]
+  rsvps        RSVPS[]
+  users_groups UserMemberships[]
 
   @@map("users")
+}
+
+model UserMemberships {
+  id      Int      @id @default(autoincrement())
+  user    String   @db.Uuid
+  group   String   @db.Uuid
+  role    String   @default("") @db.VarChar(255)
+  created DateTime @default(now()) @db.Timestamp(6)
+  updated DateTime @default(now()) @db.Timestamp(6)
+  uuid    String   @db.Uuid
+  groups  Groups   @relation(fields: [group], references: [uuid])
+  users   Users    @relation(fields: [user], references: [uuid])
+
+  @@unique([user, group], map: "users_groups_user_group_idx")
+  @@map("users_groups")
 }
 
 enum meeting_status {

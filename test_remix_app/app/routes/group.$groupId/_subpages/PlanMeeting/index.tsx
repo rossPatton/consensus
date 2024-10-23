@@ -1,10 +1,10 @@
-import React, {memo} from 'react';
+import React, { memo } from 'react';
 
-import {Helmet, PlanMeeting as PlanMeetingComponent} from '~app/components';
+import { Helmet, PlanMeeting as PlanMeetingComponent } from '~app/components';
 
-import {tProps} from './_types';
+import { tProps } from './_types';
 
-const PlanMeeting = memo((props: tProps) => (
+export const PlanMeeting = memo((props: tProps) => (
   <>
     <Helmet
       canonical={`/group/${props.group.handle}/planMeeting`}
@@ -20,5 +20,3 @@ const PlanMeeting = memo((props: tProps) => (
     />
   </>
 ));
-
-export default PlanMeeting;
