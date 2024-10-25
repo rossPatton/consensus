@@ -2,7 +2,6 @@ import cx from 'classnames';
 import { memo } from 'react';
 
 // import { spacesUrl } from '~app/constants';
-
 import { tProps } from './_types';
 
 export const Avatar = memo((props: tProps) => {
