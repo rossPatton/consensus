@@ -28,7 +28,6 @@
     "@remix-run/node": "~2.13.1",
     "@remix-run/react": "~2.13.1",
     "@remix-run/serve": "~2.13.1",
-    "@snaplet/seed": "~0.98.0",
     "@tanstack/react-query": "~5.59.15",
     "classnames": "~2.5.1",
     "dayjs": "^1.11.13",
@@ -44,8 +43,10 @@
     "zod-prisma-types": "~3.1.8"
   },
   "devDependencies": {
+    "@anatine/zod-mock": "3.9.0",
     "@remix-run/dev": "~2.13.1",
     "@snaplet/copycat": "~5.1.0",
+    "@snaplet/seed": "~0.98.0",
     "@types/lodash-es": "^4.17.12",
     "@types/qs": "^6.9.16",
     "@types/react": "~18.2.20",

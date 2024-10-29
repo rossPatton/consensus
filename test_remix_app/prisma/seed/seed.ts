@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * ! Executing this script will delete all data in your database and seed it with 10 users.
  * ! Make sure to adjust the script to your needs.
@@ -5,6 +6,8 @@
  * Learn more about the Seed Client by following our guide: https://docs.snaplet.dev/seed/getting-started
  */
 import { createSeedClient } from "@snaplet/seed";
+import { generateMock } from "@anatine/zod-mock";
+import { MeetingsSchema } from "prisma/generated/zod";
 import { v7 } from "uuid";
 
 async function main() {
@@ -49,19 +52,62 @@ async function main() {
       "description": 'Your local neighborhood test group.',
       "name": "Test Community",
       "slug": "test_community",
+      uuid: v7(),
     },
     {
       "category": categories.find((cat) => cat.slug === "coop")!.uuid!,
       "description": 'Your local neighborhood test cooperative.',
       "name": "Test Cooperative",
       "slug": "test_cooperative",
+      uuid: v7(),
     },
   ];
 
   await seed.groups(testGroups);
 
-  console.log("Database seeded successfully!");
+  const testUsers = [{
+    type: "admin",
+    uuid: v7(),
+  }];
 
+  await seed.users(testUsers);
+
+  const testMeetings = [
+    {
+      ...generateMock(MeetingsSchema),
+      category: categories.find((cat) => cat.slug === "community")!.uuid!,
+      group: testGroups.find((cat) => cat.slug === "test_community")!.uuid!,
+      host: testUsers[0].uuid,
+      duration: 60,
+      status: "Public",
+      uuid: v7(),
+    },
+    {
+      ...generateMock(MeetingsSchema),
+      category: categories.find((cat) => cat.slug === "coop")!.uuid!,
+      group: testGroups.find((cat) => cat.slug === "test_community")!.uuid!,
+      host: testUsers[0].uuid,
+      duration: 60,
+      status: "Public",
+      type: "Meeting",
+      uuid: v7(),
+    },
+    {
+      ...generateMock(MeetingsSchema),
+      category: categories.find((cat) => cat.slug === "union")!.uuid!,
+      group: testGroups.find((cat) => cat.slug === "test_community")!.uuid!,
+      host: testUsers[0].uuid,
+      duration: 60,
+      status: "Public",
+      type: "Meeting",
+      uuid: v7(),
+    },
+  ];
+  console.log("testMeetings ? ", testMeetings);
+
+  await seed.meetings(testMeetings);
+
+  console.log("Database seeded successfully!");
   process.exit();
 };
 
