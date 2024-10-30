@@ -66,6 +66,7 @@ model Groups {
 
 model Meetings {
   id           Int            @id @default(autoincrement())
+  img          String         @default("") @db.VarChar(255)
   created      DateTime       @default(now()) @db.Timestamp(6)
   updated      DateTime       @default(now()) @db.Timestamp(6)
   category     String         @db.Uuid

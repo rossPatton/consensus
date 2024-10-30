@@ -11,12 +11,12 @@ import { slugify } from '~/utils';
 import { tProps } from './_types';
 
 export const DesktopMeetings: FunctionComponent<tProps> = props => {
+  console.log("desktop meetings props ? ", props);
   const now = dayJS();
 
   return (
     <ul
-      className={cx({
-        'animated fadeInUp': true,
+      className={cx('animated fadeInUp', {
         'flex flex-row text-left': props.horizontal,
         'justify-center': props.horizontal && props.meetingsToRender.length > 1,
         'justify-between': props.horizontal && props.meetingsToRender.length === 4,

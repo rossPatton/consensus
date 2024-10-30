@@ -19,7 +19,7 @@ export const MeetingFeaturedImage: FunctionComponent<tProps> = props => {
             alt={props.alt || ''}
             className="w-full"
             height={props.height || '240'}
-            src={`${spacesUrl}/groups/${props.img}`}
+            src={`${spacesUrl}/meeting_images/${props.img}`}
             width={props.width || '480'}
           />
         ) : (

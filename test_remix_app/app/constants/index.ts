@@ -44,6 +44,6 @@ export const meetingTypes = [
   'Election',
 ];
 
-export const roles: ts.role[] = ['member', 'facilitator'];
+export const roles = ['member', 'facilitator'] as const;
 
 export const spacesUrl = 'https://consensus.nyc3.digitaloceanspaces.com';

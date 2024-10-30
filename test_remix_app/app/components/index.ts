@@ -12,6 +12,6 @@ export { GroupsComponent as GroupsList } from "./GroupsList/Component";
 export { GroupTabs } from "./GroupTabs";
 export { Header } from "./Header/Header";
 export { MeetingFeaturedImage } from "./MeetingFeaturedImage";
-export { Meetings } from "./Meetings/Component";
+export { MeetingsList } from "./Meetings/Component";
 export { PlanMeetingComponent } from "./PlanMeeting/Component";
 export { Search } from "./Search";

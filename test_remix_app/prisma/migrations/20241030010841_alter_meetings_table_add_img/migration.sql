@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "meetings" ADD COLUMN "img" VARCHAR(255) NOT NULL DEFAULT '';
