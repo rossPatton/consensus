@@ -1,4 +1,4 @@
-import cx from 'classnames';
+import { cn } from '~/utils';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import querystring from 'qs';
@@ -41,13 +41,13 @@ export const MobileMeetings: FunctionComponent<tProps> = props => {
         return (
           <li
             key={meeting.id}
-            className={cx({
+            className={cn({
               'flex flex-row mb-2': true,
               'opacity-5': isPastMeeting,
             })}>
             {!meeting.isDraft && (
               <Link
-                className={cx({
+                className={cn({
                   'max-w-6/12 min-w-6/12': !props.isEditable,
                   'max-w-4/12 min-w-4/12': props.isEditable,
                 })}

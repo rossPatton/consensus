@@ -4,23 +4,21 @@ import plugin from "tailwindcss/plugin";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config = {
-  darkMode: ["class"],
-  content: ["./app/**/{**,.client,.server}/**/*.{js,jsx,ts,tsx}"],
-  prefix: "",
+  content: ["./app/**/*.tsx"],
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
-    tracking: {
-      "base": ".01rem",
-    },
-    screens: {
-      d: '1024px',
-    },
+    // container: {
+    //   center: true,
+    //   padding: "2rem",
+    //   screens: {
+    //     "2xl": "1400px",
+    //   },
+    // },
+    // tracking: {
+    //   "base": ".01rem",
+    // },
+    // screens: {
+    //   d: '1024px',
+    // },
     extend: {
       colors: {
         black: '#000',

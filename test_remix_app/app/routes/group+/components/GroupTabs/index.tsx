@@ -10,7 +10,7 @@ export const GroupTabs = (props: { group: Groups }) => {
 
   return (
     <nav className="d:pl-2 d:pr-2 d:pt-2 mb-1 d:mb-2 overflow-scroll">
-      <ul className="flex items-baseline whitespace-no-wrap space-x-2">
+      <ul className="flex items-baseline whitespace-nowrap space-x-2">
         <li>
           <Tab
             text="Meetings"

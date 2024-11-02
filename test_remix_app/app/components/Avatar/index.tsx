@@ -1,10 +1,9 @@
-import cx from 'classnames';
-import { memo } from 'react';
+import { cn } from '~/utils';
 
 // import { spacesUrl } from '~app/constants';
 import { tProps } from './_types';
 
-export const Avatar = memo((props: tProps) => {
+export const Avatar = (props: tProps) => {
   const { className, hash, size = 'lg', type = 'groups' } = props;
 
   // hash === account uploaded an avatar/logo to DO and we want to use that
@@ -19,12 +18,11 @@ export const Avatar = memo((props: tProps) => {
 
   return (
     <div
-      className={cx({
-        'bg-gray-1 rounded-circ overflow-hidden': true,
+      className={cn('bg-gray-1 rounded-circ overflow-hidden', {
         'av-sz-sm': size === 'sm',
         'av-sz-lg': size === 'lg',
         'mr-1': typeof className !== 'string',
-        // [className]: typeof className === 'string',
+        [className as string]: typeof className === 'string',
       })}>
       {src && (
         <img
@@ -36,4 +34,4 @@ export const Avatar = memo((props: tProps) => {
       )}
     </div>
   );
-});
+};

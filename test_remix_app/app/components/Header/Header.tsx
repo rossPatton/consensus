@@ -1,4 +1,4 @@
-import cx from 'classnames';
+import { cn } from '~/utils';
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -45,7 +45,7 @@ export const Header = (props: any) => {
                       )}
                     </button>
                     <ul
-                      className={cx({
+                      className={cn({
                         'bg-white border font-bold p-2 rounded shadow t-hdr absolute animated': true,
                         'hidden': !showNav,
                         'fadeInDown': showNav,
@@ -110,7 +110,7 @@ export const Header = (props: any) => {
                     />
                   </button>
                   <ul
-                    className={cx({
+                    className={cn({
                       'bg-white border font-bold p-2 rounded shadow text-right t-hdr absolute r animated': true,
                       'hidden': !showMenu,
                       'fadeInDown': showMenu,
@@ -155,7 +155,7 @@ export const Header = (props: any) => {
                         />
                       </button>
                       <ul
-                        className={cx({
+                        className={cn({
                           'bg-white border font-bold p-2 rounded shadow text-right t-hdr absolute r animated': true,
                           'hidden': !showMenu,
                           'fadeInDown': showMenu,

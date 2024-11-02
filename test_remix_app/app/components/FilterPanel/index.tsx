@@ -1,4 +1,4 @@
-import cx from 'classnames';
+import { cn } from '~/utils';
 import { categories, roles } from '~/constants';
 import { tProps } from './_types';
 
@@ -8,7 +8,7 @@ import { tProps } from './_types';
 */
 export const FilterPanel = (props: tProps) => (
   <div
-    className={cx('flex flex-col d:flex-row', {
+    className={cn('flex flex-col d:flex-row', {
       [props.className ?? ""]: !!props.className,
       'mb-2 d:mb-3': !props.className,
     })}>

@@ -1,3 +1,4 @@
+export { cn } from './cn';
 export { deSlugify, slugify, lowerCase, upperCase } from './strings';
 export { fuzzyScore, fuzzFilterList } from './fuzzySearch';
 export { getRandomNum } from './getRandomNum';

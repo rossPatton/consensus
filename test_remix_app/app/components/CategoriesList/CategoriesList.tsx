@@ -1,6 +1,6 @@
 import { Categories } from "@prisma/client";
 import { Link } from "@remix-run/react";
-import cx from "classnames";
+import { cn } from "~/utils";
 
 export const CategoriesList = (props: { categories: Categories[] }) => {
   const { categories = [] } = props;
@@ -13,11 +13,11 @@ export const CategoriesList = (props: { categories: Categories[] }) => {
           key={i}
           className="w-full d:pl-5 d:pr-5 mb-3 d:mb-4">
           <div
-            className={cx('flex', {
+            className={cn('flex', {
               'justify-end': i % 2 === 0,
             })}>
             <h2
-              className={cx('text-2 d:text-1 mb-2 d:max-w-6/12', {
+              className={cn('text-2 d:text-1 mb-2 d:max-w-6/12', {
                 'w-6/12': i % 2 === 0,
               })}>
               <Link to={`/category/${cat.slug}`}>
@@ -26,12 +26,12 @@ export const CategoriesList = (props: { categories: Categories[] }) => {
             </h2>
           </div>
           <div
-            className={cx('flex flex-row', {
+            className={cn('flex flex-row', {
               'flex-row-reverse': i % 2 === 0,
             })}>
             <Link
               to={`/category/${cat.slug}`}
-              className={cx('w-full d:min-w-6/12', {
+              className={cn('w-full d:min-w-6/12', {
                 'mr-3': i % 2 !== 0,
                 'ml-3': i % 2 === 0,
               })}>

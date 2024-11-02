@@ -1,7 +1,7 @@
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { Groups } from "@prisma/client";
 import { Outlet, useLoaderData } from "@remix-run/react";
-import cx from 'classnames';
+import { cn } from '~/utils';
 import { useContext } from 'react';
 import { MediaContext } from '~/context';
 import { GroupInfo, GroupTabs } from "./components";
@@ -13,7 +13,7 @@ export default function GroupPage() {
 
   return (
     <div
-      className={cx({
+      className={cn({
         'flex items-start': isDesktop,
       })}>
       <GroupInfo

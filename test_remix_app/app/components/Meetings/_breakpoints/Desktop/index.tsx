@@ -1,13 +1,10 @@
-import cx from 'classnames';
 import dayJS from 'dayjs';
 import _ from 'lodash';
 import querystring from 'qs';
 import { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
-
 import { Emoji, ExternalLink, MeetingFeaturedImage } from '~/components';
-import { slugify } from '~/utils';
-
+import { cn, slugify } from '~/utils';
 import { tProps } from './_types';
 
 export const DesktopMeetings: FunctionComponent<tProps> = props => {
@@ -15,12 +12,7 @@ export const DesktopMeetings: FunctionComponent<tProps> = props => {
   const now = dayJS();
 
   return (
-    <ul
-      className={cx('animated fadeInUp', {
-        'flex flex-row text-left': props.horizontal,
-        'justify-center': props.horizontal && props.meetingsToRender.length > 1,
-        'justify-between': props.horizontal && props.meetingsToRender.length === 4,
-      })}>
+    <ul className='animated fadeInUp'>
       {props.publishedFilter === 'upcoming'
         && (
           <li className="font-semibold mb-2">
@@ -48,41 +40,33 @@ export const DesktopMeetings: FunctionComponent<tProps> = props => {
         return (
           <li
             key={meeting.id}
-            className={cx({
-              'mb-2': !props.horizontal,
-              'w-3/12 flex-grow-0 bg-white p-1': props.horizontal,
-              'mr-2': props.horizontal && i !== props.meetingsToRender.length - 1,
+            className={cn('mb-4', {
               'opacity-5': isPastMeeting,
             })}>
             <div
-              className={cx({
-                'flex flex-row items-center': !props.horizontal,
+              className={cn('flex flex-row', {
                 'p-2 hover:bg-gray-1 rounded': props.isEditable,
               })}>
-              <div
-                className={cx({
-                  'mr-2 max-w-4/12 min-w-4/12': !props.horizontal,
-                  'mb-2': props.horizontal,
-                })}>
+              <div className='mr-2 w-4/12'>
                 <Link
                   to={meeting.isDraft
                     ? `/draft/${meeting.id}/${meeting.slug}`
                     : `/meeting/${meeting.id}/${meeting.slug}`}>
                   <MeetingFeaturedImage
-                    className="mFI"
+                    // className="mFI"
                     img={meeting.img}
                     seed={meeting.id}
                   />
                 </Link>
               </div>
-              <div>
-                {meeting.isOnline && (
+              <div className='w-8/12'>
+                {meeting.location === 'online' && (
                   <div className="flex items-center mb-1 text-red-3 text-sm font-bold">
                     <img
                       alt=""
                       height="10"
                       className="mr-1"
-                      src="/images/online.svg"
+                      src="/online.svg"
                       width="16"
                     /> Online <span className="ml-1 mr-1">@</span>
                     <time dateTime={meeting.date}>
@@ -90,8 +74,7 @@ export const DesktopMeetings: FunctionComponent<tProps> = props => {
                     </time>
                   </div>
                 )}
-                {!meeting.isOnline
-                  && meeting.location
+                {meeting.location !== 'online'
                   && (
                     <div className="flex mb-1 text-sm text-red-3 font-bold leading-none">
                       <time className="mr-1" dateTime={meeting.date}>

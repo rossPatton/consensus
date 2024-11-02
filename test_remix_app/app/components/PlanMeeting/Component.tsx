@@ -1,5 +1,5 @@
 "use client";
-import cx from 'classnames';
+import { cn } from '~/utils';
 import dayJS from 'dayjs';
 import { Link } from 'react-router-dom';
 
@@ -182,7 +182,7 @@ export const PlanMeetingComponent = (props: tComponentProps) => {
 //     <>
 //       <button
 //         id="testPublish"
-//         className={cx({
+//         className={cn({
 //           'p-2 mr-1': true,
 //           'bg-green-1 hover:bg-green-2': !disableSubmit,
 //         })}

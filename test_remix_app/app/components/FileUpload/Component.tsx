@@ -1,7 +1,6 @@
-import cx from 'classnames';
+import { cn } from '~/utils';
 import { memo } from 'react';
 import { v1 } from 'uuid';
-
 import { Emoji } from '~/components';
 import { spacesUrl } from '~/constants';
 
@@ -14,8 +13,7 @@ export const FileUploadComponent = memo((props: tComponentProps) => (
     </h3>
     <div
       id="imagePreview"
-      className={cx({
-        'animated bg-gray-1 p-3 mb-3 flex flex-col items-center': true,
+      className={cn('animated bg-gray-1 p-3 mb-3 flex flex-col items-center', {
         'fadeInDown': props.img,
         'hidden': !props.img,
       })}>
@@ -34,7 +32,7 @@ export const FileUploadComponent = memo((props: tComponentProps) => (
           alt="Your uploaded file preview."
           width={props.width}
           src={`${spacesUrl}/${props.folder}/${props.img}?v=${v1()}`}
-          className={cx({
+          className={cn({
             rounded: true,
             'w-full': !props.fieldKey.includes('Avatar'),
           })}
@@ -43,8 +41,7 @@ export const FileUploadComponent = memo((props: tComponentProps) => (
     </div>
     <label
       htmlFor="fileUpload"
-      className={cx({
-        'fadeInDown bg-gray-1 border cursor-ptr flex flex-col items-center mb-3 p-3 animated': true,
+      className={cn('fadeInDown bg-gray-1 border cursor-ptr flex flex-col items-center mb-3 p-3 animated', {
         'fadeInDown': !props.img,
         'hidden': props.img,
       })}>
@@ -54,7 +51,7 @@ export const FileUploadComponent = memo((props: tComponentProps) => (
         name="eventFeaturedImage"
         onChange={props.setImage}
         type="file"
-        className={cx({
+        className={cn({
           hidden: true,
         })}
       />

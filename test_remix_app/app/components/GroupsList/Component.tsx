@@ -1,4 +1,4 @@
-import cx from 'classnames';
+import { cn } from '~/utils';
 import _ from 'lodash';
 import { memo } from 'react';
 
@@ -11,7 +11,7 @@ export const GroupsComponent = (props: tComponentProps) => {
   }
 
   return (
-    <ul className={cx({ 'flex flex-wrap': !props.asList })}>
+    <ul className={cn({ 'flex flex-wrap': !props.asList })}>
       {props?.groups.length > 0
         && props?.pendingGroups?.length > 0
         && (

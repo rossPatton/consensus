@@ -1,4 +1,4 @@
-import cx from 'classnames';
+import { cn } from '~/utils';
 import { FunctionComponent } from 'react';
 
 import { spacesUrl } from '~/constants';
@@ -24,7 +24,7 @@ export const MeetingFeaturedImage: FunctionComponent<tProps> = props => {
           />
         ) : (
           <div
-            className={cx({
+            className={cn({
               'rounded placeholder': true,
               'bg-peach-2': color === 0,
               'bg-forest': color === 1,

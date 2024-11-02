@@ -1,4 +1,4 @@
-import cx from 'classnames';
+import { cn } from '~/utils';
 import { Link, useParams } from '@remix-run/react';
 
 export const Tab = (props: { text: string, to: string }) => {
@@ -13,7 +13,7 @@ export const Tab = (props: { text: string, to: string }) => {
   // const text = routeDisplayMap[subRoute];
   // const isMeetings = subRoute === '' && typeof section === 'undefined';
   // const isActive = isMeetings || section === subRoute;
-  const className = cx({
+  const className = cn({
     'text-gray-5': true,
     // 'd:ml-2': ['', 'members'].indexOf(subRoute) === -1,
     // 'text-base d:text-3': isActive,

@@ -1,4 +1,4 @@
-import cx from 'classnames';
+import { cn } from '~/utils';
 import { find } from 'lodash-es';
 import { Link } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ export const Group = (props: tProps) => {
   return (
     <li
       key={props.index}
-      className={cx('relative', {
+      className={cn('relative', {
         'mb-2': props.asList,
         'w-full mb-2 d:mb-3': !props.asList,
         'd:w-3/12': !props.asList && props.groups.length > 3,
@@ -20,7 +20,7 @@ export const Group = (props: tProps) => {
       <div
         role="button"
         tabIndex={0}
-        className={cx('flex items-center p-1', {
+        className={cn('flex items-center p-1', {
           'hover:bg-gray-3': props.isEditable,
         })}
         onMouseEnter={() => props.setHover(props?.index!, role)}
@@ -44,7 +44,7 @@ export const Group = (props: tProps) => {
             </Link>
           </h3>
           <div
-            className={cx('text-sm text-gray-5 font-bold', {
+            className={cn('text-sm text-gray-5 font-bold', {
               'flex items-center': props.asList,
             })}>
             {props.showType && (
@@ -54,7 +54,7 @@ export const Group = (props: tProps) => {
             )}
             {props.showCategory && (
               <span
-                className={cx({
+                className={cn({
                   'mr-2': props.asList,
                   'mb-1': !props.asList,
                 })}>
@@ -63,7 +63,7 @@ export const Group = (props: tProps) => {
             )}
             {props.showLocation && (
               <span
-                className={cx('mr-2', {
+                className={cn('mr-2', {
                   'mb-1': !props.asList,
                 })}>
                 Based in {props.group.city}

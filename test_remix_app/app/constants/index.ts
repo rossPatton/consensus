@@ -1,4 +1,5 @@
-export const categories: ts.categoryObj[] = [
+// TODO: some of these should be reviewed/removed
+export const categories = [
   {
     align: 'left',
     display: 'Community',
@@ -23,14 +24,14 @@ export const categories: ts.categoryObj[] = [
     slug: 'political',
     description: "From anarchist collectives to the Democratic Socialists of America or Tech Worker's Coalition, get involved with your local political group today.",
   },
-];
+] as const;
 
-export const categoryMap: ts.categoryMap = {
+export const categoryMap = {
   'community': 'Community',
   'cooperative': 'Cooperative',
   'union': 'Union',
   'political': 'Political',
-};
+} as const;
 
 export const meetingTypes = [
   'Meeting',
@@ -42,7 +43,7 @@ export const meetingTypes = [
   'Picket',
   'Vote',
   'Election',
-];
+] as const;
 
 export const roles = ['member', 'facilitator'] as const;
 

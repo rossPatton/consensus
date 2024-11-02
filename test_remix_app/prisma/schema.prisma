@@ -71,6 +71,7 @@ model Meetings {
   updated      DateTime       @default(now()) @db.Timestamp(6)
   category     String         @db.Uuid
   description  String         @default("") @db.VarChar(1000)
+  isDraft      Boolean        @default(true)
   title        String         @default("") @db.VarChar(255)
   group        String         @db.Uuid
   type         meeting_types  @default(Meeting)
