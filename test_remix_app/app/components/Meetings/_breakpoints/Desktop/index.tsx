@@ -49,7 +49,7 @@ export const DesktopMeetings: FunctionComponent<tProps> = props => {
               })}>
               <div className='mr-2 w-4/12'>
                 <Link
-                  to={meeting.isDraft
+                  to={meeting.status === "Draft"
                     ? `/draft/${meeting.id}/${meeting.slug}`
                     : `/meeting/${meeting.id}/${meeting.slug}`}>
                   <MeetingFeaturedImage
@@ -97,8 +97,8 @@ export const DesktopMeetings: FunctionComponent<tProps> = props => {
                     </div>
                   )}
                 <h3 className="capitalize mb-2 leading-tight">
-                  {meeting.isDraft && meeting.title}
-                  {!meeting.isDraft
+                  {meeting.status === "Draft" && meeting.title}
+                  {meeting.status !== "Draft"
                     && (
                       <Link to={`/meeting/${meeting.id}/${meeting.slug}`}>
                         {meeting.title}

@@ -18,7 +18,7 @@ export const DecisionsScalarFieldEnumSchema = z.enum(['id','created','updated','
 
 export const GroupsScalarFieldEnumSchema = z.enum(['id','category','description','memberName','modName','privacyType','created','updated','uuid','name','slug','bluesky','facebook','instagram','mastodon','medium','substack','tumblr','twitter','website']);
 
-export const MeetingsScalarFieldEnumSchema = z.enum(['id','img','created','updated','category','description','title','group','type','location','locationLink','status','slug','datetime','host','duration','uuid']);
+export const MeetingsScalarFieldEnumSchema = z.enum(['id','img','created','updated','category','description','isDraft','isPrivate','title','group','type','location','locationLink','status','slug','datetime','host','duration','uuid']);
 
 export const RSVPSScalarFieldEnumSchema = z.enum(['id','uuid','user','meeting','value','type','created','updated']);
 
@@ -145,6 +145,8 @@ export const MeetingsSchema = z.object({
   updated: z.coerce.date(),
   category: z.string(),
   description: z.string(),
+  isDraft: z.boolean(),
+  isPrivate: z.boolean(),
   title: z.string(),
   group: z.string(),
   location: z.string(),
@@ -369,6 +371,8 @@ export const MeetingsSelectSchema: z.ZodType<Prisma.MeetingsSelect> = z.object({
   updated: z.boolean().optional(),
   category: z.boolean().optional(),
   description: z.boolean().optional(),
+  isDraft: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
   title: z.boolean().optional(),
   group: z.boolean().optional(),
   type: z.boolean().optional(),
@@ -790,6 +794,8 @@ export const MeetingsWhereInputSchema: z.ZodType<Prisma.MeetingsWhereInput> = z.
   updated: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   category: z.union([ z.lazy(() => UuidFilterSchema),z.string() ]).optional(),
   description: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  isDraft: z.union([ z.lazy(() => BoolFilterSchema),z.boolean() ]).optional(),
+  isPrivate: z.union([ z.lazy(() => BoolFilterSchema),z.boolean() ]).optional(),
   title: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   group: z.union([ z.lazy(() => UuidFilterSchema),z.string() ]).optional(),
   type: z.union([ z.lazy(() => Enummeeting_typesFilterSchema),z.lazy(() => meeting_typesSchema) ]).optional(),
@@ -814,6 +820,8 @@ export const MeetingsOrderByWithRelationInputSchema: z.ZodType<Prisma.MeetingsOr
   updated: z.lazy(() => SortOrderSchema).optional(),
   category: z.lazy(() => SortOrderSchema).optional(),
   description: z.lazy(() => SortOrderSchema).optional(),
+  isDraft: z.lazy(() => SortOrderSchema).optional(),
+  isPrivate: z.lazy(() => SortOrderSchema).optional(),
   title: z.lazy(() => SortOrderSchema).optional(),
   group: z.lazy(() => SortOrderSchema).optional(),
   type: z.lazy(() => SortOrderSchema).optional(),
@@ -854,6 +862,8 @@ export const MeetingsWhereUniqueInputSchema: z.ZodType<Prisma.MeetingsWhereUniqu
   updated: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   category: z.union([ z.lazy(() => UuidFilterSchema),z.string() ]).optional(),
   description: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  isDraft: z.union([ z.lazy(() => BoolFilterSchema),z.boolean() ]).optional(),
+  isPrivate: z.union([ z.lazy(() => BoolFilterSchema),z.boolean() ]).optional(),
   title: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   group: z.union([ z.lazy(() => UuidFilterSchema),z.string() ]).optional(),
   type: z.union([ z.lazy(() => Enummeeting_typesFilterSchema),z.lazy(() => meeting_typesSchema) ]).optional(),
@@ -877,6 +887,8 @@ export const MeetingsOrderByWithAggregationInputSchema: z.ZodType<Prisma.Meeting
   updated: z.lazy(() => SortOrderSchema).optional(),
   category: z.lazy(() => SortOrderSchema).optional(),
   description: z.lazy(() => SortOrderSchema).optional(),
+  isDraft: z.lazy(() => SortOrderSchema).optional(),
+  isPrivate: z.lazy(() => SortOrderSchema).optional(),
   title: z.lazy(() => SortOrderSchema).optional(),
   group: z.lazy(() => SortOrderSchema).optional(),
   type: z.lazy(() => SortOrderSchema).optional(),
@@ -905,6 +917,8 @@ export const MeetingsScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma.Meet
   updated: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
   category: z.union([ z.lazy(() => UuidWithAggregatesFilterSchema),z.string() ]).optional(),
   description: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  isDraft: z.union([ z.lazy(() => BoolWithAggregatesFilterSchema),z.boolean() ]).optional(),
+  isPrivate: z.union([ z.lazy(() => BoolWithAggregatesFilterSchema),z.boolean() ]).optional(),
   title: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   group: z.union([ z.lazy(() => UuidWithAggregatesFilterSchema),z.string() ]).optional(),
   type: z.union([ z.lazy(() => Enummeeting_typesWithAggregatesFilterSchema),z.lazy(() => meeting_typesSchema) ]).optional(),
@@ -1454,6 +1468,8 @@ export const MeetingsCreateInputSchema: z.ZodType<Prisma.MeetingsCreateInput> = 
   created: z.coerce.date().optional(),
   updated: z.coerce.date().optional(),
   description: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
   title: z.string().optional(),
   type: z.lazy(() => meeting_typesSchema).optional(),
   location: z.string().optional(),
@@ -1476,6 +1492,8 @@ export const MeetingsUncheckedCreateInputSchema: z.ZodType<Prisma.MeetingsUnchec
   updated: z.coerce.date().optional(),
   category: z.string(),
   description: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
   title: z.string().optional(),
   group: z.string(),
   type: z.lazy(() => meeting_typesSchema).optional(),
@@ -1495,6 +1513,8 @@ export const MeetingsUpdateInputSchema: z.ZodType<Prisma.MeetingsUpdateInput> = 
   created: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  isDraft: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
+  isPrivate: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   title: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   type: z.union([ z.lazy(() => meeting_typesSchema),z.lazy(() => Enummeeting_typesFieldUpdateOperationsInputSchema) ]).optional(),
   location: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -1517,6 +1537,8 @@ export const MeetingsUncheckedUpdateInputSchema: z.ZodType<Prisma.MeetingsUnchec
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   category: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  isDraft: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
+  isPrivate: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   title: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   group: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   type: z.union([ z.lazy(() => meeting_typesSchema),z.lazy(() => Enummeeting_typesFieldUpdateOperationsInputSchema) ]).optional(),
@@ -1538,6 +1560,8 @@ export const MeetingsCreateManyInputSchema: z.ZodType<Prisma.MeetingsCreateManyI
   updated: z.coerce.date().optional(),
   category: z.string(),
   description: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
   title: z.string().optional(),
   group: z.string(),
   type: z.lazy(() => meeting_typesSchema).optional(),
@@ -1556,6 +1580,8 @@ export const MeetingsUpdateManyMutationInputSchema: z.ZodType<Prisma.MeetingsUpd
   created: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  isDraft: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
+  isPrivate: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   title: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   type: z.union([ z.lazy(() => meeting_typesSchema),z.lazy(() => Enummeeting_typesFieldUpdateOperationsInputSchema) ]).optional(),
   location: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -1574,6 +1600,8 @@ export const MeetingsUncheckedUpdateManyInputSchema: z.ZodType<Prisma.MeetingsUn
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   category: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  isDraft: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
+  isPrivate: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   title: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   group: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   type: z.union([ z.lazy(() => meeting_typesSchema),z.lazy(() => Enummeeting_typesFieldUpdateOperationsInputSchema) ]).optional(),
@@ -2080,6 +2108,11 @@ export const GroupsSumOrderByAggregateInputSchema: z.ZodType<Prisma.GroupsSumOrd
   id: z.lazy(() => SortOrderSchema).optional()
 }).strict() as z.ZodType<Prisma.GroupsSumOrderByAggregateInput>;
 
+export const BoolFilterSchema: z.ZodType<Prisma.BoolFilter> = z.object({
+  equals: z.boolean().optional(),
+  not: z.union([ z.boolean(),z.lazy(() => NestedBoolFilterSchema) ]).optional(),
+}).strict() as z.ZodType<Prisma.BoolFilter>;
+
 export const Enummeeting_typesFilterSchema: z.ZodType<Prisma.Enummeeting_typesFilter> = z.object({
   equals: z.lazy(() => meeting_typesSchema).optional(),
   in: z.lazy(() => meeting_typesSchema).array().optional(),
@@ -2121,6 +2154,8 @@ export const MeetingsCountOrderByAggregateInputSchema: z.ZodType<Prisma.Meetings
   updated: z.lazy(() => SortOrderSchema).optional(),
   category: z.lazy(() => SortOrderSchema).optional(),
   description: z.lazy(() => SortOrderSchema).optional(),
+  isDraft: z.lazy(() => SortOrderSchema).optional(),
+  isPrivate: z.lazy(() => SortOrderSchema).optional(),
   title: z.lazy(() => SortOrderSchema).optional(),
   group: z.lazy(() => SortOrderSchema).optional(),
   type: z.lazy(() => SortOrderSchema).optional(),
@@ -2146,6 +2181,8 @@ export const MeetingsMaxOrderByAggregateInputSchema: z.ZodType<Prisma.MeetingsMa
   updated: z.lazy(() => SortOrderSchema).optional(),
   category: z.lazy(() => SortOrderSchema).optional(),
   description: z.lazy(() => SortOrderSchema).optional(),
+  isDraft: z.lazy(() => SortOrderSchema).optional(),
+  isPrivate: z.lazy(() => SortOrderSchema).optional(),
   title: z.lazy(() => SortOrderSchema).optional(),
   group: z.lazy(() => SortOrderSchema).optional(),
   type: z.lazy(() => SortOrderSchema).optional(),
@@ -2166,6 +2203,8 @@ export const MeetingsMinOrderByAggregateInputSchema: z.ZodType<Prisma.MeetingsMi
   updated: z.lazy(() => SortOrderSchema).optional(),
   category: z.lazy(() => SortOrderSchema).optional(),
   description: z.lazy(() => SortOrderSchema).optional(),
+  isDraft: z.lazy(() => SortOrderSchema).optional(),
+  isPrivate: z.lazy(() => SortOrderSchema).optional(),
   title: z.lazy(() => SortOrderSchema).optional(),
   group: z.lazy(() => SortOrderSchema).optional(),
   type: z.lazy(() => SortOrderSchema).optional(),
@@ -2183,6 +2222,14 @@ export const MeetingsSumOrderByAggregateInputSchema: z.ZodType<Prisma.MeetingsSu
   id: z.lazy(() => SortOrderSchema).optional(),
   duration: z.lazy(() => SortOrderSchema).optional()
 }).strict() as z.ZodType<Prisma.MeetingsSumOrderByAggregateInput>;
+
+export const BoolWithAggregatesFilterSchema: z.ZodType<Prisma.BoolWithAggregatesFilter> = z.object({
+  equals: z.boolean().optional(),
+  not: z.union([ z.boolean(),z.lazy(() => NestedBoolWithAggregatesFilterSchema) ]).optional(),
+  _count: z.lazy(() => NestedIntFilterSchema).optional(),
+  _min: z.lazy(() => NestedBoolFilterSchema).optional(),
+  _max: z.lazy(() => NestedBoolFilterSchema).optional()
+}).strict() as z.ZodType<Prisma.BoolWithAggregatesFilter>;
 
 export const Enummeeting_typesWithAggregatesFilterSchema: z.ZodType<Prisma.Enummeeting_typesWithAggregatesFilter> = z.object({
   equals: z.lazy(() => meeting_typesSchema).optional(),
@@ -2589,6 +2636,10 @@ export const RSVPSUncheckedCreateNestedManyWithoutMeetingsInputSchema: z.ZodType
   connect: z.union([ z.lazy(() => RSVPSWhereUniqueInputSchema),z.lazy(() => RSVPSWhereUniqueInputSchema).array() ]).optional(),
 }).strict() as z.ZodType<Prisma.RSVPSUncheckedCreateNestedManyWithoutMeetingsInput>;
 
+export const BoolFieldUpdateOperationsInputSchema: z.ZodType<Prisma.BoolFieldUpdateOperationsInput> = z.object({
+  set: z.boolean().optional()
+}).strict() as z.ZodType<Prisma.BoolFieldUpdateOperationsInput>;
+
 export const Enummeeting_typesFieldUpdateOperationsInputSchema: z.ZodType<Prisma.Enummeeting_typesFieldUpdateOperationsInput> = z.object({
   set: z.lazy(() => meeting_typesSchema).optional()
 }).strict() as z.ZodType<Prisma.Enummeeting_typesFieldUpdateOperationsInput>;
@@ -2958,6 +3009,11 @@ export const NestedDateTimeWithAggregatesFilterSchema: z.ZodType<Prisma.NestedDa
   _max: z.lazy(() => NestedDateTimeFilterSchema).optional()
 }).strict() as z.ZodType<Prisma.NestedDateTimeWithAggregatesFilter>;
 
+export const NestedBoolFilterSchema: z.ZodType<Prisma.NestedBoolFilter> = z.object({
+  equals: z.boolean().optional(),
+  not: z.union([ z.boolean(),z.lazy(() => NestedBoolFilterSchema) ]).optional(),
+}).strict() as z.ZodType<Prisma.NestedBoolFilter>;
+
 export const NestedEnummeeting_typesFilterSchema: z.ZodType<Prisma.NestedEnummeeting_typesFilter> = z.object({
   equals: z.lazy(() => meeting_typesSchema).optional(),
   in: z.lazy(() => meeting_typesSchema).array().optional(),
@@ -2971,6 +3027,14 @@ export const NestedEnummeeting_statusFilterSchema: z.ZodType<Prisma.NestedEnumme
   notIn: z.lazy(() => meeting_statusSchema).array().optional(),
   not: z.union([ z.lazy(() => meeting_statusSchema),z.lazy(() => NestedEnummeeting_statusFilterSchema) ]).optional(),
 }).strict() as z.ZodType<Prisma.NestedEnummeeting_statusFilter>;
+
+export const NestedBoolWithAggregatesFilterSchema: z.ZodType<Prisma.NestedBoolWithAggregatesFilter> = z.object({
+  equals: z.boolean().optional(),
+  not: z.union([ z.boolean(),z.lazy(() => NestedBoolWithAggregatesFilterSchema) ]).optional(),
+  _count: z.lazy(() => NestedIntFilterSchema).optional(),
+  _min: z.lazy(() => NestedBoolFilterSchema).optional(),
+  _max: z.lazy(() => NestedBoolFilterSchema).optional()
+}).strict() as z.ZodType<Prisma.NestedBoolWithAggregatesFilter>;
 
 export const NestedEnummeeting_typesWithAggregatesFilterSchema: z.ZodType<Prisma.NestedEnummeeting_typesWithAggregatesFilter> = z.object({
   equals: z.lazy(() => meeting_typesSchema).optional(),
@@ -3088,6 +3152,8 @@ export const MeetingsCreateWithoutCategoriesInputSchema: z.ZodType<Prisma.Meetin
   created: z.coerce.date().optional(),
   updated: z.coerce.date().optional(),
   description: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
   title: z.string().optional(),
   type: z.lazy(() => meeting_typesSchema).optional(),
   location: z.string().optional(),
@@ -3108,6 +3174,8 @@ export const MeetingsUncheckedCreateWithoutCategoriesInputSchema: z.ZodType<Pris
   created: z.coerce.date().optional(),
   updated: z.coerce.date().optional(),
   description: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
   title: z.string().optional(),
   group: z.string(),
   type: z.lazy(() => meeting_typesSchema).optional(),
@@ -3200,6 +3268,8 @@ export const MeetingsScalarWhereInputSchema: z.ZodType<Prisma.MeetingsScalarWher
   updated: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   category: z.union([ z.lazy(() => UuidFilterSchema),z.string() ]).optional(),
   description: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  isDraft: z.union([ z.lazy(() => BoolFilterSchema),z.boolean() ]).optional(),
+  isPrivate: z.union([ z.lazy(() => BoolFilterSchema),z.boolean() ]).optional(),
   title: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   group: z.union([ z.lazy(() => UuidFilterSchema),z.string() ]).optional(),
   type: z.union([ z.lazy(() => Enummeeting_typesFilterSchema),z.lazy(() => meeting_typesSchema) ]).optional(),
@@ -3244,6 +3314,8 @@ export const MeetingsCreateWithoutGroupsInputSchema: z.ZodType<Prisma.MeetingsCr
   created: z.coerce.date().optional(),
   updated: z.coerce.date().optional(),
   description: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
   title: z.string().optional(),
   type: z.lazy(() => meeting_typesSchema).optional(),
   location: z.string().optional(),
@@ -3265,6 +3337,8 @@ export const MeetingsUncheckedCreateWithoutGroupsInputSchema: z.ZodType<Prisma.M
   updated: z.coerce.date().optional(),
   category: z.string(),
   description: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
   title: z.string().optional(),
   type: z.lazy(() => meeting_typesSchema).optional(),
   location: z.string().optional(),
@@ -3678,6 +3752,8 @@ export const MeetingsCreateWithoutRsvpsInputSchema: z.ZodType<Prisma.MeetingsCre
   created: z.coerce.date().optional(),
   updated: z.coerce.date().optional(),
   description: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
   title: z.string().optional(),
   type: z.lazy(() => meeting_typesSchema).optional(),
   location: z.string().optional(),
@@ -3699,6 +3775,8 @@ export const MeetingsUncheckedCreateWithoutRsvpsInputSchema: z.ZodType<Prisma.Me
   updated: z.coerce.date().optional(),
   category: z.string(),
   description: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
   title: z.string().optional(),
   group: z.string(),
   type: z.lazy(() => meeting_typesSchema).optional(),
@@ -3757,6 +3835,8 @@ export const MeetingsUpdateWithoutRsvpsInputSchema: z.ZodType<Prisma.MeetingsUpd
   created: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  isDraft: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
+  isPrivate: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   title: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   type: z.union([ z.lazy(() => meeting_typesSchema),z.lazy(() => Enummeeting_typesFieldUpdateOperationsInputSchema) ]).optional(),
   location: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -3778,6 +3858,8 @@ export const MeetingsUncheckedUpdateWithoutRsvpsInputSchema: z.ZodType<Prisma.Me
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   category: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  isDraft: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
+  isPrivate: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   title: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   group: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   type: z.union([ z.lazy(() => meeting_typesSchema),z.lazy(() => Enummeeting_typesFieldUpdateOperationsInputSchema) ]).optional(),
@@ -3826,6 +3908,8 @@ export const MeetingsCreateWithoutUsersInputSchema: z.ZodType<Prisma.MeetingsCre
   created: z.coerce.date().optional(),
   updated: z.coerce.date().optional(),
   description: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
   title: z.string().optional(),
   type: z.lazy(() => meeting_typesSchema).optional(),
   location: z.string().optional(),
@@ -3847,6 +3931,8 @@ export const MeetingsUncheckedCreateWithoutUsersInputSchema: z.ZodType<Prisma.Me
   updated: z.coerce.date().optional(),
   category: z.string(),
   description: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
   title: z.string().optional(),
   group: z.string(),
   type: z.lazy(() => meeting_typesSchema).optional(),
@@ -4166,6 +4252,8 @@ export const MeetingsCreateManyCategoriesInputSchema: z.ZodType<Prisma.MeetingsC
   created: z.coerce.date().optional(),
   updated: z.coerce.date().optional(),
   description: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
   title: z.string().optional(),
   group: z.string(),
   type: z.lazy(() => meeting_typesSchema).optional(),
@@ -4253,6 +4341,8 @@ export const MeetingsUpdateWithoutCategoriesInputSchema: z.ZodType<Prisma.Meetin
   created: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  isDraft: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
+  isPrivate: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   title: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   type: z.union([ z.lazy(() => meeting_typesSchema),z.lazy(() => Enummeeting_typesFieldUpdateOperationsInputSchema) ]).optional(),
   location: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -4273,6 +4363,8 @@ export const MeetingsUncheckedUpdateWithoutCategoriesInputSchema: z.ZodType<Pris
   created: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  isDraft: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
+  isPrivate: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   title: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   group: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   type: z.union([ z.lazy(() => meeting_typesSchema),z.lazy(() => Enummeeting_typesFieldUpdateOperationsInputSchema) ]).optional(),
@@ -4293,6 +4385,8 @@ export const MeetingsUncheckedUpdateManyWithoutCategoriesInputSchema: z.ZodType<
   created: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  isDraft: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
+  isPrivate: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   title: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   group: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   type: z.union([ z.lazy(() => meeting_typesSchema),z.lazy(() => Enummeeting_typesFieldUpdateOperationsInputSchema) ]).optional(),
@@ -4313,6 +4407,8 @@ export const MeetingsCreateManyGroupsInputSchema: z.ZodType<Prisma.MeetingsCreat
   updated: z.coerce.date().optional(),
   category: z.string(),
   description: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
   title: z.string().optional(),
   type: z.lazy(() => meeting_typesSchema).optional(),
   location: z.string().optional(),
@@ -4339,6 +4435,8 @@ export const MeetingsUpdateWithoutGroupsInputSchema: z.ZodType<Prisma.MeetingsUp
   created: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  isDraft: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
+  isPrivate: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   title: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   type: z.union([ z.lazy(() => meeting_typesSchema),z.lazy(() => Enummeeting_typesFieldUpdateOperationsInputSchema) ]).optional(),
   location: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -4360,6 +4458,8 @@ export const MeetingsUncheckedUpdateWithoutGroupsInputSchema: z.ZodType<Prisma.M
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   category: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  isDraft: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
+  isPrivate: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   title: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   type: z.union([ z.lazy(() => meeting_typesSchema),z.lazy(() => Enummeeting_typesFieldUpdateOperationsInputSchema) ]).optional(),
   location: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -4380,6 +4480,8 @@ export const MeetingsUncheckedUpdateManyWithoutGroupsInputSchema: z.ZodType<Pris
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   category: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  isDraft: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
+  isPrivate: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   title: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   type: z.union([ z.lazy(() => meeting_typesSchema),z.lazy(() => Enummeeting_typesFieldUpdateOperationsInputSchema) ]).optional(),
   location: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -4464,6 +4566,8 @@ export const MeetingsCreateManyUsersInputSchema: z.ZodType<Prisma.MeetingsCreate
   updated: z.coerce.date().optional(),
   category: z.string(),
   description: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
   title: z.string().optional(),
   group: z.string(),
   type: z.lazy(() => meeting_typesSchema).optional(),
@@ -4500,6 +4604,8 @@ export const MeetingsUpdateWithoutUsersInputSchema: z.ZodType<Prisma.MeetingsUpd
   created: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  isDraft: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
+  isPrivate: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   title: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   type: z.union([ z.lazy(() => meeting_typesSchema),z.lazy(() => Enummeeting_typesFieldUpdateOperationsInputSchema) ]).optional(),
   location: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -4521,6 +4627,8 @@ export const MeetingsUncheckedUpdateWithoutUsersInputSchema: z.ZodType<Prisma.Me
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   category: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  isDraft: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
+  isPrivate: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   title: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   group: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   type: z.union([ z.lazy(() => meeting_typesSchema),z.lazy(() => Enummeeting_typesFieldUpdateOperationsInputSchema) ]).optional(),
@@ -4541,6 +4649,8 @@ export const MeetingsUncheckedUpdateManyWithoutUsersInputSchema: z.ZodType<Prism
   updated: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   category: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  isDraft: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
+  isPrivate: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   title: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   group: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   type: z.union([ z.lazy(() => meeting_typesSchema),z.lazy(() => Enummeeting_typesFieldUpdateOperationsInputSchema) ]).optional(),

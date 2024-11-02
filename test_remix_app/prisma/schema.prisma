@@ -72,6 +72,7 @@ model Meetings {
   category     String         @db.Uuid
   description  String         @default("") @db.VarChar(1000)
   isDraft      Boolean        @default(true)
+  isPrivate    Boolean        @default(false)
   title        String         @default("") @db.VarChar(255)
   group        String         @db.Uuid
   type         meeting_types  @default(Meeting)
