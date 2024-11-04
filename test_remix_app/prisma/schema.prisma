@@ -4,8 +4,8 @@ generator client {
 
 generator zod {
   provider           = "zod-prisma-types"
-  createPartialTypes = "true"
   useTypeAssertions  = "true"
+  createPartialTypes = "true"
 }
 
 datasource db {
@@ -66,13 +66,10 @@ model Groups {
 
 model Meetings {
   id           Int            @id @default(autoincrement())
-  img          String         @default("") @db.VarChar(255)
   created      DateTime       @default(now()) @db.Timestamp(6)
   updated      DateTime       @default(now()) @db.Timestamp(6)
   category     String         @db.Uuid
   description  String         @default("") @db.VarChar(1000)
-  isDraft      Boolean        @default(true)
-  isPrivate    Boolean        @default(false)
   title        String         @default("") @db.VarChar(255)
   group        String         @db.Uuid
   type         meeting_types  @default(Meeting)
@@ -84,6 +81,7 @@ model Meetings {
   host         String         @db.Uuid
   duration     Int            @db.SmallInt
   uuid         String         @unique(map: "meetings_uuid_idx") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  img          String         @default("") @db.VarChar(255)
   categories   Categories     @relation(fields: [category], references: [uuid])
   groups       Groups         @relation(fields: [group], references: [uuid])
   users        Users          @relation(fields: [host], references: [uuid])

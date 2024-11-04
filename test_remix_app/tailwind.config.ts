@@ -5,7 +5,6 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config = {
   content: ["./app/**/*.tsx"],
-  darkMode: ["class"],
   theme: {
     screens: {
       d: '1024px',

@@ -126,7 +126,7 @@ export const DesktopMeetings: FunctionComponent<tProps> = props => {
                           emoji="✍️"
                         /> Edit
                       </Link>
-                      {!meeting.isDraft
+                      {meeting.status !== "Draft"
                         && (
                           <Link
                             className="text-sm mr-2 no-underline"
@@ -149,7 +149,7 @@ export const DesktopMeetings: FunctionComponent<tProps> = props => {
                           /> Delete
                         </button>
                       )}
-                      {meeting.isDraft && (
+                      {meeting.status === "Draft" && (
                         <Link
                           to={`/draft/${meeting.id}`}
                           className="text-sm no-underline">
