@@ -13,72 +13,6 @@
 }
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 355.7 100% 97.3%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 142.1 76.2% 36.3%;
-    --radius: 0.5rem;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .dark {
-      --background: 20 14.3% 4.1%;
-      --foreground: 0 0% 95%;
-      --card: 24 9.8% 10%;
-      --card-foreground: 0 0% 95%;
-      --popover: 0 0% 9%;
-      --popover-foreground: 0 0% 95%;
-      --primary: 142.1 70.6% 45.3%;
-      --primary-foreground: 144.9 80.4% 10%;
-      --secondary: 240 3.7% 15.9%;
-      --secondary-foreground: 0 0% 98%;
-      --muted: 0 0% 15%;
-      --muted-foreground: 240 5% 64.9%;
-      --accent: 12 6.5% 15.1%;
-      --accent-foreground: 0 0% 98%;
-      --destructive: 0 62.8% 30.6%;
-      --destructive-foreground: 0 85.7% 97.3%;
-      --border: 240 3.7% 15.9%;
-      --input: 240 3.7% 15.9%;
-      --ring: 142.4 71.8% 29.2%;
-    }
-  }
-
-  html,
-  body {
-    background-color: #fff;
-    color: var(--color-scheme-text-color);
-
-    @media (prefers-color-scheme: dark) {
-      color: #fff;
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        color: #fff;
-      }
-    }
-  }
-
   html {
     -moz-osx-font-smoothing: grayscale;
     -ms-text-size-adjust: 100%;
@@ -91,6 +25,8 @@
   body {
     @apply pt-10;
     @apply font-sans;
+    background: #fff;
+    color: #333;
     letter-spacing: .03rem;
   }
 
@@ -99,8 +35,6 @@
   }
 
   p {
-    @apply mb-1;
-    @apply text-gray-500;
     line-height: 1.6rem;
   }
 
@@ -138,7 +72,6 @@
   h4,
   h5,
   h6 {
-    @apply font-semibold;
     color: #000;
     font-weight: 600;
     line-height: 1.25;
@@ -201,6 +134,7 @@
 
   input,
   textarea {
+    @apply bg-transparent;
     @apply border;
     @apply m-0;
     @apply contain-sm;
@@ -274,39 +208,6 @@
     -webkit-box-orient: vertical;
   }
 
-  /* drop the loading classes below and just use loading skeletons */
-  .loading {
-    @apply relative;
-    @apply inline-block;
-    width: 80px;
-    height: 80px;
-  }
-
-  .loading div {
-    @apply absolute;
-    @apply block;
-    animation: loading-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border: 8px solid #000;
-    border-color: #000 transparent transparent transparent;
-    border-radius: 50%;
-    box-sizing: border-box;
-    height: 64px;
-    margin: 8px;
-    width: 64px;
-  }
-
-  .loading div:nth-child(1) {
-    animation-delay: -0.45s;
-  }
-
-  .loading div:nth-child(2) {
-    animation-delay: -0.3s;
-  }
-
-  .loading div:nth-child(3) {
-    animation-delay: -0.15s;
-  }
-
   .viz-hidden {
     @apply absolute;
     @apply border-0;
@@ -341,6 +242,23 @@
     @apply block;
     content: '';
     padding-top: calc(100% * 5 / 9);
+  }
+
+  /* i dont have a theme switcher setup yet */
+  @media (prefers-color-scheme: dark) {
+    body {
+      @apply bg-zinc-800;
+      @apply text-zinc-300;
+    }
+
+    a,
+    h1,
+    h2,
+    h3,
+    h4 h5,
+    h6 {
+      @apply text-white;
+    }
   }
 }
 

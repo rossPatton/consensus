@@ -1305,6 +1305,62 @@
           "maxLength": null
         },
         {
+          "id": "public.users.email",
+          "name": "email",
+          "columnName": "email",
+          "type": "varchar",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": true,
+          "isId": false,
+          "maxLength": 255
+        },
+        {
+          "id": "public.users.firstName",
+          "name": "firstName",
+          "columnName": "firstName",
+          "type": "varchar",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": true,
+          "isId": false,
+          "maxLength": 255
+        },
+        {
+          "id": "public.users.lastName",
+          "name": "lastName",
+          "columnName": "lastName",
+          "type": "varchar",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": true,
+          "isId": false,
+          "maxLength": 255
+        },
+        {
+          "id": "public.users.username",
+          "name": "username",
+          "columnName": "username",
+          "type": "varchar",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": true,
+          "isId": false,
+          "maxLength": 255
+        },
+        {
           "name": "meetings",
           "type": "meetings",
           "isRequired": false,
@@ -1472,6 +1528,20 @@
           "maxLength": null
         },
         {
+          "id": "public.users_groups.status",
+          "name": "status",
+          "columnName": "status",
+          "type": "membership_status",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": true,
+          "isId": false,
+          "maxLength": null
+        },
+        {
           "name": "groups",
           "type": "groups",
           "isRequired": true,
@@ -1574,6 +1644,20 @@
         },
         {
           "name": "Vote"
+        }
+      ]
+    },
+    "membership_status": {
+      "schemaName": "public",
+      "values": [
+        {
+          "name": "Active"
+        },
+        {
+          "name": "Pending"
+        },
+        {
+          "name": "Revoked"
         }
       ]
     },

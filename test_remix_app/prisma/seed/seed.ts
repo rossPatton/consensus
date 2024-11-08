@@ -6,13 +6,12 @@
  */
 import { createSeedClient, meeting_statusEnum, meeting_typesEnum } from "@snaplet/seed";
 import { copycat, faker } from "@snaplet/copycat";
-import { generateMock } from "@anatine/zod-mock";
-import { MeetingsSchema } from "prisma/generated/zod";
 import { v7 } from "uuid";
 
 import { categories as catsConst, meetingTypes } from "../../app/constants";
 import { slugify } from "~/utils";
-import { Meetings } from "@prisma/client";
+import { membership_status, rsvp_status, rsvp_type } from "@prisma/client";
+import { db } from "~/utils/db.server";
 
 async function main() {
   const seed = await createSeedClient();
@@ -39,15 +38,22 @@ async function main() {
   const { users } = await seed.users(createMany => [
     {
       type: "admin",
+      email: "ross_patton@pm.me",
+      firstName: "Ross",
+      lastName: "Patton",
+      username: "tester",
       uuid: v7(),
     },
-    ...createMany(100, () => ({
+    ...createMany(100, ({ index }) => ({
       type: "member",
+      email: copycat.email(index),
+      firstName: copycat.firstName(index),
+      lastName: copycat.lastName(index),
+      username: copycat.username(index),
     })),
   ]);
-  console.log("users ? ", users);
 
-  let testMeetings = new Array(100).fill(null).map((_, i) => {
+  const meetings = new Array(100).fill(null).map((_, i) => {
     const title = faker.word.words({
       count: {
         min: 4,
@@ -73,27 +79,24 @@ async function main() {
       type: copycat.oneOf(i, meetingTypes as meeting_typesEnum[]),
     };
   });
-  console.log("testMeetings ? ", testMeetings);
 
-  await seed.meetings(testMeetings);
-  //  ({ index }) => ({
-  //   category: ({ seed }) => copycat.oneOf(seed, categories.map(cat => cat.uuid!)),
-  //   group: ({ seed }) => copycat.oneOf(seed, testGroups.map(group => group.uuid!)),
-  //   host: ({ seed }) => copycat.oneOf(seed, testUsers.map(user => user.uuid!)),
-  //   description: ({ seed }) => copycat.paragraph(seed, {
-  //     min: 1,
-  //     max: 3,
-  //   }),
-  //   isDraft: index % 10 === 0,
-  //   duration: ({ seed }) => copycat.oneOf(seed, [30, 60, 90, 120]),
-  //   img: "https://consensus.nyc3.cdn.digitaloceanspaces.com/meeting_images/PXL_20231211_122430891.PORTRAIT.jpg",
-  //   locationLink: ({ seed }) => copycat.url(seed),
-  //   title: ({ seed }) => copycat.words(seed, {
-  //     min: 3,
-  //     max: 10
-  //   }),
-  // })));
-  // console.log("resp ? ", resp2)
+  await seed.meetings(meetings);
+
+  const dbUsers = await db.users.findMany();
+  await seed.userMemberships(dbUsers.map(user => ({
+    user: user.uuid,
+    group: copycat.oneOf(user.uuid, groups.map(group => group.uuid!)),
+    role: "member",
+    status: copycat.oneOf(["Pending", "Active", "Revoked"]) as unknown as membership_status,
+  })));
+
+  const dbMeetings = await db.meetings.findMany();
+  await seed.rSVPS(dbUsers.map(user => ({
+    user: user.uuid,
+    meeting: copycat.oneOf(user.uuid, dbMeetings.map(m => m.uuid)),
+    type: copycat.oneOf(["private", "public"]) as unknown as rsvp_type,
+    value: copycat.oneOf(["Yes", "No", "Maybe"]) as unknown as rsvp_status,
+  })));
 
   console.log("Database seeded successfully!");
   process.exit();

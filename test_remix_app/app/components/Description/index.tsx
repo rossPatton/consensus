@@ -1,4 +1,4 @@
-// import parse from 'html-react-parser';
+import parse from 'html-react-parser';
 import { useState } from 'react';
 
 export const Description = (props: { description?: string }) => {
@@ -11,8 +11,8 @@ export const Description = (props: { description?: string }) => {
 
   const descArr = description
     .split('\n')
-    .filter(p => !!p);
-  // .map(p => parse(p));
+    .filter(p => !!p)
+    .map(p => parse(p));
 
   return (
     <div className="break-words">

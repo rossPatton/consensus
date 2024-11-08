@@ -111,6 +111,10 @@ model Users {
   uuid         String            @unique(map: "users_uuid_idx") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created      DateTime          @default(now()) @db.Timestamp(6)
   updated      DateTime          @default(now()) @db.Timestamp(6)
+  username     String            @default("") @db.VarChar(255)
+  firstName    String            @default("") @db.VarChar(255)
+  lastName     String            @default("") @db.VarChar(255)
+  email        String            @default("") @db.VarChar(255)
   meetings     Meetings[]
   rsvps        RSVPS[]
   users_groups UserMemberships[]
@@ -119,15 +123,16 @@ model Users {
 }
 
 model UserMemberships {
-  id      Int      @id @default(autoincrement())
-  user    String   @db.Uuid
-  group   String   @db.Uuid
-  role    String   @default("") @db.VarChar(255)
-  created DateTime @default(now()) @db.Timestamp(6)
-  updated DateTime @default(now()) @db.Timestamp(6)
-  uuid    String   @db.Uuid
-  groups  Groups   @relation(fields: [group], references: [uuid])
-  users   Users    @relation(fields: [user], references: [uuid])
+  id      Int               @id @default(autoincrement())
+  user    String            @db.Uuid
+  group   String            @db.Uuid
+  role    String            @default("") @db.VarChar(255)
+  status  membership_status @default(Pending)
+  created DateTime          @default(now()) @db.Timestamp(6)
+  updated DateTime          @default(now()) @db.Timestamp(6)
+  uuid    String            @db.Uuid
+  groups  Groups            @relation(fields: [group], references: [uuid])
+  users   Users             @relation(fields: [user], references: [uuid])
 
   @@unique([user, group], map: "users_groups_user_group_idx")
   @@map("users_groups")
@@ -161,4 +166,10 @@ enum rsvp_status {
 enum rsvp_type {
   public
   private
+}
+
+enum membership_status {
+  Pending
+  Active
+  Revoked
 }

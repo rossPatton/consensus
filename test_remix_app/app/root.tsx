@@ -6,7 +6,6 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-// import type { LinksFunction } from "@remix-run/node";
 
 import { Header, Footer } from "~/components";
 
@@ -19,7 +18,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="dark:bg-zinc-800">
+      <body>
         <Header />
         {/* <ErrorBoundary status={geoStatus}> */}
         <main className="contain m-auto min-h-screen py-10">

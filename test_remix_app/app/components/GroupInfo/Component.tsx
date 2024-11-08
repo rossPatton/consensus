@@ -10,7 +10,6 @@ import { LeaveForm } from '../LeaveForm';
 // import { tComponentProps } from './_types';
 
 export const GroupInfo = (props: { group: Groups }) => {
-  console.log('props ? ', props);
   const {
     group,
     //role

@@ -15,3 +15,4 @@ export { MeetingFeaturedImage } from "./MeetingFeaturedImage";
 export { MeetingsList } from "./Meetings/Component";
 export { PlanMeetingComponent } from "./PlanMeeting/Component";
 export { Search } from "./Search";
+export { UsersList } from "./UsersList/UsersList";

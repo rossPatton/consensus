@@ -3,12 +3,11 @@ import _ from 'lodash';
 import querystring from 'qs';
 import { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
-import { Emoji, ExternalLink, MeetingFeaturedImage } from '~/components';
+import { Description, Emoji, ExternalLink, MeetingFeaturedImage } from '~/components';
 import { cn, slugify } from '~/utils';
 import { tProps } from './_types';
 
 export const DesktopMeetings: FunctionComponent<tProps> = props => {
-  console.log("desktop meetings props ? ", props);
   const now = dayJS();
 
   return (
@@ -105,6 +104,9 @@ export const DesktopMeetings: FunctionComponent<tProps> = props => {
                       </Link>
                     )}
                 </h3>
+                <Description
+                  description={meeting.description}
+                />
                 {props.showGroupName
                   && (
                     <Link

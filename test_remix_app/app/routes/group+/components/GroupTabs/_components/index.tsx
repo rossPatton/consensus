@@ -4,7 +4,6 @@ import { Link, useParams } from '@remix-run/react';
 export const Tab = (props: { text: string, to: string }) => {
   const { text, to } = props;
   const params = useParams();
-  console.log("params ? ", params);
 
   // const { match, subRoute } = props;
   // const { idOrSlug, section } = match.params;
@@ -14,7 +13,7 @@ export const Tab = (props: { text: string, to: string }) => {
   // const isMeetings = subRoute === '' && typeof section === 'undefined';
   // const isActive = isMeetings || section === subRoute;
   const className = cn({
-    'text-gray-5': true,
+    // 'text-gray-5': true,
     // 'd:ml-2': ['', 'members'].indexOf(subRoute) === -1,
     // 'text-base d:text-3': isActive,
     // 'no-underline': !isActive,

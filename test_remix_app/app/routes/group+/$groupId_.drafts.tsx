@@ -5,9 +5,7 @@ import { FilterPanel, MeetingsList } from '~/components';
 import { db } from "~/utils/db.server";
 
 export default function MeetingsPage(props: any) {
-  const { group, meetings } = useLoaderData<LoaderData>();
-  console.log("meetings ? ", meetings);
-  console.log('group ? ', group);
+  const { meetings } = useLoaderData<LoaderData>();
 
   return (
     <div className="d:pb-2 d:pl-2 d:pr-2">
@@ -65,9 +63,7 @@ export const loader: LoaderFunction = async (opts) => {
     meetings: await db.meetings.findMany({
       where: {
         group: opts.params.groupId,
-        status: {
-          not: "Draft",
-        },
+        status: "Draft",
       },
     }),
   };
@@ -78,7 +74,7 @@ export const loader: LoaderFunction = async (opts) => {
 export const meta: MetaFunction = () => {
   return [
     { title: "Consensus" },
-    { name: 'description', content: 'View group meetings' },
+    { name: 'description', content: 'View meeting drafts' },
     { name: 'keywords', content: 'meetings,search,groups' }
   ];
 };
