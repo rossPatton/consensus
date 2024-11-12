@@ -1,11 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Emoji } from '~/components';
 
-// import { Emoji } from '~app/components';
-// import { postRoleSuccess, postUserByGroupId } from '~app/redux';
-
-// import { tProps, tStore } from './_types';
-
 export const JoinForm = (props: any) => {
   const {
     group,

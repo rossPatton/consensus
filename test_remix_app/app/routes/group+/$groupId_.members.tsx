@@ -6,7 +6,12 @@ import { db } from "~/utils/db.server";
 
 export default function MembersPage() {
   const { group, users } = useLoaderData<LoaderData>();
-  return <UsersList group={group} users={users} />;
+  return (
+    <>
+      <h1>{group.memberName}</h1>
+      <UsersList group={group} users={users} />
+    </>
+  );
 };
 
 // Define a type for the data returned by the loader

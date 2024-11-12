@@ -3,7 +3,7 @@ import { Link, useParams } from "@remix-run/react";
 import pluralize from "pluralize";
 
 import { AspectRatio } from "~/components/ui/aspect-ratio";
-import { Avatar, Description } from "~/components";
+import { Avatar, Description, ExternalLink } from "~/components";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { JoinForm, LeaveForm } from ".";
 import { Badge } from "~/components/ui/badge";
@@ -59,19 +59,8 @@ export const GroupInfo = (props: { group: CompleteGroup }) => {
         </div>
       </div>
       <div className="rounded d:border d:shadow mb-3 d:mb-0 d:mr-2 flex-grow-0 min-w-full d:min-w-4/12">
-        {/* {!role && ( */}
-        <small className="text-white">
-          {privacyType === "public" && "Public Group"}
-          {privacyType === "private" && "Private Group"}
-          {privacyType === "hidden" && "Hidden Group"}
-          {/* should never happen, but why not*/}
-          {!privacyType && "Group"}
-        </small>
-        {/* )} */}
-        <JoinForm role="" />
-        <LeaveForm group={group} role="" />
         <div className="flex">
-          {/* {group.facebook && (
+          {group.facebook && (
             <div className="mr-1">
               <ExternalLink
                 noFollow
@@ -96,8 +85,8 @@ export const GroupInfo = (props: { group: CompleteGroup }) => {
                 />
               </ExternalLink>
             </div>
-          )} */}
-          {/* {group.website && (
+          )}
+          {group.website && (
             <div className="mr-1">
               <ExternalLink
                 noFollow
@@ -109,7 +98,7 @@ export const GroupInfo = (props: { group: CompleteGroup }) => {
                 />
               </ExternalLink>
             </div>
-          )} */}
+          )}
           {/* {group.showEmail && (
             <div>
               <img

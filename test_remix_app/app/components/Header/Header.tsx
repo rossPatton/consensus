@@ -6,10 +6,13 @@ import { Link } from 'react-router-dom';
 import { OutsideClick } from '~/containers/OutsideClick/OutsideClick';
 import { MediaContext } from '~/context';
 import { Search } from '..';
+import { useTheme } from 'remix-themes';
+import { ThemeToggle } from './components/ThemeToggle';
 
 // import { tComponentProps } from './_types';
 
 export const Header = (props: any) => {
+  const [theme] = useTheme();
   const { isMobile } = useContext(MediaContext);
   const [showMenu, toggleMenu] = useState(false);
   const [showNav, toggleNav] = useState(false);
@@ -18,7 +21,7 @@ export const Header = (props: any) => {
 
   return (
     <header className="flex bg-white dark:bg-black shadow fixed top-0 left-0 right-0 z-50">
-      <div className="contain m-auto flex items-center relative">
+      <div className="max-w-screen-lg mx-auto flex items-center relative">
         {isMobile && (
           <div className="flex flex-col mr-2 outline-none">
             <OutsideClick
@@ -44,8 +47,7 @@ export const Header = (props: any) => {
                     )}
                   </button>
                   <ul
-                    className={cn({
-                      'bg-white border font-bold p-2 rounded shadow t-hdr absolute animated': true,
+                    className={cn('bg-white border font-bold p-2 rounded shadow t-hdr absolute animated', {
                       'hidden': !showNav,
                       'fadeInDown': showNav,
                     })}>
@@ -80,6 +82,7 @@ export const Header = (props: any) => {
             width="125"
           />
         </Link>
+        <ThemeToggle />
         <ul className="hidden d:flex flex-row font-semibold">
           {/* <li className="mr-2">
               <Link to={`/directory/us${city}`}>

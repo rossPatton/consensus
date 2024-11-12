@@ -139,6 +139,12 @@ model UserMemberships {
   @@map("users_groups")
 }
 
+enum group_privacy_types {
+  Public
+  Private
+  Invite_Only @map("Invite Only")
+}
+
 enum meeting_status {
   Draft
   Public

@@ -1,11 +1,3 @@
-// import loglevel from 'loglevel';
-// import React from 'react';
-// import { connect } from 'react-redux';
-
-// import { deleteRoleSuccess, deleteUserByGroupId } from '~app/redux';
-
-// import { tProps } from './_types';
-
 export const LeaveForm = (props: any) => {
   if (!props.role) return null;
   if (props.role === 'admin') return null;

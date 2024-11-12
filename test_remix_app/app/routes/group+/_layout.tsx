@@ -6,19 +6,23 @@ import { Outlet, useLoaderData } from "@remix-run/react";
 // import { MediaContext } from '~/context';
 import { GroupInfo, GroupTabs } from "./components";
 import { db } from "~/utils/db.server";
+import { Separator } from "~/components/ui/separator";
 // import { TabsContent } from "@radix-ui/react-tabs";
 
 export default function GroupPage() {
   const { group } = useLoaderData<LoaderData>();
 
   return (
-    <div className="space-y-4">
-      <GroupInfo
-        group={group}
-      />
-      <GroupTabs
-        group={group}
-      />
+    <div>
+      <div className="space-y-4">
+        <GroupInfo
+          group={group}
+        />
+        <GroupTabs
+          group={group}
+        />
+      </div>
+      <Separator className="my-8" />
       <Outlet />
     </div>
   );
