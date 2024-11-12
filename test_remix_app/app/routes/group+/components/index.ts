@@ -1,4 +1,4 @@
-export { GroupInfo } from "./GroupInfo/Component";
+export { GroupInfo } from "./GroupInfo";
 export { GroupTabs } from "./GroupTabs";
 export { JoinForm } from "./JoinForm";
 export { LeaveForm } from "./LeaveForm";

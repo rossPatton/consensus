@@ -17,7 +17,7 @@ export const Header = (props: any) => {
   // const city = handle ? `/${regionCode}/${handle}` : '';
 
   return (
-    <header className="flex bg-white dark:bg-black shadow fixed t l r z-50">
+    <header className="flex bg-white dark:bg-black shadow fixed top-0 left-0 right-0 z-50">
       <div className="contain m-auto flex items-center relative">
         {isMobile && (
           <div className="flex flex-col mr-2 outline-none">

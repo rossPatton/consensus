@@ -1,43 +1,45 @@
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
-import { Groups } from "@prisma/client";
+import { Categories, Groups, UserMemberships } from "@prisma/client";
 import { Outlet, useLoaderData } from "@remix-run/react";
-import { cn } from '~/utils';
-import { useContext } from 'react';
-import { MediaContext } from '~/context';
+// import { cn } from '~/utils';
+// import { useContext } from 'react';
+// import { MediaContext } from '~/context';
 import { GroupInfo, GroupTabs } from "./components";
 import { db } from "~/utils/db.server";
+// import { TabsContent } from "@radix-ui/react-tabs";
 
 export default function GroupPage() {
   const { group } = useLoaderData<LoaderData>();
-  const { isDesktop } = useContext(MediaContext);
 
   return (
-    <div
-      className={cn({
-        'flex items-start': isDesktop,
-      })}>
+    <div className="space-y-4">
       <GroupInfo
         group={group}
       />
-      <div className="d:border d:shadow rounded w-full d:min-w-8/12">
-        <GroupTabs
-          group={group}
-        />
-        <Outlet />
-      </div>
+      <GroupTabs
+        group={group}
+      />
+      <Outlet />
     </div>
   );
 };
 
 // Define a type for the data returned by the loader
 type LoaderData = {
-  group: Groups;
+  group: Groups & {
+    categories: Categories;
+    memberships: UserMemberships[];
+  };
 };
 
 export const loader: LoaderFunction = async (opts) => {
   const data = {
     group: await db.groups.findUnique({
-      where: { uuid: opts.params.groupId }
+      where: { uuid: opts.params.groupId },
+      include: {
+        categories: true,
+        memberships: true,
+      },
     }),
   };
 

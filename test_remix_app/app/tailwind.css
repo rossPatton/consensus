@@ -13,33 +13,94 @@
 }
 
 @layer base {
-  html {
-    -moz-osx-font-smoothing: grayscale;
-    -ms-text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
-    text-rendering: optimizeSpeed;
-    text-size-adjust: 100%;
+  :root {
+    --background: 0 0% 95%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 346.8 77.2% 49.8%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 346.8 77.2% 49.8%;
+    --radius: 0.3rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark,
+  :root[class~="dark"] {
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 346.8 77.2% 49.8%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 346.8 77.2% 49.8%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+
+  .dark,
+  :root[class~="dark"] {
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
   }
 
   body {
-    @apply pt-10;
-    @apply font-sans;
-    background: #fff;
-    color: #333;
-    letter-spacing: .03rem;
+    @apply bg-background text-foreground font-sans;
   }
 
   a {
     text-decoration: underline;
-  }
-
-  p {
-    line-height: 1.6rem;
-  }
-
-  span {
-    @apply inline-block;
   }
 
   aside,
@@ -57,13 +118,16 @@
     height: 64px;
   }
 
-  ul {
-    @apply list-none;
+  span {
+    @apply inline-block;
   }
 
   h1 {
-    @apply font-founders;
-    @apply leading-none;
+    @apply leading-none text-xl;
+  }
+
+  h2 {
+    @apply text-lg;
   }
 
   h1,
@@ -72,317 +136,15 @@
   h4,
   h5,
   h6 {
-    color: #000;
+    @apply font-founders;
     font-weight: 600;
     line-height: 1.25;
     margin-block-end: 0;
     margin-block-start: 0;
   }
 
-  h1 {
-    @apply text-xl;
-  }
-
-  h2 {
-    @apply text-lg;
-  }
-
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply text-base;
-  }
-
   select,
   input[type="submit"] {
     @apply cursor-pointer;
   }
-
-  .btn {
-    @apply bg-white;
-    @apply border;
-    @apply duration-150;
-    @apply font-semibold;
-    @apply inline-block;
-    @apply leading-none;
-    @apply rounded;
-    @apply text-center;
-    @apply transition;
-    @apply whitespace-nowrap;
-    vertical-align: middle;
-  }
-
-  button {
-    @apply btn;
-  }
-
-  button,
-  textarea {
-    @apply appearance-none;
-  }
-
-  i,
-  option,
-  select {
-    @apply leading-none;
-  }
-
-  textarea {
-    @apply leading-loose;
-  }
-
-  input,
-  textarea {
-    @apply bg-transparent;
-    @apply border;
-    @apply m-0;
-    @apply contain-sm;
-    @apply p-2;
-  }
-
-  button,
-  input,
-  select,
-  textarea {
-    @apply font-semibold;
-    letter-spacing: .02rem;
-  }
-
-  input[type="password"],
-  input[type="text"],
-  input[type="search"],
-  select {
-    @apply transition;
-    height: 3.6rem;
-    min-height: 3.6rem;
-    min-width: 16rem;
-  }
-
-  input {
-    @apply rounded-none;
-  }
-
-  select {
-    @apply bg-white;
-    @apply border;
-    @apply contain-sm;
-    @apply m-0;
-    @apply rounded-lg;
-    @apply whitespace-nowrap;
-    min-width: 8rem;
-    text-indent: .5rem;
-  }
-
-  select:hover {
-    @apply bg-gray-300;
-  }
-
-  i {
-    font-style: normal;
-    font-variant: normal;
-    speak: none;
-    text-transform: none;
-  }
-
-  [disabled] {
-    @apply opacity-5;
-    @apply pointer-events-none;
-    @apply cursor-default;
-  }
-
-  small {
-    @apply text-sm;
-  }
-
-  .truncate {
-    @apply whitespace-nowrap;
-    @apply overflow-hidden;
-    text-overflow: ellipsis;
-  }
-
-  .lineClamp {
-    @apply overflow-hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-  }
-
-  .viz-hidden {
-    @apply absolute;
-    @apply border-0;
-    @apply p-0;
-    @apply overflow-hidden;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    width: 1px;
-  }
-
-  .viz-hidden:focus {
-    @apply bg-white;
-    @apply font-bold;
-    @apply text-black;
-    @apply h-auto;
-    @apply overflow-visible;
-    @apply p-1;
-    @apply w-auto;
-    clip: auto;
-    margin: 0 10px;
-    outline: rgb(94, 158, 215) auto 5px;
-    position: static;
-  }
-
-  .mFI {
-    @apply overflow-hidden;
-    max-height: 150px;
-  }
-
-  .placeholder:before {
-    @apply block;
-    content: '';
-    padding-top: calc(100% * 5 / 9);
-  }
-
-  /* i dont have a theme switcher setup yet */
-  @media (prefers-color-scheme: dark) {
-    body {
-      @apply bg-zinc-800;
-      @apply text-zinc-300;
-    }
-
-    a,
-    h1,
-    h2,
-    h3,
-    h4 h5,
-    h6 {
-      @apply text-white;
-    }
-  }
-}
-
-/* extra classes below - evaluate how many of these make sense */
-.contain {
-  max-width: 1400px;
-  width: 90%;
-}
-
-.contain-sm {
-  max-width: 760px;
-  width: 90%;
-}
-
-.t {
-  top: 0;
-}
-
-.t-hdr {
-  top: 64px;
-}
-
-.r {
-  right: 0;
-}
-
-.b {
-  bottom: 0;
-}
-
-.l {
-  left: 0;
-}
-
-.av-sz-sm {
-  height: 40px;
-  width: 40px;
-  max-width: 40px;
-}
-
-.av-sz-lg {
-  height: 60px;
-  width: 60px;
-  max-width: 60px;
-}
-
-@-moz-keyframes loading-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes loading-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@-o-keyframes loading-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes loading-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translate3d(0, -1%, 0);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 1%, 0);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.animated {
-  animation-duration: .2s;
-  animation-fill-mode: both;
-}
-
-.fadeInDown {
-  animation-name: fadeInDown;
-}
-
-.fadeInUp {
-  animation-name: fadeInUp;
-}
-
-.bg-community {
-  background-image: url('/images/community.svg');
-  background-size: cover;
 }

@@ -21,7 +21,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <Header />
         {/* <ErrorBoundary status={geoStatus}> */}
-        <main className="contain m-auto min-h-screen py-10">
+        <main className="max-w-screen-lg mx-auto min-h-screen py-20">
           {children}
         </main>
         {/* </ErrorBoundary> */}

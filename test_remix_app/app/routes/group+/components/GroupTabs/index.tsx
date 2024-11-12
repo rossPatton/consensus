@@ -30,7 +30,7 @@ export const GroupTabs = (props: { group: Groups }) => {
             <li>
               <Tab
                 text="Pending Members"
-                to="pending"
+                to="pending_members"
               />
             </li>
           )}

@@ -1,4 +1,3 @@
-// import loadable from '@loadable/component';
 export { Avatar } from "./Avatar";
 export { CategoriesList } from "./CategoriesList/CategoriesList";
 export { Description } from "./Description";
@@ -7,7 +6,6 @@ export { ExternalLink } from "./ExternalLink";
 export { FileUploadComponent as FileUpload } from "./FileUpload/Component";
 export { FilterPanel } from "./FilterPanel";
 export { Footer } from "./Footer/Footer";
-export { GroupInfo } from "./GroupInfo/Component";
 export { GroupsComponent as GroupsList } from "./GroupsList/Component";
 export { GroupTabs } from "./GroupTabs";
 export { Header } from "./Header/Header";

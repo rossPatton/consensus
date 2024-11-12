@@ -20,23 +20,6 @@ export default function Index() {
           />
         </div>
       </div>
-      {/* {props.meetings
-        && props.meetings.length > 0
-        && (
-          <>
-            <h2 className="text-3 mb-2 text-center">
-              Upcoming Meetings
-            </h2>
-            <div className="mb-4 p-2 bg-gray-1 rounded">
-              <Meetings
-                horizontal
-                showGroupName
-                meetings={props.meetings}
-              />
-            </div>
-          </>
-        )
-      } */}
       <CategoriesList categories={categories} />
     </>
   );
